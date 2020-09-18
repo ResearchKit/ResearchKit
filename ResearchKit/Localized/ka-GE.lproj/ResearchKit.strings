@@ -1,650 +1,1479 @@
-/*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- 
- Redistribution and use in source and binary forms, with or without modification,
- are permitted provided that the following conditions are met:
- 
- 1.  Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
- 
- 2.  Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation and/or
- other materials provided with the distribution.
- 
- 3.  Neither the name of the copyright holder(s) nor the names of any contributors
- may be used to endorse or promote products derived from this software without
- specific prior written permission. No license is granted to the trademarks of
- the copyright holders even if such marks are included in this software.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "დამატებითი ინფორმაცია";
 
-/* Informed consent process. */
-"CONSENT_NAME_TITLE" = "Consent";
-"CONSENT_NAME_GIVEN" = "First Name";
-"CONSENT_NAME_FAMILY" = "Last Name";
-"CONSENT_NAME_PLACEHOLDER" = "Required";
-"CONSENT_REVIEW_TITLE" = "Review";
-"CONSENT_REVIEW_INSTRUCTION" = "Review the form below, and tap Agree if you\'re ready to continue.";
-"CONSENT_REVIEW_ALERT_TITLE" = "Review";
-"CONSENT_SIGNATURE_TITLE" = "Signature";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger in the box below.";
-"CONSENT_SIGNATURE_PLACEHOLDER" = "Sign Here";
-"CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "დახურეთ თქვენი %@ და დააკვირდით წერტილს კვადრატული ბადის ცენტრში.\n\nთითის ან კალმის გამოყენებით აღნიშნეთ ყველა ხარვეზი, როგორიცაა ბუნდოვანი ან ტალღოვანი ხაზები.\n\nდასრულების შემდეგ, გადაფურცლეთ მარცხნივ, ქსელის გარეთ.";
 
-/* Consent section titles. */
-"CONSENT_SECTION_WELCOME" = "Welcome";
-"CONSENT_SECTION_DATA_GATHERING" = "Data Gathering";
-"CONSENT_SECTION_PRIVACY" = "Privacy";
-"CONSENT_SECTION_DATA_USE" = "Data Use";
-"CONSENT_SECTION_STUDY_SURVEY" = "Study Survey";
-"CONSENT_SECTION_STUDY_TASKS" = "Study Tasks";
-"CONSENT_SECTION_TIME_COMMITMENT" = "Time Commitment";
-"CONSENT_SECTION_WITHDRAWING" = "Withdrawing";
-"CONSENT_LEARN_MORE_TITLE" = "Learn More";
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "ტესტირების მიმდინარეობისას განათავსეთ მოწყობილობა სახიდან 12 ინჩის მანძილზე და თვალის დონეზე.";
 
-/* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered";
-"LEARN_MORE_DATA_USE" = "Learn more about how data is used";
-"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected";
-"LEARN_MORE_WELCOME" = "Learn more about the study first";
-"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey";
-"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study's impact on your time";
-"LEARN_MORE_TASKS" = "Learn more about the tasks involved";
-"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing";
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "ეს აქტივობა ხელს უწყობს მომხმარებლის თვალით დანახული პრობლემების გამოვლენას.";
 
-/* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Sharing Options";
-"CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
-"CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
-"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "მარცხენა თვალი";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'s Name (printed)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@'s Signature";
-"CONSENT_DOC_LINE_DATE" = "Date";
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "მარჯვენა თვალი";
 
-/* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$@ of %2$@";
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "ამსლერ გრიდი";
 
-/* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Invalid value";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
-"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
-"RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს.";
 
-/* Alert for invalid email address value */
-"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "აუდიოს ჩაწერა შეუძლებელია";
 
-/* Alerts for invalid location coordinates */
-"LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
-"LOCATION_ERROR_TITLE" = "Could not Find Specified Address";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
-"LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "წარმოთქვით „აააა“ მიკროფონში იმდენ ხანს, რამდენსაც შეძლებთ.";
 
-/* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "ეს აქტივობა აფასებს თქვენს ხმას თქვენი მოწყობილობის ქვედა ნაწილში მოთავსებული მიკროფონით გაკეთებული ჩანაწერის მიხედვით.";
 
-/* Camera not available during multitasking */
-"CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "ღრმად ისუნთქეთ და წარმოთქვით \"ააააა\" მიკროფონში იმდენ ხანს, რამდენსაც შეძლებთ. დააყენეთ ხმის სტაბილური დონე იმგვარად, რომ აუდიო ზოლები ლურჯად ანათებდეს.";
 
-/* Registration step */
-"EMAIL_FORM_ITEM_TITLE" = "Email";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
-"PASSWORD_FORM_ITEM_TITLE" = "Password";
-"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
-"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
-"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
-"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
-"ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
-"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
-"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
-"GENDER_FORM_ITEM_TITLE" = "Gender";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
-"DOB_FORM_ITEM_TITLE" = "Date of Birth";
-"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Phone Number";
-"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
-
-/* Verification step */
-"VERIFICATION_NAV_TITLE" = "Verification";
-"VERIFICATION_STEP_TITLE" = "Verify your Email";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Tap on the link below if you did not receive a verification email and would like it sent again.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
-
-/* Login step */
-"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
-
-/* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
-"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
-"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
-"PASSCODE_INVALID_ALERT_TITLE" = "Passcode Incorrect";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
-"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
-"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
-"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode entry progress indicator";
-"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
-"PASSCODE_FORGOT_BUTTON_TITLE" = "Forgot Passcode?";
-
-/* Keychain wrapper */
-"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
-"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
-"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
-"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
-
-/* Blood types */
-"BLOOD_TYPE_A+" = "A+";
-"BLOOD_TYPE_A-" = "A-";
-"BLOOD_TYPE_AB+" = "AB+";
-"BLOOD_TYPE_AB-" = "AB-";
-"BLOOD_TYPE_B+" = "B+";
-"BLOOD_TYPE_B-" = "B-";
-"BLOOD_TYPE_O+" = "O+";
-"BLOOD_TYPE_O-" = "O-";
-
-/* Fitzpatrick Skin types */
-"FITZPATRICK_SKIN_TYPE_I" = "Type I";
-"FITZPATRICK_SKIN_TYPE_II" = "Type II";
-"FITZPATRICK_SKIN_TYPE_III" = "Type III";
-"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
-"FITZPATRICK_SKIN_TYPE_V" = "Type V";
-"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
-
-/* Gender values. */
-"GENDER_FEMALE" = "Female";
-"GENDER_MALE" = "Male";
-"GENDER_OTHER" = "Other";
-
-/* Boolean answer strings */
-"BOOL_NO" = "No";
-"BOOL_YES" = "Yes";
-
-/* Measuring unit abbreviations */
-"MEASURING_UNIT_CM" = "cm";
-"MEASURING_UNIT_FT" = "ft";
-"MEASURING_UNIT_IN" = "in";
-"MEASURING_UNIT_KG" = "kg";
-"MEASURING_UNIT_LB" = "lb";
-"MEASURING_UNIT_OZ" = "oz";
-
-/* Limb values. */
-"LIMB_LEFT" = "left";
-"LIMB_RIGHT" = "right";
-
-/* Default placeholders to request answers in a questionnaire. */
-"PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
-"NULL_ANSWER" = "Select an answer";
-"PLACEHOLDER_IMAGE_CHOICES" = "Tap to select";
-"PLACEHOLDER_LONG_TEXT" = "Tap to write";
-
-/* Button titles */
-"BUTTON_AGREE" = "Agree";
-"BUTTON_CANCEL" = "Cancel";
-"BUTTON_OK" = "OK";
-"BUTTON_CLEAR" = "Clear";
-"BUTTON_APPLY" = "Apply";
-"BUTTON_DISAGREE" = "Disagree";
-"BUTTON_DONE" = "Done";
-"BUTTON_GET_STARTED" = "Get Started";
-"BUTTON_LEARN_MORE" = "Learn more";
-"BUTTON_NEXT" = "Next";
-"BUTTON_SKIP" = "Skip";
-"BUTTON_SKIP_QUESTION" = "Skip this question";
-"BUTTON_START_TIMER" = "Start Timer";
-"BUTTON_OPTION_SAVE" = "Save for Later";
-"BUTTON_OPTION_DISCARD" = "Discard Results";
-"BUTTON_OPTION_STOP_TASK" = "End Task";
-"BUTTON_SAVE" = "Save";
-"BUTTON_CLEAR_ANSWER" = "Clear answer";
-"BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
-"BUTTON_COPYRIGHT" = "Copyright";
-
-/* General active tasks. */
-"COUNTDOWN_LABEL" = "Starting activity in";
-"TASK_COMPLETE_TITLE" = "Activity Complete";
-"TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ seconds remaining.";
-"TOUCH_ANYWHERE_LABEL" = "Touch anywhere to continue";
-
-/* Image capture step. */
-"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
-"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
-"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
-
-/* Video capture step. */
-"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start Recording";
-"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stop Recording";
-"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Recapture Video";
-
-/* Fitness active task. */
-"FITNESS_TASK_TITLE" = "Fitness";
-"FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
-"FITNESS_HEARTRATE_TITLE" = "Heart Rate (bpm)";
-"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sit comfortably for %@.";
-"FITNESS_WALK_INSTRUCTION_FORMAT" = "Walk as fast as you can for %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "This activity monitors your heart rate and measures how far you can walk in %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Walk outdoors at your fastest possible pace for %1$@. When you're done, sit and rest comfortably for %2$@. To begin, tap Get Started.";
-
-/* Short walk active task. */
-"WALK_TASK_TITLE" = "Gait and Balance";
-"WALK_INTRO_TEXT" = "This activity measures your gait and balance as you walk and stand still. Do not continue if you cannot safely walk unassisted.";
-"WALK_INTRO_2_TEXT_%ld" = "Find a place where you can safely walk unassisted for about %ld steps in a straight line.";
-"WALK_INTRO_2_DETAIL" = "Put your device in a pocket or bag and follow the audio instructions.";
-"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Now stand still for %@.";
-"WALK_STAND_INSTRUCTION_FORMAT" = "Stand still for %@.";
-"WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
-
-/* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find a place where you can safely walk back and forth in a straight line. Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\nNext you will be instructed to turn around in a full circle, then stand still with your arms at your sides and your feet about shoulder-width apart.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your device in a pocket or bag and follow the audio instructions.";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
-"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn in a full circle and then stand still for %@.";
-"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "You have completed the activity.";
-
-/* Tapping active task. */
-"TAPPING_TASK_TITLE" = "Tapping Speed";
-"TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
-"TAPPING_TASK_TITLE_LEFT" = "Left Hand";
-"TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your device on a flat surface.";
-"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Use two fingers on your right hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Use two fingers on your left hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Now repeat the same test using your right hand.";
-"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Now repeat the same test using your left hand.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for %@.";
-"TAPPING_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TAPPING_CALL_TO_ACTION_NEXT" = "Tap Next to begin.";
-"TAP_BUTTON_TITLE" = "Tap";
-"TOTAL_TAPS_LABEL" = "Total Taps";
-"TAPPING_INSTRUCTION" = "Tap the buttons as consistently as you can using two fingers.";
-"TAPPING_INSTRUCTION_RIGHT" = "Tap the buttons using your RIGHT hand.";
-"TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
-"TAPPING_SKIP_TITLE" = "Skip this hand";
-
-/* Amsler Grid Task.*/
-"AMSLER_GRID_TITLE" = "Amsler Grid";
-"AMSLER_GRID_INTRO_TEXT" = "This activity helps in detecting problems in user's vision.";
-"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold the device 12 inches from your face and at eye level throughout the test.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the center of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you are done, swipe left anywhere outside the grid.";
-"AMSLER_GRID_LEFT_EYE" = "Left Eye";
-"AMSLER_GRID_RIGHT_EYE" = "Right Eye";
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "გთხოვთ დაელოდოთ, სანამ ფონის ხმის დონეს შევამოწმებთ.";
 
 /* Audio active task. */
-"AUDIO_TASK_TITLE" = "Voice";
-"AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"AUDIO_INSTRUCTION" = "Say “Aaaaah” into the microphone for as long as you can.";
-"AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
-"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your device.";
-"AUDIO_TOO_LOUD_LABEL" = "Too Loud";
-"AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
-"AUDIO_LEVEL_CHECK_LABEL" = "Please wait while we check the background noise level.";
-"AUDIO_TOO_LOUD_MESSAGE" = "The ambient noise level is too loud to record your voice. Please move somewhere quieter and try again.";
-"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tap Next when ready.";
+"AUDIO_TASK_TITLE" = "ხმა";
 
-/* Tone audiometry active task. */
-"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.\n\nThe sound will be very subtle and is unlike a regular alert tone.  The sound will begin soft and then slowly increase in volume.  Please pay attention and tap the left or right button to indicate which ear you hear it in.";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap any button when you are ready to begin.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Every time you start hearing a sound, tap the left or right button to indicate which ear you hear the sound in.";
-"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Left Ear";
-"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Right Ear";
-"TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
-"TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "დააჭირეთ ღილაკს „შემდეგი“, როდესაც მზად იქნებით.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "ძალიან ხმამაღალია";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "უცხო ხმების დონე ძალიან მაღალია და ხელს უშლის თქვენი ხმის ჩაწერას. გთხოვთ გადახვიდეთ უფრო წყნარ ადგილას და ისევ სცადოთ.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "გამოიყენეთ თითი ან კალამი ქსელის პირდაპირ აღსანიშნავად ან დასასრულებლად გადაფურცლეთ მარცხნივ, ქსელის მიღმა.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "ამსლერ გრიდი";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "დავალების შესრულების დაწყება";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "აუდიო ზოლის დიაგრამა";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "კომენტარი";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "უკან";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "ესკიზის PDF-ის დაფარვა";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "დაფარეთ საძიებო ზოლი";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "გაზიარება";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "ესკიზის PDF-ის ჩვენება";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "საძიებო ზოლის ჩვენება";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "სანიშნის ჩვენება ლურჯ წრეში, რომელიც წარმატების მაუწყებელია";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "VoiceOver-ის გამოყენებისას, ღილაკი პირდაპირ დასაჭერად მზად იქნება. ის ეკრანის ცენტრთან ახლოს განთავსდება.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "კლავიატურაზე უარის თქმა";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " და ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "წერტილი: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "დიაპაზონი: % @-დან% @-მდე";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "დასტა შედგება";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "ხედის წინასწარ ნახვა";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "ხედის სურათი";
+
+/* (No Comment) */
+"AX_SELECTED" = "არჩეულია";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "შეეხეთ ეკრანს და გადაუსვით თითი ხელმოსაწერად";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "ხელმოწერის ველი";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "ხელმოწერილი";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "ხელმოუწერელი";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "პასუხის სლაიდერი. დიაპაზონი % @-დან %@-მდე";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "ჩაწერის დაწყებისას, მეორედ გაააქტიურეთ ჩაწერის შეჩერების მიზნით.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "მეტყველების ტალღის ფორმა";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "დააჭირეთ ერთი თითით";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "დააჭირეთ სხვა თითით";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "ახლა ღილაკებს პირდაპირ შეიძლება დააჭიროთ.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "დასაჭერი ღილაკები";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "გაააქტიურეთ, რომ ღილაკები პირდაპირ დაჭერა იყოს შესაძლებელი.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ VoiceOver-ის გამოყენებით, ეკრანზე შეხებით შეისწავლეთ, სად მდებარეობს ღილაკები. გაააქტიურეთ რომელიმე ღილაკი, რომ ღილაკებს შეხება საკმარისი იყოს.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "გაააქტიურეთ ტესტირების დასაწყებად. ტესტირების დაწყებისთანავე, დააჭირეთ პირდაპირ ამ ღილაკს, როდესაც მარცხენა ყურში ხმას გაიგონებთ.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "დააჭირეთ მარცხენა ყურისთვის";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "გაააქტიურეთ ტესტირების დასაწყებად. როდესაც ტესტირება დაიწყება, დააჭირეთ პირდაპირ ამ ღილაკს, როდესაც მარჯვენა ყურში ხმას გაიგონებთ.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "დააჭირეთ მარჯვენა ყურისთვის";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ VoiceOver-ის გამოყენებით, ეკრანზე შეხებით შეისწავლეთ, სად მდებარეობს თითოეული ყურის ღილაკები. როდესაც ტესტირება დაიწყება, ღილაკებს პირდაპირ შეიძლება დააჭიროთ. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "შეუძლებელია %@-ის ზომის დისკის განთავსება %@-ის ზომის დისკზე";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "დააჭირეთ ორჯერ დისკის განსანთავსებლად";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "დააჭირეთ ორჯერ ყველაზე მეტი დისკის ასარჩევად";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "სამიზნე";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "კოშკი";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "აქვს %@-ის ზომის დისკი";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ცარიელი";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "@ VoiceOver-ის გამოყენებისას, ტესტირებისას ღილაკები პირდაპირ დასაჭერად მზად იქნება.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "უეტიკეტო სურათი";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "არ არის არჩეული";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "ვიდეოს გადაღება დასრულებულია";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "ვიდეოს გადაღების გადახედვა";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "აქტიური";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "სწორი";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "მცდარი";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "მეხსიერების თამაშის ფილა";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "მშვიდი";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A -";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A +";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB -";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB +";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B -";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B +";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O -";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O +";
+
+/* Boolean answer strings */
+"BOOL_NO" = "არა";
+
+/* (No Comment) */
+"BOOL_YES" = "დიახ";
+
+/* Button titles */
+"BUTTON_AGREE" = "ვეთანხმები";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "მიმართვა";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "გაუქმება";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "ნათელია";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "გასაგები პასუხი";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "საავტორო უფლებები";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "უარყოფა";
+
+/* (No Comment) */
+"BUTTON_DONE" = "შესრულებულია";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "დაიწყეთ";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "გაიგეთ მეტი";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "შემდეგი";
+
+/* (No Comment) */
+"BUTTON_OK" = "კეთილი";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "შედეგების გაუქმება";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "შეინახეთ სამომავლოდ";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "დავალების დასრულება";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "ამ პასუხის შეცვლა შეუძლებელია.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "შენახვა";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "გამოტოვება";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "გამოტოვეთ ეს კითხვა";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "ჩართეთ ტაიმერი";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "კამერა გაყოფილ ეკრანზე ხელმისაწვდომი არ არის.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "სურათის გადაღება";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "ჩაწერის დაწყება";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "ხელახლა გადაიღეთ სურათი";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "ხელახლა გადაიღეთ ვიდეო";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "ჩაწერის შეწყვეტა";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "კამერა ვერ მოიძებნა. ამ ეტაპის დასრულება შეუძლებელია.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "გადაღებული სურათის შენახვა ვერ მოხერხდა.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "გადაღებული სურათებისთვის არ იყო მითითებული გამომავალი დირექტორია.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "ამ ეტაპის დასრულების მიზნით, ამ აპლიკაციას მიეცით წვდომა კამერაზე პარამეტრებიდან.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "მონაცემები არ არის";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "პაროლები არ ემთხვევა.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "ისევ შეიყვანეთ პაროლი";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "დადასტურება";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "თარიღი";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@-ის სახელი (დაბეჭდილი)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@-ის ხელმოწერა";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "გაიგეთ მეტი";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "გვარი";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "სახელი";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "სავალდებულოა";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "თანხმობა";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "გვერდი %1$ld - %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "მიმოხილვა";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "გადახედეთ ქვემოთ მოცემულ ფორმას და დააჭირეთ ღილაკს „ვეთანხმები“, თუ მზად ხართ გასაგრძელებლად.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "მიმოხილვა";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "მონაცემთა შეგროვება";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "მონაცემთა გამოყენება";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "კონფიდენციალურობა";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "კვლევის გამოკითხვა";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "კვლევის ამოცანები";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "დროის ვალდებულება";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "მოგესალმებით";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "გაყვანა";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "ჩემი მონაცემების გაზიარება მხოლოდ %@-ისთვის";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "გაუზიარეთ ჩემი მონაცემები %@-ს და კვალიფიციურ მკვლევრებს მსოფლიოში";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ მიიღებს თქვენი კვლევის მონაცემებს ამ კვლევაში მონაწილეობის საფუძველზე.\n\nთქვენი კოდირებული კვლევითი მონაცემების უფრო ფართოდ გაზიარებამ (ისეთი ინფორმაციის გარეშე, როგორიცაა თქვენი სახელი) შეიძლება სარგებელი მოუტანოს ამ და მომავალ კვლევას.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "გაზიარების პარამეტრები";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "გთხოვთ, ხელი მოაწეროთ თითის გამოყენებით ქვედა ველში.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "ქ მოაწერეთ ხელი";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "ხელმოწერა";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "საქმიანობის დაწყება";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "დარჩენილია %@ წამი.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "ეს აქტივობა განსაზღვრავს ადამიანის სმენის ზღვრულ დონეებს dB HL-ს სკალით.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "დარწმუნდით, რომ მოწყობილობის ხმა მაქსიმალურ დონეზეა დაყენებული.\n\nამ დავალების შესრულებისას დახვეწილი ხმა მარცხენა ან მარჯვენა ყურში აჟღერდება.\n\nყურადღებით უსმინეთ და დააჭირეთ ღილაკს ყოველთვის, როდესაც ამ ხმას გაიგონებთ.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "საანკეტო კითხვარი.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "გააკეთეთ „უკეთესი ყურის“ არჩევანი, ასეთის არსებობის შემთხვევაში";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "მარცხენა";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "არანაირი უპირატესობა";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "სწორია";
 
 /* dBHL Tone audiometry active task. */
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "This activity identifies hearing threshold levels of an individual in dB HL scale.";
-"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Make sure the device volume is set to the maximum level.\n\nDuring this task, a subtle tone will play in either the left or right ear.\n\nListen carefully and tap the button every time you hear a tone.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding questionnaire.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Select your preference for 'better ear', if any";
-"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "left";
-"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "right";
-"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "no preference";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "ტონის აუდიომეტრია";
 
-/* Spatial span memory active task. */
-"SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "This activity measures your short-term spatial memory by asking you to repeat the order in which %@ light up.";
-"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flowers";
-"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flowers";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the same order they lit up.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the reverse of the order they lit up.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "To begin, tap Get Started, then watch closely.";
-"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
-"MEMORY_GAME_SCORE_TITLE" = "Score";
-"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Watch the %@ light up";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tap the %@ in the order they lit up";
-"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tap the %@ in reverse order";
-"MEMORY_GAME_COMPLETE_TITLE" = "Sequence Complete";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "To continue, tap Next";
-"MEMORY_GAME_FAILED_TITLE" = "Try Again";
-"MEMORY_GAME_FAILED_MESSAGE" = "You didn't quite make it through that time. Tap Next to continue.";
-"MEMORY_GAME_TIMEOUT_TITLE" = "Time's Up";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "You ran out of time.\nTap Next to continue.";
-"MEMORY_GAME_COMPLETE" = "Game Complete";
-"MEMORY_GAME_PAUSED_TITLE" = "Paused";
-"MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
-"MEMORY_GAME_COPYRIGHT_TEXT" = "The memory activity was developed with assistance from Katherine Possin, PhD and Joel Kramer, PhD from University of California, San Francisco.";
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "აირჩიეთ თარიღი";
 
-/* Reaction time active task. */
-"REACTION_TIME_TASK_TITLE" = "Reaction Time";
-"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "დაბადების თარიღი";
 
-/* Stroop active task.*/
-"STROOP_TASK_TITLE" = "Stroop";
-"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Every time a word appears, select the first letter of the name of the COLOR that is shown.";
-"STROOP_TASK_INTRO2_DETAIL_TEXT" = "When you are ready to begin the Stroop activity tap Get Started.";
-"STROOP_TASK_STEP_TEXT" = "Select the first letter of the name of the COLOR that is shown.";
-"STROOP_COLOR_RED" = "RED";
-"STROOP_COLOR_GREEN" = "GREEN";
-"STROOP_COLOR_BLUE" = "BLUE";
-"STROOP_COLOR_YELLOW" = "YELLOW";
-"STROOP_COLOR_RED_INITIAL" = "R";
-"STROOP_COLOR_GREEN_INITIAL" = "G";
-"STROOP_COLOR_BLUE_INITIAL" = "B";
-"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
 
-/* Tower of Hanoi active task */
-"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
-"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "ელ. ფოსტა";
 
-/* Range of Motion active task */
-"RANGE_OF_MOTION_TITLE" = "Range of Motion";
-"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "გაანგარიშება";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "ეს აქტივობა ზომავს გარემოს ხმის სიძლიერის დონეს. თუ ხმაურის დონე ძალიან მაღალია, თქვენ ვერ გააგრძელებთ მუშაობას. გთხოვთ, გადახვიდეთ უფრო წყნარ ადგილას, რომ შეასრულოთ ეს დავალება ან განაახლოთ ეს აქტივობა მოგვიანებით.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "ზღვარი:%@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "SPL მეტრი";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "ვერ ხერხდება ჟურნალების საკმარისი ფაილების ამოღება ზღვრის მისაღწევად";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "ფაილი არაა მონიშნული როგორც წაშლილი (არ არის მონიშნული როგორც ატვირთული)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "ფაილი ვერ შეიქმნა";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "მრავალი შეცდომა ჟურნალების ამოღებისას";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "შეცდომა ატრიბუტების დაყენებისას";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "შეგროვებული მონაცემები ვერ მოიძებნა.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "მითითებული არ არის გამომავალი დირექტორია";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "ვაშლის თესლი";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "მანძილი (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "გულისცემა (წუთში)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "იარეთ გარეთ თქვენი უსწრაფესი ტემპით %1$ @-ისთვის. დასრულებისთანავე დაჯექით და დაისვენეთ კომფორტულად %2$@-ისთვის. დასაწყებად, დააჭირეთ ღილაკს „დაწყება“.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "ეს აქტივობა ამოწმებს თქვენს გულისცემას და ზომავს, რამდენად შორს შეგიძლიათ ფეხით სიარული %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "იჯექით კომფორტულად %@-ისთვის.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "ფიტნესი";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "იარეთ რაც შეიძლება სწრაფად %@-ისთვის.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "ტიპი I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "II ტიპი";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "III ტიპი";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "IV ტიპი";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "ტიპი V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "VI ტიპი";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "დაგავიწყდათ პაროლი?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "ქალი";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "აირჩიეთ სქესი";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "სქესი";
+
+/* (No Comment) */
+"GENDER_MALE" = "კაცი";
+
+/* (No Comment) */
+"GENDER_OTHER" = "სხვა";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "იოანე";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "ეს აქტივობა ამოწმებს თქვენი ზედა კიდურების ფუნქციას და ითხოვს, რომ მოათავსოთ სარი ხვრელში. ამის გაკეთება %@-ჯერ მოგეთხოვებათ.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "შემოწმდება თქვენი მარცხენა და მარჯვენა ხელები.\nთქვენ უნდა აიღოთ ღერო რაც შეიძლება სწრაფად, ჩაყოთ იგი ხვრელში და, როცა ამას %@-ჯერ შეასრულებთ, %@-ჯერ ისევ ამოიღოთ.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "შემოწმდება თქვენი მარჯვენა და მარცხენა ხელები.\nთქვენ უნდა აიღოთ ღერო რაც შეიძლება სწრაფად, ჩაყოთ იგი ხვრელში და, როცა ამას %@ ჯერ შეასრულებთ,%@-ჯერ ისევ ამოიღოთ.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "მოათავსეთ კაკალი ხვრელში მარცხენა ხელით.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "მოათავსეთ კაკალი ხვრელში მარჯვენა ხელით.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "მოათავსეთ მარცხენა ხელით სარი ხაზის უკან.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "მოათავსეთ მარჯვენა ხელით სარი ხაზის უკან.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "აიღეთ სარი ორი თითით.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "გაუშვით თითები სარის დასაგდებად.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "@-სარი-ხვრელის ტესტი";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "ელ. ფოსტის მცდარი მისამართი: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Keychain-ის ელემენტის დამატება ვერ მოხერხდა.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Keychain-ის ელემენტის წაშლა ვერ მოხერხდა.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Keychain-ის ერთეულის მოძებნა ვერ მოხერხდა.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Keychain-ის ერთეულის განახლება ვერ მოხერხდა.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "გაშალეთ მარცხენა მუხლი. შემდეგ დააჭირეთ ნებისმიერ ადგილას.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "გაშალეთ მარჯვენა მუხლი. შემდეგ დააჭირეთ ნებისმიერ ადგილას.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "ეს აქტივობა ამოწმებს, რამდენად ფართოდ შეგიძლიათ გაშალოთ მარცხენა მუხლი.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "ეს აქტივობა ამოწმებს, რამდენად შეგიძლიათ გაშალოთ მარჯვენა მუხლი.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "ჩამოჯექით სკამის კიდეზე. როდესაც დაიწყებთ, თქვენი მოწყობილობა უნდა დადოთ მარცხენა მუხლზე, შესამოწმებლად. გთხოვთ ჩართოთ ხმა თქვენს მოწყობილობაზე, რომ ინსტრუქციების მოსმენა შეძლოთ.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "ჩამოჯექით სკამის კიდეზე. როდესაც დაიწყებთ, თქვენი მოწყობილობა უნდა დადოთ მარჯვენა მუხლზე, შესამოწმებლად. გთხოვთ ჩართოთ ხმა თქვენს მოწყობილობაზე, რომ ინსტრუქციების მოსმენა შეძლოთ.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "დაიდეთ თქვენი მოწყობილობა მარცხენა მუხლზე, გარეთ მიმართული ეკრანით, როგორც სურათზეა.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "დაიდეთ თქვენი მოწყობილობა მარჯვენა მუხლზე, გარეთ მიმართული ეკრანით, როგორც სურათზეა.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "როდესაც მზად იქნებით, შეეხეთ ეკრანს, რათა დაიწყოთ და გაშალეთ მარცხენა მუხლი, რამდენადაც შეძლებთ. დასრულების შემდეგ ისევ შეეხეთ.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "როდესაც მზად იქნებით, შეეხეთ ეკრანს, რათა დაიწყოთ და გაშალეთ მარჯვენა მუხლი, რამდენადაც შეძლებთ. დასრულების შემდეგ ისევ შეეხეთ.";
 
 /* Knee Range of Motion active task */
-"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Left Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will put your device on your left knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Extend your left knee. Then tap anywhere.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Extend your right knee. Then tap anywhere.";
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "მარცხენა მუხლის მოძრაობის დიაპაზონი";
 
-/* Shoulder Range of Motion active task */
-"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "When you begin you will put your device on your left shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will put your device on your right shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lift your left arm up. Then tap anywhere.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lift your right arm up. Then tap anywhere.";
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "მარჯვენა მუხლის მოძრაობის დიაპაზონი";
 
-/* Timed walk active task. */
-"TIMED_WALK_TITLE" = "Timed Walk";
-"TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you've passed the finish line.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
-"TIMED_WALK_FORM_TITLE" = "Assistive device";
-"TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
-"TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
-"TIMED_WALK_QUESTION_2_CHOICE" = "None";
-"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
-"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
-"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
-"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
-"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
-"TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
-"TIMED_WALK_INSTRUCTION_TURN" = "Turn around.";
-"TIMED_WALK_INSTRUCTION_2" = "Walk back to where you started.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Next when complete.";
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "დაიდეთ თქვენი მოწყობილობა მარცხენა მუხლზე";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "დაიდეთ თქვენი მოწყობილობა მარჯვენა მუხლზე";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "შეიტყვეთ მეტი მონაცემთა გაზიარების შესახებ";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "შეიტყვეთ მეტი მონაცემთა შეგროვების შესახებ";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "შეიტყვეთ მეტი მონაცემების გამოყენების შესახებ";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "შეიტყვეთ მეტი იმის შესახებ, თუ როგორ არის დაცული თქვენი კონფიდენციალურობა და პირადი მონაცემები";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "შეიტყვეთ მეტი კვლევის შესახებ";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "შეიტყვეთ მეტი შესრულებული დავალებების შესახებ";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "შეიტყვეთ მეტი სწავლის გავლენის შესახებ თქვენს დროზე";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "პირველ რიგში შეიტყვეთ მეტი კვლევის შესახებ";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "შეიტყვეთ მეტი გაყვანის შესახებ";
+
+/* Limb values. */
+"LIMB_LEFT" = "მარცხენა";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption უნდა იყოს მარცხნივ ან მარჯვნივ";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "სწორია";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "შეყვანილი მისამართისთვის შედეგის პოვნა შეუძლებელია. გთხოვთ დარწმუნდეთ, რომ მისამართი სწორია.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "ან ინტერნეტთან კავშირი არ გაქვთ, ან გადააჭარბეთ მისამართების საძიებო მოთხოვნების მაქსიმალურ რაოდენობას. თუ ინტერნეტთან კავშირი არ გაქვთ, გთხოვთ ჩართოთ თქვენი Wi-Fi ამ კითხვაზე პასუხის გასაცემად, გამოტოვეთ ეს კითხვა, თუ გამოტოვების ღილაკი არსებობს, ან დაუბრუნდით გამოკითხვას, როდესაც ინტერნეტთან კავშირი გექნებათ. სხვა შემთხვევაში, გთხოვთ სცადოთ რამდენიმე წუთში.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "ადგილმდებარეობის დადგენის სერვისებზე წვდომა დაშვებული არ არის. გთხოვთ, მიანიჭოთ ამ აპლიკაციას ნებართვა, გამოიყენოს ადგილმდებარეობის დადგენის სერვისების პარამეტრებიდან.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "თქვენი ამჟამინდელი ადგილმდებარეობის დადგენა შეუძლებელია. გთხოვთ, შეიყვანოთ მისამართი ან გადახვიდეთ ისეთ ადგილას, სადაც უკეთესი GPS-სიგნალია, თუ ეს შესაძლებელია.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "მითითებული მისამართი ვერ მოიძებნა";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "შეიყვანეთ მისამართი";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "სისტემაში შესვლა";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "სმ";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "ფუტი";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "შიგნით";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "კგ";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "გირვანქა";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "უნცია";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "თამაში დასრულებულია";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "გასაგრძელებლად დააჭირეთ ღილაკს „შემდეგი“";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "მიმდევრობა დასრულებულია";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "მეხსიერების აქტივობა შემუშავდა დოქტორი კეტრინ პოსინისა და სან-ფრანცისკოს კალიფორნიის უნივერსიტეტის დოქტორი ჯოელ კრამერის დახმარებით.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "თქვენ ეს ეტაპი კარგად ვერ გაიარეთ. გასაგრძელებლად დააჭირეთ ღილაკს „შემდეგი“.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "ისევ სცადეთ";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "აკრიფეთ %@ შებრუნებული თანმიმდევრობით";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "აკრიფეთ %@ მათი ანთების თანმიმდევრობით";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "გასაგრძელებლად დააჭირეთ ღილაკს „შემდეგი“";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "შეჩერებულია";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "დააკვირდით %@ როგორ ინთება";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "ქულა";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "დრო ამოიწურა.\nგასაგრძელებლად დააჭირეთ ღილაკს შემდეგი.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "დრო ამოიწურა";
+
+/* (No Comment) */
+"NULL_ANSWER" = "აირჩიეთ პასუხი";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Paced Auditory Serial Addition Test ზომავს თქვენი აუდიტორული ინფორმაციის დამუშავების სიჩქარეს და გაანგარიშების შესაძლებლობას.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
-"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "პაროლი იდენტიფიცირებულია";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "დაადასტურეთ პაროლი";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "დაადასტურეთ თქვენი ახალი პაროლი";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "დაგავიწყდათ პაროლი?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "პაროლი არ ემთხვევა. ისევ სცადეთ.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "პაროლი მცდარია";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "შეიყვანეთ თქვენი ახალი პაროლი";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "შეიყვანეთ თქვენი ძველი პაროლი";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "შეიყვანეთ პაროლი";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "პაროლი შენახულია";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "პაროლის შეყვანის პროცესის მაჩვენებელი";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@-დან %@ ციფრი შეყვანილია";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "დაშვებულია მხოლოდ რიცხვითი სიმბოლოები.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "დაადგინეთ პირადობის მოწმობის შეცდომა";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "გთხოვთ დაადასტუროთ Touch ID-ითი";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "შეიყვანეთ პაროლი";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "პაროლი";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "ჩატარებული ხმოვანი და მხედველობითი დამატებითი სერიული ტესტი ამოწმებს თქვენ მიერ ხმოვანი და მხედველობითი ინფორმაციის დამუშავების სისწრაფეს და დაანგარიშების უნარს.";
+
+/* (No Comment) */
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "The Paced Auditory Serial Addition Test measures your auditory information processing speed and calculation ability.";
-"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
-"PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test measures your auditory and visual information processing speed and calculation ability.";
-"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ seconds.\nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn't calculate a running total, but only the sum of the last two numbers.";
-"PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
-"PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "ტელეფონის ნომერი";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "დააჭირეთ ასარჩევად";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "დააჭირეთ დასაწერად";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "დააჭირეთ პასუხის გასაცემად";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "დაიმახსოვრეთ ეს პირველი ციფრი.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "დაამატეთ ეს ახალი ციფრი წინას.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "ერთნიშნა ციფრები ყოველ %@ წამშია წარმოდგენილი.\nთქვენ მას მაშინვე უნდა დაამატოთ თითოეული ახალი ციფრი.\nყურადღება, თქვენ მიმდინარე ჯამი კი არ უნდა იანგარიშოთ, არამედ მხოლოდ ბოლო ორი რიცხვის ჯამი.";
+
+/* (No Comment) */
 "PSAT_NO_DIGIT" = "-";
 
-/* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a peg in a hole. You will be asked to do this %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Both your left and right hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "ჩატარებული მხედველობითი დამატებითი სერიული ტესტი ამოწმებს მხედველობითი ინფორმაციის დამუშავების სისწრაფეს და დაანგარიშების უნარს.";
 
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Put the peg in the hole using your left hand.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Put the peg in the hole using your right hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Put the peg behind the line using your left hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Put the peg behind the line using your right hand.";
-"HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
-"HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
 
-/* Tremor test active task. */
-"TREMOR_TEST_TITLE" = "Tremor Activity";
-"TREMOR_TEST_INTRO_1_DETAIL" = "This activity measures the tremor of your hands in various positions. Find a place where you can sit comfortably for the duration of this activity.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold the phone in your more affected hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold the phone in your RIGHT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold the phone in your LEFT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "You will be asked to perform %@ while sitting with the phone in your hand.";
-"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "a task";
-"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "two tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "three tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "four tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "five tasks";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepare to hold your phone in your lap.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Prepare to hold your phone in your lap with your LEFT hand.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Prepare to hold your phone in your lap with your RIGHT hand.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Keep holding your phone in your lap for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Now hold your phone with your hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Now hold your phone with your LEFT hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Now hold your phone with your RIGHT hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Keep holding your phone with your hand extended for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Now hold your phone at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Now hold your phone with your LEFT hand at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Now hold your phone with your RIGHT hand at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Keep holding your phone with your elbow bent for %ld seconds";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Now keeping your elbow bent, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Now keeping your elbow bent with your phone in your LEFT hand, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Now keeping your elbow bent with your phone in your RIGHT hand, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Keep touching your phone to your nose for %ld seconds";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Prepare to do a queen wave (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Prepare to do a queen wave with your phone in your LEFT hand (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Prepare to do a queen wave with your phone in your RIGHT hand (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Keep performing a queen wave for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Now switch the phone to your LEFT hand and continue to the next task.";
-"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Now switch the phone to your RIGHT hand and continue to the next task.";
-"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continue to the next task.";
-"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activity completed.";
-"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "You will be asked to perform %@ while sitting with the phone first in one hand, then again with the other hand.";
-"TREMOR_SKIP_LEFT_HAND" = "I cannot perform this activity with my LEFT hand.";
-"TREMOR_SKIP_RIGHT_HAND" = "I cannot perform this activity with my RIGHT hand.";
-"TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ აღემატება დაშვებულ მაქსიმალურ შეფასებას (%2$@).";
 
-/* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
-"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
-"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by the numbers '2' – '3' – '4'… until you reach the number '7'.";
-"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
-"TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
-"TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d error)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
-"TRAILMAKING_LETTER_A" = "A";
-"TRAILMAKING_LETTER_B" = "B";
-"TRAILMAKING_LETTER_C" = "C";
-"TRAILMAKING_LETTER_D" = "D";
-"TRAILMAKING_LETTER_E" = "E";
-"TRAILMAKING_LETTER_F" = "F";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$ @ ნაკლებია მინიმალურ დაშვებულ შეფასებაზე (%2$@).";
 
-/* Speech Recognition active task. */
-"SPEECH_TASK_TITLE" = "Speech Recognition";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "This activity records your speech with the microphone at the bottom of the device, and translates it to text.";
-"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Press the button to start recording before speaking.";
-"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start Recording";
-"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stop Recording";
-"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edit Transcript";
-"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edit transcript text to correct any misinterpretation of the speech.";
-"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Your transcription will appear here.";
-"SPEECH_RECOGNITION_FAILED" = "Speech recognition failed.";
-"SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ სწორი შეფასება არ არის.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "მცდარი მნიშვნელობა";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "მოძრაობის დიაპაზონი";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "სწრაფად შეანჯღრიეთ მოწყობილობა, როდესაც ლურჯი წრე გამოჩნდება";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@-დან %@ ცდა";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "ეს აქტივობა აფასებს იმას, რა დრო გჭირდებათ ვიზუალურ მინიშნებაზე რეაგირებისთვის.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "შეანჯღრიეთ მოწყობილობა ნებისმიერი მიმართულებით, როგორც კი ეკრანზე ლურჯი წერტილი გამოჩნდება. ამის გაკეთებას %D- ჯერ მოგთხოვენ.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "რეაქციის დრო";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "ელ. ფოსტის გადასამოწმებელი წერილის გაგზავნა";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "დააჭირეთ ქვემოთ მოცემულ ბმულს, თუ არ მიიღეთ დამადასტურებელი ელ. წერილი და გსურთ ის კვლავ გაიგზავნოს.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "ასწიეთ მარცხენა მკლავი. შემდეგ დააჭირეთ ნებისმიერ ადგილას.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "ასწიეთ მარჯვენა მკლავი. შემდეგ დააჭირეთ ნებისმიერ ადგილას.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "ეს აქტივობა ამოწმებს, რამდენად ფართოდ შეგიძლიათ გაშალოთ მარცხენა მხარი.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "ეს აქტივობა ამოწმებს, რამდენად ფართოდ შეგიძლიათ გაშალოთ მაჯვენა მხარი.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "როდესაც დაიწყებთ, თქვენი მოწყობილობა მარცხენა მხარზე უნდა დაიდოთ, შესამოწმებლად. გთხოვთ ჩართოთ ხმა თქვენს მოწყობილობაზე, რომ ინსტრუქციების მოსმენა შეძლოთ.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "როდესაც დაიწყებთ, თქვენი მოწყობილობა მარჯვენა მხარზე უნდა დაიდოთ, შესამოწმებლად. გთხოვთ ჩართოთ ხმა თქვენს მოწყობილობაზე, რომ ინსტრუქციების მოსმენა შეძლოთ.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "მოათავსეთ თქვენი მოწყობილობა მარცხენა მხარზე, გარეთ მიბრუნებული ეკრანით, როგორც სურათზეა.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "მოათავსეთ თქვენი მოწყობილობა მარჯვენა მხარზე, გარეთ მიბრუნებული ეკრანით, როგორც სურათზეა.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "როდესაც მზად იქნებით, შეეხეთ ეკრანს, რომ დაიწყოთ და ასწიოთ მარცხენა მკლავი, რამდენადაც შეძლებთ. დასრულების შემდეგ ისევ შეეხეთ.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "როდესაც მზად იქნებით, შეეხეთ ეკრანს, რომ დაიწყოთ და ასწიოთ მარჯვენა მკლავი, რამდენადაც შეძლებთ. დასრულების შემდეგ ისევ შეეხეთ.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "მარცხენა მხრის მოძრაობის დიაპაზონი";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "მარჯვენა მხრის მოძრაობის დიაპაზონი";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "მოათავსეთ თქვენი მოწყობილობა მარცხენა მხარზე";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "მოათავსეთ თქვენი მოწყობილობა მარჯვენა მხარზე";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "დასაწყებად, დააჭირეთ ღილაკს „დაწყება“, შემდეგ კი კარგად დააკვირდით.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@-ების ნაწილი სათითაოდ აინთება. შეეხეთ იმ %@-ს იმავე თანმიმდევრობით, როგორც აინთება.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%@-ების ნაწილი სათითაოდ აინთება. შეეხეთ იმ %@-ს, მათი ანთების საპირისპირო თანმიმდევრობით.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "ეს აქტივობა ამოწმებს თქვენს მოკლევადიან სივრცობრივ მეხსიერებას იმ თანმიმდევრობის გამეორებით, რომლითაც %@ ინთება.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "ყვავილები";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "ყვავილები";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "სივრცობრივი მეხსიერება";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "დააჭირეთ ღილაკს „აუდიოს დაკვრა“, დააყენეთ ხმა თქვენთვის მოსახერხებელ დონეზე და შემდეგ დააჭირეთ ღილაკს „აუდიოს გამორთვა“ გასაგრძელებლად.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "ხმის დონის დადგენა";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "ამ ტესტის ფარგლებში თქვენ უნდა:\n\nმოუსმინოთ წინადადებას.\n\nმკაფიოდ გაიმეოროთ მოსმენილი ან გამოტოვოთ და კლავიატურაზე აკრიფოთ მოსმენილი ტექსტი. \n\nთუ მოსმენილს გაიმეორებთ, საშუალება გექნებათ შეცვალოთ მეტყველების ამომცნობი მექანიზმის მიერ შექმნილი ჩანაწერი.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "ეს აქტივობა ამოწმებს, რამდენად მკაფიოდ გვესმის მეტყველება ხმაურიან გარემოში.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "გაიმეორეთ მოსმენილი.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "ილაპარაკეთ";
 
 /* Speech In Noise active task. */
-"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Play Audio";
-"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stop Audio";
-"SPEECH_IN_NOISE_TITLE" = "Speech in Noise";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "This activity measures intelligibility of speech when presented in noisy environments.";
-"SPEECH_IN_NOISE_DETAIL_TEXT" = "As part of this test, you will:\n\nListen to a sentence.\n\nRepeat clearly what you heard or skip ahead to type in what you heard using the keyboard. \n\nIf you repeat what you heard, you will have the option to modify the transcript generated by the speech recognition engine.";
-"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volume Calibration";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tap 'Play Audio', adjust your volume to a comfortable level and then tap 'Stop Audio' to proceed.";
-"SPEECH_IN_NOISE_STEP_TITLE" = "Listen";
-"SPEECH_IN_NOISE_STEP_TEXT" = "A sentence mixed with background noise at a randomized Signal to Noise Ratio (SNR) will be played only once.";
-"SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
-"SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeat what you heard.";
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "აუდიოს ჩართვა";
 
-/* Potentially user visible error messages. */
-"ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
-"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
-"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Error setting attribute";
-"ERROR_DATALOGGER_COULD_NOT_MAORK" = "File not marked deleted (not marked uploaded)";
-"ERROR_DATALOGGER_MULTIPLE" = "Multiple errors removing logs";
-"ERROR_RECORDER_NO_DATA" = "No collected data was found.";
-"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "წინადადება, რომელიც შერეულია ფონურ ხმაურთან, რომელიც „სიგნალი-ხმაურის“ შემთხვევით თანაფარდობით (SNR) ხასიათდება, მხოლოდ ერთხელ უნდა მოვისმინოთ.";
 
-/* Environment SPL*/
-"ENVIRONMENTSPL_TITLE" = "SPL Meter";
-"ENVIRONMENTSPL_INTRO_TEXT" = "This activity measures the environment sound pressure level. If the noise levels are too high, you will be unable to proceed. Please move to a quieter location to complete this task or retake this activity at a later time.";
-"ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Calculating";
-"ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "მოისმინეთ";
 
-/* Charts */
-"CHART_NO_DATA_TEXT" = "No Data";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "აუდიოს გამორთვა";
 
-/* Accessibility */
-"AX_BUTTON_BACK" = "Back";
-"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
-"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
-"AX_BUTTON_ANNOTATE" = "Annotate";
-"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
-"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
-"AX_BUTTON_SHARE" = "Share";
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "მეტყველება ხმაურში";
 
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
 
-"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "მეტყველების გარჩევა ვერ მოხერხდა.";
 
-"AX_SIGNVIEW_LABEL" = "Designated signature field";
-"AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
-"AX_SIGNVIEW_SIGNED" = "Signed";
-"AX_SIGNVIEW_UNSIGNED" = "Unsigned";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "მეტყველების ამოცნობის ინიცირება ვერ მოხერხდა.";
 
-"AX_SELECTED" = "Selected";
-"AX_UNSELECTED" = "Un-selected";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "საუბრის დაწყებამდე დააჭირეთ ღილაკს ჩაწერის დასაწყებად.";
 
-"AX_SLIDER_LABEL" = "Response slider. Range from %@ to %@";
-"AX_UNLABELED_IMAGE" = "Unlabeled image";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "ეს აქტივობა იწერს თქვენს გამოსვლას მოწყობილობის ქვედა ნაწილში მოთავსებული მიკროფონით და მას ტექსტად გარდაქმნის.";
 
-"AX_ANNOUNCE_BEGIN_TASK" = "Begin task";
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "ჩაასწორეთ ჩანაწერის ტექსტი გამოსვლის მცდარი ინტერპრეტაციის თავიდან ასაცილებლად.";
 
-"AX.MEMORY.TILE.ACTIVE" = "active";
-"AX.MEMORY.TILE.CORRECT" = "correct";
-"AX.MEMORY.TILE.INCORRECT" = "incorrect";
-"AX.MEMORY.TILE.QUIESCENT" = "quiescent";
-"AX.MEMORY.TILE.LABEL" = "Memory game tile";
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "ჩანაწერის რედაქტირება";
 
-"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
-"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "ჩაწერის დაწყება";
 
-"AX_VIDEO_CAPTURE_LABEL" = "Video capture preview";
-"AX_VIDEO_CAPTURE_COMPLETE" = "Video capture complete";
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "ჩაწერის შეწყვეტა";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Unable to place disk with size %@ on disk with size %@";
-"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
-"AX_TOWER_OF_HANOI_TOWER" = "Tower";
-"AX_TOWER_OF_HANOI_PLACE_DISK" = "Double-tap to place disk";
-"AX_TOWER_OF_HANOI_SELECT_DISK" = "Double-tap to select top-most disk";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
-"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "თქვენი ჩანაწერი აქ გამოჩნდება.";
 
-"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Dismiss keyboard";
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "მეტყველების გარჩევა";
 
-"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range from %@ to %@";
-"AX_GRAPH_STACK_PREFIX" = "Stack composed of";
-"AX_GRAPH_AND_SEPARATOR" = " and ";
-"AX_GRAPH_POINT_%@" = "Point: %@";
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%2$@-დან %1$@";
 
-"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
-"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "ლურჯი";
 
-"AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "ბ";
 
-"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
-"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "მწვანე";
 
-"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your left ear.";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tap for Right Ear";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your right ear.";
-/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons for each ear are located. When the test starts, the buttons will be directly tappable. %@";
-"AX_TAP_BUTTON_1_LABEL" = "Tap for one finger";
-"AX_TAP_BUTTON_2_LABEL" = "Tap for other finger";
-"AX_TAP_BUTTON_HINT" = "Activate to make the buttons directly tappable.";
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons are located. Activate either button to make the buttons directly tappable.";
-"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Buttons are now directly tappable.";
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Using VoiceOver, the button will be directly tappable. It will be located near the center of the screen.";
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "გ";
 
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
+/* (No Comment) */
+"STROOP_COLOR_RED" = "წითელი";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "რ";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "ყვითელი";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "ი";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "ყოველთვის, როდესაც სიტყვა გამოჩნდება, შეარჩიეთ ნაჩვენები, COLOR-ის დასახელების პირველი ასო.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "როდესაც მზად იქნებით Stroop-აქტივობის დასაწყებად, დააჭირეთ ღილაკს „დაწყება“.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "აირჩიეთ COLOR-ის დასახელების პირველი ასო, რომელიც ნაჩვენებია.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "დააჭირეთ";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "დასაწყებად დააჭირეთ ღილაკს „შემდეგი“.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "დააჭირეთ ღილაკებს იმის შესაბამისად, რამდენადაც ორი თითით შეგიძლიათ.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "დააჭირეთ ღილაკებს მარცხენა ხელის გამოყენებით.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "დააჭირეთ ღილაკებს მარჯვენა ხელის გამოყენებით.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "ეს აქტივობა ამოწმებს თქვენი აკრეფის სისწრაფეს.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "დააჭირეთ ერთი თითი, შემდეგ მეორე. შეეცადეთ დაჭერის ტემპი მაქსიმალურად თანაბარი იყოს. განაგრძეთ აკრეფა %@-ისთვის.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "გამოიყენეთ მარცხენა ხელის ორი თითი, რათა მონაცვლეობით, ეკრანის ღილაკებსაც დააჭიროთ.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "გაიმეორეთ იგივე ცდა მარცხენა ხელით.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "გამოიყენეთ იმავე ხელის ორი თითი, რათა მონაცვლეობით ეკრანის ღილაკებსაც დააჭიროთ.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "მოათავსეთ თქვენი მოწყობილობა ბრტყელ ზედაპირზე.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "გამოიყენეთ მარჯვენა ხელის ორი თითი, რათა მონაცვლეობით ეკრანის ღილაკებსაც დააჭიროთ.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "ახლა გაიმეორეთ იგივე ცდა მარჯვენა ხელით.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "გამოტოვეთ ეს ხელი";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "კრეფის სისწრაფე";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "მარცხენა ხელი";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "მარჯვენა ხელი";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "თქვენი მონაცემები გაანალიზდება და შედეგების მომზადების შემდეგ შეტყობინებას მიიღებთ.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "აქტივობა დასრულებულია";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "ტექსტის შინაარსის მაქსიმალური სიდიდე: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "გამოიყენეთ იგივე დამხმარე მოწყობილობა თითოეული ტესტისთვის.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "დამხმარე მოწყობილობა";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "იარეთ %@ მდე სწორი ხაზით.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "დაბრუნდით იქ, სადაც დაიწყოთ.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "დასრულების შემდეგ დააჭირეთ ღილაკს „შემდეგი“.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "შემობრუნდით.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "დასაწყებად დააჭირეთ ღილაკს „შემდეგი“.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "იპოვეთ ადგილი, სასურველია გარეთ, სადაც შეგიძლიათ იაროთ დაახლოებით %@-ზე სწორი ხაზით, რაც შეიძლება სწრაფად, მაგრამ ფრთხილად. არ შეანელოთ სვლა დასრულების ხაზის გადაკვეთამდე.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "ეს აქტივობა თქვენი ქვედა კიდურების ფუნქციას ამოწმებს.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "არც ერთი";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "ცალმხრივი ხელჯოხი";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "ცალმხრივი ყავარჯენი";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "ორმხრივი ხელჯოხი";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "ორმხრივი ყავარჯენი";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "დააჭირეთ აქ პასუხის ასარჩევად.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "იყენებთ თუ არა დამხმარე მოწყობილობას?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "ატარებთ თუ არა ტერფის ფეხის ორთეზს?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "დროული სიარული";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "ყოველთვის, როდესაც ხმის მოსმენას დაიწყებთ, დააჭირეთ მარცხენა ან მარჯვენა ღილაკს, რომ მიუთითოთ, რომელ ყურში გესმით ხმა.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "ეს აქტივობა სხვადასხვა ხმის მოსმენის თქვენს უნარს ამოწმებს.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "სანამ დაიწყებთ, ჩართეთ და მოირგეთ ყურსასმენები.\n\nჟღერადობა ძალიან დახვეწილი და ჩვეულებრივი ხმოვანი ტონისგან განსხვავებული იქნება. ხმა თავიდან რბილი იქნება და შემდეგ ნელ-ნელა მოიმატებს. გთხოვთ, ყურადღებით იყოთ და დააჭირეთ მარცხენა ან მარჯვენა ღილაკს, რომ განსაზღვროთ, რომელ ყურში გესმით.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "მარცხენა ყური";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "მარჯვენა ყური";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "ახლა ტონალობა უნდა მიუგდოთ ყური. დააყენეთ ხმის დონე თქვენს მოწყობილობასთან არსებული.\n\nმართვის საშუალებით. დააჭირეთ ნებისმიერ ღილაკს, როდესაც დასაწყებად მზად იქნებით.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "ტონის აუდიომეტრია";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, მარცხენა";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, მარჯვენა";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "რეგულატორების საერთო რაოდენობა";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "გასაგრძელებლად ნებისმიერ ადგილს შეეხეთ";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "ამოხსენით თავსატეხი";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "მოძრაობათა რაოდენობა:%@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "ამ თავსატეხს ვერ ამოვხსნი";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "ეს აქტივობა თავსატეხის ამოხსნის თქვენს უნარს ამოწმებს.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "მონიშნულ პლატფორმაზე მთლიანი დასტის გადატანა რაც შეიძლება ნაკლები ნაბიჯით.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "ჰანოის კოშკი";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "დასაწყებად დააჭირეთ ღილაკს. „დაწყება“.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d შეცდომა)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d შეცდომა)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "ეს აქტივობა ამოწმებს თქვენს მხედველობით ყურადღებას და ამოცანიდან ამოცანაზე გადართვის უნარს, იმ დროის აღრიცხვით, რომელიც შეკვეთის სერიის ერთეულთა დასაჭერად გჭირდებათ.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "დათვლის შემდეგ, დააჭირეთ ერთეულებს ციფრებისა და ასოების მონაცვლეობით. დაიწყეთ პირველ რიცხვ \"1\"-ზე დაჭერით და მიჰყევით ციფრების \"2\" - \"3\" - \"4\"… სანამ \"7\" ციფრს მიაღწევთ.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "დათვლის შემდეგ, დააჭირეთ ერთეულებს ციფრებისა და ასოების მონაცვლეობით. დაიწყეთ პირველ რიცხვ \"1\"-ზე დაჭერით, შემდეგ დააჭირეთ პირველ ასო \"A\"-ს, შემდეგ კი \"2\" - \"B\" - \"3\" - \"C\" სანამ \"7\" ციფრს მიაღწევთ.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "გააკეთეთ ეს რაც შეიძლება სწრაფად, შეცდომების გარეშე. \n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "ა";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "ბ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "გ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "დ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "ე";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "ვ";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "ბილიკის დამზადების ტესტი";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f წმ";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "ამ აქტივობის შესრულება მარცხენა ხელით არ შემიძლია.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "ამ აქტივობის შესრულება ორივე ხელით შემიძლია.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "ამ აქტივობას შესრულება მარჯვენა ხელით არ შემიძლია.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "დაიკავეთ თქვენი ტელეფონი მოხრილი იდაყვიით %ld წამით";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "ახლა დაიკავეთ ტელეფონი მოხრილი იდაყვით მხრის დონეზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "ახლა დაიკავეთ თქვენი ტელეფონი მარცხენა ხელით მხრის დონეზე, მოხრილი იდაყვით.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "ახლა დაიკავეთ თქვენი ტელეფონი მარჯვენა ხელით მხრის დონეზე, მოხრილი იდაყვით.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "დაიკავეთ თქვენი ტელეფონის ხელით გაშლილი %ld წამით.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "ახლა დაიკავეთ თქვენი ტელეფონი გაშლილი ხელით მხრის დონეზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "ახლა დაიკავეთ თქვენი ტელეფონი მარცხენა გაშლილი ხელით მხრის დონეზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "ახლა დაიკავეთ თქვენი ტელეფონი მარჯვენა გაშლილი ხელით მხრის დონეზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "გადადით შემდეგ ამოცანაზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "დაიდეთ თქვენი ტელეფონი კალთაში %ld წამით.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "მოემზადეთ თქვენი ტელეფონი კალთაში გასაჩერებლად.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "მოემზადეთ თქვენი ტელეფონის მარცხენა ხელით კალთაში ჩასადებად.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "მოემზადეთ თქვენი ტელეფონის მარჯვენა ხელით კალთაში ჩასადებად.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "გასაგრძელებლად დააჭირეთ ღილაკს „შემდეგი“.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "ახლა გადაიტანეთ ტელეფონი მარცხენა ხელში და გადადით შემდეგ ამოცანაზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "ახლა გადაიტანეთ ტელეფონი მარჯვენა ხელში და გადადით შემდეგ ამოცანაზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "მიიდეთ თქვენი ტელეფონის ცხვირზე %ld წამით";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "ახლა მოხრილი იდაყვით, რამდენიმეჯერ მიადეთ თქვენი ტელეფონი ცხვირს.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "ახლა მოხრილი იდაყვით, დაიკავეთ ტელეფონით მარცხენა ხელში და რამდენიმეჯერ მიადეთ თქვენს ცხვირს.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "ახლა მოხრილი იდაყვით დაიკავეთ თქვენი ტელეფონით მარჯვენა ხელში და რამდენიმეჯერ მიადეთ თქვენს ცხვირს.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "შეასრულეთ დედოფლის ტალღა ld წამის განმავლობაში.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "მოემზადეთ დედოფლის ტალღის შესასრულებლად ( მაჯის მოძრაობით).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "მოემზადეთ დედოფლის ტალღის შესასრულებლად მარცხენა ხელში დაჭერილი თქვენი ტელეფონით (მაჯის მოძრაობით).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "მოემზადეთ დედოფლის ტალღის შესასრულებლად მარჯვენა ხელში დაჭერილი თქვენი ტელეფონით ( მაჯის მოძრაობით).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "აქტივობა დასრულებულია.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "ეს აქტივობა ამოწმებს, რამდენად გიკანკალებთ ხელები სხვადასხვა მდგომარეობაში. იპოვეთ ადგილი, სადაც მოხერხებულად იჯდებით ამ საქმიანობის განმავლობაში.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "დაიჭირეთ ტელეფონი უფრო დაღლილ ხელში, როგორც ეს ნაჩვენებია ქვემოთ მოცემულ სურათზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "დავალება";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "ორი ამოცანა";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "სამი ამოცანა";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "ოთხი ამოცანა";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "ხუთი დავალება";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "თქვენ მოგეთხოვებათ %@-ის შესრულება ტელეფონით ხელში ჯდომის დროს.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "დაიჭირეთ ტელეფონი მარცხენა ხელში, როგორც ეს ნაჩვენებია ქვემოთ მოცემულ სურათზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "დაიჭირეთ ტელეფონი მარჯვენა ხელში, როგორც ეს ნაჩვენებია ქვემოთ მოცემულ სურათზე.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "თქვენ მოგეთხოვებათ %@-ის შესრულება, როდესაც ჯერ ერთ ხელში გექნებით ტელეფონი, შემდეგ კი ისევ მეორე ხელში.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "ცახცახის აქტივობა";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "გადამოწმება";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "დაადასტურეთ თქვენი ელ. ფოსტა";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "თქვენ დაასრულეთ აქტივობა.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "იარეთ წინ და უკან სწორი ხაზით %@ -ისთვის. ისე იარეთ, როგორც ჩვეულებრივად ივლიდით.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "შემოარტყით სრული წრე და შემდეგ გაჩერდით %@-ზე";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "მოათავსეთ თქვენი მოწყობილობა ჯიბეში ან ჩანთაში და მიჰყევით აუდიო ინსტრუქციებს.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "დააჭირეთ ღილაკს „დაწყება“, როდესაც დასაწყებად მზად იქნებით.\nშემდეგ მოათავსეთ თქვენი მოწყობილობა ჯიბეში ან ჩანთაში და მიჰყევით აუდიო ინსტრუქციას.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "იპოვეთ ადგილი, სადაც შეგიძლიათ უსაფრთხოდ გაიაროთ დახმარების გარეშე დაახლოებით %ld ნაბიჯი სწორ ხაზზე.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "იპოვეთ ადგილი, სადაც შეგიძლიათ უსაფრთხოდ იაროთ წინ და უკან სწორ ხაზზე. შეეცადეთ შეუჩერებლად იაროთ თქვენი ბილიკის ბოლოებში მობრუნებით, თითქოს კონუსის გარშემო დადიხართ.\n\nშემდეგ თქვენ დაგარიგებენ, როგორ უნდა შემოარტყათ სრულ წრეს, შემდეგ კი იდგეთ გვერდებზე მიდებული მკლავებით და მხრის სიგანეზე გაშლილი ფეხებით.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "ეს აქტივობა ამოწმებს თქვენს მოძრაობასა და წონასწორობას სიარულისა და დგომის დროს. ნუ გააგრძელებთ, თუ დაუხმარებლად, უსაფრთხოდ ვერ დადიხართ.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "გაიარეთ %ld ნაბიჯი სწორ ხაზზე.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "შემობრუნდით და უკან წამოდით იქამდე, საიდანაც დაიწყეთ.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "გაჩერდი %@-ზე.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "ახლა გაჩერდით %@-ზე.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "მოძრაობა და წონასწორობა";
+

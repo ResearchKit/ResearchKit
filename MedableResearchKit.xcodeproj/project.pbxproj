@@ -4043,6 +4043,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D012B6B824C116D700F4A842 /* ta-IN */,
+				DA25025A25152C5700C54366 /* ka-GE */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
