@@ -3548,7 +3548,6 @@
 				es_419,
 				"ta-IN",
 				"ka-GE",
-				"ro-RO",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -4037,7 +4036,6 @@
 				D0FB60EE2373334000FBF8D0 /* bg-BG */,
 				D012B6BA24C116D700F4A842 /* ta-IN */,
 				D069B8F624EF5C71007432B4 /* ka-GE */,
-				DA5FE5B1251534CA00A86D37 /* ro-RO */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
