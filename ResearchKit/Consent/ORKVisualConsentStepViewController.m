@@ -173,7 +173,10 @@
     
     _viewControllers = nil;
     
-    [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
+    if (self.isViewLoaded)
+    {
+        [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
+    }
 }
 
 - (ORKEAGLMoviePlayerView *)animationPlayerView {
