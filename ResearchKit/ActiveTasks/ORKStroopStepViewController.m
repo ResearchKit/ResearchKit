@@ -74,7 +74,7 @@
     double _newM;
     double _prevS;
     double _newS;
-    NSInteger _count;
+    NSInteger _questionCount;
     BOOL _match;
 }
 
@@ -142,16 +142,16 @@
         _endTime = [NSProcessInfo processInfo].systemUptime;
         NSTimeInterval reactionTime = (_endTime - _startTime);
         // calculate mean and standard deviation of reaction time (using Welford's algorithm: Welford. (1962) Technometrics 4(3), 419-420)
-        if (_count == 1) {
+        if (_questionCount == 1) {
             _prevM = _newM = reactionTime;
             _prevS = 0;
         } else {
-            _newM = _prevM + (reactionTime - _prevM) / _count;
+            _newM = _prevM + (reactionTime - _prevM) / _questionCount;
             _newS += _prevS + (reactionTime - _prevM) * (reactionTime - _newM);
             _prevM = _newM;
         }
-        _meanReactionTime = (_count > 0) ? _newM : 0;
-        _varianceReactionTime = ((_count > 1) ? _newS / (_count - 1) : 0);
+        _meanReactionTime = (_questionCount > 0) ? _newM : 0;
+        _varianceReactionTime = ((_questionCount > 1) ? _newS / (_questionCount - 1) : 0);
         if (_varianceReactionTime > 0) {
             _stdReactionTime = sqrt(_varianceReactionTime);
         }
@@ -212,10 +212,10 @@
     ORKStroopResult *stroopResult = [[ORKStroopResult alloc] initWithIdentifier:self.step.identifier];
     stroopResult.startTime = _startTime;
     stroopResult.endTime = _endTime;
+    stroopResult.reactionTime = reactionTime;
     stroopResult.color = color;
     stroopResult.text = text;
     stroopResult.colorSelected = colorSelected;
-    stroopResult.reactionTime = reactionTime;
     stroopResult.match = match;
     stroopResult.meanReactionTime = _meanReactionTime;
     stroopResult.stdReactionTime = _stdReactionTime;
@@ -251,6 +251,7 @@
     }
     [self setButtonsEnabled];
     _startTime = [NSProcessInfo processInfo].systemUptime;
+    _questionCount++;
 }
 
 - (void)setButtonsDisabled {
