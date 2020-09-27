@@ -36,21 +36,29 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_DOUBLE(aCoder, startTime);
-    ORK_ENCODE_DOUBLE(aCoder, endTime);
     ORK_ENCODE_OBJ(aCoder, color);
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, colorSelected);
+    ORK_ENCODE_BOOL(aCoder, match);
+    ORK_ENCODE_DOUBLE(aCoder, startTime);
+    ORK_ENCODE_DOUBLE(aCoder, endTime);
+    ORK_ENCODE_DOUBLE(aCoder, reactionTime);
+    ORK_ENCODE_DOUBLE(aCoder, meanReactionTime);
+    ORK_ENCODE_DOUBLE(aCoder, stdReactionTime);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_DOUBLE(aDecoder, startTime);
-        ORK_DECODE_DOUBLE(aDecoder, endTime);
         ORK_DECODE_OBJ_CLASS(aDecoder, color, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, colorSelected, NSString);
+        ORK_DECODE_BOOL(aDecoder, match);
+        ORK_DECODE_DOUBLE(aDecoder, startTime);
+        ORK_DECODE_DOUBLE(aDecoder, endTime);
+        ORK_DECODE_DOUBLE(aDecoder, reactionTime);
+        ORK_DECODE_DOUBLE(aDecoder, meanReactionTime);
+        ORK_DECODE_DOUBLE(aDecoder, stdReactionTime);
     }
     return self;
 }
@@ -64,25 +72,33 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.startTime == castObject.startTime) &&
-            (self.endTime == castObject.endTime) &&
             ORKEqualObjects(self.color, castObject.color) &&
             ORKEqualObjects(self.text, castObject.text) &&
-            ORKEqualObjects(self.colorSelected, castObject.colorSelected));
+            ORKEqualObjects(self.colorSelected, castObject.colorSelected) &&
+            (self.match == castObject.match) &&
+            (self.startTime == castObject.startTime) &&
+            (self.endTime == castObject.endTime) &&
+            (self.endTime == castObject.reactionTime) &&
+            (self.endTime == castObject.meanReactionTime) &&
+            (self.endTime == castObject.stdReactionTime));
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStroopResult *result = [super copyWithZone:zone];
-    result.startTime = self.startTime;
-    result.endTime = self.endTime;
     result -> _color = [self.color copy];
     result -> _text = [self.text copy];
     result -> _colorSelected = [self.colorSelected copy];
+    result.match = self.match;
+    result.startTime = self.startTime;
+    result.endTime = self.endTime;
+    result.endTime = self.reactionTime;
+    result.endTime = self.meanReactionTime;
+    result.endTime = self.stdReactionTime;
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; color: %@; text: %@; colorselected: %@ %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.color, self.text, self.colorSelected, self.descriptionSuffix];
+    return [NSString stringWithFormat:@"%@; color: %@; text: %@; colorselected: %@; match: %d; reactionTime: %f; meanReactionTime: %f; stdReactionTime: %f %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.color, self.text, self.colorSelected, self.match, self.reactionTime, self.meanReactionTime, self.stdReactionTime, self.descriptionSuffix];
 }
 
 @end

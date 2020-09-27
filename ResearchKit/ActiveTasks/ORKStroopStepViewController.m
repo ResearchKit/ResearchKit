@@ -67,6 +67,15 @@
     NSMutableArray *_results;
     NSTimeInterval _startTime;
     NSTimeInterval _endTime;
+    double _meanReactionTime;
+    double _stdReactionTime;
+    double _varianceReactionTime;
+    double _prevM;
+    double _newM;
+    double _prevS;
+    double _newS;
+    NSInteger _count;
+    BOOL _match;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
@@ -130,17 +139,38 @@
 - (void)buttonPressed:(id)sender {
     if (![self.stroopContentView.colorLabelText isEqualToString:@" "]) {
         [self setButtonsDisabled];
+        _endTime = [NSProcessInfo processInfo].systemUptime;
+        NSTimeInterval reactionTime = (_endTime - _startTime);
+        // calculate mean and standard deviation of reaction time (using Welford's algorithm: Welford. (1962) Technometrics 4(3), 419-420)
+        if (_count == 1) {
+            _prevM = _newM = reactionTime;
+            _prevS = 0;
+        } else {
+            _newM = _prevM + (reactionTime - _prevM) / _count;
+            _newS += _prevS + (reactionTime - _prevM) * (reactionTime - _newM);
+            _prevM = _newM;
+        }
+        _meanReactionTime = (_count > 0) ? _newM : 0;
+        _varianceReactionTime = ((_count > 1) ? _newS / (_count - 1) : 0);
+        if (_varianceReactionTime > 0) {
+            _stdReactionTime = sqrt(_varianceReactionTime);
+        }
+        // evaluate matches according to button pressed
         if (sender == self.stroopContentView.RButton) {
-            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_redString];
+            _match = ([_redString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_redString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.GButton) {
-            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_greenString];
+            _match = ([_greenString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_greenString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.BButton) {
-            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_blueString];
+            _match = ([_blueString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_blueString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.YButton) {
-            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_yellowString];
+            _match = ([_yellowString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_yellowString matching:_match inTime:reactionTime];
         }
         self.stroopContentView.colorLabelText = @" ";
         _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
@@ -178,13 +208,17 @@
 
 #pragma mark - ORKResult
 
-- (void)createResult:(NSString *)color withText:(NSString *)text withColorSelected:(NSString *)colorSelected {
+- (void)createResult:(NSString *)color withText:(NSString *)text withColorSelected:(NSString *)colorSelected matching:(BOOL)match inTime:(NSTimeInterval)reactionTime {
     ORKStroopResult *stroopResult = [[ORKStroopResult alloc] initWithIdentifier:self.step.identifier];
     stroopResult.startTime = _startTime;
-    stroopResult.endTime =  [NSProcessInfo processInfo].systemUptime;
+    stroopResult.endTime = _endTime;
     stroopResult.color = color;
     stroopResult.text = text;
     stroopResult.colorSelected = colorSelected;
+    stroopResult.reactionTime = reactionTime;
+    stroopResult.match = match;
+    stroopResult.meanReactionTime = _meanReactionTime;
+    stroopResult.stdReactionTime = _stdReactionTime;
     [_results addObject:stroopResult];
 }
 

@@ -52,6 +52,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSTimeInterval endTime;
 
 /**
+ The `reactionTime` property is the time taken (in seconds) for a response to a stimulus, equal to the difference between startTime and endTime.
+ */
+@property (nonatomic, assign) double reactionTime;
+
+/**
  The `color` property is the color of the question string.
  */
 @property (nonatomic, copy) NSString *color;
@@ -65,6 +70,23 @@ ORK_CLASS_AVAILABLE
  The `colorSelected` corresponds to the button tapped by the user as an answer.
  */
 @property (nonatomic, copy, nullable) NSString *colorSelected;
+
+/**
+ The 'match' property is a Boolean value indicating whether the value of colorSelected matches that of color.
+ The value of this property is `YES` when there is a match, and `NO` otherwise.
+ */
+@property (nonatomic, assign) BOOL match;
+
+/**
+ The `meanReactionTime` property is the mean (average) of reactionTime (in seconds). This updates with every word presented in the task.
+ */
+@property (nonatomic, assign) double meanReactionTime;
+
+/**
+ The `stdReactionTime` property is the standard deviation (a measure of distribution) of reactionTime (in seconds). This updates with every word presented in the set.
+ */
+@property (nonatomic, assign) double stdReactionTime;
+
 
 @end
 
