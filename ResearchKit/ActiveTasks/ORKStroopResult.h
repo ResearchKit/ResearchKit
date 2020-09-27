@@ -78,6 +78,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) BOOL match;
 
 /**
+The `percentCorrect` property is the percentage of correct 'match' answers for all images in the task so far . This updates with every image presented in the set.
+*/
+@property (nonatomic, assign) double percentCorrect;
+
+/**
  The `meanReactionTime` property is the mean (average) of reactionTime (in seconds). This updates with every word presented in the task.
  */
 @property (nonatomic, assign) double meanReactionTime;

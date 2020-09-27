@@ -74,7 +74,9 @@
     double _newM;
     double _prevS;
     double _newS;
+    double _percentCorrect;
     NSInteger _questionCount;
+    NSInteger _sumCorrect;
     BOOL _match;
 }
 
@@ -158,18 +160,34 @@
         // evaluate matches according to button pressed
         if (sender == self.stroopContentView.RButton) {
             _match = ([_redString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
+            if (_questionCount > 0) { // prevent zero denominator
+                _percentCorrect = (100 * _sumCorrect) / _questionCount;
+            }
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_redString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.GButton) {
             _match = ([_greenString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
+            if (_questionCount > 0) { // prevent zero denominator
+                _percentCorrect = (100 * _sumCorrect) / _questionCount;
+            }
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_greenString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.BButton) {
             _match = ([_blueString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
+            if (_questionCount > 0) { // prevent zero denominator
+                _percentCorrect = (100 * _sumCorrect) / _questionCount;
+            }
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_blueString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.YButton) {
             _match = ([_yellowString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
+            _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
+            if (_questionCount > 0) { // prevent zero denominator
+                _percentCorrect = (100 * _sumCorrect) / _questionCount;
+            }
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_yellowString matching:_match inTime:reactionTime];
         }
         self.stroopContentView.colorLabelText = @" ";
@@ -210,6 +228,7 @@
 
 - (void)createResult:(NSString *)color withText:(NSString *)text withColorSelected:(NSString *)colorSelected matching:(BOOL)match inTime:(NSTimeInterval)reactionTime {
     ORKStroopResult *stroopResult = [[ORKStroopResult alloc] initWithIdentifier:self.step.identifier];
+    // stimulus result
     stroopResult.startTime = _startTime;
     stroopResult.endTime = _endTime;
     stroopResult.reactionTime = reactionTime;
@@ -217,6 +236,8 @@
     stroopResult.text = text;
     stroopResult.colorSelected = colorSelected;
     stroopResult.match = match;
+    // task results
+    stroopResult.percentCorrect = _percentCorrect;
     stroopResult.meanReactionTime = _meanReactionTime;
     stroopResult.stdReactionTime = _stdReactionTime;
     [_results addObject:stroopResult];
