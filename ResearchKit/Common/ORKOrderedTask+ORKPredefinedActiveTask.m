@@ -1509,6 +1509,8 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
         step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
         step.text = ORKLocalizedString(@"STROOP_TASK_STEP_TEXT", nil);
         step.numberOfAttempts = numberOfAttempts;
+        step.minimumStimulusInterval = minimumStimulusInterval;
+        step.maximumStimulusInterval = maximumStimulusInterval;
         
         ORKStepArrayAddStep(steps, step);
     }
