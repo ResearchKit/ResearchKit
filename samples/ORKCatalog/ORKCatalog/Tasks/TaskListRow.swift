@@ -1709,7 +1709,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Stroop pre-defined active task.
     private var stroopTask: ORKTask {
-        return ORKOrderedTask.stroopTask(withIdentifier: String(describing: Identifier.stroopTask), intendedUseDescription: exampleDescription, numberOfAttempts: 10, options: [])
+        return ORKOrderedTask.stroopTask(withIdentifier: String(describing: Identifier.stroopTask), intendedUseDescription: exampleDescription, minimumStimulusInterval: 0.5, maximumStimulusInterval: 0.5, numberOfAttempts: 10, options: [])
     }
     
     /// This task presents the swift Stroop pre-defined active task.
