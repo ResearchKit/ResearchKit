@@ -143,7 +143,7 @@
         [self setButtonsDisabled];
         _endTime = [NSProcessInfo processInfo].systemUptime;
         NSTimeInterval reactionTime = (_endTime - _startTime);
-        // calculate mean and standard deviation of reaction time (using Welford's algorithm: Welford. (1962) Technometrics 4(3), 419-420)
+        // calculate mean and unbiased standard deviation of reaction time (using Welford's algorithm: Welford. (1962) Technometrics 4(3), 419-420)
         if (_questionCount == 1) {
             _prevM = _newM = reactionTime;
             _prevS = 0;
@@ -191,12 +191,26 @@
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_yellowString matching:_match inTime:reactionTime];
         }
         self.stroopContentView.colorLabelText = @" ";
-        _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+        _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:[self stimulusInterval]
                                                              target:self
                                                            selector:@selector(startNextQuestionOrFinish)
                                                            userInfo:nil
                                                             repeats:NO];
     }
+}
+
+- (NSTimeInterval)stimulusInterval {
+    NSTimeInterval timeInterval;
+    ORKStroopStep *step = [self stroopStep];
+    NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
+    NSTimeInterval randomFactor = (arc4random_uniform(range * 1000) + 1); // non-zero random number of milliseconds between min/max limits
+    if (range == 0 || step.maximumStimulusInterval == step.minimumStimulusInterval ||
+        _questionCount == step.numberOfAttempts) { // use min interval after last image
+        timeInterval = step.minimumStimulusInterval;
+    } else {
+        timeInterval = (randomFactor / 1000) + step.minimumStimulusInterval; // in seconds
+    }
+    return timeInterval;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
