@@ -61,6 +61,16 @@
     if (self.numberOfAttempts < minimumAttempts) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of attempts should be greater or equal to %ld.", (long)minimumAttempts]  userInfo:nil];
     }
+    if (self.minimumStimulusInterval <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"minimumStimulusInterval must be greater than zero"
+                                     userInfo:nil];
+    }
+    if (self.maximumStimulusInterval < self.minimumStimulusInterval) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"maximumStimulusInterval cannot be less than minimumStimulusInterval"
+                                     userInfo:nil];
+    }
 }
 
 - (BOOL)startsFinished {
@@ -74,6 +84,8 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStroopStep *step = [super copyWithZone:zone];
     step.numberOfAttempts = self.numberOfAttempts;
+    step.minimumStimulusInterval = self.minimumStimulusInterval;
+    step.maximumStimulusInterval = self.maximumStimulusInterval;
     return step;
 }
 
@@ -81,6 +93,8 @@
     self = [super initWithCoder:aDecoder];
     if (self ) {
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
+        ORK_DECODE_DOUBLE(aDecoder, minimumStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, maximumStimulusInterval);
     }
     return self;
 }
@@ -88,13 +102,18 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
+    ORK_ENCODE_DOUBLE(aCoder, minimumStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, maximumStimulusInterval);
 }
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && (self.numberOfAttempts == castObject.numberOfAttempts));
+    return (isParentSame &&
+            (self.numberOfAttempts == castObject.numberOfAttempts) &&
+            (self.minimumStimulusInterval == castObject.minimumStimulusInterval) &&
+            (self.maximumStimulusInterval == castObject.maximumStimulusInterval));
 }
 
 @end
