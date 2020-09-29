@@ -81,9 +81,9 @@
             (self.percentCorrect == castObject.percentCorrect) &&
             (self.startTime == castObject.startTime) &&
             (self.endTime == castObject.endTime) &&
-            (self.endTime == castObject.reactionTime) &&
-            (self.endTime == castObject.meanReactionTime) &&
-            (self.endTime == castObject.stdReactionTime));
+            (self.reactionTime == castObject.reactionTime) &&
+            (self.meanReactionTime == castObject.meanReactionTime) &&
+            (self.stdReactionTime == castObject.stdReactionTime));
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -92,12 +92,12 @@
     result -> _text = [self.text copy];
     result -> _colorSelected = [self.colorSelected copy];
     result.match = self.match;
-    result.match = self.percentCorrect;
+    result.percentCorrect = self.percentCorrect;
     result.startTime = self.startTime;
     result.endTime = self.endTime;
-    result.endTime = self.reactionTime;
-    result.endTime = self.meanReactionTime;
-    result.endTime = self.stdReactionTime;
+    result.reactionTime = self.reactionTime;
+    result.meanReactionTime = self.meanReactionTime;
+    result.stdReactionTime = self.stdReactionTime;
     return result;
 }
 
