@@ -270,6 +270,14 @@ Whether to show progress for this step when it is presented. The default is YES.
  */
 @property (nonatomic, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
 
+
+/**
+ Translations dicitonary in format [String: String] :
+ key: base language string
+ value: translation
+ */
+@property (nonatomic, strong) NSDictionary *translations;
+
 /**
  Checks the parameters of the step and throws exceptions on invalid parameters.
  

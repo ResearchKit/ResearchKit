@@ -418,6 +418,21 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     }
 }
 
+- (NSString *)localizedStringForString:(NSString *)string
+{
+    if (self.step.translations == nil) {
+        return string;
+    }
+
+    NSString *translation = [self.step.translations objectForKey:string];
+
+    if (translation != nil) {
+        return translation;
+    } else {
+        return string;
+    }
+}
+
 - (void)notifyDelegateOnResultChange {
     
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;

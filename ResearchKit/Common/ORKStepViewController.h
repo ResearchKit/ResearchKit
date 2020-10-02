@@ -409,6 +409,16 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
 
+/**
+    Returns a translation of a string based on translations property.
+
+    @param string   String to translate
+
+    @return A newly initialized step view controller.
+
+*/
+- (NSString *)localizedStringForString:(NSString *)string;
+
 @end
 
 NS_ASSUME_NONNULL_END
