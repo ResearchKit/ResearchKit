@@ -1405,9 +1405,22 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [dfm dateFromString:string];
 }
 
-- (NSDate *)pickerDefaultDate {
-    return (self.defaultDate ? : [NSDate date]);
+- (NSDate *)pickerDefaultDate
+{
+    if (!self.defaultDate)
+    {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSCalendarUnit unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
+        if (self.questionType == ORKQuestionTypeDateAndTime)
+        {
+            unitFlags |= NSCalendarUnitHour | NSCalendarUnitMinute;
+        }
+        NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:[NSDate date]];
+        NSDate *date = [calendar dateFromComponents:dateComponents];
+        return date;
+    }
     
+    return self.defaultDate;
 }
 
 - (NSDate *)pickerMinimumDate {
