@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Papildoma informacija";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Uždarykite savo %@ ir žiūrėkite į tašką kvadratinio tinklelio centre.\n\nPirštu arba rašikliu pažymėkite visus matomus iškraipymus, pvz., neryškias arba banguotas linijas.\n\nKai baigsite, perbraukite į kairę bet kur už tinklelio ribų.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Tyrimo metu laikykite įrenginį 12 colių atstumu nuo savo veido ir akių lygyje.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Ši veikla padeda aptikti naudotojo regėjimo problemas.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Kairioji akis";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Dešinioji akis";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amslerio tinklelis";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Nepavyko įrašyti garso";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Į mikrofoną sakykite „aaaaaaa“ tiek laiko, kiek galite.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Ši veikla įvertina jūsų balsą įrašant jį mikrofonu, esančiu įrenginio apačioje.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Giliai įkvėpkite ir sakykite į mikrofoną „aaaaaa“ tiek laiko, kiek galite. Išlaikykite pastovų garsumą, kad garso juostelės išliktų mėlynos.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Palaukite, kol patikrinsime foninio triukšmo lygį.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Balsas";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Bakstelėkite Toliau, kai būsite pasiruošę.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Per garsiai";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Aplinkos triukšmo lygis yra per didelis, kad būtų galima įrašyti jūsų balsą. Persikelkite į tylesnę vietą ir pabandykite dar kartą.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Pirštu arba rašikliu pažymėkite tinklelį tiesiogiai arba perbraukite už tinklelio į kairę norėdami pabaigti.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amslerio tinklelis";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Pradėti užduotį";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Garso juostos grafikas";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Komentuoti";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Grįžti";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Slėpti PDF miniatiūrą";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Slėpti paieškos juostą";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Bendrinti";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Rodyti PDF miniatiūrą";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Rodyti paieškos juostą";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Varnelės mėlyname apskritime paveiksliukas reiškia sėkmingą atlikimą";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Naudojant „VoiceOver“, mygtuką bus galima bakstelėti tiesiogiai. Jis bus šalia ekrano centro.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Atmesti klaviatūrą";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " ir";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Taškas: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Intervalas nuo %@ iki %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Rietuvę sudaro";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Fiksavimo peržiūra";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Užfiksuotas vaizdas";
+
+/* (No Comment) */
+"AX_SELECTED" = "Pasirinkta";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Palieskite ekraną ir judinkite pirštą norėdami pasirašyti";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Nurodytas parašo laukelis";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Pasirašyta";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Nepasirašyta";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Atsakymo slankiklis. Intervalas nuo %@ iki %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Kai prasideda įrašymas, suaktyvinkite antrą kartą norėdami sustabdyti.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Kalbos bangos forma";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Bakstelėjimas vienu pirštu";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Bakstelėjimas kitu pirštu";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Dabar mygtukus galima bakstelėti tiesiogiai.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Mygtukai, kuriuos galima bakstelėti";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Suaktyvinkite, kad mygtukus būtų galima bakstelėti tiesiogiai.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Naudodami „VoiceOver“ tyrinėkite ekraną liesdami, kad sužinotumėte, kur yra mygtukai. Suaktyvinkite kurį nors mygtuką, kad būtų galima bakstelėti mygtukus tiesiogiai.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Suaktyvinkite norėdami pradėti tyrimą. Kai tyrimas prasideda, bakstelėkite tiesiai šį mygtuką išgirdę garsą kairiojoje ausyje.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Bakstelėkite dėl kairiosios ausies";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Suaktyvinkite norėdami pradėti tyrimą. Kai tyrimas prasideda, bakstelėkite tiesiai šį mygtuką išgirdę garsą dešiniojoje ausyje.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Bakstelėkite dėl dešiniosios ausies";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Naudodami „VoiceOver“ ištyrinėkite ekraną liesdami, kad sužinotumėte, kur yra kiekvienai ausiai skirti mygtukai. Kai tyrimas prasideda, mygtukus galima bakstelėti tiesiogiai. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nepavyksta padėti disko, kurio dydis %@, ant disko, kurio dydis %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dukart bakstelėkite norėdami padėti diską";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dukart bakstelėkite norėdami pasirinkti viršutinį diską";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Taikinys";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Bokštas";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Yra diskas, kurio dydis %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tuščias";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Naudojant „VoiceOver“, mygtukus tyrimo metu bus galima bakstelėti tiesiogiai.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Nepažymėtas vaizdas";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Nepasirinktas";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Filmavimas baigtas";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Vaizdo įrašo peržiūra";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktyvus";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "teisingas";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "neteisingas";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Atminties žaidimo plytelė";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "tylus";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Ne";
+
+/* (No Comment) */
+"BOOL_YES" = "Taip";
+
+/* Button titles */
+"BUTTON_AGREE" = "Sutinku";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Taikyti";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Atšaukti";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Išvalyti";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Išvalyti atsakymą";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Autorių teisės";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Nesutinku";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Atlikta";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Pradėti";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Sužinokite daugiau";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Toliau";
+
+/* (No Comment) */
+"BUTTON_OK" = "Gerai";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Atmesti rezultatus";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Išsaugoti vėlesniam naudojimui";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Baigti užduotį";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Šio atsakymo negalima pakeisti.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Išsaugoti";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Praleisti";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Praleisti šį klausimą";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Pradžios laikmatis";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera nepasiekiama naudojant padalytą ekraną.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Užfiksuoti vaizdą";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Pradėti įrašymą";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Dar kartą užfiksuoti vaizdą";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Pakartotinai filmuoti";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Sustabdyti įrašymą";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nerasta jokios kameros. Šio veiksmo negalima pabaigti.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Užfiksuoto vaizdo nepavyko išsaugoti.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Užfiksuotiems vaizdams nenurodytas išvesties katalogas.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Norėdami pabaigti šį veiksmą, parametruose leiskite programai pasiekti kamerą.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nėra duomenų";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Slaptažodžiai nesutampa.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Įveskite slaptažodį dar kartą";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Patvirtinti";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Data";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ vardas (spausdintos raidės)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ parašas";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Sužinokite daugiau";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Pavardė";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Vardas";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Būtina";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Sutikimas";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "%1$ld psl. iš %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Peržiūrėti";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Peržiūrėkite toliau pateiktą formą ir bakstelėkite Sutinku, jei esate pasiruošę tęsti.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Peržiūrėti";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Duomenų rinkimas";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Duomenų naudojimas";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Privatumas";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Tyrimo apžvalga";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Tyrimo užduotys";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Skiriamas laikas";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Sveiki atvykę";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Pasitraukimas";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Mano duomenis bendrinti tik su %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Bendrinti mano duomenis su %@ ir kvalifikuotais tyrėjais visame pasaulyje";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ gaus jūsų dalyvavimo šiame tyrime duomenis.\n\nPasidalyti savo užkoduotais tyrimo duomenis plačiau (neatskleidžiant vardo) gali būti naudinga dėl šio ir ateities mokslinių tyrimų.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Bendrinimo parinktys";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Pasirašykite pirštu tolesniame langelyje.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Pasirašyti čia";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Parašas";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Veiklos pradžia";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Liko %@ sek.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ši veikla identifikuoja asmens klausos slenkstinį lygį dB HL skalėje.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Įsitikinkite, kad nustatytas didžiausias įrenginio garsumas.\n\nAtliekant šią užduotį, kairiojoje arba dešiniojoje ausyje girdėsis švelnus garsas.\n\nAtidžiai klausykite ir bakstelėkite mygtuką kiekvieną kartą, kai išgirsite garsą.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Susipažinimo klausimynas.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Pasirinkite „geresnės ausies“ parinktį, jei yra";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "kairė";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "nėra pirmenybės";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "dešinė";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Garso audiometrija";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pasirinkti datą";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Gimimo data";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "El. paštas";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Apskaičiavimas";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Ši veikla matuoja aplinkos garso slėgio lygį. Jei triukšmo lygis yra per didelis, negalėsite tęsti. Pereikite į tylesnę vietą norėdami užbaigti šią užduotį arba vėl imkitės šios veiklos vėliau.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Riba: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "SPL matuoklis";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepavyko pašalinti pakankamai žurnalo failų, kad būtų pasiekta riba";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Failas nepažymėtas kaip panaikintas (nepažymėtas kaip įkeltas)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Nepavyko sukurti failo";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Keletas žurnalų šalinimo klaidų";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Klaida nustatant požymį";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Nerasta surinktų duomenų.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nenurodytas išvesties katalogas";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "„Appleseed“";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Atstumas (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Širdies ritmas (dūžiai/min.)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Vaikščiokite lauke savo greičiausiu galimu tempu %1$@. Kai baigsite, patogiai atsisėskite ir pailsėkite %2$@. Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Ši veikla stebi jūsų širdies ritmą ir matuoja, kiek galite nueiti per %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Patogiai pasėdėkite %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fizinė parengtis";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Eikite kuo greičiau %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "I tipas";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "II tipas";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "III tipas";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "IV tipas";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "V tipas";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "VI tipas";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Pamiršote slaptažodį?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Moteris";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pasirinkti lytį";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Lytis";
+
+/* (No Comment) */
+"GENDER_MALE" = "Vyras";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Kita";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jonas";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ši veikla matuoja jūsų viršutinės galūnės funkciją ir prašoma įkišti kaištį į skylę. Bus paprašyta padaryti tai %@ kart.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Bus ištirtos abi jūsų rankos.\nTurite paimti kaištį kuo greičiau, įkišti jį į skylę ir atlikę tai %@ kart. vėl ištraukti %@ kart.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Bus ištirtos abi jūsų rankos.\nTurite paimti kaištį kuo greičiau, įkišti jį į skylę ir atlikę tai %@ kart. vėl ištraukti %@ kart.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Įkiškite kaištį į skylę kairiąja ranka.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Įkiškite kaištį į skylę dešiniąja ranka.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Padėkite kaištį už linijos kairiąja ranka.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Padėkite kaištį už linijos dešiniąja ranka.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Paimkite kaištį dviem pirštais.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Pakelkite pirštus, kad išmestumėte kaištį.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ skylės ir kaiščio tyrimas";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Netinkamas el. pašto adresas: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nepavyko įtraukti „Keychain“ elemento.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nepavyko panaikinti „Keychain“ elemento.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nepavyko rasti „Keychain“ elemento.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nepavyko atnaujinti „Keychain“ elemento.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ištieskite kairįjį kelį. Tada bakstelėkite bet kur.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ištieskite dešinįjį kelį. Tada bakstelėkite bet kur.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Ši veikla matuoja, kiek galite ištiesti savo kairįjį kelį.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Ši veikla matuoja, kiek galite ištiesti savo dešinįjį kelį.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Atsisėskite ant kėdės krašto. Prieš pradėdami pasidėkite įrenginį ant kairiojo kelio, kad išmatuotų. Įjunkite įrenginio garsą, kad girdėtumėte instrukcijas.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Atsisėskite ant kėdės krašto. Prieš pradėdami pasidėkite įrenginį ant dešiniojo kelio, kad išmatuotų. Įjunkite įrenginio garsą, kad girdėtumėte instrukcijas.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Pasidėkite įrenginį ant kairiojo kelio, kad ekranas būtų atsuktas į išorę, kaip parodyta.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Pasidėkite įrenginį ant dešiniojo kelio, kad ekranas būtų atsuktas į išorę, kaip parodyta.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kai pasiruošite, bakstelėkite ekraną norėdami pradėti ir ištieskite kairįjį kelį kiek galite. Baigę bakstelėkite dar kartą.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kai pasiruošite, bakstelėkite ekraną norėdami pradėti ir ištieskite dešinįjį kelį kiek galite. Baigę bakstelėkite dar kartą.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Kairiojo kelio judesio amplitudė";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Dešiniojo kelio judesio amplitudė";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Pasidėkite įrenginį ant kairiojo kelio";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Pasidėkite įrenginį ant dešiniojo kelio";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Sužinokite daugiau apie duomenų bendrinimą";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Sužinokite daugiau apie duomenų rinkimą";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Sužinokite daugiau apie duomenų naudojimą";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Sužinokite daugiau apie savo privatumo ir tapatybės apsaugą";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Sužinokite daugiau apie tyrimo apžvalgą";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Sužinokite daugiau apie įtrauktas užduotis";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Sužinokite daugiau apie tyrimo poveikį jūsų laikui";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Pirma sužinokite daugiau apie tyrimą";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Sužinokite daugiau apie pasitraukimą";
+
+/* Limb values. */
+"LIMB_LEFT" = "kairė";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption turi būti kairioji arba dešinioji";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "dešinė";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Nepavyko rasti įvesto adreso rezultato. Įsitikinkite, kad adresas yra teisingas.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Arba jūs neprisijungę prie interneto, arba viršijote didžiausią adresų paieškos užklausų skaičių. Jei nesate prisijungę prie interneto, įjunkite „Wi-Fi“, kad atsakytumėte į šį klausimą, praleiskite šį klausimą, jei yra praleidimo mygtukas, arba grįžkite į apklausą, kai prisijungsite prie interneto. Priešingu atveju pabandykite dar kartą po kelių minučių.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Atmesta prieiga prie vietos nustatymo paslaugų. Naudodami parametrus suteikite šiai programai leidimą naudoti vietos nustatymo paslaugas.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nepavyksta nustatyti jūsų dabartinės buvimo vietos. Įveskite adresą arba pereikite į vietą, kurioje GPS signalas stipresnis, jei galima.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Nepavyko rasti nurodyto adreso";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Įveskite adresą";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Prisijungti";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "pėdos";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "col.";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "svar.";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "unc.";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Žaidimas baigtas";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Norėdami tęsti bakstelėkite Toliau";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Seka baigta";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Atminties veikla buvo sukurta padedant dr. Katherine Possin ir dr. Joeliui Krameriui iš Kalifornijos universiteto (San Franciskas).";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Jūs per tą laiką beveik nieko nepadarėte. Bakstelėkite Toliau norėdami tęsti.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Bandyti dar kartą";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Bakstelėkite %@ atvirkštine tvarka";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Bakstelėkite %@ užsidegimo tvarka";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Norėdami tęsti bakstelėkite Toliau";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Pristabdyta";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Žiūrėkite, kaip užsidega %@";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Rezultatas";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Baigėsi laikas.\nNorėdami tęsti bakstelėkite Toliau.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Laikas baigėsi";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Pasirinkite atsakymą";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Garsinis skaičių sudėties tyrimas matuoja garso informacijos apdorojimo greitį ir skaičiavimo gebėjimus.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Slaptasis kodas autentifikuotas";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Patvirtinti slaptąjį kodą";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Patvirtinkite savo naują slaptąjį kodą";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Pamiršote slaptąjį kodą?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Slaptieji kodai nesutampa. Pabandykite dar kartą.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Neteisingas slaptasis kodas";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Įveskite savo naują slaptąjį kodą";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Įveskite savo seną slaptąjį kodą";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Įveskite slaptąjį kodą";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Slaptasis kodas išsaugotas";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Slaptojo kodo įvesties eigos indikatorius";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Įvesta %@ iš %@ skaitmenų";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Leidžiama naudoti tik skaitinius simbolius.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Identifikavimo naudojant piršto atspaudą klaida";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Patvirtinkite tapatybę naudodami piršto atspaudą";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Įveskite slaptažodį";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Slaptažodis";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Garsinis ir vaizdinis skaičių sudėties tyrimas matuoja garso ir vaizdo informacijos apdorojimo greitį bei skaičiavimo gebėjimus.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefono numeris";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Bakstelėkite norėdami pasirinkti";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Bakstelėkite norėdami rašyti";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Bakstelėkite norėdami atsakyti";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Atsiminkite šį pirmą skaitmenį.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Pridėkite šį naują skaitmenį prie ankstesnio.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Pavieniai skaitmenys pateikiami kas %@ sek.\nTurite pridėti kiekvieną naują skaitmenį prie ankstesnio skaitmens.\nDėmesio, neturite skaičiuoti tarpinių sumų, bet tik paskutinių dviejų skaičių sumą.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Vaizdinis skaičių sudėties tyrimas matuoja vaizdo informacijos apdorojimo greitį ir skaičiavimo gebėjimus.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ viršija didžiausią leidžiamą vertę (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ yra mažiau nei mažiausia leidžiama vertė (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ nėra tinkama vertė.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Netinkama vertė";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Judesio amplitudė";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Greitai papurtykite įrenginį, kai pasirodo mėlynas apskritimas";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@ bandymas iš %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Ši veikla įvertina, kiek laiko reikia, kad sureaguotumėte į vaizdo užuominą.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Papurtykite įrenginį bet kuria kryptimi, kai tik ekrane pasirodys mėlynas taškas. Bus paprašyta padaryti tai %D kart.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reakcijos laikas";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Persiųsti patvirtinimo el. laišką";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Bakstelėkite toliau esančią nuorodą, jei negavote patvirtinimo el. laiško ir norite, kad jis vėl būtų išsiųstas.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Pakelkite kairiąją ranką. Tada bakstelėkite bet kur.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Pakelkite dešiniąją ranką. Tada bakstelėkite bet kur.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Ši veikla matuoja, kiek galite ištiesti savo kairįjį petį.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Ši veikla matuoja, kiek galite ištiesti savo dešinįjį petį.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Prieš pradėdami pasidėkite įrenginį ant kairiojo peties, kad išmatuotų. Įjunkite įrenginio garsą, kad girdėtumėte instrukcijas.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Prieš pradėdami pasidėkite įrenginį ant dešiniojo peties, kad išmatuotų. Įjunkite įrenginio garsą, kad girdėtumėte instrukcijas.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Pasidėkite įrenginį ant kairiojo peties, kad ekranas būtų atsuktas į išorę, kaip parodyta.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Pasidėkite įrenginį ant dešiniojo peties, kad ekranas būtų atsuktas į išorę, kaip parodyta.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kai pasiruošite, bakstelėkite ekraną norėdami pradėti ir pakelkite kairiąją ranką kiek galite. Baigę bakstelėkite dar kartą.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kai pasiruošite, bakstelėkite ekraną norėdami pradėti ir pakelkite dešiniąją ranką kiek galite. Baigę bakstelėkite dar kartą.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Kairiojo peties judesio amplitudė";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Dešiniojo peties judesio amplitudė";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Pasidėkite įrenginį ant kairiojo peties";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Pasidėkite įrenginį ant dešiniojo peties";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti ir atidžiai žiūrėkite.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Kai kurie %@ po vieną užsidegs. Bakstelėkite %@ užsidegimo tvarka.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Kai kurie %@ po vieną užsidegs. Bakstelėkite %@ atvirkštine nei užsidegė tvarka.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ši veikla matuoja jūsų trumpalaikę erdvinę atmintį – prašoma pakartoti %@ užsidegimo tvarka.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "gėlės";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "gėlės";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Erdvinė atmintis";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Bakstelėkite Leisti garsą, nustatykite tinkamą garsumą ir norėdami tęsti bakstelėkite Sustabdyti garsą.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Garsumo kalibravimas";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Šiame tyrime jūs:\n\nIšklausykite sakinį.\n\nAiškiai pakartokite, ką išgirdote, arba praleiskite rinkdami klaviatūra tai, ką girdėjote. \n\nJei pakartosite tai, ką girdėjote, turėsite galimybę pakeisti kalbos atpažinimo modulio sugeneruotą nuorašą.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Ši veikla matuoja kalbos suprantamumą triukšmingoje aplinkoje.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Pakartokite tai, ką išgirdote.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Kalbėti";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Leisti garsą";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Sakinys, sumišęs su foniniu triukšmu, taikant atsitiktinį triukšmo koeficientą (SNR), bus leidžiamas tik vieną kartą.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Klausyti";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Sustabdyti garsą";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Kalba triukšme";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Kalbos nepavyko atpažinti.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Nepavyko inicijuoti kalbos atpažinimo.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Paspauskite mygtuką norėdami pradėti įrašymą prieš kalbėdami.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Ši veikla įrašo jūsų kalbą mikrofonu, esančiu įrenginio apačioje, ir paverčia į tekstą.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Redaguokite nuorašo tekstą, kad ištaisytumėte kalbos supratimo klaidas.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Redaguoti nuorašą";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Pradėti įrašymą";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Sustabdyti įrašymą";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Jūsų nuorašas pasirodys čia.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Kalbos atpažinimas";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ iš %2$@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "MĖLYNA";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "M";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "ŽALIA";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "Ž";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "RAUDONA";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "GELTONA";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Kiekvieną kartą, kai pasirodo žodis, pasirinkite pirmą rodomos SPALVOS pavadinimo raidę.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Kai esate pasirengę pradėti „Stroop“ veiklą, bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Pasirinkite pirmą rodomos SPALVOS pavadinimo raidę.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "„Stroop“";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Bakstelėti";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Norėdami pradėti spustelėkite Toliau.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Mygtukus dviem pirštais bakstelėkite kuo nuosekliau.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Bakstelėkite mygtukus KAIRIĄJA ranka.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Bakstelėkite mygtukus DEŠINIĄJA ranka.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Ši veikla išmatuoja jūsų bakstelėjimo greitį.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Bakstelėkite vienu pirštu, tada – kitu. Pabandykite baksnoti kuo tolygiau. Baksnokite %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Dviem kairiosios rankos pirštais pakaitomis baksnokite mygtukus ekrane.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Dabar pakartokite tą patį tyrimą kairiąja ranka.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Dviem tos pačios rankos pirštais pakaitomis baksnokite mygtukus ekrane.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Padėkite įrenginį ant lygaus paviršiaus.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Dviem dešiniosios rankos pirštais pakaitomis baksnokite mygtukus ekrane.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Dabar pakartokite tą patį tyrimą dešiniąja ranka.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Praleisti šią ranką";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Baksnojimo greitis";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Kairioji ranka";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Dešinioji ranka";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Jūsų duomenys bus išanalizuoti ir pranešta apie rezultatus.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Veikla baigta";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksto turinys, viršijantis didžiausią ilgį: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Kiekvienam tyrimui naudokite tą patį pagalbinį įrenginį.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Pagalbinis įrenginys";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Eikite iki %@ tiesia linija.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Grįžkite ten, kur pradėjote.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Bakstelėkite Toliau, kai baigsite.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Apsisukite.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Norėdami pradėti spustelėkite Toliau.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Raskite vietą, pageidautina lauke, kur galite kuo greičiau, bet saugiai, eiti apie %@ tiesia linija. Nesulėtėkite, kol nepasieksite finišo linijos.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Ši veikla išmatuoja jūsų apatinių galūnių funkciją.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nėra";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Vienos pusės lazda";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Vienos pusės ramentas";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dvipusė lazda";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvipusis ramentas";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Vaikštynė";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Bakstelėkite čia norėdami pasirinkti atsakymą.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Ar naudojatės pagalbiniu įrenginiu?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Ar naudojate kulkšnies ortopedinį įtvarą?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Matuojamo laiko ėjimas";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Kiekvieną kartą, kai išgirsite garsą, bakstelėkite kairįjį arba dešinįjį mygtuką, kad nurodytumėte, kuria ausimi girdite.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ši veikla išmatuoja jūsų gebėjimą girdėti skirtingus garsus.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Prieš pradėdami prijunkite ir užsidėkite ausines.\n\nGarsas bus labai švelnus ir nepanašus į įprastą įspėjimo toną. Garsas iš pradžių bus tylus, po to garsės. Būkite dėmesingi ir bakstelėkite kairįjį arba dešinįjį mygtuką, kad nurodytumėte, kuria ausimi girdite.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Kairioji ausis";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Dešinioji ausis";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Dabar turėtumėte išgirsti garsą. Nustatykite garsumą naudodami valdiklius įrenginio šone.\n\nBakstelėkite bet kokį mygtuką, kai būsite pasiruošę pradėti.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Garso audiometrija";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, kairė";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, dešinė";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Iš viso bakstelėjimų";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Palieskite bet kur norėdami tęsti";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Išspręskite galvosūkį";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Judesių skaičius: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Negaliu išspręsti šio galvosūkio";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ši veikla įvertina jūsų galvosūkio sprendimo įgūdžius.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Perkelkite visą rietuvę į pažymėtą platformą naudodami kuo mažiau judesių.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojaus bokštas";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Norėdami pradėti bakstelėkite Pradėti.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d klaida)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d klaidos)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Ši veikla įvertina jūsų vizualinį dėmesį ir gebėjimą pereiti prie kitos užduoties įrašydama laiką, kurio reikia norint bakstelėti taškų seriją eilės tvarka.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Po atvirkštinio skaičiavimo bakstelėkite taškus pakaitomis (skaičiai ir raidės). Pradėkite bakstelėdami pirmą skaičių 1, po jo – 2 – 3 – 4..., kol pasieksite skaičių 7.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Po atvirkštinio skaičiavimo bakstelėkite taškus pakaitomis (skaičiai ir raidės). Pradėkite bakstelėdami pirmą skaičių 1, po jo – pirmą raidę A, tada – 2 – B – 3 – C..., kol pasieksite skaičių 7.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Padarykite tai kuo greičiau išvengdami klaidų.";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Takelio tyrimas";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Negaliu atlikti šios veiklos KAIRIĄJA ranka.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Galiu atlikti šią veiklą abiem rankomis.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Negaliu atlikti šios veiklos DEŠINIĄJA ranka.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Palaikykite telefoną sulenkta alkūne %ld sek.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Dabar laikykite telefoną pečių aukštyje su sulenkta alkūne.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Dabar laikykite telefoną KAIRIĄJA ranka pečių aukštyje su sulenkta alkūne.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Dabar laikykite telefoną DEŠINIĄJA ranka pečių aukštyje su sulenkta alkūne.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Laikykite telefoną ištiesta ranka %ld sek.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Dabar laikykite telefoną ištiesta ranka pečių aukštyje.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Dabar laikykite telefoną KAIRIĄJA ranka, ištiesta pečių aukštyje.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Dabar laikykite telefoną DEŠINIĄJA ranka, ištiesta pečių aukštyje.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Tęskite atlikdami kitą užduotį.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Laikykite telefoną skreite %ld sek.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Pasiruoškite laikyti telefoną skreite.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Pasiruoškite laikyti telefoną skreite KAIRIĄJA ranka.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Pasiruoškite laikyti telefoną skreite DEŠINIĄJA ranka.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Norėdami tęsti spustelėkite Toliau.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Dabar perimkite telefoną į KAIRIĄJĄ ranką ir atlikite kitą užduotį.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Dabar perimkite telefoną į DEŠINIĄJĄ ranką ir atlikite kitą užduotį.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Glauskite telefoną prie nosies %ld sek.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Laikydami alkūnę sulenktą palieskite telefonu savo nosį kelis kartus.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Laikydami alkūnę sulenktą, o telefonui esant KAIRIOJOJE rankoje, palieskite telefonu savo nosį kelis kartus.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Laikydami alkūnę sulenktą, o telefonui esant DEŠINIOJOJE rankoje, palieskite telefonu savo nosį kelis kartus.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Mojuokite ranka %ld sek.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Pasiruoškite mojuoti (mojuokite pasukdami riešą).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Pasiruoškite mojuoti laikydami telefoną KAIRIOJOJE rankoje (mojuokite pasukdami riešą).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Pasiruoškite mojuoti laikydami telefoną DEŠINIOJOJE rankoje (mojuokite pasukdami riešą).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Veikla baigta.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Ši veikla išmatuoja jūsų rankų virpėjimą įvairiose padėtyse. Raskite vietą, kurioje šios veiklos metu galite patogiai sėdėti.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Laikykite telefoną labiau paveiktoje rankoje, kaip parodyta tolesniame paveikslėlyje.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "užduotis";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dvi užduotys";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "trys užduotys";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "keturios užduotys";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "penkios užduotys";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Jūsų bus paprašyta atlikti %@ sėdint su telefonu rankoje.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Laikykite telefoną KAIRIOJOJE rankoje, kaip parodyta tolesniame paveikslėlyje.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Laikykite telefoną DEŠINIOJOJE rankoje, kaip parodyta tolesniame paveikslėlyje.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Jūsų bus paprašyta atlikti %@ sėdint su telefonu pirmiau vienoje rankoje, tada – kitoje rankoje.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Virpėjimas";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Patvirtinimas";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Patvirtinkite savo el. paštą";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Veiklą pabaigėte.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Eikite atgal ir pirmyn tiesia linija %@. Eikite įprastai.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Apsisukite ir stovėkite %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Įsidėkite savo įrenginį į kišenę ar krepšelį ir vykdykite garso instrukcijas.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Bakstelėkite Pradėti, kai būsite pasiruošę.\nTada įsidėkite įrenginį į kišenę arba krepšelį ir vykdykite garso instrukcijas.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Raskite vietą, kur galėtumėte saugiai nueiti be pagalbos apie %ld žingsn. tiesia linija.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Raskite vietą, kur galėtumėte saugiai vaikščioti pirmyn ir atgal tiesia linija. Pabandykite vaikščioti nuolat, apsisukdami kelio gale taip, lyg reikėtų apeiti kūgelį.\n\nToliau bus nurodyta apsisukti, atsistoti ramiai laikant rankas šonuose, o pėdas pečių plotyje.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Ši veikla išmatuoja jūsų eiseną ir pusiausvyrą vaikštant bei stovint. Sustokite, jei negalite saugiai eiti be pagalbos.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Nueikite iki %ld žingsn. tiesia linija.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Apsisukite ir grįžkite ten, kur pradėjote.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Pastovėkite %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Dabar pastovėkite %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Eisena ir pusiausvyra";
+
