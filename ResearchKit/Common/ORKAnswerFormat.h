@@ -59,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKTextChoice;
 @class ORKImageChoice;
+@class ORKQuestionResult;
 
 /**
  The `ORKAnswerFormat` class is the abstract base class for classes that describe the
@@ -93,6 +94,8 @@ ORK_CLASS_AVAILABLE
  type.
  */
 @property (readonly) ORKQuestionType questionType;
+
+- (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer;
 
 /// @name Factory methods
 
