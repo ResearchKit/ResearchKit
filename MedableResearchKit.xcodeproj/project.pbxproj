@@ -350,7 +350,7 @@
 		86C40CDE1A8D7C5C00081FAC /* ORKTintedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B611A8D7C5B00081FAC /* ORKTintedImageView.m */; };
 		86C40CE41A8D7C5C00081FAC /* ORKAnswerFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B641A8D7C5B00081FAC /* ORKAnswerFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40CE61A8D7C5C00081FAC /* ORKAnswerFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B651A8D7C5B00081FAC /* ORKAnswerFormat.m */; };
-		86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B661A8D7C5B00081FAC /* ORKAnswerFormat_Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B661A8D7C5B00081FAC /* ORKAnswerFormat_Internal.h */; };
 		86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B671A8D7C5B00081FAC /* ORKAnswerTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40CEC1A8D7C5C00081FAC /* ORKAnswerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B681A8D7C5B00081FAC /* ORKAnswerTextField.m */; };
 		86C40CEE1A8D7C5C00081FAC /* ORKAnswerTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B691A8D7C5B00081FAC /* ORKAnswerTextView.h */; };
