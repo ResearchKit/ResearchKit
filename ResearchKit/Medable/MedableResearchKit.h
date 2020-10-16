@@ -25,3 +25,4 @@
 #import <ResearchKit/ORKSurveyAnswerCellForNumber.h>
 #import <ResearchKit/ORKSurveyCardHeaderView.h>
 #import <ResearchKit/ORKCaption1Label.h>
+#import <ResearchKit/ORKFormItem_Internal.h>
