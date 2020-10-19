@@ -105,13 +105,13 @@
                                                             attribute:NSLayoutAttributeWidth
                                                            multiplier:image.size.height / image.size.width
                                                              constant:0.0]];
-        // button's height <= image
+        // Limit button height to 100px or image height, whichever is smaller
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_button
                                                             attribute:NSLayoutAttributeHeight
                                                             relatedBy:NSLayoutRelationLessThanOrEqual
                                                                toItem:nil attribute:NSLayoutAttributeHeight
                                                            multiplier:1.0
-                                                             constant:image.size.height]];
+                                                             constant:MIN(100, image.size.height)]];
     } else {
         // Keep Aspect ratio
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_button
