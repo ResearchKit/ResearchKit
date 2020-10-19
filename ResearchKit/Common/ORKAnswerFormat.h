@@ -97,6 +97,8 @@ ORK_CLASS_AVAILABLE
 
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer;
 
+- (nonnull Class)questionResultClass;
+
 /// @name Factory methods
 
 + (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
