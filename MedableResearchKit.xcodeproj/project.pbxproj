@@ -1420,6 +1420,19 @@
 		D012B6B824C116D700F4A842 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D012B6BA24C116D700F4A842 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D069B8F624EF5C71007432B4 /* ka-GE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ka-GE"; path = "ka-GE.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466792543874700711EEB /* af-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "af-ZA"; path = "af-ZA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667A2543874800711EEB /* or-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "or-IN"; path = "or-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667B2543874800711EEB /* sr-Latn-RS */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn-RS"; path = "sr-Latn-RS.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667C2543874800711EEB /* te-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "te-IN"; path = "te-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667D2543874800711EEB /* st-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "st-ZA"; path = "st-ZA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667E2543874800711EEB /* gu-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "gu-IN"; path = "gu-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667F2543874800711EEB /* lv-LV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lv-LV"; path = "lv-LV.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466802543874800711EEB /* ml-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ml-IN"; path = "ml-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466812543874800711EEB /* kn-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "kn-IN"; path = "kn-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466822543874800711EEB /* mr-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "mr-IN"; path = "mr-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466832543874800711EEB /* zu-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zu-ZA"; path = "zu-ZA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466842543874800711EEB /* ar-SA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ar-SA"; path = "ar-SA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466852543874800711EEB /* pa-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pa-IN"; path = "pa-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D0FB60EE2373334000FBF8D0 /* bg-BG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "bg-BG"; path = "bg-BG.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureView.h; sourceTree = "<group>"; };
 		D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKImageCaptureView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -3550,6 +3563,19 @@
 				"ta-IN",
 				"ka-GE",
 				"lt-LT",
+				"af-ZA",
+				"or-IN",
+				"sr-Latn-RS",
+				"te-IN",
+				"st-ZA",
+				"gu-IN",
+				"lv-LV",
+				"ml-IN",
+				"kn-IN",
+				"mr-IN",
+				"zu-ZA",
+				"ar-SA",
+				"pa-IN",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -4039,6 +4065,19 @@
 				D012B6BA24C116D700F4A842 /* ta-IN */,
 				D069B8F624EF5C71007432B4 /* ka-GE */,
 				52A5D350252FD3290017A7BD /* lt-LT */,
+				D0E466792543874700711EEB /* af-ZA */,
+				D0E4667A2543874800711EEB /* or-IN */,
+				D0E4667B2543874800711EEB /* sr-Latn-RS */,
+				D0E4667C2543874800711EEB /* te-IN */,
+				D0E4667D2543874800711EEB /* st-ZA */,
+				D0E4667E2543874800711EEB /* gu-IN */,
+				D0E4667F2543874800711EEB /* lv-LV */,
+				D0E466802543874800711EEB /* ml-IN */,
+				D0E466812543874800711EEB /* kn-IN */,
+				D0E466822543874800711EEB /* mr-IN */,
+				D0E466832543874800711EEB /* zu-ZA */,
+				D0E466842543874800711EEB /* ar-SA */,
+				D0E466852543874800711EEB /* pa-IN */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
