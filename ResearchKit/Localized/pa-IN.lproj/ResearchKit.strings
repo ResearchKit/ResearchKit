@@ -125,7 +125,7 @@
 "AX_SIGNVIEW_UNSIGNED" = "ਦਸਤਖ਼ਤ ਨਹੀਂ ਕੀਤੇ ";
 
 /* (No Comment) */
-"AX_SLIDER_LABEL" = "ਰਿਸਪਾਂਸ ਸਲਾਇਡਰ। % @ ਤੋਂ% @ ਦੀ ਸੀਮਾ ਹੈ";
+"AX_SLIDER_LABEL" = "ਰਿਸਪਾਂਸ ਸਲਾਇਡਰ। %@ ਤੋਂ%@ ਦੀ ਸੀਮਾ ਹੈ";
 
 /* (No Comment) */
 "AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "ਜਦੋਂ ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ ਤਾਂ ਰਿਕਾਰਡਿੰਗ ਨੂੰ ਰੋਕਣ ਲਈ ਦੂਜੀ ਵਾਰ ਐਕਟੀਵੇਟ ਕਰੋ।";
@@ -149,7 +149,7 @@
 "AX_TAP_BUTTON_HINT" = "ਬਟਨਾਂ ਨੂੰ ਸਿੱਧੇ ਤੌਰ 'ਤੇ ਟੈਪਯੋਗ ਬਣਾਉਣ ਲਈ ਐਕਟੀਵੇਟ ਕਰੋ।";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TAPPING_INSTRUCTION_VOICEOVER" = "% @ ਵਾਇਸਓਵਰ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਇਹ ਜਾਣਨ ਲਈ ਕੀ ਬਟਨ ਕਿੱਥੇ ਸਥਿਤ ਹਨ, ਸਕਰੀਨ ਨੂੰ ਛੁਹ ਕੇ ਪਤਾ ਲਗਾਓ। ਬਟਨ ਨੂੰ ਸਿੱਧੇ ਤੌਰ 'ਤੇ ਟੈਪਯੋਗ ਬਣਾਉਣ ਲਈ ਕਿਸੇ ਇੱਕ ਬਟਨ ਨੂੰ ਐਕਟਿਵੇਟ ਕਰੋ।";
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ ਵਾਇਸਓਵਰ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਇਹ ਜਾਣਨ ਲਈ ਕੀ ਬਟਨ ਕਿੱਥੇ ਸਥਿਤ ਹਨ, ਸਕਰੀਨ ਨੂੰ ਛੁਹ ਕੇ ਪਤਾ ਲਗਾਓ। ਬਟਨ ਨੂੰ ਸਿੱਧੇ ਤੌਰ 'ਤੇ ਟੈਪਯੋਗ ਬਣਾਉਣ ਲਈ ਕਿਸੇ ਇੱਕ ਬਟਨ ਨੂੰ ਐਕਟਿਵੇਟ ਕਰੋ।";
 
 /* (No Comment) */
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "ਟੈਸਟ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਐਕਟੀਵੇਟ ਕਰੋ। ਜਦੋਂ ਟੈਸਟ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ, ਜਦੋਂ ਤੁਸੀਂ ਆਪਣੇ ਖੱਬੇ ਕੰਨ ਵਿਚ ਆਵਾਜ਼ ਸੁਣਦੇ ਹੋ ਤਾਂ ਇਸ ਬਟਨ ਤੇ ਸਿੱਧਾ ਟੈਪ ਕਰੋ।";
@@ -353,10 +353,10 @@
 "CONSENT_DOC_LINE_DATE" = "ਤਾਰੀਖ਼";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "% @ ਦਾ ਨਾਮ (ਛਾਪਿਆ ਗਿਆ)";
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ ਦਾ ਨਾਮ (ਛਾਪਿਆ ਗਿਆ)";
 
 /* (No Comment) */
-"CONSENT_DOC_LINE_SIGNATURE" = "% @ ਦੇ ਦਸਤਖ਼ਤ";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ ਦੇ ਦਸਤਖ਼ਤ";
 
 /* (No Comment) */
 "CONSENT_LEARN_MORE_TITLE" = "ਹੋਰ ਜਿਆਦਾ ਜਾਣੋ";
@@ -575,7 +575,7 @@
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਆਰੰਭ ਕਰੋ ਨੂੰ ਟੈਪ ਕਰੋ।";
 
 /* (No Comment) */
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "ਇਹ ਗਤੀਵਿਧੀ ਤੁਹਾਨੂੰ ਇੱਕ ਚੋਰੀ ਵਿੱਚ ਇੱਕ ਪੈੱਗ ਰੱਖਣ ਲਈ ਕਹਿ ਕੇ ਤੁਹਾਡੇ ਉਪਰਲੇ ਹਿੱਸੇ ਨੂੰ ਮਾਪਦੀ ਹੈ। ਤੁਹਾਨੂੰ ਇਹ% @ ਵਾਰ ਕਰਨ ਲਈ ਕਿਹਾ ਜਾਵੇਗਾ।";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "ਇਹ ਗਤੀਵਿਧੀ ਤੁਹਾਨੂੰ ਇੱਕ ਚੋਰੀ ਵਿੱਚ ਇੱਕ ਪੈੱਗ ਰੱਖਣ ਲਈ ਕਹਿ ਕੇ ਤੁਹਾਡੇ ਉਪਰਲੇ ਹਿੱਸੇ ਨੂੰ ਮਾਪਦੀ ਹੈ। ਤੁਹਾਨੂੰ ਇਹ%@ ਵਾਰ ਕਰਨ ਲਈ ਕਿਹਾ ਜਾਵੇਗਾ।";
 
 /* (No Comment) */
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "ਤੁਹਾਡੇ ਖੱਬੇ ਅਤੇ ਸੱਜੇ ਦੋਨਾਂ ਹੱਥਾਂ ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾਏਗੀ। ਤੁਹਾਨੂੰ ਜਿੰਨੀ ਜਲਦੀ ਹੋ ਸਕੇ ਪੈਗ ਨੂੰ ਚੁੱਕਣਾ ਪਏਗਾ, ਇਸ ਨੂੰ ਛੇਦ ਵਿੱਚ ਪਾਉਣਾ ਚਾਹੀਦਾ ਹੈ, ਅਤੇ ਇੱਕ ਵਾਰ ਜਦੋਂ %@ ਵਾਰੀ ਪੂਰਾ ਹੋ ਜਾਂਦਾ ਹੈ, ਇਸ ਨੂੰ %@ ਵਾਰ ਦੁਬਾਰਾ ਹਟਾ ਦਿਓ।";
@@ -602,7 +602,7 @@
 "HOLE_PEG_TEST_TEXT_2" = "ਪੈਗ ਡ੍ਰੌਪ ਕਰਨ ਲਈ ਉਂਗਲਾਂ ਨੂੰ ਚੁੱਕੋ।";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "% @ - ਹੋਲ ਪੈਗ ਟੈਸਟ";
+"HOLE_PEG_TEST_TITLE_%@" = "%@ - ਹੋਲ ਪੈਗ ਟੈਸਟ";
 
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "ਅਵੈਧ ਈਮੇਲ ਪਤਾ: %@";
@@ -1151,7 +1151,7 @@
 "TASK_COMPLETE_TITLE" = "ਮੁਕੰਮਲ ਗਤੀਵਿਧੀ ";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "ਅਧਿਕਤਮ ਲੈਂਥ ਤੋਂ ਵੱਧ ਟੈਕਸਟ ਦੀ ਸਮੱਗਰੀ :% @";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "ਅਧਿਕਤਮ ਲੈਂਥ ਤੋਂ ਵੱਧ ਟੈਕਸਟ ਦੀ ਸਮੱਗਰੀ :%@";
 
 /* (No Comment) */
 "TIMED_WALK_FORM_TEXT" = "ਹਰੇਕ ਟੈਸਟ ਲਈ ਉਹੀ ਸਹਾਇਕ ਡਿਵਾਇਸ ਦੀ ਵਰਤੋਂ ਕਰੋ।";
