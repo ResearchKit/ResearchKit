@@ -646,7 +646,6 @@
 		CBD34A571BB1FB9000F204EA /* ORKLocationSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD34A551BB1FB9000F204EA /* ORKLocationSelectionView.m */; };
 		CBD34A5A1BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = CBD34A581BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h */; };
 		CBD34A5B1BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD34A591BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.m */; };
-		D012B6B924C116D700F4A842 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D012B6B724C116D700F4A842 /* InfoPlist.strings */; };
 		D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */; };
 		D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */; };
 		D44239791AF17F5100559D96 /* ORKImageCaptureStep.h in Headers */ = {isa = PBXBuildFile; fileRef = D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -862,7 +861,6 @@
 		2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKUIViewAccessibilityTests.m; sourceTree = "<group>"; };
 		2EBFE11E1AE1B68800CB8254 /* ORKVoiceEngine_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKVoiceEngine_Internal.h; sourceTree = "<group>"; };
 		2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVoiceEngineTests.m; sourceTree = "<group>"; };
-		52A5D34F252FD3290017A7BD /* lt-LT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lt-LT"; path = "lt-LT.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		52A5D350252FD3290017A7BD /* lt-LT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lt-LT"; path = "lt-LT.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		6146D0A11B84A91E0068491D /* ORKLineGraphAccessibilityElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKLineGraphAccessibilityElement.h; sourceTree = "<group>"; };
 		6146D0A21B84A91E0068491D /* ORKLineGraphAccessibilityElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKLineGraphAccessibilityElement.m; sourceTree = "<group>"; };
@@ -1417,9 +1415,21 @@
 		CBD34A551BB1FB9000F204EA /* ORKLocationSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKLocationSelectionView.m; sourceTree = "<group>"; };
 		CBD34A581BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSurveyAnswerCellForLocation.h; sourceTree = "<group>"; };
 		CBD34A591BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKSurveyAnswerCellForLocation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		D012B6B824C116D700F4A842 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D012B6BA24C116D700F4A842 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D069B8F624EF5C71007432B4 /* ka-GE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ka-GE"; path = "ka-GE.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466792543874700711EEB /* af-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "af-ZA"; path = "af-ZA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667A2543874800711EEB /* or-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "or-IN"; path = "or-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667B2543874800711EEB /* sr-Latn-RS */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn-RS"; path = "sr-Latn-RS.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667C2543874800711EEB /* te-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "te-IN"; path = "te-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667D2543874800711EEB /* st-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "st-ZA"; path = "st-ZA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667E2543874800711EEB /* gu-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "gu-IN"; path = "gu-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E4667F2543874800711EEB /* lv-LV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lv-LV"; path = "lv-LV.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466802543874800711EEB /* ml-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ml-IN"; path = "ml-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466812543874800711EEB /* kn-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "kn-IN"; path = "kn-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466822543874800711EEB /* mr-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "mr-IN"; path = "mr-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466832543874800711EEB /* zu-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zu-ZA"; path = "zu-ZA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466842543874800711EEB /* ar-SA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ar-SA"; path = "ar-SA.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D0E466852543874800711EEB /* pa-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pa-IN"; path = "pa-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D0FB60EE2373334000FBF8D0 /* bg-BG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "bg-BG"; path = "bg-BG.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureView.h; sourceTree = "<group>"; };
 		D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKImageCaptureView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -2019,7 +2029,6 @@
 				861610BF1A8D8EDD00245F7A /* Artwork.xcassets */,
 				B1C0F4E01A9BA65F0022C153 /* Localized */,
 				86C40C101A8D7C5C00081FAC /* Info.plist */,
-				D012B6B724C116D700F4A842 /* InfoPlist.strings */,
 				B18AABE01A9F08D9003871B5 /* ResearchKit.modulemap */,
 			);
 			path = ResearchKit;
@@ -3550,6 +3559,19 @@
 				"ta-IN",
 				"ka-GE",
 				"lt-LT",
+				"af-ZA",
+				"or-IN",
+				"sr-Latn-RS",
+				"te-IN",
+				"st-ZA",
+				"gu-IN",
+				"lv-LV",
+				"ml-IN",
+				"kn-IN",
+				"mr-IN",
+				"zu-ZA",
+				"ar-SA",
+				"pa-IN",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -3600,7 +3622,6 @@
 				71B7B4DF20AA91D400C5768A /* volume_curve_AIRPODS.plist in Resources */,
 				B1A860ED1A9693C400EA57B7 /* consent_04@2x.m4v in Resources */,
 				7118AC6820BF6A3A00D7A6BB /* Sentence4.wav in Resources */,
-				D012B6B924C116D700F4A842 /* InfoPlist.strings in Resources */,
 				BA22F76D20C4F884006E6E11 /* SentencesList.txt in Resources */,
 				B17FE7FD1A8DBE7C00BF9C28 /* Artwork.xcassets in Resources */,
 				7118AC6C20BF6A3A00D7A6BB /* Sentence2.wav in Resources */,
@@ -4039,17 +4060,21 @@
 				D012B6BA24C116D700F4A842 /* ta-IN */,
 				D069B8F624EF5C71007432B4 /* ka-GE */,
 				52A5D350252FD3290017A7BD /* lt-LT */,
+				D0E466792543874700711EEB /* af-ZA */,
+				D0E4667A2543874800711EEB /* or-IN */,
+				D0E4667B2543874800711EEB /* sr-Latn-RS */,
+				D0E4667C2543874800711EEB /* te-IN */,
+				D0E4667D2543874800711EEB /* st-ZA */,
+				D0E4667E2543874800711EEB /* gu-IN */,
+				D0E4667F2543874800711EEB /* lv-LV */,
+				D0E466802543874800711EEB /* ml-IN */,
+				D0E466812543874800711EEB /* kn-IN */,
+				D0E466822543874800711EEB /* mr-IN */,
+				D0E466832543874800711EEB /* zu-ZA */,
+				D0E466842543874800711EEB /* ar-SA */,
+				D0E466852543874800711EEB /* pa-IN */,
 			);
 			name = ResearchKit.strings;
-			sourceTree = "<group>";
-		};
-		D012B6B724C116D700F4A842 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D012B6B824C116D700F4A842 /* ta-IN */,
-				52A5D34F252FD3290017A7BD /* lt-LT */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

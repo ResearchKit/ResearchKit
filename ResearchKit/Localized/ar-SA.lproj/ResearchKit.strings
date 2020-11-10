@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "معلومات إضافية";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "أغلق %@ ودقق النظر في النقطة الواقعة في وسط الشبكة المربعة.\nباستخدام أصبعك أو قلم رفيع الرأس، ضع علامة على أي خلل تراه مثل خطوط غير واضحة أو متموجة.\n\nعند الانتهاء من ذلك، اسحب لليسار في أي مكان خارج الشبكة.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "أمسك الجهاز على بُعد 12 بوصة من وجهك وعلى مستوى نظرك أثناء الاختبار.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "يساعد هذا النشاط في اكتشاف مشاكل الرؤية لدى المستخدم.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "العين اليسرى";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "العين اليمنى";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "شبكة Amsler ";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "انقر بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "يتعذر تسجيل مقطع صوتي";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "قل «آآآآآآه» في الميكروفون لأطول فترة ممكنة.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "يساعد هذا النشاط على تقييم صوتك من خلال تسجيله بالميكروفون بأسفل الجهاز.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "خذ نفسًا عميقًا وقل «آآآآآآآه» في الميكروفون لأطول فترة ممكنة. حافظ على مستوى صوت ثابت حتى تظل أشرطة الصوت باللون الأزرق.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "يرجى الانتظار حتى نتحقق من مستوى الضوضاء المحيطة.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "الصوت";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "انقر التالي عند الاستعداد.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "الصوت مرتفع للغاية";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "صوت الضوضاء المحيطة مرتفعًا للغاية لدرجة تشوش على تسجيل صوتك. يرجى الانتقال لمكان أكثر هدوءًا والمحاولة مرة أخرى.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "استخدم أصبعك أو قلم رفيع الرأس للتأشير على الشبكة مباشرة، \nأو السحب جهة اليسار خارج الشبكة للإنهاء.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "شبكة Amsler ";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "بدء مهمة";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "مخطط الشريط الصوتي";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "إضافة تعليق توضيحي";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "رجوع";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "إخفاء أداة تصغير PDF";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "إخفاء شريط البحث";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "مشاركة";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "إظهار أداة تصغير PDF";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "إظهار شريط البحث";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "رسم توضيحي لعلامة اختيار في دائرة زرقاء توضح النجاح";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ باستخدام VoiceOver، ستكون الأزرار قابلة للنقر مباشرة. وستكون واقعة بالقرب من منتصف الشاشة.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "تجاهل لوحة المفاتيح";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = "و";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "نقطة: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "تتراوح من %@ إلى %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "عرض متسلسل مكون من";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "معاينة الالتقاط";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "الصورة الملتقطة";
+
+/* (No Comment) */
+"AX_SELECTED" = "محددة";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "المس الشاشة وحرك إصبعك للتوقيع";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "خانة مخصصة للتوقيع";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "موقع عليه";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "غير موقع عليه";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "شريط تمرير الاستجابة. يمتد من %@ إلى %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "عند بدء التسجيل، قم بتنشيط مرة ثانية لإيقاف التسجيل.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "شكل موجة الكلام";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "انقر لاستخدام إصبع واحد";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "انقر لاستخدام إصبع آخر";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "أصبحت الأزرار الآن قابلة للنقر.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "أزرار قابلة للنقر";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "قم بالتنشيط لجعل الأزرار قابلة للنقر مباشرة.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ باستخدام VoiceOver، استكشف الشاشة باللمس لمعرفة مكان الأزرار. قم بتنشيط أي زر لجعل الأزرار قابلة للنقر مباشرة.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "قم بالتنشيط لبدء الاختبار. عند بدء الاختبار، انقر مباشرة على هذا الزر عند سماع صوت في الأذن اليسرى.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "انقر لاستخدام الأذن اليسرى.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "قم بالتنشيط لبدء الاختبار. عند بدء الاختبار، انقر مباشرة على هذا الزر عند سماع صوت في الأذن اليمنى.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "انقر لاستخدام الأذن اليمنى.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ باستخدام VoiceOver، استكشف الشاشة باللمس لمعرفة مكان الأزرار لكل أذن. وعند بدء الاختبار، ستكون الأزرار قابلة للنقر مباشرة.  %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "يتعذر وضع قرص بحجم %@ في قرص بحجم %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "انقر مرتين لوضع قرص";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "انقر مرتين لاختيار القرص المفضل";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "الهدف";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "الرأس";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "يحتوي على قرص بحجم %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "فارغ";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ باستخدام VoiceOver، ستكون الأزرار الموجودة في الاختبار قابلة للنقر.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "صورة غير مصنفة";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "غير محددة";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "اكتمل التقاط الفيديو";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "معاينة التقاط الفيديو";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "نشط";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "صحيح";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "غير صحيح";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "لوحة ألعاب الذاكرة";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "ثابت";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "لا";
+
+/* (No Comment) */
+"BOOL_YES" = "نعم";
+
+/* Button titles */
+"BUTTON_AGREE" = "أوافق";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "تطبيق";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "إلغاء";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "مسح";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "مسح الإجابة";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "حقوق الطبع والنشر";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "لا أوافق";
+
+/* (No Comment) */
+"BUTTON_DONE" = "انتهى";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "البدء";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "معرفة المزيد";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "التالي";
+
+/* (No Comment) */
+"BUTTON_OK" = "موافق";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "تجاهل النتائج";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "حفظ لوقت لاحق";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "إنهاء المهمة";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "يتعذر تعديل هذه الإجابة.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "حفظ";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "تخطي";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "تخطي السؤال";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "البدء في المؤقت";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "الكاميرا غير متوفرة في عرض تقسيم الشاشة.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "التقاط صورة";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "البدء في التسجيل";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "إعادة التقاط الصورة";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "إعادة تسجيل الفيديو";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "وقف التسجيل";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "لم يتم العثور على كاميرا. لا يمكن استكمال هذه الخطوة.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "يتعذر حفظ الصورة الملتقطة.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "لم يتم تحديد دليل المخرج للصور الملتقطة.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "لاستكمال هذه الخطوة، اسمح للتطبيق باستخدام الكاميرا عن طريق تغيير الإعدادات.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "لا توجد بيانات";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "لا تتطابق كلمات المرور.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "أدخل كلمة المرور مرة أخرى.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "التأكيد";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "التاريخ";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'الاسم (المطبوع)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ التوقيع";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "معرفة المزيد";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "الاسم الأخير";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "الاسم الأول";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "مطلوب";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "موافقة";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "الصفحة %1$ld من %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "معاينة";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "راجع النموذج التالي، وانقر على موافق إذا كنت جاهزًا للمتابعة.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "معاينة";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "تجميع البيانات";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "استخدام البيانات";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "الخصوصية";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "استطلاع الدراسة";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "مهام الدراسة";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "الالتزام بالوقت";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "مرحبًا";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "الانسحاب";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "مشاركة بياناتي فقط مع %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "مشاركة بياناتي مع %@ والباحثين المؤهلين من جميع أنحاء العالم";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ سوف تتلقى بيانات الدراسة من خلال مشاركتك في هذه الدراسة.\n\nقد تؤدي مشاركة بيانات الدراسة المشفرة على نطاق أوسع (بدون معلومات مثل اسمك) إلى تحقيق فائدة لهذا البحث والأبحاث المستقبلية.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "خيارات المشاركة";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "يرجى التوقيع باستخدام إصبعك في الخانة التالية.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "وقّع هنا";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "التوقيع";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "بدء النشاط في ";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%عدد الثواني المتبقية.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "يتعرف هذا النشاط على مستويات عتبة السمع للفرد بمقياس ديسيبل.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "تأكد من ضبط صوت الجهاز على أقل مستوى.\n\nأثناء هذه المهمة، سيتم تشغيل نغمة هادئة في الأذن اليسرى أو اليمنى.\n\nاستمع بعناية وانقر على الزر كل مرة تسمع فيها النغمة.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "استبيان الإعداد";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "حدد تفضيل «الأذن الأفضل»، إن وجدت.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "اليسار";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "لا يوجد تفضيل";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "اليمين";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "قياس السمع";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "اختر تاريخ";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "تاريخ الميلاد";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "البريد الإلكتروني";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "جارٍ الحساب";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "يقيس هذا النشاط مستوى ضغط صوت البيئة. وإذا كانت مستويات الضوضاء مرتفعة للغاية، فلن تتمكن من الاستمرار. يرجى الانتقال إلى مكان أكثر هدوءًا لاستكمال هذه المهمة أو إعادة ممارسة النشاط في وقت لاحق.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "الحد المسموح: %@ ديسيبل";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "مقياس حدة السمع";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "ديسيبل ";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "يتعذر إزالة ملفات السجل الكافية للوصول إلى الحد المسموح";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "حذف الملف غير المؤشر عليه (رفع الملفات المؤشر عليها)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "يتعذر إنشاء ملف";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "أخطاء متعددة في إزالة السجلات";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "خطأ في إعداد سمة";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "تم العثور على البيانات المجمعة";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "لم يحدد أي دليل مخرج";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "المسافة (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "معدل ضربات القلب (نبضة في الدقيقة )";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "تجول في الهواء الطلق بأسرع ما يمكنك %1$@. وعند القيام بذلك، اجلس واسترخ بارتياح %2$@. وللبدء، انقر على بدء العمل.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "يراقب هذا النشاط معدل ضربات القلب ويقيس سرعة السير في  %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "اجلس بارتياح لمدة %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "اللياقة";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "سر بأقصى ما يمكنك لمدة  %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "النمط 1";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "النمط 2";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "النمط 3";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "النمط 4";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "النمط 5";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "النمط 6";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "هل نسيت كلمة المرور؟";
+
+/* Gender values. */
+"GENDER_FEMALE" = "أنثى";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "اختر الجنس";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "الجنس";
+
+/* (No Comment) */
+"GENDER_MALE" = "ذكر";
+
+/* (No Comment) */
+"GENDER_OTHER" = "غير ذلك";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "جون";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "يقيس هذا النشاط أقصى أداء علوي لك حيث يطلب منك وضع وتد في حفرة. وسوف يطلب ذلك منك لعدد %@ مرة.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "سيتم اختبار كلتا يديك اليمنى واليسرى. ويجب عليك التقاط وتد بأسرع ما يمكنك ووضعه في حفرة وبمجرد القيام بذلك في %@ مرة، قم برفعه مرة أخرى لعدد %@ مرة.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "سيتم اختبار كلتا يديك اليمنى واليسرى. ويجب عليك التقاط وتد بأسرع ما يمكنك ووضعه في حفرة وبمجرد القيام بذلك في %@ مرة، قم برفعه مرة أخرى لعدد %@ مرة.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "ضع الوتد في الحفرة باستخدام يدك اليسرى.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "ضع الوتد في الحفرة باستخدام يدك اليمنى.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "ضع الوتد خلف الخط باستخدام يدك اليسرى.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "ضع الوتد خلف الخط باستخدام يدك اليمنى.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "التقط الوتد باستخدام إصبعين.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "ارفع أصابعك لإسقاط الوتد.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-اختبار وتد الحفرة";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "عنوان بريد إلكتروني غير صالح: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "يتعذر إضافة عنصر Keychain ";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "يتعذر حذف عنصر Keychain ";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "يتعذر العثور على عنصر Keychain ";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "لا يمكن تحديث عنصر Keychain ";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "قم بتمديد ركبتك اليسرى. ثم انقر في أي مكان.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "قم بتمديد ركبتك اليمنى. ثم انقر في أي مكان.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "يقيس هذا النشاط المسافة التي يمكنك مد ركبتك اليسرى لها.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "يقيس هذا النشاط المسافة التي يمكنك مد ركبتك اليمنى لها.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "اجلس على حافة كرسي. عند البدء، سوف تضع الجهاز على ركبتك اليسرى لإجراء القياس. يرجى تشغيل صوت الجهاز حتى يمكنك سماع التعليمات.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "اجلس على حافة كرسي. عند البدء، سوف تضع الجهاز على ركبتك اليمنى لإجراء القياس. يرجى تشغيل صوت الجهاز حتى يمكنك سماع التعليمات.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "ضع الجهاز على ركبتك اليسرى مع توجيه الشاشة للخارج كما تشير إليه الصورة.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "ضع الجهاز على ركبتك اليمنى مع توجيه الشاشة للخارج كما تشير إليه الصورة.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "عندما تكون جاهزًا، انقر على الشاشة للبدء على تمديد ركبتك اليسرى قدر الاستطاعة. ثم انقر مرة أخرى عند الانتهاء.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "عندما تكون جاهزًا، انقر على الشاشة للبدء على تمديد ركبتك اليمنى قدر الاستطاعة. ثم انقر مرة أخرى عند الانتهاء.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "نطاق حركة الركبة اليسرى";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "نطاق حركة الركبة اليمنى";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "ضع الجهاز على ركبتك اليسرى";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "ضع الجهاز على ركبتك اليمنى";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "تعرف على المزيد بخصوص مشاركة البيانات";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "تعرف على المزيد بخصوص البيانات التي تم تجميعها";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "تعرف على المزيد حول كيفية استخدام البيانات";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "تعرف على المزيد حول طريقة حماية الخصوصية والهوية";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "تعرف على المزيد حول استطلاع الدراسة";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "تعرف على المزيد حول المهام الموجودة";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "تعرف على المزيد حول أثر الدراسة على وقتك";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "تعرف على المزيد حول الدراسة أولاً";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "تعرف على المزيد حول الانسحاب";
+
+/* Limb values. */
+"LIMB_LEFT" = "اليسار";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "يجب أن يكون خيار الأطراف على اليمين أو اليسار";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "اليمين";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "تعذر إيجاد نتيجة للعنوان المدرج. يرجى التأكد من كون العنوان صالحًا.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "قد تكون غير متصل بالإنترنت أو أنك قد تجاوزت الحد الأقصى لطلبات البحث عن العنوان. إذا لم تكن متصلاً بالإنترنت، فيرجى تشغيل شبكة الواي فاي للإجابة على هذا السؤال أو تخطي هذا السؤال إذا كان زر التخطي متاحًا أو العودة إلى الاستطلاع عندما تكون متصلاً بالإنترنت. وبخلاف ذلك، يرجى المحاولة مرة أخرى في غضون بضع دقائق.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "تم رفض الوصول إلى خدمات الموقع. يرجى السماح للتطبيق بخدمات الموقع من خلال الإعدادات.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "تعذر الوصول للموقع الحالي. يرجى كتابة العنوان أو الانتقال لموقع يتمتع بإشارة GPS أفضل إن كان ذلك منطبقا.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "تعذر العثور على العنوان المحدد";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "إدخال عنوان";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "تسجيل الدخول";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "سم";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "قدم";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "بوصة";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "كجم";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "رطل";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "أوقية";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "انتهت اللعبة";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "للاستمرار، انقر التالي";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "اكتمل التسلسل";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "تم تطوير نشاط الذاكرة بمساعدة من د. كاثرين بوسين، ود. جويل كرامر من جامعة كاليفورنيا، سان فرانسيسكو.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "لم تنجح تمامًا في هذه المرة. انقر التالي للمتابعة";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "حاول مرة أخرى";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "انقر على %@ بترتيب عكسي ";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "انقر على %@ بالترتيب الذي تظهر فيه";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "للاستمرار، انقر التالي";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "تم التوقف";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "راقب إضاءة %@ ";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "الدرجة";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "انتهى الوقت.\nانقر التالي للمتابعة.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "لقد انتهي الوقت.";
+
+/* (No Comment) */
+"NULL_ANSWER" = "اختر إجابة";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "يقيس الاختبار السمعي الإيقاعي الإضافي المتسلسل سرعة معالجة المعلومات السمعية وقدرة الحساب.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "اختبار الإضافة السمعية والبصرية التسلسلية";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "تم مصادقة كلمة المرور";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "تأكيد كلمة المرور";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "تأكيد كلمة المرور الجديدة";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "هل نسيت كلمة المرور؟";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "كلمة المرور غير مطابقة. حاول مرة أخرى";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "كلمة مرور غير صحيحة";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "أدخل كلمة مرور جديدة";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "أدخل كلمة المرور القديمة";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "أدخل كلمة المرور";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "تم حفظ كلمة المرور";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "مؤشر تقدم إدخال كلمة المرور";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ تم إدخال %@ من الأرقام";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "يسمح فقط بالحروف الرقمية";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "خطأ في معرف اللمس";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "يرجى المصادقة باستخدام معرف اللمس";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "أدخل كلمة المرور";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "كلمة المرور";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "يقيس اختبار الإضافة السمعية والبصرية التسلسلية سرعة معالجة المعلومات السمعية والبصرية وقدرتك على الحساب.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "اختبار إضافة المسلسل المرئي";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "رقم الهاتف";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "انقر للتحديد";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "انقر للكتابة";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "انقر للإجابة";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "تذكر الرقم الأول.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "أضف هذا الرقم الجديد للرقم السابق.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "يتم عرض الأرقام الأحادية كل %@ ثانية.\nيجب عليك إضافة كل رقم جديد للرقم السابق له فورًا.\nانتبه، لا يجوز لك حساب الإجمالي الحالي بل حاصل آخر رقمين.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "يقيس اختبار إضافة المسلسل المرئي سرعة معالجة المعلومات البصرية وقدرتك على الحساب.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "اختبار إضافة المسلسل المرئي";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ يتجاوز أقصى قيمة مسموح بها (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ تعتبر أقل من أقصى قيمة مسموح بها (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ تعتبر قيمة غير صالحة.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "قيمة غير صالحة.";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "نطاق الحركة.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "قم بهز الجهاز بسرعة عند ظهور دائرة زرقاء.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "محاولة %@ من %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "يعمل هذا النشاط على تقييم المدة التي تستغرقها للاستجابة للتلميح البصري.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "قم بهز الجهاز في أي اتجاه بمجرد ظهور النقطة الزرقاء على الشاشة. وسوف يطلب منك إضافة ذلك كل  %D مرة.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "مدة رد الفعل";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "إعادة إرسال رسالة بريد إلكتروني للتحقق من الصحة";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "انقر على الرابط التالي إذا لم تتلقَ رسالة بريد إلكتروني للتحقق من الصحة وتريد إرسالها مرة أخرى";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "ارفع ذراعك الأيسر عاليًا. ثم انقر في أي مكان.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "ارفع ذراعك الأيمن عاليًا. ثم انقر في أي مكان.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "يقيس هذا النشاط سرعة مد كتفك الأيسر.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "يقيس هذا النشاط سرعة مد كتفك الأيمن.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "عند البدء، يجب وضع الجهاز على كتفك الأيسر لإجراء القياس. ويرجى تشغيل الصوت في الجهاز حتى يمكنك سماع التعليمات.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "عند البدء، يجب وضع الجهاز على كتفك الأيمن لإجراء القياس. ويرجى تشغيل الصوت في الجهاز حتى يمكنك سماع التعليمات.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "ضع الجهاز على كتفك الأيسر مع توجيه الشاشة للخارج كما تبين الصورة.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "ضع الجهاز على كتفك الأيمن مع توجيه الشاشة للخارج كما تبين الصورة.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "عندما تكون جاهزًا، انقر على الشاشة للبدء وارفع ذراعك الأيسر إلى أبعد درجة. وانقر مرة أخرى عند الانتهاء.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "عندما تكون جاهزًا، انقر على الشاشة للبدء وارفع ذراعك الأيمن إلى أبعد درجة. وانقر مرة أخرى عند الانتهاء.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "نطاق حركة الكتف الأيسر";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "نطاق حركة الكتف الأيمن";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "ضع الجهاز على كتفك الأيسر";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "ضع الجهاز على كتفك الأيمن";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "للبدء، انقر على بدء التشغيل ثم راقب عن قرب.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "تضيء بعض %@ جميعها مرة واحدة. انقر على تلك %@ بنفس الترتيب التي تضيء فيه.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "تضيء بعض %@ جميعها مرة واحدة. انقر على تلك %@ بعكس الترتيب التي تضيء فيه.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "يقيس هذا النشاط الذاكرة المكانية قصيرة المدى حيث يطلب منك تكرار الترتيب الذي تضيء فيه %@.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "الزهور";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "الزهور";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "الذاكرة المكانية";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "انقر على 'Play Audio'، لضبط درجة الصوت على المستوى المريح لك ثم انقر على  'Stop Audio' للمتابعة.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "معايرة الحجم";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "كجزء من هذا الاختبار، سوف يطلب منك ما يلي:\n\nالاستماع لجملة.\n\nتكرار ما سمعته بشكل واضح أو التخطي لكتابة ما سمعته باستخدام لوحة المفاتيح.\n\nفي حالة تكرار ما سمعته، سيكون لديك خيار تعديل النص الناتج عن محرك التعرف على الكلام.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "يقيس هذا النشاط وضوح الكلام عند عرضه في بيئة صاخبة.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "كرر ما سمعت.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "تحدث";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "شغل الصوت";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "سيتم تشغيل جملة مختلطة مع ضوضاء الخلفية بنسبة الإشارة إلى الضجيج العشوائية (SNR) مرة واحدة فقط";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "استمع";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "أوقف الصوت";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "تحدث في الضوضاء";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "فشل التعرف على الكلام.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "فشل البدء في التعرف على الكلام.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "اضغط على الزر للبدء في التسجيل قبل الكلام.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "يقيس هذا النشاط الكلام باستخدام الميكروفون الموجود أسفل الجهاز، وترجمته إلى نص.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "قم بتعديل النص لتصحيح أي تفسير خاطئ للكلام.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "تعديل النص";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "البدء في التسجيل";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "وقف التسجيل";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "سوف يظهر النسخ النصي هنا.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "التعرف على الكلام";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ من %2$@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "أزرق";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "أخضر";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "أحمر";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "أصفر";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "في كل مرة تظهر فيها الكلمة، حدد الحرف الأول من اللون الذي يظهر.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "عندما تكون جاهزًا لبدء نشاط Stroop، انقر على بدء العمل.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "حدد الحرف الأول من اسم اللون الذي يظهر.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "انقر";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "انقر التالي للبدء.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "انقر على الأزرار باستمرار باستخدام أصبعين قدر الإمكان.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "انقر على الأزرار باستخدام اليد اليسرى.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "انقر على الأزرار باستخدام اليد اليمنى.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "يقيس هذا النشاط سرعة النقر.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "انقر بإصبع واحد ثم الآخر. جرب قياس مدة النقرات بأسرع ما يمكنك. استمر في النقر حتى %@. ";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "استخدم إصبعين من يدك اليسرى للنقر على الأزرار الموجودة على الشاشة بالتناوب.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "والآن كرر نفس الاختبار باستخدام اليد اليسرى.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "استخدم أصبعين من نفس اليد للنقر على الأزرار الموجودة على الشاشة بالتناوب.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "ضع الجهاز على سطح مستو.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "استخدم إصبعين من يدك اليمنى للنقر على الأزرار الموجودة على الشاشة بالتناوب.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "الآن كرر نفس الاختبار باستخدام اليد اليمنى.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "تخطى هذه اليد.";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "سرعة النقر";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "اليد اليسرى";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "اليد اليمنى";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "سيتم تحليل بياناتك وإشعارك عند كون النتائج جاهزة.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "اكتمل النشاط";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "يتجاوز محتوى النص أقصى طول للجملة: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "استخدم نفس الجهاز المساعد لكل اختبار.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "الجهاز المساعد";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "سر إلى %@ في خط مستقيم.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "سر مرة أخرى إلى مكان البدء.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "انقر على التالي عند الانتهاء.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "استدر.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "انقر التالي للبدء.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "ابحث عن مكان، ويفضل أن يكون بالخارج حيث تسير حول %@ في خط مستقيم بسرعة قدر الإمكان لكن مع توفير الأمان. لا تبطئ السير حتى بعد اجتياز خط النهاية.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "يقيس هذا النشاط وظيفة الأطراف السفلى.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "لا شيء";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "قصبة أحادية الجانب";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "عكاز من جانب واحد";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "قصبة ثنائية الجانب";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "عكاز ثنائي الجانب";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "مساعد المشي/ناقل الحركة";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "انقر هنا لاختيار إجابة.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "هل تستخدم جهاز مساعد؟";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "هل ترتدي الجبيرة في الكاحل؟";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "توقيت السير";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "في كل مرة تبدأ فيها في سماع صوت، انقر على الزر الأيسر أو الأيمن للإشارة إلى الأذن التي تسمع الصوت.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "يقيس هذا النشاط قدرتك على سماع أصوات مختلفة.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "قبل البدء، وصل سماعات الأذن:\n\nسيكون الصوت رقيقًا جدًا ولا يشبه نغمة التنبيه العادية. وسيبدأ الصوت بهدوء ثم يرتفع مستواه ببطء. يرجى الانتباه والنقر على الزر الأيسر أو الأيمن للإشارة إلى الأذن التي تسمع الصوت.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "الأذن اليسرى";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "الأذن اليمنى";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "سوف تسمع الآن نغمة. قم بضبط درجة الصوت باستخدام أدوات التحكم في الصوت الموجودة على جانب الجهاز.\n\nانقر على أي زر عندما تكون مستعدًا للبدء.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "قياس السمع";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ هرتز، الأذن اليسرى";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ هرتز، الأذن اليمنى";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "إجمالي عدد النقرات";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "المس في أي مكان للمتابعة";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "حل اللغز";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "عدد الحركات: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "لا أستطيع حل اللغز";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "يعمل هذا النشاط على تقييم مهاراتك في حل اللغز.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "حرك المكدس بالكامل لإبراز المنصة في حركات قليلة قدر الإمكان.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "برج هانوي";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "انقر على بدء الاستخدام للبدء.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "يعمل هذا النشاط على تقييم انتباهك البصري ونقل المهمة من خلال تسجيل الوقت المطلوب للنقر على سلسلة من النقاط بالترتيب.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "بعد العد التنازلي، انقر على النقاط بترتيب متناوب بين الأرقام والحروف. ابدأ بالنقر على الرقم الأول «1» يليه الأرقام '2' – '3' – '4'…حتى الوصول للرقم  '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "بعد العد التنازلي، انقر على النقاط بترتيب متناوب بين الأرقام والحروف. ابدأ بالنقر على الرقم الأول «1» يليه الحرف الأول «أ» ثم '2' – 'ب' – 'ت'…حتى الوصول للرقم  '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "نفذ ذلك بأسرع ما يمكنك بدون أخطاء.";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "أ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "ب";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "ج";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "ث";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "د";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "هـ";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "اختبار عمل سجل";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "لا أستطيع تنفيذ هذا النشاط بيدي اليسرى.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "يمكنني تنفيذ هذا النشاط بكلتا اليدين.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "لا أستطيع تنفيذ هذا النشاط بيدي اليمنى.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "استمر في حمل جوالك مع ثني كوعك لمدة %ld ثانية";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "والآن احمل جوالك على ارتفاع الكتف مع ثني كوعك.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "الآن احمل جوالك بيدك اليسرى على ارتفاع كتفك مع ثني كوعك.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "والآن احمل جوالك بيدك اليمنى على ارتفاع كتفك مع ثني كوعك.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "استمر في حمل جوالك مع مد يديك لمدة %ld ثانية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "الآن احمل جوالك مع مد يديك على ارتفاع الكتف.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "الآن احمل جوالك مع مد يدك اليسرى على ارتفاع كتفك.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "الآن احمل جوالك مع مد يدك اليمنى على ارتفاع كتفك.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "انتقل  للمهمة التالية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "استمر في تثبيت جوالك في حضنك لمدة٪ ld ثانية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "استعد لتثبيت جوالك في حضنك.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "استعد لحمل جوالك في حضتك بيدك اليسرى.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "استعد لحمل جوالك في حضنك بيدك اليمنى.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "انقر على التالي للمتابعة.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "الآن قم بنقل جوالك بيدك اليسرى وانتقل للمهمة التالية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "الآن انقل جوالك ليدك اليمنى وانتقل للمهمة التالية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "استمر في جعل جوالك يلمس أنفك لمدة %ld ثانية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "الآن مع الاستمرار في ثني كوعك، اجعل جوالك يلمس أنفك بشكل متكرر.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "الآن، اجعل كوعك مثنيًا مع حمل جوالك في يدك اليسرى واجعل الجوال يلمس أنفك بشكل متكرر.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "الآن استمر في ثني كوعك مع وضع جوالك في يدك اليمنى واجعل الجوال يلمس أنفك بشكل متكرر";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "استمر في تنفيذ حركة تلويح الملكة لمدة %ld ثانية.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "استعد لتنفيذ حركة تلويح الملكة (التلويح بتدوير معصمك)";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "استعد لتنفيذ حركة تلويح الملكة مع وضع جوالك في يدك اليسرى (التلويح بتدوير معصمك)";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "استعد لتنفيذ حركة تلويح الملكة مع وضع جوالك في يدك اليمنى (التلويح بتدوير معصمك)";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "اكتمل النشاط";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "يقيس هذا النشاط تلويح يديك في أوضاع مختلفة. ابحث عن مكان تجلس فيه بهدوء مدة ممارسة هذا النشاط.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "احمل الجوال بيدك الأكثر تأثراً كما هو موضح في الصورة أدناه.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "مهمة واحدة";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "مهمتين";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "ثلاث مهام";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "أربع مهام";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "خمس مهام";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "سوف يطلب منك تنفيذ %@ مهمة أثناء الجلوس مع حمل الجوال في يديك.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "احمل جوالك في يدك اليسرى كما هو موضح في الصورة التالية.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "احمل جوالك في يدك اليمنى كما هو موضح في الصورة التالية.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "سوف يطلب منك تنفيذ %@ مهمة أثناء الجلوس مع حمل الجوال في يد واحدة ثم مرة أخرى مع اليد الأخرى";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "نشاط الاهتزاز";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "التحقق من الصحة";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "التحقق من صحة البريد الإلكتروني";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "لقد انتهيت من النشاط";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "عد مرة أخرى وسر في خط مستقيم لمدة %@. سر بشكل طبيعي قدر الإمكان.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = " استدر دورة كاملة ثم ظل ساكنًا لمدة %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "ضع الجهاز في جيبك أو حقيبتك واتبع التعليمات الصوتية.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "انقر على بدء عندما تكون جاهزًا. ثم ضع الجوال في جيب أو حقيبة واتبع التعليمات الصوتية.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "ابحث عن مكان يمكنك فيه السير بأمان بدون مساعدة لمدة %ld لممارسة الخطوات في خط مستقيم.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ابحث عن مكان يمكنك فيه السير للأمام وللخلف في خط مستقيم. حاول السير باستمرار من خلال الاستدارة على طرفي المسار كما لو كنت تسير حول قمع.\n\nوبعد ذلك، سيُطلب منك الالتفاف في دائرة كاملة ، ثم الوقوف بثبات مع ذراعيك على جانبيك وقدميك بعيدًا عن بعضهما بمقدار عرض الكتفين.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "يقيس هذا النشاط المشي والتوازن أثناء السير والوقوف ثابتًا. لا تكمل إذا لم تستطع السير بأمان بدون مساعدة.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "سر حتى %ld خطوة في خط مستقيم.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "استدر وسر للخلف حتى الوصول لمكان البدء.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "قف ثابتًا لمدة %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "والآن قف ثابتًا لمدة %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "المشي والتوازن";
+

@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Dodatne informacije";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Zatvorite svoj %@ i gledajte u tačku u centar kvadratne mreže.\n\nKoristite prst ili nalivpero da biste označili svako izobličenje koje vidite, kao što su mutne ili talasaste linije.\n\nKada završite, prevucite nalevo bilo gde van mreže.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Držite uređaj 30 cm od svog lica i u visini očiju tokom testa.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Ova aktivnost pomaže u otkrivanju problema u viziji korisnika.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Levo oko";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Desno oko";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amslerova mreža";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Nije moguće snimiti zvuk";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Recite „A“ u mikrofon koliko god duže možete.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Ova aktivnost procenjuje vaš glas tako što snima pomoću mikrofona na dnu vašeg uređaja.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Udahnite duboko i recite „A“ u mikrofon koliko god duže možete. Održavajte istu jačinu glasa da trake zvuka ostanu plave.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Sačekajte dok proveravamo nivo buke u pozadini.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Glas";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Dodirnite Dalje kada budete spremni.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Preglasno";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Nivo buke u okruženju je preglasan da bi se vaš glas snimio. Pomerite se negde gde je tiše i pokušajte ponovo.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Koristite prst ili nalivpero da biste direktno označili mrežu, ili prevucite nalevo van mreže da biste završili.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amslerova mreža";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Počnite zadatak";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Grafikon trake zvuka";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Zabeleži";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Nazad";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Sakrij sličicu PDF";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Sakrij traku za pretraživanje";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Deli";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Prikaži sličicu PDF";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Prikaži traku za pretraživanje";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Ilustracija oznake za potvrdu u plavom krugu prenosi uspeh";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Koristeći VoiceOver, dugme će da bude direktno tapkajuće. Nalazi se blizu središnjeg dela ekrana.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Odbaci tastaturu";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = "i";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Tačka: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Opseg od %@ do %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Stek sačinjen od";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Snimi pregled";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Snimljena slika";
+
+/* (No Comment) */
+"AX_SELECTED" = "Izabrano";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Dodirnite ekran i pomerite prst da potpišete";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Označeno polje za potpis";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Potpisano";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Nepotpisano";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Klizač odgovora. Opseg od %@ do %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Kada snimanje počne, aktivirajte drugo vreme da zaustavite snimanje.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Talasni oblik govora";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Dodirnite za jedan prst";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Dodirnite za drugi prst";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Dugmići se sada direktno tapkaju.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tapkajući dugmići";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Aktivirajte da bi dugmići bili tapkajući.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Koristeći VoiceOver, istražujte ekran dodirom da saznate gde se dugmići nalaze. Aktivirajte bilo koje dugme da bi dugmići bili tapkajući.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktivirajte da započnete test. Kada test počne, dodirnite direktno ovo dugme kada čujete zvuk u levom uvu.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Dodirnite za levo uvo";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktivirajte da započnete test. Kada test počne, dodirnite direktno ovo dugme kada čujete zvuk u desnom uvu.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Dodirnite za desno uvo";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Koristeći VoiceOver, istražujte ekran dodirom da saznate gde se nalaze dugmići za svako uvo. Kada test počne, dugmići će biti tapkajući. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Postavljanje diska veličine %@ na disk veličine %@ nije moguće";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dvaput dodrnite da postavite disk";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dvaput dodirnite da izaberete najbolji disk";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Meta";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Toranj";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Ima disk veličine %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prazno";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Koristeći VoiceOver, dugmići na testu će da budu direktno tapkajući.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Neobeležena slika";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Neizabrano";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Snimanje video zapisa je završeno";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Pregled video zapisa";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktivno";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "tačno";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "netačno";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Pločica igre memorije";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "mirovanje";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Ne";
+
+/* (No Comment) */
+"BOOL_YES" = "Da";
+
+/* Button titles */
+"BUTTON_AGREE" = "Slažem se";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Primeni";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Otkaži";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Obriši";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Jasan odgovor";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Autorsko pravo";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Ne slažem se";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Završeno";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Započni";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Saznaj više";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Dalje";
+
+/* (No Comment) */
+"BUTTON_OK" = "OK";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Odbaci rezultate";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Sačuvaj za kasnije";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Završi zadatak";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Ovaj odgovor ne može da se menja.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Sačuvaj";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Preskoči";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Preskoči ovo pitanje";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Pokreni tajmer";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera nije dostupna u podeli ekrana.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Snimi sliku";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Započni snimanje";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ponovo snimi sliku";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Ponovo snimi video zapis";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Zaustavi snimanje";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera nije pronađena. Nije moguće završiti ovaj korak.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Nije moguće sačuvati snimljenu sliku.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nije naveden izlazni direktorijum za snimljene slike.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Da završite ovaj korak, dozvolite ovoj aplikaciji da pristupi kameri u Postavkama.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nema podataka";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Lozinke se ne podudaraju.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ponovo unesite lozinku";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potvrdi";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Datum";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Ime %@ (štampano)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "Potpis %@";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Saznaj više";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Prezime";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Ime";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Potrebno";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Saglasnost";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Stranica %1$ld od %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Pregledaj";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Pregledajte obrazac u nastavku i dodirnite Slažem se ako ste spremni da nastavite.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Pregledaj";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Prikupljanje podataka";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Korišćenje podataka";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Privatnost";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Proučavanje ankete";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Zadaci u studiji";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Vremenska obaveza";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Dobro došli";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Povlačenje";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Deli moje podatke samo sa %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Deli moje podatke sa %@ i kvalifikovanim istraživačima širom sveta";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ će primiti vaše podatke o studiji iz vašeg učešća u ovoj studiji.\n\nPotpuno deljenje kodiranih podataka o studiji (bez informacija kao što je vaše ime) može da ima koristi od ovog i budućeg istraživanja.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Opcije deljenja";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Potpišite svojim prstom u dolenavedenom okviru.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Potpiši ovde";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Potpis";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Pokretanje aktivnost za";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Preostalo je %@ sekundi.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ova aktivnost identifikuje prag sluha kod pojedinca na skali dB HL.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Postavite jačinu uređaja na najviši nivo.\n\nTokom ovog zadatka, biće pušten suptilan ton na levo ili desno uvo.\n\nSlušajte pažljivo i dodirnite dugme svaki put kada čujete ton.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Upitnik za prijem.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Izaberite povlasticu za „bolje uvo“, ako ima";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "levo";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "bez povlastice";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "desno";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tonalni audiogram";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Izaberite datum";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Datum rođenja";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-pošta";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Izračunavanje";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Ova aktivnost meri nivo zvučnog pritiska u okruženju. Ako je nivo buke previsok, nećete moći da nastavite. Premestite se na mirniju lokaciju da dovršite ovaj zadatak ili ga ponovite kasnije.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Prag: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "SPL metar";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nije moguće ukloniti dovoljno datoteka evidencije da bi se dostigao prag";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Datoteka nije označena kao izbrisana (nije označena kao otpremljena)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Ne mogu da napravim datoteku";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Više grešaka prilikom uklanjanja evidencije";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Došlo je do greške prilikom podešavanja atributa";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Prikupljeni podaci nisu pronađeni.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nema navedenog izlaznog direktorijuma";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Rastojanje (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Otkucaji srca (otkucaji u minuti)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Hodajte napolju svojom najbržom mogućom brzinom %1 $@. Kada završite, sedite i odmorite se %2 $@. Da počnete dodirnite Započnite.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Ova aktivnost prati otkucaje vašeg srca i meri koliko daleko možete da hodate u %1 $@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sedite %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitnes";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Hodajte najbrže moguće %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Tip I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Tip II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Tip III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Tip IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Tip V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Tip VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Zaboravili ste lozinku?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Ženski";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Izaberite pol";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Rod";
+
+/* (No Comment) */
+"GENDER_MALE" = "Muški";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Ostalo";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Džon";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ova aktivnost meri funkciju vašeg gornjeg ekstremiteta tako što traži da stavite „ekser u otvor“. Od vas će se tražiti da to uradite %@ puta.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Biće testirane obe vaše ruke.\n\nMorate da uzmete ekser što je brže moguće, stavite ga u otvor i kada to uradite %@ puta, ponovo ga uklonite %@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Biće testirane obe vaše ruke.\n\nMorate da uzmete ekser što je brže moguće, stavite ga u otvor i kada to uradite %@ puta, ponovo ga uklonite %@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Stavite ekser u otvor levom rukom.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Stavite ekser u otvor desnom rukom.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Stavite ekser iza linije levom rukom.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Stavite ekser iza linije desnom rukom.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Podignite ekser koristeći dva prsta.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Podignite prste da ispustite ekser.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ – Test „Hole Peg“";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Nevažeća e-adresa: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nije moguće dodati stavku Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nije moguće obrisati stavku Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nije moguće pronaći stavku Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nije moguće ažurirati stavku Keychain.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ispružite levo koleno. Onda dodirnite bilo gde.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ispružite desno koleno. Onda dodirnite bilo gde.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Ova aktivnost meri koliko možete da ispružite levo koleno.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Ova aktivnost meri koliko možete da ispružite desno koleno.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sedite na ivicu stolice. Kada počnete, stavićete svoj uređaj na levo koleno za merenje. Uključite zvuk na svom uređaju da čujete instrukcije.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sedite na ivicu stolice. Kada počnete, stavićete svoj uređaj na desno koleno za merenje. Uključite zvuk na svom uređaju da čujete instrukcije.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Stavite svoj uređaj na levo koleno i okrenite ekran nadole, kao što je prikazano.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Stavite svoj uređaj na desno koleno i okrenite ekran nadole, kao što je prikazano.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kada ste spremni, dodirnite ekran da počnete i ispružite levo koleno što dalje možete. Dodirnite ponovo kada završite.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kada ste spremni, dodirnite ekran da počnete i ispružite desno koleno što dalje možete. Dodirnite ponovo kada završite.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Raspon kretanja levog kolena";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Raspon kretanja desnog kolena";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Stavite svoj uređaj na levo koleno";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Stavite svoj uređaj na desno koleno";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Saznajte više o deljenju podataka";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Saznajte više o prikupljanju podataka";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Saznajte više o korišćenju podataka";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Saznajte više o zaštiti vaše privatnosti i identiteta";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Saznajte više o anketi u vezi sa studijom";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Saznajte više o uključenim zadacima";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Saznajte više o uticaju studije na vaše vreme";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Saznajte više o studiji prvo";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Saznajte više o povlačenju";
+
+/* Limb values. */
+"LIMB_LEFT" = "levo";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption mora da bude levo ili desno";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "desno";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Nije moguće pronaći rezultat za uneti adresu. Uverite se da je adresa važeća.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ili niste povezani sa internetom ili ste prekoračili maksimalnu količinu zahteva za pronalaženje adresa. Ako niste povezani sa internetom, uključite Wi-Fi da odgovorite na ovo pitanje, preskočite ovo pitanje ako je dugme za preskakanje dostupno, ili se vratite na anketu kada ste povezani sa internetom. U suprotnom, pokušajte ponovo za nekoliko minuta.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Pristup uslugama lokacije je odbijen. Odobrite ovu dozvolu aplikacije da koristite usluge lokacije preko Postavki.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nije moguće rešiti aktuelnu lokaciju. Unesite adresu ili se premestite na lokaciju sa boljim GPS signalom ako je primenljivo.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Nije moguće pronaći navedenu adresu";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Unesite adresu";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Prijava";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "ft";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "u";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "lb";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "oz";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Igra je završena";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Da nastavite, dodirnite Dalje";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Sekvenca je završena";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Memorisjke aktivnosti su razvijene pomoću dr Ketrin Posin i dr Džoela Krejmera sa Univerziteta u Kaliforniji u San Francisku.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Niste uspeli da prođete u navedeno vreme. Dodirnite Dalje da nastavite.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Pokušajte ponovo";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Dodirnite %@ u obrnutom redosledu";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Dodirnite %@ u redosledu koji su aktivirali";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Da nastavite, dodirnite Dalje";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Pauzirano";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Pogledajte aktiviran %@";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Rezultat";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Isteklo vam je vreme.\nDodirnite Dalje da nastavite.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Vreme je isteklo";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Izaberite odgovor";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Test slušnih signala u razmacima meri brzinu obrade zvučnih informacija i sposobnost računanja.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Pristupni kôd je potvrđen";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Potvrdi pristupni kôd";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrdi svoj novi pristupni kôd";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Zaboravili ste pristupni kôd?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Pristupni kôd se ne podudara. Pokušajte ponovo.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Pristupni kôd nije tačan";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Unesite svoj novi pristupni kôd";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Unesite svoj stari pristupni kôd";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Unesite pristupni kôd";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Pristupni kôd je sačuvan";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka pristupnog koda";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Uneto je %@ od %@ cifara";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Samo numerički znakovi su dozvoljeni.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Greška kod „Touch ID“";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Potvrdite svoj identitet sa stavkom Touch ID";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Unesite lozinku";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Lozinka";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Test slušnih i vizuelnih signala u razmacima meri brzinu obrade zvučnih i vizuelnih informacija i sposobnost računanja.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+ 1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Broj telefona";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Dodirnite da izaberete";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Dodirnite da napišete";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Dodirnite da odgovorite";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Zapamtite ovu prvu cifru.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Dodajte ovu novu cifru u prethodnu.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Pojedinačne cifre se predstavljaju svake(ih) %@ sekunde(i).\nMorate da dodate svaku novu cifru u onu neposredno pre nje.\nPažnja, ne smete da izračunate ukupni zbir, već samo zbir poslednja dva broja.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "–";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Test vizuelnih signala u razmacima meri brzinu obrade vizuelnih informacija i sposobnost računanja.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1 $@ premašuje maksimalnu dozvoljenu vrednost (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1 $@ je manje od minimalne dozvoljene vrednosti (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ nije važeća vrednost.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Nevažeća vrednost";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Opseg kretanja";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Brzo protresite uređaj kada se pojavi plavi krug";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokušaj %@ od %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Ova aktivnost procenjuje vreme koje vam je potrebno da odgovorite na vizuelni znak.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Protresite uređaj u bilo kom smeru čim se pojavi plava tačka na ekranu. Od vas će se tražiti da to uradite %D puta.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Vreme reakcije";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Ponovo pošalji verifikacionu e-poruku";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Dodirnite dolenavedenu vezu ako niste primili verifikacionu e-poruku i želite da je ponovo pošaljete.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Podignite levu ruku. Onda dodirnite bilo gde.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Podignite desnu ruku. Onda dodirnite bilo gde..";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Ova aktivnost meri koliko možete da ispružite levo rame.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Ova aktivnost meri koliko možete da ispružite desno rame.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Kada počnete, stavićete svoj uređaj na levo rame za merenje. Uključite zvuk na uređaju da bi čuli instrukcije.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Kada počnete, stavićete svoj uređaj na desno rame za merenje. Uključite zvuk na uređaju da bi čuli instrukcije.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Postavite uređaj na levo rame i okrenite ekran suprotno od vas, kao što je prikazano.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Postavite uređaj na desno rame i okrenite ekran suprotno od vas, kao što je prikazano.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kada ste spremni, dodirnite ekran da počnete i podignite levu ruku što dalje možete. Dodirnite kada završite.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kada ste spremni, dodirnite ekran da počnete i podignite desnu ruku što dalje možete. Dodirnite kada završite.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Opseg kretanja levog ramena";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Opseg kretanja desnog ramena";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Postavite uređaj na levo rame";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Postavite uređaj na desno rame";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Da počnete, dodirnite Započni i pažljivo gledajte.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Aktiviraće se neki od %@ jedan po jedan. Dodirnite one %@ po istom redosledu kako su se aktivirali.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Aktiviraće se neki od %@ jedan po jedan. Dodirnite one %@ po obrnutom redosledu kako su se aktivirali.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ova aktivnost meri vaše kratkoročno prostorno pamćenje tako što traži da ponovite redosled aktiviranja %@.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "cveće";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "cveće";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Prostorna memorija";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Dodirnite „Pusti zvuk“, podesite jačinu zvuka na komforni nivo i onda dodirnite „Zaustavi zvuk“ da nastavite.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Jačina kalibracije";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Kao deo ovog testa, radićete:\n\nPoslušajte rečenicu.\n\nJasno ponovite ono što ste čuli ili preskočite to i kucajte ono što ste čuli koristeći tastaturu.\n\nAko ponovite ono što ste čuli, imaćete opciju da izmenite transkript koji je generisao pokretač prepoznavanja govora.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Ova aktivnost meri razumljivost govora u bučnim okruženjima.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Ponovite ono što ste čuli.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Govori";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Pusti zvuk";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Rečenica koja je pomešana sa bukom u pozadini u slučajnim Odnosom signala i buke (SNR) biće puštena samo jedanput.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Slušaj";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Zaustavi zvuk";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Govor prilikom buke";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Prepoznavanje govora nije uspelo.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Pokretanje prepoznavanja govora nije uspelo.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Pritisnite dugme da počnete sa snimanje pre nego što progovorite.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Ova kativnost beleži vaš govor pomoću mikrofona u donjem delu uređaja i prevodi ga u tekst.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Uredite transkript teksta da ispravite svako pogrešno tumačenje govora.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Uredi transkript";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Započni snimanje";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Zaustavi snimanje";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Vaša transkripcija će se pojaviti ovde.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Prepoznavanje govora";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1 $@ od %2 $@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "PLAVA";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "ZELENA";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "CRVENA";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "ŽUTA";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Svaki put kada se pojavi reč, izaberite prvo slovo naziva boje koja je prikazana.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Kada ste spremni da počnete aktivnost Stroop, dodirnite Započni.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Izaberite prvo slovo naziva BOJE koja je prikazana.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Dodirni";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Dodirnite Dalje da počnete.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Didirnite dugmiće što doslednije moguće koristeći dva prsta.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Dodirnite dugmiće levom rukom.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Dodirnite dugmiće desnom rukom.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Ova aktivnost meri vašu brzinu tapkanja.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Dodirnite jedan prst, a zatim drugi. Pokušajte da vreme tapkanja bude jednako. Nastavite da tapkate %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Koristite dva prsta leve ruke da naizmenično dodirnete dugmiće na ekranu.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Sada ponovite isti test levom rukom.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Koristite dva prsta iste ruke da naizmenično dodirnete dugmiće na ekranu.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Stavite svoj uređaj na ravnu površinu.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Koristite dva prsta desne ruke da naizmenično dodirnete dugmiće na ekranu.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Sada ponovite isti test desnom rukom.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Preskoči ovu ruku";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Brzina tapkanja";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Leva ruka";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Desna ruka";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Vaši podaci će biti analizirani i bićete obavešteni kada vaši rezultati budu spremni.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Aktivnost je završena";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Sadržaj teksta koji premašuje maksimalnu dužinu: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Koristite isti pomoćni uređaj za svaki test.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Pomoćni uređaj";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Hodajte do %@ po pravoj liniji.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Vratite se na početak.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Dodirnite Dalje da završite.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Okrenite se.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Dodirnite Dalje da počnete.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Pronađite mesto, poželjno napolju, gde možete da hodate %@ po pravoj liniji što je brže moguće, ali sigurnim hodom. Ne usporavajte dok ne prođete cilj.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Ova aktivnost meri funkciju vaših donjih ekstremiteta.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nijedno";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Jednostrani štap";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Jednostrana štaka";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dvostrani štap";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvostrana štaka";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Hodalica/Hodalica sa točkovima";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Dodirnite ovde da izaberete odgovor.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Koristite li pomoćni uređaj?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Nosite li ortozu za skočni zglob?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Ograničena šetnja";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Svaki put kada čujete zvuk, dodirnite levo ili desno dugme da pokažete na koje uvo čujete zvuk.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ova aktivnost meri vašu sposobnost da čujete različite zvuke.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Pre nego što počnete, uključite i stavite slušalice.\n\n\n\nZvuk će da bude veoma suptilan i neće da bude nalik običnom zvuku uzbune.  U početku će zvuk da bude mek, a onda će polako da se povećava jačina.  Obratite pažnju i dodirnite levo ili desno dugme da pokažete na koje uvo čujete zvuk.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Levo uvo";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Desno uvo";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Trebalo bi da čujete ton. Prilagodite jačinu zvuka pomoću kontrolnih komandi sa strane vašeg uređaja.\n\nDodirnite bilo koje dugme kada ste spremni da počnete.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tonalni audiogram";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, levo";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, desno";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Ukupni dodiri";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Dodirnite bilo gde da nastavite";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Reši slagalicu";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Broj pokreta: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ne mogu da rešim ovu slagalicu";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ova aktivnost procenjuje vašu veštinu rešavanja slagalice.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Premestite ceo stek na istaknutu platformu u što manje poteza.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojska kula";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Da počnete dodirnite Započni.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d greška)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d grešaka)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Ova aktivost procenjuje vašu vizuelnu pažnju i promenu zadatka tako što snima vreme koje je potrebno za dodirivanje niza tačaka u istom redosledu.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Nakon odbrojavanja, dodirnite tačke u naizmeničnom redosledu između brojeva i slova. Počnite tako što ćete dodirnuti prvi broj „1“, praćen brojevima „2„ – „3“ – „4“... dok ne stignete do broja „7“.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Nakon odbrojavanja, dodirnite tačke u naizmeničnom redosledu između brojeva i slova. Počnite tako što ćete dodirnuti prvi broj „1“, praćen prvim slovom „A“, i zatim „2„ – „B“ – „3“ – „C“... dok ne stignete do broja „7“.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Uradite ovo što je brže moguće bez greške.";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "А";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Probni test";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Ne mogu da izvršim ovu aktivnost LEVOM rukom.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Mogu da izvršim ovu aktivnost obema rukama.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Ne mogu da izvršim ovu aktivnost DESNOM rukom.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Držite svoj telefon savijenim laktom %ld sekundi";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Sada držite svoj telefon u visinu ramena savijenim laktom.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Sada držite svoj telefon LEVOM rukom u visini lakta savijenim laktom.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Sada držite svoj telefon DESNOM rukom u visini lakta savijenim laktom.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Držite svoj telefon rukom koja je ispružena %ld sekundi.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Sada držite svoj telefon rukom koja je ispružena u visini ramena.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Sada držite svoj telefon LEVOM rukom koja je ispružena u visini ramena.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Sada držite svoj telefon DESNOM rukom koja je ispružena u visini ramena.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Pređite na sledeći zadatak.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Držite svoj telefon u krilu %ld sekundi.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Pripremite se da držite svoj telefon u krilu.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Pripremite se da držite svoj telefon u krilu LEVOM rukom.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Pripremite se da držite svoj telefon u krilu DESNOM rukom.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Dodirnite dalje da nastavite.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Sada prebacite telefon u LEVU ruku i pređite na sledeći zadatka.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Sada prebacite telefon u DESNU ruku i pređite na sledeći zadatak.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Nastavite da dodirujete svoj telefon vašim nosem %ld sekundi";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Sada savijenim laktom, dodirnite svoj telefon vašim nosem više puta.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Sada savijenim laktom LEVE ruke dodirnite svoj telefon vašim nosem više puta.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Sada savijenim laktom DESNE ruke dodirnite svoj telefon vašim nosem više puta";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Nastavite da izvodite kraljičin pozdrav %ld sekundi.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Pripremi se da uradiš kraljičin pozdrav (pozdrav okretanjem zgloba).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Pripremi se da uradiš kraljičin pozdrav sa telefonom u LEVOJ ruci (pozdrav okretanjem zgloba).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Pripremi se da uradiš kraljičin pozdrav sa telefonom u DESNOJ ruci (pozdrav okretanjem zgloba).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivnost je završena.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Ova aktivnost meri tremor vaših ruku u različitim pozicijama. Pronađite mesto gde možete udobno da se smestite za vreme ove aktivnosti.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Držite telefon u ruci koja je više obolela, kao što je prikazano na slici u nastavku.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "zadatak";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dva zadatka";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tri zadatka";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "četiri zadatka";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "pet zadatka";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Od vas će se tražiti da obavite %@ dok sedite sa telefonom u ruci.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Držite telefon u LEVOJ ruci, kao što je prikazano na slici u nastavku.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Držite telefon u DESNOJ ruci, kao što je prikazano na slici u nastavku.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Od vas će se tražiti da obavite %@ dok sedite sa telefonom u jednoj ruci prvo, a zatim u drugoj ruci.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Aktivnost – tremor";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Potvrda";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Potvrdite svoju e-adresu";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Završili ste aktivnost.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Hodajte napred-nazad po pravoj liniji %@. Hodajte kao što normalno hodate.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Obiđite pun krug i onda stojte mirno %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Stavite uređaj u džep ili torbu i pratite audio uputstva.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Dodirnite Započni kada ste spremni da počnete.\nZatim stavite uređaj u džep ili torbu i pratite audio uputstva.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Pronađite mesto gde možete bezbedno da hodate bez pomoći oko %ld koraka po pravoj liniji.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Pronađite mesto gde možete bezbedno da hodate napred-nazad po pravoj liniji. Pokušajte da hodate neprekidno i okrenite se na kraju svog pravca, kao da hodate oko kupe.\n\nZatim ćete dobiti instrukcije da se krećete u punom krugu, a onda da stojite mirno sa rukama na stranu i stopalima raširenim u srazmeri sa širinom ramena.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Ova aktivnost meri vaš hod i ravnotežu dok hodate i stojite mirno. Ne nastavljajte ako ne možete bezbedno da hodate bez pomoći.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Hodajte do %ld koraka po pravoj liniji.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Okrenite se i vratite se na početak.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Budite mirni %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Sada budite mirni %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Hod i ravnoteža";
+

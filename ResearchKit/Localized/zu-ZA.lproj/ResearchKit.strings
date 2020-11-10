@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Ulwazi Olwengeziwe";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Vala %@ yakho futhi ubuke ichashazi elimaphakathi kwegridi eyisikwele.\n\nUsebenzisa umunwe noma i-stylus sakho, phawula noma yikuphi ukuhlanekezelwa okubonayo okufana nemigqa efiphele noma engamagagasi.\n\nUma usuqedile, swayipha kwesokunxele ngaphandle kwegridi.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Bamba idivayisi ibe amayintshi angu-12 ukusuka ebusweni bakho futhi iqondane namehlo phakathi nakho konke ukuhlolwa.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Lesi sivivinyo sisiza ukuthola izinkinga zokubona zomsebenzisi.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Iso Lesokunxele";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Iso Lesokudla";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Igridi Ye-Amsler";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Ayikwazi ukurekhoda umsindo";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Ithi “Aaaaah” embhobheni isikhathi eside ngokunokwenzeka.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Lesi sivivinyo sihlola izwi lakho ngokulirekhoda ngombhobho ongezansi kwedivayisi yakho.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Donsa umoya bese uthi “Aaaaah” embhobheni isikhathi eside ngokunokwenzeka. Kwenze ngevolumu yezwi ezinzile ukuze amabha omsindo ahlale esasibhakabhaka. ";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Sicela ulinde ngenkathi sihlola izinga lomsindo  ongemuva.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Izwi";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Thepha Okulandelayo uma usulungile.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Kunomsindo Omkhulu";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Izinga lomsindo ozungezile likhulu kakhulu ukuthi kurekhodwe izwi lakho. Sicela uye endaweni ethule bese uzame futhi.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Sebenzisa umunwe noma i-stylus ukuze umake igridi ngokuqondile, noma uswayiphe kwesokunxele ngaphandle kwegridi ukuze uqede.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Igridi Ye-Amsler";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Qala umsebenzi";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Igrafu Yebha Yomsindo";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Chaza";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Emuva";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Fihla Isithonjana Se-PDF";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Fihla Ibha Yosesho";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Yabelana";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Bonisa Isithonjana Se-PDF";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Bonisa Ibha Yosesho";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Umfanekiso wophawu lokuhlola endilingeni esasibhakabhaka ebonisa impumelelo";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Usebenzisa i-VoiceOver, inkinobho izokwazi ukuthinteka ngokuqondile. Izotholakala eduze nendawo emaphakathi yesikrini.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Chitha ikhibhodi";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " futhi ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Iphoyinti: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Ububanzi obusuka kokuthi %@ buye kokuthi %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Isitaki esakhiwa okuthi";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Isibonisikuqala sokuthathiwe";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Isithombe esithathiwe";
+
+/* (No Comment) */
+"AX_SELECTED" = "Kukhethiwe";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Thinta isikrini futhi uhambise umunwe ukuze usayine";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Inkundla yesiginesha eqokiwe";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Kusayiniwe";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Akusayiniwe";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Isilayida sempendulo. Ububanzi obusuka okuthi %@ buye kokuthi %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Lapho ukurekhoda kuqala, sebenzisa isikhathi sesibili ukuze uyeke ukurekhoda.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Amagagasi Enkulumo";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Thepha ukuze usebenzise umunwe owodwa";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Thepha ukuze usebenzise omunye umunwe";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Izinkinobho manje sezikwazi uthintwa ngokuqondile.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Izinkinobho Ezithintekayo";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Sebenzisa ukuze wenze izinkinobho zithinteke ngokuqondile.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Usebenzisa i-VoiceOver, hlola isikrini ngokuthinta ukuze ufunde ukuthi zitholakala kuphi izinkinobho. Sebenzisa noma iyiphi inkinobho ukuze wenze izinkinobho zithinteke ngokuqondile.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Sebenzisa ukuze uqalise ukuhlolwa. Lapho ukuhlolwa kuqala, thepha ngokuqondile kule nkinobho lapho uzwa umsindo endlebeni yakho yesokunxele.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Thepha ukuze wenze Indlebe Yesokunxele";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Sebenzisa ukuze uqalise ukuhlolwa. Lapho ukuhlolwa kuqala, thepha ngokuqondile kule nkinobho lapho uzwa umsindo endlebeni yakho yesokudla.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Thepha ukuze wenze Indlebe Yesokudla";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Usebenzisa i-VoiceOver, hlola isikrini ngokuthinta ukuze uthole ukuthi izinkinobho zendlebe ngayinye zitholakala kuphi. Lapho kuqala ukuhlolwa, izinkinobho zizokwazi ukuthinteka ngokuqondile. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Ayikwazi ukubeka idiski enosayizi ongu-%@ ediskini onosayizi ongu-%@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Thepha kabili ukuze ubeke idiski";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Thepha kabili ukuze ukhethe idiski ephakeme kakhulu";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Ithagethi";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Umbhoshongo";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Inediski enosayizi othi %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Akunalutho";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Usebenzisa i-VoiceOver, izinkinobho zokuhlola zizokwazi ukuthinteka ngokuqondile.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Isithombe esingenayo ilebula";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Akukhethiwe";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Ukuthathwa kwevidiyo kuqedile";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Isibonisikuqala sokuthathwa kwevidiyo";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "kuyasebenza";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "kulungile";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "akulungile";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Ithayela lomdlalo wenkumbulo";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "i-quiescent";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Cha";
+
+/* (No Comment) */
+"BOOL_YES" = "Yebo";
+
+/* Button titles */
+"BUTTON_AGREE" = "Ngiyavuma";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Sebenzisa";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Khansela";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Sula";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Sula impendulo";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Ilungelo lokushicilela";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Ngiyaphika";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Iqedile";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Qalisa";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Funda kabanzi";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Okulandelayo";
+
+/* (No Comment) */
+"BUTTON_OK" = "Kulungile";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Chitha Imiphumela";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Londolozela Ukuhamba Kwesikhathi";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Misa Umsebenzi";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Le mpendulo ayikwazi ukushintshwa.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Londoloza";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Yeqa";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Yeqa lo mbuzo";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Isibali-sikhathi Sokuqalisa";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Ikhamera ayitholakali kusikrini esihlukene.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Thatha Isithombe";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Qala Ukurekhoda";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Thatha Kabusha Isithombe";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Thatha Kabusha Ividiyo";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Yeka Ukurekhoda";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Ayikho ikhamera etholiwe.  Lesi sinyathelo asikwazi ukuqedelwa.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Isithombe esithathiwe asikwazanga ukulondolozwa.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Awukho umkhombandlela wokuphumayo ocacisiwe ezithombeni ezithathiwe.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Ukuze kuqedelwe lesi sinyathelo, vumela le app ukuthi ifinyelele ikhamera kokuthi Amasethingi.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ayikho Idatha";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Amaphasiwedi awafani.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Faka iphasiwedi futhi";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Qinisekisa";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Usuku  ";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Igama Lika-%@ (elibhalwe ngokuhlukanisa)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "Isiginesha Ka-%@";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Funda Kabanzi";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Isibongo";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Igama Lokuqala";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Kuyadingeka";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Imvume";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Ikhasi %1$ld kokungu-%2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Buyekeza";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Buyekeza ifomu elingezansi, bese uthepha okuthi Ngiyavuma uma usulungele ukuqhubeka.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Buyekeza";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Ukuqoqwa Kwedatha";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Ukusetshenziswa Kwedatha";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Ubumfihlo";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Inhlolovo Yocwaningo";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Imisebenzi Yocwaningo";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Isibopho Sesikhathi";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Siyakwamukela";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Ukuhoxa";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Yabelana ngedatha yami kuphela no-%@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Yabelana ngedatha yami no-%@ nabacwaningi abafanelekayo emhlabeni wonke";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ uzothola idatha yakho yocwaningo ekubambeni kwakho iqhaza kulolu cwaningo.\n\nUkwabelana ngedatha yakho yocwaningo enekhodi kabanzi (engenalo ulwazi olufana negama lakho) kungase kuzuzise lolu cwaningo nolwesikhathi esizayo.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Izinketho Zokwabelana";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Sicela usayine usebenzisa umunwe wakho ebhokisini elingezansi.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Sayina Lapha";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Isignesha";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Iqalisa isivivinyo";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Kusele imizuzwana engu-%@.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Lesi sivivinyo siphawula amazinga omkhawulo wokuzwa komuntu esikalni se-dB HL.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Yenza isiqinisekiso ivolumu yedivayisi isethwe ukuze ibe sezingeni eliphakeme.\n\nPhakathi nalo msebenzi, kuzodlala umsindo ophansi kungaba sendlebeni yesobunxele noma yokudla.\n\nLalela ngokucophelela bese uthepha inkinobho isikhathi ngasinye lapho uzwa umsindo.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Iphephambuzo lokungeniswa.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Khetha okuncamelayo kokuthi 'indlebe engcono', uma ikhona";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "esobunxele";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "akukho okuncamelayo";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "Esokudla";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Umsindo Wethoni";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Khetha usuku";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Usuku Lokuzalwa";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "I-imeyili";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Iyabala";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Lesi sivivinyo sikala izinga lomfutho womsindo wendawo ezungezile. Uma amazinga omsindo ephakeme kakhulu, ngeke ukwazi ukuqhubeka. Sicela uye endaweni ethule kakhudlwana ukuze uqale lo msebenzi noma uthathe kabusha lesi sivivinyo kamuva.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Umkhawulo: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "Isikali Se-SPL";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Ayikwazanga ukukhipha amafayela elogi anele ukuze kufinyelelwe umkhawulo";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Ifayela alimakiwe njengelisusiwe (alimakiwe njengelilayishiwe)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Ayikwazanga ukwakha ifayela";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Amaphutha amaningi okukhipha amalogi";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Iphutha lokusetha isici";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Ayikho idatha eqoqiwe etholiwe.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Awukho umkhombandlela ocacisiwe";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "I-Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Ibanga (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Ukushaya Kwenhliziyo (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Hamba ngaphandle ngejubane lakho elishesha kunawo wonke %1$@. Uma usuqedile, hlala futhi uphumule ngokunethezeka %2$@. Ukuze uqalise, thepha okuthi Qalisa.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Lesi sivivinyo siqapha ukushaya kwenhliziyo yakho futhi sikala ukuthi ungakwazi ukuhamba ibanga elide kangakanani %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Hlala unethezeke %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Ubungqabavu";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Hamba ngokushesha ngokusemandleni akho %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Uhlobo I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Uhlobo II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Uhlobo III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Uhlobo IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Uhlobo V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Uhlobo VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Ukhohlwe iphasiwedi?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Owesifazane";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Khetha ubulili";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Ubulili";
+
+/* (No Comment) */
+"GENDER_MALE" = "Owesilisa";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Okunye";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Lesi sivivinyo sikala ukusebenza kwendawo engenhla ngokukucela ukuthi ufake isikhonkwana embhotsheni. Uzocelwa ukuthi wenze lokhu izikhathi ezingu-%@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Kuzohlolwa kokubili isandla sakho sesobunxele nesokudla.\nKumelwe ukhethe isikhonkwana ngokushesha ngokunokwenzeka, usifake embhotsheni, futhi, uma usukwenze izikhathi ezingu-%@, sikhiphe futhi izikhathi ezingu-%@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Kuzohlolwa kokubili isandla sakho sesokudla nesobunxele.\nKumelwe ukhethe isikhonkwana ngokushesha ngokunokwenzeka, usifake embhotsheni, futhi, uma usukwenze izikhathi ezingu-%@, sikhiphe futhi izikhathi ezingu-%@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Faka isikhonkwana embhotsheni usebenzisa isandla sakho sobunxele.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Faka isikhonkwana embhotsheni usebenzisa isandla sakho sokudla.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Faka isikhonkwana ngemuva komugqa usebenzisa isandla sakho sobunxele.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Faka isikhonkwana ngemuva komugqa usebenzisa isandla sakho sokudla.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Qubula isikhonkwana usebenzisa iminwe emibili.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Phakamisa iminwe ukuze udedele isikhonkwana.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Ukuhlolwa Kwesikhonkwana Esisembhotsheni";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ikheli le-imeyili elingavumelekile: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Ayikwazanga ukufaka into ye-Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Ayikwazanga ukususa into ye-Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Ayikwazanga ukuthola into ye-Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Ayikwazanga ukubuyekeza into ye-Keychain.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Nweba idolo lakho lesobunxele. Bese uthepha noma yikuphi.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Nweba idolo lakho lesokudla. Bese uthepha noma yikuphi.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Lesi sivivinyo sikala ukuthi ungalinweba lize lifike kuphi idolo lakho lesobunxele.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Lesi sivivinyo sikala ukuthi ungalinweba lize lifike kuphi idolo lakho lesokudla.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Hlala phansi emkhawulweni wesihlalo. Lapho uqala uzofaka idivayisi yakho edolweni lakho lesobunxele ukuze likalwe. Sicela uvule umsindo wedivayisi yakho ukuze ukwazi ukuzwa iziyalezo.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Hlala phansi emkhawulweni wesihlalo. Lapho uqala uzofaka idivayisi yakho edolweni lakho lesokudla ukuze likalwe. Sicela uvule umsindo wedivayisi yakho ukuze ukwazi ukuzwa iziyalezo.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Beka idivayisi yakho edolweni lakho lesobunxele isikrini sibheke ngaphandle, njengoba kubonisiwe esithombeni.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Beka idivayisi yakho edolweni lakho lesokudla isikrini sibheke ngaphandle, njengoba kubonisiwe esithombeni.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Uma usulungile, thepha isikrini ukuze uqalise futhi unwebe idolo lakho lesobunxele ukuze liye kude ngokunokwenzeka. Thepha futhi uma usuqedile.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Uma usulungile, thepha isikrini ukuze uqalise futhi unwebe idolo lakho lesokudla ukuze liye kude ngokunokwenzeka. Thepha futhi uma usuqedile.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Ibanga Lomnyakazo Wedolo Lesobunxele";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Ibanga Lomnyakazo Wedolo Lesokudla";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Beka idivayisi yakho edolweni lakho lesobunxele";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Beka idivayisi yakho edolweni lakho lesokudla";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Funda kabanzi mayelana nokwabelana ngedatha";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Funda kabanzi mayelana nendlela idatha eqoqwa ngayo";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Funda kabanzi mayelana nendlela idatha esetshenziswa ngayo";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Funda kabanzi mayelana nendlela ubumfihlo bakho nobuwena obuvikelwa ngayo";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Funda kabanzi mayelana nenhlolovo yocwaningo";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Funda kabanzi mayelana nemisebenzi ehililekile";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Funda kabanzi mayelana nomthelela wocwaningo esikhathini sakho";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Funda kabanzi mayelana nocwaningo kuqala";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Funda kabanzi mayelana nokuhoxa";
+
+/* Limb values. */
+"LIMB_LEFT" = "esobunxele";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption kumelwe ibe eyesobunxele noma eyesokudla";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "Esokudla";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Ayikwazi ukuthola umphumela wekheli elifakiwe. Sicela uqiniseke ukuthi ikheli livumelekile.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Kungenzeka ukuthi awuxhunyiwe ku-inthanethi noma weqe inani elivunyelwe lezicelo zokubheka ikheli. Uma ungaxhunyiwe ku-inthanethi, sicela uvule i-Wi-Fi ukuze uphendule lo mbuzo, yeqa lo mbuzo uma inkinobho yokweqa itholakala, noma buyela kunhlolovo lapho uxhunywe ku-inthanethi. Ngale kwalokho, sicela uzame futhi emzuzwini embalwa.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Ukufinyelela amasevisi endawo kwenqatshiwe. Sicela unikeze le app imvume yokusebenzisa amasevisi endawo kokuthi Amasethingi.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Ayikwazi ukuxazulula indawo yakho yamanje. Sicela uthayiphe ikheli noma iya endaweni enesiginali ye-GPS engcono uma kusebenza kuwena.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Ayikwazanga Ukuthola Ikheli Elishiwo";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Faka ikheli";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Ukungena";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "ft";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "in";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "lb";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "oz";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Umdlalo Uphelile";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Ukuze uqhubeke, thepha okuthi Okulandelayo";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Ukulandelana Kuphelile";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Isivivinyo senkumbulo sakhiwa ngosizo luka-Katherine Possin, PhD kanye no-Joel Kramer, PhD base-University of California, e-San Francisco.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Awuzange uphumelele ngaleso sikhathi. Thepha okuthi Okulandelayo ukuze uqhubeke.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Zama Futhi";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Thepha okuthi %@ ngohlelo olubuyela emuva";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Thepha okuthi %@ ngohlelo ezikhanye ngalo";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Ukuze uqhubeke, thepha okuthi Okulandelayo";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Kumiswe Isikhashana";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Buka %@ ukukhanya okuphezulu ";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Iphuzu";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Uphelelwe isikhathi.\nThepha okuthi Okulandelayo ukuze uqhubeke.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Isikhathi Siphelile";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Khetha impendulo";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Ukuhlolwa Kokuhlanganisa Okuwuchungechunge Kokuzwa Ngejubane kukala ijubane lakho lokucubungula ulwazi oluzwayo kanye nekhono lokubala.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "I-PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Iphasikhodi iqinisekisiwe";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Qinisekisa iphasikhodi";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Qinisekisa iphasikhodi yakho entsha";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Ukhohlwe Iphasikhodi?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Amaphasikhodi awafani. Zama futhi.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Iphasikhodi Ayilungile";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Faka iphasikhodi entsha";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Faka iphasikhodi yakho endala";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Faka iphasikhodi";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Iphasikhodi ilondoloziwe";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Inkomba yenqubekelaphambili yokufakwa kwephasikhodi";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Kufakwe %@ kumadijithi angu-%@";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kuvunyelwe kuphela izinhlamvu zenombolo.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Iphutha Le-ID Yokuthinta";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Sicela uqinisekise nge-ID Yokuthinta";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Faka iphasiwedi";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Iphasiwedi";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Ukuhlolwa Kokuhlanganisa Okuwuchungechunge Kokuzwa Nokubona Ngejubane kukala ijubane lakho lokucubungula ulwazi oluzwayo nolubonayo kanye nekhono lokubala.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "I-PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Inombolo Yocingo";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Thepha ukuze ukhethe";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Thepha ukuze ubhale";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Thepha ukuze uphendule";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Khumbula le dijithi yokuqala.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Engeza le dijithi entsha esikhundleni sedlule.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Amadijithi awodwa ethulwa njalo emizuzwaneni engu-%@.\nKumelwe wengeze idijithi ngayinye entsha kuleyo engaphambi kwayo.\nQaphela, akumelwe ubale ingqikithi esebenzayo, kodwa isamba sezinombolo ezimbili zokugcina.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Ukuhlolwa Kokuhlanganisa Okuwuchungechunge Kokubona Ngejubane kukala ijubane lakho lokucubungula ulwazi olubonayo kanye nekhono lokubala.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "I-PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ yeqa umkhawulo wenani elivunyelwe (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ ingaphansi kwenani eliphansi elivunyelwe (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ akulona inani elivunyelwe.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Inani elingavunyelwe";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Ububanzi Bomnyakazo";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Xukuza idivayisi ngokushesha lapho kuvela indilinga esasibhakabhaka";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Umzamo %@ kwengu-%@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Lesi sivivinyo sihlaziya isikhathi osithathayo ukuze uphendule into oyibonayo.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Xukuza idivayisi ukuze iye kunoma yiluphi uhlangothi ngokushesha nje lapho kuvela ichashazi elisasibhaka esikrinini. Uzocelwa ukuthi wenze lokhu izikhathi ezingu-%D.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Isikhathi Sokusabela";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Thumela Kabusha I-imeyili Yokuqinisekisa";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Thepha ilinki engezansi uma ungazange uthole i-imeyili yokuqinekisa futhi uma ungathanda ukuthi ithunyelwe futhi.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Phakamisa ingalo yakho yesobunxele. Bese uthepha noma yikuphi.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Phakamisa ingalo yakho yesokudla. Bese uthepha noma yikuphi.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Lesi sivivinyo sikala ukuthi ungakwazi ukulinweba liye kude kangakanani ihlombe lakho lesobunxele.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Lesi sivivinyo sikala ukuthi ungakwazi ukulinweba liye kude kangakanani ihlombe lakho lesokudla.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Lapho uqala uzobeka idivayisi yakho ehlombe lakho lesobunxele ukuze likalwe. Sicela uvule umsindo wedivayisi yakho ukuze ukwazi ukuzwa iziyalezo.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Lapho uqala uzobeka idivayisi yakho ehlombe lakho lesokudla ukuze likalwe. Sicela uvule umsindo wedivayisi yakho ukuze ukwazi ukuzwa iziyalezo.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Beka idivayisi yakho ehlombe lakho lesobunxele isikrini sibheke ngaphandle, njengoba kuboniswe esithombeni.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Beka idivayisi yakho ehlombe lakho lesokudla isikrini sibheke ngaphandle, njengoba kuboniswe esithombeni.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Uma usulungile, thepha isikrini ukuze uqalise bese uphakamisa ingalo yakho yesobunxele kude ngokunokwenzeka. Thepha futhi uma usuqedile.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Uma usulungile, thepha isikrini ukuze uqalise bese uphakamisa ingalo yakho yesokudla kude ngokunokwenzeka. Thepha futhi uma usuqedile.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Ububanzi Bomnyakazo Behlombe Lesobunxele";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Ububanzi Bomnyakazo Behlombe Lesokudla";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Beka idivayisi yakho ehlombe lakho lesobunxele";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Beka idivayisi yakho ehlombe lakho lesokudla";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Ukuze uqalise, thepha okuthi Qalisa, bese ubuka ngokucophelela.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Enye %@ izokhanya ngayinye ngesikhathi. Thepha lezo %@ ngokulandelana kokukhanya kwazo.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Enye %@ izokhanya ngayinye ngesikhathi. Thepha lezo %@ eziphambene nokulandelana kokukhanya kwazo.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Lesi sivivinyo sikala inkumbulo yesikhala sesikhathi sesikhashana ngokuthi sikucele ukuthi uphinde ukulandelana %@ ekhanya ngakho.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "Izimbali";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "Izimbali";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Inkumbulo Yesikhala";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Thepha okuthi 'Dlala Umsindo', lungisa ivolomu yakho ukuze ibe sezingeni elinethezekile bese uthepha okuthi 'Misa Umsindo' ukuze uqhubeke.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Ukulungiswa Kwevolomu";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Njengengxenye yalokhu kuhlolwa, kufanele:\n\nUlalele umusho.\n\nUphinde ngendlela ezwakalayo lokho okuzwile noma uqhubekele phambili ukuze uthayiphe lokho okuzwile usebenzisa ikhibhodi. \n\nUma uphinda lokho okuzwile, uzokwazi ukushintsha okulotshiwe okukhiqizwe injini yokubonwa kwenkulumo.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Lesi sivivinyo sikala ukuqondakala kwenkulumo lapho yethulwa endaweni enomsindo.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Phinda lokho okuzwile.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Khuluma";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Dlala Umsindo";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Umusho oxutshwe nomsindo wengemuva Esilinganisweni Sesignali Nomsindo (SNR) esingahleliwe uzodlalwa kanye kuphela.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Lalela";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Misa Umsindo";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Inkulumo Emsindweni";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Ukuhlonzwa kwenkulumo kuhlulekile.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Ihlulekile ukuqalisa ukuhlonzwa kwenkulumo.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Cindezela inkinobho ukuze uqalise ukurekhoda ngaphambi kokukhuluma.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Lesi sivivinyo sirekhoda inkulumo yakho ngombhobho ongezansi kwedivayisi, futhi uyihumushe ukuze ibe umbhalo.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Hlela umbhalo wokulotshiwe ukuze ulungise noma iyiphi inkulumo engatolikiwe kahle.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Hlela Okulotshiwe";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Qala Ukurekhoda";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Yeka Ukurekhoda";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Okulotshiwe kwakho kuzovela lapha.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Ukuhlonzwa Kwenkulumo";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ kokungu-%2$@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "OKUSASIBHAKABHAKA";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "OKUHLAZA";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "OKUBOMVU";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "OKUPHUZI";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Isikhathi ngasinye lapho kuvela igama, khetha uhlamvu lwegama LOMBALA obonisiwe.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Uma usukulungele ukuqala isivivinyo se-Stroop thepha okuthi Qalisa.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Khetha uhlamvu lwegama LOMBALA obonisiwe.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "I-Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Thepha";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Thepha okuthi Okulandelayo ukuze uqalise.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Thepha izinkinobho ngendlela engashintshi ngokunokwenzeka usebenzisa iminwe emibili.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Thepha izinkinobho usebenzisa isandla SESOBUNXELE.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Thepha izinkinobho usebenzisa isandla SESOKUDLA.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Lesi sivivinyo sikala ijubane lakho lokuthepha.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Thepha umunwe owodwa, bese uthepha omunye. Zama ukulinganisa ukuthepha kwakho ukuze kulingane ngokunokwenzeka. Qhubeka uthepha %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Sebenzisa iminwe emibili esandleni sakho sesobunxele ukuze uthephe ngokushintshana izinkinobho esikrinini.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Manje phinda ukuhlola okufanayo usebenzisa isandla sakho sesobunxele.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Beka idivayisi yakho endaweni eyisicaba.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Sebenzisa iminwe emibili esandleni sakho sesokudla ukuze uthephe ngokushintshana izinkinobho esikrinini.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Manje phinda ukuhlola okufanayo usebenzisa isandla sakho sesokudla.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Yeqa lesi sandla";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Ijubane Lokuthepha";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Isandla Sobunxele";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Isandla Sokudla";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Idatha yakho izohlaziywa futhi uzokwaziswa uma imiphumela yakho isilungile.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Isivivinyo Siphelile";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Okuqukethwe kombhalo kweqa ubude bomkhawulo: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Sebenzisa idivayisi esizayo efanayo ekuhlolweni ngakunye.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Idivayisi esizayo";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Hamba kuze kube %@ emugqeni oqondile.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Hamba ubuyele lapho oqale khona.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Thepha okuthi Okulandelayo uma usuqedile.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Phenduka.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Thepha okuthi Okulandelayo ukuze uqalise.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Thola indawo, uma kungenzeka ngaphandle, lapho ongakwazi khona ukuhamba kuze kube %@ emugqeni oqondile ngokushesha ngokunokwenzeka, kodwa ngokuphephile. Unganciphisi ijubane kuze kube yilapho usudlule umugqa wesiphetho.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Lesi sivivinyo sikala ukusebenza kwezingxenye ezingezansi.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ayikho";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Udondolo Olulodwa";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Induku Eyodwa";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Udondolo Olukabili";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Induku Ekabili";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "I-Walker/I-Rollator";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Thepha lapha ukuze ukhethe impendulo.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Ingabe usebenzisa idivayisi esizayo?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Ingabe ugqoka i-orthosis yeqakala lonyawo?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Ukuhamba Okubaliwe";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Isikhathi ngasinye lapho uzwa umsindo, thepha inkinobho yesobunxele noma yesokudla ukuze ubonise indlebe ozwa kuyo umsindo.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Lesi sivivinyo sikala ikhono lakho lokuzwa imisindo ehlukahlukene.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Ngaphambi kokuthi uqale, xhuma futhi ufake amahedifoni akho.\n\nUmsindo uzoba phansi kakhulu futhi awufani nethoni evamile yesixwayiso.  Umsindo uzoqalela phansi futhi unyuke kancane ngokwevolumu.  Sicela uqaphe futhi uthephe inkinobho yesobunxele noma yesokudla ukuze ubonise ukuthi umsindo uwuzwa kuyiphi indlebe.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Indlebe Yesobunxele";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Indlebe Yesokudla";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Manje kufanele uzwe umsindo. Lungisa ivolumu usebenzisa izilawuli eziseceleni kwedivayisi yakho.\n\nThepha noma iyiphi inkinobho uma usulungele ukuqalisa.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Umsindo Wethoni";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Kwesobunxele";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Kwesokudla";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Ingqikithi Yokuthepha";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Thinta noma yikuphi ukuze uqhubeke";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Xazulula Iphazili";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Inani Leminyakazo: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Angikwazi ukuxazulula le phazili";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Lesi sivivinyo sihlola amakhona akho okuxazulula iphazili.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Hambisa sonke isitaki siye enkundleni egqanyisiwe ngeminyakazo embalwa ngokunokwenzeka.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "I-Tower of Hanoi";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Thepha okuthi Qalisa ukuze uqale.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (iphutha elingu-%d)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (amaphutha angu-%d)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Lesi sivivinyo sihlola ukuqapha kwakho kokubona nokushintsha umsebenzi ngokurekhoda isikhathi esidingekayo sokuthepha uchungechunge lwamachashazi ngokulandelana.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Ngemva kokuqala kokubala, thinta amachashazi ngendlela eshintshanayo phakathi kwezinombolo nezinhlamvu. Qala ngokuthi uthephe inombolo yokuqala '1' kulandele izinombolo ezithi '2' – '3' – '4'… kuze kube yilapho ufinyelela inombolo ethi '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Ngemva kokuqala kokubala, thinta amachashazi ngendlela eshintshanayo phakathi kwezinombolo nezinhlamvu. Qala ngokuthi uthephe inombolo yokuqala '1' kulandele ngokuthepha uhlamvu lokuqala oluthi 'A', bese uthi '2' – 'B' – '3' – 'C'… kuze kube yilapho ufinyelela inombolo ethi '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Enza lokhu ngokushesha ngokunokwenzeka ngaphandle kokwenza amaphutha. \n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Ukuhlolwa Kokwenza Umzila";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Angikwazi ukwenza lesi sivivinyo ngesandla sami SESOBUNXELE.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Ngikwazi ukwenza lesi sivivinyo ngazo zombili izandla.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Angikwazi ukwenza lesi sivivinyo ngesandla sami SOKUDLA.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Qhubeka ubambe ucingo lwakho ugobise indololwane yakho imizuzwana engu-%ld";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Manje bamba ucingo lwakho lulingane nehlombe lakho ugobise indololwane yakho.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Manje bamba ucingo lwakho ngesandla SESOBUNXELE lulingane nehlombe lakho ugobise indololwane yakho.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Manje bamba ucingo lwakho ngesandla SOKUDLA lulingane nehlombe lakho ugobise indololwane yakho.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Qhubeka ubambe ucingo lwakho ngesandla sakho esinwetshiwe imizuzwana engu-%ld.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Manje bamba ucingo lwakho ulule isandla sakho silingane nokuphakama kwehlombe.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Manje bamba ucingo lwakho ulule isandla sakho SESOBUNXELE silingane nokuphakama kwehlombe.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Manje bamba ucingo lwakho ulule isandla sakho SOKUDLA silingane nokuphakama kwehlombe.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Qhubekela emsebenzini olandelayo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Qhubeka nokubeka ucingo lwakho ethangeni lakho imizuzwana engu-%ld.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Lungiselela ukubeka ucingo lwakho ethangeni lakho.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Lungiselela ukubeka ucingo lwakho ethangeni lakho ngesandla sakho SOBUNXELE.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Lungiselela ukubeka ucingo lwakho ethangeni lakho ngesandla sakho SOKUDLA.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Thepha okulandelayo ukuze uqhubeke.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Manje bamba ucingo lwakho ngesandla sakho SOBUNXELE futhi udlulele emsebenzini olandelayo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Manje bamba ucingo lwakho ngesandla sakho SOKUDLA futhi udlulele emsebenzini olandelayo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Qhubeka uthintisa ucingo lwakho ekhaleni lakho imizuzwana engu-%ld";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Manje njengoba ugcina indololwane yakho igobile, thintisa ucingo lwakho ekhaleni lakho ngokuqhubekayo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Manje njengoba ugcina indololwane yakho igobile futhi ucingo lwakho lusesandleni SOBUNXELE, thintisa ucingo lwakho ekhaleni lakho ngokuqhubekayo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Manje njengoba ugcina indololwane yakho igobile futhi ucingo lwakho lusesandleni SOKUDLA, thintisa ucingo lwakho ekhaleni lakho ngokuqhubekayo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Qhubeka nokwenza ukuvayiza kwendlovukazi imizuzwana engu-%ld.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Lungiselela ukwenza ukuvayiza kwendlovukazi (vayiza ngokuphendula isihlakala).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Lungiselela ukwenza ukuvayiza kwendlovukazi ucingo lwakho lusesandleni SOBUNXELE (vayiza ngokuphendula isihlakala).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Lungiselela ukwenza ukuvayiza kwendlovukazi ucingo lwakho lusesandleni SOKUDLA (vayiza ngokuphendula isihlakala).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Isivivinyo siqediwe.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Lesi sivivinyo sikala ukuqhaqhazela kwesandla sakho ezimweni ezihlukahlukene. Thola indawo ongakwazi ukuhlala kuyo ngokunethezeka kuze kuphele isivivinyo.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Bamba ucingo ngasandla sakho esiphazamiseke kakhudlwana njengoba kuboniswe esithombeni esingezansi.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "umsebenzi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "imisebenzi emibili";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "imisebenzi emithathu";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "imisebenzi emine";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "imisebenzi eyisihlanu";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Uzocelwa ukuthi wenze %@ ngenkathi uhlezi ubambe ucingo ngesandla sakho.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Bamba ucingo ngesandla sakho SOBUNXELE njengoba kubonisiwe esithombeni esingezansi.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Bamba ucingo ngesandla sakho SOKUDLA njengoba kubonisiwe esithombeni esingezansi.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Uzocelwa ukuthi wenze %@ ngenkathi uhlezi nocingo lusesandleni esisodwa, bese uyaphinda futhi ngesinye isandla.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Isivivinyo Sokuqhaqhazela";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Ukuqinisekisa";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Qinisekisa I-imeyili yakho";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ususiqedile isivivinyo.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Hamba uye emuva naphambili emugqeni oqondile %@. Hamba ngendlela evamile.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Phenduka ujike ngokuphelele bese uyama unganyakazi %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Faka idivayisi yakho ephaketheni noma esikhwameni bese ulandela iziyalezo zomsindo.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Thepha okuthi Qalisa uma usulungele ukuqalisa.\nBese ubeka idivayisi yakho ephaketheni noma esikhwameni bese ulandela iziyalezo zomsindo.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Thola indawo lapho ongakwazi khona ukuhamba ngokuphephile ngaphandle kosizo cishe izinyathelo ezingu-%ld emugqeni oqondile.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Thola indawo lapho ongakwazi khona ukuhamba ngokuphephile uye emuva naphambili emugqeni oqondile. Zama ukuhamba ngokuqhubekayo ngokujika ekupheleni komzila wakho, njengokungathi uzungeza i-cone.\n\nNgokulandelayo uzonikezwa isiqondiso sokuthi ujike ngokuphelele, bese uyama unganyakazi izandla zakho ziseceleni futhi izinyawo zakho zigxamazale ubude obulingana nehlombe.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Lesi sivivinyo sikala ukuhamba nobhalansa kwakho njengoba futhi uma unganyakazi. Ungaqhubeki uma ungakwazi ukuqhubeka ngokuphephile ngaphandle kokusizo.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Hamba kuze kube izinyathelo ezingu-%@ emugqeni oqondile.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Phenduka, futhi ubuyele emuva lapho oqale khona.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Ima unganyakazi %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Manje ima unganyakazi %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Ukuhamba Nokubhalansa";
+
