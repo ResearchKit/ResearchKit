@@ -98,7 +98,7 @@
 "AX_GRAPH_POINT_%@" = "പോയിന്റ്: %@";
 
 /* (No Comment) */
-"AX_GRAPH_RANGE_FORMAT_%@_%@" = "% @ മുതൽ %@ വരെയുള്ള ശ്രേണി";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "%@ മുതൽ %@ വരെയുള്ള ശ്രേണി";
 
 /* (No Comment) */
 "AX_GRAPH_STACK_PREFIX" = "ഉൾക്കൊള്ളുന്ന സ്റ്റാക്ക്";
@@ -164,10 +164,10 @@
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "വലത് ചെവിക്ക് വേണ്ടി ടാപ്പ് ചെയ്യുക";
 
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "% @ വോയ്‌സ്‌ഓവർ ഉപയോഗിച്ച്, ഓരോ ചെവിയുടെയും ബട്ടണുകൾ എവിടെയാണെന്ന് മനസിലാക്കാൻ സ്‌പർശനത്തിലൂടെ സ്‌ക്രീനിൽ പര്യവേക്ഷണം നടത്തുക. ടെസ്റ്റ് ആരംഭിക്കുമ്പോൾ, ബട്ടണുകൾ നേരിട്ട് ടാപ്പ് ചെയ്യാൻ കഴിയും. %@";
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ വോയ്‌സ്‌ഓവർ ഉപയോഗിച്ച്, ഓരോ ചെവിയുടെയും ബട്ടണുകൾ എവിടെയാണെന്ന് മനസിലാക്കാൻ സ്‌പർശനത്തിലൂടെ സ്‌ക്രീനിൽ പര്യവേക്ഷണം നടത്തുക. ടെസ്റ്റ് ആരംഭിക്കുമ്പോൾ, ബട്ടണുകൾ നേരിട്ട് ടാപ്പ് ചെയ്യാൻ കഴിയും. %@";
 
 /* (No Comment) */
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "% @ വലുപ്പമുള്ള ഡിസ്കിൽ %@ വലുപ്പമുള്ള ഡിസ്ക് സ്ഥാപിക്കാൻ സാധിക്കില്ല";
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%@ വലുപ്പമുള്ള ഡിസ്കിൽ %@ വലുപ്പമുള്ള ഡിസ്ക് സ്ഥാപിക്കാൻ സാധിക്കില്ല";
 
 /* (No Comment) */
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "ഡിസ്ക് സ്ഥാപിക്കാൻ ഇരട്ട-ടാപ്പ് ചെയ്യുക";
@@ -761,7 +761,7 @@
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "അവർ തെളിക്കുന്ന ക്രമത്തിൽ %@ ടാപ്പ് ചെയ്യുക";
 
 /* (No Comment) */
-"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "% @";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 
 /* (No Comment) */
 "MEMORY_GAME_PAUSED_MESSAGE" = "തുടരാൻ, അടുത്തത് ടാപ്പ് ചെയ്യുക";
