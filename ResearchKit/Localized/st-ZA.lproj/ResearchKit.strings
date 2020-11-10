@@ -1,650 +1,1479 @@
-/*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- 
- Redistribution and use in source and binary forms, with or without modification,
- are permitted provided that the following conditions are met:
- 
- 1.  Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
- 
- 2.  Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation and/or
- other materials provided with the distribution.
- 
- 3.  Neither the name of the copyright holder(s) nor the names of any contributors
- may be used to endorse or promote products derived from this software without
- specific prior written permission. No license is granted to the trademarks of
- the copyright holders even if such marks are included in this software.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Tlhahisoleseding ya Tlatsetso";
 
-/* Informed consent process. */
-"CONSENT_NAME_TITLE" = "Consent";
-"CONSENT_NAME_GIVEN" = "First Name";
-"CONSENT_NAME_FAMILY" = "Last Name";
-"CONSENT_NAME_PLACEHOLDER" = "Required";
-"CONSENT_REVIEW_TITLE" = "Review";
-"CONSENT_REVIEW_INSTRUCTION" = "Review the form below, and tap Agree if you\'re ready to continue.";
-"CONSENT_REVIEW_ALERT_TITLE" = "Review";
-"CONSENT_SIGNATURE_TITLE" = "Signature";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger in the box below.";
-"CONSENT_SIGNATURE_PLACEHOLDER" = "Sign Here";
-"CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Kwala %@ ya hao mme o shebe letheba le bohareng ba sekwere. \n\nO sebedisa monwana wa hao kapa pene ya fono, tshwaya mehwabadi eo o e bonang jwaloka mela e lerootho kapa e harelaneng.\n\nHa o qetile, hulela ka botshehading kae kappa kae kantle ho sekwere";
 
-/* Consent section titles. */
-"CONSENT_SECTION_WELCOME" = "Welcome";
-"CONSENT_SECTION_DATA_GATHERING" = "Data Gathering";
-"CONSENT_SECTION_PRIVACY" = "Privacy";
-"CONSENT_SECTION_DATA_USE" = "Data Use";
-"CONSENT_SECTION_STUDY_SURVEY" = "Study Survey";
-"CONSENT_SECTION_STUDY_TASKS" = "Study Tasks";
-"CONSENT_SECTION_TIME_COMMITMENT" = "Time Commitment";
-"CONSENT_SECTION_WITHDRAWING" = "Withdrawing";
-"CONSENT_LEARN_MORE_TITLE" = "Learn More";
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Tshwarela sesebediswa thoko ho sefahlelo ha hao ka bo hole ba di-inch tse 12 le phahamelo e bapileng le mahlo a hao nako yohle ya teko.";
 
-/* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered";
-"LEARN_MORE_DATA_USE" = "Learn more about how data is used";
-"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected";
-"LEARN_MORE_WELCOME" = "Learn more about the study first";
-"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey";
-"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study's impact on your time";
-"LEARN_MORE_TASKS" = "Learn more about the tasks involved";
-"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing";
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Mosebetsi ona o thusa ho lemoha mathata ponong ya mosebedisi.";
 
-/* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Sharing Options";
-"CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
-"CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
-"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Leihlo le Letsehadi";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'s Name (printed)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@'s Signature";
-"CONSENT_DOC_LINE_DATE" = "Date";
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Leihlo le Letona";
 
-/* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$@ of %2$@";
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Sekwere sa Amsler";
 
-/* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Invalid value";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
-"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
-"RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
 
-/* Alert for invalid email address value */
-"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Ha ho kgonehe ho rekota kgatiso e mamelwang";
 
-/* Alerts for invalid location coordinates */
-"LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
-"LOCATION_ERROR_TITLE" = "Could not Find Specified Address";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
-"LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "E re “Aaaaah” ho microphonemicrophone nako e telele kamoo o ka kgonang.";
 
-/* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Mosebetsi ona o hlahlobisisa lentswe la hao ka ho le rekota ka microphonemicrophone  ebotlaaseng ba sesebediswa sa hao.";
 
-/* Camera not available during multitasking */
-"CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Hula moya haholo mme o re “Aaaaah” ho microphone nako e telele ka kamoo hoo ka kgonang. Leka hoba le modumo o tsitsitseng hore dithutswana tsa kgatiso e mamellwang di lule ele tse mmala o moputswa.";
 
-/* Registration step */
-"EMAIL_FORM_ITEM_TITLE" = "Email";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
-"PASSWORD_FORM_ITEM_TITLE" = "Password";
-"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
-"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
-"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
-"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
-"ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
-"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
-"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
-"GENDER_FORM_ITEM_TITLE" = "Gender";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
-"DOB_FORM_ITEM_TITLE" = "Date of Birth";
-"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Phone Number";
-"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Ka kopo ema ha re hlahloba tekanyo ya lerata le kamorao.";
 
-/* Verification step */
-"VERIFICATION_NAV_TITLE" = "Verification";
-"VERIFICATION_STEP_TITLE" = "Verify your Email";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Tap on the link below if you did not receive a verification email and would like it sent again.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Lentswe";
 
-/* Login step */
-"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tobetsa E Latelang ha o loketse.";
 
-/* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
-"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
-"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
-"PASSCODE_INVALID_ALERT_TITLE" = "Passcode Incorrect";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
-"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
-"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
-"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode entry progress indicator";
-"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
-"PASSCODE_FORGOT_BUTTON_TITLE" = "Forgot Passcode?";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Hodimo haholo";
 
-/* Keychain wrapper */
-"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
-"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
-"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
-"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Tekanyo ya lerata ya bokahohle e hodimo haholo hore o rekote lentswe la hao. Ka kopo fallela sebakeng se thotseng mme o leke hape.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Sebedisa  monwana wa hao kapa pene ya fono ho tshwaya sekwere ka kotloloho, kapa o hulele ka lehlakoreng la hao le letsehadi ka ntle ho sekwere ho phethela.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Sekwere sa Amsler";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Qala mosebetsi";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Tjhate ya Dithutswana ya Kgatiso e Mamellwang";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Hlalosa";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Morao";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Pata  Letshwao laPDF";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Pata Karolo ya Ho Batlisisa";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Arolelana";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Bontsha Letshwao la PDF";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Bontsha Karolo ya ho Batlisisa";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Setshwantsho sa letshwao ka hare ho sedikadikwe sa mmala o moputswa se bontshang katleho";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ O sebedisa VoiceOver, konopo e tla tobetseha ka kotloloho. E tla fumaneha haufi le bohare ba sekirini.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Tlosa keyboard";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = "le";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Ntlha: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Ho tloha ho %@ ho ya ho %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Qubu e entswe ka";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Ho hlola setshwantsho";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Senepe se nkilweng";
+
+/* (No Comment) */
+"AX_SELECTED" = "Kgethilweng";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Tobetsa sekerine ebe o tsamaisa monwana wa hao hore o saene";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Karolo e kgethilweng ya mosaeno";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "E Saennwe";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Ha ya Saenwa";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Sesupi sa karabo. E tloha ho %@ ho ya ho %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Ha ho rekota ho qala, qadisa nako ya bobedi ya hore o kgaotse ho rekota.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Pontsho ya boemo ba Lentswe";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Tobetsa bakeng sa monwana o le mong";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Tobetsa bakeng sa monwana o mong";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Dikonopo jwale di tobetseha ka kotloloho.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Dikonopo tse Tobetsehang";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Qadisa ho etsa hore dikonopo di tobetsehe ka kotloloho.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ O sebedisa VoiceOver, hlahloba sekerine ka ho se thetsa ho ithuta moo dikonopo di leng teng. Kenya tshebetsong  konopo  leha e le efe ho etsa hore dikonopo di tobetsehe ka kotloloho.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Qadisa hore o qale tlhahlobo. Ha tlhahlobo e qala, tobetsa ka kotloloho konopong ena ha o utlwa modumo tsebeng ya hao e lehlakoreng le letsehadi.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tobetsa bakeng sa Tsebe e lehlakoreng le Letsehadi";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Qadisa hore o qale tlhahlobo. Ha tlhahlobo e qala, tobetsa ka kotloloho konopong ena ha o utlwa modumo tsebeng ya hao e lehlakoreng le letona.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tobetsa bakeng sa Tsebe e lehlakoreng le Letona";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ O sebedisa VoiceOver, hlahloba sekerine ka ho se thetsa ho ithuta moo dikonopo tsa tsebe ka nngwe di behilweng teng. Ha tlahlobo e qala, dikonopo di tla tobetseha ka kotloloho. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = " E hloleha ho beha diski ya boholo bo %@ ho diski ya boholo bo %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Tobetsa habedi ho beha diski";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Tobetsa habedi ho kgetha diski e ka hodimo-dimo";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Pakane";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Tora";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "E na le di diski tsa boholo ba %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Ha ho Letho";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ O sebedisa VoiceOver, dikonopo tse tlhahlobong di tla tobetseha ka kotloloho.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Senepe se sa ngolwang";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Ha e sa kgethilwe";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "E qetile ho nka video";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Ho hlola video e nkilweng";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "ya sebetsa";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "nepahetse";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "fosahetse";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Papadi ya ho hopola thaele";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "ha e sebetse";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
-"BLOOD_TYPE_A-" = "A-";
-"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
 "BLOOD_TYPE_AB-" = "AB-";
-"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
 "BLOOD_TYPE_B-" = "B-";
-"BLOOD_TYPE_O+" = "O+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
 "BLOOD_TYPE_O-" = "O-";
 
-/* Fitzpatrick Skin types */
-"FITZPATRICK_SKIN_TYPE_I" = "Type I";
-"FITZPATRICK_SKIN_TYPE_II" = "Type II";
-"FITZPATRICK_SKIN_TYPE_III" = "Type III";
-"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
-"FITZPATRICK_SKIN_TYPE_V" = "Type V";
-"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
-
-/* Gender values. */
-"GENDER_FEMALE" = "Female";
-"GENDER_MALE" = "Male";
-"GENDER_OTHER" = "Other";
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
 
 /* Boolean answer strings */
-"BOOL_NO" = "No";
-"BOOL_YES" = "Yes";
+"BOOL_NO" = "Tjhe";
+
+/* (No Comment) */
+"BOOL_YES" = "Ee";
+
+/* Button titles */
+"BUTTON_AGREE" = "Dumela";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Sebedisa";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Hlakola";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Tlosa";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Tlosa karabo";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Ditokelo tsa bongodi";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Hanyetsana";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Qetile";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Qadisa";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Ithute ho eketsehileng";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "E latelang";
+
+/* (No Comment) */
+"BUTTON_OK" = "Ho Lokile";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Tlosa DiphethoDiphetho";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Boloka bakeng sa Nako e Tlang";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Qeta Mosebetsi";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Karabo ena ha e na ho fetolwa.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Boloka";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Tlola";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Tlola potso ena";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Qadisa Sesupa Nako";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Khamera ha e fumanehe ha sekirini se arotswe habedi.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Nka Senepe";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Qala ho Rekota";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Nka Senepe Hape";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Nka Video Hape";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Emisa ho Rekota";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Ha ho khamera e fumanweng.  Bohato bona ha bo kgone ho phethelwa.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Ha ho kgonehe ho boloka senepe se nkilweng.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Ha hona faele e kgethilweng bakeng sa ho boloka dinepe tse nkilweng.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "E le hore o fete bohatong bona, dumella app ena ho kena ho khamera ho Ditlhophiso.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ha hona Ditaba";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Dinotlolo ha di tshwane.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Kenya password  hape";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Netefatsa";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Mohla";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'s Lebitso (le hatisitsweng)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@'s Mosaeno";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Ithute ho Eketsehileng";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Fane";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Lebitso";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Hlokahalang";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Tumello";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Leqephe %1$ld ho a %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Lekola";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Hlahloba foromo e tlase mona, mme o tobetse Dumela haeba o loketse ho tswelapele.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Lekola";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Pokello ya Ditaba";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Tshebediso ya Ditaba";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Sephiri";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Patlisiso ya Phuputso";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Mesebetsi ya Phuputso";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Boitlamo ba Nako";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Rea ho amohela";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Ho Ikgula";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Abelana ka ditaba tsa ka le %@ feela";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Abelana ka ditaba tsaka le %@ hammoho le bafuputsi ba ditsibi  lefatshe ka bophara";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ o tla amohela ditaba tsa hao tsa phuputso  tse tswang bonkakarolong ba hao phuputso ho phu\nKa ho abelana ditaba tsa hao tsa phuputso tse kentsweng khoutu  (di sena tlhahisoleseding e jwaloka lebitso la hao) ho ka tswela senaphuputso le patlisiso ya kamoso molemo.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Dikgetho tsa Kabelano";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Ka kopo saena o sebedisa monwana wa hao lebokoseng le tlaase mona.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Saena Mona";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Mosaeno";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "E qala mosebetsi ka";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Metsotswana e %@ e setseng.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Mosebetsi ona o lemoha tekanyo tsa kutlo tsa motho ka sekala sa dB HL.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Netefatsa hore modumo wa sesebediswa o behilwe ho tekano e hodimo ka hofetisisa.\n\nNakong ya mosebetsi ona, ho tla bapalwa modumo o tlaase tsebeng e lehlakoreng le letshehadi kapa le letona.\n\nMamela ka hloko mme o tobetse konopo nako le nako ha o utlwa modumo.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Lethathamo la dipotso la ho ingodisa.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Kgetha eo o e ratang bakeng sa 'tsebe e sebetsang hamolemo', ha e le teng";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "letshehadi";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "Ha ho eo ke e kgethang";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "letona";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tekanyo ya Modumo";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Kgetha mohla";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Mohla wa Tswalo";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Eya Kopanya";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Mosebetsi ona o lekanya tekanyo ya boemo ba kgatello ya modumo wa tikoloho. Haeba tekanyo ya lerata e le hodimo haholo, o tla hloleha ho tswelapele. Ka kopo fallela sebakeng se thotseng ho qetella mosebetsi ona kapa o etse mosebetsi ona hape ka nako enngwe.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Tekanyo: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "Mithara wa SPL ";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "E hlolehile ho tlosa difaele tsa tshebediso ho fihlella tekanyo";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Faele ha ya tshwawa ele e hlakotsweng (esa tshwawa e kentswe)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "E hlolehile ho etsa faele";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Diphoso tse ngata ha ho tloswa difaele tsa tshebediso";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Phoso tlhophisong ya boleng";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Ha hona ditaba tse bokelletsweng tse fumanweng.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ha hona faele ya ho boloka e kgethilweng";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Bohole (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Lebelo la ho Otla ha Pelo (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Tsamaya ka ntle ka lebelo le hodimo leo o ka le kgonang ka %1$@. Ha o qetile, dula fatshe o phomole o iketlile ka %2$@. Ho qala, tobetsa Qadisa.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Mosebetsi ona o hlahloba lebelo leo pelo ya hao e otlang ka lona mme e lekanya hore o ka tsamaya bohole bo bokae ka %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Dula o iketlile ka %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Ho Shahla";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Tsamaya ka potlako kamoo o ka kgonang ka %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Mofuta wa I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Mofuta wa II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Mofuta wa III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Mofuta wa IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Mofuta wa V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Mofuta wa VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "O lebetse password?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Motsehadi";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Kgetha bong";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Bong";
+
+/* (No Comment) */
+"GENDER_MALE" = "Motona";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Enngwe";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Mosebetsi ona o lekanya ho sebetsa hantle ha karolo e kahodimo ya mmele ka ho kopa hore o kenye phekse ka hare ho lesoba. O tla kopuwa ho etsa sena ka makgetlo a %@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Bobedi ba matsoho a hao, le letshehadi le le letona, a tla hlahlojwa. O lokela ho nka phekse ka potlako kamoo o ka kgonang, o e kenye ka hare ho lesoba, mme, ha o qetile  seo ka makgetlo a %@, o e tlose hape ka makgetlo a %@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Bobedi ba matsoho a hao, le letshehadi le le letona, a tla hlahlojwa.O lokela ho nka phekse ka potlako kamoo o ka kgonang, o e kenye ka hare ho lesoba, mme, ha o qetile seo ka makgetlo a %@, o e tlose hape ka makgetlo a %@.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Kenya phekse ka hare ho lesoba o sebedisa letsoho la hao le letshehadi.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Kenya phekse ka hare ho lesoba o sebedisa letsoho la hao le letona.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Kenya phekse kamorao ho mola o sebedisa letsoho la hao le letshehadi.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Kenya phekse kamorao ho mola o sebedisa letsoho la hao le letona.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Nka phekse o sebedisa menwana e mmedimmedi.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Phahamisa menwana ho lahlela phekse fatshe.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Tlhahlobo ya Phekse Lesobeng";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Aterese ya email ha e tshebetsong : %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "E hlolehile ho kenya ntho ya Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "E hlolehile ho hlakola ntho ya Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "E hlolehile ho fumana ntho ya Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "E hlolehile ho ntjhafatsa ntho ya Keychain.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Otlolla lengole le letshehadi. Ebe o tobetsa kae kapa kae.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Otlolla lengole le letona. Ebe o tobetsa kae kapa kae.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Mosebetsi ona o lekanya hore o kgona ho otlolla lengole la hao le letshehadi ka bohole bo bokae.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Mosebetsi ona o lekanya hore o kgona ho otlolla lengole la hao le letona ka bohole bo bokae.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Dula qetheng ya setulo. Ha o qala, o tla beha sesebediswa sa hao hodimalengole la hao le letshehadi bakeng sa ho lekanya. Ka kopo bulela modumo wa sesebediswa sa hao hore o utlwe ditaelo.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Dula qetheng ya setulo. Ha o qala, o tla beha sesebediswa sa hao hodimalengole la hao le letona bakeng sa ho lekanya. Ka kopo bulela modumo wa sesebediswa sa hao hore o utlwe ditaelo.hodima";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Beha sesebediswa sa hao hodima lengole la hao le letshehadi o shebisitse sekirini ka hodimo, jwalokaha ho bontshitswe senepeng.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Beha sesebediswa sa hao hodima lengole la hao le letona o shebisitse sekirini ka hodimo, jwalokaha ho bontshitswe senepeng.hodima";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha o loketse, tobetsa sekirini ho qala ebe o otlolla lengole la hao le letshehadi ho fihlella hole kamoo o ka kgonang. Tobetsa hape ha o qetile.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = " ";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Bohole boo Lengole le Letshehadi le kgonang ho Sisinyeha";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Bohole boo Lengole le Letona le kgonang ho Sisinyeha";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Beha sesebediswa sa hao hodima lengole la hao le letshehadi";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Beha sesebediswa sa hao hodima lengole la hao le letona";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Ithute haholwanyane ka kabelano ya ditaba";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Ithute haholwanyane ka hore na ditaba di bokellwa jwang";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Ithute haholwanyane hore ditaba di sebediswa jwang";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Ithute haholwanyane ka tsela eo sephiri le boitsebahatso ba hao di sireletswang kateng";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Ithute haholwanyaneka patlisiso ya phuputso";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Ithute haholwanyaneka mesebetsi e etswang";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Ithute haholwanyane ka tsela eo phuputso e tlang ho ama nako ya hao kateng";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Ithute haholwanyane ka phuputso pele";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Ithute haholwanyaneho ikgula";
+
+/* Limb values. */
+"LIMB_LEFT" = "letshehadi";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "Kgetho ya setho sa mmele\n e lokela hoba ka lehlakoreng le letshehadi kapa le letona";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "letona";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "E hloleha ho fumana sephetho bakeng sa aterese e kentsweng. Ka kopo netefatsa hore aterese ya sebetsa.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "E kanna  yaba ha wa bula inthanete kapa o fetile palo ya dikopo tsa ho sheba di aterese. Haeba o sa bula inthanete, ka kopo bula Wi-Fi ya hao ho araba potso ena, tlola potso ena haeba konopo ya ho tlola e fumaneha, kapa o kgutlele hape ho patlisiso ena ha o se o butse inthanete. Ho seng jwalo, ka kopo leka hape hamorao ha metsotso e mmalwa.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Tumello ho ditshebeletso tsa sebaka e hannwe. Ka kopo dumella app ena ho sebedisa ditshebeletso tsa sebaka ka Ditlhophiso.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "E hloleha ho rarolla sebaka sa hao sa hajwale. Ka kopo ngola aterese kapa o o ye sebakeng se nang le pontsho e molemonyana ya GPS haeba ho kgoneha.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "E hlolehile ho Fumana Aterese e Boletsweng";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Kenya aterese";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Kena ho akhaonte";
 
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";
-"MEASURING_UNIT_FT" = "ft";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "Ft";
+
+/* (No Comment) */
 "MEASURING_UNIT_IN" = "in";
+
+/* (No Comment) */
 "MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
 "MEASURING_UNIT_LB" = "lb";
+
+/* (No Comment) */
 "MEASURING_UNIT_OZ" = "oz";
 
-/* Limb values. */
-"LIMB_LEFT" = "left";
-"LIMB_RIGHT" = "right";
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Papadi e Phethilwe";
 
-/* Default placeholders to request answers in a questionnaire. */
-"PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
-"NULL_ANSWER" = "Select an answer";
-"PLACEHOLDER_IMAGE_CHOICES" = "Tap to select";
-"PLACEHOLDER_LONG_TEXT" = "Tap to write";
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Ho tswelapele, tobetsa E latelang";
 
-/* Button titles */
-"BUTTON_AGREE" = "Agree";
-"BUTTON_CANCEL" = "Cancel";
-"BUTTON_OK" = "OK";
-"BUTTON_CLEAR" = "Clear";
-"BUTTON_APPLY" = "Apply";
-"BUTTON_DISAGREE" = "Disagree";
-"BUTTON_DONE" = "Done";
-"BUTTON_GET_STARTED" = "Get Started";
-"BUTTON_LEARN_MORE" = "Learn more";
-"BUTTON_NEXT" = "Next";
-"BUTTON_SKIP" = "Skip";
-"BUTTON_SKIP_QUESTION" = "Skip this question";
-"BUTTON_START_TIMER" = "Start Timer";
-"BUTTON_OPTION_SAVE" = "Save for Later";
-"BUTTON_OPTION_DISCARD" = "Discard Results";
-"BUTTON_OPTION_STOP_TASK" = "End Task";
-"BUTTON_SAVE" = "Save";
-"BUTTON_CLEAR_ANSWER" = "Clear answer";
-"BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
-"BUTTON_COPYRIGHT" = "Copyright";
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Tatellano e Phethilwe";
 
-/* General active tasks. */
-"COUNTDOWN_LABEL" = "Starting activity in";
-"TASK_COMPLETE_TITLE" = "Activity Complete";
-"TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ seconds remaining.";
-"TOUCH_ANYWHERE_LABEL" = "Touch anywhere to continue";
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Mosebetsi wa mohopolo o entswe ka thuso ya Katherine Possin, PhD le Joel Kramer, PhD ho tswa Univesithing ya California, San Francisco.";
 
-/* Image capture step. */
-"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
-"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
-"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Ha wa atleha hantle ka nako eo. Tobetsa E latelang ho tswelapele.";
 
-/* Video capture step. */
-"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start Recording";
-"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stop Recording";
-"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Recapture Video";
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Leka Hape";
 
-/* Fitness active task. */
-"FITNESS_TASK_TITLE" = "Fitness";
-"FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
-"FITNESS_HEARTRATE_TITLE" = "Heart Rate (bpm)";
-"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sit comfortably for %@.";
-"FITNESS_WALK_INSTRUCTION_FORMAT" = "Walk as fast as you can for %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "This activity monitors your heart rate and measures how far you can walk in %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Walk outdoors at your fastest possible pace for %1$@. When you're done, sit and rest comfortably for %2$@. To begin, tap Get Started.";
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tobetsa %@ o qala le ka morao";
 
-/* Short walk active task. */
-"WALK_TASK_TITLE" = "Gait and Balance";
-"WALK_INTRO_TEXT" = "This activity measures your gait and balance as you walk and stand still. Do not continue if you cannot safely walk unassisted.";
-"WALK_INTRO_2_TEXT_%ld" = "Find a place where you can safely walk unassisted for about %ld steps in a straight line.";
-"WALK_INTRO_2_DETAIL" = "Put your device in a pocket or bag and follow the audio instructions.";
-"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Now stand still for %@.";
-"WALK_STAND_INSTRUCTION_FORMAT" = "Stand still for %@.";
-"WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tobetsa %@ ka tatellano eo di kgantseng ka yona";
 
-/* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find a place where you can safely walk back and forth in a straight line. Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\nNext you will be instructed to turn around in a full circle, then stand still with your arms at your sides and your feet about shoulder-width apart.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your device in a pocket or bag and follow the audio instructions.";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
-"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn in a full circle and then stand still for %@.";
-"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "You have completed the activity.";
-
-/* Tapping active task. */
-"TAPPING_TASK_TITLE" = "Tapping Speed";
-"TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
-"TAPPING_TASK_TITLE_LEFT" = "Left Hand";
-"TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your device on a flat surface.";
-"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Use two fingers on your right hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Use two fingers on your left hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Now repeat the same test using your right hand.";
-"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Now repeat the same test using your left hand.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for %@.";
-"TAPPING_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TAPPING_CALL_TO_ACTION_NEXT" = "Tap Next to begin.";
-"TAP_BUTTON_TITLE" = "Tap";
-"TOTAL_TAPS_LABEL" = "Total Taps";
-"TAPPING_INSTRUCTION" = "Tap the buttons as consistently as you can using two fingers.";
-"TAPPING_INSTRUCTION_RIGHT" = "Tap the buttons using your RIGHT hand.";
-"TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
-"TAPPING_SKIP_TITLE" = "Skip this hand";
-
-/* Amsler Grid Task.*/
-"AMSLER_GRID_TITLE" = "Amsler Grid";
-"AMSLER_GRID_INTRO_TEXT" = "This activity helps in detecting problems in user's vision.";
-"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold the device 12 inches from your face and at eye level throughout the test.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the center of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you are done, swipe left anywhere outside the grid.";
-"AMSLER_GRID_LEFT_EYE" = "Left Eye";
-"AMSLER_GRID_RIGHT_EYE" = "Right Eye";
-
-/* Audio active task. */
-"AUDIO_TASK_TITLE" = "Voice";
-"AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"AUDIO_INSTRUCTION" = "Say “Aaaaah” into the microphone for as long as you can.";
-"AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
-"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your device.";
-"AUDIO_TOO_LOUD_LABEL" = "Too Loud";
-"AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
-"AUDIO_LEVEL_CHECK_LABEL" = "Please wait while we check the background noise level.";
-"AUDIO_TOO_LOUD_MESSAGE" = "The ambient noise level is too loud to record your voice. Please move somewhere quieter and try again.";
-"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tap Next when ready.";
-
-/* Tone audiometry active task. */
-"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.\n\nThe sound will be very subtle and is unlike a regular alert tone.  The sound will begin soft and then slowly increase in volume.  Please pay attention and tap the left or right button to indicate which ear you hear it in.";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap any button when you are ready to begin.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Every time you start hearing a sound, tap the left or right button to indicate which ear you hear the sound in.";
-"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Left Ear";
-"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Right Ear";
-"TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
-"TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
-
-/* dBHL Tone audiometry active task. */
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "This activity identifies hearing threshold levels of an individual in dB HL scale.";
-"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Make sure the device volume is set to the maximum level.\n\nDuring this task, a subtle tone will play in either the left or right ear.\n\nListen carefully and tap the button every time you hear a tone.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding questionnaire.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Select your preference for 'better ear', if any";
-"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "left";
-"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "right";
-"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "no preference";
-
-/* Spatial span memory active task. */
-"SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "This activity measures your short-term spatial memory by asking you to repeat the order in which %@ light up.";
-"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flowers";
-"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flowers";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the same order they lit up.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the reverse of the order they lit up.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "To begin, tap Get Started, then watch closely.";
+/* (No Comment) */
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
-"MEMORY_GAME_SCORE_TITLE" = "Score";
-"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Watch the %@ light up";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tap the %@ in the order they lit up";
-"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tap the %@ in reverse order";
-"MEMORY_GAME_COMPLETE_TITLE" = "Sequence Complete";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "To continue, tap Next";
-"MEMORY_GAME_FAILED_TITLE" = "Try Again";
-"MEMORY_GAME_FAILED_MESSAGE" = "You didn't quite make it through that time. Tap Next to continue.";
-"MEMORY_GAME_TIMEOUT_TITLE" = "Time's Up";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "You ran out of time.\nTap Next to continue.";
-"MEMORY_GAME_COMPLETE" = "Game Complete";
-"MEMORY_GAME_PAUSED_TITLE" = "Paused";
-"MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
-"MEMORY_GAME_COPYRIGHT_TEXT" = "The memory activity was developed with assistance from Katherine Possin, PhD and Joel Kramer, PhD from University of California, San Francisco.";
 
-/* Reaction time active task. */
-"REACTION_TIME_TASK_TITLE" = "Reaction Time";
-"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Ho tswelapele, tobetsa E latelang";
 
-/* Stroop active task.*/
-"STROOP_TASK_TITLE" = "Stroop";
-"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Every time a word appears, select the first letter of the name of the COLOR that is shown.";
-"STROOP_TASK_INTRO2_DETAIL_TEXT" = "When you are ready to begin the Stroop activity tap Get Started.";
-"STROOP_TASK_STEP_TEXT" = "Select the first letter of the name of the COLOR that is shown.";
-"STROOP_COLOR_RED" = "RED";
-"STROOP_COLOR_GREEN" = "GREEN";
-"STROOP_COLOR_BLUE" = "BLUE";
-"STROOP_COLOR_YELLOW" = "YELLOW";
-"STROOP_COLOR_RED_INITIAL" = "R";
-"STROOP_COLOR_GREEN_INITIAL" = "G";
-"STROOP_COLOR_BLUE_INITIAL" = "B";
-"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Emisitswe";
 
-/* Tower of Hanoi active task */
-"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
-"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Sheba %@ ha e kganya";
 
-/* Range of Motion active task */
-"RANGE_OF_MOTION_TITLE" = "Range of Motion";
-"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Dintlha";
 
-/* Knee Range of Motion active task */
-"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Left Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will put your device on your left knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Extend your left knee. Then tap anywhere.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Extend your right knee. Then tap anywhere.";
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "O ile wa fellwa ke nako.\nTobetsa E latelang ho tswelapele.";
 
-/* Shoulder Range of Motion active task */
-"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "When you begin you will put your device on your left shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will put your device on your right shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lift your left arm up. Then tap anywhere.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lift your right arm up. Then tap anywhere.";
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Nako e Fedile";
 
-/* Timed walk active task. */
-"TIMED_WALK_TITLE" = "Timed Walk";
-"TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you've passed the finish line.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
-"TIMED_WALK_FORM_TITLE" = "Assistive device";
-"TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
-"TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
-"TIMED_WALK_QUESTION_2_CHOICE" = "None";
-"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
-"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
-"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
-"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
-"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
-"TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
-"TIMED_WALK_INSTRUCTION_TURN" = "Turn around.";
-"TIMED_WALK_INSTRUCTION_2" = "Walk back to where you started.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Next when complete.";
+/* (No Comment) */
+"NULL_ANSWER" = "Kgetha karabo";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Paced Auditory Serial Addition Test e lekanya lebelo la hao la kutlo ya tlhahisoleseding le bokgoni ba hao ba ho kopanya.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
-"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Paskhoutu e netefaditswe";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Netefatsa paskhoutu";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Netefatsa paskhoutu ya hao e ntjha";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "O lebetse Paskhoutu?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Di paskhoutu ha di tshwane. Leka hape.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Paskhoutu e Fosahetse";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Kenya paskhoutu ya hao e ntjha";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Kenya paskhoutu ya hao ya kgale";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Kenya paskhoutu";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Paskhoutu e bolokilwe";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Sesupo sa tswelopele ya ho kenywa ha paskhoutu";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Dinomoro tse %@ ho tse %@ tse kentsweng";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Ke dinomoro fela tse dumelletsweng.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Phoso ya Touch ID";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Ka kopo netefatsa ka Touch ID";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Kenya password";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test e lekanya lebelo la hao la kutlo le ho bona boitsebiso le bokgoni ba hao ba ho bala.";
+
+/* (No Comment) */
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "The Paced Auditory Serial Addition Test measures your auditory information processing speed and calculation ability.";
-"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
-"PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test measures your auditory and visual information processing speed and calculation ability.";
-"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ seconds.\nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn't calculate a running total, but only the sum of the last two numbers.";
-"PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
-"PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Nomoro ya Mohala";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Tobetsa hore o kgethe";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Tobetsa hore o ngole";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Tobetsa hore o arabe";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Hopola nomoro ena ya ho qala.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Kenya nomoro ena e ntjha ho ya kgale.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Dinomoro tse leng ka bomong di bontshwa ka metsotso e meng le e meng e %@.\nO lokela ho kenya nomoro ka nngwe e ntjha ho e pejana ho yona.\nHlokomela, o seke wa bala kakaretso e so feleng, empa e be feela kakaretso ya dinomoro tse pedi tsa ho qetela.";
+
+/* (No Comment) */
 "PSAT_NO_DIGIT" = "-";
 
-/* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a peg in a hole. You will be asked to do this %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Both your left and right hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Teko ya Paced Visual Serial Addition e lekanya lebelo la hao la ho bala tlhahisoleseding le bokgoni ba hao ba ho kopanya.";
 
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Put the peg in the hole using your left hand.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Put the peg in the hole using your right hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Put the peg behind the line using your left hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Put the peg behind the line using your right hand.";
-"HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
-"HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
 
-/* Tremor test active task. */
-"TREMOR_TEST_TITLE" = "Tremor Activity";
-"TREMOR_TEST_INTRO_1_DETAIL" = "This activity measures the tremor of your hands in various positions. Find a place where you can sit comfortably for the duration of this activity.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold the phone in your more affected hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold the phone in your RIGHT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold the phone in your LEFT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "You will be asked to perform %@ while sitting with the phone in your hand.";
-"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "a task";
-"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "two tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "three tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "four tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "five tasks";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepare to hold your phone in your lap.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Prepare to hold your phone in your lap with your LEFT hand.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Prepare to hold your phone in your lap with your RIGHT hand.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Keep holding your phone in your lap for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Now hold your phone with your hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Now hold your phone with your LEFT hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Now hold your phone with your RIGHT hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Keep holding your phone with your hand extended for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Now hold your phone at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Now hold your phone with your LEFT hand at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Now hold your phone with your RIGHT hand at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Keep holding your phone with your elbow bent for %ld seconds";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Now keeping your elbow bent, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Now keeping your elbow bent with your phone in your LEFT hand, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Now keeping your elbow bent with your phone in your RIGHT hand, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Keep touching your phone to your nose for %ld seconds";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Prepare to do a queen wave (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Prepare to do a queen wave with your phone in your LEFT hand (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Prepare to do a queen wave with your phone in your RIGHT hand (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Keep performing a queen wave for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Now switch the phone to your LEFT hand and continue to the next task.";
-"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Now switch the phone to your RIGHT hand and continue to the next task.";
-"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continue to the next task.";
-"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activity completed.";
-"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "You will be asked to perform %@ while sitting with the phone first in one hand, then again with the other hand.";
-"TREMOR_SKIP_LEFT_HAND" = "I cannot perform this activity with my LEFT hand.";
-"TREMOR_SKIP_RIGHT_HAND" = "I cannot perform this activity with my RIGHT hand.";
-"TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ e feta palo e hodimo e dumelletsweng (%2$@).";
 
-/* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
-"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
-"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by the numbers '2' – '3' – '4'… until you reach the number '7'.";
-"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
-"TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
-"TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d error)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
-"TRAILMAKING_LETTER_A" = "A";
-"TRAILMAKING_LETTER_B" = "B";
-"TRAILMAKING_LETTER_C" = "C";
-"TRAILMAKING_LETTER_D" = "D";
-"TRAILMAKING_LETTER_E" = "E";
-"TRAILMAKING_LETTER_F" = "F";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ e tlaase ho bonyane ba palo e dumelletsweng (%2$@).";
 
-/* Speech Recognition active task. */
-"SPEECH_TASK_TITLE" = "Speech Recognition";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "This activity records your speech with the microphone at the bottom of the device, and translates it to text.";
-"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Press the button to start recording before speaking.";
-"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start Recording";
-"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stop Recording";
-"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edit Transcript";
-"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edit transcript text to correct any misinterpretation of the speech.";
-"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Your transcription will appear here.";
-"SPEECH_RECOGNITION_FAILED" = "Speech recognition failed.";
-"SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ ha se palo e nepahetseng.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Palo e fosahetseng";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Bohole ba ho Sisinyeha";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ka potlako sisinya sesebediswa ha sedikadikwe se mmala o moputswa se hlaha";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Boiteko %@ ba %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Mosebetsi ona o hlahloba nako eo o e nkang ho arabela ho setswantsho.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Sisinya sesebediswa lehlakoreng leha e le lefe hang feela ha letheba le mmala o moputswa le hlahella ho sekirini. O tla kopuwa ho etsa sena makgetlo a %D.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Nako ya Karabelo";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Romela Email ya ho Netefatsa Hape";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tobetsa ho linki e tlaase mona haeba o sa amohela email ya ho netefatsa mme o lakatsa hore e romelwe hape.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Phahamisetsa letshoho la hao le letshehadi hodimo. Ebe  o tobetsa kae kapa kae.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Phahamisetsa letshoho la hao le letona hodimo. Ebe o tobetsa kae kapa kae.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Mosebetsi ona o lekanya bohole boo o ka otlollang lehetla la hao le letshehadi.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Mosebetsi ona o lekanya bohole boo o ka otlollang lehetla la hao le letona.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Ha o qala o tla beha sesebediswa sa hao hodimalehetla la hao le letshehadi bakeng sa ho lekanya. Ka kopo bulela modumo ho sesebediswa sa hao hore o utlwe ditaelo.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Ha o qala o tla beha sesebediswa sa hao hodimalehetla la hao le letona bakeng sa ho lekanya. Ka kopo bulela modumo ho sesebediswa sa hao hore o utlwe ditaelo.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Beha sesebediswa sa hao hodimalehetla la hao le letshehadi ka sekirini se shebile hodimo, jwalokaha ho bontshitswe senepeng.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Beha sesebediswa sa hao hodimalehetla la hao le letona ka sekirini se lebelletse hodimo, jwalokaha ho bontshitswe senepeng.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha o loketse, tobetsa sekirini hore o qale mme o phahamise letsoho la hao le letshehadi haholo kamoo o ka fihlang. Tobetsa hape ha o qetile.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha o loketse, tobetsa sekirini hore o qale mme o phahamise letsoho la hao le letona haholo kamoo o ka fihlang. Tobetsa hape ha o qetile.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bohole ba ho Sisinya Lehetla le Letsehadi";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Bohole ba ho Sisinya Lehetla le Letona";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Beha sesebediswa sa hao hodima lehetla le letshehadi";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Beha sesebediswa sa hao hodima lehetla le letona";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Ho qala, tobetsa Qadisa, mme o lebelle ka kelo-hloko.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Tse ding tsa di %@ di tla kganya ka nako e le nngwe. Tobetsa di %@ tseo ka tatellano eo di kgantseng ka yona.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Tse ding tsa di %@ di tla kganya ka nako e le nngwe. Tobetsa di %@ tseo ho qala morao ka tatellano eo di kgantseng ka yona.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Mosebetsi ona o lekanya mohopolo wa hao wa tikoloho ya nakwana ka ho kopa ho pheta tatellano eo di %@ di kgantseng ka yona.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "lipalesa";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "lipalesa";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Mohopolo wa Tikoloho";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tobetsa 'Bapala Kgatiso e Mamelwang', lokisa modumo ho tekanyo eo o e ratang mme o tobetse 'Emisa Kgatiso e Mamelwang' ho tswelapele.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Ho Lekanyetswa ha Modumo";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Jwaloka karolo ya tlhahlobo ena, o tla:\n\nMamela polelo.\n\nPhetha ka ho hlaka seo o se utlwileng kapa o fetele pele ho thaepa seo o se utlwileng o sebedisa keyboard. \n\nHaeba o phetha seo o se utlwileng, o tla ba le kgetho ya ho fetola rekoto e ngotsweng e entswng ke enjene ya ho lemoha se bolelwang.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Mosebetsi ona o lekanya ho utlwisiseha ha se bolelwang tikolohong e nang le lerata.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Phetha seo o se utlwileng.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Bua";
 
 /* Speech In Noise active task. */
-"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Play Audio";
-"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stop Audio";
-"SPEECH_IN_NOISE_TITLE" = "Speech in Noise";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "This activity measures intelligibility of speech when presented in noisy environments.";
-"SPEECH_IN_NOISE_DETAIL_TEXT" = "As part of this test, you will:\n\nListen to a sentence.\n\nRepeat clearly what you heard or skip ahead to type in what you heard using the keyboard. \n\nIf you repeat what you heard, you will have the option to modify the transcript generated by the speech recognition engine.";
-"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volume Calibration";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tap 'Play Audio', adjust your volume to a comfortable level and then tap 'Stop Audio' to proceed.";
-"SPEECH_IN_NOISE_STEP_TITLE" = "Listen";
-"SPEECH_IN_NOISE_STEP_TEXT" = "A sentence mixed with background noise at a randomized Signal to Noise Ratio (SNR) will be played only once.";
-"SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
-"SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeat what you heard.";
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Bapala Kgatiso e Mamelwang";
 
-/* Potentially user visible error messages. */
-"ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
-"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
-"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Error setting attribute";
-"ERROR_DATALOGGER_COULD_NOT_MAORK" = "File not marked deleted (not marked uploaded)";
-"ERROR_DATALOGGER_MULTIPLE" = "Multiple errors removing logs";
-"ERROR_RECORDER_NO_DATA" = "No collected data was found.";
-"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Polelo e kopantsweng le lerata le utlwahalang ho Signal to Noise Ratio (SNR) e sa rerwang e tla bapalwang hangwe feela.";
 
-/* Environment SPL*/
-"ENVIRONMENTSPL_TITLE" = "SPL Meter";
-"ENVIRONMENTSPL_INTRO_TEXT" = "This activity measures the environment sound pressure level. If the noise levels are too high, you will be unable to proceed. Please move to a quieter location to complete this task or retake this activity at a later time.";
-"ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Calculating";
-"ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Mamela";
 
-/* Charts */
-"CHART_NO_DATA_TEXT" = "No Data";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Emisa Kgatiso e Mamelwang";
 
-/* Accessibility */
-"AX_BUTTON_BACK" = "Back";
-"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
-"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
-"AX_BUTTON_ANNOTATE" = "Annotate";
-"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
-"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
-"AX_BUTTON_SHARE" = "Share";
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Se Bolelwang Lerateng";
 
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
 
-"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "E hlolehile ho lemoha se buiwang.";
 
-"AX_SIGNVIEW_LABEL" = "Designated signature field";
-"AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
-"AX_SIGNVIEW_SIGNED" = "Signed";
-"AX_SIGNVIEW_UNSIGNED" = "Unsigned";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "E hlolehile ho qala ho lemoha se buiwang.";
 
-"AX_SELECTED" = "Selected";
-"AX_UNSELECTED" = "Un-selected";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Tobetsa konopo ho qala ho rekota pele o bua.";
 
-"AX_SLIDER_LABEL" = "Response slider. Range from %@ to %@";
-"AX_UNLABELED_IMAGE" = "Unlabeled image";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Mosebetsi ona o rekota seo o se buang ka microphone botlaaseng ba sesebediswa sena, mme o fetolela seo ho polelo.";
 
-"AX_ANNOUNCE_BEGIN_TASK" = "Begin task";
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Lokisa rekoto e ngotsweng ho lokisa leha e le eng e builweng e sa utlwisisehe.";
 
-"AX.MEMORY.TILE.ACTIVE" = "active";
-"AX.MEMORY.TILE.CORRECT" = "correct";
-"AX.MEMORY.TILE.INCORRECT" = "incorrect";
-"AX.MEMORY.TILE.QUIESCENT" = "quiescent";
-"AX.MEMORY.TILE.LABEL" = "Memory game tile";
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Lokisa Rekoto e Ngotsweng";
 
-"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
-"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Qala ho Rekota";
 
-"AX_VIDEO_CAPTURE_LABEL" = "Video capture preview";
-"AX_VIDEO_CAPTURE_COMPLETE" = "Video capture complete";
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Emisa ho Rekota";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Unable to place disk with size %@ on disk with size %@";
-"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
-"AX_TOWER_OF_HANOI_TOWER" = "Tower";
-"AX_TOWER_OF_HANOI_PLACE_DISK" = "Double-tap to place disk";
-"AX_TOWER_OF_HANOI_SELECT_DISK" = "Double-tap to select top-most disk";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
-"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Rekoto ya hao e ngotsweng e tla hlahella mona.";
 
-"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Dismiss keyboard";
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Ho Lemoha se Buiwang";
 
-"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range from %@ to %@";
-"AX_GRAPH_STACK_PREFIX" = "Stack composed of";
-"AX_GRAPH_AND_SEPARATOR" = " and ";
-"AX_GRAPH_POINT_%@" = "Point: %@";
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ ya %2$@";
 
-"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
-"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "PUTSWA";
 
-"AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
 
-"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
-"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "TALA";
 
-"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your left ear.";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tap for Right Ear";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your right ear.";
-/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons for each ear are located. When the test starts, the buttons will be directly tappable. %@";
-"AX_TAP_BUTTON_1_LABEL" = "Tap for one finger";
-"AX_TAP_BUTTON_2_LABEL" = "Tap for other finger";
-"AX_TAP_BUTTON_HINT" = "Activate to make the buttons directly tappable.";
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons are located. Activate either button to make the buttons directly tappable.";
-"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Buttons are now directly tappable.";
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Using VoiceOver, the button will be directly tappable. It will be located near the center of the screen.";
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
 
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
+/* (No Comment) */
+"STROOP_COLOR_RED" = "KGUBEDU";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "TSHEHLA";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Nako le nako ha ho hlaha lentswe, kgetha tlhaku ya ho qala ya lebitso la MMALA o bontshitsweng.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Ha o loketse ho qala mosebetsi wa Stroop tobetsa Qadisa.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Kgetha tlhaku ya ho qala ya lebitso la MMALA o bontshitsweng.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Tobetsa";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Tobetsa Latelang ho qala.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Tobetsa dikonopo ka tsela e tshwanang kamoo o ka kgonang o sebedisa menwana e mmedi.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Tobetsa dikonopo o sebedisa letsoho le LETSHEHADI.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Tobetsa dikonopo o sebedisa letsoho le LETONA.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Mosebetsi ona o lekanya lebelo la hao la ho tobetsa.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Tobetsa ka monwana o le mong, le ka o mong hape. Leka ho lekantsha nako e pakeng tsa ho tobetsa ha hao kamoo o ka kgonang. Tswela pele o tobetsa nako e ka bang %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Sebedisa menwana e mmedi letsohong la hao le letshehadi ho tobetsa dikonopo sekirining ka ho latelana.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Jwale phetha thlahlobo e tshwanang o sebedisa letsoho la hao le letshehadi.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Sebedisa menwana e mmedi ho letsoho le le leng ho tobetsa dikonopo sekirining ka ho latelana.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Beha sesebediswa sa hao sebakeng se bataletseng.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Sebedisa menwana e mmedi letsohong la hao le letona ho tobetsa dikonopo sekirining ka ho latelana.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Jwale phetha tlhahlobo e tshwanang o sebedisa letsoho la hao le letona.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Tlola letsoho lena";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Lebelo la ho Tobetsa";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Letshoho le Letshehadi";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Letsoho le Letona";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Phuputso ya hao e tla lekolwa mme o tla tsebiswa ha diphetho tsa hao di lokile.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Mosebetsi o Phethilwe";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Se ngotsweng polelong se telele ho feta se lekanyeditsweng: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Sebedisa sesebediswa se tshwanang se thusang bakeng sa tlhahlobo ka nngwe.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Sesebediswa se thusang";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Tsamaya bohole bo ka fihlang ho %@ ka tsela e otlolohileng.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Tsamaya o kgutlela morao moo o qadileng.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tobetsa E latelang ha ho fedile.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Reteleha.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Tobetsa Latelang ho qala.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Fumana sebaka, ho kaba molemo kantle, moo o ka tsamayang nako e ka bang %@ ka tsela e otlolohileng ka potlako kamoo o ka kgonang, empa o bolokehile. O se ke wa fokotsa lebelo ho fihlela o fetile kgole ya tlholo.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Mosebetsi ona o lekanya tshebetso ya karolo e tlaase ya mmele wa hao.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Letho";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Molamu wa Lehlakore le le Leng la Mmele";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Seikokotlelo sa Lehlakore le le Leng la Mmele";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Molamu wa Mahlakore a Mabedi a Mmele";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Seikokotlelo sa Mahlakore a Mabedi a Mmele";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Seikokotlelo/Seikokotlelo sa mabili";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Tobetsa mona ho kgetha karabo.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Na o sebedisa sesebediswa se thusang?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Na o apara ntho e thusang ho tsamaya ya leoto le leqaqailana?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Motsamao  o Behetsweng Nako";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Nako yohle ha o qala ho utlwa modumo, tobetsa konopo e lehlakoreng le letshehadi kapa lehlakoreng le letona ho bontsha hore ke tsebe efe eo o utlwang modumo ho yona.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Mosebetsi ona o lekanya bokgoni ba hao ba ho utlwa medumo e sa tshwaneng.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Pele o qala, kenya polaka mme o kenye di headphone tsa hao.\n\nModumo o tlaba tlaase mme o keke wa tshwana le modumo o tlwaelehileng.  Modumo o tla qala o le tlaase mme modumo o eketsehe butle-butle.  Ka kopo ela hloko mme o tobetse konopo e lehlakoreng le letshehadi kapa le letona ho bontsha hore o utlwa ka tsebe efe.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Tsebe e lehlakoreng le Letshehadi";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Tsebe e lehlakoreng le Letona";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Jwale o tshwanetse ho utlwa modumo. Lokisa modumo o sebedisa dikonopo tse ka lehlakoreng la sesebediswa sa hao.\n\nTobetsa konopo le ha e le efe ha o loketse ho qala.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tekanyo ya Modumo";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Lehlakore le Letshehadi";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Lehlakore le Letona";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Kakaretso ya Metobetso";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Tobetsa kae kapa kae ho tswelapele";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Rarolla Selotho sa Ditshwantsho";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Palo ya ho Tsamaisa: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ha ke kgone ho rarolla selotho sena sa ditshwantsho";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Mosebetsi ona o hlahloba bokgoni ba hao ba ho rarolla selotho sa ditshwantsho.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Tlosa qubu kaofela o e behe moo ho kgantshitsweng ka tsamaiso ya makgetlo a mmalwa kamoo o ka kgonang.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tora ya Hanoi";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Tobetsa Qala ho qala";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Mosebetsi ona o hlahloba kelo-hloko ya hao ya pono le ho etsa mesebetsi e fapaneng ka ho rekota nako e hlokahalang ho tobetsa matheba a latellanang ka tatellano.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Kamora ho balwa ha nako, tobetsa matheba ka tsela e latellanang dipakeng tsa dinomoro le ditlhaku. Qala ka ho tobetsa nomoro ya ho qala '1' ho latelwe ke dinomoro '2' – '3' – '4'… ho fihlella o fihla ho nomoro ya '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Kamora ho balwa nako, tobetsa matheba ka tsela e latellanang dipakeng tsa dinomoro le ditlhaku. Qala ka ho tobetsa nomoro ya ho qala '1' ho latelwe ke tlhaku ya ho qala 'A', mme e be '2' – 'B' – '3' – 'C'… ho fihlella o fihla ho nomoro ya '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Etsa sena ka potlako kamoo o ka kgonang ntle le ho etsa diphoso.\n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Tlhahlobo ya Trail Making";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Ha ke kgone ho etsa mosebetsi ona ka letsoho la ka le LETSHEHADI.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Ke kgona ho etsa mosebetsi ona ka matsoho a mabedi.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Ha ke kgone ho etsa mosebetsi ona ka letsoho la ka le LETONA.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Tswelapele o tshwere selefouno ya hao o kobile setswe sa hao metsotswana e %ld ";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Jwale tshwara selefouno ya hao ho tadimane le lehetla o kobile setswe sa hao.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Jwale tshwara selefouno ya hao ka letsoho la hao le LETSHEHADI ho tadimane le lehetla la hao o kobile setswe sa hao.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Jwale tshwara selefouno ya hao ka letsoho la hao le LETONA ho tadimane le lehetla la hao o kobile setswe sa hao.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Tswelapele o tshwere selefouno ya hao o otlollotse letsoho la hao metsotswana e %ld. ";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Jwale tshwara selefouno ya hao o otlollotse letshoho la hao ho tadimane le lehetla.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Jwale tshwara selefouno ya hao ka letsoho la hao le LETSHEHADI le otlollohile ho tadimane le lehetla.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Jwale tshwara selefouno ya hao ka letsoho la hao le LETONA le otlollohile ho tadimane le lehetla.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Tswelapele ho mosebetsi o latelang.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Tswelapele o tshwere selefouno ya hao seropeng sa hao metsotswana e %ld.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Itokisetse ho tshwara selefouno ya hao seropeng sa hao.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Itokisetse ho tshwara selefouno ya hao seropeng sa hao ka letsoho le LETSHEHADI.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Itokisetse ho tshwara selefouno ya hao seropeng sa hao ka letsoho la hao le LETONA.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tobetsa e latelang ho tswelapele.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Jwale isa selefouno letsohong la hao le LETSHEHADI mme o tswele pele ho mosebetsi o latelang.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Jwale isa selefouno letsohong la hao le LETONA mme o tswele pele ho mosebetsi o latelang.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Tswelapele o beha selefouno ya hao hodima nko ya hao metsotswana e %ld";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Jwale o ntse o kobile setswe sa hao, beha selefouno hodima nko ya hao kgafetsa.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Jwale o ntse o kobile setswe sa hao ka selefouno ya hao e le ka letsohong la hao le LETSHEHADI, beha selefouno hodimanko ya hao kgafetsa.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Jwale o ntse o kobile setswe sa hao ka selefouno ya hao e le ka letsohong la h ao le LETONA, beha selefouno hodima nko ya hao kgafetsa.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Tswelapele ho etsa tumediso ya mofumahadi metsotswana e %ld.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Itokisetse ho etsa tumediso ya mofumahadi (wave by turning your wrist).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Itokisetse ho etsa tumediso ya mofumahadi ka selefouno ya hao e le letsohong la hao le LETSHEHADI (wave by turning your wrist).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Itokisetse ho etsa tumediso ya mofumahadi ka selefouno ya hao e le letsohong la hao le LETONA (wave by turning your wrist).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Mosebetsi o phethilwe.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Mosebetsi ona o lekanya tsisinyeho ya matsoho a hao maemong a fapaneng. Fumana sebaka moo o ka dulang o iketlile nakong ya mosebetsi.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Tshwara selefouno ka letsoho la hao le amehileng jwalokaha ho bontshitswe senepeng se tlaase mona.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "mosebetsi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "mesebetsi e mmedi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "mesebetsi e meraro";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "mesebetsi e mene";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "mesebetsi e mehlano";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "O tla kopuwa ho etsa %@ o ntse o dutse ka selefouno e le letsohong la hao.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Tshwara selefounu letsohong la hao le LETSHEHADI jwalokaha ho bontshitswe senepeng se tlaase mona.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Tshwara selefounu letsohong la hao le LETONA jwalokaha ho bontshitswe senepeng se tlaase mona.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "O tla kopuwa ho etsa %@ o ntse o dutse ka selefouno qalong ka letsohong le le leng, le hape ka letsoho le leng.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Mosebetsi wa Tsisinyeho";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Netefatso";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Netefatsa Email ya hao";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "O phethile mosebetsi.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Tsamaya o ye pele le morao ka tsela e otlollohileng nako e ka bang %@. Tsamaya jwalokaha o tlwaetse.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Reteleha ka ho feletseng mme o eme o sa sisinyehe nako e ka bang %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Kenya sesebediswa ka hare ho phokotho kapa mokotla mme o latele ditaelo tsa kgatiso e mamelwang.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tobetsa Qadisa ha o loketse ho qala.\nEbe o beha sesebediswa sa hao ka pokothong kapa mokotleng mme o latele ditaelo tsa kgatiso e mamelwang.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Fumana sebaka moo o ka tsamayang o bolokehile o sa thuswe mehato e ka bang %ld ka tsela e otlollohileng.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Fumana sebaka moo o ka tsamayang o bolokehile o ya pele le morao ka tsela e otlollohileng. Leka ho tsamaya o sa kgaotse ka ho reteleha ha o fihla qetellong ya tsela ya hao, jwaloka eka o tsamaya o dikoloha motlorutlo. \n\nHo latelang, o tla laelwa ho reteleha ka ho feletseng, mme o eme o sa sisinyehe ka matsoho a le mahlakoreng a hao le maoto a hao a bulehile ho lekana le kamoo mahetla a arohaneng. ";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Mosebetsi ona o lekanya mokgwa wa hao wa ho tsamaya le botsitso ha o ntse o tsamaya le ho ema o sa sisinyehe. O se ke wa tswelapele haeba o sa kgone ho tsamaya o bolokehile ntle ho thuso.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Tsamaya mehato e ka bang %ld  ka tsela e otlollohileng.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Reteleha, mme o tsamaye o kgutlele moo o qadileng.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Ema o sa sisinyehe nako e ka bang %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Jwale ema o sa sisinyehe nako e ka bang %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Mokgwa wa ho Tsamaya le Botsitso";
+

@@ -1,650 +1,1479 @@
-/*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- 
- Redistribution and use in source and binary forms, with or without modification,
- are permitted provided that the following conditions are met:
- 
- 1.  Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
- 
- 2.  Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation and/or
- other materials provided with the distribution.
- 
- 3.  Neither the name of the copyright holder(s) nor the names of any contributors
- may be used to endorse or promote products derived from this software without
- specific prior written permission. No license is granted to the trademarks of
- the copyright holders even if such marks are included in this software.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Papildu Informācija";
 
-/* Informed consent process. */
-"CONSENT_NAME_TITLE" = "Consent";
-"CONSENT_NAME_GIVEN" = "First Name";
-"CONSENT_NAME_FAMILY" = "Last Name";
-"CONSENT_NAME_PLACEHOLDER" = "Required";
-"CONSENT_REVIEW_TITLE" = "Review";
-"CONSENT_REVIEW_INSTRUCTION" = "Review the form below, and tap Agree if you\'re ready to continue.";
-"CONSENT_REVIEW_ALERT_TITLE" = "Review";
-"CONSENT_SIGNATURE_TITLE" = "Signature";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger in the box below.";
-"CONSENT_SIGNATURE_PLACEHOLDER" = "Sign Here";
-"CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Aizveriet savu %@ un skatieties uz punktu kvadrāta režģa centrā.\n\nIzmantojot pirkstu vai irbuli, atzīmējiet jebkādus traucējumus, ko redzat, piemēram, neskaidras vai viļņotas līnijas.\n\nKad esat pabeidzis, pavelciet pa kreisi jebkur ārpus režģa.";
 
-/* Consent section titles. */
-"CONSENT_SECTION_WELCOME" = "Welcome";
-"CONSENT_SECTION_DATA_GATHERING" = "Data Gathering";
-"CONSENT_SECTION_PRIVACY" = "Privacy";
-"CONSENT_SECTION_DATA_USE" = "Data Use";
-"CONSENT_SECTION_STUDY_SURVEY" = "Study Survey";
-"CONSENT_SECTION_STUDY_TASKS" = "Study Tasks";
-"CONSENT_SECTION_TIME_COMMITMENT" = "Time Commitment";
-"CONSENT_SECTION_WITHDRAWING" = "Withdrawing";
-"CONSENT_LEARN_MORE_TITLE" = "Learn More";
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Visa testa laikā turiet ierīci 12 collas no sejas un acu līmenī.";
 
-/* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered";
-"LEARN_MORE_DATA_USE" = "Learn more about how data is used";
-"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected";
-"LEARN_MORE_WELCOME" = "Learn more about the study first";
-"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey";
-"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study's impact on your time";
-"LEARN_MORE_TASKS" = "Learn more about the tasks involved";
-"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing";
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Šī darbība palīdz atklāt problēmas ar lietotāja redzi.";
 
-/* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Sharing Options";
-"CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
-"CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
-"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Kreisā acs";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'s Name (printed)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@'s Signature";
-"CONSENT_DOC_LINE_DATE" = "Date";
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Labā acs";
 
-/* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$@ of %2$@";
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amslera režģis";
 
-/* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Invalid value";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
-"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
-"RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
 
-/* Alert for invalid email address value */
-"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Neizdevās ierakstīt skaņu";
 
-/* Alerts for invalid location coordinates */
-"LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
-"LOCATION_ERROR_TITLE" = "Could not Find Specified Address";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
-"LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Mikrofonā sakiet \"Aaaaa\" tik ilgi, cik vien varat.";
 
-/* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Šī darbība novērtē jūsu balsi, ierakstot to ar mikrofonu jūsu ierīces apakšā.";
 
-/* Camera not available during multitasking */
-"CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Dziļi ieelpojiet un mikrofonā sakiet \"Aaaaa\" tik ilgi, cik vien varat. Saglabājiet vienmērīgu balss skaļumu, lai skaņas joslas paliek zilā krāsā.";
 
-/* Registration step */
-"EMAIL_FORM_ITEM_TITLE" = "Email";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
-"PASSWORD_FORM_ITEM_TITLE" = "Password";
-"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
-"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
-"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
-"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
-"ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
-"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
-"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
-"GENDER_FORM_ITEM_TITLE" = "Gender";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
-"DOB_FORM_ITEM_TITLE" = "Date of Birth";
-"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Phone Number";
-"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Lūdzu uzgaidiet, kamēr mēs pārbaudām fona trokšņu līmeni.";
 
-/* Verification step */
-"VERIFICATION_NAV_TITLE" = "Verification";
-"VERIFICATION_STEP_TITLE" = "Verify your Email";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Tap on the link below if you did not receive a verification email and would like it sent again.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Balss";
 
-/* Login step */
-"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Pieskarieties \"Tālāk\", kad esat gatavs.";
 
-/* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
-"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
-"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
-"PASSCODE_INVALID_ALERT_TITLE" = "Passcode Incorrect";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
-"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
-"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
-"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode entry progress indicator";
-"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
-"PASSCODE_FORGOT_BUTTON_TITLE" = "Forgot Passcode?";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Pārāk skaļi";
 
-/* Keychain wrapper */
-"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
-"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
-"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
-"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Apkārtējo trokšņu līmenis ir pārāk liels, lai ierakstītu jūsu balsi. Lūdzu, pārejiet uz klusāku vietu un mēģiniet vēlreiz.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Izmantojiet pirkstu vai irbuli, lai atzīmētu režģi tieši, vai pavelciet pa kreisi ārpus režģa, lai pabeigtu.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amslera režģis";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Sākt uzdevumu";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Skaņas joslas grafiks";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Anotēt";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Atpakaļ";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Paslēpt PDF sīktēlu";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Paslēpt meklēšanas joslu";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Kopīgot";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Rādīt PDF sīktēlu";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Rādīt meklēšanas joslu";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Attēls ar kontroles atzīmi zilā aplī, kas apzīmē panākumus";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Izmantojot Aizkadra balsi, pogai varēs pieskarties tieši. Tā atradīsies netālu no ekrāna centra.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Noņemt tastatūru";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " un ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Punkts: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Diapazons no %@ līdz %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Grēda sastāv no";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Uzņemtā priekšskatījums";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Uzņemtais attēls";
+
+/* (No Comment) */
+"AX_SELECTED" = "Atlasītais";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Pieskarieties ekrānam un pārvietojiet pirkstu, lai parakstītu";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Paredzētais lauks parakstam";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Parakstīts";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Neparakstīts";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Atbildes slīdnis. Diapazons no %@ līdz %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Kad ierakstīšana sākas, aktivizēt vēlreiz, lai apturētu ierakstīšanu.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Runas viļņu forma";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Pieskarieties par vienu pirkstu";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Pieskarieties par otru pirkstu";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Pogām tagad var pieskarties tieši.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Pogas, kam pieskarties";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Aktivizējiet, lai pogām varētu pieskarties tieši.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Izmantojot Aizkadra balsi, izpētiet ekrānu, pieskarieties, lai uzzinātu, kur atrodas pogas. Aktivizēt katru pogu, lai tām varētu pieskarties tieši.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktivizējiet, lai sāktu testu. Kad tests tiek sākts, pieskarieties tieši šai pogai, kad dzirdat skaņu kreisajā ausī.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Pieskarieties par kreiso ausi";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktivizējiet, lai sāktu testu. Kad tests tiek sākts, pieskarieties tieši šai pogai, kad dzirdat skaņu labajā ausī.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Pieskarieties par labo ausi";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Izmantojot Aizkadra balsi, izpētiet ekrānu, pieskarieties, lai uzzinātu, kur atrodas pogas katrai ausij. Kad tests tiek sākts, pogām varēs pieskarties tieši. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nevar novietot disku ar izmēru %@ uz diska ar izmēru %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Pieskarieties divreiz, lai novietotu disku";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Pieskarieties divreiz, lai atlasītu augšējo disku";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mērķis";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Tornis";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tam ir diski, kuru izmērs ir %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tukšs";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Izmantojot Aizkadra balsi, pogām testā varēs pieskarties tieši.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Nemarķēts attēls";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Atlase atcelta";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Video uzņemšana pabeigta";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Uzņemtā video priekšskatījums";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktīvs";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "pareizi";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "nepareizi";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Atmiņas spēles elements";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "nekustīgs";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
-"BLOOD_TYPE_A-" = "A-";
-"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
 "BLOOD_TYPE_AB-" = "AB-";
-"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
 "BLOOD_TYPE_B-" = "B-";
-"BLOOD_TYPE_O+" = "O+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
 "BLOOD_TYPE_O-" = "O-";
 
-/* Fitzpatrick Skin types */
-"FITZPATRICK_SKIN_TYPE_I" = "Type I";
-"FITZPATRICK_SKIN_TYPE_II" = "Type II";
-"FITZPATRICK_SKIN_TYPE_III" = "Type III";
-"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
-"FITZPATRICK_SKIN_TYPE_V" = "Type V";
-"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
-
-/* Gender values. */
-"GENDER_FEMALE" = "Female";
-"GENDER_MALE" = "Male";
-"GENDER_OTHER" = "Other";
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
 
 /* Boolean answer strings */
-"BOOL_NO" = "No";
-"BOOL_YES" = "Yes";
+"BOOL_NO" = "Nē";
+
+/* (No Comment) */
+"BOOL_YES" = "Jā";
+
+/* Button titles */
+"BUTTON_AGREE" = "Piekrītu";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Piemērot";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Atcelt";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Notīrīt";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Skaidra atbilde";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Autortiesības";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Nepiekrītu";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Paveikts";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Sākt darbu";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Papildinformācija";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Nākamais";
+
+/* (No Comment) */
+"BUTTON_OK" = "Labi";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Atmest rezultātus";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Saglabāt vēlākam laikam";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Beigt uzdevumu";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Šo atbildi nevar mainīt.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Saglabāt";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Izlaist";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Izlaist šo jautājumu";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Palaist taimeri";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Dalītajā ekrānā kamera nav pieejama.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Uzņemt attēlu";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Sākt ierakstīšanu";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Atkārtoti uzņemt attēlu";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Atkārtoti uzņemt video";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Apturēt ierakstīšanu";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera nav atrasta. Šo darbību nevar pabeigt.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Neizdevās saglabāt uzņemto attēlu.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Uzņemtajiem attēliem nav norādīts izvades direktorijs.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Lai pabeigtu šo darbību, iestatījumos atļaujiet šai lietotnei piekļūt kamerai.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nav datu";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Paroles nesakrīt.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ievadiet paroli vēlreiz";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Apstiprināt";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Datums";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ vārds (drukāts)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ paraksts";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Papildinformācija";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Uzvārds";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Vārds";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Nepieciešams";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Piekrišana";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "%1$ld lapa no %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Pārskatīt";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Pārskatiet zemāk esošo veidlapu un pieskarieties \"Piekrītu\", ja esat gatavs turpināt.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Pārskatīt";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Datu vākšana";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Datu izmantošana";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Privātums";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Pētījuma mērījumi";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Pētījuma uzdevumi";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Izpildes laiks";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Laipni lūdzam";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Atkāpšanās";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Kopīgojiet manus datus tikai ar %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Kopīgojiet manus datus tikai ar %@ un kvalificētiem pētniekiem visā pasaulē";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ saņems pētījuma datus par jūsu piedalīšanos šajā pētījumā.\n\nKodētu pētījuma datus plašāka kopīgošana (bez tādas informācijas kā, piemēram, jūsu vārds) var sniegt labumu šai un turpmākai pētniecībai.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Kopīgošanas opcijas";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Lūdzu, pierakstieties, izmantojot pirkstu, zemāk esošajā lodziņā.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Parakstiet šeit";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Paraksts";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Darbība tiks uzsākta pēc";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Atlikušas %@ sekundes.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Šī darbība nosaka personas dzirdes slieksni dB HL skalā.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Pārliecinieties, ka ierīces skaļums ir iestatīts uz maksimumu.\n\nŠī uzdevuma laikā kreisajā vai labajā ausī tiks atskaņots smalks tonis.\n\nKlausieties uzmanīgi un pieskarieties pogai katru reizi, kad dzirdat toni.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Pievienošanās anketa.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Dodiet priekšroku savai \"labākajai ausij\", ja tāda ir";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "kreisā";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "nav priekšrokas";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "labā";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toņa audiometrija";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Izvēlēties datumu";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Dzimšanas datums";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-pasts";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Notiek aprēķināšana";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Šī darbība mēra vides skaņas spiediena līmeni. Ja trokšņu līmenis ir pārāk augsts, jūs nevarēsiet turpināt darbu. Lai pabeigtu šo uzdevumu, lūdzu, pārejiet uz klusāku vietu vai atkārtoti veiciet šo darbību vēlāk.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Slieksnis: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "Trokšņu līmeņa mērītājs";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Neizdevās dzēst pietiekamu daudzumu žurnālfailu, lai sasniegtu slieksni";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Fails nav atzīmēts ka dzēsts (nav atzīmēts kā augšupielādēts)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Neizdevās izveidot failu";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Vairākas kļūdas, dzēšot žurnālus";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Kļūda, iestatot atribūtu";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Savāktie dati netika atrasti.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nav norādīts izvades direktorijs";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Attālums (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Pulss (stieni minūtē)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Pastaigājieties ārā savā ātrākajā iespējamajā solī %1$@ ilgi. Kad esat beidzis, apsēdieties un ērti atpūsties %2$@ ilgi. Lai sāktu, pieskarieties \"Sākt darbu\".";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Šī darbība uzrauga jūsu pulsu un nomēra, cik tālu varat noiet %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Ērti apsēdieties %@ ilgi.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fiziskā sagatavotība";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Cik vien ātri varat, soļojiet %@ ilgi.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "I tips";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "II tips";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "III tips";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "IV tips";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "V tips";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "VI tips";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Aizmirsāt paroli?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Sieviete";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Izvēlēties dzimumu";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Dzimums";
+
+/* (No Comment) */
+"GENDER_MALE" = "Vīrietis";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Cits";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Džons";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Šī darbība mēra jūsu augšējo ekstremitāšu funkciju, lūdzot jums ielikt tapiņu bedrītē. Jums tiks lūgts to darīt %@ reizes.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tiks pārbaudīta gan jūsu kreisā, gan labā roka.\nPaņemiet tapiņu, cik ātri vien iespējams, ielieciet to bedrītē, un, kad tas paveikts %@ reizes, atkal izņemiet to %@ reizes.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tiks pārbaudīta gan jūsu labā, gan kreisā roka.\nPaņemiet tapiņu, cik ātri vien iespējams, ielieciet to bedrītē, un, kad tas paveikts %@ reizes, atkal izņemiet to %@ reizes.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Ielieciet tapiņu bedrītē, izmantojot kreiso roku.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Ielieciet tapiņu bedrītē, izmantojot labo roku.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Novietojiet tapiņu aiz līnijas, izmantojot kreiso roku.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Novietojiet tapiņu aiz līnijas, izmantojot labo roku.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Paceliet tapiņu, izmantojot divus pirkstus.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Atlaidiet pirkstus, lai nomestu tapiņu.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Bedrīšu tapiņu tests";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Nederīga e-pasta adrese: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Neizdevās pievienot Keychain vienumu.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Neizdevās dzēst Keychain vienumu.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Neizdevās atrast Keychain vienumu.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Neizdevās atjaunināt Keychain vienumu.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Iztaisnojiet ceļgalā kreiso kāju. Pēc tam pieskarieties jebkur.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Iztaisnojiet ceļgalā labo kāju. Pēc tam pieskarieties jebkur.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Šī darbība nomēra, cik tālu varat iztaisnot ceļgalā kreiso kāju.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Šī darbība nomēra, cik tālu varat iztaisnot ceļgalā labo kāju.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Apsēdies uz krēsla malas. Uzsākot darbību, mērīšanas nolūkos novietojiet ierīci uz kreisās kājas ceļgala. Lūdzu, ieslēdziet ierīces skaņu tā, lai varētu dzirdēt norādījumus.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Apsēdies uz krēsla malas. Uzsākot darbību, mērīšanas nolūkos novietojiet ierīci uz labās kājas ceļgala. Lūdzu, ieslēdziet ierīces skaņu tā, lai varētu dzirdēt norādījumus.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Novietojiet ierīci uz kreisās kājas ceļgala ar ekrānu, kas vērsts prom no sevis, kā parādīts attēlā.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Novietojiet ierīci uz labās kājas ceļgala ar ekrānu, kas vērsts prom no sevis, kā parādīts attēlā.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kad esat gatavs, pieskarieties ekrānam, lai sāktu, un iztaisnojiet ceļgalā kreiso kāju, cik daudz vien iespējams. Pieskarieties vēlreiz, kad esat pabeidzis.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kad esat gatavs, pieskarieties ekrānam, lai sāktu, un iztaisnojiet ceļgalā labo kāju, cik daudz vien iespējams. Pieskarieties vēlreiz, kad esat pabeidzis.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Kreisās kājas ceļgala kustības amplitūda";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Labās kājas ceļgala kustības amplitūda";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Novietojiet ierīci uz kreisās kājas ceļgala";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Novietojiet ierīci uz labās kājas ceļgala";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Papildinformācija par datu kopīgošanu";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Papildinformācija par datu vākšanu";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Papildinformācija par datu izmantošanu";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Papildinformācija par jūsu privātuma un identitātes aizsardzību";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Papildinformācija par pētījuma mērījumiem";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Papildinformācija par ietvertajiem uzdevumiem";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Papildinformācija par pētījuma ietekmi uz jūsu laiku";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Papildinformācija par pētījuma sākumu";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Papildinformācija par atkāpšanos";
+
+/* Limb values. */
+"LIMB_LEFT" = "kreisā";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption jābūt kreisajai vai labajai";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "labā";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Neizdevās atrast rezultātu ievadītajai adresei. Lūdzu, pārliecinieties, ka adrese ir derīga.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Vai nu jums nav savienojuma ar internetu, vai arī esat pārsniedzis maksimālo adrešu uzmeklēšanas pieprasījumu skaitu. Ja jums nav savienojuma ar internetu, lūdzu, ieslēdziet Wi-Fi, lai atbildētu uz šo jautājumu, izlaistu šo jautājumu, ja ir pieejama izlaišanas poga, vai atgriezieties pie mērījumiem, kad jums ir savienojums ar internetu. Pretējā gadījumā, lūdzu, mēģiniet vēlreiz pēc dažām minūtēm.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Ir liegta piekļuve atrašanās vietas pakalpojumiem. Izmantojot iestatījumus, lūdzu, dodiet šai lietotnei atļauju izmantot atrašanās vietas pakalpojumus.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Neizdevās noteikt jūsu pašreizējo atrašanās vietu. Lūdzu, ievadiet adresi vai dodieties uz vietu ar labāku GPS signālu, ja tas piemērojams.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Neizdevās atrast norādīto adresi";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Ievadiet adresi";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Pieteikties";
 
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";
-"MEASURING_UNIT_FT" = "ft";
-"MEASURING_UNIT_IN" = "in";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "pēdas";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "collas";
+
+/* (No Comment) */
 "MEASURING_UNIT_KG" = "kg";
-"MEASURING_UNIT_LB" = "lb";
-"MEASURING_UNIT_OZ" = "oz";
 
-/* Limb values. */
-"LIMB_LEFT" = "left";
-"LIMB_RIGHT" = "right";
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "mārciņas";
 
-/* Default placeholders to request answers in a questionnaire. */
-"PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
-"NULL_ANSWER" = "Select an answer";
-"PLACEHOLDER_IMAGE_CHOICES" = "Tap to select";
-"PLACEHOLDER_LONG_TEXT" = "Tap to write";
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "unces";
 
-/* Button titles */
-"BUTTON_AGREE" = "Agree";
-"BUTTON_CANCEL" = "Cancel";
-"BUTTON_OK" = "OK";
-"BUTTON_CLEAR" = "Clear";
-"BUTTON_APPLY" = "Apply";
-"BUTTON_DISAGREE" = "Disagree";
-"BUTTON_DONE" = "Done";
-"BUTTON_GET_STARTED" = "Get Started";
-"BUTTON_LEARN_MORE" = "Learn more";
-"BUTTON_NEXT" = "Next";
-"BUTTON_SKIP" = "Skip";
-"BUTTON_SKIP_QUESTION" = "Skip this question";
-"BUTTON_START_TIMER" = "Start Timer";
-"BUTTON_OPTION_SAVE" = "Save for Later";
-"BUTTON_OPTION_DISCARD" = "Discard Results";
-"BUTTON_OPTION_STOP_TASK" = "End Task";
-"BUTTON_SAVE" = "Save";
-"BUTTON_CLEAR_ANSWER" = "Clear answer";
-"BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
-"BUTTON_COPYRIGHT" = "Copyright";
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Spēle pabeigta";
 
-/* General active tasks. */
-"COUNTDOWN_LABEL" = "Starting activity in";
-"TASK_COMPLETE_TITLE" = "Activity Complete";
-"TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ seconds remaining.";
-"TOUCH_ANYWHERE_LABEL" = "Touch anywhere to continue";
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Lai turpinātu, pieskarieties \"Tālāk\"";
 
-/* Image capture step. */
-"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
-"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
-"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Secība pabeigta";
 
-/* Video capture step. */
-"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start Recording";
-"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stop Recording";
-"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Recapture Video";
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Darbības atmiņai izstrādāšanu atbalstīja dr. Ketrīna Posina (Katherine Possin, PhD) un dr. Džoels Krēmers (Joel Kramer, PhD) no Kalifornijas Universitātes Sanfrancisko.";
 
-/* Fitness active task. */
-"FITNESS_TASK_TITLE" = "Fitness";
-"FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
-"FITNESS_HEARTRATE_TITLE" = "Heart Rate (bpm)";
-"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sit comfortably for %@.";
-"FITNESS_WALK_INSTRUCTION_FORMAT" = "Walk as fast as you can for %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "This activity monitors your heart rate and measures how far you can walk in %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Walk outdoors at your fastest possible pace for %1$@. When you're done, sit and rest comfortably for %2$@. To begin, tap Get Started.";
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Jums neizdevās to paveikt laicīgi. Pieskarieties \"Tālāk\", lai turpinātu.";
 
-/* Short walk active task. */
-"WALK_TASK_TITLE" = "Gait and Balance";
-"WALK_INTRO_TEXT" = "This activity measures your gait and balance as you walk and stand still. Do not continue if you cannot safely walk unassisted.";
-"WALK_INTRO_2_TEXT_%ld" = "Find a place where you can safely walk unassisted for about %ld steps in a straight line.";
-"WALK_INTRO_2_DETAIL" = "Put your device in a pocket or bag and follow the audio instructions.";
-"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Now stand still for %@.";
-"WALK_STAND_INSTRUCTION_FORMAT" = "Stand still for %@.";
-"WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Mēģināt vēlreiz";
 
-/* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find a place where you can safely walk back and forth in a straight line. Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\nNext you will be instructed to turn around in a full circle, then stand still with your arms at your sides and your feet about shoulder-width apart.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your device in a pocket or bag and follow the audio instructions.";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
-"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn in a full circle and then stand still for %@.";
-"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "You have completed the activity.";
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Pieskarieties %@ pretējā secībā";
 
-/* Tapping active task. */
-"TAPPING_TASK_TITLE" = "Tapping Speed";
-"TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
-"TAPPING_TASK_TITLE_LEFT" = "Left Hand";
-"TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your device on a flat surface.";
-"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Use two fingers on your right hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Use two fingers on your left hand to alternately tap the buttons on the screen.";
-"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Now repeat the same test using your right hand.";
-"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Now repeat the same test using your left hand.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for %@.";
-"TAPPING_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TAPPING_CALL_TO_ACTION_NEXT" = "Tap Next to begin.";
-"TAP_BUTTON_TITLE" = "Tap";
-"TOTAL_TAPS_LABEL" = "Total Taps";
-"TAPPING_INSTRUCTION" = "Tap the buttons as consistently as you can using two fingers.";
-"TAPPING_INSTRUCTION_RIGHT" = "Tap the buttons using your RIGHT hand.";
-"TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
-"TAPPING_SKIP_TITLE" = "Skip this hand";
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Pieskarieties %@ tādā secībā, kādā tie tiek izgaismoti";
 
-/* Amsler Grid Task.*/
-"AMSLER_GRID_TITLE" = "Amsler Grid";
-"AMSLER_GRID_INTRO_TEXT" = "This activity helps in detecting problems in user's vision.";
-"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold the device 12 inches from your face and at eye level throughout the test.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the center of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you are done, swipe left anywhere outside the grid.";
-"AMSLER_GRID_LEFT_EYE" = "Left Eye";
-"AMSLER_GRID_RIGHT_EYE" = "Right Eye";
-
-/* Audio active task. */
-"AUDIO_TASK_TITLE" = "Voice";
-"AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"AUDIO_INSTRUCTION" = "Say “Aaaaah” into the microphone for as long as you can.";
-"AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
-"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your device.";
-"AUDIO_TOO_LOUD_LABEL" = "Too Loud";
-"AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
-"AUDIO_LEVEL_CHECK_LABEL" = "Please wait while we check the background noise level.";
-"AUDIO_TOO_LOUD_MESSAGE" = "The ambient noise level is too loud to record your voice. Please move somewhere quieter and try again.";
-"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tap Next when ready.";
-
-/* Tone audiometry active task. */
-"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.\n\nThe sound will be very subtle and is unlike a regular alert tone.  The sound will begin soft and then slowly increase in volume.  Please pay attention and tap the left or right button to indicate which ear you hear it in.";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap any button when you are ready to begin.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Every time you start hearing a sound, tap the left or right button to indicate which ear you hear the sound in.";
-"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Left Ear";
-"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Right Ear";
-"TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
-"TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
-
-/* dBHL Tone audiometry active task. */
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "This activity identifies hearing threshold levels of an individual in dB HL scale.";
-"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Make sure the device volume is set to the maximum level.\n\nDuring this task, a subtle tone will play in either the left or right ear.\n\nListen carefully and tap the button every time you hear a tone.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding questionnaire.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Select your preference for 'better ear', if any";
-"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "left";
-"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "right";
-"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "no preference";
-
-/* Spatial span memory active task. */
-"SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "This activity measures your short-term spatial memory by asking you to repeat the order in which %@ light up.";
-"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flowers";
-"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flowers";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the same order they lit up.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the reverse of the order they lit up.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "To begin, tap Get Started, then watch closely.";
+/* (No Comment) */
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
-"MEMORY_GAME_SCORE_TITLE" = "Score";
-"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Watch the %@ light up";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tap the %@ in the order they lit up";
-"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tap the %@ in reverse order";
-"MEMORY_GAME_COMPLETE_TITLE" = "Sequence Complete";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "To continue, tap Next";
-"MEMORY_GAME_FAILED_TITLE" = "Try Again";
-"MEMORY_GAME_FAILED_MESSAGE" = "You didn't quite make it through that time. Tap Next to continue.";
-"MEMORY_GAME_TIMEOUT_TITLE" = "Time's Up";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "You ran out of time.\nTap Next to continue.";
-"MEMORY_GAME_COMPLETE" = "Game Complete";
-"MEMORY_GAME_PAUSED_TITLE" = "Paused";
-"MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
-"MEMORY_GAME_COPYRIGHT_TEXT" = "The memory activity was developed with assistance from Katherine Possin, PhD and Joel Kramer, PhD from University of California, San Francisco.";
 
-/* Reaction time active task. */
-"REACTION_TIME_TASK_TITLE" = "Reaction Time";
-"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Lai turpinātu, pieskarieties \"Tālāk\"";
 
-/* Stroop active task.*/
-"STROOP_TASK_TITLE" = "Stroop";
-"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Every time a word appears, select the first letter of the name of the COLOR that is shown.";
-"STROOP_TASK_INTRO2_DETAIL_TEXT" = "When you are ready to begin the Stroop activity tap Get Started.";
-"STROOP_TASK_STEP_TEXT" = "Select the first letter of the name of the COLOR that is shown.";
-"STROOP_COLOR_RED" = "RED";
-"STROOP_COLOR_GREEN" = "GREEN";
-"STROOP_COLOR_BLUE" = "BLUE";
-"STROOP_COLOR_YELLOW" = "YELLOW";
-"STROOP_COLOR_RED_INITIAL" = "R";
-"STROOP_COLOR_GREEN_INITIAL" = "G";
-"STROOP_COLOR_BLUE_INITIAL" = "B";
-"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Pauzēts";
 
-/* Tower of Hanoi active task */
-"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
-"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Vērojiet, kā tiek izgaismoti %@";
 
-/* Range of Motion active task */
-"RANGE_OF_MOTION_TITLE" = "Range of Motion";
-"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Rezultāts";
 
-/* Knee Range of Motion active task */
-"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Left Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will put your device on your left knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Extend your left knee. Then tap anywhere.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Extend your right knee. Then tap anywhere.";
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Laiks beidzās.\nPieskarieties \"Tālāk\", lai turpinātu.";
 
-/* Shoulder Range of Motion active task */
-"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "When you begin you will put your device on your left shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will put your device on your right shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lift your left arm up. Then tap anywhere.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lift your right arm up. Then tap anywhere.";
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Laiks beidzies";
 
-/* Timed walk active task. */
-"TIMED_WALK_TITLE" = "Timed Walk";
-"TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you've passed the finish line.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
-"TIMED_WALK_FORM_TITLE" = "Assistive device";
-"TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
-"TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
-"TIMED_WALK_QUESTION_2_CHOICE" = "None";
-"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
-"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
-"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
-"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
-"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
-"TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
-"TIMED_WALK_INSTRUCTION_TURN" = "Turn around.";
-"TIMED_WALK_INSTRUCTION_2" = "Walk back to where you started.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Next when complete.";
+/* (No Comment) */
+"NULL_ANSWER" = "Izvēlieties atbildi";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Tempa audiālais sērijveida pievienošanas tests (Paced Auditory Serial Addition Test) mēra audiālās informācijas apstrādes ātrumu un aprēķināšanas spējas.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
-"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Piekļuves kods autentificēts";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Apstiprināt piekļuves kodu";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Apstipriniet savu jauno piekļuves kodu";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Aizmirsāt piekļuves kodu?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Piekļuves kodi nesakrīt. Mēģiniet vēlreiz.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Nepareizs piekļuves kods";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Ievadiet savu jauno piekļuves kodu";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Ievadiet savu veco piekļuves kodu";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Ievadiet piekļuves kodu";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Piekļuves kods saglabāts";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Piekļuves kodu ievades progresa indikators";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Ievadīti %@ no%@ cipariem";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Atļautas tikai ciparu rakstzīmes.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID kļūda";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Lūdzu, autentificējieties ar Touch ID";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ievadiet paroli";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Parole";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Tempa audiālais un vizuālais sērijveida pievienošanas tests (Paced Auditory and Visual Serial Addition Test) mēra audiālās un vizuālās informācijas apstrādes ātrumu un aprēķināšanas spējas.";
+
+/* (No Comment) */
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "The Paced Auditory Serial Addition Test measures your auditory information processing speed and calculation ability.";
-"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
-"PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test measures your auditory and visual information processing speed and calculation ability.";
-"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ seconds.\nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn't calculate a running total, but only the sum of the last two numbers.";
-"PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
-"PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Tālruņa numurs";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Pieskarieties, lai atlasītu";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Pieskarieties, lai rakstītu";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Pieskarieties, lai atbildētu";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Atceries šo pirmo ciparu.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Pieskaitiet šo jauno ciparu iepriekšējam.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Pa vienam ciparam tiek parādīts ik pēc %@ sekundēm.\nJums nekavējoties katrs jaunais cipars jāpieskaita iepriekšējam.\nUzmanību, jums nav jāaprēķina kopējā summa, bet tikai pēdējo divu ciparu summa.";
+
+/* (No Comment) */
 "PSAT_NO_DIGIT" = "-";
 
-/* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a peg in a hole. You will be asked to do this %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Both your left and right hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Tempa vizuālais sērijveida pievienošanas tests (Paced Visual Serial Addition Test) mēra vizuālās informācijas apstrādes ātrumu un aprēķināšanas spējas.";
 
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Put the peg in the hole using your left hand.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Put the peg in the hole using your right hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Put the peg behind the line using your left hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Put the peg behind the line using your right hand.";
-"HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
-"HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
 
-/* Tremor test active task. */
-"TREMOR_TEST_TITLE" = "Tremor Activity";
-"TREMOR_TEST_INTRO_1_DETAIL" = "This activity measures the tremor of your hands in various positions. Find a place where you can sit comfortably for the duration of this activity.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold the phone in your more affected hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold the phone in your RIGHT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold the phone in your LEFT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "You will be asked to perform %@ while sitting with the phone in your hand.";
-"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "a task";
-"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "two tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "three tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "four tasks";
-"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "five tasks";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepare to hold your phone in your lap.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Prepare to hold your phone in your lap with your LEFT hand.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Prepare to hold your phone in your lap with your RIGHT hand.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Keep holding your phone in your lap for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Now hold your phone with your hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Now hold your phone with your LEFT hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Now hold your phone with your RIGHT hand extended out at shoulder height.";
-"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Keep holding your phone with your hand extended for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Now hold your phone at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Now hold your phone with your LEFT hand at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Now hold your phone with your RIGHT hand at shoulder height with your elbow bent.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Keep holding your phone with your elbow bent for %ld seconds";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Now keeping your elbow bent, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Now keeping your elbow bent with your phone in your LEFT hand, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Now keeping your elbow bent with your phone in your RIGHT hand, touch your phone to your nose repeatedly.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Keep touching your phone to your nose for %ld seconds";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Prepare to do a queen wave (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Prepare to do a queen wave with your phone in your LEFT hand (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Prepare to do a queen wave with your phone in your RIGHT hand (wave by turning your wrist).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Keep performing a queen wave for %ld seconds.";
-"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Now switch the phone to your LEFT hand and continue to the next task.";
-"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Now switch the phone to your RIGHT hand and continue to the next task.";
-"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continue to the next task.";
-"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activity completed.";
-"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "You will be asked to perform %@ while sitting with the phone first in one hand, then again with the other hand.";
-"TREMOR_SKIP_LEFT_HAND" = "I cannot perform this activity with my LEFT hand.";
-"TREMOR_SKIP_RIGHT_HAND" = "I cannot perform this activity with my RIGHT hand.";
-"TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ pārsniedz maksimālo atļauto vērtību (%2$@).";
 
-/* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
-"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
-"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by the numbers '2' – '3' – '4'… until you reach the number '7'.";
-"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
-"TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
-"TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d error)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
-"TRAILMAKING_LETTER_A" = "A";
-"TRAILMAKING_LETTER_B" = "B";
-"TRAILMAKING_LETTER_C" = "C";
-"TRAILMAKING_LETTER_D" = "D";
-"TRAILMAKING_LETTER_E" = "E";
-"TRAILMAKING_LETTER_F" = "F";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ ir mazāks nekā minimālā atļautā vērtība (%2$@).";
 
-/* Speech Recognition active task. */
-"SPEECH_TASK_TITLE" = "Speech Recognition";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "This activity records your speech with the microphone at the bottom of the device, and translates it to text.";
-"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Press the button to start recording before speaking.";
-"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start Recording";
-"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stop Recording";
-"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edit Transcript";
-"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edit transcript text to correct any misinterpretation of the speech.";
-"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Your transcription will appear here.";
-"SPEECH_RECOGNITION_FAILED" = "Speech recognition failed.";
-"SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ nav derīga vērtība.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Nederīga vērtība";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Kustību amplitūda";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ātri sakratiet ierīci, kad tiek parādīts zils aplis";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@ mēģinājums no %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Šī darbība novērtē laiku, kas nepieciešams, lai jūs varētu reaģēt uz vizuālu norādi.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Sakratiet ierīci jebkurā virzienā, tiklīdz uz ekrāna tiek parādīts zils punkts. Jums tiks lūgts to darīt %D reizes.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reakcijas laiks";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Atkārtoti nosūtīt verifikācijas e-pastu";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pieskarieties zemāk esošajai saitei, ja jūs nesaņēmāt verifikācijas e-pastu un vēlaties, lai tas tiktu nosūtīts vēlreiz.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Paceliet uz augšu kreiso roku. Pēc tam pieskarieties jebkur.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Paceliet uz augšu labo roku. Pēc tam pieskarieties jebkur.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Šī darbība nomēra, cik tālu varat pakustināt kreiso plecu.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Šī darbība nomēra, cik tālu varat pakustināt labo plecu.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Uzsākot darbību, mērīšanas nolūkos novietojiet ierīci uz kreisā pleca. Lūdzu, ieslēdziet ierīces skaņu tā, lai varētu dzirdēt norādījumus.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Uzsākot darbību, mērīšanas nolūkos novietojiet ierīci uz labā pleca. Lūdzu, ieslēdziet ierīces skaņu tā, lai varētu dzirdēt norādījumus.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Novietojiet ierīci uz kreisā pleca ar ekrānu, kas vērsts prom no sevis, kā parādīts attēlā.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Novietojiet ierīci uz labā pleca ar ekrānu, kas vērsts prom no sevis, kā parādīts attēlā.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kad esat gatavs, pieskarieties ekrānam, lai sāktu, un paceliet kreiso roku, cik daudz vien iespējams. Pieskarieties vēlreiz, kad esat pabeidzis.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kad esat gatavs, pieskarieties ekrānam, lai sāktu, un paceliet labo roku, cik daudz vien iespējams. Pieskarieties vēlreiz, kad esat pabeidzis.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Kreisā pleca kustības amplitūda";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Labā pleca kustības amplitūda";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Novietojiet ierīci uz kreisā pleca";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Novietojiet ierīci uz labā pleca";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt darbu\", tad skatieties uzmanīgi.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Daži no %@ tiks izgaismoti pa vienam. Pieskarieties šiem %@ tādā pašā secībā, kā tie tiek izgaismoti.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Daži no %@ tiks izgaismoti pa vienam. Pieskarieties šiem %@ pretēja secībā, nekā tie tiek izgaismoti.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Šī darbība mēra jūsu īstermiņa telpisko atmiņu, lūdzot atkārtot secību, kādā %@ tiek izgaismoti.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "ziedi";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "ziedi";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Telpiskā atmiņa";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Pieskarieties vienumam \"Atskaņot audio\", pielāgojiet skaļumu līdz vēlamajam līmenim un pēc tam pieskarieties vienumam \"Apturēt audio\", lai turpinātu.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Skaļuma kalibrēšana";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Kā daļu no šī testa, jūs:\n\nNoklausīsieties teikumu.\n\nSkaidri atkārtosiet to, ko dzirdējāt vai pāriesiet uz priekšu, lai, izmantojot tastatūru, uzrakstītu to, ko dzirdējāt. \n\nJa atkārtojat to, ko dzirdējāt, jums būs iespēja rediģēt runas atpazīšanas programmas radīto pierakstu.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Šī darbība mēra runas skaidrību esošā trokšņainā vidē.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Atkārtojiet to, ko dzirdējāt.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Runāt";
 
 /* Speech In Noise active task. */
-"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Play Audio";
-"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stop Audio";
-"SPEECH_IN_NOISE_TITLE" = "Speech in Noise";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "This activity measures intelligibility of speech when presented in noisy environments.";
-"SPEECH_IN_NOISE_DETAIL_TEXT" = "As part of this test, you will:\n\nListen to a sentence.\n\nRepeat clearly what you heard or skip ahead to type in what you heard using the keyboard. \n\nIf you repeat what you heard, you will have the option to modify the transcript generated by the speech recognition engine.";
-"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volume Calibration";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tap 'Play Audio', adjust your volume to a comfortable level and then tap 'Stop Audio' to proceed.";
-"SPEECH_IN_NOISE_STEP_TITLE" = "Listen";
-"SPEECH_IN_NOISE_STEP_TEXT" = "A sentence mixed with background noise at a randomized Signal to Noise Ratio (SNR) will be played only once.";
-"SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
-"SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeat what you heard.";
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Atskaņot audio";
 
-/* Potentially user visible error messages. */
-"ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
-"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
-"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Error setting attribute";
-"ERROR_DATALOGGER_COULD_NOT_MAORK" = "File not marked deleted (not marked uploaded)";
-"ERROR_DATALOGGER_MULTIPLE" = "Multiple errors removing logs";
-"ERROR_RECORDER_NO_DATA" = "No collected data was found.";
-"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Teikums, kas jaukts ar fona troksni nejauši atlasītā signāla‑trokšņa attiecībā (Signal to Noise Ratio — SNR), tiks atskaņots tikai vienu reizi.";
 
-/* Environment SPL*/
-"ENVIRONMENTSPL_TITLE" = "SPL Meter";
-"ENVIRONMENTSPL_INTRO_TEXT" = "This activity measures the environment sound pressure level. If the noise levels are too high, you will be unable to proceed. Please move to a quieter location to complete this task or retake this activity at a later time.";
-"ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Calculating";
-"ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Klausīties";
 
-/* Charts */
-"CHART_NO_DATA_TEXT" = "No Data";
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Apturēt audio";
 
-/* Accessibility */
-"AX_BUTTON_BACK" = "Back";
-"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
-"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
-"AX_BUTTON_ANNOTATE" = "Annotate";
-"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
-"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
-"AX_BUTTON_SHARE" = "Share";
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Runa troksnī";
 
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
 
-"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Runas atpazīšana neizdevās.";
 
-"AX_SIGNVIEW_LABEL" = "Designated signature field";
-"AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
-"AX_SIGNVIEW_SIGNED" = "Signed";
-"AX_SIGNVIEW_UNSIGNED" = "Unsigned";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Neizdevās inicializēt runas atpazīšanu.";
 
-"AX_SELECTED" = "Selected";
-"AX_UNSELECTED" = "Un-selected";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Nospiediet pogu, lai sāktu ierakstīšanu pirms runāšanas.";
 
-"AX_SLIDER_LABEL" = "Response slider. Range from %@ to %@";
-"AX_UNLABELED_IMAGE" = "Unlabeled image";
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Šī darbība ieraksta jūsu runu, izmantojot mikrofonu ierīces apakšā, un pārveido to tekstā.";
 
-"AX_ANNOUNCE_BEGIN_TASK" = "Begin task";
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Rediģējiet pieraksta tekstu, lai izlabotu jebkādu nepareizu runas interpretāciju.";
 
-"AX.MEMORY.TILE.ACTIVE" = "active";
-"AX.MEMORY.TILE.CORRECT" = "correct";
-"AX.MEMORY.TILE.INCORRECT" = "incorrect";
-"AX.MEMORY.TILE.QUIESCENT" = "quiescent";
-"AX.MEMORY.TILE.LABEL" = "Memory game tile";
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Rediģēt pierakstu";
 
-"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
-"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Sākt ierakstīšanu";
 
-"AX_VIDEO_CAPTURE_LABEL" = "Video capture preview";
-"AX_VIDEO_CAPTURE_COMPLETE" = "Video capture complete";
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Apturēt ierakstīšanu";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Unable to place disk with size %@ on disk with size %@";
-"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
-"AX_TOWER_OF_HANOI_TOWER" = "Tower";
-"AX_TOWER_OF_HANOI_PLACE_DISK" = "Double-tap to place disk";
-"AX_TOWER_OF_HANOI_SELECT_DISK" = "Double-tap to select top-most disk";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
-"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Jūsu pieraksts tiks parādīts šeit.";
 
-"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Dismiss keyboard";
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Runas atpazīšana";
 
-"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range from %@ to %@";
-"AX_GRAPH_STACK_PREFIX" = "Stack composed of";
-"AX_GRAPH_AND_SEPARATOR" = " and ";
-"AX_GRAPH_POINT_%@" = "Point: %@";
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ no %2$@";
 
-"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
-"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "ZILS";
 
-"AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "Z";
 
-"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
-"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "ZAĻŠ";
 
-"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your left ear.";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tap for Right Ear";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your right ear.";
-/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons for each ear are located. When the test starts, the buttons will be directly tappable. %@";
-"AX_TAP_BUTTON_1_LABEL" = "Tap for one finger";
-"AX_TAP_BUTTON_2_LABEL" = "Tap for other finger";
-"AX_TAP_BUTTON_HINT" = "Activate to make the buttons directly tappable.";
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons are located. Activate either button to make the buttons directly tappable.";
-"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Buttons are now directly tappable.";
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Using VoiceOver, the button will be directly tappable. It will be located near the center of the screen.";
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "Z";
 
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
+/* (No Comment) */
+"STROOP_COLOR_RED" = "SARKANS";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "S";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "DZELTENS";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "D";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Katru reizi, kad parādās vārds, atlasiet pirmo burtu no parādītās KRĀSAS nosaukuma.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Kad esat gatavs sākt Strūpa testu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Atlasiet pirmo burtu no parādītās KRĀSAS nosaukuma.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Strūps";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Pieskarties";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Pieskarieties \"Tālāk\", lai sāktu.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Pieskarieties pogām tik konsekventi, cik vien varat, izmantojot divus pirkstus.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Pieskarieties pogām, izmantojot KREISO roku.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Pieskarieties pogām, izmantojot LABO roku.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Šī darbība mēra jūsu pieskaršanās ātrumu.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Pieskarieties ar vienu pirkstu, pēc tam ar otru. Centieties, lai pieskārieni būtu pēc iespējas vienādi. Turpiniet pieskarties %@ ilgi.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Izmantojiet kreisās rokas divus pirkstus, lai pārmaiņus pieskartos pogām uz ekrāna.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Tagad atkārtojiet to pašu testu, izmantojot kreiso roku.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Izmantojiet vienas rokas divus pirkstus, lai pārmaiņus pieskartos pogām uz ekrāna.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Novietojiet ierīci uz līdzenas virsmas.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Izmantojiet labās rokas divus pirkstus, lai pārmaiņus pieskartos pogām uz ekrāna.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Tagad atkārtojiet to pašu testu, izmantojot labo roku.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Izlaist šo roku";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Pieskaršanās ātrums";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Kreisā roka";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Labā roka";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Jūsu dati tiks analizēti, un jums tiks paziņots, kad rezultāti būs gatavi.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Darbība pabeigta";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksta saturs pārsniedz maksimālo garumu: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Katram testam izmantojiet vienu un to pašu palīgierīci.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Palīgierīce";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Ejiet taisnā līnijā līdz %@.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Ejiet atpakaļ uz turieni, kur sākāt.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Pieskarieties \"Tālāk\", kad esat beidzis.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Apgriezieties.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Pieskarieties \"Tālāk\", lai sāktu.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Atrodiet vietu, vēlams ārvidē, kur varat noiet apmēram %@ taisnā līnijā, cik ātri vien iespējams, bet droši. Nesamaziniet ātrumu pirms finiša līnijas sasniegšanas.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Šī darbība mēra jūsu apakšējo ekstremitāšu funkciju.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nav";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Vienpusējs spieķis";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Vienpusējs kruķis";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Abpusēji spieķi";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Abpusēji kruķi";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Staigāšanas rāmis/rolators";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Pieskarieties šeit, lai atlasītu atbildi.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Vai izmantojat palīgierīci?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Vai valkājat potītes ortozi?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Pastaiga uz laiku";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Katru reizi, kad izdzirdat skaņu, pieskarieties pogai kreisajā vai labajā pusē, lai norādītu, ar kuru ausi dzirdat skaņu.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Šī darbība mēra jūsu spēju dzirdēt dažādas skaņas.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Pirms sākat, pievienojiet un uzlieciet austiņas.\n\nSkaņa būs ļoti smalka un atšķirīga no parastā trauksmes signāla.  Skaņa sākuma būs klusa un pēc tam skaļums lēnām tiks pastiprināts.  Lūdzu, pievērsiet uzmanību un pieskarieties pogai kreisajā vai labajā pusē, lai norādītu, ar kuru ausi to dzirdat.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Kreisā auss";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Labā auss";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Jums tagad vajadzētu dzirdēt toni. Noregulējiet skaļumu, izmantojot vadīklas ierīces sānos.\n\nPieskarieties jebkurai pogu, kad esat gatavs sākt.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toņa audiometrija";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, kreisajā pusē";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, labajā pusē";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Pieskārieni kopā";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Pieskarties jebkur, lai turpinātu";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Atrisiniet uzdevumu";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Gājienu skaits: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Es nevaru atrisināt šo uzdevumu";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Šī darbība izvērtē jūsu uzdevuma atrisināšanas prasmes.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Pārvietojiet visu grēdu uz izcelto platformu, izmantojot tik maz gājienu, cik vien iespējams.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojas tornis";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Lai sāktu, pieskarieties \"Sākt\".";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d kļūda)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d kļūdas)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Šī darbība novērtē jūsu vizuālo uzmanību un uzdevumu maiņu, ierakstot laiku, kas nepieciešams, lai pieskartos punktiem noteiktā kārtībā.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Pēc laika skaitīšanas atpakaļ pieskarieties punktiem — pārmaiņus skaitļiem un burtiem. Sāciet, pieskaroties pirmajam ciparam \"1\", kam sekos cipari \"2\", \"3\", \"4\"... līdz sasniegsiet ciparu \"7\".";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Pēc laika skaitīšanas atpakaļ pieskarieties punktiem — pārmaiņus skaitļiem un burtiem. Sāciet, pieskaroties pirmajam ciparam \"1\", pēc tam pieskaroties pirmajam burtam \"A\" un pēc tam \"2\", \"B\", \"3\", \"C\"... līdz sasniegsiet ciparu \"7\".";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Dariet to, cik ātri vien iespējams, nepieļaujot kļūdas.";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "Z";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Taku veidošanas tests";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Es nevaru veikt šo darbību ar KREISO roku.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Es varu veikt šo darbību ar abām rokām.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Es nevaru veikt šo darbību ar LABO roku.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Ar saliektu elkoni turpiniet turēt tālruni %ld sekundes ilgi";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Tagad ar saliektu elkoni turiet tālruni plecu augstumā.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Tagad ar saliektu elkoni turiet tālruni ar KREISO roku plecu augstumā.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Tagad ar saliektu elkoni turiet tālruni ar LABO roku plecu augstumā.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Turpiniet turēt tālruni izstieptā rokā %ld sekundes ilgi.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Tagad turiet tālruni izstieptā rokā plecu augstumā.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Tagad turiet tālruni izstieptā KREISAJĀ rokā plecu augstumā.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Tagad turiet tālruni izstieptā LABAJĀ rokā plecu augstumā.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Turpināt ar nākamo uzdevumu.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Turpiniet turēt tālruni klēpī %ld sekundes ilgi.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Sagatavojieties turēt tālruni klēpī.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Sagatavojieties turēt tālruni klēpī ar KREISO roku.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Sagatavojieties turēt tālruni klēpī ar LABO roku.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Pieskarieties \"Tālāk\", lai turpinātu.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Tagad pārlieciet tālruni uz KREISO roku un turpiniet ar nākamo uzdevumu.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Tagad pārlieciet tālruni uz LABO roku un turpiniet ar nākamo uzdevumu.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Turiet pieskarties ar tālruni degunam %ld sekundes ilgi";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Tagad, turot elkoni saliektu, vairākas reizes pieskarieties ar tālruni degunam.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Tagad, turot elkoni saliektu ar tālruni KREISAJĀ rokā, vairākas reizes pieskarieties ar tālruni degunam.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Tagad, turot elkoni saliektu ar tālruni LABAJĀ rokā, vairākas reizes pieskarieties ar tālruni degunam.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Turpiniet veikt karalienes sveicienu %ld sekundes ilgi.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Sagatavojieties veikt karalienes sveicienu (mājiet ar roku, kustinot plaukstas locītavu).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Sagatavojieties veikt karalienes sveicienu ar tālruni KREISAJĀ rokā (mājiet ar roku, kustinot plaukstas locītavu).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Sagatavojieties veikt karalienes sveicienu ar tālruni LABAJĀ rokā (mājiet ar roku, kustinot plaukstas locītavu).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Darbība pabeigta.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Šī darbība mēra roku trīci dažādās pozīcijās. Atrodiet vietu, kur varat ērti sēdēt šīs darbības veikšanas laikā.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Turiet tālruni vairāk skartajā rokā, kā parādīts zemāk redzamajā attēlā.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "uzdevums";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "divi uzdevumi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "trīs uzdevumi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "četri uzdevumi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "pieci uzdevumi";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Jums tiks lūgts veikt %@, sēžot ar tālruni rokā.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Turiet tālruni KREISAJĀ rokā, kā parādīts zemāk redzamajā attēlā.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Turiet tālruni LABAJĀ rokā, kā parādīts zemāk redzamajā attēlā.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Jums tiks lūgts veikt %@, sēžot ar tālruni vispirms vienā rokā, pēc tam — otrā rokā.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Trīces uzdevums";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifikācija";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Verificējiet savu e-pastu";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Jūs esat pabeidzis darbību.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Ejiet uz priekšu un atpakaļ taisnā līnijā %@ ilgi. Staigājiet kā parasti.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Veiciet pilnu apli un pēc tam nekustīgi stāviet %@ ilgi.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Ielieciet ierīci kabatā vai somā un izpildiet audio norādījumus.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Pieskarieties \"Sākt\", kad esat gatavs sākt.\nPēc tam ielieciet ierīci kabatā vai somā un izpildiet audio norādījumus.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Atrodiet vietu, kur bez palīdzības varat droši noiet apmēram %ld soļus taisnā līnijā.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Atrodiet vietu, kur varat droši staigāt uz priekšu un atpakaļ taisnā līnijā. Mēģiniet staigāt nepārtraukti, pagriežoties ceļa galā, it kā staigātu apkārt konusam.\n\nTālāk jums tiks uzdots apgriezties pilnu apli, tad nekustīgi stāvēt ar rokām gar sāniem un kājām plecu platumā.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Šī darbība mēra jūsu gaitu un līdzsvaru, kad staigājat un stāvat. Neturpiniet, ja nevarat droši staigāt bez palīdzības.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Ejiet līdz pat %@ soļus taisnā līnijā.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Apgriezieties un ej atpakaļ uz vietu, kur sākāt.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stāviet %@ ilgi.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Tagad nekustīgi stāviet %@ ilgi.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gaita un līdzsvars";
+
