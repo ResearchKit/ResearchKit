@@ -179,7 +179,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     if (!_containerView) {
         _containerView = [UIView new];
     }
-    [self addSubview:_containerView];
+    [self.contentView addSubview:_containerView];
 }
 
 - (void)addContainerViewToSelfConstraints {
@@ -187,21 +187,21 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeTop
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeTop
                                     multiplier:1.0
                                       constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeLeft
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeLeft
                                     multiplier:1.0
                                       constant:_leftRightMargin],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeRight
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeRight
                                     multiplier:1.0
                                       constant:-_leftRightMargin]
@@ -291,7 +291,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     [self addDetailLabelConstraints];
     [self addCheckViewToContainerViewConstraints];
     [self addContainerViewBottomConstraint];
-    [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:self
+    [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
                                                                   attribute:NSLayoutAttributeBottom
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:_containerView
