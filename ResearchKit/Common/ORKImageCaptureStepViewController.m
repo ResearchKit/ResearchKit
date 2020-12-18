@@ -299,11 +299,13 @@
 }
 
 - (void)setCapturedImageData:(NSData *)capturedImageData {
+    BOOL shouldRemoveFile = capturedImageData != nil;
+    
     _capturedImageData = capturedImageData;
     _imageCaptureView.capturedImage = capturedImageData ? [UIImage imageWithData:capturedImageData] : nil;
     
     // Remove the old file, if it exists, now that new data was acquired or reset
-    if (_fileURL) {
+    if (_fileURL && shouldRemoveFile) {
         [[NSFileManager defaultManager] removeItemAtURL:_fileURL error:nil];
         // Force the file to be rewritten the next time the result is requested
         _fileURL = nil;
