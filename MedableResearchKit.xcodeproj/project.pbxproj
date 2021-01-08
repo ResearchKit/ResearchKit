@@ -1252,6 +1252,8 @@
 		A17DE997233D069A00A19A73 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		A17DE998233D06A600A19A73 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		A17DE999233D06B300A19A73 /* zh-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-TW"; path = "zh-TW.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		A3E409F725A9198600D5EF3B /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		A3E40A0B25A91A4600D5EF3B /* bn-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "bn-IN"; path = "bn-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStep.h; sourceTree = "<group>"; };
 		B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSharingStep.m; sourceTree = "<group>"; };
 		B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStepViewController.h; sourceTree = "<group>"; };
@@ -3572,6 +3574,8 @@
 				"zu-ZA",
 				"ar-SA",
 				"pa-IN",
+				"de-AT",
+				"bn-IN",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -4073,6 +4077,8 @@
 				D0E466832543874800711EEB /* zu-ZA */,
 				D0E466842543874800711EEB /* ar-SA */,
 				D0E466852543874800711EEB /* pa-IN */,
+				A3E409F725A9198600D5EF3B /* de-AT */,
+				A3E40A0B25A91A4600D5EF3B /* bn-IN */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
