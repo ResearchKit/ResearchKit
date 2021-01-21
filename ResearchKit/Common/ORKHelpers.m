@@ -450,16 +450,7 @@ NSURL *ORKURLForRelativePath(NSString *relativePath) {
     }
     
     NSURL *homeDirectoryURL = ORKHomeDirectoryURL();
-    NSURL *url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:NO relativeToURL:homeDirectoryURL];
-    
-    if (url != nil) {
-        BOOL isDirectory = NO;;
-        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:url.path isDirectory:&isDirectory];
-        if (fileExists && isDirectory) {
-            url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:YES relativeToURL:homeDirectoryURL];
-        }
-    }
-    return url;
+    return [NSURL URLWithString:relativePath relativeToURL:homeDirectoryURL];
 }
 NSString *ORKRelativePathForURL(NSURL *url) {
     if (!url) {

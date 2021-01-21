@@ -288,6 +288,7 @@
 		65EF3C0721B7BAE6007BE0D6 /* ORKTouchAbilitySwipeTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF3C0521B7BAE6007BE0D6 /* ORKTouchAbilitySwipeTrial.m */; };
 		65EF3C0A21B7BE2C007BE0D6 /* ORKTouchAbilitySwipeContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF3C0821B7BE2C007BE0D6 /* ORKTouchAbilitySwipeContentView.h */; };
 		65EF3C0B21B7BE2C007BE0D6 /* ORKTouchAbilitySwipeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF3C0921B7BE2C007BE0D6 /* ORKTouchAbilitySwipeContentView.m */; };
+		67C6B8B125BA2D61009B2E89 /* ORKHelpersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C6B8B025BA2D61009B2E89 /* ORKHelpersTests.m */; };
 		7118AC6720BF6A3A00D7A6BB /* Sentence7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7118AC6020BF6A3900D7A6BB /* Sentence7.wav */; };
 		7118AC6820BF6A3A00D7A6BB /* Sentence4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7118AC6120BF6A3A00D7A6BB /* Sentence4.wav */; };
 		7118AC6920BF6A3A00D7A6BB /* Sentence6.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7118AC6220BF6A3A00D7A6BB /* Sentence6.wav */; };
@@ -1225,6 +1226,7 @@
 		65EF3C0521B7BAE6007BE0D6 /* ORKTouchAbilitySwipeTrial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilitySwipeTrial.m; sourceTree = "<group>"; };
 		65EF3C0821B7BE2C007BE0D6 /* ORKTouchAbilitySwipeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilitySwipeContentView.h; sourceTree = "<group>"; };
 		65EF3C0921B7BE2C007BE0D6 /* ORKTouchAbilitySwipeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilitySwipeContentView.m; sourceTree = "<group>"; };
+		67C6B8B025BA2D61009B2E89 /* ORKHelpersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKHelpersTests.m; sourceTree = "<group>"; };
 		7118AC5920BF6A0000D7A6BB /* Noise.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Noise.wav; sourceTree = "<group>"; };
 		7118AC5B20BF6A1200D7A6BB /* Window.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Window.wav; sourceTree = "<group>"; };
 		7118AC6020BF6A3900D7A6BB /* Sentence7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sentence7.wav; sourceTree = "<group>"; };
@@ -2825,6 +2827,7 @@
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
 				86CC8EAB1AC09383001CCD89 /* ORKDataLoggerManagerTests.m */,
 				86CC8EAC1AC09383001CCD89 /* ORKDataLoggerTests.m */,
+				67C6B8B025BA2D61009B2E89 /* ORKHelpersTests.m */,
 				86CC8EAD1AC09383001CCD89 /* ORKHKSampleTests.m */,
 				86D348001AC16175006DB02B /* ORKRecorderTests.m */,
 				86CC8EAF1AC09383001CCD89 /* ORKResultTests.m */,
@@ -4623,6 +4626,7 @@
 			files = (
 				248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */,
 				86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */,
+				67C6B8B125BA2D61009B2E89 /* ORKHelpersTests.m in Sources */,
 				FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */,
 				86CC8EB81AC09383001CCD89 /* ORKHKSampleTests.m in Sources */,
 				BCB96C131B19C0EC002A0B96 /* ORKStepTests.m in Sources */,
