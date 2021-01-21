@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Zusätzliche Informationen";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Schließen Sie Ihr %@ und beobachten Sie den Punkt in der Mitte des quadratischen Rasters.\n\nMarkieren Sie mit Ihrem Finger oder Stift alle Verzerrungen, die Sie sehen, wie verschwommene oder wellige Linien.\n\nWenn Sie fertig sind, können Sie irgendwo außerhalb des Rasters nach links wischen.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Halten Sie das Gerät während des gesamten Tests 30 cm von Ihrem Gesicht entfernt und in Augenhöhe.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Diese Aktivität hilft bei der Erkennung von Problemen im Sehvermögen des Benutzers.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Linkes Auge";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Rechtes Auge";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amsler-Gitter";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Audio kann nicht aufgenommen werden";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Sagen Sie \"Aaaaah\" in das Mikrofon, so lange Sie können.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Diese Aktivität wertet Ihre Stimme aus, indem Sie sie mit dem Mikrofon an der Unterseite Ihres Geräts aufzeichnen.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Atmen Sie tief durch und sagen Sie \"Aaaaah” in das Mikrofon, so lange es geht. Halten Sie eine konstante Stimmlautstärke, damit die Audiobalken blau bleiben.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Bitte warten Sie, während wir den Hintergrundgeräuschpegel überprüfen.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Stimme";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tippen Sie auf Weiter, wenn Sie bereit sind.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Zu laut";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Der Umgebungsgeräuschpegel ist zu laut, um Ihre Stimme aufzunehmen. Bitte gehen Sie an einen ruhigeren Ort und versuchen Sie es erneut.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Verwenden Sie Ihren Finger oder Stift, um das Raster direkt zu markieren, oder wischen Sie außerhalb des Rasters nach links, um zu beenden.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amsler-Gitter";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Aufgabe starten";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Grafik der Audioleiste";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Mit Anmerkungen versehen";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Zurück";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "PDF-Miniaturansicht ausblenden";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Suchleiste ausblenden";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Teilen";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "PDF-Miniaturansicht anzeigen";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Suchleiste anzeigen";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Die Abbildung eines Häkchens in einem blauen Kreis bedeutet Erfolg";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Mit VoiceOver kann die Schaltfläche direkt angetippt werden. Es befindet sich in der Nähe der Bildschirmmitte.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Tastatur verwerfen";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = "und";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Punkt: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Bereich von %@ bis %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Stapel bestehend aus";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Aufnahmevorschau";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Aufgenommenes Bild";
+
+/* (No Comment) */
+"AX_SELECTED" = "Ausgewählt";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Berühren Sie den Bildschirm und bewegen Sie den Finger, um zu unterschreiben";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Bezeichnetes Unterschriftenfeld";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Unterzeichnet";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Nicht unterzeichnet";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Antwort-Schieber. Bereich von %@ bis %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Wenn die Aufnahme beginnt, aktivieren Sie ein zweites Mal, um die Aufnahme zu stoppen.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Sprachwellenform";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Antippen für einen Finger";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Antippen für zwei Finger";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Schaltflächen sind nun direkt antippbar.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Antippbare Schaltflächen";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Aktivieren, um die Schaltflächen direkt antippbar zu machen.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Mit VoiceOver können Sie den Bildschirm durch Berührung erkunden, um zu erfahren, wo sich die Schaltflächen befinden. Aktivieren Sie eine der Schaltflächen, um die Schaltflächen direkt antippbar zu machen.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktivieren, um den Test zu starten. Wenn der Test beginnt, tippen Sie direkt auf diese Schaltfläche, wenn Sie ein Geräusch in Ihrem linken Ohr hören.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Antippen für linkes Ohr";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktivieren, um den Test zu starten. Wenn der Test beginnt, tippen Sie direkt auf diese Schaltflächen, wenn Sie ein Geräusch im rechten Ohr hören.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Antippen für rechtes Ohr";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Mit VoiceOver können Sie den Bildschirm durch Berührung erkunden, um zu erfahren, wo sich die Schaltflächen für jedes Ohr befinden. Wenn der Test beginnt, können die Schaltflächen direkt angetippt werden. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Scheibe mit der Größe %@ kann nicht auf Scheibe mit der Größe %@ platziert werden";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Doppeltippen zum Platzieren der Scheibe";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Doppeltippen, um die oberste Scheibe auszuwählen";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Zielvorgabe";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Turm";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Hat Scheibe mit den Größen %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Leer";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Mit VoiceOver können die Schaltflächen im Test direkt angetippt werden.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Unbeschriftetes Bild";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Nicht ausgewählt";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Videoaufnahme abgeschlossen";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Videoaufnahmevorschau";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktiv";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "korrekt";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "fehlerhaft";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Memory-Spiel Kachel";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "ruhend";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nein";
+
+/* (No Comment) */
+"BOOL_YES" = "Ja";
+
+/* Button titles */
+"BUTTON_AGREE" = "Stimme zu";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Anwenden";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Abbrechen";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Löschen";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Antwort löschen ";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Urheberrecht";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Stimme nicht zu";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Erledigt";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Erste Schritte";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Erfahren Sie mehr";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Weiter";
+
+/* (No Comment) */
+"BUTTON_OK" = "OK";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Ergebnisse verwerfen";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Für später speichern";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Aufgabe beenden";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Diese Antwort kann nicht geändert werden.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Speichern";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Überspringen";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Diese Frage überspringen";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Stoppuhr starten";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera im geteilten Bildschirm nicht verfügbar.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Bild aufnehmen";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Aufnahme starten";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Bild erneut aufnehmen";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Video erneut aufnehmen";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Aufnahme beenden";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Keine Kamera gefunden.  Dieser Schritt kann nicht abgeschlossen werden.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Das aufgenommene Bild konnte nicht gespeichert werden.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Für aufgenommene Bilder wurde kein Ausgabeverzeichnis angegeben.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Um diesen Schritt abzuschließen, erlauben Sie dieser App den Zugriff auf die Kamera in den Einstellungen.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Keine Daten";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwörter stimmen nicht überein.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Passwort erneut eingeben";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bestätigen";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Datumsangabe";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Name (in Druckbuchstaben) von %@";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "Unterschrift von %@";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Erfahren Sie mehr";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Nachname";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Vorname";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Erforderlich";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Zustimmungserklärung";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Seite %1$ ld von %2$ ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Überprüfen";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Überprüfen Sie das untenstehende Formular und tippen Sie auf Zustimmen, wenn Sie bereit sind, fortzufahren.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Überprüfen";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Datenerfassung";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Datennutzung";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Privatsphäre ";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Studienumfrage";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Studienaufgaben";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Zeitliche Verpflichtung";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Herzlich Willkommen";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Verlassen der Studie";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Meine Daten nur an %@ weitergeben";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Teilen Sie meine Daten mit %@ und qualifizierten Forschern weltweit";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ erhält Ihre Studiendaten aus Ihrer Teilnahme an dieser Studie.\n\nDie Weitergabe Ihrer codierten Studiendaten im weiteren Sinne (ohne Informationen wie Ihren Namen) kann dieser und zukünftigen Forschung zugute kommen.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Freigabeoptionen";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Bitte unterzeichnen Sie mit Ihrem Finger im Feld unten.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Hier unterschreiben";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Unterschrift";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Starten der Tätigkeit in";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ Sekunden.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Diese Aktivität identifiziert Hörschwellenpegel einer Person in dB HL-Skala.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Stellen Sie sicher, dass die Gerätelautstärke auf den maximalen Pegel eingestellt ist.\n\nWährend dieser Aufgabe wird ein subtiles Geräusch entweder im linken oder rechten Ohr gespielt.\n\nHören Sie genau zu und tippen Sie jedes Mal auf die Schaltfläche, wenn Sie einen Ton hören.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding-Fragebogen.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Wählen Sie Ihre Präferenz für \"besseres Ohr\", falls vorhanden";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "links";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "keine Präferenz";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "rechts";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Geräusch-Audiometrie";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Wählen Sie ein Datum";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Geburtsdatum";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-Mail Adresse";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Berechnen";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Diese Aktivität misst den Umgebungsschalldruckpegel. Wenn die Geräuschpegel zu hoch sind, können Sie nicht fortfahren. Bitte gehen Sie an einen ruhigeren Ort, um diese Aufgabe zu erledigen oder wiederholen Sie diese Aktivität zu einem späteren Zeitpunkt.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Schwelle: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "SPL-Messgerät";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Es konnten nicht genügend Protokolldateien entfernt werden, um den Schwellenwert zu erreichen";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Datei wurde nicht als gelöscht markiert (nicht hochgeladen markiert)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Datei konnte nicht erstellt werden";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Mehrere Fehler beim Entfernen von Protokollen";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Fehler beim Einstellen des Attributs";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Es wurden keine erfassten Daten gefunden.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Kein Ausgabeverzeichnis angegeben";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Entfernung (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Herzfrequenz (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gehen Sie für %1$ @ im Freien in Ihrem schnellstmöglichen Tempo. Wenn Sie fertig sind, setzen Sie sich und ruhen Sie sich bequem für %2$ @ aus. Um zu beginnen, tippen Sie auf Erste Schritte.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Diese Aktivität überwacht Ihre Herzfrequenz und misst, wie weit Sie in %1$ @ gehen können.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Setzen Sie sich bequem hin für %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gehen Sie so schnell wie möglich für %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Typ I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Typ II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Typ III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Typ IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Typ V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Typ VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Passwort vergessen?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Weiblich";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Wählen Sie ein Geschlecht";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Geschlecht";
+
+/* (No Comment) */
+"GENDER_MALE" = "Männlich";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Sonstiges";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Diese Aktivität misst die Funktion Ihrer oberen Extremitäten, indem Sie aufgefordert werden, einen Stift in ein Loch zu stecken. Sie werden aufgefordert, dies %@ mal zu tun.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Es werden sowohl Ihre linke als auch Ihre rechte Hand getestet.\nSie müssen den Stift so schnell wie möglich aufheben, ihn in das Loch stecken und, nachdem Sie dies %@ mal getan haben, wieder %@ mal herausnehmen.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sowohl die rechte als auch die linke Hand werden getestet.\nSie müssen den Stift so schnell wie möglich aufheben, ihn in das Loch stecken und, nachdem Sie dies %@ mal getan haben, wieder %@ mal herausnehmen.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Stecken Sie den Stift mit der linken Hand in das Loch.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Stecken Sie den Stift mit der rechten Hand in das Loch.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Setzen Sie den Stift mit der linken Hand hinter die Linie.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Setzen Sie den Stift mit der rechten Hand hinter die Linie.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Heben Sie den Stift mit zwei Fingern auf.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Heben Sie die Finger, um den Stift fallen zu lassen.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Lochstift-Test";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ungültige E-Mail-Adresse: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Das Element Schlüsselbund konnte nicht hinzugefügt werden.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Das Element Schlüsselbund konnte nicht gelöscht werden.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Das Element Schlüsselbund konnte nicht gefunden werden.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Das Element Schlüsselbund konnte nicht aktualisiert werden.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Strecken Sie Ihr linkes Knie aus. Dann tippen Sie irgendwo hin.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Strecken Sie Ihr rechtes Knie aus. Dann tippen Sie irgendwo hin.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Diese Aktivität misst, wie weit Sie Ihr linkes Knie strecken können.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Diese Aktivität misst, wie weit Sie Ihr rechtes Knie strecken können.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Setzen Sie sich auf die Sesselkante. Wenn Sie beginnen, legen Sie Ihr Gerät für eine Messung auf das linke Knie. Bitte schalten Sie den Ton auf Ihrem Gerät ein, damit Sie Anweisungen hören können.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Setzen Sie sich auf die Sesselkante. Wenn Sie beginnen, legen Sie Ihr Gerät für eine Messung auf das rechte Knie. Bitte schalten Sie den Ton auf Ihrem Gerät ein, damit Sie Anweisungen hören können.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legen Sie Ihr Gerät wie abgebildet mit dem Bildschirm nach außen auf das linke Knie.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legen Sie Ihr Gerät wie abgebildet mit dem Bildschirm nach außen auf das rechte Knie.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn Sie bereit sind, tippen Sie auf den Bildschirm, um zu beginnen, und strecken Sie Ihr linkes Knie so weit wie möglich aus. Tippen Sie erneut, wenn Sie fertig sind.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn Sie bereit sind, tippen Sie auf den Bildschirm, um zu beginnen, und strecken Sie Ihr rechtes Knie so weit wie möglich aus. Tippen Sie erneut, wenn Sie fertig sind.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Linkes Knie Bewegungsbereich";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Rechtes Knie Bewegungsbereich";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legen Sie Ihr Gerät auf das linke Knie";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legen Sie Ihr Gerät auf das rechte Knie";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Erfahren Sie mehr über die Datenfreigabe";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Erfahren Sie mehr darüber, wie Daten gesammelt werden";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Erfahren Sie mehr darüber, wie Daten verwendet werden";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Erfahren Sie mehr darüber, wie Ihre Privatsphäre und Identität geschützt sind";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Erfahren Sie mehr über die Umfrage";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Erfahren Sie mehr über die damit verbundenen Aufgaben";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Erfahren Sie mehr über die Auswirkungen der Studie auf Ihre Zeit";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Erfahren Sie zuerst mehr über die Studie";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Erfahren Sie mehr über Aussteigen";
+
+/* Limb values. */
+"LIMB_LEFT" = "links";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption muss links oder rechts sein";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "rechts";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Es konnte kein Ergebnis für die eingegebene Adresse gefunden werden. Bitte stellen Sie sicher, dass die Adresse gültig ist.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Entweder sind Sie nicht mit dem Internet verbunden oder Sie haben die maximale Anzahl von Adresssuchanfragen überschritten. Wenn Sie nicht mit dem Internet verbunden sind, schalten Sie bitte Ihr WLAN ein, um diese Frage zu beantworten, überspringen Sie diese Frage, wenn die Schaltfläche \"Überspringen\" verfügbar ist, oder kommen Sie zurück zur Umfrage, wenn Sie mit dem Internet verbunden sind. Andernfalls versuchen Sie es bitte in ein paar Minuten erneut.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Der Zugriff auf Standortdienste wurde verweigert. Bitte erteilen Sie dieser App über die Einstellungen die Berechtigung, Standortdienste zu verwenden.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Der aktuelle Standort kann nicht ermittelt werden. Bitte geben Sie eine Adresse ein oder wechseln Sie gegebenenfalls an einen Ort mit besserem GPS-Signal.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Angegebene Adresse konnte nicht gefunden werden";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Adresse eingeben";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Einloggen";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "ft";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "in";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "lb";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "oz";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Spiel abgeschlossen";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Um fortzufahren, tippen Sie auf Weiter";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Sequenz abgeschlossen";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Die Gedächtnisaktivität wurde mit Unterstützung von Katherine Possin, PhD und Joel Kramer, PhD von der University of California, San Francisco, entwickelt.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Sie haben die Zeit nicht ganz durchgehalten. Tippen Sie auf Weiter, um fortzufahren.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Versuchen Sie es erneut";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tippen Sie auf %@ in umgekehrter Reihenfolge";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tippen Sie auf %@ in der Reihenfolge, in der sie aufleuchten";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Um fortzufahren, tippen Sie auf Weiter";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Pausiert";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "%@ aufleuchten sehen";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Punktzahl";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Ihre Zeit ist abgelaufen.\nTippen Sie auf Weiter, um fortzufahren.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Die Zeit ist abgelaufen";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Wählen Sie eine Antwort";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Der sog. „Paced Auditory Serial Addition Test“ misst die Verarbeitungsgeschwindigkeit und Berechnungsfähigkeit Ihrer auditiven Informationen.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authentifiziert";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Passcode bestätigen";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bestätigen Sie Ihren neuen Passcode";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Passcode vergessen?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Die Passcodes stimmten nicht überein. Versuchen Sie es noch einmal.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Passcode falsch";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Geben Sie Ihren neuen Passcode ein";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Geben Sie Ihren alten Passcode ein";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Passcode eingeben";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Passcode gespeichert";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcodeeingabefortschrittsanzeige";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ von %@ eingegebenen Ziffern";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Nur numerische Zeichen erlaubt.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch-ID-Fehler";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Bitte mit Touch ID authentisieren";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Passwort eingeben";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Passwort";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Der sog. „Paced Auditory and Visual Serial Addition Test“ misst Ihre auditive und visuelle Informationsverarbeitungsgeschwindigkeit und Berechnungsfähigkeit.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Tippen, um auszuwählen";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Zum Schreiben tippen";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Tippen, um zu antworten";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Merken Sie sich diese erste Ziffer.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Fügen Sie diese neue Ziffer zur vorherigen hinzu.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Einzelne Ziffern werden alle %@ Sekunden angezeigt.\nSie müssen jede neue Ziffer mit der unmittelbar davor liegenden Ziffer addieren.\nAchtung, Sie dürfen keine laufende Summe berechnen, sondern nur die Summe der letzten beiden Zahlen.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Der sog. „Paced Visual Serial Addition Test“ misst Ihre Verarbeitungsgeschwindigkeit und Berechnungsfähigkeit für visuelle Informationen.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$ @ überschreitet den maximal zulässigen Wert (%2$ @).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$ @ ist kleiner als der minimal zulässige Wert (%2$ @).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ ist kein gültiger Wert.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Ungültiger Wert";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Bewegungsbereich";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Schütteln Sie das Gerät schnell, wenn der blaue Kreis erscheint";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Versuch %@ von %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Diese Aktivität bewertet die Zeit, die Sie benötigen, um auf ein visuelles Signal zu reagieren.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schütteln Sie das Gerät in jede beliebige Richtung, sobald der blaue Punkt auf dem Bildschirm erscheint. Sie werden aufgefordert, dies %D mal zu tun.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaktionszeit";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Bestätigungs-E-Mail erneut senden";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tippen Sie auf den untenstehenden Link, wenn Sie keine Bestätigungs-E-Mail erhalten haben und diese erneut gesendet werden soll.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Heben Sie den linken Arm nach oben. Dann tippen Sie irgendwo hin.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Heben Sie den rechten Arm nach oben. Dann tippen Sie irgendwo hin.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Diese Aktivität misst, wie weit Sie Ihre linke Schulter strecken können.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Diese Aktivität misst, wie weit Sie Ihre rechte Schulter strecken können.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Wenn Sie beginnen, legen Sie Ihr Gerät für eine Messung auf die linke Schulter. Bitte schalten Sie den Ton auf Ihrem Gerät ein, damit Sie Anweisungen hören können.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Wenn Sie beginnen, legen Sie Ihr Gerät für eine Messung auf die rechte Schulter. Bitte schalten Sie den Ton auf Ihrem Gerät ein, damit Sie Anweisungen hören können.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legen Sie Ihr Gerät wie abgebildet mit dem Bildschirm nach außen auf die linke Schulter.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legen Sie Ihr Gerät wie abgebildet mit dem Bildschirm nach außen auf die rechte Schulter.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Tippen Sie auf den Bildschirm, um zu beginnen, und heben Sie den linken Arm so weit wie möglich an. Tippen Sie erneut, wenn Sie fertig sind.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn Sie bereit sind, tippen Sie auf den Bildschirm, um zu beginnen, und heben Sie Ihren rechten Arm so weit wie möglich an. Tippen Sie erneut, wenn Sie fertig sind.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bewegungsbereich linke Schulter";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Bewegungsbereich rechte Schulter";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legen Sie Ihr Gerät auf die linke Schulter";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legen Sie Ihr Gerät auf die rechte Schulter";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tippen Sie zunächst auf Erste Schritte und schauen Sie genau hin.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Einige der %@ leuchten nacheinander auf. Tippen Sie auf die %@ in der gleichen Reihenfolge, in der sie aufleuchteten.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Einige der %@ leuchten nacheinander auf. Tippen Sie auf %@ in der umgekehrten Reihenfolge, in der sie aufleuchteten.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Diese Aktivität misst Ihr räumliches Kurzzeitgedächtnis, indem Sie aufgefordert werden, die Reihenfolge zu wiederholen, in der %@ aufleuchtet.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "Blumen";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "Blumen";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Räumliches Gedächtnis";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tippen Sie auf \"Audio abspielen\", stellen Sie die Lautstärke auf ein komfortables Niveau ein und tippen Sie dann auf \"Audio stoppen\", um fortzufahren.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volumenkalibrierung";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Im Rahmen dieses Tests werden Sie:\n\n Einen Satz hören.\n\nDeutlich wiederholen, was Sie gehört haben, oder voraus springen, um das, was Sie gehört haben, mit der Tastatur einzutippen. \n\nWenn Sie wiederholen, was Sie gehört haben, haben Sie die Möglichkeit, die von der Spracherkennungsmaschine erzeugte Transkription zu ändern.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Diese Aktivität misst die Verständlichkeit der Sprache, wenn sie in lauten Umgebungen präsentiert wird.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Wiederholen Sie, was Sie gehört haben.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Sprechen";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Audio abspielen";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Ein Satz, der mit Hintergrundgeräuschen bei einem zufälligen Signal-Rausch-Verhältnis (SNR) gemischt wird, wird nur einmal abgespielt.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Zuhören";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Audio stoppen";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Sprache mit Hintergrundgeräuschen";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Spracherkennung fehlgeschlagen.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Fehler beim Initialisieren der Spracherkennung.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Drücken Sie die Schaltfläche, um die Aufnahme vor dem Sprechen zu starten.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Diese Aktivität zeichnet Ihre Sprache mit dem Mikrofon am unteren Rand des Geräts auf und überträgt sie in Text.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Bearbeiten Sie die Texttranskription, um eventuelle Fehlinterpretationen der Rede zu korrigieren.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Transkription bearbeiten";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Aufnahme starten";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Aufnahme beenden";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Ihre Transkription wird hier erscheinen.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Spracherkennung";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$ @ von %2$ @";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "BLAU";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "GRÜN";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "ROT";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "GELB";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Jedes Mal, wenn ein Wort erscheint, wählen Sie den ersten Buchstaben des Namens der angezeigten FARBE.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Wenn Sie bereit sind, mit der Stroop-Aktivität zu beginnen, tippen Sie auf Erste Schritte.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Wählen Sie den ersten Buchstaben des Namens der angezeigten FARBE.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Tippen Sie auf";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Tippen Sie auf Weiter, um zu beginnen.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Tippen Sie so konsequent wie möglich mit zwei Fingern auf die Schaltflächen.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Tippen Sie mit der LINKEN Hand auf die Schaltflächen.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Tippen Sie mit der RECHTEN Hand auf die Schaltflächen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Diese Aktivität misst Ihre Klopfgeschwindigkeit.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Tippen Sie mit einem Finger, dann mit dem anderen. Versuchen Sie, Ihre Tippbewegungen so gleichmäßig wie möglich zu gestalten. Tippen Sie weiter auf %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Tippen Sie mit zwei Fingern der linken Hand abwechselnd auf die Schaltflächen auf dem Bildschirm.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Wiederholen Sie nun den gleichen Test mit der linken Hand.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Tippen Sie abwechselnd mit zwei Fingern derselben Hand auf die Schaltflächen auf dem Bildschirm.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Stellen Sie Ihr Gerät auf eine waagrechte Fläche.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Tippen Sie mit zwei Fingern der rechten Hand abwechselnd auf die Schaltflächen auf dem Bildschirm.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Wiederholen Sie nun den gleichen Test mit der rechten Hand.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Diese Hand überspringen";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Tippgeschwindigkeit";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Linke Hand";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Rechte Hand";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Ihre Daten werden analysiert und Sie werden benachrichtigt, wenn Ihre Ergebnisse vorliegen.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Aktivität abgeschlossen";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textinhalt überschreitet maximale Länge: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Verwenden Sie für jeden Test dasselbe Hilfsgerät.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Hilfsgerät";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Gehen Sie bis zu %@ in einer geraden Linie.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Gehen Sie dorthin zurück, wo Sie angefangen haben.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tippen Sie auf Weiter, wenn Sie fertig sind.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Drehen Sie sich um.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Tippen Sie auf Weiter, um zu beginnen.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finden Sie einen Ort, am besten draußen, wo Sie für ca. %@ in einer geraden Linie so schnell wie möglich, aber sicher gehen können. Verlangsamen Sie nicht, bis Sie die Ziellinie passiert haben.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Diese Aktivität misst die Funktion Ihrer unteren Extremitäten.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Keiner";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Einseitiger Stock";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Einseitige Krücke";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Beidseitiger Stock";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Beidseitige Krücke";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gehhilfe/Rollator";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Tippen Sie hier, um eine Antwort auszuwählen.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Verwenden Sie ein Hilfsgerät?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Tragen Sie eine Knöchel-Fuß-Orthese?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Zeitgesteuerter Spaziergang";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tippen Sie jedes Mal, wenn Sie einen Ton hören, auf die linke oder rechte Schaltfläche, um anzuzeigen, in welchem Ohr Sie den Ton hören.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Diese Aktivität misst Ihre Fähigkeit, verschiedene Geräusche zu hören.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Bevor Sie beginnen, schließen Sie die Kopfhörer an und setzen Sie sie auf.\n\nDas Geräusch ist sehr subtil und unterscheidet sich von einem normalen Alarmton.  Der Ton beginnt leise und nimmt dann langsam an Lautstärke zu.  Bitte achten Sie darauf und tippen Sie auf die linke oder rechte Schaltfläche, um anzuzeigen, in welchem Ohr Sie ihn hören.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Linkes Ohr";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Rechtes Ohr";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Sie sollten jetzt einen Ton hören. Stellen Sie die Lautstärke mithilfe der Bedienelemente an der Seite Ihres Geräts ein.\n\nTippen Sie auf eine beliebige Schaltfläche, wenn Sie bereit sind, zu beginnen.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Geräusch-Audiometrie";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, links";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, rechts";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Gesamte Tipps";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Berühren Sie eine beliebige Stelle, um fortzufahren";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Das Puzzle lösen";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Anzahl der Züge: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ich kann dieses Puzzle nicht lösen";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Diese Aktivität bewertet Ihre Rätsellösungsfähigkeiten.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Bewegen Sie den gesamten Stapel in so wenigen Zügen wie möglich auf die markierte Plattform.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Turm von Hanoi";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Tippen Sie auf Erste Schritte, um zu beginnen.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d Fehler)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d Fehler)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Diese Aktivität bewertet Ihre visuelle Aufmerksamkeit und Ihre Fähigkeit zwischen Aufgaben zu wechseln, indem sie die Zeit aufzeichnet, die benötigt wird, um eine Reihe von Punkten in der Reihenfolge anzutippen.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Tippen Sie nach dem Countdown abwechselnd auf Punkte zwischen Zahlen und Buchstaben. Tippen Sie zunächst auf die erste Zahl '1', gefolgt von den Zahlen '2' – '3' – '4' … bis Sie die Zahl '7' erreichen.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Tippen Sie nach dem Countdown abwechselnd auf Punkte zwischen Zahlen und Buchstaben. Tippen Sie zunächst auf die erste Zahl '1', dann auf den ersten Buchstaben 'A' und dann auf '2' – 'B' – '3' – 'C'… bis Sie die Zahl '7' erreichen.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Tun Sie dies so schnell wie möglich, ohne Fehler zu machen.";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Spurbildungstest";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Ich kann diese Aktivität nicht mit der LINKEN Hand ausführen.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Ich kann diese Aktivität mit beiden Händen ausführen.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Diese Tätigkeit kann ich nicht mit der RECHTEN Hand ausführen.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Halten Sie Ihr Handy %ld Sekunden lang mit gebeugtem Ellbogen";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Halten Sie Ihr Handy nun in Schulterhöhe mit gebeugtem Ellbogen.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Halten Sie nun Ihr Handy mit der LINKEN Hand in Schulterhöhe mit gebeugtem Ellbogen.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Halten Sie nun Ihr Handy mit der RECHTEN Hand in Schulterhöhe mit gebeugtem Ellbogen.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Halten Sie Ihr Handy %ld Sekunden lang mit gestreckter Hand.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Halten Sie nun Ihr Handy mit ausgestreckter Hand in Schulterhöhe.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Halten Sie nun Ihr Handy mit der LINKEN Hand in Schulterhöhe ausgestreckt.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Halten Sie nun Ihr Handy mit der RECHTEN Hand in Schulterhöhe ausgestreckt.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Fahren Sie zur nächsten Aufgabe fort.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Halten Sie Ihr Handy %ld Sekunden lang in Ihrem Schoß.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Bereiten Sie sich darauf vor, Ihr Handy im Schoß zu halten.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Bereiten Sie sich darauf vor, Ihr Handy mit der LINKEN Hand im Schoß zu halten.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Bereiten Sie sich darauf vor, Ihr Handy mit der RECHTEN Hand im Schoß zu halten.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tippen Sie auf Weiter, um fortzufahren.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Nun nehmen Sie das Handy in Ihre LINKE Hand und fahren mit der nächsten Aufgabe fort.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Nun nehmen Sie das Handy in Ihre RECHTE Hand und fahren mit der nächsten Aufgabe fort.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Halten Sie Ihr Handy %ld Sekunden lang an der Nase";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Halten Sie nun Ihren Ellbogen gebeugt und halten Sie Ihr Handy wiederholt an der Nase.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Halten Sie nun Ihren Ellbogen gebeugt, während Sie Ihr Handy in der LINKEN Hand halten. Halten Sie Ihr Handy wiederholt an der Nase.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Halten Sie nun Ihren Ellbogen gebeugt, während Sie Ihr Handy in der RECHTEN Hand halten. Halten Sie Ihr Telefon wiederholt an der Nase.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Führen Sie eine Queen-Wave für %ld Sekunden durch.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Bereiten Sie sich auf eine Queen-Wave vor (Welle durch Drehen des Handgelenks).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Bereiten Sie sich darauf vor, eine Queen-Wave mit dem Handy in der LINKEN Hand zu machen (Welle durch Drehen des Handgelenks).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Bereiten Sie sich darauf vor, eine Queen-Wave mit Ihrem Handy in der RECHTEN Hand zu machen (Welle durch Drehen des Handgelenks).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivität abgeschlossen.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Diese Aktivität misst das Zittern Ihrer Hände in verschiedenen Positionen. Finden Sie einen Ort, an dem Sie für die Dauer dieser Aktivität bequem sitzen können.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Halten Sie das Handy in Ihrer stärker betroffenen Hand, wie in der Abbildung unten gezeigt.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "eine Aufgabe";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "zwei Aufgaben";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "drei Aufgaben";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "vier Aufgaben";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "fünf Aufgaben";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Sie werden aufgefordert, %@ durchzuführen, während Sie mit dem Handy in der Hand sitzen.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Halten Sie das Handy in der LINKEN Hand, wie in der Abbildung unten gezeigt.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Halten Sie das Handy in der RECHTEN Hand, wie in der Abbildung unten gezeigt.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Sie werden aufgefordert, %@ beim Sitzen mit dem Handy zuerst in einer Hand, dann wieder mit der anderen Hand durchzuführen.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Tremor-Aktivität";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifikation";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Bestätigen Sie Ihre E-Mail-Adresse";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Sie haben die Aktivität abgeschlossen.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gehen Sie in einer geraden Linie für %@ hin und her. Gehen Sie, wie Sie es normalerweise tun würden.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Drehen Sie sich in einem vollen Kreis und stehen Sie dann für %@ still.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Stecken Sie Ihr Gerät in eine Tasche oder eine Handtasche und befolgen Sie die Audioanweisungen.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tippen Sie auf Erste Schritte, wenn Sie bereit sind, zu beginnen.\nLegen Sie Ihr Gerät dann in eine Tasche oder eine Handtasche und befolgen Sie die Audioanweisungen.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Finden Sie einen Ort, an dem Sie ohne fremde Hilfe etwa %ld Schritte in gerader Linie sicher gehen können.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Finden Sie einen Ort, an dem Sie sicher in einer geraden  Linie hin und her gehen können. Versuchen Sie, kontinuierlich zu gehen, indem Sie sich an den Enden Ihres Weges drehen, als ob Sie um einen Kegel gehen.\n\nAls nächstes werden Sie angewiesen, sich in einem vollen Kreis umzudrehen, dann stehen Sie still mit den Armen an der Seite und den Füßen etwa schulterbreit auseinander.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Diese Aktivität misst Ihren Gang und Ihr Gleichgewicht, während Sie gehen und still stehen. Fahren Sie nicht fort, wenn Sie nicht sicher gehen können.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gehen Sie bis zu %ld Schritte in einer geraden Linie.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Drehen Sie sich um und gehen Sie zurück zu Ihrem Ausgangspunkt.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stillstand für %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stehen Sie jetzt für %@ still.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gang und Gleichgewicht";
+
