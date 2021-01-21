@@ -1349,7 +1349,7 @@
 "TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "അടുത്ത ടാസ്‌ക്കിലേക്ക് തുടരുക.";
 
 /* (No Comment) */
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "% Ld സെക്കൻഡ് സമയത്തേക്ക് നിങ്ങളുടെ ഫോൺ മടിയിൽ പിടിക്കുക.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "%ld സെക്കൻഡ് സമയത്തേക്ക് നിങ്ങളുടെ ഫോൺ മടിയിൽ പിടിക്കുക.";
 
 /* (No Comment) */
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "നിങ്ങളുടെ ഫോൺ മടിയിൽ പിടിക്കാൻ തയ്യാറെടുക്കുക.";

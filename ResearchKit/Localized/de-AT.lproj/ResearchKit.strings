@@ -479,7 +479,7 @@
 "ENVIRONMENTSPL_INTRO_TEXT" = "Diese Aktivität misst den Umgebungsschalldruckpegel. Wenn die Geräuschpegel zu hoch sind, können Sie nicht fortfahren. Bitte gehen Sie an einen ruhigeren Ort, um diese Aufgabe zu erledigen oder wiederholen Sie diese Aktivität zu einem späteren Zeitpunkt.";
 
 /* (No Comment) */
-"ENVIRONMENTSPL_THRESHOLD" = "Schwelle: % @ dBA";
+"ENVIRONMENTSPL_THRESHOLD" = "Schwelle: %@ dBA";
 
 /* Environment SPL */
 "ENVIRONMENTSPL_TITLE" = "SPL-Messgerät";
@@ -518,10 +518,10 @@
 "FITNESS_HEARTRATE_TITLE" = "Herzfrequenz (bpm)";
 
 /* (No Comment) */
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Gehen Sie für %1$ @ im Freien in Ihrem schnellstmöglichen Tempo. Wenn Sie fertig sind, setzen Sie sich und ruhen Sie sich bequem für % 2$ @ aus. Um zu beginnen, tippen Sie auf Erste Schritte.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gehen Sie für %1$ @ im Freien in Ihrem schnellstmöglichen Tempo. Wenn Sie fertig sind, setzen Sie sich und ruhen Sie sich bequem für %2$ @ aus. Um zu beginnen, tippen Sie auf Erste Schritte.";
 
 /* (No Comment) */
-"FITNESS_INTRO_TEXT_FORMAT" = "Diese Aktivität überwacht Ihre Herzfrequenz und misst, wie weit Sie in % 1$ @ gehen können.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Diese Aktivität überwacht Ihre Herzfrequenz und misst, wie weit Sie in %1$ @ gehen können.";
 
 /* (No Comment) */
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Setzen Sie sich bequem hin für %@.";
@@ -968,10 +968,10 @@
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tippen Sie zunächst auf Erste Schritte und schauen Sie genau hin.";
 
 /* (No Comment) */
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Einige der % @ leuchten nacheinander auf. Tippen Sie auf die % @ in der gleichen Reihenfolge, in der sie aufleuchteten.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Einige der %@ leuchten nacheinander auf. Tippen Sie auf die %@ in der gleichen Reihenfolge, in der sie aufleuchteten.";
 
 /* (No Comment) */
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Einige der % @ leuchten nacheinander auf. Tippen Sie auf %@ in der umgekehrten Reihenfolge, in der sie aufleuchteten.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Einige der %@ leuchten nacheinander auf. Tippen Sie auf %@ in der umgekehrten Reihenfolge, in der sie aufleuchteten.";
 
 /* (No Comment) */
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Diese Aktivität misst Ihr räumliches Kurzzeitgedächtnis, indem Sie aufgefordert werden, die Reihenfolge zu wiederholen, in der %@ aufleuchtet.";
@@ -1382,7 +1382,7 @@
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Halten Sie nun Ihren Ellbogen gebeugt, während Sie Ihr Handy in der RECHTEN Hand halten. Halten Sie Ihr Telefon wiederholt an der Nase.";
 
 /* (No Comment) */
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Führen Sie eine Queen-Wave für % ld Sekunden durch.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Führen Sie eine Queen-Wave für %ld Sekunden durch.";
 
 /* (No Comment) */
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Bereiten Sie sich auf eine Queen-Wave vor (Welle durch Drehen des Handgelenks).";

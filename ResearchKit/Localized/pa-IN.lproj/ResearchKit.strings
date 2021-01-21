@@ -1382,7 +1382,7 @@
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "ਹੁਣ ਸੱਜੇ ਹੱਥ ਵਿੱਚ ਆਪਣਾ ਫੋਨ ਫੜ ਕੇ ਕੂਹਣੀ ਨੂੰ ਮੋੜਦੇ ਹੋਏ, ਆਪਣੇ ਫੋਨ ਨੂੰ ਆਪਣੀ ਨੱਕ ਨਾਲ ਵਾਰ ਵਾਰ ਛੋਹਵੋ।";
 
 /* (No Comment) */
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "% Ld ਸਕਿੰਟਾਂ ਲਈ ਕਵੀਨ ਵੇਵ ਦਾ ਪ੍ਰਦਰਸ਼ਨ ਕਰਦੇ ਰਹੋ।";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "%ld ਸਕਿੰਟਾਂ ਲਈ ਕਵੀਨ ਵੇਵ ਦਾ ਪ੍ਰਦਰਸ਼ਨ ਕਰਦੇ ਰਹੋ।";
 
 /* (No Comment) */
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "ਇੱਕ ਕਵੀਨ ਵੇਵ (ਆਪਣੇ ਗੁੱਟ ਨੂੰ ਮੋੜ ਕੇ ਵੇਵ) ਕਰਨ ਲਈ ਤਿਆਰ ਕਰੋ।";

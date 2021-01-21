@@ -149,7 +149,7 @@
 "AX_TAP_BUTTON_HINT" = "பட்டன்களை நேரடியாகத் தட்டச் செய்வதற்கு செயலாக்கம் செய்யவும்.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TAPPING_INSTRUCTION_VOICEOVER" = "% Voice VoiceOver ஐப் பயன்படுத்தி, ஒவ்வொரு காதுக்கும் பட்டன்கள் எங்கு அமைந்துள்ளன என்பதை தொடுவதன் மூலம் ஸ்கிரீனில் ஆராயுங்கள். ஏதேனும் ஒரு பட்டனை செயலாக்கம் செய்து நேரடியாக தட்டக்கூடியவையாக ஆக்கவும்.";
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Voice VoiceOver ஐப் பயன்படுத்தி, ஒவ்வொரு காதுக்கும் பட்டன்கள் எங்கு அமைந்துள்ளன என்பதை தொடுவதன் மூலம் ஸ்கிரீனில் ஆராயுங்கள். ஏதேனும் ஒரு பட்டனை செயலாக்கம் செய்து நேரடியாக தட்டக்கூடியவையாக ஆக்கவும்.";
 
 /* (No Comment) */
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "சோதனையைத் தொடங்க செயல்படுத்தவும். சோதனை தொடங்கும் சமயம், உங்கள் இடது காதில் ஒரு சத்தம் கேட்கும்போது இந்த பட்டனை நேரடியாகத் தட்டவும்.";
@@ -164,7 +164,7 @@
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "வலது காதிற்கு தட்டவும்";
 
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "% Voice VoiceOver ஐப் பயன்படுத்தி, ஒவ்வொரு காதுக்கும் பட்டன்கள் எங்கு அமைந்துள்ளன என்பதை தொடுவதன் மூலம் ஸ்கிரீனில் ஆராயுங்கள். சோதனை தொடங்கும் போது, பட்டன்கள் நேரடியாக தட்டக்கூடியதாக இருக்கும். %@";
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Voice VoiceOver ஐப் பயன்படுத்தி, ஒவ்வொரு காதுக்கும் பட்டன்கள் எங்கு அமைந்துள்ளன என்பதை தொடுவதன் மூலம் ஸ்கிரீனில் ஆராயுங்கள். சோதனை தொடங்கும் போது, பட்டன்கள் நேரடியாக தட்டக்கூடியதாக இருக்கும். %@";
 
 /* (No Comment) */
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%@ அளவுடைய டிஸ்க்கை %@ அளவுடைய டிஸ்க்கில் வைக்கமுடியவில்லை";
@@ -1175,7 +1175,7 @@
 "TIMED_WALK_INTRO_2_DETAIL" = "துவங்குவதறகு ‘Next’ ஐ தட்டவும்.";
 
 /* (No Comment) */
-"TIMED_WALK_INTRO_2_TEXT_%@" = "நீங்கள் பாதுகாப்பாக ஒரு நேர் கோட்டில் சுமார்% for க்கு விரைவாக நடக்க கூடிய முடிந்தவரை வெளிப்புறமாக ஒரு இடத்தை தேர்ந்தெடுத்து நடக்கவும், முற்று கோடு வரும் வரை வேகத்தைக் குறைக்க வேண்டாம்.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "நீங்கள் பாதுகாப்பாக ஒரு நேர் கோட்டில் சுமார்%@ for க்கு விரைவாக நடக்க கூடிய முடிந்தவரை வெளிப்புறமாக ஒரு இடத்தை தேர்ந்தெடுத்து நடக்கவும், முற்று கோடு வரும் வரை வேகத்தைக் குறைக்க வேண்டாம்.";
 
 /* (No Comment) */
 "TIMED_WALK_INTRO_DETAIL" = "இச்செயல் உங்கள் கீழ்ப்பாகத்தின் செயல்பாட்டை அளவிடுகிறது.";

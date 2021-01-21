@@ -1052,7 +1052,7 @@
 "SPEECH_TASK_TITLE" = "স্পিচ রেকগনিশন";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%2$@ এর % 1$@";
+"STEP_PROGRESS_FORMAT" = "%2$@ এর %1$@";
 
 /* (No Comment) */
 "STROOP_COLOR_BLUE" = "নীল";
