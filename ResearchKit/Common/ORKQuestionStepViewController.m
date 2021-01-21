@@ -586,8 +586,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)notifyDelegateOnResultChange {
-    [super notifyDelegateOnResultChange];
-    
     if (self.hasNextStep == NO) {
         self.continueButtonItem = self.internalDoneButtonItem;
     } else {
@@ -604,6 +602,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     
     [self.tableView reloadData];
+    
+    [super notifyDelegateOnResultChange];
 }
 
 - (id<NSCopying, NSCoding, NSObject>)answer {
