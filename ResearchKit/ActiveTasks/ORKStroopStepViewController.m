@@ -147,8 +147,9 @@
 - (void)buttonPressed:(id)sender {
     if (![self.stroopContentView.colorLabelText isEqualToString:@" "]) {
         [self setButtonsDisabled];
-        NSTimeInterval reactionTime = [self reactionTime];
+        [_timeoutTimer invalidate];
         _timedOut = NO;
+        NSTimeInterval reactionTime = [self reactionTime];
         // calculate mean and unbiased standard deviation of reaction time (using Welford's algorithm: Welford. (1962) Technometrics 4(3), 419-420)
         if (_questionCount == 1) {
             _prevM = _newM = reactionTime;
@@ -331,6 +332,7 @@
 }
 
 - (void)startNextQuestionOrFinish {
+    [_interStimulusIntervalTimer invalidate];
     self.questionNumber = self.questionNumber + 1;
     if (self.questionNumber == ([self stroopStep].numberOfAttempts)) {
         [self finish];
