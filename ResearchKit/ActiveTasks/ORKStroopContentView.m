@@ -129,9 +129,9 @@ static const CGFloat buttonStackViewSpacing = 20.0;
 - (void)setUpConstraints {
     
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _buttonStackView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _timeoutView, _buttonStackView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==30)-[_colorLabel]-(>=10)-[_buttonStackView]-(==30)-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==30)-[_colorLabel]-[_timeoutView]-(>=10)-[_buttonStackView]-(==30)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:views]];
