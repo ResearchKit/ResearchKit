@@ -43,6 +43,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
 
+@property (nonatomic, assign) NSTimeInterval timeout;
+
 @end
 
 NS_ASSUME_NONNULL_END

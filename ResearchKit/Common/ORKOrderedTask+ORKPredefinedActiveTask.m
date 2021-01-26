@@ -1470,6 +1470,7 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
                       intendedUseDescription:(nullable NSString *)intendedUseDescription
                      minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
                      maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                                     timeout:(NSTimeInterval)timeout
                             numberOfAttempts:(NSInteger)numberOfAttempts
                                      options:(ORKPredefinedTaskOption)options {
     NSMutableArray *steps = [NSMutableArray array];
@@ -1511,6 +1512,7 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
         step.numberOfAttempts = numberOfAttempts;
         step.minimumStimulusInterval = minimumStimulusInterval;
         step.maximumStimulusInterval = maximumStimulusInterval;
+        step.timeout = timeout;
         
         ORKStepArrayAddStep(steps, step);
     }

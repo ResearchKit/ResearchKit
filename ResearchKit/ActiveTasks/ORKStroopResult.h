@@ -78,6 +78,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) BOOL match;
 
 /**
+ The 'timedOut' property is a Boolean value indicating whether the the attempt timed out, based on the value set in the non-zero 'timeout' parameter (in seconds), before a selection was made. The value of this property is `YES` when the timeout value was reached, and `NO` otherwise. When YES, reactionTime values will not contribute to task summaries (means and standard deviations).
+ */
+@property (nonatomic, assign) BOOL timedOut;
+
+/**
 The `percentCorrect` property is the percentage of correct 'match' answers for all images in the task so far . This updates with every image presented in the set.
 */
 @property (nonatomic, assign) double percentCorrect;

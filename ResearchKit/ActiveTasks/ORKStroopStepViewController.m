@@ -63,6 +63,9 @@
     NSString *_blueString;
     NSString *_yellowString;
     NSTimer *_nextQuestionTimer;
+    NSTimer *_interStimulusIntervalTimer;
+    NSTimer *_timeoutTimer;
+    NSTimer *_timeoutNotificationTimer;
     
     NSMutableArray *_results;
     NSTimeInterval _startTime;
@@ -77,7 +80,10 @@
     double _percentCorrect;
     NSInteger _questionCount;
     NSInteger _sumCorrect;
+    NSInteger _timedOutCount;
+    NSInteger _percentTimedOut;
     BOOL _match;
+    BOOL _timedOut;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
@@ -141,8 +147,8 @@
 - (void)buttonPressed:(id)sender {
     if (![self.stroopContentView.colorLabelText isEqualToString:@" "]) {
         [self setButtonsDisabled];
-        _endTime = [NSProcessInfo processInfo].systemUptime;
-        NSTimeInterval reactionTime = (_endTime - _startTime);
+        NSTimeInterval reactionTime = [self reactionTime];
+        _timedOut = NO;
         // calculate mean and unbiased standard deviation of reaction time (using Welford's algorithm: Welford. (1962) Technometrics 4(3), 419-420)
         if (_questionCount == 1) {
             _prevM = _newM = reactionTime;
@@ -161,36 +167,28 @@
         if (sender == self.stroopContentView.RButton) {
             _match = ([_redString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
             _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
-            if (_questionCount > 0) { // prevent zero denominator
-                _percentCorrect = (100 * _sumCorrect) / _questionCount;
-            }
+            [self calculatePercentages];
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_redString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.GButton) {
             _match = ([_greenString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
             _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
-            if (_questionCount > 0) { // prevent zero denominator
-                _percentCorrect = (100 * _sumCorrect) / _questionCount;
-            }
+            [self calculatePercentages];
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_greenString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.BButton) {
             _match = ([_blueString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
             _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
-            if (_questionCount > 0) { // prevent zero denominator
-                _percentCorrect = (100 * _sumCorrect) / _questionCount;
-            }
+            [self calculatePercentages];
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_blueString matching:_match inTime:reactionTime];
         }
         else if (sender == self.stroopContentView.YButton) {
             _match = ([_yellowString isEqualToString:self.stroopContentView.colorLabelText]) ? YES : NO;
             _sumCorrect = (_match) ? _sumCorrect + 1 : _sumCorrect;
-            if (_questionCount > 0) { // prevent zero denominator
-                _percentCorrect = (100 * _sumCorrect) / _questionCount;
-            }
+            [self calculatePercentages];
             [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:_yellowString matching:_match inTime:reactionTime];
         }
-        self.stroopContentView.colorLabelText = @" ";
+        [self hideColorLabelText];
         _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:[self stimulusInterval]
                                                              target:self
                                                            selector:@selector(startNextQuestionOrFinish)
@@ -211,6 +209,80 @@
         timeInterval = (randomFactor / 1000) + step.minimumStimulusInterval; // in seconds
     }
     return timeInterval;
+}
+
+- (void)startTimeoutTimer {
+    NSTimeInterval timeout = [self stroopStep].timeout;
+    if (timeout > 0) {
+        _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
+                                                         target:self
+                                                       selector:@selector(timeoutTimerDidFire)
+                                                       userInfo:nil
+                                                        repeats:NO];
+    }
+}
+
+- (void)timeoutTimerDidFire {
+    [_timeoutTimer invalidate];
+    NSTimeInterval reactionTime = [self reactionTime];
+    _match = NO;
+    _timedOut = YES;
+    _timedOutCount++;
+    [self calculatePercentages];
+    [self createResult:[self.colors allKeysForObject:self.stroopContentView.colorLabelColor][0] withText:self.stroopContentView.colorLabelText withColorSelected:ORKLocalizedString(@"STROOP_BUTTON_NONE", nil) matching:_match inTime:reactionTime];
+    [self displayTimeoutNotification];
+}
+
+-(void)displayTimeoutNotification {
+    [self hideColorLabelText];
+    [self setButtonsDisabled];
+    NSString *timeoutText = ORKLocalizedString(@"STROOP_TIMEOUT_NOTIFICATION", nil);
+    self.stroopContentView.timeoutText = timeoutText;
+    _timeoutNotificationTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                                 target:self
+                                                               selector:@selector(startInterStimulusInterval)
+                                                               userInfo:nil
+                                                                repeats:NO];
+}
+
+- (void)startInterStimulusInterval {
+    [_timeoutNotificationTimer invalidate];
+    [self hideColorLabelText];
+    [self hideTimeoutText];
+    _interStimulusIntervalTimer = [NSTimer scheduledTimerWithTimeInterval:[self interStimulusInterval]
+                                                              target:self
+                                                            selector:@selector(startNextQuestionOrFinish)
+                                                            userInfo:nil
+                                                             repeats:NO];
+}
+
+- (NSTimeInterval)interStimulusInterval {
+    NSTimeInterval timeInterval;
+    ORKStroopStep *step = [self stroopStep];
+    NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
+    NSTimeInterval randomFactor = (arc4random_uniform(range * 1000) + 1); // non-zero random number of milliseconds between min/max limits
+    if (range == 0 || step.maximumStimulusInterval == step.minimumStimulusInterval ||
+        _questionCount == step.numberOfAttempts) { // use min interval after last image of set
+        timeInterval = step.minimumStimulusInterval;
+    } else {
+        timeInterval = (randomFactor / 1000) + step.minimumStimulusInterval; // in seconds
+    }
+    return timeInterval;
+}
+
+- (NSTimeInterval)reactionTime {
+    NSTimeInterval endTime = [NSProcessInfo processInfo].systemUptime;
+    double duration = (endTime - _startTime);
+    return duration;
+}
+
+- (void)calculatePercentages {
+    if (_questionCount > 0) { // prevent zero denominator
+        _percentCorrect = (100 * (double)_sumCorrect) / (double)_questionCount;
+    }
+    if (_questionCount > 0) { // prevent zero denominator
+        _percentTimedOut = (100 * (double)_timedOutCount) / (double)_questionCount;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -250,6 +322,7 @@
     stroopResult.text = text;
     stroopResult.colorSelected = colorSelected;
     stroopResult.match = match;
+    stroopResult.timedOut = _timedOut; // use parameter instead of global variable?
     // task results
     stroopResult.percentCorrect = _percentCorrect;
     stroopResult.meanReactionTime = _meanReactionTime;
@@ -286,6 +359,7 @@
     }
     [self setButtonsEnabled];
     _startTime = [NSProcessInfo processInfo].systemUptime;
+    [self startTimeoutTimer];
     _questionCount++;
 }
 
@@ -301,6 +375,14 @@
     [self.stroopContentView.GButton setEnabled: YES];
     [self.stroopContentView.BButton setEnabled: YES];
     [self.stroopContentView.YButton setEnabled: YES];
+}
+
+- (void)hideTimeoutText {
+    self.stroopContentView.timeoutText = @" ";
+}
+
+- (void)hideColorLabelText {
+    self.stroopContentView.colorLabelText = @" ";
 }
 
 @end

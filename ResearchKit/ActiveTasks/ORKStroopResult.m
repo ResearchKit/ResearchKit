@@ -40,6 +40,7 @@
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, colorSelected);
     ORK_ENCODE_BOOL(aCoder, match);
+    ORK_ENCODE_BOOL(aCoder, timedOut);
     ORK_ENCODE_DOUBLE(aCoder, percentCorrect);
     ORK_ENCODE_DOUBLE(aCoder, startTime);
     ORK_ENCODE_DOUBLE(aCoder, endTime);
@@ -55,6 +56,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, colorSelected, NSString);
         ORK_DECODE_BOOL(aDecoder, match);
+        ORK_DECODE_BOOL(aDecoder, timedOut);
         ORK_DECODE_DOUBLE(aDecoder, percentCorrect);
         ORK_DECODE_DOUBLE(aDecoder, startTime);
         ORK_DECODE_DOUBLE(aDecoder, endTime);
@@ -78,6 +80,7 @@
             ORKEqualObjects(self.text, castObject.text) &&
             ORKEqualObjects(self.colorSelected, castObject.colorSelected) &&
             (self.match == castObject.match) &&
+            (self.timedOut == castObject.timedOut) &&
             (self.percentCorrect == castObject.percentCorrect) &&
             (self.startTime == castObject.startTime) &&
             (self.endTime == castObject.endTime) &&
@@ -92,6 +95,7 @@
     result -> _text = [self.text copy];
     result -> _colorSelected = [self.colorSelected copy];
     result.match = self.match;
+    result.timedOut = self.timedOut;
     result.percentCorrect = self.percentCorrect;
     result.startTime = self.startTime;
     result.endTime = self.endTime;
@@ -102,7 +106,7 @@
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; color: %@; text: %@; colorselected: %@; match: %d; percentCorrect: %f; reactionTime: %f; meanReactionTime: %f; stdReactionTime: %f %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.color, self.text, self.colorSelected, self.match, self.percentCorrect, self.reactionTime, self.meanReactionTime, self.stdReactionTime, self.descriptionSuffix];
+    return [NSString stringWithFormat:@"%@; color: %@; text: %@; colorselected: %@; match: %d; timedOut: %d; percentCorrect: %f; reactionTime: %f; meanReactionTime: %f; stdReactionTime: %f %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.color, self.text, self.colorSelected, self.match, self.timedOut, self.percentCorrect, self.reactionTime, self.meanReactionTime, self.stdReactionTime, self.descriptionSuffix];
 }
 
 @end
