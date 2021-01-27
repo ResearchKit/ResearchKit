@@ -61,14 +61,14 @@
     if (self.numberOfAttempts < minimumAttempts) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of attempts should be greater or equal to %ld.", (long)minimumAttempts]  userInfo:nil];
     }
-    if (self.minimumStimulusInterval <= 0) {
+    if (self.minimumInterStimulusInterval <= 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"minimumStimulusInterval must be greater than zero"
+                                       reason:@"minimumInterStimulusInterval must be greater than zero"
                                      userInfo:nil];
     }
-    if (self.maximumStimulusInterval < self.minimumStimulusInterval) {
+    if (self.maximumInterStimulusInterval < self.minimumInterStimulusInterval) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"maximumStimulusInterval cannot be less than minimumStimulusInterval"
+                                       reason:@"maximumInterStimulusInterval cannot be less than minimumInterStimulusInterval"
                                      userInfo:nil];
     }
     if (self.timeout <= 0) {
@@ -89,8 +89,8 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStroopStep *step = [super copyWithZone:zone];
     step.numberOfAttempts = self.numberOfAttempts;
-    step.minimumStimulusInterval = self.minimumStimulusInterval;
-    step.maximumStimulusInterval = self.maximumStimulusInterval;
+    step.minimumInterStimulusInterval = self.minimumInterStimulusInterval;
+    step.maximumInterStimulusInterval = self.maximumInterStimulusInterval;
     step.timeout = self.timeout;
     return step;
 }
@@ -99,8 +99,8 @@
     self = [super initWithCoder:aDecoder];
     if (self ) {
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
-        ORK_DECODE_DOUBLE(aDecoder, minimumStimulusInterval);
-        ORK_DECODE_DOUBLE(aDecoder, maximumStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, minimumInterStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, maximumInterStimulusInterval);
         ORK_DECODE_DOUBLE(aDecoder, timeout);
     }
     return self;
@@ -109,8 +109,8 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
-    ORK_ENCODE_DOUBLE(aCoder, minimumStimulusInterval);
-    ORK_ENCODE_DOUBLE(aCoder, maximumStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, minimumInterStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, maximumInterStimulusInterval);
     ORK_ENCODE_DOUBLE(aCoder, timeout);
 }
 
@@ -120,8 +120,8 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.numberOfAttempts == castObject.numberOfAttempts) &&
-            (self.minimumStimulusInterval == castObject.minimumStimulusInterval) &&
-            (self.maximumStimulusInterval == castObject.maximumStimulusInterval) &&
+            (self.minimumInterStimulusInterval == castObject.minimumInterStimulusInterval) &&
+            (self.maximumInterStimulusInterval == castObject.maximumInterStimulusInterval) &&
             (self.timeout == castObject.timeout));
 }
 

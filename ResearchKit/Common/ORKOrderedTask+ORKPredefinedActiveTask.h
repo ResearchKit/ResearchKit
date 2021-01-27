@@ -364,16 +364,16 @@ NS_ASSUME_NONNULL_BEGIN
  @param intendedUseDescription  A localized string describing the intended use of the data
  collected. If the value of this parameter is `nil`, the default
  localized text is displayed.
- @param minimumStimulusInterval     The minimum interval before the stimulus is delivered.
- @param maximumStimulusInterval     The maximum interval before the stimulus is delivered.
+ @param minimumInterStimulusInterval     The minimum interval before the stimulus is delivered.
+ @param maximumInterStimulusInterval     The maximum interval before the stimulus is delivered.
  @param timeout          The time period (in seconds) permitted after the stimulus begins, until the attempt fails, if a button is not pressed.
  @param numberOfAttempts        Total number of stroop questions to include in the task.
  @param options                 Options that affect the features of the predefined task.
  */
 + (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)identifier
                       intendedUseDescription:(nullable NSString *)intendedUseDescription
-                     minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
-                     maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                     minimumInterStimulusInterval:(NSTimeInterval)minimumInterStimulusInterval
+                     maximumInterStimulusInterval:(NSTimeInterval)maximumInterStimulusInterval
                                      timeout:(NSTimeInterval)timeout
                             numberOfAttempts:(NSInteger)numberOfAttempts
                                      options:(ORKPredefinedTaskOption)options;

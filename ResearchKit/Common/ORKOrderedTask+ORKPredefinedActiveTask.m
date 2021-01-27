@@ -1468,8 +1468,8 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
 
 + (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)identifier
                       intendedUseDescription:(nullable NSString *)intendedUseDescription
-                     minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
-                     maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                     minimumInterStimulusInterval:(NSTimeInterval)minimumInterStimulusInterval
+                     maximumInterStimulusInterval:(NSTimeInterval)maximumInterStimulusInterval
                                      timeout:(NSTimeInterval)timeout
                             numberOfAttempts:(NSInteger)numberOfAttempts
                                      options:(ORKPredefinedTaskOption)options {
@@ -1510,8 +1510,8 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
         step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
         step.text = ORKLocalizedString(@"STROOP_TASK_STEP_TEXT", nil);
         step.numberOfAttempts = numberOfAttempts;
-        step.minimumStimulusInterval = minimumStimulusInterval;
-        step.maximumStimulusInterval = maximumStimulusInterval;
+        step.minimumInterStimulusInterval = minimumInterStimulusInterval;
+        step.maximumInterStimulusInterval = maximumInterStimulusInterval;
         step.timeout = timeout;
         
         ORKStepArrayAddStep(steps, step);

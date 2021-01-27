@@ -201,13 +201,13 @@
 - (NSTimeInterval)stimulusInterval {
     NSTimeInterval timeInterval;
     ORKStroopStep *step = [self stroopStep];
-    NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
+    NSTimeInterval range = step.maximumInterStimulusInterval - step.minimumInterStimulusInterval;
     NSTimeInterval randomFactor = (arc4random_uniform(range * 1000) + 1); // non-zero random number of milliseconds between min/max limits
-    if (range == 0 || step.maximumStimulusInterval == step.minimumStimulusInterval ||
+    if (range == 0 || step.maximumInterStimulusInterval == step.minimumInterStimulusInterval ||
         _questionCount == step.numberOfAttempts) { // use min interval after last image
-        timeInterval = step.minimumStimulusInterval;
+        timeInterval = step.minimumInterStimulusInterval;
     } else {
-        timeInterval = (randomFactor / 1000) + step.minimumStimulusInterval; // in seconds
+        timeInterval = (randomFactor / 1000) + step.minimumInterStimulusInterval; // in seconds
     }
     return timeInterval;
 }
@@ -260,13 +260,13 @@
 - (NSTimeInterval)interStimulusInterval {
     NSTimeInterval timeInterval;
     ORKStroopStep *step = [self stroopStep];
-    NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
+    NSTimeInterval range = step.maximumInterStimulusInterval - step.minimumInterStimulusInterval;
     NSTimeInterval randomFactor = (arc4random_uniform(range * 1000) + 1); // non-zero random number of milliseconds between min/max limits
-    if (range == 0 || step.maximumStimulusInterval == step.minimumStimulusInterval ||
+    if (range == 0 || step.maximumInterStimulusInterval == step.minimumInterStimulusInterval ||
         _questionCount == step.numberOfAttempts) { // use min interval after last image of set
-        timeInterval = step.minimumStimulusInterval;
+        timeInterval = step.minimumInterStimulusInterval;
     } else {
-        timeInterval = (randomFactor / 1000) + step.minimumStimulusInterval; // in seconds
+        timeInterval = (randomFactor / 1000) + step.minimumInterStimulusInterval; // in seconds
     }
     return timeInterval;
 }
