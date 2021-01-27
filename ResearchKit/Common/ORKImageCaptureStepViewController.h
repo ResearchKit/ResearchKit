@@ -47,6 +47,12 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKImageCaptureStepViewController : ORKStepViewController
 
+/**
+ Boolean value indicating whether image data should be removed when recapture button is pressed.
+ When editing image capture step, setting this value to `true`, will not remove previously captured data.
+ */
+@property (nonatomic) BOOL preserveImageDataOnRetakeAction;
+
 @end
 
 NS_ASSUME_NONNULL_END
