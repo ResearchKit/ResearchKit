@@ -40,6 +40,7 @@ static const CGFloat minimumButtonHeight = 60;
 static const CGFloat buttonStackViewSpacing = 20.0;
 
 @implementation ORKStroopContentView {
+    UILabel *_timeoutView;
     UILabel *_colorLabel;
     UIStackView *_buttonStackView;
 }
@@ -55,6 +56,16 @@ static const CGFloat buttonStackViewSpacing = 20.0;
         [_colorLabel setFont:[UIFont systemFontOfSize:60]];
         [_colorLabel setAdjustsFontSizeToFitWidth:YES];
         
+        if (!_timeoutView) {
+            _timeoutView = [UILabel new];
+            _timeoutView.numberOfLines = 1;
+            _timeoutView.textAlignment = NSTextAlignmentCenter;
+            [_timeoutView setTextColor:[UIColor blueColor]];
+            [_timeoutView setFont:[UIFont systemFontOfSize:20]];
+            [_timeoutView setAdjustsFontSizeToFitWidth:YES];
+            _timeoutView.translatesAutoresizingMaskIntoConstraints = NO;
+            [self addSubview:_timeoutView];
+        }
         
         _RButton = [[ORKBorderedButton alloc] init];
         _RButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -80,11 +91,17 @@ static const CGFloat buttonStackViewSpacing = 20.0;
         _buttonStackView.axis = UILayoutConstraintAxisHorizontal;
         
         [self addSubview:_colorLabel];
+        [self addSubview:_timeoutView];
         [self addSubview:_buttonStackView];
         
         [self setUpConstraints];
     }
     return self;
+}
+
+- (void)setTimeoutText:(NSString *)timeoutText {
+    [_timeoutView setText:timeoutText];
+    [self setNeedsDisplay];
 }
 
 - (void)setColorLabelText:(NSString *)colorLabelText {
@@ -95,6 +112,10 @@ static const CGFloat buttonStackViewSpacing = 20.0;
 - (void)setColorLabelColor:(UIColor *)colorLabelColor {
     [_colorLabel setTextColor:colorLabelColor];
     [self setNeedsDisplay];
+}
+
+- (NSString *)timeoutText {
+    return _timeoutView.text;
 }
 
 - (NSString *)colorLabelText {
@@ -108,9 +129,9 @@ static const CGFloat buttonStackViewSpacing = 20.0;
 - (void)setUpConstraints {
     
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _buttonStackView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _timeoutView, _buttonStackView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==30)-[_colorLabel]-(>=10)-[_buttonStackView]-(==30)-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==30)-[_colorLabel]-[_timeoutView]-(>=10)-[_buttonStackView]-(==30)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:views]];

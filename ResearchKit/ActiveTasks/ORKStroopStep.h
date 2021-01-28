@@ -39,6 +39,12 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) NSInteger numberOfAttempts;
 
+@property (nonatomic, assign) NSTimeInterval minimumInterStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval maximumInterStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval timeout;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -356,7 +356,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  In a stroop task, the participant is shown a text. The text is a name of a color, but the text is printed in a color that may or may not be denoted by the name. In each attempt of the task, the participant has to press the button that corresponds to the first letter of the color in which the text is printed. The participant has to ignore the name of the color written in the text, but respond based on the color of the text.
  
- A stroop task finishes when the user has completed all the attempts, irrespective of correct or incorrect answers.
+ A stroop task finishes when the user has completed all the attempts, or when all of the questions have timed out, irrespective of correct or incorrect answers.
  
  Data collected by the task is in the form of an `ORKStroopResult` object.
  
@@ -364,11 +364,17 @@ NS_ASSUME_NONNULL_BEGIN
  @param intendedUseDescription  A localized string describing the intended use of the data
  collected. If the value of this parameter is `nil`, the default
  localized text is displayed.
+ @param minimumInterStimulusInterval     The minimum interval before the stimulus is delivered.
+ @param maximumInterStimulusInterval     The maximum interval before the stimulus is delivered.
+ @param timeout          The time period (in seconds) permitted after the stimulus begins, until the attempt fails, if a button is not pressed.
  @param numberOfAttempts        Total number of stroop questions to include in the task.
  @param options                 Options that affect the features of the predefined task.
  */
 + (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)identifier
                       intendedUseDescription:(nullable NSString *)intendedUseDescription
+                     minimumInterStimulusInterval:(NSTimeInterval)minimumInterStimulusInterval
+                     maximumInterStimulusInterval:(NSTimeInterval)maximumInterStimulusInterval
+                                     timeout:(NSTimeInterval)timeout
                             numberOfAttempts:(NSInteger)numberOfAttempts
                                      options:(ORKPredefinedTaskOption)options;
 

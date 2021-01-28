@@ -200,7 +200,7 @@ enum ResultRow {
         storyboard.
     */
     enum TableViewCellIdentifier: String {
-        case `default` =          "Default"
+        case `default` =        "Default"
         case noResultSet =      "NoResultSet"
         case noChildResults =   "NoChildResults"
         case textImage =        "TextImage"
@@ -771,9 +771,14 @@ class StroopResultTableViewProvider: ResultTableViewProvider {
             return rows
         }
         return [
+            ResultRow(text: "Reaction Time", detail: stroopResult.reactionTime),
             ResultRow(text: "Color", detail: stroopResult.color),
             ResultRow(text: "Text", detail: stroopResult.text),
-            ResultRow(text: "Color Selected", detail: stroopResult.colorSelected)
+            ResultRow(text: "Color Selected", detail: stroopResult.colorSelected),
+            ResultRow(text: "Correct Match", detail: stroopResult.match),
+            ResultRow(text: "Percent Correct", detail: stroopResult.percentCorrect),
+            ResultRow(text: "Mean Reaction Time", detail: stroopResult.meanReactionTime),
+            ResultRow(text: "SD Reaction Time", detail: stroopResult.stdReactionTime)
         ]
     }
 }

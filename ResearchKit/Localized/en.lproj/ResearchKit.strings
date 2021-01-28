@@ -403,16 +403,18 @@
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Stroop";
 "STROOP_TASK_INTRO1_DETAIL_TEXT" = "Every time a word appears, select the first letter of the name of the COLOR that is shown.";
-"STROOP_TASK_INTRO2_DETAIL_TEXT" = "When you are ready to begin the Stroop activity tap Get Started.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "You will be presented with %1$@ words. Make your selections as accurate and as fast as you can. You will have a time limit of %2$@ seconds to judge the color of each word.\n\nTap the button when you are ready to begin.";
 "STROOP_TASK_STEP_TEXT" = "Select the first letter of the name of the COLOR that is shown.";
 "STROOP_COLOR_RED" = "RED";
 "STROOP_COLOR_GREEN" = "GREEN";
 "STROOP_COLOR_BLUE" = "BLUE";
 "STROOP_COLOR_YELLOW" = "YELLOW";
+"STROOP_COLOR_NONE" = "NONE";
 "STROOP_COLOR_RED_INITIAL" = "R";
 "STROOP_COLOR_GREEN_INITIAL" = "G";
 "STROOP_COLOR_BLUE_INITIAL" = "B";
 "STROOP_COLOR_YELLOW_INITIAL" = "Y";
+"STROOP_TIMEOUT_NOTIFICATION" = "Sorry, this attempt timed out.";
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";

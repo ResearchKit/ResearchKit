@@ -1468,6 +1468,9 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
 
 + (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)identifier
                       intendedUseDescription:(nullable NSString *)intendedUseDescription
+                     minimumInterStimulusInterval:(NSTimeInterval)minimumInterStimulusInterval
+                     maximumInterStimulusInterval:(NSTimeInterval)maximumInterStimulusInterval
+                                     timeout:(NSTimeInterval)timeout
                             numberOfAttempts:(NSInteger)numberOfAttempts
                                      options:(ORKPredefinedTaskOption)options {
     NSMutableArray *steps = [NSMutableArray array];
@@ -1485,8 +1488,15 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
         }
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
+            numberFormatter.usesSignificantDigits = YES;
+            NSString *timeoutString = [numberFormatter stringFromNumber:@(timeout)];
+            
             step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
-            step.detailText = ORKLocalizedString(@"STROOP_TASK_INTRO2_DETAIL_TEXT", nil);
+            step.detailText = [NSString localizedStringWithFormat:ORKLocalizedString(@"STROOP_TASK_INTRO2_DETAIL_TEXT", nil),
+            ORKLocalizedStringFromNumber(@(numberOfAttempts)),
+            timeoutString];
             step.image = [UIImage imageNamed:@"phonestroopbutton" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.imageContentMode = UIViewContentModeCenter;
             step.shouldTintImages = YES;
@@ -1497,6 +1507,7 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
     {
         ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
+        step.spokenInstruction = ORKLocalizedString(@"STROOP_TASK_STEP_TEXT", nil);
         step.stepDuration = 5.0;
         
         ORKStepArrayAddStep(steps, step);
@@ -1505,8 +1516,10 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
         ORKStroopStep *step = [[ORKStroopStep alloc] initWithIdentifier:ORKStroopStepIdentifier];
         step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
         step.text = ORKLocalizedString(@"STROOP_TASK_STEP_TEXT", nil);
-        step.spokenInstruction = step.text;
         step.numberOfAttempts = numberOfAttempts;
+        step.minimumInterStimulusInterval = minimumInterStimulusInterval;
+        step.maximumInterStimulusInterval = maximumInterStimulusInterval;
+        step.timeout = timeout;
         
         ORKStepArrayAddStep(steps, step);
     }

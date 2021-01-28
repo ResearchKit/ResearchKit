@@ -61,6 +61,21 @@
     if (self.numberOfAttempts < minimumAttempts) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of attempts should be greater or equal to %ld.", (long)minimumAttempts]  userInfo:nil];
     }
+    if (self.minimumInterStimulusInterval <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"minimumInterStimulusInterval must be greater than zero"
+                                     userInfo:nil];
+    }
+    if (self.maximumInterStimulusInterval < self.minimumInterStimulusInterval) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"maximumInterStimulusInterval cannot be less than minimumInterStimulusInterval"
+                                     userInfo:nil];
+    }
+    if (self.timeout <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"timeout must be greater than zero"
+                                     userInfo:nil];
+    }
 }
 
 - (BOOL)startsFinished {
@@ -74,6 +89,9 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStroopStep *step = [super copyWithZone:zone];
     step.numberOfAttempts = self.numberOfAttempts;
+    step.minimumInterStimulusInterval = self.minimumInterStimulusInterval;
+    step.maximumInterStimulusInterval = self.maximumInterStimulusInterval;
+    step.timeout = self.timeout;
     return step;
 }
 
@@ -81,6 +99,9 @@
     self = [super initWithCoder:aDecoder];
     if (self ) {
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
+        ORK_DECODE_DOUBLE(aDecoder, minimumInterStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, maximumInterStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, timeout);
     }
     return self;
 }
@@ -88,13 +109,20 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
+    ORK_ENCODE_DOUBLE(aCoder, minimumInterStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, maximumInterStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, timeout);
 }
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && (self.numberOfAttempts == castObject.numberOfAttempts));
+    return (isParentSame &&
+            (self.numberOfAttempts == castObject.numberOfAttempts) &&
+            (self.minimumInterStimulusInterval == castObject.minimumInterStimulusInterval) &&
+            (self.maximumInterStimulusInterval == castObject.maximumInterStimulusInterval) &&
+            (self.timeout == castObject.timeout));
 }
 
 @end
