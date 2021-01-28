@@ -1488,8 +1488,15 @@ NSString *const ORKStroopStepIdentifier = @"stroop";
         }
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc]init];
+            numberFormatter.usesSignificantDigits = YES;
+            NSString *timeoutString = [numberFormatter stringFromNumber:@(timeout)];
+            
             step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
-            step.detailText = ORKLocalizedString(@"STROOP_TASK_INTRO2_DETAIL_TEXT", nil);
+            step.detailText = [NSString localizedStringWithFormat:ORKLocalizedString(@"STROOP_TASK_INTRO2_DETAIL_TEXT", nil),
+            ORKLocalizedStringFromNumber(@(numberOfAttempts)),
+            timeoutString];
             step.image = [UIImage imageNamed:@"phonestroopbutton" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.imageContentMode = UIViewContentModeCenter;
             step.shouldTintImages = YES;
