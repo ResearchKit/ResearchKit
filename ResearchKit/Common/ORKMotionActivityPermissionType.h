@@ -30,6 +30,7 @@
 
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKPermissionType.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
