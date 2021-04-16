@@ -663,6 +663,10 @@
 "REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health Data";
 "REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to Health data.";
 
+/* Request Notification Permission Step */
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notifications";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "The study is requesting to send you notifications.";
+
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
 "AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
