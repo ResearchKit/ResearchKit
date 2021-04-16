@@ -40,9 +40,8 @@
                                                         objectTypesToRead:objectTypesToRead];
 }
 
-+ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions) options {
++ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions)options {
     return [[ORKNotificationPermissionType alloc] initWithAuthorizationOptions:options];
 }
 
 @end
-
