@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020, Apple Inc. All rights reserved.
+ Copyright (c) 2021, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,26 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKHealthKitPermissionType.h"
-#import "ORKNotificationPermissionType.h"
-#import "ORKMotionActivityPermissionType.h"
-#import "ORKHelpers_Internal.h"
-#import "ORKPermissionType.h"
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKPermissionType.h>
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation ORKPermissionType
-
-+ (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(NSSet<HKSampleType *> *)sampleTypesToWrite objectTypesToRead:(NSSet<HKObjectType *> *)objectTypesToRead {
-    return [[ORKHealthKitPermissionType alloc] initWithSampleTypesToWrite:sampleTypesToWrite
-                                                        objectTypesToRead:objectTypesToRead];
-}
-
-+ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions) options {
-    return [[ORKNotificationPermissionType alloc] initWithAuthorizationOptions:options];
-}
-
-+ (ORKMotionActivityPermissionType *)deviceMotionPermissionType {
-    return [[ORKMotionActivityPermissionType alloc] init];
-}
+ORK_CLASS_AVAILABLE
+@interface ORKMotionActivityPermissionType : ORKPermissionType
 
 @end
 
+NS_ASSUME_NONNULL_END

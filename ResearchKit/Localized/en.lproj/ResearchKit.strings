@@ -667,6 +667,10 @@
 "REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notifications";
 "REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "The study is requesting to send you notifications.";
 
+/* Request Device Motion Permission Step */
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Device Motion";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "The study is requesting access to motion data from your devices.";
+
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
 "AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";

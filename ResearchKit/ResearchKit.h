@@ -148,5 +148,6 @@
 #import <ResearchKit/ORKPermissionType.h>
 #import <ResearchKit/ORKHealthKitPermissionType.h>
 #import <ResearchKit/ORKNotificationPermissionType.h>
+#import <ResearchKit/ORKMotionActivityPermissionType.h>
 
 #import <ResearchKit/ORKDeprecated.h>

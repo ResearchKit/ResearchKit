@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKHealthKitPermissionType;
 @class ORKNotificationPermissionType;
+@class ORKMotionActivityPermissionType;
 @class ORKRequestPermissionView;
 @class HKSampleType, HKObjectType;
 
@@ -50,6 +51,8 @@ ORK_CLASS_AVAILABLE
                                                             objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
 
 + (ORKNotificationPermissionType *) notificationPermissionType:(UNAuthorizationOptions)options;
+
++ (ORKMotionActivityPermissionType *) deviceMotionPermissionType;
 
 @end
 
