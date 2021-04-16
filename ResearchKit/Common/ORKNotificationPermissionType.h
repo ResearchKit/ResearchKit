@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020, Apple Inc. All rights reserved.
+ Copyright (c) 2021, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,31 +28,20 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import Foundation;
-
 #import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKPermissionType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKHealthKitPermissionType;
-@class ORKNotificationPermissionType;
-@class ORKMotionActivityPermissionType;
-@class ORKRequestPermissionView;
-@class HKSampleType, HKObjectType;
-
-typedef NS_OPTIONS(NSUInteger, UNAuthorizationOptions);
-
 ORK_CLASS_AVAILABLE
-@interface ORKPermissionType : NSObject
+@interface ORKNotificationPermissionType : ORKPermissionType
 
-@property (nonatomic) ORKRequestPermissionView *cardView;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
-+ (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
-                                                            objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
+- (instancetype)initWithAuthorizationOptions:(UNAuthorizationOptions)options;
 
-+ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions)options;
-
-+ (ORKMotionActivityPermissionType *)deviceMotionPermissionType;
+@property (nonatomic, readonly) UNAuthorizationOptions options;
 
 @end
 
