@@ -31,7 +31,7 @@
 @import UIKit;
 @import Foundation;
 
-#import "ORKRequestPermissionButton.h"
+@class ORKRequestPermissionButton;
 
 NS_ASSUME_NONNULL_BEGIN
 
