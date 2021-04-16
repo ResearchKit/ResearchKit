@@ -52,7 +52,7 @@ ORK_CLASS_AVAILABLE
 
 + (ORKNotificationPermissionType *) notificationPermissionType:(UNAuthorizationOptions)options;
 
-+ (ORKMotionActivityPermissionType *) deviceMotionPermissionType;
++ (ORKMotionActivityPermissionType *)deviceMotionPermissionType;
 
 @end
 
