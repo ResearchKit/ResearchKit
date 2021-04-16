@@ -1428,9 +1428,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         let notificationsPermissionType = ORKNotificationPermissionType(
             authorizationOptions: [.alert, .badge, .sound])
 
+        let motionActivityPermissionType = ORKMotionActivityPermissionType()
+
         let requestPermissionsStep = ORKRequestPermissionsStep(
             identifier: String(describing: Identifier.requestPermissionsStep),
-            permissionTypes: [healthKitPermissionType, notificationsPermissionType])
+            permissionTypes: [
+                healthKitPermissionType,
+                notificationsPermissionType,
+                motionActivityPermissionType
+            ])
        
         requestPermissionsStep.title = "Authorization Requests"
         requestPermissionsStep.text = "Please review the authorizations below and enable to contribute to the study."
