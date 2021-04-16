@@ -30,6 +30,7 @@
 
 #import "ORKMotionActivityPermissionType.h"
 #import "ORKRequestPermissionView.h"
+#import "ORKRequestPermissionButton.h"
 #import "ORKHelpers_Internal.h"
 
 @import CoreMotion;
