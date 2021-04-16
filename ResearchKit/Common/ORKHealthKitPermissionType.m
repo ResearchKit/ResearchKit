@@ -28,20 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKRequestPermissionButton.h"
 #import "ORKHealthKitPermissionType.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKRequestPermissionView.h"
+#import <HealthKit/HealthKit.h>
 
-typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
-    ORKRequestPermissionsButtonStateDefault = 0,
-    ORKRequestPermissionsButtonStateConnected,
-    ORKRequestPermissionsButtonStateNotSupported,
-    ORKRequestPermissionsButtonStateError,
-} ORK_ENUM_AVAILABLE;
+static NSString *const Symbol = @"heart.fill";
+static uint32_t const IconTintColor = 0xFF5E5E;
 
-@implementation ORKHealthKitPermissionType {
-    UIButton *_requestPermissionButton;
-}
+@implementation ORKHealthKitPermissionType
 
 + (instancetype)new {
     ORKThrowMethodUnavailableException();
@@ -68,100 +64,81 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
     UIImage *image;
     
     if (@available(iOS 13.0, *)) {
-        image = [UIImage systemImageNamed:@"heart.fill"];
+        image = [UIImage systemImageNamed:Symbol];
     }
     
     self.cardView = [[ORKRequestPermissionView alloc] initWithIconImage:image
                                                                   title:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE", nil)
                                                              detailText:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION", nil)];
     
-    _requestPermissionButton = self.cardView.requestPermissionButton;
-    [_requestPermissionButton addTarget:self action:@selector(requestPermissionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.cardView updateIconTintColor:[UIColor redColor]];
+    [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
+
+    [self.cardView.requestPermissionButton addTarget:self action:@selector(requestPermissionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.cardView updateIconTintColor:ORKRGB(IconTintColor)];
 }
 
 - (void)checkHealthKitAuthorizationStatus {
     if (![HKHealthStore isHealthDataAvailable]) {
-        [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateNotSupported];
+        [self setState:ORKRequestPermissionsButtonStateNotSupported canContinue:YES];
         return;
     }
-    
+
     if (@available(iOS 12.0, *)) {
         [[HKHealthStore new] getRequestStatusForAuthorizationToShareTypes:_sampleTypesToWrite readTypes:_objectTypesToRead completion:^(HKAuthorizationRequestStatus requestStatus, NSError * _Nullable error) {
-            if (error) {
-                [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateError];
-                return;
-            }
-            
-            if (requestStatus == HKAuthorizationRequestStatusShouldRequest) {
-                [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateDefault];
-            } else if (requestStatus == HKAuthorizationRequestStatusUnnecessary) {
-                [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateConnected];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                if (error) {
+                    [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
+                    return;
+                }
+
+                switch (requestStatus) {
+
+                    case HKAuthorizationStatusSharingAuthorized:
+                        [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
+                        break;
+
+                    case HKAuthorizationRequestStatusShouldRequest:
+                    case HKAuthorizationRequestStatusUnknown:
+                        [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
+                        break;
+                }
+            });
         }];
     } else {
-        [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateDefault];
+        [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
     }
-}
-
-- (void)setRequestPermissionsButtonState:(ORKRequestPermissionsButtonState)state {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        switch (state) {
-            case ORKRequestPermissionsButtonStateDefault:
-                [self updateRequestButtonWithText:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_DEFAULT", nil) backgroundColor:[UIColor systemBlueColor]];
-                [self setEnableContinue:NO];
-                break;
-                
-            case ORKRequestPermissionsButtonStateConnected:
-                [self updateRequestButtonWithText:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_CONNECTED", nil) backgroundColor:[UIColor grayColor]];
-                [self setEnableContinue:YES];
-                break;
-                
-            case ORKRequestPermissionsButtonStateNotSupported:
-                [self updateRequestButtonWithText:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_NOT_SUPPORTED", nil) backgroundColor:[UIColor redColor]];
-                [self setEnableContinue:YES];
-                break;
-                
-            case ORKRequestPermissionsButtonStateError:
-                [self updateRequestButtonWithText:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_ERROR", nil) backgroundColor:[UIColor redColor]];
-                [self setEnableContinue:YES];
-                break;
-                
-            default:
-                break;
-        }
-    });
-}
-
-- (void)updateRequestButtonWithText:(NSString *)text backgroundColor:(UIColor *)backgroundColor {
-    if (_requestPermissionButton) {
-        [_requestPermissionButton setTitle:text forState:UIControlStateNormal];
-        [_requestPermissionButton setBackgroundColor:backgroundColor];
-    }
-    
 }
 
 - (void)requestPermissionButtonPressed {
     [[HKHealthStore new] requestAuthorizationToShareTypes:_sampleTypesToWrite readTypes:_objectTypesToRead completion:^(BOOL success, NSError * _Nullable error) {
-        
-        if (error) {
-            [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateError];
-            return;
-        }
-        
-        if (success) {
-            [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateConnected];
-        } else {
-            [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateError];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            if (error) {
+                [self setState:ORKRequestPermissionsButtonStateError canContinue:YES];
+                return;
+            }
+
+            [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
+        });
     }];
 }
 
-- (void)setEnableContinue:(BOOL)enableContinue {
-    if (self.cardView) {
-        [self.cardView setEnableContinueButton:enableContinue];
+- (void)setState:(ORKRequestPermissionsButtonState)state canContinue:(BOOL)canContinue {
+    [self.cardView setEnableContinueButton:canContinue];
+    [self.cardView.requestPermissionButton setState:state];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
     }
+
+    __typeof(self) castObject = object;
+    return
+        ORKEqualObjects(self.objectTypesToRead, castObject.objectTypesToRead) &&
+        ORKEqualObjects(self.sampleTypesToWrite, castObject.sampleTypesToWrite);
 }
 
 @end

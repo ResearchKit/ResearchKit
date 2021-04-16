@@ -653,13 +653,15 @@
 /* Review Step */
 "REVIEW_STEP_PAGE" = "Page";
 
+/* Request Permission Step */
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Review";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Reviewed";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Not Supported";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Error";
+
 /* Request Health Data Step */
-"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health App Data";
-"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting data from the Health app";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_DEFAULT" = "Review Request";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_CONNECTED" = "Requested";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_NOT_SUPPORTED" = "HealthKit not supported by this device";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_ERROR" = "Encountered error";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health Data";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to Health data.";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
