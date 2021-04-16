@@ -29,6 +29,7 @@
  */
 
 #import "ORKRequestPermissionView.h"
+#import "ORKRequestPermissionButton.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
