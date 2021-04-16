@@ -49,7 +49,7 @@ ORK_CLASS_AVAILABLE
 + (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
                                                             objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
 
-+ (ORKNotificationPermissionType *) notificationPermissionType:(UNAuthorizationOptions)options;
++ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions)options;
 
 @end
 
