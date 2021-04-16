@@ -31,6 +31,7 @@
 #import <UserNotifications/UserNotifications.h>
 
 #import "ORKNotificationPermissionType.h"
+#import "ORKRequestPermissionButton.h"
 #import "ORKRequestPermissionView.h"
 #import "ORKHelpers_Internal.h"
 
