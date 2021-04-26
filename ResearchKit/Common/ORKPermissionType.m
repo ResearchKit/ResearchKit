@@ -29,6 +29,8 @@
  */
 
 #import "ORKHealthKitPermissionType.h"
+#import "ORKNotificationPermissionType.h"
+#import "ORKMotionActivityPermissionType.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKPermissionType.h"
 
@@ -39,5 +41,12 @@
                                                         objectTypesToRead:objectTypesToRead];
 }
 
-@end
++ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions)options {
+    return [[ORKNotificationPermissionType alloc] initWithAuthorizationOptions:options];
+}
 
++ (ORKMotionActivityPermissionType *)deviceMotionPermissionType {
+    return [[ORKMotionActivityPermissionType alloc] init];
+}
+
+@end
