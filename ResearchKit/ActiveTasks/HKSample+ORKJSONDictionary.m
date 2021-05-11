@@ -45,7 +45,7 @@ static NSString *const HKUnitKey = @"unit";
 static NSString *const HKCorrelatedObjectsKey = @"objects";
 // static NSString *const HKSourceIdentifierKey = @"sourceBundleIdentifier";
 
-
+#if HEALTH
 @implementation HKSample (ORKJSONDictionary)
 
 - (NSMutableDictionary *)ork_JSONMutableDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
@@ -167,3 +167,4 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
 }
 
 @end
+#endif

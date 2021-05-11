@@ -38,7 +38,10 @@
 #import "ORKSkin.h"
 
 @import CoreMotion;
+
+#if HEALTH
 @import HealthKit;
+#endif
 
 
 // #define LAYOUT_TEST 1
@@ -308,7 +311,9 @@
         default:
             break;
     }
-    
+
+
+#if HEALTH
     // Use HealthKit to convert the unit, so we can use the number formatter directly.
     HKUnit *hkUnit = [HKUnit unitFromLengthFormatterUnit:unit];
     double conversionFactor = 1.0;
@@ -318,7 +323,7 @@
     }
     HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit meterUnit] doubleValue:displayDistance];
     distanceString = [_lengthFormatter.numberFormatter stringFromNumber:@([quantity doubleValueForUnit:hkUnit]*conversionFactor)];
-    
+#endif
     [self distanceView].title = [NSString localizedStringWithFormat:ORKLocalizedString(@"FITNESS_DISTANCE_TITLE_FORMAT", nil), unitString];
     [self distanceView].value = distanceString;
 }

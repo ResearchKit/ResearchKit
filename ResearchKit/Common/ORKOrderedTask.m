@@ -335,6 +335,7 @@
     return NO;
 }
 
+#if HEALTH
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
     for (ORKStep *step in self.steps) {
@@ -345,6 +346,7 @@
     }
     return healthTypes.count ? healthTypes : nil;
 }
+#endif
 
 - (NSSet *)requestedHealthKitTypesForWriting {
     return nil;

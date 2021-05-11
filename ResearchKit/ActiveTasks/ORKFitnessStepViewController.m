@@ -86,6 +86,7 @@
     self.activeStepView.activeCustomView = _contentView;
 }
 
+#if HEALTH
 - (void)updateHeartRateWithQuantity:(HKQuantitySample *)quantity unit:(HKUnit *)unit {
     if (quantity != nil) {
         _contentView.hasHeartRate = YES;
@@ -96,6 +97,7 @@
         _contentView.heartRate = @"--";
     }
 }
+#endif
 
 - (void)updateDistance:(double)distanceInMeters {
     _contentView.hasDistance = YES;
@@ -112,10 +114,12 @@
         if ([recorder isKindOfClass:[ORKPedometerRecorder class]]) {
             pedometerRecorder = (ORKPedometerRecorder *)recorder;
         } else if ([recorder isKindOfClass:[ORKHealthQuantityTypeRecorder class]]) {
+#if HEALTH
             ORKHealthQuantityTypeRecorder *rec1 = (ORKHealthQuantityTypeRecorder *)recorder;
             if ([[[rec1 quantityType] identifier] isEqualToString:HKQuantityTypeIdentifierHeartRate]) {
                 heartRateRecorder = (ORKHealthQuantityTypeRecorder *)recorder;
             }
+#endif
         }
     }
     
@@ -136,9 +140,11 @@
 #pragma mark - ORKHealthQuantityTypeRecorderDelegate
 
 - (void)healthQuantityTypeRecorderDidUpdate:(ORKHealthQuantityTypeRecorder *)healthQuantityTypeRecorder {
+#if HEALTH
     if ([[healthQuantityTypeRecorder.quantityType identifier] isEqualToString:HKQuantityTypeIdentifierHeartRate]) {
         [self updateHeartRateWithQuantity:healthQuantityTypeRecorder.lastSample unit:healthQuantityTypeRecorder.unit];
     }
+#endif
 }
 
 #pragma mark - ORKPedometerRecorderDelegate

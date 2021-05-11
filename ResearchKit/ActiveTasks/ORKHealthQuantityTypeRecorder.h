@@ -52,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHealthQuantityTypeRecorder : ORKRecorder
 
+#if HEALTH
 @property (nonatomic, copy, readonly) HKQuantityType *quantityType;
 
 @property (nonatomic, copy, readonly) HKUnit *unit;
@@ -74,7 +75,7 @@ ORK_CLASS_AVAILABLE
                               unit:(HKUnit *)unit
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
-
+#endif
 @end
 
 NS_ASSUME_NONNULL_END

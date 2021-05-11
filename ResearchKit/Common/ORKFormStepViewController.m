@@ -62,6 +62,10 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+#if HEALTH
+#import <HealthKit/HealthKit.h>
+#endif
+
 static const CGFloat TableViewYOffsetStandard = 30.0;
 static const CGFloat DelayBeforeAutoScroll = 0.25;
 
@@ -321,7 +325,9 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 }
 
 - (instancetype)ORKFormStepViewController_initWithResult:(ORKResult *)result {
+#if HEALTH
     _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
+#endif
     if (result) {
         NSAssert([result isKindOfClass:[ORKStepResult class]], @"Expect a ORKStepResult instance");
 
@@ -364,16 +370,18 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     [super viewWillAppear:animated];
     [self updateAnsweredSections];
     NSMutableSet *types = [NSMutableSet set];
+#if HEALTH
     for (ORKFormItem *item in [self formItems]) {
-        ORKAnswerFormat *format = [item answerFormat];
-        HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
+         ORKAnswerFormat *format = [item answerFormat];
+         HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
         if (objType) {
             [types addObject:objType];
         }
     }
-    
+#endif
     BOOL refreshDefaultsPending = NO;
     if (types.count) {
+#if HEALTH
         NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
         if (![types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
@@ -386,6 +394,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
                 });
             }];
         }
+#endif
     }
     if (!refreshDefaultsPending) {
         [self refreshDefaults];

@@ -89,9 +89,12 @@
     return nil;
 }
 
-- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
+#if HEALTH
+ - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     return nil;
-}
+ }
+#endif
+
 - (ORKPermissionMask)requestedPermissionMask {
     return ORKPermissionNone;
 }

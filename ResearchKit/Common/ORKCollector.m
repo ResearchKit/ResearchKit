@@ -115,6 +115,7 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 
 @implementation ORKHealthCollector : ORKCollector
 
+#if HEALTH
 - (instancetype)initWithSampleType:(HKSampleType*)sampleType unit:(HKUnit*)unit startDate:(NSDate*)startDate {
     NSString *itemIdentifier = [NSString stringWithFormat:ItemIdentifierFormatWithTwoPlaceholders, sampleType.identifier, unit.unitString];
     self = [super initWithIdentifier:itemIdentifier];
@@ -125,6 +126,7 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
     }
     return self;
 }
+#endif
 
 + (BOOL)supportsSecureCoding {
     return YES;
@@ -133,23 +135,27 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+#if HEALTH
         ORK_DECODE_OBJ_CLASS(aDecoder, sampleType, HKSampleType);
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, HKUnit);
         ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, lastAnchor, HKQueryAnchor);
+#endif
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    
+#if HEALTH
     ORK_ENCODE_OBJ(aCoder, sampleType);
     ORK_ENCODE_OBJ(aCoder, unit);
     ORK_ENCODE_OBJ(aCoder, startDate);
     ORK_ENCODE_OBJ(aCoder, lastAnchor);
+#endif
 }
 
+#if HEALTH
 - (NSArray *)serializableObjectsForObjects:(NSArray<HKSample *> *)objects {
     NSMutableArray *elements = [NSMutableArray arrayWithCapacity:[objects count]];
     for (HKSample *sample in objects) {
@@ -191,12 +197,14 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
             ORKEqualObjects(_startDate, castObject.startDate) &&
             ORKEqualObjects(_lastAnchor, castObject.lastAnchor));
 }
+#endif
 
 @end
 
 
 @implementation ORKHealthCorrelationCollector : ORKCollector
 
+#if HEALTH
 - (instancetype)initWithCorrelationType:(HKCorrelationType *)correlationType
                             sampleTypes:(NSArray *)sampleTypes
                                   units:(NSArray<HKUnit *> *)units
@@ -286,6 +294,7 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
             ORKEqualObjects(_startDate, castObject.startDate) &&
             ORKEqualObjects(_lastAnchor, castObject.lastAnchor));
 }
+#endif
 
 @end
 

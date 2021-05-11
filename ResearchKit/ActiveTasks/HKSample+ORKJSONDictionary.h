@@ -28,7 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#if HEALTH
 @import HealthKit;
 
 
@@ -43,7 +43,7 @@ typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
 /**
  JSON serialization aid for HKSample.
  */
-@interface HKSample (ORKJSONDictionary)
+ @interface HKSample (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(nullable HKUnit *)unit;
 
@@ -60,3 +60,4 @@ typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
 @end
 
 NS_ASSUME_NONNULL_END
+#endif

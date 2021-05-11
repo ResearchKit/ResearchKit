@@ -697,9 +697,12 @@ NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
         
         ORKStepArrayAddStep(steps, step);
     }
-    
+
+#if HEALTH
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *heartRateType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+#endif
+
     {
         if (walkDuration > 0) {
             NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
@@ -717,10 +720,12 @@ NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
             if (!(ORKPredefinedTaskOptionExcludeLocation & options)) {
                 [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
             }
+#if HEALTH
             if (!(ORKPredefinedTaskOptionExcludeHeartRate & options)) {
                 [recorderConfigurations addObject:[[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:ORKHeartRateRecorderIdentifier
                                                                                                       healthQuantityType:heartRateType unit:bpmUnit]];
             }
+#endif
             ORKFitnessStep *fitnessStep = [[ORKFitnessStep alloc] initWithIdentifier:ORKFitnessWalkStepIdentifier];
             fitnessStep.stepDuration = walkDuration;
             fitnessStep.title = ORKLocalizedString(@"FITNESS_TASK_TITLE", nil);
@@ -749,11 +754,12 @@ NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
+#if HEALTH
             if (!(ORKPredefinedTaskOptionExcludeHeartRate & options)) {
                 [recorderConfigurations addObject:[[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:ORKHeartRateRecorderIdentifier
                                                                                                       healthQuantityType:heartRateType unit:bpmUnit]];
             }
-            
+#endif
             ORKFitnessStep *stillStep = [[ORKFitnessStep alloc] initWithIdentifier:ORKFitnessRestStepIdentifier];
             stillStep.stepDuration = restDuration;
             stillStep.title = ORKLocalizedString(@"FITNESS_TASK_TITLE", nil);

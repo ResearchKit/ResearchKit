@@ -30,7 +30,11 @@
 
 
 @import Foundation;
+
+#if HEALTH
 @import HealthKit;
+#endif
+
 #import <ResearchKit/ORKTypes.h>
 
 
@@ -245,7 +249,10 @@ requests access to these HealthKit types.
  
  See also: `requestedHealthKitTypesForWriting`.
  */
+
+#if HEALTH
 @property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
+#endif
 
 /**
  The set of HealthKit types for which the task needs to request write access.
@@ -256,8 +263,9 @@ requests access to these HealthKit types.
  
  See also: `requestedHealthKitTypesForReading`.
  */
+#if HEALTH
 @property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForWriting;
-
+#endif
 /**
  The set of permissions requested by the task.
  

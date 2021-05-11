@@ -41,6 +41,9 @@
 
 #import "ORKHelpers_Internal.h"
 
+#if HEALTH
+#import <HealthKit/HealthKit.h>
+#endif
 
 @implementation ORKFormStep
 
@@ -181,6 +184,7 @@
     }
 }
 
+#if HEALTH
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     NSMutableSet<HKObjectType *> *healthTypes = [NSMutableSet set];
     
@@ -194,6 +198,7 @@
     
     return healthTypes.count ? healthTypes : nil;
 }
+#endif
 
 @end
 

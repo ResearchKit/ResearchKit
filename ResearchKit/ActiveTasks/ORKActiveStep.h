@@ -30,7 +30,10 @@
 
 
 @import UIKit;
+#if HEALTH
 @import HealthKit;
+#endif
+
 #import <ResearchKit/ORKStep.h>
 
 
@@ -205,6 +208,8 @@ The default value of this property is `NO`.
  See also: `ORKRecorderConfiguration` and `ORKRecorder`.
  */
 @property (nonatomic, copy, nullable) NSArray<ORKRecorderConfiguration *> *recorderConfigurations;
+
+-(void)testFlagSet;
 
 @end
 

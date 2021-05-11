@@ -31,7 +31,9 @@
 
 
 @import UIKit;
+#if HEALTH
 @import HealthKit;
+#endif
 #import <ResearchKit/ORKDefines.h>
 #import <Availability.h>
 
@@ -106,7 +108,9 @@ ORK_CLASS_AVAILABLE
  If your recorder requires or would benefit from read access to HealthKit at
  runtime during the task, return the appropriate set of `HKSampleType` objects.
  */
+#if HEALTH
 - (nullable NSSet<HKObjectType *> *)requestedHealthKitTypesForReading;
+#endif
 
 @end
 
@@ -369,7 +373,9 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized health quantity type recorder configuration.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
+#if HEALTH
+ - (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
+#endif
 
 /**
  Returns a new health quantity type recorder configuration initialized from data in the given unarchiver.
@@ -383,12 +389,16 @@ ORK_CLASS_AVAILABLE
 /**
  The quantity type to be collected from HealthKit. (read-only)
  */
-@property (nonatomic, readonly, copy) HKQuantityType *quantityType;
+#if HEALTH
+ @property (nonatomic, readonly, copy) HKQuantityType *quantityType;
+#endif
 
 /**
  The unit in which to serialize the data from HealthKit. (read-only)
  */
-@property (nonatomic, readonly, copy) HKUnit *unit;
+#if HEALTH
+ @property (nonatomic, readonly, copy) HKUnit *unit;
+#endif
 
 @end
 
@@ -408,9 +418,11 @@ API_AVAILABLE(ios(12.0))
  
  @return An initialized health clinical type recorder configuration.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier
+#if HEALTH
+ - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthClinicalType:(HKClinicalType *)healthClinicalType
             healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
+#endif
 
 /**
  Returns a new health clinical type recorder configuration initialized from data in the given unarchiver.
@@ -424,12 +436,16 @@ API_AVAILABLE(ios(12.0))
 /**
  The HKClinicalType to be collected from HealthKit. (read-only)
  */
-@property (nonatomic, readonly, copy) HKClinicalType *healthClinicalType;
+#if HEALTH
+ @property (nonatomic, readonly, copy) HKClinicalType *healthClinicalType;
+#endif
 
 /**
  The HKFHIRResourceType to used as predicate for HKQuery. (read-only)
  */
-@property (nonatomic, readonly, copy) HKFHIRResourceType healthFHIRResourceType;
+#if HEALTH
+ @property (nonatomic, readonly, copy) HKFHIRResourceType healthFHIRResourceType;
+#endif
 
 @end
 #endif

@@ -653,14 +653,6 @@
 /* Review Step */
 "REVIEW_STEP_PAGE" = "Page";
 
-/* Request Health Data Step */
-"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health App Data";
-"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting data from the Health app";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_DEFAULT" = "Review Request";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_CONNECTED" = "Requested";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_NOT_SUPPORTED" = "HealthKit not supported by this device";
-"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_ERROR" = "Encountered error";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
 "AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";

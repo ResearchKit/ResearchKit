@@ -31,6 +31,10 @@
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKPermissionType.h>
 
+#if HEALTH
+@import HealthKit;
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
@@ -39,11 +43,13 @@ ORK_CLASS_AVAILABLE
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
+#if HEALTH
 - (instancetype)initWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
                          objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
 
 @property (nonatomic, nullable) NSSet<HKSampleType *> *sampleTypesToWrite;
 @property (nonatomic, nullable) NSSet<HKObjectType *> *objectTypesToRead;
+#endif
 
 @end
 

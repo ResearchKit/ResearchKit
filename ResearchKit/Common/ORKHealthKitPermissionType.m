@@ -51,6 +51,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
     ORKThrowMethodUnavailableException();
 }
 
+#if HEALTH
 - (instancetype)initWithSampleTypesToWrite:(NSSet<HKSampleType *> *)sampleTypesToWrite objectTypesToRead:(NSSet<HKObjectType *> *)objectTypesToRead {
     self = [super init];
     
@@ -63,6 +64,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
     
     return self;
 }
+#endif
 
 - (void)setupCardView {
     UIImage *image;
@@ -82,6 +84,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
 }
 
 - (void)checkHealthKitAuthorizationStatus {
+#if HEALTH
     if (![HKHealthStore isHealthDataAvailable]) {
         [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateNotSupported];
         return;
@@ -103,6 +106,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
     } else {
         [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateDefault];
     }
+#endif
 }
 
 - (void)setRequestPermissionsButtonState:(ORKRequestPermissionsButtonState)state {
@@ -143,6 +147,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
 }
 
 - (void)requestPermissionButtonPressed {
+#if HEALTH
     [[HKHealthStore new] requestAuthorizationToShareTypes:_sampleTypesToWrite readTypes:_objectTypesToRead completion:^(BOOL success, NSError * _Nullable error) {
         
         if (error) {
@@ -156,6 +161,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
             [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateError];
         }
     }];
+#endif
 }
 
 - (void)setEnableContinue:(BOOL)enableContinue {

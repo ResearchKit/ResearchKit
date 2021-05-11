@@ -31,7 +31,9 @@
 
 @import Foundation;
 @import UIKit;
+#if HEALTH
 @import HealthKit;
+#endif
 #import <ResearchKit/ORKTypes.h>
 
 
@@ -268,7 +270,9 @@ Whether to show progress for this step when it is presented. The default is YES.
  By default, the property scans the recorders and collates the HealthKit
  types the recorders require. Subclasses may override this implementation.
  */
+#if HEALTH
 @property (nonatomic, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
+#endif
 
 /**
  Checks the parameters of the step and throws exceptions on invalid parameters.

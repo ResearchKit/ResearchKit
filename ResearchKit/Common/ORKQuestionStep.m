@@ -193,9 +193,11 @@
     return [self isFormatFitsChoiceCells];
 }
 
+#if HEALTH
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     HKObjectType *objType = [[self answerFormat] healthKitObjectTypeForAuthorization];
     return (objType != nil) ? [NSSet setWithObject:objType] : nil;
 }
+#endif
 
 @end

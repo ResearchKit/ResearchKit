@@ -33,8 +33,9 @@
 #import "ORKCollector_Internal.h"
 #import "ORKOperation.h"
 #import "ORKHelpers_Internal.h"
+#if HEALTH
 #import <HealthKit/HealthKit.h>
-
+#endif
 
 static  NSString *const ORKDataCollectionPersistenceFileName = @".dataCollection.ork.data";
 
@@ -43,9 +44,11 @@ static  NSString *const ORKDataCollectionPersistenceFileName = @".dataCollection
     NSOperationQueue *_operationQueue;
     NSString * _Nonnull _managedDirectory;
     NSArray<ORKCollector *> *_collectors;
+#if HEALTH
     HKHealthStore *_healthStore;
-    CMMotionActivityManager *_activityManager;
     NSMutableArray<HKObserverQueryCompletionHandler> *_completionHandlers;
+#endif
+    CMMotionActivityManager *_activityManager;
 }
 
 - (instancetype)initWithPersistenceDirectoryURL:(NSURL *)directoryURL {
@@ -117,12 +120,14 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     });
 }
 
+#if HEALTH
 - (HKHealthStore *)healthStore {
     if (!_healthStore && [HKHealthStore isHealthDataAvailable]){
         _healthStore = [[HKHealthStore alloc] init];
     }
     return _healthStore;
 }
+#endif
 
 - (CMMotionActivityManager *)activityManager {
     if (!_activityManager && [CMMotionActivityManager isActivityAvailable]) {
@@ -163,6 +168,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     _collectors = [collectors copy];
 }
 
+#if HEALTH
 - (ORKHealthCollector *)addHealthCollectorWithSampleType:(HKSampleType*)sampleType unit:(HKUnit *)unit startDate:(NSDate *)startDate error:(NSError**)error {
     
     if (!sampleType) {
@@ -215,6 +221,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     
     return healthCorrelationCollector;
 }
+#endif
 
 - (ORKMotionActivityCollector *)addMotionActivityCollectorWithStartDate:(NSDate *)startDate
                                                                   error:(NSError* __autoreleasing *)error {
@@ -315,12 +322,12 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
                 if (_delegate && [_delegate respondsToSelector:@selector(dataCollectionManagerDidCompleteCollection:)]) {
                     [_delegate dataCollectionManagerDidCompleteCollection:self];
                 }
-                
+#if HEALTH
                 for (HKObserverQueryCompletionHandler handler in _completionHandlers) {
                     handler();
                 }
                 [_completionHandlers removeAllObjects];
-                
+#endif
                 return NO;
             }];
         }];

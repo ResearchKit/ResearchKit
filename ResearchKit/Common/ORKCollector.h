@@ -30,7 +30,11 @@
 
 
 #import <Foundation/Foundation.h>
+
+#if HEALTH
 #import <HealthKit/HealthKit.h>
+#endif
+
 #import <ResearchKit/ORKErrors.h>
 #import <ResearchKit/ORKDefines.h>
 
@@ -89,6 +93,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKHealthCollector : ORKCollector
 
+#if HEALTH
 /**
  HealthKit sample type.
  */
@@ -108,6 +113,7 @@ ORK_CLASS_AVAILABLE
  Last anchor already seen.
  */
 @property (copy, readonly) HKQueryAnchor *lastAnchor;
+#endif
 
 @end
 
@@ -121,6 +127,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKHealthCorrelationCollector : ORKCollector
 
+#if HEALTH
 /**
  HealthKit correlation type.
  */
@@ -145,6 +152,7 @@ ORK_CLASS_AVAILABLE
  Last anchor already seen.
  */
 @property (copy, readonly) HKQueryAnchor *lastAnchor;
+#endif
 
 @end
 

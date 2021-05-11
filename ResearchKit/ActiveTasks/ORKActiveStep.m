@@ -165,6 +165,7 @@
             (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
 }
 
+#if HEALTH
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     NSMutableSet<HKObjectType *> *set = [NSMutableSet set];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
@@ -175,6 +176,7 @@
     }
     return set;
 }
+#endif
 
 - (ORKPermissionMask)requestedPermissions {
     ORKPermissionMask mask = [super requestedPermissions];
@@ -182,6 +184,16 @@
         mask |= [config requestedPermissionMask];
     }
     return mask;
+}
+
+-(void)testFlagSet {
+#if (CARE && HEALTH)
+    NSLog(@"Flag is set CARE && HEALTH");
+#elif HEALTH
+    NSLog(@"Flag is set HEALTH");
+#elif CARE
+    NSLog(@"Flag is set CARE");
+#endif
 }
 
 @end

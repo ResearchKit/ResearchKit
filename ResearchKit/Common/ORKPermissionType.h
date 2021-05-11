@@ -40,9 +40,11 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic) ORKRequestPermissionView *cardView;
 
+#if HEALTH
 + (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
                                                             objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
 
+#endif
 
 @end
 

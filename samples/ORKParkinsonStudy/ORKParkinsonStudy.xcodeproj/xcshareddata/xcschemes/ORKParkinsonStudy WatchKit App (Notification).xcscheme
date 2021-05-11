@@ -56,10 +56,8 @@
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "8"
       notificationPayloadFile = "ORKParkinsonStudy WatchKit Extension/Supporting Files/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/ORKParkinsonStudy WatchKit App">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BA87DBAF20B80FFD004ACAFF"
@@ -67,7 +65,7 @@
             BlueprintName = "ORKParkinsonStudy WatchKit App"
             ReferencedContainer = "container:ORKParkinsonStudy.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -77,10 +75,8 @@
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "8"
       notificationPayloadFile = "ORKParkinsonStudy WatchKit Extension/Supporting Files/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/ORKParkinsonStudy WatchKit App">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BA87DBAF20B80FFD004ACAFF"
@@ -88,16 +84,7 @@
             BlueprintName = "ORKParkinsonStudy WatchKit App"
             ReferencedContainer = "container:ORKParkinsonStudy.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA87DBAF20B80FFD004ACAFF"
-            BuildableName = "ORKParkinsonStudy WatchKit App.app"
-            BlueprintName = "ORKParkinsonStudy WatchKit App"
-            ReferencedContainer = "container:ORKParkinsonStudy.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

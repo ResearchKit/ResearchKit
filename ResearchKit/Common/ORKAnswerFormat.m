@@ -44,7 +44,10 @@
 
 #import "ORKHelpers_Internal.h"
 
+#if HEALTH
 @import HealthKit;
+#endif
+
 @import MapKit;
 @import Contacts;
 
@@ -88,7 +91,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return style == ORKNumberFormattingStylePercent ? NSNumberFormatterPercentStyle : NSNumberFormatterDecimalStyle;
 }
 
-
+#if HEALTH
 @implementation ORKAnswerDefaultSource {
     NSMutableDictionary *_unitsTable;
 }
@@ -268,7 +271,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 }
 
 @end
-
+#endif
 
 #pragma mark - ORKAnswerFormat
 
@@ -511,6 +514,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return NO;
 }
 
+#if HEALTH
 - (HKObjectType *)healthKitObjectType {
     return nil;
 }
@@ -530,6 +534,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 - (void)setHealthKitUserUnit:(HKUnit *)unit {
     
 }
+#endif
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeNone;

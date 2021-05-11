@@ -43,7 +43,9 @@
 @interface ORKHealthClinicalTypeRecorder () {
     ORKDataLogger *_logger;
     BOOL _isRecording;
+#if HEALTH
     HKHealthStore *_healthStore;
+#endif
     ORKStep *_step;
 }
 
@@ -51,6 +53,7 @@
 
 @implementation ORKHealthClinicalTypeRecorder
 
+#if HEALTH
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthClinicalType:(HKClinicalType *)healthClinicalType
             healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType
@@ -68,6 +71,7 @@
     }
     return self;
 }
+#endif
 
 - (void)dealloc {
     [_logger finishCurrentLog];
@@ -84,7 +88,8 @@
             return;
         }
     }
-    
+
+#if HEALTH
     if (![HKHealthStore isHealthDataAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
@@ -115,14 +120,19 @@
                                                               }
                                                           }];
                                                       }];
+#endif
     
     _isRecording = YES;
+#if HEALTH
     [_healthStore executeQuery:query];
+#endif
 }
 
+#if HEALTH
 - (NSString *)recorderType {
     return _healthClinicalType.identifier;
 }
+#endif
 
 - (void)stop {
     if (!_isRecording) {
@@ -170,11 +180,14 @@
 
 @end
 
-
+#if HEALTH
 @implementation ORKHealthClinicalTypeRecorderConfiguration
+#endif
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
+#if HEALTH
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
 }
@@ -190,8 +203,10 @@
     }
     return self;
 }
+#endif
 #pragma clang diagnostic pop
 
+#if HEALTH
 - (ORKRecorder *)recorderForStep:(ORKStep *)step
                  outputDirectory:(NSURL *)outputDirectory {
     return [[ORKHealthClinicalTypeRecorder alloc] initWithIdentifier:self.identifier
@@ -233,4 +248,6 @@
 }
 
 @end
+#endif
+
 #endif

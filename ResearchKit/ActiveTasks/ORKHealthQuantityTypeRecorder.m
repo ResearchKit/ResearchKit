@@ -40,14 +40,16 @@
 @interface ORKHealthQuantityTypeRecorder () {
     ORKDataLogger *_logger;
     BOOL _isRecording;
+#if HEALTH
     HKHealthStore *_healthStore;
-    NSPredicate *_samplePredicate;
     HKObserverQuery *_observerQuery;
     /// Either the HKQueryAnchor object *or* NSUInteger value are tracked since the initializer for
     /// iOS 8 and iOS 9 use different objects. Only one will actually be referenced in the initalizer.
     HKQueryAnchor *_anchor;
-    NSUInteger _anchorValue;
     HKQuantitySample *_lastSample;
+#endif
+    NSPredicate *_samplePredicate;
+    NSUInteger _anchorValue;
 }
 
 @end
@@ -55,6 +57,7 @@
 #ifdef __IPHONE_10_0
 /// Add a protocol defining the initializer for iOS 8 apps. This signature was deprecated in iOS 9
 /// and deleted in iOS 10.
+#if HEALTH
 @interface HKAnchoredObjectQuery (iOS8)
 - (instancetype)initWithType:(HKSampleType *)type
                    predicate:(NSPredicate *)predicate
@@ -66,9 +69,11 @@
                                        NSError *error))handler NS_DEPRECATED_IOS(8_0, 9_0);
 @end
 #endif
+#endif
 
 @implementation ORKHealthQuantityTypeRecorder
 
+#if HEALTH
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthQuantityType:(HKQuantityType *)quantityType
                               unit:(HKUnit *)unit
@@ -89,11 +94,13 @@
     }
     return self;
 }
+#endif
 
 - (void)dealloc {
     [_logger finishCurrentLog];
 }
 
+#if HEALTH
 - (void)updateMostRecentSample:(HKQuantitySample *)sample {
     [self willChangeValueForKey:@"lastSample"];
     _lastSample = sample;
@@ -105,7 +112,7 @@
     }
 }
 
-static const NSInteger _HealthAnchoredQueryLimit = 100;
+ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 - (void)query_logResults:(NSArray *)results withAnchor:(HKQueryAnchor*)newAnchor anchorValue:(NSUInteger)anchorValue {
     
@@ -139,13 +146,17 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
         }
     });
 }
+#endif
 
 - (void)doFetchNewData {
+#if HEALTH
     if (!_healthStore || !_isRecording) {
         return;
     }
+#endif
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
-    
+
+#if HEALTH
     __weak typeof(self) weakSelf = self;
     void (^handleResults)(NSArray <__kindof HKSample *> *, HKQueryAnchor *, NSUInteger, NSError *) = ^ (NSArray *results, HKQueryAnchor *newAnchor, NSUInteger newAnchorValue, NSError *error) {
         if (error) {
@@ -159,7 +170,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     };
     
     
-    HKAnchoredObjectQuery *anchoredQuery;
+     HKAnchoredObjectQuery *anchoredQuery;
     if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:resultsHandler:)]) {
         
         anchoredQuery = [[HKAnchoredObjectQuery alloc] initWithType:_quantityType
@@ -188,6 +199,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
 
     [_healthStore executeQuery:anchoredQuery];
+#endif
 }
 
 - (void)start {
@@ -201,7 +213,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
             return;
         }
     }
-    
+#if HEALTH
     if (![HKHealthStore isHealthDataAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
@@ -223,7 +235,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     _lastSample = nil;
     _samplePredicate = [HKQuery predicateForSamplesWithStartDate:[NSDate date] endDate:nil options:HKQueryOptionStrictStartDate];
     
-    NSAssert(!_observerQuery, @"observer query should not exist if not recording");
+     NSAssert(!_observerQuery, @"observer query should not exist if not recording");
     
     __weak __typeof(self) weakSelf = self;
     _observerQuery = [[HKObserverQuery alloc]
@@ -244,14 +256,19 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                           completionHandler();
                           
                       }];
+#endif
     
     _isRecording = YES;
+#if HEALTH
     [_healthStore executeQuery:_observerQuery];
+#endif
 }
 
+#if HEALTH
 - (NSString *)recorderType {
     return _quantityType.identifier;
 }
+#endif
 
 - (void)stop {
     if (!_isRecording) {
@@ -274,6 +291,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 - (void)doStopRecording {
     if (_isRecording) {
+#if HEALTH
         NSAssert(_observerQuery != nil, @"Observer query should be non-nil when recording");
         [_healthStore stopQuery:_observerQuery];
         _observerQuery = nil;
@@ -282,6 +300,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
         _isRecording = NO;
         
         [self updateMostRecentSample:nil];
+#endif
     }
 }
 
@@ -315,6 +334,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
 }
 
+#if HEALTH
 - (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit {
     self = [super initWithIdentifier:identifier];
     if (self) {
@@ -326,8 +346,10 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     return self;
 }
+#endif
 #pragma clang diagnostic pop
 
+#if HEALTH
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     return [[ORKHealthQuantityTypeRecorder alloc] initWithIdentifier:self.identifier
                                                   healthQuantityType:_quantityType
@@ -335,25 +357,31 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                                 step:step
                                                      outputDirectory:outputDirectory];
 }
+#endif
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+#if HEALTH
         ORK_DECODE_OBJ_CLASS(aDecoder, quantityType, HKQuantityType);
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, HKUnit);
+#endif
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+#if HEALTH
     ORK_ENCODE_OBJ(aCoder, quantityType);
     ORK_ENCODE_OBJ(aCoder, unit);
+#endif
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
 
+#if HEALTH
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -366,5 +394,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 - (NSSet *)requestedHealthKitTypesForReading {
     return [NSSet setWithObject:_quantityType];
 }
+#endif
 
 @end
