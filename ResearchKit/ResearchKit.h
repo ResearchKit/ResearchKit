@@ -117,6 +117,7 @@
 
 #import <ResearchKit/ORKDeprecated.h>
 
+#import <ResearchKit/ORKImageCaptureView.h>
 
 // Medable ---
 // Extra headers
