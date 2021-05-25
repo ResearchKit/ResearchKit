@@ -315,7 +315,7 @@
 }
 
 - (NSURL *)writeCapturedDataWithError:(NSError **)error {
-    NSURL *URL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
+    NSURL *URL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", [[NSUUID UUID] UUIDString]]];
     // Confirm the outputDirectory was set properly
     if (!URL) {
         if (error) {
