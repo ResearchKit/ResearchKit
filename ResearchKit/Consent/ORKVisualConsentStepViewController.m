@@ -56,6 +56,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+@interface ORKVisualConsentStepAccessibility : NSObject
+@end
+
+@implementation ORKVisualConsentStepAccessibility
++ (NSString * _Nonnull)sectionTitle { return @"Consent Section Title"; }
+@end
+
+
 @interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {
     BOOL _hasAppeared;
     ORKStepViewControllerNavigationDirection _navigationDirection;
@@ -459,6 +467,17 @@
     }
     else {
         self.title = viewController.title;
+        
+        // Automation - Add a UILabel as the navigation title, as to provide an accessibility Identifier.
+        UILabel *titleLabel = [UILabel new];
+
+        titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+        titleLabel.adjustsFontForContentSizeCategory = YES;
+
+        titleLabel.text = viewController.title;
+        titleLabel.accessibilityIdentifier = ORKVisualConsentStepAccessibility.sectionTitle;
+
+        self.navigationItem.titleView = titleLabel;
     }
     
     ORKWeakTypeOf(self) weakSelf = self;

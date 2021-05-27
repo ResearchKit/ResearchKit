@@ -340,12 +340,16 @@ static const CGFloat cardTopBottomMargin = 2.0;
 
 #pragma mark - Accessibility
 
+- (BOOL)isAccessibilityElement {
+    return YES;
+}
+
 - (NSString *)accessibilityLabel {
     return ORKAccessibilityStringForVariables(self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {
-    return UIAccessibilityTraitButton | (self.selectedItem ? UIAccessibilityTraitSelected : 0);
+    return UIAccessibilityTraitButton | (self.selectedItem ? UIAccessibilityTraitSelected : 0) | [super accessibilityTraits];
 }
 
 @end

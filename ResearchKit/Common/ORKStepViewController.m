@@ -42,6 +42,21 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+
+@interface ORKStepViewControllerAccessibility : NSObject
+@end
+
+@implementation ORKStepViewControllerAccessibility
+
++ (NSString * _Nonnull)backButton { return @"Step Navigation Back Button"; }
++ (NSString * _Nonnull)continueButton { return @"Step Continue Button"; }
++ (NSString * _Nonnull)doneButton { return @"Step Done Button"; }
++ (NSString * _Nonnull)skipButton { return @"Step Skip Button"; }
++ (NSString * _Nonnull)stepTitle { return @"Step Title"; }
+
+@end
+
+
 static const CGFloat iPadStepTitleLabelFontSize = 34.0;
 static const CGFloat iPhoneStepTitleLabelFontSize = 28.0;
 
@@ -150,6 +165,11 @@ static const CGFloat iPhoneStepTitleLabelFontSize = 28.0;
     _internalDoneButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStyleDone target:self action:@selector(goForward)];
     _internalSkipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_SKIP", nil) style:UIBarButtonItemStylePlain target:self action:@selector(skip:)];
     _backButtonItem = _internalBackButtonItem;
+    
+    _internalBackButtonItem.accessibilityIdentifier = ORKStepViewControllerAccessibility.backButton;
+    _internalContinueButtonItem.accessibilityIdentifier = ORKStepViewControllerAccessibility.continueButton;
+    _internalDoneButtonItem.accessibilityIdentifier = ORKStepViewControllerAccessibility.doneButton;
+    _internalSkipButtonItem.accessibilityIdentifier = ORKStepViewControllerAccessibility.skipButton;
 }
 
 #pragma clang diagnostic push
@@ -241,6 +261,8 @@ static const CGFloat iPhoneStepTitleLabelFontSize = 28.0;
     [_iPadStepTitleLabel setAdjustsFontSizeToFitWidth:YES];
     [_iPadStepTitleLabel setText:self.step.title];
     [_iPadBackgroundView addSubview:_iPadStepTitleLabel];
+    
+    _iPadStepTitleLabel.accessibilityIdentifier = ORKStepViewControllerAccessibility.stepTitle;
 }
 
 - (void)setiPadStepTitleLabelText:(NSString *)text {

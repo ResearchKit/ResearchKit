@@ -1071,6 +1071,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @end
 
 
+@interface ORKTextChoiceAccessiblity : NSObject
+@end
+
+@implementation ORKTextChoiceAccessiblity
++ (NSString * _Nonnull)booleanYesAnswer { return @"Boolean Yes answer"; }
++ (NSString * _Nonnull)booleanNoAnswer { return @"Boolean No answer"; }
+@end
+
+
 #pragma mark - ORKImageChoice
 
 @implementation ORKImageChoice {

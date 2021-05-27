@@ -36,6 +36,14 @@
 #import "ORKSkin.h"
 
 
+@interface ORKAnswerTextViewAccessibility : NSObject
+@end
+
+@implementation ORKAnswerTextViewAccessibility
++ (NSString * _Nonnull)keyboardDoneToolbarButton { return @"Keyboard Done Button"; };
+@end
+
+
 @implementation ORKAnswerTextView {
     UITextView *_placeholderTextView;
     NSArray<UIAccessibilityCustomAction *> *_accessibilityCustomActions;
@@ -91,6 +99,8 @@
     accessoryViewWithDoneButton.items = @[flexibleSpace, doneButton];
     [accessoryViewWithDoneButton setBarTintColor:ORKColor(ORKBackgroundColorKey)];
     self.inputAccessoryView = accessoryViewWithDoneButton;
+    
+    doneButton.accessibilityIdentifier = ORKAnswerTextViewAccessibility.keyboardDoneToolbarButton;
 }
 
 - (void)keyboardAccessoryViewDoneButtonPressed {
