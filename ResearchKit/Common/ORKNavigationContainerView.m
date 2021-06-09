@@ -126,7 +126,7 @@ static const CGFloat shadowHeight = 0.75;
     }
     [self setCancelButtonConstraints];
     
-    _cancelButton.accessibilityIdentifier = ORKNavigationAccessibility.continueButton;
+    _cancelButton.accessibilityIdentifier = ORKNavigationAccessibility.cancelButton;
 }
 
 - (void)setCancelButtonConstraints {
