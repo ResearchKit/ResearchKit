@@ -50,7 +50,9 @@ static NSString *ORKKeychainWrapperDefaultService() {
 + (BOOL)setObject:(id<NSSecureCoding>)object
            forKey:(NSString *)key
             error:(NSError **)errorOut {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object
+                                         requiringSecureCoding:YES
+                                                         error:errorOut];
     return [self setData:data
                   forKey:key
                  service:ORKKeychainWrapperDefaultService()
