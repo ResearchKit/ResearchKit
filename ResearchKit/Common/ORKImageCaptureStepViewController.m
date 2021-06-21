@@ -309,6 +309,8 @@
         [[NSFileManager defaultManager] removeItemAtURL:_fileURL error:nil];
         // Force the file to be rewritten the next time the result is requested
         _fileURL = nil;
+    } else if (_preserveImageDataOnRetakeAction) {
+        _fileURL = nil;
     }
     
     [self notifyDelegateOnResultChange];
