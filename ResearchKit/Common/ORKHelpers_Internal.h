@@ -236,8 +236,8 @@ UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
 
-NSURL *ORKURLFromBookmarkData(NSData *data);
-NSData *ORKBookmarkDataFromURL(NSURL *url);
+NSURL  * _Nullable ORKURLFromBookmarkData(NSData *data);
+NSData * _Nullable ORKBookmarkDataFromURL(NSURL *url);
 
 NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
 NSURL *ORKURLForRelativePath(NSString *relativePath);
