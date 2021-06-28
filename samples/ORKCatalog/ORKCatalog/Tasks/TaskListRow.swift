@@ -1424,12 +1424,22 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let healthKitPermissionType = ORKHealthKitPermissionType(sampleTypesToWrite: healthKitTypesToWrite,
                                                                  objectTypesToRead: healthKitTypesToRead)
-        
-        let requestPermissionsStep = ORKRequestPermissionsStep(identifier: String(describing: Identifier.requestPermissionsStep),
-                                                               permissionTypes: [healthKitPermissionType])
+
+        let notificationsPermissionType = ORKNotificationPermissionType(
+            authorizationOptions: [.alert, .badge, .sound])
+
+        let motionActivityPermissionType = ORKMotionActivityPermissionType()
+
+        let requestPermissionsStep = ORKRequestPermissionsStep(
+            identifier: String(describing: Identifier.requestPermissionsStep),
+            permissionTypes: [
+                healthKitPermissionType,
+                notificationsPermissionType,
+                motionActivityPermissionType
+            ])
        
-        requestPermissionsStep.title = "Health Data Request"
-        requestPermissionsStep.text = "Please review the health data types below and enable sharing to contribute to the study."
+        requestPermissionsStep.title = "Authorization Requests"
+        requestPermissionsStep.text = "Please review the authorizations below and enable to contribute to the study."
         
         return ORKOrderedTask(identifier: String(describing: Identifier.requestPermissionsStep), steps: [requestPermissionsStep])
     }

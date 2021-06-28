@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020, Apple Inc. All rights reserved.
+ Copyright (c) 2021, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -31,23 +31,18 @@
 @import UIKit;
 @import Foundation;
 
-@class ORKRequestPermissionButton;
-
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * ORKRequestPermissionsNotification NS_STRING_ENUM;
-extern ORKRequestPermissionsNotification const ORKRequestPermissionsNotificationCardViewStatusChanged;
+typedef NS_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
+    ORKRequestPermissionsButtonStateDefault = 0,
+    ORKRequestPermissionsButtonStateConnected,
+    ORKRequestPermissionsButtonStateNotSupported,
+    ORKRequestPermissionsButtonStateError,
+};
 
-@interface ORKRequestPermissionView : UIView
+@interface ORKRequestPermissionButton : UIControl
 
-- (instancetype)initWithIconImage:(nullable UIImage *)iconImage
-                            title:(NSString *)title
-                       detailText:(NSString *)detailText;
-
-@property (nonatomic, strong) ORKRequestPermissionButton *requestPermissionButton;
-@property (nonatomic) BOOL enableContinueButton;
-
-- (void)updateIconTintColor:(UIColor *)iconTintColor;
+- (void)setState:(ORKRequestPermissionsButtonState)state;
 
 @end
 

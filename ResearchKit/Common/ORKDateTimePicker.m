@@ -74,6 +74,9 @@
     if (_pickerView == nil) {
         _pickerView = [[UIDatePicker alloc] init];
         [_pickerView addTarget:self action:@selector(valueDidChange:) forControlEvents:UIControlEventValueChanged];
+        if (@available(iOS 13.4, *)) {
+            _pickerView.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
         self.answerFormat = _answerFormat;
         self.answer = _answer;
     }
