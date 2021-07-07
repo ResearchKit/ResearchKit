@@ -1046,7 +1046,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSString *title = _sections[section].title;
+    ORKTableSection *tableSection = _sections[section];
+    NSString *title = tableSection.title;
     ORKFormStep *formStep = [self formStep];
     
     if (formStep.useCardView && _sections[section].items.count > 0) {
@@ -1056,6 +1057,19 @@
         if (cardHeaderView == nil && title) {
             cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:title];
         }
+        
+        /*
+         Accessibility identifiers for Boolean and Text Choice form items. For the others check MDORKFormStepViewController ~ln: 83. Search for 'Accessibility identifier for all form cells'.
+         
+         For Boolean and Text Choice there is no container view to separate the form steps / form items. They are all mixed in UI as cells (ORKChoiceViewCell for Boolean yes/no and Text Choice choices), and there are logic model objects to make the distinction (ORKTableSection, etc).
+         
+         For example for Text Choice, there is a section header view (which we're building right now), and then one cell (ORKChoiceViewCell) for each choice. We are setting the form item identifier as the accessibility identifier for the header view. The cells right after that are considered the options for this form item.
+         
+         For the other form item types, they are contained within a view, and by setting the form item identifier as the accessibility identifier, it's a lot easier to automate.
+         */
+        ORKTableCellItem *sectionFirstTableCellItem = tableSection.items.firstObject;
+        NSString *accessibilityIdentifier = sectionFirstTableCellItem.formItem.identifier;
+        cardHeaderView.accessibilityIdentifier = accessibilityIdentifier;
         
         return cardHeaderView;
     }

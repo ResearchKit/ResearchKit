@@ -47,6 +47,14 @@
 #import "ORKSkin.h"
 
 
+@interface ORKConsentSectionAccessibility : NSObject
+@end
+
+@implementation ORKConsentSectionAccessibility
++ (NSString * _Nonnull)sectionSummary { return @"Consent Section Summary"; }
+@end
+
+
 @interface ORKConsentSceneView ()
 
 @property (nonatomic, strong) ORKConsentSection *consentSection;
@@ -75,7 +83,8 @@
     
     self.imageView.image = consentSection.image;
     self.headerView.instructionLabel.text = [consentSection summary];
-    
+
+    self.headerView.instructionLabel.accessibilityIdentifier = ORKConsentSectionAccessibility.sectionSummary;
 }
 
 @end

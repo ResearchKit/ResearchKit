@@ -38,6 +38,17 @@
 
 #define ORKVerticalContainerLog(...)
 
+
+@interface ORKStepHeaderViewAccessibility : NSObject
+@end
+
+@implementation ORKStepHeaderViewAccessibility
+
++ (NSString * _Nonnull)learnMore { return @"Learn More Button"; }
+
+@end
+
+
 @implementation ORKStepHeaderView {
     NSLayoutConstraint *_captionMinBottomSpacingConstraint;
     NSLayoutConstraint *_captionToInstructionConstraint;
@@ -153,6 +164,10 @@
     _learnMoreButtonItem = learnMoreButtonItem;
     [_learnMoreButton setTitle:learnMoreButtonItem.title forState:UIControlStateNormal];
     _learnMoreButton.alpha = (learnMoreButtonItem.title.length > 0) ? 1 : 0;
+    
+    _learnMoreButton.accessibilityIdentifier = ORKStepHeaderViewAccessibility.learnMore;
+    _learnMoreButton.isAccessibilityElement = YES;
+    
     [self updateConstraintConstantsForWindow:self.window];
 }
 

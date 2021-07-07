@@ -1071,6 +1071,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @end
 
 
+@interface ORKTextChoiceAccessiblity : NSObject
+@end
+
+@implementation ORKTextChoiceAccessiblity
++ (NSString * _Nonnull)booleanYesAnswer { return @"Boolean Yes answer"; }
++ (NSString * _Nonnull)booleanNoAnswer { return @"Boolean No answer"; }
+@end
+
+
 #pragma mark - ORKImageChoice
 
 @implementation ORKImageChoice {
@@ -1182,9 +1191,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _no = ORKLocalizedString(@"BOOL_NO", nil);
     }
     
-    return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                            textChoices:@[[ORKTextChoice choiceWithText:_yes value:@(YES)],
-                                                          [ORKTextChoice choiceWithText:_no value:@(NO)]]];
+    ORKTextChoice *yesAnswer = [ORKTextChoice choiceWithText:_yes value:@(YES)];
+    yesAnswer.accessibilityIdentifier = ORKTextChoiceAccessiblity.booleanYesAnswer;
+
+    ORKTextChoice *noAnswer = [ORKTextChoice choiceWithText:_no value:@(NO)];
+    noAnswer.accessibilityIdentifier = ORKTextChoiceAccessiblity.booleanNoAnswer;
+
+    return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[ yesAnswer, noAnswer]];
 }
 
 - (Class)questionResultClass {

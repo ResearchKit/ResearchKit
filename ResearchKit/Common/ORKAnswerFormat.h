@@ -953,6 +953,16 @@ ORK_CLASS_AVAILABLE
 @end
 
 
+@interface ORKTextChoice (Accessibility)
+
+/**
+ Use this property to pass the accessibility identifiers from model objects, where the context and types are, into UI.
+ */
+@property (copy, readwrite, nullable) NSString *accessibilityIdentifier;
+
+@end
+
+
 /**
  The `ORKImageChoice` class defines a choice that can
  be included in an `ORKImageChoiceAnswerFormat` object.

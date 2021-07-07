@@ -35,6 +35,14 @@
 #import "ORKAccessibility.h"
 
 
+@interface ORKAnswerTextFieldAccessibility : NSObject
+@end
+
+@implementation ORKAnswerTextFieldAccessibility
++ (NSString * _Nonnull)keyboardDoneToolbarButton { return @"Keyboard Done Button"; };
+@end
+
+
 @implementation ORKAnswerTextField
 
 - (instancetype)init {
@@ -75,6 +83,8 @@
     accessoryViewWithDoneButton.items = @[flexibleSpace, doneButton];
     [accessoryViewWithDoneButton setBarTintColor:ORKColor(ORKBackgroundColorKey)];
     self.inputAccessoryView = accessoryViewWithDoneButton;
+    
+    doneButton.accessibilityIdentifier = ORKAnswerTextFieldAccessibility.keyboardDoneToolbarButton;
 }
 
 - (void)keyboardAccessoryViewDoneButtonPressed {
