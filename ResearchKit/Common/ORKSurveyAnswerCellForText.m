@@ -69,7 +69,7 @@ static const CGFloat CellBottomPadding = 5.0;
 }
 
 - (void)applyAnswerFormat {
-    ORKAnswerFormat *answerFormat = [self.step.answerFormat impliedAnswerFormat];
+    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     
     if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
         ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)answerFormat;
