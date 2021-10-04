@@ -191,7 +191,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else {
         [_childNavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor systemGrayColor]}];
     }
-    [_childNavigationController.view setBackgroundColor:UIColor.clearColor];
+    //[_childNavigationController.view setBackgroundColor:UIColor.clearColor];
     
     [self addChildViewController:_childNavigationController];
     _childNavigationController.view.frame = self.view.frame;
