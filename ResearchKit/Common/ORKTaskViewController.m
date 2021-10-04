@@ -184,14 +184,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [_childNavigationController.navigationBar setShadowImage:[UIImage new]];
     [_childNavigationController.navigationBar setTranslucent:NO];
     [_childNavigationController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
-    
+    [_childNavigationController.navigationBar setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+ 
     if (@available(iOS 13.0, *)) {
         [_childNavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor secondaryLabelColor]}];
         _childNavigationController.navigationBar.prefersLargeTitles = NO;
     } else {
         [_childNavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor systemGrayColor]}];
     }
-    //[_childNavigationController.view setBackgroundColor:UIColor.clearColor];
+    [_childNavigationController.view setBackgroundColor:UIColor.clearColor];
     
     [self addChildViewController:_childNavigationController];
     _childNavigationController.view.frame = self.view.frame;
