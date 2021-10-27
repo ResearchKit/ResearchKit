@@ -152,6 +152,26 @@
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ von %@ Stellen eingegeben";
 "PASSCODE_FORGOT_BUTTON_TITLE" = "Code vergessen?";
 
+
+/* Request Permission Step */
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Prüfen";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Geprüft";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Nicht unterstützt";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Fehler";
+
+/* Request Health Data Step */
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Gesundheitsdaten";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Die Studie möchte Zugriff auf Ihre Gesundheitsdaten";
+
+/* Request Notification Permission Step */
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Benachrichtigungen";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Die Studie möchte Ihnen Benachrichtigungen senden";
+
+/* Request Device Motion Permission Step */
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Bewegungsdaten";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Die Studie möchte auf Ihre Bewegungs- und Fitnessdaten zugreifen";
+
+
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht hinzugefügt werden";
 "KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht aktualisiert werden";
