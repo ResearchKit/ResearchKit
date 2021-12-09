@@ -76,7 +76,7 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
    
     _dontKnowButtonActive = NO;
     
-    ORKNumericAnswerFormat *numericAnswerFormat = (ORKNumericAnswerFormat *)self.step.answerFormat;
+    ORKNumericAnswerFormat *numericAnswerFormat = (ORKNumericAnswerFormat *)[self.step impliedAnswerFormat];
 
     _textFieldView = [[ORKTextFieldView alloc] init];
     _textFieldView.hideUnitWhenAnswerEmpty = numericAnswerFormat.hideUnitWhenAnswerIsEmpty;

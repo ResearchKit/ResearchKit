@@ -16,7 +16,7 @@ for medical research or for other research projects.
 Getting More Information
 ========================
 
-* Join the [*ResearchKit* Forum](https://forums.developer.apple.com/community/researchkit) for discussing uses of the *ResearchKit framework and* related projects.
+* Join the [*ResearchKit* Forum](https://developer.apple.com/forums/tags/researchkit) for discussing uses of the *ResearchKit framework and* related projects.
 
 Use Cases
 ===========
