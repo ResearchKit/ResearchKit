@@ -45,7 +45,11 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) ORKPredefinedTaskLimbOption limbOption; //The left and/or right limb to be tested during the task
 
-- (instancetype)initWithIdentifier:(NSString *)identifier limbOption:(ORKPredefinedTaskLimbOption)limbOption;
+@property (nonatomic, assign) NSInteger numberOfTaps; // The number of taps required to begin and end the range of motion step (default is 1)
+
+@property (nonatomic, assign) NSInteger numberOfTouches;  // The number of touches (fingers) required to tap the screen to begin and end the range of motion step (default is 1)
+
+- (instancetype)initWithIdentifier:(NSString *)identifier instructionText:(NSString *)instructionText limbOption:(ORKPredefinedTaskLimbOption)limbOption numberOfTaps:(NSInteger)numberOfTaps numberOfTouches:(NSInteger)numberOfTouches;
 
 @end
 
