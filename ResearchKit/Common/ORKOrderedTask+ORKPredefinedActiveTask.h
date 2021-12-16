@@ -197,11 +197,15 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param limbOption              Which knee is being measured.
+ @param numberOfTaps        The number of taps required to begin and end the range of motion step
+ @param numberOfTouches        The number of touches (fingers) required to tap the screen to begin and end the range of motion step (between 1 and 4)
  @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
  @param options                 Options that affect the features of the predefined task.
  */
 + (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                              limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                           numberOfTaps: (NSInteger)numberOfTaps
+                                        numberOfTouches: (NSInteger)numberOfTouches
                                  intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                 options:(ORKPredefinedTaskOption)options;
 
@@ -211,11 +215,15 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param limbOption              Which shoulder is being measured.
+ @param numberOfTaps        The number of taps required to begin and end the range of motion step
+ @param numberOfTouches        The number of touches (fingers) required to tap the screen to begin and end the range of motion step (between 1 and 4)
  @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
  @param options                 Options that affect the features of the predefined task.
  */
 + (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                                  limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                               numberOfTaps: (NSInteger)numberOfTaps
+                                            numberOfTouches: (NSInteger)numberOfTouches
                                      intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                     options:(ORKPredefinedTaskOption)options;
 
