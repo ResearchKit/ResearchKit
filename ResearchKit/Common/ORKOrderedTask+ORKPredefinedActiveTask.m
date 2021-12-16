@@ -1060,12 +1060,36 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
 
 + (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                              limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                           numberOfTaps:(NSInteger)numberOfTaps
+                                        numberOfTouches:(NSInteger)numberOfTouches
                                  intendedUseDescription:(NSString *)intendedUseDescription
                                                 options:(ORKPredefinedTaskOption)options {
     NSMutableArray *steps = [NSMutableArray array];
     NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
     UIImage *kneeStartImage = [UIImage imageNamed:@"knee_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
     UIImage *kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+    
+    // Build insertion for instructions including taps/touches
+    NSString *tapsAndTouches;
+    if(numberOfTaps <= 1) { // default
+        if (numberOfTouches > 1) { // number of fingers
+            tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_MULTIPLE_FINGERS", nil), @(numberOfTouches)]];
+        } else { // number of fingers is 1 or 0
+            tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), @""];
+        }
+    } else if (numberOfTaps == 2) {
+        if (numberOfTouches > 1) {
+            tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_DOUBLE_TAP_SCREEN", nil), [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_MULTIPLE_FINGERS", nil), @(numberOfTouches)]];
+        } else { // number of fingers is 1
+            tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_DOUBLE_TAP_SCREEN", nil), @""];
+        }
+    } else { // number of taps required is more than two
+        if (numberOfTouches > 1) {
+            tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), [NSString stringWithFormat:@"%@%@", [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_MULTIPLE_FINGERS", nil), (@(numberOfTouches))], [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_NUMBER_OF_TOUCHES", nil), @(numberOfTaps)]]];
+        } else { // number of fingers is 1
+            tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_NUMBER_OF_TOUCHES", nil), @(numberOfTaps)]];
+        }
+    }
     
     if (limbOption == ORKPredefinedTaskLimbOptionLeft) {
         limbType = ORKLocalizedString(@"LIMB_LEFT", nil);
@@ -1114,8 +1138,8 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
 
                 [[ORKBodyItem alloc] initWithText:
                  ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])?
-                 ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil) :
-                 ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil)
+                 [NSString localizedStringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil), tapsAndTouches] :
+                 [NSString localizedStringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil), tapsAndTouches]
                                        detailText:nil
                                             image:[UIImage systemImageNamed:@"4.circle.fill"]
                                     learnMoreItem:nil
@@ -1152,7 +1176,7 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
 
             ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
             instructionStep3.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-            instructionStep3.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
+            instructionStep3.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? [NSString localizedStringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil), tapsAndTouches] : [NSString localizedStringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil), tapsAndTouches];
 
             instructionStep3.image = kneeMaximumImage;
             instructionStep3.imageContentMode = UIViewContentModeCenter;
@@ -1162,7 +1186,7 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
     }
 
     NSString *instructionText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT", nil);
-    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
+    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText numberOfTaps:numberOfTaps numberOfTouches:numberOfTouches];
     touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
     touchAnywhereStep.image = kneeMaximumImage;
     touchAnywhereStep.imageContentMode = UIViewContentModeCenter;
@@ -1172,13 +1196,14 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
     
     ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
-    ORKRangeOfMotionStep *kneeRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:ORKKneeRangeOfMotionStepIdentifier limbOption:limbOption];
+    NSString *kneeRangeOfMotionText = ([limbType isEqualToString: ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil) :
+    ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
+    
+    ORKRangeOfMotionStep *kneeRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:ORKKneeRangeOfMotionStepIdentifier instructionText:kneeRangeOfMotionText limbOption:limbOption numberOfTaps:numberOfTaps numberOfTouches:numberOfTouches];
+    
     kneeRangeOfMotionStep.image = kneeStartImage;
     kneeRangeOfMotionStep.imageContentMode = UIViewContentModeCenter;
     kneeRangeOfMotionStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-    kneeRangeOfMotionStep.text = ([limbType isEqualToString: ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil) :
-    ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
-    
     kneeRangeOfMotionStep.spokenInstruction = kneeRangeOfMotionStep.text;
     kneeRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
     kneeRangeOfMotionStep.optional = NO;
@@ -1201,6 +1226,8 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
 
 + (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                                  limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                               numberOfTaps:(NSInteger)numberOfTaps
+                                            numberOfTouches:(NSInteger)numberOfTouches
                                      intendedUseDescription:(NSString *)intendedUseDescription
                                                     options:(ORKPredefinedTaskOption)options {
     NSMutableArray *steps = [NSMutableArray array];
@@ -1237,8 +1264,30 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
         ORKStepArrayAddStep(steps, instructionStep2);
         
         ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
+        
+        // Build insertion for instructions
+        NSString *tapsAndTouches;
+        if(numberOfTaps <= 1) { // default
+            if (numberOfTouches > 1) { // number of fingers
+                tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_MULTIPLE_FINGERS", nil), @(numberOfTouches)]];
+            } else { // number of fingers is 1 or 0
+                tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), @""];
+            }
+        } else if (numberOfTaps == 2) {
+            if (numberOfTouches > 1) {
+                tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_DOUBLE_TAP_SCREEN", nil), [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_MULTIPLE_FINGERS", nil), @(numberOfTouches)]];
+            } else { // number of fingers is 1
+                tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_DOUBLE_TAP_SCREEN", nil), @""];
+            }
+        } else { // number of taps required is more than two
+            if (numberOfTouches > 1) {
+                tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), [NSString stringWithFormat:@"%@%@", [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_MULTIPLE_FINGERS", nil), (@(numberOfTouches))], [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_NUMBER_OF_TOUCHES", nil), @(numberOfTaps)]]];
+            } else { // number of fingers is 1
+                tapsAndTouches = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_TAP_SCREEN", nil), [NSString localizedStringWithFormat:ORKLocalizedString(@"TOUCH_ANYWHERE_NUMBER_OF_TOUCHES", nil), @(numberOfTaps)]];
+            }
+        }
         instructionStep3.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep3.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
+        instructionStep3.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)]) ? [NSString localizedStringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil), tapsAndTouches] : [NSString localizedStringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil), tapsAndTouches];
         instructionStep3.image = shoulderMaximumImage;
         instructionStep3.imageContentMode = UIViewContentModeCenter;
         instructionStep3.shouldTintImages = YES;
@@ -1246,7 +1295,7 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
     }
     
     NSString *instructionText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT", nil);
-    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
+    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText numberOfTaps:numberOfTaps numberOfTouches:numberOfTouches];
     touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
     ORKStepArrayAddStep(steps, touchAnywhereStep);
     
@@ -1254,13 +1303,12 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
     
     ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
-    ORKShoulderRangeOfMotionStep *shoulderRangeOfMotionStep = [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:ORKShoulderRangeOfMotionStepIdentifier limbOption:limbOption];
-    shoulderRangeOfMotionStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-    shoulderRangeOfMotionStep.text = ([limbType isEqualToString: ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil) :
+    NSString *shoulderRangeOfMotionText = ([limbType isEqualToString: ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil) :
     ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
     
-    shoulderRangeOfMotionStep.spokenInstruction = shoulderRangeOfMotionStep.text;
+    ORKRangeOfMotionStep *shoulderRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:ORKShoulderRangeOfMotionStepIdentifier instructionText:shoulderRangeOfMotionText limbOption:limbOption numberOfTaps:numberOfTaps numberOfTouches:numberOfTouches];
     
+    shoulderRangeOfMotionStep.spokenInstruction = shoulderRangeOfMotionStep.text;
     shoulderRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
     shoulderRangeOfMotionStep.optional = NO;
     
