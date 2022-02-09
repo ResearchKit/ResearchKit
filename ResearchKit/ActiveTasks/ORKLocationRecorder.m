@@ -88,7 +88,8 @@
     }
     
     self.locationManager = [self createLocationManager];
-    if ([CLLocationManager authorizationStatus] <= kCLAuthorizationStatusDenied) {
+
+    if (self.locationManager.authorizationStatus == kCLAuthorizationStatusRestricted || self.locationManager.authorizationStatus == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
@@ -156,7 +157,8 @@
 }
 
 - (BOOL)isRecording {
-    return [CLLocationManager locationServicesEnabled] && (self.locationManager != nil) && ([CLLocationManager authorizationStatus] > kCLAuthorizationStatusDenied);
+    
+    return [CLLocationManager locationServicesEnabled] && (self.locationManager != nil) && (self.locationManager.authorizationStatus > kCLAuthorizationStatusDenied);
 }
 
 - (void)reset {

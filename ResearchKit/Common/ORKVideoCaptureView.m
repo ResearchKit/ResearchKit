@@ -100,7 +100,6 @@
         [_navigationFooterView setAlpha:0.8];
         [self addSubview:_navigationFooterView];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInterruptionEnded:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
@@ -121,24 +120,30 @@
 }
 
 - (void)orientationDidChange {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
-        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
-            case UIInterfaceOrientationLandscapeRight:
-                orientation = AVCaptureVideoOrientationLandscapeRight;
-                break;
-            case UIInterfaceOrientationLandscapeLeft:
-                orientation = AVCaptureVideoOrientationLandscapeLeft;
-                break;
-            case UIInterfaceOrientationPortraitUpsideDown:
-                orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-                break;
-            case UIInterfaceOrientationPortrait:
-                orientation = AVCaptureVideoOrientationPortrait;
-                break;
-            case UIInterfaceOrientationUnknown:
-                // Do nothing in these cases, since we don't need to change display orientation.
-                return;
+        
+        UIWindowScene *windowScene = weakSelf.window.windowScene;
+        
+        if (windowScene) {
+            switch (windowScene.interfaceOrientation) {
+                case UIInterfaceOrientationLandscapeRight:
+                    orientation = AVCaptureVideoOrientationLandscapeRight;
+                    break;
+                case UIInterfaceOrientationLandscapeLeft:
+                    orientation = AVCaptureVideoOrientationLandscapeLeft;
+                    break;
+                case UIInterfaceOrientationPortraitUpsideDown:
+                    orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+                    break;
+                case UIInterfaceOrientationPortrait:
+                    orientation = AVCaptureVideoOrientationPortrait;
+                    break;
+                case UIInterfaceOrientationUnknown:
+                    // Do nothing in these cases, since we don't need to change display orientation.
+                    return;
+            }
         }
         
         [_previewView setVideoOrientation:orientation];

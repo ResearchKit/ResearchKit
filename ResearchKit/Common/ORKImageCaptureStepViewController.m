@@ -177,7 +177,8 @@
         photoSettings = [AVCapturePhotoSettings photoSettingsWithRawPixelFormatType:rawPixelFormatType
                                                                     processedFormat:@{AVVideoCodecKey: AVVideoCodecTypeJPEG}];
     }
-    [photoSettings setAutoStillImageStabilizationEnabled:NO];
+
+    [photoSettings setPhotoQualityPrioritization:AVCapturePhotoQualityPrioritizationSpeed];
     [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
     
     return photoSettings;
@@ -194,7 +195,7 @@
         _imageDataExtension = @"jpeg";
     }
     
-    [photoSettings setAutoStillImageStabilizationEnabled: [_photoOutput isStillImageStabilizationSupported]];
+    [photoSettings setPhotoQualityPrioritization:AVCapturePhotoQualityPrioritizationSpeed];
     [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
 
     return photoSettings;
@@ -288,6 +289,14 @@
     }
     
     [super viewWillDisappear:animated];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    if (_imageCaptureView) {
+        [_imageCaptureView orientationDidChange];
+    }
 }
 
 - (void)queue_SetupCaptureSession {

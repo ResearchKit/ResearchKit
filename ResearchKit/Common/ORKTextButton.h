@@ -47,6 +47,8 @@ ORK_CLASS_AVAILABLE
 
 - (void)init_ORKTextButton;
 
+- (void)updateContentInsets:(NSDirectionalEdgeInsets)contentInsets;
+
 @end
 
 NS_ASSUME_NONNULL_END

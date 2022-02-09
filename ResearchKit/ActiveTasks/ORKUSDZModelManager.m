@@ -140,7 +140,7 @@
     [self setContinueEnabled:!self.enableContinueAfterSelection];
     _parentView = view;
     
-    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     [_parentView addSubview:_spinner];
     [self setSpinnerConstraints];
     [_spinner startAnimating];
