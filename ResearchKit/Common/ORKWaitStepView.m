@@ -71,7 +71,7 @@
                 if (@available(iOS 13.0, *)) {
                     _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
                 } else {
-                    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
                 }
                 [_activityIndicatorView startAnimating];
                 self.customContentView = _activityIndicatorView;

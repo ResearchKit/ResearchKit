@@ -60,7 +60,12 @@ ORK_CLASS_AVAILABLE
     button.titleLabel.numberOfLines = 0;
     button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     button.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [button setContentEdgeInsets:UIEdgeInsetsMake(CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN)];
+    
+    UIButtonConfiguration *buttonConfig = [UIButtonConfiguration filledButtonConfiguration];
+    [buttonConfig setContentInsets:NSDirectionalEdgeInsetsMake(0, 0, 0, 0)];
+    
+    [button setConfiguration:buttonConfig];
+    
     return button;
 }
 

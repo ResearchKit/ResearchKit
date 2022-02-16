@@ -88,8 +88,10 @@
 
 @interface ORKAnimationPlaceholderView : UIView
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @property (nonatomic, strong) ORKEAGLMoviePlayerView *playerView;
-
+#pragma clang diagnostic pop
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 @end
@@ -100,7 +102,10 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         _playerView = [ORKEAGLMoviePlayerView new];
+#pragma clang diagnostic pop
         _playerView.hidden = YES;
         [self addSubview:_playerView];
     }
@@ -176,9 +181,12 @@
     [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (ORKEAGLMoviePlayerView *)animationPlayerView {
     return [(ORKAnimationPlaceholderView *)_animationView playerView];
 }
+#pragma clang diagnostic pop
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -208,10 +216,13 @@
     [self updatePageIndex];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (ORKVisualConsentStep *)visualConsentStep {
     assert(!self.step || [self.step isKindOfClass:[ORKVisualConsentStep class]]);
     return (ORKVisualConsentStep *)self.step;
 }
+#pragma clang diagnostic pop
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

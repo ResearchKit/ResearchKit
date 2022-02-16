@@ -55,8 +55,10 @@ static NSString *const invalidKey = @"RK invalid key";
     XCTAssertTrue(success);
     
     // Test that the object set is equal to the object retrieved.
-    NSString *outObject = (NSString *) [ORKKeychainWrapper objectForKey:key
-                                                                  error:&error];
+    NSString *outObject = (NSString *) [ORKKeychainWrapper objectOfClass:NSString.self
+                                                                  forKey:key
+                                                                   error:&error];
+   
     XCTAssertNil(error);
     XCTAssertEqualObjects(inObject, outObject);
     
@@ -73,14 +75,16 @@ static NSString *const invalidKey = @"RK invalid key";
     XCTAssertTrue(success);
     
     // Test that the object set is equal to the object retrieved.
-    NSString *outObject = (NSString *) [ORKKeychainWrapper objectForKey:key
-                                                                  error:&error];
+    NSString *outObject = (NSString *) [ORKKeychainWrapper objectOfClass:NSString.self
+                                                                  forKey:key
+                                                                   error:&error];
     XCTAssertNil(error);
     XCTAssertEqualObjects(inObject, outObject);
     
     // Test that there is an error for invalid key.
-    id object = [ORKKeychainWrapper objectForKey:invalidKey
-                               error:&error];
+    id object = [ORKKeychainWrapper objectOfClass:NSDictionary.class
+                                           forKey:invalidKey
+                                            error:&error];
     XCTAssertNotNil(error);
     XCTAssertNil(object);
 }
@@ -102,8 +106,9 @@ static NSString *const invalidKey = @"RK invalid key";
     XCTAssertTrue(success);
     
     // Test that there is no object for the key.
-    id object = [ORKKeychainWrapper objectForKey:key
-                                           error:&error];
+    id object = [ORKKeychainWrapper objectOfClass:NSString.self
+                                           forKey:key
+                                            error:&error];
     XCTAssertNotNil(error);
     XCTAssertNil(object);
 }
@@ -124,8 +129,9 @@ static NSString *const invalidKey = @"RK invalid key";
     XCTAssertTrue(success);
     
     // Test that there is no object for the key.
-    id object = [ORKKeychainWrapper objectForKey:key
-                                           error:&error];
+    id object = [ORKKeychainWrapper objectOfClass:NSString.self
+                                           forKey:key
+                                            error:&error];
     XCTAssertNotNil(error);
     XCTAssertNil(object);
 }

@@ -33,15 +33,14 @@ import UIKit
 
 class ORKContinueButtonTests: XCTestCase {
     
-    var button: ORKContinueButton!
+    var button = ORKContinueButton(title: "BUTTON", isDoneButton: true)
     
     override func setUp() {
         super.setUp()
-        button = ORKContinueButton(title: "BUTTON", isDoneButton: true)
     }
 
     func testAttributes() {
-        XCTAssertEqual(button.titleLabel?.text, "BUTTON")
+        XCTAssertEqual(button.currentTitle, "BUTTON")
         XCTAssertEqual(button.isDoneButton, true)
     }
 }

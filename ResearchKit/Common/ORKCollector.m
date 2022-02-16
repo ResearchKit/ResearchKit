@@ -220,7 +220,11 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, correlationType, HKCorrelationType);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, sampleTypes, HKSampleType);
+
+        {
+            NSSet<Class> *allowedClasses = [NSSet setWithObjects:HKSampleType.self, nil];
+            _sampleTypes = [aDecoder decodeArrayOfObjectsOfClasses:allowedClasses forKey:@ORK_STRINGIFY(sampleTypes)];
+        }
         ORK_DECODE_OBJ_ARRAY(aDecoder, units, HKUnit);
         ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, lastAnchor, HKQueryAnchor);

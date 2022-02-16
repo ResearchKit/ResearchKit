@@ -194,6 +194,14 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    if (_videoCaptureView) {
+        [_videoCaptureView orientationDidChange];
+    }
+}
+
 - (void)queue_SetupCaptureSession {
     // Create the session
     _captureSession = [AVCaptureSession new];

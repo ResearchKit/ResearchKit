@@ -126,8 +126,8 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
             _originalForgotPasscodeY = self.view.bounds.size.height - kForgotPasscodeVerticalPadding - kForgotPasscodeHeight;
             CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
 
-            UIButton *forgotPasscodeButton = [ORKTextButton new];
-            forgotPasscodeButton.contentEdgeInsets = (UIEdgeInsets){12, 10, 8, 10};
+            ORKTextButton *forgotPasscodeButton = [ORKTextButton new];
+            [forgotPasscodeButton updateContentInsets: NSDirectionalEdgeInsetsMake(12, 10, 8, 10)];
             forgotPasscodeButton.frame = CGRectMake(x, _originalForgotPasscodeY, width, kForgotPasscodeHeight);
             
             NSString *buttonTitle = [self forgotPasscodeButtonText];
@@ -499,9 +499,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)removePasscodeFromKeychain {
     NSError *error;
-    [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
+    id storedValue = [ORKKeychainWrapper objectOfClass:NSDictionary.self forKey:PasscodeKey error:&error];
     
-    if (!error) {
+    if (storedValue != nil) {
         [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:&error];
     
         if (error) {
@@ -512,8 +512,10 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (BOOL)passcodeMatchesKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    if (error) {
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectOfClass:NSDictionary.self
+                                                                           forKey:PasscodeKey
+                                                                            error:&error];
+    if (dictionary == nil) {
         [self throwExceptionWithKeychainError:error];
     }
     
@@ -523,8 +525,11 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)setValuesFromKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    if (error) {
+    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectOfClass:NSDictionary.self
+                                                                          forKey:PasscodeKey
+                                                                           error:&error];
+    
+    if (dictionary == nil) {
         [self throwExceptionWithKeychainError:error];
     }
     
