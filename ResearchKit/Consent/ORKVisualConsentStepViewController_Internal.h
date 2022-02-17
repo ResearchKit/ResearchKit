@@ -37,8 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKEAGLMoviePlayerView;
 
 @interface ORKVisualConsentStepViewController ()
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (nullable ORKEAGLMoviePlayerView *)animationPlayerView;
+#pragma clang diagnostic pop
 
 @end
 

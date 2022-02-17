@@ -101,18 +101,20 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     }
     
     _started = YES;
-    NSString *whenInUseKey = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"];
-    NSString *alwaysKey = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"];
+    NSString *allowedWhenInUse = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"];
+    NSString *allowedAlways = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"];
     
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    if ((status == kCLAuthorizationStatusNotDetermined) && (whenInUseKey || alwaysKey)) {
-        if (alwaysKey) {
-            [_manager requestAlwaysAuthorization];
+    if (_manager) {
+        CLAuthorizationStatus status = _manager.authorizationStatus;
+        if ((status == kCLAuthorizationStatusNotDetermined) && (allowedWhenInUse || allowedAlways)) {
+            if (allowedAlways) {
+                [_manager requestAlwaysAuthorization];
+            } else {
+                [_manager requestWhenInUseAuthorization];
+            }
         } else {
-            [_manager requestWhenInUseAuthorization];
+            [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
         }
-    } else {
-        [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
     }
 }
 
@@ -123,8 +125,10 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (_handler && _started && status != kCLAuthorizationStatusNotDetermined) {
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+    CLAuthorizationStatus status = manager.authorizationStatus;
+    
+    if (_started && status != kCLAuthorizationStatusNotDetermined) {
         [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
     }
 }

@@ -61,6 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) ORKVideoCaptureCameraPreviewView *previewView;
 @property (nonatomic, strong, readonly) AVPlayerViewController *playerViewController;
 
+- (void)orientationDidChange;
+
 @end
 
 NS_ASSUME_NONNULL_END

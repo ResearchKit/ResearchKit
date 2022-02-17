@@ -38,7 +38,8 @@
 
 #import "ORKHelpers_Internal.h"
 
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation ORKVisualConsentStep
 
 + (Class)stepViewControllerClass {
@@ -90,3 +91,4 @@
 }
 
 @end
+#pragma clang diagnostic pop

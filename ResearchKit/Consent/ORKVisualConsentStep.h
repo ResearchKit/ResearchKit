@@ -51,7 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  An `ORKVisualConsentStep` object produces an `ORKStepResult` object, in which the dates indicate the total amount of time participants have spent in the consent process, and the route by which they can exit the consent process.
  */
-ORK_CLASS_AVAILABLE
+
+API_DEPRECATED("Use ORKInstructionStep for obtaining consent.", ios(3.0, 11.0)) API_UNAVAILABLE(watchos, tvos)
 @interface ORKVisualConsentStep : ORKStep
 
 /**

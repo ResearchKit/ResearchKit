@@ -72,7 +72,9 @@
     if (self) {
         {
             _clearButton = [ORKTextButton new];
-            _clearButton.contentEdgeInsets = (UIEdgeInsets){12,10,8,10}; // insets adjusted to get correct vertical height from bottom of screen when aligned to margin
+
+            // insets adjusted to get correct vertical height from bottom of screen when aligned to margin
+            [_clearButton updateContentInsets:NSDirectionalEdgeInsetsMake(12, 10, 8, 10)];
             _clearButton.exclusiveTouch = YES;
             [_clearButton setTitle:ORKLocalizedString(@"BUTTON_CLEAR", nil) forState:UIControlStateNormal];
             _clearButton.translatesAutoresizingMaskIntoConstraints = NO;

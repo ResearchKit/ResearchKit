@@ -123,6 +123,8 @@ static const GLfloat ColorConversion709[] = {
 @end
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation ORKEAGLMoviePlayerView
 
 const GLfloat DefaultPreferredRotation = 0;
@@ -732,3 +734,4 @@ const GLfloat DefaultPreferredRotation = 0;
 }
 
 @end
+#pragma clang diagnostic pop
