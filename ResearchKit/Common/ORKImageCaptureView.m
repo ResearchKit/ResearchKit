@@ -78,7 +78,6 @@
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _navigationFooterView, _headerView);
         ORKEnableAutoLayoutForViews(dictionary.allValues);
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInterruptionEnded:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
@@ -101,24 +100,29 @@
 - (void)orientationDidChange {
     dispatch_async(dispatch_get_main_queue(), ^{
         AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
-        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
-            case UIInterfaceOrientationLandscapeRight:
-                orientation = AVCaptureVideoOrientationLandscapeRight;
-                break;
-            case UIInterfaceOrientationLandscapeLeft:
-                orientation = AVCaptureVideoOrientationLandscapeLeft;
-                break;
-            case UIInterfaceOrientationPortraitUpsideDown:
-                orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-                break;
-            case UIInterfaceOrientationPortrait:
-                orientation = AVCaptureVideoOrientationPortrait;
-                break;
-            case UIInterfaceOrientationUnknown:
-                // Do nothing in these cases, since we don't need to change display orientation.
-                return;
-        }
+
+        UIWindowScene *windowScene = self.window.windowScene;
         
+        if (windowScene) {
+            switch (windowScene.interfaceOrientation) {
+                case UIInterfaceOrientationLandscapeRight:
+                    orientation = AVCaptureVideoOrientationLandscapeRight;
+                    break;
+                case UIInterfaceOrientationLandscapeLeft:
+                    orientation = AVCaptureVideoOrientationLandscapeLeft;
+                    break;
+                case UIInterfaceOrientationPortraitUpsideDown:
+                    orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+                    break;
+                case UIInterfaceOrientationPortrait:
+                    orientation = AVCaptureVideoOrientationPortrait;
+                    break;
+                case UIInterfaceOrientationUnknown:
+                    // Do nothing in these cases, since we don't need to change display orientation.
+                    return;
+            }
+        }
+
         [_previewView setVideoOrientation:orientation];
         [self.delegate videoOrientationDidChange:orientation];
         [self setNeedsUpdateConstraints];
@@ -226,7 +230,13 @@
                                                views:views]];
     
     // Float the continue view over the previewView if in landscape to give more room for the preview
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    
+    UIWindowScene *windowScene = self.window.windowScene;
+    if (windowScene == nil){
+        return;
+    }
+    
+    if (UIInterfaceOrientationIsLandscape(windowScene.interfaceOrientation)) {
         [_variableConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
@@ -247,6 +257,13 @@
                                                    views:views]];
         _navigationFooterView.backgroundColor = [_navigationFooterView.backgroundColor colorWithAlphaComponent:NavigationFooterViewOpaqueAlpha];
     }
+    
+    [_variableConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_navigationFooterView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    _navigationFooterView.backgroundColor = [_navigationFooterView.backgroundColor colorWithAlphaComponent:NavigationFooterViewOpaqueAlpha];
     
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];

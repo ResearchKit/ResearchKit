@@ -2531,7 +2531,7 @@ static id jsonObjectForObject(id object, ORKESerializationContext *context) {
     NSMutableArray *a = [NSMutableArray array];
     NSDictionary *table = ORKESerializationEncodingTable();
     for (NSString *key in [table allKeys]) {
-        if ([key containsString:@"SwiftStroop"]) {
+        if ([key containsString:@"SwiftStroop"] || [key containsString:@"DataCollectionState"]) {
             continue;
         }
         [a addObject:NSClassFromString(key)];

@@ -84,7 +84,6 @@ enum TaskListRow: Int, CustomStringConvertible {
     case PDFViewer
     case requestPermissions
     case eligibilityTask
-    case consent
     case accountCreation
     case login
     case passcode
@@ -166,7 +165,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Onboarding", rows:
                 [
                     .eligibilityTask,
-                    .consent,
                     .accountCreation,
                     .login,
                     .passcode
@@ -287,9 +285,6 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .eligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
-            
-        case .consent:
-            return NSLocalizedString("Consent-Obtaining Example", comment: "")
 
         case .accountCreation:
             return NSLocalizedString("Account Creation", comment: "")
@@ -523,8 +518,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case eligibilityEligibleStep
         
         // Consent task specific identifiers.
-        case consentTask
-        case visualConsentStep
         case consentSharingStep
         case consentReviewStep
         case consentDocumentParticipantSignature
@@ -664,9 +657,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .eligibilityTask:
             return eligibilityTask
-            
-        case .consent:
-            return consentTask
             
         case .accountCreation:
             return accountCreationTask
@@ -1517,50 +1507,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         return eligibilityTask
     }
     
-    /// A task demonstrating how the ResearchKit framework can be used to obtain informed consent.
-    private var consentTask: ORKTask {
-        /*
-        Informed consent starts by presenting an animated sequence conveying
-        the main points of your consent document.
-        */
-        let visualConsentStep = ORKVisualConsentStep(identifier: String(describing: Identifier.visualConsentStep), document: consentDocument)
-        
-        let investigatorShortDescription = NSLocalizedString("Institution", comment: "")
-        let investigatorLongDescription = NSLocalizedString("Institution and its partners", comment: "")
-        let localizedLearnMoreHTMLContent = NSLocalizedString("Your sharing learn more content here.", comment: "")
-        
-        /*
-        If you want to share the data you collect with other researchers for
-        use in other studies beyond this one, it is best practice to get
-        explicit permission from the participant. Use the consent sharing step
-        for this.
-        */
-        let sharingConsentStep = ORKConsentSharingStep(identifier: String(describing: Identifier.consentSharingStep), investigatorShortDescription: investigatorShortDescription, investigatorLongDescription: investigatorLongDescription, localizedLearnMoreHTMLContent: localizedLearnMoreHTMLContent)
-        
-        /*
-        After the visual presentation, the consent review step displays
-        your consent document and can obtain a signature from the participant.
-        
-        The first signature in the document is the participant's signature.
-        This effectively tells the consent review step which signatory is
-        reviewing the document.
-        */
-        let signature = consentDocument.signatures!.first
-        
-        let reviewConsentStep = ORKConsentReviewStep(identifier: String(describing: Identifier.consentReviewStep), signature: signature, in: consentDocument)
-        reviewConsentStep.requiresScrollToBottom = true
-        
-        // In a real application, you would supply your own localized text.
-        reviewConsentStep.title = NSLocalizedString("Consent Document", comment: "")
-        reviewConsentStep.text = loremIpsumText
-        reviewConsentStep.reasonForConsent = loremIpsumText
-
-        return ORKOrderedTask(identifier: String(describing: Identifier.consentTask), steps: [
-            visualConsentStep,
-            sharingConsentStep,
-            reviewConsentStep
-            ])
-    }
     
     /// This task presents the Account Creation process.
     private var accountCreationTask: ORKTask {

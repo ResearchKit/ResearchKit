@@ -109,7 +109,6 @@
     _submitVideoButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
     [_submitVideoButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_submitVideoButton setBackgroundColor:[UIColor systemBlueColor]];
-    [_submitVideoButton setTitleEdgeInsets:UIEdgeInsetsMake(5.0, 8.0, 5.0, 8.0)];
     [_submitVideoButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_SUBMIT_VIDEO", nil) forState:UIControlStateNormal];
     [self.contentView addSubview:_submitVideoButton];
 }
@@ -194,9 +193,14 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
 
 - (void)setupSubviews {
     _startStopButton = [UIButton new];
+    
+    UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration plainButtonConfiguration];
+    [buttonConfiguration setContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
+    
+    [_startStopButton setConfiguration:buttonConfiguration];
     _startStopButton.layer.cornerRadius = 14.0;
     _startStopButton.clipsToBounds = YES;
-    _startStopButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+    
     UIFontDescriptor *descriptorOne = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
     _startStopButton.titleLabel.font = [UIFont boldSystemFontOfSize:[[descriptorOne objectForKey: UIFontDescriptorSizeAttribute] doubleValue] + 1.0];
     [self.contentView addSubview:_startStopButton];

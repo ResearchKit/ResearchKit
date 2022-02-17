@@ -236,7 +236,14 @@ static UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
         // Use this method instead of UIApplication's keyWindow or UIApplication's delegate's window
         // because we may need the window before the keyWindow is set (e.g., if a view controller
         // loads programmatically on the app delegate to be assigned as the root view controller)
-        window = [UIApplication sharedApplication].windows.firstObject;
+        
+        for (UIScene *scene in UIApplication.sharedApplication.connectedScenes) {
+            if ([scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
+                window = [(id<UIWindowSceneDelegate>)scene.delegate window];
+                break;
+            }
+        }
+        
     }
     return window;
 }
@@ -435,7 +442,7 @@ void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInse
         insets.bottom = bottomInset;
         scrollView.contentInset = insets;
         
-        insets = scrollView.scrollIndicatorInsets;
+        insets = scrollView.verticalScrollIndicatorInsets;
         insets.bottom = bottomInset;
         scrollView.scrollIndicatorInsets = insets;
         

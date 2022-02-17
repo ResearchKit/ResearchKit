@@ -34,6 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//__attribute__((unavailable("ORKEAGLMoviePlayerView has been deprecated. Please use ORKInstructionStep instead.")))
+API_DEPRECATED("Use ORKInstructionStep for obtaining consent.", ios(2.0, 11.0)) API_UNAVAILABLE(tvos, watchos, macos)
 @interface ORKEAGLMoviePlayerView : UIView
 
 @property (nonatomic) CGSize presentationSize;

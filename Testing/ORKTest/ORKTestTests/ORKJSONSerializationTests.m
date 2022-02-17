@@ -543,6 +543,38 @@ ORK_MAKE_TEST_INIT(UIColor, (^{ return [self initWithRed:1 green:1 blue:1 alpha:
     [stringsForClassesExcluded addObject:@"ORKUSDZModelManagerScene"];
     [stringsForClassesExcluded addObject:@"ORKBlurFooterView"];
     [stringsForClassesExcluded addObject:@"ORKFrontFacingCameraStepOptionsView"];
+    [stringsForClassesExcluded addObject:@"ORKDataCollectionState"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTouch"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTouch"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTrack"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTapStep"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTapTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityPinchStep"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilitySwipeStep"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTapResult"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityPinchTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityLongPressTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityScrollTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityRotationTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilitySwipeTrial"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityRotationGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityPinchGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilitySwipeGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityPanGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityLongPressGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityTapGestureRecoginzerEvent"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityRotationStep"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityLongPressStep"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityScrollStep"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityPinchResult"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityRotationResult"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityLongPressResult"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilitySwipeResult"];
+    [stringsForClassesExcluded addObject:@"ORKTouchAbilityScrollResult"];
+    
+
     
     // Find all classes that conform to NSSecureCoding
     NSMutableArray<Class> *classesWithSecureCoding = [NSMutableArray new];
