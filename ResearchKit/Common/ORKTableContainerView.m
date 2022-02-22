@@ -222,7 +222,7 @@ static const CGFloat FooterViewHeightOffset = 20.0;
         CGFloat newHeight = tableViewHeight - self.tableView.contentSize.height + FooterViewHeightOffset;
         CGRect footerBounds = newHeight < minHeight ? CGRectMake(0.0, 0.0, _tableView.bounds.size.width, minHeight) : CGRectMake(0.0, 0.0, _tableView.bounds.size.width, newHeight);
 
-        [_footerView setBounds:footerBounds];
+        [_footerView setFrame:footerBounds];
         _tableView.tableFooterView = _footerView;
     }
 }
