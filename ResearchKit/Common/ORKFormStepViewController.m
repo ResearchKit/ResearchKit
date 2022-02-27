@@ -749,8 +749,11 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 
     BOOL scale = (answerFormat.questionType == ORKQuestionTypeScale);
     
+    // Added code - Sharon
+    BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
+    
     // Items require individual section
-    if (multiCellChoices || scale) {
+    if (multiCellChoices || scale || multilineTextEntry) {
         return YES;
     }
     
