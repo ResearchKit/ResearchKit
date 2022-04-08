@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Karagdagang impormasyon";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Isara ang iyong %@ titigan ang tuldok sa sentro ng parisukat na grid.\n\nGamit ang iyong daliri o stylus, markahan ang anumang mga pagbaluktot na nakikita mo tulad ng malabo o kulot na mga linya.\n\nKapag tapos ka na, mag-swipe pakaliwa saanman sa labas ng grid.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hawakan ang device ng 12 pulgada mula sa iyong mukha at sa antas ng mata sa buong test.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Nakakatulong ang aktibidad na ito sa pagtuklas ng mga problema sa paningin ng user.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Kaliwang mata";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Kanang mata";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amsler Grid";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Hindi makapagrekord ng audio";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Sabihin ang \"Aaaaah\" sa mikropono sa tagal na hanggang makakaya mo.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Sinusuri ng aktibidad na ito ang iyong boses sa pamamagitan ng pagrekord nito sa mikropono sa ilalim ng iyong device.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Huminga ng malalim at sabihin ang \"Aaaaah\" sa mikropono sa tagal na hanggang makakaya mo. Panatilihin ang isang matatag na lakas na boses upang ang mga audio bar ay mananatiling asul.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Mangyaring maghintay habang sinusuri namin ang antas ng ingay sa background.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Boses";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "I-tap ang Susunod pag handa na.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Masyadong Malakas";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Masyadong malakas ang antas ng ingay sa paligid upang mairekord ang iyong boses. Mangyaring lumipat sa isang lugar na mas tahimik at subukang muli.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Gamitin ang iyong daliri o stylus upang markahan ang grid nang direkta, o mag-swipe nang pakaliwa sa labas ng grid upang tapusin.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Simulan ang gawain";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Magkomentaryo";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Balik";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Itago ang PDF Thumbnail";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Itago ang Search Bar";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Magbahagi";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Ipakita ang Thumbnail ng PDF";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Ipakita ang Search Bar";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Paglalarawan ng isang marka ng tsek sa isang asul na bilog na naghahatid ng tagumpay";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Gamit ang VoiceOver, ang button ay direkta nang mata-tap. Makikita ito malapit sa sentro ng screen.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "I-dismiss ang keyboard";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " at ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Point: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Saklaw mula sa %@ sa %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Ang tumpok ay binubuo ng";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Kunan ng preview";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Nakunang image";
+
+/* (No Comment) */
+"AX_SELECTED" = "Napili";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Idikit ang iyong daliri sa screen at igalaw ang iyong daliri upang magpirma";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Itinalagang patlang ng lagda";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Nilagdaan";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Hindi linagdaan";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Slider ng tugon. Saklaw mula sa %@ sa %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Kapag nagsimula ang pagrekord, aktibahin ng pangalawang pagkakataon upang ihinto ang pagrekord.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Waveform ng Pagsasalita";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "I-tap para sa isang daliri";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "I-tap para sa ibang daliri";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Ang mga button ay direkta nang nata-tap.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Nata-tap na mga Button";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "I-activate upang gawing direktang nata-tap ang mga button.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Gamit ang VoiceOver, galugarin ang screen sa pamamagitan ng pagpindot upang malaman kung saan matatagpuan ang mga button. I-activate ang alinmang button upang gawing direktang nata-tap ang mga button.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "I-activate upang simulan ang test. Kapag nagsimula ang test, direktang i-tap itong button pag nakarinig ka ng tunog sa iyong kaliwang tainga.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "I-tap para sa Kaliwang Tainga";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "I-activate upang simulan ang test. Kapag nagsimula ang test, direktang i-tap itong button pag nakarinig ka ng tunog sa iyong kanang tainga.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "I-tap para sa Kanang Tainga";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Gamit ang VoiceOver, i-explore ang screen sa pamamagitan ng paghawak upang malaman kung saan matatagpuan ang mga button para sa bawat tainga. Kapag nagsimula ang test, direkta nang mata-tap ang mga button. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Hindi mailagay ang disk na may sukat %@ sa disk na may sukat %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dobleng i-tap upang ilagay ang disk";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dobleng i-tap upang mapili ang pinakaibabaw na disk";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Tore";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "May disk na may mga sukat %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Walang laman";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Gamit ang VoiceOver, ang mga button sa test ay direkta nang mata-tap.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Walang-label na image";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Hindi napili";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Kumpleto na ang pagkuha sa video";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Preview ng pagkuha ng video";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktibo";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "tama";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "hindi tama";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Memory game tile";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "quiescent";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Hindi";
+
+/* (No Comment) */
+"BOOL_YES" = "Oo";
+
+/* Button titles */
+"BUTTON_AGREE" = "Sang-ayon";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Apply";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Ikansela";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Malinaw";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Alisin ang sagot";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Copyright";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Hindi sang-ayon";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Tapos na";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Magsimula";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Matuto nang higit pa";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Susunod";
+
+/* (No Comment) */
+"BUTTON_OK" = "OK";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Itapon ang mga Resulta";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "I-save para Mamaya";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Tapusin ang Gawain";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Ang sagot na ito ay hindi maaaring mabago.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "I-save";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Laktawan";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Laktawan itong tanong";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Simulan ang Timer";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Hindi available ang camera sa split screen.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Kunan ng Image";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Simulan ang Pagrekord";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Kunin muli ang Image";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Muling Kunin ang Video";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Ihinto ang Pagrerekord";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Walang nahanap na camera.  Ang hakbang na ito ay hindi maaaring makumpleto.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Ang nakunang image ay hindi nai-save.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Walang tinukoy na output directory para sa mga nakunang image.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Upang makumpleto ang hakbang na ito, payagan ang akses ng app na ito sa camera sa Settings.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Walang Data";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Ang mga password ay hindi tugma.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ipasok muli ang password";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Kumpirmahin";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Petsa";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'s Pangalan (naka-print)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@'s Lagda";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Matuto Nang Higit Pa";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Apelyido";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Unang Pangalan";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Kailangan";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Consent";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Pahina %1$ld ng %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Review";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Suriin ang form sa ibaba, at i-tap ang Agree kung handa ka nang magpatuloy.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Review";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Pagtitipon ng Data";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Paggamit ng Data";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Privacy";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Survey sa Pag-aaral";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Mga Gawain sa Pag-aaral";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Oras na Pangako";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Maligayang pagdating";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Pag-atras";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Ibahagi lamang ang aking data sa %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Ibahagi ang aking data sa %@ at mga kwalipikadong mananaliksik sa buong mundo";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ tatanggap ang iyong data ng pag-aaral mula sa iyong pakikilahok sa pag-aaral na ito.\n\nAng pagbabahagi ng iyong naka-code na data ng pag-aaral nang mas malawak (nang walang impormasyon tulad ng iyong pangalan) ay maaaring makinabang dito at sa hinaharap na pagsasaliksik.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Mga Pagpipilian sa Pagbabahagi";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Mangyaring maglagda gamit ang iyong daliri sa kahon sa ibaba.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Pumirma Dito";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Pirma";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Pagsisimula ng aktibidad sa";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ mga segundong natitira.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Kinikilala ng aktibidad na ito ang mga hearing threshold levels ng isang indibidwal sa dB HL scale.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Tiyaking ang lakas ng device ay nakatakda sa pinakamataas na antas.\n\nSa panahon ng gawaing ito, ang isang banayad na tono ay maglaro sa kaliwa o kanang tainga.\n\nMakinig ng mabuti at i-tap ang button sa tuwing makakarinig ka ng isang tono.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding questionnaire.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Piliin ang iyong preference para sa 'mas mahusay na tainga', kung mayroon man";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "kaliwa";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "walang preference";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "kanan";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pumili ng isang petsa";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Araw ng kapanganakan";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Nagka-calculate";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Sinusukat ng aktibidad na ito ang antas ng presyon ng tunog sa kapaligiran. Kung ang mga antas ng ingay ay masyadong mataas, hindi mo magawang magpatuloy. Mangyaring lumipat sa isang mas tahimik na lokasyon upang makumpleto ang gawaing ito o muling kunin ang aktibidad na ito sa ibang oras.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "Metro na SPL";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Hindi maalis ang sapat na mga log file upang maabot ang threshold";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Ang file ay hindi minarkahan na tinanggal (hindi minarkahang nai-upload)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Hindi makalikha ng file";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Maramihang mga error sa pag-aalis ng mga log";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Error sa pagtatakda ng katangian";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Walang nahanap na nakolektang data.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Walang tinukoy na output directory";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Distansya (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Tibok ng Puso (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Maglakad sa labas sa iyong pinakamabilis na posibleng bilis sa loob ng %1$@. Kapag tapos ka na, umupo at magpahinga ng kumportable sa loob ng %2$@. Upang simulan, i-tap ang Magsimula.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Sinusubaybayan ng aktibidad na ito ang tibok ng iyong puso at sinusukat kung hanggang saan ka makakalakad sa loob ng %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Umupo nang kumportable sa loob ng %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Kalakasan ng katawan";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Maglakad sa bilis na hanggang makakaya mo sa loob ng %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Type I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Type II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Type III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Type V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Nakalimutan ang password?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Babae";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pumili ng kasarian";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Kasarian";
+
+/* (No Comment) */
+"GENDER_MALE" = "Lalaki";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Iba";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Sinusukat ng aktibidad na ito ang paggana ng iyong itaas na paa't kamay sa pamamagitan ng pagtatanong sa iyo na maglagay ng isang peg sa isang butas. Hihilingin sa iyo na gawin ang mga ito %@ beses.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Masusubukan ang pareho mong kaliwa at kanang kamay.\nDapat mong kunin ang peg sa bilis na hanggang makakaya mo, ilagay ito sa butas, at, sa sandaling natapos nang %@ beses, alisin itong muli nang %@ beses.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Susuriin ang pareho mong kanan at kaliwang kamay.\nDapat mong kunin ang peg sa bilis na hanggang makakaya mo, ilagay ito sa butas, at, sa sandaling natapos nang %@ beses, alisin itong muli nang %@ beses.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Ilagay ang peg sa butas gamit ang iyong kaliwang kamay.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Ilagay ang peg sa butas gamit ang iyong kanang kamay.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Ilagay ang peg sa kabila ng linya gamit ang iyong kaliwang kamay.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Ilagay ang peg sa kabila ng linya gamit ang iyong kanang kamay.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Kunin ang peg gamit ang dalawang daliri.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Itaas ang mga daliri upang ihulog ang peg.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Hindi maidagdag ang Keychain na aytem .";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Hindi matanggal ang Keychain na aytem.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Hindi mahanap ang Keychain na aytem.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Hindi mabago ang Keychain na aytem.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Pahabain ang iyong kaliwang tuhod. Pagkatapos ay mag-tap kahit saan.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Pahabain ang iyong kanang tuhod. Pagkatapos ay mag-tap kahit saan.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Sinusukat ng aktibidad na ito kung hanggang saan mo mapahaba ang iyong kaliwang tuhod.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Sinusukat ng aktibidad na ito kung hanggang saan mo mapahaba ang iyong kanang tuhod.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Umupo sa gilid ng isang upuan. Kapag nagsimula ka ay ilalagay mo ang iyong device sa iyong kaliwang tuhod para sa isang pagsukat. Mangyaring buksan ang tunog sa iyong device upang marinig mo ang mga instruction.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Umupo sa gilid ng isang upuan. Kapag nagsimula ka ay ilalagay mo ang iyong device sa iyong kanang tuhod para sa isang pagsukat. Mangyaring buksan ang tunog sa iyong device upang marinig mo ang mga instruction.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Ilagay ang iyong device sa iyong kaliwang tuhod na nakaharap ang screen, tulad ng nakalarawan.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Ilagay ang iyong device sa iyong kanang tuhod na nakaharap ang screen, tulad ng nakalarawan.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kapag handa na, i-tap ang screen upang simulan at pahabain ang iyong kaliwang tuhod hanggang sa makakaya mo. I-tap uli kapag tapos ka na.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kapag handa na, i-tap ang screen upang simulan at pahabain ang iyong kanang tuhod hanggang sa makakaya mo. I-tap uli kapag tapos ka na.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Saklaw ng Paggalaw ng Kaliwang Tuhod";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Saklaw ng Paggalaw ng Kanang Tuhod";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Ilagay ang iyong device sa iyong kaliwang tuhod";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Ilagay ang iyong device sa iyong kanang tuhod";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Matuto nang higit pa tungkol sa pagbabahagi ng data";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Matuto nang higit pa tungkol sa kung paano tinitipon ang data";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Matuto nang higit pa tungkol sa kung paano ginagamit ang data";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Matuto nang higit pa tungkol sa kung paano protektado ang iyong privacy at pagkakakilanlan";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Matuto nang higit pa tungkol sa survey ng pag-aaral";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Matuto nang higit pa tungkol sa mga kasangkot na gawain";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Matuto nang higit pa tungkol sa impact ng pag-aaral sa iyong oras";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Alamin muna ang tungkol sa pag-aaral";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Matuto nang higit pa tungkol sa pag-urong";
+
+/* Limb values. */
+"LIMB_LEFT" = "kaliwa";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption ay dapat na kaliwa o kanan";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "kanan";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Hindi makahanap ng isang resulta para sa ipinasok na address. Mangyaring tiyaking valid ang address.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Alinman ay hindi ka nakakonekta sa internet o lumampas ka sa pinakamaraming halagang mga kahilingan sa paghahanap ng address. Kung hindi ka nakakonekta sa internet, mangyaring i-on ang iyong Wi-Fi upang sagutin ang katanungang ito, laktawan ang katanungang ito kung available ang skip button, o bumalik sa survey kapag nakakonekta ka sa internet. Kung hindi man, mangyaring subukang muli sa loob ng ilang minuto.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Tinanggihan ang pag-akses sa mga serbisyo sa lokasyon. Mangyaring bigyan ng permission ang app na ito na gumamit ng location services sa pamamagitan ng Settings.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Hindi malutas ang iyong kasalukuyang lokasyon. Mangyaring mag-type ng isang address o lumipat sa isang lokasyon na may mas mahusay na signal ng GPS kung maaari.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Hindi Mahanap ang Tinukoy na Address";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Maglagay ng address";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "ft";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "in";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "lb";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "oz";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Nakumpleto ang Laro";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Upang magpatuloy, i-tap ang Susunod";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Nakumpleto ang Sequence";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Ang activity memory ay dinevelop sa tulong ni Katherine Possin, PhD at Joel Kramer, PhD mula sa University of California, San Francisco.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Hindi mo masyadong nalampasan ang oras na iyon. I-tap ang Next upang magpatuloy.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Subukang Muli";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "I-tap ang %@ sa kabaligtaran na pagkakasunod-sunod";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "I-tap ang %@ sa pagkakasunod-sunod na naiilawan sila";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Upang magpatuloy, i-tap ang Susunod";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Nakatigil nang sandali";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Panoorin ang %@ ilaw";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Iskor";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Naubusan ka ng oras.\nI-tap ang Next upang magpatuloy.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Tapos na ang Oras";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Pumili ng isang sagot";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Sinusukat ng Paced Auditory Serial Addition Test ang iyong bilis ng pagproseso ng impormasyong pandinig at kakayahan sa pag-calculate.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Napatunayan ang passcode";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Kumpirmahin ang passcode";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Kumpirmahin ang iyong bagong passcode";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Nakalimutan ang Passcode?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Ang mga passcode ay hindi tugma. Subukang muli.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Mali ang Passcode";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Ipasok ang iyong bagong passcode";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Ipasok ang iyong lumang passcode";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Ipasok ang passcode";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Nai-save ang passcode";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Tagapahiwatig ng progreso ng pagpasok ng Passcode";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ ng %@ ipinasok na mga numero";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Ang mga karakter na numero lamang ang pinapayagan.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Pindutin ang error sa ID";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Mangyaring patunayan sa pamamagitan ng Touch ID";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ilagay ang password";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Sinusukat ng Paced Auditory at Visual Serial Addition Test ang bilis nang pagproseso ng impormasyon ng pandinig at sa paningin at kakayahan sa pag-calculate.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Numero ng telepono";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "I-tap upang pumili";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "I-tap upang magsulat";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "I-tap upang sagutin";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Tandaan ang unang digit na ito.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Idagdag ang bagong digit sa nauna.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Ipinapakita ang mga solong digit bawat %@ segundo.\nDapat mong idagdag ang bawat bagong numero kaagad sa isa bago ito.\nAtensyon, hindi mo dapat i-calculate ang kabuuang pagtakbo, kundi ang kabuuan lamang ng huling dalawang numero.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Sinusukat ng Paced Visual Serial Addition Test ang iyong bilis ng pagproseso ng impormasyon sa paningin at kakayahan sa pag-calculate.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ ay lumampas sa pinakamataas na pinapayagang halaga (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ ay mas mababa sa pinakamababang pinapayagang halaga (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ ay hindi valid na halaga.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Invalid na halaga";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Saklaw ng Paggalaw";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Mabilis na kalugin ang device kapag lumitaw ang asul na bilog";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pagsubok %@ ng %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Sinusuri ng aktibidad na ito ang oras na kinakailangan upang tumugon ka sa isang hudyat ng paningin.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Kalugin ang davice sa anumang direksyon sa sandaling lumitaw ang asul na tuldok sa screen. Hihilingin sa iyo na gawin ang mga ito %D beses.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Oras ng Reaksyon";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Muling ipadala ang verification email";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Mag-tap sa link sa ibaba kung hindi ka nakatanggap ng isang verification email at nais mong ipadala itong muli.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Itaas ang iyong kaliwang braso pataas. Pagkatapos ay mag-tap kahit saan.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Itaas ang iyong kanang braso pataas. Pagkatapos ay mag-tap kahit saan.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Sinusukat ng aktibidad na ito kung hanggang saan mo maaabot ang iyong kaliwang balikat.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Sinusukat ng aktibidad na ito kung hanggang saan mo maaabot ang iyong kanang balikat.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Kapag nagsimula ka ay ilalagay mo ang iyong device sa iyong kaliwang balikat para sa isang sukat. Mangyaring buksan ang tunog sa iyong device upang marinig mo ang mga instruction.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Kapag nagsimula ka ay ilalagay mo ang iyong device sa iyong kanang balikat para sa isang sukat. Mangyaring buksan ang tunog sa iyong device upang marinig mo ang mga instruction.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Ilagay ang iyong device sa iyong kaliwang balikat na nakaharap ang screen, tulad ng nakalarawan.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Ilagay ang iyong device sa iyong kanang balikat na nakaharap ang screen, tulad ng nakalarawan.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kapag handa na, i-tap ang screen upang simulan at itaas ang iyong kaliwang braso hanggang sa maaari mo. I-tap uli kapag tapos ka na.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kapag handa na, i-tap ang screen upang simulan at itaas ang iyong kanang braso hangga't maaari. I-tap uli kapag tapos ka na.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Saklaw ng Paggalaw ng Kaliwang Balikat";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Saklaw ng Paggalaw ng Kanang Balikat";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Ilagay ang iyong device sa iyong kaliwang balikat";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Ilagay ang iyong device sa iyong kanang balikat";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Upang magsimula, i-tap ang Magsimula, pagkatapos ay panoorin nang mabuti.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Ang ilan %@ ay mag-iilaw nang paisa-isa. I-tap ang mga iyon %@ na nasa parehong pagkakasunod-sunod na naiilawan sila.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Ang ilan %@ ay mag-iilaw nang paisa-isa. I-tap ang mga iyon %@ na nasa kabaligtarang pagkakasunod-sunod na naiilawan sila.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Sinusukat ng aktibidad na ito ang iyong panandaliang malapad na memorya sa pamamagitan ng pagtatanong sa iyo na ulitin ang pagkakasunod-sunod ng kung saan %@ ang ilaw.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "mga bulaklak";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "mga bulaklak";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Malapad na Memorya";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "I-tap ang 'Play Audio', ayusin ang iyong lakas sa isang komportableng antas at pagkatapos ay i-tap ang 'Stop Audio' upang magpatuloy.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Pagkakalibrate ng Lakas";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Bilang bahagi ng test na ito, ang gagawin mo ay:\n\nMakinig sa isang pangungusap.\n\nUlitin nang malinaw kung ano ang iyong narinig o laktawan nang maaga upang mai-type ang iyong narinig gamit ang keyboard. \n\nKung ulitin mo ang narinig, magkakaroon ka ng pagpipilian upang baguhin ang transcript na nabuo ng makina ng pagkilala sa pagsasalita.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Sinusukat ng aktibidad na ito ang pagiging madaling maunawaan ng pagsasalita kapag ipinakita sa mga maingay na environment.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Ulitin ang iyong narinig.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Magsalita";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Patugtugin ang Audio";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Ang isang pangungusap na hinaluan ng ingay sa background sa isang sapalarang Signal to Noise Ratio (SNR) ay ipapatugtog lamang nang isang beses.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Makinig";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Itigil ang Audio";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Pagsasalita sa Ingay";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Nabigo ang pagkilala sa pagsasalita.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Nabigong simulan ang pagkilala sa pagsasalita.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Pindutin ang button upang simulang magrekord bago magsalita.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Itinatala ng aktibidad na ito ang iyong pagsasalita gamit ang mikropono sa ilalim ng device, at isinalin ito sa teksto.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "I-edit ang tekstong transcript upang iwasto ang anumang misinterpretasyon ng pagsasalita.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "I-edit ang Transcript";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Simulan ang Pagrekord";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Ihinto ang Pagrerekord";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Lilitaw ang iyong transcription dito.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Speech Recognition";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ ng %2$@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "BLUE";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "GREEN";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "RED";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "YELLOW";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Sa tuwing lilitaw ang isang salita, piliin ang unang titik ng pangalan ng KULAY na ipinapakita.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Kapag handa ka nang simulan ang aktibidad ng Stroop i-tap ang Magsimula.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Piliin ang unang titik ng pangalan ng KULAY na ipinakita.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Tap";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "I-tap ang Next upang magsimula.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "I-tap ang mga button nang tuloy-tuloy hanggang sa makakaya gamit ang dalawang daliri.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "I-tap ang mga button gamit ang iyong KALIWANG kamay.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "I-tap ang mga button gamit ang iyong KANANG kamay.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Sinusukat ng aktibidad na ito ang iyong bilis ng pag-tap.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "I-tap ang isang daliri, pagkatapos ay ang isa pa. Subukang ioras ang iyong mga tap na pantay-pantay hangga't maaari. Patuloy na mag-tap hanggang sa %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Gumamit ng dalawang daliri sa iyong kaliwang kamay upang salit-salitang i-tap ang mga button sa screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Ngayon ulitin ang parehong test gamit ang iyong kaliwang kamay.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Gumamit ng dalawang daliri sa parehong kamay upang salit-salitang i-tap ang mga button sa screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Ilagay ang iyong device sa isang patag na ibabaw.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Gumamit ng dalawang daliri sa iyong kanang kamay upang salit-salitang i-tap ang mga button sa screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Ngayon ulitin ang parehong test gamit ang iyong kanang kamay.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Laktawan ang kamay na ito";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Bilis ng Pag-tap";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Kaliwang kamay";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Kanang kamay";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Ang iyong data ay susuriin at aabisuhan ka kapag handa na ang iyong mga resulta.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Kumpleto na ang Aktibidad";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Nilalaman ng teksto na lumalagpas sa pinkamahabang haba: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Gumamit ng parehong pantulong na device para sa bawat test.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Pantulong na device";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Maglakad hanggang sa %@ isang tuwid na linya.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Maglakad pabalik kung saan ka nagsimula.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "I-tap ang Susunod kapag nakumpleto.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Umikot.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "I-tap ang Next upang magsimula.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Humanap ng isang lugar, mas mabuti sa labas, kung saan maaari kang maglakad %@ nang isang tuwid na linya sa lalong madaling panahon, ngunit ligtas. Huwag pabagalin hanggang matapos mong malamapasan ang linyang pagtatapos.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Sinusukat ng aktibidad na ito ang paggana ng iyong mas mababang paa't kamay.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Wala";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral na Tungkod";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral na Saklay";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral na Tungkod";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral na Saklay";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Mag-tap dito upang pumili ng isang sagot.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Gumagamit ka ba ng pantulong na device?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Nagsusuot ka ba ng ankle foot orthosis?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Pagsasaoras ng Paglalakad";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Sa tuwing nagsisimula kang marinig ang isang tunog, i-tap ang kaliwa o kanang button upang ipahiwatig kung aling tainga ang naririnig mo ang tunog.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Sinusukat ng aktibidad na ito ang iyong kakayahang makarinig ng iba't ibang mga tunog.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Bago ka magsimula, mag-plug in at ilagay ang iyong mga headphone.\n\nAng tunog ay magiging napaka banayad at hindi katulad ng isang regular na tono ng alerto. Ang tunog ay magsisimulang mahina at pagkatapos ay dahan-dahang lalakas. Mangyaring magbigay ng pansin at i-tap ang kaliwa o kanang button upang ipahiwatig kung aling tainga ang naririnig mo ang tunog.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Kaliwang tainga";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Kanang tainga";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Dapat marinig mo ngayon ang isang tono. Ayusin ang lakas gamit ang mga kontrol sa gilid ng iyong device.\n\nI-tap ang anumang button kapag handa ka nang magsimula.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Kaliwa";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Kabuuang mga Tap";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Pumindot kahit saan upang magpatuloy";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Sagutan ang Puzzle";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Bilang ng mga Galaw: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Hindi ko malutas ang puzzle na ito";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ini-evaluate ng aktibidad na ito ang iyong mga kasanayan sa puzzle solving.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Ilipat ang buong stack sa naka-highlight na platform sa pinakakaunting galaw na posible.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tore ng Hanoi";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "I-tap ang Magsimula upang simulan.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Ine-evaluate ng aktibidad na ito ang iyong visual attention at task switching sa pagrekord ng oras na kinakailangan upang i-tap ang isang serye ng mga tuldok sa pagkakasunod-sunod.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Matapos ang countdown, i-tap ang mga tuldok sa kahaliling pagkakasunod-sunod sa pagitan ng mga numero at titik. Magsimula sa pamamagitan ng pag-tap sa unang numero na '1' na sinusundan ng mga numerong '2' - '3' - '4'… hanggang sa maabot mo ang bilang na '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Matapos ang countdown, i-tap ang mga tuldok sa kahaliling pagkakasunod-sunod sa pagitan ng mga numero at titik. Magsimula sa pamamagitan ng pag-tap sa unang numero na '1' na sinusundan ng pag-tap sa unang titik na 'A', at pagkatapos ay '2' - 'B' - '3' - 'C'… hanggang sa maabot mo ang bilang na '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Gawin ito nang pinakamabilis na makakaya mo nang hindi nagkakamali. \n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Hindi ko maisasagawa ang aktibidad na ito sa aking KALIWANG kamay.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Maaari kong isagawa ang aktibidad na ito sa parehong mga kamay.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Hindi ko maisasagawa ang aktibidad na ito sa aking KANANG kamay.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Patuloy na hawakan ang iyong telepono na nakabaluktot ang iyong siko  %ld mga segundo";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Hawakan ngayon ang iyong phone sa taas ng balikat na ang iyong siko ay nakabaluktot.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Hawakan ngayon ang iyong phone sa KALIWANG kamay sa taas ng balikat na ang iyong siko ay nakabaluktot.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Hawakan ngayon ang iyong phone sa KANANG kamay sa taas ng balikat na ang iyong siko ay nakabaluktot.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Patuloy na hawakan ang iyong telepono na ang iyong kamay ay paabot ng %ld  mga segundo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Ngayon hawakan ang iyong phone gamit ang iyong kamay na paabot sa taas ng balikat.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Hawakan ngayon ang iyong phone gamit ang iyong KALIWANG kamay na paabot sa taas ng balikat.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Ngayon hawakan ang iyong phone gamit ang iyong KANANG kamay na paabot sa taas ng balikat.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Magpatuloy sa susunod na gawain.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Patuloy na hawakan ang iyong selpon sa iyong kandungan nang %ld segundo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Maghanda na hawakan ang iyong phone sa iyong kandungan.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Maghanda na hawakan ang iyong phone sa iyong kandungan gamit ang iyong KALIWANG kamay.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Maghanda na hawakan ang iyong phone sa iyong kandungan gamit ang iyong KANANG kamay.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "I-tap ang Susunod upang magpatuloy.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Ngayon ilipat ang phone sa iyong KALIWANG kamay at magpatuloy sa susunod na gawain.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Ngayon ilipat ang phone sa iyong KANANG kamay at magpatuloy sa susunod na gawain.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Patuloy na idikit ang iyong selpon sa iyong ilong nang %ld segundo";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Ngayon panatilihing baluktot ang iyong siko, idikit ang iyong phone sa iyong ilong nang paulit-ulit.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Ngayon panatilihing iyong siko na baluktot gamit ang iyong phone sa iyong KALIWANG kamay, idikit ang iyong phone sa iyong ilong nang paulit-ulit.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Ngayon panatilihing iyong siko na baluktot gamit ang iyong phone sa iyong KANANG kamay, idikit ang iyong phone sa iyong ilong nang paulit-ulit.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Patuloy na gawin ang queen wave nang %ld segundo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Maghanda na gumawa ng queen wave (kumaway sa pamamagitang pag-ikot ng iyong pulso).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Maghanda na gumawa ng queen wave gamit ang iyong phone sa iyong KALIWANG kamay (kumaway sa pamamagitan ng pag-ikot ng iyong pulso).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Maghanda na gumawa ng isang queen wave gamit ang iyong phone sa iyong KANANG kamay (kumaway sa pamamagitan ng pag-ikot ng iyong pulso).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Nakumpleto ang aktibidad.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Sinusukat ng aktibidad na ito ang panginginig ng iyong mga kamay sa iba't ibang mga posisyon. Humanap ng isang lugar kung saan maaari kang umupo nang kumportable sa tagal ng aktibidad na ito.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hawakan ang phone sa iyong apektadong kamay tulad ng ipinapakita sa image sa ibaba.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "isang gawain";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dalawang gawain";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tatlong gawain";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "apat na gawain";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "limang gawain";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Hihilingin sa iyo na gumanap %@ habang nakaupo kasama ang phone sa iyong kamay.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hawakan ang phone sa iyong KALIWANG kamay tulad ng ipinakita sa image sa ibaba.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hawakan ang phone sa iyong KANANG kamay tulad ng ipinakita sa image sa ibaba.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Hihilingin sa iyo na gumanap %@ habang nakaupo kasama ang phone sa isang kamay, at pagkatapos ay sa kabilang kamay.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Aktibidad ng Panginginig";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verification";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "I-verify ang iyong Email";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Nakumpleto mo na ang aktibidad.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Maglakad pabalik-balik sa isang tuwid na linya para sa %@. Maglakad tulad ng dati mong ginagawa.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Lumiko sa isang buong bilog at pagkatapos ay tumayo lang para sa %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Ilagay ang iyong device sa bulsa o bag at sundin ang mga audio instructions.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "I-tap ang Magsimula kapag handa ka nang magsimula.\nPagkatapos ay ilagay ang iyong device sa isang bulsa o bag at sundin ang mga audio instruction.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Humanap ng isang lugar kung saan maaari kang ligtas na maglakad nang hindi tinulungan para sa halos %ld na mga hakbang sa isang tuwid na linya.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Maghanap ng isang lugar kung saan maaari kang ligtas na maglakad nang pabalik-balik sa isang tuwid na linya. Subukang maglakad nang tuloy-tuloy sa pamamagitan ng pagliko sa mga dulo ng iyong landas, na parang naglalakad ka sa paligid ng isang kono.\n\nSusunod ay aatasan ka sa pagliko sa isang buong bilog, pagkatapos ay tumayo ka nakatigil gamit ang iyong mga braso sa iyong mga gilid at ang iyong mga paa nakalayo na na kalaparan ng balikat.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Sinusukat ng aktibidad na ito ang iyong lakad at balanse habang ikaw ay naglalakad at tumatayo nang nakatigil. Huwag magpatuloy kung hindi ka ligtas na makalakad nang hindi tinulungan.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Maglakad hanggang sa %ld na mga hakbang sa isang tuwid na linya.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Lumikong palibot at lumakad pabalik sa kung saan ka nagsimula.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Tumayo nang nakatigil para sa %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Ngayon tumayo nang nakatigil para sa %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Lakad at Balanse";
+
