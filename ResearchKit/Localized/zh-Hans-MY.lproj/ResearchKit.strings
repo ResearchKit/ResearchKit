@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "附加信息";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "关闭您的%@并盯着方形网格中心的点。\n\n使用您的手指或手写笔，标记您看到的任何扭曲，例如模糊或波浪线。\n\n完成后，向左滑动网格外的任意位置。";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "在整个测试过程中，将设备与您的脸部保持 30 厘米距离并保持在视线水平。";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "此活动有助于检测用户视力的问题。";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "左眼";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "右眼";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "阿姆斯勒网格";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "无法录制音频";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "尽可能长时间地对着麦克风说 “Aaaaah”。";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "此活动通过使用设备底部的麦克风录音来评估您的声音。";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "深吸一口气，尽可能长时间地对着麦克风说 “Aaaaah”。保持稳定的音量，使音频条保持蓝色。";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "我们正在检查背景噪音水平，请稍候。";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "声音";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "准备好后点击“下一步”。";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "太吵了";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "环境噪音水平太大，无法录制您的声音。请移到更安静的地方，然后再试一次。";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "用手指或手写笔直接标记网格，或在网格外向左滑动以完成。";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "阿姆斯勒网格";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "开始任务";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "音频条形图";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "注释";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "后退";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "隐藏 PDF 缩略图";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "隐藏搜索栏";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "共享";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "显示 PDF 缩略图";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "显示搜索栏";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "在表示成功的蓝色圆圈中的复选标记插图";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ 使用 VoiceOver，按钮可以直接点击。它将位于屏幕中央附近。";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "关闭键盘";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " 和 ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "点数：%@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "范围从%@到%@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "堆垛组成";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "捕捉预览";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "捕获的图像";
+
+/* (No Comment) */
+"AX_SELECTED" = "已选择";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "触摸屏幕并移动手指进行签名";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "指定签名栏";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "已签名";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "未签名";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "响应滑块。范围从%@到%@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "录制开始时，再次激活以停止录制。";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "语音波形";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "点击表示一根手指";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "点击表示另一根手指";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "按钮现在可以直接点击。";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "可点击的按钮";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "激活以使按钮可直接点击。";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ 使用 VoiceOver，通过触摸浏览屏幕以了解按钮所在的位置。激活任一按钮以使按钮可直接点击。";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "激活以开始测试。测试开始时，当您听到左耳有声音时，直接点击此按钮。";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "点击表示左耳";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "激活以开始测试。测试开始时，当您听到右耳有声音时，直接点击此按钮。";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "点击表示右耳";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ 使用 VoiceOver，通过触摸浏览屏幕以了解代表每只耳朵的按钮所在的位置。测试开始时，按钮将可直接点击。 %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "无法将大小为%@的磁盘放置在大小为%@的磁盘上";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "双击以放置磁盘";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "双击以选择最上面的磁盘";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "目标";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "塔";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "有大小为%@的磁盘";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ 使用 VoiceOver，测试中的按钮将可以直接点击。";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "未标记的图像";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "取消选中";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "视频捕捉完成";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "视频捕捉预览";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "有效";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "正确";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "不正确";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "记忆游戏方块";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "静止";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "否";
+
+/* (No Comment) */
+"BOOL_YES" = "是";
+
+/* Button titles */
+"BUTTON_AGREE" = "同意";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "申请";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "取消";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "清除";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "清除答案";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "版权";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "不同意";
+
+/* (No Comment) */
+"BUTTON_DONE" = "完毕";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "开始";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "了解更多";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "下一步";
+
+/* (No Comment) */
+"BUTTON_OK" = "确定";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "舍弃结果";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "保存供以后用";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "结束任务";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "此答案无法修改。";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "保存";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "跳过";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "跳过这个问题";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "启动计时器";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "相机在分屏模式下不可用。";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "捕捉图像";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "开始录音";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新捕捉图像";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "重新捕捉视频";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "停止录音";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "找不到相机。此步骤无法完成。";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "无法保存捕获的图像。";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "没有为捕获的图像指定输出目录。";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "为了完成此步骤，请在“设置”中允许此应用程序访问相机。";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "无数据";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密码不匹配。";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "再次输入密码";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "确认";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "日期";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ 的姓名（正楷）";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ 的签名";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "了解更多";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "姓";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "名字";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "必填";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "同意";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "第%1$ld页，共%2$ld页";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "审核";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "查看下面的表格，如果您准备好继续，请点击“同意”。";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "审核";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "数据收集";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "数据使用";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "隐私";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "研究调查";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "研究任务";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "时间投入";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "欢迎";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "退出";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "仅与%@共享我的数据";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "与%@和全球合格的研究人员共享我的数据";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@将收到您参与本研究的研究数据。\n\n更广泛地共享您的编码研究数据（没有您的姓名等信息）可能有益于本研究和未来的研究。";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "共享选项";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "请在下面的框中用手指签名。";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "此处签名";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "签名";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "将在";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "剩余的 %@ 秒后开始活动。";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "此活动以 dB HL 等级确定个人的听力阈值水平。";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "确保设备音量设置为最大声级。\n\n在此任务期间，左耳或右耳会播放一种细微的音调。\n\n仔细聆听并在每次听到提示音时点击按钮。";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "入组问卷。";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "选择听力“较好的耳朵”（如有）";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "左";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "没有偏好";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "右";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "音调测听";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "选择日期";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "出生日期";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "电子邮件";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "计算";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "此活动测量环境声压级。如果噪音水平太高，您将无法继续。请移到更安静的地方完成此任务或稍后重新进行此活动。";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "阈值： %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "声压计";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "无法删除足够多的日志文件以达到阈值";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "文件未标记为已删除（未标记为已上传）";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "删除日志时出现多个错误";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "设置属性时出错";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "找不到已收集的数据。";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定输出目录";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "距离((%@))";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "心率 (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "对于%1$@，以最快的速度在户外步行。对于%2$@，完成后，坐下来舒适地休息。首先，点击“开始”。";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "此活动会监测您的心率并测量您可以步行的距离(%1$@)。";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "舒适地坐下休息%@。";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "健康";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "尽可能快地行走%@。";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "I 型";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Ⅱ 型";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Ⅲ 型";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Ⅳ 型";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "V 型";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "VI 型";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "忘记了密码？";
+
+/* Gender values. */
+"GENDER_FEMALE" = "女性";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "选择性别";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "性别";
+
+/* (No Comment) */
+"GENDER_MALE" = "男性";
+
+/* (No Comment) */
+"GENDER_OTHER" = "其他";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此活动通过要求您将钉子放入孔中来测量您的上肢功能。您将被要求执行此操作%@次。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "您的左右手都将接受测试。\n您必须尽快拿起钉子，将其放入孔中，完成%@次后，再将其取出%@次。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "您的左右手都将接受测试。\n您必须尽快拿起钉子，将其放入孔中，完成%@次后，再将其取出%@次。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "用左手将钉子插入孔中。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "用右手将钉子插入孔中。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "用左手把钉子放在线后面。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "用右手把钉子放在线后面。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "用两根手指拿起钉子。";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "抬起手指以放下钉子。";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-孔钉测试";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "无效的电子邮箱：%@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "无法添加钥匙串项目。";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "无法删除钥匙串项目。";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "找不到钥匙串项目。";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "无法更新钥匙串项目。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "伸展左膝。然后点击任意位置。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "伸展右膝。然后点击任意位置。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "这项活动测量您可以将左膝伸展多远。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "这项活动测量您可以将右膝伸展多远。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "坐在椅子的边缘。开始时，您要将设备放在左膝上进行测量。请打开设备上的声音，以便您可以听到指示。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "坐在椅子的边缘。开始时，您要将设备放在右膝上进行测量。请打开设备上的声音，以便您可以听到指示。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在左膝上，屏幕朝外，如图所示。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在右膝上，屏幕朝外，如图所示。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "准备好后，点击屏幕开始，并尽可能地伸展左膝。完成后再次点击。";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "准备好后，点击屏幕开始，并尽可能地伸展右膝。完成后再次点击。";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "左膝关节活动范围";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "右膝关节活动度";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在左膝上";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在右膝上";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "了解有关数据共享的更多信息";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "了解有关如何收集数据的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "了解有关如何使用数据的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "了解如何保护您的隐私和身份的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "了解有关研究调查的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "了解有关所涉及任务的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "了解这项研究对您时间的影响的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "首先了解有关研究的更多信息";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "了解有关退出的更多信息";
+
+/* Limb values. */
+"LIMB_LEFT" = "左";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption 必须是左或右";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "右";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "无法找到输入地址的结果。请确保地址有效。";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "您未连接到网络或已超出地址查找请求的最大数量。如果您没有连接到网络，请打开您的 Wi-Fi 来回答这个问题，如果跳过按钮可用，请跳过这个问题，或者当您连接到网络时返回调查。否则，请在几分钟后重试。";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "已拒绝访问定位服务。请通过“设置”授予此应用程序使用定位服务的权限。";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "无法解析您当前的位置。如果适用，请输入地址或移动到 GPS 信号更好的位置。";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "找不到指定地址";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "输入地址";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "登录";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "厘米";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "英尺";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "英寸";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "公斤";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "磅";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "盎司";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "游戏完成";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "要继续，请点击“下一步”";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "序列完成";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "记忆活动是在 University of California, San Francisco 的 Katherine Possin 博士和 Joel Kramer 博士的帮助下开发的。";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "您没有顺利完成。点击“下一步”继续。";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "再试一次";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "以相反的顺序点击%@";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "按点亮的顺序点击%@";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "要继续，请点击“下一步”";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "暂停";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "看%@灯亮起来";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "分数";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "您的时间用完了。\n点击“下一步”继续。";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "时间到";
+
+/* (No Comment) */
+"NULL_ANSWER" = "选择答案";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "踱步听觉系列加法测验测量您的听觉信息处理速度和计算能力。";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "密码已验证";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "确认密码";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "确认您的新密码";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "忘记了密码？";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "密码不匹配。再试一次。";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "密码不正确";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "输入您的新密码";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "输入您的旧密码";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "输入密码";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "密码已保存";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密码输入进度指示器";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已输入第 %@ 位数，共 %@ 位数";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "只允许输入数字字符。";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 错误";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "请使用 Touch ID 进行身份验证";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "输入密码";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "密码";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "踱步听觉和视觉连续加法测试测量您的听觉和视觉信息处理速度和计算能力。";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "电话号码";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "点击以选择";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "点击以写入";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "点击以回答";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "记住这第一个数字。";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "将此新数字添加到前一位。";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "每 %@ 秒显示一位数。\n您必须将每个新数字添加到它之前的数字中。\n注意，您不能计算运行总数，而只能计算最后两个数字的总和。";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "踱步视觉连续加法测试测量您的视觉信息处理速度和计算能力。";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@超出了最大允许值((%2$@))。";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@小于最小允许值((%2$@))。";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@不是有效值。";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "无效值";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "运动范围";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "出现蓝色圆圈时快速摇晃设备";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@ 次尝试，共 %@ 次尝试";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "此活动评估您对视觉提示做出反应所需的时间。";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "屏幕上出现蓝点后，立即朝任何方向摇晃设备。您将被要求执行此操作%D次。";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反应时间";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "重新发送验证电子邮件";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果您没有收到验证电子邮件并希望再次发送，请点击下面的链接。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "抬起您的左臂。然后点击任意位置。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "抬起您的右臂。然后点击任意位置。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "这项活动测量您可以将左肩伸展多远。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "这项活动测量您可以将右肩伸展多远。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "开始时，您会将设备放在左肩上进行测量。请打开设备上的声音，以便您可以听到指示。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "开始时，您会将设备放在右肩上进行测量。请打开设备上的声音，以便您可以听到指示。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在左肩上，屏幕朝外，如图所示。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在右肩上，屏幕朝外，如图所示。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "准备好后，点击屏幕开始，然后尽可能地抬起左臂。完成后再次点击。";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "准备好后，点击屏幕开始，然后尽可能地抬起右臂。完成后再次点击。";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩活动范围";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "右肩活动范围";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在左肩上";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在右肩上";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "首先，点击“开始”，然后仔细观察。";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "一些%@将一个一个地亮起来。按照它们点亮的顺序点击这些%@。";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "一些%@将一个一个地亮起来。按与它们点亮的顺序相反的顺序点击这些%@。";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "此活动通过要求您重复%@点亮的顺序来测量您的短期空间记忆。";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花卉";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花卉";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "空间记忆";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "点击“播放音频”，将音量调整到合适的水平，然后点击“停止音频”继续。";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "音量校准";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "作为此测试的一部分，您将：\n\n听一句话。\n\n清楚地重复您听到的内容，或跳过以使用键盘输入您听到的内容。\n\n如果您重复听到的内容，您可以选择修改语音识别引擎生成的转录文本。";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "此活动测量在嘈杂环境中呈现的说话的可懂度。";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "重复您听到的内容。";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "说";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "播放音频";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "以随机信噪比 (SNR) 与背景噪音混合的句子将仅播放一次。";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "听";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "停止音频";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "噪音中的说话";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "语音识别失败。";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "无法初始化语音识别。";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "说话前按下按钮开始录音。";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "此活动使用设备底部的麦克风对您的讲话录音，并将其转换为文本。";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "编辑转录文本以纠正对说话内容的任何误解。";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "编辑转录文本";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "开始录音";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "停止录音";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "您的转录文本将显示在此处。";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "语音识别";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "第%1$@页，共%2$@页";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "蓝色";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "绿色";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "红色";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "黄色";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "每次出现一个单词时，选择显示的颜色名称的第一个字母。";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "当您准备好开始 Stroop 测验活动时，点击“开始”。";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "选择显示的颜色名称的第一个字母。";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "点击";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "点击“下一步”开始。";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "用两根手指尽可能一致地点击按钮。";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "用您的左手点击按钮。";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "用您的右手点击按钮。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "此活动测量您的点击速度。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "点击一根手指，然后点击另一根手指。尽量让您的点击时间尽可能均匀。继续点击持续%@。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "用左手的两根手指交替点击屏幕上的按钮。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "现在用您的左手重复同样的测试。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "用同一只手的两个手指交替点击屏幕上的按钮。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "将您的设备放在平坦的表面上。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "用右手的两根手指交替点击屏幕上的按钮。";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "现在用您的右手重复同样的测试。";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "跳过这只手";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "点击速度";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "左手";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "右手";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "您的数据将被分析，当您的结果准备就绪时，您将收到通知。";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "活动完成";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "超过最大长度的文本内容：%@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "每次测试使用相同的辅助设备。";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "辅助设备";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "沿直线走到%@。";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "走回到您开始的地方。";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "完成后点击“下一步”。";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "转身。";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "点击“下一步”开始。";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "找一个地方，最好是在外面，在那里您可以尽可能快但安全地沿直线步行约%@。在通过终点线之前不要放慢速度。";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "此活动测量您的下肢功能。";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "无";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "单侧手杖";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "单边拐杖";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "双侧手杖";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "双边拐杖";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "助行器/助行车";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "点击此处选择答案。";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "您是否使用辅助设备？";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "您是否戴脚踝矫形器？";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "定时步行";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "每次开始听到声音时，点击向左或向右按​​钮以指明您听到声音的耳朵。";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "这项活动测量您听到不同声音的能力。";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "在开始之前，请插入并戴上耳机。\n\n声音将非常微妙，与常规警报音不同。声音一开始柔和，然后音量慢慢增加。请集中注意力，并点击向左或向右按​​钮以指示您的哪个耳朵听到它。";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "左耳";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "您现在应该听到一个提示音。使用设备侧面的控件调节音量。\n\n当您准备好开始时，点击任意按钮。";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "音调测听";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ 赫兹，左";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ 赫兹，右";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "总点击次数";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "点触任意位置以继续";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解开谜题";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移动次数：%@\n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我无法解开这个谜题";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "此活动评估您的解谜技巧。";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "以尽可能少的移动将整个堆垛移动到高亮显示的平台。";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "汉诺塔";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "点击“开始”使用。";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@（%d个错误）";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@（%d个错误）";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "此活动通过记录按顺序点击一系列点所需的时间来评估您的视觉注意力和任务切换能力。";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "倒计时后，在数字和字母之间交替点击点。首先点击第一个数字 “1”，然后点击数字 “2” – “3” – “4”……直到您到达数字 “7”。";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "倒计时后，在数字和字母之间交替点击点。首先点击第一个数字 “1”，然后点击第一个字母 “A”，然后点击“2” – “B” – “3” – “C”……直到到达数字 “7”。";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "尽快点击完，而且不出错。\n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "连线测试";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%。1fs";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "我无法用左手进行这项活动。";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "我可以用双手进行这项活动。";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "我无法用右手进行这项活动。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "保持手肘弯曲握住手机%ld秒";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "现在将手机保持在与肩同高的位置，肘部弯曲。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "现在用左手握住手机，与肩同高，肘部弯曲。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "现在用右手握住手机，与肩同高，肘部弯曲。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "伸出手继续握住手机%ld秒。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "现在握住手机，将手伸出与肩同高。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "现在握住手机，将左手伸出与肩同高。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "现在握住手机，将右手伸出与肩同高。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "继续下一项任务。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "将手机放在膝盖上保持%ld秒。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "准备好将手机放在膝上。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "准备好用左手将手机放在膝盖上。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "准备好用右手将手机放在膝盖上。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "点击“下一步”继续。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "现在将手机换到左手并继续下一项任务。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "现在将手机换到右手并继续下一项任务。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "保持将手机靠近鼻子%ld秒";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "现在保持肘部弯曲，反复将手机靠近鼻子。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "现在保持肘部弯曲，左手拿着手机，反复将手机靠近鼻子。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "现在保持肘部弯曲，右手拿着手机，反复将手机靠近鼻子。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "继续执行%ld秒的女王式挥手。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "准备做一个女王式挥手（通过转动手腕来挥动）。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "拿着您的手机，准备用左手做一个女王式挥手（转动手腕来挥手）。";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "拿着您的手机，准备用右手做一个女王式挥手（转动手腕来挥手）。";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "活动完成。";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "这项活动测量您的手在不同位置的颤抖。在此活动期间，找一个您可以舒适地坐着的地方。";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "将手机握在受影响较大的手中，如下图所示。";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "一项任务";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "两项任务";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "三项任务";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "四项任务";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "五项任务";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "您将被要求坐下来，手里拿着手机时进行%@。";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "用左手握住手机，如下图所示。";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "用右手握住手机，如下图所示。";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "您将被要求坐下来，进行%@，同时先用一只手拿手机，然后换手拿手机。";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "震颤活动";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "验证";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "验证您的电子邮件";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "您已完成活动。";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "来回走直线持续%@。像往常一样走路。";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "旋转一整圈，然后站立不动持续%@。";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "将您的设备放入口袋或包袋中，并按照音频说明进行操作。";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "当您准备好开始时，点击“开始”。\n然后将您的设备放入口袋或包袋中，并按照音频说明进行操作。";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "找一个您可以在无人帮助的情况下安全行走的地方，然后沿直线步行约%ld步。";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找一个可以安全地来回走直线的地方。尝试通过在道路尽头转弯来连续行走，就好像您在绕着圆锥体行走一样。\n\n接下来，您将按指令旋转一整圈，然后站立不动，双臂放在身体两侧，双脚分开与肩同宽。";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "这项活动测量您走路和站立时的步态和平衡。如果您无法在无人协助的情况下安全行走，请不要继续。";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "沿直线向前走%ld步。";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "转身，走回您开始的地方。";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "站立不动持续%@。";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "现在站立不动持续%@。";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "步态和平衡";
+
