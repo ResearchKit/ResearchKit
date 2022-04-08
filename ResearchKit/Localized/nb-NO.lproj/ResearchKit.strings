@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Tilleggsinformasjon";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Lukk din %@ og stirre på prikken i midten av det firkantede rutenettet.\n\nMarker eventuelle forvrengninger du ser, f.eks. uskarpe eller bølgede linjer med fingeren eller pekepennen.\n\nNår du er ferdig sveiper du til venstre hvor som helst utenfor rutenettet.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold enheten 30 cm (12 tommer) fra ansiktet og i øyehøyde under hele testen.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Denne aktiviteten hjelper til med å oppdage problemer i brukerens syn.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Venstre øye";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Høyre øye";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amsler-grid";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke ta opp audio";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Si «aaaaaa» inn i mikrofonen så lenge du kan.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Denne aktiviteten evaluerer stemmen din ved å ta den opp med mikrofonen nederst på enheten.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Pust dypt og si «aaaaaa» inn i mikrofonen så lenge du kan. Hold et jevnt vokalvolum slik at lydfeltene holder seg blå.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Vennligst vent mens vi sjekker støynivået i bakgrunnen.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Stemme";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Trykk på Neste når du er klar.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "For høyt";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Det omgivende støynivået er for høyt til å ta opp stemmen din. Gå til et roligere sted og prøv igjen.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Bruk fingeren eller pekepennen til å markere rutenettet direkte, eller sveip til venstre utenfor rutenettet for å fullføre.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amsler-grid";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Begynn oppgaven";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Lydfeltgraf";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Kommenter";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Tilbake";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Skjul PDF-miniatyrbildet";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Skjul søkefeltet";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Dele";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Vis PDF-miniatyrbildet";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Vis søkefeltet";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Illustrasjon av en hake i en blå sirkel som formidler suksess";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Ved bruk av VoiceOver vil knappen i testen være direkte trykkbare. Den vil være nær senter på skjermen.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Avvis tastaturet";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " og ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Pek: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Spenner fra %@ til %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Stabel sammensatt av";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Fanget forhåndsvisning";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Fanget bilde";
+
+/* (No Comment) */
+"AX_SELECTED" = "Valgt";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Berør skjermen og beveg fingeren for å signere";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Utpekt signaturfelt";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Signert";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Ikke signert";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Svarglidebryter. Spenner fra %@ til %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Når opptaket starter, aktiverer du andre gang for å stoppe opptaket.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Tale bølgeform";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Trykk for en finger";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Trykk for en annen finger";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Knappene er nå direkte trykkbare.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Trykkbare knapper";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Aktiver for å gjøre kanppene direkte trykkbare.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Ved bruk av VoiceOver utforsker du skjermen med berøring for å lære hvor knappene befinner seg. Aktiver en av knappene for å gjøre knappene direkte trykkbare.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktiver for å starte testen. Når testen starter, trykker du direkte på denne knappen når du hører en lyd i venstre øre.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Trykk for venstre øre";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktiver for å starte testen. Når testen starter, trykker du direkte på denne knappen når du hører en lyd i høyre øre.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Trykk for høyre øre";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Ved bruk av VoiceOver utforsker du skjermen med berøring for å lære hvor knappene befinner seg. Aktiver en av knappene for å gjøre knappene direkte trykkbare. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke plassere diskett med størrelsen %@ på diskett med størrelse %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dobbeltrykk for å plassere diskett";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dobbeltrykk for å velge den mest disketten";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Tårn";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har diskett med størrelser %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Ved bruk av VoiceOver vil knappene i testen være direkte trykkbare.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Bilde uten etikett";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Ikke-valgt";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Videoopptaket er fullført";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Forhåndsvisning av videoopptaket";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktiv";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "korrekt";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "ikke korrekt";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Minnespillrute";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "hvilende";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nei";
+
+/* (No Comment) */
+"BOOL_YES" = "Ja";
+
+/* Button titles */
+"BUTTON_AGREE" = "Enig";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Påfør";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Avbryt";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Slett";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Slett svaret";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Opphavsrett";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Uenig";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Utført";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Komme i gang";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Lær mer";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Neste";
+
+/* (No Comment) */
+"BUTTON_OK" = "OK";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Forkast resultater";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Lagre til senere";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Slutt oppgaven";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Dette svaret kan ikke modifiseres.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "Lagre";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Hopp over";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Hopp over dette spørsmålet";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Start timer";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera ikke tilgjengelig på delt skjerm.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ta bilde";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start opptak";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ta bilde igjen";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Gjenoppta video";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stopp opptak";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Fant ikke kamera.  Dette trinnet kan ikke bli fullført.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Det fangede bildet kunne ikke lagres.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Ingen utskriftskatalog ble angitt for fangede bilder.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "For å fullføre dette trinnet gir du denne appen tilgang til kameraet i Innstillinger.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ingen data";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passordene er ikke like.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Skriv inn passordet igjen";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekreft";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Dato";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ sitt navn (blokkbokstaver)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ sin signatur";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Lær mer";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Etternavn";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Fornavn";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Påkrevd";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Samtykke";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Side %1$ld av %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Gjennomgang";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Se gjennom skjemaet nedenfor og trykk på Godta hvis du er klar til å fortsette.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Gjennomgang";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Datainnsamling";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Databruk";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Privatvern";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Studieundersøkelse";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Studieoppgaver";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Tidsengasjement";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Velkommen";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Tilbaketrekking";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Kun del data med %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Deling av mine data med %@ og kvalifiserte forskere verden over";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ vil motta studiedata fra din deltakelse i denne studien.\n\nÅ dele dine kodede studiedata bredere (uten informasjon som navn) kan være til nytte for denne og fremtidig forskning.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Alternativer for deling";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Signer ved å bruke fingeren din i ruten nedenfor.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Signer her";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Signatur";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Starter aktivt om";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder igjen.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktiviteten registrerer hørselsterskelnivåene til en person i dB HL-skala.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Sørg for at enhetens volum innstilt til maksimumsnivået.\n\nI løpet av denne oppgaven vil en svak tone spilles av i enten venstre eller høyre øre.\n\nLytt nøye og trykk på knappen hver gang du hører en tone.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Registreringsspørsmål.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Velg din preferanse for «beste øre» (om noen)";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "venstre";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ingen preferanse";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "høyre";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Velg en dato";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Fødselsdato";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-post";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Kalkulerer";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Denne aktiviteten måler lydnivået i miljøet. Hvis lydnivået er for høyt, kan du ikke fortsette. Flytt til et roligere sted for å fullføre denne oppgaven eller ta denne aktiviteten på nytt senere.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Terskel: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "SPL-meter";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne tilstrekkelige loggfiler for å nå terskelen";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Filen er ikke merket som slettet (ikke merket som lastet opp)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Flere feil ved fjerning av logger";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Feil ved innstilling av attributt";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Ingen innsamlede data ble funnet.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen utgangskatalog spesifisert";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Avstand (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Puls (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gå utendørs i raskest mulig tempo i %1$@. Når du er ferdig, sitt og hvil deg komfortabelt i %2$@. For å begynne, trykk på Komme i gang.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Denne aktiviteten overvåker pulsen din og måler hvor langt du kan gå i %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sitt komfortabelt i %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gå så fort du kan i %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Type I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Type II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Type III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Type V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Glemt passordet?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Kvinne";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Velg et kjønn";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Kjønn";
+
+/* (No Comment) */
+"GENDER_MALE" = "Mann";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Annet";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktiviteten måler funksjonen på øvre ekstremitet ved å be deg om å plassere en pinne i et hull. Du vil bli bedt om å gjøre dette %@ ganger.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pinnen så fort som mulig, sette den i hullet, og når den er ferdig %@ ganger, fjern den igjen %@ ganger.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pinnen så fort som mulig, sette den i hullet, og når den er ferdig %@ ganger, fjern den igjen %@ ganger.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Sett pinnen inn i hullet med din venstre hånd.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Sett pinnen inn i hullet med din høyre hånd.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Sett pinnen bak linjen med din venstre hånd.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Sett pinnen bak linjen med din høyre hånd.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Plukk opp pinnen med to fingre.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "La fingrene gi slipp på pinnen.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hull-/pinnetest";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ugyldig e-postadresse: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunne ikke legge til Keychain-element.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Kunne ikke fjerne Keychain-element.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Kunne ikke finne Keychain-element.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Kunne ikke oppdatere Keychain-element.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Strekk ditt venstre kne. Trykk deretter hvor som helst.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Strekk ditt høyre kne. Trykk deretter hvor som helst.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Denne aktiviteten måler hvor langt du kan strekke venstre kne.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Denne aktiviteten måler hvor langt du kan strekke høyre kne.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sett deg på kanten av en stol. Når du begynner legger du enheten på venstre kne for en måling. Slå på lyden på enheten slik at du kan høre instruksjonene.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sett deg på kanten av en stol. Når du begynner, legger du enheten på høyre kne for en måling. Slå på lyden på enheten slik at du kan høre instruksjonene.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Plasser enheten på venstre kne med skjermen vendt ut, som vist på bildet.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Plasser enheten på høyre kne med skjermen vendt ut, som vist på bildet.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, trykker du på skjermen for å begynne og strekk venstre kne så langt du kan. Trykk igjen når du er ferdig.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar trykker du på skjermen for å begynne, og strekk høyre kne så langt du kan. Trykk igjen når du er ferdig.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Bevegelsesområde for venstre kne";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Bevegelsesområde for høyre kne";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Plasser enheten din på venstre kne";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Plasser enheten din på høyre kne";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Lær mer om datadeling";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Lær mer om hvordan data samles";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Lær mer om hvordan data blir brukt";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Lær mer om hvordan ditt privatvern og identitet er beskyttet";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Lær mer om studieundersøkelsen";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Lær mer om de involverte oppgavene";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Lær mer om studiens innvirkning på din tid";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Lær mer om studien først";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Lær mer om tilbaketrekking";
+
+/* Limb values. */
+"LIMB_LEFT" = "venstre";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption-alternativet må være enten venstre eller høyre";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "høyre";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Kan ikke finne et resultat for den angitte adressen. Pass på at adressen er gyldig.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Enten er du ikke koblet til Internett, eller du har overskredet den maksimale mengden adresseforespørsler. Hvis du ikke er koblet til internett, må du slå på Wi-Fi for å svare på dette spørsmålet, hoppe over dette spørsmålet hvis hoppeknapp er tilgjengelig, eller komme tilbake til undersøkelsen når du er koblet til internett. Ellers kan du prøve igjen om noen få minutter.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Tilgang til posisjonstjenester er nektet. Gi denne appen tillatelse til å bruke posisjonstjenester via Innstillinger.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Kan ikke løse din nåværende posisjon. Skriv inn en adresse eller flytt til et sted med et bedre GPS-signal hvis det er aktuelt.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Kunne ikke finne spesifisert adresse";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Skriv inn en adresse";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Logg inn";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "fot";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "tommer";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "pund";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "unser";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Spillet er ferdig";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Klikk på Neste for å fortsette";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Sekvens fullført";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Minneaktiviteten ble utviklet med bistand fra Katherine Possin, PhD og Joel Kramer, PhD fra University of California, San Francisco.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Du klarte ikke helt gjennom denne gangen. Klikk på Neste for å fortsette.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Prøv igjen";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Trykk på %@ i motsatt rekkefølge";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Trykk på %@ i den rekkefølgen de lyser opp";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Klikk på Neste for å fortsette";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Pause";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Se %@ lyse";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Score";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Du gikk tom for tid.\nKlikk på Neste for å fortsette.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Tiden er ute";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Velg et svar";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Paced Auditory Serial Addition Test måler hastigheten på din auditive informasjon og beregningsevne.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Passord godkjent";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Bekreft passord";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekreft ditt nye passord";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Glemt passordet?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Passordene stemte ikke. Prøv igjen.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Feil passord";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Skriv inn nytt passord";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Skriv inn gammelt passord";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Skriv inn passord";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Passord lagret";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Fremskrittindikator for oppføring av passord";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ antall %@ sifre angitt";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Bare numeriske tegn er tillatt.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-feil";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Vennligst bekreft med Touch ID";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Skriv inn passord";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Passord";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Auditory og Visual Serial Addition-testen måler din hastighet og beregningsevne for hørsel og visuell informasjon.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Trykk for å velge";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Trykk for å skrive";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Trykk for å svare";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Husk dette første sifferet.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Legg til dette nye sifferet til det forrige.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Enkelt siffer presenteres hvert %@ sekund.\nDu må legge til hvert nytt siffer i tallet umiddelbart før det.\nVær oppmerksom på at du ikke må beregne en løpende total, men bare summen av de to siste tallene.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Paced Visual Serial Addition-testen måler hastigheten på visuell informasjon og beregningsevne.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ overstiger maksimal tillatt verdi (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ er mindre enn minimal tillatt verdi (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ er ikke en gyldig verdi.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Ikke gyldig verdi";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Bevegelsesområde";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Rist enheten raskt når den blå sirkelen vises";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %@ av %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Denne aktiviteten vurderer tiden det tar før du reagerer på et visuelt signal.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rist enheten i hvilken som helst retning så snart den blå prikken vises på skjermen. Du vil bli bedt om å gjøre dette %D ganger.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaksjonstid";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Send bekreftelse på e-post på nytt";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Trykk på koblingen nedenfor hvis du ikke mottok en bekreftelse på e-post og ønsker å sende den på nytt.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Løft opp din venstre arm. Trykk deretter hvor som helst.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Løft opp din høyre arm. Trykk deretter hvor som helst.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Denne aktiviteten måler hvor langt du kan strekke ut din venstre skulder.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Denne aktiviteten måler hvor langt du kan strekke ut din høyre skulder.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Når du begynner, skal du legge enheten på din venstre skulder for å foreta en måling. Slå på lyden på enheten slik at du kan høre instruksjonene.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Når du begynner, skal du legge enheten på din høyre skulder for å foreta en måling. Slå på lyden på enheten slik at du kan høre instruksjonene.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legg enheten på din venstre skulder med skjermen vendt ut som avbildet.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legg enheten på din høyre skulder med skjermen vendt ut som avbildet.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, trykker du på skjermen for å begynne og løfter din venstre arm så langt som mulig. Trykk igjen når du er ferdig.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar trykker du på skjermen for å begynne, og løft din høyre arm så langt som mulig. Trykk igjen når du er ferdig.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bevegelsesområde for venstre skulder";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Bevegelsesområde for høyre skulder";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legg enheten på din venstre skulder";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legg enheten på din høyre skulder";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Trykk på Start for å begynne, og følg nøye med.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Noen av %@ lyser opp én om gangen. Trykk på de %@ i samme rekkefølge som de lyser opp.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Noen av %@ lyser opp én om gangen. Trykk på de %@ i motsatt rekkefølge som de lyser opp i.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Denne aktiviteten måler din romlige korttidsminne ved å be deg om å gjenta rekkefølgen %@ lyser opp i.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blomster";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blomster";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Romlig minne";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Trykk på «Spill av lyd», juster volumet til et behagelig nivå og trykk deretter på «Stopp lyd» for å fortsette.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volumkalibrering";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Som en del av denne testen vil du gjøre følgende:\n\nLytt til en setning.\n\nGjenta tydelig det du hørte eller gå videre for å skrive ned det du hørte med tastaturet. \n\nHvis du gjentar det du hørte, vil du få muligheten til å endre transkripsjonen som talegjenkjenningsmotoren genererer.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Denne aktiviteten måler taleforståeligheten i støyende omgivelser.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Gjenta det du hørte.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Snakk";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Spill av lyd";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "En setning med bakgrunnsstøy ved et tilfeldig signal/støy-forhold (SNR) spilles av kun én gang.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Lytt";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stopp lyd";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Tale med støy";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Talegjenkjenning mislyktes.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Kunne ikke initialisere talegjenkjenning.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Trykk på knappen for å begynne å spille inn før du snakker.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Denne aktiviteten registrerer talen din med mikrofonen nederst på enheten, og oversetter den til tekst.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Rediger transkripsjonsteksten for å korrigere eventuelle feiltolkninger av talen.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Rediger transkripsjon";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start opptak";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stopp opptak";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Transkripsjonen din vises her.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Talegjenkjenning";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ av %2$@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "BLÅ";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "GRØNN";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "RØD";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "GUL";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Hver gang et ord vises, skal du velge den første bokstaven i navnet på FARGEN som vises.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Trykk på Start når du er klar til å starte Stroop-aktiviteten.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Velg den første bokstaven i navnet på FARGEN som vises.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Trykk";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Trykk på Neste for å starte.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Trykk på knappene så sammenhengende som du kan med to fingre.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Trykk på knappene med din VENSTRE hånd.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Trykk på knappene med din HØYRE hånd.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Denne aktiviteten måler trykkehastigheten din.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Trykk med én finger og deretter med den andre. Prøv å trykke mest mulig i takt. Fortsett å trykke i %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Trykk på knappene på skjermen ved å bruke to fingre på din venstre hånd vekselvis.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Gjenta den samme testen med din venstre hånd.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Trykk på knappene på skjermen ved å bruke to fingre på den samme hånden vekselvis.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Legg enheten på et flatt underlag.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Trykk på knappene på skjermen ved å bruke to fingre på din høyre hånd vekselvis.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Gjenta den samme testen med din høyre hånd.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Hopp over denne hånden";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Trykkehastighet";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Venstre hånd";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Høyre hånd";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Dataene dine analyseres, og du blir varslet når resultatene dine er klare.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Aktivitet fullført";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstinnholdet overskrider maksimumslengden: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Bruk samme hjelpemiddel for hver test.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Hjelpemiddel";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Gå bort til %@ i en rett linje.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Gå tilbake til der du begynte.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Trykk på Neste når du er ferdig.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Snu deg.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Trykk på Neste for å starte.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, fortrinnsvis ute, der du kan gå omtrent %@ i en rett linje så raskt som mulig, men trygt. Ikke senk farten før du har passert målstreken.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Denne aktiviteten måler underekstremitetenes funksjon.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral stokk";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral krykke";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral stokk";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral krykke";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåbord/rullator";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Trykk her for å velge et svar.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Bruker du et hjelpemiddel?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Bruker du en ankel/fot-ortose?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Tidsbegrenset gange";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Hver gang du begynner å høre en lyd, trykker du på venstre eller høyre knapp for å angi hvilket øre du hører lyden i.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktiviteten måler evnen din til å høre forskjellige lyder.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Koble til og sett på hodetelefonene dine før du begynner.\n\nLyden vil være veldig svak og er ulikt fra en vanlig varselstone.  Lyden begynner svakt og blir deretter sakte høyere.  Følg med og trykk på venstre eller høyre knapp for å angi hvilket øre du hører den i.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Venstre øre";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Høyre øre";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Nå vil du høre en tone. Juster volumen med kontrollene på siden av enheten.\n\nTrykk på en hvilken som helst knapp når du er klar til å begynne.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, høyre";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Totalt antall trykk";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Trykk hvor som helst for å fortsette";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Løs oppgaven";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antall trekk: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg kan ikke løse denne oppgaven";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Denne aktiviteten vurderer oppgaveløsningsferdighetene dine.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flytt hele stabelen til plattformen som er merket, med færrest mulige trekk.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Trykk på Kom i gang for å begynne.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d feil)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d feil)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Denne aktiviteten vurderer din visuelle oppmerksomhet og oppgavevekslingsevne ved å registrere tiden som kreves for å trykke en serie med prikker i riktig rekkefølge.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Etter nedtellingen skal du trykke på prikkene i vekslende rekkefølge mellom tall og bokstaver. Begynn ved å trykke på det første tallet «1» etterfulgt av tallene «2» – «3» – «4» … til du når tallet «7».";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Etter nedtellingen skal du trykke på prikkene i vekslende rekkefølge mellom tall og bokstaver. Begynn ved å trykke på det første tallet «1» etterfulgt av å trykke på den første bokstaven «A» og deretter «2» – «B» – «3» – «C» … til du når tallet «7».";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Gjør dette raskest mulig uten å gjøre feil. \n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Jeg kan ikke utføre denne aktiviteten med min VENSTRE hånd.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Jeg kan utføre denne aktiviteten med begge hendene.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Jeg kan ikke utføre denne aktiviteten med min HØYRE hånd.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Hold telefonen din med bøyd albue i %ld sekunder";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Nå skal du holde telefonen din på høyde med skulderen din med bøyd albue.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Nå skal du holde telefonen din i VENSTRE hånd på høyde med skulderen din med bøyd albue.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Nå skal du holde telefonen din i HØYRE hånd på høyde med skulderen din med bøyd albue.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Fortsett å holde telefonen din med hånden utstrakt i %ld sekunder.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Nå skal du holde telefonen din med hånden utstrakt på høyde med skulderen din.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Nå skal du holde telefonen din med VENSTRE HÅND utstrakt på høyde med skulderen din.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Nå skal du holde telefonen din med HØYRE HÅND utstrakt på høyde med skulderen din.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Gå videre til neste oppgave.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Fortsett å holde telefonen din i fanget ditt i %ld sekunder.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Gjør deg klar til å holde telefonen i fanget ditt.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Gjør deg klar til å holde telefonen i fanget ditt med VENSTRE hånd.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Gjør deg klar til å holde telefonen i fanget ditt med HØYRE hånd.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Trykk på Neste for å fortsette.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Legg telefonen i VENSTRE hånd og gå videre til neste oppgave.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Legg telefonen i HØYRE hånd og gå videre til neste oppgave.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Fortsett å berøre nesen din med telefonen i %ld sekunder";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Berør nesen din flere ganger med telefonen med albuen bøyd.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Berør nesen din flere ganger med telefonen i VENSTRE hånd med albuen bøyd.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Berør nesen din flere ganger med telefonen i HØYRE hånd med albuen bøyd.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Fortsett å vinke som en dronning i %ld sekunder.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Gjør deg klar til å vinke som en dronning (vink ved å vri på håndleddet).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Gjør deg klar til å vinke som en dronning med telefonen i VENSTRE hånd (vink ved å vri på håndleddet).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Gjør deg klar til å vinke som en dronning med telefonen i HØYRE hånd (vink ved å vri på håndleddet).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivitet fullført.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Denne aktiviteten måler skjelvingen i hendene dine i forskjellige posisjoner. Finn et sted der du kan sitte behagelig i løpet av denne aktiviteten.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold telefonen i den hånden som er mest berørt, som vist i bildet nedenfor.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "en oppgave";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "to oppgaver";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tre oppgaver";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "fire oppgaver";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "fem oppgaver";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Du vil bli bedt om å utføre %@ mens du sitter med telefonen i hånden.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold telefonen i VENSTRE hånd som vist i bildet nedenfor.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold telefonen i HØYRE hånd som vist i bildet nedenfor.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Du vil bli bedt om å utføre %@ mens du sitter med telefonen først i den ene hånden, så på nytt med den andre hånden.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Skjelvingsaktivitet";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Bekreftelse";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Bekreft e-posten din";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Du har fullført aktiviteten.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gå frem og tilbake i en rett linje i %@. Gå som normalt.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Snu deg helt rundt og stå deretter i ro i %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Legg enheten i en lomme eller veske og følg lydinstruksjonene.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Trykk på Start når du er klar til å begynne.\nLegg deretter enheten i en lomme eller veske og følg lydinstruksjonene.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du kan gå trygt uten hjelp i omtrent %ld skritt i en rett linje.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Finn et sted der du kan gå trygt frem og tilbake i en rett linje. Prøv å gå kontinuerlig ved å snu deg ved målstreken som om du går rundt en kjegle.\n\nDu vil deretter bli bedt om å snu deg helt rundt og deretter stå i ro med armene ned langs sidene og føttene i skulderbredde.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Denne aktiviteten måler gangen og balansen din mens du går og står i ro. Ikke fortsett hvis du ikke kan gå trygt uten hjelp.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gå opptil %ld skritt i en rett linje.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Snu deg rundt og gå tilbake til der du begynte.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stå i ro i %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå deretter i ro i %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gange og balanse";
+
