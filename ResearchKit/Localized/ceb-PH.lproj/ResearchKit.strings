@@ -1,0 +1,1479 @@
+/* (No Comment) */
+"ADDITIONAL_INFO_SECTION_TITLE" = "Dugang nga Kasayuran";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Isira ang imong %@ ug pagtutok sa  tulbok sa sentro sa square grid.\n\nGamit ang imong tudlo o stylus, markahi ang bisan unsang mga pagtuis nga imong nakit-an sama sa dili hanap o wavy nga mga linya.\n\nKung nahuman na ka, pag-swipe sa wala bisan diin gawas sa grid.";
+
+/* (No Comment) */
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hupti ang aparato 12 pulgada gikan sa imong nawong ug sa lebel sa mata sa tibuuk nga pagsulay.";
+
+/* (No Comment) */
+"AMSLER_GRID_INTRO_TEXT" = "Ang kini nga kalihokan makatabang sa pag-ila sa mga problema sa panan-aw sa ninggamit.";
+
+/* (No Comment) */
+"AMSLER_GRID_LEFT_EYE" = "Wala nga Mata";
+
+/* (No Comment) */
+"AMSLER_GRID_RIGHT_EYE" = "Tuo nga Mata";
+
+/* Amsler Grid Task. */
+"AMSLER_GRID_TITLE" = "Amsler Grid";
+
+/* (No Comment) */
+"AUDIO_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"AUDIO_GENERIC_ERROR_LABEL" = "Dili ma-record ang audio";
+
+/* (No Comment) */
+"AUDIO_INSTRUCTION" = "Isulti ang \"Aaaaah\" sa mikropono kutob sa mahimo.";
+
+/* (No Comment) */
+"AUDIO_INTENDED_USE" = "Gisusi sa kini nga kalihokan ang imong tingog pinaagi sa pagrekord niini gamit ang mikropono sa ilawom sa imong aparato.";
+
+/* (No Comment) */
+"AUDIO_INTRO_TEXT" = "Humana ang pagginhawa ug isulti ang \"Aaaaah\" sa mikropono kutob sa mahimo. Paghupot sa usa ka makanunayon nga kusog sa tingog aron ang mga audio bar magpabilin nga asul.";
+
+/* (No Comment) */
+"AUDIO_LEVEL_CHECK_LABEL" = "Palihug paghulat samtang gisusi namo ang lebel sa kasaba sa background.";
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Boses";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Pag-tap sa Sunod kon andam na.";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_LABEL" = "Kusog kaayo";
+
+/* (No Comment) */
+"AUDIO_TOO_LOUD_MESSAGE" = "Ang lebel sa kasibut sa kasaba kusog kaayo aron maitala ang imong tingog. Palihug lihok sa usa ka dapit nga mas hilum ug pagsulay sab.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_HINT" = "Gamita ang imong tudlo stylus aron markahan nga direkta ang grid, o pag-swipe sa wala sa gawas sa grid aron matapos.";
+
+/* (No Comment) */
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+
+/* (No Comment) */
+"AX_ANNOUNCE_BEGIN_TASK" = "Pagsugod sa buluhaton";
+
+/* (No Comment) */
+"AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+/* (No Comment) */
+"AX_BUTTON_ANNOTATE" = "Annotate";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Balik";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
+
+/* (No Comment) */
+"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
+
+/* (No Comment) */
+"AX_BUTTON_SHARE" = "Ipaambit";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Ipakita ang PDF Thumbnail";
+
+/* (No Comment) */
+"AX_BUTTON_SHOW_SEARCH" = "Ipakita ang Search Bar";
+
+/* (No Comment) */
+"AX_COMPLETION_ILLUSTRATION" = "Paghulagway sa usa ka marka sa tsek sa usa ka asul nga lingin nga nagpadala sa kalampusan";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Paggamit sa VoiceOver, ang button direkta nga ma-tap. Kini makit-an nga duul sa sentro sa screen.";
+
+/* (No Comment) */
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Isalikway ang keyboard";
+
+/* (No Comment) */
+"AX_GRAPH_AND_SEPARATOR" = " ug ";
+
+/* (No Comment) */
+"AX_GRAPH_POINT_%@" = "Punto: %@";
+
+/* (No Comment) */
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range sukad %@ hangtod %@";
+
+/* (No Comment) */
+"AX_GRAPH_STACK_PREFIX" = "Ang stack gilangkuban sa";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURE_LABEL" = "Pag-capture sa preview";
+
+/* (No Comment) */
+"AX_IMAGE_CAPTURED_LABEL" = "Gi-capture nga imahe";
+
+/* (No Comment) */
+"AX_SELECTED" = "Gipili";
+
+/* (No Comment) */
+"AX_SIGNVIEW_HINT" = "Hikapa ang screen ug ibalhin ang imong tudlo aron mopirma";
+
+/* (No Comment) */
+"AX_SIGNVIEW_LABEL" = "Gitudlo ngfield sa pirma";
+
+/* (No Comment) */
+"AX_SIGNVIEW_SIGNED" = "Gipirmahan";
+
+/* (No Comment) */
+"AX_SIGNVIEW_UNSIGNED" = "Wala Gipirmahan";
+
+/* (No Comment) */
+"AX_SLIDER_LABEL" = "Slider sa tubag. Range sukad %@ hangtod %@";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Kung magsugod ang pagrekord, pagpaaktibo sa ikaduha nga higayon aron ihunong ang pagrekord.";
+
+/* (No Comment) */
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_1_LABEL" = "Pag-tap alang sa usa ka tudlo";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_2_LABEL" = "Pag-tap alang sa ubang tudlo";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Ang mga button direkta na nga ma-tap.";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Mga Button nga Ma-tap";
+
+/* (No Comment) */
+"AX_TAP_BUTTON_HINT" = "Pag-aktibo aron mahimo nga direkta nga ma-tap ang mga button.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Paggamit sa VoiceOver, pagsuhid sa screen pinaagi sa paghikap aron mahibal-an kung diin mahimutang ang mga button. I-aktibo ang bisan hain nga button aron direkta nga ma-tap ang mga button.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Pag-aktibo aron masugdan ang pagsulay. Kung magsugod ang pagsulay, direkta nga mag-tap sa kini nga button kung makadungog ka usa ka tunog sa imong wala nga dunggan.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Pag-tap alang sa Wala nga Dunggan";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Pag-aktibo aron masugdan ang pagsulay. Kung magsugod ang pagsulay, direkta nga mag-tap sa kini nga button kung makadungog ka usa ka tunog sa imong tuo nga dunggan.";
+
+/* (No Comment) */
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Pag-tap alang sa Tuo nga Dunggan";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Paggamit sa VoiceOver, pagsuhid sa screen pinaagi sa paghikap aron mahibal-an kung diin mahimutang ang mga button alang sa matag dunggan. igdulungog. Kung magsugod ang pagsulay, ang mga button direkta nga ma-tap. %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Dili mabutang ang disk nga adunay gidak-on %@ sa disk nga adunay gidak-on %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Pag-double tap aron ibutang ang disk";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Pag-double tap aron mapili ang labing kadaghan nga disk";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER" = "Tower";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Adunay disk nga naay mga sukod %@";
+
+/* (No Comment) */
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Wala sulud";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
+
+/* (No Comment) */
+"AX_UNLABELED_IMAGE" = "Wala’y marka nga imahe";
+
+/* (No Comment) */
+"AX_UNSELECTED" = "Wala mapili";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_COMPLETE" = "Tapos na ang pag-capture sa video";
+
+/* (No Comment) */
+"AX_VIDEO_CAPTURE_LABEL" = "Preview sa pag-capture sa video";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.ACTIVE" = "aktibo";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.CORRECT" = "tukma";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.INCORRECT" = "dili tukma";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.LABEL" = "Memory game tile";
+
+/* (No Comment) */
+"AX.MEMORY.TILE.QUIESCENT" = "quiescent";
+
+/* (No Comment) */
+"BLOOD_TYPE_A-" = "A-";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB-" = "AB-";
+
+/* (No Comment) */
+"BLOOD_TYPE_AB+" = "AB+";
+
+/* (No Comment) */
+"BLOOD_TYPE_B-" = "B-";
+
+/* (No Comment) */
+"BLOOD_TYPE_B+" = "B+";
+
+/* (No Comment) */
+"BLOOD_TYPE_O-" = "O-";
+
+/* (No Comment) */
+"BLOOD_TYPE_O+" = "O+";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Dili";
+
+/* (No Comment) */
+"BOOL_YES" = "Oo";
+
+/* Button titles */
+"BUTTON_AGREE" = "Uyon";
+
+/* (No Comment) */
+"BUTTON_APPLY" = "Pag-apply";
+
+/* (No Comment) */
+"BUTTON_CANCEL" = "Ikansela";
+
+/* (No Comment) */
+"BUTTON_CLEAR" = "Limyoha";
+
+/* (No Comment) */
+"BUTTON_CLEAR_ANSWER" = "Tin-aw nga tubag";
+
+/* (No Comment) */
+"BUTTON_COPYRIGHT" = "Copyright";
+
+/* (No Comment) */
+"BUTTON_DISAGREE" = "Dili Uyon";
+
+/* (No Comment) */
+"BUTTON_DONE" = "Human na";
+
+/* (No Comment) */
+"BUTTON_GET_STARTED" = "Pagsugod";
+
+/* (No Comment) */
+"BUTTON_LEARN_MORE" = "Hibal-i ang dugang pa";
+
+/* (No Comment) */
+"BUTTON_NEXT" = "Sunod";
+
+/* (No Comment) */
+"BUTTON_OK" = "OK";
+
+/* (No Comment) */
+"BUTTON_OPTION_DISCARD" = "Ibalewala ang mga Resulta";
+
+/* (No Comment) */
+"BUTTON_OPTION_SAVE" = "Pag-save sa Ulahi";
+
+/* (No Comment) */
+"BUTTON_OPTION_STOP_TASK" = "Pagtapos sa Buluhaton";
+
+/* (No Comment) */
+"BUTTON_READ_ONLY_MODE" = "Kini nga tubag dili mahimo og usbon.";
+
+/* (No Comment) */
+"BUTTON_SAVE" = "I-save";
+
+/* (No Comment) */
+"BUTTON_SKIP" = "Laktawi";
+
+/* (No Comment) */
+"BUTTON_SKIP_QUESTION" = "Laktawi kini nga pangutana";
+
+/* (No Comment) */
+"BUTTON_START_TIMER" = "Sugdi ang Timer";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Dili magamit ang camera sa split screen.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "I-capture sa Imahe";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Pagsugod sa Pagrekord";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Pag-capture pag-usab ang Imahe";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Pag-capture pag-usab ang Video";
+
+/* (No Comment) */
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Hunong sa Pagrekord";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Wala nakit-an nga kamera  Kini nga lakang dili mahuman.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Ang na-capture nga imahe dili ma-save.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Wala gilatid nga direktoryo sa output alang sa na-capture nga mga imahe.";
+
+/* (No Comment) */
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Aron makumpleto kini nga lakang, tugoti kini nga pag-access sa app sa kamera sa Mga Setting.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Walay Datos";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Ang mga password dili managsama.";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Isulud pag-usab ang password";
+
+/* (No Comment) */
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Kumpirmaha";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_DATE" = "Petsa";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ Ngalan sa (giminolde)";
+
+/* (No Comment) */
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ Pirma sa";
+
+/* (No Comment) */
+"CONSENT_LEARN_MORE_TITLE" = "Hibal-i ang Dugang pa";
+
+/* (No Comment) */
+"CONSENT_NAME_FAMILY" = "Apelyido";
+
+/* (No Comment) */
+"CONSENT_NAME_GIVEN" = "Ngalan";
+
+/* (No Comment) */
+"CONSENT_NAME_PLACEHOLDER" = "Gikinahanglan";
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Pag-uyon";
+
+/* (No Comment) */
+"CONSENT_PAGE_NUMBER_FORMAT" = "Panid %1$ld sa %2$ld";
+
+/* (No Comment) */
+"CONSENT_REVIEW_ALERT_TITLE" = "Rebyuha";
+
+/* (No Comment) */
+"CONSENT_REVIEW_INSTRUCTION" = "Ribyuha ang porma sa ubus, ug i-tap ang Uyon kung andam ka na nga magpadayon.";
+
+/* (No Comment) */
+"CONSENT_REVIEW_TITLE" = "Rebyuha";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_GATHERING" = "Pagpundok sa Datos";
+
+/* (No Comment) */
+"CONSENT_SECTION_DATA_USE" = "Paggamit sa Datos";
+
+/* (No Comment) */
+"CONSENT_SECTION_PRIVACY" = "Pribasiya";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_SURVEY" = "Survey sa Pagtuon";
+
+/* (No Comment) */
+"CONSENT_SECTION_STUDY_TASKS" = "Mga Buluhaton sa Pagtuon";
+
+/* (No Comment) */
+"CONSENT_SECTION_TIME_COMMITMENT" = "Oras nga Pasalig";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Malipayon nga Pag-abut";
+
+/* (No Comment) */
+"CONSENT_SECTION_WITHDRAWING" = "Pag-atras";
+
+/* (No Comment) */
+"CONSENT_SHARE_ONLY_%@" = "Pag-ambit lang sa akong datos sa %@";
+
+/* (No Comment) */
+"CONSENT_SHARE_WIDELY_%@" = "Ipaambit ang akong datos sa %@ ug mga kwalipikado nga tigdukiduki sa tibuuk kalibutanan";
+
+/* (No Comment) */
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ dawaton ang imong datos sa pagtuon gikan sa imong pagsalmot sa kini nga pagtuon.\n\nAng pagpaambit sa imong datos sa pagtuon nga gi-code nga labi ka kadaghan (nga wala’y kasayuran sama sa imong ngalan) mahimong makabenipisyo niini ug sa umaabot nga panukiduki.";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Mga Opsyon sa Pakig-ambit";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_INSTRUCTION" = "Palihug pagpirma gamit ang imong tudlo sa kahon sa ubus.";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Pirma Dinhi";
+
+/* (No Comment) */
+"CONSENT_SIGNATURE_TITLE" = "Pirma";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Pagsugod kalihokan sa";
+
+/* (No Comment) */
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ mga segundo nga nahabilin.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Giila sa kini nga kalihokan ang mga lebel sa threshold sa pandungog sa usa ka indibidwal sa iskala sa dB HL.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Siguruha nga ang kadako sa aparato nakatakda sa labing taas nga lebel.\n\nSa kini nga buluhaton, usa ka maliputon nga tono ang magpatugtog sa wala o tuo nga dalunggan.\n\nPaminaw pag-ayo ug i-tap ang buton sa matag higayon nga makadungog ka usa ka tono.";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Kuwestiyonaryo sa Onboarding";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Pilia ang imong gusto alang sa 'labi ka maayo nga dalunggan', kung adunay";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "wala";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "walay pinalabi";
+
+/* (No Comment) */
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "tuo";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pagpili usa ka petsa";
+
+/* (No Comment) */
+"DOB_FORM_ITEM_TITLE" = "Petsa sa Adlawng Natawhan";
+
+/* (No Comment) */
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_CALCULATING" = "Pagkalkula";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_INTRO_TEXT" = "Gisukod sa kini nga kalihokan ang lebel sa presyur sa tunog sa palibot. Kung ang lebel sa kasaba sobra ka taas, dili ka makapadayon. Palihug pagbalhin sa usa ka mas hilum nga lugar aron makumpleto kini nga buluhaton o makuha usab kini nga kalihokan sa ulahi nga oras.";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
+
+/* Environment SPL */
+"ENVIRONMENTSPL_TITLE" = "SPL Meter";
+
+/* (No Comment) */
+"ENVIRONMENTSPL_UNIT" = "dBA";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Dili makuha ang igo nga mga file sa log aron maabot ang threshold";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Ang file wala gimarkahan nga gitangtang (dili gimarkahan nga gi-upload)";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Dili makahimo file";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_MULTIPLE" = "Daghang mga sayup nga gikuha ang mga troso";
+
+/* (No Comment) */
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Sayup nga setting sa hiyas";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_DATA" = "Wala nakit-an nga nakolekta nga datos.";
+
+/* (No Comment) */
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Wala gipiho nga direktoryo sa output";
+
+/* (No Comment) */
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+
+/* (No Comment) */
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Distansiya (%@)";
+
+/* (No Comment) */
+"FITNESS_HEARTRATE_TITLE" = "Kapaspas sa Pagpitik sa Kasingkasing (bpm)";
+
+/* (No Comment) */
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Paglakaw sa gawas sa labing tulin nga mahimo og lakang sulod sa %1$@. Kung nahuman ka na, lingkod ug pahuway nga komportable sulod sa %2$@. Aron magsugod, i-tap ang Pagsugod.";
+
+/* (No Comment) */
+"FITNESS_INTRO_TEXT_FORMAT" = "Gisubay niini nga kalihokan ang kapaspason sa pagpitik sa imong kasingkasing ug gisukod kung unsa kalayo ang imong mahimong lakawon sulod sa %1$@.";
+
+/* (No Comment) */
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Lingkod nga komportable alang sa %@.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+
+/* (No Comment) */
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Lakat sa labing kadali kutob sa mahimo alang sa %@.";
+
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Matang I";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_II" = "Matang II";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_III" = "Matang III";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_IV" = "Matang IV";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_V" = "Matang V";
+
+/* (No Comment) */
+"FITZPATRICK_SKIN_TYPE_VI" = "Matang VI";
+
+/* (No Comment) */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Nakalimtan ang password?";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Babaye";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pagkuha usa ka katawohon";
+
+/* (No Comment) */
+"GENDER_FORM_ITEM_TITLE" = "Katawohon";
+
+/* (No Comment) */
+"GENDER_MALE" = "Lalaki";
+
+/* (No Comment) */
+"GENDER_OTHER" = "Uban Pa";
+
+/* (No Comment) */
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Gisukod sa kini nga kalihokan ang imong pagpaandar sa ibabaw nga bahin pinaagi sa paghangyo kanimo nga ibutang ang usa ka lagdok sa usa ka lungag. Hangyuon ka nga buhaton kini %@ beses.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Ang parehas nga imong wala ug tuo nga mga kamot pagasulayan.\nKinahanglan nimo nga kuhaon ang peg sa labing dali nga panahon, ibutang kini sa lungag, ug, kung nahimo na %@ nga mga higayon, kuhaa kini pag-usab %@ ka beses.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Ang parehas nga imong wala ug tuo nga mga kamot pagasulayan.\nKinahanglan nimo nga kuhaon ang peg sa labing dali nga panahon, ibutang kini sa lungag, ug, kung nahimo na %@ nga mga higayon, kuhaa kini pag-usab %@ ka beses.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Ibutang ang lagdok sa lungag gamit ang imong wala nga kamot.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Ibutang ang lagdok sa lungag gamit ang imong tuo nga kamot.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Ibutang ang lagdok sa likud sa linya gamit ang imong wala nga kamut.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Ibutang ang lagdok sa likud sa linya gamit ang imong tuo nga kamot.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT" = "Kuhaa ang peg gamit ang duha nga tudlo.";
+
+/* (No Comment) */
+"HOLE_PEG_TEST_TEXT_2" = "Ipataas ang mga tudlo aron mahulog ang lagdok.";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Dili balido nga email adres: %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Dili madugang ang butang nga Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Dili matangtang ang butang sa Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Wala makit-an ang item sa Keychain.";
+
+/* (No Comment) */
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Dili ma-update ang item nga Keychain.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ipadako ang imong wala nga tuhod. Unya pag-tap bisan asa.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ipadako ang imong tuo nga tuhod. Unya pag-tap bisan asa.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Gisukod sa kini nga kalihokan kung unsa ka layo nga imong mapadako ang imong wala nga tuhod.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Gisukod sa kini nga kalihokan kung unsa ka layo nga imong mapadako sa imong tuo nga tuhod.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Lingkod sa ngilit sa usa ka lingkuranan. Kung nagsugod ka ibutang nimo ang imong aparato sa imong wala nga tuhod alang sa usa ka sukod. Palihug i-on ang tunog sa imong aparato aron madungog nimo ang mga panudlo.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Lingkod sa ngilit sa usa ka lingkuranan. Kung nagsugod ka ibutang nimo ang imong aparato sa imong tuo nga tuhod alang sa usa ka sukod. Palihug i-on ang tunog sa imong aparato aron madungog nimo ang mga panudlo.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Ibutang ang imong aparato sa imong wala nga tuhod nga adunay atubang ang screen, sama sa litrato.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Ibutang ang imong aparato sa imong tuo nga tuhod nga adunay atubang ang screen, sama sa litrato.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kung andam na, i-tap ang screen aron magsugod ug ipaabut ang imong wala nga tuhod kutob sa mahimo. Pag-tap pag-usab kung nahuman na.";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kung andam na, i-tap ang screen aron magsugod ug ipaabut ang imong tuo nga tuhod kutob sa mahimo. Pag-tap pag-usab kung nahuman na.";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Wala nga Tuhod nga sa Range sa Paglihok sa Knee";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Tuo nga Tuhod nga Kasangkaran sa Paglihok";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Ibutang ang imong aparato sa imong wala nga tuhod";
+
+/* (No Comment) */
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Ibutang ang imong aparato sa imong tuo nga tuhod";
+
+/* (No Comment) */
+"LEARN_MORE_CONSENT_SHARING" = "Hibal-i ang daghan pa bahin sa pagpaambit sa datos";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Hibal-i ang dugang pa bahin sa kung giunsa pagkolekta ang datos";
+
+/* (No Comment) */
+"LEARN_MORE_DATA_USE" = "Hibal-i ang dugang pa bahin sa kung giunsa paggamit ang datos";
+
+/* (No Comment) */
+"LEARN_MORE_PRIVACY" = "Hibal-i ang dugang pa bahin sa kung giunsa pagpanalipod sa imong pribasiya ug pagkatawo";
+
+/* (No Comment) */
+"LEARN_MORE_STUDY_SURVEY" = "Hibal-i ang dugang pa bahin sa survey sa pagtuon";
+
+/* (No Comment) */
+"LEARN_MORE_TASKS" = "Hibal-i ang dugang pa bahin sa mga buluhaton nga nalambigit";
+
+/* (No Comment) */
+"LEARN_MORE_TIME_COMMITMENT" = "Hibal-i ang daghan pa bahin sa epekto sa pagtuon sa imong oras";
+
+/* (No Comment) */
+"LEARN_MORE_WELCOME" = "Hibal-i ang dugang pa bahin sa pagtuon una sa tanan";
+
+/* (No Comment) */
+"LEARN_MORE_WITHDRAWING" = "Hibal-i ang dugang pa bahin sa pag-atras";
+
+/* Limb values. */
+"LIMB_LEFT" = "wala";
+
+/* (No Comment) */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption kinahanglan wala o tuo";
+
+/* (No Comment) */
+"LIMB_RIGHT" = "tuo";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE" = "Dili makapangita usa ka resulta alang sa gisulud nga adres. Palihug siguruha nga ang address husto.";
+
+/* (No Comment) */
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ang bisan kinsa dili ka konektado sa internet o milapas ka sa labing kadaghan nga mga hangyo nga gipangita ang adres. Kung dili ka konektado sa internet, palihug i-on ang imong Wi-Fi aron matubag kini nga pangutana, laktawi kini nga pangutana kung magamit ang pindutan sa paglaktaw, o pagbalik sa survey kung nakakonekta ka sa internet. Kung dili, palihug pagsulay sab sa pipila ka minuto.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_DENIED" = "Gidili ang pag-access sa mga serbisyo sa lokasyon. Palihug ihatag ang pagtugot sa kini nga app nga magamit ang mga serbisyo sa lokasyon pinaagi sa Mga setting.";
+
+/* (No Comment) */
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Dili masulbad ang imong karon nga lokasyon. Palihug pag-type sa usa ka adres o pagbalhin sa usa ka lokasyon nga adunay labi ka maayo nga signal sa GPS kung magamit.";
+
+/* (No Comment) */
+"LOCATION_ERROR_TITLE" = "Dili Makita ang Gipiho nga Adres";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Pagsulud usa ka adres";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Pag-login";
+
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+
+/* (No Comment) */
+"MEASURING_UNIT_FT" = "ft";
+
+/* (No Comment) */
+"MEASURING_UNIT_IN" = "in";
+
+/* (No Comment) */
+"MEASURING_UNIT_KG" = "kg";
+
+/* (No Comment) */
+"MEASURING_UNIT_LB" = "lb";
+
+/* (No Comment) */
+"MEASURING_UNIT_OZ" = "oz";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE" = "Kompleto na ang Dula";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Aron magpadayon, i-tap ang Sunod";
+
+/* (No Comment) */
+"MEMORY_GAME_COMPLETE_TITLE" = "Nakumpleto na ang Han-ay";
+
+/* (No Comment) */
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Ang kalihokan sa memorya gihimo pinaagi sa tabang gikan sa Katherine Possin, PhD ug Joel Kramer, PhD gikan sa University of California, San Francisco.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_MESSAGE" = "Dili pa nimo malampasan kana nga orasa. Pag-tap sa Sunod aron magpadayon.";
+
+/* (No Comment) */
+"MEMORY_GAME_FAILED_TITLE" = "Sulayi Pag-usab";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "I-tap ang %@ sa reverse order";
+
+/* (No Comment) */
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "I-tap ang %@ sa han-ay nga nagsiga sila";
+
+/* (No Comment) */
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_MESSAGE" = "Aron magpadayon, i-tap ang Sunod";
+
+/* (No Comment) */
+"MEMORY_GAME_PAUSED_TITLE" = "Mihunong";
+
+/* (No Comment) */
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Tan-awa ang %@ pagsiga";
+
+/* (No Comment) */
+"MEMORY_GAME_SCORE_TITLE" = "Iskor";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Nahurot na imong oras.\nPag-tap sa Sunod aron magpadayon.";
+
+/* (No Comment) */
+"MEMORY_GAME_TIMEOUT_TITLE" = "Nahurot na ang oras.";
+
+/* (No Comment) */
+"NULL_ANSWER" = "Pagpili og usa ka tubag";
+
+/* (No Comment) */
+"PASAT_INTRO_TEXT" = "Gisukod sa Paced Auditory Serial Addition Test ang tulin sa pagproseso sa kasayuran sa auditory ug abilidad sa pagkalkula.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+
+/* (No Comment) */
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Gipamatud-an ang passcode";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_MESSAGE" = "Gikumpirma ang passcode";
+
+/* (No Comment) */
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Gikumpirma ang imong bag-ong passcode";
+
+/* (No Comment) */
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Nakalimtan ang Passcode?";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Ang mga passcode dili magkatugma. Pagsulay sab.";
+
+/* (No Comment) */
+"PASSCODE_INVALID_ALERT_TITLE" = "Dili husto ang Passcode";
+
+/* (No Comment) */
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Pagsulud sa imong bag-ong passcode";
+
+/* (No Comment) */
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Pagsulud sa imong daan nga passcode";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Pagsulud sa passcode";
+
+/* (No Comment) */
+"PASSCODE_SAVED_MESSAGE" = "Natipig ang passcode";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator sa pagprogreso sa pagsulud sa passcode";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ sa %@ ang mga digit nga gisulod";
+
+/* (No Comment) */
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Gitugotan lang ang mga karakter nga numero.";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Kasaypanan sa Touch ID";
+
+/* (No Comment) */
+"PASSCODE_TOUCH_ID_MESSAGE" = "Palihug pamatud-i gamit ang Touch ID";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Pagsulud password";
+
+/* (No Comment) */
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+
+/* (No Comment) */
+"PAVSAT_INTRO_TEXT" = "Gisukod sa Paced Auditory ug Visual Serial Addition Test ang imong pagdungog ug abilidad sa pagproseso sa kasayuran sa visual ug katakus sa pagkalkula.";
+
+/* (No Comment) */
+"PAVSAT_TITLE" = "PAVSAT";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+
+/* (No Comment) */
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Numero sa Telepono";
+
+/* (No Comment) */
+"PLACEHOLDER_IMAGE_CHOICES" = "Pag-tap aron mapili";
+
+/* (No Comment) */
+"PLACEHOLDER_LONG_TEXT" = "Pag-tap sa pagsulat";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Pag-tap aron matubag";
+
+/* (No Comment) */
+"PSAT_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"PSAT_INITIAL_INSTRUCTION" = "Hinumdomi kini nga una nga numero.";
+
+/* (No Comment) */
+"PSAT_INSTRUCTION" = "Idugang kining bag-ong digit sa naunang usa.";
+
+/* (No Comment) */
+"PSAT_INTRO_TEXT_2_%@" = "Ang usa ka digit gipakita matag %@ segundo.\nKinahanglan nimong idugang ang matag bag-ong numero sa usa ka dayon niini.\nPagtagad, dili nimo kinahanglan makalkula ang usa ka total nga nagdagan, apan ang kantidad ra sa katapusang duha nga numero.";
+
+/* (No Comment) */
+"PSAT_NO_DIGIT" = "-";
+
+/* (No Comment) */
+"PVSAT_INTRO_TEXT" = "Gisukod sa Paced Visual Serial Addition Test ang imong tulin sa pagproseso sa kasayuran sa visual ug katakus sa pagkalkula.";
+
+/* (No Comment) */
+"PVSAT_TITLE" = "PVSAT";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Ang %1$@milapas sa kinadak-an nga gitugotan nga balor (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Ang %1$@mas gamay sa kinaminosan nga gitugotan nga balor (%2$@).";
+
+/* (No Comment) */
+"RANGE_ALERT_MESSAGE_OTHER" = "Ang %@ dili balido nga kantidad.";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Dili balido nga kantidad";
+
+/* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Sakuban sa Paglihok";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Dali nga uyuga ang aparato kung makita ang asul nga lingin";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pagsulay %@ sa %@";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTENDED_USE" = "Gisusi sa kini nga kalihokan ang oras nga gikinahanglan aron makatubag ka sa usa ka visual cue.";
+
+/* (No Comment) */
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "I-uyog ang aparato sa bisan unsang direksyon sa higayon nga makita ang asul nga tuldok sa screen. Hangyuon ka nga buhaton kini %D beses.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Oras sa Reaksyon";
+
+/* (No Comment) */
+"RESEND_EMAIL_BUTTON_TITLE" = "Ipadala pag-usab ang Email sa Pagpamatuud";
+
+/* (No Comment) */
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pag-tap sa link sa ubus kung wala ka makadawat usa ka email sa pagpanghimatuud ug gusto nimo kini ipadala pag-usab.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ipataas ang imong wala nga bukton. Unya pag-tap bisan asa.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ipataas ang imong tuo nga bukton. Unya pag-tap bisan asa.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Gisukod sa kini nga kalihokan kung unsa ka layo ang imong mahimo sa imong wala nga abaga.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Gisukod sa kini nga kalihokan kung unsa ka layo ang imong mahimo sa pagdugang sa imong tuo nga abaga.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Kung nagsugod ka ibutang nimo ang imong aparato sa imong wala nga abaga alang sa usa ka sukod. Palihug i-on ang tunog sa imong aparato aron madungog nimo ang mga panudlo.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Kung nagsugod ka ibutang nimo ang imong aparato sa imong tuo nga abaga alang sa usa ka sukod. Palihug i-on ang tunog sa imong aparato aron madungog nimo ang mga panudlo.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Ibutang ang imong aparato sa imong wala nga abaga nga ang atubang sa screen, sama sa litrato.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Ibutang ang imong aparato sa imong tuo nga abaga nga adunay atubang ang screen, sama sa litrato.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kung andam na, i-tap ang screen aron magsugod ug ipataas ang imong wala nga bukton kutob sa mahimo. Pag-tap pag-usab kung nahuman na.";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kung andam na, i-tap ang screen aron magsugod ug ipataas ang imong tuo nga bukton kutob sa mahimo. Pag-tap pag-usab kung nahuman na.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Wala nga Sakuban sa Paglihok sa Abaga";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Tuo nga Sakuban sa Paglihok sa Abaga";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Ibutang ang imong aparato sa imong wala nga abaga";
+
+/* (No Comment) */
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "butang ang imong aparato sa imong tuo nga abaga";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Sa pagsugod, i-tap ang Pagsugod, dayon tan-awa pag-ayo.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Ang pila sa %@ magdagkot matag usa. I-tap ang mga %@ sa parehas nga han-ay nga ilang gidan-agan.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Ang pila sa %@ magdagkot matag usa. I-tap ang mga Tap those %@ in the reverse of the order they lit up.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Gisukod sa kini nga kalihokan ang imong mubo nga panumduman nga spatial nga panumduman pinaagi sa paghangyo kanimo nga sublion ang han-ay diin ang %@ modan-ag.";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "mga bulak";
+
+/* (No Comment) */
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "mga bulak";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Pag-tap sa 'Play Audio', ayuhon ang imong gidaghanon sa usa ka komportable nga lebel ug dayon i-tap ang 'Stop Audio' aron makapadayon.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Pag-calibrate sa Volume";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Ingon bahin sa kini nga pagsulay, ikaw:\n\nPagpamati sa usa ka tudling-pulong.\n\nBalika sa tin-aw kung unsa ang imong nadungog o laktawan sa unahan aron i-type ang imong nadungog gamit ang keyboard. \n\nKung imong gibalikbalik kung unsa ang imong nadungog, adunay ka kapilian nga usbon ang transcript nga gihimo sa makina nga maila ang sinultihan.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Gisukod sa kini nga kalihokan ang pagkasabut sa sinultian kung gipakita sa mga saba nga palibot.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Balika kung unsa ang imong nadungog.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Pagsulti";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Pagtugtog sa Audio";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TEXT" = "Ang usa ka tudling-pulong nga gisagol sa kasaba sa background sa usa ka random nga Signal to Noise Ratio (SNR) ipatugtog kausa ra.";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STEP_TITLE" = "Paminaw";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Hununga ang Audio";
+
+/* (No Comment) */
+"SPEECH_IN_NOISE_TITLE" = "Pagsulti sa Kasaba";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_FAILED" = "Nagpakyas ang pag-ila sa pinulongan.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Napakyas sa pagpauna sa pagkilala sa sinultian.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Pagpadayon sa buton aron magsugod sa pagrekord sa wala pa mosulti.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Gitala sa kini nga kalihokan ang imong sinultian gamit ang mikropono sa ilawom sa aparato, ug gihubad kini sa text.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Pag-edit sa teksto sa transcript aron matul-id ang bisan unsang sayup nga paghubad sa sinultian.";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Pag-edit sa Transcript";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Pagsugod sa Pagrekord";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Hunong sa Pagrekord";
+
+/* (No Comment) */
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Ang imong hulagway makita dinhi.";
+
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Speech Recognition";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@ sa %2$@";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE" = "ASUL";
+
+/* (No Comment) */
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN" = "BERDE";
+
+/* (No Comment) */
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+
+/* (No Comment) */
+"STROOP_COLOR_RED" = "PULA";
+
+/* (No Comment) */
+"STROOP_COLOR_RED_INITIAL" = "R";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW" = "DULAW";
+
+/* (No Comment) */
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Matag higayon nga adunay motungha nga pulong, pilia ang una nga letra sa ngalan sa KOLOR nga gipakita.";
+
+/* (No Comment) */
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Kung andam ka na nga magsugod sa kalihokan sa Stroop tapikin ang Pagsugod.";
+
+/* (No Comment) */
+"STROOP_TASK_STEP_TEXT" = "Pilia ang una nga letra sa ngalan sa KOLOR nga gipakita.";
+
+/* Stroop active task. */
+"STROOP_TASK_TITLE" = "Stroop";
+
+/* (No Comment) */
+"TAP_BUTTON_TITLE" = "Pag-tap";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"TAPPING_CALL_TO_ACTION_NEXT" = "Pag-tap sa Sunod aron magsugod.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION" = "Pag-tap sa mga buton ingon nga kanunay kutob sa mahimo nimo nga paggamit sa duha nga mga tudlo.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_LEFT" = "Pag-tap sa mga buton gamit ang imong WALA nga kamot.";
+
+/* (No Comment) */
+"TAPPING_INSTRUCTION_RIGHT" = "Pag-tap sa mga buton gamit ang imong TUO nga kamot.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT" = "Gisukod sa kini nga kalihokan ang imong katulin sa pag-tap.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Pag-tap sa usa ka tudlo, pagkahuman sa pikas. Sulayi nga i-time ang imong mga gripo aron mahimo’g kutob sa mahimo. Padayon sa pag-tap alang sa %@.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Paggamit duha nga mga tudlo sa imong wala nga kamot aron kapili nga i-tap ang mga buton sa screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Karon sublion ang parehas nga pagsulay gamit ang imong wala nga kamot.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Paggamit duha nga mga tudlo sa parehas nga kamut aron alternatibo nga i-tap ang mga buton sa screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Ibutang ang imong aparato sa usa ka patag.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Paggamit duha nga mga tudlo sa imong tuo nga kamut aron kapili nga i-tap ang mga buton sa screen.";
+
+/* (No Comment) */
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Karon sublion ang parehas nga pagsulay gamit ang imong tuo nga kamot.";
+
+/* (No Comment) */
+"TAPPING_SKIP_TITLE" = "Laktaw kini nga kamut";
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Kadali sa Pag-tap";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_LEFT" = "Wala nga kamot";
+
+/* (No Comment) */
+"TAPPING_TASK_TITLE_RIGHT" = "Tuo nga Kamot";
+
+/* (No Comment) */
+"TASK_COMPLETE_TEXT" = "Pag-analisar sa imong datos ug mapahibalo ka kung andam na ang imong mga resulta.";
+
+/* (No Comment) */
+"TASK_COMPLETE_TITLE" = "Kumpleto nga Kalihokan";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Ang sulud sa teksto nga molapas sa labing kadaghan nga gitas-on: %@";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TEXT" = "Paggamit parehas nga makatabang nga aparato alang sa matag pagsulay.";
+
+/* (No Comment) */
+"TIMED_WALK_FORM_TITLE" = "Nakatabang nga aparato";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_%@" = "Paglakaw hangtod sa %@ sa usa ka tul-id nga linya.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_2" = "Paglakaw balik kung diin ka nagsugod.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TEXT" = "Pag-tap sa Sunod kung nahuman na.";
+
+/* (No Comment) */
+"TIMED_WALK_INSTRUCTION_TURN" = "Paglingi";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_DETAIL" = "Pag-tap sa Sunod aron magsugod.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Pagpangita usa ka lugar, labi nga sa gawas, diin mahimo ka nga maglakaw og hapit  %@ sa usa ka tul-id nga linya nga labing dali, apan luwas. Ayaw paghinay hangtod nahuman nimo ang pagtapos sa linya.";
+
+/* (No Comment) */
+"TIMED_WALK_INTRO_DETAIL" = "Gisukod sa kini nga kalihokan ang imong pag-andar sa ubos nga bahin.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE" = "Wala";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TEXT" = "Pag-tap dinhi aron makapili usa ka tubag.";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_2_TITLE" = "Naggamit ka ba og assistive device?";
+
+/* (No Comment) */
+"TIMED_WALK_QUESTION_TEXT" = "Gisul-ob ba nimo ang usa ka ankle foot orthosis?";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Giorasan nga Paglakaw";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INSTRUCTION" = "Sa matag higayon nga magsugod ka makadungog usa ka tunog, i-tap ang wala o tuo nga buton aron ipakita kung asa nga dalunggan ang madungog nimo ang tunog.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTENDED_USE" = "Gisukod sa kini nga kalihokan ang imong kaarang nga makadungog lainlaing mga tunog.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sa wala pa ka magsugod, pagsulud ug ibutang ang imong mga headphone.\n\nAng tunog mahimong maliputon kaayo ug dili sama sa usa ka regular nga tono sa alerto. Ang tunog magsugod hinay ug pagkahuman hinayhinay nga modaghan. Palihug hatagi'g pagtagad ug i-tap ang wala o tuo nga buton aron ipakita kung unsang dalunggan ang paminaw nimo niini.";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Wala nga Dalunggan";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Tuo nga Dalunggan";
+
+/* (No Comment) */
+"TONE_AUDIOMETRY_PREP_TEXT" = "Kinahanglan ka makadungog usa ka tono. Ayuhon ang gidaghanon gamit ang mga kontrol sa kilid sa imong aparato.\n\nPag-tap sa bisan unsang buton kung andam ka na magsugod.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+
+/* (No Comment) */
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Wala";
+
+/* (No Comment) */
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Tuo";
+
+/* (No Comment) */
+"TOTAL_TAPS_LABEL" = "Tibuok nga mga Tap";
+
+/* (No Comment) */
+"TOUCH_ANYWHERE_LABEL" = "Paghikap bisan diin aron magpadayon";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "I-sulbad ang Puzzle";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Gidaghan nga mga Pagbalhin: %@ \n %@";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Dili nako masulbad kini nga puzzle";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Gisusi sa kini nga kalihokan ang imong kahanas sa pagsulbad sa puzzle.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Igbalhin ang tibuuk nga stack sa gipasiugda nga platform sa pipila ka mga paglihok kutob sa mahimo.";
+
+/* (No Comment) */
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
+
+/* (No Comment) */
+"TRAILMAKING_CALL_TO_ACTION" = "Pag-tap sa Pagsugod aron magsugod.";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR" = "%@ (%d sayup)";
+
+/* (No Comment) */
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d mga sayup)";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE" = "Gisusi sa kini nga kalihokan ang imong panan-aw sa panan-aw ug paglihok sa buluhaton pinaagi sa pagrekord sa oras nga gikinahanglan aron ma-tap ang usa ka serye sa mga tulbok aron mahan-ay.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_A" = "Pagkahuman sa pag-ihap, i-tap ang mga tuldok sa alternating han-ay sa taliwala sa mga numero ug letra. Sugdi pinaagi sa pag-tap sa unang numero nga '1' gisundan sa mga numero nga '2' - '3' - '4'… hangtod maabut ang numero nga '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTENDED_USE2_B" = "Pagkahuman sa pag-ihap, i-tap ang mga tuldok sa alternating han-ay sa taliwala sa mga numero ug letra. Sugdi pinaagi sa pag-tap sa unang numero nga '1' gisundan sa pag-tap sa una nga letrang 'A', ug pagkahuman ang '2' - 'B' - '3' - 'C'… hangtod naabut nimo ang numero nga '7'.";
+
+/* (No Comment) */
+"TRAILMAKING_INTRO_TEXT" = "Buhata kini sa labing madali nga mahimo nimo nga wala’y mga sayup. \n ";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_A" = "A";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_B" = "B";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_C" = "C";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_D" = "D";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_E" = "E";
+
+/* (No Comment) */
+"TRAILMAKING_LETTER_F" = "F";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making nga PagsulayTest";
+
+/* (No Comment) */
+"TRAILMAKING_TIMER" = "%.1f s";
+
+/* (No Comment) */
+"TREMOR_SKIP_LEFT_HAND" = "Dili nako mahimo kini nga kalihokan sa akong WALA nga kamut.";
+
+/* (No Comment) */
+"TREMOR_SKIP_NEITHER" = "Mahimo nako kini nga kalihokan sa parehas nga mga kamut.";
+
+/* (No Comment) */
+"TREMOR_SKIP_RIGHT_HAND" = "Dili nako mahimo kini nga kalihokan sa akong tuo nga kamut.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Ipadayon ang paghawid sa imong telepono nga gibawog nga siko sulod sa %ld ka mga segundo";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Karon kupti ang imong telepono sa taas nga abaga gamit ang imong siko nga gibawog.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Karon kupti ang imong telepono gamit ang imong WALA nga kamot sa taas nga abaga gamit ang imong siko nga gibawog.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Karon kupti ang imong telepono gamit ang TUO nga kamot sa taas nga abaga gamit ang imong siko nga gibawog.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Ipadayon ang paghawid sa imong telepono nga ang imong kamot gituy-od sulod sa %ld ka mga segundo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Karon kupti ang imong telepono gamit ang imong kamut nga gipaabot sa gitas-on sa abaga.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Karon kupti ang imong telepono gamit ang imong WALA nga kamot nga gipaabot sa taas nga abaga.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Karon kupti ang imong telepono gamit ang imong tuo nga kamot nga gipaabot sa taas nga abaga.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Padayon sa sunod nga buluhaton.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Ipadayon ang paghawid sa imong telepono sa imong sabakan sulod sa %ld ka mga segundo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Pag-andam sa paghawid sa imong telepono sa imong paa.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Pag-andam sa paghawid sa imong telepono sa imong paa gamit ang imong WALA nga kamot.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Pag-andam sa paghawid sa imong telepono sa imong paa gamit ang TUO nga kamot.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Pag-tap sa sunod aron makapadayon.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Karon ibalhin ang telepono sa imong WALA nga kamut ug magpadayon sa sunod nga buluhaton.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Karon ibalhin ang telepono sa imong tuo nga kamot ug ipadayon ang sunod nga buluhaton.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Ipadayon ang paghikap sa imong telepono sa imong ilong sulod sa %ld ka mga segundo";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Karon nga gipadayon ang imong siko nga gibawog, paghikap sa imong telepono sa imong ilong kanunay.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Karon nga gipadayon ang imong siko nga gibawog gamit ang imong telepono sa imong wala nga kamot, hikapa ang imong telepono sa imong ilong balik-balik.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Karon nga gipadayon ang imong siko nga gibawog gamit ang imong telepono sa imong TUO nga kamot, hikapa ang imong telepono sa imong ilong kanunay.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Padayon sa paghimo og queen wave sulod sa %ld mga segundo.";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Pag-andam sa paghimo sa usa ka queen wave (iwagay pinaagi sa pagliso sa imong pulso).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Pag-andam sa paghimo sa usa ka queen wave gamit ang imong telepono sa imong WALA nga kamut (iwagay pinaagi sa pagliso sa imong pulso).";
+
+/* (No Comment) */
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Pag-andam nga buhaton ang usa ka reyna nga reyna gamit ang imong telepono sa imong TUO nga kamot (itabyog pinaagi sa pagtuyok sa imong pulso).";
+
+/* (No Comment) */
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Nahuman ang kalihokan.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_1_DETAIL" = "Gisukod sa kini nga kalihokan ang pagkurog sa imong mga kamot sa lainlaing mga posisyon. Pagpangita usa ka lugar diin makalingkod ka nga komportable sa gidugayon sa kini nga kalihokan.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hupti ang telepono sa imong labi ka apektadong kamot ingon sa gipakita sa imahe sa ubus.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "usa ka buluhaton";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "duha ka buluhaton";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tulo ka buluhaton";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "upat ka buluhaton";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "lima ka buluhaton";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Hangyoon ka nga magpasundayag %@  samtang naglingkod kauban ang telepono sa imong kamot.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Kupti ang telepono sa imong WALA nga kamot ingon gipakita ang imahe sa ubus.";
+
+/* (No Comment) */
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Kupti ang telepono sa imong TUO nga kamot ingon sa gipakita sa imahe sa ubus.";
+
+/* (No Comment) */
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Hangyoon ka nga magpasundayag %@ samtang naglingkod kauban ang telepono una sa usa ka kamot, pagkahuman sab sa pikas nga kamut.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Kalihokan sa";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Pagpanghimatuud";
+
+/* (No Comment) */
+"VERIFICATION_STEP_TITLE" = "Pagpanghimatuud sa imong Email";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Nahuman nimo ang kalihokan.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Paglakaw pabalik-balik sa usa ka tul-id nga linya alang sa %@. Lakaw ingon sa naandan nimo.";
+
+/* (No Comment) */
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Paglibut sa usa ka tibuuk nga lingin ug paghunong sa %@.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL" = "Ibutang ang imong aparato sa bulsa o bag ug sunda ang mga panudlo sa audio.";
+
+/* (No Comment) */
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Pag-tap sa Pagsugod kung andam ka na magsugod.\nPagkahuman ibutang ang imong aparato sa bulsa o bag ug sunda ang mga panudlo sa audio.";
+
+/* (No Comment) */
+"WALK_INTRO_2_TEXT_%ld" = "Pagpangita usa ka lugar diin mahimo ka nga luwas nga makalakaw nga wala tabangi sa mga %ld nga mga lakang sa usa ka tul-id nga linya.";
+
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Pagpangita usa ka lugar diin mahimo ka luwas nga maglakaw pabalik-balik sa usa ka tul-id nga linya. Sulayi ang paglakaw nga padayon pinaagi sa pagliko sa mga kinatumyan sa imong agianan, nga ingon kung naglakaw ka sa usa ka cone.\n\nSunod sugoon ka sa pagtuyok sa tibuuk nga lingin, pagkahuman tindog nga nagtindog uban ang imong mga bukton sa imong mga kilid ug ang imong mga tiil nga layo sa abaga ang abaga.";
+
+/* (No Comment) */
+"WALK_INTRO_TEXT" = "Gisukod sa kini nga kalihokan ang imong lakaw ug balanse samtang naglakaw ug nagbarug. Ayaw pagpadayon kung dili ka makalakaw nga luwas sa pagtabang.";
+
+/* (No Comment) */
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Paglakaw hangtod sa %ld nga mga lakang sa usa ka tul-id nga linya.";
+
+/* (No Comment) */
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Paglingi, ug lakaw balik sa imong sinugdanan.";
+
+/* (No Comment) */
+"WALK_STAND_INSTRUCTION_FORMAT" = "Pagbarug alang sa %@.";
+
+/* (No Comment) */
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Karon, pagbarug alang sa %@.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Paglihok ug Balanse";
+
