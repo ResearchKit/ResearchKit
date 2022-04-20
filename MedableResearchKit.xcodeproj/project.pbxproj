@@ -869,6 +869,7 @@
 		522B8AB22800B2390057E7AB /* nb-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nb-NO"; path = "nb-NO.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		522B8AB32800B27A0057E7AB /* fil-PH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fil-PH"; path = "fil-PH.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		52A5D350252FD3290017A7BD /* lt-LT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lt-LT"; path = "lt-LT.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		52AE36AC2810662E0078EDC4 /* ms-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ms-SG"; path = "ms-Latn-SG.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		52F84F2127EA5F5800E64F30 /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		6146D0A11B84A91E0068491D /* ORKLineGraphAccessibilityElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKLineGraphAccessibilityElement.h; sourceTree = "<group>"; };
 		6146D0A21B84A91E0068491D /* ORKLineGraphAccessibilityElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKLineGraphAccessibilityElement.m; sourceTree = "<group>"; };
@@ -3592,6 +3593,7 @@
 				"zh-Hans-MY",
 				"nb-NO",
 				"fil-PH",
+				"ms-SG",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -4103,6 +4105,7 @@
 				522B8AB12800B1F30057E7AB /* zh-Hans-MY */,
 				522B8AB22800B2390057E7AB /* nb-NO */,
 				522B8AB32800B27A0057E7AB /* fil-PH */,
+				52AE36AC2810662E0078EDC4 /* ms-SG */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
