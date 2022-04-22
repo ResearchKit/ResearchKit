@@ -88,8 +88,16 @@
     }
     
     self.locationManager = [self createLocationManager];
-
-    if (self.locationManager.authorizationStatus == kCLAuthorizationStatusRestricted || self.locationManager.authorizationStatus == kCLAuthorizationStatusNotDetermined) {
+    
+    CLAuthorizationStatus status = kCLAuthorizationStatusNotDetermined;
+    
+    if (@available(iOS 14.0, *)) {
+        status = self.locationManager.authorizationStatus;
+    } else {
+        status = [CLLocationManager authorizationStatus];
+    }
+    
+    if (status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
@@ -157,8 +165,15 @@
 }
 
 - (BOOL)isRecording {
+    CLAuthorizationStatus status = kCLAuthorizationStatusNotDetermined;
     
-    return [CLLocationManager locationServicesEnabled] && (self.locationManager != nil) && (self.locationManager.authorizationStatus > kCLAuthorizationStatusDenied);
+    if (@available(iOS 14.0, *)) {
+        status = self.locationManager.authorizationStatus;
+    } else {
+        status = [CLLocationManager authorizationStatus];
+    }
+    
+    return [CLLocationManager locationServicesEnabled] && (self.locationManager != nil) && (status > kCLAuthorizationStatusDenied);
 }
 
 - (void)reset {

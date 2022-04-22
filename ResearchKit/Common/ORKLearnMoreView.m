@@ -61,10 +61,13 @@ ORK_CLASS_AVAILABLE
     button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     button.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    UIButtonConfiguration *buttonConfig = [UIButtonConfiguration filledButtonConfiguration];
-    [buttonConfig setContentInsets:NSDirectionalEdgeInsetsMake(0, 0, 0, 0)];
-    
-    [button setConfiguration:buttonConfig];
+    if (@available(iOS 15.0, *)) {
+        UIButtonConfiguration *buttonConfig = [UIButtonConfiguration filledButtonConfiguration];
+        [buttonConfig setContentInsets:NSDirectionalEdgeInsetsMake(0, 0, 0, 0)];
+        [button setConfiguration:buttonConfig];
+    } else {
+        [button setContentEdgeInsets:UIEdgeInsetsMake(CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN)];
+    }
     
     return button;
 }

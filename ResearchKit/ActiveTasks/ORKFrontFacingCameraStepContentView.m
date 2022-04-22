@@ -194,10 +194,14 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
 - (void)setupSubviews {
     _startStopButton = [UIButton new];
     
-    UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration plainButtonConfiguration];
-    [buttonConfiguration setContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
-    
-    [_startStopButton setConfiguration:buttonConfiguration];
+    if (@available(iOS 15.0, *)) {
+        UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration plainButtonConfiguration];
+        [buttonConfiguration setContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
+        [_startStopButton setConfiguration:buttonConfiguration];
+    } else {
+        _startStopButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+    }
+
     _startStopButton.layer.cornerRadius = 14.0;
     _startStopButton.clipsToBounds = YES;
     

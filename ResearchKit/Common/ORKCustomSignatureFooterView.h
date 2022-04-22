@@ -43,7 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> signatureViewDelegate;
 @property (nonatomic, weak, nullable) id<ORKCustomSignatureAccessoryViewProvider> customViewProvider;
 @property (nonatomic, weak, nullable) id<ORKCustomSignatureFooterViewStatusDelegate> delegate;
-@property (nonatomic) BOOL enabled;
 
 - (BOOL)isComplete;
 

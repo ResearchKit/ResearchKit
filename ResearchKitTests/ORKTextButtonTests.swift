@@ -1,7 +1,6 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sam Falconer.
-
+ Copyright (c) 2022, Apple Inc. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,62 +28,24 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import XCTest
+@testable import ResearchKit
 
-@import UIKit;
-
-
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKSignatureView;
-
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
-
-@optional
-- (void)signatureViewDidEndEditingWithTimeInterval;
-
-@end
-
-@class ORKCustomSignatureFooterView;
-
-@protocol ORKCustomSignatureFooterViewStatusDelegate <NSObject>
-
-- (void)signatureFooterView:(nonnull ORKCustomSignatureFooterView *)footerView didChangeCompletedStatus:(BOOL)isComplete;
-
-@end
-
-
-@interface ORKSignatureView : UIView
-
-- (instancetype)initWithoutDefaultWidth;
-
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
-
-/**
- lineWidthVariation defines the max amount by which the line
- width can vary (default 3pts).
-
- The exact amount of the variation is determined by the amount
- of force applied on 3D touch capable devices or by the speed
- of the stroke if 3D touch is not available.
- 
- If the user is signing with an Apple Pencil, its force will be used.
- */
-@property (nonatomic) CGFloat lineWidthVariation;
-
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
-@property (nonatomic, copy, nullable) NSArray <UIBezierPath *> *signaturePath;
-
-- (UIImage *)signatureImage;
-
-@property (nonatomic, readonly) BOOL signatureExists;
-
-- (void)clear;
-- (void)cancelAutoScrollTimer;
-
-@end
-
-NS_ASSUME_NONNULL_END
+class ORKTextButtonTests: XCTestCase {
+    
+    let button = ORKTextButton(type: .custom)
+    
+    override func setUp() {
+        super.setUp()
+        
+        button.updateContentInsets(NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 10))
+    }
+    
+    func testProperties() {
+        XCTAssertNotNil(button.configuration)
+        XCTAssertEqual(button.configuration!.contentInsets.top, 10);
+        XCTAssertEqual(button.configuration!.contentInsets.leading, 0);
+        XCTAssertEqual(button.configuration!.contentInsets.bottom, 10);
+        XCTAssertEqual(button.configuration!.contentInsets.trailing, 10);
+    }
+}
