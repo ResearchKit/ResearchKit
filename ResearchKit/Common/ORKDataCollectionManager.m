@@ -36,15 +36,6 @@
 #import <HealthKit/HealthKit.h>
 
 
-@interface ORKDataCollectionState : NSObject <NSSecureCoding>
-
-@property(nonatomic, nullable, readwrite) NSString *archiveVersion;
-
-@property(nonatomic, nonnull, readwrite) NSArray<ORKCollector *> *collectors;
-
-@end
-
-
 // The file names for persisting the state of our collectors
 static  NSString *const ORKDataCollectionPersistenceFileNamev1 = @".dataCollection.ork.data"; // pre-secureCoding
 static  NSString *const ORKDataCollectionPersistenceFileNamev2 = @".dataCollection.ork.archive"; // current
@@ -388,10 +379,8 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
 
     self = [super init];
     
-    NSSet<Class> *decodableClasses = [NSSet setWithObjects:
-                                      ORKCollector.self,
-                                      nil];
-    _collectors = [aDecoder decodeArrayOfObjectsOfClasses:decodableClasses forKey:@ORK_STRINGIFY(collectors)];
+  
+    ORK_DECODE_OBJ_ARRAY(aDecoder, collectors, ORKCollector);
     ORK_DECODE_OBJ_CLASS(aDecoder, archiveVersion, NSString);
 
     return self;

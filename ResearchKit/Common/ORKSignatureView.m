@@ -548,11 +548,6 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     [(ORKSignatureGestureRecognizer *)_signatureGestureRecognizer cancelAutoScrollTimer];
 }
 
-- (void)setEnabled:(BOOL)enabled {
-    _enabled = enabled;
-    [self setUserInteractionEnabled:enabled];
-}
-
 #pragma mark - Accessibility
 
 - (BOOL)isAccessibilityElement {

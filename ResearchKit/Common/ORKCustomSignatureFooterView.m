@@ -226,10 +226,6 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
     [self setNeedsLayout];
 }
 
-- (void)setEnabled:(BOOL)enabled {
-    [_signatureView setEnabled:enabled];
-}
-
 - (void)setSignatureViewDelegate:(id<ORKSignatureViewDelegate>)signatureViewDelegate {
     _signatureViewDelegate = signatureViewDelegate;
     _signatureView.delegate = signatureViewDelegate;

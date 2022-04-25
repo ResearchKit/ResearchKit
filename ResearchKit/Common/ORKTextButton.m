@@ -73,9 +73,11 @@
 }
 
 - (void)updateContentInsets:(NSDirectionalEdgeInsets)contentInsets {
-    UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration plainButtonConfiguration];
-    [buttonConfiguration setContentInsets:contentInsets];
-    [self setConfiguration:buttonConfiguration];
+    if (@available(iOS 15.0, *)) {
+        UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration plainButtonConfiguration];
+        [buttonConfiguration setContentInsets:contentInsets];
+        [self setConfiguration:buttonConfiguration];
+    }
 }
 
 - (void)updateAppearance {
