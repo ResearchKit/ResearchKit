@@ -432,22 +432,11 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
 // MARK: UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    BOOL enabled = [self shouldEnableSignatureView] && scrollView.isDecelerating;
-    [_signatureView setEnabled:enabled];
-    
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {    
     if ([_scrollView.panGestureRecognizer translationInView:_scrollView.superview].y > 0) {
         // Scrolling upward
         [_signatureView cancelAutoScrollTimer];
     }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [_signatureView setEnabled:[self shouldEnableSignatureView]];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [_signatureView setEnabled:[self shouldEnableSignatureView]];
 }
 
 - (BOOL)shouldEnableSignatureView {

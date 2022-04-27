@@ -194,6 +194,7 @@
 		51751464245A5172009E8FFC /* ORKFrontFacingCameraStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51751462245A5172009E8FFC /* ORKFrontFacingCameraStepViewController.m */; };
 		51751467245A53D7009E8FFC /* ORKFrontFacingCameraStepContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 51751465245A53D7009E8FFC /* ORKFrontFacingCameraStepContentView.h */; };
 		51751468245A53D7009E8FFC /* ORKFrontFacingCameraStepContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51751466245A53D7009E8FFC /* ORKFrontFacingCameraStepContentView.m */; };
+		517B96E127ED310E00C29A00 /* ORKTextButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517B96E027ED310E00C29A00 /* ORKTextButtonTests.swift */; };
 		5185A799227C960500A570DE /* ORKLandoltCStepContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5185A798227C960500A570DE /* ORKLandoltCStepContentView.swift */; };
 		5190141924759E6800E3A418 /* ORKFrontFacingCameraStepResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 5190141724759E6800E3A418 /* ORKFrontFacingCameraStepResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5190141A24759E6800E3A418 /* ORKFrontFacingCameraStepResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 5190141824759E6800E3A418 /* ORKFrontFacingCameraStepResult.m */; };
@@ -1136,6 +1137,7 @@
 		51751462245A5172009E8FFC /* ORKFrontFacingCameraStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKFrontFacingCameraStepViewController.m; sourceTree = "<group>"; };
 		51751465245A53D7009E8FFC /* ORKFrontFacingCameraStepContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKFrontFacingCameraStepContentView.h; sourceTree = "<group>"; };
 		51751466245A53D7009E8FFC /* ORKFrontFacingCameraStepContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKFrontFacingCameraStepContentView.m; sourceTree = "<group>"; };
+		517B96E027ED310E00C29A00 /* ORKTextButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKTextButtonTests.swift; sourceTree = "<group>"; };
 		5185A798227C960500A570DE /* ORKLandoltCStepContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKLandoltCStepContentView.swift; sourceTree = "<group>"; };
 		5190141724759E6800E3A418 /* ORKFrontFacingCameraStepResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKFrontFacingCameraStepResult.h; sourceTree = "<group>"; };
 		5190141824759E6800E3A418 /* ORKFrontFacingCameraStepResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKFrontFacingCameraStepResult.m; sourceTree = "<group>"; };
@@ -2090,6 +2092,7 @@
 			children = (
 				14D3F09B225BCA8100A3962D /* ORKBorderedButtonTests.swift */,
 				148E58C1227B753F00EEF915 /* ORKContinueButtonTests.swift */,
+				517B96E027ED310E00C29A00 /* ORKTextButtonTests.swift */,
 			);
 			name = ORKButtonTests;
 			sourceTree = "<group>";
@@ -4669,6 +4672,7 @@
 				FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */,
 				714151D0225C4A23002CA33B /* ORKPasscodeViewControllerTests.swift in Sources */,
 				14E79040226A5F72009D8083 /* ORKStepViewControllerHelpers.swift in Sources */,
+				517B96E127ED310E00C29A00 /* ORKTextButtonTests.swift in Sources */,
 				86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */,
 				1490DCFC224D4867003FEEDA /* ORKEnvironmentSPLMeterResultTests.swift in Sources */,
 				7141EA2222EFBC0C00650145 /* ORKLoggingTests.m in Sources */,
@@ -5213,7 +5217,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -5282,7 +5286,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -5389,8 +5393,9 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = ResearchKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 2.1.0;
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5436,8 +5441,9 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = ResearchKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 2.1.0;
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
