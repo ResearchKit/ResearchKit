@@ -51,6 +51,7 @@
 @end
 
 static const CGFloat FooterViewHeightOffset = 20.0;
+static const CGFloat SectionHeaderTopPadding = 20.0;
 
 @implementation ORKTableContainerView {
     CGFloat _leftRightPadding;
@@ -101,6 +102,7 @@ static const CGFloat FooterViewHeightOffset = 20.0;
     _tableView.preservesSuperviewLayoutMargins = YES;
     _tableView.layer.masksToBounds = YES;
     [_tableView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    [_tableView setSectionHeaderTopPadding:SectionHeaderTopPadding];
     _tableView.scrollIndicatorInsets = ORKScrollIndicatorInsetsForScrollView(self);
     [self addSubview:_tableView];
     [self setupFooterView];
@@ -222,7 +224,7 @@ static const CGFloat FooterViewHeightOffset = 20.0;
         CGFloat newHeight = tableViewHeight - self.tableView.contentSize.height + FooterViewHeightOffset;
         CGRect footerBounds = newHeight < minHeight ? CGRectMake(0.0, 0.0, _tableView.bounds.size.width, minHeight) : CGRectMake(0.0, 0.0, _tableView.bounds.size.width, newHeight);
 
-        [_footerView setBounds:footerBounds];
+        [_footerView setFrame:footerBounds];
         _tableView.tableFooterView = _footerView;
     }
 }
