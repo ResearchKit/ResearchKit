@@ -140,6 +140,11 @@
     
     _pickerView.datePickerMode = datePickerMode;
     
+    if (@available(iOS 13.4, *)) {
+        //USES WHEEL STYLE DATEPICKER; YEAR IS NOT VISIBLE ON MM-DD-YYYY H:M VALIDATION
+        _pickerView.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+    
     if ([self isTimeOfDay]) {
         [self setDate:[(ORKTimeOfDayAnswerFormat *)answerFormat pickerDefaultDate]];
     } else {
