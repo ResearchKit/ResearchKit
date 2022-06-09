@@ -101,9 +101,14 @@
 
 + (BOOL)isPasscodeStoredInKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectOfClass:NSDictionary.self
-                                                                          forKey:PasscodeKey
-                                                                           error:&error];
+    NSSet<Class> *classes = [NSSet setWithArray:@[
+        NSDictionary.class,
+        NSString.class,
+        NSNumber.class,
+    ]];
+    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectsOfClasses:classes
+                                                                             forKey:PasscodeKey
+                                                                              error:&error];
     
     if (dictionary == nil) {
         return NO;

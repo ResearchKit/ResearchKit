@@ -499,7 +499,12 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)removePasscodeFromKeychain {
     NSError *error;
-    id storedValue = [ORKKeychainWrapper objectOfClass:NSDictionary.self forKey:PasscodeKey error:&error];
+    NSSet<Class> *classes = [NSSet setWithArray:@[
+        NSDictionary.class,
+        NSString.class,
+        NSNumber.class,
+    ]];
+    id storedValue = [ORKKeychainWrapper objectsOfClasses:classes forKey:PasscodeKey error:&error];
     
     if (storedValue != nil) {
         [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:&error];
@@ -512,9 +517,14 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (BOOL)passcodeMatchesKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectOfClass:NSDictionary.self
-                                                                           forKey:PasscodeKey
-                                                                            error:&error];
+    NSSet<Class> *classes = [NSSet setWithArray:@[
+        NSDictionary.class,
+        NSString.class,
+        NSNumber.class,
+    ]];
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectsOfClasses:classes
+                                                                              forKey:PasscodeKey
+                                                                               error:&error];
     if (dictionary == nil) {
         [self throwExceptionWithKeychainError:error];
     }
@@ -525,9 +535,14 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)setValuesFromKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectOfClass:NSDictionary.self
-                                                                          forKey:PasscodeKey
-                                                                           error:&error];
+    NSSet<Class> *classes = [NSSet setWithArray:@[
+        NSDictionary.class,
+        NSString.class,
+        NSNumber.class,
+    ]];
+    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectsOfClasses:classes
+                                                                             forKey:PasscodeKey
+                                                                              error:&error];
     
     if (dictionary == nil) {
         [self throwExceptionWithKeychainError:error];
