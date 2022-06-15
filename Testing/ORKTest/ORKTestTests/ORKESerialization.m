@@ -2282,7 +2282,6 @@ static NSMutableDictionary<NSString *, ORKESerializableTableEntry *> *ORKESerial
                       PROPERTY(healthFHIRResourceType, NSString, NSObject, NO, nil, nil),
                       })) }];
         }
->>>>>>> main
     });
     return internalEncodingTable;
 }
