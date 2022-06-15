@@ -1314,6 +1314,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)flipToPreviousPageFrom:(ORKStepViewController *)fromController animated:(BOOL)animated {
+
     if (fromController != _currentStepViewController) {
         return;
     }

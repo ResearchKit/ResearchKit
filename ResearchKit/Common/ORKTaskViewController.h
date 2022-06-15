@@ -512,6 +512,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong, readonly, nullable) ORKStepViewController *currentStepViewController;
 
+- (void)flipToFirstPage;
+
 /**
  Forces navigation to the next step.
  

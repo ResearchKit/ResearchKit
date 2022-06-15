@@ -40,8 +40,9 @@
 #import "ORKStroopStep.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
+#import "ORKNavigationContainerView.h"
+#import "ORKTaskViewController_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
-
 
 @interface ORKStroopStepViewController ()
 
@@ -63,6 +64,8 @@
     NSString *_blueString;
     NSString *_yellowString;
     NSTimer *_nextQuestionTimer;
+    
+    NSTimer *_timeoutTimer;
     
     NSMutableArray *_results;
     NSTimeInterval _startTime;
@@ -93,7 +96,7 @@
     _red = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0];
     _green = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
     _blue = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
-    _yellow = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
+    _yellow = [UIColor colorWithRed:245.0/225.0 green:221.0/225.0 blue:66.0/255.0 alpha:1.0];
     
     self.colors = @{
                     _redString: _red,
@@ -111,6 +114,21 @@
 
     self.questionNumber = 0;
     _stroopContentView = [ORKStroopContentView new];
+    [_stroopContentView setUseTextForStimuli: [self stroopStep].useTextForStimuli];
+    [_stroopContentView setUseGridLayoutForButtons: [self stroopStep].useGridLayoutForButtons];
+
+    if ([self stroopStep].useGridLayoutForButtons) {
+        [_navigationFooterView setHidden:true];
+        
+        _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:30
+            target:self
+          selector:@selector(timeOut)
+          userInfo:nil
+           repeats:NO];
+    }
+    
+
+    
     self.activeStepView.activeCustomView = _stroopContentView;
     
     [self.stroopContentView.RButton addTarget:self
@@ -148,7 +166,43 @@
                                                            selector:@selector(startNextQuestionOrFinish)
                                                            userInfo:nil
                                                             repeats:NO];
+        
+        if ([self stroopStep].useGridLayoutForButtons) {
+
+            [_timeoutTimer invalidate];
+                    _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:30
+                          target:self
+                        selector:@selector(timeOut)
+                        userInfo:nil
+                         repeats:NO];
+        }
     }
+}
+
+- (void)timeOut {
+    
+    UIAlertController* controller = [UIAlertController alertControllerWithTitle: ORKLocalizedString(@"TIME_OUT_TILE", nil)
+                                                                        message: ORKLocalizedString(@"TIME_OUT_BODY", nil) preferredStyle:UIAlertControllerStyleAlert];
+    [controller addAction:[UIAlertAction actionWithTitle: ORKLocalizedString(@"TIME_OUT_RESTART_ACTION", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[self taskViewController] flipToFirstPage];
+    }]];
+    
+    [controller addAction:[UIAlertAction actionWithTitle: ORKLocalizedString(@"TIME_OUT_END_ACTION", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        ORKStrongTypeOf(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
+        if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
+            [strongDelegate taskViewController:self.taskViewController didFinishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
+        }
+    }]];
+
+    [self presentViewController:controller animated:true completion:nil];
+}
+
+- (void)startNextQuestionTimer {
+    _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+                                                         target:self
+                                                       selector:@selector(startNextQuestionOrFinish)
+                                                       userInfo:nil
+                                                        repeats:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -198,26 +252,35 @@
 }
 
 - (void)startQuestion {
-    int pattern = arc4random() % 2;
-    if (pattern == 0) {
+    if ([self stroopStep].randomizeVisualAndColorAlignment) {
+        int pattern = arc4random() % 2;
+        if (pattern == 0) {
+            int index = arc4random() % [self.colors.allKeys count];
+            NSString *text = [self.colors.allKeys objectAtIndex:index];
+            self.stroopContentView.colorLabelText = text;
+            UIColor *color = [self.colors valueForKey:text];
+            self.stroopContentView.colorLabelColor = color;
+        }
+        else {
+            int index = arc4random() % [self.differentColorLabels.allKeys count];
+            NSString *text = [self.differentColorLabels.allKeys objectAtIndex:index];
+            self.stroopContentView.colorLabelText = text;
+            NSArray *colorArray = [self.differentColorLabels valueForKey:text];
+            int randomColor = arc4random() % colorArray.count;
+            UIColor *color = [colorArray objectAtIndex:randomColor];
+            self.stroopContentView.colorLabelColor = color;
+        }
+    } else {
         int index = arc4random() % [self.colors.allKeys count];
         NSString *text = [self.colors.allKeys objectAtIndex:index];
         self.stroopContentView.colorLabelText = text;
         UIColor *color = [self.colors valueForKey:text];
         self.stroopContentView.colorLabelColor = color;
     }
-    else {
-        int index = arc4random() % [self.differentColorLabels.allKeys count];
-        NSString *text = [self.differentColorLabels.allKeys objectAtIndex:index];
-        self.stroopContentView.colorLabelText = text;
-        NSArray *colorArray = [self.differentColorLabels valueForKey:text];
-        int randomColor = arc4random() % colorArray.count;
-        UIColor *color = [colorArray objectAtIndex:randomColor];
-        self.stroopContentView.colorLabelColor = color;
-    }
     [self setButtonsEnabled];
     _startTime = [NSProcessInfo processInfo].systemUptime;
 }
+
 
 - (void)setButtonsDisabled {
     [self.stroopContentView.RButton setEnabled: NO];

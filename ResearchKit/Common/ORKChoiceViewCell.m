@@ -53,12 +53,13 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 @property (nonatomic) ORKSelectionSubTitleLabel *detailLabel;
 @property (nonatomic) ORKCheckmarkView *checkView;
 @property (nonatomic) NSMutableArray<NSLayoutConstraint *> *containerConstraints;
+@property (nonatomic, readonly) CGFloat leftRightMargin;
+@property (nonatomic, readonly) CGFloat intraCellSpacing;
 
 @end
 
 @implementation ORKChoiceViewCell {
     
-    CGFloat _leftRightMargin;
     CGFloat _topBottomMargin;
     CAShapeLayer *_contentMaskLayer;
     UIColor *_fillColor;
@@ -71,7 +72,6 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.clipsToBounds = YES;
-        _leftRightMargin = 0.0;
         _topBottomMargin = 0.0;
         [self setupContainerView];
         [self setupCheckView];
@@ -82,6 +82,14 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     [self setMaskLayers];
+}
+
+- (CGFloat)leftRightMargin {
+    return self.useCardView ? ORKCardLeftRightMarginForWindow(self.window) : 0.0;
+}
+
+- (CGFloat)intraCellSpacing {
+    return 0;
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -179,7 +187,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     if (!_containerView) {
         _containerView = [UIView new];
     }
-    [self addSubview:_containerView];
+    [self.contentView addSubview:_containerView];
 }
 
 - (void)addContainerViewToSelfConstraints {
@@ -187,24 +195,31 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeTop
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeTop
                                     multiplier:1.0
                                       constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeLeft
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeLeft
                                     multiplier:1.0
-                                      constant:_leftRightMargin],
+                                      constant:self.leftRightMargin],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeRight
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeRight
                                     multiplier:1.0
-                                      constant:-_leftRightMargin]
+                                      constant:-self.leftRightMargin],
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeBottom
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self.contentView
+                                     attribute:NSLayoutAttributeBottom
+                                    multiplier:1.0
+                                      constant:-self.intraCellSpacing],
     ]];
 }
 
@@ -311,7 +326,6 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 
 - (void)setUseCardView:(bool)useCardView {
     _useCardView = useCardView;
-    _leftRightMargin = ORKCardLeftRightMarginForWindow(self.window);
     _topBottomMargin = CardTopBottomMargin;
     [self setBackgroundColor:[UIColor clearColor]];
     self.selectionStyle = UITableViewCellSelectionStyleNone;

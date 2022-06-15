@@ -122,6 +122,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, spokenInstruction, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, finishedSpokenInstruction, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, recorderConfigurations, ORKRecorderConfiguration);
+        ORK_DECODE_BOOL(aDecoder, isPractice);
     }
     return self;
 }
@@ -142,6 +143,7 @@
     ORK_ENCODE_OBJ(aCoder, spokenInstruction);
     ORK_ENCODE_OBJ(aCoder, finishedSpokenInstruction);
     ORK_ENCODE_OBJ(aCoder, recorderConfigurations);
+    ORK_ENCODE_BOOL(aCoder, isPractice);
 }
 
 - (BOOL)isEqual:(id)object {
@@ -162,7 +164,8 @@
             (self.shouldVibrateOnStart == castObject.shouldVibrateOnStart) &&
             (self.shouldVibrateOnFinish == castObject.shouldVibrateOnFinish) &&
             (self.shouldContinueOnFinish == castObject.shouldContinueOnFinish) &&
-            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
+            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton) &&
+            (self.isPractice == castObject.isPractice));
 }
 
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
@@ -182,6 +185,10 @@
         mask |= [config requestedPermissionMask];
     }
     return mask;
+}
+
+- (BOOL)allowsBackNavigation {
+    return self.isPractice;
 }
 
 @end

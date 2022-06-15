@@ -39,6 +39,30 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) NSInteger numberOfAttempts;
 
+/**
+A Boolean value indicating whether this task randomizes the visual and color of each stroop question.
+This means that the color of the text displayed and the text may not match, which makes for a harder stroop test. 
+
+By default, this property is set to `YES`
+*/
+@property (nonatomic, assign) BOOL randomizeVisualAndColorAlignment;
+
+/**
+A Boolean value indicating whether this task should use text or boxes.
+If set to `YES` then color words will be displayed for the user to guess.
+If set to `NO` we will display a square box with the current color for the user to guess
+
+By default, this property is set to `YES`
+*/
+@property (nonatomic, assign) BOOL useTextForStimuli;
+
+/**
+A Boolean value indicating whether this task will use a 2x2 grid of buttons
+
+By default, this property is set to `NO`
+*/
+@property (nonatomic, assign) BOOL useGridLayoutForButtons;
+
 @end
 
 NS_ASSUME_NONNULL_END

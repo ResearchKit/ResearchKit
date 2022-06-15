@@ -63,6 +63,7 @@
 #import "ORKPSATStep.h"
 #import "ORKQuestionStep.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKNormalizedReactionTimeStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKSpeechRecognitionStep.h"
 #import "ORKStep_Private.h"
