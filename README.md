@@ -82,7 +82,7 @@ The latest stable version of *ResearchKit framework* can be cloned with
 git clone -b stable https://github.com/ResearchKit/ResearchKit.git
 ```
 
-Or, for the latest changes, use the `master` branch:
+Or, for the latest changes, use the `main` branch:
 
 ```
 git clone https://github.com/ResearchKit/ResearchKit.git
