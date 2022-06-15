@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@は、この調査に参加したあなたの調査データを受信します。\n\n名前などの情報を含まない、大まかにコード化された調査データを共有すると、今回と将来の調査に役立てることができます。";
 "LEARN_MORE_CONSENT_SHARING" = "データ共有についての詳しい情報を表示します";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@さんの名前（活字体）";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@さんの署名";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "氏名（活字体）";
+"CONSENT_DOC_LINE_SIGNATURE" = "署名";
 "CONSENT_DOC_LINE_DATE" = "日付";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "質問: %1$@ / %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "スキップしました";
+"REVIEW_EDIT_ANSWER" = "編集";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "値が無効です";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "キャンセル";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "消去";
+"BUTTON_CLEAR_SIGNATURE" = "署名を消去";
 "BUTTON_APPLY" = "適用";
 "BUTTON_DISAGREE" = "同意しない";
 "BUTTON_DONE" = "完了";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "答えを消去";
 "BUTTON_READ_ONLY_MODE" = "この答えは変更できません。";
 "BUTTON_COPYRIGHT" = "著作権";
+"BUTTON_CLOSE" = "閉じる";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "アクティビティ開始まで";
 "TASK_COMPLETE_TITLE" = "アクティビティ完了";
-"TASK_COMPLETE_TEXT" = "データは分析され、結果の準備ができると通知されます。";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "残り%@秒です。";
+"TASK_COMPLETE_TEXT" = "データは分析され、結果が準備できたら通知されます。";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "残り%@です。";
 "TOUCH_ANYWHERE_LABEL" = "続けるにはどこかをタッチしてください";
 
 /* Image capture step. */
@@ -234,8 +243,8 @@
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "取り込んだイメージを保存できませんでした。";
 
 /* Video capture step. */
-"CAPTURE_BUTTON_CAPTURE_VIDEO" = "録画を開始";
-"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "録画を停止";
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "収録を開始";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "収録を停止";
 "CAPTURE_BUTTON_RECAPTURE_VIDEO" = "再度ビデオを取り込む";
 
 /* Fitness active task. */
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "トーン音が聞こえたらタップしてください。";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "トーンおよび音量";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "一連のトーン音が聞こえます。";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "トーン音が聞こえたら、ボタンをタップしてください。";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "このテストでは、音量は50パーセントに設定されます。";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "テストの所要時間は約10分です。";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "テストの中断を避けるために、“おやすみモード”をオンにしてください。";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "トーンは最初に右の耳で再生されます。";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "トーンは次に左の耳で再生されます。";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "このアクティビティでは、個人の聴覚閾値レベルをdBHL単位で識別します。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "デバイスの音量が最大レベルまで設定されていることを確認してください。\n\nこのタスクの間に、かすかな音が左耳か右耳のどちらかに流れます。\n\n耳を澄ませて、音が聞こえるたびにボタンをタップしてください。";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "このテストは、音が聞こえるにはどれぐらいの音量が必要かを確認します。";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "開始時の質問。";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "聴きやすいほうの耳があれば選択します";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "左";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "右";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "設定なし";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "テストはキャンセルされました";
+"dBHL_ALERT_TITLE_START_OVER" = "もう一度開始";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "テストをキャンセル";
+"dBHL_ALERT_TEXT" = "このテストを実行するには、AirPodsかEarPodsを再接続してください。";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@完了";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "ヘッドフォン";
+"HEADPHONES_UNKNOWN" = "不明";
+"HEADPHONES_NONE" = "なし";
+"CONNECTED" = "接続済み";
+"NOT_CONNECTED" = "未接続";
+"HEADPHONE_CONNECTED_%@" = "接続済み - %@";
+"HEADPHONE_DETECT_TITLE" = "ヘッドフォンを接続";
+"HEADPHONE_DETECT_TEXT" = "このテストにはApple製品のAirPodsまたはEarPodsが必要です";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "このアクティビティでは、%@が明るく表示される順番を再現することで、短期空間記憶を測定します。";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と同じ順番でタップしてください。";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と逆の順番でタップしてください。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と同じ順番でタップしてください。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と逆の順番でタップしてください。";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてから、じっと見てください。";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "スコア";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "椅子の端に座ってください。始めるときは、測定のためにデバイスを右膝の上に置きます。指示が聞こえるように、デバイスのサウンドをオンにしてください。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "写真のように、画面を外側に向けてデバイスを左膝の上に置きます。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "写真のように、画面を外側に向けてデバイスを右膝の上に置きます。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左膝をできるだけ伸ばしてください。終わったら、もう一度タップしてください。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右膝をできるだけ伸ばしてください。終わったら、もう一度タップしてください。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左膝の上に置いてください";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右膝の上に置いてください";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "左膝を伸ばしてください。次にどこかをタップしてください。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "右膝を伸ばしてください。次にどこかをタップしてください。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左膝をできるだけ伸ばしてください。終わったら、最初の位置に戻りもう一度タップしてください。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右膝をできるだけ伸ばしてください。終わったら、最初の位置に戻りもう一度タップしてください。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左膝の上に置きます。画面をタップして、左膝をできるだけ伸ばしてください。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右膝の上に置きます。画面をタップして、右膝をできるだけ伸ばしてください。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "終わったら、左膝を最初の位置に戻してください。次にどこかをタップしてください。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "終わったら、右膝を最初の位置に戻してください。次にどこかをタップしてください。";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩の可動域";
@@ -411,17 +447,17 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "始めるときは、測定のためにデバイスを右肩の上に置きます。指示が聞こえるように、デバイスのサウンドをオンにしてください。";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "写真のように、画面を外側に向けてデバイスを左肩の上に置きます。";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "写真のように、画面を外側に向けてデバイスを右肩の上に置きます。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左腕をできるだけ高く上げてください。終わったら、もう一度タップしてください。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右腕をできるだけ高く上げてください。終わったら、もう一度タップしてください。";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左肩の上に置いてください";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右肩の上に置いてください";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "左腕を上げてください。次にどこかをタップしてください。";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "右腕を上げてください。次にどこかをタップしてください。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左腕をできるだけ高く上げてください。終わったら、最初の位置に戻りもう一度タップしてください。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右腕をできるだけ高く上げてください。終わったら、最初の位置に戻りもう一度タップしてください。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左肩の上に置きます。画面をタップして、左腕をできるだけ前に上げてください。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右肩の上に置きます。画面をタップして、右腕をできるだけ前に上げてください。";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "終わったら、左腕を最初の位置に戻してください。次にどこかをタップしてください。";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "終わったら、右腕を最初の位置に戻してください。次にどこかをタップしてください。";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "歩行時間";
 "TIMED_WALK_INTRO_DETAIL" = "このアクティビティでは、下肢の機能を測定します。";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "約%@を安全にまっすぐ歩ける場所を見つけてください。できれば屋外が良いでしょう。このアクティビティでは安全にできるだけ速く歩いていただきます。ゴールを過ぎるまで速度を落とさないでください。";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "約%@の距離をできるだけ速く安全にまっすぐに歩ける場所（可能であれば屋外で）を見つけてください。ゴールを通過するまで速度を落とさないでください。";
 "TIMED_WALK_INTRO_2_DETAIL" = "始めるには、“次へ”をタップしてください。";
 "TIMED_WALK_FORM_TITLE" = "補助器具";
 "TIMED_WALK_FORM_TEXT" = "すべてのテストで同じ補助器具を使用してください。";
@@ -455,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ホールペグテスト";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "このアクティビティでは、円を穴に入れる動作で上肢機能を測定します。測定は%@回行います。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "右手と左手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
@@ -515,9 +551,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "カウントダウンの後、数字と文字を交互にタップしてください。最初に数字“1”をタップして、文字“A”をタップしてから、“2”–“B”–“3”–“C”の順にタップし、数字“7”まで続けます。";
 "TRAILMAKING_INTRO_TEXT" = "間違えずにできるだけ速くこれを行ってください。\n ";
 "TRAILMAKING_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
-"TRAILMAKING_TIMER" = "%.1f秒";
-"TRAILMAKING_ERROR" = "%@（%d個のエラー）";
-"TRAILMAKING_ERROR_PLURAL" = "%@（%d個のエラー）";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -527,11 +560,11 @@
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "音声認識";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "このアクティビティは、デバイスの下部にあるマイクで発声した内容を記録して、テキストに書き起こします。";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "このアクティビティは、あなたが話す音声をデバイスの下部にあるマイクで記録して、テキストに書き起こします。";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "ボタンを押して、収録を開始してから、話します。";
-"SPEECH_RECOGNITION_START_RECORD_LABEL" = "録画を開始";
-"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "録画を停止";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "収録を開始";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "収録を停止";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "発音表記を編集";
 "SPEECH_RECOGNITION_QUESTION_TEXT" = "発音表記のテキストを修正して、発声内容の聞き間違いを訂正します。";
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "発音表記はここに表示されます。";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "計算中";
 "ENVIRONMENTSPL_THRESHOLD" = "閾値: %@ dBA";
+"ENVIRONMENTSPL_OK" = "背景ノイズOK";
+"ENVIRONMENTSPL_NOISE" = "背景の雑音が多すぎます";
+"ENVIRONMENTSPL_TITLE_2" = "静かな環境を見つけてください";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "正確性を確保するため、このテストは静かな環境で実施する必要があります。";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "タスクを開始";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "データなし";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "スライダを動かして値を入力します";
+"SLIDER_I_DONT_KNOW" = "知りません";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "ページ";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "戻る";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "選択";
 "AX_UNSELECTED" = "選択解除";
+"AX_SELECT_ALL_THAT_APPLY" = "該当するものすべてを選択してください";
 
 "AX_SLIDER_LABEL" = "応答スライダ。範囲は%@から%@です";
 "AX_UNLABELED_IMAGE" = "ラベルなしイメージ";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@のサイズの円盤があります";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "キーボードを閉じる";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "範囲%@〜%@";
 "AX_GRAPH_STACK_PREFIX" = "次の内容のスタック:";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "アムスラーグリッド";
 "AX_AMSLER_GRID_HINT" = "指かスタイラスペンでグリッドに直接マークするか、グリッドの外を左にスワイプして終了します。";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "直接タップ可能ボタン";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "左耳用タップ";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "アクティベートしてテストを開始します。テストが始まったら、左耳で音が聞こえたらこのボタンを直接タップしてください。";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "右耳用タップ";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "アクティベートしてテストを開始します。テストが始まったら、右耳で音が聞こえたらこのボタンを直接タップしてください。";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@VoiceOverを使用して画面をタッチして、それぞれの耳用のボタンの位置を確認してください。テストが始まると、ボタンを直接タップできるようになります。%@";
+"AX_TAP_BUTTON_1_LABEL" = "1本指用タップ";
+"AX_TAP_BUTTON_2_LABEL" = "その他の指用タップ";
+"AX_TAP_BUTTON_HINT" = "このボタンを直接タップできるようにするには、アクティベートします。";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@VoiceOverを使用して画面をタッチして、ボタンの位置を確認してください。ボタンを直接タップできるようにするには、いずれかのボタンをアクティブにします。";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "ボタンを直接タップできるようになりました。";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@VoiceOverを使用して、ボタンを直接タップできるようになります。ボタンは画面の中央付近にあります。";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@VoiceOverを使用して、ボタンを直接タップできるようになります。";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "初期化のためのrestoreDataのデコードができません";

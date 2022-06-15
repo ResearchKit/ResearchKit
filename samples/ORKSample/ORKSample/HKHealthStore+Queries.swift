@@ -38,8 +38,7 @@ extension HKHealthStore {
         let query = HKSampleQuery(sampleType: quantityType, predicate: predicate, limit: 1, sortDescriptors: [timeSortDescriptor]) { _, samples, error in
             if let firstSample = samples?.first as? HKQuantitySample {
                 completion(firstSample.quantity, nil)
-            }
-            else {
+            } else {
                 completion(nil, error as NSError?)
             }
         }

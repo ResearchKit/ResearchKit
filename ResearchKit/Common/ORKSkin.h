@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -92,6 +92,21 @@ ORK_EXTERN NSString *const ORKProgressLabelColorKey;
 /// Default color used by iPadBackgroundView
 ORK_EXTERN NSString *const ORKiPadBackgroundViewColorKey;
 
+/// Background color of TopContentImageView in ORKStepContainerView
+ORK_EXTERN NSString *const ORKTopContentImageViewBackgroundColorKey;
+
+/// Font color for detail text in bullet item
+ORK_EXTERN NSString *const ORKBulletItemTextColorKey;
+
+/// ORKStepContentView stepTopContentImage  KVO keyPath image changed
+ORK_EXTERN NSString *const ORKStepTopContentImageChangedKey;
+
+/// Name of notification that is triggered when the keyboard's done button is pressed
+ORK_EXTERN NSString *const ORKDoneButtonPressedKey;
+
+/// Name of notification that is triggered when the keyboard's done button is pressed
+ORK_EXTERN NSString *const ORKResetDoneButtonKey;
+
 /// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
 
@@ -107,11 +122,8 @@ ORK_EXTERN CGFloat ORKCardDefaultBorderWidth;
 /// Default font size for card view
 ORK_EXTERN CGFloat ORKCardDefaultFontSize;
 
-/// Default Left and Right margin for card view
-ORK_EXTERN CGFloat ORKCardLeftRightMargin;
-
 /// Default Top and Bottom margin for card view
-ORK_EXTERN CGFloat ORKCardTopBottomMargin;
+ORK_EXTERN CGFloat ORKSurveyItemMargin;
 
 /// Padding for Form and Question Step Table Containers
 ORK_EXTERN CGFloat ORKSurveyTableContainerLeftRightPadding;
@@ -124,6 +136,24 @@ ORK_EXTERN CGFloat ORKiPadBackgroundViewBottomPadding;
 
 /// Default Left Right margin for iPadBackgroundView;
 ORK_EXTERN CGFloat ORKiPadBackgroundViewLeftRightPadding;
+
+/// Default body to body item padding;
+ORK_EXTERN CGFloat ORKBodyToBodyPaddingStandard;
+
+/// Default body to body item padding;
+ORK_EXTERN CGFloat ORKBodyToBodyParagraphPaddingStandard;
+
+/// Step Content Icon Image View Dimension
+ORK_EXTERN CGFloat ORKStepContentIconImageViewDimension;
+
+/// Navigation Container Effect View Style
+ORK_EXTERN CGFloat ORKEffectViewOpacityHidden;
+
+/// Navigation Container Effect View Style
+ORK_EXTERN CGFloat ORKEffectViewOpacityVisible;
+
+/// Checkmark View dimension
+ORK_EXTERN CGFloat CheckmarkViewDimension;
 
 /// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
@@ -160,8 +190,6 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricIllustrationToCaptionBaseline,
     ORKScreenMetricIllustrationHeight,
     ORKScreenMetricInstructionImageHeight,
-    ORKScreenMetricContinueButtonHeightRegular,
-    ORKScreenMetricContinueButtonHeightCompact,
     ORKScreenMetricContinueButtonWidth,
     ORKScreenMetricMinimumStepHeaderHeightForMemoryGame,
     ORKScreenMetricMinimumGameViewHeightForMemoryGame,
@@ -187,10 +215,10 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
 
 typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhoneX,
+    ORKScreenTypeiPhoneXSMax,
     ORKScreenTypeiPhone6Plus,
     ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
-    ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
     ORKScreenTypeiPad10_5,
     ORKScreenTypeiPad12_9,
@@ -210,5 +238,15 @@ BOOL ORKNeedWideScreenDesign(UIView *view);
 
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 
+CGFloat ORKStepContainerLeftRightPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerExtendedLeftRightPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTopPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTopContentHeightForWindow(UIWindow *window);
+CGFloat ORKStepContainerFirstItemTopPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTitleToBodyTopPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window);
+CGFloat ORKCardLeftRightMarginForWindow(UIWindow *window);
+
+UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window);
 
 NS_ASSUME_NONNULL_END

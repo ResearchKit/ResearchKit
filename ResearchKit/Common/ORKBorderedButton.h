@@ -58,6 +58,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) NSTimeInterval fadeDelay;
 
+- (void)updateBackgroundColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

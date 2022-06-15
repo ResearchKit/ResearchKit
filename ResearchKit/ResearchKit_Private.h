@@ -32,11 +32,14 @@
 #import <ResearchKit/ResearchKit.h>
 
 #import <ResearchKit/ORKHelpers_Private.h>
+#import <ResearchKit/ORKHelpers_Internal.h>
 
 // Active step support
 #import <ResearchKit/ORKDataLogger.h>
 #import <ResearchKit/ORKErrors.h>
 
+#import <ResearchKit/ORKChoiceViewCell.h>
+#import <ResearchKit/ORKChoiceViewCell_Internal.h>
 #import <ResearchKit/ORKAnswerFormat_Private.h>
 #import <ResearchKit/ORKConsentDocument_Private.h>
 #import <ResearchKit/ORKConsentSection_Private.h>
@@ -52,6 +55,7 @@
 #import <ResearchKit/ORKQuestionResult_Private.h>
 #import <ResearchKit/ORKSignatureResult_Private.h>
 #import <ResearchKit/ORKResult_Private.h>
+#import <ResearchKit/ORKStepContainerView_Private.h>
 
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKAmslerGridStep.h>
@@ -71,14 +75,24 @@
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKdBHLToneAudiometryStep.h>
+#import <ResearchKit/ORKdBHLToneAudiometryOnboardingStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 #import <ResearchKit/ORKTrailmakingStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
 #import <ResearchKit/ORKSpeechRecognitionStep.h>
 #import <ResearchKit/ORKSpeechInNoiseStep.h>
+#import <ResearchKit/ORKTouchAbilityTapStep.h>
+#import <ResearchKit/ORKTouchAbilityLongPressStep.h>
+#import <ResearchKit/ORKTouchAbilitySwipeStep.h>
+#import <ResearchKit/ORKTouchAbilityScrollStep.h>
+#import <ResearchKit/ORKTouchAbilityPinchStep.h>
+#import <ResearchKit/ORKTouchAbilityRotationStep.h>
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
+#import <ResearchKit/ORKFormStepViewController_Private.h>
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
+#import <ResearchKit/ORKPasscodeStepViewController_Internal.h>
+#import <ResearchKit/ORKInstructionStepViewController_Internal.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKAmslerGridStepViewController.h>
@@ -97,12 +111,12 @@
 #import <ResearchKit/ORKStroopStepViewController.h>
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
-#import <ResearchKit/ORKdBHLToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
 #import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKWalkingTaskStepViewController.h>
 #import <ResearchKit/ORKVideoInstructionStepViewController.h>
 #import <ResearchKit/ORKSpeechRecognitionStepViewController.h>
+#import <ResearchKit/ORKLearnMoreStepViewController.h>
 
 #import <ResearchKit/ORKAccelerometerRecorder.h>
 #import <ResearchKit/ORKAudioRecorder.h>
@@ -116,4 +130,51 @@
 #import <ResearchKit/ORKHTMLPDFPageRenderer.h>
 
 // For custom steps
+#import <ResearchKit/ORKStepView_Private.h>
 #import <ResearchKit/ORKCustomStepView.h>
+#import <ResearchKit/ORKTappingContentView.h>
+#import <ResearchKit/ORKVerticalContainerView.h>
+#import <ResearchKit/ORKVerticalContainerView_Internal.h>
+#import <ResearchKit/ORKStepContainerView.h>
+#import <ResearchKit/ORKNavigationContainerView.h>
+#import <ResearchKit/ORKNavigationContainerView_Internal.h>
+#import <ResearchKit/ORKStepHeaderView.h>
+#import <ResearchKit/ORKStepHeaderView_Internal.h>
+#import <ResearchKit/ORKTintedImageView.h>
+#import <ResearchKit/ORKActiveStepView.h>
+#import <ResearchKit/ORKDirectionView.h>
+#import <ResearchKit/ORKSeparatorView.h>
+#import <ResearchKit/ORKActiveStepQuantityView.h>
+#import <ResearchKit/ORKCustomStepView_Internal.h>
+#import <ResearchKit/ORKRingView.h>
+#import <ResearchKit/ORKProgressView.h>
+#import <ResearchKit/ORKFreehandDrawingView.h>
+#import <ResearchKit/ORKAudioGraphView.h>
+#import <ResearchKit/ORKInstructionStepContainerView.h>
+
+#import <ResearchKit/ORKLabel.h>
+#import <ResearchKit/ORKUnitLabel.h>
+#import <ResearchKit/ORKHeadlineLabel.h>
+#import <ResearchKit/ORKSubheadlineLabel.h>
+#import <ResearchKit/ORKTapCountLabel.h>
+#import <ResearchKit/ORKFootnoteLabel.h>
+
+#import <ResearchKit/ORKActiveStep_Internal.h>
+#import <ResearchKit/ORKStep_Private.h>
+#import <ResearchKit/ORKActiveStepViewController_Internal.h>
+#import <ResearchKit/ORKStepViewController_Internal.h>
+#import <ResearchKit/ORKTaskViewController_Internal.h>
+
+#import <ResearchKit/ORKAccessibility.h>
+#import <ResearchKit/ORKAccessibilityFunctions.h>
+#import <ResearchKit/ORKGraphChartAccessibilityElement.h>
+#import <ResearchKit/UIView+ORKAccessibility.h>
+
+#import <ResearchKit/ORKRoundTappingButton.h>
+#import <ResearchKit/ORKActiveStepTimer.h>
+#import <ResearchKit/ORKSkin.h>
+#import <ResearchKit/ORKDefaultFont.h>
+#import <ResearchKit/ORKVoiceEngine.h>
+
+#import <ResearchKit/ORKLearnMoreView.h>
+#import <ResearchKit/ORKBodyContainerView.h>

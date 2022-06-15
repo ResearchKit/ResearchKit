@@ -70,7 +70,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     _results = [NSMutableArray new];
     _reactionTimeContentView = [ORKReactionTimeContentView new];
     self.activeStepView.activeCustomView = _reactionTimeContentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
     [_reactionTimeContentView setStimulusHidden:YES];
 }
 
@@ -232,7 +231,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (NSTimeInterval)stimulusInterval {
     ORKReactionTimeStep *step = [self reactionTimeStep];
     NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
-    NSTimeInterval randomFactor = ((NSTimeInterval)rand() / RAND_MAX) * range;
+    NSTimeInterval randomFactor = ((NSTimeInterval)arc4random() / RAND_MAX) * range;
     return randomFactor + step.minimumStimulusInterval;
 }
 

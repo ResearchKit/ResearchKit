@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "Prezime";
 "CONSENT_NAME_PLACEHOLDER" = "Potrebno";
 "CONSENT_REVIEW_TITLE" = "Pregled informacija";
-"CONSENT_REVIEW_INSTRUCTION" = "Pregledajte obrazac u nastavku, te dodirnite Slažem se ako ste spremni nastaviti.";
+"CONSENT_REVIEW_INSTRUCTION" = "Pregledajte obrazac u nastavku te dodirnite Slažem se ako ste spremni nastaviti.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Pregled informacija";
 "CONSENT_SIGNATURE_TITLE" = "Potpis";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Prijavite se koristeći prst u donjem okviru.";
@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ će primiti vaše podatke o studiji iz vašeg sudjelovanja u ovoj studiji.\n\nŠire dijeljenje vaše kodirane studije (bez informacija kao što je vaše ime) može doprinijeti ovom i budućem istraživanju.";
 "LEARN_MORE_CONSENT_SHARING" = "Saznajte više o dijeljenju podataka";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@: ime (tiskano)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@: potpis";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Ime";
+"CONSENT_DOC_LINE_SIGNATURE" = "Potpis";
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ od %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Pitanje %1$@ od %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Preskočeno";
+"REVIEW_EDIT_ANSWER" = "Uredi";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nevažeća vrijednost";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Poništi";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Očisti";
+"BUTTON_CLEAR_SIGNATURE" = "Očisti potpis";
 "BUTTON_APPLY" = "Primijeni";
 "BUTTON_DISAGREE" = "Ne slažem se";
 "BUTTON_DONE" = "OK";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Očisti odgovor";
 "BUTTON_READ_ONLY_MODE" = "Ovaj odgovor se ne može promijeniti.";
 "BUTTON_COPYRIGHT" = "Autorsko pravo";
+"BUTTON_CLOSE" = "Zatvori";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Započinjanje aktivnosti za";
 "TASK_COMPLETE_TITLE" = "Aktivnost dovršena";
 "TASK_COMPLETE_TEXT" = "Vaši podaci će se analizirati i bit ćete obaviješteni kad rezultati budu spremni.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ s preostalo.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Preostalo: %@.";
 "TOUCH_ANYWHERE_LABEL" = "Dodirnite bilo gdje za nastavak";
 
 /* Image capture step. */
@@ -287,7 +296,7 @@
 
 /* Amsler Grid Task.*/
 "AMSLER_GRID_TITLE" = "Amslerova mreža";
-"AMSLER_GRID_INTRO_TEXT" = "Ovom se aktivnošću pomažu detektirati problemi u vidu korisnika.";
+"AMSLER_GRID_INTRO_TEXT" = "Ovom se aktivnošću pomažu detektirati problemi s vidom korisnika.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Tijekom cijelog testa uređaj držite na udaljenosti od 30 centimetara od svog lica i u razini očiju.";
 "AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Zatvorite svoje %@ i gledajte točku u središtu četvrtaste mreže.\n\nPrstima ili olovkom označite sva izobličenja koja vidite poput zamagljenih ili valovitih linija.\n\nKad završite, povucite lijevo bilo gdje izvan rešetke.";
 "AMSLER_GRID_LEFT_EYE" = "Lijevo oko";
@@ -298,7 +307,7 @@
 "AUDIO_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "AUDIO_INSTRUCTION" = "Izgovarajte \"Aaaaaa\" u mikrofon što dulje možete.";
 "AUDIO_INTRO_TEXT" = "Duboko udahnite i izgovorite \"Aaaaaa\" u mikrofon što dulje možete. Održavajte ujednačenu glasnoću glasa tako da audio stupci ostanu plavi.";
-"AUDIO_INTENDED_USE" = "Ovom se aktivnošću procjenjuje vaš glas tako što se on snimi mikrofonom na dnu vašeg uređaja.";
+"AUDIO_INTENDED_USE" = "Ovom se aktivnošću procjenjuje vaš glas snimanjem mikrofonom koji se nalazi na dnu uređaja.";
 "AUDIO_TOO_LOUD_LABEL" = "Preglasno";
 "AUDIO_GENERIC_ERROR_LABEL" = "Zvuk se ne može snimati";
 "AUDIO_LEVEL_CHECK_LABEL" = "Molimo, pričekajte da provjerimo razinu pozadinske buke.";
@@ -306,7 +315,7 @@
 "AUDIO_TOO_LOUD_ACTION_NEXT" = "Dodirnite Sljedeće kad budete spremni.";
 
 /* Tone audiometry active task. */
-"TONE_AUDIOMETRY_TASK_TITLE" = "Tonalna audiom.";
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tonalna audiometrija";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Ovom se aktivnošću mjeri vaša sposobnost da čujete različite zvukove.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Prije nego započnete, uključite slušalice i stavite ih.\n\nZvuk će biti jako suptilan i neće biti nalik redovitom tonu upozorenja.  Zvuk će započeti tiho, zatim će mu se polako povećavati glasnoća.  Obratite pažnju i dodirnite lijevu ili desnu tipku kako biste označili u kojem uhu čujete zvuk.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tonalna audiom.";
-"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ovom se aktivnošću identificiraju razine pragova sluha pojedinca na dB HL skali.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Dodirnite kad čujete ton.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ton i glasnoća";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Čut ćete niz tonova.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Kad čujete ton, dodirnite tipku.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Za ovaj test glasnoća će biti podešena na 50 %.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Ovaj test traje približno 10 minuta.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Uključite Zabranu ometanja kako biste izbjegli prekidanje.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Tonovi će se reproducirati prvo u vašem desnom uhu.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Tonovi će se sad reproducirati u vašem lijevom uhu.";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ovom se aktivnošću identificiraju pragovi čujnosti pojedinca na dB HL skali.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Provjerite je li glasnoća uređaja podešena na maksimalnu razinu.\n\nTijekom ovog zadatka u lijevom ili desnom uhu reproducirat će se suptilan ton.\n\nSlušajte pažljivo i dodirnite tipku svaki put kad začujete ton.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Ovaj test služi određivanju koliko glasan zvuk treba biti da biste ga čuli.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Upitnik o dodavanju novog korisnika.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Odaberite svoju postavku za 'bolje uho', ako ga ima";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "lijevo";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "desno";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "bez postavke";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Test je poništen";
+"dBHL_ALERT_TITLE_START_OVER" = "Ponovno pokreni";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Poništi test";
+"dBHL_ALERT_TEXT" = "Ponovno spojite svoje AirPods ili EarPods slušalice za provođenje ovog testa.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ dovršeno";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Slušalice";
+"HEADPHONES_UNKNOWN" = "Nepoznato";
+"HEADPHONES_NONE" = "Bez";
+"CONNECTED" = "Spojeno";
+"NOT_CONNECTED" = "Nije spojeno";
+"HEADPHONE_CONNECTED_%@" = "Spojeno - %@";
+"HEADPHONE_DETECT_TITLE" = "Spojite slušalice";
+"HEADPHONE_DETECT_TEXT" = "Ovaj test zahtijeva Apple AirPods ili Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Prostorna memorija";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ova aktivnost mjeri vašu kratkotrajnu prostornu memoriju dok dodirujete %@ redoslijedom kojim su zasvijetlili.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "cvjetove";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "cvjetovi";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ istim redoslijedom kojim su zasvijetlili.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ obrnutim redoslijedom od onog kojim su zasvijetlili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ istim redoslijedom kojim su zasvijetlili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ obrnutim redoslijedom od onog kojim su zasvijetlili.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Za početak dodirnite Pokreni i zatim gledajte pažljivo.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Rezultat";
@@ -344,7 +380,7 @@
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Za nastavak dodirnite Sljedeće";
 "MEMORY_GAME_FAILED_TITLE" = "Pokušaj ponovno";
 "MEMORY_GAME_FAILED_MESSAGE" = "Ovaj put niste uspjeli. Dodirnite Sljedeće za nastavak.";
-"MEMORY_GAME_TIMEOUT_TITLE" = "Vrijeme je isteklo";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Isteklo vrijeme";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Isteklo vam je vrijeme.\nZa nastavak kliknite Dalje.";
 "MEMORY_GAME_COMPLETE" = "Igra je dovršena";
 "MEMORY_GAME_PAUSED_TITLE" = "Pauzirano";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sjednite na rub stolice. Kad započnete, trebat ćete staviti uređaj na desno koljeno radi mjerenja. Molimo, uključite zvuk na uređaju kako biste čuli upute.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Stavite uređaj na lijevo koljeno, sa zaslonom okrenutim prema van, kako je prikazano na slici.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Stavite uređaj na desno koljeno, sa zaslonom okrenutim prema van, kako je prikazano na slici.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kad budete spremni, dodirnite zaslon za pokretanje testa i ispružite lijevo koljeno koliko možete. Ponovno dodirnite kad budete gotovi.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kad budete spremni, dodirnite zaslon za pokretanje testa i ispružite desno koljeno koliko možete. Ponovno dodirnite kad budete gotovi.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Stavite uređaj na lijevo koljeno";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Stavite uređaj na desno koljeno";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ispružite lijevo koljeno. Zatim dodirnite bilo gdje.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ispružite desno koljeno. Zatim dodirnite bilo gdje.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kad budete spremni, dodirnite zaslon za početak i ispružite svoje lijevo koljeno koliko god možete. Vratite se na početni položaj i dodirnite ponovno kad ste gotovi.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kad budete spremni, dodirnite zaslon za početak i ispružite svoje desno koljeno koliko god možete. Vratite se na početni položaj i dodirnite ponovno kad ste gotovi.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Postavite uređaj na svoje lijevo koljeno. Dodirnite zaslon i ispružite lijevo koljeno koliko god možete.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Postavite uređaj na svoje desno koljeno. Dodirnite zaslon i ispružite desno koljeno koliko god možete.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kad ste gotovi, vratite svoje lijevo koljeno na početni položaj. Zatim dodirnite bilo gdje.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Kad ste gotovi, vratite svoje desno koljeno na početni položaj. Zatim dodirnite bilo gdje.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Raspon kretanja lijevog ramena";
@@ -411,17 +447,17 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Kad započnete, trebat ćete staviti uređaj na desno rame radi mjerenja. Molimo, uključite zvuk na uređaju kako biste čuli upute.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Stavite uređaj na lijevo rame, sa zaslonom okrenutim prema van, kako je prikazano na slici.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Stavite uređaj na desno rame, sa zaslonom okrenutim prema van, kako je prikazano na slici.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kad budete spremni, dodirnite zaslon za pokretanje testa i podignite lijevu ruku koliko možete. Ponovno dodirnite kad budete gotovi.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kad budete spremni, dodirnite zaslon za pokretanje testa i podignite desnu ruku koliko možete. Ponovno dodirnite kad budete gotovi.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Stavite uređaj na lijevo rame";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Stavite uređaj na desno rame";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Podignite lijevu ruku. Zatim dodirnite bilo gdje.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Podignite desnu ruku. Zatim dodirnite bilo gdje.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kad budete spremni, dodirnite zaslon za početak i podignite svoju lijevu ruku koliko god možete. Vratite se na početni položaj i dodirnite ponovno kad ste gotovi.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kad budete spremni, dodirnite zaslon za početak i podignite svoju desnu ruku koliko god možete. Vratite se na početni položaj i dodirnite ponovno kad ste gotovi.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Postavite uređaj na svoje lijevo rame. Dodirnite zaslon i podignite lijevu ruku ispred sebe koliko god možete.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Postavite uređaj na svoje desno rame. Dodirnite zaslon i podignite desnu ruku ispred sebe koliko god možete.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kad ste gotovi, vratite svoju lijevu ruku na početni položaj. Zatim dodirnite bilo gdje.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Kad ste gotovi, vratite svoju desnu ruku na početni položaj. Zatim dodirnite bilo gdje.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Tempirana šetnja";
 "TIMED_WALK_INTRO_DETAIL" = "Ova aktivnost mjeri funkcionalnost vaših donjih ekstremiteta.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Pronađite mjesto, po mogućnosti vani, gdje možete hodati otprilike\\n%@ u ravnoj liniji što brže možete, ali sigurno. Nemojte usporavati sve dok ne prijeđete ciljnu liniju.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Pronađite mjesto, po mogućnosti vani, gdje možete hodati približno %@ u ravnoj liniji što je brže moguće, ali na siguran način. Nemojte usporavati sve dok ne prođete završnu liniju.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Dodirnite Sljedeće za početak.";
 "TIMED_WALK_FORM_TITLE" = "Pomagalo";
 "TIMED_WALK_FORM_TEXT" = "Koristite isto pomagalo za svaki test.";
@@ -434,7 +470,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Dva štapa za hodanje";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvije štake";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Hodalica/Guralica";
-"TIMED_WALK_INSTRUCTION_%@" = "Hodajte najviše\\n%@ u ravnoj liniji.";
+"TIMED_WALK_INSTRUCTION_%@" = "Hodajte najviše %@ u ravnoj liniji.";
 "TIMED_WALK_INSTRUCTION_TURN" = "Okrenite se.";
 "TIMED_WALK_INSTRUCTION_2" = "Hodajte natrag do mjesta od kojeg ste krenuli.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Po završetku dodirnite Sljedeće.";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "Auditivni test tempiranog serijskog zbrajanja (PASAT) mjeri brzinu vaše obrade auditivnih podataka te sposobnost računanja.";
 "PVSAT_INTRO_TEXT" = "Vizualni test tempiranog serijskog zbrajanja mjeri (PVSAT) brzinu vaše obrade vizualnih podataka te sposobnost računanja.";
 "PAVSAT_INTRO_TEXT" = "Auditivni i vizualni test tempiranog serijskog zbrajanja (PAVSAT) mjeri brzinu vaše obrade auditivnih i vizualnih podataka te sposobnost računanja.";
-"PSAT_INTRO_TEXT_2_%@" = "Jednoznamenkaste brojke prikazuju se svakih %@ sekundi.\nMorate pribrojiti svaku novu znamenku onoj koja joj neposredno prethodi.\nPozor, ne smijete računati ukupni iznos, nego samo zbroj posljednja dva broja.";
+"PSAT_INTRO_TEXT_2_%@" = "Jednoznamenkaste brojke prikazuju se svake %@.\nMorate pribrojiti svaku novu znamenku onoj koja joj neposredno prethodi.\nPozor, ne smijete računati ukupni iznos, nego samo zbroj posljednja dva broja.";
 "PSAT_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "PSAT_INITIAL_INSTRUCTION" = "Zapamtite prvu znamenku.";
 "PSAT_INSTRUCTION" = "Zbrojite ovu novu znamenku s prethodnom.";
@@ -455,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test s %@ rupa i klinovima";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ova aktivnost mjeri funkciju vaših gornjih ekstremiteta dok stavljate klin u rupu. Ovu radnju morat ćete ponoviti %@ puta.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Testirat će se vaša lijeva i desna ruka.\nMorate što je brže moguće podići klin, staviti ga u otvor i, čim to napravite %@ puta, morate ga ponovno ukloniti %@ puta.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Testirat će se vaša lijeva i desna ruka.\nMorate što je brže moguće podići klin, staviti ga u otvor i, čim to napravite %@ puta, morate ga ponovno ukloniti %@ puta.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Testirat će se vaša desna i lijeva ruka.\nMorate što je brže moguće podići klin, staviti ga u otvor i, čim to napravite %@ puta, morate ga ponovno ukloniti %@ puta.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
@@ -468,7 +504,7 @@
 
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Aktivnost drhtanja";
-"TREMOR_TEST_INTRO_1_DETAIL" = "Ova aktivnost mjeri podrhtavanje vaših ruku u različitim položajima. Pronađite mjesto na kojem možete udobno sjediti tijekom trajanja ove aktivnosti.";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Ova aktivnost mjeri drhtanje vaših ruku u različitim položajima. Pronađite mjesto na kojem možete udobno sjediti tijekom trajanja ove aktivnosti.";
 "TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Držite telefon u ruci koja vam je više zahvaćena, kako je prikazano na slici ispod.";
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Držite telefon u DESNOJ ruci kako je prikazano na slici ispod.";
 "TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Držite telefon u LIJEVOJ ruci kako je prikazano na slici ispod.";
@@ -509,15 +545,12 @@
 "TREMOR_SKIP_NEITHER" = "Mogu obaviti ovaj zadatak s obje ruke.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Test izrade tragova";
-"TRAILMAKING_INTENDED_USE" = "Ova aktivnost evaluira vašu vizualnu pažnju i mogućnost promjene zadataka tako što bilježi vrijeme potrebno za redoslijedno dodirivanje niza točaka.";
+"TRAILMAKING_TASK_TITLE" = "Test praćenja linije";
+"TRAILMAKING_INTENDED_USE" = "Ovom se aktivnošću procjenjuje vaša vizualna pažnja i mogućnost promjene zadataka tako što se bilježi vrijeme potrebno za redoslijedno dodirivanje niza točaka.";
 "TRAILMAKING_INTENDED_USE2_A" = "Nakon odbrojavanja, naizmjence dodirujte točke između brojeva i slova. Započnite dodirivanjem prvog broja “1”, zatim dodirnite brojeve “2” – “3” – “4”… sve dok ne dosegnete broj “7”.";
 "TRAILMAKING_INTENDED_USE2_B" = "Nakon odbrojavanja, naizmjence dodirujte točke između brojeva i slova. Započnite dodirivanjem prvog broja “1”, zatim dodirnite prvo slovo “A”, a zatim “2” – “B” – “3” – “C”… sve dok ne dosegnete broj “7”.";
 "TRAILMAKING_INTRO_TEXT" = "Napravite ovo što brže možete bez grešaka. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (greške: %d)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (greške: %d)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -529,7 +562,7 @@
 "SPEECH_TASK_TITLE" = "Prepozn. govora";
 "SPEECH_RECOGNITION_INTRO_TEXT" = "Ovom se aktivnošću snima vaš govor s mikrofonom na dnu uređaja, te se prevodi u tekst.";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
-"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Pritisnite tipku za početak snimanja prije govora.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Prije nego što započnete govoriti pritisnite tipku za početak snimanja.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Započni snimati";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Zaustavi snimanje";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "Uredi transkript";
@@ -542,7 +575,7 @@
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Reproduciraj zvuk";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Zaustavi audio zapis";
 "SPEECH_IN_NOISE_TITLE" = "Govor u buci";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "Ovom se aktivnošću mjeri razumljivost govora kad se prezentira u bučnim okruženjima.";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Ovom se aktivnošću mjeri razumljivost govora u bučnim okruženjima.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Kao dio ovog testa, učinit ćete sljedeće:\n\nPoslušati rečenicu.\n\nJasno ponoviti što ste čuli ili preskočiti prema naprijed kako biste tipkovnicom natipkali ono što ste čuli. \n\nAko ponovite što ste čuli, moći ćete izmijeniti transkript koji je generirao uređaj za prepoznavanje govora.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Kalibracija glasnoće";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Dodirnite 'Reproduciraj zvuk', podesite svoju glasnoću na ugodnu razinu i zatim dodirnite 'Zaustavi audio zapis' za nastavak.";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Izračunavanje";
 "ENVIRONMENTSPL_THRESHOLD" = "Prag: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Pozadinska je buka u redu";
+"ENVIRONMENTSPL_NOISE" = "Previše pozadinske buke";
+"ENVIRONMENTSPL_TITLE_2" = "Pronađite tiho mjesto";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Kako bi se osigurala točnost, ovaj test treba provoditi u tihom okruženju.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Započni zadatak";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Bez podataka";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Pomaknite kliznik za unos vrijednosti";
+"SLIDER_I_DONT_KNOW" = "Ne znam";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Stranica";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Natrag";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Odabrano";
 "AX_UNSELECTED" = "Nije odabrano";
+"AX_SELECT_ALL_THAT_APPLY" = "NAVEDITE SVOJE SIMPTOME";
 
 "AX_SLIDER_LABEL" = "Kliznik odgovora. Raspon od %@ do %@";
 "AX_UNLABELED_IMAGE" = "Neoznačena slika";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Ima pločicu veličine %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Isprazni";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Odbaci tipkovnicu";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Raspon od %@ do %@.";
 "AX_GRAPH_STACK_PREFIX" = "Stog sastavljen od";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Amslerova mreža";
 "AX_AMSLER_GRID_HINT" = "Prstom ili olovkom izravno označite rešetku ili za završetak povucite lijevo izvan rešetke.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tipke koje se mogu dodirivati";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Dodirnite za lijevo uho";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktivirajte za početak testa. Kad test započne, dodirnite izravno na ovu tipku kad začujete zvuk u lijevom uhu.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Dodirnite za desno uho";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktivirajte za početak testa. Kad test započne, dodirnite izravno na ovu tipku kad začujete zvuk u desnom uhu.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Koristeći VoiceOver, istražite zaslon dodirom kako biste saznali gdje se nalaze tipke za svako uho. Kad test započne, tipke će se moći izravno dodirivati. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Dodirnite za jedan prst";
+"AX_TAP_BUTTON_2_LABEL" = "Dodirnite za drugi prst";
+"AX_TAP_BUTTON_HINT" = "Aktivirajte kako bi se tipke mogle izravno dodirivati.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Koristeći VoiceOver, istražite zaslon dodirom kako biste saznali gdje se nalaze tipke. Aktivirajte bilo koju tipku kako bi se tipke mogle izravno dodirivati.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Tipke se sada mogu izravno dodirivati.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Koristeći VoiceOver, tipka će se moći izravno dodirnuti. Nalazit će se blizu sredine zaslona.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Koristeći VoiceOver, tipke u testu moći će se izravno dodirivati.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Nije moguće dekodirati restoreData za inicijalizaciju";

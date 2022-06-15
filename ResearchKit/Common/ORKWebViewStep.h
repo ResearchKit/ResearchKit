@@ -33,6 +33,36 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ORKCustomSignatureAccessoryViewProtocol;
+
+@protocol ORKCustomSignatureAccessoryViewDelegate <NSObject>
+
+- (void)customViewDidChangeCompletedState:(UIView<ORKCustomSignatureAccessoryViewProtocol> *)customView;
+- (CGRect)rectInFooterViewForRect:(CGRect)rect;
+- (CGRect)rectInHeaderViewForRect:(CGRect)rect;
+
+@end
+
+@protocol ORKCustomSignatureAccessoryViewProtocol <NSObject>
+
+@required
+@property (nonatomic, weak, nullable) id<ORKCustomSignatureAccessoryViewDelegate> customViewDelegate;
+
+- (NSDictionary *)resultUserInfo;
+- (BOOL)isComplete;
+
+@end
+
+@protocol ORKCustomSignatureAccessoryViewProvider <NSObject>
+
+@optional
+- (UIView<ORKCustomSignatureAccessoryViewProtocol> * _Nullable)customFooterViewForSignatureContent;
+
+@optional
+- (UIView<ORKCustomSignatureAccessoryViewProtocol> * _Nullable)customHeaderViewForSignatureContent;
+
+@end
+
 /**
  The `ORKWebViewStep` class represents a step that displays an embedded webview.
  
@@ -63,6 +93,12 @@ ORK_CLASS_AVAILABLE
  Embedded html used for displaying the webview.
  */
 @property (nonatomic, copy, nullable) NSString *html;
+
+@property (nonatomic, copy, nullable) NSString *customCSS;
+
+@property (nonatomic) BOOL showSignatureAfterContent;
+
+@property (nonatomic, weak, nullable) id<ORKCustomSignatureAccessoryViewProvider> customViewProvider;
 
 @end
 

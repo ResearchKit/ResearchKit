@@ -196,6 +196,10 @@
     return YES;
 }
 
+- (void)setTaskRunUUID:(NSUUID * _Nonnull)taskRunUUID {
+    self->_taskRunUUID = [taskRunUUID copy];
+}
+
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -356,9 +360,9 @@
             ORKStepResult *stepResult = (ORKStepResult *)result;
             if (stepResult.results.count > 0) {
                 // For each subresult in this step, append the step identifier onto the result
-                for (ORKResult *result in stepResult.results) {
-                    ORKResult *copy = [result copy];
-                    NSString *subIdentifier = result.identifier ?: [NSString stringWithFormat:@"%@", @(result.hash)];
+                for (ORKResult *currentResult in stepResult.results) {
+                    ORKResult *copy = [currentResult copy];
+                    NSString *subIdentifier = currentResult.identifier ?: [NSString stringWithFormat:@"%@", @(currentResult.hash)];
                     copy.identifier = [NSString stringWithFormat:@"%@.%@", stepResult.identifier, subIdentifier];
                     [results addObject:copy];
                 }

@@ -32,10 +32,25 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+@class ORKLearnMoreView;
 
 @interface ORKSurveyCardHeaderView: UIView
 
 - (instancetype) initWithTitle:(NSString *)title;
+
+- (instancetype) initWithTitle:(NSString *)title
+                    detailText:(nullable NSString *)text
+                 learnMoreView:(nullable ORKLearnMoreView *)learnMoreView
+                 progressText:(nullable NSString *)progressText
+                       tagText:(nullable NSString *)tagText;
+
+- (instancetype) initWithTitle:(NSString *)title
+                    detailText:(nullable NSString *)text
+                 learnMoreView:(nullable ORKLearnMoreView *)learnMoreView
+                  progressText:(nullable NSString *)progressText
+                       tagText:(nullable NSString *)tagText
+                    showBorder:(BOOL)showBorder
+         hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem;
 
 @end
 

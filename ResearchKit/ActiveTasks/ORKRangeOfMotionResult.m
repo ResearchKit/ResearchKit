@@ -39,15 +39,21 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_DOUBLE(aCoder, flexed);
-    ORK_ENCODE_DOUBLE(aCoder, extended);
+    ORK_ENCODE_DOUBLE(aCoder, start);
+    ORK_ENCODE_DOUBLE(aCoder, finish);
+    ORK_ENCODE_DOUBLE(aCoder, minimum);
+    ORK_ENCODE_DOUBLE(aCoder, maximum);
+    ORK_ENCODE_DOUBLE(aCoder, range);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_DOUBLE(aDecoder, flexed);
-        ORK_DECODE_DOUBLE(aDecoder, extended);
+        ORK_DECODE_DOUBLE(aDecoder, start);
+        ORK_DECODE_DOUBLE(aDecoder, finish);
+        ORK_DECODE_DOUBLE(aDecoder, minimum);
+        ORK_DECODE_DOUBLE(aDecoder, maximum);
+        ORK_DECODE_DOUBLE(aDecoder, range);
     }
     return self;
 }
@@ -60,8 +66,11 @@
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
     return isParentSame &&
-    self.flexed == castObject.flexed &&
-    self.extended == castObject.extended;
+    self.start == castObject.start &&
+    self.finish == castObject.finish &&
+    self.minimum == castObject.minimum &&
+    self.maximum == castObject.maximum &&
+    self.range == castObject.range;
 }
 
 - (NSUInteger)hash {
@@ -70,13 +79,16 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRangeOfMotionResult *result = [super copyWithZone:zone];
-    result.flexed = self.flexed;
-    result.extended = self.extended;
+    result.start = self.start;
+    result.finish = self.finish;
+    result.minimum = self.minimum;
+    result.maximum = self.maximum;
+    result.range = self.range;
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"<%@: flexion: %f; extension: %f>", self.class.description, self.flexed, self.extended];
+    return [NSString stringWithFormat:@"<%@: start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, self.start, self.finish, self.minimum, self.maximum, self.range];
 }
 
 @end

@@ -64,9 +64,9 @@
     self.signature.requiresName = NO;
     NSString *html;
     html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/>"
-            @"<div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
+            @"<div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Signature</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";
@@ -76,39 +76,39 @@
 - (void)testHTMLForSignature_withNameRequired_formatsNames {
     self.signature.requiresName = YES;
     NSString *html;
-    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
+    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
+            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
+            @"Signature</p></div>"
+            @"<div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div>"
-            @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
-            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";
     XCTAssertEqualObjects([self.formatter HTMLForSignature:self.signature], html);
 
     self.signature.familyName = @"Family";
-    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
+    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
+            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
+            @"Signature</p></div>"
+            @"<div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>Family</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div>"
-            @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
-            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";
     XCTAssertEqualObjects([self.formatter HTMLForSignature:self.signature], html);
 
     self.signature.givenName = @"Given";
-    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
+    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
+            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
+            @"Signature</p></div>"
+            @"<div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>Given&nbsp;Family</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div><div class='col-1-3 border'>"
-            @"<p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
-            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";
@@ -121,7 +121,7 @@
     html =  @"<div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";
@@ -131,13 +131,13 @@
 - (void)testHTMLForSignature_withSignatureImageRequired_formatsImage {
     self.signature.requiresSignatureImage = YES;
     NSString *html;
-    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
+    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
+            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
+            @"Signature</p></div>"
+            @"<div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div>"
-            @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
-            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />Date</p></div></div>";
     XCTAssertEqualObjects([self.formatter HTMLForSignature:self.signature], html);
@@ -147,13 +147,13 @@
 - (void)testHTMLForSignature_withSignatureImage_formatsImage {
     self.signature.signatureImage = [UIImage imageNamed:@"arrowLeft"];
     NSString *html;
-    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
+    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
+            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
+            @"Signature</p></div>"
+            @"<div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div>"
-            @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
-            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";
@@ -169,13 +169,13 @@
     self.signature.signatureImage = [UIImage imageNamed:@"arrowLeft"];
 
     NSString *html;
-    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'>"
+    html =  @"<br/><div class='grid border'><div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inboxImage'>&nbsp;</div></div>"
+            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
+            @"Signature</p></div>"
+            @"<div class='col-1-3 border'><p><br/><div class='sigbox'>"
             @"<div class='inbox'>Given&nbsp;Family</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Name (printed)</p></div>"
-            @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
-            @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
-            @"User's Signature</p></div>"
+            @"Printed Name</p></div>"
             @"<div class='col-1-3 border'><p><br/><div class='sigbox'><div class='inbox'>&nbsp;</div></div>"
             @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />"
             @"Date</p></div></div>";

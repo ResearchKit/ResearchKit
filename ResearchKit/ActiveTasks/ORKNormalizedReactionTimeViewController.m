@@ -83,8 +83,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     [_reactionTimeContentView.button addTarget:self action:@selector(startReactionTimer) forControlEvents:UIControlEventTouchUpInside];
     
     self.activeStepView.activeCustomView = _reactionTimeContentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
+
     _backgroundView = [_reactionTimeContentView getBackgroundView];
     _stimulusView = [_reactionTimeContentView getStimulusView];
 
@@ -165,7 +164,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     _timerStartDate = nil;
     _reactionDate = nil;
     _stimulusStartDate = nil;
-    [self reactionTimeStep].currentInterval = 0;
     
     [self attemptDidFinish];
 }

@@ -111,12 +111,12 @@
         queryBeginDate = [NSDate distantPast];
     }
     
-    ORK_Log_Debug(@"\nMotion Query: %@\n", @{@"from": queryBeginDate, @"to":queryEndDate});
+    ORK_Log_Debug("\nMotion Query: %@\n", @{@"from": queryBeginDate, @"to":queryEndDate});
     
     // Run a single query up to current date
     [_manager.activityManager queryActivityStartingFromDate:queryBeginDate toDate:queryEndDate toQueue:_queue withHandler:^(NSArray<CMMotionActivity *> *activities, NSError *error) {
         ORKMotionActivityQueryOperation *op = weakSelf;
-        ORK_Log_Debug(@"\nMotion Query: %@\n", @{@"from": queryBeginDate, @"to":queryEndDate, @"returned count": @(activities.count)});
+        ORK_Log_Debug("\nMotion Query: %@\n", @{@"from": queryBeginDate, @"to":queryEndDate, @"returned count": @(activities.count)});
         [op handleResults:activities queryBegin:queryBeginDate queryEnd:queryEndDate error:error itemIdentifier:itemIdentifier];
     }];
     

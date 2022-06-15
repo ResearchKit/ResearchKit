@@ -66,16 +66,23 @@
 "CONSENT_SHARING_TITLE" = "Jakovalinnat";
 "CONSENT_SHARE_WIDELY_%@" = "Jaa datani kohteen %@ ja hyväksyttyjen tutkijoiden kanssa maailmanlaajuisesti";
 "CONSENT_SHARE_ONLY_%@" = "Jaa datani vain kohteen %@ kanssa";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ vastaanottaa tutkimusdatasi tästä tutkimuksesta.\n\nKoodatun tutkimusdatan jakaminen laajemmalle käyttäjäkunnalle (ilman nimi ym. tietoja) voi edesauttaa tätä ja tulevia tutkimuksia.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ vastaanottaa tutkimusdatasi tästä tutkimuksesta.\n\nKoodatun tutkimusdatan jakaminen laajemmalle käyttäjäkunnalle (ilman nimeä ym. tietoja) voi edesauttaa tätä ja tulevia tutkimuksia.";
 "LEARN_MORE_CONSENT_SHARING" = "Lisätietoja datajaosta";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ – nimi tekstattuna";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@ – allekirjoitus";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nimi painokirjaimin";
+"CONSENT_DOC_LINE_SIGNATURE" = "Allekirjoitus";
 "CONSENT_DOC_LINE_DATE" = "Päivämäärä";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ / %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Kysymys %1$@/%2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Ohitettu";
+"REVIEW_EDIT_ANSWER" = "Muokkaa";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Virheellinen arvo";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Kumoa";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Tyhjennä";
+"BUTTON_CLEAR_SIGNATURE" = "Poista allekirjoitus";
 "BUTTON_APPLY" = "Käytä";
 "BUTTON_DISAGREE" = "Hylkää";
 "BUTTON_DONE" = "Valmis";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Tyhjennä vastaus";
 "BUTTON_READ_ONLY_MODE" = "Tätä vastausta ei voida muuttaa.";
 "BUTTON_COPYRIGHT" = "Tekijänoikeudet";
+"BUTTON_CLOSE" = "Sulje";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktiviteetti alkaa";
 "TASK_COMPLETE_TITLE" = "Aktiviteetti valmis";
 "TASK_COMPLETE_TEXT" = "Datasi analysoidaan ja sinulle ilmoitetaan, kun tuloksesi ovat valmiina.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekuntia jäljellä.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ jäljellä.";
 "TOUCH_ANYWHERE_LABEL" = "Jatka koskettamalla mihin tahansa";
 
 /* Image capture step. */
@@ -290,14 +299,14 @@
 "AMSLER_GRID_INTRO_TEXT" = "Tämä aktiviteetti auttaa havaitsemaan ongelmia käyttäjän näössä.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Pidä laitetta noin 30 cm päässä kasvoistasi ja silmän korkeudella koko testin ajan.";
 "AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Sulje %@ ja tuijota neliöruudukon keskellä olevaa pistettä.\n\nMerkitse sormella tai kynällä kaikki näkemäsi vääristymät, esim. epäselvät tai aaltoilevat viivat.\n\nKun olet valmis, pyyhkäise vasemmalle ruudukon ulkopuolelta.";
-"AMSLER_GRID_LEFT_EYE" = "Vasen silmä";
-"AMSLER_GRID_RIGHT_EYE" = "Oikea silmä";
+"AMSLER_GRID_LEFT_EYE" = "vasen silmä";
+"AMSLER_GRID_RIGHT_EYE" = "oikea silmä";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Ääni";
 "AUDIO_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
 "AUDIO_INSTRUCTION" = "Sano ”aaa” mikrofoniin niin kauan kuin voit.";
-"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano ”Aaaaa\" mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
+"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano \”Aaaaa\” mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
 "AUDIO_INTENDED_USE" = "Tämä aktiviteetti arvioi ääntäsi tallentamalla sitä laitteen alareunassa olevalla mikrofonilla.";
 "AUDIO_TOO_LOUD_LABEL" = "Liian kovaa";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ei voida äänittää";
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria";
-"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Tämä aktiviteetti osoittaa henkilön kuulon kynnystasoja dB HL -asteikolla.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Napauta, kun kuulet äänen.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ääni ja äänenvoimakkuus";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Kuulet sarjan ääniä.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Kun kuulet äänen, napauta painiketta.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Tälle testille äänenvoimakkuus asetetaan 50 prosenttiin.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Tämä testi kestää noin 10 minuuttia.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Laita Älä häiritse -toiminto päälle keskeytysten välttämiseksi.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Äänet toistetaan ensin oikeaan korvaan.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Äänet toistetaan nyt vasempaan korvaan.";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Tämä aktiviteetti mittaa henkilön kuulon kynnystasoja dB HL -asteikolla.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Varmista, että laitteen äänenvoimakkuus on asetettu suurimpaan arvoonsa.\n\nTämän tehtävän aikana hiljainen ääni toistetaan joko vasempaan tai oikeaan korvaan.\n\nKuuntele tarkasti ja napauta painiketta aina, kun kuulet äänen.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Tämä testi määrittää, kuinka kova äänen täytyy olla, jotta kuulet sen.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Aloituskysely.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Valitse ”parempi korva”, jos tarpeen";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "vasen";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "oikea";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ei asetusta";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Testi kumottu";
+"dBHL_ALERT_TITLE_START_OVER" = "Aloita alusta";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Kumoa testi";
+"dBHL_ALERT_TEXT" = "Liitä AirPods- tai EarPods-kuulokkeet testin suorittamista varten.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ suoritettu";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Kuulokkeet";
+"HEADPHONES_UNKNOWN" = "Tuntematon";
+"HEADPHONES_NONE" = "Ei mitään";
+"CONNECTED" = "Yhdistetty";
+"NOT_CONNECTED" = "Ei yhteydessä";
+"HEADPHONE_CONNECTED_%@" = "Yhdistetty – %@";
+"HEADPHONE_DETECT_TITLE" = "Liitä kuulokkeet";
+"HEADPHONE_DETECT_TEXT" = "Tämä testi vaatii Apple AirPods- tai Apple EarPods -kuulokkeet";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Avaruudellinen muisti";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tämä aktiiviteetti mittaa lyhytaikaista avaruudellista muistiasi. Toista järjestys, jossa %@ syttyy.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "kukkia";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "kukkia";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ samassa järjestyksessä kuin ne syttyivät.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ käänteisessä syttymisjärjestyksessä.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ samassa järjestyksessä kuin ne syttyivät.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ käänteisessä syttymisjärjestyksessä.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Aloita napauttamalla Aloita ja katso tarkasti.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Tulos";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Istu tuolin reunalle. Aloitettaessa laite asetetaan mittausta varten oikealle polvelle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aseta laite vasemmalle polvelle näyttö ulospäin, kuten kuvassa.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aseta laite oikealle polvelle näyttö ulospäin, kuten kuvassa.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, napauta näyttöä ja ojenna vasen polvi niin pitkälle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, napauta näyttöä ja ojenna oikea polvi niin pitkälle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle polvelle";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle polvelle";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ojenna vasen polvi suoraksi. Napauta sitten johonkin.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ojenna oikea polvi suoraksi. Napauta sitten johonkin.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta vasen polvi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta oikea polvi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle polvelle. Napauta näyttöä ja suorista vasenta polvea niin pitkälle kuin mahdollista.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle polvelle. Napauta näyttöä ja suorista oikeaa polvea niin pitkälle kuin mahdollista.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kun olet valmis, palauta vasen polvi lähtöasentoon. Napauta sitten missä tahansa.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Kun olet valmis, palauta oikea polvi aloitusasentoon. Napauta sitten missä tahansa.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Vasemman olkapään liikealue";
@@ -411,12 +447,12 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Aloitettaessa laite asetetaan mittausta varten oikealle olkapäälle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aseta laite vasemmalle olkapäälle näyttö ulospäin, kuten kuvassa.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aseta laite oikealle olkapäälle näyttö ulospäin, kuten kuvassa.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, napauta näyttöä ja nosta vasen käsi niin korkealle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, napauta näyttöä ja nosta oikea käsi niin korkealle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle olkapäälle";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle olkapäälle";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Nosta vasen käsi ylös. Napauta sitten johonkin.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Nosta oikea käsi ylös. Napauta sitten johonkin.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta vasen käsi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta oikea käsi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle olkapäälle. Napauta näyttöä ja nosta vasen käsi eteen niin kauas kuin mahdollista.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle olkapäälle. Napauta näyttöä ja nosta oikea käsi eteen niin kauas kuin mahdollista.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kun olet valmis, palauta vasen käsi lähtöasentoon. Napauta sitten missä tahansa.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Kun olet valmis, palauta oikea käsi lähtöasentoon. Napauta sitten missä tahansa.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Ajoitettu kävely";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "PASAT-testi (Paced Auditory Serial Addition Test) mittaa kuullun informaation käsittelynopeuttasi ja laskutaitoasi.";
 "PVSAT_INTRO_TEXT" = "PVSAT-testi (Paced Visual Serial Addition Test) mittaa nähdyn informaation käsittelynopeuttasi ja laskutaitoasi.";
 "PAVSAT_INTRO_TEXT" = "PAVSAT-testi (Paced Auditory and Visual Serial Addition Test) mittaa kuullun ja nähdyn informaation käsittelynopeuttasi ja laskutaitoasi.";
-"PSAT_INTRO_TEXT_2_%@" = "Yksittäisiä numeroita näytetään %@ sekunnin välein.\nKukin uusi numero on lisättävä sitä edeltäneeseen.\nHuomaa, että ei ole tarkoitus laskea jatkuvaa summaa, vaan vain kahden viimeisen numeron summa.";
+"PSAT_INTRO_TEXT_2_%@" = "Yksittäisten numeroiden välillä kuluu %@.\nKukin uusi numero on lisättävä sitä edeltäneeseen.\nHuomaa, että ei ole tarkoitus laskea jatkuvaa summaa, vaan vain kahden viimeisen numeron summa.";
 "PSAT_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
 "PSAT_INITIAL_INSTRUCTION" = "Muista tämä ensimmäinen numero.";
 "PSAT_INSTRUCTION" = "Lisää tämä uusi numero edelliseen.";
@@ -455,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ reiän palikkatesti";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tämä aktiviteetti mittaa yläraajojen toimintaa pyytämällä sinua asettamaan palikan reikään. Tämä toistetaan %@ kertaa.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sekä vasen että oikea käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Sekä vasen että oikea käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sekä oikea että vasen käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
@@ -509,15 +545,12 @@
 "TREMOR_SKIP_NEITHER" = "Voin suorittaa tämän aktiviteetin molemmilla käsillä.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+"TRAILMAKING_TASK_TITLE" = "Polkutesti";
 "TRAILMAKING_INTENDED_USE" = "Tämä aktiviteetti arvioi visuaalista tarkkaavaisuutta ja tehtävänvaihtoa mittaamalla aikaa, joka kuluu pisteiden napautteluun järjestyksessä.";
 "TRAILMAKING_INTENDED_USE2_A" = "Lähtölaskennan jälkeen napauttele pisteitä numeroiden ja kirjainten vuorottelevassa järjestyksessä. Aloita napauttamalla numeroa 1, napauta sitten 2, 3, 4 jne., kunnes vastaan tulee numero 7.";
 "TRAILMAKING_INTENDED_USE2_B" = "Lähtölaskennan jälkeen napauttele pisteitä numeroiden ja kirjainten vuorottelevassa järjestyksessä. Aloita napauttamalla numeroa 1, napauta sitten kirjainta A. Jatka tätä järjestyksessä 2 ja B, 3 ja C jne., kunnes vastaan tulee numero 7.";
 "TRAILMAKING_INTRO_TEXT" = "Tee tämä niin nopeasti kuin kykenet tekemättä virheitä. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d virhe)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d virhettä)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -529,11 +562,11 @@
 "SPEECH_TASK_TITLE" = "Puheentunnistus";
 "SPEECH_RECOGNITION_INTRO_TEXT" = "Tämä aktiviteetti tallentaa puhettasi laitteen alareunassa olevalla mikrofonilla ja muuntaa sen tekstiksi.";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
-"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Aloita äänitys ennen puhumista painamalla painiketta.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Aloita äänitys painamalla painiketta ennen puhumista.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Aloita tallentaminen";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Lopeta tallentaminen";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "Muokkaa tekstiä";
-"SPEECH_RECOGNITION_QUESTION_TEXT" = "Korjaa mahdolliset väärintunnistetut kohdat muokkaamalla muunnettua tekstiä.";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Korjaa mahdolliset väärintunnistetut kohdat muokkaamalla saneltua tekstiä.";
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Muunnettu teksti näkyy tässä.";
 "SPEECH_RECOGNITION_FAILED" = "Puheentunnistus epäonnistui.";
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Puheentunnistuksen alustaminen epäonnistui.";
@@ -541,9 +574,9 @@
 /* Speech In Noise active task. */
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Toista ääni";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Pysäytä ääni";
-"SPEECH_IN_NOISE_TITLE" = "Puhe kohinan\\nseassa";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "Tämä aktiviteetti mittaa puheen havaitsemista meluisassa ympäristössä.";
-"SPEECH_IN_NOISE_DETAIL_TEXT" = "Tämän testin osana:\n\nKuuntele virke.\n\nToista selkeästi kuulemasi tai jatka eteenpäin ja kirjoita kuulemasi näppäimistöllä. \n\nJos toistit kuulemasi, voit vielä muokata puheentunnistusjärjestelmän tuottamaa tekstiä.";
+"SPEECH_IN_NOISE_TITLE" = "Puhe kohinan seassa";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Tämä aktiviteetti mittaa puheen ymmärrettävyyttä meluisassa ympäristössä.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Tämän testin osana:\n\nKuuntele virke.\n\nToista kuulemasi selkeästi tai jatka eteenpäin ja kirjoita kuulemasi näppäimistöllä. \n\nJos toistit kuulemasi, voit tarvittaessa muokata puheen­tunnistus­järjestelmän tuottamaa tekstiä.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Äänenvoimakkuuden kalibrointi";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Napauta Toista ääni, säädä äänenvoimakkuus sopivalle tasolle ja jatka napauttamalla Pysäytä ääni.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Kuuntele";
@@ -562,13 +595,27 @@
 
 /* Environment SPL*/
 "ENVIRONMENTSPL_TITLE" = "SPL-mittari";
-"ENVIRONMENTSPL_INTRO_TEXT" = "Tämä aktiviteetti mittaa ympäristön äänenpaineen. Jos melutaso on liian korkea, et voi jatkaa. Suorita tämä tehtävä siirtymällä hiljaisempaan ympäristöön tai myöhemmin.";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Tämä aktiviteetti mittaa ympäristön äänenpaineen. Jos melutaso on liian korkea, et voi jatkaa. Siirry hiljaisempaan ympäristöön nyt tai suorita tämä tehtävä myöhemmin.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Lasketaan";
 "ENVIRONMENTSPL_THRESHOLD" = "Kynnys: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Taustamelu OK";
+"ENVIRONMENTSPL_NOISE" = "Liikaa taustahälyä";
+"ENVIRONMENTSPL_TITLE_2" = "Etsi hiljainen paikka";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Tarkkuuden varmistamiseksi tämä testi on suoritettava hiljaisessa paikassa.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Aloita tehtävä";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Ei dataa";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Syötä arvo siirtämällä liukusäädintä";
+"SLIDER_I_DONT_KNOW" = "En tiedä";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Sivu";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Takaisin";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Valittu";
 "AX_UNSELECTED" = "Valitsematon";
+"AX_SELECT_ALL_THAT_APPLY" = "VALITSE KAIKKI SOPIVAT KOHDAT";
 
 "AX_SLIDER_LABEL" = "Vastausliukusäädin. Asteikko %@–%@";
 "AX_UNLABELED_IMAGE" = "Merkitsemätön kuva";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Sisältää levyjä, joiden koko on %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tyhjä";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Sulje näppäimistö";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Alue välillä %@–%@";
 "AX_GRAPH_STACK_PREFIX" = "Pino, joka koostuu arvoista";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Amslerin ruudukko";
 "AX_AMSLER_GRID_HINT" = "Merkitse suoraan ruudukkoon sormellasi tai kynällä, tai lopeta pyyhkäisemällä ruudukon ulkopuolella.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Napautettavissa olevat painikkeet";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Napauta vasemmalle korvalle";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aloita testi napauttamalla. Kun testi alkaa, napauta tätä painiketta suoraan, kun kuulet äänen vasemmassa korvassasi.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Napauta oikealle korvalle";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aloita testi napauttamalla. Kun testi alkaa, napauta tätä painiketta suoraan, kun kuulet äänen oikeassa korvassasi.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Käytettäessä VoiceOveria paikanna kunkin korvan painikkeet koskettelemalla näyttöä. Painikkeet ovat suoraan painettavissa testin alettua.%@";
+"AX_TAP_BUTTON_1_LABEL" = "Napauta yhdelle sormelle";
+"AX_TAP_BUTTON_2_LABEL" = "Napauta toiselle sormelle";
+"AX_TAP_BUTTON_HINT" = "Laita päälle, jotta painikkeita voidaan napauttaa suoraan.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Käytettäessä VoiceOveria voit tutustua näyttöön ja painikkeiden sijaintiin koskettamalla näyttöä. Jos haluat voida napauttaa painikkeita suoraan, laita jompikumpi painike päälle.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Painikkeita voi nyt napauttaa suoraan.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ VoiceOveria käytettäessä painiketta voidaan napauttaa suoraan. Se sijaitsee lähellä näytön keskustaa.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Käytettäessä VoiceOveria testissä olevia painikkeita voidaan napauttaa suoraan.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "restoreDataa ei voida dekoodata alustusta varten";

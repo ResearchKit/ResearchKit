@@ -34,6 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepTimerView.h"
 #import "ORKActiveStepView.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKVerticalContainerView.h"
@@ -118,30 +119,30 @@
 
 - (void)setActiveStepView {
     if (!_activeStepView) {
-        _activeStepView = [[ORKActiveStepView alloc] initWithFrame:self.view.bounds];
+        _activeStepView = [ORKActiveStepView new];
+        [_activeStepView placeNavigationContainerInsideScrollView];
     }
-    [_activeStepView setCustomView:_customView];
-    _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+    if (_customView) {
+        _activeStepView.customContentView = _customView;
+    }
     [self.view addSubview:_activeStepView];
 }
 
 - (void)setNavigationFooterView {
     if (!_navigationFooterView) {
-        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView = _activeStepView.navigationFooterView;
     }
     _navigationFooterView.skipButtonItem = self.skipButtonItem;
     _navigationFooterView.continueEnabled = _finished;
-    
+
     ORKActiveStep *step = [self activeStep];
     _navigationFooterView.useNextForSkip = step.shouldUseNextAsSkipButton;
     _navigationFooterView.optional = step.optional;
-    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
     BOOL neverHasContinueButton = (step.shouldContinueOnFinish && !step.startsFinished);
     [_navigationFooterView setNeverHasContinueButton:neverHasContinueButton];
     [_navigationFooterView updateContinueAndSkipEnabled];
-    
+
     [self updateContinueButtonItem];
-    [self.view addSubview:_navigationFooterView];
 }
 
 - (void)setupConstraints {
@@ -150,61 +151,38 @@
     }
     _constraints = nil;
     
-    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
     
     _activeStepView.translatesAutoresizingMaskIntoConstraints = NO;
-    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeTop
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
-                                                   constant:0.0],
+                                                   constant:0.0]
                      
                      ];
     [NSLayoutConstraint activateConstraints:_constraints];
@@ -217,31 +195,25 @@
     [self prepareStep];
 }
 
-- (UIView *)customViewContainer {
-    __unused UIView *view = [self view];
-    return _activeStepView.customViewContainer;
-}
-
-- (ORKTintedImageView *)imageView {
-    __unused UIView *view = [self view];
-    return _activeStepView.imageView;
-}
-
 - (void)setCustomView:(UIView *)customView {
     _customView = customView;
-    [_activeStepView setStepView:_customView];
+    if (_customView) {
+        [_activeStepView setCustomContentView:_customView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    ORK_Log_Debug(@"%@",self);
-
-    [self.taskViewController setRegisteredScrollView:_activeStepView];
+    
+    if (_activeStepView.navigationFooterView) {
+        [_activeStepView.navigationFooterView flattenIfNeeded];
+    }
+    ORK_Log_Debug("%@",self);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -256,7 +228,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     
     [self suspend];
 }
@@ -272,7 +244,6 @@
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
-    _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
@@ -282,7 +253,6 @@
 
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
     [super setCancelButtonItem:cancelButtonItem];
-    _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
 - (void)setFinished:(BOOL)finished {
@@ -345,7 +315,7 @@
     
     self.finished = [[self activeStep] startsFinished];
     
-    ORK_Log_Debug(@"%@", self);
+    ORK_Log_Debug("%@", self);
     _activeStepView.activeStep = self.activeStep;
     
     if ([self.activeStep hasCountDown]) {
@@ -386,7 +356,7 @@
 }
 
 - (void)start {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     self.started = YES;
     [self startTimer];
     [_activeStepView.activeCustomView startStep:self];
@@ -412,7 +382,7 @@
 }
 
 - (void)suspend {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     if (self.finished || !self.started) {
         return;
     }
@@ -424,7 +394,7 @@
 }
 
 - (void)resume {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     if (self.finished || !self.started) {
         return;
     }
@@ -436,7 +406,7 @@
 }
 
 - (void)finish {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     if (self.finished) {
         return;
     }
@@ -520,7 +490,15 @@
     BOOL isHalfway = !_hasSpokenHalfwayCountdown && timer.runtime > timer.duration / 2.0;
     if (!finished && self.activeStep.shouldSpeakRemainingTimeAtHalfway && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
         _hasSpokenHalfwayCountdown = YES;
-        NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
+        
+        NSDateComponentsFormatter *secondsFormatter = [NSDateComponentsFormatter new];
+        secondsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleSpellOut;
+        secondsFormatter.allowedUnits = NSCalendarUnitSecond;
+        secondsFormatter.formattingContext = NSFormattingContextDynamic;
+        secondsFormatter.maximumUnitCount = 1;
+        NSString *seconds = [secondsFormatter stringFromTimeInterval:countDownValue];
+        NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), seconds];
+        
         [voice speakText:text];
     }
 }

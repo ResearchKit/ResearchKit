@@ -37,7 +37,7 @@
 
 
 CGFloat minimumButtonHeight = 60;
-UIStackViewAlignment alignment = UILayoutConstraintAxisHorizontal;
+UILayoutConstraintAxis alignment = UILayoutConstraintAxisHorizontal;
 CGFloat labelHeight = 250.0;
 CGFloat labelWidth = 250.0;
 static const CGFloat buttonStackViewSpacing = 20.0;

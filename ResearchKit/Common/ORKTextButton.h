@@ -29,7 +29,7 @@
  */
 
 @import UIKit;
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -46,6 +46,8 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextButton ()
 
 - (void)init_ORKTextButton;
+
+- (void)updateContentInsets:(NSDirectionalEdgeInsets)contentInsets;
 
 @end
 

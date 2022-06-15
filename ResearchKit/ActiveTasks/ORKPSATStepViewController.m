@@ -33,9 +33,11 @@
 
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKPSATContentView.h"
 #import "ORKPSATKeyboardView.h"
 #import "ORKVerticalContainerView.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKCollectionResult_Private.h"
@@ -102,11 +104,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.psatContentView = [[ORKPSATContentView alloc] initWithPresentationMode:[self psatStep].presentationMode];
     self.psatContentView.keyboardView.delegate = self;
     [self.psatContentView setEnabled:NO];
     self.activeStepView.activeCustomView = self.psatContentView;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     
     self.timerUpdateInterval = [self psatStep].interStimulusInterval;
 }
@@ -198,7 +200,7 @@
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
     if (self.currentDigitIndex == 0) {
         [self.psatContentView setEnabled:YES];
-        [self.activeStepView updateTitle:nil text:ORKLocalizedString(@"PSAT_INSTRUCTION", nil)];
+        [self.activeStepView updateTitle:self.step.title text:ORKLocalizedString(@"PSAT_INSTRUCTION", nil)];
     } else {
         [self saveSample];
     }

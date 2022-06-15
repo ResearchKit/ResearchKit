@@ -38,10 +38,14 @@
 #define ORKdBHLToneAudiometryTaskToneMinimumDuration 1.0
 #define ORKdBHLToneAudiometryTaskDefaultMaxRandomPreStimulusDelay 2.0
 #define ORKdBHLToneAudiometryTaskDefaultMaxPostStimulusDelay 1.0
-#define ORKdBHLToneAudiometryTaskDefaultTransitionsPerFrequency 15
+#define ORKdBHLToneAudiometryTaskDefaultTransitionsPerFrequency 20
 #define ORKdBHLToneAudiometryTaskInitialdBHLValue 30.0
 #define ORKdBHLToneAudiometryTaskdBHLStepUpSize 5.0
+#define ORKdBHLToneAudiometryTaskdBHLStepUpSizeFirstMiss 20.0
+#define ORKdBHLToneAudiometryTaskdBHLStepUpSizeSecondMiss 10.0
+#define ORKdBHLToneAudiometryTaskdBHLStepUpSizeThirdMiss 10.0
 #define ORKdBHLToneAudiometryTaskdBHLStepDownSize 10.0
+#define ORKdBHLToneAudiometryTaskdBHLMinimumThreshold -10.0
 
 @implementation ORKdBHLToneAudiometryStep
 
@@ -64,8 +68,14 @@
     self.maxNumberOfTransitionsPerFrequency = ORKdBHLToneAudiometryTaskDefaultTransitionsPerFrequency;
     self.initialdBHLValue = ORKdBHLToneAudiometryTaskInitialdBHLValue;
     self.dBHLStepUpSize = ORKdBHLToneAudiometryTaskdBHLStepUpSize;
+    self.dBHLStepUpSizeFirstMiss = ORKdBHLToneAudiometryTaskdBHLStepUpSizeFirstMiss;
+    self.dBHLStepUpSizeSecondMiss = ORKdBHLToneAudiometryTaskdBHLStepUpSizeSecondMiss;
+    self.dBHLStepUpSizeThirdMiss = ORKdBHLToneAudiometryTaskdBHLStepUpSizeThirdMiss;
     self.dBHLStepDownSize = ORKdBHLToneAudiometryTaskdBHLStepDownSize;
+    self.dBHLMinimumThreshold = ORKdBHLToneAudiometryTaskdBHLMinimumThreshold;
     self.frequencyList = @[@1000.0, @2000.0, @3000.0, @4000.0, @8000.0, @1000.0, @500.0, @250.0];
+    self.stepDuration = CGFLOAT_MAX;
+    self.shouldShowDefaultTimer = NO;
 }
 
 - (void)validateParameters {
@@ -98,6 +108,10 @@
     step.initialdBHLValue = self.initialdBHLValue;
     step.dBHLStepDownSize = self.dBHLStepDownSize;
     step.dBHLStepUpSize = self.dBHLStepUpSize;
+    step.dBHLMinimumThreshold = self.dBHLMinimumThreshold;
+    step.dBHLStepUpSizeFirstMiss = self.dBHLStepUpSizeFirstMiss;
+    step.dBHLStepUpSizeSecondMiss = self.dBHLStepUpSizeSecondMiss;
+    step.dBHLStepUpSizeThirdMiss = self.dBHLStepUpSizeThirdMiss;
     step.headphoneType = self.headphoneType;
     step.earPreference = self.earPreference;
     step.frequencyList = self.frequencyList;
@@ -113,6 +127,10 @@
         ORK_DECODE_DOUBLE(aDecoder, initialdBHLValue);
         ORK_DECODE_DOUBLE(aDecoder, dBHLStepDownSize);
         ORK_DECODE_DOUBLE(aDecoder, dBHLStepUpSize);
+        ORK_DECODE_DOUBLE(aDecoder, dBHLStepUpSizeFirstMiss);
+        ORK_DECODE_DOUBLE(aDecoder, dBHLStepUpSizeSecondMiss);
+        ORK_DECODE_DOUBLE(aDecoder, dBHLStepUpSizeThirdMiss);
+        ORK_DECODE_DOUBLE(aDecoder, dBHLMinimumThreshold);
         ORK_DECODE_INTEGER(aDecoder, maxNumberOfTransitionsPerFrequency);
         ORK_DECODE_INTEGER(aDecoder, earPreference);
         ORK_DECODE_OBJ(aDecoder, headphoneType);
@@ -129,6 +147,10 @@
     ORK_ENCODE_DOUBLE(aCoder, initialdBHLValue);
     ORK_ENCODE_DOUBLE(aCoder, dBHLStepDownSize);
     ORK_ENCODE_DOUBLE(aCoder, dBHLStepUpSize);
+    ORK_ENCODE_DOUBLE(aCoder, dBHLStepUpSizeFirstMiss);
+    ORK_ENCODE_DOUBLE(aCoder, dBHLStepUpSizeSecondMiss);
+    ORK_ENCODE_DOUBLE(aCoder, dBHLStepUpSizeThirdMiss);
+    ORK_ENCODE_DOUBLE(aCoder, dBHLMinimumThreshold);
     ORK_ENCODE_INTEGER(aCoder, maxNumberOfTransitionsPerFrequency);
     ORK_ENCODE_INTEGER(aCoder, earPreference);
     ORK_ENCODE_OBJ(aCoder, headphoneType);
@@ -151,6 +173,10 @@
             && (self.initialdBHLValue == castObject.initialdBHLValue)
             && (self.dBHLStepDownSize == castObject.dBHLStepDownSize)
             && (self.dBHLStepUpSize == castObject.dBHLStepUpSize)
+            && (self.dBHLStepUpSizeFirstMiss == castObject.dBHLStepUpSizeFirstMiss)
+            && (self.dBHLStepUpSizeSecondMiss == castObject.dBHLStepUpSizeSecondMiss)
+            && (self.dBHLStepUpSizeThirdMiss == castObject.dBHLStepUpSizeThirdMiss)
+            && (self.dBHLMinimumThreshold == castObject.dBHLMinimumThreshold)
             && (self.earPreference == castObject.earPreference)
             && ORKEqualObjects(self.headphoneType, castObject.headphoneType)
             && ORKEqualObjects(self.frequencyList, castObject.frequencyList));

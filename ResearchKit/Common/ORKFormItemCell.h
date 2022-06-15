@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-
+#import "ORKFormStep.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell;
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message;
+- (BOOL)formItemCellShouldDismissKeyboard:(ORKFormItemCell *)cell;
 
 @end
 
@@ -67,11 +68,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL useCardView;
 @property (nonatomic) BOOL isLastItem;
 @property (nonatomic) BOOL isFirstItemInSectionWithoutTitle;
+@property (nonatomic) ORKCardViewStyle cardViewStyle;
 
 @end
 
 
 @interface ORKFormItemTextFieldBasedCell : ORKFormItemCell <UITextFieldDelegate>
+
+- (void)removeEditingHighlight;
 
 @end
 
@@ -112,6 +116,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ORKFormItemLocationCell : ORKFormItemCell
+
+@end
+
+@interface ORKFormItemSESCell : ORKFormItemCell
 
 @end
 

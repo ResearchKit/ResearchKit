@@ -32,6 +32,8 @@
 @import PDFKit;
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol ORKPDFViewerStepViewDelegate <NSObject>
 
 - (void)didSelectShareButton:(id)sender;
@@ -51,3 +53,5 @@
 - (BOOL)pdfModified;
 
 @end
+
+NS_ASSUME_NONNULL_END

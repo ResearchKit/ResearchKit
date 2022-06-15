@@ -33,9 +33,9 @@
 "CONSENT_NAME_GIVEN" = "שם פרטי";
 "CONSENT_NAME_FAMILY" = "שם משפחה";
 "CONSENT_NAME_PLACEHOLDER" = "חובה";
-"CONSENT_REVIEW_TITLE" = "סקור/י";
-"CONSENT_REVIEW_INSTRUCTION" = "עיין/י בטופס הבא, והקש/י על ״אני מסכים/ה״ אם הינך מוכן/ה להמשיך.";
-"CONSENT_REVIEW_ALERT_TITLE" = "סקור/י";
+"CONSENT_REVIEW_TITLE" = "נא לקרוא בעיון";
+"CONSENT_REVIEW_INSTRUCTION" = "יש לעיין בטופס הבא ולהקיש על ״אני מסכים/ה״ כדי להמשיך.";
+"CONSENT_REVIEW_ALERT_TITLE" = "נא לקרוא בעיון";
 "CONSENT_SIGNATURE_TITLE" = "חתימה";
 "CONSENT_SIGNATURE_INSTRUCTION" = "חתום/י עם האצבע בתיבה שלמטה.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "חתום/י כאן";
@@ -66,16 +66,23 @@
 "CONSENT_SHARING_TITLE" = "אפשרויות שיתוף";
 "CONSENT_SHARE_WIDELY_%@" = "שתף את הנתונים שלי עם %@ ועם חוקרים מוסמכים מכל העולם";
 "CONSENT_SHARE_ONLY_%@" = "שתף את הנתונים שלי רק עם %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ תקבל את נתוני המחקר שבו השתתפת.\n\nשיתוף נרחב יותר של נתוני המחקר המקודדים שלך (שאינם מכילים מידע כגון שמך) עשוי לתרום למחקר זה ולמחקרים עתידיים.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "נתוני המחקר שבו השתתפת יישלחו אל %@.\n\nשיתוף נרחב יותר של נתונים מקודדים מהמחקר שלך (שאינם כוללים מידע אישי כמו השם שלך) עשוי לתרום למחקר זה ולמחקרים עתידיים.";
 "LEARN_MORE_CONSENT_SHARING" = "קבל/י מידע נוסף בנושא שיתוף נתונים";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "השם של %@ (מודפס)";
-"CONSENT_DOC_LINE_SIGNATURE" = "החתימה של %@";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "שם מלא";
+"CONSENT_DOC_LINE_SIGNATURE" = "חתימה";
 "CONSENT_DOC_LINE_DATE" = "תאריך";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ מתוך %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "שאלה %1$@ מתוך %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "דילגת על פריט זה";
+"REVIEW_EDIT_ANSWER" = "עריכה";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "ערך שאינו תקין";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "ביטול";
 "BUTTON_OK" = "אישור";
 "BUTTON_CLEAR" = "נקה";
+"BUTTON_CLEAR_SIGNATURE" = "נקה את החתימה";
 "BUTTON_APPLY" = "החל";
 "BUTTON_DISAGREE" = "איני מסכים/ה";
 "BUTTON_DONE" = "סיום";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "נקה את התשובה";
 "BUTTON_READ_ONLY_MODE" = "לא ניתן לשנות את התשובה הזאת.";
 "BUTTON_COPYRIGHT" = "זכויות יוצרים";
+"BUTTON_CLOSE" = "סגור";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "מתחיל פעילות בעוד";
 "TASK_COMPLETE_TITLE" = "הפעילות הושלמה";
 "TASK_COMPLETE_TEXT" = "הנתונים שלך ינותחו וכאשר התוצאות יהיו מוכנות תקבל/י הודעה.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "נותרו %@ שניות.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "נותרו %@.";
 "TOUCH_ANYWHERE_LABEL" = "גע/י במסך כדי להמשיך";
 
 /* Image capture step. */
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "בדיקת שמיעה";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "הקש/י כאשר תשמע/י את הצליל.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "צליל ועוצמת קול";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "כעת יישמעו כמה צלילים ברצף.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "כאשר תשמע/י צליל, עליך להקיש על הכפתור.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "במהלך בדיקה זו, עוצמת הקול תיקבע ל-50 אחוז.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "משך הבדיקה הוא כ-10 דקות.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "מומלץ להפעיל את ״נא לא להפריע״ כדי למנוע הפרעות במהלך הבדיקה.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "הצלילים יושמעו באוזן ימין שלך תחילה.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "הצלילים יושמעו באוזן שמאל שלך.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "פעילות זו מזהה רמות סף של שמיעה בטווח דציבלים גבוה/נמוך.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "ודא/י שעוצמת הקול של המכשיר הוגדרה לעוצמה המקסימלית.\n\nבמהלך משימה זו, יישמע צליל עדין באוזן שמאל או באוזן ימין.\n\nהאזן/י בקפידה והקש/י על הכפתור בכל פעם שהינך שומע/ת צליל.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "בדיקה זו מזהה את עוצמת הצליל הנמוכה ביותר שביכולתך לשמוע.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "שאלון הצטרפות.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "בחר/י את העדפתך לגבי האוזן ״הטובה יותר״, אם יש כזו";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "שמאל";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "ימין";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ללא העדפה";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "הבדיקה בוטלה";
+"dBHL_ALERT_TITLE_START_OVER" = "התחל מחדש";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "בטל את הבדיקה";
+"dBHL_ALERT_TEXT" = "יש לחבר מחדש את ה-AirPods או ה-EarPods כדי להתחיל בבדיקה.";
+"dBHL_PROGRESS_COMPLETION_%@" = "‏%@ הושלם";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "אזניות";
+"HEADPHONES_UNKNOWN" = "לא ידוע";
+"HEADPHONES_NONE" = "ללא";
+"CONNECTED" = "מחובר";
+"NOT_CONNECTED" = "לא מחובר";
+"HEADPHONE_CONNECTED_%@" = "מחובר - %@";
+"HEADPHONE_DETECT_TITLE" = "כעת עליך לחבר אזניות";
+"HEADPHONE_DETECT_TEXT" = "בדיקה זו דורשת שימוש ב-Apple AirPods או Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "זכרון מרחבי";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "פעילות זו מודדת את הזכרון המרחבי שלך לטווח קצר על-ידי הנחיה לחזור על הסדר שבו נדלקו ה%@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "פרחים";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "פרחים";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "כמה מה%@ יידלקו זה אחר זה. הקש/י על ה%@ בסדר זהה לזה שבו הם נדלקו.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "כמה מה%@ יידלקו זה אחר זה. הקש/י על ה%@ בסדר הפוך מזה שבו הם נדלקו.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "כמה מה%@ יידלקו זה אחר זה. הקש/י על ה%@ בסדר זהה לזה שבו הם נדלקו.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "כמה מה%@ יידלקו זה אחר זה. הקש/י על ה%@ בסדר הפוך מזה שבו הם נדלקו.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "כדי להתחיל, הקש/י על ״התחלה״ וצפה/י בתשומת לב.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "תוצאה";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "שב/י על חלקו הקדמי של הכיסא. בתחילת הפעילות, תצטרך/י להניח את המכשיר על ברך ימין כדי לבצע מדידות. ודא/י שהצליל במכשיר מופעל כדי שתוכל/י לשמוע את ההנחיות.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "הנח/י את המכשיר על ברך שמאל כשהמסך מופנה כלפי מעלה, כפי שנראה בתמונה.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "הנח/י את המכשיר על ברך ימין כשהמסך מופנה כלפי מעלה, כפי שנראה בתמונה.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "כשתרצה/י להתחיל את הבדיקה, הקש/י על המסך ויישר/י את ברך שמאל ככל שתוכל/י. לסיום, הקש/י שוב על המסך.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "כשתרצה/י להתחיל את הבדיקה, הקש/י על המסך ויישר/י את ברך ימין ככל שתוכל/י. לסיום, הקש/י שוב על המסך.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "הנח/י את המכשיר על ברך שמאל";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "הנח/י את המכשיר על ברך ימין";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "ישר/י את ברך שמאל והקש/י על המסך.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "ישר/י את ברך ימין והקש/י על המסך.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "כדי להתחיל, הקש/י על המסך והרחק/י את ברך שמאל רחוק ככל האפשר. לאחר מכן, חזור/י לנקודת ההתחלה והקש/י שוב לסיום.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "כדי להתחיל, הקש/י על המסך והרחק/י את ברך ימין רחוק ככל האפשר. לאחר מכן, חזור/י לנקודת ההתחלה והקש/י שוב לסיום.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "הנח/י את המכשיר על ברך שמאל. הקש/י על המסך והרחק/י את ברך שמאל ככל האפשר.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "הנח/י את המכשיר על ברך ימין. הקש/י על המסך והרחק/י את ברך ימין ככל האפשר.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "לסיום, החזר/י את ברך שמאל לנקודת ההתחלה. לאחר מכן, הקש/י בכל מקום.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "לסיום, החזר/י את ברך ימין לנקודת ההתחלה. לאחר מכן, הקש/י בכל מקום.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "טווח התנועה של כתף שמאל";
@@ -411,12 +447,12 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "בתחילת הפעילות, תצטרך/י להניח את המכשיר על כתף ימין כדי לבצע מדידות. ודא/י שהצליל במכשיר מופעל כדי שתוכל/י לשמוע את ההנחיות.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "הנח/י את המכשיר על כתף שמאל כשהמסך מופנה כלפי מעלה, כפי שנראה בתמונה.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "הנח/י את המכשיר על כתף ימין כשהמסך מופנה כלפי מעלה, כפי שנראה בתמונה.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "כשתרצה/י להתחיל את הבדיקה, הקש/י על המסך והרם/י את זרוע שמאל ככל שתוכל/י. לסיום, הקש/י שוב על המסך.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "כשתרצה/י להתחיל את הבדיקה, הקש/י על המסך והרם/י את זרוע ימין ככל שתוכל/י. לסיום, הקש/י שוב על המסך.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "הנח/י את המכשיר על כתף שמאל";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "הנח/י את המכשיר על כתף ימין";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "הרם/י את זרוע שמאל והקש/י על המסך.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "הרם/י את זרוע ימין והקש/י על המסך.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "כדי להתחיל, הקש/י על המסך והרם/י את זרוע שמאל רחוק ככל האפשר. לאחר מכן, חזור/י לנקודת ההתחלה והקש/י שוב לסיום.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "כדי להתחיל, הקש/י על המסך והרם/י את זרוע ימין רחוק ככל האפשר. לאחר מכן, חזור/י לנקודת ההתחלה והקש/י שוב לסיום.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "הנח/י את המכשיר על כתף שמאל. הקש/י על המסך והרם/י את זרוע שמאל קדימה ככל האפשר.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "הנח/י את המכשיר על כתף ימין. הקש/י על המסך והרם/י את זרוע ימין קדימה ככל האפשר.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "לסיום, החזר/י את זרוע שמאל לנקודת ההתחלה. לאחר מכן, הקש/י בכל מקום.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "לסיום, החזר/י את זרוע ימין לנקודת ההתחלה. לאחר מכן, הקש/י בכל מקום.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "הליכה מתוזמנת";
@@ -455,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "מבחן דיסקית של %@ חורים";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "פעילות זו מודדת את תפקוד פלג הגוף העליון בכך שהיא מבקשת ממך להניח דיסקית עגולה בתוך חור. את הפעולה הזו תתבקש/י לבצע %@ פעמים.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד הימנית והשמאלית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "הקש/י על ״התחלה״ כדי להתחיל.";
@@ -515,9 +551,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "לאחר הספירה לאחור, הקש/י על הנקודות בסדר מתחלף תוך מעבר בין מספרים ואותיות. התחל/י בהקשה על המספר ׳1׳ ולאחר מכן על האות הראשונה ׳א׳, והמשך/י כך עם ׳2׳ – ׳ב׳ – ׳3׳ – ׳ג׳ וכן הלאה, עד שתגיע/י למספר ׳7׳.";
 "TRAILMAKING_INTRO_TEXT" = "בצע/י את הבדיקה מהר ככל שתוכל/י מבלי לטעות.\n";
 "TRAILMAKING_CALL_TO_ACTION" = "הקש/י על ״התחלה״ כדי להתחיל.";
-"TRAILMAKING_TIMER" = "%.1f שנ׳";
-"TRAILMAKING_ERROR" = "‏%@ (מס׳ שגיאות: %d)";
-"TRAILMAKING_ERROR_PLURAL" = "‏%@ (מס׳ שגיאות: %d)";
 "TRAILMAKING_LETTER_A" = "א";
 "TRAILMAKING_LETTER_B" = "ב";
 "TRAILMAKING_LETTER_C" = "ג";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "מחשב";
 "ENVIRONMENTSPL_THRESHOLD" = "סף: ‎%@ dBA";
+"ENVIRONMENTSPL_OK" = "רעשי רקע תקינים";
+"ENVIRONMENTSPL_NOISE" = "יש יותר מדי רעשי רקע";
+"ENVIRONMENTSPL_TITLE_2" = "עליך למצוא מקום שקט";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "לשמירה על מידת הדיוק של הבדיקה, יש לבצעה באזור שקט.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "התחל משימה";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "אין נתונים";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "הזז/י את המחוון להזנת ערך";
+"SLIDER_I_DONT_KNOW" = "לא ממש ברור לי";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "עמוד";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "הקודם";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "נבחרו";
 "AX_UNSELECTED" = "לא נבחר";
+"AX_SELECT_ALL_THAT_APPLY" = "נא לבחור את כל האפשרויות הרלוונטיות";
 
 "AX_SLIDER_LABEL" = "מחוון תגובה. טווח שנע בין %@ ל-%@";
 "AX_UNLABELED_IMAGE" = "תמונה ללא תיוג";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "כולל דיסק בגדלים %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ריק";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "סגור את המקלדת";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "נע בין %@ ל-%@";
 "AX_GRAPH_STACK_PREFIX" = "הערימה מכילה";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "בדיקת רשת אמסלר";
 "AX_AMSLER_GRID_HINT" = "השתמש/י באצבע או בעט דיגיטלי כדי לסמן ישירות על הרשת, או החלק/י ימינה מחוץ לרשת לסיום.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "כפתורים שניתן להקיש עליהם";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "הקש/י עבור אוזן שמאל";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "הפעל/י כדי להתחיל בבדיקה. עם תחילת הבדיקה, הקש/י ישירות על כפתור זה כאשר תשמע/י צליל באזנך השמאלית.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "הקש/י עבור אוזן ימין";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "הפעל/י כדי להתחיל בבדיקה. עם תחילת הבדיקה, הקש/י ישירות על כפתור זה כאשר תשמע/י צליל באזנך הימנית.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ באמצעות VoiceOver, ניתן לנווט במסך כדי ללמוד היכן ממוקמים הכפתורים של כל אוזן. עם תחילת הבדיקה, ניתן יהיה להקיש ישירות על הכפתורים. %@";
+"AX_TAP_BUTTON_1_LABEL" = "הקש/י לאצבע אחת";
+"AX_TAP_BUTTON_2_LABEL" = "הקש/י לאצבע נוספת";
+"AX_TAP_BUTTON_HINT" = "הפעל/י כדי לאפשר הקשה ישירה על הכפתורים.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ באמצעות VoiceOver, ניתן לנווט במסך כדי ללמוד היכן ממוקמים הכפתורים השונים. ניתן להפעיל כל כפתור כדי לאפשר הקשה ישירה עליו.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "הקשה ישירה על הכפתורים זמינה כעת.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ באמצעות VoiceOver, ניתן יהיה להקיש באופן ישיר על הכפתור. הוא ימוקם בקרבת מרכז המסך.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ באמצעות VoiceOver, ניתן יהיה להקיש ישירות על הכפתורים בבדיקה.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "לא ניתן לפענח את הקוד של restoreData לצורך אתחול";

@@ -98,7 +98,11 @@
 
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
-        self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        if (@available(iOS 13.0, *)) {
+            self.digitLabel.textColor = [[UIColor labelColor] colorWithAlphaComponent:0.3f];
+        } else {
+            self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        }
         self.digitLabel.text = ORKLocalizedString(@"PSAT_NO_DIGIT", nil);
     } else {
         [self.keyboardView.selectedAnswerButton setSelected:NO];
@@ -129,7 +133,7 @@
     const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewWidth, self.window);
     const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewHeight, self.window);
     
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _digitLabel, _keyboardView);
     
@@ -139,11 +143,20 @@
                                              metrics:nil
                                                views:views]];
     
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_keyboardView(==keyboardWidth)]-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:@{ @"keyboardWidth": @(ORKPSATKeyboardWidth) }
-                                               views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_keyboardView
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
+                                                         constant:ORKPSATKeyboardWidth]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_keyboardView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_keyboardView(==keyboardHeight)]"

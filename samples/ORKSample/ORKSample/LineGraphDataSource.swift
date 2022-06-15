@@ -41,7 +41,7 @@ class LineGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
             ORKValueRange(value: 25),
             ORKValueRange(),
             ORKValueRange(value: 30),
-            ORKValueRange(value: 40),
+            ORKValueRange(value: 40)
         ],
         [
             ORKValueRange(value: 2),
@@ -49,7 +49,7 @@ class LineGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
             ORKValueRange(value: 8),
             ORKValueRange(value: 16),
             ORKValueRange(value: 32),
-            ORKValueRange(value: 64),
+            ORKValueRange(value: 64)
         ]
     ]
     

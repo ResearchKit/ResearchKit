@@ -68,7 +68,7 @@
     ORKSpeechRecognizer *_speechRecognizer;
     
     dispatch_queue_t _speechRecognitionQueue;
-    ORKSpeechRecognitonResult *_localResult;
+    ORKSpeechRecognitionResult *_localResult;
     BOOL _errorState;
     float _peakPower;
 }
@@ -99,7 +99,7 @@
    
     [ORKSpeechRecognizer requestAuthorization];
 
-    _localResult = [[ORKSpeechRecognitonResult alloc] initWithIdentifier:self.step.identifier];
+    _localResult = [[ORKSpeechRecognitionResult alloc] initWithIdentifier:self.step.identifier];
     _speechRecognitionQueue = dispatch_queue_create("SpeechRecognitionQueue", DISPATCH_QUEUE_SERIAL);
 }
 
@@ -163,7 +163,7 @@
     }
     
     if (error) {
-        ORK_Log_Error(@"Speech recognition failed with error message: \"%@\"", error.localizedDescription);
+        ORK_Log_Error("Speech recognition failed with error message: \"%@\"", error.localizedDescription);
         [_speechRecognitionContentView addRecognitionError:error.localizedDescription];
         _speechRecognitionContentView.recordButton.enabled = NO;
         _errorState = YES;
@@ -240,7 +240,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (error) {
-            ORK_Log_Error(@"Speech framework failed with error code: %ld, and error description: %@", (long)error.code, error.localizedDescription);
+            ORK_Log_Error("Speech framework failed with error code: %ld, and error description: %@", (long)error.code, error.localizedDescription);
             NSError *recognitionError = [NSError errorWithDomain:ORKErrorDomain
                                                             code:ORKSpeechRecognitionErrorRecognitionFailed
                                                         userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"SPEECH_RECOGNITION_FAILED", nil)}];
@@ -276,7 +276,7 @@
 }
 
 - (void)recordersWillStart {
-    NSLog(@"Recorder is starting");
+    ORK_Log_Debug("Recorder is starting");
 }
 
 @end

@@ -32,13 +32,13 @@
 import Foundation
 import ResearchKit
 
-protocol OnboardingManagerDelegate {
+protocol OnboardingManagerDelegate: class {
     func didCompleteOnboarding()
 }
 
 class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDelegate {
     
-    var onboardingManagerDelegate: OnboardingManagerDelegate?
+    weak var onboardingManagerDelegate: OnboardingManagerDelegate?
     
     override init(task: ORKTask?, taskRun taskRunUUID: UUID?) {
         super.init(task: task, taskRun: taskRunUUID)
@@ -50,6 +50,7 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.delegate = self
     }
     
@@ -57,27 +58,31 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
         
         // Welcome View Controller
         let welcomeStep = ORKInstructionStep(identifier: "welcomeStepIdentifier")
-        welcomeStep.title = "Welcome"
-        welcomeStep.detailText = "Welcome to the ResearchKit Example Study. This sample app is an example of how to utilize the ResearchKit modules and views to create a great study.\n\nTo provide the best user experience for your study participants consider only using the necessary steps in the onboarding and consent process. This helps reduce the number of steps required to get into your main application."
+        welcomeStep.title = NSLocalizedString("ONBOARDING_WELCOME_INTRO_TITLE", comment: "")
+        welcomeStep.detailText = NSLocalizedString("ONBOARDING_WELCOME_INTRO_DETAIL", comment: "")
         welcomeStep.iconImage = UIImage(named: "graph")!.withRenderingMode(.alwaysTemplate)
         
         // What to Expect
         let whatToExpectStep = ORKTableStep(identifier: "whatToExpectStep")
-        whatToExpectStep.title = "Study Expectations"
-        whatToExpectStep.text = "You should expect the following items when participating in the ResearchKit study."
-        whatToExpectStep.items = ["The study will continue to run on your device even if the study app is not in the foreground." as NSCopying & NSSecureCoding & NSObjectProtocol,
-                                  "The study will last for 2-4 weeks." as NSCopying & NSSecureCoding & NSObjectProtocol,
-                                  "ResearchKit study data will be sent to the study owner." as NSCopying & NSSecureCoding & NSObjectProtocol]
+        whatToExpectStep.title = NSLocalizedString("ONBOARDING_WELCOME_EXPECTATIONS_TITLE", comment: "")
+        whatToExpectStep.text = NSLocalizedString("ONBOARDING_WELCOME_EXPECTATIONS_BODY", comment: "")
+        whatToExpectStep.items = [
+            NSLocalizedString("ONBOARDING_WELCOME_EXPECTATIONS_FOREGROUND", comment: "") as NSString,
+            NSLocalizedString("ONBOARDING_WELCOME_EXPECTATIONS_STUDY_DURATION", comment: "") as NSString,
+            NSLocalizedString("ONBOARDING_WELCOME_EXPECTATIONS_STUDY_OWNER", comment: "") as NSString
+        ]
         whatToExpectStep.bulletIconNames = ["phone", "calendar", "share"]
-        whatToExpectStep.isBulleted = true
+        whatToExpectStep.bulletType = .circle
         
         // Requirements
         let requirementsStep = ORKTableStep(identifier: "requirementsStep")
-        requirementsStep.title = "Study Requirements"
-        requirementsStep.text = "In order to participate in this study you must meet the following critera:"
-        requirementsStep.items = ["Be over the age of 18" as NSCopying & NSSecureCoding & NSObjectProtocol,
-                                  "Have not participated in a prior or similar version of this study" as NSCopying & NSSecureCoding & NSObjectProtocol,
-                                  "Carry your iPhone or Apple device around with you regularly" as NSCopying & NSSecureCoding & NSObjectProtocol]
+        requirementsStep.title = NSLocalizedString("ONBOARDING_WELCOME_REQUIREMENTS_TITLE", comment: "")
+        requirementsStep.text = NSLocalizedString("ONBOARDING_WELCOME_REQUIREMENTS_BODY", comment: "")
+        requirementsStep.items = [
+            NSLocalizedString("ONBOARDING_WELCOME_REQUIREMENTS_AGE_LIMIT", comment: "") as NSString,
+            NSLocalizedString("ONBOARDING_WELCOME_REQUIREMENTS_SIMILAR_STUDY", comment: "") as NSString,
+            NSLocalizedString("ONBOARDING_WELCOME_REQUIREMENTS_CARRY_IPHONE", comment: "") as NSString
+        ]
         requirementsStep.isBulleted = true
         
         // Consent document including data gathering
@@ -85,53 +90,86 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
         let consentStep = ORKVisualConsentStep(identifier: "consentStep", document: consentDoc)
         
         // Review step
-        let signiature = consentDoc.signatures!.first!
-        let reviewStep = ORKConsentReviewStep(identifier: "reviewStep", signature: signiature, in: consentDoc)
-        reviewStep.text = "Review the consent agreement and begin the agreement process by entering your first and last name below."
-        reviewStep.reasonForConsent = "Consent to join the ResearchKit Study"
+        let signature = consentDoc.signatures!.first!
+        let reviewStep = ORKConsentReviewStep(identifier: "reviewStep", signature: signature, in: consentDoc)
+        reviewStep.text = NSLocalizedString("ONBOARDING_WELCOME_REVIEW_BODY", comment: "")
+        reviewStep.reasonForConsent = NSLocalizedString(
+            "ONBOARDING_WELCOME_REVIEW_CONSENT_AFFIRM", comment: ""
+        )
         
         // Completion
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = "Success"
-        completionStep.text = "Thank you for enrolling in the ResearchKit study.For the best results please stay enrolled in the study for its entire duration."
+        completionStep.title = NSLocalizedString("ONBOARDING_WELCOME_REVIEW_COMPLETION_TITLE", comment: "")
+        completionStep.text = NSLocalizedString("ONBOARDING_WELCOME_REVIEW_COMPLETION_BODY", comment: "")
         
         // Create task and present it
-        let task = ORKNavigableOrderedTask(identifier: "JoinTask", steps: [welcomeStep, whatToExpectStep, requirementsStep, consentStep, reviewStep, completionStep])
+        let task = ORKNavigableOrderedTask(
+            identifier: "JoinTask", steps: [
+                welcomeStep,
+                whatToExpectStep,
+                requirementsStep,
+                consentStep,
+                reviewStep,
+                completionStep
+            ]
+        )
         
         return task
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    func signatureResult(taskViewController: ORKTaskViewController) -> ORKConsentSignatureResult? {
+        
+        let taskResults: [ORKResult]? = taskViewController.result.results
+        let reviewStepResult = taskResults?.first(where: { (result) -> Bool in
+            result.identifier == "reviewStep"
+        })
+        let reviewStepResults = (reviewStepResult as? ORKStepResult)?.results
+        let signatureResult = reviewStepResults?.first as? ORKConsentSignatureResult
+        
+        return signatureResult
+        
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+        
+        // If there is a signature result, and no consent, exit onboarding.
+        if
+            let signatureResult = signatureResult(taskViewController: taskViewController),
+            signatureResult.consented == false {
+            
+            self.presentingViewController?.dismiss(animated: false, completion: nil)
+            
+        }
+        
+    }
+    
+    public func taskViewController(
+        _ taskViewController: ORKTaskViewController,
+        didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
         switch reason {
         case .discarded, .failed, .saved:
-            self.dismiss(animated: false, completion: nil)
-            break;
+            
+            self.presentingViewController?.dismiss(animated: false, completion: nil)
+            
         case .completed:
+            
             OnboardingStateManager.shared.setOnboardingCompletedState(state: true)
             
-            if (taskViewController.result.results != nil) {
-                let results: [ORKResult] = taskViewController.result.results!
+            // Access the first and last name from the review step
+            
+            if
+                let signatureResult = signatureResult(taskViewController: taskViewController),
+                let signature = signatureResult.signature {
                 
-                for result in results {
-                    if (result.identifier == "reviewStep") {
-                        let stepResult: ORKStepResult = result as! ORKStepResult;
-                        if (stepResult.results != nil && stepResult.results!.count > 0) {
-                            let signarureResult: ORKConsentSignatureResult = stepResult.results![0] as! ORKConsentSignatureResult
-                            if (signarureResult.signature != nil) {
-                                let defaults = UserDefaults.standard;
-                                defaults.set(signarureResult.signature!.givenName, forKey: "firstName")
-                                defaults.set(signarureResult.signature!.familyName, forKey: "lastName");
-                            }
-                        }
-                    }
-                }
+                let defaults = UserDefaults.standard
+                defaults.set(signature.givenName, forKey: "firstName")
+                defaults.set(signature.familyName, forKey: "lastName")
+                
             }
             
-            dismiss(animated: true, completion: {
-                if ((self.onboardingManagerDelegate != nil) && (self.onboardingManagerDelegate?.didCompleteOnboarding != nil)) {
-                }
-            })
-            break;
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+
         }
     }
 }

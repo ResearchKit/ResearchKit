@@ -32,7 +32,6 @@
 import Foundation
 
 @available(watchOSApplicationExtension 5.0, *)
-
 class AssessmentManager {
     private var manager: CMMovementDisorderManager?
     init() {
@@ -51,13 +50,13 @@ class AssessmentManager {
     func queryNewAssessments() {
         let calendar = Calendar.current
         let toDate = Date()
-        let fromDate:Date = calendar.date(byAdding: .day, value: -7, to: toDate)!
+        let fromDate: Date = calendar.date(byAdding: .day, value: -7, to: toDate)!
         
-        manager?.queryTremor(from: fromDate, to: toDate, withHandler: { (results, error) in
+        manager?.queryTremor(from: fromDate, to: toDate, withHandler: { (_/*results*/, _/*error*/) in
             
         })
         
-        manager?.queryDyskineticSymptom(from: fromDate, to: toDate, withHandler: { (results, error) in
+        manager?.queryDyskineticSymptom(from: fromDate, to: toDate, withHandler: { (_/*results*/, _/*error*/) in
             
         })
     }

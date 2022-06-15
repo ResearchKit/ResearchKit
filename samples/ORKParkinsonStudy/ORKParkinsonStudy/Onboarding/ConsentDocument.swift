@@ -54,7 +54,7 @@ class ConsentDocument: ORKConsentDocument {
         
         sections = [ORKConsentSection]()
         
-        for (index, _) in sectionTypes.enumerated() {
+        for index in sectionTypes.indices {
             let section = ORKConsentSection(type: sectionTypes[index])
             
             let localizedText = NSLocalizedString(consentText[index], comment: "")
@@ -63,13 +63,19 @@ class ConsentDocument: ORKConsentDocument {
             section.summary = localizedSummary
             section.content = localizedText
             
-            if (sections != nil) {
+            if sections != nil {
                 sections!.append(section)
             }
         }
         
-        let signature = ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: "ConsentDocumentParticipantSignature")
-        signature.title = "Participant Signiature"
+        let signature = ORKConsentSignature(
+            forPersonWithTitle: nil,
+            dateFormatString: nil,
+            identifier: "ConsentDocumentParticipantSignature"
+        )
+        
+        signature.title = "Participant Signature"
+        
         addSignature(signature)
     }
     

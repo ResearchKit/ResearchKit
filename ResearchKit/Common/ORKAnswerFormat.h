@@ -56,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKHeightAnswerFormat;
 @class ORKWeightAnswerFormat;
 @class ORKLocationAnswerFormat;
+@class ORKSESAnswerFormat;
 
 @class ORKTextChoice;
 @class ORKImageChoice;
@@ -93,6 +94,20 @@ ORK_CLASS_AVAILABLE
  type.
  */
 @property (readonly) ORKQuestionType questionType;
+
+/**
+ Determines if the "I Don't Know" button will show.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldShowDontKnowButton) BOOL showDontKnowButton;
+
+/**
+ Custom text that will be shown inside of the "I Don't Know" button if showDontKnowButton is set to true.
+ 
+ Defults to nil.
+ */
+@property (nonatomic, nullable) NSString *customDontKnowButtonText;
 
 /// @name Factory methods
 
@@ -183,6 +198,8 @@ ORK_CLASS_AVAILABLE
                                                       defaultValue:(double)defaultValue;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
+
++ (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText bottomRungText:(NSString *)bottomRungText;
 
 /// @name Validation
 
@@ -330,6 +347,11 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
+ A Boolean value indicating whether the selected value should be hidden.
+ */
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
+
+/**
  Number formatter applied to the minimum, maximum, and slider values. Can be overridden by
  subclasses.
  */
@@ -376,6 +398,27 @@ ORK_CLASS_AVAILABLE
  If nil, the stops are spread uniformly across the range. Defaults to nil.
  */
 @property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
+/**
+ Determines if the minimum and maximum numbers are hidden on the slider.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
+
+/**
+ Determines if the bottom left and bottom right description labels are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
+
+/**
+ Determines if the value markers on the slider are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideValueMarkers) BOOL hideValueMarkers;
 
 @end
 
@@ -497,6 +540,11 @@ ORK_CLASS_AVAILABLE
 @property (readonly) NSNumberFormatter *numberFormatter;
 
 /**
+ A Boolean value indicating whether the selected value should be hidden.
+ */
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
+
+/**
  A localized label to describe the maximum value of the scale. (read-only)
  */
 @property (readonly, nullable) NSString *maximumValueDescription;
@@ -538,6 +586,20 @@ ORK_CLASS_AVAILABLE
  */
 @property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
 
+/**
+ Determines if the minimum and maximum numbers are hidden on the slider.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
+
+/**
+ Determines if the bottom left and bottom right description labels are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
+
 @end
 
 
@@ -566,7 +628,6 @@ ORK_CLASS_AVAILABLE
                                         the slider is displayed without a default value.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
                                         scale, pass `NO`.
- 
  @return An initialized text scale answer format.
  */
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
@@ -610,6 +671,11 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
+ A Boolean value indicating whether the selected value should be hidden.
+ */
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
+
+/**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that
  lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
  the array corresond to the maximum side of the scale.
@@ -628,6 +694,27 @@ ORK_CLASS_AVAILABLE
  If nil, the stops are spread uniformly across the range. Defaults to nil.
  */
 @property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
+/**
+ Determines if the minimum and maximum numbers are hidden on the slider.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
+
+/**
+ Determines if the bottom left and bottom right description labels are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
+
+/**
+ Determines if the value markers on the slider are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideValueMarkers) BOOL hideValueMarkers;
 
 @end
 
@@ -873,6 +960,20 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
+ Returns a text choice object that includes the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
+ @param value                        The value to record in a result object when this item is selected.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(nullable NSString *)text primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString detailText:(nullable NSString *)detailText detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
+
+/**
  Returns a text choice object that includes the specified primary text, detail text,
  and exclusivity.
  
@@ -899,8 +1000,6 @@ ORK_CLASS_AVAILABLE
  Returns an initialized text choice object using the specified primary text, detail text,
  and exclusivity.
  
- This method is the designated initializer.
- 
  @param text        The primary text that describes the choice in a localized string.
  @param detailText  The detail text to display below the primary text, in a localized string.
  @param value       The value to record in a result object when this item is selected.
@@ -911,7 +1010,28 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithText:(NSString *)text
                   detailText:(nullable NSString *)detailText
                        value:(id<NSCopying, NSCoding, NSObject>)value
-                    exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
+                    exclusive:(BOOL)exclusive;
+
+/**
+ Returns an initialized text choice object using the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
+ 
+ This method is the designated initializer.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
+ @param value                        The value to record in a result object when this item is selected.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return An initialized text choice.
+ */
+- (instancetype)initWithText:(nullable NSString *)text
+ primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
+                  detailText:(nullable NSString *)detailText
+  detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
+                       value:(id<NSCopying, NSCoding, NSObject>)value
+                   exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
 
 /**
  The text that describes the choice in a localized string.
@@ -919,6 +1039,13 @@ ORK_CLASS_AVAILABLE
  In general, it's best when the text can fit on one line.
   */
 @property (copy, readonly) NSString *text;
+
+/**
+ The text that describes the choice in an attributed string.
+ 
+ In general, it's best when the text can fit on one line.
+ */
+@property (copy, readonly, nullable) NSAttributedString *primaryTextAttributedString;
 
 /**
  The value to return when this choice is selected.
@@ -938,12 +1065,85 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly, nullable) NSString *detailText;
 
 /**
+ The text that provides additional details about the choice in an attributed string.
+ 
+ The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
+ text.
+ */
+@property (copy, readonly, nullable) NSAttributedString *detailTextAttributedString;
+
+/**
  In a multiple choice format, this indicates whether this choice requires all other choices to be
  unselected.
  
  In general, this is used to indicate a "None of the above" choice.
  */
 @property (readonly) BOOL exclusive;
+
+@end
+
+
+/**
+ The `ORKTextChoiceOther` class defines the choice option to describe an answer not
+ included in provided choices.
+ 
+ The `ORKTextChoiceOther` provides an optional text view of type `ORKAnswerTextView` that allows users to enter free form text.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTextChoiceOther : ORKTextChoice
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns a text choice other object that includes the specified text, detail text, exclusivity and a text view with placeholder text for additional user input.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param value                        The value to record in a result object when this item is selected.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ @param textViewPlaceholderText      The placeholder text for the text view.
+ 
+ @return A text choice other instance.
+ */
++ (instancetype)choiceWithText:(nullable NSString *)text
+                    detailText:(nullable NSString *)detailText
+                         value:(id<NSCopying, NSCoding, NSObject>)value
+                     exclusive:(BOOL)exclusive
+       textViewPlaceholderText:(NSString *)textViewPlaceholderText;
+
+/**
+ Returns an initialized text choice other object using the specified primary text or text with string attributes, detail text or text with string attributes, exclusivity and an optional view for free form text entry.
+ 
+ This method is the designated initializer.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
+ @param value                        The value to record in a result object when this item is selected.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ @param textViewPlaceholderText      The placeholder text for the text view.
+ @param textViewInputOptional        Whether the user is required to provide additional text when selecting this choice.
+ @param textViewStartsHidden         Whether the text view should be hidden untill the cell is selected.
+ 
+ @return An initialized text choice other object.
+ */
+- (instancetype)initWithText:(nullable NSString *)text
+ primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
+                  detailText:(nullable NSString *)detailText
+  detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
+                       value:(id<NSCopying, NSCoding, NSObject>)value
+                   exclusive:(BOOL)exclusive
+     textViewPlaceholderText:(NSString *)textViewPlaceholderText
+       textViewInputOptional:(BOOL)textViewInputOptional
+        textViewStartsHidden:(BOOL)textViewStartsHidden;
+
+@property (copy, readonly, nullable) NSString *textViewPlaceholderText;
+
+@property (readonly) BOOL textViewInputOptional;
+
+@property (readonly) BOOL textViewStartsHidden;
 
 @end
 
@@ -1094,8 +1294,6 @@ ORK_CLASS_AVAILABLE
 Returns an initialized numeric answer format using the specified style, unit designation, and range
  values.
  
- This method is the designated initializer.
- 
  @param style                   The style of the numeric answer (decimal or integer).
  @param unit                    A string that displays a localized version of the unit designation.
  @param minimum                 The minimum value to apply, or `nil` if none is specified.
@@ -1109,8 +1307,8 @@ Returns an initialized numeric answer format using the specified style, unit des
                       maximum:(nullable NSNumber *)maximum;
 
 /**
-Returns an initialized numeric answer format using the specified style, unit designation, and range
- values.
+ Returns an initialized numeric answer format using the specified style, unit designation, range
+ values, and precision.
  
  This method is the designated initializer.
  
@@ -1139,7 +1337,7 @@ Returns an initialized numeric answer format using the specified style, unit des
  
  Examples of unit designations are days, lbs, and liters.
  The unit string is included in the `ORKNumericQuestionResult` object.
-  */
+ */
 @property (copy, readonly, nullable) NSString *unit;
 
 /**
@@ -1169,6 +1367,20 @@ Returns an initialized numeric answer format using the specified style, unit des
  The default numeric answer.
  */
 @property (copy, nullable) NSNumber *defaultNumericAnswer;
+
+/**
+ A property that specifies whether the unit is hidden when the answer is empty.
+ 
+ Defaults to `YES`.
+ */
+@property (assign) BOOL hideUnitWhenAnswerIsEmpty;
+
+/**
+The placeholder to dislpay when the answer is empty.
+ 
+Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+*/
+@property (copy, nullable) NSString *placeholder;
 
 @end
 
@@ -1200,6 +1412,14 @@ ORK_CLASS_AVAILABLE
  the picker displays the current time of day.
  */
 @property (nonatomic, copy, readonly, nullable) NSDateComponents *defaultComponents;
+
+/**
+ The interval at which the date picker should display minutes.
+ 
+ When the value of this property is not explicitly set, the picker defaults to an interval of
+ one minute.
+ */
+@property (nonatomic) NSInteger minuteInterval;
 
 @end
 
@@ -1300,6 +1520,14 @@ When the value of this property is `nil`, there is no minimum.
  */
 @property (copy, readonly, nullable) NSCalendar *calendar;
 
+/**
+ The interval at which the date picker should display minutes.
+ 
+ When the value of this property is not explicitly set, the picker defaults to an interval of
+ one minute.
+ */
+@property (nonatomic) NSInteger minuteInterval;
+
 @end
 
 
@@ -1374,6 +1602,24 @@ ORK_CLASS_AVAILABLE
 @property BOOL multipleLines;
 
 /**
+A Boolean that determines if the clear button should be hidden.
+ 
+This only applies if multipleLines is set to YES.
+
+This By default, the value of this property is `NO`.
+*/
+@property BOOL hideClearButton;
+
+/**
+A Boolean that determines if the word count label should be hidden.
+ 
+This only applies if multipleLines is set to YES.
+
+This By default, the value of this property is `NO`.
+*/
+@property BOOL hideCharacterCountLabel;
+
+/**
  The autocapitalization type that applies to the user's input.
  
  By default, the value of this property is `UITextAutocapitalizationTypeSentences`.
@@ -1402,11 +1648,33 @@ ORK_CLASS_AVAILABLE
 @property UIKeyboardType keyboardType;
 
 /**
+ The semantic UITextContentType that applies to the user's input.
+ 
+ If specified the system can improve keyboard suggestions to help with filling forms and other
+ input. By default, the value of this property is `nil` meaning no specific type.
+ */
+@property (nonatomic, copy, nullable) UITextContentType textContentType;
+
+/**
+ The password generation rules to use for Automatic Secure Passwords.
+ 
+ If specified, overrides the default passsword generation rules for fields with secureTextEntry.
+ */
+@property (nonatomic, copy, nullable) UITextInputPasswordRules *passwordRules API_AVAILABLE(ios(12));
+
+/**
  Identifies whether the text object should hide the text being entered.
  
  By default, the value of this property is NO.
  */
 @property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+
+/**
+ The placeholder to dislpay when the answer is empty.
+ 
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+  */
+@property (copy, nullable) NSString *placeholder;
 
 @end
 
@@ -1419,6 +1687,17 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKEmailAnswerFormat : ORKAnswerFormat
+
+/**
+ Identifies whether this email answer format is being used as a username.
+ 
+ For integration with iOS 12's password management functionality. Use this answer format if your
+ username is also an email address, if it is not guaranteed to be an email address, use
+ `ORKTextAnswerFormat` and set the `textContentType` to `UITextContentTypeUsername`.
+ 
+ By default, the value of this property is NO.
+ */
+@property (nonatomic,getter=isUsernameField) BOOL usernameField;
 
 @end
 
@@ -1659,6 +1938,28 @@ ORK_CLASS_AVAILABLE
  By default, this value is YES.
  */
 @property (nonatomic, assign) BOOL useCurrentLocation;
+
+/**
+ The placeholder to dislpay when the answer is empty.
+ 
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+  */
+@property (copy, nullable) NSString *placeholder;
+
+@end
+
+/**
+ Socio-Economic Ladder Answer Format.
+
+ This answer format works best in ORKFormStep, there is a known issue where the cell might get squished if presented inside an ORKQuestionStep.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKSESAnswerFormat : ORKAnswerFormat
+
+- (instancetype)initWithTopRungText:(nullable NSString *)topRungText bottomRungText:(nullable NSString *)bottomRungText;
+
+@property (nonatomic, nullable) NSString *topRungText;
+@property (nonatomic, nullable) NSString *bottomRungText;
 
 @end
 

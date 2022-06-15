@@ -50,6 +50,12 @@ class ChartListViewController: UITableViewController {
     var chartTableViewCells: [UITableViewCell]!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.tableView.backgroundColor = UIColor.systemBackground
+        }
+        
         // ORKPieChartView
         pieChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell)
         let pieChartView = pieChartTableViewCell.pieChartView
@@ -65,7 +71,7 @@ class ChartListViewController: UITableViewController {
         lineGraphChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell)
         let lineGraphChartView = lineGraphChartTableViewCell.graphView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = lineGraphChartDataSource
-        lineGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
+        lineGraphChartView.tintColor = UIColor(red: 244 / 255, green: 190 / 255, blue: 74 / 255, alpha: 1)
         // Optional custom configuration
         lineGraphChartView.showsHorizontalReferenceLines = true
         lineGraphChartView.showsVerticalReferenceLines = true
@@ -74,7 +80,7 @@ class ChartListViewController: UITableViewController {
         discreteGraphChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell)
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = discreteGraphChartDataSource
-        discreteGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
+        discreteGraphChartView.tintColor = UIColor(red: 244 / 255, green: 190 / 255, blue: 74 / 255, alpha: 1)
         // Optional custom configuration
         discreteGraphChartView.showsHorizontalReferenceLines = true
         discreteGraphChartView.showsVerticalReferenceLines = true
@@ -83,12 +89,19 @@ class ChartListViewController: UITableViewController {
         barGraphChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as! BarGraphChartTableViewCell)
         let barGraphChartView = barGraphChartTableViewCell.graphView as! ORKBarGraphChartView
         barGraphChartView.dataSource = barGraphChartDataSource
-        barGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
+        barGraphChartView.tintColor = UIColor(red: 244 / 255, green: 190 / 255, blue: 74 / 255, alpha: 1)
         // Optional custom configuration
         barGraphChartView.showsHorizontalReferenceLines = true
         barGraphChartView.showsVerticalReferenceLines = true
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell, barGraphChartTableViewCell]
+        
+        if #available(iOS 13.0, *) {
+            pieChartView?.backgroundColor = UIColor.secondarySystemBackground
+            lineGraphChartView.backgroundColor = UIColor.secondarySystemBackground
+            discreteGraphChartView.backgroundColor = UIColor.secondarySystemBackground
+            barGraphChartView.backgroundColor = UIColor.secondarySystemBackground
+        }
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
@@ -98,7 +111,12 @@ class ChartListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = chartTableViewCells[(indexPath as NSIndexPath).row];
+        let cell = chartTableViewCells[(indexPath as NSIndexPath).row]
+        
+        if #available(iOS 13.0, *) {
+            cell.contentView.backgroundColor = UIColor.systemBackground
+        }
+        
         return cell
     }
     
@@ -108,6 +126,6 @@ class ChartListViewController: UITableViewController {
         lineGraphChartTableViewCell.graphView.animate(withDuration: 0.5)
         discreteGraphChartTableViewCell.graphView.animate(withDuration: 0.5)
         barGraphChartTableViewCell.graphView.animate(withDuration: 0.5)
-    }    
+    }
 
 }

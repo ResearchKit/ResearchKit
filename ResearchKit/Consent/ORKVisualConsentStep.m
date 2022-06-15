@@ -38,7 +38,8 @@
 
 #import "ORKHelpers_Internal.h"
 
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation ORKVisualConsentStep
 
 + (Class)stepViewControllerClass {
@@ -49,6 +50,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.consentDocument = consentDocument;
+        self.showsProgress = NO;
     }
     return self;
 }
@@ -88,8 +90,5 @@
     return super.hash ^ self.consentDocument.hash;
 }
 
-- (BOOL)showsProgress {
-    return NO;
-}
-
 @end
+#pragma clang diagnostic pop

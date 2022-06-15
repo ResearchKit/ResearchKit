@@ -75,13 +75,12 @@ static const NSUInteger NumberOfTowers = 3;
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     _towerOfHanoiCustomView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
-    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle, self.view.window);
     
     [self setUpTowers];
     [self setUpTowerViews];
     [self reloadData];
-    NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
-    NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT",nil);
+    NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT", nil);
+    NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT", nil);
     [self.activeStepView updateTitle:title text:text];
 }
 
@@ -187,7 +186,7 @@ static const NSUInteger NumberOfTowers = 3;
 - (void)updateTitleText {
     NSString *moves = ORKLocalizedStringFromNumber(@(self.moves.count));
     NSString *time = [self.dateComponentsFormatter stringFromTimeInterval:_secondsElapsed];
-    NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
+    NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT", nil);
     NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), moves, time];
     [self.activeStepView updateTitle:title text:text];
 }

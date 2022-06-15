@@ -38,6 +38,7 @@
 #import "ORKRoundTappingButton.h"
 
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKCollectionResult_Private.h"
 #import "ORKTrailmakingResult.h"
@@ -50,7 +51,6 @@
 
 
 #define BOUND(lo, hi, v) (((v) < (lo)) ? (lo) : (((v) > (hi)) ? (hi) : (v)))
-
 
 @implementation ORKTrailmakingStepViewController {
     ORKTrailmakingContentView *_trailmakingContentView;
@@ -107,20 +107,49 @@
 
 - (void)timerUpdated:(NSTimer*)timer {
     NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate: self.presentedDate];
-    NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_TIMER", nil), elapsed];
     
-    if (_errors == 1) {
-        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR", nil), text, _errors];
-    } else if (_errors > 1) {
-        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR_PLURAL", nil), text, _errors];
+    NSDateComponentsFormatter *durationFormatter = [NSDateComponentsFormatter new];
+    [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStyleAbbreviated];
+    [durationFormatter setAllowedUnits:NSCalendarUnitSecond];
+    [durationFormatter setFormattingContext:NSFormattingContextDynamic];
+    [durationFormatter setMaximumUnitCount:1];
+    NSString *text = [durationFormatter stringFromTimeInterval:elapsed];
+    
+    if(_errors > 0){
+        NSString *localizedErrors = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR_FORMAT", nil), _errors];
+        text = [NSString stringWithFormat:@"%@ %@", text, localizedErrors];
     }
     
     _timerLabel.text = text;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self start];
+    _updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdated:) userInfo:nil repeats:YES];
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        // Put focus on the direct touch area immediately so that the first touch gets registered
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _trailmakingContentView);
+    }
+    
+    [self layoutButtons];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (_updateTimer != nil) {
+        [_updateTimer invalidate];
+        _updateTimer = nil;
+    }
+}
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    
+    [self layoutButtons];
+}
+
+- (void)layoutButtons {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     int screenSize = MAX(screenRect.size.width, screenRect.size.height);
     
@@ -140,14 +169,17 @@
     [_timerLabel setFrame:labelRect];
     
     CGRect r = _trailmakingContentView.testArea;
-        
     int idx = 0;
+    
+    /* When viewWillLayoutSubviews is called for the first time _trailmakingContentView.testArea height and width might not be set which can cause all the buttons to stack on top of one another. This check avoids that scenario */
+    if (r.size.height == 0 && r.size.width == 0) {
+        return;
+    }
     
     for (ORKRoundTappingButton* b in _trailmakingContentView.tapButtons) {
         CGPoint pp = [[_testPoints objectAtIndex:idx] CGPointValue];
         
-        if (r.size.width > r.size.height)
-        {
+        if (r.size.width > r.size.height) {
             float temp = pp.x;
             pp.x = pp.y;
             pp.y = temp;
@@ -155,30 +187,10 @@
         
         const int x = BOUND(5, r.size.width - cx - 5, pp.x * r.size.width);
         const int y = BOUND(5, r.size.height - cx - 5, pp.y * r.size.height);
-        
         b.frame = CGRectMake(x, y, cx, cx);
         b.diameter = cx;
         
         idx++;
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self start];
-    _updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdated:) userInfo:nil repeats:YES];
-    if (UIAccessibilityIsVoiceOverRunning()) {
-        // Put focus on the direct touch area immediately so that the first touch gets registered
-        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _trailmakingContentView);
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (_updateTimer != nil) {
-        [_updateTimer invalidate];
-        _updateTimer = nil;
     }
 }
 

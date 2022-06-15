@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+ORK_CLASS_AVAILABLE
 @interface ORKdBHLToneAudiometryOnboardingStep : ORKFormStep
 
 @end

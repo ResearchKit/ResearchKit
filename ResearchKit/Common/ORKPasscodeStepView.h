@@ -29,14 +29,14 @@
  */
 
 
-#import "ORKVerticalContainerView.h"
+#import "ORKStepContainerView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKPasscodeTextField;
 
-@interface ORKPasscodeStepView : ORKVerticalContainerView
+@interface ORKPasscodeStepView : ORKStepContainerView
 
 @property (nonatomic, strong, readonly) ORKPasscodeTextField *textField;
 

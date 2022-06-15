@@ -29,8 +29,8 @@
  */
 
 
-#import "ORKLabel.h"
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKLabel.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

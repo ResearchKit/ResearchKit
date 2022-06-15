@@ -44,19 +44,19 @@ func randomColorArray(_ number: Int) -> [UIColor] {
         return colors
     }
 
-let NumberOfPieChartSegments = 13
+let numberOfPieChartSegments = 13
 
 class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
     
     func numberOfSegments(in pieChartView: ORKPieChartView ) -> Int {
-        return NumberOfPieChartSegments
+        return numberOfPieChartSegments
     }
     
     func pieChartView(_ pieChartView: ORKPieChartView, valueForSegmentAt index: Int) -> CGFloat {
         return CGFloat(index + 1)
     }
     
-    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String {
+    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String? {
         return "Title \(index + 1)"
     }
 }
@@ -64,7 +64,7 @@ class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
 class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
     
     lazy var backingStore: [UIColor] = {
-        return randomColorArray(NumberOfPieChartSegments)
+        return randomColorArray(numberOfPieChartSegments)
         }()
 
     func pieChartView(_ pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
@@ -72,7 +72,7 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
     }
 }
 
-class BaseFloatRangeGraphChartDataSource:  NSObject, ORKValueRangeGraphChartViewDataSource {
+class BaseFloatRangeGraphChartDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     var plotPoints: [[ORKValueRange]] = [[]]
     
     internal func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
@@ -88,7 +88,7 @@ class BaseFloatRangeGraphChartDataSource:  NSObject, ORKValueRangeGraphChartView
     }
 }
 
-class BaseFloatStackGraphChartDataSource:  NSObject, ORKValueStackGraphChartViewDataSource {
+class BaseFloatStackGraphChartDataSource: NSObject, ORKValueStackGraphChartViewDataSource {
     
     var plotPoints: [[ORKValueStack]] = [[]]
     
@@ -118,7 +118,7 @@ class LineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(),
                     ORKValueRange(value: 30),
                     ORKValueRange(value: 40),
-                    ORKValueRange(),
+                    ORKValueRange()
                 ],
                 [
                     ORKValueRange(value: 2),
@@ -127,7 +127,7 @@ class LineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(value: 16),
                     ORKValueRange(value: 32),
                     ORKValueRange(value: 50),
-                    ORKValueRange(value: 64),
+                    ORKValueRange(value: 64)
                 ],
                 [
                     ORKValueRange(),
@@ -138,8 +138,8 @@ class LineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(),
                     ORKValueRange(value: 30),
                     ORKValueRange(value: 40),
-                    ORKValueRange(),
-                ],
+                    ORKValueRange()
+                ]
         ]
     }
     
@@ -212,7 +212,7 @@ class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(minimumValue: 1, maximumValue: 3),
                     ORKValueRange(minimumValue: 2, maximumValue: 6),
                     ORKValueRange(minimumValue: 3, maximumValue: 9),
-                    ORKValueRange(minimumValue: 4, maximumValue: 13),
+                    ORKValueRange(minimumValue: 4, maximumValue: 13)
                 ],
                 [
                     ORKValueRange(value: 1),
@@ -221,15 +221,15 @@ class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(minimumValue: 5, maximumValue: 11),
                     ORKValueRange(minimumValue: 7, maximumValue: 13),
                     ORKValueRange(minimumValue: 10, maximumValue: 13),
-                    ORKValueRange(minimumValue: 12, maximumValue: 15),
+                    ORKValueRange(minimumValue: 12, maximumValue: 15)
                 ],
                 [
                     ORKValueRange(),
                     ORKValueRange(minimumValue: 5, maximumValue: 6),
                     ORKValueRange(),
                     ORKValueRange(minimumValue: 2, maximumValue: 15),
-                    ORKValueRange(minimumValue: 4, maximumValue: 11),
-                ],
+                    ORKValueRange(minimumValue: 4, maximumValue: 11)
+                ]
         ]
     }
     
@@ -275,7 +275,7 @@ class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
                     ORKValueStack(stackedValues: [1, 3, 2]),
                     ORKValueStack(stackedValues: [2, 6, 1]),
                     ORKValueStack(stackedValues: [3, 9, 4]),
-                    ORKValueStack(stackedValues: [4, 13, 2]),
+                    ORKValueStack(stackedValues: [4, 13, 2])
                 ],
                 [
                     ORKValueStack(stackedValues: [1]),
@@ -284,7 +284,7 @@ class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
                     ORKValueStack(stackedValues: [5, 11]),
                     ORKValueStack(stackedValues: [7, 13]),
                     ORKValueStack(stackedValues: [10, 13]),
-                    ORKValueStack(stackedValues: [12, 15]),
+                    ORKValueStack(stackedValues: [12, 15])
                 ],
                 [
                     ORKValueStack(),
@@ -292,8 +292,8 @@ class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
                     ORKValueStack(stackedValues: [2, 15]),
                     ORKValueStack(stackedValues: [4, 11]),
                     ORKValueStack(),
-                    ORKValueStack(stackedValues: [6, 16]),
-                ],
+                    ORKValueStack(stackedValues: [6, 16])
+                ]
         ]
     }
     
@@ -366,7 +366,7 @@ class PerformanceLineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(),
                     ORKValueRange(value: 30),
                     ORKValueRange(value: 40),
-                    ORKValueRange(),
+                    ORKValueRange()
                 ],
                 [
                     ORKValueRange(value: 2),
@@ -396,7 +396,7 @@ class PerformanceLineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(value: 16),
                     ORKValueRange(value: 32),
                     ORKValueRange(value: 50),
-                    ORKValueRange(value: 64),
+                    ORKValueRange(value: 64)
                 ],
                 [
                     ORKValueRange(),
@@ -434,8 +434,8 @@ class PerformanceLineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                     ORKValueRange(),
                     ORKValueRange(value: 30),
                     ORKValueRange(value: 40),
-                    ORKValueRange(),
-                ],
+                    ORKValueRange()
+                ]
         ]
     }
     

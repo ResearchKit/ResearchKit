@@ -31,15 +31,22 @@
 
 
 #import "ORKOrderedTask.h"
+#import "ORKFormStep.h"
+#import "ORKQuestionStep.h"
+#import "ORKFormStepViewController.h"
+#import "ORKAnswerFormat.h"
+#import "ORKInstructionStep.h"
+#import "ORKCompletionStep.h"
+#import "ORKFormItem_Internal.h"
 
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-
 @implementation ORKOrderedTask {
     NSString *_identifier;
+    NSMutableArray *_stepsThatDisplayProgress;
 }
 
 + (instancetype)new {
@@ -59,6 +66,7 @@
         _steps = steps;
         
         _progressLabelColor = ORKColor(ORKProgressLabelColorKey);
+        [self setUpArrayOfStepsThatShowProgress];
         [self validateParameters];
     }
     return self;
@@ -67,6 +75,13 @@
 - (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps {
     ORKOrderedTask *task = [self copyWithZone:nil];
     task->_steps = ORKArrayCopyObjects(steps);
+    return task;
+}
+
+- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps identifier:(NSString *)identifier {
+    ORKOrderedTask *task = [self copyWithZone:nil];
+    task->_steps = ORKArrayCopyObjects(steps);
+    task->_identifier = [identifier copy];
     return task;
 }
 
@@ -103,6 +118,33 @@
 
 - (NSString *)identifier {
     return _identifier;
+}
+
+- (void)setUpArrayOfStepsThatShowProgress {
+    _stepsThatDisplayProgress = [NSMutableArray new];
+    
+    // Steps will not be included in the _stepsThatDisplayProgress array if:
+    // 1) The step is a instruction or completion step (or inherits from it) and is the first or last step in the task
+    // 3) There is only ONE step in the entire task
+    // 4) The showsProgress property is set to false
+    
+    for (ORKStep *stepObject in _steps) {
+        NSUInteger indexOfStep = [self indexOfStep:stepObject];
+        BOOL isFirstOrLastStep = indexOfStep == 0 || indexOfStep == _steps.count - 1;
+        BOOL isInstructionOrCompletionStep = [stepObject isKindOfClass:[ORKInstructionStep class]] || [stepObject isKindOfClass:[ORKCompletionStep class]];
+        
+        if (!(isInstructionOrCompletionStep && isFirstOrLastStep) && [stepObject showsProgress]) {
+            [_stepsThatDisplayProgress addObject:stepObject.identifier];
+        }
+    }
+}
+
+- (void)appendSteps:(NSArray<ORKStep *> *)additionalSteps {
+    NSMutableArray *newSteps = [_steps mutableCopy];
+    
+    [newSteps addObjectsFromArray:additionalSteps];
+    
+    _steps = [newSteps copy];
 }
 
 - (NSUInteger)indexOfStep:(ORKStep *)step {
@@ -144,19 +186,19 @@
     }
     
     ORKStep *currentStep = step;
-    ORKStep *nextStep = nil;
+    ORKStep *previousStep = nil;
     
     if (currentStep == nil) {
-        nextStep = nil;
+        previousStep = nil;
         
     } else {
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != 0) {
-            nextStep = steps[index - 1];
+            previousStep = steps[index - 1];
         }
     }
-    return nextStep;
+    return previousStep;
 }
 
 - (ORKStep *)stepWithIdentifier:(NSString *)identifier {
@@ -172,13 +214,125 @@
 
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)taskResult {
     ORKTaskProgress progress;
-    progress.current = [self indexOfStep:step];
-    progress.total = _steps.count;
     
-    if (![step showsProgress]) {
+    if ([_stepsThatDisplayProgress containsObject:step.identifier]) {
+        progress.current = [_stepsThatDisplayProgress indexOfObject:step.identifier];
+        progress.total = _stepsThatDisplayProgress.count;
+        progress.shouldBePresented = progress.total > 1 ? YES : NO;
+    } else {
+        progress.current = [self indexOfStep:step];
         progress.total = 0;
+        progress.shouldBePresented = NO;
     }
+    
     return progress;
+}
+
+- (ORKTaskTotalProgress)totalProgressOfCurrentStep:(ORKStep *)currentStep {
+    ORKTaskTotalProgress totalProgress;
+    int totalQuestions = 0;
+    int currentStepStartingProgressNumber = 0;
+    
+    for (ORKStep *step in self.steps) {
+        if ([step isKindOfClass:[ORKFormStep class]]) {
+            ORKFormStep *formStep = (ORKFormStep *)step;
+            if (formStep.identifier == currentStep.identifier) {
+                currentStepStartingProgressNumber = (totalQuestions + 1);
+            }
+            NSMutableArray *allSections = [self calculateSectionsForFormItems:formStep.formItems];
+            totalQuestions += allSections.count;
+        } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
+            if (step.identifier == currentStep.identifier) {
+                currentStepStartingProgressNumber = (totalQuestions + 1);
+            }
+            totalQuestions += 1;
+        }
+    }
+    
+    totalProgress.currentStepStartingProgressPosition = currentStepStartingProgressNumber;
+    totalProgress.total = totalQuestions;
+    
+    return totalProgress;
+}
+
+- (NSMutableArray *)calculateSectionsForFormItems:(NSArray *)formItems {
+    NSMutableArray<NSMutableArray *> *_sections = [NSMutableArray new];
+    NSMutableArray *section = nil;
+    
+    for (ORKFormItem *item in formItems) {
+        BOOL itemRequiresSingleSection = [self doesItemRequireSingleSection:item];
+
+        if (!item.answerFormat) {
+            // Add new section
+            section = [NSMutableArray new];
+            [_sections addObject:section];
+            
+        } else if (itemRequiresSingleSection || _sections.count == 0) {
+            
+            NSMutableArray *newSection = [self buildSingleSection:item];
+            [_sections addObject:newSection];
+            section = newSection;
+        } else {
+            if (section) {
+                [section addObject:item];
+            }
+        }
+    }
+    return _sections;
+}
+
+- (NSMutableArray *)buildSingleSection:(ORKFormItem *)item {
+    NSMutableArray *section = nil;
+
+    // Section header
+    if ([item impliedAnswerFormat] == nil) {
+        // Add new section
+        section = [NSMutableArray new];
+        return section;
+    } else {
+
+        if ([self doesItemRequireSingleSection:item]) {
+            // Add new section
+            section = [NSMutableArray new];
+            [section addObject:item];
+            return section;
+
+        } else {
+            // In case no section available, create new one.
+            if (section == nil) {
+                section = [NSMutableArray new];
+            }
+            [section addObject:item];
+            return section;
+        }
+    }
+}
+
+- (BOOL)doesItemRequireSingleSection:(ORKFormItem *)item {
+    if (item.impliedAnswerFormat == nil) {
+        return NO;
+    }
+    
+    ORKAnswerFormat *answerFormat = [item impliedAnswerFormat];
+    
+    NSArray *singleSectionTypes = @[@(ORKQuestionTypeBoolean),
+                                    @(ORKQuestionTypeSingleChoice),
+                                    @(ORKQuestionTypeMultipleChoice),
+                                    @(ORKQuestionTypeLocation)];
+    
+    BOOL multiCellChoices = ([singleSectionTypes containsObject:@(answerFormat.questionType)] &&
+                             NO == [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]);
+    
+    BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
+    
+    BOOL scale = (answerFormat.questionType == ORKQuestionTypeScale);
+    
+    // Items that require individual section
+    if (multiCellChoices || multilineTextEntry || scale) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (NSSet *)requestedHealthKitTypesForReading {

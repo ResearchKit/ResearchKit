@@ -88,8 +88,10 @@
 
 @interface ORKAnimationPlaceholderView : UIView
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @property (nonatomic, strong) ORKEAGLMoviePlayerView *playerView;
-
+#pragma clang diagnostic pop
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 @end
@@ -100,7 +102,10 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         _playerView = [ORKEAGLMoviePlayerView new];
+#pragma clang diagnostic pop
         _playerView.hidden = YES;
         [self addSubview:_playerView];
     }
@@ -176,15 +181,16 @@
     [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (ORKEAGLMoviePlayerView *)animationPlayerView {
     return [(ORKAnimationPlaceholderView *)_animationView playerView];
 }
+#pragma clang diagnostic pop
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    CGRect viewBounds = self.view.bounds;
-   
+       
     // Prepare pageViewController
     _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
@@ -199,92 +205,6 @@
     }
     [self.view addSubview:_pageViewController.view];
     
-    if (ORKNeedWideScreenDesign(self.view)) {
-        UIView *_iPadContentView;
-        self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
-        [self setiPadBackgroundViewColor:_backgroundColor];
-        _iPadContentView = [self viewForiPadLayoutConstraints];
-        [_iPadContentView setBackgroundColor:_backgroundColor];
-        self.animationView = [ORKAnimationPlaceholderView new];
-        _animationView.translatesAutoresizingMaskIntoConstraints = NO;
-        [_iPadContentView addSubview:_animationView];
-        _pageViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-        [NSLayoutConstraint activateConstraints:@[
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeTop
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeTop
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeRight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeRight
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeBottom
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeBottom
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  
-                                                  
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeTop
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeTop
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeRight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeRight
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeHeight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:nil
-                                                                               attribute:NSLayoutAttributeNotAnAttribute
-                                                                              multiplier:1.0
-                                                                                constant:ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)]
-                                                  ]];
-    }
-    else {
-        
-        _pageViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _pageViewController.view.frame = viewBounds;
-        
-        self.view.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
-        
-        self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:
-                              (CGRect){{0, 0}, {viewBounds.size.width, ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)}}];
-        _animationView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
-        [self.view addSubview:_animationView];
-        _animationView.backgroundColor = [UIColor clearColor];
-    }
-    
-    
     [self addChildViewController:_pageViewController];
     [_pageViewController didMoveToParentViewController:self];
     
@@ -296,10 +216,13 @@
     [self updatePageIndex];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (ORKVisualConsentStep *)visualConsentStep {
     assert(!self.step || [self.step isKindOfClass:[ORKVisualConsentStep class]]);
     return (ORKVisualConsentStep *)self.step;
 }
+#pragma clang diagnostic pop
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -328,13 +251,9 @@
     return button;
 }
 
-- (void)ork_setBackButtonItem:(UIBarButtonItem *)backButton {
-    [super ork_setBackButtonItem:backButton];
-}
-
-- (void)updateNavLeftBarButtonItem {
+- (void)updateBarButtonItems {
     if ([self currentIndex] == 0) {
-        [super updateNavLeftBarButtonItem];
+        [super updateBarButtonItems];
     } else {
         self.navigationItem.leftBarButtonItem = [self goToPreviousPageButton];
     }
@@ -345,7 +264,7 @@
         return;
     }
     
-    [self updateNavLeftBarButtonItem];
+    [self updateBarButtonItems];
 }
 
 #pragma mark - actions
@@ -451,13 +370,6 @@
         return;
     }
     
-    if (ORKNeedWideScreenDesign(self.view)) {
-        [self setiPadStepTitleLabelText:viewController.title];
-    }
-    else {
-        self.title = viewController.title;
-    }
-    
     ORKWeakTypeOf(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
         ORKStrongTypeOf(self) strongSelf = weakSelf;
@@ -510,7 +422,7 @@
         BOOL semaphoreBTimedOut = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
         
         if (semaphoreATimedOut || semaphoreBTimedOut) {
-            ORK_Log_Debug(@"[Semaphore timed out] semaphoreATimedOut: %d, semaphoreBTimedOut: %d, transitionFinished: %d, animatorFinished: %d", semaphoreATimedOut, semaphoreBTimedOut, transitionFinished, animatorFinished);
+            ORK_Log_Debug("[Semaphore timed out] semaphoreATimedOut: %d, semaphoreBTimedOut: %d, transitionFinished: %d, animatorFinished: %d", semaphoreATimedOut, semaphoreBTimedOut, transitionFinished, animatorFinished);
         }
             
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -528,14 +440,14 @@
 
     if (!animateBeforeTransition && !transitionBeforeAnimate) {
         [_animator animateTransitionWithDirection:direction
-                                      loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                      loadHandler:^(ORKVisualConsentTransitionAnimator *loadAnimator, UIPageViewControllerNavigationDirection loadDirection) {
                                           
                                           fromViewController.imageHidden = YES;
                                           toViewController.imageHidden = YES;
                                           
                                           ORKStrongTypeOf(self) strongSelf = weakSelf;
                                           [strongSelf doShowViewController:toViewController
-                                                                 direction:direction
+                                                                 direction:loadDirection
                                                                   animated:YES
                                                                 completion:^(BOOL finished) {
                                                                     
@@ -543,27 +455,27 @@
                                                                     dispatch_semaphore_signal(semaphore);
                                                                 }];
                                       }
-                                completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                completionHandler:^(ORKVisualConsentTransitionAnimator *completedAnimator, UIPageViewControllerNavigationDirection completedDirection) {
         
                                     animatorFinished = YES;
-                                    finishAndNilAnimator(animator);
+                                    finishAndNilAnimator(completedAnimator);
                                     dispatch_semaphore_signal(semaphore);
                                 }];
         
     } else if (animateBeforeTransition && !transitionBeforeAnimate) {
         [_animator animateTransitionWithDirection:direction
-                                      loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                      loadHandler:^(ORKVisualConsentTransitionAnimator *loadAnimator, UIPageViewControllerNavigationDirection loadDirection) {
                                           
                                           fromViewController.imageHidden = YES;
                                       }
-                                completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                completionHandler:^(ORKVisualConsentTransitionAnimator *completedAnimator, UIPageViewControllerNavigationDirection completedDirection) {
                                     
                                     animatorFinished = YES;
-                                    finishAndNilAnimator(animator);
+                                    finishAndNilAnimator(completedAnimator);
                                     
                                     ORKStrongTypeOf(self) strongSelf = weakSelf;
                                     [strongSelf doShowViewController:toViewController
-                                                           direction:direction
+                                                           direction:completedDirection
                                                             animated:YES
                                                           completion:^(BOOL finished) {
                                                               
@@ -585,10 +497,10 @@
                             
                             [_animator animateTransitionWithDirection:direction
                                                           loadHandler:nil
-                                                    completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                                    completionHandler:^(ORKVisualConsentTransitionAnimator *completedAnimator, UIPageViewControllerNavigationDirection completedDirection) {
                                                         
                                                         animatorFinished = YES;
-                                                        finishAndNilAnimator(animator);
+                                                        finishAndNilAnimator(completedAnimator);
                                                         dispatch_semaphore_signal(semaphore);
                                                     }];
                             
@@ -625,13 +537,6 @@
                      forward:forward
                     animated:animated
                   completion:^(BOOL finished) {
-                      if (preloadNextViewController) {
-                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
-                          ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
-                          [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
-                                                              tintColor:currentSceneImageView.tintColor
-                                                                  scale:currentSceneImageView.window.screen.scale];
-                      }
                   }];
 }
 
@@ -647,7 +552,6 @@
     }
     // Stop old hairline scroll view observer and start new one
     _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView delegate:self];
-    [self.taskViewController setRegisteredScrollView:viewController.sceneView];
 
     ORKConsentSceneViewController *fromViewController = nil;
     NSUInteger currentIndex = [self currentIndex];

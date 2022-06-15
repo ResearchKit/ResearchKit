@@ -42,9 +42,9 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
     // MARK: Properties
     
     let segments = [
-        Segment(title: "Title 1", value: 10.0, color: UIColor(red: 217/225, green: 217/255, blue: 217/225, alpha: 1)),
-        Segment(title: "Title 2", value: 25.0, color: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1)),
-        Segment(title: "Title 3", value: 45.0, color: UIColor(red: 244/225, green: 190/255, blue: 74/225, alpha: 1))
+        Segment(title: "Title 1", value: 10.0, color: UIColor(red: 217 / 225, green: 217 / 255, blue: 217 / 225, alpha: 1)),
+        Segment(title: "Title 2", value: 25.0, color: UIColor(red: 142 / 255, green: 142 / 255, blue: 147 / 255, alpha: 1)),
+        Segment(title: "Title 3", value: 45.0, color: UIColor(red: 244 / 225, green: 190 / 255, blue: 74 / 225, alpha: 1))
     ]
     
     // MARK: ORKPieChartViewDataSource
@@ -61,7 +61,7 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
         return segments[index].color
     }
     
-    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String {
+    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String? {
         return segments[index].title
     }
 }

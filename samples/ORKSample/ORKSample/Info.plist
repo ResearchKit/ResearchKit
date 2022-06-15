@@ -27,7 +27,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>This app uses Face ID during passcode step.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>HealthKit</string>
+	<string>Health Share Usage description must be longer than one word</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Use healthkit</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -44,8 +44,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

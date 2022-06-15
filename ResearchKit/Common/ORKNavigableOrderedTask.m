@@ -151,7 +151,7 @@
             nextStep = [self stepWithIdentifier:nextStepIdentifier];
             
             if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
-                ORK_Log_Warning(@"Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules. Also please note that you'll get duplicate result entries each time you loop over the same step.", nextStep.identifier, step.identifier);
+                ORK_Log_Info("Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in navigable ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules. Also please note that you'll get duplicate result entries each time you loop over the same step.", nextStep.identifier, step.identifier);
             }
         } else {
             nextStep = [super stepAfterStep:step withResult:result];
@@ -159,7 +159,7 @@
         
         ORKSkipStepNavigationRule *skipNavigationRule = _skipStepNavigationRules[nextStep.identifier];
         if ([skipNavigationRule stepShouldSkipWithTaskResult:result]) {
-            return [self stepAfterStep:nextStep withResult:result];
+            nextStep = [self stepAfterStep:nextStep withResult:result];
         }
     }
     
@@ -174,13 +174,14 @@
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *previousStep = nil;
     __block NSInteger indexOfCurrentStepResult = -1;
-    [result.results enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ORKResult *result, NSUInteger idx, BOOL *stop) {
-        if ([result.identifier isEqualToString:step.identifier]) {
+    // Use results to account for ORKNavigableOrderedTask loops
+    [result.results enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ORKResult *enumeratedResult, NSUInteger idx, BOOL *stop) {
+        if ([enumeratedResult.identifier isEqualToString:step.identifier]) {
             indexOfCurrentStepResult = idx;
             *stop = YES;
         }
     }];
-    if (indexOfCurrentStepResult != -1 && indexOfCurrentStepResult != 0) {
+    if (indexOfCurrentStepResult > 0) {
         previousStep = [self stepWithIdentifier:result.results[indexOfCurrentStepResult - 1].identifier];
     }
     return previousStep;

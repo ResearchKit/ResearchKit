@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKdBHLToneAudiometryFrequencySample;
 @class ORKdBHLToneAudiometryUnit;
 
+ORK_EXTERN const double ORKInvalidDBHLValue ORK_AVAILABLE_DECL;
+
 ORK_CLASS_AVAILABLE
 @interface ORKdBHLToneAudiometryResult : ORKResult
 
@@ -45,7 +47,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) NSTimeInterval postStimulusDelay;
 
-@property (nonatomic, copy, nullable) NSString *headphoneType;
+@property (nonatomic, copy, nullable) ORKHeadphoneTypeIdentifier headphoneType;
 
 @property (nonatomic, copy, nullable) NSArray<ORKdBHLToneAudiometryFrequencySample *> *samples;
 

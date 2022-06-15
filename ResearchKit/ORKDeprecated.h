@@ -29,10 +29,10 @@
  */
 
 
-#import "ORKAnswerFormat.h"
-#import "ORKOrderedTask.h"
-#import "ORKRegistrationStep.h"
-#import "ORKQuestionStep.h"
+#import <ResearchKit/ORKAnswerFormat.h>
+#import <ResearchKit/ORKOrderedTask.h>
+#import <ResearchKit/ORKRegistrationStep.h>
+#import <ResearchKit/ORKQuestionStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

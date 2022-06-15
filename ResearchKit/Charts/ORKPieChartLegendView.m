@@ -42,7 +42,7 @@
 
 static const CGFloat MinimumInteritemSpacing = 10.0;
 static const CGFloat MinimumLineSpacing = 6.0;
-
+static NSString *const CellIdentifier = @"ORKPieChartLegendCell";
 
 @implementation ORKPieChartLegendView {
     __weak ORKPieChartView *_parentPieChartView;
@@ -69,7 +69,7 @@ static const CGFloat MinimumLineSpacing = 6.0;
     pieChartLegendCollectionViewLayout.estimatedItemSize = CGSizeMake(100.0, 30.0);
     self = [super initWithFrame:CGRectZero collectionViewLayout:pieChartLegendCollectionViewLayout];
     if (self) {
-        [self registerClass:[ORKPieChartLegendCell class] forCellWithReuseIdentifier:@"cell"];
+        [self registerClass:[ORKPieChartLegendCell class] forCellWithReuseIdentifier:CellIdentifier];
         _sizingCell = [[ORKPieChartLegendCell alloc] initWithFrame:CGRectZero];
         
         _parentPieChartView = parentPieChartView;
@@ -94,17 +94,28 @@ static const CGFloat MinimumLineSpacing = 6.0;
     return self;
 }
 
+- (NSArray<NSNumber *> *)_validIndexesWithReportedSegmentCount:(NSInteger)reportedSegmentCount {
+    NSMutableArray<NSNumber *> *validIndexes = [NSMutableArray new];
+    for (NSInteger currentIndex = 0; currentIndex < reportedSegmentCount; currentIndex++) {
+        NSString *title = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:currentIndex];
+        if (title) {
+            [validIndexes addObject:@(currentIndex)];
+        }
+    }
+    return [validIndexes copy];
+}
+
 - (void)cacheCellSizes {
     _cellSizes = [NSMutableArray new];
     _totalCellWidth = 0;
-    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
-    for (NSInteger index = 0; index < numberOfSegments; index++) {
-        // cell size
+    NSArray<NSNumber *> *validIndexes = [self _validIndexesWithReportedSegmentCount:[_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView]];
+    for (NSNumber *indexNumber in validIndexes) {
+        NSInteger index = indexNumber.integerValue;
         _sizingCell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:index];
         CGSize size = [_sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         [_cellSizes addObject:[NSValue valueWithCGSize:size]];
         _totalCellWidth += size.width;
-        if (index != numberOfSegments - 1) {
+        if (index != validIndexes.count - 1) {
             _totalCellWidth += MinimumInteritemSpacing;
         }
     }
@@ -149,23 +160,29 @@ static const CGFloat MinimumLineSpacing = 6.0;
 #pragma mark - UICollectionViewDataSource / UICollectionViewDelegate
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:indexPath.item];
-    NSString *title = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:indexPath.item];
+    NSAssert(indexPath.section == 0, @"Section cannot be non-zero on an ORKPieChartView.");
     
-    ORKPieChartLegendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.tag = indexPath.item;
+    NSArray<NSNumber *> *validIndexes = [self _validIndexesWithReportedSegmentCount:[_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView]];
+    
+    NSAssert(validIndexes.count > indexPath.item, @"A valid index path has not been found for item: %ld", (long)indexPath.item);
+    
+    NSInteger correctedIndex = validIndexes[indexPath.item].integerValue;
+    NSString *title = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:correctedIndex];
+    CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:correctedIndex];
+    ORKPieChartLegendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.tag = correctedIndex;
     cell.titleLabel.text = title;
     cell.titleLabel.font = _labelFont;
-    cell.dotView.backgroundColor = [_parentPieChartView colorForSegmentAtIndex:indexPath.item];
+    cell.dotView.backgroundColor = [_parentPieChartView colorForSegmentAtIndex:correctedIndex];
     
     cell.accessibilityLabel = title;
     cell.accessibilityValue = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 : value / _sumOfValues * 100];
-    
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    NSInteger numberOfReportedCells = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    return (NSInteger)[self _validIndexesWithReportedSegmentCount:numberOfReportedCells].count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView

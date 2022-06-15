@@ -34,13 +34,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * ORKBiologicalSexIdentifier NS_STRING_ENUM;
+typedef NSString *ORKBiologicalSexIdentifier NS_STRING_ENUM;
 
 ORK_EXTERN ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierFemale;
 ORK_EXTERN ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale;
 ORK_EXTERN ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther;
 
-typedef NSString * ORKBloodTypeIdentifier NS_STRING_ENUM;
+typedef NSString *ORKBloodTypeIdentifier NS_STRING_ENUM;
 
 ORK_EXTERN ORKBloodTypeIdentifier const ORKBloodTypeIdentifierAPositive;
 ORK_EXTERN ORKBloodTypeIdentifier const ORKBloodTypeIdentifierANegative;

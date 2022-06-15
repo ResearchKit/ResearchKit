@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03F7FD9F23959DD500432EF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */; };
 		3E39B9FB1ABF682D00C2ABE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9F91ABF682D00C2ABE5 /* Main.storyboard */; };
 		3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FC1ABF683700C2ABE5 /* LaunchScreen.xib */; };
 		3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FF1ABF683F00C2ABE5 /* Images.xcassets */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		246DF9FF1BEADFDF00591E9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA021BEAE01700591E9A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA031BEAE02100591E9A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */,
+				03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */,
 				259E77171AFFD23B0070F786 /* Displaying Charts */,
 				3E838B891ABFD104006AE2D4 /* Displaying Results */,
 				3E838B881ABFD0E5006AE2D4 /* Presenting Tasks */,
@@ -239,22 +242,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = researchkit.org;
 				TargetAttributes = {
 					869230BD1AAA890A00BFE11B = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeamName = "Apple Inc. - SPG-NGS";
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
 			buildConfigurationList = 869230B91AAA890A00BFE11B /* Build configuration list for PBXProject "ORKCatalog" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				fr,
@@ -263,11 +266,9 @@
 				"zh-Hant",
 				ja,
 				es,
-				"es-MX",
 				it,
 				nl,
 				ko,
-				"pt-BR",
 				"pt-PT",
 				da,
 				fi,
@@ -295,6 +296,16 @@
 				"en-AU",
 				"zh-HK",
 				"fr-CA",
+				"es-419",
+				pt,
+				zh_CN,
+				zh_TW,
+				es_419,
+				pt_PT,
+				en_GB,
+				en_AU,
+				zh_HK,
+				fr_CA,
 			);
 			mainGroup = 869230B51AAA890A00BFE11B;
 			productRefGroup = 869230BF1AAA890A00BFE11B /* Products */;
@@ -334,6 +345,7 @@
 				BC9A273D1B82741900BDA84D /* ResultTableViewProviders.swift in Sources */,
 				BC9A273F1B82741900BDA84D /* TextImageTableViewCell.swift in Sources */,
 				86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */,
+				03F7FD9F23959DD500432EF6 /* SceneDelegate.swift in Sources */,
 				BC9A273C1B82741900BDA84D /* ImageTableViewCell.swift in Sources */,
 				BC9A27351B82740D00BDA84D /* TaskListViewController.swift in Sources */,
 				BC9A27341B82740D00BDA84D /* TaskListRow.swift in Sources */,
@@ -435,6 +447,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -459,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -491,6 +504,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -508,7 +522,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
@@ -522,20 +536,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "ORKCatalog/Supporting Files/ORKCatalog.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKCatalog";
 				PRODUCT_NAME = ORKCatalog;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -545,20 +558,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "ORKCatalog/Supporting Files/ORKCatalog.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKCatalog";
 				PRODUCT_NAME = ORKCatalog;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

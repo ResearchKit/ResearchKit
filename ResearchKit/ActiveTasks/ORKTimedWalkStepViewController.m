@@ -33,6 +33,7 @@
 
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKTimedWalkContentView.h"
 
@@ -82,10 +83,9 @@
     [super viewDidLoad];
     
     self.timedWalkContentView = [ORKTimedWalkContentView new];
-    self.timedWalkContentView.image = [self timedWalkStep].image;
     self.activeStepView.activeCustomView = self.timedWalkContentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.navigationFooterView.continueEnabled = YES;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
+    _navigationFooterView.continueEnabled = YES;
     
     self.timerUpdateInterval = 0.1f;
 }

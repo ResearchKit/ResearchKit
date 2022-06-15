@@ -13,15 +13,6 @@
       "idiom" : "universal",
       "filename" : "speechInNoise@3x.png",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "ipad",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "filename" : "speechInNoise@2x~ipad.png",
-      "scale" : "2x"
     }
   ],
   "info" : {

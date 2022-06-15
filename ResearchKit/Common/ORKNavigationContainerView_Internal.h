@@ -29,15 +29,14 @@
  */
 
 #import <ResearchKit/ORKTypes.h>
-#import "ORKNavigationContainerView.h"
-#import "ORKContinueButton.h"
-#import "ORKBorderedButton.h"
-#import "ORKFootnoteLabel.h"
+#import <ResearchKit/ORKContinueButton.h>
+#import <ResearchKit/ORKNavigationContainerView.h>
+#import <ResearchKit/ORKFootnoteLabel.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKNavigationContainerBorderedButton: ORKBorderedButton
+@interface ORKBorderedButton ()
 
 - (void)setAppearanceAsTextButton;
 - (void)setAppearanceAsBoldTextButton;
@@ -45,13 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
 @interface ORKNavigationContainerView ()
 
 @property (nonatomic, strong, readonly) ORKContinueButton *continueButton;
-@property (nonatomic, strong, readonly) ORKNavigationContainerBorderedButton *skipButton;
+@property (nonatomic, strong, readonly) ORKBorderedButton *skipButton;
 @property (nonatomic, strong, readonly) ORKFootnoteLabel *footnoteLabel;
-@property (nonatomic, strong, readonly) ORKNavigationContainerBorderedButton *cancelButton;
+@property (nonatomic, strong, readonly) ORKBorderedButton *cancelButton;
 
 @property (nonatomic) BOOL useNextForSkip;
 @property (nonatomic, getter=isOptional) BOOL optional;

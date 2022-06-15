@@ -30,10 +30,12 @@
 
 
 #import "ORKTableStep.h"
-
 #import "ORKTableStepViewController.h"
-
 #import "ORKHelpers_Internal.h"
+
+static const CGFloat CellPadding = 20.0;
+static const CGFloat BulletNumberMaxWidth = 24.0 ;
+static const CGFloat BulletNumberToTextPadding = 20.0;
 
 
 ORKDefineStringKey(ORKBasicCellReuseIdentifier);
@@ -78,23 +80,29 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     textLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [cell addSubview:textLabel];
     
-    [textLabel.topAnchor constraintEqualToAnchor:cell.topAnchor constant:20.0].active = YES;
-    [textLabel.bottomAnchor constraintEqualToAnchor:cell.bottomAnchor constant:-20.0].active = YES;
+    [textLabel.topAnchor constraintEqualToAnchor:cell.topAnchor constant:CellPadding].active = YES;
+    [cell.bottomAnchor constraintEqualToAnchor:textLabel.bottomAnchor constant:CellPadding].active = YES;
     [textLabel.trailingAnchor constraintEqualToAnchor:cell.trailingAnchor constant:-24.0].active = YES;
     
     UIImage *bullet = nil;
-    if (self.isBulleted) {
-        if (self.bulletIconNames != nil) {
-            if (indexPath.row < self.bulletIconNames.count) {
-                NSString *iconName = [self.bulletIconNames objectAtIndex:indexPath.row];
-                bullet = [[UIImage imageNamed:iconName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            }
-        } else {
-            if (!_circleBulletImage) {
-                _circleBulletImage = [self circleImage];
-            }
-            bullet = [_circleBulletImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UILabel *numberLabel = nil;
+
+    if (self.bulletType == ORKBulletTypeCircle) {
+        if (!_circleBulletImage) {
+            _circleBulletImage = [self circleImage];
         }
+        bullet = [_circleBulletImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    } else if (self.bulletType == ORKBulletTypeImage && _bulletIconNames != nil) {
+        if (indexPath.row < self.bulletIconNames.count) {
+            NSString *iconName = [self.bulletIconNames objectAtIndex:indexPath.row];
+            bullet = [[UIImage imageNamed:iconName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        }
+    } else if (self.bulletType == ORKBulletTypeNumber) {
+        numberLabel = [[UILabel alloc] init];
+        numberLabel.text = [NSString stringWithFormat: @"%ld.", indexPath.row + 1];
+        numberLabel.numberOfLines = 0;
+        numberLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [cell addSubview:numberLabel];
     }
     
     if (bullet != nil) {
@@ -102,7 +110,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         bulletView.translatesAutoresizingMaskIntoConstraints = NO;
         [cell addSubview:bulletView];
         
-        CGFloat size = self.bulletIconNames != nil ? 40.0 : 8.0;
+        CGFloat size = (self.bulletIconNames && self.bulletType == ORKBulletTypeImage) ? 40.0 : 8.0;
         CGFloat topPadding = self.bulletIconNames != nil ? 20.0 : (20 + (size * .5));
         CGFloat leadingPadding = self.bulletIconNames != nil ? 24.0 : (24 + (size * .5));
         
@@ -112,10 +120,20 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         [bulletView.widthAnchor constraintEqualToConstant:size].active = YES;
         [bulletView.leadingAnchor constraintEqualToAnchor:cell.leadingAnchor constant:leadingPadding].active = YES;
         [textLabel.leadingAnchor constraintEqualToAnchor:bulletView.trailingAnchor constant:20.0].active = YES;
-        
+    }
+    else if (numberLabel != nil) {
+        [numberLabel.topAnchor constraintEqualToAnchor:textLabel.topAnchor constant:0.0].active = YES;
+        [numberLabel.widthAnchor constraintEqualToConstant:BulletNumberMaxWidth].active = YES;
+        numberLabel.textAlignment = NSTextAlignmentRight;
+        [numberLabel.leadingAnchor constraintEqualToAnchor:cell.leadingAnchor constant:0.0].active = YES;
+        [textLabel.leadingAnchor constraintEqualToAnchor:numberLabel.trailingAnchor constant:BulletNumberToTextPadding].active = YES;
     } else {
         [textLabel.leadingAnchor constraintEqualToAnchor:cell.leadingAnchor constant:24.0].active = YES;
     }
+}
+
+- (UITableViewStyle)customTableViewStyle {
+    return [self numberOfSections] > 1 ? UITableViewStyleGrouped : UITableViewStylePlain;
 }
 
 - (UIImage*)resizeImage:(UIImage*)image toSize:(CGSize)size {
@@ -153,6 +171,9 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTableStep *step = [super copyWithZone:zone];
     step->_items = ORKArrayCopyObjects(_items);
+    step->_bulletType = _bulletType;
+    step->_bulletIconNames = ORKArrayCopyObjects(_bulletIconNames);
+    step->_allowsSelection = _allowsSelection;
     return step;
 }
 
@@ -166,6 +187,10 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, items, NSObject);
+        ORK_DECODE_INTEGER(aDecoder, bulletType);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, bulletIconNames, NSString);
+        ORK_DECODE_BOOL(aDecoder, allowsSelection);
+        ORK_DECODE_BOOL(aDecoder, pinNavigationContainer);
     }
     return self;
 }
@@ -173,6 +198,10 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, items);
+    ORK_ENCODE_INTEGER(aCoder, bulletType);
+    ORK_ENCODE_OBJ(aCoder, bulletIconNames);
+    ORK_ENCODE_BOOL(aCoder, allowsSelection);
+    ORK_ENCODE_BOOL(aCoder, pinNavigationContainer);
 }
 
 #pragma mark - Equality
@@ -181,11 +210,16 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.items, castObject.items);
+    return (isParentSame
+            && ORKEqualObjects(self.items, castObject.items)
+            && (self.bulletType == castObject.bulletType)
+            && (self.allowsSelection == castObject.allowsSelection)
+            && ORKEqualObjects(self.bulletIconNames, castObject.bulletIconNames)
+            && self.pinNavigationContainer == castObject.pinNavigationContainer);
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.items.hash;
+    return super.hash ^ self.items.hash ^ self.bulletIconNames.hash ^ (_bulletType ? 0xf : 0x0) ^ (_allowsSelection ? 0xf : 0x0) ^ (_pinNavigationContainer ? 0xf : 0x0);
 }
 
 @end

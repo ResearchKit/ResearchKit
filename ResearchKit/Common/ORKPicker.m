@@ -40,36 +40,6 @@
 
 #import "ORKAnswerFormat.h"
 
-/**
- Creates a picker appropriate to the type required by answerformat
- 
- @param answerFormat   An ORKAnswerFormat object which specified the format of the result
- @param answer         The current answer (to set as the picker's current result)
- @param delegate       A delegate who conforms to ORKPickerDelegate
- 
- @return The picker object
- */
-id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPickerDelegate> delegate) {
-    id<ORKPicker> picker;
-    
-    if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
-        picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    } else if ([answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]]) {
-        picker = [[ORKTimeIntervalPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    } else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]]) {
-        picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
-        picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    } else if ([answerFormat isKindOfClass:[ORKWeightAnswerFormat class]]) {
-        picker = [[ORKWeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    } else if ([answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]]) {
-        picker = [[ORKMultipleValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    }
-
-    return picker;
-}
-
-
 @implementation ORKPicker : NSObject
 
 /**
@@ -82,7 +52,11 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
  @return The picker object
  */
 + (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer delegate:(id<ORKPickerDelegate>) delegate {
-    id<ORKPicker> picker;
+    id<ORKPicker> picker = nil;
+    
+    if ([answer isKindOfClass:[ORKDontKnowAnswer class]]) {
+        answer = nil;
+    }
     
     if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
@@ -97,6 +71,8 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
     } else if ([answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]]) {
         picker = [[ORKMultipleValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
+    
+    NSAssert(picker, @"Cannot create picker for answer format %@", answerFormat);
     
     return picker;
 }

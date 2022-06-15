@@ -39,6 +39,6 @@ public extension ORKPredicateStepNavigationRule {
             resultPredicates.append(tuple.resultPredicate)
             destinationStepIdentifiers.append(tuple.destinationStepIdentifier)
         }
-        self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifierOrNil, validateArrays: true);
+        self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifierOrNil, validateArrays: true)
     }
 }

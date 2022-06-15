@@ -35,6 +35,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, ORKBulletType) {
+    ORKBulletTypeNone = 0,
+    ORKBulletTypeCircle,
+    ORKBulletTypeImage,
+    ORKBulletTypeNumber
+} ORK_ENUM_AVAILABLE;
+
 /**
  The `ORKTableStepSource` is a protocol that can be used for presenting a list of model
  objects in a UITableView. Any `ORKStep` subclass that implements this protocol can be used with
@@ -107,6 +114,12 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (nullable UIView *)viewForHeaderInSection:(NSInteger)section tableView:(UITableView *)tableView;
 
+/**
+ Optional override for configuring the table style.
+ */
+@optional
+- (UITableViewStyle)customTableViewStyle;
+
 @end
 
 /**
@@ -135,7 +148,12 @@ ORK_CLASS_AVAILABLE
 /**
  Boolean flag representing if the table data should be displayed in a bulleted format.
  */
-@property (nonatomic) BOOL isBulleted;
+@property (nonatomic) BOOL isBulleted DEPRECATED_MSG_ATTRIBUTE("isBulleted property has been deprecated. Please use 'bulletType' property to indicate `ORKBulletType` enum.");
+
+/**
+ The bullet type to use for bullet items.
+ */
+@property (nonatomic) ORKBulletType bulletType;
 
 /**
  The array of icon names to display instead of bullets.
@@ -144,6 +162,20 @@ ORK_CLASS_AVAILABLE
  images in you application project not the ResearchKit framework.
  */
 @property (nonatomic, copy, nullable) NSArray <NSString *> *bulletIconNames;
+
+/**
+ Boolean flag representing if the table rows should be selectable.
+ 
+ Default value is NO
+ */
+@property (nonatomic) BOOL allowsSelection;
+
+/**
+ Boolean flag representing if the navigation container should get pinned to the bottom of the view
+ 
+ Default value is NO
+ */
+@property (nonatomic) BOOL pinNavigationContainer;
 
 /**
  Returns the number of sections in the tableview used to display this step. Default = `1`.

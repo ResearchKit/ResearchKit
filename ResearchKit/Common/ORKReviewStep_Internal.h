@@ -36,10 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKReviewStep ()
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray *)steps
-                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource;
-
 /**
  A Boolean value indicating whether this review step is used in standalone mode (read-only). 
  */

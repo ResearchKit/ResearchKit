@@ -161,7 +161,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     if (!_clearAnnotationsButton) {
         _clearAnnotationsButton = [ORKBorderedButton new];
     }
-    _clearAnnotationsButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+    [_clearAnnotationsButton updateContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
     _clearAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _clearButtonView = [UIView new];
     _clearButtonView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -197,7 +197,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     if (!_applyAnnotationsButton) {
         _applyAnnotationsButton = [ORKBorderedButton new];
     }
-    _applyAnnotationsButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+    [_applyAnnotationsButton updateContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
     _applyAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _applyButtonView = [UIView new];
     _applyButtonView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -766,7 +766,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     return _pdfView.document;
 }
 
-#pragma UISearchBarDelegate
+#pragma mark UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [_pdfView.document beginFindString:searchText withOptions:NSCaseInsensitiveSearch];
@@ -827,13 +827,13 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     [self updateActionButtonsAppearance];
 }
 
-#pragma ORKFreehandDrawingViewDelegate
+#pragma mark ORKFreehandDrawingViewDelegate
 
 - (void)freehandDrawingViewDidEditImage:(ORKFreehandDrawingView *)freehandDrawingView {
     [self updateClearApplyAnnotationButtons];
 }
 
-#pragma PDFDocumentDelegate
+#pragma mark PDFDocumentDelegate
 
 - (void)documentDidUnlock:(NSNotification *)notification {
     [self setEnableAllButtons:YES];

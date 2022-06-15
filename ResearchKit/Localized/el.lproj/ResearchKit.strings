@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "Η %@ θα λάβει τα δεδομένα που θα προκύψουν από τη συμμετοχή σας σε αυτήν τη μελέτη.\n\nΗ πιο ευρεία κοινοποίηση των κωδικοποιημένων δεδομένων μελέτης σας (χωρίς πληροφορίες όπως π.χ. το όνομά σας) μπορεί να ωφελήσουν αυτήν και τυχόν μελλοντικές μελέτες.";
 "LEARN_MORE_CONSENT_SHARING" = "Μάθετε περισσότερα για την κοινοποίηση δεδομένων";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@: όνομα (με κεφαλαία)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@: υπογραφή";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Ονοματεπώνυμο (ολογράφως)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Υπογραφή";
 "CONSENT_DOC_LINE_DATE" = "Ημερομηνία";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ από %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Ερώτηση %1$@ από %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Παραλείφθηκε";
+"REVIEW_EDIT_ANSWER" = "Επεξεργασία";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Μη έγκυρη τιμή";
@@ -104,17 +111,17 @@
 "EMAIL_FORM_ITEM_TITLE" = "Email";
 "EMAIL_FORM_ITEM_PLACEHOLDER" = "gmilosporos@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Συνθηματικό";
-"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε συνθηματικό";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγωγή";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Επιβεβαίωση";
-"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε πάλι το συνθηματικό";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγωγή πάλι";
 "CONFIRM_PASSWORD_ERROR_MESSAGE" = "Τα συνθηματικά δεν ταιριάζουν.";
 "ADDITIONAL_INFO_SECTION_TITLE" = "Πρόσθετες πληροφορίες";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "Γιάννης";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "Μηλοσπόρος";
 "GENDER_FORM_ITEM_TITLE" = "Φύλο";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε φύλο";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Επιλογή";
 "DOB_FORM_ITEM_TITLE" = "Ημερομηνία γέννησης";
-"DOB_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε ημερομηνία";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Επιλογή";
 "PHONE_NUMBER_FORM_ITEM_TITLE" = "Αριθμός τηλεφώνου";
 "PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
@@ -129,21 +136,21 @@
 "FORGOT_PASSWORD_BUTTON_TITLE" = "Ξεχάσατε το συνθηματικό;";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Εισαγάγετε συνθηματικό";
-"PASSCODE_CONFIRM_MESSAGE" = "Επιβεβαίωση συνθηματικού";
-"PASSCODE_SAVED_MESSAGE" = "Το συνθηματικό αποθηκεύτηκε";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "Έγινε έλεγχος ταυτότητας συνθηματικού";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Εισαγάγετε το παλιό συνθηματικό";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Εισαγάγετε το νέο συνθηματικό";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Επιβεβαίωση νέου συνθηματικού";
-"PASSCODE_INVALID_ALERT_TITLE" = "Λανθασμένο συνθηματικό";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Ασυμφωνία συνθηματικών. Δοκιμάστε ξανά.";
+"PASSCODE_PROMPT_MESSAGE" = "Εισαγωγή κωδικού";
+"PASSCODE_CONFIRM_MESSAGE" = "Επιβεβαίωση κωδικού";
+"PASSCODE_SAVED_MESSAGE" = "Ο κωδικός αποθηκεύτηκε";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Έγινε έλεγχος ταυτότητας κωδικού";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Εισαγάγετε τον παλιό κωδικό";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Εισαγάγετε τον νέο κωδικό";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Επιβεβαίωση νέου κωδικού";
+"PASSCODE_INVALID_ALERT_TITLE" = "Λανθασμένος κωδικός";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Ασυμφωνία κωδικών. Δοκιμάστε ξανά.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Πραγματοποιήστε έλεγχο ταυτότητας με Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Σφάλμα Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Επιτρέπονται μόνο αριθμητικοί χαρακτήρες.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Ένδειξη προόδου εισαγωγής συνθηματικού";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Ένδειξη προόδου εισαγωγής κωδικού";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Εισάχθηκαν %@ από %@ ψηφία";
-"PASSCODE_FORGOT_BUTTON_TITLE" = "Ξεχάσατε το συνθηματικό;";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Ξεχάσατε τον κωδικό;";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Δεν ήταν δυνατή η προσθήκη στοιχείου της Κλειδοθήκης.";
@@ -182,7 +189,7 @@
 "MEASURING_UNIT_CM" = "εκ.";
 "MEASURING_UNIT_FT" = "πδ";
 "MEASURING_UNIT_IN" = "ίντσ.";
-"MEASURING_UNIT_KG" = "κιλ";
+"MEASURING_UNIT_KG" = "κ.";
 "MEASURING_UNIT_LB" = "λβ";
 "MEASURING_UNIT_OZ" = "oz";
 
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Ακύρωση";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Εκκαθάριση";
+"BUTTON_CLEAR_SIGNATURE" = "Εκκαθάριση υπογραφής";
 "BUTTON_APPLY" = "Εφαρμογή";
 "BUTTON_DISAGREE" = "Απόρριψη";
 "BUTTON_DONE" = "Τέλος";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Εκκαθάριση απάντησης";
 "BUTTON_READ_ONLY_MODE" = "Δεν είναι δυνατή η τροποποίηση αυτής της απάντησης.";
 "BUTTON_COPYRIGHT" = "Πνευματικά δικαιώματα";
+"BUTTON_CLOSE" = "Κλείσιμο";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Έναρξη δραστηριότητας σε";
 "TASK_COMPLETE_TITLE" = "Η δραστηριότητα ολοκληρώθηκε";
 "TASK_COMPLETE_TEXT" = "Τα δεδομένα σας θα αναλυθούν και θα ειδοποιηθείτε όταν είναι έτοιμα τα αποτελέσματα.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "Απομένουν %@ δευτερόλεπτα.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Απομένουν %@.";
 "TOUCH_ANYWHERE_LABEL" = "Αγγίξτε οπουδήποτε για να συνεχίσετε";
 
 /* Image capture step. */
@@ -273,8 +282,8 @@
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Χρησιμοποιήστε δύο δάχτυλα του ίδιου χεριού για εναλλάξ άγγιγμα των κουμπιών στην οθόνη.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Χρησιμοποιήστε δύο δάχτυλα του δεξιού χεριού για εναλλάξ άγγιγμα των κουμπιών στην οθόνη.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Χρησιμοποιήστε δύο δάχτυλα του αριστερού χεριού για εναλλάξ άγγιγμα των κουμπιών στην οθόνη.";
-"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Τώρα επαναλάβετε την ίδια δοκιμή με το δεξιό σας χέρι.";
-"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Τώρα επαναλάβετε την ίδια δοκιμή με το αριστερό σας χέρι.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Τώρα επαναλάβετε το ίδιο τεστ με το δεξιό σας χέρι.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Τώρα επαναλάβετε το ίδιο τεστ με το αριστερό σας χέρι.";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "Αγγίξτε με το ένα δάχτυλο και μετά με το άλλο. Προσπαθήστε ώστε ο χρόνος μεταξύ των αγγιγμάτων να είναι όσο το δυνατόν ίδιος. Συνεχίστε τα αγγίγματα για %@.";
 "TAPPING_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
 "TAPPING_CALL_TO_ACTION_NEXT" = "Αγγίξτε «Επόμενο» για να ξεκινήσετε.";
@@ -301,39 +310,66 @@
 "AUDIO_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί τη φωνή σας μέσω της εγγραφής με το μικρόφωνο στο κάτω μέρος της συσκευής σας.";
 "AUDIO_TOO_LOUD_LABEL" = "Πολύ δυνατά";
 "AUDIO_GENERIC_ERROR_LABEL" = "Δεν είναι δυνατή η εγγραφή ήχου";
-"AUDIO_LEVEL_CHECK_LABEL" = "Περιμένετε μέχρι να ελεγχθεί το επίπεδο θορύβου βάθους.";
+"AUDIO_LEVEL_CHECK_LABEL" = "Περιμένετε μέχρι να ελεγχθεί το επίπεδο θορύβου παρασκηνίου.";
 "AUDIO_TOO_LOUD_MESSAGE" = "Το επίπεδο περιβαλλοντικού θορύβου είναι πολύ υψηλό για εγγραφή της φωνής σας. Πηγαίνετε σε έναν χώρο με λιγότερο θόρυβο και προσπαθήστε πάλι.";
 "AUDIO_TOO_LOUD_ACTION_NEXT" = "Αγγίξτε «Επόμενο» όταν είστε έτοιμοι.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Τονική ακοομετρία";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Αυτή η δραστηριότητα μετρά την ικανότητά σας να ακούτε διαφορετικούς ήχους.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Προτού ξεκινήσετε, συνδέστε και φορέστε τα ακουστικά κεφαλής.\n\nΟ ήχος θα είναι πολύ απαλός και δεν μοιάζει με τυπικό τόνο ειδοποίησης. Η ένταση του ήχου θα ξεκινήσει σε χαμηλό επίπεδο και θα αυξάνεται αργά. Δώστε προσοχή και αγγίξτε το αριστερό ή το δεξιό κουμπί για να υποδείξετε σε ποιο αφτί ακούτε τον ήχο.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Προτού ξεκινήσετε, συνδέστε και φορέστε τα ακουστικά κεφαλής.\n\nΟ ήχος θα είναι πολύ απαλός και δεν μοιάζει με τυπικό τόνο ειδοποίησης.  Η ένταση του ήχου θα ξεκινήσει σε χαμηλό επίπεδο και θα αυξάνεται αργά.  Δώστε προσοχή και αγγίξτε το αριστερό ή το δεξιό κουμπί για να υποδείξετε σε ποιο αυτί ακούτε τον ήχο.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Τώρα θα ακούσετε έναν τόνο. Προσαρμόστε την ένταση ήχου με τα χειριστήρια που βρίσκονται στην πλαϊνή πλευρά της συσκευής σας.\n\nΑγγίξτε οποιοδήποτε κουμπί όταν είστε έτοιμοι να ξεκινήσετε.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Κάθε φορά που ακούτε έναν ήχο, αγγίξτε το αριστερό ή το δεξιό κουμπί για να υποδείξετε σε ποιο αφτί ακούτε τον ήχο.";
-"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Αριστερό αφτί";
-"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Δεξιό αφτί";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Κάθε φορά που ακούτε έναν ήχο, αγγίξτε το αριστερό ή το δεξιό κουμπί για να υποδείξετε σε ποιο αυτί ακούτε τον ήχο.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Αριστερό αυτί";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Δεξιό αυτί";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, αριστερά";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, δεξιά";
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Τονική ακοομετρία";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Αγγίξτε όταν ακούσετε έναν τόνο.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Τόνος και ένταση ήχου";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Θα ακούσετε μια σειρά τόνων.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Όταν ακούσετε έναν τόνο, αγγίξτε το κουμπί.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Για αυτό το τεστ, η ένταση ήχου θα οριστεί στο 50 τοις εκατό.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Αυτό το τεστ διαρκεί περίπου 10 λεπτά.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Ενεργοποιήστε τη ρύθμιση «Μην ενοχλείτε» για να μη σας διακόψουν.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Πρώτα θα αναπαραχθούν τόνοι στο δεξιό αυτί σας.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Τώρα θα αναπαραχθούν τόνοι στο αριστερό αυτί σας.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Αυτή η δραστηριότητα εντοπίζει τα επίπεδα κατωφλίου ακοής ενός ατόμου σε κλίμακα επιπέδου ακοής dB.";
-"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Βεβαιωθείτε ότι η ένταση ήχου της συσκευής είναι στο μέγιστο επίπεδο.\n\nΚατά τη διάρκεια αυτής της δραστηριότητας, θα αναπαραχθεί ένας απαλός ήχος είτε στο αριστερό είτε στο δεξιό αφτί.\n\nΑκούστε προσεκτικά και αγγίξτε το κουμπί κάθε φορά που ακούτε έναν τόνο.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Βεβαιωθείτε ότι η ένταση ήχου της συσκευής είναι στο μέγιστο επίπεδο.\n\nΚατά τη διάρκεια αυτής της δραστηριότητας, θα αναπαραχθεί ένας απαλός ήχος είτε στο αριστερό είτε στο δεξιό αυτί.\n\nΑκούστε προσεκτικά και αγγίξτε το κουμπί κάθε φορά που ακούτε έναν τόνο.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Αυτό το τεστ προσδιορίζει πόσο δυνατός πρέπει να είναι ένας ήχος για να τον ακούσετε.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Ερωτηματολόγιο συμμετοχής.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Επιλέξτε την προτίμηση σας για «καλύτερο αφτί», αν ισχύει";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Επιλέξτε την προτίμηση σας για «καλύτερο αυτί», αν ισχύει";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "αριστερό";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "δεξιό";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "καμία προτίμηση";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Το τεστ ακυρώθηκε";
+"dBHL_ALERT_TITLE_START_OVER" = "Έναρξη εκ νέου";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Ακύρωση τεστ";
+"dBHL_ALERT_TEXT" = "Επανασυνδέστε τα AirPods ή EarPods για εκτέλεση αυτού του τεστ.";
+"dBHL_PROGRESS_COMPLETION_%@" = "Έχει ολοκληρωθεί το %@";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Ακουστικά";
+"HEADPHONES_UNKNOWN" = "Άγνωστο";
+"HEADPHONES_NONE" = "Κανένα";
+"CONNECTED" = "Συνδεδεμένο";
+"NOT_CONNECTED" = "Μη συνδεδεμένο";
+"HEADPHONE_CONNECTED_%@" = "Συνδέθηκε - %@";
+"HEADPHONE_DETECT_TITLE" = "Συνδέστε τα ακουστικά σας";
+"HEADPHONE_DETECT_TEXT" = "Για αυτό το τεστ, χρειάζεστε Apple AirPods ή Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Χωρική μνήμη";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Αυτή η δραστηριότητα αξιολογεί τη χωρική μνήμη σας ζητώντας σας να επαναλάβετε τη σειρά με την οποία φωτίζονται οι %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "εικόνες";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "εικόνες";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Κάποιες από τις %@ θα φωτίζονται μία-μία. Αγγίξτε αυτές τις %@ με την ίδια σειρά με αυτήν που φωτίστηκαν.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Κάποιες από τις %@ θα φωτίζονται μία-μία. Αγγίξτε αυτές τις %@ με σειρά αντίστροφη από αυτήν που φωτίστηκαν.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Κάποιες από τις %@ θα φωτίζονται μία-μία. Αγγίξτε αυτές τις %@ με την ίδια σειρά με αυτήν που φωτίστηκαν.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Κάποιες από τις %@ θα φωτίζονται μία-μία. Αγγίξτε αυτές τις %@ με σειρά αντίστροφη από αυτήν που φωτίστηκαν.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Για να αρχίσετε, αγγίξτε «Έναρξη» και μετά παρακολουθήστε προσεκτικά.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Βαθμολογία";
@@ -393,14 +429,14 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Αυτή η δραστηριότητα μετρά πόσο πολύ μπορείτε να τεντώσετε το δεξιό σας γόνατο.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Καθίστε στην άκρη μιας καρέκλας. Όταν ξεκινήσετε, θα τοποθετήσετε τη συσκευή στο αριστερό σας γόνατο για τη μέτρηση. Αυξήστε την ένταση ήχου στη συσκευή για να ακούσετε τις οδηγίες.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Καθίστε στην άκρη μιας καρέκλας. Όταν ξεκινήσετε, θα τοποθετήσετε τη συσκευή στο δεξιό σας γόνατο για τη μέτρηση. Αυξήστε την ένταση ήχου στη συσκευή για να ακούσετε τις οδηγίες.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Τοποθετήστε τη συσκευή στο αριστερό σας γόνατο με την οθόνη να κοιτά προς τα πάνω, όπως φαίνεται στην εικόνα.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Τοποθετήστε τη συσκευή στο δεξιό σας γόνατο με την οθόνη να κοιτά προς τα πάνω, όπως φαίνεται στην εικόνα.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη και τεντώστε το αριστερό σας γόνατο όσο περισσότερο μπορείτε. Αγγίξτε πάλι όταν τελειώσετε.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη και τεντώστε το δεξιό σας γόνατο όσο περισσότερο μπορείτε. Αγγίξτε πάλι όταν τελειώσετε.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Τοποθετήστε τη συσκευή στο αριστερό σας γόνατο";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Τοποθετήστε τη συσκευή στο δεξιό σας γόνατο";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Τεντώστε το αριστερό σας γόνατο. Μετά, αγγίξτε οπουδήποτε.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Τεντώστε το δεξιό σας γόνατο. Μετά, αγγίξτε οπουδήποτε.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Τοποθετήστε τη συσκευή στο αριστερό σας γόνατο με την οθόνη να κοιτά προς τα έξω, όπως φαίνεται στην εικόνα.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Τοποθετήστε τη συσκευή στο δεξιό σας γόνατο με την οθόνη να κοιτά προς τα έξω, όπως φαίνεται στην εικόνα.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη για να ξεκινήσετε και εκτείνετε το αριστερό σας γόνατο όσο μπορείτε. Επιστρέψτε στην αρχική θέση και αγγίξτε πάλι όταν τελειώσετε.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη για να ξεκινήσετε και εκτείνετε το δεξιό σας γόνατο όσο μπορείτε. Επιστρέψτε στην αρχική θέση και αγγίξτε πάλι όταν τελειώσετε.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Τοποθετήστε τη συσκευή στο αριστερό σας γόνατο. Αγγίξτε την οθόνη και εκτείνετε όσο μπορείτε το αριστερό σας γόνατο.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Τοποθετήστε τη συσκευή στο δεξιό σας γόνατο. Αγγίξτε την οθόνη και εκτείνετε όσο μπορείτε το δεξιό σας γόνατο.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Όταν τελειώσετε, επαναφέρετε το αριστερό σας γόνατο στην αρχική θέση. Μετά, αγγίξτε οπουδήποτε.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Όταν τελειώσετε, επαναφέρετε το δεξιό σας γόνατο στην αρχική θέση. Μετά, αγγίξτε οπουδήποτε.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Εύρος κίνησης αριστερού ώμου";
@@ -409,19 +445,19 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Αυτή η δραστηριότητα μετρά πόσο πολύ μπορείτε να τεντώσετε τον δεξιό σας ώμο.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Όταν ξεκινήσετε, θα τοποθετήσετε τη συσκευή στον αριστερό σας ώμο για τη μέτρηση. Αυξήστε την ένταση ήχου στη συσκευή για να ακούσετε τις οδηγίες.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Όταν ξεκινήσετε, θα τοποθετήσετε τη συσκευή στον δεξιό σας ώμο για τη μέτρηση. Αυξήστε την ένταση ήχου στη συσκευή για να ακούσετε τις οδηγίες.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Τοποθετήστε τη συσκευή στον αριστερό σας ώμο με την οθόνη να κοιτά προς τα πάνω, όπως φαίνεται στην εικόνα.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Τοποθετήστε τη συσκευή στον δεξιό σας ώμο με την οθόνη να κοιτά προς τα πάνω, όπως φαίνεται στην εικόνα.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη και σηκώστε το αριστερό σας χέρι όσο πιο πάνω μπορείτε. Αγγίξτε πάλι όταν τελειώσετε.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη και σηκώστε το δεξιό σας χέρι όσο πιο πάνω μπορείτε. Αγγίξτε πάλι όταν τελειώσετε.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Τοποθετήστε τη συσκευή στον αριστερό σας ώμο";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Τοποθετήστε τη συσκευή στον δεξιό σας ώμο";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Σηκώστε το αριστερό σας χέρι προς τα πάνω. Μετά, αγγίξτε οπουδήποτε.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Σηκώστε το δεξιό σας χέρι προς τα πάνω. Μετά, αγγίξτε οπουδήποτε.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Τοποθετήστε τη συσκευή στον αριστερό σας ώμο με την οθόνη να κοιτά προς τα έξω, όπως φαίνεται στην εικόνα.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Τοποθετήστε τη συσκευή στον δεξιό σας ώμο με την οθόνη να κοιτά προς τα έξω, όπως φαίνεται στην εικόνα.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη για να ξεκινήσετε και σηκώστε το αριστερό χέρι σας όσο μπορείτε. Επιστρέψτε στην αρχική θέση και αγγίξτε πάλι όταν τελειώσετε.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Όταν είστε έτοιμοι, αγγίξτε την οθόνη για να ξεκινήσετε και σηκώστε το δεξιό χέρι σας όσο μπορείτε. Επιστρέψτε στην αρχική θέση και αγγίξτε πάλι όταν τελειώσετε.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Τοποθετήστε τη συσκευή στον αριστερό σας ώμο. Αγγίξτε την οθόνη και σηκώστε όσο μπορείτε το αριστερό χέρι σας προς τα εμπρός.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Τοποθετήστε τη συσκευή στον δεξιό σας ώμο. Αγγίξτε την οθόνη και σηκώστε όσο μπορείτε το δεξιό χέρι σας προς τα εμπρός.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Όταν τελειώσετε, επαναφέρετε το αριστερό χέρι σας στην αρχική θέση. Μετά, αγγίξτε οπουδήποτε.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Όταν τελειώσετε, επαναφέρετε το δεξιό χέρι σας στην αρχική θέση. Μετά, αγγίξτε οπουδήποτε.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Χρονισμένο περπάτημα";
 "TIMED_WALK_INTRO_DETAIL" = "Αυτή η δραστηριότητα αξιολογεί τη λειτουργία των κάτω άκρων σας.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Βρείτε ένα μέρος, κατά προτίμηση σε εξωτερικό χώρο, όπου μπορείτε να περπατήσετε για περίπου %@ σε ευθεία γραμμή όσο το δυνατόν πιο γρήγορα αλλά με ασφάλεια. Μη μειώσετε την ταχύτητά σας μέχρι να περάσετε τη γραμμή τερματισμού.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Βρείτε ένα μέρος, κατά προτίμηση σε εξωτερικό χώρο, όπου μπορείτε να περπατήσετε για περίπου %@ σε ευθεία γραμμή όσο το δυνατόν πιο γρήγορα αλλά με ασφάλεια. Μη μειώσετε την ταχύτητά σας προτού περάσετε τη γραμμή τερματισμού.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Αγγίξτε «Επόμενο» για να ξεκινήσετε.";
 "TIMED_WALK_FORM_TITLE" = "Βοηθητική συσκευή";
 "TIMED_WALK_FORM_TEXT" = "Χρησιμοποιήστε την ίδια βοηθητική συσκευή για κάθε τεστ.";
@@ -443,20 +479,20 @@
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "Η δοκιμασία PASAT (Βηματική ακουστική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
-"PVSAT_INTRO_TEXT" = "Η δοκιμασία PVSAT (Βηματική οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
-"PAVSAT_INTRO_TEXT" = "Η δοκιμασία PAVSAT (Βηματική ακουστική και οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής και οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
-"PSAT_INTRO_TEXT_2_%@" = "Τα μονά ψηφία εμφανίζονται κάθε %@ δευτερόλεπτα.\nΠρέπει να προσθέτετε κάθε νέο ψηφίο με το ακριβώς προηγούμενό του.\nΠροσοχή: Δεν πρέπει να υπολογίζετε το ολικό σύνολο, αλλά μόνο το σύνολο των τελευταίων δύο αριθμών.";
+"PASAT_INTRO_TEXT" = "Το τεστ PASAT (Βηματική ακουστική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PVSAT_INTRO_TEXT" = "Το τεστ PVSAT (Βηματική οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PAVSAT_INTRO_TEXT" = "Το τεστ PAVSAT (Βηματική ακουστική και οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής και οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PSAT_INTRO_TEXT_2_%@" = "Τα μονά ψηφία εμφανίζονται κάθε %@.\nΠρέπει να προσθέτετε κάθε νέο ψηφίο με το ακριβώς προηγούμενό του.\nΠροσοχή: Δεν πρέπει να υπολογίζετε το ολικό σύνολο, αλλά μόνο το σύνολο των τελευταίων δύο αριθμών.";
 "PSAT_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
 "PSAT_INITIAL_INSTRUCTION" = "Θυμηθείτε αυτό το πρώτο ψηφίο.";
 "PSAT_INSTRUCTION" = "Προσθέστε αυτό το νέο ψηφίο στο προηγούμενο ψηφίο.";
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "Δοκιμή %@-HPT";
+"HOLE_PEG_TEST_TITLE_%@" = "Τεστ %@-HPT";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Αυτή η δραστηριότητα μετρά την επιδεξιότητα των άνω άκρων σας ζητώντας σας να τοποθετήσετε έναν κύκλο σε μια οπή. Αυτό θα σας ζητηθεί να το κάνετε %@ φορές.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Θα ελεγχθούν και το αριστερό και το δεξιό σας χέρι.\nΠρέπει να πιάσετε τον κύκλο όσο το γρηγορότερο δυνατό, να τον τοποθετήσετε στην οπή και, όταν το κάνετε αυτό %@ φορές, να τον αφαιρέσετε από την οπή %@ φορές.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Θα ελεγχθούν και το δεξιό και το αριστερό σας χέρι.\nΠρέπει να πιάσετε τον κύκλο όσο το γρηγορότερο δυνατό, να τον τοποθετήσετε στην οπή και, όταν το κάνετε αυτό %@ φορές, να τον αφαιρέσετε από την οπή %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Θα ελεγχθούν και το αριστερό και το δεξιό σας χέρι.\nΠρέπει να πιάσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην οπή και, όταν το κάνετε αυτό %@ φορές, να τον αφαιρέσετε από την οπή %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Θα ελεγχθούν και το δεξιό και το αριστερό σας χέρι.\nΠρέπει να πιάσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην οπή και, όταν το κάνετε αυτό %@ φορές, να τον αφαιρέσετε από την οπή %@ φορές.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο στην οπή με το αριστερό χέρι σας.";
@@ -496,8 +532,8 @@
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Κρατώντας τον αγκώνα σας λυγισμένο με το τηλέφωνο στο ΔΕΞΙΟ χέρι σας, αγγίξτε τη μύτη σας με το τηλέφωνο επανειλημμένα.";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Συνεχίστε να ακουμπάτε τη μύτη σας με το τηλέφωνο για %ld δευτερόλεπτα.";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό (κουνώντας τον καρπό).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό με το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας (χαιρετίστε κουνώντας τον καρπό).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό με το τηλέφωνο στο ΔΕΞΙΟ χέρι σας (χαιρετίστε κουνώντας τον καρπό).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό (κουνώντας τον καρπό) με το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό (κουνώντας τον καρπό) με το τηλέφωνο στο ΔΕΞΙΟ χέρι σας.";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Συνεχίστε να χαιρετάτε με αυτόν τον τρόπο για %ld δευτερόλεπτα.";
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Τώρα κρατήστε το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας και συνεχίστε στην επόμενη εργασία.";
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Τώρα κρατήστε το τηλέφωνο στο ΔΕΞΙΟ χέρι σας και συνεχίστε στην επόμενη εργασία.";
@@ -509,15 +545,12 @@
 "TREMOR_SKIP_NEITHER" = "Μπορώ να εκτελέσω αυτήν τη δραστηριότητα και με τα δύο χέρια.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Δοκιμή δημιουργίας διαδρομής";
+"TRAILMAKING_TASK_TITLE" = "Τεστ δημιουργίας διαδρομής";
 "TRAILMAKING_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί την οπτική προσοχή σας και την ικανότητα αλλαγής εργασιών, εγγράφοντας τον χρόνο που χρειάζεστε για να αγγίξετε κάποιες κουκκίδες στη σειρά.";
 "TRAILMAKING_INTENDED_USE2_A" = "Μετά την αντίστροφη μέτρηση, αγγίξτε κουκκίδες σε εναλλάξ σειρά μεταξύ αριθμών και γραμμάτων. Ξεκινήστε αγγίζοντας τον πρώτο αριθμό «1» και μετά τους αριθμούς «2» – «3» – «4»… μέχρι να φτάσετε στον αριθμό «7».";
-"TRAILMAKING_INTENDED_USE2_B" = "Μετά την αντίστροφη μέτρηση, αγγίξτε κουκκίδες σε εναλλάξ σειρά μεταξύ αριθμών και γραμμάτων. Ξεκινήστε αγγίζοντας τον πρώτο αριθμό «1», μετά το πρώτο γράμμα «A», και στη συνέχεια «2» – «B» – «3» – «C»… μέχρι να φτάσετε στον αριθμό «7».";
+"TRAILMAKING_INTENDED_USE2_B" = "Μετά την αντίστροφη μέτρηση, αγγίξτε κουκκίδες σε εναλλάξ σειρά μεταξύ αριθμών και γραμμάτων. Ξεκινήστε αγγίζοντας τον πρώτο αριθμό «1», μετά το πρώτο γράμμα «Α», και στη συνέχεια «2» – «Β» – «3» – «Γ»… μέχρι να φτάσετε στον αριθμό «7».";
 "TRAILMAKING_INTRO_TEXT" = "Κάντε αυτήν τη δραστηριότητα όσο πιο γρήγορα μπορείτε χωρίς να κάνετε λάθη. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
-"TRAILMAKING_TIMER" = "%.1f δ.";
-"TRAILMAKING_ERROR" = "%@ (%d σφάλμα)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d σφάλματα)";
 "TRAILMAKING_LETTER_A" = "Α";
 "TRAILMAKING_LETTER_B" = "Β";
 "TRAILMAKING_LETTER_C" = "Γ";
@@ -547,7 +580,7 @@
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Διακρίβωση έντασης ήχου";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Αγγίξτε «Αναπαραγωγή ήχου», προσαρμόστε τον ήχο σε άνετο επίπεδο και μετά αγγίξτε «Διακοπή ήχου» για να συνεχίσετε.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Ακρόαση";
-"SPEECH_IN_NOISE_STEP_TEXT" = "Θα αναπαραχθεί μόνο μία φορά μια πρόταση με θόρυβο στο παρασκήνιο σε τυχαιοποιημένο SNR (λόγος σήματος προς θόρυβο).";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Θα αναπαραχθεί μόνο μία φορά μια πρόταση μαζί με θόρυβο στο παρασκήνιο σε τυχαιοποιημένο SNR (λόγος σήματος προς θόρυβο).";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Ομιλία";
 "SPEECH_IN_NOISE_SPEAK_TEXT" = "Επαναλάβετε αυτά που ακούσατε";
 
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Υπολογισμός…";
 "ENVIRONMENTSPL_THRESHOLD" = "Όριο: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Θόρυβος παρασκηνίου ΟΚ";
+"ENVIRONMENTSPL_NOISE" = "Υπερβολικός θόρυβος παρασκηνίου";
+"ENVIRONMENTSPL_TITLE_2" = "Βρείτε ένα ήσυχο μέρος";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Για διασφάλιση της ακρίβειας, αυτό το τεστ πρέπει να διεξαχθεί σε ήσυχο περιβάλλον.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Έναρξη εργασίας";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Μετακινήστε το ρυθμιστικό για εισαγωγή τιμής";
+"SLIDER_I_DONT_KNOW" = "Δεν γνωρίζω";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Σελίδα";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Πίσω";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Επιλεγμένο";
 "AX_UNSELECTED" = "Μη επιλεγμένο";
+"AX_SELECT_ALL_THAT_APPLY" = "ΕΠΙΛΕΞΤΕ ΟΛΑ ΟΣΑ ΙΣΧΥΟΥΝ";
 
 "AX_SLIDER_LABEL" = "Ρυθμιστικό απάντησης. Εύρος από %@ έως %@";
 "AX_UNLABELED_IMAGE" = "Εικόνα χωρίς ετικέτα";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Έχει δίσκο με μεγέθη %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Κενός";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Απόρριψη πληκτρολογίου";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Εύρος από %@ έως %@";
 "AX_GRAPH_STACK_PREFIX" = "Η στοίβα αποτελείται από";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Πλέγμα Amsler";
 "AX_AMSLER_GRID_HINT" = "Χρησιμοποιήστε το δάχτυλό σας ή τη γραφίδα για να σημειώσετε απευθείας πάνω στο πλέγμα, ή σαρώστε προς τα αριστερά έξω από το πλέγμα για ολοκλήρωση.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Κουμπιά με δυνατότητα αγγίγματος";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Αγγίξτε για αριστερό αυτί";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Ενεργοποιήστε για έναρξη του τεστ. Όταν ξεκινήσει το τεστ, αγγίξτε απευθείας αυτό το κουμπί όταν ακούσετε έναν ήχο στο αριστερό αυτί σας.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Αγγίξτε για δεξιό αυτί";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Ενεργοποιήστε για έναρξη του τεστ. Όταν ξεκινήσει το τεστ, αγγίξτε απευθείας αυτό το κουμπί όταν ακούσετε έναν ήχο στο δεξιό αυτί σας.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Χρησιμοποιώντας το VoiceOver, εξερευνήστε την οθόνη με αφή για να μάθετε πού βρίσκονται τα κουμπιά για κάθε αυτί. Όταν ξεκινήσει το τεστ, θα είναι δυνατό το απευθείας άγγιγμα στα κουμπιά. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Αγγίξτε για ένα δάχτυλο";
+"AX_TAP_BUTTON_2_LABEL" = "Αγγίξτε για άλλο δάχτυλο";
+"AX_TAP_BUTTON_HINT" = "Ενεργοποιήστε για να είναι δυνατό το απευθείας άγγιγμα στα κουμπιά.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Χρησιμοποιώντας το VoiceOver, εξερευνήστε την οθόνη με αφή για να μάθετε πού βρίσκονται τα κουμπιά για κάθε αυτί. Ενεργοποιήστε οποιοδήποτε κουμπί ώστε να είναι δυνατό το απευθείας άγγιγμα στα κουμπιά.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Μπορείτε πλέον να αγγίζετε τα κουμπιά απευθείας.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Με χρήση του VoiceOver, θα είναι δυνατό το απευθείας άγγιγμα στο κουμπί, το οποίο θα βρίσκεται κοντά στο κέντρο της οθόνης.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Με τη χρήση του VoiceOver, θα είναι δυνατό το απευθείας άγγιγμα στα κουμπιά του τεστ.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Δεν είναι δυνατή η αποκωδικοποίηση του restoreData για αρχικοποίηση";

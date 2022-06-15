@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; };
 		335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */; };
+		712977A922B0917A0049213B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; };
+		712977AA22B0917A0049213B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		866DA52E1D63D1EE00C9AF3F /* ORKDataCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */; };
 		86717A901AC0C0FE00AC2A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A8F1AC0C0FE00AC2A23 /* main.m */; };
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
@@ -21,8 +23,7 @@
 		86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD81AC0C53800AC2A23 /* ORKESerialization.m */; };
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; };
-		BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B119F055229BD4B6001402F9 /* samples.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B119F054229BD4B6001402F9 /* samples.bundle */; };
 		BCEDC7D71E8A45DE00C5405F /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7D31E8A45DE00C5405F /* ChartDataSources.swift */; };
 		BCEDC7D81E8A45DE00C5405F /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7D41E8A45DE00C5405F /* ChartListViewController.swift */; };
 		BCEDC7D91E8A45DE00C5405F /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCEDC7D51E8A45DE00C5405F /* Charts.storyboard */; };
@@ -46,6 +47,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		712977A522B091500049213B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7129779F22B091500049213B /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		712977A722B091500049213B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7129779F22B091500049213B /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
 		86717AA41AC0C0FE00AC2A23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86717A821AC0C0FE00AC2A23 /* Project object */;
@@ -62,7 +77,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */,
+				712977AA22B0917A0049213B /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +87,7 @@
 /* Begin PBXFileReference section */
 		24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKKeychainWrapperTests.m; sourceTree = "<group>"; };
 		335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SAMPLE_PDF_TEST.pdf; sourceTree = "<group>"; };
+		7129779F22B091500049213B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../../ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKDataCollectionTests.m; sourceTree = "<group>"; };
 		86717A8A1AC0C0FE00AC2A23 /* ORKTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORKTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86717A8E1AC0C0FE00AC2A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +137,7 @@
 		86717B2B1AC0CC4A00AC2A23 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86D347F91AC0E1B4006DB02B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ORKTest.entitlements; sourceTree = "<group>"; };
+		B119F054229BD4B6001402F9 /* samples.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = samples.bundle; sourceTree = "<group>"; };
 		B1337BA01B1E709B0098AA54 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA11B1E709C0098AA54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA21B1E70A00098AA54 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -132,7 +149,6 @@
 		B15636901B1F8A0700B28200 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BC2A3CA01C58E85D00DA64B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCEDC7D31E8A45DE00C5405F /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDataSources.swift; sourceTree = "<group>"; };
 		BCEDC7D41E8A45DE00C5405F /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartListViewController.swift; sourceTree = "<group>"; };
 		BCEDC7D51E8A45DE00C5405F /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Charts.storyboard; sourceTree = "<group>"; };
@@ -175,7 +191,7 @@
 			files = (
 				CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */,
 				86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */,
-				BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */,
+				712977A922B0917A0049213B /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,9 +205,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		712977A022B091500049213B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				712977A622B091500049213B /* ResearchKit.framework */,
+				712977A822B091500049213B /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		86717A811AC0C0FE00AC2A23 = {
 			isa = PBXGroup;
 			children = (
+				7129779F22B091500049213B /* ResearchKit.xcodeproj */,
 				BC2A3CA01C58E85D00DA64B7 /* README.md */,
 				BC2A3C9F1C58E83B00DA64B7 /* Frameworks */,
 				86717A8C1AC0C0FE00AC2A23 /* ORKTest */,
@@ -238,6 +264,7 @@
 		86717AA61AC0C0FE00AC2A23 /* ORKTestTests */ = {
 			isa = PBXGroup;
 			children = (
+				B119F054229BD4B6001402F9 /* samples.bundle */,
 				866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */,
 				86717AFF1AC0C93E00AC2A23 /* ORKESerialization.h */,
 				86717AD81AC0C53800AC2A23 /* ORKESerialization.m */,
@@ -273,7 +300,6 @@
 		BC2A3C9F1C58E83B00DA64B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */,
 				CAF31DCE1BC6AEA200041163 /* MapKit.framework */,
 				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
 			);
@@ -378,14 +404,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = ResearchKit;
 				TargetAttributes = {
 					86717A891AC0C0FE00AC2A23 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeamName = "Apple Inc. - SPG-NGS";
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -397,14 +422,14 @@
 					};
 					86717AA21AC0C0FE00AC2A23 = {
 						CreatedOnToolsVersion = 6.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 86717A891AC0C0FE00AC2A23;
 					};
 				};
 			};
 			buildConfigurationList = 86717A851AC0C0FE00AC2A23 /* Build configuration list for PBXProject "ORKTest" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -458,6 +483,12 @@
 			mainGroup = 86717A811AC0C0FE00AC2A23;
 			productRefGroup = 86717A8B1AC0C0FE00AC2A23 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 712977A022B091500049213B /* Products */;
+					ProjectRef = 7129779F22B091500049213B /* ResearchKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				86717A891AC0C0FE00AC2A23 /* ORKTest */,
@@ -465,6 +496,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		712977A622B091500049213B /* ResearchKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ResearchKit.framework;
+			remoteRef = 712977A522B091500049213B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		712977A822B091500049213B /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = 712977A722B091500049213B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		86717A881AC0C0FE00AC2A23 /* Resources */ = {
@@ -486,6 +534,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B119F055229BD4B6001402F9 /* samples.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +671,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -642,7 +692,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -671,6 +721,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -686,7 +737,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -703,20 +754,18 @@
 				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -728,20 +777,18 @@
 				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -751,7 +798,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -762,7 +809,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORKTest.app/ORKTest";
 			};
 			name = Debug;
@@ -773,14 +819,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ORKTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORKTest.app/ORKTest";
 			};
 			name = Release;

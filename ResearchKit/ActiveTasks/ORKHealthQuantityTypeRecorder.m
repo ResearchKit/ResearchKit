@@ -150,7 +150,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     void (^handleResults)(NSArray <__kindof HKSample *> *, HKQueryAnchor *, NSUInteger, NSError *) = ^ (NSArray *results, HKQueryAnchor *newAnchor, NSUInteger newAnchorValue, NSError *error) {
         if (error) {
             // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
-            ORK_Log_Warning(@"Anchored query error: %@", error);
+            ORK_Log_Error("Anchored query error: %@", error);
             return;
         }
         
@@ -194,10 +194,10 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [super start];
     
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }

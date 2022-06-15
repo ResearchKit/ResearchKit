@@ -32,6 +32,7 @@
 #import "ORKBorderedButton.h"
 #import "ORKTextButton_Internal.h"
 
+static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
 
 @implementation ORKBorderedButton {
 
@@ -47,8 +48,7 @@
 }
 
 - (void)setLayerAndFadeDelay {
-    self.layer.borderWidth = 0.0f;
-    self.layer.cornerRadius = 10.0f;
+    self.layer.cornerRadius = ORKBorderedButtonCornerRadii;
     self.fadeDelay = 0.0;
 }
 
@@ -58,10 +58,9 @@
     if (!_appearsAsTextButton) {
         [self setLayerAndFadeDelay];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-        
+        [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7f] forState:UIControlStateHighlighted];
+        [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7f] forState:UIControlStateSelected];
+        [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3f] forState:UIControlStateDisabled];
     }
     else {
         [self setTitleColor:_normalTintColor forState:UIControlStateNormal];
@@ -69,19 +68,21 @@
         [self setTitleColor:_normalHighlightOrSelectTintColor forState:UIControlStateSelected];
         [self setTitleColor:_disableTintColor forState:UIControlStateDisabled];
     }
+    [self setDefaultTintColors];
     [self updateBackgroundColor];
 
 }
 
 - (void)setDefaultTintColors {
-    _normalTintColor = [[self tintColor] colorWithAlphaComponent:0.7f];
-    _normalHighlightOrSelectTintColor = [_normalTintColor colorWithAlphaComponent:1.0f];
-    _disableTintColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.3f];
+    _normalTintColor = [[self tintColor] colorWithAlphaComponent:1.0f];
+    _normalHighlightOrSelectTintColor = [_normalTintColor colorWithAlphaComponent:0.7f];
 }
 
 - (void)setNormalTintColor:(UIColor *)normalTintColor {
     _normalTintColor = normalTintColor;
-    _normalHighlightOrSelectTintColor = [normalTintColor colorWithAlphaComponent:1.0f];
+    _normalHighlightOrSelectTintColor = [normalTintColor colorWithAlphaComponent:0.7f];
+    
+    _disableTintColor = [normalTintColor colorWithAlphaComponent:0.3f];
     [self updateBackgroundColor];
 }
 

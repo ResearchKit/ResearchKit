@@ -35,7 +35,7 @@
 
 #import "ORKChoiceViewCell.h"
 #import "ORKTextChoiceCellGroup.h"
-
+#import "ORKAnswerTextView.h"
 
 @interface ORKTextChoiceCellGroupTests : XCTestCase
 
@@ -55,6 +55,19 @@
     }
     
     return choices;
+}
+
+- (NSArray *)textChoicesOther {
+    ORKTextChoiceOther *textChoiceOtherOne = [[ORKTextChoiceOther alloc] initWithText:@"Text Choice Other One" primaryTextAttributedString:nil detailText:nil detailTextAttributedString:nil value:@"one" exclusive:true textViewPlaceholderText:@"Please describe." textViewInputOptional:YES textViewStartsHidden:YES];
+    ORKTextChoiceOther *textChoiceOtherTwo = [[ORKTextChoiceOther alloc] initWithText:@"Text Choice Other Two" primaryTextAttributedString:nil detailText:nil detailTextAttributedString:nil value:@"two" exclusive:true textViewPlaceholderText:@"" textViewInputOptional:YES textViewStartsHidden:NO];
+    ORKTextChoiceOther *textChoiceOtherThree = [[ORKTextChoiceOther alloc] initWithText:@"Text Choice Other Three" primaryTextAttributedString:nil detailText:nil detailTextAttributedString:nil value:@"three" exclusive:true textViewPlaceholderText:@"Please describe." textViewInputOptional:NO textViewStartsHidden:YES];
+    ORKTextChoiceOther *textChoiceOtherFour = [[ORKTextChoiceOther alloc] initWithText:nil primaryTextAttributedString:nil detailText:@"Text Choice Other Four"  detailTextAttributedString:nil value:@"four" exclusive:true textViewPlaceholderText:@"Please describe." textViewInputOptional:NO textViewStartsHidden:NO];
+    
+    static NSArray *choicesOther = nil;
+    if (choicesOther == nil) {
+        choicesOther = @[textChoiceOtherOne, textChoiceOtherTwo, textChoiceOtherThree, textChoiceOtherFour];
+    }
+    return choicesOther;
 }
 
 - (NSArray *)textChoicesWithOneExclusive {
@@ -127,7 +140,6 @@
         XCTAssertNotNil(cell, @"");
         XCTAssertEqualObjects(cell.reuseIdentifier, @"abc", @"");
         XCTAssertEqual(cell.immediateNavigation, YES, @"");
-        XCTAssertEqual(cell.accessoryType, UITableViewCellAccessoryDisclosureIndicator, @"");
     }
     
     ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
@@ -157,7 +169,7 @@
         XCTAssertEqualObjects(answerArray.firstObject, value, @"%@ vs %@", answerArray.firstObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual( cell.selectedItem, YES);
+        XCTAssertEqual( cell.isCellSelected, YES);
     }
     
     // Test cell deselection (ORKChoiceAnswerStyleSingleChoice: selected cell should not deselect if chosen again)
@@ -176,14 +188,14 @@
     XCTAssertEqual(answerArray.count, 0);
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(cell.selectedItem, NO);
+        XCTAssertEqual(cell.isCellSelected, NO);
     }
     [group setAnswer:ORKNullAnswerValue()];
     XCTAssertEqual(answerArray.count, 0);
     
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual( cell.selectedItem, NO);
+        XCTAssertEqual( cell.isCellSelected, NO);
     }
     
     // Test set answer
@@ -205,7 +217,7 @@
         XCTAssertEqualObjects(answerArray.firstObject, value, @"%@ vs %@", answerArray.firstObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertTrue( cell.selectedItem );
+        XCTAssertTrue( cell.isCellSelected );
     }
 }
 
@@ -265,7 +277,7 @@
         XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual( cell.selectedItem, YES);
+        XCTAssertEqual( cell.isCellSelected, YES);
     }
     
     // Test cell deselection
@@ -283,7 +295,7 @@
         }
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual( cell.selectedItem, NO);
+        XCTAssertEqual( cell.isCellSelected, NO);
     }
     
     XCTAssert(group.answer == ORKNullAnswerValue());
@@ -301,7 +313,7 @@
     XCTAssertNil(group.answer);
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssert( cell.selectedItem == NO);
+        XCTAssert( cell.cellSelected == NO);
     }
 
     // Select all cells again
@@ -316,7 +328,7 @@
     XCTAssert(group.answer == ORKNullAnswerValue());
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(cell.selectedItem, NO);
+        XCTAssertEqual(cell.isCellSelected, NO);
     }
 
     // Test set answers
@@ -341,7 +353,7 @@
         XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertTrue( cell.selectedItem );
+        XCTAssertTrue( cell.isCellSelected );
     }
 }
 
@@ -428,7 +440,7 @@
             XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
             
             ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-            XCTAssertEqual( cell.selectedItem, YES);
+            XCTAssertEqual( cell.isCellSelected, YES);
         }
         // Now, Select the exclusive choice, which should unselect all the non-exclusive choices chosen
         [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0]];
@@ -437,14 +449,14 @@
         NSArray *exclusiveAnswerArray = exclusiveAnswer;
         XCTAssertEqual(exclusiveAnswerArray.count, 1);
         ORKChoiceViewCell *exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(exclusiveCell.selectedItem, YES);
+        XCTAssertEqual(exclusiveCell.isCellSelected, YES);
     
         // Test cell deselection.  First deselect the exclusive, and confirm no choices are selected
         [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0]];
         exclusiveAnswer = group.answer;
         XCTAssert(exclusiveAnswer == ORKNullAnswerValue());
         exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(exclusiveCell.selectedItem, NO);
+        XCTAssertEqual(exclusiveCell.isCellSelected, NO);
         
         // Now, select the exclusive choice again, and then select a non-exclusive choice, which
         // should deselect the exclusive choice
@@ -454,16 +466,16 @@
         exclusiveAnswerArray = exclusiveAnswer;
         XCTAssertEqual(exclusiveAnswerArray.count, 1);
         exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(exclusiveCell.selectedItem, YES);
+        XCTAssertEqual(exclusiveCell.isCellSelected, YES);
         [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:((NSNumber *)nonExclusiveIndexes[0]).unsignedIntegerValue inSection:0]];
         exclusiveAnswer = group.answer;
         XCTAssert([exclusiveAnswer isKindOfClass:[NSArray class]]);
         exclusiveAnswerArray = exclusiveAnswer;
         XCTAssertEqual(exclusiveAnswerArray.count, 1);
         ORKChoiceViewCell *nonExclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:((NSNumber *)nonExclusiveIndexes[0]).unsignedIntegerValue inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(nonExclusiveCell.selectedItem, YES);
+        XCTAssertEqual(nonExclusiveCell.isCellSelected, YES);
         exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(exclusiveCell.selectedItem, NO);
+        XCTAssertEqual(exclusiveCell.isCellSelected, NO);
 
         // Deselect the non-exclusive to reset for the next test
         [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:((NSNumber *)nonExclusiveIndexes[0]).unsignedIntegerValue inSection:0]];
@@ -480,7 +492,7 @@
             exclusiveAnswerArray = exclusiveAnswer;
             XCTAssertEqual(exclusiveAnswerArray.count, 1);
             exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-            XCTAssertEqual(exclusiveCell.selectedItem, YES);
+            XCTAssertEqual(exclusiveCell.isCellSelected, YES);
 
             // Select the other exclusive choice and confirm its selected, and the previously selected exclusive
             // choice is no longer selected
@@ -490,9 +502,9 @@
             exclusiveAnswerArray = exclusiveAnswer;
             XCTAssertEqual(exclusiveAnswerArray.count, 1);
             exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:otherExclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-            XCTAssertEqual(exclusiveCell.selectedItem, YES);
+            XCTAssertEqual(exclusiveCell.isCellSelected, YES);
             exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
-            XCTAssertEqual(exclusiveCell.selectedItem, NO);
+            XCTAssertEqual(exclusiveCell.isCellSelected, NO);
 
             // Deselect the other exclusive choice to reset for the next test
             [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:otherExclusiveIndex inSection:0]];
@@ -503,7 +515,7 @@
             NSUInteger index = ((NSNumber *)nonExclusiveIndexes[nonExclusiveIndexI]).unsignedIntegerValue;
             [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
             ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-            XCTAssertEqual( cell.selectedItem, YES);
+            XCTAssertEqual( cell.isCellSelected, YES);
         }
         XCTAssertEqual(((NSArray *)group.answer).count, nonExclusiveIndexes.count);
         
@@ -522,7 +534,7 @@
             }
             
             ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-            XCTAssertEqual( cell.selectedItem, NO);
+            XCTAssertEqual( cell.isCellSelected, NO);
         }
         
         id answer = group.answer;
@@ -537,14 +549,14 @@
     XCTAssertEqual(answerArray.count, 0);
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssert(cell.selectedItem == NO);
+        XCTAssert(cell.cellSelected == NO);
     }
     [group setAnswer:ORKNullAnswerValue()];
     XCTAssertEqual(answerArray.count, 0);
 
     for (index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertEqual(cell.selectedItem, NO);
+        XCTAssertEqual(cell.isCellSelected, NO);
     }
 
     // Test set answers
@@ -570,7 +582,7 @@
         XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
-        XCTAssertTrue(cell.selectedItem );
+        XCTAssertTrue(cell.isCellSelected );
     }
 }
 
@@ -579,6 +591,65 @@
     NSArray *choices = [self textChoicesWithAllExclusives];
     ORKTextChoiceAnswerFormat *answerFormat = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
     [self testSingleChoice:answerFormat choices:choices];
+}
+
+- (void)testTextChoiceOthers {
+    NSArray<ORKTextChoiceOther *> *choices = [self textChoicesOther];
+    ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
+    ORKTextChoiceCellGroup *group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
+                                                                                            answer:nil
+                                                                                beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                                                               immediateNavigation:YES];
+    
+    // Test basics
+    XCTAssertEqual(group.size, [self textChoices].count, @"");
+    XCTAssertEqualObjects(group.answer, nil, @"");
+    XCTAssertEqualObjects(group.answerForBoolean, nil, @"");
+    
+    // Test containsIndexPath
+    XCTAssertFalse([group containsIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]], @"");
+    XCTAssertFalse([group containsIndexPath:[NSIndexPath indexPathForRow:[self textChoices].count inSection:0]], @"");
+    XCTAssertTrue([group containsIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]], @"");
+    XCTAssertTrue([group containsIndexPath:[NSIndexPath indexPathForRow:[self textChoices].count-1 inSection:0]], @"");
+    
+    // Test cell generation
+    NSUInteger index = 0;
+    for ( index = 0 ; index < group.size; index++) {
+        ORKChoiceOtherViewCell *cell = (ORKChoiceOtherViewCell *)[group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
+        ORKTextChoiceOther *choice = choices[index];
+        XCTAssertNotNil(cell, @"");
+        XCTAssertEqualObjects(cell.reuseIdentifier, @"abc", @"");
+        XCTAssertEqual(cell.immediateNavigation, YES, @"");
+        
+        if (choice.textViewStartsHidden) {
+            XCTAssertTrue(cell.textView.isHidden);
+        }
+        else {
+            XCTAssertFalse(cell.textView.isHidden);
+        }
+        XCTAssertEqual(choice.textViewPlaceholderText, cell.textView.placeholder);
+    }
+    
+    ORKChoiceOtherViewCell *cell = (ORKChoiceOtherViewCell *)[group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
+    XCTAssertNil(cell, @"");
+    
+    // Regenerate cell group
+    group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
+                                                                    answer:nil
+                                                        beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                                       immediateNavigation:YES];
+    
+    // Test cell selection
+    for ( index = 0 ; index < group.size; index++) {
+        ORKChoiceOtherViewCell *cell = (ORKChoiceOtherViewCell *)[group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
+        ORKTextChoiceOther *choice = choices[index];
+        [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        id answer = group.answer;
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        NSArray *answerArray = answer;
+        XCTAssertEqual(answerArray.count, 1);
+        XCTAssertEqual(cell.isCellSelected, (choice.textViewInputOptional || cell.textView.text.length > 0));
+    }
 }
 
 @end

@@ -55,6 +55,14 @@ class ResultViewController: UITableViewController {
     
     // MARK: View Life Cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.tableView.backgroundColor = UIColor.systemGroupedBackground
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -63,7 +71,7 @@ class ResultViewController: UITableViewController {
             displayed result, and the result that has been most recently set on
             the `ResultViewController`.
         */
-        guard result != currentResult || currentResult == nil else { return }
+//        guard result != currentResult || currentResult == nil else { return }
         
         // Update the currently displayed result.
         currentResult = result
@@ -88,8 +96,7 @@ class ResultViewController: UITableViewController {
             result view controller.
         */
         if let identifier = segue.identifier,
-               let segueIdentifier = SegueIdentifier(rawValue: identifier)
-               , segueIdentifier == .showTaskResult {
+               let segueIdentifier = SegueIdentifier(rawValue: identifier), segueIdentifier == .showTaskResult {
             
             let cell = sender as! UITableViewCell
             

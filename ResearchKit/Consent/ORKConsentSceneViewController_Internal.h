@@ -30,12 +30,12 @@
 
 
 #import "ORKConsentSceneViewController.h"
-#import "ORKVerticalContainerView.h"
+#import "ORKStepContainerView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKConsentSceneView : ORKVerticalContainerView
+@interface ORKConsentSceneView : ORKStepContainerView
 
 @end
 

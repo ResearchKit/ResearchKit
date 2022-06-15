@@ -33,7 +33,7 @@
 "CONSENT_NAME_GIVEN" = "Meno";
 "CONSENT_NAME_FAMILY" = "Priezvisko";
 "CONSENT_NAME_PLACEHOLDER" = "Povinné";
-"CONSENT_REVIEW_TITLE" = "Skontrolovať";
+"CONSENT_REVIEW_TITLE" = "Revízia";
 "CONSENT_REVIEW_INSTRUCTION" = "Skontrolujte formulár nižšie, a ak ste pripravení pokračovať, klepnite na Súhlasím.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Skontrolovať";
 "CONSENT_SIGNATURE_TITLE" = "Podpis";
@@ -58,7 +58,7 @@
 "LEARN_MORE_PRIVACY" = "Viac informácií o ochrane súkromia a identity";
 "LEARN_MORE_WELCOME" = "Viac informácií o štúdii";
 "LEARN_MORE_STUDY_SURVEY" = "Viac informácií o prieskume štúdie";
-"LEARN_MORE_TIME_COMMITMENT" = "Viac informácií o vplyvu štúdie na váš čas";
+"LEARN_MORE_TIME_COMMITMENT" = "Viac informácií o vplyve štúdie na váš čas";
 "LEARN_MORE_TASKS" = "Viac informácií o úlohách";
 "LEARN_MORE_WITHDRAWING" = "Viac informácií o odstúpení";
 
@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "Vaše dáta z účasti v tejto štúdii budú doručené inštitúcii %@.\n\nŠiršie zdieľanie zakódovaných dát štúdie (bez informácií, ako je vaše meno) môže byť užitočné pre tento a budúci výskum.";
 "LEARN_MORE_CONSENT_SHARING" = "Viac informácií o zdieľaní dát";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Meno osoby %@ (vytlačené)";
-"CONSENT_DOC_LINE_SIGNATURE" = "Podpis osoby %@";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Meno tlačeným písmom";
+"CONSENT_DOC_LINE_SIGNATURE" = "Podpis";
 "CONSENT_DOC_LINE_DATE" = "Dátum";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ z %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Otázka %1$@ z %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Preskočená";
+"REVIEW_EDIT_ANSWER" = "Upraviť";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Neplatná hodnota";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Zrušiť";
 "BUTTON_OK" = "Potvrdiť";
 "BUTTON_CLEAR" = "Vyčistiť";
+"BUTTON_CLEAR_SIGNATURE" = "Vymazať podpis";
 "BUTTON_APPLY" = "Použiť";
 "BUTTON_DISAGREE" = "Nesúhlasím";
 "BUTTON_DONE" = "Hotovo";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Vyčistiť odpoveď";
 "BUTTON_READ_ONLY_MODE" = "Túto odpoveď nie je možné upraviť.";
 "BUTTON_COPYRIGHT" = "Copyright";
+"BUTTON_CLOSE" = "Zatvoriť";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivita sa spustí o";
 "TASK_COMPLETE_TITLE" = "Aktivita dokončená";
 "TASK_COMPLETE_TEXT" = "Vaše dáta budú analyzované a na výsledky budete upozornení po ich vyhodnotení.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "Zostáva %@ s.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Zostáva: %@.";
 "TOUCH_ANYWHERE_LABEL" = "Pokračujte klepnutím na obrazovku.";
 
 /* Image capture step. */
@@ -277,7 +286,7 @@
 "TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Zopakujte tento test pomocou ľavej ruky.";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "Klepnite najprv jedným prstom a potom druhým prstom. Skúste klepnutia načasovať tak, aby boli čo najviac pravidelné. Klepte %@.";
 "TAPPING_CALL_TO_ACTION" = "Aktivitu spustíte klepnutím na Začať.";
-"TAPPING_CALL_TO_ACTION_NEXT" = "Pre spustenie klepnite na Ďalej.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Začnite klepnutím na Ďalej.";
 "TAP_BUTTON_TITLE" = "Klepnite";
 "TOTAL_TAPS_LABEL" = "Počet klepnutí";
 "TAPPING_INSTRUCTION" = "Pravidelne klepte na tlačidlá dvomi prstami.";
@@ -297,7 +306,7 @@
 "AUDIO_TASK_TITLE" = "Hlas";
 "AUDIO_CALL_TO_ACTION" = "Aktivitu spustíte klepnutím na Začať.";
 "AUDIO_INSTRUCTION" = "Po čo najdlhšiu dobu vravte do mikrofónu „Aaaaaaaaaa“.";
-"AUDIO_INTRO_TEXT" = "Zhlboka sa nadýchnite a po čo najdlhšiu dobu vravte do mikrofónu „Aaaaaaaaaa“. Snažte sa zachovať rovnakú hlasitosť - paličky audia by mali byť modré.";
+"AUDIO_INTRO_TEXT" = "Zhlboka sa nadýchnite a čo najdlhšie hovorte do mikrofónu „Aaaaaaaaaa“. Snažte sa udržať stabilnú hlasitosť, aby paličky zvuku zostali modré.";
 "AUDIO_INTENDED_USE" = "Táto aktivita vyhodnotí váš hlas, ktorý nahráte pomocou mikrofónu v dolnej časti zariadenia.";
 "AUDIO_TOO_LOUD_LABEL" = "Príliš nahlas";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nie je možné nahrať zvuk";
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tónová audiometria";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Keď začujete tón, klepnite.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Tóny a hlasitosť";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Budete počuť sériu tónov.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Keď začujete tón, klepnite na tlačidlo.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Pri tomto teste bude hlasitosť nastavená na úroveň 50 percent.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Tento test trvá približne 10 minút.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Zapnite si režim Nerušiť, aby vás nikto nevyrušoval.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Najskôr budú tóny znieť vo vašom pravom uchu.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Teraz budú tóny znieť vo vašom ľavom uchu.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Táto aktivita identifikuje prahové úrovne sluchu osoby na mierke v dB HL.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Uistite sa, že hlasitosť zariadenia je nastavená na maximum.\n\nPočas tejto úlohy budete v ľavom alebo pravom uchu počuť slabý tón.\n\nPočúvajte pozorne a vždy, keď začujete tón, klepnite na tlačidlo.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Tento test určuje, nakoľko hlasný musí byť zvuk, aby ste ho počuli.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Úvodný dotazník.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "V prípade potreby vyberte ucho, ktorým lepšie počujete.";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "ľavé";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "pravé";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "bez predvoľby";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Test bol zrušený";
+"dBHL_ALERT_TITLE_START_OVER" = "Spustiť znovu";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Zrušiť test";
+"dBHL_ALERT_TEXT" = "Ak chcete absolvovať tento test, znovu pripojte AirPody alebo EarPody.";
+"dBHL_PROGRESS_COMPLETION_%@" = "Dokončené na %@";
+
+/* Headphones. */
+"AIRPODS" = "AirPody";
+"EARPODS" = "EarPody";
+"HEADPHONES" = "Slúchadlá";
+"HEADPHONES_UNKNOWN" = "Neznáme";
+"HEADPHONES_NONE" = "Žiadne";
+"CONNECTED" = "Pripojené";
+"NOT_CONNECTED" = "Nepripojené";
+"HEADPHONE_CONNECTED_%@" = "Pripojené – %@";
+"HEADPHONE_DETECT_TITLE" = "Pripojte slúchadlá";
+"HEADPHONE_DETECT_TEXT" = "Na tento test budete potrebovať Apple AirPody alebo Apple EarPody";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Priestorová pamäť";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Táto aktivita zmeria vašu krátkodobú pamäť zobrazením sekvencie obrázkov (%@), ktorú budete musieť zopakovať.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "kvety";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "kvety";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v rovnakom poradí, v akom sa rozsvietili.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v opačnom poradí, v akom sa rozsvietili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v rovnakom poradí, v akom sa rozsvietili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v opačnom poradí, v akom sa rozsvietili.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Klepnutím na Začať spustite test a pozorne sa dívajte.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skóre";
@@ -341,14 +377,14 @@
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Klepnite na obrázky (%@) v poradí, v akom sa rozsvietili";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Klepnite na obrázky (%@) v opačnom poradí";
 "MEMORY_GAME_COMPLETE_TITLE" = "Sekvencia dokončená";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "Pre pokračovanie klepnite na Ďalej.";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Pokračujte klepnutím na Ďalej.";
 "MEMORY_GAME_FAILED_TITLE" = "Skúste to znovu";
 "MEMORY_GAME_FAILED_MESSAGE" = "Tentokrát sa vám to nepodarilo. Pokračujte klepnutím na Ďalej.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Čas vypršal";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Vypršal vám čas.\nPokračujte klepnutím na Ďalej.";
 "MEMORY_GAME_COMPLETE" = "Hra dokončená";
 "MEMORY_GAME_PAUSED_TITLE" = "Pozastavené";
-"MEMORY_GAME_PAUSED_MESSAGE" = "Pre pokračovanie klepnite na Ďalej.";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Pokračujte klepnutím na Ďalej.";
 "MEMORY_GAME_COPYRIGHT_TEXT" = "Na vývoji tejto aktivity sa podieľali Katherine Possin, PhD a Joel Kramer, PhD z Kalifornskej univerzity v San Franciscu.";
 
 /* Reaction time active task. */
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Na zariadení zapnite zvuk, aby ste počuli pokyny. Sadnite si na okraj stoličky. Po spustení aktivity si na účely merania pridržte zariadenie na pravom kolene.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Položte zariadenie na ľavé koleno obrazovkou nahor, ako je to znázornené na obrázku.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Pridržte si zariadenie na pravom kolene obrazovkou nahor, ako je to znázornené na obrázku.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Keď budete pripravení, klepnite na obrazovku a čo najviac vystrite ľavé koleno. Po skončení znovu klepnite na obrazovku.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Keď budete pripravení, klepnite na obrazovku a čo najviac vystrite pravé koleno. Po skončení znovu klepnite na obrazovku.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Položte zariadenie na ľavé koleno";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Pridržte si zariadenie na pravom kolene";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Vystrite ľavé koleno. Potom klepnite na obrazovku.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Vystrite pravé koleno. Potom klepnite na obrazovku.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Keď budete pripravení, klepnite na obrazovku a čo najviac vystrite ľavé koleno. Potom ho vráťte do počiatočnej polohy a znova klepnite na obrazovku.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Keď budete pripravení, klepnite na obrazovku a čo najviac vystrite pravé koleno. Potom ho vráťte do počiatočnej polohy a znova klepnite na obrazovku.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Položte si zariadenie na ľavé koleno. Klepnite na obrazovku a ľavé koleno čo najviac vystrite.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Položte si zariadenie na pravé koleno. Klepnite na obrazovku a pravé koleno čo najviac vystrite.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Keď skončíte, vráťte ľavé koleno do počiatočnej polohy. Potom klepnite na ľubovoľné miesto.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Keď skončíte, vráťte pravé koleno do počiatočnej polohy. Potom klepnite na ľubovoľné miesto.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Rozsah pohybu ľavého ramena";
@@ -411,18 +447,18 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Na zariadení zapnite zvuk, aby ste počuli pokyny. Po spustení aktivity si na účely merania pridržte zariadenie na pravom ramene.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Pridržte si zariadenie na ľavom ramene obrazovkou nahor, ako je to znázornené na obrázku.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Pridržte si zariadenie na pravom ramene obrazovkou nahor, ako je to znázornené na obrázku.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Keď budete pripravení, klepnite na obrazovku a čo najviac zdvihnite ľavú ruku. Po skončení znovu klepnite na obrazovku.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Keď budete pripravení, klepnite na obrazovku a čo najviac zdvihnite pravú ruku. Po skončení znovu klepnite na obrazovku.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Pridržte si zariadenie na ľavom ramene";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Pridržte si zariadenie na pravom ramene";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Zdvihnite ľavú ruku. Potom klepnite na obrazovku.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Zdvihnite pravú ruku. Potom klepnite na obrazovku.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Keď budete pripravení, klepnite na obrazovku a zdvihnite ľavú ruku čo najvyššie. Potom ju vráťte do počiatočnej polohy a znova klepnite na obrazovku.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Keď budete pripravení, klepnite na obrazovku a zdvihnite pravú ruku čo najvyššie. Potom ju vráťte do počiatočnej polohy a znova klepnite na obrazovku.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Položte si zariadenie na ľavé plece. Klepnite na obrazovku a ľavú ruku čo najviac predpažte.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Položte si zariadenie na pravé plece. Klepnite na obrazovku a pravú ruku čo najviac predpažte.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Keď skončíte, vráťte ľavú ruku do počiatočnej polohy. Potom klepnite na ľubovoľné miesto.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Keď skončíte, vráťte pravú ruku do počiatočnej polohy. Potom klepnite na ľubovoľné miesto.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Chôdza na čas";
 "TIMED_WALK_INTRO_DETAIL" = "Táto aktivita meria funkčnosť vašich dolných končatín.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Nájdite si miesto, najlepšie vonku, kde môžete čo najrýchlejšie bezpečne prejsť v priamom smere približne\n%@. Nespomaľujte, kým neprejdete cieľom.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Pre spustenie klepnite na Ďalej.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Nájdite si miesto, najlepšie vonku, kde môžete čo najrýchlejšie bezpečne prejsť v priamom smere približne %@. Nespomaľujte, kým neprejdete cieľom.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Začnite klepnutím na Ďalej.";
 "TIMED_WALK_FORM_TITLE" = "Zdravotná pomôcka";
 "TIMED_WALK_FORM_TEXT" = "Pre každý test použite rovnakú zdravotnú pomôcku.";
 "TIMED_WALK_QUESTION_TEXT" = "Nosíte ortézu na členku?";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "Paced Auditory Serial Addition Test meria rýchlosť, akou dokážete spracovať a spočítať informácie prijaté prostredníctvom sluchu.";
 "PVSAT_INTRO_TEXT" = "Paced Visual Serial Addition Test meria rýchlosť, akou dokážete spracovať a spočítať informácie prijaté prostredníctvom zraku.";
 "PAVSAT_INTRO_TEXT" = "Paced Auditory a Visual Serial Addition Test meria rýchlosť, akou dokážete spracovať a spočítať informácie prijaté prostredníctvom sluchu a zraku.";
-"PSAT_INTRO_TEXT_2_%@" = "Každé %@ s sa zobrazí nové číslo.\nKaždé nové číslo musíte pripočítať k číslu zobrazenému pred ním.\nPozor, nesmiete počítať celkový súčet týchto čísiel, ale len súčet dvoch posledných čísiel.";
+"PSAT_INTRO_TEXT_2_%@" = "Každé %@ sa zobrazí nové číslo.\nKaždé nové číslo musíte pripočítať k číslu zobrazenému pred ním.\nPozor, nesmiete počítať celkový súčet všetkých čísel, ale len súčet dvoch posledných čísel.";
 "PSAT_CALL_TO_ACTION" = "Aktivitu spustíte klepnutím na Začať.";
 "PSAT_INITIAL_INSTRUCTION" = "Zapamätajte si toto prvé číslo.";
 "PSAT_INSTRUCTION" = "Pripočítajte nové číslo k predošlému číslu.";
@@ -455,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-kolíkový test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Táto aktivita slúži na otestovanie motoriky horných končatín. Počas testu budete umiestňovať kolíky do otvorov. Test budete opakovať %@-krát.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Otestovaná bude vaša ľavá aj pravá ruka.\nČo najrýchlejšie vezmite kolík, umiestnite do otvoru %@-krát a potom ho vytiahnite taktiež %@-krát.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Otestovaná bude vaša ľavá aj pravá ruka.\nČo najrýchlejšie vezmite kolík, umiestnite do otvoru %@-krát a potom ho vytiahnite taktiež %@-krát.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Otestovaná bude vaša pravá aj ľavá ruka.\nČo najrýchlejšie vezmite kolík, umiestnite do otvoru %@-krát a potom ho vytiahnite taktiež %@-krát.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aktivitu spustíte klepnutím na Začať.";
@@ -509,15 +545,12 @@
 "TREMOR_SKIP_NEITHER" = "Túto aktivitu dokážem vykonať pomocou oboch rúk.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Test cesty";
+"TRAILMAKING_TASK_TITLE" = "Test spájania bodov";
 "TRAILMAKING_INTENDED_USE" = "Táto aktivita vyhodnotí vašu vizuálnu pozornosť a schopnosť pracovať na viacerých úlohách tak, že zaznamená čas, ktorý potrebujete na klepnutie na sériu bodiek v určitom poradí.";
 "TRAILMAKING_INTENDED_USE2_A" = "Po skončení odpočítavania striedavo klepajte na bodky s číslami a písmenami. Začnite klepnutím na prvé číslo „1“ a potom klepnite na čísla „2“ – „3“ – „4“…, až kým nedosiahnete číslo „7“.";
 "TRAILMAKING_INTENDED_USE2_B" = "Po skončení odpočítavania striedavo klepajte na bodky s číslami a písmenami. Začnite klepnutím na prvé číslo „1“, potom klepnite na prvé písmeno „A“ a pokračujte klepnutím na „2“ – „B“ – „3“ – „C“…, až kým nedosiahnete číslo „7“.";
 "TRAILMAKING_INTRO_TEXT" = "Spravte to čo najrýchlejšie a bez chýb. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Aktivitu spustíte klepnutím na Začať.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (chyby: %d)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (chyby: %d)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -539,13 +572,13 @@
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Nepodarilo sa spustiť rozpoznávanie reči.";
 
 /* Speech In Noise active task. */
-"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Prehrať audio";
-"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Zastaviť audio";
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Spustiť prehrávanie";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Zastaviť prehrávanie";
 "SPEECH_IN_NOISE_TITLE" = "Reč v hlučnom prostredí";
 "SPEECH_IN_NOISE_INTRO_TEXT" = "Táto aktivita meria zrozumiteľnosť reči v hlučnom prostredí.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Tento test pozostáva z nasledujúcich úloh:\n\nVypočujete si vetu.\n\nZreteľne zopakujete, čo ste počuli, prípadne to napíšete pomocou klávesnice. \n\nAk zopakujete, čo ste počuli, budete môcť upraviť prepis vygenerovaný funkciou na rozpoznávanie reči.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Kalibrácia hlasitosti";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Klepnite na Prehrať audio, upravte hlasitosť na primeranú úroveň a potom pokračujte klepnutím na Zastaviť audio.";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Klepnite na Spustiť prehrávanie, upravte hlasitosť na primeranú úroveň a potom pokračujte klepnutím na Zastaviť prehrávanie.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Počúvanie";
 "SPEECH_IN_NOISE_STEP_TEXT" = "Nahrávka vety skombinovanej so šumom na pozadí a náhodným pomerom signálu k šumu (SNR) bude prehraná len raz.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Rozprávanie";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Vypočítavam";
 "ENVIRONMENTSPL_THRESHOLD" = "Prah: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Hlučnosť prostredia je vyhovujúca";
+"ENVIRONMENTSPL_NOISE" = "Príliš hlučné prostredie";
+"ENVIRONMENTSPL_TITLE_2" = "Nájdite si tiché miesto";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Na zaistenie čo najväčšej presnosti sa tento test musí vykonať v tichom prostredí.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Spustiť úlohu";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Žiadne dáta";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Nastavte hodnotu posuvníkom";
+"SLIDER_I_DONT_KNOW" = "Neviem";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Strana";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Späť";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Označené";
 "AX_UNSELECTED" = "Neoznačené";
+"AX_SELECT_ALL_THAT_APPLY" = "ZAŠKRTNITE VHODNÉ";
 
 "AX_SLIDER_LABEL" = "Posuvník pre odpoveď. Rozsah je od %@ do %@";
 "AX_UNLABELED_IMAGE" = "Obrázok bez popisu";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje kotúče o veľkostiach %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prázdne";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Zrušiť klávesnicu";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Rozsah od %@ do %@";
 "AX_GRAPH_STACK_PREFIX" = "Pyramída pozostáva z";
@@ -624,13 +673,29 @@
 "AX_SPEECH_RECOGNITION_WAVEFORM" = "Vlnový priebeh reči";
 "AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Keď sa spustí nahrávanie, ďalšou aktiváciou ho zastavíte.";
 
-"AX_AUDIO_BAR_GRAPH" = "Stĺpcový graf audia";
+"AX_AUDIO_BAR_GRAPH" = "Stĺpcový graf zvuku";
 
 "AX_AMSLER_GRID_LABEL" = "Amslerova mriežka";
 "AX_AMSLER_GRID_HINT" = "Pomocou prsta alebo dotykového pera označte mriežku alebo potiahnutím doľava mimo mriežky dokončite úlohu.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tlačidlá s možnosťou klepnutia";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Klepnite pre ľavé ucho";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktiváciou spustíte test. Keď budete po spustení testu počuť zvuk v ľavom uchu, klepnite priamo na toto tlačidlo.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Klepnite pre pravé ucho";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktiváciou spustíte test. Keď budete po spustení testu počuť zvuk v pravom uchu, klepnite priamo na toto tlačidlo.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Pri používaní VoiceOveru môžete dotykom na obrazovku zistiť, kde sa nachádzajú tlačidlá pre každé ucho. Po spustení testu bude možné na tlačidlá priamo klepnúť. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Klepnutím aktivujete používanie jedného prsta";
+"AX_TAP_BUTTON_2_LABEL" = "Klepnutím aktivujete používanie druhého prsta";
+"AX_TAP_BUTTON_HINT" = "Po aktivácii bude možné na tlačidlá priamo klepnúť.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Pri používaní VoiceOveru môžete dotykom na obrazovku zistiť, kde sa nachádzajú tlačidlá. Po aktivácii niektorého z tlačidiel bude možné na tlačidlá priamo klepnúť.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Na tlačidlá teraz možno priamo klepnúť.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Pri používaní VoiceOveru bude možné na tlačidlo priamo klepnúť. Tlačidlo bude umiestnené približne v strede obrazovky.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Pri používaní VoiceOveru bude možné na tlačidlá v teste priamo klepnúť.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Nie je možné dekódovať restoreData pre inicializáciu";

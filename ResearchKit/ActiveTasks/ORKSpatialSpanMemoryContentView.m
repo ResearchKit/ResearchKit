@@ -260,7 +260,7 @@
 - (void)setButtonItem:(ORKBorderedButton *)buttonItem {
     _buttonItem = buttonItem;
     if (buttonItem) {
-        buttonItem.contentEdgeInsets = (UIEdgeInsets){.top = 2, .bottom = 2, .left = 8, .right = 8};
+        [buttonItem updateContentInsets:NSDirectionalEdgeInsetsMake(2, 8, 2, 8)];
         buttonItem.translatesAutoresizingMaskIntoConstraints = NO;
         [_continueView addSubview:buttonItem];
         [[NSLayoutConstraint constraintWithItem:_buttonItem
@@ -318,7 +318,7 @@
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:ORKScreenMetricMaxDimension];
+                                                                       constant:CGFLOAT_MIN];
     gameViewHeightConstraint.priority = UILayoutPriorityDefaultLow - 1;
     [constraints addObject:gameViewHeightConstraint];
     

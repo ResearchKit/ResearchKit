@@ -192,15 +192,15 @@
     return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID.UUIDString];
 }
 
-- (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError **)error {
+- (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError **)errorOut {
     NSURL *workingDir = [self recordingDirectoryURL];
     if (!workingDir) {
-        if (error) {
-            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
+        if (errorOut != NULL) {
+            *errorOut = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
         }
         return nil;
     }
-    if (![[NSFileManager defaultManager] createDirectoryAtURL:workingDir withIntermediateDirectories:YES attributes:nil error:error]) {
+    if (![[NSFileManager defaultManager] createDirectoryAtURL:workingDir withIntermediateDirectories:YES attributes:nil error:errorOut]) {
         return nil;
     }
     
@@ -230,7 +230,7 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     if (! [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(fileProtection)} ofItemAtPath:[url path] error:&error]) {
-        ORK_Log_Warning(@"Error setting %@ on %@: %@", ORKFileProtectionFromMode(fileProtection), url, error);
+        ORK_Log_Error("Error setting %@ on %@: %@", ORKFileProtectionFromMode(fileProtection), url, error);
     }
 }
 

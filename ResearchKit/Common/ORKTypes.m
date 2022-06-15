@@ -31,7 +31,15 @@
 
 
 #import "ORKTypes.h"
+#import "ORKHelpers_Internal.h"
 
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPods = @"AIRPODS";
+
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro = @"AIRPODSPRO";
+
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods = @"EARPODS";
+
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierUnknown = @"UNKNOWN";
 
 ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA = @"A";
 
@@ -162,3 +170,47 @@ ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseHK = @"zh-HK";
 ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW = @"zh-TW";
 
 const double ORKDoubleDefaultValue = DBL_MAX;
+
+const CGFloat ORKCGFloatDefaultValue = CGFLOAT_MAX;
+
+@implementation ORKDontKnowAnswer
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init_ORKDontKnowAnswer {
+   return [super init];
+}
+
++ (instancetype)answer {
+    static ORKDontKnowAnswer *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[ORKDontKnowAnswer alloc] init_ORKDontKnowAnswer];
+    });
+    return instance;
+}
+
+- (nonnull id)copyWithZone:(nullable NSZone *)zone {
+    return self;
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+    return;
+}
+
+- (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
+    ORKDontKnowAnswer *instance = [ORKDontKnowAnswer answer];
+    return instance;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+@end

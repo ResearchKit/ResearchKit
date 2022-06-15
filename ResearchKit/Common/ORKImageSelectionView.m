@@ -121,7 +121,7 @@
                                                             attribute:NSLayoutAttributeWidth
                                                            multiplier:1.0
                                                              constant:0.0]];
-        ORK_Log_Warning(@"The size of imageChoice's normal image should not be zero. %@", image);
+        ORK_Log_Info("The size of imageChoice's normal image should not be zero. %@", image);
     }
     
     [NSLayoutConstraint activateConstraints:constraints];
@@ -371,7 +371,11 @@ static const CGFloat SpacerHeight = 5.0;
 - (void)setLabelText:(NSString *)text {
     if (_singleChoice || [text length] > 0) {
         _choiceLabel.text = text;
-        _choiceLabel.textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            _choiceLabel.textColor = [UIColor labelColor];
+        } else {
+            _choiceLabel.textColor = [UIColor blackColor];
+        }
         
         _choiceLabel.hidden = NO;
         _placeHolderLabel.hidden = !_choiceLabel.hidden;

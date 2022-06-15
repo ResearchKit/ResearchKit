@@ -57,7 +57,7 @@ ORK_INLINE NSArray *ORKArrayCopyObjects(NSArray *a) {
         return nil;
     }
     NSMutableArray *b = [NSMutableArray arrayWithCapacity:a.count];
-    [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [a enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
         [b addObject:[obj copy]];
     }];
     return [b copy];

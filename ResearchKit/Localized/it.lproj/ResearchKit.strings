@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "Cognome";
 "CONSENT_NAME_PLACEHOLDER" = "Obbligatorio";
 "CONSENT_REVIEW_TITLE" = "Verifica";
-"CONSENT_REVIEW_INSTRUCTION" = "Leggi il modulo sottostante e scegli Accetto per continuare.";
+"CONSENT_REVIEW_INSTRUCTION" = "Leggi il modulo di seguito e scegli Accetto per continuare.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Verifica";
 "CONSENT_SIGNATURE_TITLE" = "Firma";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Firma con il dito nel riquadro sottostante.";
@@ -42,40 +42,47 @@
 "CONSENT_PAGE_NUMBER_FORMAT" = "Pagina %1$ld di %2$ld";
 
 /* Consent section titles. */
-"CONSENT_SECTION_WELCOME" = "Benvenuto";
+"CONSENT_SECTION_WELCOME" = "Ciao";
 "CONSENT_SECTION_DATA_GATHERING" = "Raccolta dati";
 "CONSENT_SECTION_PRIVACY" = "Privacy";
 "CONSENT_SECTION_DATA_USE" = "Utilizzo dati";
-"CONSENT_SECTION_STUDY_SURVEY" = "Indagine conoscitiva";
-"CONSENT_SECTION_STUDY_TASKS" = "Attività indagine conoscitiva";
+"CONSENT_SECTION_STUDY_SURVEY" = "Indagine studio scientifico";
+"CONSENT_SECTION_STUDY_TASKS" = "Attività studio";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Tempo richiesto";
-"CONSENT_SECTION_WITHDRAWING" = "Ritiro";
+"CONSENT_SECTION_WITHDRAWING" = "Non partecipare più allo studio";
 "CONSENT_LEARN_MORE_TITLE" = "Scopri di più";
 
 /* Consent section learn more */
 "LEARN_MORE_DATA_GATHERING" = "Scopri di più sulla raccolta di dati";
 "LEARN_MORE_DATA_USE" = "Scopri di più sull'utilizzo dei dati";
 "LEARN_MORE_PRIVACY" = "Scopri di più sulla tutela dei dati relativi alla privacy e alla tua identità";
-"LEARN_MORE_WELCOME" = "Prima di iniziare, scopri di più sull'indagine conoscitiva";
-"LEARN_MORE_STUDY_SURVEY" = "Scopri di più sull'indagine conoscitiva";
-"LEARN_MORE_TIME_COMMITMENT" = "Scopri di più sull'impatto che l'indagine conoscitiva avrà sul tuo tempo";
+"LEARN_MORE_WELCOME" = "Prima di iniziare, scopri di più sullo studio";
+"LEARN_MORE_STUDY_SURVEY" = "Scopri di più sullo studio";
+"LEARN_MORE_TIME_COMMITMENT" = "Scopri di più sull'impatto che lo studio avrà sul tuo tempo";
 "LEARN_MORE_TASKS" = "Scopri di più sulle attività previste";
-"LEARN_MORE_WITHDRAWING" = "Scopri di più sul ritiro";
+"LEARN_MORE_WITHDRAWING" = "Scopri di più sulla possibilità di annullare la partecipazione allo studio";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Opzioni di condivisione";
 "CONSENT_SHARE_WIDELY_%@" = "Condividi i miei dati con %@ e con ricercatori qualificati a livello mondiale";
 "CONSENT_SHARE_ONLY_%@" = "Condividi i miei dati solo con %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ riceverà i dati raccolti grazie alla tua partecipazione all'indagine conoscitiva.\n\nUna condivisione più ampia di questi dati codificati (senza rivelare informazioni sensibili come il tuo nome) può aiutare lo studio ed eventuali ricerche future.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Partecipando allo studio, invierai a %@ i dati raccolti.\n\nUna condivisione più ampia di questi dati codificati (senza rivelare informazioni sensibili come il tuo nome) può aiutare questo studio ed eventuali ricerche future.";
 "LEARN_MORE_CONSENT_SHARING" = "Scopri di più sulla condivisione dei dati";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Nome di %@ (stampatello)";
-"CONSENT_DOC_LINE_SIGNATURE" = "Firma di %@";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nome in stampatello";
+"CONSENT_DOC_LINE_SIGNATURE" = "Firma";
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ di %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Domanda %1$@ di %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Ignorata";
+"REVIEW_EDIT_ANSWER" = "Modifica";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valore non valido";
@@ -92,7 +99,7 @@
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Impossibile individuare la tua posizione attuale. Inserisci l'indirizzo o spostati in una zona con una migliore copertura GPS.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "L'accesso ai servizi di localizzazione è stato negato. Vai in Impostazioni e autorizza l'applicazione a utilizzare i servizi di localizzazione.";
 "LOCATION_ERROR_GEOCODE" = "Impossibile trovare risultati per l'indirizzo inserito, assicurati che sia valido.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Non sei connesso a Internet o hai superato il numero massimo di tentativi di ricerca dell'indirizzo. Se non sei connesso a Internet, attiva la rete Wi-Fi per rispondere a questa domanda, ignora il passaggio se è disponibile il tasto Ignora o torna al sondaggio una volta connesso. In alternativa, riprova tra qualche minuto.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "La connessione a internet non è attiva oppure hai superato il numero massimo di tentativi di ricerca dell'indirizzo. Se la connessione a internet non è attiva, per rispondere a questa domanda attiva la rete Wi-Fi, ignora il passaggio se è disponibile il pulsante Ignora o torna all'indagine conoscitiva una volta ristabilita la connessione. In alternativa, riprova tra qualche minuto.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Il testo supera la lunghezza massima: %@";
@@ -106,7 +113,7 @@
 "PASSWORD_FORM_ITEM_TITLE" = "Password";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Inserisci password";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Conferma";
-"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Inserisci di nuovo la password";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Reinserisci password";
 "CONFIRM_PASSWORD_ERROR_MESSAGE" = "Le password non coincidono.";
 "ADDITIONAL_INFO_SECTION_TITLE" = "Ulteriori informazioni";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "Giovanni";
@@ -187,8 +194,8 @@
 "MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
-"LIMB_LEFT" = "sinistra";
-"LIMB_RIGHT" = "destra";
+"LIMB_LEFT" = "sinistro";
+"LIMB_RIGHT" = "destro";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tocca per rispondere";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Annulla";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Cancella";
+"BUTTON_CLEAR_SIGNATURE" = "Cancella firma";
 "BUTTON_APPLY" = "Applica";
 "BUTTON_DISAGREE" = "Rifiuto";
 "BUTTON_DONE" = "Fine";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Cancella risposta";
 "BUTTON_READ_ONLY_MODE" = "La risposta non può essere modificata.";
 "BUTTON_COPYRIGHT" = "Copyright";
+"BUTTON_CLOSE" = "Chiudi";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Inizio attività tra";
 "TASK_COMPLETE_TITLE" = "Attività completata";
 "TASK_COMPLETE_TEXT" = "I dati verranno analizzati, riceverai una notifica quando i risultati saranno pronti.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ secondi rimanenti.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ rimanenti.";
 "TOUCH_ANYWHERE_LABEL" = "Tocca un punto qualsiasi per continuare";
 
 /* Image capture step. */
@@ -245,7 +254,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Siediti comodamente per %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Cammina il più velocemente possibile per %@.";
 "FITNESS_INTRO_TEXT_FORMAT" = "L'attività monitora la tua frequenza cardiaca e valuta la distanza massima che puoi raggiungere in %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Cammina all'aperto all'andatura massima che riesci a sostenere per %1$@. Al termine, siediti e riposati per %2$@. Per cominciare, tocca Inizia.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Cammina all'aperto tenendo l'andatura più veloce che riesci a sostenere per %1$@. Al termine, siediti e riposati per %2$@. Tocca Inizia per cominciare.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Deambulazione ed equilibrio";
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonale";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tocca quando senti un suono.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Tono e volume";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Sentirai una serie di suoni.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Quando senti un suono, tocca il pulsante.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Per questo test, il volume sarà impostato al 50 per cento.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Questo test dura circa 10 minuti.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Attiva “Non disturbare” per evitare interruzioni.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "I suoni verranno riprodotti nell'orecchio destro.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "I suoni verranno riprodotti nell'orecchio sinistro.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "L'attività identifica i livelli soglia dell'udito di un individuo in scala dB HL.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Assicurati che il volume del dispositivo sia impostato sul livello massimo.\n\nDurante l'attività, verrà riprodotto un tenue segnale acustico nell'orecchio sinistro o nell'orecchio destro.\n\nAscolta con attenzione e tocca il pulsante ogni volta che senti un segnale acustico.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Questo test identifica il volume necessario perché tu senta un suono.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Questionario introduttivo.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Seleziona l'orecchio migliore, se presente";
-"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "sinistra";
-"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "destra";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "sinistro";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "destro";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "nessuna preferenza";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Test annullato";
+"dBHL_ALERT_TITLE_START_OVER" = "Ricomincia";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Annulla test";
+"dBHL_ALERT_TEXT" = "Per eseguire questo test, riconnetti i tuoi auricolari AirPods o EarPods.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ completato";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Cuffie";
+"HEADPHONES_UNKNOWN" = "Sconosciute";
+"HEADPHONES_NONE" = "Nessuna";
+"CONNECTED" = "Connessi";
+"NOT_CONNECTED" = "Non connessi";
+"HEADPHONE_CONNECTED_%@" = "Connesso - %@";
+"HEADPHONE_DETECT_TITLE" = "Connetti le cuffie";
+"HEADPHONE_DETECT_TEXT" = "Questo test richiede auricolari AirPods o Earpods di Apple";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memoria spaziale";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "L'attività valuta la tua memoria spaziale a breve termine. Ripeti l'ordine di accensione dei simboli a forma di %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "fiore";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "fiori";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Tocca i %@ seguendo l'ordine di accensione.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Tocca i %@ in ordine inverso rispetto alla sequenza iniziale.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Toccali seguendo l'ordine di accensione.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Toccali in ordine inverso rispetto alla sequenza iniziale.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Per cominciare, tocca Inizia e osserva con attenzione.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Punteggio";
@@ -343,7 +379,7 @@
 "MEMORY_GAME_COMPLETE_TITLE" = "Sequenza completa";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Per continuare, tocca Avanti";
 "MEMORY_GAME_FAILED_TITLE" = "Riprova";
-"MEMORY_GAME_FAILED_MESSAGE" = "Non sei riuscito a completare l'attività richiesta. Tocca Avanti per continuare.";
+"MEMORY_GAME_FAILED_MESSAGE" = "Non hai completato l'attività in tempo. Tocca Avanti per continuare.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Tempo scaduto";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Tempo scaduto.\nTocca Avanti per continuare.";
 "MEMORY_GAME_COMPLETE" = "Fine";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Siediti sul bordo di una sedia. All’inizio posizionerai il dispositivo sul ginocchio destro per una misurazione. Attiva i suoni del dispositivo per poter sentire le istruzioni.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Posiziona il dispositivo sul ginocchio sinistro con lo schermo rivolto all’esterno, come illustrato.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Posiziona il dispositivo sul ginocchio destro con lo schermo rivolto all’esterno, come illustrato.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Tocca lo schermo per iniziare ed estendi il più possibile il ginocchio sinistro. Tocca di nuovo quando hai finito.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Tocca lo schermo per iniziare ed estendi il più possibile il ginocchio destro. Tocca di nuovo quando hai finito.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Posiziona il dispositivo sul ginocchio sinistro";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Posiziona il dispositivo sul ginocchio destro";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Estendi il ginocchio sinistro. Quindi tocca un punto qualsiasi.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Estendi il ginocchio destro. Quindi tocca un punto qualsiasi.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Quando vuoi, tocca lo schermo per iniziare ed estendi il più possibile il ginocchio sinistro. Torna alla posizione iniziale e tocca di nuovo quando hai finito.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Quando vuoi, tocca lo schermo per iniziare ed estendi il più possibile il ginocchio destro. Torna alla posizione iniziale e tocca di nuovo quando hai finito.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Posiziona il dispositivo sul ginocchio sinistro. Tocca lo schermo ed estendi il più possibile il ginocchio sinistro.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Posiziona il dispositivo sul ginocchio destro. Tocca lo schermo ed estendi il più possibile il ginocchio destro.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Quando hai finito, riporta il ginocchio sinistro nella posizione iniziale e tocca qualunque punto.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Quando hai finito, riporta il ginocchio destro nella posizione iniziale e tocca qualunque punto.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Ampiezza del movimento della spalla sinistra";
@@ -411,17 +447,17 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "All’inizio posizionerai il dispositivo sulla spalla destra per una misurazione. Attiva i suoni del dispositivo per poter sentire le istruzioni.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Posiziona il dispositivo sulla spalla sinistra con lo schermo rivolto all’esterno, come illustrato.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Posiziona il dispositivo sulla spalla destra con lo schermo rivolto all’esterno, come illustrato.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Tocca lo schermo per iniziare e solleva il più possibile il braccio sinistro. Tocca di nuovo quando hai finito.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Tocca lo schermo per iniziare e solleva il più possibile il braccio destro. Tocca di nuovo quando hai finito.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Posiziona il dispositivo sulla spalla sinistra";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Posiziona il dispositivo sulla spalla destra";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Solleva il braccio sinistro. Quindi tocca un punto qualsiasi.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Solleva il braccio destro. Quindi tocca un punto qualsiasi.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Quando vuoi, tocca lo schermo per iniziare e alza il più possibile il braccio sinistro. Torna alla posizione iniziale e tocca di nuovo quando hai finito.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Quando vuoi, tocca lo schermo per iniziare e alza il più possibile il braccio destro. Torna alla posizione iniziale e tocca di nuovo quando hai finito.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Posiziona il dispositivo sulla spalla sinistra. Tocca lo schermo e alza il più possibile in avanti il braccio sinistro.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Posiziona il dispositivo sulla spalla destra. Tocca lo schermo e alza il più possibile in avanti il braccio destro.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Quando hai finito, riporta il braccio sinistro nella posizione iniziale e tocca qualunque punto.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Quando hai finito, riporta il braccio destro nella posizione iniziale e tocca qualunque punto.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Camminata a tempo";
 "TIMED_WALK_INTRO_DETAIL" = "Questa attività misura la funzionalità dei tuoi arti inferiori.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Trova un posto, preferibilmente all'aperto, dove puoi camminare per %@ in linea retta più velocemente possibile, ma in sicurezza. Non rallentare finché non hai superato il traguardo.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Trova un luogo, preferibilmente all'aperto, dove puoi camminare per circa %@ in linea retta il più velocemente possibile, ma in sicurezza. Non rallentare finché non hai superato il traguardo.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Tocca Avanti per iniziare.";
 "TIMED_WALK_FORM_TITLE" = "Ausilio ortopedico";
 "TIMED_WALK_FORM_TEXT" = "Utilizza lo stesso ausilio ortopedico per ciascun test.";
@@ -446,16 +482,16 @@
 "PASAT_INTRO_TEXT" = "Il Paced Auditory Serial Addition Test (PASAT) misura la velocità di elaborazione delle informazioni uditive e la capacità di calcolo.";
 "PVSAT_INTRO_TEXT" = "Il Paced Visual Serial Addition Test (PVSAT) misura la velocità di elaborazione delle informazioni visive e la capacità di calcolo.";
 "PAVSAT_INTRO_TEXT" = "Il Paced Auditory and Visual Serial Addition Test (PAVSAT) misura la velocità di elaborazione delle informazioni uditive e visive e la capacità di calcolo.";
-"PSAT_INTRO_TEXT_2_%@" = "Le singole cifre vengono mostrate ogni %@ secondi.\nDevi aggiungere ciascuna cifra a quella immediatamente precedente.\nAttenzione, non devi calcolare un totale collettivo, ma solo la somma degli ultimi due numeri.";
+"PSAT_INTRO_TEXT_2_%@" = "Le singole cifre vengono mostrate ogni %@.\nDevi sommare ogni nuova cifra a quella immediatamente precedente.\nAttenzione: non devi calcolare un totale collettivo, ma solo la somma degli ultimi due numeri.";
 "PSAT_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
 "PSAT_INITIAL_INSTRUCTION" = "Ricorda questa prima cifra.";
-"PSAT_INSTRUCTION" = "Aggiungi questa nuova cifra alla precedente.";
+"PSAT_INSTRUCTION" = "Somma questa nuova cifra alla precedente.";
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test dei %@ pioli";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Questo test valuta la funzionalità dei tuoi arti superiori. Dovrai posizionare l'icona colorata nella sagoma vuota %@ volte.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Verranno esaminate entrambe le mani.\nDovrai afferrare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Verranno esaminate entrambe le mani.\nDovrai afferrare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Verranno esaminate entrambe le mani.\nDovrai afferrare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
@@ -472,7 +508,7 @@
 "TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Tieni il telefono nella mano maggiormente interessata come mostrato nell'immagine sotto.";
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Tieni il telefono nella mano DESTRA come mostrato nell'immagine sotto.";
 "TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Tieni il telefono nella mano SINISTRA come mostrato nell'immagine sotto.";
-"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Ti verrà richiesto di eseguire %@ mentre stai seduto con il telefono in mano.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Ti verrà richiesto di eseguire %@ in posizione seduta con il telefono in mano.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "un'attività";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "due attività";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tre attività";
@@ -503,21 +539,18 @@
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Ora passa il telefono alla mano DESTRA e continua con l'attività successiva.";
 "TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continua con l'attività successiva.";
 "TREMOR_TEST_COMPLETED_INSTRUCTION" = "Attività completata.";
-"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Ti verrà richiesto di eseguire %@ mentre stai seduto con il telefono prima in una mano, poi di nuovo nell'altra.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Ti verrà richiesto di eseguire %@ in posizione seduta con il telefono prima in una mano, poi di nuovo nell'altra.";
 "TREMOR_SKIP_LEFT_HAND" = "Non posso eseguire l'attività con la mano SINISTRA.";
 "TREMOR_SKIP_RIGHT_HAND" = "Non posso eseguire l'attività con la mano DESTRA.";
 "TREMOR_SKIP_NEITHER" = "Posso eseguire l'attività con entrambe le mani.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Trail-making test";
+"TRAILMAKING_TASK_TITLE" = "Test di trail-making";
 "TRAILMAKING_INTENDED_USE" = "L'attività valuta la tua attenzione visiva e il passaggio da un compito all’altro registrando il tempo richiesto per toccare una serie di punti in ordine.";
 "TRAILMAKING_INTENDED_USE2_A" = "Dopo il conto alla rovescia, tocca i punti in ordine alternato tra numeri e lettere. Inizia toccando il primo numero “1” seguito dai numeri “2” – “3” – “4”… fino a raggiungere il numero “7”.";
 "TRAILMAKING_INTENDED_USE2_B" = "Dopo il conto alla rovescia, tocca i punti in ordine alternato tra numeri e lettere. Inizia toccando il primo numero “1” seguito dalla prima lettera “A”, quindi “2” – “B” – “3” – “C”… fino a raggiungere il numero “7”.";
 "TRAILMAKING_INTRO_TEXT" = "Fallo più velocemente che puoi senza commettere errori. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d errore)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errori)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Calcolo";
 "ENVIRONMENTSPL_THRESHOLD" = "Soglia: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Rumore di sottofondo OK";
+"ENVIRONMENTSPL_NOISE" = "Troppo rumore in sottofondo";
+"ENVIRONMENTSPL_TITLE_2" = "Trova un luogo silenzioso";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Per garantire la precisione necessaria, il test dovrebbe essere realizzato in un ambiente silenzioso.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Avvia attività";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Nessun dato";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Sposta il cursore per inserire un valore";
+"SLIDER_I_DONT_KNOW" = "Non saprei";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Pagina";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Indietro";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Selezionato";
 "AX_UNSELECTED" = "Non selezionato";
+"AX_SELECT_ALL_THAT_APPLY" = "SELEZIONA TUTTE LE OPZIONI VALIDE";
 
 "AX_SLIDER_LABEL" = "Slider risposta. Da %@ a %@";
 "AX_UNLABELED_IMAGE" = "Immagine senza etichetta";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Dimensioni dischi: %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vuota";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Chiudi tastiera";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Intervallo da %@ a %@";
 "AX_GRAPH_STACK_PREFIX" = "Pila composta da";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Griglia di Amsler";
 "AX_AMSLER_GRID_HINT" = "Utilizza il dito o lo stilo per segnare direttamente sulla griglia oppure scorri verso sinistra da un punto fuori dalla griglia per finire.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Pulsanti attivabili tramite tocco";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tocca per orecchio sinistro";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Attiva per avviare il test. Dopo che è iniziato, tocca direttamente il pulsante quando senti un suono nell'orecchio sinistro.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tocca per orecchio destro";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Attiva per avviare il test. Dopo che è iniziato, tocca direttamente il pulsante quando senti un suono nell'orecchio destro.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Usando VoiceOver, tocca lo schermo per sapere dove sono posizionati i pulsanti per ogni orecchio. Quando inizia il test, i pulsanti saranno attivabili direttamente tramite tocco. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Tocca per un dito";
+"AX_TAP_BUTTON_2_LABEL" = "Tocca per un altro dito";
+"AX_TAP_BUTTON_HINT" = "Abilita quest'opzione per rendere i pulsanti attivabili direttamente tramite tocco.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Usando VoiceOver, esplora lo schermo toccando per sapere dove sono posizionati i pulsanti. Abilita uno dei pulsanti per renderli attivabili direttamente tramite tocco.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "I pulsanti adesso sono attivabili direttamente tramite tocco.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Usando VoiceOver, il pulsante potrà essere attivato direttamente tramite tocco. Sarà posizionato approssimativamente al centro dello schermo.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Usando VoiceOver, i pulsanti del test saranno attivabili direttamente tramite tocco.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Impossibile decodificare restoreData per l'inizializzazione";

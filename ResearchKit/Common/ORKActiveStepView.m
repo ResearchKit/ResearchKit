@@ -32,9 +32,8 @@
 #import "ORKActiveStepView.h"
 
 #import "ORKCustomStepView_Internal.h"
-#import "ORKNavigationContainerView_Internal.h"
-#import "ORKStepHeaderView_Internal.h"
 #import "ORKTintedImageView.h"
+#import "ORKStepContainerView_Private.h"
 
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
@@ -44,51 +43,25 @@
     ORKTintedImageView *_imageView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _imageView = [ORKTintedImageView new];
-        _imageView.translatesAutoresizingMaskIntoConstraints = NO;
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
-        
-        [self tintColorDidChange];
-    }
-    return self;
-}
-
-- (void)updateStepView {
-    if (_activeCustomView) {
-        self.stepView = _activeCustomView;
-    } else if (_imageView.image) {
-        self.stepView = _imageView;
-    } else {
-        self.stepView = nil;
-    }
-}
-
 - (void)setActiveStep:(ORKActiveStep *)step {
     _activeStep = step;
-    self.headerView.instructionLabel.hidden = !(_activeStep.hasText);
-    
-    self.headerView.instructionLabel.text = _activeStep.text;
-    self.stepViewFillsAvailableSpace = YES;
-    
-    _imageView.image = _activeStep.image;
-    _imageView.shouldApplyTint = _activeStep.shouldTintImages;
-    [self updateStepView];
+    self.stepTitle = step.title;
+    self.stepText = step.text;
+    self.stepDetailText = step.detailText;
+    self.stepTopContentImage = step.image;
+    self.stepTopContentImageContentMode = step.imageContentMode;
 }
 
 - (void)updateTitle:(NSString *)title text:(NSString *)text {
-    ORKStepHeaderView *headerView = [self headerView];
-    [headerView.captionLabel setText:title];
-    [headerView.instructionLabel setText:text];
-    headerView.instructionLabel.hidden = (text == nil);
-    [headerView updateCaptionLabelPreferredWidth];
+    self.stepTitle = title;
+    self.stepText = text;
 }
 
 - (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView {
     _activeCustomView = activeCustomView;
-    [self updateStepView];
+    if (_activeCustomView) {
+        self.customContentView = activeCustomView;
+    }
 }
 
 @end

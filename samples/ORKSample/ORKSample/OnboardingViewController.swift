@@ -53,7 +53,7 @@ class OnboardingViewController: UIViewController {
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
         completionStep.title = "Welcome aboard."
         completionStep.text = "Thank you for joining this study."
-        
+         
         let orderedTask = ORKOrderedTask(identifier: "Join", steps: [consentStep, reviewConsentStep, healthDataStep, passcodeStep, completionStep])
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
         taskViewController.delegate = self
@@ -62,13 +62,13 @@ class OnboardingViewController: UIViewController {
     }
 }
 
-extension OnboardingViewController : ORKTaskViewControllerDelegate {
+extension OnboardingViewController: ORKTaskViewControllerDelegate {
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
             case .completed:
                 performSegue(withIdentifier: "unwindToStudy", sender: nil)
-            
+
             case .discarded, .failed, .saved:
                 dismiss(animated: true, completion: nil)
         }

@@ -87,7 +87,7 @@ static const NSUInteger MaximumNumberOfDisks = 8;
 - (void)validateParameters {
     [super validateParameters];
     if (self.numberOfDisks > MaximumNumberOfDisks) {
-        ORK_Log_Warning(@"Having a large number of disks provides a poor user experience, consider reducing the number below %@.", @(MaximumNumberOfDisks));
+        ORK_Log_Info("Having a large number of disks provides a poor user experience, consider reducing the number below %@.", @(MaximumNumberOfDisks));
     }
 }
 

@@ -95,8 +95,8 @@ static const CGFloat GraphViewRedZoneHeight = 25;
         [self addSubview:_timerLabel];
         [self addSubview:_graphView];
         
-        _timerLabel.text = @"06:00";
         _alertLabel.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
+        // _timerLabel.text set in -updateTimerLabel:
         
         self.alertThreshold = GraphViewBlueZoneHeight / ((GraphViewRedZoneHeight * 2) + GraphViewBlueZoneHeight);
         

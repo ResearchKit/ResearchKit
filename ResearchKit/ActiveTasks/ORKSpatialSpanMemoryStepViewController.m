@@ -32,6 +32,7 @@
 #import "ORKSpatialSpanMemoryStepViewController.h"
 
 #import "ORKActiveStepView.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKSpatialSpanMemoryContentView.h"
 #import "ORKVerticalContainerView_Internal.h"
 
@@ -46,6 +47,7 @@
 #import "ORKSpatialSpanGame.h"
 #import "ORKSpatialSpanGameState.h"
 #import "ORKSpatialSpanMemoryStep.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -168,17 +170,12 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.footerHidden = YES;
     _contentView.gameView.delegate = self;
     self.activeStepView.activeCustomView = _contentView;
-    self.activeStepView.stepViewFillsAvailableSpace = NO;
-    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForMemoryGame, self.view.window);
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     
     [self resetUI];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUserTap:)];
     [self.activeStepView addGestureRecognizer:tapGestureRecognizer];
-    
-    if (usesDefaultCopyright) {
-        self.activeStepView.headerView.learnMoreButton.alpha = 0;
-    }
 }
 
 - (void)stepDidChange {
@@ -654,9 +651,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 
 - (void)showComplete {
     [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_COMPLETE_TITLE", nil) text:nil];
-    
-    // Show the copyright
-    self.activeStepView.headerView.learnMoreButton.alpha = 1;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _contentView.buttonItem = [ORKBorderedButton new];

@@ -32,6 +32,8 @@
 #import "ORKFormStep.h"
 
 #import "ORKFormStepViewController.h"
+#import "ORKBodyItem.h"
+#import "ORKLearnMoreItem.h"
 
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKFormItem_Internal.h"
@@ -56,6 +58,7 @@
         self.optional = YES;
         self.useSurveyMode = YES;
         self.useCardView = YES;
+        self.cardViewStyle = ORKCardViewStyleDefault;
     }
     return self;
 }
@@ -66,10 +69,10 @@
         self.optional = YES;
         self.useSurveyMode = YES;
         self.useCardView = YES;
+        self.cardViewStyle = ORKCardViewStyleDefault;
     }
     return self;
 }
-
 
 - (void)validateParameters {
     [super validateParameters];
@@ -94,7 +97,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormStep *step = [super copyWithZone:zone];
     step.formItems = ORKArrayCopyObjects(_formItems);
-    step.footnote = self.footnote;
+    step.cardViewStyle = self.cardViewStyle;
     return step;
 }
 
@@ -102,20 +105,53 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame &&
-        ORKEqualObjects(self.formItems, castObject.formItems) &&
-        ORKEqualObjects(self.footnote, castObject.footnote);
+    return (isParentSame &&
+            (ORKEqualObjects(self.formItems, castObject.formItems)) &&
+            self.cardViewStyle == castObject.cardViewStyle);
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.formItems.hash ^ self.footnote.hash;
+    return super.hash ^ self.formItems.hash;
+}
+
+- (ORKAnswerFormat *)impliedAnswerFormat {
+    // We enter this code-path only for formSteps which have ONE valid answer format (the other type of formItem would likely be a section header)
+    ORKFormItem *item;
+    for (item in self.formItems) {
+        if (item.answerFormat) {
+            break;
+        }
+    }
+    return item.answerFormat;
+}
+
+- (ORKQuestionType)questionType {
+    ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
+    return impliedFormat.questionType;
+}
+
+- (BOOL)isFormatImmediateNavigation {
+    // Only allow immediate navigation for formSteps which contain only ONE formItem with a valid answer format
+    int numberOfAnswerFormats = 0;
+    for (ORKFormItem *item in self.formItems) {
+        if (item.answerFormat) {
+            numberOfAnswerFormats += 1;
+            if (numberOfAnswerFormats > 1) {
+                return false;
+            }
+        }
+    }
+    ORKQuestionType questionType = self.questionType;
+    return (self.optional == NO) && ((questionType == ORKQuestionTypeBoolean) || (questionType == ORKQuestionTypeSingleChoice));
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
-        ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
+        ORK_DECODE_BOOL(aDecoder, useCardView);
+        ORK_DECODE_OBJ(aDecoder, footerText);
+        ORK_DECODE_ENUM(aDecoder, cardViewStyle);
     }
     return self;
 }
@@ -123,7 +159,9 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, formItems);
-    ORK_ENCODE_OBJ(aCoder, footnote);
+    ORK_ENCODE_BOOL(aCoder, useCardView);
+    ORK_ENCODE_OBJ(aCoder, footerText);
+    ORK_ENCODE_ENUM(aCoder, cardViewStyle);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -163,25 +201,58 @@
 @implementation ORKFormItem
 
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
-    return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
+    return [self initWithIdentifier:identifier
+                               text:text
+                         detailText:nil
+                      learnMoreItem:nil
+                      showsProgress:YES
+                       answerFormat:answerFormat
+                            tagText: nil
+                           optional:YES];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL)optional {
-    self = [super init];
-    if (self) {
-        ORKThrowInvalidArgumentExceptionIfNil(identifier);
-        _identifier = [identifier copy];
-        _text = [text copy];
-        _answerFormat = [answerFormat copy];
-        _optional = optional;
-    }
-    return self;
+    return [self initWithIdentifier:identifier
+                               text:text
+                         detailText:nil
+                      learnMoreItem:nil
+                      showsProgress:YES
+                       answerFormat:answerFormat
+                            tagText: nil
+                           optional:optional];
 }
 
 - (instancetype)initWithSectionTitle:(NSString *)sectionTitle {
     self = [super init];
     if (self) {
         _text = [sectionTitle copy];
+    }
+    return self;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(nullable NSString *)text detailText:(nullable NSString *)detailText learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem showsProgress:(BOOL)showsProgress answerFormat:(nullable ORKAnswerFormat *)answerFormat tagText:(nullable NSString *)tagText optional:(BOOL) optional {
+    self = [super init];
+    if (self) {
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
+        _identifier = [identifier copy];
+        _text = [text copy];
+        _detailText = [detailText copy];
+        _learnMoreItem = [learnMoreItem copy];
+        _showsProgress = showsProgress;
+        _answerFormat = [answerFormat copy];
+        _tagText = [tagText copy];
+        _optional = optional;
+    }
+    return self;
+}
+
+- (instancetype)initWithSectionTitle:(nullable NSString *)sectionTitle detailText:(nullable NSString *)text learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem showsProgress:(BOOL)showsProgress {
+    self = [super init];
+    if (self) {
+        _text = [sectionTitle copy];
+        _detailText = [text copy];
+        _learnMoreItem = [learnMoreItem copy];
+        _showsProgress = showsProgress;
     }
     return self;
 }
@@ -212,8 +283,12 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormItem *item = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy] text:[_text copy] answerFormat:[_answerFormat copy]];
-    item.optional = _optional;
-    item.placeholder = _placeholder;
+    item->_optional = _optional;
+    item->_placeholder = _placeholder;
+    item->_detailText = [_detailText copy];
+    item->_learnMoreItem = [_learnMoreItem copy];
+    item->_showsProgress = _showsProgress;
+    item->_tagText = [_tagText copy];
     return item;
 }
 
@@ -223,9 +298,13 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_BOOL(aDecoder, optional);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, learnMoreItem, ORKLearnMoreItem);
+        ORK_DECODE_BOOL(aDecoder, showsProgress);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
         ORK_DECODE_OBJ_CLASS(aDecoder, step, ORKFormStep);
+        ORK_DECODE_OBJ_CLASS(aDecoder, tagText, NSString);
     }
     return self;
 }
@@ -234,9 +313,13 @@
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_BOOL(aCoder, optional);
     ORK_ENCODE_OBJ(aCoder, text);
+    ORK_ENCODE_OBJ(aCoder, detailText);
+    ORK_ENCODE_OBJ(aCoder, learnMoreItem);
+    ORK_ENCODE_BOOL(aCoder, showsProgress);
     ORK_ENCODE_OBJ(aCoder, placeholder);
     ORK_ENCODE_OBJ(aCoder, answerFormat);
     ORK_ENCODE_OBJ(aCoder, step);
+    ORK_ENCODE_OBJ(aCoder, tagText);
 
 }
 
@@ -250,13 +333,17 @@
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && self.optional == castObject.optional
             && ORKEqualObjects(self.text, castObject.text)
+            && ORKEqualObjects(self.detailText, castObject.detailText)
+            && ORKEqualObjects(self.learnMoreItem, castObject.learnMoreItem)
+            && self.showsProgress == castObject.showsProgress
             && ORKEqualObjects(self.placeholder, castObject.placeholder)
+            && ORKEqualObjects(self.tagText, castObject.tagText)
             && ORKEqualObjects(self.answerFormat, castObject.answerFormat));
 }
 
 - (NSUInteger)hash {
      // Ignore the step reference - it's not part of the content of this item
-    return _identifier.hash ^ _text.hash ^ _placeholder.hash ^ _answerFormat.hash ^ (_optional ? 0xf : 0x0);
+    return _identifier.hash ^ _text.hash ^ _placeholder.hash ^ _answerFormat.hash ^ (_optional ? 0xf : 0x0) ^ _detailText.hash ^ _learnMoreItem.hash ^ (_showsProgress ? 0xf : 0x0) ^ _tagText.hash;
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {

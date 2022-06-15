@@ -197,4 +197,13 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+ORK_CLASS_AVAILABLE
+@interface ORKDataCollectionState : NSObject <NSSecureCoding>
+
+@property(nonatomic, nullable, readwrite) NSString *archiveVersion;
+
+@property(nonatomic, nonnull, readwrite) NSArray<ORKCollector *> *collectors;
+
+@end
+
 NS_ASSUME_NONNULL_END

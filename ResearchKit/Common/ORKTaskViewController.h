@@ -40,9 +40,23 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStepViewController;
 @class ORKTaskResult;
 @class ORKTaskViewController;
+@class ORKLearnMoreInstructionStep;
+@class ORKLearnMoreStepViewController;
 @protocol ORKStepViewControllerDelegate;
 @protocol ORKTask;
 @protocol ORKTaskResultSource;
+@class ORKInstructionStep;
+
+
+/**
+ The `ORKTaskViewControllerReviewMode` value indicates how the task view controller reviews the task.
+ */
+typedef NS_ENUM(NSInteger, ORKTaskViewControllerReviewMode) {
+    
+    ORKTaskViewControllerReviewModeNever = 0,
+    
+    ORKTaskViewControllerReviewModeStandalone
+};
 
 /**
  The `ORKTaskViewControllerFinishReason` value indicates how the task view controller has finished
@@ -62,6 +76,20 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
     /// An error was detected during the current step.
     ORKTaskViewControllerFinishReasonFailed
 };
+
+/**
+ The `ORKTaskViewControllerProgressMode` value indicates how the question progress labels will be presented during the task
+ */
+typedef NS_ENUM(NSInteger, ORKTaskViewControllerProgressMode) {
+    
+    /// The displayed progress numbers for each step will be dependent on the total amount of questions throughout the entire task.
+    ORKTaskViewControllerProgressModeTotalQuestions = 0,
+
+    /// The displayed progress numbers for each step will be dependent on amount of questions within that particular step.
+    ORKTaskViewControllerProgressModeQuestionsPerStep
+} ORK_ENUM_AVAILABLE;
+
+
 
 /**
  The task view controller delegate is responsible for processing the results
@@ -173,6 +201,18 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController;
 
 /**
+ Asks the delegate for a custom view Learn More view controller for the specified step.
+ 
+ If this method is implemented, the task view controller calls it to obtain a
+ view controller for the learn more item in the step.
+ 
+ @param step The step for which the learn more controller should be overridden.
+ 
+ @return A custom `ORKLearMoreStepViewController`, or `nil` to request the default learn more step controller for this step.
+ */
+- (nullable ORKLearnMoreStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController learnMoreViewControllerForStep:(ORKLearnMoreInstructionStep *)step;
+
+/**
  Asks the delegate for a custom view controller for the specified step.
  
  If this method is implemented, the task view controller calls it to obtain a
@@ -249,6 +289,10 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  @param result              The current value of the result.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
+
+/**
+ */
+- (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreButtonPressedWithStep:(ORKLearnMoreInstructionStep *)learnMoreStep forStepViewController:(ORKStepViewController *)stepViewController;
 
 @end
 
@@ -335,7 +379,27 @@ ORK_CLASS_AVAILABLE
  
  @return A new task view controller.
  */
-- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate;
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut;
+
+/**
+ Creates a new task view controller that starts the task at the step that has the specified step identifier.
+ 
+ Call this method to start a task from a specific step. Additionally, you can supply a defaultResultSource to resume a
+ partially completed task, or to provide your own prefilled results.
+
+ if `startingStepIdentifier` is nil, the task starts from the first step.
+ 
+ @param task                    The task to be presented.
+ @param ongoingResult           An optional task result from a previous run of the task. If you provide an ongoingResult, the task will start at the step corresponding to the last result.
+ @param defaultResultSource     A source that the task view controller can consult to obtain default answers for questions provided in question steps and form steps.
+ @param delegate                The delegate for the task view controller.
+ 
+ @return A new task view controller.
+ */
+- (instancetype)initWithTask:(id<ORKTask>)task
+               ongoingResult:(nullable ORKTaskResult *)ongoingResult
+         defaultResultSource:(nullable id<ORKTaskResultSource>)defaultResultSource
+                    delegate:(id<ORKTaskViewControllerDelegate>)delegate;
 
 /**
  The delegate for the task view controller.
@@ -468,6 +532,19 @@ ORK_CLASS_AVAILABLE
 - (void)goBackward;
 
 /**
+ Returns the step after the  provided step
+ 
+ @param step         The `ORKStep` before the one returned.
+ @return        The `ORKStep` after `step`.
+ */
+- (nullable ORKStep *)stepAfterStep:(ORKStep *)step;
+
+/**
+ Returns true if the step provided is instruction step and is the  first step in the task.
+ */
+- (BOOL)isStepLastBeginningInstructionStep:(ORKStep *)step;
+
+/**
  A Boolean value indicating whether the navigation bar is hidden.
  
  By default, the task view controller includes a visible navigation bar. To disable the display of the navigation bar, set this property to `NO`.
@@ -483,11 +560,38 @@ ORK_CLASS_AVAILABLE
 - (void)setNavigationBarHidden:(BOOL)hidden animated:(BOOL)animated;
 
 /**
+ Returns a learn more view controller for the given step.
+ @param step The step needing a learn more view controller
+ */
+-(ORKLearnMoreStepViewController *)learnMoreViewControllerForStep:(ORKLearnMoreInstructionStep *)step;
+
+/**
  The navigation bar for the task view controller. (read-only)
  
  You can use this method to customize the appearance of the task view controller's navigation bar.
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
+
+/**
+ A Boolean value indicating whether the task view controller can be dismissed directly, without showing the "End Task" action sheet, when
+ a user taps the "Cancel" button.
+ 
+ The default value of this property is `NO`. To allow the task view controller to be dismissed directly with its results discarded, set
+ the value to `YES`.
+ */
+@property (nonatomic, assign) BOOL discardable;
+
+@property (nonatomic) ORKTaskViewControllerReviewMode reviewMode;
+
+@property (nonatomic, nullable) ORKInstructionStep * reviewInstructionStep;
+
+/**
+ A enum that determines if the progress numbers displayed within each step is based on the total amount of questions throughout the task or the total amount of questoins within that particular step.
+ 
+ The default value is ORKTaskViewControllerProgressModeTotalQuestions
+ */
+
+@property (nonatomic) ORKTaskViewControllerProgressMode progressMode;
 
 @end
 

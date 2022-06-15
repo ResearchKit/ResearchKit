@@ -34,8 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKRoundTappingButton.h"
 #import "ORKTappingContentView.h"
-#import "ORKVerticalContainerView.h"
-
+#import "ORKStepContainerView_Private.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
@@ -43,6 +42,7 @@
 #import "ORKCollectionResult_Private.h"
 #import "ORKTappingIntervalResult.h"
 #import "ORKStep.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -92,16 +92,13 @@
     _touchDownRecognizer = [UIGestureRecognizer new];
     _touchDownRecognizer.delegate = self;
     [self.view addGestureRecognizer:_touchDownRecognizer];
-    
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    
     self.timerUpdateInterval = 0.1;
     
     _expired = NO;
     
     _tappingContentView = [[ORKTappingContentView alloc] init];
-    _tappingContentView.hasSkipButton = self.step.optional;
     self.activeStepView.activeCustomView = _tappingContentView;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     [_tappingContentView.tapButton2 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];

@@ -77,10 +77,10 @@
     [super start];
     
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }
@@ -99,18 +99,18 @@
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:_healthClinicalType
                                                            predicate:_healthFHIRResourceType ? [HKQuery predicateForClinicalRecordsWithFHIRResourceType:_healthFHIRResourceType] : nil limit:HKObjectQueryNoLimit
                                                      sortDescriptors:nil
-                                                      resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
-                                                          NSUInteger resultCount = results.count;
+                                                      resultsHandler:^(HKSampleQuery * _Nonnull sampleQuery, NSArray<__kindof HKSample *> * _Nullable sampleResults, NSError * _Nullable error) {
+                                                          NSUInteger resultCount = sampleResults.count;
                                                           if (resultCount == 0) {
                                                               return;
                                                           }
                                                           
-                                                          [results enumerateObjectsUsingBlock:^(HKClinicalRecord *clinicalRecord, NSUInteger idx, BOOL *stop) {
+                                                          [sampleResults enumerateObjectsUsingBlock:^(HKClinicalRecord *clinicalRecord, NSUInteger idx, BOOL *stop) {
                                                               
-                                                              NSError *error = nil;
-                                                              [_logger append:clinicalRecord.FHIRResource.data error:&error];
-                                                              if (error) {
-                                                                  ORK_Log_Warning(@"Failed to add health records object to the logger with error: %@", error);
+                                                              NSError *logError = nil;
+                                                              [_logger append:clinicalRecord.FHIRResource.data error:&logError];
+                                                              if (logError) {
+                                                                  ORK_Log_Error("Failed to add health records object to the logger with error: %@", logError);
                                                                   return;
                                                               }
                                                           }];

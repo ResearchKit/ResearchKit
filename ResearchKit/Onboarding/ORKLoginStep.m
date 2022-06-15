@@ -68,6 +68,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
     if (self) {
         _loginViewControllerString = NSStringFromClass(loginViewControllerClass);
         self.formItems = [self loginFormItems];
+        self.showsProgress = NO;
         
         [self validateParameters];
     }
@@ -79,6 +80,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
     
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
+        answerFormat.usernameField = YES;
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
@@ -96,6 +98,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        answerFormat.textContentType = UITextContentTypePassword;
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
@@ -126,10 +129,6 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
 - (BOOL)isOptional {
     // This is necessary because the skip button is used as a `Forgot password?` button.
     return YES;
-}
-
-- (BOOL)showsProgress {
-    return NO;
 }
 
 + (BOOL)supportsSecureCoding {

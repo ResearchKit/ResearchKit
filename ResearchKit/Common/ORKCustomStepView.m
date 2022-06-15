@@ -79,11 +79,9 @@
     NSString *_title;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super init];
     if (self) {
-        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
-        
         self.translatesAutoresizingMaskIntoConstraints = NO;
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
         [self addGestureRecognizer:recognizer];
@@ -103,9 +101,9 @@
     [self addSubview:_containerView];
 }
 
-- (void)setupHeaderViewWithTitle:(NSString *)title {
+- (void)setupHeaderViewWithTitle:(NSString *)title detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
     if (!_cardHeaderView) {
-        _cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:title];
+        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText tagText:nil showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem];
     }
     _cardHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_cardHeaderView];
@@ -135,12 +133,12 @@
     [self setUpCellConstraints];
 }
 
--(void)useCardViewWithTitle:(NSString *)title {
+- (void)useCardViewWithTitle:(NSString *)title detailText:(NSString *)detailText learnMoreView:(ORKLearnMoreView *)learnMoreView progressText:(NSString *)progressText tagText:(NSString *)tagText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
     _title = title;
     _useCardView = YES;
-    _leftRightMargin = ORKCardLeftRightMargin;
+    _leftRightMargin = 0.0;
     [self setBackgroundColor:[UIColor clearColor]];
-    [self setupHeaderViewWithTitle:title];
+    [self setupHeaderViewWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
     [self setupConstraints];
 }
 
@@ -202,14 +200,14 @@
                                                                                                                 toItem:self
                                                                                                              attribute:NSLayoutAttributeLeft
                                                                                                             multiplier:1.0
-                                                                                                              constant:_leftRightMargin],
+                                                                                                              constant:ORKCardLeftRightMarginForWindow(self.window)],   //Adding Padding to match surveyCardHeader in Question Step.
                                                                                 [NSLayoutConstraint constraintWithItem:_containerView
                                                                                                              attribute:NSLayoutAttributeRight
                                                                                                              relatedBy:NSLayoutRelationEqual
                                                                                                                 toItem:self
                                                                                                              attribute:NSLayoutAttributeRight
                                                                                                             multiplier:1.0
-                                                                                                              constant:-_leftRightMargin]
+                                                                                                              constant:-ORKCardLeftRightMarginForWindow(self.window)]   //Adding Padding to match surveyCardHeader in Question Step.
                                                                                 ]];
     
     [NSLayoutConstraint activateConstraints:_containerConstraints];
@@ -236,14 +234,14 @@
                                                         attribute:NSLayoutAttributeLeft
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_containerView
-                                                        attribute:NSLayoutAttributeLeftMargin
+                                                        attribute:NSLayoutAttributeLeft
                                                        multiplier:1.0
                                                          constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_cell
                                                         attribute:NSLayoutAttributeRight
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_containerView
-                                                        attribute:NSLayoutAttributeRightMargin
+                                                        attribute:NSLayoutAttributeRight
                                                        multiplier:1.0
                                                          constant:0.0]];
      [constraints addObject:[NSLayoutConstraint constraintWithItem:_containerView
@@ -286,12 +284,21 @@
             _contentMaskLayer = nil;
         }
         _contentMaskLayer = [[CAShapeLayer alloc] init];
-        
-        UIColor *fillColor = [UIColor ork_borderGrayColor];
+
+        UIColor *fillColor;
+        if (@available(iOS 13.0, *)) {
+            fillColor = UIColor.secondarySystemGroupedBackgroundColor;
+        } else {
+            fillColor = [UIColor ork_borderGrayColor];
+        }
         [_contentMaskLayer setFillColor:[fillColor CGColor]];
         
         CAShapeLayer *foreLayer = [CAShapeLayer layer];
-        [foreLayer setFillColor:[[UIColor whiteColor] CGColor]];
+        if (@available(iOS 13.0, *)) {
+            [foreLayer setFillColor:[[UIColor secondarySystemGroupedBackgroundColor] CGColor]];
+        } else {
+            [foreLayer setFillColor:[[UIColor whiteColor] CGColor]];
+        }
         foreLayer.zPosition = 0.0f;
         
         CAShapeLayer *lineLayer = [CAShapeLayer layer];
@@ -312,7 +319,11 @@
 
         [_contentMaskLayer addSublayer:foreLayer];
         [_contentMaskLayer addSublayer:lineLayer];
-        
+        if (@available(iOS 13.0, *)) {
+            _contentMaskLayer.fillColor = UIColor.separatorColor.CGColor;
+        } else {
+            _contentMaskLayer.fillColor = [UIColor ork_midGrayTintColor].CGColor;
+        }
         [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
     }
 }

@@ -81,14 +81,14 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_INTEGER(aDecoder, limbOption);
+        ORK_DECODE_ENUM(aDecoder, limbOption);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_INTEGER(aCoder, limbOption);
+    ORK_ENCODE_ENUM(aCoder, limbOption);
 }
 
 - (BOOL)isEqual:(id)object {

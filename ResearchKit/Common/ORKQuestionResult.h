@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ORKResult.h>
 @import CoreLocation;
+@import Contacts;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -102,7 +103,7 @@ ORK_CLASS_AVAILABLE
  
  If the user skipped the question, the value of the corresponding array member is `nil`.
  */
-@property (nonatomic, copy, nullable) NSArray *choiceAnswers;
+@property (nonatomic, copy, nullable) NSArray<id<NSCopying, NSCoding, NSObject>> *choiceAnswers;
 
 @end
 
@@ -164,9 +165,9 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, readonly, nullable) NSString *userInput;
 
 /**
- The address dicitonary for this coordinate from MapKit.
+ The postal address for this coordinate
  */
-@property (nonatomic, copy, readonly, nullable) NSDictionary *addressDictionary;
+@property (nonatomic, copy, readonly, nullable) CNPostalAddress *postalAddress;
 
 @end
 
@@ -323,5 +324,17 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ The `ORKSESQuestionResult` class represents the result of socio-economic ladder answer format.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKSESQuestionResult : ORKQuestionResult
+
+/**
+ The socio-economic status picked by the user.
+ */
+@property (nonatomic, copy, nullable) NSNumber *rungPicked;
+
+@end
 
 NS_ASSUME_NONNULL_END

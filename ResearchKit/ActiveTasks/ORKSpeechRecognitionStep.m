@@ -87,7 +87,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.speechRecognizerLocale == castObject.speechRecognizerLocale));
+            [self.speechRecognizerLocale isEqual:castObject.speechRecognizerLocale]);
 }
 
 - (BOOL)allowsBackNavigation {

@@ -42,7 +42,7 @@
 
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKWaitStepView.h"
-
+#import "ORKStepView.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKWaitStep.h"
@@ -55,7 +55,6 @@
     ORKWaitStepView *_waitStepView;
     ORKProgressIndicatorType _indicatorType;
     NSString *_updatedText;
-    ORKNavigationContainerView *_navigationFooterView;
     NSArray<NSLayoutConstraint *> *_constraints;
 }
 
@@ -80,18 +79,22 @@
         [self.view addSubview:_waitStepView];
         [self setupNavigationFooterView];
         [self setupConstraints];
-        _waitStepView.headerView.instructionLabel.text = _updatedText;
-        [self.taskViewController setRegisteredScrollView:_waitStepView];
+        _waitStepView.stepTopContentImage = self.step.image;
+        _waitStepView.titleIconImage = self.step.iconImage;
+        _waitStepView.stepTitle = self.step.title;
+        _waitStepView.stepText = _updatedText;
+        _waitStepView.stepDetailText = self.step.detailText;
+        _waitStepView.stepHeaderTextAlignment = self.step.headerTextAlignment;
+        _waitStepView.bodyItems = self.step.bodyItems;
+        _waitStepView.stepTopContentImageContentMode = self.step.imageContentMode;
     }
 }
 
 - (void)setupNavigationFooterView {
     if (!_navigationFooterView) {
-        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView = _waitStepView.navigationFooterView;
+        _navigationFooterView.neverHasContinueButton = YES;
     }
-    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
-    _navigationFooterView.neverHasContinueButton = YES;
-    [self.view addSubview:_navigationFooterView];
 }
 
 - (void)setupConstraints {
@@ -100,58 +103,35 @@
     }
     _constraints = nil;
     _waitStepView.translatesAutoresizingMaskIntoConstraints = NO;
-    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
     
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_waitStepView
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_waitStepView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_waitStepView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_waitStepView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeTop
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0]
                      ];

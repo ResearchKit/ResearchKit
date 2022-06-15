@@ -173,7 +173,7 @@
         if (([keyPath isEqualToString:@"status"] && object == _moviePlayer) ||
             ([keyPath isEqualToString:@"duration"] && object == _playerItem)) {
             if (_moviePlayer.error) {
-                ORK_Log_Warning(@"%@", _moviePlayer.error);
+                ORK_Log_Error("%@", _moviePlayer.error);
             }
             
             [self attemptAnimationWithContext:animationContext];
@@ -229,9 +229,12 @@
 - (void)initialFrameDidDisplay {
     // Once our initial frame has definitely been drawn, we make ourselves visible
     // and signal the caller that the animation has started.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     ORKEAGLMoviePlayerView *playerView = [_stepViewController animationPlayerView];
     playerView.hidden = NO;
-    
+#pragma clang diagnostic pop
+
     if (_pendingContext && !_pendingContext.hasCalledLoadHandler) {
         if (_pendingContext.loadHandler) {
             _pendingContext.loadHandler(self, _pendingContext.direction);
@@ -257,7 +260,11 @@
         CVPixelBufferRef pixelBuffer = NULL;
         pixelBuffer = [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
         
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         ORKEAGLMoviePlayerView *playerView = [_stepViewController animationPlayerView];
+#pragma clang diagnostic pop
+
         CGSize playerItemPresentationSize = _playerItem.presentationSize;
         if (!CGSizeEqualToSize(playerView.presentationSize, playerItemPresentationSize)) {
             playerView.presentationSize = playerItemPresentationSize;

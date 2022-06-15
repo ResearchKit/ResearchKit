@@ -30,9 +30,21 @@
 
 @import UIKit;
 @import WebKit;
-#import "ORKStepViewController.h"
+#import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKSignatureView.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKWebViewStepViewController;
+
+@protocol ORKWebViewStepDelegate <NSObject>
+
+- (WKNavigationActionPolicy)handleLinkNavigationWithURL:(NSURL *)url;
+- (void)didFinishLoadingWebStepViewController:(ORKWebViewStepViewController *)webStepViewController;
+
+@end
+
+@class ORKCustomSignatureFooterView;
 
 /**
  The `ORKWebViewStepViewController` class is a step view controller subclass
@@ -41,7 +53,16 @@ NS_ASSUME_NONNULL_BEGIN
  You should not need to instantiate a web view step view controller directly. Instead, include
  a web view step in a task, and present a task view controller for that task.
  */
-@interface ORKWebViewStepViewController : ORKStepViewController<WKScriptMessageHandler, WKNavigationDelegate>
+
+ORK_CLASS_AVAILABLE
+@interface ORKWebViewStepViewController : ORKStepViewController<WKScriptMessageHandler, WKNavigationDelegate, ORKSignatureViewDelegate,  ORKCustomSignatureFooterViewStatusDelegate, UIScrollViewDelegate>
+
+@property (nonatomic, weak, nullable) id<ORKWebViewStepDelegate> webViewDelegate;
+@property (nonatomic) CGFloat bottomOffset;
+@property (nonatomic) BOOL shouldScrollAfterSignature;
+- (void)startPreload;
+
+- (void)scrollSignatureViewRect:(CGRect)rect toPoint:(CGPoint)endPoint animated:(BOOL)animated;
 
 @end
 

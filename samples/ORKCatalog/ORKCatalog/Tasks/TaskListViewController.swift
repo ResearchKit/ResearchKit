@@ -8,25 +8,25 @@
  1.  Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
  
- 2.  Redistributions in binary form must reproduce the above copyright notice, 
- this list of conditions and the following disclaimer in the documentation and/or 
- other materials provided with the distribution. 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
  
- 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
- may be used to endorse or promote products derived from this software without 
- specific prior written permission. No license is granted to the trademarks of 
- the copyright holders even if such marks are included in this software. 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
  
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
- ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import UIKit
@@ -46,7 +46,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     var waitStepViewController: ORKWaitStepViewController?
     var waitStepUpdateTimer: Timer?
     var waitStepProgress: CGFloat = 0.0
-    
+
     // MARK: Types
     
     enum TableViewCellIdentifier: String {
@@ -60,6 +60,16 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         with the created task.
     */
     var taskResultFinishedCompletionHandler: ((ORKResult) -> Void)?
+    
+    // MARK: View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.tableView.backgroundColor = UIColor.systemGroupedBackground
+        }
+    }
     
     // MARK: UITableViewDataSource
 
@@ -81,6 +91,10 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
         
         cell.textLabel!.text = "\(taskListRow)"
+        
+        if #available(iOS 13.0, *) {
+            cell.textLabel?.textColor = UIColor.label
+        }
         
         return cell
     }
@@ -109,10 +123,10 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
         /*
-            We present the task directly, but it is also possible to use segues.
-            The task property of the task view controller can be set any time before
-            the task view controller is presented.
-        */
+         We present the task directly, but it is also possible to use segues.
+         The task property of the task view controller can be set any time before
+         the task view controller is presented.
+         */
         present(taskViewController, animated: true, completion: nil)
     }
     
@@ -137,36 +151,44 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         if stepViewController.step?.identifier == "WaitStepIndeterminate" ||
             stepViewController.step?.identifier == "WaitStep" ||
             stepViewController.step?.identifier == "LoginWaitStep" {
-            delay(5.0, closure: { () -> () in
+            delay(5.0, closure: { () -> Void in
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
                     stepViewController.goForward()
                 }
             })
         } else if stepViewController.step?.identifier == "WaitStepDeterminate" {
-            delay(1.0, closure: { () -> () in
+            delay(1.0, closure: { () -> Void in
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
-                    self.waitStepViewController = stepViewController;
+                    self.waitStepViewController = stepViewController
                     self.waitStepProgress = 0.0
                     self.waitStepUpdateTimer = Timer(timeInterval: 0.1, target: self, selector: #selector(TaskListViewController.updateProgressOfWaitStepViewController), userInfo: nil, repeats: true)
-                    RunLoop.main.add(self.waitStepUpdateTimer!, forMode: RunLoopMode.commonModes)
+                    RunLoop.main.add(self.waitStepUpdateTimer!, forMode: RunLoop.Mode.common)
                 }
             })
         }
     }
     
-    func delay(_ delay:Double, closure:@escaping ()->()) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, learnMoreButtonPressedWith learnMoreStep: ORKLearnMoreInstructionStep, for stepViewController: ORKStepViewController) {
+        //        FIXME: Temporary fix. This method should not be called if it is only used to present the learnMoreStepViewController, the stepViewController should present the learnMoreStepViewController.
+        stepViewController.present(UINavigationController(rootViewController: ORKLearnMoreStepViewController(step: learnMoreStep)), animated: true) {
+            
+        }
+    }
+    
+    func delay(_ delay: Double, closure: @escaping () -> Void ) {
         let delayTime = DispatchTime.now() + delay
-        let dispatchWorkItem = DispatchWorkItem(block: closure);
+        let dispatchWorkItem = DispatchWorkItem(block: closure)
         DispatchQueue.main.asyncAfter(deadline: delayTime, execute: dispatchWorkItem)
     }
     
-    @objc func updateProgressOfWaitStepViewController() {
+    @objc
+    func updateProgressOfWaitStepViewController() {
         if let waitStepViewController = waitStepViewController {
             waitStepProgress += 0.01
             DispatchQueue.main.async(execute: { () -> Void in
                 waitStepViewController.setProgress(self.waitStepProgress, animated: true)
             })
-            if (waitStepProgress < 1.0) {
+            if waitStepProgress < 1.0 {
                 return
             } else {
                 self.waitStepUpdateTimer?.invalidate()

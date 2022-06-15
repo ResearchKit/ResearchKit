@@ -140,15 +140,25 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     [self stepDidChange];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([_pageViewController.viewControllers[0] isKindOfClass:[ORKConsentReviewController class]]) {
+        ORKConsentReviewController *consentReviewController = _pageViewController.viewControllers[0];
+        [self.taskViewController setRegisteredScrollView:consentReviewController.webView.scrollView];
+    } else {
+        NSAssert(NO, @"The first view controller in a consent review step should be of type ORKConsentReviewController");
+    }
+}
+
 - (UIBarButtonItem *)goToPreviousPageButtonItem {
     UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
 }
 
-- (void)updateNavLeftBarButtonItem {
+- (void)updateBarButtonItems {
     if (_currentPageIndex == 0) {
-        [super updateNavLeftBarButtonItem];
+        [super updateBarButtonItems];
     } else {
         self.navigationItem.leftBarButtonItem = [self goToPreviousPageButtonItem];
     }
@@ -159,7 +169,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
         return;
     }
     
-    [self updateNavLeftBarButtonItem];
+    [self updateBarButtonItems];
 }
 
 static NSString *const _NameFormIdentifier = @"nameForm";
@@ -172,27 +182,37 @@ static NSString *const _FamilyNameIdentifier = @"family";
                                                              text:self.step.text];
     formStep.useSurveyMode = NO;
     
-    ORKTextAnswerFormat *nameAnswerFormat = [ORKTextAnswerFormat textAnswerFormat];
-    nameAnswerFormat.multipleLines = NO;
-    nameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-    nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+    ORKTextAnswerFormat *givenNameAnswerFormat = [ORKTextAnswerFormat textAnswerFormat];
+    givenNameAnswerFormat.multipleLines = NO;
+    givenNameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    givenNameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+    givenNameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+    givenNameAnswerFormat.textContentType = UITextContentTypeGivenName;
     ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
                                                               text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
-                                                      answerFormat:nameAnswerFormat];
+                                                      answerFormat:givenNameAnswerFormat];
     givenNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
+    ORKTextAnswerFormat *familyNameAnswerFormat = [ORKTextAnswerFormat textAnswerFormat];
+    familyNameAnswerFormat.multipleLines = NO;
+    familyNameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    familyNameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+    familyNameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+    familyNameAnswerFormat.textContentType = UITextContentTypeFamilyName;
     ORKFormItem *familyNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
                                                              text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
-                                                     answerFormat:nameAnswerFormat];
+                                                     answerFormat:familyNameAnswerFormat];
     familyNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
     givenNameFormItem.optional = NO;
     familyNameFormItem.optional = NO;
     
-    NSArray *formItems = @[givenNameFormItem, familyNameFormItem];
-    if (ORKCurrentLocalePresentsFamilyNameFirst()) {
-        formItems = @[familyNameFormItem, givenNameFormItem];
+    ORKFormItem *sectionTitleFormItem = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"CONSENT_NAME_TITLE", nil)];
+    
+    NSArray *formItems = @[sectionTitleFormItem, givenNameFormItem, familyNameFormItem];
+    if (ORKCurrentLocalePresentsFamilyNameFirst())
+    {
+        formItems = @[sectionTitleFormItem, familyNameFormItem, givenNameFormItem];
     }
     
     [formStep setFormItems:formItems];
@@ -365,7 +385,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     UIViewController *viewController = [self viewControllerForIndex:page];
     
     if (!viewController) {
-        ORK_Log_Debug(@"No view controller!");
+        ORK_Log_Debug("No view controller!");
         return;
     }
     
@@ -388,12 +408,6 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         if (finished) {
             ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
             [strongSelf updateBackButton];
-            
-            //register ScrollView to update hairline
-            if ([viewController isKindOfClass:[ORKConsentReviewController class]]) {
-                ORKConsentReviewController *reviewViewController =  (ORKConsentReviewController *)viewController;
-                [strongSelf.taskViewController setRegisteredScrollView:reviewViewController.webView.scrollView];
-            }
             
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
         }

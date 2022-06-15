@@ -45,10 +45,6 @@
     return [ORKConsentSharingStepViewController class];
 }
 
-- (BOOL)showsProgress {
-    return NO;
-}
-
 - (BOOL)useSurveyMode {
     return NO;
 }
@@ -70,14 +66,14 @@
         }
         
         self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
-                             @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@",nil), investigatorShortDescription] value:@(YES)],
-                               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@",nil), investigatorLongDescription] value:@(NO)],
+                             @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@", nil), investigatorShortDescription] value:@(YES)],
+                               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@", nil), investigatorLongDescription] value:@(NO)],
                                ]];
         self.optional = NO;
         self.useSurveyMode = NO;
         self.title = ORKLocalizedString(@"CONSENT_SHARING_TITLE", nil);
         self.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_%@", nil), investigatorLongDescription];
-        
+        self.showsProgress = NO;
         self.localizedLearnMoreHTMLContent = localizedLearnMoreHTMLContent;
     }
     return self;

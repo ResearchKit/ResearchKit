@@ -176,6 +176,8 @@
         dispatch_async(_sessionQueue, ^{
             [_captureSession startRunning];
         });
+    } else {
+        [self setFileURL:_fileURL];
     }
 }
 
@@ -190,6 +192,14 @@
     [_videoCaptureView.playerViewController.player pause];
     
     [super viewWillDisappear:animated];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    if (_videoCaptureView) {
+        [_videoCaptureView orientationDidChange];
+    }
 }
 
 - (void)queue_SetupCaptureSession {
@@ -207,13 +217,13 @@
     }
     
     if (device) {
-        // Check if the device has flash.
-        if ([device isFlashModeSupported:_videoCaptureStep.flashMode]) {
+        // Check if the device has the requested torchMode
+        if([device isTorchModeSupported:_videoCaptureStep.torchMode]){
             [device lockForConfiguration:nil];
-            device.flashMode = _videoCaptureStep.flashMode;
+            device.torchMode = _videoCaptureStep.torchMode;
             [device unlockForConfiguration];
         }
-
+        
         // Configure the input and output
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         
@@ -335,7 +345,7 @@
             });
         }
         else {
-            NSLog(@"Connection not ready");
+            ORK_Log_Info("Connection not ready");
             // Use the main queue, as UI components may need to be updated
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (handler) {

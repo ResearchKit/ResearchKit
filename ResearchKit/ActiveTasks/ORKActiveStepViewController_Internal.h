@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKActiveStepViewController.h"
+#import <ResearchKit/ORKActiveStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -55,8 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSTimeInterval timerUpdateInterval;
 
 @property (nonatomic, assign, getter=isStarted) BOOL started;
-
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *navigationFooterView;
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished; // Let subclass receive timer fires
 

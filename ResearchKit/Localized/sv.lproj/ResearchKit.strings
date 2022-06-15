@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "Efternamn";
 "CONSENT_NAME_PLACEHOLDER" = "Krävs";
 "CONSENT_REVIEW_TITLE" = "Granska";
-"CONSENT_REVIEW_INSTRUCTION" = "Granska formuläret nedan och tryck på Godkänn om du är redo att fortsätta.";
+"CONSENT_REVIEW_INSTRUCTION" = "Granska formuläret nedan och tryck på Godkänn om du vill fortsätta.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Granska";
 "CONSENT_SIGNATURE_TITLE" = "Signatur";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Signera med hjälp av fingret i rutan nedan.";
@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ kommer att få dina studiedata från din medverkan i denna studie.\n\nVidare delning av dina kodade studiedata (utan ditt namn eller liknande information) kan vara till nytta för denna och framtida forskning.";
 "LEARN_MORE_CONSENT_SHARING" = "Läs mer om datadelning";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@s namn (tryckt)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@s signatur";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Namnförtydligande";
+"CONSENT_DOC_LINE_SIGNATURE" = "Signatur";
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ av %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Fråga %1$@ av %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Överhoppad";
+"REVIEW_EDIT_ANSWER" = "Ändra";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ogiltigt värde";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Avbryt";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Rensa";
+"BUTTON_CLEAR_SIGNATURE" = "Rensa signatur";
 "BUTTON_APPLY" = "Använd";
 "BUTTON_DISAGREE" = "Avböj";
 "BUTTON_DONE" = "Klar";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Rensa svar";
 "BUTTON_READ_ONLY_MODE" = "Det här svaret kan inte ändras.";
 "BUTTON_COPYRIGHT" = "Copyright";
+"BUTTON_CLOSE" = "Stäng";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Startar aktivitet om";
 "TASK_COMPLETE_TITLE" = "Aktiviteten är klar";
 "TASK_COMPLETE_TEXT" = "Dina data kommer att analyseras, och du blir meddelad när resultaten är klara.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder återstår.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ återstår.";
 "TOUCH_ANYWHERE_LABEL" = "Fortsätt genom att trycka var som helst";
 
 /* Image capture step. */
@@ -308,7 +317,7 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometri";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Den här aktiviteten mäter din förmåga att höra olika ljud.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Anslut och ta på dig hörlurarna innan du börjar.\n\nLjudet kommer att vara väldigt subtilt och liknar inte ett vanligt varningsljud. Ljudet är svagt i början och ökar sakta i ljudstyrka. Koncentrera dig på ljudet och tryck på höger- eller vänsterknappen för att registrera i vilket öra du hör ljudet.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Anslut och ta på dig hörlurarna innan du börjar.\n\nLjudet kommer att vara väldigt subtilt och liknar inte ett vanligt varningsljud. Ljudet är svagt i början och ökar sakta i ljudstyrka. Koncentrera dig på ljudet och tryck på höger- eller vänsterknappen för att registrera i vilket öra du hör ljudet.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Nu bör du höra en ton. Justera volymen med reglagen på sidan av enheten.\n\nTryck på någon av knapparna när du vill börja.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Varje gång du börjar höra ett ljud ska du trycka på vänster eller höger knapp för att visa vilket öra du hör ljudet i.";
@@ -319,21 +328,48 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometri";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tryck när du hör en ton.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ton och volym";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "En serie toner kommer att spelas upp.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Tryck på knappen när du hör en ton.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "I det här testet kommer volymen att ställas in på 50 procent.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Det här testet tar omkring 10 minuter.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Aktivera Stör ej så att du inte blir avbruten.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Först kommer toner att spelas upp i ditt högra öra.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Nu kommer toner att spelas upp i ditt vänstra öra.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Den här aktiviteten identifierar en persons hörseltröskvärden i dB HL-skala.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Se till att ljudet på enheten är inställt på högsta volym.\n\nUnder den här uppgiften kommer en subtil ton att spelas i antingen det högra eller vänstra örat.\n\nLyssna noga och tryck på knappen varje gång du hör en ton.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Det här testet mäter hur hög volymen måste vara för att du ska kunna höra ett ljud.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Förberedande frågeformulär.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Markera din inställning för ”bättre öra” (om du har ett)";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "vänster";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "höger";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ingen inställning";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Testet avbröts";
+"dBHL_ALERT_TITLE_START_OVER" = "Börja om";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Avbryt testet";
+"dBHL_ALERT_TEXT" = "Anslut AirPods eller EarPods på nytt om du vill utföra det här testet.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ klart";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Hörlurar";
+"HEADPHONES_UNKNOWN" = "Okända";
+"HEADPHONES_NONE" = "Inga";
+"CONNECTED" = "Ansluten";
+"NOT_CONNECTED" = "Ej ansluten";
+"HEADPHONE_CONNECTED_%@" = "Anslutna – %@";
+"HEADPHONE_DETECT_TITLE" = "Anslut dina hörlurar";
+"HEADPHONE_DETECT_TEXT" = "Det här testet kräver Apple AirPods eller Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatialt minne";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Den här aktiviteten mäter ditt spatiala korttidsminne genom att be dig upprepa den ordning i vilken %@ lyser upp.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blommor";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blommor";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "En del av %@na kommer att lysa upp en i taget. Tryck på de %@na i samma ordning som de lyser upp.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "En del av %@na kommer att lysa upp en i taget. Tryck på de %@na i omvänd ordning jämfört med hur de lyser upp.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "En del av %@na kommer att lysa upp en i taget. Tryck på de %@na i samma ordning som de lyser upp.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "En del av %@na kommer att lysa upp en i taget. Tryck på de %@na i omvänd ordning jämfört med hur de lyser upp.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tryck på Kom igång för att börja och titta noggrant.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Poäng";
@@ -393,14 +429,14 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Den här aktiviteten mäter hur långt du kan sträcka ditt högra knä.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sätt dig längst ut på en stol. Du börjar med att lägga enheten på ditt vänstra knä så att det kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sätt dig längst ut på en stol. Du börjar med att lägga enheten på ditt högra knä så att det kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lägg enheten på ditt vänstra knä med skärmen utåt (se bild).";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lägg enheten på ditt högra knä med skärmen utåt (se bild).";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "När du vill börja trycker du på skärmen och sträcker ut ditt vänstra knä så långt du kan. Tryck igen när du är klar.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "När du vill börja trycker du på skärmen och sträcker ut ditt högra knä så långt du kan. Tryck igen när du är klar.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lägg enheten på vänster knä";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lägg enheten på höger knä";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Sträck ut ditt vänstra knä. Tryck sedan var som helst.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Sträck ut ditt högra knä. Tryck sedan var som helst.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Placera enheten på ditt vänstra knä med skärmen utåt (se bild).";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Placera enheten på ditt högra knä med skärmen utåt (se bild).";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "När du är klar trycker du på skärmen för att börja och rätar ut ditt vänstra knä så långt du kan. Återgå till startpositionen och tryck igen när du är klar.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "När du är klar trycker du på skärmen för att börja och rätar ut ditt högra knä så långt du kan. Återgå till startpositionen och tryck igen när du är klar.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Placera enheten på ditt vänstra knä. Tryck på skärmen och räta ut ditt vänstra knä så mycket du kan.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Placera enheten på ditt högra knä. Tryck på skärmen och räta ut ditt högra knä så mycket du kan.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "När du är klar återgår du till startpositionen för ditt vänstra knä. Tryck sedan var som helst på skärmen.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "När du är klar återgår du till startpositionen för ditt högra knä. Tryck sedan var som helst på skärmen.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Rörlighet, vänster axel";
@@ -409,14 +445,14 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Den här aktiviteten mäter hur långt du kan sträcka din högra axel.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Du börjar med att lägga enheten på din vänstra axel så att den kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Du börjar med att lägga enheten på din högra axel så att den kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lägg enheten på din vänstra axel med skärmen utåt (se bild).";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lägg enheten på din högra axel med skärmen utåt (se bild).";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "När du vill börja trycker du på skärmen och lyfter din vänstra arm så högt du kan. Tryck igen när du är klar.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "När du vill börja trycker du på skärmen och lyfter din högra arm så högt du kan. Tryck igen när du är klar.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lägg enheten på vänster axel";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lägg enheten på höger axel";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lyft din vänstra arm. Tryck sedan var som helst.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lyft din högra arm. Tryck sedan var som helst.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Placera enheten på din vänstra axel med skärmen utåt (se bild).";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Placera enheten på din högra axel med skärmen utåt (se bild).";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "När du är klar trycker du på skärmen för att börja och höjer din vänstra arm så högt du kan. Återgå till startpositionen och tryck igen när du är klar.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "När du är klar trycker du på skärmen för att börja och höjer din högra arm så högt du kan. Återgå till startpositionen och tryck igen när du är klar.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Placera enheten på din vänstra axel. Tryck på skärmen och lyft din vänstra arm framåt så långt du kan.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Placera enheten på din högra axel. Tryck på skärmen och lyft din högra arm framåt så långt du kan.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "När du är klar återgår du till startpositionen för din vänstra arm. Tryck sedan var som helst på skärmen.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "När du är klar återgår du till startpositionen för din högra arm. Tryck sedan var som helst på skärmen.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gång med tidtagning";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "PASAT (Paced Auditory Serial Addition Test) mäter din auditiva bearbetningshastighet och beräkningsförmåga.";
 "PVSAT_INTRO_TEXT" = "PVSAT (Paced Visual Serial Addition Test) mäter din visuella bearbetningshastighet och beräkningsförmåga.";
 "PAVSAT_INTRO_TEXT" = "PAVSAT (Paced Auditory and Visual Serial Addition Test) mäter din auditiva och visuella bearbetningshastighet och beräkningsförmåga.";
-"PSAT_INTRO_TEXT_2_%@" = "Ensiffriga tal visas med intervall på %@ sekunder.\nDu måste addera varje nytt tal till talet som visades omedelbart före det.\nObs! Du ska inte beräkna en löpande totalsumma, utan bara summan av de senaste två talen.";
+"PSAT_INTRO_TEXT_2_%@" = "Ensiffriga tal visas med intervall på %@.\nDu måste addera varje nytt tal till talet som visades omedelbart före det.\nObs! Du ska inte beräkna en löpande totalsumma, utan bara summan av de senaste två talen.";
 "PSAT_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
 "PSAT_INITIAL_INSTRUCTION" = "Kom ihåg den första siffran.";
 "PSAT_INSTRUCTION" = "Addera det nya talet till det föregående.";
@@ -455,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-håls pegtest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Den här aktiviteten mäter funktionen för dina övre extremiteter genom att be dig placera en pinne i ett hål. Du uppmanas att göra detta %@ gånger.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både den vänstra och högra handen kommer att testas.\nDu måste plocka upp pinnen så fort som möjligt och placera den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Både den vänstra och högra handen kommer att testas.\nDu måste plocka upp pinnen så fort som möjligt och placera den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både den högra och vänstra handen kommer att testas.\nDu måste plocka upp pinnen så fort som möjligt och placera den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
@@ -515,9 +551,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "När nedräkningen är slut ska du trycka på prickar med varannan gång siffror och varannan gång bokstäver. Börja genom att trycka på den första siffran ”1” och tryck sedan på den första bokstaven ”A”. Sedan ska du trycka på ”2” – ”B” – ”3” – ”C” osv. tills du kommer till siffran ”7”.";
 "TRAILMAKING_INTRO_TEXT" = "Gör det här så snabbt du kan utan att göra några misstag. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d fel)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d fel)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -542,7 +575,7 @@
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Spela upp ljud";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stoppa ljud";
 "SPEECH_IN_NOISE_TITLE" = "Tal i brus";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "Den här aktiviteten mäter hörförståelsen i bullriga nivåer.";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Den här aktiviteten mäter hörförståelsen i bullriga miljöer.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Som en del av det här testet ska du:\n\nLyssna på en mening.\n\nTydligt upprepa det du hörde eller gå vidare för att skriva in det du hörde med tangentbordet. \n\nOm du upprepar det du hörde har du möjlighet att ändra utskriften som görs av röstigenkänningsmotorn.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volymkalibrering";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tryck på Spela upp ljud, justera volymen till en behaglig nivå och fortsätt sedan genom att trycka på Stoppa ljud.";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Beräknar";
 "ENVIRONMENTSPL_THRESHOLD" = "Tröskel: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Bakgrundsbrus OK";
+"ENVIRONMENTSPL_NOISE" = "För mycket bakgrundsljud";
+"ENVIRONMENTSPL_TITLE_2" = "Hitta en tyst plats";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "För att det här testet ska bli så exakt som möjligt bör det utföras i en tyst miljö.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Starta uppgiften";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Inga data";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Ange ett värde genom att flytta skjutreglaget";
+"SLIDER_I_DONT_KNOW" = "Jag vet inte";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Sida";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tillbaka";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Markerat";
 "AX_UNSELECTED" = "Avmarkerat";
+"AX_SELECT_ALL_THAT_APPLY" = "MARKERA ALLT SOM GÄLLER";
 
 "AX_SLIDER_LABEL" = "Svarsreglage. Intervall från %@ till %@";
 "AX_UNLABELED_IMAGE" = "Omärkt bild";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skivor med storlekarna %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tomt";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Stäng tangentbord";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Intervall från %@ till %@";
 "AX_GRAPH_STACK_PREFIX" = "Trave som består av";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Amsler-nät";
 "AX_AMSLER_GRID_HINT" = "Använd fingret eller en ritpenna till att märka rutnätet, eller svep åt vänster utanför rutnätet för att avsluta.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Knappar som kan tryckas";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tryck för vänster öra";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktivera när du vill starta testet. När testet startas trycker du direkt på den här knappen när du hör ett ljud i vänster öra.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tryck för höger öra";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktivera när du vill starta testet. När testet startas trycker du direkt på den här knappen när du hör ett ljud i höger öra.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Rör vid skärmen för att utforska var knapparna för varje öra finns när du använder VoiceOver. När testet startas kan du trycka direkt på knapparna. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Tryck för ett finger";
+"AX_TAP_BUTTON_2_LABEL" = "Tryck för annat finger";
+"AX_TAP_BUTTON_HINT" = "Aktivera om du vill kunna trycka direkt på knapparna.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Rör vid skärmen för att utforska var knapparna finns när du använder VoiceOver. Aktivera en av knapparna så att du kan trycka på den direkt.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Nu kan du trycka direkt på knapparna.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Du kan trycka direkt på den här knappen när du använder VoiceOver. Den kommer att placeras nära mitten av skärmen.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Du kan trycka direkt på knapparna i testet när du använder VoiceOver.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Det går inte att avkoda restoreData för initiering";
