@@ -60,14 +60,14 @@ static NSString *ORKKeychainWrapperDefaultService() {
                    error:errorOut];
 }
 
-+ (id<NSSecureCoding>)objectOfClass:(Class)objectClass forKey:(NSString *)key
++ (id<NSSecureCoding>)objectsOfClasses:objectClasses forKey:(NSString *)key
        error:(NSError **)errorOut {
   NSData *data = [self dataForKey:key
               service:ORKKeychainWrapperDefaultService()
             accessGroup:nil
                error:errorOut];
   
-  return data ? [NSKeyedUnarchiver unarchivedObjectOfClass:objectClass fromData:data error:errorOut] : nil;
+  return data ? [NSKeyedUnarchiver unarchivedObjectOfClasses:objectClasses fromData:data error:errorOut] : nil;
 }
 
 + (BOOL)removeObjectForKey:(NSString *)key
