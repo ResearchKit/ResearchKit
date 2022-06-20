@@ -30,6 +30,7 @@
 
 
 #import "ORKTouchAnywhereStepViewController.h"
+#import "ORKTouchAnywhereStep.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKCustomStepView_Internal.h"
@@ -112,13 +113,25 @@
 
 @implementation ORKTouchAnywhereStepViewController
 
+
+- (ORKTouchAnywhereStep *)touchAnywhereStep {
+    return (ORKTouchAnywhereStep *)self.step;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _touchAnywhereView = [[ORKTouchAnywhereView alloc] init];
     _touchAnywhereView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _touchAnywhereView;
     
+    // set number of taps and number of touches (i.e. number of fingers tapping) to end the task. Default value of both is 1.
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    if (self.touchAnywhereStep.numberOfTaps > 0) {
+        _gestureRecognizer.numberOfTapsRequired = self.touchAnywhereStep.numberOfTaps;
+    }
+    if (self.touchAnywhereStep.numberOfTouches > 0) {
+        _gestureRecognizer.numberOfTouchesRequired = self.touchAnywhereStep.numberOfTouches;
+    }
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
     self.internalContinueButtonItem = nil;
 }

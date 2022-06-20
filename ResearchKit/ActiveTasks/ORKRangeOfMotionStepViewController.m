@@ -30,6 +30,7 @@
 
 
 #import "ORKRangeOfMotionStepViewController.h"
+#import "ORKRangeOfMotionStep.h"
 
 #import "ORKCustomStepView_Internal.h"
 #import "ORKHelpers_Internal.h"
@@ -132,12 +133,24 @@
 
 @implementation ORKRangeOfMotionStepViewController
 
+- (ORKRangeOfMotionStep *)rangeOfMotionStep {
+    return (ORKRangeOfMotionStep *)self.step;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _contentView = [ORKRangeOfMotionContentView new];
     _contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _contentView;
+    
+    // set number of taps and number of touches (i.e. number of fingers tapping) to end the task
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    if (self.rangeOfMotionStep.numberOfTaps > 0) {
+        _gestureRecognizer.numberOfTapsRequired = self.rangeOfMotionStep.numberOfTaps;
+    }
+    if (self.rangeOfMotionStep.numberOfTouches > 0) {
+        _gestureRecognizer.numberOfTouchesRequired = self.rangeOfMotionStep.numberOfTouches;
+    }
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
 }
     //This function records the angle of the device when the screen is tapped

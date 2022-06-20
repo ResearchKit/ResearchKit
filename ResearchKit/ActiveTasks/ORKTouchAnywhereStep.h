@@ -45,13 +45,17 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAnywhereStep : ORKActiveStep
 
+@property (nonatomic, assign) NSInteger numberOfTaps;
+
+@property (nonatomic, assign) NSInteger numberOfTouches;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
  Init with an identifier and instruction text. Instruction text should be used to tell the user
  where to place the device before touching anywhere.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier instructionText:(NSString *)instructionText;
+- (instancetype)initWithIdentifier:(NSString *)identifier instructionText:(NSString *)instructionText numberOfTaps:(NSInteger)numberOfTaps numberOfTouches:(NSInteger)numberOfTouches;
 
 @end
 
