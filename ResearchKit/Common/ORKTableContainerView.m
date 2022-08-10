@@ -102,7 +102,9 @@ static const CGFloat SectionHeaderTopPadding = 20.0;
     _tableView.preservesSuperviewLayoutMargins = YES;
     _tableView.layer.masksToBounds = YES;
     [_tableView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    [_tableView setSectionHeaderTopPadding:SectionHeaderTopPadding];
+    if (@available(iOS 15.0, *)) {
+        [_tableView setSectionHeaderTopPadding:SectionHeaderTopPadding];
+    }
     _tableView.scrollIndicatorInsets = ORKScrollIndicatorInsetsForScrollView(self);
     [self addSubview:_tableView];
     [self setupFooterView];
