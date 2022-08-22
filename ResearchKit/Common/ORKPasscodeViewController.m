@@ -101,16 +101,17 @@
 
 + (BOOL)isPasscodeStoredInKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectOfClass:NSDictionary.self
-                                                                          forKey:PasscodeKey
-                                                                           error:&error];
+    NSSet<Class> *classes = [NSSet setWithArray:@[
+        NSDictionary.class,
+        NSString.class,
+        NSNumber.class,
+    ]];
+    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectsOfClasses:classes
+                                                                             forKey:PasscodeKey
+                                                                              error:&error];
     
     if (dictionary == nil) {
-        NSString *errorReason = error.localizedDescription;
-        if (error.code == errSecItemNotFound) {
-            errorReason = @"There is no passcode stored in the keychain.";
-        }
-        @throw [NSException exceptionWithName:NSGenericException reason:errorReason userInfo:nil];
+        return NO;
     }
     
     return ([dictionary objectForKey:KeychainDictionaryPasscodeKey]) ? YES : NO;

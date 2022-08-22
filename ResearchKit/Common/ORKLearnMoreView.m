@@ -62,7 +62,7 @@ ORK_CLASS_AVAILABLE
     button.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
     if (@available(iOS 15.0, *)) {
-        UIButtonConfiguration *buttonConfig = [UIButtonConfiguration filledButtonConfiguration];
+        UIButtonConfiguration *buttonConfig = [UIButtonConfiguration plainButtonConfiguration];
         [buttonConfig setContentInsets:NSDirectionalEdgeInsetsMake(0, 0, 0, 0)];
         [button setConfiguration:buttonConfig];
     } else {

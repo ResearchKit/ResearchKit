@@ -395,11 +395,14 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "hold";
 "REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tap the hold button, and then the blue circle";
+
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Stroop";
@@ -414,6 +417,11 @@
 "STROOP_COLOR_GREEN_INITIAL" = "G";
 "STROOP_COLOR_BLUE_INITIAL" = "B";
 "STROOP_COLOR_YELLOW_INITIAL" = "Y";
+"TIME_OUT_TILE" = "Time Out";
+"TIME_OUT_BODY" = "You have not responded in 30 seconds. Would you like to restart?";
+"TIME_OUT_RESTART_ACTION" = "Restart";
+"TIME_OUT_END_ACTION" = "End Task";
+
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
