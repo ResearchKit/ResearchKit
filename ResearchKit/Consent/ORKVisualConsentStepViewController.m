@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if __has_include(<OpenGLES/OpenGLES.h>)
 
 #import "ORKVisualConsentStepViewController.h"
 
@@ -729,3 +730,5 @@ static NSString *const _ORKInitialBackButtonRestoreKey = @"initialBackButton";
 }
 
 @end
+
+#endif

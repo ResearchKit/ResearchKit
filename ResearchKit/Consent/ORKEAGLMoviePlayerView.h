@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if __has_include(<OpenGLES/OpenGLES.h>)
 
 @import UIKit;
 
@@ -47,3 +48,5 @@ API_DEPRECATED("Use ORKInstructionStep for obtaining consent.", ios(2.0, 11.0)) 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

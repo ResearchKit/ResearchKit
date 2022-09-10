@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if __has_include(<OpenGLES/OpenGLES.h>)
 
 @import UIKit;
 
@@ -57,3 +58,5 @@ typedef void (^ORKVisualConsentAnimationCompletionHandler)(ORKVisualConsentTrans
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

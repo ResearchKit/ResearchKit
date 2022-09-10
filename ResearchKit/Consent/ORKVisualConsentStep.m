@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if __has_include(<OpenGLES/OpenGLES.h>)
 
 #import "ORKVisualConsentStep.h"
 
@@ -92,3 +93,5 @@
 
 @end
 #pragma clang diagnostic pop
+
+#endif

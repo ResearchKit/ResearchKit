@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if __has_include(<OpenGLES/OpenGLES.h>)
 
 #import "ORKEAGLMoviePlayerView.h"
 
@@ -735,3 +736,5 @@ const GLfloat DefaultPreferredRotation = 0;
 
 @end
 #pragma clang diagnostic pop
+
+#endif
