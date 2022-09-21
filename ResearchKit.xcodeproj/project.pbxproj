@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -22,16 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0B4C04582357B43700719958 /* ORKNormalizedReactionTimeStimulusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04572357B43700719958 /* ORKNormalizedReactionTimeStimulusView.m */; };
-		0B4C045C2357B47700719958 /* ORKNormalizedReactionTimeStimulusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C045B2357B47700719958 /* ORKNormalizedReactionTimeStimulusView.h */; };
-		0B4C045E2357B48D00719958 /* ORKNormalizedReactionTimeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C045D2357B48D00719958 /* ORKNormalizedReactionTimeContentView.m */; };
-		0B4C04602357B49C00719958 /* ORKNormalizedReactionTimeContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C045F2357B49C00719958 /* ORKNormalizedReactionTimeContentView.h */; };
-		0B4C04622357B4B100719958 /* ORKNormalizedReactionTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04612357B4B100719958 /* ORKNormalizedReactionTimeViewController.m */; };
-		0B4C04642357B4BF00719958 /* ORKNormalizedReactionTimeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C04632357B4BF00719958 /* ORKNormalizedReactionTimeViewController.h */; };
-		0B4C04662357B4CD00719958 /* ORKNormalizedReactionTimeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04652357B4CD00719958 /* ORKNormalizedReactionTimeStep.m */; };
-		0B4C04682357B4DA00719958 /* ORKNormalizedReactionTimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C04672357B4DA00719958 /* ORKNormalizedReactionTimeStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B4C046A2357B4ED00719958 /* ORKNormalizedReactionTimeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04692357B4ED00719958 /* ORKNormalizedReactionTimeResult.m */; };
-		0B4C046C2357B4FF00719958 /* ORKNormalizedReactionTimeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C046B2357B4FF00719958 /* ORKNormalizedReactionTimeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		00B1F7852241503900D022FE /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B1F7842241503900D022FE /* Speech.framework */; };
 		00C2668A2302244300337E0B /* ORKCustomStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 00C266882302244300337E0B /* ORKCustomStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		00C2668B2302244300337E0B /* ORKCustomStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C266892302244300337E0B /* ORKCustomStepViewController.m */; };
@@ -43,6 +33,16 @@
 		037D9B982629FF7E00B83F9D /* ORKNotificationPermissionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D9B962629FF7E00B83F9D /* ORKNotificationPermissionType.m */; };
 		037D9BA7262A031300B83F9D /* ORKMotionActivityPermissionType.h in Headers */ = {isa = PBXBuildFile; fileRef = 037D9BA5262A031300B83F9D /* ORKMotionActivityPermissionType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		037D9BA8262A031300B83F9D /* ORKMotionActivityPermissionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D9BA6262A031300B83F9D /* ORKMotionActivityPermissionType.m */; };
+		0B4C04582357B43700719958 /* ORKNormalizedReactionTimeStimulusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04572357B43700719958 /* ORKNormalizedReactionTimeStimulusView.m */; };
+		0B4C045C2357B47700719958 /* ORKNormalizedReactionTimeStimulusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C045B2357B47700719958 /* ORKNormalizedReactionTimeStimulusView.h */; };
+		0B4C045E2357B48D00719958 /* ORKNormalizedReactionTimeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C045D2357B48D00719958 /* ORKNormalizedReactionTimeContentView.m */; };
+		0B4C04602357B49C00719958 /* ORKNormalizedReactionTimeContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C045F2357B49C00719958 /* ORKNormalizedReactionTimeContentView.h */; };
+		0B4C04622357B4B100719958 /* ORKNormalizedReactionTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04612357B4B100719958 /* ORKNormalizedReactionTimeViewController.m */; };
+		0B4C04642357B4BF00719958 /* ORKNormalizedReactionTimeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C04632357B4BF00719958 /* ORKNormalizedReactionTimeViewController.h */; };
+		0B4C04662357B4CD00719958 /* ORKNormalizedReactionTimeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04652357B4CD00719958 /* ORKNormalizedReactionTimeStep.m */; };
+		0B4C04682357B4DA00719958 /* ORKNormalizedReactionTimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C04672357B4DA00719958 /* ORKNormalizedReactionTimeStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B4C046A2357B4ED00719958 /* ORKNormalizedReactionTimeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C04692357B4ED00719958 /* ORKNormalizedReactionTimeResult.m */; };
+		0B4C046C2357B4FF00719958 /* ORKNormalizedReactionTimeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B4C046B2357B4FF00719958 /* ORKNormalizedReactionTimeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		106FF29E1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF29C1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		106FF29F1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 106FF29D1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m */; };
 		106FF2A21B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF2A01B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -972,16 +972,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B4C04572357B43700719958 /* ORKNormalizedReactionTimeStimulusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeStimulusView.m; sourceTree = "<group>"; };
-		0B4C045B2357B47700719958 /* ORKNormalizedReactionTimeStimulusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeStimulusView.h; sourceTree = "<group>"; };
-		0B4C045D2357B48D00719958 /* ORKNormalizedReactionTimeContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeContentView.m; sourceTree = "<group>"; };
-		0B4C045F2357B49C00719958 /* ORKNormalizedReactionTimeContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeContentView.h; sourceTree = "<group>"; };
-		0B4C04612357B4B100719958 /* ORKNormalizedReactionTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeViewController.m; sourceTree = "<group>"; };
-		0B4C04632357B4BF00719958 /* ORKNormalizedReactionTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeViewController.h; sourceTree = "<group>"; };
-		0B4C04652357B4CD00719958 /* ORKNormalizedReactionTimeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeStep.m; sourceTree = "<group>"; };
-		0B4C04672357B4DA00719958 /* ORKNormalizedReactionTimeStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeStep.h; sourceTree = "<group>"; };
-		0B4C04692357B4ED00719958 /* ORKNormalizedReactionTimeResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeResult.m; sourceTree = "<group>"; };
-		0B4C046B2357B4FF00719958 /* ORKNormalizedReactionTimeResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeResult.h; sourceTree = "<group>"; };
 		00B1F7842241503900D022FE /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		00C266882302244300337E0B /* ORKCustomStepViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKCustomStepViewController.h; sourceTree = "<group>"; };
 		00C266892302244300337E0B /* ORKCustomStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKCustomStepViewController.m; sourceTree = "<group>"; };
@@ -993,6 +983,16 @@
 		037D9B962629FF7E00B83F9D /* ORKNotificationPermissionType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKNotificationPermissionType.m; sourceTree = "<group>"; };
 		037D9BA5262A031300B83F9D /* ORKMotionActivityPermissionType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKMotionActivityPermissionType.h; sourceTree = "<group>"; };
 		037D9BA6262A031300B83F9D /* ORKMotionActivityPermissionType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKMotionActivityPermissionType.m; sourceTree = "<group>"; };
+		0B4C04572357B43700719958 /* ORKNormalizedReactionTimeStimulusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeStimulusView.m; sourceTree = "<group>"; };
+		0B4C045B2357B47700719958 /* ORKNormalizedReactionTimeStimulusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeStimulusView.h; sourceTree = "<group>"; };
+		0B4C045D2357B48D00719958 /* ORKNormalizedReactionTimeContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeContentView.m; sourceTree = "<group>"; };
+		0B4C045F2357B49C00719958 /* ORKNormalizedReactionTimeContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeContentView.h; sourceTree = "<group>"; };
+		0B4C04612357B4B100719958 /* ORKNormalizedReactionTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeViewController.m; sourceTree = "<group>"; };
+		0B4C04632357B4BF00719958 /* ORKNormalizedReactionTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeViewController.h; sourceTree = "<group>"; };
+		0B4C04652357B4CD00719958 /* ORKNormalizedReactionTimeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeStep.m; sourceTree = "<group>"; };
+		0B4C04672357B4DA00719958 /* ORKNormalizedReactionTimeStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeStep.h; sourceTree = "<group>"; };
+		0B4C04692357B4ED00719958 /* ORKNormalizedReactionTimeResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeResult.m; sourceTree = "<group>"; };
+		0B4C046B2357B4FF00719958 /* ORKNormalizedReactionTimeResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeResult.h; sourceTree = "<group>"; };
 		106FF29C1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestPlaceStep.h; sourceTree = "<group>"; };
 		106FF29D1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHolePegTestPlaceStep.m; sourceTree = "<group>"; };
 		106FF2A01B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestPlaceStepViewController.h; sourceTree = "<group>"; };
@@ -1973,6 +1973,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00C266872302242A00337E0B /* Custom Step */ = {
+			isa = PBXGroup;
+			children = (
+				00C2668C23022CD400337E0B /* ORKCustomStep.h */,
+				00C2668D23022CD400337E0B /* ORKCustomStep.m */,
+				00C266882302244300337E0B /* ORKCustomStepViewController.h */,
+				00C266892302244300337E0B /* ORKCustomStepViewController.m */,
+			);
+			name = "Custom Step";
+			sourceTree = "<group>";
+		};
 		0B4C04552357B39200719958 /* Normalized */ = {
 			isa = PBXGroup;
 			children = (
@@ -2005,17 +2016,6 @@
 				25ECC0A21AFBDD2700F3D63B /* ORKReactionTimeStimulusView.m */,
 			);
 			name = Shake;
-			sourceTree = "<group>";
-		};
-		00C266872302242A00337E0B /* Custom Step */ = {
-			isa = PBXGroup;
-			children = (
-				00C2668C23022CD400337E0B /* ORKCustomStep.h */,
-				00C2668D23022CD400337E0B /* ORKCustomStep.m */,
-				00C266882302244300337E0B /* ORKCustomStepViewController.h */,
-				00C266892302244300337E0B /* ORKCustomStepViewController.m */,
-			);
-			name = "Custom Step";
 			sourceTree = "<group>";
 		};
 		106FF29B1B663F5C004EACF2 /* Hole Peg Test */ = {
@@ -4663,6 +4663,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		B1429E9C1AAA651C003DE546 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -5346,7 +5347,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -5380,7 +5382,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = ResearchKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5406,7 +5412,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = ResearchKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5450,7 +5460,11 @@
 				INFOPLIST_FILE = ResearchKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -5498,14 +5512,19 @@
 				INFOPLIST_FILE = ResearchKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ResearchKit;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
