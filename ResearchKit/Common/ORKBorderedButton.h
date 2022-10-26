@@ -32,10 +32,28 @@
 @import UIKit;
 #import <ResearchKit/ORKTextButton.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, ORKBorderedButtonDisabledStyle) {
+    /**
+     default ResearchKit style
+     */
+    ORKBorderedButtonDisabledStyleDefault,
+    /**
+     Styling to match system disabled state
+     */
+    ORKBorderedButtonDisabledStyleSystemGray
+} ORK_ENUM_AVAILABLE;
+
 ORK_CLASS_AVAILABLE
+
+@interface CALayer (ORKCornerCurveContinuousCategory)
+
+- (void)setCornerCurveContinuous;
+- (void)setCornerCurveCircular;
+
+@end
+
 @interface ORKBorderedButton : ORKTextButton
 
 /**
@@ -52,6 +70,12 @@ ORK_CLASS_AVAILABLE
  The tint color of the button for UIControlStateDisabled
  */
 @property (nonatomic) UIColor *disableTintColor;
+
+/**
+ The style to user for disabled buttons.
+ ORKBorderedButtonDisabledStyleSystemGray ignores any set values and applies its own style
+ */
+@property (nonatomic) ORKBorderedButtonDisabledStyle disabledButtonStyle;
 
 /**
  The delay in fading animation

@@ -29,10 +29,13 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKTypes_Private.h>
 
 #import <ResearchKit/ORKHelpers_Private.h>
 #import <ResearchKit/ORKHelpers_Internal.h>
+#import <ResearchKit/ORKDevice_Private.h>
+
+#import <ResearchKit/ORKQuestionStep_Private.h>
 
 // Active step support
 #import <ResearchKit/ORKDataLogger.h>
@@ -58,8 +61,8 @@
 #import <ResearchKit/ORKStepContainerView_Private.h>
 
 #import <ResearchKit/ORKAudioStep.h>
+#import <ResearchKit/ORKAudioFitnessStep.h>
 #import <ResearchKit/ORKAmslerGridStep.h>
-#import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
@@ -95,6 +98,7 @@
 #import <ResearchKit/ORKInstructionStepViewController_Internal.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
+#import <ResearchKit/ORKAudioFitnessStepViewController.h>
 #import <ResearchKit/ORKAmslerGridStepViewController.h>
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
 #import <ResearchKit/ORKConsentSharingStepViewController.h>
@@ -112,7 +116,6 @@
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
-#import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKWalkingTaskStepViewController.h>
 #import <ResearchKit/ORKVideoInstructionStepViewController.h>
 #import <ResearchKit/ORKSpeechRecognitionStepViewController.h>
@@ -149,6 +152,7 @@
 #import <ResearchKit/ORKRingView.h>
 #import <ResearchKit/ORKProgressView.h>
 #import <ResearchKit/ORKFreehandDrawingView.h>
+#import <ResearchKit/ORKAudioMeteringView.h>
 #import <ResearchKit/ORKAudioGraphView.h>
 #import <ResearchKit/ORKInstructionStepContainerView.h>
 

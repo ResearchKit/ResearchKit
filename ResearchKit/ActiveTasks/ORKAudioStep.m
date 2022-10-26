@@ -49,8 +49,19 @@
     if (self) {
         self.shouldShowDefaultTimer = NO;
         self.shouldStartTimerAutomatically = YES;
+        self.useRecordButton = NO;
     }
     return self;
+}
+
+- (void)setUseRecordButton:(BOOL)useRecordButton {
+    _useRecordButton = useRecordButton;
+    
+    [self setShouldStartTimerAutomatically:!_useRecordButton];
+    
+    if (_useRecordButton) {
+        self.stepDuration = 0;
+    }
 }
 
 - (void)validateParameters {
@@ -58,7 +69,7 @@
     
     NSTimeInterval const ORKAudioTaskMinimumDuration = 5.0;
     
-    if ( self.stepDuration < ORKAudioTaskMinimumDuration) {
+    if ( self.stepDuration < ORKAudioTaskMinimumDuration && !self.useRecordButton) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKAudioTaskMinimumDuration)]  userInfo:nil];
     }
 }
@@ -67,4 +78,35 @@
     return NO;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKAudioStep *step = [super copyWithZone:zone];
+    step.useRecordButton = self.useRecordButton;
+    return step;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, useRecordButton);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, useRecordButton);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame && self.useRecordButton == castObject.useRecordButton);
+}
+
 @end
+

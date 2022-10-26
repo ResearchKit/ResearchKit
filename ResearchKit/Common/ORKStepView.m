@@ -133,6 +133,10 @@
     [_stepContentView setBuildsInBodyItems:_buildInBodyItems];
 }
 
+- (void)setCenteredVerticallyImage:(UIImage *)centeredVerticallyImage {
+    _centeredVerticallyImage = centeredVerticallyImage;
+    [_stepContentView setCenteredVerticallyImage:_centeredVerticallyImage];
+}
 
 - (void)setUseExtendedPadding:(BOOL)useExtendedPadding {
     _useExtendedPadding = useExtendedPadding;

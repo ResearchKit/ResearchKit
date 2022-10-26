@@ -120,6 +120,29 @@ NS_ASSUME_NONNULL_BEGIN
                                            options:(ORKPredefinedTaskOption)options;
 
 /**
+ Returns a predefined task that consists of a 6 Minute Walk Test (6MWT).
+
+ In a 6MWT task, the participant is asked to walk as far as they can in a 6 minute interval.
+ During this period, various sensor data is collected and returned by the task view controller's
+ delegate. Sensor data can include accelerometer, device motion, pedometer, location, and
+ heart rate data where available.
+
+ By default, the task includes an instruction step that explains what the user needs to do during
+ the task, but this can be excluded with `ORKPredefinedTaskOptionExcludeInstructions`.
+
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the default
+                                    localized text is displayed.
+ @param options                 Options that affect the features of the predefined task.
+
+ @return A 6 Minute Walk Test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)sixMinuteWalkTaskWithIdentifier:(NSString *)identifier
+                             intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                            options:(ORKPredefinedTaskOption)options API_AVAILABLE(ios(14.0));
+
+/**
  Returns a predefined task that consists of a short walk.
  
  In a short walk task, the participant is asked to walk a short distance, which may be indoors.

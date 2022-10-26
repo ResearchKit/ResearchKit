@@ -66,7 +66,6 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized consent review step using the specified identifier, signature, and consent document.
-
  @param identifier      The identifier for the step.
  @param signature       The signature to be collected, if any.
  @param consentDocument The consent document to be reviewed.

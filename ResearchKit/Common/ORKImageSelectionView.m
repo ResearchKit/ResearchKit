@@ -163,7 +163,12 @@ static const CGFloat SpacerHeight = 5.0;
         
         _placeHolderLabel = [self makeLabel];
         _placeHolderLabel.text = [ORKLocalizedString(@"PLACEHOLDER_IMAGE_CHOICES", nil) stringByAppendingString:@""];
-        _placeHolderLabel.textColor = [UIColor ork_midGrayTintColor];
+
+        if (@available(iOS 13.0, *)) {
+            _placeHolderLabel.textColor = [UIColor secondaryLabelColor];
+        } else {
+            _placeHolderLabel.textColor = [UIColor ork_midGrayTintColor];
+        }
         
         _choiceLabel = [self makeLabel];
         

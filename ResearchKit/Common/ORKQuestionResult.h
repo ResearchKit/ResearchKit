@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKResult.h>
+#endif
+
 @import CoreLocation;
 @import Contacts;
 
@@ -60,6 +62,13 @@ ORK_CLASS_AVAILABLE
  easier to use this value in a switch statement in Objective-C.
  */
 @property (nonatomic) ORKQuestionType questionType;
+
+/**
+ The `noAnswerType` is a nullable property that can contain an instance of an `ORKNoAnswer` subclass.
+ 
+ If the user used the `ORKDontKnowButton`, the value of this property is `ORKDontKnowAnswer`, and the questionType specific answer is `nil`.
+ */
+@property (nonatomic, copy, nullable) ORKNoAnswer *noAnswerType;
 
 @end
 
@@ -103,7 +112,7 @@ ORK_CLASS_AVAILABLE
  
  If the user skipped the question, the value of the corresponding array member is `nil`.
  */
-@property (nonatomic, copy, nullable) NSArray<id<NSCopying, NSCoding, NSObject>> *choiceAnswers;
+@property (nonatomic, copy, nullable) NSArray<NSObject<NSCopying, NSSecureCoding> *> *choiceAnswers;
 
 @end
 
@@ -212,7 +221,7 @@ ORK_CLASS_AVAILABLE
  
  If the user skipped the question, the value of the corresponding array member is `nil`.
  */
-@property (nonatomic, copy, nullable) NSArray *componentsAnswer;
+@property (nonatomic, copy, nullable) NSArray<NSObject<NSCopying, NSSecureCoding> *> *componentsAnswer;
 
 /**
  The string separator used to join the components (if applicable)
@@ -266,7 +275,6 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
 /**
  The `ORKTextQuestionResult` class represents the answer to a question or
  form item that uses an `ORKTextAnswerFormat` format.
@@ -281,7 +289,7 @@ ORK_CLASS_AVAILABLE
 /**
  The answer that the user entered.
  
- If the user skipped the question, the value of this property is `nil`.
+ If the user skipped the question the value of this property is `nil`.
  */
 @property (nonatomic, copy, nullable) NSString *textAnswer;
 

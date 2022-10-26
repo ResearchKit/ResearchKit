@@ -73,6 +73,11 @@
  | | |   |--LearnMore  | | |
  | | |___|_____________| | |
  | |_____________________| |
+ |                         |
+ | +---------------------+ |
+ | | _centeredVertically-| |
+ | |      ImageView      | |
+ | |_____________________| |
  |_________________________|
  */
 
@@ -80,6 +85,7 @@ static const CGFloat ORKStepContentIconImageViewToTitleLabelPadding = 15.0;
 static const CGFloat ORKStepContentIconToBodyTopPaddingStandard = 20.0;
 static const CGFloat ORKStepContentIconToBulletTopPaddingStandard = 20.0;
 static const CGFloat ORKStepContentTagPaddingTop = 15.0;
+static const CGFloat ORKStepContentBottomPadding = 35.0;
 
 typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     ORKUpdateConstraintSequenceTopContentImageView = 0,
@@ -87,7 +93,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     ORKUpdateConstraintSequenceTitleLabel,
     ORKUpdateConstraintSequenceTextLabel,
     ORKUpdateConstraintSequenceDetailTextLabel,
-    ORKUpdateConstraintSequenceBodyContainerView
+    ORKUpdateConstraintSequenceBodyContainerView,
+    ORKUpdateConstraintSequenceCenteredVerticallyImageView
 } ORK_ENUM_AVAILABLE;
 
 
@@ -105,6 +112,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     NSArray<NSLayoutConstraint *> *_iconImageViewConstraints;
     NSArray<NSLayoutConstraint *> *_textLabelConstraints;
     NSArray<NSLayoutConstraint *> *_detailTextLabelConstraints;
+    NSArray<NSLayoutConstraint *> *_centeredVerticallyImageViewContraints;
     NSMutableArray<NSLayoutConstraint *> *_leftRightPaddingConstraints;
     
     NSLayoutConstraint *_iconImageViewTopConstraint;
@@ -112,6 +120,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     NSLayoutConstraint *_textLabelTopConstraint;
     NSLayoutConstraint *_detailTextLabelTopConstraint;
     NSLayoutConstraint *_bodyContainerViewTopConstraint;
+    NSLayoutConstraint *_centeredVerticallyImageViewTopConstraint;
     NSArray<NSLayoutConstraint *> *_bodyContainerLeftRightConstraints;
     NSLayoutConstraint *_stepContentBottomConstraint;
     ORKCompletionCheckmarkView *_completionCheckmarkView;
@@ -380,16 +389,14 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
             topItem = _iconImageView;
             attribute = NSLayoutAttributeBottom;
             constant = ORKStepContentIconImageViewToTitleLabelPadding;
-        }
-        else if (_topContentImageView) {
+        } else if (_topContentImageView) {
             topItem = _topContentImageView;
             attribute = NSLayoutAttributeBottom;
             constant = ORKStepContentIconImageViewToTitleLabelPadding;
-        }
-        else {
+        } else {
             topItem = self;
             attribute = NSLayoutAttributeTop;
-            constant = ORKStepContentIconImageViewToTitleLabelPadding;
+            constant = _customTopPadding ? [_customTopPadding floatValue] : ORKStepContentIconImageViewToTitleLabelPadding;
         }
         
         _titleLabelTopConstraint = [NSLayoutConstraint constraintWithItem:_titleLabel
@@ -402,6 +409,10 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     }
 }
 
+- (void)setCustomTopPadding:(NSNumber *)customTopPadding {
+    _customTopPadding = customTopPadding;
+    [self updateTitleLabelTopConstraint];
+}
 
 // step text
 
@@ -672,6 +683,145 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     [self setNeedsUpdateConstraints];
 }
 
+#pragma mark - Vertical ImageView
+
+- (void)setCenteredVerticallyImage:(UIImage *)centeredVerticallyImage {
+    
+    _centeredVerticallyImage = centeredVerticallyImage;
+    
+    if (centeredVerticallyImage && !_centeredVerticallyImageView) {
+        [self setupCenteredVerticallyImageView];
+        [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceCenteredVerticallyImageView];
+        [self setNeedsUpdateConstraints];
+        [_centeredVerticallyImageView setImage:centeredVerticallyImage];
+        [_centeredVerticallyImageView setContentMode:UIViewContentModeScaleAspectFit];
+    }
+    else if (centeredVerticallyImage && _centeredVerticallyImageView) {
+        [_centeredVerticallyImageView setImage:_centeredVerticallyImage];
+        [_centeredVerticallyImageView setContentMode:UIViewContentModeScaleAspectFit];
+    }
+    else if (!_centeredVerticallyImage) {
+        [_centeredVerticallyImageView removeFromSuperview];
+        _centeredVerticallyImageView = nil;
+        [self deactivateCenteredVerticallyImageViewConstraints];
+        [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceCenteredVerticallyImageView];
+        [self setNeedsUpdateConstraints];
+    }
+}
+
+- (void)deactivateCenteredVerticallyImageViewConstraints {
+    [self deactivateConstraints:_centeredVerticallyImageViewContraints];
+    _centeredVerticallyImageViewContraints = nil;
+}
+
+- (void)setupCenteredVerticallyImageView {
+    
+    if (!_centeredVerticallyImageView) {
+        _centeredVerticallyImageView = [[UIImageView alloc] init];
+    }
+    
+    [self addSubview:_centeredVerticallyImageView];
+    [self setupCenteredVerticallyImageViewContraints];
+    [self setContainerLeftRightConstraints];
+}
+
+- (void)updateCenteredVerticallyImageViewTopContraint {
+    
+    if (_centeredVerticallyImageView) {
+        
+        if (_centeredVerticallyImageViewTopConstraint) {
+            [self deactivateConstraints:@[_centeredVerticallyImageViewTopConstraint]];
+        }
+        [self setCenteredVerticallyImageViewTopConstraint];
+        if (_centeredVerticallyImageViewTopConstraint) {
+            [_updatedConstraints addObject:_centeredVerticallyImageViewTopConstraint];
+        }
+    }
+}
+
+- (void)setupCenteredVerticallyImageViewContraints {
+    _centeredVerticallyImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self setCenteredVerticallyImageViewTopConstraint];
+    _centeredVerticallyImageViewContraints = @[_centeredVerticallyImageViewTopConstraint];
+    
+    [_updatedConstraints addObjectsFromArray:_centeredVerticallyImageViewContraints];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setCenteredVerticallyImageViewTopConstraint {
+    
+    if (_centeredVerticallyImageView) {
+        
+        id topItem;
+        CGFloat topPadding;
+        NSLayoutAttribute attribute;
+        
+        if (_bodyContainerView) {
+            topItem = _bodyContainerView;
+            attribute = NSLayoutAttributeBottom;
+            topPadding = ORKBodyToBodyPaddingStandard;
+        } else if (_detailTextLabel && ![_stepDetailText isEqualToString:@""]) {
+            topItem = _detailTextLabel;
+            topPadding = ORKBodyToBodyPaddingStandard;
+            attribute = NSLayoutAttributeBottom;
+        } else if (_textLabel && ![_stepText isEqualToString:@""]) {
+            topItem = _textLabel;
+            if (_bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleTag ||
+                _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleHorizontalRule) {
+                topPadding = ORKBodyToBodyParagraphPaddingStandard;
+            } else {
+                topPadding = ORKBodyToBodyPaddingStandard;
+            }
+            attribute = NSLayoutAttributeBottom;
+        } else if (_titleLabel) {
+            topItem = _titleLabel;
+            
+            if (_bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleTag) {
+                topPadding = ORKStepContentTagPaddingTop;
+            } else {
+                topPadding = _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleText ? ORKStepContainerTitleToBodyTopPaddingForWindow(self.window) : ORKStepContainerTitleToBulletTopPaddingForWindow(self.window);
+            }
+            
+            attribute = NSLayoutAttributeBottom;
+        } else if (_iconImageView) {
+            topItem = _iconImageView;
+            topPadding = _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleText ? ORKStepContentIconToBodyTopPaddingStandard : ORKStepContentIconToBulletTopPaddingStandard;
+            attribute = NSLayoutAttributeBottom;
+        } else if (_topContentImageView) {
+            topItem = _topContentImageView;
+            topPadding = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
+            attribute = NSLayoutAttributeBottom;
+        } else {
+            topItem = self;
+            topPadding = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
+            attribute = NSLayoutAttributeTop;
+        }
+        
+        _centeredVerticallyImageViewTopConstraint = [NSLayoutConstraint constraintWithItem:_centeredVerticallyImageView
+                                                                                 attribute:NSLayoutAttributeTop
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:topItem
+                                                                                 attribute:attribute
+                                                                                multiplier:1.0
+                                                                                  constant:topPadding];
+        
+        [self setNeedsUpdateConstraints];
+    }
+}
+
+-(void)updateCenteredVerticallyImageViewTopConstraint {
+    if (_centeredVerticallyImageViewTopConstraint && _centeredVerticallyImageViewTopConstraint.isActive) {
+        [NSLayoutConstraint deactivateConstraints:@[_centeredVerticallyImageViewTopConstraint]];
+    }
+    if ([_updatedConstraints containsObject:_centeredVerticallyImageViewTopConstraint]) {
+        [_updatedConstraints removeObject:_centeredVerticallyImageViewTopConstraint];
+    }
+    [self setCenteredVerticallyImageViewTopConstraint];
+    if (_centeredVerticallyImageViewTopConstraint) {
+        [_updatedConstraints addObject:_centeredVerticallyImageViewTopConstraint];
+    }
+}
+
 - (void)setContainerLeftRightConstraints {
     [NSLayoutConstraint deactivateConstraints:_leftRightPaddingConstraints];
     [_updatedConstraints removeObjectsInArray:_leftRightPaddingConstraints];
@@ -753,6 +903,12 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         ]];
     }
     
+    if (_centeredVerticallyImageView != nil) {
+        [_leftRightPaddingConstraints addObjectsFromArray:@[
+            [_centeredVerticallyImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0.0]
+        ]];
+    }
+    
     if (_iconImageView != nil) {
         if (_stepHeaderTextAlignment == NSTextAlignmentLeft) {
             [_leftRightPaddingConstraints addObjectsFromArray:@[
@@ -798,7 +954,13 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     
     else if (_textLabel && ![_stepText isEqualToString:@""]) {
         topItem = _textLabel;
-        topPadding = ORKBodyToBodyPaddingStandard;
+
+        if (_bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleTag ||
+            _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleHorizontalRule) {
+            topPadding = ORKBodyToBodyParagraphPaddingStandard;
+        } else {
+            topPadding = ORKBodyToBodyPaddingStandard;
+        }
         attribute = NSLayoutAttributeBottom;
     }
     
@@ -855,7 +1017,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
             [self updateDetailTextLabelTopConstraint];
         case ORKUpdateConstraintSequenceDetailTextLabel:
             [self updateBodyContainerViewTopConstraint];
-            
+        case ORKUpdateConstraintSequenceCenteredVerticallyImageView:
+            [self updateCenteredVerticallyImageViewTopConstraint];
         default:
             break;
     }
@@ -871,37 +1034,38 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 - (void)setStepContentViewBottomConstraint {
     id bottomItem;
     NSLayoutAttribute attribute;
-    CGFloat constant;
+    CGFloat constant = 0.0;
     
-    if (_bodyContainerView) {
+    if (@available(iOS 15, *)) {
+        constant += ORKStepContentBottomPadding;
+    }
+    
+    if (_centeredVerticallyImageView) {
+        bottomItem = _centeredVerticallyImageView;
+        attribute = NSLayoutAttributeBottom;
+    } else if (_bodyContainerView) {
         bottomItem = _bodyContainerView;
         attribute = NSLayoutAttributeBottom;
-        constant = 0.0;
     }
     else if (_detailTextLabel && ![_stepDetailText isEqualToString:@""]) {
         bottomItem = _detailTextLabel;
         attribute = NSLayoutAttributeBottom;
-        constant = 0.0;
     }
     else if (_textLabel && ![_stepText isEqualToString:@""]) {
         bottomItem = _textLabel;
         attribute = NSLayoutAttributeBottom;
-        constant = 0.0;
     }
     else if (_titleLabel) {
         bottomItem = _titleLabel;
         attribute = NSLayoutAttributeBottom;
-        constant = 0.0;
     }
     else if (_iconImageView) {
         bottomItem = _iconImageView;
         attribute = NSLayoutAttributeBottom;
-        constant = 0.0;
     }
     else {
         bottomItem = nil;
         attribute = NSLayoutAttributeNotAnAttribute;
-        constant = 0.0;
     }
     
     _stepContentBottomConstraint = [NSLayoutConstraint constraintWithItem:self

@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIColor *lineColor;
 @property (nonatomic) CGFloat lineWidth;
+@property (nonatomic) BOOL enabled;
 
 /**
  lineWidthVariation defines the max amount by which the line

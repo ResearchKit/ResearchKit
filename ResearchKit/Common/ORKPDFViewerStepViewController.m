@@ -195,6 +195,7 @@
         fileResult.endDate = now;
         fileResult.contentType = @"document/pdf";
         fileResult.fileURL = fileURL;
+        fileResult.fileName = [fileURL lastPathComponent];
         [results addObject:fileResult];
         stepResult.results = [results copy];
     }

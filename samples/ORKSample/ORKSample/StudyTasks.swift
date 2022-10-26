@@ -65,10 +65,10 @@ struct StudyTasks {
         // Quest question using text choice
         let questQuestionStepTitle = "Which of the following is not a planet?"
         let textChoices = [
-            ORKTextChoice(text: "Saturn", value: 0 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Uranus", value: 1 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Pluto", value: 2 as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Mars", value: 3 as NSCoding & NSCopying & NSObjectProtocol)
+            ORKTextChoice(text: "Saturn", value: 0 as NSNumber),
+            ORKTextChoice(text: "Uranus", value: 1 as NSNumber),
+            ORKTextChoice(text: "Pluto", value: 2 as NSNumber),
+            ORKTextChoice(text: "Mars", value: 3 as NSNumber)
         ]
         let questAnswerFormat: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
         let questQuestionStep = ORKQuestionStep(identifier: "TextChoiceQuestionStep", title: questQuestionStepTitle, answer: questAnswerFormat)
@@ -91,7 +91,7 @@ struct StudyTasks {
             (UIImage(named: "circle")!, "Circle")
         ]
         let imageChoices: [ORKImageChoice] = shapeTuples.map {
-            return ORKImageChoice(normalImage: $0.0, selectedImage: nil, text: $0.1, value: $0.1 as NSCoding & NSCopying & NSObjectProtocol)
+            return ORKImageChoice(normalImage: $0.0, selectedImage: nil, text: $0.1, value: $0.1 as NSString)
         }
         let shapeAnswerFormat: ORKImageChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
         let shapeQuestionStep = ORKQuestionStep(identifier: "ImageChoiceQuestionStep", title: shapeQuestionStepTitle, answer: shapeAnswerFormat)

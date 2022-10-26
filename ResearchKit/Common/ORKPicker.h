@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)picker:(id)picker answerDidChangeTo:(nullable id)answer;
 
+- (BOOL)isOptional;
+
 @end
 
 

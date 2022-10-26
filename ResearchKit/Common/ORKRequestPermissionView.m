@@ -29,10 +29,10 @@
  */
 
 #import "ORKRequestPermissionView.h"
-#import "ORKRequestPermissionButton.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#import "ORKRequestPermissionButton.h"
 
 ORKRequestPermissionsNotification const ORKRequestPermissionsNotificationCardViewStatusChanged = @"ORKRequestPermissionsNotificationCardViewStatusChanged";
 
@@ -47,13 +47,13 @@ static const CGFloat ButtonWidth = 150;
 
 @implementation ORKRequestPermissionView {
     NSMutableArray *_constraints;
-
+    
     UIImage *_iconImage;
     UIImageView *_iconImageView;
-
+    
     NSString *_title;
     NSString *_detailText;
-
+    
     UILabel *_titleLabel;
     UILabel *_detailTextLabel;
 
@@ -250,4 +250,3 @@ static const CGFloat ButtonWidth = 150;
 }
 
 @end
-

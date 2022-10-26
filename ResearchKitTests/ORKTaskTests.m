@@ -280,8 +280,7 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     
     if (resultOptions & (TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSymptomDizziness | TestsTaskResultOptionSymptomNausea)) {
         stepIdentifier = SymptomStepIdentifier;
-        questionResult = [[ORKChoiceQuestionResult alloc] init];
-        questionResult.identifier = stepIdentifier;
+        questionResult = [[ORKChoiceQuestionResult alloc] initWithIdentifier:stepIdentifier];
         if (resultOptions & TestsTaskResultOptionSymptomHeadache) {
             questionResult.answer = @[HeadacheChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomDizziness) {
@@ -302,8 +301,7 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     
     if (resultOptions & (TestsTaskResultOptionSeverityYes | TestsTaskResultOptionSeverityNo)) {
         stepIdentifier = SeverityStepIdentifier;
-        questionResult = [[ORKBooleanQuestionResult alloc] init];
-        questionResult.identifier = stepIdentifier;
+        questionResult = [[ORKBooleanQuestionResult alloc] initWithIdentifier:stepIdentifier];
         if (resultOptions & TestsTaskResultOptionSeverityYes) {
             questionResult.answer = @(YES);
         } else if (resultOptions & TestsTaskResultOptionSeverityNo) {
@@ -342,8 +340,8 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
 }
 
 - (void)testOrderedTask {
-    ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] init];
-    
+    ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:_orderedTask.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
+
     XCTAssertEqualObjects(_orderedTask.identifier, OrderedTaskIdentifier);
     XCTAssertEqualObjects(_orderedTask.steps, _orderedTaskSteps);
     
@@ -808,7 +806,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     
     {
         // Predicate matching, no additional task results, matching
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         
         resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
@@ -855,7 +855,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
                                                               destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
                                                                    defaultStepIdentifier:DefaultDestinationStepIdentifier];
         
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
         
@@ -976,7 +978,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     
     {
         // Predicate matching, no additional task results, matching
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         
         resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
@@ -1017,7 +1021,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
         predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
         predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
         
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
         
@@ -1114,7 +1120,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
 - (void)testDirectStepNavigationRule {
     ORKDirectStepNavigationRule *directRule = nil;
-    ORKTaskResult *mockTaskResult = [ORKTaskResult new];
+    ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                                      taskRunUUID:[NSUUID new]
+                                                                  outputDirectory:nil];
     
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:MatchedDestinationStepIdentifier];
     XCTAssertEqualObjects(directRule.destinationStepIdentifier, [MatchedDestinationStepIdentifier copy] );
@@ -1719,7 +1727,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     ORKBooleanQuestionResult *result = [[ORKBooleanQuestionResult alloc] initWithIdentifier:@"question"];
     result.booleanAnswer = @(YES);
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"question" results:@[result]];
-    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithIdentifier:NavigableOrderedTaskIdentifier];
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:NavigableOrderedTaskIdentifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
     taskResult.results = @[stepResult];
     
     // For the case where the answer is YES, then the title should be "Yes" (unmodified)
