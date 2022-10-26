@@ -29,20 +29,21 @@
  */
 
 
+#import "ORKHelpers_Internal.h"
+#import "ORKOrderedTask.h"
 #import "ORKStep.h"
 #import "ORKStep_Private.h"
 
-#import "ORKStepViewController.h"
-
-#import "ORKOrderedTask.h"
-#import "ORKStepViewController_Internal.h"
+#if TARGET_OS_IOS
 #import "ORKBodyItem.h"
-
-#import "ORKHelpers_Internal.h"
-
+#import "ORKStepViewController.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKEarlyTerminationConfiguration.h"
+#endif
 
 @implementation ORKStep
 
+#pragma mark - Common
 + (instancetype)new {
     ORKThrowMethodUnavailableException();
 }
@@ -56,29 +57,11 @@
     if (self) {
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
         _identifier = [identifier copy];
+        _earlyTerminationConfiguration = nil;
+
         self.showsProgress = YES;
     }
     return self;
-}
-
-+ (Class)stepViewControllerClass {
-    return [ORKStepViewController class];
-}
-
-- (Class)stepViewControllerClass {
-    return [[self class] stepViewControllerClass];
-}
-
-- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
-    Class stepViewControllerClass = [self stepViewControllerClass];
-    
-    ORKStepViewController *stepViewController = [[stepViewControllerClass alloc] initWithStep:self result:result];
-    
-    // Set the restoration info using the given class
-    stepViewController.restorationIdentifier = self.identifier;
-    stepViewController.restorationClass = stepViewControllerClass;
-    
-    return stepViewController;
 }
 
 - (instancetype)copyWithIdentifier:(NSString *)identifier {
@@ -86,121 +69,6 @@
     ORKStep *step = [self copy];
     step->_identifier = [identifier copy];
     return step;
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
-    step.title = _title;
-    step.optional = _optional;
-    step.text = _text;
-    step.detailText = self.detailText;
-    step.headerTextAlignment = _headerTextAlignment;
-    step.bodyItemTextAlignment = _bodyItemTextAlignment;
-    step.buildInBodyItems = _buildInBodyItems;
-    step.footnote = self.footnote;
-    step.image = self.image;
-    step.imageContentMode = self.imageContentMode;
-    step.auxiliaryImage = self.auxiliaryImage;
-    step.iconImage = self.iconImage;
-    step.bodyItems = [_bodyItems copy];
-    step.showsProgress = _showsProgress;
-    step.shouldTintImages = _shouldTintImages;
-    step.useSurveyMode = _useSurveyMode;
-    step.useExtendedPadding = _useExtendedPadding;
-    return step;
-}
-
-- (BOOL)isEqual:(id)object {
-    if ([self class] != [object class]) {
-        return NO;
-    }
-    
-    // Ignore the task reference - it's not part of the content of the step.
-    __typeof(self) castObject = object;
-    return (ORKEqualObjects(self.identifier, castObject.identifier)
-            && ORKEqualObjects(self.title, castObject.title)
-            && ORKEqualObjects(self.text, castObject.text)
-            && ORKEqualObjects(self.detailText, castObject.detailText)
-            && (self.headerTextAlignment == castObject.headerTextAlignment)
-            && (self.bodyItemTextAlignment == castObject.bodyItemTextAlignment)
-            && (self.buildInBodyItems == castObject.buildInBodyItems)
-            && ORKEqualObjects(self.footnote, castObject.footnote)
-            && ORKEqualObjects(self.image, castObject.image)
-            && ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage)
-            && ORKEqualObjects(self.iconImage, castObject.iconImage)
-            && ORKEqualObjects(self.bodyItems, castObject.bodyItems)
-            && (self.imageContentMode == castObject.imageContentMode)
-            && (self.showsProgress == castObject.showsProgress)
-            && (self.optional == castObject.optional)
-            && (self.shouldTintImages == castObject.shouldTintImages)
-            && (self.useSurveyMode == castObject.useSurveyMode)
-            && (self.useExtendedPadding == castObject.useExtendedPadding));
-}
-
-- (NSUInteger)hash {
-    // Ignore the task reference - it's not part of the content of the step.
-    return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ _bodyItems.hash ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0);
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
-        ORK_DECODE_ENUM(aDecoder, headerTextAlignment);
-        ORK_DECODE_ENUM(aDecoder, bodyItemTextAlignment);
-        ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
-        ORK_DECODE_IMAGE(aDecoder, image);
-        ORK_DECODE_ENUM(aDecoder, imageContentMode);
-        ORK_DECODE_IMAGE(aDecoder, auxiliaryImage);
-        ORK_DECODE_IMAGE(aDecoder, iconImage);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, bodyItems, ORKBodyItem);
-        ORK_DECODE_BOOL(aDecoder, showsProgress);
-        ORK_DECODE_BOOL(aDecoder, optional);
-        ORK_DECODE_OBJ_CLASS(aDecoder, task, ORKOrderedTask);
-        ORK_DECODE_BOOL(aDecoder, shouldTintImages);
-        ORK_DECODE_BOOL(aDecoder, useSurveyMode);
-        ORK_DECODE_BOOL(aDecoder, buildInBodyItems);
-        ORK_DECODE_BOOL(aDecoder, useExtendedPadding);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, identifier);
-    ORK_ENCODE_OBJ(aCoder, title);
-    ORK_ENCODE_OBJ(aCoder, text);
-    ORK_ENCODE_OBJ(aCoder, detailText);
-    ORK_ENCODE_ENUM(aCoder, headerTextAlignment);
-    ORK_ENCODE_ENUM(aCoder, bodyItemTextAlignment);
-    ORK_ENCODE_OBJ(aCoder, footnote);
-    ORK_ENCODE_IMAGE(aCoder, image);
-    ORK_ENCODE_ENUM(aCoder, imageContentMode);
-    ORK_ENCODE_IMAGE(aCoder, auxiliaryImage);
-    ORK_ENCODE_IMAGE(aCoder, iconImage);
-    ORK_ENCODE_OBJ(aCoder, bodyItems);
-    ORK_ENCODE_BOOL(aCoder, showsProgress);
-    ORK_ENCODE_BOOL(aCoder, optional);
-    ORK_ENCODE_BOOL(aCoder, shouldTintImages);
-    ORK_ENCODE_BOOL(aCoder, useSurveyMode);
-    ORK_ENCODE_BOOL(aCoder, buildInBodyItems);
-    ORK_ENCODE_BOOL(aCoder, useExtendedPadding);
-    if ([_task isKindOfClass:[ORKOrderedTask class]]) {
-        ORK_ENCODE_OBJ(aCoder, task);
-    }
-}
-
-- (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
-    _auxiliaryImage = auxiliaryImage;
-    if (auxiliaryImage) {
-        self.shouldTintImages = YES;
-    }
 }
 
 - (NSString *)description {
@@ -226,5 +94,169 @@
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     return nil;
 }
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
+    step.title = _title;
+    step.optional = _optional;
+    step.text = _text;
+    step.detailText = self.detailText;
+    step.headerTextAlignment = _headerTextAlignment;
+    step.footnote = self.footnote;
+    step.showsProgress = _showsProgress;
+    step.shouldTintImages = _shouldTintImages;
+    step.useSurveyMode = _useSurveyMode;
+    step.useExtendedPadding = _useExtendedPadding;
+
+#if TARGET_OS_IOS
+    step.bodyItemTextAlignment = _bodyItemTextAlignment;
+    step.buildInBodyItems = _buildInBodyItems;
+    step.image = self.image;
+    step.imageContentMode = self.imageContentMode;
+    step.auxiliaryImage = self.auxiliaryImage;
+    step.iconImage = self.iconImage;
+    step.bodyItems = [_bodyItems copy];
+    step.earlyTerminationConfiguration = self.earlyTerminationConfiguration;
+#endif
+
+    return step;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if ([self class] != [object class])
+    {
+        return NO;
+    }
+    
+    // Ignore the task reference - it's not part of the content of the step.
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(self.identifier, castObject.identifier)
+            && ORKEqualObjects(self.title, castObject.title)
+            && ORKEqualObjects(self.text, castObject.text)
+            && ORKEqualObjects(self.detailText, castObject.detailText)
+            && (self.headerTextAlignment == castObject.headerTextAlignment)
+            && ORKEqualObjects(self.footnote, castObject.footnote)
+            && (self.showsProgress == castObject.showsProgress)
+            && (self.optional == castObject.optional)
+            && (self.shouldTintImages == castObject.shouldTintImages)
+            && (self.useSurveyMode == castObject.useSurveyMode)
+            && (self.useExtendedPadding == castObject.useExtendedPadding)
+#if TARGET_OS_IOS
+            && (self.bodyItemTextAlignment == castObject.bodyItemTextAlignment)
+            && (self.buildInBodyItems == castObject.buildInBodyItems)
+            && ORKEqualObjects(self.image, castObject.image)
+            && ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage)
+            && (self.imageContentMode == castObject.imageContentMode)
+            && ORKEqualObjects(self.iconImage, castObject.iconImage)
+            && ORKEqualObjects(self.bodyItems, castObject.bodyItems)
+            && ORKEqualObjects(self.earlyTerminationConfiguration, castObject.earlyTerminationConfiguration)
+#endif
+            );
+}
+
+- (NSUInteger)hash {
+    // Ignore the task reference - it's not part of the content of the step.
+    return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment  ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0)
+#if TARGET_OS_IOS
+    ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ _bodyItems.hash ^_earlyTerminationConfiguration.hash
+#endif
+    ;
+}
+
+#pragma mark - NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+        ORK_DECODE_ENUM(aDecoder, headerTextAlignment);
+        ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
+        ORK_DECODE_IMAGE(aDecoder, iconImage);
+        ORK_DECODE_BOOL(aDecoder, showsProgress);
+        ORK_DECODE_BOOL(aDecoder, optional);
+        ORK_DECODE_OBJ_CLASS(aDecoder, task, ORKOrderedTask);
+        ORK_DECODE_BOOL(aDecoder, shouldTintImages);
+        ORK_DECODE_BOOL(aDecoder, useSurveyMode);
+        ORK_DECODE_BOOL(aDecoder, useExtendedPadding);
+#if TARGET_OS_IOS
+        ORK_DECODE_ENUM(aDecoder, bodyItemTextAlignment);
+        ORK_DECODE_IMAGE(aDecoder, image);
+        ORK_DECODE_ENUM(aDecoder, imageContentMode);
+        ORK_DECODE_IMAGE(aDecoder, auxiliaryImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, bodyItems, ORKBodyItem);
+        ORK_DECODE_BOOL(aDecoder, buildInBodyItems);
+        ORK_DECODE_OBJ_CLASS(aDecoder, earlyTerminationConfiguration, ORKEarlyTerminationConfiguration);
+#endif
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, identifier);
+    ORK_ENCODE_OBJ(aCoder, title);
+    ORK_ENCODE_OBJ(aCoder, text);
+    ORK_ENCODE_OBJ(aCoder, detailText);
+    ORK_ENCODE_ENUM(aCoder, headerTextAlignment);
+    ORK_ENCODE_OBJ(aCoder, footnote);
+    ORK_ENCODE_BOOL(aCoder, showsProgress);
+    ORK_ENCODE_BOOL(aCoder, optional);
+    ORK_ENCODE_BOOL(aCoder, shouldTintImages);
+    ORK_ENCODE_BOOL(aCoder, useSurveyMode);
+    ORK_ENCODE_BOOL(aCoder, useExtendedPadding);
+#if TARGET_OS_IOS
+    ORK_ENCODE_ENUM(aCoder, bodyItemTextAlignment);
+    ORK_ENCODE_IMAGE(aCoder, image);
+    ORK_ENCODE_ENUM(aCoder, imageContentMode);
+    ORK_ENCODE_IMAGE(aCoder, auxiliaryImage);
+    ORK_ENCODE_IMAGE(aCoder, iconImage);
+    ORK_ENCODE_OBJ(aCoder, bodyItems);
+    ORK_ENCODE_BOOL(aCoder, buildInBodyItems);
+    ORK_ENCODE_OBJ(aCoder, earlyTerminationConfiguration);
+#endif
+    if ([_task isKindOfClass:[ORKOrderedTask class]]) {
+        ORK_ENCODE_OBJ(aCoder, task);
+    }
+}
+
+#if TARGET_OS_IOS
+#pragma mark - iOS
+
++ (Class)stepViewControllerClass {
+    return [ORKStepViewController class];
+}
+
+- (Class)stepViewControllerClass {
+    return [[self class] stepViewControllerClass];
+}
+
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
+    Class stepViewControllerClass = [self stepViewControllerClass];
+    
+    ORKStepViewController *stepViewController = [[stepViewControllerClass alloc] initWithStep:self result:result];
+    
+    // Set the restoration info using the given class
+    stepViewController.restorationIdentifier = self.identifier;
+    stepViewController.restorationClass = stepViewControllerClass;
+    
+    return stepViewController;
+}
+
+- (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
+    _auxiliaryImage = auxiliaryImage;
+    if (auxiliaryImage) {
+        self.shouldTintImages = YES;
+    }
+}
+#endif
 
 @end

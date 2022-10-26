@@ -57,7 +57,7 @@ This method signifies that the step is about to end so any necessary clean up be
  
 You can also optionally pass back an array of ORKResults.
 */
-- (nullable NSArray<ORKResult *> *)provideResults;
+- (nullable NSArray<ORKResult *> *)provideResultsWithIdentifier:(NSString *)identifier;
 
 @end
 

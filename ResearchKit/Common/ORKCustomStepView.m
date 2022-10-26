@@ -336,3 +336,252 @@
 }
 
 @end
+
+
+@implementation ORKQuestionStepSwiftUIViewHolder {
+    CGFloat _leftRightMargin;
+    CAShapeLayer *_contentMaskLayer;
+    
+    ORKSurveyCardHeaderView * _cardHeaderView;
+    UIView *_containerView;
+    BOOL _useCardView;
+    NSArray<NSLayoutConstraint *> *_containerConstraints;
+    NSString *_title;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        _leftRightMargin = 0.0;
+        [self setupContainerView];
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setupConstraints];
+    }
+    return self;
+}
+
+- (void)setupContainerView {
+    if (!_containerView) {
+        _containerView = [UIView new];
+    }
+    _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_containerView];
+}
+
+- (void)setupHeaderViewWithTitle:(NSString *)title detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
+    if (!_cardHeaderView) {
+        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText tagText:nil showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem];
+    }
+    _cardHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_cardHeaderView];
+    if (!title) {
+        [_cardHeaderView removeFromSuperview];
+        _cardHeaderView = nil;
+    }
+}
+
+- (void)setSwiftUIView:(UIView *)swiftUIView {
+    _swiftUIView = swiftUIView;
+    [_swiftUIView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [_containerView addSubview:_swiftUIView];
+    [self setupSwiftUIViewConstraints];
+}
+
+- (void)useCardViewWithTitle:(NSString *)title detailText:(NSString *)detailText learnMoreView:(ORKLearnMoreView *)learnMoreView progressText:(NSString *)progressText tagText:(NSString *)tagText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
+    _title = title;
+    _useCardView = YES;
+    _leftRightMargin = 0.0;
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self setupHeaderViewWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
+    [self setupConstraints];
+}
+
+- (void)setupConstraints {
+    
+    if (_containerConstraints) {
+        [NSLayoutConstraint deactivateConstraints:_containerConstraints];
+    }
+    NSArray<NSLayoutConstraint *> *topViewConstraints;
+    
+    if (_cardHeaderView) {
+        topViewConstraints = @[
+            [NSLayoutConstraint constraintWithItem:_cardHeaderView
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self
+                                         attribute:NSLayoutAttributeTop
+                                        multiplier:1.0
+                                          constant:0.0],
+            [NSLayoutConstraint constraintWithItem:_cardHeaderView
+                                         attribute:NSLayoutAttributeLeft
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self
+                                         attribute:NSLayoutAttributeLeft
+                                        multiplier:1.0
+                                          constant:0.0],
+            [NSLayoutConstraint constraintWithItem:_cardHeaderView
+                                         attribute:NSLayoutAttributeRight
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self
+                                         attribute:NSLayoutAttributeRight
+                                        multiplier:1.0
+                                          constant:0.0],
+            [NSLayoutConstraint constraintWithItem:_containerView
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_cardHeaderView
+                                         attribute:NSLayoutAttributeBottom
+                                        multiplier:1.0
+                                          constant:0.0]
+        ];
+    }
+    else {
+        topViewConstraints = @[
+            [NSLayoutConstraint constraintWithItem:_containerView
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self
+                                         attribute:NSLayoutAttributeTop
+                                        multiplier:1.0
+                                          constant:0.0]
+        ];
+    }
+    
+    _containerConstraints = [topViewConstraints arrayByAddingObjectsFromArray:@[
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeLeft
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeLeft
+                                    multiplier:1.0
+                                      constant:ORKCardLeftRightMarginForWindow(self.window)],   //Adding Padding to match surveyCardHeader in Question Step.
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeRight
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeRight
+                                    multiplier:1.0
+                                      constant:-ORKCardLeftRightMarginForWindow(self.window)]   //Adding Padding to match surveyCardHeader in Question Step.
+    ]];
+    
+    [NSLayoutConstraint activateConstraints:_containerConstraints];
+}
+
+- (void)setupSwiftUIViewConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_swiftUIView
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_containerView
+                                                        attribute:NSLayoutAttributeTopMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_swiftUIView
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeBottomMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_swiftUIView
+                                                        attribute:NSLayoutAttributeLeft
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_containerView
+                                                        attribute:NSLayoutAttributeLeft
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_swiftUIView
+                                                        attribute:NSLayoutAttributeRight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_containerView
+                                                        attribute:NSLayoutAttributeRight
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_containerView
+                                                        attribute:NSLayoutAttributeBottomMargin
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_swiftUIView
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
+}
+
+-(void) drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    [self setMaskLayers];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self setMaskLayers];
+}
+
+- (void)setMaskLayers {
+    if (_useCardView) {
+        if (_contentMaskLayer) {
+            for (CALayer *sublayer in [_contentMaskLayer.sublayers mutableCopy]) {
+                [sublayer removeFromSuperlayer];
+            }
+            [_contentMaskLayer removeFromSuperlayer];
+            _contentMaskLayer = nil;
+        }
+        _contentMaskLayer = [[CAShapeLayer alloc] init];
+        
+        UIColor *fillColor;
+        if (@available(iOS 13.0, *)) {
+            fillColor = UIColor.secondarySystemGroupedBackgroundColor;
+        } else {
+            fillColor = [UIColor ork_borderGrayColor];
+        }
+        [_contentMaskLayer setFillColor:[fillColor CGColor]];
+        
+        CAShapeLayer *foreLayer = [CAShapeLayer layer];
+        if (@available(iOS 13.0, *)) {
+            [foreLayer setFillColor:[[UIColor secondarySystemGroupedBackgroundColor] CGColor]];
+        } else {
+            [foreLayer setFillColor:[[UIColor whiteColor] CGColor]];
+        }
+        foreLayer.zPosition = 0.0f;
+        
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+        
+        NSUInteger rectCorners = _title ? UIRectCornerBottomLeft | UIRectCornerBottomRight : UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerTopRight | UIRectCornerTopLeft;
+        
+        _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: _containerView.bounds
+                                                       byRoundingCorners: rectCorners
+                                                             cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
+        
+        CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, _containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, _containerView.bounds.size.height - ORKCardDefaultBorderWidth);
+        
+        CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
+        
+        foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds byRoundingCorners: rectCorners cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
+        
+        
+        
+        [_contentMaskLayer addSublayer:foreLayer];
+        [_contentMaskLayer addSublayer:lineLayer];
+        if (@available(iOS 13.0, *)) {
+            _contentMaskLayer.fillColor = UIColor.separatorColor.CGColor;
+        } else {
+            _contentMaskLayer.fillColor = [UIColor ork_midGrayTintColor].CGColor;
+        }
+        [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
+    }
+}
+
+@end

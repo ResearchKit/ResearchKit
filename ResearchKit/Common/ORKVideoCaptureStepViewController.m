@@ -303,6 +303,7 @@
     fileResult.endDate = now;
     fileResult.contentType = @"video/mp4";
     fileResult.fileURL = _fileURL;
+    fileResult.fileName = [_fileURL lastPathComponent];
     [results addObject:fileResult];
     stepResult.results = [results copy];
     return stepResult;

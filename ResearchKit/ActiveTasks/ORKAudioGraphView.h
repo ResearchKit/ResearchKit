@@ -28,20 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 @import UIKit;
+#import <ResearchKit/ORKAudioMeteringView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKAudioGraphView : UIView
-
-@property (nonatomic, strong) UIColor *keyColor;
-@property (nonatomic, strong) UIColor *alertColor;
-
-@property (nonatomic, copy) NSArray *values;
-
-@property (nonatomic) CGFloat alertThreshold;
-
+@interface ORKAudioGraphView : UIView <ORKAudioMetering, ORKAudioMeteringDisplay>
 
 @end
 
 NS_ASSUME_NONNULL_END
+

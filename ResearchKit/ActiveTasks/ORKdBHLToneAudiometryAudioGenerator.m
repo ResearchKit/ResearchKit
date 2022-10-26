@@ -55,6 +55,16 @@
 
 @import AudioToolbox;
 
+typedef NSString * ORKVolumeCurveFilename NS_STRING_ENUM;
+ORKVolumeCurveFilename const ORKVolumeCurveFilenameAirPods = @"volume_curve_AIRPODS";
+ORKVolumeCurveFilename const ORKVolumeCurveFilenameAirPodsGen3 = @"volume_curve_AIRPODSV3";
+ORKVolumeCurveFilename const ORKVolumeCurveFilenameAirPodsPro = @"volume_curve_AIRPODSPRO";
+ORKVolumeCurveFilename const ORKVolumeCurveFilenameAirPodsMax = @"volume_curve_AIRPODSMAX";
+ORKVolumeCurveFilename const ORKVolumeCurveFilenameWired = @"volume_curve_WIRED";
+
+NSString * const frequencydBSPLBaseFilename = @"frequency_dBSPL_%@";
+NSString * const retsplBaseFilename = @"retspl_%@";
+NSString * const filenameExtension = @"plist";
 
 @interface ORKdBHLToneAudiometryAudioGenerator () {
 @public
@@ -167,20 +177,40 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
 
 @implementation ORKdBHLToneAudiometryAudioGenerator
 
-- (instancetype)initForHeadphones: (NSString *)headphones {
+- (instancetype)initForHeadphoneType:(ORKHeadphoneTypeIdentifier)headphoneType {
     self = [super init];
     if (self) {
         _lastNodeInput = 0;
         
-        _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"frequency_dBSPL_%@", [headphones uppercaseString]]  ofType:@"plist"]];
-
-        _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"retspl_%@", [headphones uppercaseString]] ofType:@"plist"]];
+        NSString *headphoneTypeUppercased = [headphoneType uppercaseString];
+        ORKHeadphoneTypeIdentifier headphoneTypeIdentifier;
+        ORKVolumeCurveFilename volumeCurveFilename;
         
-        if ([[headphones uppercaseString] isEqualToString:@"AIRPODS"]) {
-            _volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_AIRPODS" ofType:@"plist"]];
+        if ([headphoneTypeUppercased isEqualToString:ORKHeadphoneTypeIdentifierAirPodsGen1] ||
+            [headphoneTypeUppercased isEqualToString:ORKHeadphoneTypeIdentifierAirPodsGen2]) {
+            headphoneTypeIdentifier = ORKHeadphoneTypeIdentifierAirPods;
+            volumeCurveFilename = ORKVolumeCurveFilenameAirPods;
+        } else if ([headphoneTypeUppercased isEqualToString:ORKHeadphoneTypeIdentifierAirPodsGen3]) {
+            headphoneTypeIdentifier = ORKHeadphoneTypeIdentifierAirPodsGen3;
+            volumeCurveFilename = ORKVolumeCurveFilenameAirPodsGen3;
+        } else if ([headphoneTypeUppercased isEqualToString:ORKHeadphoneTypeIdentifierAirPodsPro]) {
+            headphoneTypeIdentifier = ORKHeadphoneTypeIdentifierAirPodsPro;
+            volumeCurveFilename = ORKVolumeCurveFilenameAirPodsPro;
+        } else if ([headphoneTypeUppercased isEqualToString:ORKHeadphoneTypeIdentifierAirPodsMax]) {
+            headphoneTypeIdentifier = ORKHeadphoneTypeIdentifierAirPodsMax;
+            volumeCurveFilename = ORKVolumeCurveFilenameAirPodsMax;
+        } else if ([headphoneTypeUppercased isEqualToString:ORKHeadphoneTypeIdentifierEarPods]) {
+            headphoneTypeIdentifier = ORKHeadphoneTypeIdentifierEarPods;
+            volumeCurveFilename = ORKVolumeCurveFilenameWired;
         } else {
-            _volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_WIRED" ofType:@"plist"]];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"A valid headphone route identifier must be provided" userInfo:nil];
         }
+        
+        _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:frequencydBSPLBaseFilename, headphoneTypeIdentifier]  ofType:filenameExtension]];
+
+        _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:retsplBaseFilename, headphoneTypeIdentifier] ofType:filenameExtension]];
+        
+        _volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:volumeCurveFilename ofType:filenameExtension]];
         
         [self setupGraph];
     }
@@ -188,11 +218,15 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
 }
 
 - (void)dealloc {
-    [self stop];
+    if (_mGraph) {
+        int nodeInput = (_lastNodeInput % 2) + 1;
+        AUGraphDisconnectNodeInput(_mGraph, _mixerNode, nodeInput);
+        AUGraphUpdate(_mGraph, NULL);
+        AUGraphStop(_mGraph);
+        AUGraphUninitialize(_mGraph);
+        _mGraph = nil;
+    }
     
-    AUGraphStop(_mGraph);
-    AUGraphUninitialize(_mGraph);
-    _mGraph = nil;
     _mMixer = nil;
 }
 
@@ -215,7 +249,7 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
         NewAUGraph(&_mGraph);
         AudioComponentDescription mixer_desc;
         mixer_desc.componentType = kAudioUnitType_Mixer;
-        mixer_desc.componentSubType = kAudioUnitSubType_MultiChannelMixer;
+        mixer_desc.componentSubType = kAudioUnitSubType_SpatialMixer;
         mixer_desc.componentFlags = 0;
         mixer_desc.componentFlagsMask = 0;
         mixer_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
@@ -268,20 +302,45 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
             desc.mChannelsPerFrame = 2;
             desc.mBitsPerChannel = four_bytes_per_float * eight_bits_per_byte;
             
-            AudioUnitSetProperty(  _mMixer,
-                                    kAudioUnitProperty_StreamFormat,
-                                    kAudioUnitScope_Input,
-                                    i,
-                                    &desc,
-                                    sizeof(desc));
+            AudioUnitSetProperty(_mMixer,
+                                 kAudioUnitProperty_StreamFormat,
+                                 kAudioUnitScope_Input,
+                                 i,
+                                 &desc,
+                                 sizeof(desc));
+            
+            AUSpatialMixerOutputType outputType = kSpatialMixerOutputType_Headphones;
+            AudioUnitSetProperty(_mMixer,
+                                 kAudioUnitProperty_SpatialMixerOutputType,
+                                 kAudioUnitScope_Global,
+                                 i,
+                                 &outputType,
+                                 sizeof(outputType));
+            
+            AUSpatializationAlgorithm stereoPassThrough = kSpatializationAlgorithm_StereoPassThrough;
+            AudioUnitSetProperty(_mMixer,
+                                 kAudioUnitProperty_SpatializationAlgorithm,
+                                 kAudioUnitScope_Input,
+                                 i,
+                                 &stereoPassThrough,
+                                 sizeof(stereoPassThrough));
+            
+            UInt32 bypass = kSpatialMixerSourceMode_Bypass;
+            AudioUnitSetProperty(_mMixer,
+                                 kAudioUnitProperty_SpatialMixerSourceMode,
+                                 kAudioUnitScope_Input,
+                                 i,
+                                 &bypass,
+                                 sizeof(bypass));
         }
+
+        AudioUnitSetProperty(_mMixer,
+                             kAudioUnitProperty_StreamFormat,
+                             kAudioUnitScope_Output,
+                             0,
+                             &desc,
+                             sizeof(desc));
         
-        AudioUnitSetProperty(  _mMixer,
-                                kAudioUnitProperty_StreamFormat,
-                                kAudioUnitScope_Output,
-                                0,
-                                &desc,
-                                sizeof(desc));
         AUGraphInitialize(_mGraph);
         AUGraphStart(_mGraph);
     }

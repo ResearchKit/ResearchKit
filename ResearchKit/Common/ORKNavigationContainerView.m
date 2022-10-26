@@ -38,6 +38,7 @@ static const CGFloat skipButtonHeight = 50.0;
 static const CGFloat topSpacing = 24.0;
 static const CGFloat bottomSpacing = 34.0;
 static const CGFloat activityIndicatorPadding = 24.0;
+static const CGFloat detailTextBottomSpacing = 16.0;
 
 @implementation ORKNavigationContainerView {
     UIActivityIndicatorView *_activityIndicatorView;
@@ -58,6 +59,7 @@ static const CGFloat activityIndicatorPadding = 24.0;
         [self setupVisualEffectView];
         [self setupViews];
         [self setupFootnoteLabel];
+        [self setupNavigationDetailTextLabel];
         self.preservesSuperviewLayoutMargins = NO;
         _appTintColor = nil;
         self.skipButtonStyle = ORKNavigationContainerButtonStyleTextBold;
@@ -139,6 +141,20 @@ static const CGFloat activityIndicatorPadding = 24.0;
     [self addSubview:_footnoteLabel];
 }
 
+- (void)setupNavigationDetailTextLabel {
+    _detailTextLabel = [[ORKLabel alloc] init];
+    _detailTextLabel.numberOfLines = 0;
+    _detailTextLabel.textAlignment = NSTextAlignmentCenter;
+    _detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    if (@available(iOS 13.0, *)) {
+        _detailTextLabel.textColor = [UIColor secondaryLabelColor];
+    } else {
+        _detailTextLabel.textColor = [UIColor grayColor];
+    }
+    _detailTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_detailTextLabel];
+}
+
 - (void)setupViews {
     [self setupContinueButton];
     [self setupSkipButton];
@@ -146,7 +162,8 @@ static const CGFloat activityIndicatorPadding = 24.0;
 }
 
 - (void)didMoveToWindow {
-    _appTintColor = self.window.tintColor ? : ORKColor(ORKBlueHighlightColorKey);
+    _appTintColor = ORKWindowTintcolor(self.window) ? : ORKColor(ORKBlueHighlightColorKey);
+    
     _continueButton.normalTintColor = _appTintColor;
     _skipButton.normalTintColor = _appTintColor;
 }
@@ -177,6 +194,16 @@ static const CGFloat activityIndicatorPadding = 24.0;
 - (void)setBottomMargin:(CGFloat)bottomMargin {
     _bottomMargin = bottomMargin;
     [self updateContinueAndSkipEnabled];
+}
+
+- (void)setNavigationDetailText:(NSString *)navigationDetailText {
+    _navigationDetailText = navigationDetailText;
+    _detailTextLabel.text = _navigationDetailText;
+}
+
+- (void)setContinueButtonDisabledStyle:(ORKBorderedButtonDisabledStyle)continueButtonDisabledStyle {
+    _continueButtonDisabledStyle = continueButtonDisabledStyle;
+    _continueButton.disabledButtonStyle = continueButtonDisabledStyle;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
@@ -242,7 +269,7 @@ static const CGFloat activityIndicatorPadding = 24.0;
 }
 
 - (BOOL)skipButtonHidden {
-    return (!_skipButtonItem) || _useNextForSkip || !self.optional;
+    return (!_skipButtonItem) || _useNextForSkip || !self.optional || _skipButtonItem.title == nil;
 }
 
 - (CGFloat)skipButtonAlpha {
@@ -275,7 +302,8 @@ static const CGFloat activityIndicatorPadding = 24.0;
     }
     
     _continueButton.enabled = (_continueEnabled || (_useNextForSkip && _skipButtonItem));
-    _continueButton.disableTintColor = [[self tintColor] colorWithAlphaComponent:0.3];
+    _continueButton.disableTintColor = [[self tintColor] colorWithAlphaComponent:0.5];
+    _continueButton.disabledButtonStyle = self.continueButtonDisabledStyle;
     
     // Do not modify _continueButton.userInteractionEnabled during continueButton disable period
     // or when the activity indicator is present
@@ -295,14 +323,28 @@ static const CGFloat activityIndicatorPadding = 24.0;
     if (showActivityIndicator == YES) {
         if (_activityIndicatorView == nil) {
             _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
-            [_activityIndicatorView startAnimating];
-
+            
             [_continueButton addSubview:_activityIndicatorView];
-            CGPoint center = CGPointMake(_continueButton.titleLabel.frame.origin.x - activityIndicatorPadding, _continueButton.titleLabel.center.y);
-            [_activityIndicatorView setCenter:center];
-        } else {
-            [_activityIndicatorView startAnimating];
+            _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+            [NSLayoutConstraint activateConstraints:@[
+                [NSLayoutConstraint constraintWithItem:_activityIndicatorView
+                                             attribute:NSLayoutAttributeCenterX
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:_continueButton.titleLabel
+                                             attribute:NSLayoutAttributeLeft
+                                            multiplier:1.0
+                                              constant:-activityIndicatorPadding],
+                [NSLayoutConstraint constraintWithItem:_activityIndicatorView
+                                             attribute:NSLayoutAttributeCenterY
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:_continueButton.titleLabel
+                                             attribute:NSLayoutAttributeCenterY
+                                            multiplier:1.0
+                                              constant:0]
+            ]];
+
         }
+        [_activityIndicatorView startAnimating];
     } else {
         [_activityIndicatorView stopAnimating];
     }
@@ -338,15 +380,57 @@ static const CGFloat activityIndicatorPadding = 24.0;
     [_regularConstraints removeAllObjects];
     _regularConstraints = [NSMutableArray new];
 
-    if (_continueButton) {
+    if (_detailTextLabel) {
         [_regularConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_continueButton
+            [NSLayoutConstraint constraintWithItem:_detailTextLabel
                                          attribute:NSLayoutAttributeTop
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:self
                                          attribute:NSLayoutAttributeTop
                                         multiplier:1.0
                                           constant:topSpacing],
+
+            [NSLayoutConstraint constraintWithItem:_detailTextLabel
+                                         attribute:NSLayoutAttributeLeft
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self.safeAreaLayoutGuide
+                                         attribute:NSLayoutAttributeLeft
+                                        multiplier:1.0
+                                          constant:leftRightPadding],
+            [NSLayoutConstraint constraintWithItem:_detailTextLabel
+                                         attribute:NSLayoutAttributeRight
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self.safeAreaLayoutGuide
+                                         attribute:NSLayoutAttributeRight
+                                        multiplier:1.0
+                                          constant:-leftRightPadding]
+        ]];
+    }
+    
+    if (_continueButton) {
+        if (_detailTextLabel) {
+            [_regularConstraints addObjectsFromArray:@[
+                [NSLayoutConstraint constraintWithItem:_continueButton
+                                             attribute:NSLayoutAttributeTop
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:_detailTextLabel
+                                             attribute:NSLayoutAttributeBottom
+                                            multiplier:1.0
+                                              constant:detailTextBottomSpacing]
+            ]];
+        } else {
+            [_regularConstraints addObjectsFromArray:@[
+                [NSLayoutConstraint constraintWithItem:_continueButton
+                                             attribute:NSLayoutAttributeTop
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:self
+                                             attribute:NSLayoutAttributeTop
+                                            multiplier:1.0
+                                              constant:topSpacing]
+            ]];
+        }
+        
+        [_regularConstraints addObjectsFromArray:@[
             [NSLayoutConstraint constraintWithItem:_continueButton
                                          attribute:NSLayoutAttributeLeft
                                          relatedBy:NSLayoutRelationEqual

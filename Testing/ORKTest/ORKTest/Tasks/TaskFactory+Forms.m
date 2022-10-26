@@ -817,7 +817,7 @@
         
         step.shouldPresentStepBlock = ^BOOL(ORKTaskViewController *taskViewController, ORKStep *step) {
             ORKTextQuestionResult *textResult = (ORKTextQuestionResult *)[[taskViewController.result stepResultForStepIdentifier:@"step5"] resultForIdentifier:@"text"];
-            BOOL isValid = [textResult.answer isEqualToString:@"Valid"];
+            BOOL isValid = [textResult.textAnswer isEqualToString:@"Valid"];
             if (!isValid) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                                message:@"Invalid text field value."

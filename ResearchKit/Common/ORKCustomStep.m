@@ -45,6 +45,7 @@
     
     if (self) {
         ORK_DECODE_BOOL(aDecoder, pinNavigationContainer);
+        ORK_DECODE_BOOL(aDecoder, hideNavigationContainer);
     }
     return self;
 }
@@ -52,6 +53,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_BOOL(aCoder, pinNavigationContainer);
+    ORK_ENCODE_BOOL(aCoder, hideNavigationContainer);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -63,12 +65,14 @@
     
     __typeof(self) castObject = object;
     return (superIsEqual
-            && self.pinNavigationContainer == castObject.pinNavigationContainer);
+            && self.pinNavigationContainer == castObject.pinNavigationContainer
+            && self.hideNavigationContainer == castObject.hideNavigationContainer);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKCustomStep *step = [super copyWithZone:zone];
     step.pinNavigationContainer = self.pinNavigationContainer;
+    step.hideNavigationContainer = self.hideNavigationContainer;
     step.detailText = self.detailText;
     step.text = self.text;
     step.title = self.title;

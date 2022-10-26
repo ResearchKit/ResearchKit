@@ -28,22 +28,24 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+#import <ResearchKit/ORKTypes.h>
+#endif
 
 @import Foundation;
 @import UIKit;
-@import HealthKit;
-#import <ResearchKit/ORKTypes.h>
 
+@class HKObjectType;
+@class ORKResult;
+@class ORKStepViewController;
+@protocol ORKTask;
 
 NS_ASSUME_NONNULL_BEGIN
 
+#pragma mark - ORKStep Common
+
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
-
-@class ORKStepViewController;
-@class ORKResult;
-@class ORKBodyItem;
-
-@protocol ORKTask;
+@class ORKEarlyTerminationConfiguration;
 
 /**
  `ORKStep` is the base class for the steps that can compose a task for presentation
@@ -65,7 +67,7 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
  */
 
 
-ORK_CLASS_AVAILABLE
+ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
 
 @interface ORKStep : NSObject <NSSecureCoding, NSCopying>
 
@@ -166,23 +168,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) NSTextAlignment headerTextAlignment;
 
-/**
- Array of `ORKBodyItem` type items to display textual info.
- */
-@property (nonatomic, nullable) NSArray<ORKBodyItem *> *bodyItems;
-
-/**
- An 'NSTextAlignment' that controls the text alignment for text bodyItems.
- */
-@property (nonatomic) NSTextAlignment bodyItemTextAlignment;
-
-/**
- A `Boolen` value indicating if the body items of the step should build in.
- 
- Default value is NO resulting in all body items being displayed. Set to YES to
- only show the first item and subsequent items will build in on continue.
- */
-@property (nonatomic, assign) BOOL buildInBodyItems;
 
 /**
  Additional text to display for the step in a localized string at the bottom of the view.
@@ -193,32 +178,6 @@ ORK_CLASS_AVAILABLE
  */
 
 @property (nonatomic, copy, nullable) NSString *footnote;
-
-/**
- An image that provides visual context for the instruction.
- 
- The image is displayed with aspect fit. Depending on the device, the screen area
- available for this image can vary.
- */
-@property (nonatomic, copy, nullable) UIImage *image;
-
-/**
- A `UIViewContentMode` used to position image inside a `UIImageView` used by the step.
- 
- Depending on the subclass of the step, the `ORKStepView` uses specific 'UIImageView', and the
- imageContentMode property sets the content mode of used image view.
- */
-@property (nonatomic) UIViewContentMode imageContentMode;
-
-/**
- An image that provides visual context for the instruction that will allow for showing
- a two-part composite image where the `image` is tinted and the `auxiliaryImage` is
- shown with light grey.
- 
- The image is displayed with the same frame as the `image` so both the `auxiliaryImage`
- and `image` should have transparently to allow for overlay.
- */
-@property (nonatomic, copy, nullable) UIImage *auxiliaryImage;
 
 /**
  Optional icon image to show above the title and text.
@@ -234,6 +193,11 @@ Whether to show progress for this step when it is presented. The default is YES.
  Whether to use extended outer padding for views
  */
 @property (nonatomic, assign) BOOL useExtendedPadding;
+
+/**
+ Configuration for supporting early termination from a step
+ */
+@property (nonatomic, copy, nullable) ORKEarlyTerminationConfiguration *earlyTerminationConfiguration;
 
 /**
  The task that contains the step.
@@ -282,11 +246,72 @@ Whether to show progress for this step when it is presented. The default is YES.
  */
 - (void)validateParameters;
 
+@end
+
+#pragma mark - iOS
+
+#if TARGET_OS_IOS
+
+@class ORKBodyItem;
+
+API_AVAILABLE(ios(11))
+@interface ORKStep ()
+
+/**
+ Array of `ORKBodyItem` type items to display textual info.
+ */
+@property (nonatomic, nullable) NSArray<ORKBodyItem *> *bodyItems API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
+
+/**
+ An 'NSTextAlignment' that controls the text alignment for text bodyItems.
+ */
+@property (nonatomic) NSTextAlignment bodyItemTextAlignment API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
+
+/**
+ A `Boolen` value indicating if the body items of the step should build in.
+ 
+ Default value is NO resulting in all body items being displayed. Set to YES to
+ only show the first item and subsequent items will build in on continue.
+ */
+@property (nonatomic, assign) BOOL buildInBodyItems API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
+
+/**
+ An image that provides visual context for the instruction.
+ 
+ The image is displayed with aspect fit. Depending on the device, the screen area
+ available for this image can vary.
+ */
+
+@property (nonatomic, copy, nullable) UIImage *image API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
+
+
+/**
+ An image that provides visual context for the instruction that will allow for showing
+ a two-part composite image where the `image` is tinted and the `auxiliaryImage` is
+ shown with light grey.
+ 
+ The image is displayed with the same frame as the `image` so both the `auxiliaryImage`
+ and `image` should have transparently to allow for overlay.
+ */
+
+@property (nonatomic, copy, nullable) UIImage *auxiliaryImage API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
+
+
+/**
+ A `UIViewContentMode` used to position image inside a `UIImageView` used by the step.
+ 
+ Depending on the subclass of the step, the `ORKStepView` uses specific 'UIImageView', and the
+ imageContentMode property sets the content mode of used image view.
+ */
+
+@property (nonatomic) UIViewContentMode imageContentMode API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
+
 /**
  Returns the class that the task view controller should instantiate to display
  this step.
  */
-- (Class)stepViewControllerClass;
+
+- (Class)stepViewControllerClass API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
 
 /**
  Instantiates a step view controller for this class.
@@ -296,15 +321,17 @@ Whether to show progress for this step when it is presented. The default is YES.
  using the `-stepViewControllerClass` method and initializing that instance by calling `initWithIdentifier:result:`
  on the provided `ORKStepViewController` class instance.
  
- Override this method if you need to customize the behavior before presenting the step or if 
+ Override this method if you need to customize the behavior before presenting the step or if
  the view controller is presented using a nib or storyboard.
  
  @param result    The result associated with this step
  
  @return A newly initialized step view controller.
  */
-- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result;
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
 
 @end
+
+#endif
 
 NS_ASSUME_NONNULL_END

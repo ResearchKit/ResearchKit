@@ -32,6 +32,7 @@
 #import "ORK3DModelStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
+
 @implementation ORK3DModelStep
 
 + (Class)stepViewControllerClass {
@@ -73,7 +74,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self ) {
-        ORK_DECODE_OBJ(aDecoder, modelManager);
+        ORK_DECODE_OBJ_CLASS(aDecoder, modelManager, ORK3DModelManager);
     }
     return self;
 }
@@ -90,8 +91,8 @@
     return (isParentSame && ORKEqualObjects(self.modelManager, castObject.modelManager));
 }
 
-- (NSUInteger)hash
-{
+
+- (NSUInteger)hash {
     return [super hash] ^ [_modelManager hash];
 }
 

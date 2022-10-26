@@ -30,8 +30,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import ResearchKit
+import ResearchKit.Private
 import AudioToolbox
+import ResearchKit
 
 /**
     Wraps a SystemSoundID.
@@ -63,6 +64,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case form = 0
     case groupedForm
     case survey
+    case platterUIQuestion
     case booleanQuestion
     case customBooleanQuestion
     case dateQuestion
@@ -89,6 +91,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case passcode
     case audio
     case amslerGrid
+    case sixMinuteWalk
     case fitness
     case holePegTest
     case psat
@@ -117,6 +120,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case videoInstruction
     case webView
     
+    
     class TaskListRowSection {
         var title: String
         var rows: [TaskListRow]
@@ -130,7 +134,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// Returns an array of all the task list row enum cases.
     static var sections: [ TaskListRowSection ] {
         
-        return [
+        let defaultSections = [
             TaskListRowSection(title: "Surveys", rows:
                 [
                     .form,
@@ -139,6 +143,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 ]),
             TaskListRowSection(title: "Survey Questions", rows:
                 [
+                    .platterUIQuestion,
                     .booleanQuestion,
                     .customBooleanQuestion,
                     .dateQuestion,
@@ -173,6 +178,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .audio,
                     .amslerGrid,
+                    .sixMinuteWalk,
                     .fitness,
                     .holePegTest,
                     .psat,
@@ -201,8 +207,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .videoInstruction,
                     .webView
-                ])
-        ]}
+                ])]
+        
+            return defaultSections
+        }
     
     // MARK: CustomStringConvertible
     
@@ -216,6 +224,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .survey:
             return NSLocalizedString("Simple Survey Example", comment: "")
+            
+        case .platterUIQuestion:
+            return NSLocalizedString("Platter UI Question", comment: "")
             
         case .booleanQuestion:
             return NSLocalizedString("Boolean Question", comment: "")
@@ -300,7 +311,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .amslerGrid:
             return NSLocalizedString("Amsler Grid", comment: "")
-            
+
+        case .sixMinuteWalk:
+            return NSLocalizedString("Six Minute Walk", comment: "")
+
         case .fitness:
             return NSLocalizedString("Fitness Check", comment: "")
         
@@ -375,6 +389,7 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .webView:
             return NSLocalizedString("Web View", comment: "")
+            
         }
     }
     
@@ -409,6 +424,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case questionStep
         case birthdayQuestion
         case summaryStep
+        
+        // Task with a Platter UI Question
+        case platterQuestionTask
+        case platterQuestionStep
         
         // Task with a Boolean question.
         case booleanQuestionTask
@@ -517,12 +536,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case eligibilityIneligibleStep
         case eligibilityEligibleStep
         
-        // Consent task specific identifiers.
-        case consentSharingStep
-        case consentReviewStep
-        case consentDocumentParticipantSignature
-        case consentDocumentInvestigatorSignature
-        
         // Account creation task specific identifiers.
         case accountCreationTask
         case registrationStep
@@ -541,6 +554,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Active tasks.
         case audioTask
         case amslerGridTask
+        case sixMinuteWalkTask
         case fitnessTask
         case holePegTestTask
         case psatTask
@@ -573,6 +587,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Web view tasks.
         case webViewTask
         case webViewStep
+        
     }
     
     // MARK: Properties
@@ -588,6 +603,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .survey:
             return surveyTask
+            
+        case .platterUIQuestion:
+            return platterQuestionTask
             
         case .booleanQuestion:
             return booleanQuestionTask
@@ -673,6 +691,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .amslerGrid:
             return amslerGridTask
 
+        case .sixMinuteWalk:
+            return sixMinuteWalkTask
+
         case .fitness:
             return fitnessTask
             
@@ -747,6 +768,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .webView:
             return webView
+            
         }
     }
 
@@ -777,12 +799,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, answerFormat: scaleAnswerFormat)
 
         let textChoices: [ORKTextChoice] = [
-            ORKTextChoice(text: "choice 1", detailText: "detail 1", value: 1 as NSCoding & NSCopying & NSObjectProtocol, exclusive: false),
-            ORKTextChoice(text: "choice 2", detailText: "detail 2", value: 2 as NSCoding & NSCopying & NSObjectProtocol, exclusive: false),
-            ORKTextChoice(text: "choice 3", detailText: "detail 3", value: 3 as NSCoding & NSCopying & NSObjectProtocol, exclusive: false),
-            ORKTextChoice(text: "choice 4", detailText: "detail 4", value: 4 as NSCoding & NSCopying & NSObjectProtocol, exclusive: false),
-            ORKTextChoice(text: "choice 5", detailText: "detail 5", value: 5 as NSCoding & NSCopying & NSObjectProtocol, exclusive: false),
-            ORKTextChoice(text: "choice 6", detailText: "detail 6", value: 6 as NSCoding & NSCopying & NSObjectProtocol, exclusive: false)
+            ORKTextChoice(text: "choice 1", detailText: "detail 1", value: 1 as NSNumber, exclusive: false),
+            ORKTextChoice(text: "choice 2", detailText: "detail 2", value: 2 as NSNumber, exclusive: false),
+            ORKTextChoice(text: "choice 3", detailText: "detail 3", value: 3 as NSNumber, exclusive: false),
+            ORKTextChoice(text: "choice 4", detailText: "detail 4", value: 4 as NSNumber, exclusive: false),
+            ORKTextChoice(text: "choice 5", detailText: "detail 5", value: 5 as NSNumber, exclusive: false),
+            ORKTextChoice(text: "choice 6", detailText: "detail 6", value: 6 as NSNumber, exclusive: false)
         ]
         
         let textScaleAnswerFormat = ORKTextScaleAnswerFormat(textChoices: textChoices, defaultIndex: 10)
@@ -790,7 +812,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         textScaleAnswerFormat.shouldShowDontKnowButton = true
         let formItem04 = ORKFormItem(identifier: String(describing: Identifier.formItem04), text: exampleQuestionText, answerFormat: textScaleAnswerFormat)
         
-        let appleChoices: [ORKTextChoice] = [ORKTextChoice(text: "Granny Smith", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Honeycrisp", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Fuji", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "McIntosh", value: 10 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Kanzi", value: 5 as NSCoding & NSCopying & NSObjectProtocol)]
+        let appleChoices: [ORKTextChoice] = [ORKTextChoice(text: "Granny Smith", value: 1 as NSNumber), ORKTextChoice(text: "Honeycrisp", value: 2 as NSNumber), ORKTextChoice(text: "Fuji", value: 3 as NSNumber), ORKTextChoice(text: "McIntosh", value: 10 as NSNumber), ORKTextChoice(text: "Kanzi", value: 5 as NSNumber)]
         
         let appleAnswerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: appleChoices)
         
@@ -869,7 +891,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         question2Step.text = exampleDetailText
         
         
-        let appleChoices: [ORKTextChoice] = [ORKTextChoice(text: "Granny Smith", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Honeycrisp", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Fuji", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "McIntosh", value: 10 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Kanzi", value: 5 as NSCoding & NSCopying & NSObjectProtocol)]
+        let appleChoices: [ORKTextChoice] = [ORKTextChoice(text: "Granny Smith", value: 1 as NSNumber), ORKTextChoice(text: "Honeycrisp", value: 2 as NSNumber), ORKTextChoice(text: "Fuji", value: 3 as NSNumber), ORKTextChoice(text: "McIntosh", value: 10 as NSNumber), ORKTextChoice(text: "Kanzi", value: 5 as NSNumber)]
         
         let appleAnswerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: appleChoices)
         
@@ -924,6 +946,53 @@ enum TaskListRow: Int, CustomStringConvertible {
             question2Step,
             summaryStep
             ])
+    }
+    
+    private var platterQuestionTask: ORKTask {
+        
+        let textChoiceOneText = NSLocalizedString("Choice 1", comment: "")
+        let textChoiceTwoText = NSLocalizedString("Choice 2", comment: "")
+        let textChoiceThreeText = NSLocalizedString("Choice 3", comment: "")
+        
+        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .headline)
+        let font = UIFont(descriptor: descriptor, size: descriptor.pointSize)
+        
+        let primaryAttributes = [NSAttributedString.Key.font:font]
+        
+        let textChoiceOnePrimaryAttributedString = NSAttributedString(string: textChoiceOneText, attributes:primaryAttributes)
+        let textChoiceTwoPrimaryAttributedString = NSAttributedString(string: textChoiceTwoText, attributes: primaryAttributes)
+        let textChoiceThreePrimaryAttributedString = NSAttributedString(string: textChoiceThreeText, attributes: primaryAttributes)
+        
+        let textChoices = [
+            ORKTextChoice(text: nil,
+                          primaryTextAttributedString: textChoiceOnePrimaryAttributedString,
+                          detailText: "Detail",
+                          detailTextAttributedString: nil,
+                          value: "choice 1" as NSString,
+                          exclusive: true),
+            ORKTextChoice(text: nil,
+                          primaryTextAttributedString: textChoiceTwoPrimaryAttributedString,
+                          detailText: "Detail",
+                          detailTextAttributedString: nil,
+                          value: "choice 2" as NSString,
+                          exclusive: true),
+            ORKTextChoice(text: nil,
+                          primaryTextAttributedString: textChoiceThreePrimaryAttributedString,
+                          detailText: "Detail",
+                          detailTextAttributedString: nil,
+                          value: "choice 3" as NSString,
+                          exclusive: true)
+        ]
+        
+        let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice,
+                                                              textChoices: textChoices)
+        
+        let questionStep = ORKQuestionStep.platterQuestion(withIdentifier: String(describing: Identifier.platterQuestionStep),
+                                                           question: "How many fingers am I holding up?",
+                                                           text: "Answer to the best of your knowledge.",
+                                                           answerFormat: answerFormat)
+        
+        return ORKOrderedTask(identifier: String(describing: Identifier.platterQuestionTask), steps: [questionStep])
     }
 
     /// This task presents just a single "Yes" / "No" question.
@@ -1071,8 +1140,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         let squareShapeText = NSLocalizedString("Square Shape", comment: "")
         
         let imageChoces = [
-            ORKImageChoice(normalImage: roundShapeImage, selectedImage: nil, text: roundShapeText, value: roundShapeText as NSCoding & NSCopying & NSObjectProtocol),
-            ORKImageChoice(normalImage: squareShapeImage, selectedImage: nil, text: squareShapeText, value: squareShapeText as NSCoding & NSCopying & NSObjectProtocol)
+            ORKImageChoice(normalImage: roundShapeImage, selectedImage: nil, text: roundShapeText, value: roundShapeText as NSString),
+            ORKImageChoice(normalImage: squareShapeImage, selectedImage: nil, text: squareShapeText, value: squareShapeText as NSString)
         ]
         
         let answerFormat1 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
@@ -1164,7 +1233,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         questionStep4.text = "Continuous Vertical Scale"
         
         // The fifth step is a scale control that allows text choices.
-        let textChoices: [ORKTextChoice] = [ORKTextChoice(text: "Poor", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Fair", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Good", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Above Average", value: 10 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Excellent", value: 5 as NSCoding & NSCopying & NSObjectProtocol)]
+        let textChoices: [ORKTextChoice] = [ORKTextChoice(text: "Poor", value: 1 as NSNumber), ORKTextChoice(text: "Fair", value: 2 as NSNumber), ORKTextChoice(text: "Good", value: 3 as NSNumber), ORKTextChoice(text: "Above Average", value: 10 as NSNumber), ORKTextChoice(text: "Excellent", value: 5 as NSNumber)]
 
         let step5AnswerFormat = ORKAnswerFormat.textScale(with: textChoices, defaultIndex: NSIntegerMax, vertical: false)
         
@@ -1219,10 +1288,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // The text to display can be separate from the value coded for each choice:
         let textChoices = [
-            ORKTextChoice(text: textChoiceOneText, value: "choice_1" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: textChoiceTwoText, value: "choice_2" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: textChoiceThreeText, value: "choice_3" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoiceOther.choice(withText: textChoiceFourText, detailText: nil, value: "choice_4" as NSCoding & NSCopying & NSObjectProtocol, exclusive: true, textViewPlaceholderText: "enter additional information")
+            ORKTextChoice(text: textChoiceOneText, value: "choice_1" as NSString),
+            ORKTextChoice(text: textChoiceTwoText, value: "choice_2" as NSString),
+            ORKTextChoice(text: textChoiceThreeText, value: "choice_3" as NSString),
+            ORKTextChoiceOther.choice(withText: textChoiceFourText, detailText: nil, value: "choice_4" as NSString, exclusive: true, textViewPlaceholderText: "enter additional information")
         ]
         
         let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
@@ -1283,9 +1352,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // The text to display can be separate from the value coded for each choice:
         let textChoices = [
-            ORKTextChoice(text: textChoiceOneText, value: "choice_1" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: textChoiceTwoText, value: "choice_2" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: textChoiceThreeText, value: "choice_3" as NSCoding & NSCopying & NSObjectProtocol)
+            ORKTextChoice(text: textChoiceOneText, value: "choice_1" as NSString),
+            ORKTextChoice(text: textChoiceTwoText, value: "choice_2" as NSString),
+            ORKTextChoice(text: textChoiceThreeText, value: "choice_3" as NSString)
         ]
         
         let answerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: textChoices)
@@ -1401,36 +1470,35 @@ enum TaskListRow: Int, CustomStringConvertible {
     }
     
     private var requestPermissionsTask: ORKTask {
-        let healthKitTypesToWrite: Set<HKSampleType> = [
-            HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
-            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-            HKObjectType.workoutType()]
         
-        let healthKitTypesToRead: Set<HKObjectType> = [
-            HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!,
-            HKObjectType.characteristicType(forIdentifier: .bloodType)!,
-            HKObjectType.workoutType()]
-        
-        
-        let healthKitPermissionType = ORKHealthKitPermissionType(sampleTypesToWrite: healthKitTypesToWrite,
-                                                                 objectTypesToRead: healthKitTypesToRead)
-
         let notificationsPermissionType = ORKNotificationPermissionType(
             authorizationOptions: [.alert, .badge, .sound])
 
         let motionActivityPermissionType = ORKMotionActivityPermissionType()
+        
 
+        let healthKitTypesToWrite: Set<HKSampleType> = [
+            HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKObjectType.workoutType()]
+
+        let healthKitTypesToRead: Set<HKObjectType> = [
+            HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!,
+            HKObjectType.characteristicType(forIdentifier: .bloodType)!,
+            HKObjectType.workoutType()]
+
+        let healthKitPermissionType = ORKHealthKitPermissionType(sampleTypesToWrite: healthKitTypesToWrite,
+                                                                 objectTypesToRead: healthKitTypesToRead)
+
+        let locationPermissionType = ORKLocationPermissionType()
+        
         let requestPermissionsStep = ORKRequestPermissionsStep(
             identifier: String(describing: Identifier.requestPermissionsStep),
-            permissionTypes: [
-                healthKitPermissionType,
-                notificationsPermissionType,
-                motionActivityPermissionType
-            ])
-       
-        requestPermissionsStep.title = "Authorization Requests"
-        requestPermissionsStep.text = "Please review the authorizations below and enable to contribute to the study."
-        
+            permissionTypes: [notificationsPermissionType, motionActivityPermissionType, healthKitPermissionType, locationPermissionType])
+
+        requestPermissionsStep.title = "Health Data Request"
+        requestPermissionsStep.text = "Please review the health data types below and enable sharing to contribute to the study."
+
         return ORKOrderedTask(identifier: String(describing: Identifier.requestPermissionsStep), steps: [requestPermissionsStep])
     }
     
@@ -1451,7 +1519,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         formStep.isOptional = false
         
         // Form items
-        let textChoices: [ORKTextChoice] = [ORKTextChoice(text: "Yes", value: "Yes" as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "No", value: "No" as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "N/A", value: "N/A" as NSCoding & NSCopying & NSObjectProtocol)]
+        let textChoices: [ORKTextChoice] = [ORKTextChoice(text: "Yes", value: "Yes" as NSString), ORKTextChoice(text: "No", value: "No" as NSString), ORKTextChoice(text: "N/A", value: "N/A" as NSString)]
+
         let answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
         
         let formItem01 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem01), text: exampleQuestionText, answerFormat: answerFormat)
@@ -1487,13 +1556,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // Build navigation rules.
         var resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep), resultIdentifier: String(describing: Identifier.eligibilityFormItem01))
-        let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
+
+        let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSString)
         
         resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep), resultIdentifier: String(describing: Identifier.eligibilityFormItem02))
-        let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSString)
         
         resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep), resultIdentifier: String(describing: Identifier.eligibilityFormItem03))
-        let predicateFormItem03 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "No" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateFormItem03 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "No" as NSString)
         
         let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
         let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(describing: Identifier.eligibilityEligibleStep)) ])
@@ -1506,7 +1576,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         return eligibilityTask
     }
-    
     
     /// This task presents the Account Creation process.
     private var accountCreationTask: ORKTask {
@@ -1624,7 +1693,25 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var fitnessTask: ORKTask {
         return ORKOrderedTask.fitnessCheck(withIdentifier: String(describing: Identifier.fitnessTask), intendedUseDescription: exampleDescription, walkDuration: 20, restDuration: 20, options: [])
     }
-    
+
+    private var sixMinuteWalkTask: ORKTask {
+        if #available(iOS 14, *) {
+            return ORKOrderedTask.sixMinuteWalk(
+                withIdentifier: String(describing: Identifier.sixMinuteWalkTask),
+                intendedUseDescription: exampleDescription,
+                options: []
+            )
+        } else {
+            return ORKOrderedTask.fitnessCheck(
+                withIdentifier: String(describing: Identifier.sixMinuteWalkTask),
+                intendedUseDescription: exampleDescription,
+                walkDuration: 360,
+                restDuration: 0,
+                options: []
+            )
+        }
+    }
+
     /// This task presents the Hole Peg Test pre-defined active task.
     private var holePegTestTask: ORKTask {
         return ORKNavigableOrderedTask.holePegTest(withIdentifier: String(describing: Identifier.holePegTestTask), intendedUseDescription: exampleDescription, dominantHand: .right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: [])
@@ -1662,6 +1749,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var speechInNoiseTask: ORKTask {
         return ORKOrderedTask.speechInNoiseTask(withIdentifier: String(describing: Identifier.speechInNoiseTask), intendedUseDescription: nil, options: [])
     }
+    
     
     /// This task presents the Stroop pre-defined active task.
     private var stroopTask: ORKTask {
@@ -1787,7 +1875,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
     }
     
-
     /// This task presents a video instruction step
     private var frontFacingCameraStep: ORKTask {
         let frontFacingCameraStep = ORKFrontFacingCameraStep(identifier: String(describing: Identifier.frontFacingCameraStep))
@@ -1807,123 +1894,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         webViewStep.title = NSLocalizedString("Web View", comment: "")
         webViewStep.showSignatureAfterContent = true
         return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
-    }
-    
-    // MARK: Consent Document Creation Convenience
-    
-    /**
-        A consent document provides the content for the visual consent and consent
-        review steps. This helper sets up a consent document with some dummy
-        content. You should populate your consent document to suit your study.
-    */
-    private var consentDocument: ORKConsentDocument {
-        let consentDocument = ORKConsentDocument()
-        
-        /*
-            This is the title of the document, displayed both for review and in
-            the generated PDF.
-        */
-        consentDocument.title = NSLocalizedString("Example Consent", comment: "")
-        
-        // This is the title of the signature page in the generated document.
-        consentDocument.signaturePageTitle = NSLocalizedString("Consent", comment: "")
-        
-        /*
-            This is the line shown on the signature page of the generated document,
-            just above the signatures.
-        */
-        consentDocument.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "")
-        
-        /*
-            Add the participant signature, which will be filled in during the
-            consent review process. This signature initially does not have a
-            signature image or a participant name; these are collected during
-            the consent review step.
-        */
-        let participantSignatureTitle = NSLocalizedString("Participant", comment: "")
-        let participantSignature = ORKConsentSignature(forPersonWithTitle: participantSignatureTitle, dateFormatString: nil, identifier: String(describing: Identifier.consentDocumentParticipantSignature))
-        
-        consentDocument.addSignature(participantSignature)
-        
-        /*
-            Add the investigator signature. This is pre-populated with the
-            investigator's signature image and name, and the date of their
-            signature. If you need to specify the date as now, you could generate
-            a date string with code here.
-          
-            This signature is only used for the generated PDF.
-        */
-        let signatureImage = UIImage(named: "signature")!
-        let investigatorSignatureTitle = NSLocalizedString("Investigator", comment: "")
-        let investigatorSignatureGivenName = NSLocalizedString("Jonny", comment: "")
-        let investigatorSignatureFamilyName = NSLocalizedString("Appleseed", comment: "")
-        let investigatorSignatureDateString = "3/10/15"
-
-        let investigatorSignature = ORKConsentSignature(forPersonWithTitle: investigatorSignatureTitle, dateFormatString: nil, identifier: String(describing: Identifier.consentDocumentInvestigatorSignature), givenName: investigatorSignatureGivenName, familyName: investigatorSignatureFamilyName, signatureImage: signatureImage, dateString: investigatorSignatureDateString)
-        
-        consentDocument.addSignature(investigatorSignature)
-        
-        /*
-            This is the HTML content for the "Learn More" page for each consent
-            section. In a real consent, this would be your content, and you would
-            have different content for each section.
-          
-            If your content is just text, you can use the `content` property
-            instead of the `htmlContent` property of `ORKConsentSection`.
-        */
-        let htmlContentString = "<ul><li>Lorem</li><li>ipsum</li><li>dolor</li></ul><p>\(loremIpsumLongText)</p><p>\(loremIpsumMediumText)</p>"
-        
-        /*
-            These are all the consent section types that have pre-defined animations
-            and images. We use them in this specific order, so we see the available
-            animated transitions.
-        */
-        let consentSectionTypes: [ORKConsentSectionType] = [
-            .overview,
-            .dataGathering,
-            .privacy,
-            .dataUse,
-            .timeCommitment,
-            .studySurvey,
-            .studyTasks,
-            .withdrawing
-        ]
-        
-        /*
-            For each consent section type in `consentSectionTypes`, create an
-            `ORKConsentSection` that represents it.
-
-            In a real app, you would set specific content for each section.
-        */
-        var consentSections: [ORKConsentSection] = consentSectionTypes.map { contentSectionType in
-            let consentSection = ORKConsentSection(type: contentSectionType)
-            
-            consentSection.summary = loremIpsumShortText
-            
-            if contentSectionType == .overview {
-                consentSection.htmlContent = htmlContentString
-            } else {
-                consentSection.content = loremIpsumLongText
-            }
-            
-            return consentSection
-        }
-        
-        /*
-            This is an example of a section that is only in the review document
-            or only in the generated PDF, and is not displayed in `ORKVisualConsentStep`.
-        */
-        let consentSection = ORKConsentSection(type: .onlyInDocument)
-        consentSection.summary = NSLocalizedString(".OnlyInDocument Scene Summary", comment: "")
-        consentSection.title = NSLocalizedString(".OnlyInDocument Scene", comment: "")
-        consentSection.content = loremIpsumLongText
-        
-        consentSections += [consentSection]
-        
-        // Set the sections on the document after they've been created.
-        consentDocument.sections = consentSections
-        
-        return consentDocument
     }
     
     // MARK: `ORKTask` Reused Text Convenience

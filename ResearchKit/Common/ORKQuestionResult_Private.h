@@ -29,7 +29,10 @@
  */
 
 
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKQuestionResult.h>
+#endif
+
 @import MapKit;
 
 
@@ -41,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable Class)answerClass;
 
 // Used internally for unit testing.
-@property (nonatomic, strong, nullable) id answer;
+@property (nonatomic, strong, nullable) NSObject<NSCopying, NSSecureCoding> *answer;
 
 @end
 

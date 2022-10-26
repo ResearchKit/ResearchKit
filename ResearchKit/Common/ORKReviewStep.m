@@ -39,7 +39,6 @@
 
 #import "ORKHelpers_Internal.h"
 
-
 @implementation ORKReviewStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
@@ -76,12 +75,16 @@
     return YES;
 }
 
++ (NSArray *)allowedTaskResultSourceClasses {
+    return @[[ORKTaskResult class], [ORKPageResult class]];
+}
+
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
-        ORK_DECODE_OBJ(aDecoder, resultSource);
+        ORK_DECODE_OBJ_CLASSES(aDecoder, resultSource, [ORKReviewStep allowedTaskResultSourceClasses]);
         ORK_DECODE_BOOL(aDecoder, excludeInstructionSteps);
     }
     return self;

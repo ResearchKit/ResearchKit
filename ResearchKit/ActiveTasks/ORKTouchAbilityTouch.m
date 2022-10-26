@@ -114,7 +114,7 @@
         self.azimuthUnitVectorInWindow = [aDecoder decodeCGVectorForKey:@ORK_STRINGIFY(azimuthUnitVectorInWindow)];
         
         ORK_DECODE_DOUBLE(aDecoder, altitudeAngle);
-        ORK_DECODE_OBJ(aDecoder, estimationUpdateIndex);
+        ORK_DECODE_OBJ_CLASS(aDecoder, estimationUpdateIndex, NSNumber);
         ORK_DECODE_INTEGER(aDecoder, estimatedProperties);
         ORK_DECODE_INTEGER(aDecoder, estimatedPropertiesExpectingUpdates);
     }

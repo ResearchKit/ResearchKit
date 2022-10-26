@@ -63,7 +63,7 @@
 #import "ORKSkin.h"
 
 static const CGFloat TableViewYOffsetStandard = 30.0;
-static const CGFloat DelayBeforeAutoScroll = 0.25;
+static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 
 @interface ORKTableCellItem : NSObject
 
@@ -153,6 +153,8 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 
 - (void)addFormItem:(ORKFormItem *)item;
 
+- (BOOL)containsFormItem:(ORKFormItem *)formItem;
+
 @property (nonatomic, readonly) CGFloat maxLabelWidth;
 
 @end
@@ -193,6 +195,16 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
         ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item];
        [(NSMutableArray *)self.items addObject:cellItem];
     }
+}
+
+- (BOOL)containsFormItem:(ORKFormItem *)formItem {
+    for (ORKTableCellItem *cellItem in _items) {
+        if (cellItem.formItem.identifier == formItem.identifier) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 - (CGFloat)maxLabelWidth {
@@ -394,12 +406,6 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     // Reset skipped flag - result can now be non-empty
     _skipped = NO;
     
-    if (_tableContainer) {
-        [_tableContainer sizeHeaderToFit];
-        [_tableContainer resizeFooterToFit];
-        [_tableContainer layoutIfNeeded];
-    }
-    
     if (_tableView) {
         [_tableView reloadData];
     }
@@ -575,7 +581,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
             
             if (ORKNeedWideScreenDesign(self.view)) {
                 [_tableView setBackgroundColor:[UIColor clearColor]];
-                [self.taskViewController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+                [self.taskViewController setNavigationBarColor:ORKColor(ORKBackgroundColorKey)];
                 [self.view setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
             }
             else {
@@ -584,7 +590,8 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
                 } else {
                     [_tableView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
                 }
-                [self.taskViewController.navigationBar setBarTintColor:[_tableView backgroundColor]];
+
+                [self.taskViewController setNavigationBarColor:[_tableView backgroundColor]];
                 [self.view setBackgroundColor:[_tableView backgroundColor]];
             }
         } else {
@@ -727,7 +734,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     section.learnMoreItem = item.learnMoreItem;
     section.showsProgress = item.showsProgress;
     section.tagText = item.tagText;
-    
+
     return section;
 }
 
@@ -793,6 +800,29 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     return YES;
 }
 
+- (nullable ORKFormItem *)fetchFirstUnansweredNonOptionalFormItem:(NSArray<ORKFormItem *> *)formItems {
+    for (ORKFormItem *item in formItems) {
+        if (!item.optional) {
+            id answer = _savedAnswers[item.identifier];
+            if (ORKIsAnswerEmpty(answer) || ![item.impliedAnswerFormat isAnswerValid:answer]) {
+                return item;
+            }
+        }
+    }
+
+    return nil;
+}
+
+- (nullable ORKTableSection *)fetchSectionThatContainsFormItem:(ORKFormItem *)formItem {
+    for (ORKTableSection *section in _sections) {
+        if ([section containsFormItem:formItem]) {
+            return section;
+        }
+    }
+
+    return nil;
+}
+
 - (BOOL)continueButtonEnabled {
     BOOL enabled = ([self numberOfAnsweredFormItems] > 0
                     && [self allAnsweredFormItemsAreValid]
@@ -814,6 +844,10 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 - (void)updateButtonStates {
     _navigationFooterView.continueEnabled = [self continueButtonEnabled];
     _navigationFooterView.skipEnabled = [self skipButtonEnabled];
+    
+    if (self.shouldPresentInReview && self.navigationItem.rightBarButtonItem) {
+        self.navigationItem.rightBarButtonItem.enabled = [self continueButtonEnabled];
+    }
 }
 
 - (void)setShouldPresentInReview:(BOOL)shouldPresentInReview {
@@ -860,8 +894,6 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 // Not to use `ImmediateNavigation` when current step already has an answer.
 // So user is able to review the answer when it is present.
 - (BOOL)isStepImmediateNavigation {
-    // FIXME: - add explicit property in FormStep to dictate this behavior
-//    return [[self formStep] isFormatImmediateNavigation] && [self hasAnswer] == NO && !self.isBeingReviewed;
     return NO;
 }
 
@@ -953,9 +985,6 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 
             if ([nextCell isKindOfClass:[ORKFormItemCell class]]) {
                 [nextCell becomeFirstResponder];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                    [_tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                });
             }
 
         } else {
@@ -972,6 +1001,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     
     if ([nextCell respondsToSelector:@selector(formItem)] && !_autoScrollCancelled) {
         ORKQuestionType type = nextCell.formItem.impliedAnswerFormat.questionType;
+
         if ([self doesTableCellTypeUseKeyboard:type] && [nextCell isKindOfClass:[ORKFormItemCell class]]) {
             return YES;
         }
@@ -993,23 +1023,55 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     ORKTableSection *section = _sections[indexPath.section];
     NSNumber *sectionIndex = [NSNumber numberWithLong:indexPath.section];
     
-    if ([cell isKindOfClass:[ORKFormItemCell class]]) {
+    if ([cell isKindOfClass:[ORKFormItemCell class]] && [cell.answer class] != [ORKDontKnowAnswer class]) {
         if (cell.formItem.answerFormat.impliedAnswerFormat.questionType != ORKQuestionTypeSES) {
             return;
         }
-    } else if (section.textChoiceCellGroup.answerFormat.style != ORKChoiceAnswerStyleSingleChoice) {
+    } else if (![cell isKindOfClass:[ORKFormItemCell class]] && ![self isAnswerStyleSingleChoice:section.textChoiceCellGroup] && ![self exclusiveChoiceSelectedForCellGroup:section.textChoiceCellGroup withCell:cell] ) {
         return;
     }
 
     if ((indexPath.section < _sections.count - 1) && [self shouldAutoScrollToNextSection:indexPath] && ![_answeredSections containsObject:sectionIndex]) {
         [self autoScrollToNextSection:indexPath];
     } else if ((indexPath.section == (_sections.count - 1)) && ![_answeredSections containsObject:sectionIndex]) {
-        [self.tableView scrollRectToVisible:[self.tableView convertRect:self.tableView.tableFooterView.bounds fromView:self.tableView.tableFooterView] animated:YES];
+        if (![self allNonOptionalFormItemsHaveAnswers]) {
+            [self scrollToFirstUnansweredSection];
+        } else {
+            [self.tableView scrollRectToVisible:[self.tableView convertRect:self.tableView.tableFooterView.bounds fromView:self.tableView.tableFooterView] animated:YES];
+        }
+        
     } else if (indexPath.section < (_sections.count - 1) && ![_answeredSections containsObject:sectionIndex]) {
         NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.section + 1)];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [_tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
+    }
+}
+
+- (void)scrollToFirstUnansweredSection {
+    ORKFormItem *formItem = [self fetchFirstUnansweredNonOptionalFormItem:[self formItems]];
+    if (formItem) {
+        ORKTableSection *section = [self fetchSectionThatContainsFormItem:formItem];
+        if (section) {
+            NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:section.index];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [_tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            });
+        }
+    }
+}
+
+- (BOOL)isAnswerStyleSingleChoice:(ORKTextChoiceCellGroup *)cellGroup {
+    return (cellGroup.answerFormat.style == ORKChoiceAnswerStyleSingleChoice);
+}
+
+- (BOOL)exclusiveChoiceSelectedForCellGroup:(ORKTextChoiceCellGroup *)cellGroup withCell:(ORKFormItemCell *)cell {
+    ORKChoiceViewCell *choiceViewCell = (ORKChoiceViewCell *)cell;
+    
+    if (choiceViewCell) {
+        return (cellGroup.answer != nil && choiceViewCell.isExclusive);
+    } else {
+        return NO;
     }
 }
 
@@ -1047,7 +1109,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
         } else {
             CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
             
-            if ((_currentFirstResponderCell.frame.origin.y + _currentFirstResponderCell.frame.size.height) >= (self.view.frame.size.height - keyboardSize.height)) {
+            if ((_currentFirstResponderCell.frame.origin.y + CGRectGetHeight(_currentFirstResponderCell.frame)) >= (CGRectGetHeight(self.view.frame) - keyboardSize.height)) {
                 _tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height + TableViewYOffsetStandard, 0);
             }
         }
@@ -1357,7 +1419,12 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
         [self autoScrollToNextSection:indexPath];
         return;
     } else if (cell.isLastItem && indexPath.section == (_sections.count - 1) && ![_answeredSections containsObject:sectionIndex]) {
-        [self.tableView scrollRectToVisible:[self.tableView convertRect:self.tableView.tableFooterView.bounds fromView:self.tableView.tableFooterView] animated:YES];
+
+        if (![self allNonOptionalFormItemsHaveAnswers]) {
+            [self scrollToFirstUnansweredSection];
+        } else {
+            [self.tableView scrollRectToVisible:[self.tableView convertRect:self.tableView.tableFooterView.bounds fromView:self.tableView.tableFooterView] animated:YES];
+        }
     }
     
     NSIndexPath *path = [_tableView indexPathForCell:cell];

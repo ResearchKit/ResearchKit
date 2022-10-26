@@ -32,30 +32,44 @@
 @import Foundation;
 @import UIKit;
 
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKESerializationLocalizer : NSObject
+#if defined(__cplusplus)
+#  define ORKE_EXTERN extern "C" __attribute__((visibility("default")))
+#else
+#  define ORKE_EXTERN extern __attribute__((visibility("default")))
+#endif
+
+typedef NSString *ORKESerializationKey NS_STRING_ENUM;
+ORKE_EXTERN ORKESerializationKey const ORKESerializationKeyImageName;
+
+@protocol ORKESerializationLocalizer
+
+- (NSString *)localizedStringForKey:(ORKESerializationKey)string;
+
+@end
+
+@interface ORKESerializationBundleLocalizer : NSObject<ORKESerializationLocalizer>
 
 - (instancetype)initWithBundle:(NSBundle *)bundle tableName:(NSString *)tableName;
 
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, copy) NSString *tableName;
 
-- (NSString *)localizedStringForString:(NSString *)string;
+- (NSString *)localizedStringForKey:(ORKESerializationKey)string;
 
 @end
 
 @protocol ORKESerializationImageProvider
 
-- (UIImage *)imageForReference:(NSDictionary *)reference;
+- (nullable UIImage *)imageForReference:(NSDictionary *)reference;
 - (nullable NSDictionary *)referenceBySavingImage:(UIImage *)image;
 
 @end
 
 typedef NS_ENUM(NSInteger, ORKESerializationPropertyModifierType) {
     ORKESerializationPropertyModifierTypePath
-} ORK_ENUM_AVAILABLE;
+};
 
 @interface ORKESerializationPropertyModifier: NSObject
 
@@ -69,9 +83,9 @@ typedef NS_ENUM(NSInteger, ORKESerializationPropertyModifierType) {
 
 @interface ORKESerializationPropertyInjector : NSObject
 
-- (instancetype)initWithBundle:(NSBundle *)bundle modifiers:(nullable NSArray<ORKESerializationPropertyModifier *> *)modifiers;
+- (instancetype)initWithBasePath:(NSString *)basePath modifiers:(nullable NSArray<ORKESerializationPropertyModifier *> *)modifiers;
 
-@property (nonatomic, strong, readonly) NSBundle *bundle;
+@property (nonatomic, copy, readonly) NSString *basePath;
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, id> *propertyValues;
 
 @end
@@ -84,16 +98,12 @@ typedef NS_ENUM(NSInteger, ORKESerializationPropertyModifierType) {
 
 @interface ORKESerializationContext : NSObject
 
-- (instancetype)initWithLocalizer:(nullable ORKESerializationLocalizer *)localizer
+- (instancetype)initWithLocalizer:(nullable id<ORKESerializationLocalizer>)localizer
                     imageProvider:(nullable id<ORKESerializationImageProvider>)imageProvider
                stringInterpolator:(nullable id<ORKESerializationStringInterpolator>)stringInterpolator
                  propertyInjector:(nullable ORKESerializationPropertyInjector *)propertyInjector;
 
-- (instancetype)initWithBundle:(NSBundle *)bundle
-         localizationTableName:(NSString *)localizationTableName
-             propertyModifiers:(nullable NSArray<ORKESerializationPropertyModifier *> *)modifiers;
-
-@property (nonatomic, strong, nullable) ORKESerializationLocalizer *localizer;
+@property (nonatomic, strong, nullable) id<ORKESerializationLocalizer> localizer;
 @property (nonatomic, strong, nullable) id<ORKESerializationImageProvider> imageProvider;
 @property (nonatomic, strong, nullable) id<ORKESerializationStringInterpolator> stringInterpolator;
 @property (nonatomic, strong, nullable) ORKESerializationPropertyInjector *propertyInjector;
@@ -104,8 +114,6 @@ typedef _Nullable id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSSt
 typedef _Nullable id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
 typedef _Nullable id (^ORKESerializationObjectToJSONBlock)(id object, ORKESerializationContext *context);
 typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject, ORKESerializationContext *context);
-
-
 
 
 @interface ORKESerializationBundleImageProvider : NSObject<ORKESerializationImageProvider>
@@ -155,4 +163,3 @@ typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject, ORKESe
 
 
 NS_ASSUME_NONNULL_END
-

@@ -242,6 +242,14 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
     
     UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @(_countDown).stringValue);
     [_countdownView startAnimateWithDuration:[(ORKActiveStep *)self.step stepDuration]];
+    
+    [UIApplication.sharedApplication setIdleTimerDisabled:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [UIApplication.sharedApplication setIdleTimerDisabled:NO];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)updateCountdownLabel {

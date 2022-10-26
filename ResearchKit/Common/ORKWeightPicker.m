@@ -97,8 +97,11 @@ static const CGFloat PickerMinimumHeight = 34.0;
 
 - (void)setAnswer:(id)answer {
     _answer = answer;
-    
     if (ORKIsAnswerEmpty(answer)) {
+        if (![_pickerDelegate isOptional]) {
+            return;
+        }
+        
         answer = [self defaultAnswerValue];
     }
     
@@ -179,28 +182,55 @@ static const CGFloat PickerMinimumHeight = 34.0;
 - (NSNumber *)selectedAnswerValue {
     NSNumber *answer = nil;
     if (_answerFormat.useMetricSystem) {
-        NSInteger wholeRow = [_pickerView selectedRowInComponent:0];
+        NSInteger wholeRow = [self fetchSelectedRowInComponent:0];;
+        
+        if (![_pickerDelegate isOptional] && wholeRow == -1) {
+            return nil;
+        }
+        
         NSNumber *whole = _majorValues[wholeRow];
         if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
             answer = @( whole.doubleValue );
         } else {
-            NSInteger fractionRow = [_pickerView selectedRowInComponent:1];
+            NSInteger fractionRow = [self fetchSelectedRowInComponent:1];
+            
+            if (![_pickerDelegate isOptional] && fractionRow == -1) {
+                return nil;
+            }
+            
             NSNumber *fraction = _minorValues[fractionRow];
             answer = @( ORKWholeAndFractionToKilograms(whole.doubleValue, fraction.doubleValue) );
         }
     } else {
-        NSInteger poundsRow = [_pickerView selectedRowInComponent:0];
+        NSInteger poundsRow = [self fetchSelectedRowInComponent:0];
+        
+        if (![_pickerDelegate isOptional] && poundsRow == -1) {
+            return nil;
+        }
+        
         NSNumber *pounds = _majorValues[poundsRow];
         if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
             answer = @( ORKPoundsToKilograms(pounds.doubleValue) );
         } else {
-            NSInteger ouncesRow = [_pickerView selectedRowInComponent:1];
+            NSInteger ouncesRow = [self fetchSelectedRowInComponent:1];
+            
+            if (![_pickerDelegate isOptional] && ouncesRow == -1) {
+                return nil;
+            }
+            
             NSNumber *ounces = _minorValues[ouncesRow];
             answer = @( ORKPoundsAndOuncesToKilograms(pounds.doubleValue, ounces.doubleValue) );
         }
     }
     
     return answer;
+}
+
+- (NSInteger)fetchSelectedRowInComponent:(NSInteger)component {
+    NSInteger row = [_pickerView selectedRowInComponent:component];
+     
+    //subtract row by 1 to account for empty value added if step is not optional
+    return [_pickerDelegate isOptional] ? row : (row - 1);
 }
 
 - (NSString *)selectedLabelText {
@@ -249,31 +279,42 @@ static const CGFloat PickerMinimumHeight = 34.0;
     } else {
         numberOfRows = 1;
     }
-    return numberOfRows;
+    return  ![_pickerDelegate isOptional] && (component < 2) ? numberOfRows + 1 : numberOfRows;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSInteger currentRow = row;
+    
+    if (![self.pickerDelegate isOptional] && component < 2) {
+        
+        if (row == 0) {
+            return @"";
+        } else {
+            currentRow = row - 1;
+        }
+    }
+    
     NSString *title = nil;
     if (_answerFormat.useMetricSystem) {
         if (component == 0) {
             if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
-                title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
+                title = [NSString stringWithFormat:@"%@ %@", _majorValues[currentRow], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
             } else {
-                title = [NSString stringWithFormat:@"%@", _majorValues[row]];
+                title = [NSString stringWithFormat:@"%@", _majorValues[currentRow]];
             }
         } else if (component == 1) {
             NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
             formatter.minimumIntegerDigits = 2;
             formatter.maximumFractionDigits = 0;
-            title = [NSString stringWithFormat:@".%@", [formatter stringFromNumber:_minorValues[row]]];
+            title = [NSString stringWithFormat:@".%@", [formatter stringFromNumber:_minorValues[currentRow]]];
         } else if (component == 2) {
             title = ORKLocalizedString(@"MEASURING_UNIT_KG", nil);
         }
     } else {
         if (component == 0) {
-            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
+            title = [NSString stringWithFormat:@"%@ %@", _majorValues[currentRow], ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
         } else {
-            title = [NSString stringWithFormat:@"%@ %@", _minorValues[row], ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
+            title = [NSString stringWithFormat:@"%@ %@", _minorValues[currentRow], ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
         }
     }    
     return title;

@@ -349,6 +349,7 @@
     frontFacingCameraResult.endDate = now;
     frontFacingCameraResult.contentType = @"video/quicktime";
     frontFacingCameraResult.fileURL = _savedFileURL;
+    frontFacingCameraResult.fileName = _savedFileName;
     frontFacingCameraResult.retryCount = retryCount;
 
     [results addObject:frontFacingCameraResult];

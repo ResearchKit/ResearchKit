@@ -207,7 +207,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     givenNameFormItem.optional = NO;
     familyNameFormItem.optional = NO;
     
-    ORKFormItem *sectionTitleFormItem = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"CONSENT_NAME_TITLE", nil)];
+    ORKFormItem *sectionTitleFormItem = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"CONSENT_NAME_SECTION_TITLE", nil)];
     
     NSArray *formItems = @[sectionTitleFormItem, givenNameFormItem, familyNameFormItem];
     if (ORKCurrentLocalePresentsFamilyNameFirst())
@@ -331,7 +331,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         }
     }
     
-    ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] init];
+    ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] initWithIdentifier:self.step.identifier];
     result.signature = _currentSignature;
     result.identifier = _currentSignature.identifier;
     result.consented = _documentReviewed;

@@ -38,6 +38,7 @@
 #import "ORKTask.h"
 
 #import "ORKHelpers_Internal.h"
+#import "ORKDevice.h"
 
 @interface ORKCollectionResult ()
 
@@ -173,6 +174,20 @@
     if (self) {
         self->_taskRunUUID = [taskRunUUID copy];
         self->_outputDirectory = [outputDirectory copy];
+        self->_device = [ORKDevice currentDevice];
+    }
+    return self;
+}
+
+- (instancetype)initWithTaskIdentifier:(NSString *)identifier
+                           taskRunUUID:(NSUUID *)taskRunUUID
+                       outputDirectory:(NSURL *)outputDirectory
+                                device:(ORKDevice *)device {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self->_taskRunUUID = [taskRunUUID copy];
+        self->_outputDirectory = [outputDirectory copy];
+        self->_device = [device copy];
     }
     return self;
 }
@@ -181,6 +196,7 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, taskRunUUID);
     ORK_ENCODE_URL(aCoder, outputDirectory);
+    ORK_ENCODE_OBJ(aCoder, device);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -188,6 +204,7 @@
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, taskRunUUID, NSUUID);
         ORK_DECODE_URL(aDecoder, outputDirectory);
+        ORK_DECODE_OBJ_CLASS(aDecoder, device, ORKDevice);
     }
     return self;
 }
@@ -206,18 +223,19 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.taskRunUUID, castObject.taskRunUUID) &&
-            ORKEqualFileURLs(self.outputDirectory, castObject.outputDirectory));
+            ORKEqualFileURLs(self.outputDirectory, castObject.outputDirectory) &&
+            ORKEqualObjects(self.device, castObject.device));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.taskRunUUID.hash ^ self.outputDirectory.hash;
+    return super.hash ^ self.taskRunUUID.hash ^ self.outputDirectory.hash ^ self.device.hash;
 }
-
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTaskResult *result = [super copyWithZone:zone];
     result->_taskRunUUID = [self.taskRunUUID copy];
-    result->_outputDirectory =  [self.outputDirectory copy];
+    result->_outputDirectory = [self.outputDirectory copy];
+    result->_device = [self.device copy];
     return result;
 }
 
@@ -242,11 +260,13 @@
 }
 
 - (void)updateEnabledAssistiveTechnology {
+#if TARGET_OS_IOS
     if (UIAccessibilityIsVoiceOverRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
     } else if (UIAccessibilityIsSwitchControlRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
     }
+#endif
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -290,9 +310,8 @@
 
 @end
 
-
 #pragma mark - ORKPageResult
-
+#if TARGET_OS_IOS
 @implementation ORKPageResult
 
 - (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result {
@@ -385,3 +404,4 @@
 }
 
 @end
+#endif // TARGET_OS_IOS

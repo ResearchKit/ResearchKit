@@ -30,8 +30,10 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKDefines.h>
 
+#if TARGET_OS_IOS
+#import <ResearchKit/ORKDefines.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -219,12 +221,14 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhone6Plus,
     ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
+    ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
     ORKScreenTypeiPad10_5,
     ORKScreenTypeiPad12_9,
     ORKScreenType_COUNT
 };
 
+#if TARGET_OS_IOS
 ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow * _Nullable window);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow * _Nullable window);
 
@@ -248,5 +252,7 @@ CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window);
 CGFloat ORKCardLeftRightMarginForWindow(UIWindow *window);
 
 UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window);
+
+#endif
 
 NS_ASSUME_NONNULL_END

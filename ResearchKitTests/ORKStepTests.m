@@ -323,7 +323,8 @@
     result.booleanAnswer = @(YES);
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"stepOne" results:@[result]];
-    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithIdentifier:@"task"];
+    
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"task" taskRunUUID:[NSUUID UUID] outputDirectory:nil];
     taskResult.results = @[stepResult];
     
     // Creating predicates
@@ -501,6 +502,7 @@
 - (void)testAttributes {
     NSString *identifier = @"STEP";
     ORKLearnMoreInstructionStep *step = [[ORKLearnMoreInstructionStep alloc] initWithIdentifier:identifier];
+
     XCTAssertEqual([step identifier], identifier);
 }
 
@@ -533,6 +535,38 @@
     [step setThresholdValue:2];
     XCTAssertThrowsSpecificNamed([step validateParameters], NSException, NSInvalidArgumentException);
     
+    XCTAssert([step isEqual:step]);
+}
+
+@end
+
+@interface ORKAudioFitnessStepTests : XCTestCase
+
+@end
+
+@implementation ORKAudioFitnessStepTests
+
+- (void)testAttributes {
+
+    NSString *identifier = @"abc";
+    NSString *bundleID = @"com.fake.bundle";
+    NSString *name = @"song";
+    NSString *extension = @".mp3";
+
+    ORKBundleAsset *audio = [[ORKBundleAsset alloc] initWithName:name
+                                                bundleIdentifier:bundleID
+                                                   fileExtension:extension];
+
+    ORKAudioFitnessStep *step = [[ORKAudioFitnessStep alloc] initWithIdentifier:identifier
+                                                                     audioAsset:audio
+                                                                      vocalCues:nil];
+    XCTAssertEqual(step.identifier, identifier);
+    XCTAssertEqual(step.audioAsset.bundleIdentifier, bundleID);
+    XCTAssertEqual(step.audioAsset.name, name);
+    XCTAssertEqual(step.audioAsset.fileExtension, extension);
+    XCTAssertEqual(step.stepDuration, 180);
+    XCTAssertEqual(step.shouldShowDefaultTimer, NO);
+    XCTAssertEqual(step.vocalCues.count, 0);
     XCTAssert([step isEqual:step]);
 }
 

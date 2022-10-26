@@ -30,30 +30,26 @@
 
 
 #import "ORKActiveStepTimer.h"
-
 #import "ORKHelpers_Internal.h"
 
 @import UIKit;
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 
-
 static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
-    static mach_timebase_info_data_t    sTimebaseInfo;
-    if ( sTimebaseInfo.denom == 0 ) {
-        (void) mach_timebase_info(&sTimebaseInfo);
+    static mach_timebase_info_data_t sTimebaseInfo;
+    if (sTimebaseInfo.denom == 0) {
+        (void)mach_timebase_info(&sTimebaseInfo);
     }
     uint64_t elapsedNano = delta * sTimebaseInfo.numer / sTimebaseInfo.denom;
     return elapsedNano * 1.0 / NSEC_PER_SEC;
 }
-
 
 @implementation ORKActiveStepTimer {
     uint64_t _startTime;
     NSTimeInterval _preExistingRuntime;
     dispatch_queue_t _queue;
     dispatch_source_t _timer;
-    UIBackgroundTaskIdentifier _backgroundTaskIdentifier;
     uint32_t _isRunning;
 }
 
@@ -68,7 +64,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
         _interval = interval;
         _handler = [handler copy];
         _preExistingRuntime = runtime;
-        _backgroundTaskIdentifier = UIBackgroundTaskInvalid;
         
         _queue = dispatch_queue_create("active_step", DISPATCH_QUEUE_SERIAL);
         
@@ -128,7 +123,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
 }
 
 - (void)queue_event {
-    [self queue_assertBackgroundTask];
     
     NSTimeInterval runtime = [self queue_runtime];
     BOOL finished = (runtime >= _duration);
@@ -138,13 +132,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         _handler(self, finished);
-        dispatch_sync(_queue, ^{
-            
-            // If the timer is still NULL here, we can safely release the background task.
-            if (_timer == NULL) {
-                [self queue_releaseBackgroundTask];
-            }
-        });
     });
 }
 
@@ -154,29 +141,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
         dispatch_source_cancel(_timer);
         _timer = NULL;
     }
-}
-
-- (void)queue_releaseBackgroundTask {
-    if (_backgroundTaskIdentifier == UIBackgroundTaskInvalid) {
-        return;
-    }
-    UIBackgroundTaskIdentifier identifier = _backgroundTaskIdentifier;
-    _backgroundTaskIdentifier = UIBackgroundTaskInvalid;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication] endBackgroundTask:identifier];
-    });
-}
-
-- (void)queue_assertBackgroundTask {
-    if (_backgroundTaskIdentifier != UIBackgroundTaskInvalid) {
-        return;
-    }
-    _backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        // This is guaranteed to be called synchronously on the main queue, switch to our queue to invalidate the identifier
-        dispatch_sync(_queue, ^{
-            _backgroundTaskIdentifier = UIBackgroundTaskInvalid;
-        });
-    }];
 }
 
 - (void)queue_resume {
@@ -189,11 +153,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
         [self queue_event];
         return;
     }
-    
-    // We want to run in the background if we can, so voice can be played, etc.
-    assert(_backgroundTaskIdentifier == UIBackgroundTaskInvalid);
-    
-    [self queue_assertBackgroundTask];
     
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,
                                     0, 0, dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0));
@@ -228,16 +187,11 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     _preExistingRuntime += timeIntervalFromMachTime(now - _startTime);
     _startTime = 0;
     
-    if (!atFinish) {
-        // If we are atFinish, the task will be released after the handler completes
-        [self queue_releaseBackgroundTask];
-    }
 }
 
 - (void)queue_reset {
     [self queue_clearTimer];
     _preExistingRuntime = 0;
-    [self queue_releaseBackgroundTask];
 }
 
 @end
