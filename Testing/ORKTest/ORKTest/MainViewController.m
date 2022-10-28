@@ -484,18 +484,8 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
     NSParameterAssert(task != nil);
     NSError *error;
     
-    if (_savedViewControllers[identifier]) {
-        NSData *data = _savedViewControllers[identifier];
-        _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self error: &error];
-    } else {
-        // No saved data, just create the task and the corresponding task view controller.
-        _taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
-    }
-    
-    // If we have stored data then data will contain the stored data.
-    // If we don't, data will be nil (and the task will be opened up as a 'new' task.
-    NSData *data = _savedViewControllers[identifier];
-    _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self error: &error];
+    NSData *restorationData = _savedViewControllers[identifier];
+    _taskViewController = [[TaskFactory sharedInstance] makeTaskViewControllerWithIdentifier:identifier task:task restorationData:restorationData delegate:self];
     
     [self beginTask];
 }
@@ -911,7 +901,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [super decodeRestorableStateWithCoder:coder];
     
     _taskViewController = [coder decodeObjectOfClass:[UIViewController class] forKey:@"taskVC"];
-    _lastRouteResult = [coder decodeObjectForKey:@"lastRouteResult"];
+    _lastRouteResult = [coder decodeObjectOfClass:[ORKTaskResult class] forKey:@"lastRouteResult"];
     
     // Need to give the task VC back a copy of its task, so it can restore itself.
     

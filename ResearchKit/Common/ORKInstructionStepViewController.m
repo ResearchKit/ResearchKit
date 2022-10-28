@@ -84,7 +84,7 @@
         _navigationFooterView.continueButtonItem = self.continueButtonItem;
         _navigationFooterView.continueEnabled = YES;
         _navigationFooterView.hidden = self.isBeingReviewed;
-        _navigationFooterView.optional = [self instructionStep].isOptional;
+        _navigationFooterView.optional = [self instructionStep].isOptional || [self instructionStep].earlyTerminationConfiguration != nil;
         _navigationFooterView.footnoteLabel.text = [self instructionStep].footnote;
         [_navigationFooterView updateContinueAndSkipEnabled];
     }
@@ -136,7 +136,7 @@
     }
     
     [super viewWillAppear:animated];
-    [self.taskViewController.navigationBar setBarTintColor:self.view.backgroundColor];
+    [self.taskViewController setNavigationBarColor:self.view.backgroundColor];
 }
 
 - (void)viewDidLoad {

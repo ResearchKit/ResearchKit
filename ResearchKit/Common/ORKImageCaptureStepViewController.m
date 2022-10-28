@@ -75,6 +75,7 @@
 
             if (fileResult.fileURL) {
                 // Setting these properties in this order allows us to reuse the existing file on disk
+                _previewImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:fileResult.fileURL]];
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];
                 _fileURL = fileResult.fileURL;
             }
@@ -197,7 +198,7 @@
     
     [photoSettings setPhotoQualityPrioritization:AVCapturePhotoQualityPrioritizationSpeed];
     [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
-
+    
     return photoSettings;
 }
 
@@ -415,6 +416,7 @@
     NSString *contentType = [NSString stringWithFormat:@"image/%@", _imageDataExtension];
     fileResult.contentType = contentType;
     fileResult.fileURL = _fileURL;
+    fileResult.fileName = [_fileURL lastPathComponent];
     [results addObject:fileResult];
     stepResult.results = [results copy];
     return stepResult;

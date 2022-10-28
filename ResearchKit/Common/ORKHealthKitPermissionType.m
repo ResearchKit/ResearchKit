@@ -70,11 +70,9 @@ static uint32_t const IconTintColor = 0xFF5E5E;
     self.cardView = [[ORKRequestPermissionView alloc] initWithIconImage:image
                                                                   title:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE", nil)
                                                              detailText:ORKLocalizedString(@"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION", nil)];
-    
+
     [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
-
     [self.cardView.requestPermissionButton addTarget:self action:@selector(requestPermissionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-
     [self.cardView updateIconTintColor:ORKRGB(IconTintColor)];
 }
 

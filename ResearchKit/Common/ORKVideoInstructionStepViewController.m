@@ -79,9 +79,9 @@
 - (void)stepDidChange {
     [self setThumbnailImageFromAsset];
     [super stepDidChange];
-    _playbackStoppedTime = NAN;
+    _playbackStoppedTime = DBL_MAX;
     _playbackCompleted = NO;
-    
+
     if (self.step && [self isViewLoaded] && [self videoInstructionStep].image) {
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
         [tapRecognizer addTarget:self action:@selector(play)];
@@ -102,15 +102,20 @@
     }
 }
 
+- (nullable NSURL*)assetURL {
+    ORKVideoInstructionStep *step = [self videoInstructionStep];
+    return step.videoURL ?: step.bundleAsset.url;
+}
+
 - (void)setThumbnailImageFromAsset {
     if ([self videoInstructionStep].image) {
         return;
     }
-    if (![self videoInstructionStep].videoURL) {
+    if (![self assetURL]) {
         self.videoInstructionStep.image = nil;
         return;
     }
-    AVAsset* asset = [AVAsset assetWithURL:[self videoInstructionStep].videoURL];
+    AVAsset* asset = [AVAsset assetWithURL:[self assetURL]];
     CMTime duration = [asset duration];
     duration.value = MIN([self videoInstructionStep].thumbnailTime, duration.value / duration.timescale) * duration.timescale;
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
@@ -121,7 +126,7 @@
 }
 
 - (void)play {
-    AVAsset* asset = [AVAsset assetWithURL:[self videoInstructionStep].videoURL];
+    AVAsset* asset = [AVAsset assetWithURL:[self assetURL]];
     AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:asset];
     ORKRateObservedPlayer* player = [[ORKRateObservedPlayer alloc] initWithPlayerItem:playerItem andObserver:self];
     player.actionAtItemEnd = AVPlayerActionAtItemEndPause;

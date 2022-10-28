@@ -42,19 +42,19 @@
 
 - (ORKTaskResult *)createTaskResultTree {
     // Construction
-    ORKFileResult *fileResult1 = [[ORKFileResult alloc] init];
+    ORKFileResult *fileResult1 = [[ORKFileResult alloc] initWithIdentifier:@"fileResultIdentifier"];
     
     NSURL *baseURL = [NSURL fileURLWithPath:NSHomeDirectory()];
     NSURL *standardizedBaseURL = [baseURL URLByStandardizingPath];
     fileResult1.fileURL = [NSURL fileURLWithPath:@"ResultFile" relativeToURL:standardizedBaseURL];
     fileResult1.contentType = @"file";
     
-    ORKTextQuestionResult *questionResult1 = [[ORKTextQuestionResult alloc] init];
+    ORKTextQuestionResult *questionResult1 = [[ORKTextQuestionResult alloc] initWithIdentifier:@"questionResultIdentifier"];
     questionResult1.identifier = @"qid";
     questionResult1.answer = @"answer";
     questionResult1.questionType = ORKQuestionTypeText;
     
-    ORKConsentSignatureResult *consentResult1 = [[ORKConsentSignatureResult alloc] init];
+    ORKConsentSignatureResult *consentResult1 = [[ORKConsentSignatureResult alloc] initWithIdentifier:@"consentSignatureResultIdentifier"];
     consentResult1.signature = [[ORKConsentSignature alloc] init];
     
     ORKStepResult *stepResult1 = [[ORKStepResult alloc] initWithStepIdentifier:@"StepIdentifier" results:@[fileResult1, questionResult1, consentResult1]];
@@ -120,7 +120,7 @@
     }];
 }
 
-- (void)testResultSerialization {
+- (void)testResultSecureCoding {
     ORKTaskResult *taskResult1 = [self createTaskResultTree];
     
     // Archive

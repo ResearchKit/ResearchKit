@@ -188,8 +188,15 @@ static const CGFloat FooterViewHeightOffset = 20.0;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    [self sizeHeaderToFit];
     [self resizeFooterToFit];
     [self updateTableViewBottomConstraint];
+}
+
+- (void)didMoveToWindow {
+    [self sizeHeaderToFit];
+    [self resizeFooterToFit];
+    [self layoutIfNeeded];
 }
 
 - (void)addStepContentView {
@@ -220,9 +227,9 @@ static const CGFloat FooterViewHeightOffset = 20.0;
         [_tableView layoutIfNeeded];
         CGFloat tableViewHeight = self.tableView.bounds.size.height;
         CGFloat newHeight = tableViewHeight - self.tableView.contentSize.height + FooterViewHeightOffset;
-        CGRect footerBounds = newHeight < minHeight ? CGRectMake(0.0, 0.0, _tableView.bounds.size.width, minHeight) : CGRectMake(0.0, 0.0, _tableView.bounds.size.width, newHeight);
+        CGRect footerRect = newHeight < minHeight ? CGRectMake(0.0, 0.0, _tableView.bounds.size.width, minHeight) : CGRectMake(0.0, 0.0, _tableView.bounds.size.width, newHeight);
 
-        [_footerView setBounds:footerBounds];
+        [_footerView setFrame:footerRect];
         _tableView.tableFooterView = _footerView;
     }
 }

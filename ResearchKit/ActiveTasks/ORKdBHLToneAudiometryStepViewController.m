@@ -49,8 +49,10 @@
 #import "ORKdBHLToneAudiometryResult.h"
 #import "ORKdBHLToneAudiometryStep.h"
 
+
 #import "ORKHelpers_Internal.h"
 #import "ORKTaskViewController_Private.h"
+#import "ORKTaskViewController_Internal.h"
 #import "ORKOrderedTask.h"
 
 @interface ORKdBHLToneAudiometryTransitions: NSObject
@@ -101,6 +103,7 @@
     dispatch_block_t _preStimulusDelayWorkBlock;
     dispatch_block_t _pulseDurationWorkBlock;
     dispatch_block_t _postStimulusDelayWorkBlock;
+    
 }
 
 @property (nonatomic, strong) ORKdBHLToneAudiometryContentView *dBHLToneAudiometryContentView;
@@ -166,16 +169,33 @@
     [self.activeStepView.navigationFooterView setHidden:YES];
 
     [self.dBHLToneAudiometryContentView.tapButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
+    
 
-    _audioChannel = [self dBHLToneAudiometryStep].earPreference;
-    _audioGenerator = [[ORKdBHLToneAudiometryAudioGenerator alloc] initForHeadphones:[self dBHLToneAudiometryStep].headphoneType];
+    _audioChannel = dBHLTAStep.earPreference;
+    _audioGenerator = [[ORKdBHLToneAudiometryAudioGenerator alloc] initForHeadphoneType:dBHLTAStep.headphoneType];
     _audioGenerator.delegate = self;
     _hapticFeedback = [[UIImpactFeedbackGenerator alloc] initWithStyle: UIImpactFeedbackStyleHeavy];
+}
+
+- (void)addObservers {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+}
+
+- (void)removeObservers {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
+    [center removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
+    [self addObservers];
+}
+-(void)appWillTerminate:(NSNotification*)note {
+    [self stopAudio];
+    [self removeObservers];
 }
 
 - (void)animatedBHLButton {
@@ -202,11 +222,14 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     _audioGenerator.delegate = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+
+    [self removeObservers];
     [self stopAudio];
 }
 
@@ -265,6 +288,8 @@
         _currentdBHL = [self dBHLToneAudiometryStep].initialdBHLValue;
         _initialDescent = YES;
         _ackOnce = NO;
+        _usingMissingList = YES;
+        _indexOfStepUpMissingList = 0;
         _transitionsDictionary = nil;
         _transitionsDictionary = [NSMutableDictionary dictionary];
         if (_resultSample) {
@@ -432,4 +457,3 @@
 }
 
 @end
-

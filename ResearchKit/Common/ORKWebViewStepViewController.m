@@ -39,123 +39,194 @@
 #import "ORKSkin.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSignatureResult_Private.h"
-#import "ORKCustomSignatureFooterView.h"
+#import "ORKCustomSignatureFooterView_Private.h"
 
 static const CGFloat ORKSignatureTopPadding = 37.0;
+
+// This view controller will hide it's view until the HTML finishes loading.
+// That way, the entire view is rendered at once. For a snappier UX, the HTML
+// can be preloaded using the `preloadHTML` method.
 
 @implementation ORKWebViewStepViewController {
     UIScrollView *_scrollView;
     WKWebView *_webView;
-    NSString *_result;
+
+    NSString *_receivedMessageBody;
     NSMutableArray<NSLayoutConstraint *> *_constraints;
     
-    ORKCustomSignatureFooterView *_signatureView;
+    ORKCustomSignatureFooterView *_signatureFooterView;
     
-    CGFloat _leftRightPadding;
     CGFloat _bottomOffset;
+
+    BOOL _isHTMLRendered;
 }
 
 - (ORKWebViewStep *)webViewStep {
     return (ORKWebViewStep *)self.step;
 }
 
-- (void)stepDidChange {
-    
-    _result = nil;
-    [_webView removeFromSuperview];
-    _webView = nil;
-    
-    [_scrollView removeFromSuperview];
-    _scrollView = nil;
-    
-    if (self.step && [self isViewLoaded]) {
-        
-        _scrollView = [[UIScrollView alloc] init];
-        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        [_scrollView setDelegate:self];
-        [self.view addSubview:_scrollView];
-        
-        if ([self webViewStep].showSignatureAfterContent) {
-            _signatureView = [[ORKCustomSignatureFooterView alloc] init];
-            _signatureView.signatureViewDelegate = self;
-            _signatureView.delegate = self;
-            _signatureView.customViewProvider = [self webViewStep].customViewProvider;
-            [_scrollView addSubview:_signatureView];
-        }
-        
-        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-        config.allowsInlineMediaPlayback = true;
-        if ([config respondsToSelector:@selector(mediaTypesRequiringUserActionForPlayback)]) {
-            config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
-        }
-        
-        WKUserContentController *controller = [[WKUserContentController alloc] init];
-        [controller addScriptMessageHandler:self name:@"ResearchKit"];
-        config.userContentController = controller;
-        
-        _leftRightPadding = self.step.useExtendedPadding ? ORKStepContainerExtendedLeftRightPaddingForWindow(self.view.window) : ORKStepContainerLeftRightPaddingForWindow(self.view.window);
-        
-        UIColor *backgroundColor;
+- (void)setupSubviews {
+    [self setupScrollView];
+    [self setupNavigationFooterView];
+    [self setupWebView];
+    [self setupSignatureIfNeeded];
+}
+
+- (void)didFinishLoadingHTML {
+    // Now that the HTML is loaded we can display the subviews
+    [self addSubviews];
+    [self setupConstraints];
+
+    // Notify the delegate that the view controller has finished loading
+    if (
+        _webViewDelegate != nil &&
+        [_webViewDelegate respondsToSelector:@selector(didFinishLoadingWebStepViewController:)]
+    ) {
+        [_webViewDelegate didFinishLoadingWebStepViewController:self];
+    }
+}
+
+// Refresh the HTML in the web view and hide subviews until it's finished loading.
+// This helps to remove flashing behavior in the UI.
+- (void)refreshHTML {
+    // Remove the subviews while the HTML loads
+    [self removeSubviews];
+    [NSLayoutConstraint deactivateConstraints:_constraints];
+
+    // Generate the CSS for the HTML
+
+    NSString *css = [self webViewStep].customCSS;
+
+    if (!css) {
+        UIColor *backgroundColor = ORKColor(ORKBackgroundColorKey);
         UIColor *textColor;
         if (@available(iOS 13.0, *)) {
-            backgroundColor = [UIColor systemBackgroundColor];
             textColor = [UIColor labelColor];
         } else {
-            backgroundColor = [UIColor whiteColor];
             textColor = [UIColor blackColor];
         }
-        
+
         NSString *backgroundColorString = [self hexStringForColor:backgroundColor];
         NSString *textColorString = [self hexStringForColor:textColor];
-        
-        NSString *css = [NSString stringWithFormat:@"body { margin: 0px; font-size: 17px; font-family: \"-apple-system\"; padding-left: %fpx; padding-right: %fpx; background-color: %@; color: %@; }",
-                         _leftRightPadding,
-                         _leftRightPadding,
-                         backgroundColorString,
-                         textColorString];
-        
-        if ([self webViewStep].customCSS != nil) {
-            css = [self webViewStep].customCSS;
+
+        CGFloat horizontalPadding = [self horizontalPadding];
+
+        css = [NSString stringWithFormat:@"body { margin: 0px; font-size: 17px; font-family: \"-apple-system\"; padding-left: %fpx; padding-right: %fpx; background-color: %@; color: %@; }",
+               horizontalPadding,
+               horizontalPadding,
+               backgroundColorString,
+               textColorString];
+    }
+
+    // Apply the CSS to the HTML using JS
+
+    NSString *js = @"var style = document.createElement('style'); style.innerHTML = '%@'; document.head.appendChild(style);";
+    NSString *formattedString = [NSString stringWithFormat:js, css];
+    WKUserScript *userScript = [[WKUserScript alloc] initWithSource:formattedString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:true];
+
+    WKUserContentController *controller = _webView.configuration.userContentController;
+    [controller removeAllUserScripts];      // Clear the previous script and CSS
+    [controller addUserScript:userScript];
+
+    // Kick off loading the HTML. Once it's completed, make sure to call `didFinishLoadingHTML`.
+    [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
+}
+
+
+- (CGFloat)horizontalPadding {
+    return self.step.useExtendedPadding ?
+        ORKStepContainerExtendedLeftRightPaddingForWindow(self.view.window) :
+        ORKStepContainerLeftRightPaddingForWindow(self.view.window);
+}
+
+- (void)setupWebView {
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    config.allowsInlineMediaPlayback = true;
+    if ([config respondsToSelector:@selector(mediaTypesRequiringUserActionForPlayback)]) {
+        config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
+    }
+
+    WKUserContentController *controller = [[WKUserContentController alloc] init];
+    [controller addScriptMessageHandler:self name:@"ResearchKit"];
+    config.userContentController = controller;
+
+    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
+    _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    _webView.navigationDelegate = self;
+    _webView.scrollView.scrollEnabled = NO;
+    _webView.scrollView.delegate = self;
+}
+
+- (void)setupScrollView {
+    _scrollView = [[UIScrollView alloc] init];
+    _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    [_scrollView setDelegate:self];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+
+    // We need to re-render the HTML if the interface style has changed
+    // so that the CSS adopts the new color scheme.
+    if (@available(iOS 13, *)) {
+        if (self.traitCollection.userInterfaceStyle != previousTraitCollection.userInterfaceStyle) {
+            [self refreshHTML];
         }
-        
-        NSString *js = @"var style = document.createElement('style'); style.innerHTML = '%@'; document.head.appendChild(style);";
-        NSString *formattedString = [NSString stringWithFormat:js, css];
-        WKUserScript *userScript = [[WKUserScript alloc] initWithSource:formattedString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:true];
-        [controller addUserScript:userScript];
-        
-        _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _webView.navigationDelegate = self;
-        _webView.scrollView.scrollEnabled = NO;
-        _webView.scrollView.delegate = self;
-        
-        [_scrollView addSubview:_webView];
-        [self setupNavigationFooterView];
-        [self setupConstraints];
-        [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
+    }
+}
+
+- (void)setupSignatureIfNeeded {
+    if (![self webViewStep].showSignatureAfterContent) {
+        return;
+    }
+    _signatureFooterView = [[ORKCustomSignatureFooterView alloc] init];
+    _signatureFooterView.signatureViewDelegate = self;
+    _signatureFooterView.delegate = self;
+    _signatureFooterView.customViewProvider = [self webViewStep].customViewProvider;
+
+    if ([_signatureFooterView.customViewProvider respondsToSelector:@selector(keyboardDismissModeForCustomView)]) {
+        [_scrollView setKeyboardDismissMode:[_signatureFooterView.customViewProvider keyboardDismissModeForCustomView]];
     }
 }
 
 - (void)setupNavigationFooterView {
-    if (!_navigationFooterView) {
-        _navigationFooterView = [ORKNavigationContainerView new];
-        [_navigationFooterView removeStyling];
-    }
+    _navigationFooterView = [ORKNavigationContainerView new];
+    [_navigationFooterView removeStyling];
     
     _navigationFooterView.continueButtonItem = self.continueButtonItem;
     _navigationFooterView.continueEnabled = YES;
+    _navigationFooterView.optional = [self webViewStep].isOptional;
     [_navigationFooterView updateContinueAndSkipEnabled];
     [_navigationFooterView setUseExtendedPadding:[self.step useExtendedPadding]];
     
     if ([self webViewStep].showSignatureAfterContent) {
         _navigationFooterView.continueEnabled = NO;
     }
-    
-    if ([self webViewStep].showSignatureAfterContent) {
-        [_scrollView addSubview:_navigationFooterView];
-    } else {
-        [self.view addSubview:_navigationFooterView];
+}
+
+- (void)addSubviews {
+    [self.view addSubview:_scrollView];
+    [_scrollView addSubview:_navigationFooterView];
+    [_scrollView addSubview:_webView];
+
+    if (_signatureFooterView) {
+        [_scrollView addSubview:_signatureFooterView];
     }
+}
+
+- (void)removeSubviews {
+    [_scrollView removeFromSuperview];
+    [_navigationFooterView removeFromSuperview];
+    [_webView removeFromSuperview];
+
+    if (_signatureFooterView) {
+        [_signatureFooterView removeFromSuperview];
+    }
+}
+
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
+    [super setSkipButtonItem:skipButtonItem];
+    _navigationFooterView.skipButtonItem = self.skipButtonItem;
 }
 
 - (void)setupConstraints {
@@ -170,7 +241,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    _signatureView.translatesAutoresizingMaskIntoConstraints = NO;
+    _signatureFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     
     _constraints = [[NSMutableArray alloc] initWithArray:@[
         [NSLayoutConstraint constraintWithItem:_scrollView
@@ -240,33 +311,35 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
     ]];
     
     if ([[self webViewStep] showSignatureAfterContent]) {
+        CGFloat horizontalPadding = [self horizontalPadding];
+
         [_constraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_signatureView
+            [NSLayoutConstraint constraintWithItem:_signatureFooterView
                                          attribute:NSLayoutAttributeTop
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:_webView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
                                           constant:ORKSignatureTopPadding / 2.0],
-            [NSLayoutConstraint constraintWithItem:_signatureView
+            [NSLayoutConstraint constraintWithItem:_signatureFooterView
                                          attribute:NSLayoutAttributeLeading
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:self.view
                                          attribute:NSLayoutAttributeLeading
                                         multiplier:1.0
-                                          constant:_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_signatureView
+                                          constant:horizontalPadding],
+            [NSLayoutConstraint constraintWithItem:_signatureFooterView
                                          attribute:NSLayoutAttributeTrailing
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:self.view
                                          attribute:NSLayoutAttributeTrailing
                                         multiplier:1.0
-                                          constant:-_leftRightPadding],
+                                          constant:-horizontalPadding],
             
             [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                          attribute:NSLayoutAttributeTop
                                          relatedBy:NSLayoutRelationEqual
-                                            toItem:_signatureView
+                                            toItem:_signatureFooterView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
                                           constant:ORKSignatureTopPadding / 2.0],
@@ -278,19 +351,19 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
                                         multiplier:1.0
                                           constant:0.0],
         ]];
-    } else {
+    } else {        
         [_constraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_webView
-                                         attribute:NSLayoutAttributeBottom
-                                         relatedBy:NSLayoutRelationLessThanOrEqual
-                                            toItem:_scrollView
+            [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_webView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
-                                          constant:0.0],
+                                          constant:ORKSignatureTopPadding / 2.0],
             [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                          attribute:NSLayoutAttributeBottom
                                          relatedBy:NSLayoutRelationEqual
-                                            toItem:viewForiPad ? : self.view
+                                            toItem:_scrollView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
                                           constant:0.0],
@@ -302,7 +375,11 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self stepDidChange];
+
+    // Note, the subviews will not be added to the view hierarchy
+    // until the HTML is loaded
+    [self setupSubviews];
+    [self refreshHTML];
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
@@ -322,7 +399,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
  @param animated            A boolean value indicating wether the scroll should be animated or not.
  */
 - (void)scrollSignatureViewRect:(CGRect)rect toPoint:(CGPoint)endPoint animated:(BOOL)animated {
-    CGRect rectInView = [_signatureView convertRect:rect toView:self.view];
+    CGRect rectInView = [_signatureFooterView convertRect:rect toView:self.view];
     
     CGFloat offset = endPoint.y - (rectInView.origin.y + rectInView.size.height);
     
@@ -352,11 +429,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    if (![[self webViewStep] showSignatureAfterContent]) {
-        [_scrollView setContentInset:UIEdgeInsetsMake(0, 0, _navigationFooterView.frame.size.height, 0)];
-    } else {
-        [_scrollView setContentInset:UIEdgeInsetsZero];
-    }
+    [_scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
@@ -365,37 +438,45 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 }
 
 - (void)startPreload {
-    [self.view layoutSubviews];
-    [self stepDidChange];
+    if (self.viewLoaded) {
+        [self didFinishLoadingHTML];
+    } else {
+        [self loadViewIfNeeded];
+    }
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.body isKindOfClass:[NSString class]]){
-        _result = (NSString *)message.body;
+        _receivedMessageBody = ORKDynamicCast(message.body, NSString);
         [self goForward];
     }
 }
 
 - (ORKStepResult *)result {
-    ORKStepResult *parentResult = [super result];
-    
-    if (parentResult) {
-        ORKWebViewStepResult *childResult = [[ORKWebViewStepResult alloc] initWithIdentifier:self.step.identifier];
-        childResult.result = _result;
-        childResult.endDate = parentResult.endDate;
-        childResult.userInfo = @{@"html": [self webViewStep].html};
-        parentResult.results = [parentResult.results arrayByAddingObject:childResult] ? : @[childResult];
+    ORKStepResult *stepResult = [super result];
+    if (stepResult) {
+        NSString *webViewResultIdentifier = @"WebView";
+        ORKWebViewStepResult *webViewResult = [[ORKWebViewStepResult alloc] initWithIdentifier:webViewResultIdentifier];
+        webViewResult.result = _receivedMessageBody;
+        webViewResult.endDate = stepResult.endDate;
+        webViewResult.userInfo = @{@"html": [self webViewStep].html};
+        stepResult.results = [stepResult.results arrayByAddingObject:webViewResult] ? : @[webViewResult];
         
-        if ([[self webViewStep] showSignatureAfterContent] && [_signatureView isComplete]) {
-            ORKSignatureResult *signatureResult = [_signatureView result];
-            parentResult.results = [parentResult.results arrayByAddingObject:signatureResult] ? : @[signatureResult];
+        if ([[self webViewStep] showSignatureAfterContent] && [_signatureFooterView isComplete]) {
+            NSString *signatureResultIdentifier = @"Signature";
+            ORKSignatureResult *signatureResult = [_signatureFooterView resultWithIdentifier: signatureResultIdentifier];
+            stepResult.results = [stepResult.results arrayByAddingObject:signatureResult] ? : @[signatureResult];
         }
     }
-    return parentResult;
+    return stepResult;
 }
 
 // MARK: WKWebViewDelegate
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+    
+}
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     [webView evaluateJavaScript:@"document.readyState" completionHandler:^(id complete, NSError *readyError) {
@@ -406,15 +487,11 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
                     CGFloat height = [resultString floatValue];
                     [_webView.heightAnchor constraintEqualToConstant:height].active = YES;
                 }
-                
-                if (_webViewDelegate != nil && [_webViewDelegate respondsToSelector:@selector(didFinishLoadingWebStepViewController:)]) {
-                    [_webViewDelegate didFinishLoadingWebStepViewController:self];
-                }
+
+                [self didFinishLoadingHTML];
             }];
         } else {
-            if (_webViewDelegate != nil && [_webViewDelegate respondsToSelector:@selector(didFinishLoadingWebStepViewController:)]) {
-                [_webViewDelegate didFinishLoadingWebStepViewController:self];
-            }
+            [self didFinishLoadingHTML];
         }
     }];
 }
@@ -432,15 +509,26 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
 // MARK: UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {    
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    BOOL enabled = [self shouldEnableSignatureView] && scrollView.isDecelerating;
+    [_signatureFooterView setEnabled:enabled];
+    
     if ([_scrollView.panGestureRecognizer translationInView:_scrollView.superview].y > 0) {
         // Scrolling upward
-        [_signatureView cancelAutoScrollTimer];
+        [_signatureFooterView cancelAutoScrollTimer];
     }
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [_signatureFooterView setEnabled:[self shouldEnableSignatureView]];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [_signatureFooterView setEnabled:[self shouldEnableSignatureView]];
+}
+
 - (BOOL)shouldEnableSignatureView {
-    CGFloat bottomOfSignature = _signatureView.frame.size.height + _signatureView.frame.origin.y;
+    CGFloat bottomOfSignature = _signatureFooterView.frame.origin.y + _signatureFooterView.signatureViewFrame.origin.y + _signatureFooterView.signatureViewFrame.size.height;
     CGFloat signaturePosition = _scrollView.contentOffset.y + _scrollView.frame.size.height;
     return (bottomOfSignature <= signaturePosition);
 }
@@ -448,7 +536,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 // MARK: Signature
 
 - (void)signatureViewDidEditImage:(nonnull ORKSignatureView *)signatureView {
-    _navigationFooterView.continueEnabled = [_signatureView isComplete];
+    _navigationFooterView.continueEnabled = [_signatureFooterView isComplete];
 }
 
 - (void)signatureViewDidEndEditingWithTimeInterval {

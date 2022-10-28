@@ -77,6 +77,11 @@ typedef BOOL (^ShouldPresentStepBlockType)(ORKTaskViewController *taskViewContro
 
 - (id<ORKTask>)makeTaskWithIdentifier:(NSString *)identifier;
 
+- (ORKTaskViewController *)makeTaskViewControllerWithIdentifier:(NSString *)identifier
+                                                           task:(id<ORKTask>)task
+                                                restorationData:(NSData *)data
+                                                       delegate:(id<ORKTaskViewControllerDelegate>)delegate;
+
 - (ORKConsentDocument *)buildConsentDocument;
 
 - (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size border:(BOOL)border;

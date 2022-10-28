@@ -48,6 +48,7 @@
 #import "ORKKeychainWrapper.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKTaskViewController_Internal.h"
+#import "ORKSkin.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -88,6 +89,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     _passcodeStepView = nil;
     
     if (self.step && [self isViewLoaded]) {
+        
+        [self.taskViewController setNavigationBarColor:ORKColor(ORKBackgroundColorKey)];
+        [self.view setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
         
         _accessibilityPasscodeField = [UITextField new];
         _accessibilityPasscodeField.hidden = YES;

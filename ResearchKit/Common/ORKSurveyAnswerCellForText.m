@@ -33,6 +33,7 @@
 
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
+#import "ORKDontKnowButton.h"
 
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
@@ -44,10 +45,13 @@ static const CGFloat TextViewTopPadding = 8.0;
 static const CGFloat TextViewBottomPadding = 16.0;
 static const CGFloat TextViewMinimumHeight = 140.0;
 static const CGFloat ClearTextButtonMinimumHeight = 20.0;
+static const CGFloat ClearTextButtonRightPadding = 12.0;
 static const CGFloat ErrorLabelTopPadding = 4.0;
 static const CGFloat ErrorLabelBottomPadding = 10.0;
 static const CGFloat StandardSpacing = 8.0;
 static const CGFloat CellBottomPadding = 5.0;
+static const CGFloat DontKnowButtonTopBottomPadding = 12.0;
+static const CGFloat DividerViewTopPadding = 10.0;
 
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
 
@@ -62,10 +66,14 @@ static const CGFloat CellBottomPadding = 5.0;
     NSString *_defaultTextAnswer;
     UILabel *_textCountLabel;
     UIButton *_clearTextViewButton;
+    ORKDontKnowButton *_dontKnowButton;
     UIView *_bottomSeperatorView;
+    UIView *_dontKnowBackgroundView;
+    UIView *_dividerView;
     NSMutableArray *_constraints;
     BOOL _hideClearButton;
     BOOL _hideCharacterCountLabel;
+    BOOL _shouldShowDontKnow;
 }
 
 - (void)applyAnswerFormat {
@@ -190,6 +198,11 @@ static const CGFloat CellBottomPadding = 5.0;
         [self addSubview:_errorLabel];
     }
     
+    _shouldShowDontKnow = [[self textAnswerFormat] shouldShowDontKnowButton];
+    if (_shouldShowDontKnow) {
+        [self setupDontKnowButton];
+    }
+    
     self.accessibilityElements = [accessibilityElements copy];
     accessibilityElements = nil;
     
@@ -208,8 +221,16 @@ static const CGFloat CellBottomPadding = 5.0;
 
 - (void)answerDidChange {
     id answer = self.answer;
-    self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
-    [self assignDefaultAnswer];
+
+    if (answer == [ORKDontKnowAnswer answer] && ![_dontKnowButton active]) {
+        [self dontKnowButtonWasPressed];
+    } else if (answer != [ORKDontKnowAnswer answer]) {
+        if (answer == ORKNullAnswerValue()) {
+            answer = nil;
+        }
+        _textView.text = (NSString *)answer;
+        [self assignDefaultAnswer];
+    }
 }
 
 - (void)setUpConstraints {
@@ -260,14 +281,14 @@ static const CGFloat CellBottomPadding = 5.0;
         //TextCountLabel Constraints
         if (_textCountLabel && !_textCountLabel.isHidden) {
             [_constraints addObject:[_textCountLabel.topAnchor constraintEqualToAnchor:_bottomSeperatorView.bottomAnchor constant:TextViewBottomPadding]];
-            [_constraints addObject:[_textCountLabel.leadingAnchor constraintEqualToAnchor:_textView.leadingAnchor]];
+            [_constraints addObject:[_textCountLabel.leadingAnchor constraintEqualToAnchor:_textView.leadingAnchor constant:StandardSpacing]];
             [_constraints addObject:[_textCountLabel.heightAnchor constraintGreaterThanOrEqualToConstant:ClearTextButtonMinimumHeight]];
         }
         
         //ClearTextViewButton Constraints
         if (_clearTextViewButton) {
             [_constraints addObject:[_clearTextViewButton.topAnchor constraintEqualToAnchor:_bottomSeperatorView.bottomAnchor constant:TextViewBottomPadding]];
-            [_constraints addObject:[_clearTextViewButton.trailingAnchor constraintEqualToAnchor:_textView.trailingAnchor]];
+            [_constraints addObject:[_clearTextViewButton.trailingAnchor constraintEqualToAnchor:_textView.trailingAnchor constant:-ClearTextButtonRightPadding]];
             [_constraints addObject:[_clearTextViewButton.heightAnchor constraintGreaterThanOrEqualToConstant:ClearTextButtonMinimumHeight]];
         }
         
@@ -289,7 +310,46 @@ static const CGFloat CellBottomPadding = 5.0;
         bottomMostElement = _textView;
     }
     
-    if (createEmptySpaceForPossibleErrorMessage) {
+    if (_shouldShowDontKnow) {
+        [[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor] setActive:YES];
+        [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+        [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
+        [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
+        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        
+        if (createEmptySpaceForPossibleErrorMessage) {
+            [[_dividerView.topAnchor constraintEqualToAnchor:bottomMostElement.bottomAnchor constant:CellBottomPadding + TextViewBottomPadding + ClearTextButtonMinimumHeight] setActive:YES];
+        } else {
+            [[_dividerView.topAnchor constraintEqualToAnchor:bottomMostElement.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
+        }
+        
+        [[_dividerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+        [[_dividerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
+        NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_dividerView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0
+                                                                       constant:separatorHeight];
+        constraint1.priority = UILayoutPriorityRequired - 1;
+        constraint1.active = YES;
+        [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
+        
+        if (_dontKnowButton.dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
+            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor] setActive:YES];
+            [[_dontKnowButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.leadingAnchor constant:StandardSpacing] setActive:YES];
+            [[_dontKnowButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.trailingAnchor constant:-StandardSpacing] setActive:YES];
+        } else {
+            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:_textView.leadingAnchor] setActive:YES];
+            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:_textView.trailingAnchor] setActive:YES];
+            
+            [_dontKnowButton setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
+        }
+        
+        [_constraints addObject:[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding - StandardSpacing]];
+        
+    } else if (createEmptySpaceForPossibleErrorMessage) {
         [_constraints addObject:[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:bottomMostElement.bottomAnchor constant:CellBottomPadding + TextViewBottomPadding + ClearTextButtonMinimumHeight]];
     } else {
         [_constraints addObject:[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:bottomMostElement.bottomAnchor constant:CellBottomPadding]];
@@ -301,12 +361,53 @@ static const CGFloat CellBottomPadding = 5.0;
     [NSLayoutConstraint activateConstraints:_constraints];
 }
 
+- (void)setupDontKnowButton {
+    if(!_dontKnowBackgroundView) {
+        _dontKnowBackgroundView = [UIView new];
+        _dontKnowBackgroundView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                            action:@selector(dontKnowBackgroundViewPressed)];
+        [_dontKnowBackgroundView addGestureRecognizer:gestureRecognizer];
+        _dontKnowBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    
+    if (!_dontKnowButton) {
+        _dontKnowButton = [ORKDontKnowButton new];
+        _dontKnowButton.customDontKnowButtonText = self.step.answerFormat.customDontKnowButtonText;
+        _dontKnowButton.dontKnowButtonStyle = self.step.answerFormat.dontKnowButtonStyle;
+        _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    if (!_dividerView) {
+        _dividerView = [UIView new];
+        _dividerView.translatesAutoresizingMaskIntoConstraints = NO;
+        if (@available(iOS 13.0, *)) {
+            [_dividerView setBackgroundColor:[UIColor separatorColor]];
+        } else {
+            [_dividerView setBackgroundColor:[UIColor lightGrayColor]];
+        }
+    }
+    
+    [self addSubview:_dontKnowBackgroundView];
+    [self addSubview:_dontKnowButton];
+    [self addSubview:_dividerView];
+    
+    if (self.answer == [ORKDontKnowAnswer answer]) {
+        [self dontKnowButtonWasPressed];
+    }
+}
+
 + (BOOL)shouldDisplayWithSeparators {
     return NO;
 }
 
 - (void)textDidChange {
     [self ork_setAnswer:(self.textView.text.length > 0) ? self.textView.text : ORKNullAnswerValue()];
+    
+    if (self.textView.text.length > 0 && _dontKnowButton && [_dontKnowButton active]) {
+        [_dontKnowButton setActive:NO];
+    }
 }
 
 - (void)updateTextCountLabel {
@@ -327,9 +428,29 @@ static const CGFloat CellBottomPadding = 5.0;
     [self updateTextCountLabel];
 }
 
+- (void)dontKnowButtonWasPressed {
+    if (![_dontKnowButton active]) {
+        [_dontKnowButton setActive:YES];
+        
+        [_textView setText:nil];
+        [_textView endEditing:YES];
+        
+        [self textDidChange];
+        [self updateTextCountLabel];
+        
+        [self ork_setAnswer: [ORKDontKnowAnswer answer]];
+    }
+}
+
+- (void)dontKnowBackgroundViewPressed {
+    if (_dontKnowButton && self.step.answerFormat.dontKnowButtonStyle == ORKDontKnowButtonStyleCircleChoice) {
+        [self dontKnowButtonWasPressed];
+    }
+}
+
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
-    if (![answerFormat isAnswerValidWithString:self.textView.text]) {
+    if (self.answer != [ORKDontKnowAnswer answer] && ![answerFormat isAnswerValidWithString:self.textView.text]) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
         return NO;
     }
@@ -379,6 +500,18 @@ static const CGFloat CellBottomPadding = 5.0;
         self.accessibilityElements = [tempArray copy];
     }
     [self setUpConstraints];
+}
+
+- (ORKTextAnswerFormat *)textAnswerFormat {
+    ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)self.step.answerFormat;
+    
+    if (![textAnswerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"the ORKSurveyAnswerCellForText's answerFormat must be a ORKTextAnswerFormat"
+                                     userInfo:nil];
+    }
+    
+    return textAnswerFormat;
 }
 
 #pragma mark - UITextViewDelegate
@@ -437,6 +570,10 @@ static const CGFloat CellBottomPadding = 5.0;
 @implementation ORKSurveyAnswerCellForTextField {
     NSMutableArray *constraints;
     NSString *_defaultTextAnswer;
+    ORKDontKnowButton *_dontKnowButton;
+    UIView *_dontKnowBackgroundView;
+    UIView *_dividerView;
+    BOOL _shouldShowDontKnow;
 }
 
 - (BOOL)becomeFirstResponder {
@@ -474,6 +611,12 @@ static const CGFloat CellBottomPadding = 5.0;
         [self addSubview:_errorLabel];
     }
     
+    _shouldShowDontKnow = NO;
+    if ([[self textAnswerFormat] shouldShowDontKnowButton]) {
+        _shouldShowDontKnow = YES;
+        [self setupDontKnowButton];
+        self.accessibilityElements = @[_dontKnowButton];
+    }
     
     [self setUpConstraints];
 }
@@ -497,20 +640,97 @@ static const CGFloat CellBottomPadding = 5.0;
     }
     
     constraints = [NSMutableArray new];
-
+    
+    // textField constraints
     [[_textField.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:StandardSpacing] setActive:YES];
     [[_textField.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-StandardSpacing] setActive:YES];
     [[_textField.topAnchor constraintEqualToAnchor:self.topAnchor constant:0.0] setActive:YES];
     [[_textField.bottomAnchor constraintEqualToAnchor:_errorLabel.topAnchor constant:ErrorLabelTopPadding] setActive:YES];
     
+    [_textField setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
+    
+    // errorLabel constraints
     [[_errorLabel.leadingAnchor constraintEqualToAnchor:_textField.leadingAnchor constant:0.0] setActive:YES];
     [[_errorLabel.trailingAnchor constraintEqualToAnchor:_textField.trailingAnchor constant:0.0] setActive:YES];
     
-    [[self.bottomAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
+    // dontKnowButton constraints
+    if (_shouldShowDontKnow) {
+        [[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor] setActive:YES];
+        [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+        [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
+        [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
+        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        
+        [[_dividerView.topAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
+        [[_dividerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+        [[_dividerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
+        NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_dividerView
+                                                                       attribute:NSLayoutAttributeHeight
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:separatorHeight];
+        constraint1.priority = UILayoutPriorityRequired - 1;
+        constraint1.active = YES;
+        [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
+        
+        if (_dontKnowButton.dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
+            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor] setActive:YES];
+            [[_dontKnowButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.leadingAnchor constant:StandardSpacing] setActive:YES];
+            [[_dontKnowButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.trailingAnchor constant:-StandardSpacing] setActive:YES];
+        } else {
+            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:_textField.leadingAnchor] setActive:YES];
+            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:_textField.trailingAnchor] setActive:YES];
+            
+            [_dontKnowButton setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
+        }
+        
+        [[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding - StandardSpacing] setActive:YES];
+    } else {
+        [[self.bottomAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
+    }
     
     // Get a full width layout
     [constraints addObject:[self.class fullWidthLayoutConstraint:_textField]];
     [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)setupDontKnowButton {
+    if(!_dontKnowBackgroundView) {
+        _dontKnowBackgroundView = [UIView new];
+        _dontKnowBackgroundView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                            action:@selector(dontKnowBackgroundViewPressed)];
+        [_dontKnowBackgroundView addGestureRecognizer:gestureRecognizer];
+        _dontKnowBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+
+    if (!_dontKnowButton) {
+        _dontKnowButton = [ORKDontKnowButton new];
+        _dontKnowButton.customDontKnowButtonText = self.step.answerFormat.customDontKnowButtonText;
+        _dontKnowButton.dontKnowButtonStyle = self.step.answerFormat.dontKnowButtonStyle;
+        _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    }
+
+    if (!_dividerView) {
+        _dividerView = [UIView new];
+        _dividerView.translatesAutoresizingMaskIntoConstraints = NO;
+        if (@available(iOS 13.0, *)) {
+            [_dividerView setBackgroundColor:[UIColor separatorColor]];
+        } else {
+            [_dividerView setBackgroundColor:[UIColor lightGrayColor]];
+        }
+    }
+
+    [self addSubview:_dontKnowBackgroundView];
+    [self addSubview:_dontKnowButton];
+    [self addSubview:_dividerView];
+
+    if (self.answer == [ORKDontKnowAnswer answer]) {
+        [self dontKnowButtonWasPressed];
+    }
 }
 
 + (BOOL)shouldDisplayWithSeparators {
@@ -529,12 +749,32 @@ static const CGFloat CellBottomPadding = 5.0;
 
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
-    if (![answerFormat isAnswerValidWithString:self.textField.text]) {
+    if (![_dontKnowButton active] && ![answerFormat isAnswerValidWithString:self.textField.text]) {
         [self updateErrorLabelWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
         return NO;
     }
     
     return YES;
+}
+
+- (void)dontKnowButtonWasPressed {
+
+    if (![_dontKnowButton active]) {
+        [_dontKnowButton setActive:YES];
+        [_textField setText:nil];
+        [_textField endEditing:YES];
+        [self ork_setAnswer:[ORKDontKnowAnswer answer]];
+        
+        if (self.errorLabel.attributedText) {
+            [self removeErrorMessage];
+        }
+    }
+}
+
+- (void)dontKnowBackgroundViewPressed {
+    if (_dontKnowButton && self.step.answerFormat.dontKnowButtonStyle == ORKDontKnowButtonStyleCircleChoice) {
+        [self dontKnowButtonWasPressed];
+    }
 }
 
 - (void)answerDidChange {
@@ -553,12 +793,17 @@ static const CGFloat CellBottomPadding = 5.0;
             self.textField.passwordRules = textFormat.passwordRules;
         }
     }
-    NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     
-    if (displayValue == nil && _defaultTextAnswer) {
-        [self assignDefaultAnswer];
-    } else {
-        self.textField.text = displayValue;
+    if (answer == [ORKDontKnowAnswer answer] && ![_dontKnowButton active]) {
+        [self dontKnowButtonWasPressed];
+    } else if (answer != [ORKDontKnowAnswer answer]) {
+        NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
+        
+        if (displayValue == nil && _defaultTextAnswer) {
+            [self assignDefaultAnswer];
+        } else {
+            self.textField.text = displayValue;
+        }
     }
 }
 
@@ -570,11 +815,15 @@ static const CGFloat CellBottomPadding = 5.0;
     NSString *text = self.textField.text;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
     
-    if (text.length && [answerFormat isAnswerValidWithString:text]) {
+   if (text.length && [answerFormat isAnswerValidWithString:text]) {
         [self ork_setAnswer:text];
     } else {
         [self ork_setAnswer:ORKNullAnswerValue()];
         [self removeErrorMessage];
+    }
+    
+    if (_dontKnowButton && [_dontKnowButton active]) {
+        [_dontKnowButton setActive:NO];
     }
 }
 
@@ -619,6 +868,18 @@ static const CGFloat CellBottomPadding = 5.0;
         [tempArray removeObject:self.errorLabel];
         self.accessibilityElements = [tempArray copy];
     }
+}
+
+- (ORKTextAnswerFormat *)textAnswerFormat {
+    ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)self.step.answerFormat;
+
+    if (![textAnswerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"the ORKSurveyAnswerCellForTextFields's answerFormat must be a ORKTextAnswerFormat"
+                                     userInfo:nil];
+    }
+
+    return textAnswerFormat;
 }
 
 #pragma mark - UITextFieldDelegate

@@ -88,33 +88,6 @@
 #pragma mark - Consent review task
 
 /*
- This consent task demonstrates visual consent, followed by a consent review step.
- 
- In a real consent process, you would substitute the text of your consent document
- for the various placeholders.
- */
-- (id<ORKTask>)makeConsentTaskWithIdentifier:(NSString *)identifier {
-    /*
-     Most of the configuration of what pages will appear in the visual consent step,
-     and what content will be displayed in the consent review step, it in the
-     consent document itself.
-     */
-    ORKConsentDocument *consentDocument = [self buildConsentDocument];
-    self.currentConsentDocument = [consentDocument copy];
-    
-    ORKVisualConsentStep *step = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visualConsent" document:consentDocument];
-    step.title = @"Consent Document";
-    ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReview" signature:consentDocument.signatures[0] inDocument:consentDocument];
-    reviewStep.title = @"Consent Review";
-    reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step, reviewStep]];
-    
-    return task;
-}
-
-/*
  The consent review task is used to quickly verify the layout of the consent
  sharing step and the consent review step.
  

@@ -1,0 +1,31 @@
+//
+// ResearchKit-Shared.xcconfig
+//
+
+BUILD_LIBRARY_FOR_DISTRIBUTION = YES
+CODE_SIGN_IDENTITY =
+CODE_SIGN_STYLE = Manual
+DEFINES_MODULE = YES
+DEVELOPMENT_TEAM =
+DYLIB_COMPATIBILITY_VERSION = 1
+DYLIB_CURRENT_VERSION = 1
+DYLIB_INSTALL_NAME_BASE = @rpath
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = ResearchKit/ResearchKit_Prefix.pch
+INFOPLIST_FILE = ResearchKit/Info.plist
+INSTALL_PATH = $(LOCAL_LIBRARY_DIR)/Frameworks
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap
+PRODUCT_BUNDLE_IDENTIFIER = org.researchkit.${PRODUCT_NAME:rfc1034identifier}
+PRODUCT_NAME = ResearchKit
+PROVISIONING_PROFILE_SPECIFIER =
+PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*] =
+SWIFT_VERSION = 5.0
+SYSTEM_FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/ResearchKit/PrivateHeaders $(inherited)
+SYSTEM_HEADER_SEARCH_PATHS = $(SRCROOT)/ResearchKit/PrivateHeaders $(inherited)
+CLANG_STATIC_ANALYZER_MODE = deep
+
+#include? "samples/ORKCatalog/ResearchKit-Shared.xcconfig"
+#include? "../xcconfig/ResearchKit-Shared.xcconfig"
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) $(ORK_GCC_PREPROCESSOR_DEFINITIONS)

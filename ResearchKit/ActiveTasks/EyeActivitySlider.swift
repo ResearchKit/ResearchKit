@@ -167,6 +167,7 @@ internal class EyeActivitySlider: UIView {
         letterImageView.isHidden = true
     }
     
+    // swiftlint:disable large_tuple
     internal func fetchResultDataAndUpdateSlider() -> (outcome: Bool, letterAngle: Double, sliderAngle: Double, score: Int, incorrectAnswers: Int, maxScore: Int) {
         let outcome = getResult()
         let score = stepScores[currentStep]

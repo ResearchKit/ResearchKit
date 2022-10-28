@@ -30,7 +30,7 @@
 */
 
 import UIKit
-import ResearchKit
+import ResearchKit.Private
 
 /**
     This example displays a catalog of tasks, each consisting of one or two steps,
@@ -142,7 +142,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             view controller.
         */
         taskResultFinishedCompletionHandler?(taskViewController.result)
-
+        
         taskViewController.dismiss(animated: true, completion: nil)
     }
     

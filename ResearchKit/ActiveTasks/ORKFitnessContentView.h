@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2020, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -34,19 +34,38 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// Displays a countdown ring and a timer.
+// 
+//  ------------------------------
+// |                              |
+// |         Title Label          |
+// |                              |
+// |       subtitle label         |
+// |                              |
+// |         __________           |
+// |        /          \          |
+// |       |    2:30    |         |
+// |        \ ________ /          |
+// |                              |
+// |______________________________|
 @interface ORKFitnessContentView : ORKActiveStepCustomView
 
-@property (nonatomic, assign, getter=isFinished) BOOL finished;
 
-@property (nonatomic) BOOL hasHeartRate;
-@property (nonatomic) BOOL hasDistance;
+/// The total amount of time the active task is supposed to be performed for.
+/// For the six minute walk test, this will typically be 360 seconds.
+@property (nonatomic) NSTimeInterval duration;
 
-@property (nonatomic, copy, nullable) NSString *heartRate;
-@property (nonatomic) double distanceInMeters;
+/// The amount of time that still remain.
+@property (nonatomic) NSTimeInterval timeLeft;
 
-@property (nonatomic, strong, nullable) UIImage *image;
+/// Whether or not the text label is hidden.
+@property (nonatomic) BOOL labelHidden;
 
-@property (nonatomic, assign) NSTimeInterval timeLeft;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithDuration:(NSTimeInterval)duration;
 
 @end
 

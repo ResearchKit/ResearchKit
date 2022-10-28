@@ -68,7 +68,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, speechRecognizerLocale);
+        ORK_DECODE_OBJ_CLASS(aDecoder, speechRecognizerLocale, NSString);
     }
     return self;
 }

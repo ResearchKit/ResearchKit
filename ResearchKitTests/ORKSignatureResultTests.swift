@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,6 +32,7 @@ import XCTest
 
 class ORKSignatureResultTests: XCTestCase {
     var result: ORKSignatureResult!
+    var identifier: String!
     var image: UIImage!
     var path: UIBezierPath!
     let date = Date()
@@ -39,12 +40,14 @@ class ORKSignatureResultTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let bundle = Bundle(identifier: "org.researchkit.ResearchKit")
+        identifier = "SignatureIdentifier"
         image = UIImage(named: "heartbeat", in: bundle, compatibleWith: .none)
         path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50))
-        result = ORKSignatureResult(signatureImage: image, signaturePath: [path])
+        result = ORKSignatureResult(identifier: identifier, signatureImage: image, signaturePath: [path])
     }
 
     func testProperties() {
+        XCTAssertEqual(result.identifier, identifier)
         XCTAssertEqual(result.signatureImage, image)
         XCTAssertEqual(result.signaturePath, [path])
     }
@@ -53,7 +56,7 @@ class ORKSignatureResultTests: XCTestCase {
         result.startDate = date
         result.endDate = date
         
-        let newResult = ORKSignatureResult(signatureImage: image, signaturePath: [path])
+        let newResult = ORKSignatureResult(identifier: identifier, signatureImage: image, signaturePath: [path])
         newResult.startDate = date
         newResult.endDate = date
         

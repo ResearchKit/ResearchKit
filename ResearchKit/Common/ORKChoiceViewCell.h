@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL isFirstItemInSectionWithoutTitle;
 
+@property (nonatomic) BOOL isExclusive;
+
 @property (nonatomic) ORKCardViewStyle cardViewStyle;
 
 - (void)setPrimaryText:(NSString *)primaryText;
@@ -63,6 +65,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) ORKAnswerTextView *textView;
 
 @property (nonatomic, assign, setter=hideTextView:) BOOL textViewHidden;
+
+@end
+
+@interface ORKChoiceViewPlatterCell : ORKChoiceViewCell
 
 @end
 

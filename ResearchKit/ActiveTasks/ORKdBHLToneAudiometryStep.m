@@ -133,7 +133,7 @@
         ORK_DECODE_DOUBLE(aDecoder, dBHLMinimumThreshold);
         ORK_DECODE_INTEGER(aDecoder, maxNumberOfTransitionsPerFrequency);
         ORK_DECODE_INTEGER(aDecoder, earPreference);
-        ORK_DECODE_OBJ(aDecoder, headphoneType);
+        ORK_DECODE_OBJ_CLASS(aDecoder, headphoneType, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, frequencyList, NSNumber);
     }
     return self;

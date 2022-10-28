@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; };
 		335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */; };
+		5D2DEA6324DB618B000A2A5B /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2DEA5D24DB618A000A2A5B /* ORKESerialization.m */; };
 		712977A922B0917A0049213B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; };
 		712977AA22B0917A0049213B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		866DA52E1D63D1EE00C9AF3F /* ORKDataCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */; };
@@ -20,7 +21,6 @@
 		86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */ = {isa = PBXBuildFile; fileRef = 86717AE01AC0C53800AC2A23 /* image_example.png */; };
 		86717AED1AC0C53800AC2A23 /* signature.png in Resources */ = {isa = PBXBuildFile; fileRef = 86717AE31AC0C53800AC2A23 /* signature.png */; };
 		86717AFD1AC0C86000AC2A23 /* ORKJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AFC1AC0C86000AC2A23 /* ORKJSONSerializationTests.m */; };
-		86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD81AC0C53800AC2A23 /* ORKESerialization.m */; };
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B119F055229BD4B6001402F9 /* samples.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B119F054229BD4B6001402F9 /* samples.bundle */; };
@@ -71,6 +71,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		71B4927C24981533001F9598 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC2A3CE31C58F1EE00DA64B7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,6 +97,8 @@
 /* Begin PBXFileReference section */
 		24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKKeychainWrapperTests.m; sourceTree = "<group>"; };
 		335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SAMPLE_PDF_TEST.pdf; sourceTree = "<group>"; };
+		5D2DEA5D24DB618A000A2A5B /* ORKESerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
+		5D2DEA6224DB618B000A2A5B /* ORKESerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
 		7129779F22B091500049213B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../../ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKDataCollectionTests.m; sourceTree = "<group>"; };
 		86717A8A1AC0C0FE00AC2A23 /* ORKTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORKTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,12 +111,10 @@
 		86717AA31AC0C0FE00AC2A23 /* ORKTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORKTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86717AA81AC0C0FE00AC2A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86717AD71AC0C53800AC2A23 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		86717AD81AC0C53800AC2A23 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
 		86717ADE1AC0C53800AC2A23 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		86717AE01AC0C53800AC2A23 /* image_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_example.png; sourceTree = "<group>"; };
 		86717AE31AC0C53800AC2A23 /* signature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signature.png; sourceTree = "<group>"; };
 		86717AFC1AC0C86000AC2A23 /* ORKJSONSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKJSONSerializationTests.m; sourceTree = "<group>"; };
-		86717AFF1AC0C93E00AC2A23 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
 		86717B081AC0CC0400AC2A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86717B0A1AC0CC1A00AC2A23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86717B0B1AC0CC1C00AC2A23 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -264,10 +274,10 @@
 		86717AA61AC0C0FE00AC2A23 /* ORKTestTests */ = {
 			isa = PBXGroup;
 			children = (
+				5D2DEA6224DB618B000A2A5B /* ORKESerialization.h */,
+				5D2DEA5D24DB618A000A2A5B /* ORKESerialization.m */,
 				B119F054229BD4B6001402F9 /* samples.bundle */,
 				866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */,
-				86717AFF1AC0C93E00AC2A23 /* ORKESerialization.h */,
-				86717AD81AC0C53800AC2A23 /* ORKESerialization.m */,
 				86717AFC1AC0C86000AC2A23 /* ORKJSONSerializationTests.m */,
 				24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */,
 				86717AA71AC0C0FE00AC2A23 /* Supporting Files */,
@@ -369,6 +379,7 @@
 				86717A871AC0C0FE00AC2A23 /* Frameworks */,
 				86717A881AC0C0FE00AC2A23 /* Resources */,
 				BC2A3CE31C58F1EE00DA64B7 /* Embed Frameworks */,
+				71B4927C24981533001F9598 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -573,8 +584,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				86717AFD1AC0C86000AC2A23 /* ORKJSONSerializationTests.m in Sources */,
+				5D2DEA6324DB618B000A2A5B /* ORKESerialization.m in Sources */,
 				866DA52E1D63D1EE00C9AF3F /* ORKDataCollectionTests.m in Sources */,
-				86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */,
 				24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,10 +766,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -778,10 +791,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

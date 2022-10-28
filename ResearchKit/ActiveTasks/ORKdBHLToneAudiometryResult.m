@@ -53,7 +53,7 @@ const double ORKInvalidDBHLValue = DBL_MAX;
         ORK_DECODE_DOUBLE(aDecoder, outputVolume);
         ORK_DECODE_DOUBLE(aDecoder, tonePlaybackDuration);
         ORK_DECODE_DOUBLE(aDecoder, postStimulusDelay);
-        ORK_DECODE_OBJ(aDecoder, headphoneType);
+        ORK_DECODE_OBJ_CLASS(aDecoder, headphoneType, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKdBHLToneAudiometryFrequencySample);
     }
     return self;

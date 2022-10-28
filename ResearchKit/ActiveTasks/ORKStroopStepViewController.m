@@ -65,8 +65,6 @@
     NSString *_yellowString;
     NSTimer *_nextQuestionTimer;
     
-    NSTimer *_timeoutTimer;
-    
     NSMutableArray *_results;
     NSTimeInterval _startTime;
     NSTimeInterval _endTime;
@@ -114,21 +112,6 @@
 
     self.questionNumber = 0;
     _stroopContentView = [ORKStroopContentView new];
-    [_stroopContentView setUseTextForStimuli: [self stroopStep].useTextForStimuli];
-    [_stroopContentView setUseGridLayoutForButtons: [self stroopStep].useGridLayoutForButtons];
-
-    if ([self stroopStep].useGridLayoutForButtons) {
-        [_navigationFooterView setHidden:true];
-        
-        _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:30
-            target:self
-          selector:@selector(timeOut)
-          userInfo:nil
-           repeats:NO];
-    }
-    
-
-    
     self.activeStepView.activeCustomView = _stroopContentView;
     
     [self.stroopContentView.RButton addTarget:self
@@ -166,35 +149,7 @@
                                                            selector:@selector(startNextQuestionOrFinish)
                                                            userInfo:nil
                                                             repeats:NO];
-        
-        if ([self stroopStep].useGridLayoutForButtons) {
-
-            [_timeoutTimer invalidate];
-                    _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:30
-                          target:self
-                        selector:@selector(timeOut)
-                        userInfo:nil
-                         repeats:NO];
-        }
     }
-}
-
-- (void)timeOut {
-    
-    UIAlertController* controller = [UIAlertController alertControllerWithTitle: ORKLocalizedString(@"TIME_OUT_TILE", nil)
-                                                                        message: ORKLocalizedString(@"TIME_OUT_BODY", nil) preferredStyle:UIAlertControllerStyleAlert];
-    [controller addAction:[UIAlertAction actionWithTitle: ORKLocalizedString(@"TIME_OUT_RESTART_ACTION", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[self taskViewController] flipToFirstPage];
-    }]];
-    
-    [controller addAction:[UIAlertAction actionWithTitle: ORKLocalizedString(@"TIME_OUT_END_ACTION", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        ORKStrongTypeOf(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
-        if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
-            [strongDelegate taskViewController:self.taskViewController didFinishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
-        }
-    }]];
-
-    [self presentViewController:controller animated:true completion:nil];
 }
 
 - (void)startNextQuestionTimer {
