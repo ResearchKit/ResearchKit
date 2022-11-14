@@ -521,6 +521,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 
 - (void)updateCheckView {
     if (_checkView) {
+        _checkView.tintColor = self.tintColor;
         [_checkView setChecked:_cellSelected];
     }
 }

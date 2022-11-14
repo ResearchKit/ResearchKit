@@ -1157,6 +1157,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
                 ORKChoiceOtherViewCell *choiceOtherViewCell = (ORKChoiceOtherViewCell *)choiceViewCell;
                 choiceOtherViewCell.delegate = self;
             }
+            choiceViewCell.tintColor = ORKWindowTintcolor(self.view.window) ? : self.view.tintColor;
             choiceViewCell.useCardView = [self formStep].useCardView;
             choiceViewCell.cardViewStyle = [self formStep].cardViewStyle;
             choiceViewCell.isLastItem = isLastItem;

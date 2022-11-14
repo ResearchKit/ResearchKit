@@ -332,7 +332,7 @@ static const CGFloat CheckMarkImageTrailingPadding = 2.0;
                     color = [UIColor grayColor];
                 }
             } else {
-                color = ORKWindowTintcolor(self.window) ? : [UIColor systemBlueColor];
+                color = ORKWindowTintcolor(self.window) ? : self.tintColor;
             }
             
             break;
