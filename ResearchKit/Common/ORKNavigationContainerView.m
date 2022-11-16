@@ -559,4 +559,9 @@ static const CGFloat detailTextBottomSpacing = 16.0;
     [self setUpConstraints];
 }
 
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self didMoveToWindow];
+}
+
 @end
