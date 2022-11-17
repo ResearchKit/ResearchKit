@@ -1,0 +1,186 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ResearchKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import ResearchKit.Private
+@_exported import ResearchKit
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+@objc public enum VisionStepLeftOrRightEye : Swift.Int {
+  case left
+  case right
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum VisionStepType : Swift.Int {
+  case visualAcuity
+  case contrastSensitivity
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class ORKLandoltCStep : ResearchKit.ORKActiveStep {
+  public var testType: ResearchKit.VisionStepType?
+  public var eyeToTest: ResearchKit.VisionStepLeftOrRightEye?
+  @objc override dynamic public class func stepViewControllerClass() -> Swift.AnyClass
+  public class func supportsSecureCoding() -> Swift.Bool
+  @objc public init(identifier: Swift.String, testType: ResearchKit.VisionStepType, eyeToTest: ResearchKit.VisionStepLeftOrRightEye)
+  @objc override dynamic public var allowsBackNavigation: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc required dynamic public init(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class ORKSwiftStroopResult : ResearchKit.ORKResult {
+  public var startTime: Foundation.TimeInterval?
+  public var endTime: Foundation.TimeInterval?
+  public var color: Swift.String?
+  public var text: Swift.String?
+  public var colorSelected: Swift.String?
+  @objc override dynamic public init(identifier: Swift.String)
+  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
+  @objc required dynamic public init(coder aDecoder: Foundation.NSCoder)
+  public class func supportsSecureCoding() -> Swift.Bool
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: Swift.UInt) -> Swift.String
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers public class ORKLandoltCResult : ResearchKit.ORKResult {
+  public var outcome: Swift.Bool?
+  public var letterAngle: Swift.Double?
+  public var sliderAngle: Swift.Double?
+  public var score: Swift.Int?
+  public init(identifier: Swift.String, outcome: Swift.Bool, letterAngle: Swift.Double, sliderAngle: Swift.Double, score: Swift.Int)
+  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
+  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc override dynamic public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: Swift.UInt) -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKSwiftStroopStepViewController : ResearchKit.ORKActiveStepViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func start()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class SwiftUIViewFactory : ObjectiveC.NSObject {
+  @objc public var answerDidUpdateClosure: ((Any) -> Swift.Void)?
+  @objc public func makeSwiftUIView(answerFormat: ResearchKit.ORKAnswerFormat, answer: Any) -> UIKit.UIView?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKLandoltCStepViewController : ResearchKit.ORKActiveStepViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKLandoltCStepView : UIKit.UIView {
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ORKSwiftStroopStep : ResearchKit.ORKActiveStep {
+  public var numberOfAttempts: Swift.Int
+  @objc override dynamic public class func stepViewControllerClass() -> Swift.AnyClass
+  public class func supportsSecureCoding() -> Swift.Bool
+  @objc override dynamic public init(identifier: Swift.String)
+  @objc override dynamic public func validateParameters()
+  @objc override dynamic public func startsFinished() -> Swift.Bool
+  @objc override dynamic public var allowsBackNavigation: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc deinit
+}
+extension ResearchKit.ORKPredicateStepNavigationRule {
+  convenience public init(resultPredicatesAndDestinationStepIdentifiers tuples: [(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)], defaultStepIdentifierOrNil: Swift.String? = nil)
+}
+public enum CircleSliderOption {
+  case startAngle(Swift.Double)
+  case barColor(UIKit.UIColor)
+  case trackingColor(UIKit.UIColor)
+  case thumbColor(UIKit.UIColor)
+  case thumbImage(UIKit.UIImage)
+  case barWidth(CoreFoundation.CGFloat)
+  case thumbWidth(CoreFoundation.CGFloat)
+  case maxValue(Swift.Float)
+  case minValue(Swift.Float)
+  case sliderEnabled(Swift.Bool)
+  case viewInset(CoreFoundation.CGFloat)
+  case minMaxSwitchTreshold(Swift.Float)
+}
+@objc @_Concurrency.MainActor(unsafe) open class CircleSlider : UIKit.UISlider {
+  @_Concurrency.MainActor(unsafe) open var sliderValue: Swift.Float {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func awakeFromNib()
+  @_Concurrency.MainActor(unsafe) public init(frame: CoreFoundation.CGRect, options: [ResearchKit.CircleSliderOption]?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSublayers(of layer: QuartzCore.CALayer)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func hitTest(_ point: CoreFoundation.CGPoint, with event: UIKit.UIEvent?) -> UIKit.UIView?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func point(inside point: CoreFoundation.CGPoint, with event: UIKit.UIEvent?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func continueTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) open func changeOptions(_ options: [ResearchKit.CircleSliderOption])
+  @objc deinit
+}
+public enum DeviceType : Swift.String {
+  case iPhone5
+  case iPhone5C
+  case iPhone5S
+  case iPhone6Plus
+  case iPhone6
+  case iPhone6S
+  case iPhone6SPlus
+  case iPhone7
+  case iPhone7Plus
+  case iPhoneSE
+  case IPodTouch5
+  case IPodTouch6
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension UIKit.UIDevice {
+  @_Concurrency.MainActor(unsafe) public class var deviceType: ResearchKit.DeviceType {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public class var pixelsPerMm: CoreFoundation.CGFloat {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public class var iPhonePlus: Swift.Bool {
+    get
+  }
+}
+extension ResearchKit.VisionStepLeftOrRightEye : Swift.Equatable {}
+extension ResearchKit.VisionStepLeftOrRightEye : Swift.Hashable {}
+extension ResearchKit.VisionStepLeftOrRightEye : Swift.RawRepresentable {}
+extension ResearchKit.VisionStepType : Swift.Equatable {}
+extension ResearchKit.VisionStepType : Swift.Hashable {}
+extension ResearchKit.VisionStepType : Swift.RawRepresentable {}
+extension ResearchKit.DeviceType : Swift.Equatable {}
+extension ResearchKit.DeviceType : Swift.Hashable {}
+extension ResearchKit.DeviceType : Swift.RawRepresentable {}
