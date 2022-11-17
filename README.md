@@ -1,14 +1,14 @@
 ResearchKit Framework
 ===========
 
-![VCS](https://img.shields.io/badge/dvcs-Git%20%2B%20LFS-tomato.svg) ![Platform](https://img.shields.io/cocoapods/p/ResearchKit.svg) ![CocoaPods](https://img.shields.io/cocoapods/v/ResearchKit.svg) ![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license) ![](https://travis-ci.com/ResearchKit/ResearchKit.svg?branch=master)
+![Platform](https://img.shields.io/cocoapods/p/ResearchKit.svg) ![SwiftPackageManager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange) ![CocoaPods](https://img.shields.io/cocoapods/v/ResearchKit.svg) ![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license) ![](https://travis-ci.com/ResearchKit/ResearchKit.svg?branch=master)
 
 The *ResearchKit™ framework* is an open source software framework that makes it easy to create apps
 for medical research or for other research projects.
 
 * [Getting Started](#gettingstarted)
 * [Documentation](docs/)
-* [Best Practices](../../wiki/best-practices)
+* [Best Practices](https://github.com/ResearchKit/ResearchKit/wiki/best-practices)
 * [Contributing to ResearchKit](CONTRIBUTING.md)
 * [Website](https://www.researchandcare.org)
 * [ResearchKit BSD License](#license)
@@ -72,60 +72,20 @@ The primary *ResearchKit framework* codebase supports *iOS* and requires *Xcode 
 *ResearchKit framework* has a *Base SDK* version of *8.0*, meaning that apps using the *ResearchKit
 framework* can run on devices with *iOS 8.0* or newer.
 
+Integrating the ResearchKit framework using the [Swift Package Manager](https://www.swift.org/package-manager/) requires Xcode 14 and Swift 5.7 or newer.
 
-Installation
-------------
-
-The latest stable version of *ResearchKit framework* can be cloned with
-
-```
-git clone -b stable https://github.com/ResearchKit/ResearchKit.git
-```
-
-Or, for the latest changes, use the `main` branch:
-
-```
-git clone https://github.com/ResearchKit/ResearchKit.git
-```
-
-Building
---------
-
-Build the *ResearchKit framework* by opening `ResearchKit.xcodeproj` and running the `ResearchKit`
-framework target. Optionally, run the unit tests too.
-
+Note: You can also import *ResearchKit* into your project using a
+ [alternative installation](./docs-standalone/alternative-installation.md) such as *CocoaPods*, *Carthage*, or as a dynamic framework using previous Xcode versions.
 
 Adding the ResearchKit framework to your App
 ------------------------------
 
-This walk-through shows how to embed the *ResearchKit framework* in your app as a dynamic framework,
+This walk-through shows how to embed the *ResearchKit framework* in your app using the [Swift Package Manager](https://www.swift.org/package-manager/),
 and present a simple task view controller.
 
 ### 1. Add the ResearchKit framework to Your Project
 
-To get started, drag `ResearchKit.xcodeproj` from your checkout into your *iOS* app project
-in *Xcode*:
-
-<center>
-<figure>
-  <img src="../../wiki/AddingResearchKitXcode.png" alt="Adding the ResearchKit framework to your
-   project" align="middle"/>
-</figure>
-</center>
-
-Then, embed the *ResearchKit framework* as a dynamic framework in your app, by adding it to the
-*Embedded Binaries* section of the *General* pane for your target as shown in the figure below.
-
-<center>
-<figure>
-  <img src="../../wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to
-   Embedded Binaries" align="middle"/>
-   <figcaption><center>Adding the ResearchKit framework to Embedded Binaries</center></figcaption>
-</figure>
-</center>
-
-Note: You can also import *ResearchKit* into your project using a
- [dependency manager](./docs-standalone/dependency-management.md) such as *CocoaPods* or *Carthage*.
+Follow the article about [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) using the following repository URL: `https://github.com/CardinalKit/ResearchKit`.
 
 ### 2. Create a Step
 
@@ -231,7 +191,7 @@ If you now run your app, you should see your first *ResearchKit framework* instr
 
 <center>
 <figure>
-  <img src="../../wiki/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
+  <img src="https://github.com/ResearchKit/ResearchKit/wiki/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
 </figure>
 </center>
 

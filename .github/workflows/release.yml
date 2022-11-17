@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version number that should be used to tag the release'
+        type: string
+        required: true
+
+jobs:
+  create-xcarchive:
+    name: Build XCArchive
+    runs-on: macos-12
+    strategy:
+      matrix:
+        sdk: [iphoneos, iphonesimulator]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Check environment
+      run: |
+          xcodebuild -version
+          swift --version
+          echo Release version: ${{ inputs.version }}
+          echo SDK: ${{ matrix.sdk }}
+    - name: Archive for iOS 
+      run: |
+          xcodebuild archive \
+            -workspace RKWorkspace.xcworkspace \
+            -scheme ResearchKit \
+            -configuration Release \
+            -sdk ${{ matrix.sdk }} \
+            -archivePath './.build/ResearchKit-${{ matrix.sdk }}.xcarchive' \
+            SKIP_INSTALL=NO \
+            BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+            ONLY_ACTIVE_ARCH=NO
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ResearchKit-${{ matrix.sdk }}.xcarchive
+        path: ./.build/ResearchKit-${{ matrix.sdk }}.xcarchive
+  create-xcframework:
+    name: Build XCFramework
+    runs-on: macos-12
+    needs: create-xcarchive
+    steps:
+    - uses: actions/checkout@v3
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Check environment
+      run: |
+          xcodebuild -version
+          swift --version
+          echo Release version: ${{ inputs.version }}
+    - uses: actions/download-artifact@v3
+      with:
+        path: ./.build
+    - name: Create XCFramework
+      run: |
+          rm -rf ResearchKit.xcframework
+          xcodebuild -create-xcframework \
+            -framework ./.build/ResearchKit-iphoneos.xcarchive/Products/Library/Frameworks/ResearchKit.framework \
+            -framework ./.build/ResearchKit-iphonesimulator.xcarchive/Products/Library/Frameworks/ResearchKit.framework \
+            -output ResearchKit.xcframework
+          rm -rf .build
+    - name: Commit and push XCFramework
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: ResearchKit.xcframework
+        message: Create XCFramework for release ${{ inputs.version }}
+        tag: '${{ inputs.version }} --force'
+        tag_push: '--force'
+    - name: Create Artifacts
+      run: |
+          tar -zcvf ResearchKit.xcframework.tar.gz ResearchKit.xcframework
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ inputs.version }}
+        generate_release_notes: true
+        fail_on_unmatched_files: true
+        files: ResearchKit.xcframework.tar.gz
