@@ -85,7 +85,7 @@ and present a simple task view controller.
 
 ### 1. Add the ResearchKit framework to Your Project
 
-Follow the article about [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) using the following repository URL: `https://github.com/CardinalKit/ResearchKit`.
+Follow the article about [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) using the following repository URL: `https://github.com/StanfordBDHG/ResearchKit`.
 
 ### 2. Create a Step
 
