@@ -162,7 +162,7 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 }
 
 - (void)didMoveToWindow {
-    _appTintColor = ORKWindowTintcolor(self.window) ? : self.tintColor;
+    _appTintColor = ORKViewTintColor(self);
     
     _continueButton.normalTintColor = _appTintColor;
     _skipButton.normalTintColor = _appTintColor;

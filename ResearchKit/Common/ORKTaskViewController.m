@@ -1024,7 +1024,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     ORKStepViewController *stepViewController = nil;
-    UIColor *tintColor = ORKWindowTintcolor(self.view.window) ? : self.view.tintColor;
+    UIColor *tintColor = ORKViewTintColor(self.view);
     
     if ([self.delegate respondsToSelector:@selector(taskViewController:viewControllerForStep:)]) {
         // NOTE: While the delegate does not have direct access to the defaultResultSource,

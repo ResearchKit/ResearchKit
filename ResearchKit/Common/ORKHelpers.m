@@ -200,6 +200,13 @@ UIColor *ORKWindowTintcolor(UIWindow *window) {
     return windowTintColor;
 }
 
+UIColor *ORKViewTintColor(UIView *view) {
+    UIColor *existingTintColor = view.tintColor ? : [UIColor systemBlueColor];
+    UIColor *tintColor = ORKWindowTintcolor(view.window) ? : existingTintColor;
+
+    return tintColor;
+}
+
 #endif
 
 UIImage *ORKImageWithColor(UIColor *color) {
