@@ -162,7 +162,7 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 }
 
 - (void)didMoveToWindow {
-    _appTintColor = ORKWindowTintcolor(self.window) ? : ORKColor(ORKBlueHighlightColorKey);
+    _appTintColor = ORKViewTintColor(self);
     
     _continueButton.normalTintColor = _appTintColor;
     _skipButton.normalTintColor = _appTintColor;
@@ -557,6 +557,11 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 - (void)setUseExtendedPadding:(BOOL)useExtendedPadding {
     _useExtendedPadding = useExtendedPadding;
     [self setUpConstraints];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self didMoveToWindow];
 }
 
 @end
