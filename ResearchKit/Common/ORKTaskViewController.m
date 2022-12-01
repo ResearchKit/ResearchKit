@@ -1024,6 +1024,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     ORKStepViewController *stepViewController = nil;
+    UIColor *tintColor = ORKViewTintColor(self.view);
     
     if ([self.delegate respondsToSelector:@selector(taskViewController:viewControllerForStep:)]) {
         // NOTE: While the delegate does not have direct access to the defaultResultSource,
@@ -1042,6 +1043,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             id<ORKTaskResultSource> resultSource = reviewStep.isStandalone ? reviewStep.resultSource : self.result;
             stepViewController = [[ORKReviewStepViewController alloc] initWithReviewStep:(ORKReviewStep *) step steps:steps resultSource:resultSource];
             ORKReviewStepViewController *reviewStepViewController = (ORKReviewStepViewController *) stepViewController;
+            reviewStepViewController.view.tintColor = tintColor;
             reviewStepViewController.reviewDelegate = self;
         }
         else {
@@ -1103,7 +1105,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         stepViewController.learnMoreButtonItem = [self defaultLearnMoreButtonItem];
     }
-    
+
+    stepViewController.view.tintColor = tintColor;
     stepViewController.delegate = self;
     return stepViewController;
 }
