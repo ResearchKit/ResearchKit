@@ -178,6 +178,8 @@ CGFloat ORKExpectedLabelHeight(UILabel *label);
 
 UIColor * _Nullable ORKWindowTintcolor(UIWindow *window);
 
+UIColor * ORKViewTintColor(UIView *view);
+
 #endif
 
 // build a image with color
