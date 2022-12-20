@@ -53,7 +53,6 @@
 #import <AVFoundation/AVFoundation.h>
 #include <sys/sysctl.h>
 
-
 static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
 
 @interface ORKEnvironmentSPLMeterStepViewController ()<ORKRingViewDelegate, ORKEnvironmentSPLMeterContentViewVoiceOverDelegate> {
@@ -121,6 +120,8 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
     [self requestRecordPermissionIfNeeded];
     [self configureAudioSession];
     [self setupFeedbackGenerator];
+    
+    [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
 }
 
 - (void)saveAudioSession {
@@ -140,6 +141,19 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
     _navigationFooterView.continueButtonItem = continueButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!_audioEngine.isRunning) {
+        [self saveAudioSession];
+        _sensitivityOffset = [self sensitivityOffsetForDevice];
+        [self requestRecordPermissionIfNeeded];
+        [self configureAudioSession];
+        [self setupFeedbackGenerator];
+        
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -163,12 +177,8 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self stopAudioEngine];
     [self resetAudioSession];
-    [_eqUnit removeTapOnBus:0];
-    [_audioEngine stop];
-    [_rmsBuffer removeAllObjects];
-    [self resetAudioSession];
-    
 }
 
 - (NSString *)deviceType {
@@ -243,7 +253,7 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
     }
     
     [session setActive:YES error:&error];
-    
+
     if (error) {
         ORK_Log_Error("Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
     }
@@ -269,7 +279,7 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
     }
     
     [session setActive:YES error:&error];
-    
+
     if (error) {
         ORK_Log_Error("Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
     }
@@ -389,7 +399,7 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
                                    });
                                    dispatch_semaphore_wait(_semaphoreRms, DISPATCH_TIME_FOREVER);
                                } else if ([AVAudioSession sharedInstance].recordPermission == AVAudioSessionRecordPermissionDenied) {
-                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                        [_eqUnit removeTapOnBus:0];
                                        [_audioEngine stop];
                                        [_rmsBuffer removeAllObjects];
@@ -400,9 +410,7 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
             NSError *error = nil;
             [_audioEngine startAndReturnError:&error];
         } else {
-            [_eqUnit removeTapOnBus:0];
-            [_audioEngine stop];
-            [_rmsBuffer removeAllObjects];
+            [self stopAudioEngine];
         }
     }
 }
@@ -445,8 +453,18 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
     }
 }
 
+- (void)stopAudioEngine {
+    if ([_audioEngine isRunning]) {
+        dispatch_semaphore_signal(_semaphoreRms);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [_eqUnit removeTapOnBus:0];
+            [_audioEngine stop];
+            [_rmsBuffer removeAllObjects];
+        });
+    }
+}
+
 - (void)reachedOptimumNoiseLevel {
-    [_audioEngine stop];
     [self resetAudioSession];
 }
 
@@ -467,6 +485,7 @@ static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
 #pragma mark - ORKRingViewDelegate
 
 - (void)ringViewDidFinishFillAnimation {
+    [self reachedOptimumNoiseLevel];
     [self.environmentSPLMeterContentView reachedOptimumNoiseLevel];
     self.activeStepView.navigationFooterView.continueEnabled = YES;
 }

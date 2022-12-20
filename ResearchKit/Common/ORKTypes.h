@@ -31,9 +31,7 @@
 @import Foundation;
 @import UIKit;
 
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKDefines.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -384,6 +382,9 @@ ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen
 
 /// AirPods Pro
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro;
+
+/// AirPods Pro generation 2
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsProGen2;
 
 /// AirPods Max
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMax;

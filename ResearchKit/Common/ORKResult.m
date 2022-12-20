@@ -69,7 +69,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, endDate, NSDate);
-        ORK_DECODE_OBJ_CLASS(aDecoder, userInfo, NSDictionary);
+        ORK_DECODE_OBJ_PLIST(aDecoder, userInfo);
     }
     return self;
 }

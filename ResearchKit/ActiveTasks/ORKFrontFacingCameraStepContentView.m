@@ -307,7 +307,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     {
         [_startStopButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_START_TITLE", nil) forState:UIControlStateNormal];
         [_startStopButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_startStopButton setBackgroundColor:[UIColor systemBlueColor]];
+        [_startStopButton setBackgroundColor:self.tintColor];
         
         [_timerLabel setText:ORKLocalizedString(@"FRONT_FACING_CAMERA_START_TIME", nil)];
         [_timerLabel setTextColor:[UIColor darkGrayColor]];
@@ -315,7 +315,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     else
     {
         [_startStopButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_STOP_TITLE", nil) forState:UIControlStateNormal];
-        [_startStopButton setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
+        [_startStopButton setTitleColor:self.tintColor forState:UIControlStateNormal];
         [_startStopButton setBackgroundColor:[UIColor systemGrayColor]];
         
         [_timerLabel setTextColor:[UIColor whiteColor]];
@@ -352,6 +352,10 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     _isTextCollapsed = !_isTextCollapsed;
 }
 
+- (void)didMoveToWindow {
+    self.tintColor = ORKViewTintColor(self);
+    [self setStartStopButtonState:_startStopButtonState];
+}
 @end
 
 @interface ORKFrontFacingCameraStepContentView ()

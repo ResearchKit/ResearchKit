@@ -31,9 +31,7 @@
 
 @import Foundation;
 
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKStep.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

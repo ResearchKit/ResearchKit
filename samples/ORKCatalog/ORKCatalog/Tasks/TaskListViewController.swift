@@ -107,21 +107,26 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         // Present the task view controller that the user asked for.
         let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
         
+        displayTaskViewController(taskListRow: taskListRow)
+
+    }
+    
+    func displayTaskViewController(taskListRow: TaskListRow) {
         // Create a task from the `TaskListRow` to present in the `ORKTaskViewController`.
         let task = taskListRow.representedTask
         
         /*
-            Passing `nil` for the `taskRunUUID` lets the task view controller
-            generate an identifier for this run of the task.
-        */
+         Passing `nil` for the `taskRunUUID` lets the task view controller
+         generate an identifier for this run of the task.
+         */
         let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
-
+        
         // Make sure we receive events from `taskViewController`.
         taskViewController.delegate = self
         
         // Assign a directory to store `taskViewController` output.
         taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-
+        
         /*
          We present the task directly, but it is also possible to use segues.
          The task property of the task view controller can be set any time before
@@ -167,9 +172,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             })
         }
     }
-    
     func taskViewController(_ taskViewController: ORKTaskViewController, learnMoreButtonPressedWith learnMoreStep: ORKLearnMoreInstructionStep, for stepViewController: ORKStepViewController) {
-        //        FIXME: Temporary fix. This method should not be called if it is only used to present the learnMoreStepViewController, the stepViewController should present the learnMoreStepViewController.
         stepViewController.present(UINavigationController(rootViewController: ORKLearnMoreStepViewController(step: learnMoreStep)), animated: true) {
             
         }

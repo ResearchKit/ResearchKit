@@ -306,7 +306,6 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
     if (indexPath == tableView.indexPathsForVisibleRows.lastObject) {
         [self.view setNeedsLayout];
     }

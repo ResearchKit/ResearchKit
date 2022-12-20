@@ -103,7 +103,7 @@
 
 - (void)setCheckmarkColor:(UIColor *)checkmarkColor {
     _checkmarkColor = [checkmarkColor copy];
-    
+
     if (_completionCheckmarkView) {
         _completionCheckmarkView.tintColor = checkmarkColor;
     }

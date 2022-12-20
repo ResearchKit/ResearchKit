@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Reconecte os AirPods ou EarPods para realizar este teste.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ Concluído";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Fones de Ouvido";
-"HEADPHONES_UNKNOWN" = "Desconhecido";
-"HEADPHONES_NONE" = "Nenhum";
-"CONNECTED" = "Conectados";
-"NOT_CONNECTED" = "Não Conectados";
-"HEADPHONE_CONNECTED_%@" = "Conectado - %@";
-"HEADPHONE_DETECT_TITLE" = "Conecte seus Fones de Ouvido";
-"HEADPHONE_DETECT_TEXT" = "Este teste requer AirPods ou EarPods da Apple";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memória Espacial";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Esta atividade mede a sua memória espacial de curto prazo ao pedir que você repita a ordem em que as %@ se acendem.";

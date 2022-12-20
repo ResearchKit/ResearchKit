@@ -197,7 +197,7 @@
     /*
      In some cases we want to allow the parent application to intercept the learn more callback in learn more instruction steps. These
      should get handled the same way as other learn more callbacks at the task level. If the app responds to this delegate, it get's
-     higher prioriy and it becomes the responsibility of the developer to handle all cases.
+     higher priority and it becomes the responsibility of the developer to handle all cases.
      
      If not implemented, default to showing the learnMore view controller for the the step.
      */

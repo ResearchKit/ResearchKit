@@ -122,7 +122,7 @@ static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
     if (self.disabledButtonStyle == ORKBorderedButtonDisabledStyleDefault) {
         _disableTintColor = [normalTintColor colorWithAlphaComponent:0.3f];
     }
-    
+
     [self updateBackgroundColor];
 }
 

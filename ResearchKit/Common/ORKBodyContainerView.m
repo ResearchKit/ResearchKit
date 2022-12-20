@@ -111,7 +111,6 @@ static NSString *ORKBulletUnicode = @"\u2981";
 }
 
 - (void)setupBodyStyleView {
-
     if (_bodyItem.useCardStyle == YES) {
         _cardView = [[UIView alloc] init];
         _cardView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -575,7 +574,6 @@ static NSString *ORKBulletUnicode = @"\u2981";
     } else if (aboveStyle == ORKBodyItemStyleText) {
         return belowStyle == ORKBodyItemStyleText ? (_bodyItems[belowItemIndex].text ? ORKBodyToBodyParagraphPaddingStandard : ORKBodyToBodyPaddingStandard) : ORKBodyToBulletPaddingStandard;
     } else if (aboveStyle == ORKBodyItemStyleTag) {
-
         if (belowStyle == ORKBodyItemStyleBulletPoint) {
             return ORKBulletToBulletPaddingStandard;
         } else {

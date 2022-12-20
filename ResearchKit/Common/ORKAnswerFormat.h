@@ -368,7 +368,6 @@ ORK_CLASS_AVAILABLE
 /**
  The image that will be presented to the left of the text provided for the textChoice
  */
-
 @property (strong, nullable) UIImage *image;
 
 /**
@@ -429,11 +428,19 @@ ORK_CLASS_AVAILABLE
                                                  maximumDate:(nullable NSDate *)maximumDate
                                                     calendar:(nullable NSCalendar *)calendar;
 
++ (ORKDateAnswerFormat *)dateTimeAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
+                                                  daysAfterCurrentDate:(NSInteger)daysAfter
+                                                              calendar:(nullable NSCalendar *)calendar;
+
 + (ORKDateAnswerFormat *)dateAnswerFormat;
 + (ORKDateAnswerFormat *)dateAnswerFormatWithDefaultDate:(nullable NSDate *)defaultDate
                                              minimumDate:(nullable NSDate *)minimumDate
                                              maximumDate:(nullable NSDate *)maximumDate
                                                 calendar:(nullable NSCalendar *)calendar;
+
++ (ORKDateAnswerFormat *)dateAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
+                                              daysAfterCurrentDate:(NSInteger)daysAfter
+                                                          calendar:(nullable NSCalendar *)calendar;
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
 
@@ -1117,7 +1124,6 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
 /**
  The `ORKTextChoiceOther` class defines the choice option to describe an answer not
  included in provided choices.
@@ -1135,7 +1141,7 @@ ORK_CLASS_AVAILABLE
  
  @param text                         The primary text that describes the choice in a localized string.
  @param detailText                   The detail text to display below the primary text, in a localized string.
- @param value                        The value to record in a result object when this item is selected.
+ @param value                        The value to record in a result object when this item is selected.  Only `NSString`, `NSNumber`, and `NSDate` values are supported.
  @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
  @param textViewPlaceholderText      The placeholder text for the text view.
  
@@ -1143,7 +1149,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)choiceWithText:(nullable NSString *)text
                     detailText:(nullable NSString *)detailText
-                         value:(id<NSCopying, NSCoding, NSObject>)value
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value
                      exclusive:(BOOL)exclusive
        textViewPlaceholderText:(NSString *)textViewPlaceholderText;
 
@@ -1156,7 +1162,7 @@ ORK_CLASS_AVAILABLE
  @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
  @param detailText                   The detail text to display below the primary text, in a localized string.
  @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
- @param value                        The value to record in a result object when this item is selected.
+ @param value                        The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
  @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
  @param textViewPlaceholderText      The placeholder text for the text view.
  @param textViewInputOptional        Whether the user is required to provide additional text when selecting this choice.
@@ -1168,7 +1174,7 @@ ORK_CLASS_AVAILABLE
  primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
                   detailText:(nullable NSString *)detailText
   detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
-                       value:(id<NSCopying, NSCoding, NSObject>)value
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
                    exclusive:(BOOL)exclusive
      textViewPlaceholderText:(NSString *)textViewPlaceholderText
        textViewInputOptional:(BOOL)textViewInputOptional
@@ -1344,11 +1350,9 @@ Returns an initialized numeric answer format using the specified style, unit des
 /**
  Returns an initialized numeric answer format using the specified style, unit designation, range
  values, and precision.
- 
- This method is the designated initializer.
- 
- @param style                   The style of the numeric answer (decimal or integer).
- @param unit                    A string that displays a localized version of the unit designation.
+  
+ @param style                     The style of the numeric answer (decimal or integer).
+ @param unit                        A string that displays a localized version of the unit designation.
  @param minimum                 The minimum value to apply, or `nil` if none is specified.
  @param maximum                 The maximum value to apply, or `nil` if none is specified.
  @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
@@ -1359,6 +1363,28 @@ Returns an initialized numeric answer format using the specified style, unit des
                          unit:(nullable NSString *)unit
                       minimum:(nullable NSNumber *)minimum
                       maximum:(nullable NSNumber *)maximum
+        maximumFractionDigits:(NSNumber *)maximumFractionDigits;
+
+/**
+ Returns an initialized numeric answer format using the specified style, unit designation, range
+ values, and precision.
+ 
+ This method is the designated initializer.
+ 
+ @param style                     The style of the numeric answer (decimal or integer).
+ @param unit                        A string that displays the unit designation in the results.
+ @param displayUnit        An string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+ @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
+
+ @return An initialized numeric answer format.
+ */
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(nullable NSString *)unit
+                  displayUnit:(nullable NSString *)displayUnit
+                      minimum:(nullable NSNumber *)minimum
+                      maximum:(nullable NSNumber *)maximum
         maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -1367,13 +1393,25 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (readonly) ORKNumericAnswerStyle style;
 
 /**
- A string that displays a localized version of the unit designation next to the numeric value.
+ A string that displays the unit designation next to the numeric value in the results.
  (read-only)
- 
+ If displayUnit is not set, the answerFormat will display the unit instead
+
  Examples of unit designations are days, lbs, and liters.
  The unit string is included in the `ORKNumericQuestionResult` object.
  */
 @property (copy, readonly, nullable) NSString *unit;
+
+/**
+ A string that displays a localized version of the display unit designation next to the numeric value.
+ This property will only be used for display UI purposes.
+ If this property is not set, the answerFormat will display the unit instead
+ (read-only)
+ 
+ Examples of unit designations are days, lbs, and liters.
+ The displayUnit string is included in the `ORKNumericQuestionResult` object.
+ */
+@property (copy, readonly, nullable) NSString *displayUnit;
 
 /**
  The minimum allowed value for the numeric answer.
@@ -1548,6 +1586,26 @@ When the value of this property is `nil`, there is no minimum.
 @property (copy, readonly, nullable) NSDate *maximumDate;
 
 /**
+ This number passed to this property will set the minimum date to the relative amount of days
+ before the current date.
+ */
+@property (nonatomic) NSInteger daysBeforeCurrentDateToSetMinimumDate;
+
+/**
+ This number passed to this property will set the minimum date to the relative amount of days
+ after the current date.
+ */
+@property (nonatomic) NSInteger daysAfterCurrentDateToSetMinimumDate;
+
+
+/**
+ A boolean property that determines if the max date should be set to the current time or not
+ 
+ When the value of this property is `true`, the max date is set to the current time
+ */
+@property (nonatomic, assign) BOOL isMaxDateCurrentTime;
+
+/**
  The calendar to use in the picker.
  
  When the value of this property is `nil`, the picker uses the default calendar for the current
@@ -1628,6 +1686,8 @@ ORK_CLASS_AVAILABLE
  When the value of this property is 0, there is no maximum.
  */
 @property NSInteger maximumLength;
+
+
 
 /**
  A Boolean value indicating whether to expect more than one line of input.

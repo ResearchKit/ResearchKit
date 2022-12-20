@@ -127,11 +127,26 @@
 }
 
 - (void)configureContainerView {
-    [_containerView setStepTitle:self.customStep.title];
-    [_containerView setStepText:self.customStep.text];
-    [_containerView setStepDetailText:self.customStep.detailText];
-    [_containerView setStepHeaderTextAlignment:self.customStep.headerTextAlignment];
-    [_containerView setTitleIconImage:self.step.iconImage];
+    
+    if (self.customStep.title){
+        [_containerView setStepTitle:self.customStep.title];
+    }
+    
+    if (self.customStep.text) {
+        [_containerView setStepText:self.customStep.text];
+    }
+    
+    if (self.customStep.detailText) {
+        [_containerView setStepDetailText:self.customStep.detailText];
+    }
+    
+    if (self.customStep.headerTextAlignment) {
+        [_containerView setStepHeaderTextAlignment:self.customStep.headerTextAlignment];
+    }
+    
+    if (self.step.iconImage){
+        [_containerView setTitleIconImage:self.step.iconImage];
+    }
 }
 
 - (void)setStepHeaderTextAlignment:(NSTextAlignment)stepHeaderTextAlignment {

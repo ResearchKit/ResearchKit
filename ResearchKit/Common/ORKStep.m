@@ -58,7 +58,6 @@
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
         _identifier = [identifier copy];
         _earlyTerminationConfiguration = nil;
-
         self.showsProgress = YES;
     }
     return self;

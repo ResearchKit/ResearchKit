@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Hubungkan ulang AirPods atau EarPods Anda untuk mengikuti tes ini.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ Selesai";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Headphone";
-"HEADPHONES_UNKNOWN" = "Tidak Diketahui";
-"HEADPHONES_NONE" = "Tidak Ada";
-"CONNECTED" = "Terhubung";
-"NOT_CONNECTED" = "Tidak Terhubung";
-"HEADPHONE_CONNECTED_%@" = "Terhubung - %@";
-"HEADPHONE_DETECT_TITLE" = "Hubungkan Headphone Anda";
-"HEADPHONE_DETECT_TEXT" = "Tes ini memerlukan Apple AirPods atau Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memori Spasial";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aktivitas ini mengukur memori spasial jangka pendek dengan meminta Anda untuk mengulangi urutan menyalanya %@.";

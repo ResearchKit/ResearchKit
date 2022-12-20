@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "이 테스트를 실시하려면 AirPods 또는 EarPods를 다시 연결하십시오.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ 완료";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "헤드폰";
-"HEADPHONES_UNKNOWN" = "알 수 없음";
-"HEADPHONES_NONE" = "없음";
-"CONNECTED" = "연결됨";
-"NOT_CONNECTED" = "연결 안 됨";
-"HEADPHONE_CONNECTED_%@" = "연결됨 - %@";
-"HEADPHONE_DETECT_TITLE" = "헤드폰에 연결";
-"HEADPHONE_DETECT_TEXT" = "이 테스트는 Apple AirPods 또는 Apple EarPods이 필요합니다.";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "공간 기억";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "이 실험은 %@에 불이 들어오는 순서를 반복하도록 하여 사용자의 단기 공간 기억 능력을 측정합니다.";

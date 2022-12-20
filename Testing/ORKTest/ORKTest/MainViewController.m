@@ -135,8 +135,6 @@ NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *TestButtonTable()
              @{ @"Miscellaneous":
                     @[
                         @"Continue Button",
-                        @"Test Charts",
-                        @"Test Charts Performance",
                         @"Toggle Tint Color",
                         ]},
              ];
@@ -622,18 +620,6 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [viewController presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)testChartsButtonTapped:(id)sender {
-    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartListViewController"];
-    [self presentViewController:chartListViewController animated:YES completion:nil];
-}
-
-- (void)testChartsPerformanceButtonTapped:(id)sender {
-    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartPerformanceListViewController"];
-    [self presentViewController:chartListViewController animated:YES completion:nil];
 }
 
 #pragma mark - Helpers

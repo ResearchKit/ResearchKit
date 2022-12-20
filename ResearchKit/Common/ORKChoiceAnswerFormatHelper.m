@@ -139,7 +139,6 @@
         for (id answerValue in (NSArray *)answer) {
             id<ORKAnswerOption> matchedChoice = nil;
             for ( id<ORKAnswerOption> choice in _choices) {
-
 #if TARGET_OS_IOS
                 if ([choice isKindOfClass:[ORKTextChoiceOther class]]) {
                     ORKTextChoiceOther *textChoiceOther = (ORKTextChoiceOther *)choice;

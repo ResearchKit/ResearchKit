@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		03F7FD9F23959DD500432EF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */; };
+		0B6CB32728B577640092E993 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6CB32628B577640092E993 /* Bundle+Extensions.swift */; };
+		3C39E45E2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */; };
 		3E39B9FB1ABF682D00C2ABE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9F91ABF682D00C2ABE5 /* Main.storyboard */; };
 		3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FC1ABF683700C2ABE5 /* LaunchScreen.xib */; };
 		3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FF1ABF683F00C2ABE5 /* Images.xcassets */; };
@@ -29,9 +31,6 @@
 		BC9A273D1B82741900BDA84D /* ResultTableViewProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27391B82741900BDA84D /* ResultTableViewProviders.swift */; };
 		BC9A273E1B82741900BDA84D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A273A1B82741900BDA84D /* ResultViewController.swift */; };
 		BC9A273F1B82741900BDA84D /* TextImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A273B1B82741900BDA84D /* TextImageTableViewCell.swift */; };
-		BC9A27431B82742600BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27401B82742600BDA84D /* ChartDataSources.swift */; };
-		BC9A27441B82742600BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27411B82742600BDA84D /* ChartListViewController.swift */; };
-		BC9A27451B82742600BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27421B82742600BDA84D /* ChartTableViewCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0B6CB32628B577640092E993 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		246DF9FF1BEADFDF00591E9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA021BEAE01700591E9A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA031BEAE02100591E9A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -98,6 +98,7 @@
 		246DFA261BEAE26200591E9A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = en_GB.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA271BEAE27000591E9A /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = en_AU.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA281BEAE2A800591E9A /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = zh_HK.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "ORKCatalog-Shared.xcconfig"; path = "ORKCatalog/Configuration/ORKCatalog-Shared.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3E39B9E81ABF675000C2ABE5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3E39B9FA1ABF682D00C2ABE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E39B9FD1ABF683700C2ABE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -126,9 +127,6 @@
 		BC9A27391B82741900BDA84D /* ResultTableViewProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultTableViewProviders.swift; path = Results/ResultTableViewProviders.swift; sourceTree = "<group>"; };
 		BC9A273A1B82741900BDA84D /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultViewController.swift; path = Results/ResultViewController.swift; sourceTree = "<group>"; };
 		BC9A273B1B82741900BDA84D /* TextImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextImageTableViewCell.swift; path = Results/TextImageTableViewCell.swift; sourceTree = "<group>"; };
-		BC9A27401B82742600BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
-		BC9A27411B82742600BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
-		BC9A27421B82742600BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,14 +149,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		259E77171AFFD23B0070F786 /* Displaying Charts */ = {
+		0B1A0A8228B6E0D800C16ABA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				BC9A27401B82742600BDA84D /* ChartDataSources.swift */,
-				BC9A27411B82742600BDA84D /* ChartListViewController.swift */,
-				BC9A27421B82742600BDA84D /* ChartTableViewCells.swift */,
+				0B6CB32628B577640092E993 /* Bundle+Extensions.swift */,
 			);
-			name = "Displaying Charts";
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3C39E45F2950F27800BD96F6 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		3E838B881ABFD0E5006AE2D4 /* Presenting Tasks */ = {
@@ -206,8 +210,9 @@
 			children = (
 				86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */,
 				03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */,
-				259E77171AFFD23B0070F786 /* Displaying Charts */,
+				3C39E45F2950F27800BD96F6 /* Configuration */,
 				3E838B891ABFD104006AE2D4 /* Displaying Results */,
+				0B1A0A8228B6E0D800C16ABA /* Extensions */,
 				3E838B881ABFD0E5006AE2D4 /* Presenting Tasks */,
 				BC74787A1B990EED0072BFE8 /* Resources */,
 				869230C11AAA890A00BFE11B /* Supporting Files */,
@@ -314,7 +319,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = researchkit.org;
 				TargetAttributes = {
 					869230BD1AAA890A00BFE11B = {
@@ -405,6 +410,7 @@
 				BAAC3FD620C4EF1C0065B9E1 /* ResearchKit.pdf in Resources */,
 				B125E3D41B1BA47600FF8759 /* tap.aif in Resources */,
 				3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */,
+				3C39E45E2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig in Resources */,
 				3ED967B81AC13D37007E2D83 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,10 +429,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC9A27451B82742600BDA84D /* ChartTableViewCells.swift in Sources */,
 				BC9A273E1B82741900BDA84D /* ResultViewController.swift in Sources */,
-				BC9A27441B82742600BDA84D /* ChartListViewController.swift in Sources */,
-				BC9A27431B82742600BDA84D /* ChartDataSources.swift in Sources */,
+				0B6CB32728B577640092E993 /* Bundle+Extensions.swift in Sources */,
 				BC9A273D1B82741900BDA84D /* ResultTableViewProviders.swift in Sources */,
 				BC9A273F1B82741900BDA84D /* TextImageTableViewCell.swift in Sources */,
 				86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */,
@@ -531,6 +535,7 @@
 /* Begin XCBuildConfiguration section */
 		050B7A0323ECA11400CC1719 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -570,7 +575,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
@@ -586,14 +591,14 @@
 				CODE_SIGN_ENTITLEMENTS = "ORKCatalog/Supporting Files/ORKCatalog.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(ORK_CATALOG_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = "$(ORK_CATALOG_VERSION_NUMBER)";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ORKCatalog;
@@ -633,6 +638,7 @@
 		};
 		869230DD1AAA890A00BFE11B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -696,7 +702,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ORKCatalog/Supporting Files/ORKCatalog.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(ORK_CATALOG_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -706,7 +712,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = "$(ORK_CATALOG_VERSION_NUMBER)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKCatalog";
 				PRODUCT_NAME = ORKCatalog;
 				PROVISIONING_PROFILE_SPECIFIER = "";

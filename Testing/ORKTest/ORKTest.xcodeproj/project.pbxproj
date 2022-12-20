@@ -24,10 +24,6 @@
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B119F055229BD4B6001402F9 /* samples.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B119F054229BD4B6001402F9 /* samples.bundle */; };
-		BCEDC7D71E8A45DE00C5405F /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7D31E8A45DE00C5405F /* ChartDataSources.swift */; };
-		BCEDC7D81E8A45DE00C5405F /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7D41E8A45DE00C5405F /* ChartListViewController.swift */; };
-		BCEDC7D91E8A45DE00C5405F /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCEDC7D51E8A45DE00C5405F /* Charts.storyboard */; };
-		BCEDC7DA1E8A45DE00C5405F /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7D61E8A45DE00C5405F /* ChartTableViewCells.swift */; };
 		BCEDC7E41E8A45EE00C5405F /* ContinueButtonExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7DD1E8A45EE00C5405F /* ContinueButtonExampleViewController.m */; };
 		BCEDC7E51E8A45EE00C5405F /* DragonPokerStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7DF1E8A45EE00C5405F /* DragonPokerStep.m */; };
 		BCEDC7E61E8A45EE00C5405F /* DynamicTask.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7E11E8A45EE00C5405F /* DynamicTask.m */; };
@@ -159,10 +155,6 @@
 		B15636901B1F8A0700B28200 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BC2A3CA01C58E85D00DA64B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		BCEDC7D31E8A45DE00C5405F /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDataSources.swift; sourceTree = "<group>"; };
-		BCEDC7D41E8A45DE00C5405F /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartListViewController.swift; sourceTree = "<group>"; };
-		BCEDC7D51E8A45DE00C5405F /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Charts.storyboard; sourceTree = "<group>"; };
-		BCEDC7D61E8A45DE00C5405F /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartTableViewCells.swift; sourceTree = "<group>"; };
 		BCEDC7DC1E8A45EE00C5405F /* ContinueButtonExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueButtonExampleViewController.h; sourceTree = "<group>"; };
 		BCEDC7DD1E8A45EE00C5405F /* ContinueButtonExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueButtonExampleViewController.m; sourceTree = "<group>"; };
 		BCEDC7DE1E8A45EE00C5405F /* DragonPokerStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonPokerStep.h; sourceTree = "<group>"; };
@@ -249,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				BCEDC7DB1E8A45EE00C5405F /* Customization */,
-				BC9A27111B81732200BDA84D /* Charts */,
 				BCEDC7E81E8A469D00C5405F /* Tasks */,
 				86717B011AC0C9D400AC2A23 /* Resources */,
 				86717A8D1AC0C0FE00AC2A23 /* Supporting Files */,
@@ -314,17 +305,6 @@
 				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BC9A27111B81732200BDA84D /* Charts */ = {
-			isa = PBXGroup;
-			children = (
-				BCEDC7D31E8A45DE00C5405F /* ChartDataSources.swift */,
-				BCEDC7D41E8A45DE00C5405F /* ChartListViewController.swift */,
-				BCEDC7D51E8A45DE00C5405F /* Charts.storyboard */,
-				BCEDC7D61E8A45DE00C5405F /* ChartTableViewCells.swift */,
-			);
-			path = Charts;
 			sourceTree = "<group>";
 		};
 		BCEDC7DB1E8A45EE00C5405F /* Customization */ = {
@@ -535,7 +515,6 @@
 				335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */,
 				86717AED1AC0C53800AC2A23 /* signature.png in Resources */,
 				86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */,
-				BCEDC7D91E8A45DE00C5405F /* Charts.storyboard in Resources */,
 				86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */,
 				86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */,
 			);
@@ -556,16 +535,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCEDC7DA1E8A45DE00C5405F /* ChartTableViewCells.swift in Sources */,
 				BCEDC7E41E8A45EE00C5405F /* ContinueButtonExampleViewController.m in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				BCEDC7FD1E8A469D00C5405F /* TaskFactory+Forms.m in Sources */,
-				BCEDC7D81E8A45DE00C5405F /* ChartListViewController.swift in Sources */,
 				BCEDC8021E8A469D00C5405F /* TaskFactory+TaskReview.m in Sources */,
 				BCEDC7E51E8A45EE00C5405F /* DragonPokerStep.m in Sources */,
 				BCEDC8051E8A469D00C5405F /* TaskFactory.swift in Sources */,
 				BCEDC7E71E8A45EE00C5405F /* FooterView.m in Sources */,
-				BCEDC7D71E8A45DE00C5405F /* ChartDataSources.swift in Sources */,
 				BCEDC7E61E8A45EE00C5405F /* DynamicTask.m in Sources */,
 				BCEDC8031E8A469D00C5405F /* TaskFactory+UtilitySteps.m in Sources */,
 				BCEDC7FC1E8A469D00C5405F /* TaskFactory+ActiveTasks.m in Sources */,

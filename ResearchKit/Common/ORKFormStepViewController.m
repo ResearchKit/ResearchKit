@@ -924,10 +924,10 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             systemTimeZone = _savedSystemTimeZones[item.identifier];
             NSAssert(answer == nil || answer == ORKNullAnswerValue() || systemTimeZone != nil, @"systemTimeZone NOT saved");
         }
-        
+   
         ORKQuestionResult *result = [item.answerFormat resultWithIdentifier:item.identifier answer:answer];
         ORKAnswerFormat *impliedAnswerFormat = [item impliedAnswerFormat];
-        
+
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
             ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
             if (dqr.dateAnswer) {
@@ -939,6 +939,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
             if (nqr.unit == nil) {
                 nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+                nqr.displayUnit = [(ORKNumericAnswerFormat *)impliedAnswerFormat displayUnit];
             }
         }
         

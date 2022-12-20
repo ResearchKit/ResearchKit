@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Kết nối lại AirPods hoặc EarPods của bạn để thực hiện bài kiểm tra này.";
 "dBHL_PROGRESS_COMPLETION_%@" = "Hoàn tất %@";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Tai nghe";
-"HEADPHONES_UNKNOWN" = "Không xác định";
-"HEADPHONES_NONE" = "Không có";
-"CONNECTED" = "Đã kết nối";
-"NOT_CONNECTED" = "Không được kết nối";
-"HEADPHONE_CONNECTED_%@" = "Đã kết nối - %@";
-"HEADPHONE_DETECT_TITLE" = "Kết nối tai nghe của bạn";
-"HEADPHONE_DETECT_TEXT" = "Kiểm tra này yêu cầu Apple AirPods hoặc Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Trí nhớ Không gian";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Hoạt động này sẽ đánh giá trí nhớ không gian ngắn hạn của bạn bằng cách yêu cầu bạn lặp lại thứ tự sáng lên của %@.";

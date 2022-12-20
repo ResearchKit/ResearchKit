@@ -128,7 +128,7 @@ static const CGFloat BarViewHeight = 50.0;
     
     _barView.translatesAutoresizingMaskIntoConstraints = NO;
     [_containerView addSubview:_barView];
-    
+
     [[_barView.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor] setActive:YES];
     [[_barView.trailingAnchor constraintEqualToAnchor:_containerView.trailingAnchor] setActive:YES];
 

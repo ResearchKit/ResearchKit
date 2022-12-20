@@ -35,7 +35,6 @@
 #import "ORKHelpers_Internal.h"
 
 @implementation ORKBodyItem
-
 {
     // For our internal custom button type
     BOOL _isCustomButtonType;

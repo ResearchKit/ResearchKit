@@ -128,7 +128,6 @@ public extension TaskFactory {
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
         //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
         resultSelector = ORKResultSelector(resultIdentifier: "symptom")
-       
         let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "headache" as NSString)
         
         // User didn't chose headache at the symptom step
