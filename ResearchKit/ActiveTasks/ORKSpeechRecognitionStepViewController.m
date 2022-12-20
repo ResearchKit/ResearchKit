@@ -186,9 +186,8 @@
 
 
 - (void)setAllowUserToRecordInsteadOnNextStep:(BOOL)allowUserToRecordInsteadOnNextStep
-{
-    _allowUserToRecordInsteadOnNextStep = allowUserToRecordInsteadOnNextStep;
-    
+{    
+    _allowUserToRecordInsteadOnNextStep = (allowUserToRecordInsteadOnNextStep && [SFSpeechRecognizer authorizationStatus] != SFSpeechRecognizerAuthorizationStatusDenied);
 }
 
 - (CAShapeLayer *)recordingShapeLayer

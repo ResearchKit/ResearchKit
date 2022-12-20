@@ -246,7 +246,6 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
             CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
             foreLayer.path = [UIBezierPath bezierPathWithRect:foreLayerBounds].CGPath;
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:self.containerView.bounds].CGPath;
-
             CGRect lineBounds = CGRectMake(0.0, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width, 0.5);
             lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
             lineLayer.zPosition = 0.0f;
@@ -547,7 +546,6 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
 }
 
 - (void)dontKnowButtonWasPressed {
-
     if (![_dontKnowButton active]) {
         [_dontKnowButton setActive:YES];
         [_textFieldView.textField setText:nil];
@@ -558,7 +556,6 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
             if (self.delegate) {
                 [self.delegate formItemCellDidResignFirstResponder:self];
             }
-            
         } else {
             [self textFieldShouldClear:_textFieldView.textField];
             [_textFieldView.textField endEditing:YES];
@@ -1044,7 +1041,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
     _defaultNumericAnswer = answerFormat.defaultNumericAnswer;
     
     self.textField.manageUnitAndPlaceholder = YES;
-    self.textField.unit = answerFormat.unit;
+    self.textField.unit = answerFormat.displayUnit ?: answerFormat.unit;
     self.textField.placeholder = self.formItem.placeholder;
     
     _numberFormatter = ORKDecimalNumberFormatter();
@@ -1156,7 +1153,6 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
     _textView = [[ORKFormTextView alloc] init];
     _textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     _textView.delegate = self;
-    _textView.contentInset = UIEdgeInsetsMake(-5.0, -4.0, -5.0, 0.0);
     _textView.textAlignment = NSTextAlignmentNatural;
     _textView.scrollEnabled = YES;
     _textView.placeholder = self.formItem.placeholder;
@@ -1256,6 +1252,28 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
         }
         
         bottomViewToConstrainTo = _dontKnowButton;
+    }
+    
+    //TextView vertical constraints
+    if (_maxLengthView || _shouldShowDontKnow) {
+        [[_textView.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:TextViewVerticalMargin] setActive:YES];
+        [[_textView.heightAnchor constraintGreaterThanOrEqualToConstant:TextViewMinHeight] setActive:YES];
+        
+        NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:self.containerView
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:bottomViewToConstrainTo
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                     multiplier:1.0
+                                                                       constant:DontKnowButtonTopBottomPadding];
+        constraint2.priority = UILayoutPriorityRequired - 1;
+        constraint2.active = YES;
+    } else {
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
     }
     
     //TextView vertical constraints
@@ -1538,10 +1556,6 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    if (textView.text.length == 0) {
-        textView.text = self.formItem.placeholder;
-        textView.textColor = [self placeholderColor];
-    }
     [self.delegate formItemCellDidResignFirstResponder:self];
 }
 

@@ -39,14 +39,11 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
-    
     return self;
 }
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
-    
     ORKAudioStreamer *obj = [[ORKAudioStreamer alloc] initWithIdentifier:self.identifier step:step];
-    
     return obj;
 }
 

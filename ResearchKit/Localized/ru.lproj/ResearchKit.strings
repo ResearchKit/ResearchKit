@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Чтобы пройти тест, переподключите свои наушники AirPods или EarPods.";
 "dBHL_PROGRESS_COMPLETION_%@" = "Выполнено %@";
 
-/* Headphones. */
-"AIRPODS" = "Наушники AirPods";
-"EARPODS" = "Наушники EarPods";
-"HEADPHONES" = "Наушники";
-"HEADPHONES_UNKNOWN" = "Неизвестно";
-"HEADPHONES_NONE" = "Нет";
-"CONNECTED" = "Подключены";
-"NOT_CONNECTED" = "Не подключены";
-"HEADPHONE_CONNECTED_%@" = "Подключено — %@";
-"HEADPHONE_DETECT_TITLE" = "Подключите наушники";
-"HEADPHONE_DETECT_TEXT" = "Для этого теста нужны наушники Apple AirPods или Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Пространственная память";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Во время выполнения этого задания оцениваются возможности Вашей кратковременной пространственной памяти. Программа попросит Вас повторить последовательность, в которой подсвечиваются %@.";

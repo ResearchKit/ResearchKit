@@ -483,9 +483,12 @@ class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
         return super.resultRowsForSection(section) + [
             // The numeric value the user entered.
             ResultRow(text: "numericAnswer", detail: questionResult.numericAnswer),
-
+            
+            // The unit string with the numeric value.
+            ResultRow(text: "unit", detail: questionResult.unit),
+            
             // The unit string that was displayed with the numeric value.
-            ResultRow(text: "unit", detail: questionResult.unit)
+            ResultRow(text: "displayUnit", detail: questionResult.displayUnit)
         ]
     }
 }
@@ -1413,7 +1416,9 @@ class dBHLToneAudiometryResultTableViewProvider: ResultTableViewProvider {
             ]
         } else if section == 1 {
             guard let samples = dBHLToneAudiometryResult.samples else { return rows }
-            return rows + samples.map { sample in
+			
+	        let sortedSamples = samples.sorted { $0.frequency < $1.frequency }
+            return rows + sortedSamples.map { sample in
                 return ResultRow(text: "freq: \(String(format: "%.1f",sample.frequency))", detail: "threshold: \(String(format: "%.2f", sample.calculatedThreshold)), channel: \(sample.channel == .left ? "left" : "right")", selectable: false)
             }
         }
@@ -1421,7 +1426,6 @@ class dBHLToneAudiometryResultTableViewProvider: ResultTableViewProvider {
         return rows
     }
 }
-
 
 /// Table view provider specific to an `ORKEnvironmentSPLMeterResult` instance.
 class SPLMeterStepResultTableViewProvider: ResultTableViewProvider {

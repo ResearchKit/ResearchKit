@@ -158,7 +158,6 @@ static const CGFloat DontKnowButtonBottomPaddingOffset = 10.0;
 - (void)valueChangedDueUserAction:(BOOL)userAction {
     if (userAction) {
         _valueChangedDueUserAction = userAction;
-        
         if (_dontKnowButton && [_dontKnowButton active]) {
             [_dontKnowButton setActive:NO];
         }

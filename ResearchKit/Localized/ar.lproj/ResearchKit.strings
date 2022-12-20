@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "أعِد توصيل الـ AirPods أو EarPods لإجراء هذا الاختبار.";
 "dBHL_PROGRESS_COMPLETION_%@" = "اكتمل %@";
 
-/* Headphones. */
-"AIRPODS" = "‏AirPods";
-"EARPODS" = "‏EarPods";
-"HEADPHONES" = "سماعات الرأس";
-"HEADPHONES_UNKNOWN" = "غير معروف";
-"HEADPHONES_NONE" = "لا شيء";
-"CONNECTED" = "متصلة";
-"NOT_CONNECTED" = "غير متصل";
-"HEADPHONE_CONNECTED_%@" = "متصلة - %@";
-"HEADPHONE_DETECT_TITLE" = "وصّل سماعات الرأس";
-"HEADPHONE_DETECT_TEXT" = "يتطلب هذا الاختبار Apple AirPods أو Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "الذاكرة المكانية";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "يقيس هذا النشاط ذاكرتك المكانية قصيرة المدى من خلال مطالبتك بتكرار نفس ترتيب إضاءة %@.";

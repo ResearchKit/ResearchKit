@@ -295,8 +295,9 @@
                                           outputDirectory:self.outputDirectory];
         recorder.configuration = provider;
         recorder.delegate = self;
-        
-        [recorders addObject:recorder];
+        if (recorder) {
+            [recorders addObject:recorder];
+        }
     }
     self.recorders = recorders;
     

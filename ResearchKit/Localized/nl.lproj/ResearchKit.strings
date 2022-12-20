@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Verbind je AirPods of EarPods opnieuw om deze test uit te voeren.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ voltooid";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Koptelefoon";
-"HEADPHONES_UNKNOWN" = "Onbekend";
-"HEADPHONES_NONE" = "Geen";
-"CONNECTED" = "Verbonden";
-"NOT_CONNECTED" = "Geen verbinding";
-"HEADPHONE_CONNECTED_%@" = "Verbonden - %@";
-"HEADPHONE_DETECT_TITLE" = "Sluit je koptelefoon aan";
-"HEADPHONE_DETECT_TEXT" = "Voor deze test zijn Apple AirPods of Apple EarPods vereist";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Ruimtelijk geheugen";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tijdens deze activiteit wordt je ruimtelijk kortetermijngeheugen gemeten door je de volgorde waarin %@ oplichten te laten herhalen.";

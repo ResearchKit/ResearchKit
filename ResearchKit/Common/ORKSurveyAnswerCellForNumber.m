@@ -147,7 +147,6 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
 }
 
 - (void)dontKnowButtonWasPressed {
-    
     if (![_dontKnowButton active]) {
         [_dontKnowButton setActive:YES];
         [_textFieldView.textField setText:nil];
@@ -250,13 +249,12 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
     (self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil));
 
     self.textField.manageUnitAndPlaceholder = YES;
-    self.textField.unit = numericAnswerFormat.unit;
+    self.textField.unit = numericAnswerFormat.displayUnit ?: numericAnswerFormat.unit;
     self.textField.placeholder = placeholder;
 
     if (answer == [ORKDontKnowAnswer answer]) {
         [self dontKnowButtonWasPressed];
     } else if (answer != ORKNullAnswerValue() && ![_dontKnowButton active]) {
-        
         if (!answer) {
             [self assignDefaultAnswer];
         }
@@ -378,7 +376,6 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-
     if (_dontKnowButton && [_dontKnowButton active]) {
         [_dontKnowButton setActive:NO];
     }

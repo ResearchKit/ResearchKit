@@ -31,9 +31,7 @@
 
 @import UIKit;
 
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKDefines.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -252,7 +250,6 @@ CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window);
 CGFloat ORKCardLeftRightMarginForWindow(UIWindow *window);
 
 UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window);
-
 #endif
 
 NS_ASSUME_NONNULL_END

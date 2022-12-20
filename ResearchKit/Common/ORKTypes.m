@@ -43,6 +43,8 @@ ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen3 = @"AIRPO
 
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro = @"AIRPODSPRO";
 
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsProGen2 = @"AIRPODSPROV2";
+
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMax = @"AIRPODSMAX";
 
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods = @"EARPODS";
@@ -180,7 +182,6 @@ ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW = @"zh-TW";
 const double ORKDoubleDefaultValue = DBL_MAX;
 
 const CGFloat ORKCGFloatDefaultValue = CGFLOAT_MAX;
-
 
 @implementation ORKNoAnswer
 

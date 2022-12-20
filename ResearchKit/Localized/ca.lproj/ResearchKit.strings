@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Torna a connectar els AirPods o els EarPods per fer la prova.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ completat";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Auriculars";
-"HEADPHONES_UNKNOWN" = "Desconegut";
-"HEADPHONES_NONE" = "Cap";
-"CONNECTED" = "Connectat";
-"NOT_CONNECTED" = "Sense connexió";
-"HEADPHONE_CONNECTED_%@" = "Connectat - %@";
-"HEADPHONE_DETECT_TITLE" = "Connecta els auriculars";
-"HEADPHONE_DETECT_TEXT" = "Per fer aquesta prova necessitaràs uns AirPods o uns EarPods d’Apple";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memòria espacial";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aquesta activitat mesura la memòria espacial a curt termini demanant-te que repeteixis l’ordre en què s’il·luminen les %@.";

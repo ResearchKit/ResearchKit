@@ -202,7 +202,6 @@ static const CGFloat LabelCheckViewPadding = 10.0;
           
         [_contentMaskLayer addSublayer:[self lineLayer]];
         
-
         [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
     }
 }

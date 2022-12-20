@@ -614,6 +614,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (_restoredStepIdentifier) {
         [self applicationFinishedRestoringState];
     }
+    
+    if (@available(iOS 13.0, *)) {
+        [self setNavigationBarColor:[UIColor systemGroupedBackgroundColor]];
+    } else {
+        [self setNavigationBarColor:ORKColor(ORKBackgroundColorKey)];
+    }
 }
 
 
@@ -826,6 +832,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 #pragma mark - internal helpers
 
+
 - (void)updateLastBeginningInstructionStepIdentifierForStep:(ORKStep *)step
                                                   goForward:(BOOL)goForward {
     if (NO == goForward) {
@@ -898,7 +905,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             return;
         }
     }
-    
+
     if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
@@ -1132,7 +1139,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 #pragma mark - internal action Handlers
 
-- (void)finishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
+- (void)finishWithReason:(ORKTaskViewControllerFinishReason)reason error:(nullable NSError *)error {
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
         [strongDelegate taskViewController:self didFinishWithReason:reason error:error];

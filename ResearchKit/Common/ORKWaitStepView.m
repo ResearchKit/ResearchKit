@@ -69,7 +69,6 @@
                 break;
             case ORKProgressIndicatorTypeIndeterminate:
                 _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
-                
                 [_activityIndicatorView startAnimating];
                 self.customContentView = _activityIndicatorView;
                 break;

@@ -940,7 +940,6 @@ NSString *const ORKSixMinuteWalkFatigueIdentifier = @"6mwt.fatigue";
     return task;
 }
 
-
 #pragma mark - shortWalkTask
 
 NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
@@ -1825,11 +1824,8 @@ NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 
 #pragma mark - dBHLToneAudiometryTask
 
-NSString *const ORKdBHLToneAudiometryStepIdentifier = @"dBHL.tone.audiometry";
-NSString *const ORKdBHLToneAudiometryStep0Identifier = @"dBHL0.tone.audiometry";
 NSString *const ORKdBHLToneAudiometryStep1Identifier = @"dBHL1.tone.audiometry";
 NSString *const ORKdBHLToneAudiometryStep2Identifier = @"dBHL2.tone.audiometry";
-NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
 
 
 + (ORKNavigableOrderedTask *)dBHLToneAudiometryTaskWithIdentifier:(NSString *)identifier
@@ -1892,7 +1888,6 @@ NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
         step.thresholdValue = 45;
         step.title = ORKLocalizedString(@"ENVIRONMENTSPL_TITLE_2", nil);
         step.text = ORKLocalizedString(@"ENVIRONMENTSPL_INTRO_TEXT_2", nil);
-        
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -1906,8 +1901,8 @@ NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
         ORKdBHLToneAudiometryStep *step = [[ORKdBHLToneAudiometryStep alloc] initWithIdentifier:ORKdBHLToneAudiometryStep1Identifier];
         step.title = ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2", nil);
         step.stepDuration = CGFLOAT_MAX;
-        step.earPreference = ORKAudioChannelLeft;
         step.headphoneType = ORKHeadphoneTypeIdentifierAirPodsGen1;
+        step.earPreference = ORKAudioChannelLeft;
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -1915,7 +1910,6 @@ NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
         step.title = ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR", nil);
         step.shouldTintImages = YES;
-        
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -1923,8 +1917,8 @@ NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
         ORKdBHLToneAudiometryStep *step = [[ORKdBHLToneAudiometryStep alloc] initWithIdentifier:ORKdBHLToneAudiometryStep2Identifier];
         step.title = ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2", nil);
         step.stepDuration = CGFLOAT_MAX;
-        step.headphoneType = ORKHeadphoneTypeIdentifierAirPodsGen1;
         step.earPreference = ORKAudioChannelRight;
+        step.headphoneType = ORKHeadphoneTypeIdentifierAirPodsGen1;
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -1937,7 +1931,6 @@ NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
     
     return task;
 }
-
 
 
 #pragma mark - towerOfHanoiTask
@@ -2039,6 +2032,74 @@ NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
     }
     
     ORKReactionTimeStep *step = [[ORKReactionTimeStep alloc] initWithIdentifier:ORKReactionTimeStepIdentifier];
+    step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
+    step.maximumStimulusInterval = maximumStimulusInterval;
+    step.minimumStimulusInterval = minimumStimulusInterval;
+    step.thresholdAcceleration = thresholdAcceleration;
+    step.numberOfAttempts = numberOfAttempts;
+    step.timeout = timeout;
+    step.successSound = successSoundID;
+    step.timeoutSound = timeoutSoundID;
+    step.failureSound = failureSoundID;
+    step.recorderConfigurations = @[ [[ORKDeviceMotionRecorderConfiguration  alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency: 100]];
+
+    ORKStepArrayAddStep(steps, step);
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
+
+#pragma mark - normalizedReactionTimeTask
+
+NSString *const ORKNormalizedReactionTimeStepIdentifier = @"normalizedReactionTime";
+
++ (ORKOrderedTask *)normalizedReactionTimeTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                           minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                             thresholdAcceleration:(double)thresholdAcceleration
+                                  numberOfAttempts:(int)numberOfAttempts
+                                           timeout:(NSTimeInterval)timeout
+                                      successSound:(UInt32)successSoundID
+                                      timeoutSound:(UInt32)timeoutSoundID
+                                      failureSound:(UInt32)failureSoundID
+                                           options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"REACTION_TIME_TASK_INTENDED_USE", nil);
+            step.image = [UIImage imageNamed:@"phoneshake" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.imageContentMode = UIViewContentModeCenter;
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
+            step.text = [NSString localizedStringWithFormat: ORKLocalizedString(@"REACTION_TIME_TASK_INTRO_TEXT_FORMAT", nil), numberOfAttempts];
+            step.detailText = ORKLocalizedString(@"REACTION_TIME_TASK_CALL_TO_ACTION", nil);
+            step.image = [UIImage imageNamed:@"phoneshakecircle" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.imageContentMode = UIViewContentModeCenter;
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    ORKNormalizedReactionTimeStep *step = [[ORKNormalizedReactionTimeStep alloc] initWithIdentifier:ORKReactionTimeStepIdentifier];
     step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
     step.maximumStimulusInterval = maximumStimulusInterval;
     step.minimumStimulusInterval = minimumStimulusInterval;
