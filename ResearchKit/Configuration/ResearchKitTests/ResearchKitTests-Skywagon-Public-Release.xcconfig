@@ -1,0 +1,7 @@
+//
+// ResearchKitTests-Skywagon-Public-Release.xcconfig
+//
+
+#include "ResearchKitTests-Shared.xcconfig"
+
+SWIFT_OBJC_BRIDGING_HEADER = ResearchKitTests/ResearchKitTests-Bridging-Header.h

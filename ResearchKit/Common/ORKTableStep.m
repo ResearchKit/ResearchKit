@@ -186,7 +186,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_ARRAY(aDecoder, items, NSObject);
+        ORK_DECODE_OBJ_ARRAY_PROPS(aDecoder, items);
         ORK_DECODE_INTEGER(aDecoder, bulletType);
         ORK_DECODE_OBJ_ARRAY(aDecoder, bulletIconNames, NSString);
         ORK_DECODE_BOOL(aDecoder, allowsSelection);

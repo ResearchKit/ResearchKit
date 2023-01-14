@@ -40,6 +40,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSignatureResult_Private.h"
 #import "ORKCustomSignatureFooterView_Private.h"
+#import "ORKTaskViewController_Internal.h"
 
 static const CGFloat ORKSignatureTopPadding = 37.0;
 
@@ -67,6 +68,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
 - (void)setupSubviews {
     [self setupScrollView];
+    [self setupNavigationBarView];
     [self setupNavigationFooterView];
     [self setupWebView];
     [self setupSignatureIfNeeded];
@@ -169,7 +171,8 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
     // We need to re-render the HTML if the interface style has changed
     // so that the CSS adopts the new color scheme.
     if (@available(iOS 13, *)) {
-        if (self.traitCollection.userInterfaceStyle != previousTraitCollection.userInterfaceStyle) {
+        if (self.traitCollection.userInterfaceStyle != previousTraitCollection.userInterfaceStyle ||
+            self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory) {
             [self refreshHTML];
         }
     }
@@ -186,6 +189,16 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
     if ([_signatureFooterView.customViewProvider respondsToSelector:@selector(keyboardDismissModeForCustomView)]) {
         [_scrollView setKeyboardDismissMode:[_signatureFooterView.customViewProvider keyboardDismissModeForCustomView]];
+    }
+}
+
+- (void)setupNavigationBarView {
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *navBarAppearance = [[UINavigationBarAppearance alloc] init];
+        [navBarAppearance configureWithOpaqueBackground];
+        UINavigationBar *navigationBar = self.navigationController.navigationBar;
+        navigationBar.standardAppearance = navBarAppearance;
+        navigationBar.scrollEdgeAppearance = navBarAppearance;
     }
 }
 
@@ -380,6 +393,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
     // until the HTML is loaded
     [self setupSubviews];
     [self refreshHTML];
+    [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
@@ -419,7 +433,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
 - (void)setBottomOffset:(CGFloat)bottomOffset {
     _bottomOffset = bottomOffset;
-    [_scrollView setContentSize:CGSizeMake(_scrollView.contentSize.width, _scrollView.contentSize.height + bottomOffset)];
+    [_scrollView setContentInset:UIEdgeInsetsMake(0, 0, bottomOffset, 0)];
 }
 
 - (CGFloat)bottomOffset {
@@ -428,8 +442,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    [_scrollView setContentInset:UIEdgeInsetsZero];
+    [_scrollView setContentInset:UIEdgeInsetsMake(0, 0, _bottomOffset, 0)];
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
@@ -494,6 +507,8 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
             [self didFinishLoadingHTML];
         }
     }];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = false;
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {

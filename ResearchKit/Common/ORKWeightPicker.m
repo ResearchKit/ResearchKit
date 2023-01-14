@@ -107,10 +107,13 @@ static const CGFloat PickerMinimumHeight = 34.0;
     
     if (_answerFormat.useMetricSystem) {
         if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
-            NSUInteger index = [_majorValues indexOfObject:@((NSInteger)((NSNumber *)answer).doubleValue)];
+            NSUInteger index = [_majorValues indexOfObject:@((double)((NSNumber *)answer).doubleValue)];
             if (index == NSNotFound) {
                 [self setAnswer:[self defaultAnswerValue]];
                 return;
+            }
+            if (![_pickerDelegate isOptional]) {
+                index = index + 1;
             }
             [_pickerView selectRow:index inComponent:0 animated:NO];
         } else {
@@ -121,6 +124,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
             if (wholeIndex == NSNotFound || fractionIndex == NSNotFound) {
                 [self setAnswer:[self defaultAnswerValue]];
                 return;
+            }
+            if (![_pickerDelegate isOptional]) {
+                wholeIndex = wholeIndex + 1;
+                fractionIndex = fractionIndex + 1;
             }
             [_pickerView selectRow:wholeIndex inComponent:0 animated:NO];
             [_pickerView selectRow:fractionIndex inComponent:1 animated:NO];
@@ -134,6 +141,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
                 [self setAnswer:[self defaultAnswerValue]];
                 return;
             }
+            // need to add one if not optional
+            if (![_pickerDelegate isOptional]) {
+                poundsIndex = poundsIndex + 1;
+            }
             [_pickerView selectRow:poundsIndex inComponent:0 animated:NO];
         } else {
             double pounds, ounces;
@@ -143,6 +154,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
             if (poundsIndex == NSNotFound || ouncesIndex == NSNotFound) {
                 [self setAnswer:[self defaultAnswerValue]];
                 return;
+            }
+            if (![_pickerDelegate isOptional]) {
+                poundsIndex = poundsIndex + 1;
+                ouncesIndex = ouncesIndex + 1;
             }
             [_pickerView selectRow:poundsIndex inComponent:0 animated:NO];
             [_pickerView selectRow:ouncesIndex inComponent:1 animated:NO];

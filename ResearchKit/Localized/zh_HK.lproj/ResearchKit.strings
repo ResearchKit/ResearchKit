@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "重新連接AirPods或EarPods以進行測試。";
 "dBHL_PROGRESS_COMPLETION_%@" = "已完成%@";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "耳筒";
-"HEADPHONES_UNKNOWN" = "未知";
-"HEADPHONES_NONE" = "無";
-"CONNECTED" = "已連接";
-"NOT_CONNECTED" = "未連接";
-"HEADPHONE_CONNECTED_%@" = "已連接 - %@";
-"HEADPHONE_DETECT_TITLE" = "連接你的耳筒";
-"HEADPHONE_DETECT_TEXT" = "此測試需要Apple AirPods或Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "此測試活動需要你重覆%@圖案亮起的次序，以測量你的短期空間記憶。";

@@ -28,6 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_WATCH
+@import WatchKit;
+#endif
+
 #import "ORKCollectionResult.h"
 
 #import "ORKCollectionResult_Private.h"
@@ -260,13 +264,11 @@
 }
 
 - (void)updateEnabledAssistiveTechnology {
-#if TARGET_OS_IOS
     if (UIAccessibilityIsVoiceOverRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
     } else if (UIAccessibilityIsSwitchControlRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
     }
-#endif
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

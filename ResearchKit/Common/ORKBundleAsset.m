@@ -85,7 +85,10 @@
 }
 
 - (nullable NSURL *)url {
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:self.bundleIdentifier];
+    NSBundle *bundle = (self.bundleIdentifier) ?
+        [NSBundle bundleWithIdentifier:self.bundleIdentifier] :
+        [NSBundle mainBundle];
+
     NSURL *url = [bundle URLForResource:self.name withExtension:self.fileExtension];
     return url;
 }

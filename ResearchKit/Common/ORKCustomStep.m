@@ -35,6 +35,7 @@
 
 + (instancetype)customStepWithIdentifier:(NSString *)identifier
                              contentView:(UIView *)contentView {
+    NSAssert(contentView != NULL, @"ORKCustomStep must be initialized with a contentView");
     ORKCustomStep *step = [[ORKCustomStep alloc] initWithIdentifier:identifier];
     step.contentView = contentView;
     return step;
@@ -77,6 +78,10 @@
     step.text = self.text;
     step.title = self.title;
     return step;
+}
+
++ (Class)stepViewControllerClass {
+    return [ORKCustomStepViewController class];
 }
 
 @end

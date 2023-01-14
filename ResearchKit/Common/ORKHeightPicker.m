@@ -95,6 +95,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
             [self setAnswer:[self defaultAnswerValue]];
             return;
         }
+        // need to add one if not optional
+        if (![_pickerDelegate isOptional]) {
+            index = index + 1;
+        }
         [_pickerView selectRow:index inComponent:0 animated:NO];
     } else {
         double feet, inches;
@@ -105,6 +109,12 @@ static const CGFloat PickerMinimumHeight = 34.0;
             [self setAnswer:[self defaultAnswerValue]];
             return;
         }
+        // need to add one if not optional
+        if (![_pickerDelegate isOptional]) {
+            feetIndex = feetIndex + 1;
+            inchesIndex = inchesIndex + 1;
+        }
+        
         [_pickerView selectRow:feetIndex inComponent:0 animated:NO];
         [_pickerView selectRow:inchesIndex inComponent:1 animated:NO];
     }

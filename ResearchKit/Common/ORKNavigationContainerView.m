@@ -389,7 +389,6 @@ static const CGFloat detailTextBottomSpacing = 16.0;
                                          attribute:NSLayoutAttributeTop
                                         multiplier:1.0
                                           constant:topSpacing],
-
             [NSLayoutConstraint constraintWithItem:_detailTextLabel
                                          attribute:NSLayoutAttributeLeft
                                          relatedBy:NSLayoutRelationEqual

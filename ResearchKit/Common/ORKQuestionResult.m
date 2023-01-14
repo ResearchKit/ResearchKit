@@ -96,7 +96,6 @@
     }
 
     NSParameterAssert(!answer || [answer isKindOfClass:[[self class] answerClass]] || [answer isKindOfClass:[ORKNoAnswer class]]);
-
     return answer;
 }
 
@@ -204,7 +203,6 @@
     [super setAnswer:answer];
 }
 
-
 - (void)setBooleanAnswer:(NSNumber *)booleanAnswer {
     self.answer = booleanAnswer;
 }
@@ -276,7 +274,7 @@
             // Backwards compatibility, do not change the key
             ORK_DECODE_OBJ_CLASSES_FOR_KEY(aDecoder, typedAnswerOrNoAnswer, [[self class] answerClassesIncludingNoAnswer], dateAnswer);
         }
-        
+
         if (_typedAnswerOrNoAnswer != nil && ![_typedAnswerOrNoAnswer isKindOfClass:[NSDate class]] && ![_typedAnswerOrNoAnswer isKindOfClass:[ORKNoAnswer class]]) {
             ORK_Log_Fault("ORKDateQuestionResult: Discarding answer of wrong class: %{public}@ (%@, identifier: %{public}@)", [_typedAnswerOrNoAnswer class], _typedAnswerOrNoAnswer, self.identifier);
             _typedAnswerOrNoAnswer = nil;
@@ -311,6 +309,12 @@
 
 + (Class)answerClass {
     return [NSDate class];
+}
+
+// Date answer sometimes gets a wrong NSNumber value
++ (NSArray<Class> *)answerClassesIncludingNoAnswer {
+    NSArray *classes = [[super answerClassesIncludingNoAnswer] arrayByAddingObjectsFromArray:ORKAllowableValueClasses()];
+    return classes;
 }
 
 - (void)setDateAnswer:(NSDate *)dateAnswer {
@@ -554,7 +558,6 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     return classes;
 }
 
-
 - (void)setComponentsAnswer:(NSArray<NSObject<NSCopying, NSSecureCoding> *> *)componentsAnswer {
     self.answer = componentsAnswer;
 }
@@ -575,12 +578,14 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, unit);
+    ORK_ENCODE_OBJ(aCoder, displayUnit);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, displayUnit, NSString);
         if (_typedAnswerOrNoAnswer == nil) {
             // Backwards compatibility, do not change the key
             ORK_DECODE_OBJ_CLASSES_FOR_KEY(aDecoder, typedAnswerOrNoAnswer, [[self class] answerClassesIncludingNoAnswer], numericAnswer);
@@ -597,17 +602,19 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.unit, castObject.unit));
+            ORKEqualObjects(self.unit, castObject.unit) &&
+            ORKEqualObjects(self.displayUnit, castObject.displayUnit));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.unit.hash;
+    return super.hash ^ self.unit.hash ^ self.displayUnit.hash;
 }
 
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKNumericQuestionResult *copy = [super copyWithZone:zone];
     copy->_unit = [self.unit copyWithZone:zone];
+    copy->_displayUnit = [self.displayUnit copyWithZone:zone];
     return copy;
 }
 
@@ -616,7 +623,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 - (NSString *)descriptionSuffix {
-    return [NSString stringWithFormat:@" %@>", _unit];
+    return [NSString stringWithFormat:@" %@> displayUnit: %@", _unit, _displayUnit];
 }
 
 - (void)setNumericAnswer:(NSNumber *)numericAnswer {

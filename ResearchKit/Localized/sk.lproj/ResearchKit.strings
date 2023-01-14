@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Ak chcete absolvovať tento test, znovu pripojte AirPody alebo EarPody.";
 "dBHL_PROGRESS_COMPLETION_%@" = "Dokončené na %@";
 
-/* Headphones. */
-"AIRPODS" = "AirPody";
-"EARPODS" = "EarPody";
-"HEADPHONES" = "Slúchadlá";
-"HEADPHONES_UNKNOWN" = "Neznáme";
-"HEADPHONES_NONE" = "Žiadne";
-"CONNECTED" = "Pripojené";
-"NOT_CONNECTED" = "Nepripojené";
-"HEADPHONE_CONNECTED_%@" = "Pripojené – %@";
-"HEADPHONE_DETECT_TITLE" = "Pripojte slúchadlá";
-"HEADPHONE_DETECT_TEXT" = "Na tento test budete potrebovať Apple AirPody alebo Apple EarPody";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Priestorová pamäť";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Táto aktivita zmeria vašu krátkodobú pamäť zobrazením sekvencie obrázkov (%@), ktorú budete musieť zopakovať.";

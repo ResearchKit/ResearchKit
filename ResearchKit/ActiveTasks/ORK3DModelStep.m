@@ -32,7 +32,6 @@
 #import "ORK3DModelStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
-
 @implementation ORK3DModelStep
 
 + (Class)stepViewControllerClass {
@@ -90,7 +89,6 @@
     __typeof(self) castObject = object;
     return (isParentSame && ORKEqualObjects(self.modelManager, castObject.modelManager));
 }
-
 
 - (NSUInteger)hash {
     return [super hash] ^ [_modelManager hash];

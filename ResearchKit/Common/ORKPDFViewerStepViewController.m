@@ -71,6 +71,8 @@
         [self.view addSubview:_pdfView];
         [self setNavigationFooterView];
         [self setupConstraints];
+        
+        [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
     }
 }
 

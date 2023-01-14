@@ -29,10 +29,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKCollectionResult.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -83,12 +80,6 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithTaskIdentifier:(NSString *)identifier taskRunUUID:(NSUUID *)taskRunUUID outputDirectory:(nullable NSURL *)outputDirectory device:(ORKDevice *)device NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly) ORKDevice *device;
-
-@end
-
-@interface ORKTaskResult ()
-
-- (void)setTaskRunUUID:(NSUUID * _Nonnull)taskRunUUID;
 
 @end
 

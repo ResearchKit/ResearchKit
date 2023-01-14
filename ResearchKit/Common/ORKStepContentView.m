@@ -124,17 +124,30 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     NSArray<NSLayoutConstraint *> *_bodyContainerLeftRightConstraints;
     NSLayoutConstraint *_stepContentBottomConstraint;
     ORKCompletionCheckmarkView *_completionCheckmarkView;
-
+    BOOL useStandardTextAndFormPadding;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self setupUpdatedConstraints];
-        [self setStepContentViewBottomConstraint];
-        _leftRightPadding = ORKStepContainerLeftRightPaddingForWindow(self.window);
+        [self setupContentView];
     }
     return self;
+}
+
+- (instancetype)initWithStandardPadding {
+    self = [super init];
+    if (self) {
+        useStandardTextAndFormPadding = true;
+        [self setupContentView];
+    }
+    return self;
+}
+
+- (void)setupContentView {
+    [self setupUpdatedConstraints];
+    [self setStepContentViewBottomConstraint];
+    _leftRightPadding = ORKStepContainerLeftRightPaddingForWindow(self.window);
 }
 
 // top content image
@@ -352,7 +365,12 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     [paragraphStyle setHyphenationFactor:0.5];
-    
+    [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+
+    if (@available(iOS 14.0, *)) {
+        [paragraphStyle setLineBreakStrategy:NSLineBreakStrategyPushOut];
+    }
+        
     NSDictionary *hyphenAttribute = @{NSParagraphStyleAttributeName : paragraphStyle};
     
     NSAttributedString *attributedStepTitle = [[NSAttributedString alloc] initWithString:stepTitle ?: @"" attributes:hyphenAttribute];
@@ -1037,7 +1055,9 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     CGFloat constant = 0.0;
     
     if (@available(iOS 15, *)) {
-        constant += ORKStepContentBottomPadding;
+        if (!useStandardTextAndFormPadding) {
+            constant += ORKStepContentBottomPadding;
+        }
     }
     
     if (_centeredVerticallyImageView) {

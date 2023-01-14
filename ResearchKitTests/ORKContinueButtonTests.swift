@@ -32,6 +32,7 @@ import XCTest
 import UIKit
 
 class ORKContinueButtonTests: XCTestCase {
+
     var button: ORKContinueButton!
     
     override func setUp() {

@@ -50,7 +50,7 @@
 
 - (void)prepareView {
     [super prepareView];
-    
+
     _selectionView = [[ORKSESSelectionView alloc] initWithAnswerFormat:(ORKSESAnswerFormat *)self.step.answerFormat answer:self.answer];
     _selectionView.delegate = self;
     _selectionView.translatesAutoresizingMaskIntoConstraints = NO;
