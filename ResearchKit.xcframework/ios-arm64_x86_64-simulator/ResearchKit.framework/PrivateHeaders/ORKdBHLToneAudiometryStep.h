@@ -30,13 +30,17 @@
 
 
 @import Foundation;
+#import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKAudiometryProtocol.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKdBHLToneAudiometryStep : ORKActiveStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier audiometryEngine:(nullable id<ORKAudiometryProtocol>)audiometry;
 
 @property (nonatomic, assign) NSTimeInterval toneDuration;
 
@@ -65,6 +69,9 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) ORKAudioChannel earPreference;
 
 @property (nonatomic, copy, nullable) NSArray *frequencyList;
+
+
+- (id<ORKAudiometryProtocol>)audiometryEngine;
 
 @end
 

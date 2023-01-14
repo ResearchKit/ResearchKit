@@ -131,6 +131,7 @@
 #import <ResearchKit/ORKPedometerRecorder.h>
 #import <ResearchKit/ORKTouchRecorder.h>
 #import <ResearchKit/ORKHTMLPDFPageRenderer.h>
+#import <ResearchKit/ORKAudiometry.h>
 
 // For custom steps
 #import <ResearchKit/ORKStepView_Private.h>

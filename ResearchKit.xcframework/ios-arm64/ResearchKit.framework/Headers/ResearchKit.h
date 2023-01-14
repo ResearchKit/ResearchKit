@@ -115,6 +115,9 @@
 
 #import <ResearchKit/ORKRecorder.h>
 
+#import <ResearchKit/ORKAudiometryStimulus.h>
+#import <ResearchKit/ORKAudiometryProtocol.h>
+
 #import <ResearchKit/ORKConsentDocument.h>
 #import <ResearchKit/ORKConsentSection.h>
 #import <ResearchKit/ORKConsentSignature.h>
@@ -126,6 +129,8 @@
 #import <ResearchKit/ORKDiscreteGraphChartView.h>
 #import <ResearchKit/ORKLineGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
+
+#import <ResearchKit/ORKPicker.h>
 
 #import <ResearchKit/ORKBodyItem.h>
 #import <ResearchKit/ORKLearnMoreItem.h>

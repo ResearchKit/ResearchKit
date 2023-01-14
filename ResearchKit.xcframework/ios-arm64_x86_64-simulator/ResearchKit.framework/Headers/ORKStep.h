@@ -28,9 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
-#endif
 
 @import Foundation;
 @import UIKit;
@@ -65,7 +63,6 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
  you should consider subclassing `ORKActiveStep` and `ORKActiveStepViewController`
  instead.
  */
-
 
 ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
 
@@ -331,7 +328,6 @@ API_AVAILABLE(ios(11))
 - (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result API_AVAILABLE(ios(11)) API_UNAVAILABLE(watchos);
 
 @end
-
 #endif
 
 NS_ASSUME_NONNULL_END

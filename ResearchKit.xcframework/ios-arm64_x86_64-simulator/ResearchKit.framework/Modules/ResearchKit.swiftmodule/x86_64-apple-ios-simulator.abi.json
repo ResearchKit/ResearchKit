@@ -5,6 +5,698 @@
     "printedName": "TopLevel",
     "children": [
       {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftUIViewFactory",
+        "printedName": "SwiftUIViewFactory",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "answerDidUpdateClosure",
+            "printedName": "answerDidUpdateClosure",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Any) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Any) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(py)answerDidUpdateClosure",
+            "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Any) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Any) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)answerDidUpdateClosure",
+                "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Any) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Any) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)setAnswerDidUpdateClosure:",
+                "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvM",
+                "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "makeSwiftUIView",
+            "printedName": "makeSwiftUIView(answerFormat:answer:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIView",
+                    "printedName": "UIKit.UIView",
+                    "usr": "c:objc(cs)UIView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ORKAnswerFormat",
+                "printedName": "ResearchKit.ORKAnswerFormat",
+                "usr": "c:objc(cs)ORKAnswerFormat"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)makeSwiftUIViewWithAnswerFormat:answer:",
+            "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC04makecD012answerFormat0G0So0D0CSgSo09ORKAnswerH0C_yptF",
+            "moduleName": "ResearchKit",
+            "objc_name": "makeSwiftUIViewWithAnswerFormat:answer:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftUIViewFactory",
+                "printedName": "ResearchKit.SwiftUIViewFactory",
+                "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)init",
+            "mangledName": "$s11ResearchKit18SwiftUIViewFactoryCACycfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory",
+        "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit.Private",
+        "printedName": "ResearchKit.Private",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit.Private",
+        "printedName": "ResearchKit.Private",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ORKLandoltCStepViewController",
+        "printedName": "ORKLandoltCStepViewController",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(step:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKLandoltCStepViewController",
+                "printedName": "ResearchKit.ORKLandoltCStepViewController",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ResearchKit.ORKStep?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ORKStep",
+                    "printedName": "ResearchKit.ORKStep",
+                    "usr": "c:objc(cs)ORKStep"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)initWithStep:",
+            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC4stepACSo7ORKStepCSg_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "initWithStep:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "result",
+            "printedName": "result",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ResearchKit.ORKStepResult?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ORKStepResult",
+                    "printedName": "ResearchKit.ORKStepResult",
+                    "usr": "c:objc(cs)ORKStepResult"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(py)result",
+            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC6resultSo13ORKStepResultCSgvp",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "result",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "ResearchKit.ORKStepResult?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ORKStepResult",
+                        "printedName": "ResearchKit.ORKStepResult",
+                        "usr": "c:objc(cs)ORKStepResult"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)result",
+                "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC6resultSo13ORKStepResultCSgvg",
+                "moduleName": "ResearchKit",
+                "overriding": true,
+                "objc_name": "result",
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "viewDidLoad",
+            "printedName": "viewDidLoad()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)viewDidLoad",
+            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC11viewDidLoadyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "viewDidLoad",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stepDidFinish",
+            "printedName": "stepDidFinish()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)stepDidFinish",
+            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC13stepDidFinishyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "stepDidFinish",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "AccessControl",
+              "Override"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController",
+        "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "Custom",
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ORKActiveStepViewController",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ResearchKit.ORKActiveStepViewController",
+          "ResearchKit.ORKStepViewController",
+          "UIKit.UIViewController",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ORKLandoltCStepView",
+        "printedName": "ORKLandoltCStepView",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(frame:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKLandoltCStepView",
+                "printedName": "ResearchKit.ORKLandoltCStepView",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepView(im)initWithFrame:",
+            "mangledName": "$s11ResearchKit19ORKLandoltCStepViewC5frameACSo6CGRectV_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "initWithFrame:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepView",
+        "mangledName": "$s11ResearchKit19ORKLandoltCStepViewC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "Custom",
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)UIView",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "UIKit.UIView",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "__DefaultCustomPlaygroundQuickLookable",
+            "printedName": "__DefaultCustomPlaygroundQuickLookable",
+            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
         "kind": "TypeDecl",
         "name": "VisionStepLeftOrRightEye",
         "printedName": "VisionStepLeftOrRightEye",
@@ -1896,6 +2588,475 @@
       },
       {
         "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ORKSwiftStroopStep",
+        "printedName": "ORKSwiftStroopStep",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "numberOfAttempts",
+            "printedName": "numberOfAttempts",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "stepViewControllerClass",
+            "printedName": "stepViewControllerClass()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ExistentialMetatype",
+                "printedName": "AnyObject.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "AnyObject"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(cm)stepViewControllerClass",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC23stepViewControllerClassyXlXpyFZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "overriding": true,
+            "objc_name": "stepViewControllerClass",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "supportsSecureCoding",
+            "printedName": "supportsSecureCoding()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(identifier:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKSwiftStroopStep",
+                "printedName": "ResearchKit.ORKSwiftStroopStep",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)initWithIdentifier:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC10identifierACSS_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "initWithIdentifier:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "validateParameters",
+            "printedName": "validateParameters()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)validateParameters",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC18validateParametersyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "validateParameters",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "startsFinished",
+            "printedName": "startsFinished()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)startsFinished",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC14startsFinishedSbyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "startsFinished",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "allowsBackNavigation",
+            "printedName": "allowsBackNavigation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(py)allowsBackNavigation",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvp",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "allowsBackNavigation",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)allowsBackNavigation",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvg",
+                "moduleName": "ResearchKit",
+                "overriding": true,
+                "objc_name": "allowsBackNavigation",
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "copy",
+            "printedName": "copy(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ObjectiveC.NSZone?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "NSZone",
+                    "printedName": "ObjectiveC.NSZone",
+                    "usr": "s:10ObjectiveC6NSZoneV"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)copyWithZone:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC4copy4withyp10ObjectiveC6NSZoneVSg_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "copyWithZone:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)encodeWithCoder:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC6encode4withySo7NSCoderC_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "encodeWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isEqual",
+            "printedName": "isEqual(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)isEqual:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC7isEqualySbypSgF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "isEqual:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep",
+        "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ORKActiveStep",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ResearchKit.ORKActiveStep",
+          "ResearchKit.ORKStep",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "ResearchKit.Private",
         "printedName": "ResearchKit.Private",
         "declKind": "Import",
@@ -2652,6 +3813,26 @@
         ]
       },
       {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit.Private",
+        "printedName": "ResearchKit.Private",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
         "kind": "TypeDecl",
         "name": "ORKSwiftStroopStepViewController",
         "printedName": "ORKSwiftStroopStepViewController",
@@ -2952,1187 +4133,6 @@
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
           }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "SwiftUI",
-        "printedName": "SwiftUI",
-        "declKind": "Import",
-        "moduleName": "ResearchKit"
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "SwiftUIViewFactory",
-        "printedName": "SwiftUIViewFactory",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "answerDidUpdateClosure",
-            "printedName": "answerDidUpdateClosure",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "((Any) -> ())?",
-                "children": [
-                  {
-                    "kind": "TypeFunc",
-                    "name": "Function",
-                    "printedName": "(Any) -> ()",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Void",
-                        "printedName": "()"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ProtocolComposition",
-                        "printedName": "Any"
-                      }
-                    ]
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(py)answerDidUpdateClosure",
-            "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl",
-              "ObjC"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "((Any) -> ())?",
-                    "children": [
-                      {
-                        "kind": "TypeFunc",
-                        "name": "Function",
-                        "printedName": "(Any) -> ()",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "Void",
-                            "printedName": "()"
-                          },
-                          {
-                            "kind": "TypeNominal",
-                            "name": "ProtocolComposition",
-                            "printedName": "Any"
-                          }
-                        ]
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)answerDidUpdateClosure",
-                "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "declAttributes": [
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "((Any) -> ())?",
-                    "children": [
-                      {
-                        "kind": "TypeFunc",
-                        "name": "Function",
-                        "printedName": "(Any) -> ()",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "Void",
-                            "printedName": "()"
-                          },
-                          {
-                            "kind": "TypeNominal",
-                            "name": "ProtocolComposition",
-                            "printedName": "Any"
-                          }
-                        ]
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)setAnswerDidUpdateClosure:",
-                "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "declAttributes": [
-                  "ObjC"
-                ],
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvM",
-                "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "makeSwiftUIView",
-            "printedName": "makeSwiftUIView(answerFormat:answer:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "UIKit.UIView?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "UIView",
-                    "printedName": "UIKit.UIView",
-                    "usr": "c:objc(cs)UIView"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "ORKAnswerFormat",
-                "printedName": "ResearchKit.ORKAnswerFormat",
-                "usr": "c:objc(cs)ORKAnswerFormat"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "ProtocolComposition",
-                "printedName": "Any"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)makeSwiftUIViewWithAnswerFormat:answer:",
-            "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC04makecD012answerFormat0G0So0D0CSgSo09ORKAnswerH0C_yptF",
-            "moduleName": "ResearchKit",
-            "objc_name": "makeSwiftUIViewWithAnswerFormat:answer:",
-            "declAttributes": [
-              "AccessControl",
-              "ObjC"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "SwiftUIViewFactory",
-                "printedName": "ResearchKit.SwiftUIViewFactory",
-                "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory(im)init",
-            "mangledName": "$s11ResearchKit18SwiftUIViewFactoryCACycfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "init",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override"
-            ],
-            "init_kind": "Designated"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)SwiftUIViewFactory",
-        "mangledName": "$s11ResearchKit18SwiftUIViewFactoryC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)NSObject",
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "ResearchKit.Private",
-        "printedName": "ResearchKit.Private",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "ORKLandoltCStepViewController",
-        "printedName": "ORKLandoltCStepViewController",
-        "children": [
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(step:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKLandoltCStepViewController",
-                "printedName": "ResearchKit.ORKLandoltCStepViewController",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ResearchKit.ORKStep?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ORKStep",
-                    "printedName": "ResearchKit.ORKStep",
-                    "usr": "c:objc(cs)ORKStep"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)initWithStep:",
-            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC4stepACSo7ORKStepCSg_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "initWithStep:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Var",
-            "name": "result",
-            "printedName": "result",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ResearchKit.ORKStepResult?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ORKStepResult",
-                    "printedName": "ResearchKit.ORKStepResult",
-                    "usr": "c:objc(cs)ORKStepResult"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(py)result",
-            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC6resultSo13ORKStepResultCSgvp",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "result",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "ResearchKit.ORKStepResult?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ORKStepResult",
-                        "printedName": "ResearchKit.ORKStepResult",
-                        "usr": "c:objc(cs)ORKStepResult"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)result",
-                "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC6resultSo13ORKStepResultCSgvg",
-                "moduleName": "ResearchKit",
-                "overriding": true,
-                "objc_name": "result",
-                "declAttributes": [
-                  "Dynamic",
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "viewDidLoad",
-            "printedName": "viewDidLoad()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)viewDidLoad",
-            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC11viewDidLoadyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "viewDidLoad",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "stepDidFinish",
-            "printedName": "stepDidFinish()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController(im)stepDidFinish",
-            "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC13stepDidFinishyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "stepDidFinish",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "AccessControl",
-              "Override"
-            ],
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepViewController",
-        "mangledName": "$s11ResearchKit29ORKLandoltCStepViewControllerC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "Custom",
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)ORKActiveStepViewController",
-        "hasMissingDesignatedInitializers": true,
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "ResearchKit.ORKActiveStepViewController",
-          "ResearchKit.ORKStepViewController",
-          "UIKit.UIViewController",
-          "UIKit.UIResponder",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Sendable",
-            "printedName": "Sendable",
-            "usr": "s:s8SendableP",
-            "mangledName": "$ss8SendableP"
-          }
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "ORKLandoltCStepView",
-        "printedName": "ORKLandoltCStepView",
-        "children": [
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(frame:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKLandoltCStepView",
-                "printedName": "ResearchKit.ORKLandoltCStepView",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepView"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "CGRect",
-                "printedName": "CoreFoundation.CGRect",
-                "usr": "c:@S@CGRect"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepView(im)initWithFrame:",
-            "mangledName": "$s11ResearchKit19ORKLandoltCStepViewC5frameACSo6CGRectV_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "initWithFrame:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override"
-            ],
-            "init_kind": "Designated"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)ORKLandoltCStepView",
-        "mangledName": "$s11ResearchKit19ORKLandoltCStepViewC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "Custom",
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)UIView",
-        "hasMissingDesignatedInitializers": true,
-        "superclassNames": [
-          "UIKit.UIView",
-          "UIKit.UIResponder",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "__DefaultCustomPlaygroundQuickLookable",
-            "printedName": "__DefaultCustomPlaygroundQuickLookable",
-            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
-            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Sendable",
-            "printedName": "Sendable",
-            "usr": "s:s8SendableP",
-            "mangledName": "$ss8SendableP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "ORKSwiftStroopStep",
-        "printedName": "ORKSwiftStroopStep",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "numberOfAttempts",
-            "printedName": "numberOfAttempts",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "stepViewControllerClass",
-            "printedName": "stepViewControllerClass()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ExistentialMetatype",
-                "printedName": "AnyObject.Type",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "AnyObject"
-                  }
-                ]
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(cm)stepViewControllerClass",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC23stepViewControllerClassyXlXpyFZ",
-            "moduleName": "ResearchKit",
-            "static": true,
-            "overriding": true,
-            "objc_name": "stepViewControllerClass",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "supportsSecureCoding",
-            "printedName": "supportsSecureCoding()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
-            "moduleName": "ResearchKit",
-            "static": true,
-            "declAttributes": [
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(identifier:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKSwiftStroopStep",
-                "printedName": "ResearchKit.ORKSwiftStroopStep",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)initWithIdentifier:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC10identifierACSS_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "initWithIdentifier:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "validateParameters",
-            "printedName": "validateParameters()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)validateParameters",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC18validateParametersyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "validateParameters",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "startsFinished",
-            "printedName": "startsFinished()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)startsFinished",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC14startsFinishedSbyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "startsFinished",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Var",
-            "name": "allowsBackNavigation",
-            "printedName": "allowsBackNavigation",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(py)allowsBackNavigation",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvp",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "allowsBackNavigation",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)allowsBackNavigation",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvg",
-                "moduleName": "ResearchKit",
-                "overriding": true,
-                "objc_name": "allowsBackNavigation",
-                "declAttributes": [
-                  "Dynamic",
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "copy",
-            "printedName": "copy(with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ProtocolComposition",
-                "printedName": "Any"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ObjectiveC.NSZone?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "NSZone",
-                    "printedName": "ObjectiveC.NSZone",
-                    "usr": "s:10ObjectiveC6NSZoneV"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)copyWithZone:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC4copy4withyp10ObjectiveC6NSZoneVSg_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "copyWithZone:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "encode",
-            "printedName": "encode(with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "NSCoder",
-                "printedName": "Foundation.NSCoder",
-                "usr": "c:objc(cs)NSCoder"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)encodeWithCoder:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC6encode4withySo7NSCoderC_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "encodeWithCoder:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "isEqual",
-            "printedName": "isEqual(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Any?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "Any"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)isEqual:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC7isEqualySbypSgF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "isEqual:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep",
-        "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)ORKActiveStep",
-        "hasMissingDesignatedInitializers": true,
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "ResearchKit.ORKActiveStep",
-          "ResearchKit.ORKStep",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "ResearchKit.Private",
-        "printedName": "ResearchKit.Private",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "SwiftUI",
-        "printedName": "SwiftUI",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "ResearchKit.Private",
-        "printedName": "ResearchKit.Private",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
         ]
       },
       {
@@ -6220,6 +6220,153 @@
   },
   "ConstValues": [
     {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1797,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 1837,
+      "length": 4,
+      "value": "20.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 1875,
+      "length": 4,
+      "value": "22.5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "Array",
+      "offset": 1911,
+      "length": 36,
+      "value": "[0, 45, 90, 135, 180, 225, 270, 315]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2354,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "Array",
+      "offset": 2399,
+      "length": 78,
+      "value": "[5.82, 4.65, 3.72, 2.91, 2.33, 1.86, 1.45, 1.16, 0.93, 0.73, 0.58, 0.47, 0.37]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "Array",
+      "offset": 2522,
+      "length": 71,
+      "value": "[0.9, 0.92, 0.937, 0.95, 0.96, 0.968, 0.975, 0.98, 0.984, 0.9875, 0.99]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "Array",
+      "offset": 2630,
+      "length": 55,
+      "value": "[50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 2716,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "StringLiteral",
+      "offset": 2820,
+      "length": 13,
+      "value": "\"iCNLandoltC\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "StringLiteral",
+      "offset": 3147,
+      "length": 18,
+      "value": "\"orangeGrayCircle\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "StringLiteral",
+      "offset": 1682,
+      "length": 17,
+      "value": "\"ResearchKit.EyeActivitySlider\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 1710,
+      "length": 26,
+      "value": "\"ResearchKit.ORKLandoltCStepContentView\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 5024,
+      "length": 4,
+      "value": "12.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 5067,
+      "length": 4,
+      "value": "20.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 5118,
+      "length": 4,
+      "value": "15.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 5166,
+      "length": 4,
+      "value": "10.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 4883,
+      "length": 19,
+      "value": "\"ResearchKit.ORKLandoltCStepView\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1955,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "StringLiteral",
+      "offset": 1682,
+      "length": 10,
+      "value": "\"ResearchKit.TrackLayer\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "StringLiteral",
+      "offset": 1682,
+      "length": 10,
+      "value": "\"ResearchKit.TrackLayer\""
+    },
+    {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "IntegerLiteral",
       "offset": 1740,
@@ -6388,25 +6535,18 @@
       "value": "20.0"
     },
     {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 1955,
+      "offset": 1740,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
-      "kind": "StringLiteral",
-      "offset": 1682,
-      "length": 10,
-      "value": "\"ResearchKit.TrackLayer\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
-      "kind": "StringLiteral",
-      "offset": 1682,
-      "length": 10,
-      "value": "\"ResearchKit.TrackLayer\""
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1776,
+      "length": 2,
+      "value": "10"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
@@ -6416,88 +6556,25 @@
       "value": "\"ResearchKit.ORKLandoltCResult\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "FloatLiteral",
+      "offset": 1869,
+      "length": 5,
+      "value": "115.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3826,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
       "kind": "IntegerLiteral",
-      "offset": 1797,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "FloatLiteral",
-      "offset": 1837,
-      "length": 4,
-      "value": "20.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "FloatLiteral",
-      "offset": 1875,
-      "length": 4,
-      "value": "22.5"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "Array",
-      "offset": 1911,
-      "length": 36,
-      "value": "[0, 45, 90, 135, 180, 225, 270, 315]"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2354,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "Array",
-      "offset": 2399,
-      "length": 78,
-      "value": "[5.82, 4.65, 3.72, 2.91, 2.33, 1.86, 1.45, 1.16, 0.93, 0.73, 0.58, 0.47, 0.37]"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "Array",
-      "offset": 2522,
-      "length": 71,
-      "value": "[0.9, 0.92, 0.937, 0.95, 0.96, 0.968, 0.975, 0.98, 0.984, 0.9875, 0.99]"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "Array",
-      "offset": 2630,
-      "length": 55,
-      "value": "[50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110]"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "FloatLiteral",
-      "offset": 2716,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "StringLiteral",
-      "offset": 2820,
-      "length": 13,
-      "value": "\"iCNLandoltC\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "StringLiteral",
-      "offset": 3147,
-      "length": 18,
-      "value": "\"orangeGrayCircle\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
-      "kind": "StringLiteral",
-      "offset": 1682,
-      "length": 17,
-      "value": "\"ResearchKit.EyeActivitySlider\""
+      "offset": 3890,
+      "length": 2,
+      "value": "20"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
@@ -6673,83 +6750,6 @@
       "offset": 2580,
       "length": 2,
       "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 5024,
-      "length": 4,
-      "value": "12.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 5067,
-      "length": 4,
-      "value": "20.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 5118,
-      "length": 4,
-      "value": "15.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 5166,
-      "length": 4,
-      "value": "10.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 4883,
-      "length": 19,
-      "value": "\"ResearchKit.ORKLandoltCStepView\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1740,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1776,
-      "length": 2,
-      "value": "10"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
-      "kind": "FloatLiteral",
-      "offset": 1869,
-      "length": 5,
-      "value": "115.0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3826,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3890,
-      "length": 2,
-      "value": "20"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 1710,
-      "length": 26,
-      "value": "\"ResearchKit.ORKLandoltCStepContentView\""
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",

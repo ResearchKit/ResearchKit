@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
+#import <ResearchKit/ORKActiveStep_Internal.h>
 @import HealthKit;
 
 

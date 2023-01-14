@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ResearchKit
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Foundation
@@ -9,6 +9,24 @@ import Swift
 import SwiftUI
 import _Concurrency
 import _StringProcessing
+@_inheritsConvenienceInitializers @objc public class SwiftUIViewFactory : ObjectiveC.NSObject {
+  @objc public var answerDidUpdateClosure: ((Any) -> Swift.Void)?
+  @objc public func makeSwiftUIView(answerFormat: ResearchKit.ORKAnswerFormat, answer: Any) -> UIKit.UIView?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKLandoltCStepViewController : ResearchKit.ORKActiveStepViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKLandoltCStepView : UIKit.UIView {
+  @objc deinit
+}
 @objc public enum VisionStepLeftOrRightEye : Swift.Int {
   case left
   case right
@@ -57,47 +75,6 @@ import _StringProcessing
   @objc override dynamic public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: Swift.UInt) -> Swift.String
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers public class ORKLandoltCResult : ResearchKit.ORKResult {
-  public var outcome: Swift.Bool?
-  public var letterAngle: Swift.Double?
-  public var sliderAngle: Swift.Double?
-  public var score: Swift.Int?
-  public init(identifier: Swift.String, outcome: Swift.Bool, letterAngle: Swift.Double, sliderAngle: Swift.Double, score: Swift.Int)
-  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-  @objc override dynamic public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: Swift.UInt) -> Swift.String
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKSwiftStroopStepViewController : ResearchKit.ORKActiveStepViewController {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
-    @objc get
-  }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func start()
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc public class SwiftUIViewFactory : ObjectiveC.NSObject {
-  @objc public var answerDidUpdateClosure: ((Any) -> Swift.Void)?
-  @objc public func makeSwiftUIView(answerFormat: ResearchKit.ORKAnswerFormat, answer: Any) -> UIKit.UIView?
-  @objc override dynamic public init()
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKLandoltCStepViewController : ResearchKit.ORKActiveStepViewController {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
-    @objc get
-  }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
-  @objc deinit
-}
-@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKLandoltCStepView : UIKit.UIView {
-  @objc deinit
-}
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ORKSwiftStroopStep : ResearchKit.ORKActiveStep {
   public var numberOfAttempts: Swift.Int
   @objc override dynamic public class func stepViewControllerClass() -> Swift.AnyClass
@@ -113,8 +90,31 @@ import _StringProcessing
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
   @objc deinit
 }
+@objc @_hasMissingDesignatedInitializers public class ORKLandoltCResult : ResearchKit.ORKResult {
+  public var outcome: Swift.Bool?
+  public var letterAngle: Swift.Double?
+  public var sliderAngle: Swift.Double?
+  public var score: Swift.Int?
+  public init(identifier: Swift.String, outcome: Swift.Bool, letterAngle: Swift.Double, sliderAngle: Swift.Double, score: Swift.Int)
+  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
+  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc override dynamic public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: Swift.UInt) -> Swift.String
+  @objc deinit
+}
 extension ResearchKit.ORKPredicateStepNavigationRule {
   convenience public init(resultPredicatesAndDestinationStepIdentifiers tuples: [(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)], defaultStepIdentifierOrNil: Swift.String? = nil)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKSwiftStroopStepViewController : ResearchKit.ORKActiveStepViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func start()
+  @objc deinit
 }
 public enum CircleSliderOption {
   case startAngle(Swift.Double)

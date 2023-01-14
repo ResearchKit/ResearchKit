@@ -31,10 +31,8 @@
 
 @import Foundation;
 
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKDefines.h>
-#endif
 
 typedef NS_ENUM(NSInteger, ORKCardViewStyle) {
     ORKCardViewStyleDefault,

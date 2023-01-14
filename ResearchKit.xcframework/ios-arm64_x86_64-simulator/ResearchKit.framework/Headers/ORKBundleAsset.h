@@ -42,14 +42,15 @@ ORK_CLASS_AVAILABLE
 /// The file name of the resource, excluding the file extension.
 @property (nonatomic, copy) NSString *name;
 
-/// The bundle identifier for the bundle that contains the asset.
-@property (nonatomic, copy) NSString *bundleIdentifier;
+/// The bundle identifier for the bundle that contains the asset. If this is not set,
+/// the main bundle identifier will be used.
+@property (nonatomic, copy, nullable) NSString *bundleIdentifier;
 
 /// An optional file extension that may be used for disambiguation.
 @property (nonatomic, copy, nullable) NSString *fileExtension;
 
 - (instancetype)initWithName:(NSString *) name
-            bundleIdentifier:(NSString *) bundleIdentifier
+            bundleIdentifier:(nullable NSString *) bundleIdentifier
                fileExtension:(nullable NSString *) fileExtension;
 
 - (nullable NSURL*)url;

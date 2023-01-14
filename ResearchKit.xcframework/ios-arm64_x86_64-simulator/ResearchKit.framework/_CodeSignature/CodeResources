@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		krxv84FjiwtzKlQVg1fzgG3FExg=
+		OHnO/+bcugGHGHFjUR+WIbRTgkE=
 		</data>
 		<key>Headers/ORK3DModelManager.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/ORKActiveStep.h</key>
 		<data>
-		DGydN+XXGVoPQEUrWdRibNuYBjE=
+		mwi/IYZas1UzBT+zU2yxDjdX0gY=
 		</data>
 		<key>Headers/ORKActiveStepViewController.h</key>
 		<data>
@@ -42,7 +42,15 @@
 		</data>
 		<key>Headers/ORKAnswerFormat.h</key>
 		<data>
-		tfesjUKp/KBY8/IuxQF6m/dHag4=
+		IL6UUYi4TLtpTygG6DHUvPb7NVk=
+		</data>
+		<key>Headers/ORKAudiometryProtocol.h</key>
+		<data>
+		RQwSIwLBzgsB9jzDSV028qq6oQA=
+		</data>
+		<key>Headers/ORKAudiometryStimulus.h</key>
+		<data>
+		VS3V0Xv1d2Z7XM5e81tt8qQ+Q+U=
 		</data>
 		<key>Headers/ORKBarGraphChartView.h</key>
 		<data>
@@ -58,7 +66,7 @@
 		</data>
 		<key>Headers/ORKBundleAsset.h</key>
 		<data>
-		Vqjjuo8X5f9dhbXtnU1k8ja4vDY=
+		zwbFzQNwFuLXi2OZCsYgGt/izrs=
 		</data>
 		<key>Headers/ORKChartTypes.h</key>
 		<data>
@@ -66,7 +74,7 @@
 		</data>
 		<key>Headers/ORKCollectionResult.h</key>
 		<data>
-		ZkK3Rz9AUTdPCHSw/k6y4iwKUCE=
+		JE8tkRUk5ZresjLA3oXrSuRYPuE=
 		</data>
 		<key>Headers/ORKCollector.h</key>
 		<data>
@@ -134,7 +142,7 @@
 		</data>
 		<key>Headers/ORKEarlyTerminationConfiguration.h</key>
 		<data>
-		/p0m8R3i+ZaEAqbJCD7C4Aa3wtk=
+		GnNnI/aFQsxl8GoeUQsNTg1zwqo=
 		</data>
 		<key>Headers/ORKEnvironmentSPLMeterResult.h</key>
 		<data>
@@ -150,7 +158,7 @@
 		</data>
 		<key>Headers/ORKFormStep.h</key>
 		<data>
-		/WfPl4gQiwspKC6R+BKDSJ6WRa4=
+		oVqxzqogrX+tmTkhcxOr0/hSDOc=
 		</data>
 		<key>Headers/ORKFormStepViewController.h</key>
 		<data>
@@ -186,7 +194,7 @@
 		</data>
 		<key>Headers/ORKInstructionStep.h</key>
 		<data>
-		FqvnOdy9XfUlkI5nJ2vMYoDKas8=
+		dsRWgS1yiHFwN4SPypfbRAxnxXc=
 		</data>
 		<key>Headers/ORKInstructionStepViewController.h</key>
 		<data>
@@ -194,7 +202,7 @@
 		</data>
 		<key>Headers/ORKKeychainWrapper.h</key>
 		<data>
-		udu0Lr4QrfAmmM+pkd37effR62s=
+		YBNRb1x13zLa5nptvPASl1h9MVc=
 		</data>
 		<key>Headers/ORKLearnMoreInstructionStep.h</key>
 		<data>
@@ -238,11 +246,11 @@
 		</data>
 		<key>Headers/ORKNormalizedReactionTimeResult.h</key>
 		<data>
-		VJe/aV6Sc3uCcX5qK+0WMmuMseY=
+		5DP3Bp4WWREQKn2DkWTI/+h8szA=
 		</data>
 		<key>Headers/ORKNormalizedReactionTimeStep.h</key>
 		<data>
-		rczNAqsSG4C/UHrfWB0koiD6u14=
+		KXKFL4liErYzBTrXj/heVXkHTbY=
 		</data>
 		<key>Headers/ORKNotificationPermissionType.h</key>
 		<data>
@@ -250,11 +258,11 @@
 		</data>
 		<key>Headers/ORKOrderedTask+ORKPredefinedActiveTask.h</key>
 		<data>
-		Mj9+xQp4biNp9XpdUV6MGiYyfRs=
+		db0aTmd9XR4JDnih5nyapq7CZWE=
 		</data>
 		<key>Headers/ORKOrderedTask.h</key>
 		<data>
-		X4/Y0+c8Y3XFf/VcRyWPkDiaMzQ=
+		eQUe9Rz80He/wtDlfVt32ETSR6s=
 		</data>
 		<key>Headers/ORKPDFViewerStep.h</key>
 		<data>
@@ -270,7 +278,7 @@
 		</data>
 		<key>Headers/ORKPageStep.h</key>
 		<data>
-		smM7C60cGp+tGCrLA3LDm+Qc8lk=
+		yjoyQ+3gtg6NrqhiNq/9ITw3OPk=
 		</data>
 		<key>Headers/ORKPageStepViewController.h</key>
 		<data>
@@ -292,6 +300,10 @@
 		<data>
 		CCgKsp9cf3IyfWnBa8jtWMhsGrQ=
 		</data>
+		<key>Headers/ORKPicker.h</key>
+		<data>
+		/WLn2/0OAUu8tDnkrRMdOdYJaII=
+		</data>
 		<key>Headers/ORKPieChartView.h</key>
 		<data>
 		SA/UcVg+5Ot0TaqK7l7HH6J5uqU=
@@ -302,11 +314,11 @@
 		</data>
 		<key>Headers/ORKQuestionResult.h</key>
 		<data>
-		9KdGDG1Y03+qjm3LtE7hCOpi+vs=
+		lXDGg/ZYYLMz5CaLH5Ul9Zi+n0c=
 		</data>
 		<key>Headers/ORKQuestionStep.h</key>
 		<data>
-		k9ZqbKoTh1fTpEco/YcaSj6EDL8=
+		Fc8HS/7Mgp3EMusQrjkjKj9+xx8=
 		</data>
 		<key>Headers/ORKRangeOfMotionResult.h</key>
 		<data>
@@ -330,7 +342,7 @@
 		</data>
 		<key>Headers/ORKResult.h</key>
 		<data>
-		Qk/TYb3EaEm0N8uJ907bZqWuJfk=
+		bWuEN2YGcqarO/1hKVjbjLPC12g=
 		</data>
 		<key>Headers/ORKResultPredicate.h</key>
 		<data>
@@ -378,11 +390,11 @@
 		</data>
 		<key>Headers/ORKStep.h</key>
 		<data>
-		XstgMAxatHilL8yIxxqhl7jVta4=
+		V04LjXJ/wV/uz6SBIhz9No0xyZY=
 		</data>
 		<key>Headers/ORKStepNavigationRule.h</key>
 		<data>
-		hciOmqRxmWhi7vL8IQwmM8jvxts=
+		krLo/Koz/JRLu6lPAZ8njF1TgnI=
 		</data>
 		<key>Headers/ORKStepViewController.h</key>
 		<data>
@@ -394,7 +406,7 @@
 		</data>
 		<key>Headers/ORKTableStep.h</key>
 		<data>
-		uiOM/Wi88TF7Ff8PeqV4oxzCh+c=
+		X7X9dk+XGppoL5c22NJHCaERFOg=
 		</data>
 		<key>Headers/ORKTableStepViewController.h</key>
 		<data>
@@ -478,7 +490,7 @@
 		</data>
 		<key>Headers/ORKTouchAbilityTouch.h</key>
 		<data>
-		boyVDCOoBadA7HfWS1QgGg16LYI=
+		um6n05epLRND3vcEryFwCUl82XQ=
 		</data>
 		<key>Headers/ORKTouchAbilityTrack.h</key>
 		<data>
@@ -506,7 +518,7 @@
 		</data>
 		<key>Headers/ORKTypes.h</key>
 		<data>
-		KnijhRMj6e/P/433v6KkZqfFHvc=
+		qFQdhi2JsjiQoAgP8QiJ4rwEfxA=
 		</data>
 		<key>Headers/ORKUSDZModelManager.h</key>
 		<data>
@@ -514,7 +526,7 @@
 		</data>
 		<key>Headers/ORKUSDZModelManagerResult.h</key>
 		<data>
-		uBqWMLdvjA6qFrHy+TwUgCdhu90=
+		/yXMETVlUveySyU+4Oje/rSF2zA=
 		</data>
 		<key>Headers/ORKVerificationStep.h</key>
 		<data>
@@ -558,59 +570,59 @@
 		</data>
 		<key>Headers/ORKdBHLToneAudiometryResult.h</key>
 		<data>
-		CbSLrmy3ctpghIVcN+eSReM882I=
+		BOzme6dooFCPjsYjGvYVjB513NI=
 		</data>
 		<key>Headers/ResearchKit-Swift.h</key>
 		<data>
-		RyTdKJa5OQ9mwCN4wBtG3forfFw=
+		kEPHDtPklm5LDK1ILcIcLYN8TJE=
 		</data>
 		<key>Headers/ResearchKit.h</key>
 		<data>
-		wcQYdg6i2bI4v14LE230Al/w3Lo=
+		jwWpjVbPr0xue4mD6qKxi05dZEY=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		qsckXBC5rs2Fj3rbgPVPUUzejt0=
+		np2RC8pqi9RE85tLdQH7b4WRWSk=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		NGJLEjLSsM2SwgsEEpRM9u81S/0=
+		8lUctUcsRMDRF4DSrXlfO/IKMic=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		dG7R1FBUKQl2jXZB4acU6FBg6bo=
+		VUhxwzxdfR3L1v1YJg+KLLYOcOg=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Q8KXhbN6T6vtx5CDKifmwH9qoL8=
+		EtskFwiex9baouHLu77m10rrkT8=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		dG7R1FBUKQl2jXZB4acU6FBg6bo=
+		VUhxwzxdfR3L1v1YJg+KLLYOcOg=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		GcavNPvMYv8iX8vrGviqdeIkc7g=
+		lnzuuJOgzI0+Zsl3xCb/7O9Sc7o=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		NGJLEjLSsM2SwgsEEpRM9u81S/0=
+		8lUctUcsRMDRF4DSrXlfO/IKMic=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		ojDX6ert90wVXwL0s28lmaFK+gc=
+		VL6t/1RO1fYdKnxIe9B0rO8x2o8=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Gwkj6lhumlRIXcfszhb2cILxKNI=
+		UwF87JEeIWvQTX28VDlbYxlCjkg=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ojDX6ert90wVXwL0s28lmaFK+gc=
+		VL6t/1RO1fYdKnxIe9B0rO8x2o8=
 		</data>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		3ubsdY0rWjJfXuhOHD7r+3eTj+c=
+		otpZs8MTKDgkI6tDYls5T0yPCt0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -670,7 +682,7 @@
 		</data>
 		<key>PrivateHeaders/ORKAnswerFormat_Private.h</key>
 		<data>
-		cbfNPhvKJS4d8+u+eJZPSeRo830=
+		xU+zjon5pHYvh3lakJKSEo0zJ8I=
 		</data>
 		<key>PrivateHeaders/ORKAudioFitnessStep.h</key>
 		<data>
@@ -704,6 +716,10 @@
 		<data>
 		e4E97BC58flxegunbvv2NyK8nOA=
 		</data>
+		<key>PrivateHeaders/ORKAudiometry.h</key>
+		<data>
+		mlJxlTcQg68NFFVMhQa0Sq350UQ=
+		</data>
 		<key>PrivateHeaders/ORKBodyContainerView.h</key>
 		<data>
 		3805/ODODNdXXNUxVPB1as5chfA=
@@ -718,7 +734,7 @@
 		</data>
 		<key>PrivateHeaders/ORKCollectionResult_Private.h</key>
 		<data>
-		x+adJ6Jbe8V/NX9QpyVPPENRTcg=
+		wZsbR7D7V6FVSHlBSumUyvrLQeU=
 		</data>
 		<key>PrivateHeaders/ORKConsentDocument_Private.h</key>
 		<data>
@@ -762,7 +778,7 @@
 		</data>
 		<key>PrivateHeaders/ORKDevice.h</key>
 		<data>
-		3oDJ5m27arUkeut7u98JUKO6XbM=
+		a7wgslBX6uvNa1zJYnNHk23OSDI=
 		</data>
 		<key>PrivateHeaders/ORKDeviceMotionRecorder.h</key>
 		<data>
@@ -770,7 +786,7 @@
 		</data>
 		<key>PrivateHeaders/ORKDevice_Private.h</key>
 		<data>
-		bv3Ckj+4R38lNfPiXH9dOCQCQbA=
+		yqidbXjnEsGprGsBRGZUdbVM1Gw=
 		</data>
 		<key>PrivateHeaders/ORKDirectionView.h</key>
 		<data>
@@ -778,7 +794,7 @@
 		</data>
 		<key>PrivateHeaders/ORKErrors.h</key>
 		<data>
-		D5GpnnkmYMnhJany4po4bGZFCko=
+		w4tQ+tkx5QTC/JhqqmbTyoo/t6k=
 		</data>
 		<key>PrivateHeaders/ORKFitnessStep.h</key>
 		<data>
@@ -822,11 +838,11 @@
 		</data>
 		<key>PrivateHeaders/ORKHelpers_Internal.h</key>
 		<data>
-		8LExGKwyc+uxlePkUmat132gmaM=
+		CNIwx88Aat17giUS4sb1tB6i/RE=
 		</data>
 		<key>PrivateHeaders/ORKHelpers_Private.h</key>
 		<data>
-		++PdxWJwvjXY6sgpn5q51qCfhpg=
+		yb735tWAM7m9UJ0+GyFzIBt0OrM=
 		</data>
 		<key>PrivateHeaders/ORKHolePegTestPlaceStep.h</key>
 		<data>
@@ -910,7 +926,7 @@
 		</data>
 		<key>PrivateHeaders/ORKQuestionResult_Private.h</key>
 		<data>
-		Cj3l6pcVAatJfDPYvIXfL5MSjvA=
+		gvXDkWms4aWTUaUM7AP8gI5Wuyg=
 		</data>
 		<key>PrivateHeaders/ORKQuestionStepViewController.h</key>
 		<data>
@@ -938,7 +954,7 @@
 		</data>
 		<key>PrivateHeaders/ORKResult_Private.h</key>
 		<data>
-		yf1nLvI1rySftNUIBL4HJuK1nZ4=
+		QtNfwk/jxUK9klvmtecEKQLEnU4=
 		</data>
 		<key>PrivateHeaders/ORKReviewStepViewController.h</key>
 		<data>
@@ -970,7 +986,7 @@
 		</data>
 		<key>PrivateHeaders/ORKSkin.h</key>
 		<data>
-		/A9pJhZVBVqFSj90hgq/PDiJQRs=
+		h2Nco1M0XIPOUVWe6LvoHBDI1rU=
 		</data>
 		<key>PrivateHeaders/ORKSpatialSpanMemoryStep.h</key>
 		<data>
@@ -1026,7 +1042,7 @@
 		</data>
 		<key>PrivateHeaders/ORKStep_Private.h</key>
 		<data>
-		UnTzg/6TbbVBYW5v4ol3gAptiUk=
+		8ru3vvXPDKrdqNplV33hZDco7PQ=
 		</data>
 		<key>PrivateHeaders/ORKStreamingAudioRecorder.h</key>
 		<data>
@@ -1062,7 +1078,7 @@
 		</data>
 		<key>PrivateHeaders/ORKTaskViewController_Internal.h</key>
 		<data>
-		vntGYkclWwT+aqMMnPRKV3d43+c=
+		1wlxKjRHEyEPj6e+iT4hWaNrZPo=
 		</data>
 		<key>PrivateHeaders/ORKTaskViewController_Private.h</key>
 		<data>
@@ -1162,19 +1178,15 @@
 		</data>
 		<key>PrivateHeaders/ORKdBHLToneAudiometryStep.h</key>
 		<data>
-		l7I9Hru7B80zksEnM/dUGlpQ9jw=
+		nZ3qLcmxIovO2fnHMZa6XisSgbI=
 		</data>
 		<key>PrivateHeaders/ResearchKit_Private.h</key>
 		<data>
-		IrxjEk1ZkQ6EJyKy5tV8CQK6K7U=
+		/LR3Sn87Hjo1kBRh0x+tu6AI5nY=
 		</data>
 		<key>PrivateHeaders/UIView+ORKAccessibility.h</key>
 		<data>
 		myh3qgBTixvcbDpJW09LvuResoA=
-		</data>
-		<key>ResearchKit.stringsdict</key>
-		<data>
-		dPW3KWrkI4n4CQRxYLFfiV4o7gg=
 		</data>
 		<key>Sentence1.wav</key>
 		<data>
@@ -1220,7 +1232,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NVQl8HGdy3XmOXBc3gCuge4N+5Y=
+			SftMW0tD23ruRrYxCWqaygSPgFI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1229,7 +1241,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pNyxZ6kEZHAEwN72+pNdGWZID6A=
+			xwj4CzUIm10ejkxMgkCgmLJlXq0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1294,7 +1306,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			y/b2radVSi4H5vY9LlTR9+Atn7c=
+			oLSUSOqIbIxG1s6TkGb/NSiRR0A=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1303,7 +1315,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZZJKKn8iqO/X0GgyAeqCnLKhw7o=
+			FPubPdZGWMqrLvGdPTTTaQnCGfQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1312,7 +1324,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ig7VZgMiTOrFIFdh7Duu0Nglppg=
+			qYxkcyB4JLfK0HBU1SW6akd2PT4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1321,7 +1333,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Sa4Ob389Bq7uS5HSrTxrSOjAN3c=
+			QHm2PlqDHaBCVaMBmfF+nToPd5o=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1330,7 +1342,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Bm9XR5JH2n7a+QOpWR81lg8YurM=
+			IzVBddBjUxU1SLFnPtVU6tUYKEo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1348,7 +1360,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XJssSrSV1yFHZVJ4o6l6oFfuNs0=
+			3euP3mYYJF6r+ttA+SzRmZiJlnY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1357,7 +1369,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZNvuhcmU+JkSqmqLjRCK1Xyopy4=
+			fdCMw/NA2y4gzoWO1nccv/MsEEE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1366,7 +1378,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PrW6WBYwjaMUguCbkzoEwRa7MpQ=
+			dA/w8Z4K6ptIaqvdC6dVIJD5nX8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1375,7 +1387,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XChO0UKzITm3HqXbs9yEfubhatU=
+			LOephaqfhb77IP+XYmEnPgM+XFA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1384,7 +1396,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WnboXZ8qTnp6hH6UvYtZPvd2OFA=
+			GsjuKlLxN1yj3MeD49T0Vul/YrM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1393,7 +1405,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oNbWZE3FjQ1K5F7KoC8LjDinQnk=
+			a2qmuZiQRvWvrxRhBPkyPqV/tWE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1402,7 +1414,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			10bzVLp6GS715ZCKCQl6dhNaoTc=
+			BliBKijgn0T7Y5zLC1RxDdkPKpU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1417,7 +1429,11 @@
 		</data>
 		<key>frequency_dBSPL_AIRPODSPRO.plist</key>
 		<data>
-		vFIR2VX1KwqquTpjwc1cCuACPS4=
+		MNuYgB13QQkdXAHX28nB0cA/uS4=
+		</data>
+		<key>frequency_dBSPL_AIRPODSPROV2.plist</key>
+		<data>
+		wo6MMB7fqyXj1vw9QX7j2FFcWU0=
 		</data>
 		<key>frequency_dBSPL_AIRPODSV3.plist</key>
 		<data>
@@ -1431,7 +1447,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RDSE0KwZvpWImqbZmMTwYV9V4Cg=
+			PlSjicnFtacnKRvwC/XSY9wF+O8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1440,7 +1456,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aNg0J6Gc9yopNSL03kyn4dgXwco=
+			cTlKKtCUACYGXG3PAHlzA4yTrJM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1449,7 +1465,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7rSyZafs1XtIN3Kl4LcfnrHeVRM=
+			nylqI/GFqopFoW1aMj+STaHnHSA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1458,7 +1474,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			30tJv+m6XppwL9snt2xlMmfTBSM=
+			0OOLqWXdrxH9sp1+ySw3IadQMCI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1467,7 +1483,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bSpZ6BluNNSQYrCMaylKUjMUtTU=
+			07y5MMMNgExgGy5la0IX4PPY0LY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1476,7 +1492,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IFRLBogrcdnNOb0a5+pVLHXfKgE=
+			7Enzv/kta6ID0Pf2dbEfZriQUo8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1485,7 +1501,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			w8TEz2/ACEGXTtsY6DFXSoTyXnE=
+			wpj6BO2UtsGV+SCC+vH6dp6WhT4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1494,7 +1510,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LBTqigNMowVixidCeWGpzY1ExFs=
+			GIh/Eh+brunDpYVnJrfArtfXdD8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1503,7 +1519,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ky3z4jaLOY57eYQTQ/wOpc4WRGU=
+			43U9AXuemD64cok5+ScSvc2bLHE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1512,7 +1528,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tndmaprGXEWYdtjk30wKeVBlH4M=
+			hEeyPtZBn3uX2lLu7jwU03OchP8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1521,7 +1537,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UfdJPxZ/DDo9/kZcu1kCM+kFG70=
+			RM3cBI6gTq9WntBpNghE722c8ko=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1530,7 +1546,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zj/XRWgJTzn/01J7TB1LeI95Lx4=
+			LjlYbbhs5IziUqAj+w+j/p22gdM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1539,7 +1555,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6LpCTW1rGzVdyk/kRzkIq6VfXk4=
+			8k8zJxPpq8KF/4dmitLL8LQ1gXg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1548,7 +1564,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PzjXCb+kUoUYKxN2RSXf5Xx1tW4=
+			JJtl5xS232DcOBGDz02u9xKCtSM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1565,6 +1581,10 @@
 		<data>
 		AOcw089AcxaXXj41N7OlEEPiG0A=
 		</data>
+		<key>retspl_AIRPODSPROV2.plist</key>
+		<data>
+		AOcw089AcxaXXj41N7OlEEPiG0A=
+		</data>
 		<key>retspl_AIRPODSV3.plist</key>
 		<data>
 		AOcw089AcxaXXj41N7OlEEPiG0A=
@@ -1577,7 +1597,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zZJCqxEJV8TNnYvD8VGKvOG8ndw=
+			EBlNezXHqV/KbBc3Doekvpb4bqE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1586,7 +1606,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			MFzyf0nXI/SBmWienvtSXDBx1f0=
+			c10wehO8iqnEqp7DnD5Ucp08Eng=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1595,7 +1615,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Op/+4pagMOWwcoONoYm4TM0SEMg=
+			WymFMCwwNo0byCSDgzMeTJt21nc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1608,7 +1628,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Bmv8FOLtsLpVA0oSwdUxDWKslrI=
+			dw2QDwgLr6e/3g0SVE/oB8IEPOw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1617,7 +1637,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			k9a3tC9LANvFgw8/6zpZdrWjCPE=
+			vj/f1hvQ58o8a4JRoM9QIEm7jHY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1626,7 +1646,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sDhWnGgghGSAhY6rh3+OIrQo6a8=
+			DbJGSDme0jSdpwAQ5qk4EnpyUf0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1635,7 +1655,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XkHLNX0wSNH97NZx3SXOjCd+h/M=
+			0KctqjGp69BBY3rR7ydXoHrYbhI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1644,7 +1664,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jcfB4tDROBtWeFLChARVRKiS0eM=
+			AjyRLpxXxNWt5oWFGyrZD63C1SI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1661,6 +1681,10 @@
 		<data>
 		ZuCAQVlCe+QO1kaKz8hrqT8jsAM=
 		</data>
+		<key>volume_curve_AIRPODSPROV2.plist</key>
+		<data>
+		ZuCAQVlCe+QO1kaKz8hrqT8jsAM=
+		</data>
 		<key>volume_curve_AIRPODSV3.plist</key>
 		<data>
 		ZuCAQVlCe+QO1kaKz8hrqT8jsAM=
@@ -1673,7 +1697,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fykC/APqzOjZ+vkcDTROw0N1AB8=
+			A1HhNq5DyS8LpGfqBHZsV6scqoI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1682,7 +1706,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/LtzgdMKsnFfklKJY8cmTLMbELQ=
+			PyI5AF8+BZZxGOMGwckQbzjoaRs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1691,7 +1715,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SqV0lyrHEhBYxGAjDrdaOvXMATs=
+			HTxF8esyoHrsdp0An4erL9Plc3w=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1703,7 +1727,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			M8KI0mPIXMXyCp7QT/YAil+ZvQT+yFsn0PKQiZObyDI=
+			r1LupYFFBfIpQ9qdXP2FTdX51QZBAX/mIk4SS92Zb3E=
 			</data>
 		</dict>
 		<key>Headers/ORK3DModelManager.h</key>
@@ -1738,7 +1762,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LNvj3D8X68jwpp4j5S0nr6sd+HMLbxTj72HShY4HQAE=
+			PkMoRZlq2ZezkTWg2lAYseTeJbSRIS6SZBs759vxxZo=
 			</data>
 		</dict>
 		<key>Headers/ORKActiveStepViewController.h</key>
@@ -1766,7 +1790,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KZBjG43RQglnivQ87LF9UuKc4pLfFRmfzbp7ZVOMygw=
+			F0qe6cAnuuPIMZNjjdVMJgSZincvwtZkM3iAnUqCWfE=
+			</data>
+		</dict>
+		<key>Headers/ORKAudiometryProtocol.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Zc3XHVQIkg/TUNRi0XlJRco+RCJru6EwQnZrwIVv6FE=
+			</data>
+		</dict>
+		<key>Headers/ORKAudiometryStimulus.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3AGhxIW0uR50tnkO+sxV+aT+/k9g6OWTcyt6pdj2rtM=
 			</data>
 		</dict>
 		<key>Headers/ORKBarGraphChartView.h</key>
@@ -1794,7 +1832,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			m8RPZAspz7byFtt/9G0n50urQVvSaSxuzBQr2MkrOfs=
+			4nBdZ9HDv3P84VHWDGXZ9TsbrGocGDf4b1IZGUGxynA=
 			</data>
 		</dict>
 		<key>Headers/ORKChartTypes.h</key>
@@ -1808,7 +1846,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QSC0FfF/SOGcYon/FEfdmraU+QsxSNp+7AlxopPqRKE=
+			nLYh354eooCJCrCdUMz2ngaQzjTopD4LB7EqbdW0YhY=
 			</data>
 		</dict>
 		<key>Headers/ORKCollector.h</key>
@@ -1927,7 +1965,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0/+QmWb++gLFCTt65jQe7Ptu9Xt6slvluyoax6CbN9M=
+			WEHWNx5agm7BSssxZc59QGCsGHrEqWbkwxayyZt8Z60=
 			</data>
 		</dict>
 		<key>Headers/ORKEnvironmentSPLMeterResult.h</key>
@@ -1955,7 +1993,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qWcTDfAu2iB2zHhSgGutus3q1hrQG7AMmlLZlLg71OY=
+			DbNOL4W6rxZvzwjW+Ag8GFgN4Ub44dV/dNbVVhgg9t8=
 			</data>
 		</dict>
 		<key>Headers/ORKFormStepViewController.h</key>
@@ -2018,7 +2056,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Olj7JQdJZBihOdCLZZZOLlSg7Zfpa+vUyfBgvl5+7NE=
+			unsTUjYQF73KMm+7CBqhhOJKV5c/Fgp1ohZ/flFNK0c=
 			</data>
 		</dict>
 		<key>Headers/ORKInstructionStepViewController.h</key>
@@ -2032,7 +2070,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			hD710KqbPA7DghuDIS3zxio4t11xT23dtkUdJd4HfGw=
+			tRXJ/wqiGbsD7zS6dEdPvFI6z322TQChZBBVObvT2ZU=
 			</data>
 		</dict>
 		<key>Headers/ORKLearnMoreInstructionStep.h</key>
@@ -2109,14 +2147,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PBiSs1yblLvP7sce9I87vj75cihJUHBysIupPIboh+8=
+			qjPwg73i0jTYicC9uO5r0pK3g1RR3sJOxp5yCmZ/g4g=
 			</data>
 		</dict>
 		<key>Headers/ORKNormalizedReactionTimeStep.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4z0SLOIWVNZp2gFW2hw4ekTUPQ97o2YMm7zlj9tifWI=
+			brrUqToank+4uiqpV8km/00OIpbeAugCoaV7bcOosOc=
 			</data>
 		</dict>
 		<key>Headers/ORKNotificationPermissionType.h</key>
@@ -2130,14 +2168,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6qrLxiJ9NpIZ5PyxhNe22unZO+HHNnboZhCUQD30fb0=
+			OCm1WU0VrDRd0s/pAWudW6Ha7oKKeOENojWY+zXxnhY=
 			</data>
 		</dict>
 		<key>Headers/ORKOrderedTask.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hG2LKuv2nqKnkxgzoS3BDg/3JYyb/gLZAJAA0YNx47E=
+			pjaYwAcrnX0FFANvGcKcLsYB1K6EAbjtHziJtr4TE1s=
 			</data>
 		</dict>
 		<key>Headers/ORKPDFViewerStep.h</key>
@@ -2165,7 +2203,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LpF3NXzXtk+JZLa3SrSintz681VasWulGQjpYp7oW38=
+			Eaza2IXodZcj/lwu9+YnU8ZPVwkL5BQePyd03uuoorg=
 			</data>
 		</dict>
 		<key>Headers/ORKPageStepViewController.h</key>
@@ -2203,6 +2241,13 @@
 			qmlm90lfOcZzvyy+0W4mrAMIZX2G6XAWfxc8JLeT+cc=
 			</data>
 		</dict>
+		<key>Headers/ORKPicker.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tYwgtxE3DZH6J1xUKN9Jao0JyPhP32+WdfmR9dXYo6M=
+			</data>
+		</dict>
 		<key>Headers/ORKPieChartView.h</key>
 		<dict>
 			<key>hash2</key>
@@ -2221,14 +2266,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8e0rQn9003BLItZ3onm+6JQyimo2A6Jj5LEOuKhg3oE=
+			1SHCiawPT1POUmzz/7OPD+yTp4hWexruwpvhKvcKIdo=
 			</data>
 		</dict>
 		<key>Headers/ORKQuestionStep.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uZp+irPwd/oHioXaarGLHmgBOdwMKV+AVMu+KC4zclA=
+			KJ9Hyle9iGjfHoV1W7IoG7Df6MYKGRlzGPP6Ybu+Ifc=
 			</data>
 		</dict>
 		<key>Headers/ORKRangeOfMotionResult.h</key>
@@ -2270,7 +2315,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4KPZmAs/WNeI7VmljaT9zmWG504AoBORuIfPz876rmU=
+			E5HHOeExFjsCl5HdOeNUOg1/1aTIGaexH83199Z+6b0=
 			</data>
 		</dict>
 		<key>Headers/ORKResultPredicate.h</key>
@@ -2354,14 +2399,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			89zA8d1kt8yJjaqnoWrwHquJRHfnMc8OpoBzKAaWHQc=
+			ilwcR1TnrzZxIFCZwxHfkAXYr575f51qVSuqvLc9Bvg=
 			</data>
 		</dict>
 		<key>Headers/ORKStepNavigationRule.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			p5XNGrCXlIbLqrlBp6MOEDNCaypDYQ7q+/OBNbDkVC8=
+			kDfQm1uxVz8h9mZ9ztilq92Lb7r2sx0rMFme6z553Gw=
 			</data>
 		</dict>
 		<key>Headers/ORKStepViewController.h</key>
@@ -2382,7 +2427,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			g1CDVV9x8nATvWeCxjkWLKO6n185xrHzgHF3t/9uAWg=
+			hHM5q6b2iixcwBK4lqVnTZmRLXp4QWLQfDeubFmILDM=
 			</data>
 		</dict>
 		<key>Headers/ORKTableStepViewController.h</key>
@@ -2529,7 +2574,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			O4AAmDLFYX066j//YCBVLEXAAuFc0bMKD9Z3C+mtdsY=
+			V5LGHxyax3a8+xQW5JJPDVCXAGMXmYp4not7L1e6nWw=
 			</data>
 		</dict>
 		<key>Headers/ORKTouchAbilityTrack.h</key>
@@ -2578,7 +2623,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			w+jKrGCBlwz2udnVUDWSAuNeHrAS7Rir2zZWnUWrDvI=
+			JPrwCuBcnDyB3pES2M/eKY/1Qw6rUzu+U4mRrQxDptc=
 			</data>
 		</dict>
 		<key>Headers/ORKUSDZModelManager.h</key>
@@ -2592,7 +2637,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qVsUT7vF0pqIbtTw7tJBF+4TULwHNEHWlJ3pzrSSy3I=
+			6tFU4IP45d/NmFwzLy4C1GXzVp76zMPyXzPzZAyAW0E=
 			</data>
 		</dict>
 		<key>Headers/ORKVerificationStep.h</key>
@@ -2669,91 +2714,91 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1pQvkz/fupps5Nq/M3wCjos9oGRoeqOLKKprk132gCg=
+			R0AdBAxEsSogK6d7QQBxgv+s2IOgQbVyNqfwFQD9UX0=
 			</data>
 		</dict>
 		<key>Headers/ResearchKit-Swift.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6t8w7GXihjLHXbFXRBHUHS2Ke1ScJ/f7ytnRulBZ8FA=
+			FURdZh5JvIFKJacWkaMeB4ATO9GSjJccMcTU3cpxNb4=
 			</data>
 		</dict>
 		<key>Headers/ResearchKit.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5iBeP67dBxyt3uGSTrquSA+iQGOn25Tz5V7d8d/d5Gc=
+			mItIt8mn7LTUkMlXRxvnLBJpWCJoXo0T6v+LtYYI4wU=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gl8FdXBFJrH64kAF8nLXh1gHYHzYbZ6Z6ehrEoxjQ7U=
+			0J/6GV2BYcMeKgAmrnXTCHC7lvmei2iULaC+oBHaft0=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qCmpgEvlNuqXuu2slZ9PHrz53cx96azhnD34sxNyERk=
+			V32mdZpGhgTwRK7i203hUfGa0ijX42YONBUo4ZbB8Qo=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZgKcBqOKgi8QVkXasY+9gDoxUxXvZ1rsyhVk5R6jSEs=
+			FmIpUowhqntfwCr5RpK8EIec86Ljfn8nwhh7Xt0V4Jg=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qCmpgEvlNuqXuu2slZ9PHrz53cx96azhnD34sxNyERk=
+			V32mdZpGhgTwRK7i203hUfGa0ijX42YONBUo4ZbB8Qo=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			R+G0KCYl3d3O8XMRFdY7CGxFXAmHpppEOjR8kJpoljc=
+			9Ic4kOm+NG2aqZ7WAFAWj1IR6UkXcsBwyQZiwV14r6o=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gl8FdXBFJrH64kAF8nLXh1gHYHzYbZ6Z6ehrEoxjQ7U=
+			0J/6GV2BYcMeKgAmrnXTCHC7lvmei2iULaC+oBHaft0=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			lRn0LstctwzzLjEISJYHuBjcccu3QBxVHribIFCbDW4=
+			cTtI/s4uaGc+1BPl1ASgZITK3mNUwkEAtuTnffF47s8=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yvLruVDs8MQrrv285urghVELDFOhoErVOd5GhSGXrKE=
+			meCjN0Wdbt/3zByctzuAh7jiP7tZqEdjAy2ApjMXwyU=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			lRn0LstctwzzLjEISJYHuBjcccu3QBxVHribIFCbDW4=
+			cTtI/s4uaGc+1BPl1ASgZITK3mNUwkEAtuTnffF47s8=
 			</data>
 		</dict>
 		<key>Modules/ResearchKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YnvTk0IjlCIEqBE3RThsh6d9zUk+VOe2o/PBjqYM90c=
+			3joYi5LdhHrBQakFgWkvCA0+VPhXZLTkuUNGpYuU8Dk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -2858,7 +2903,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZPG4a0scQQOJK+pJfoy8u4TkthwMubY+tkAyMBwzPmE=
+			p/XnZ68ne79nXWx9AJFoF3jB2bPgM7FtMwIbYnYXPow=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKAudioFitnessStep.h</key>
@@ -2917,6 +2962,13 @@
 			87VXgpWnLTC8ChKRRQZvEi+rng9PORqTqEHZVesTXSw=
 			</data>
 		</dict>
+		<key>PrivateHeaders/ORKAudiometry.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SM8VY9dN2m4Y5ZhMA9qJgefQ1yMzrt2pwv3JQ29JhjY=
+			</data>
+		</dict>
 		<key>PrivateHeaders/ORKBodyContainerView.h</key>
 		<dict>
 			<key>hash2</key>
@@ -2942,7 +2994,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TicmIAr/4Wn7hAmNznaJK/pG4YMi4ssA57ZT1sIeeX8=
+			KDSsl92AZ1dY0vA6WU5sJhMWKupYVJKx3BzXKHSCOXU=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKConsentDocument_Private.h</key>
@@ -3019,7 +3071,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IkeS6GlxNF8g9YXYXjfNzByXpQ8ApD7ejrdVEninsa8=
+			f6p7U//LstTtOS678WHAyDx5G2j8xkVXEELim7nuA78=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKDeviceMotionRecorder.h</key>
@@ -3033,7 +3085,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LGn/tdrDMNrXM5QzjZgchDpvEd/1ai9fP+oZRF96cBA=
+			muQRLKcazaHtmv5VFxN2Hv6Uol+pbKCq2GX2r0wgr+Q=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKDirectionView.h</key>
@@ -3047,7 +3099,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JfCRgyovitfwmDiIJ9U2t0WLx7+ZOQ2+70Pg7WXVb/s=
+			wPSb3HxZ5mB5fGTaVvg2ntKYD3pMAtGVdpGzHTYj9iU=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKFitnessStep.h</key>
@@ -3124,14 +3176,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TOtya0SGNbKDtXYfDPxNT5eCBVCZUT3fsfOtehzsn6o=
+			u3gNPKoODRHcnUvcZRuAqteuMTXueAv7WsEbCf3xtsM=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKHelpers_Private.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			boO/YeMexshjenA8jOFlQHuFqeX9AjEbx4h7lo02S98=
+			xdJ485Hrx8PneLmeIYvBZOqoiWBDm87C4pTtRdhpxek=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKHolePegTestPlaceStep.h</key>
@@ -3278,7 +3330,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rGQYdLf+np9PayFIOAlXVwTdlb6eQb9D8l0U87JDcPA=
+			nsvrkWFldW/YigSQNeRzYVKxE+aVJEPa06hSOsOFY7Q=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKQuestionStepViewController.h</key>
@@ -3327,7 +3379,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			NzQsYvCllqeZWEncZbUNdNHSoKwK4S85sjvXQl1hLpI=
+			1m2qohf/SiQzqTZa4ZcqMDvRgKv7yVQMfrXPIMRgkec=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKReviewStepViewController.h</key>
@@ -3383,7 +3435,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7KKkx3eKxKkJqhCsOlG/umzuyu9HhaUpe5bio7s/Quw=
+			0hih/Q+hpRUhyCMzm9sY5eukb7CH68Y3pWznEFISV90=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKSpatialSpanMemoryStep.h</key>
@@ -3481,7 +3533,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rxlTF/S+kQKp8Lyonz17Mku5mfI+cBNNGn5j1OIml64=
+			3i19vtDVfW47eGbo4uOuRfYA3P2kP6EPp1I02UbbDTw=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKStreamingAudioRecorder.h</key>
@@ -3544,7 +3596,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			tJXlwNDw0l1SoH31FyHtLQZ74rF9R403SgzW0OJEZRA=
+			97fOCV5ZEq/18dJjjwJdM9AvrFB/izMCeX91Hz4y1jU=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ORKTaskViewController_Private.h</key>
@@ -3719,14 +3771,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Uf9sK1CWXlGP3wU9UD5A5Gz7oSbAX67ss87oRY7MEFo=
+			cv8EyET47ntQPBUWZyDDzoEtrU2Tq8HPfLKjkBi9MvQ=
 			</data>
 		</dict>
 		<key>PrivateHeaders/ResearchKit_Private.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LfQukxtTiaY4bUrJhvMdUS7fbemPzn+AMX5sAruRlQw=
+			yzf/qAjYSMpv5lUbGps5U3KiBI/9b44ON1TleQFaHwQ=
 			</data>
 		</dict>
 		<key>PrivateHeaders/UIView+ORKAccessibility.h</key>
@@ -3734,13 +3786,6 @@
 			<key>hash2</key>
 			<data>
 			l60WXbW52cjRRsjxMTqDnqStKK5mXLtXsCJakwyLw3U=
-			</data>
-		</dict>
-		<key>ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
 			</data>
 		</dict>
 		<key>Sentence1.wav</key>
@@ -3817,7 +3862,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WfBrmtZJeS4CxYh/0jBrWPNUUKqUbZevgtSTU13MHJc=
+			Hx3ShX9UZKiOym9BCADh84UhWlMgGUIKlW6O95shVAE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3826,7 +3871,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			X4dVL2NWFvLbrODPxNBxIbbb9FIx9WBRKaS29JtAbxo=
+			H0UajTddLvvjkT28bLo+leW2vdfMoSsg7Y4Vth8CKdE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3933,7 +3978,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qhn265/Ygw9CUFKzvD56OoN+VJCPJ7qcdZuNbwU8Rlk=
+			4cSqjeeNPJ9kNQPCsgvM7JH979gAuerfJZ6Lp5kyktA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3942,7 +3987,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bKcDd62cJBluFqzcSXVgD51OeqlO/qO7yBkb9I46kjw=
+			fSljduEZl09TovfuYblaC2ZhqqUQQ33a6ehQ5pqKf4c=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3951,7 +3996,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bW5u+feqVCCxQ/IVlmQKbaTB/aZYqEisdAKP8slqNdU=
+			QD2q/c1g5t4RDg3RCBFzsyLI+DP6QAaBpeXkRrl2ofQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3960,7 +4005,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uM2uEko6jJc4xByVFYvLhOH9CjfJnaezKg9IatS7jBg=
+			O9r48dGIxW3WIkLfwjp1a01ryCUiz6SbZA8nkTybWu4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3969,7 +4014,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Dv812cPJlaLfqozMcV8NWc/AIier3P+xxtKBTALOjL0=
+			8Uoz8qqcCL4Y0BdH0DTtd6pHX5YeELcmjsgoKPQuyFg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3987,7 +4032,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			anT9JxHJqv3AEazkJ1egarvCe3eqQeGC447TnZfdblk=
+			4C76S/1r7+0ur4TOaFkQohp6/vlYMyPLhXqMCFoZ+ZY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3996,7 +4041,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sl+44L+QMyspcayLC6acHoBmGCsB5PWfuEAOsKWylio=
+			sFL4/ZJsvljOKlWsgNh35UYYr4G8Eo/US6zswyHMlck=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4005,7 +4050,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			v6gfFnacNQjRVl+JM+b/8AYuW4vogbd74CyFf4nogBY=
+			OajwTdcyX04MciTJE9pPwLGIRFMkbMDRoP+vpJ5pwW4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4014,7 +4059,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Tngd8tG/MG1l/h2W0tfZAbrBzgYrNakfdeT96FXgkD0=
+			SGunJz8VixUQrxl/SUnnV1+shn/scqClW+s7ZqvMRP8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4023,7 +4068,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			US8hZJOC4OafgPlUut/7RRTeZydLz7B8rb8xJltngyg=
+			lhT3z/Tv2TrUGXz4RWAMbdNnbVoBZB2VxiLCxNqA0Ro=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4032,7 +4077,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2ZnEOZEJN/TnaKMhDVRxGViOL9rXZMaviH6/VI+ilZ8=
+			C+3drV5T2jnruwOu623unfe/n1Q1FAbM1caKr0T6eDs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4041,7 +4086,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4djZDGZSS5HvVCviY7HEau7fSNopERc/+NG7bq6HRfE=
+			r9TKfxrpQB2BE+cK5Um7qZeItlt1nZgK/SgtW/Fy+hA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4064,7 +4109,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oql9pPBPPu056UutfaDWIcM7f0zWG7Xo+6rZfkgfe54=
+			KsXBzvwiUA4rpYeuhZr+YtvFAjeN1X735IGjG49pvUU=
+			</data>
+		</dict>
+		<key>frequency_dBSPL_AIRPODSPROV2.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+GIupnCTr4dQZlc312HaXqYIX44hBSVkm/r+eKazT+0=
 			</data>
 		</dict>
 		<key>frequency_dBSPL_AIRPODSV3.plist</key>
@@ -4085,7 +4137,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JrDNnz6etNa8DWtxNIbyc0wN6Ni1cQjYcwrTS4OfkWE=
+			Pxx8xox/B/XfNQwOqY21pC9yFHMQnBv3t7rh+xEzoOg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4094,7 +4146,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			o1tXlG6yV4Ndyww5RJyRjytYC/4YfeSjzrYXrHqmqEo=
+			UuOzAXRayDURUGXjnHmwIfHeOBGZR1J7HcVZW6ezO9I=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4103,7 +4155,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aD1Zr1JzsY4w/VEG8/14As5K2WnziaqZD0hNTSW4NFg=
+			ylL8Pb3LFGjv+Ej1U6HU4Pjvdff1DQ7hI4xW+DnOfQE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4112,7 +4164,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bU5Fu3PUK6jD1RaEoK7YPWSlV5+2mU6jJXJmGWBt2MU=
+			REE+6EaU88XZDbkRBJCR297JFO/gW6A7VUPQ7I6TaRI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4121,7 +4173,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JouKD1ER10XruEKLcCd1UaGdQQLAWvqvNpK9vOMxOkQ=
+			V8lc2O5PnBBb+AKB8V8XFAiBeakZbvhYBJ9C4NFXTpY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4130,7 +4182,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			pWW+aqwL1NyZkcrrcG0Oyl2pj28O4cwElqNpHN3/+cE=
+			o+FL6x2LIVoktzgNB8+RObRyvBJNYYLaX+8lMTh9eWU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4139,7 +4191,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Wurf4T+vKEnFdn80Ovymg//Jwm6g/DClRFCxHJ2298Q=
+			IYSxgru806WQJW9QWa/S/4vKLDgumXkjUbnaYtcp+sU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4148,7 +4200,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0/FrJGqG81v9+JK/9/rnnJGFTZxwaetHmmgVIZoo9NM=
+			HOh9E1Z63vk0WHn9CAgDVfd9IaLNp9VbbTOawHZH0Qs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4157,7 +4209,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R2YsLTUxtxb0fP7xowC22DdWd50XnSD5YPsFK0V3xC8=
+			1telkZMpcJxuAVYDrg6KhfJPfSoiGRCkMQCRiNvlBx4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4166,7 +4218,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			CUsZU+MrKN34tnXqMMTqu2bXHOTAiWTZl42jR3GK2xw=
+			+m8GeMf1JvHwQPGIu0zcvfnWfmZ+a3Mht6LjqyryQz0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4175,7 +4227,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			o91XOCNXwjTrgiUVPyNUGMuCCYuzfQnWt0KzIiG52Sg=
+			r+ycCE0J4l9QHKnBtalF/VPOGCJ7PEXNNIAA0Br/w5M=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4184,7 +4236,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8+y4MYUkGevL3ilbvQUo6cBD+9SJx5TBrJ4G4XMguoo=
+			rAeq2kNEFqKKpVoeFVW/pCUcGP/Mllwt1P56u7QTFbY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4193,7 +4245,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xj3q8XE8mMdanAkiXe3VRu9ZIDt2lAyKL3P/7tEeV4E=
+			JWjVp96T70uMh5g7m7kx5JuGHNRyP7GPzn2U3brRLL4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4202,7 +4254,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cBX7437shRIrRrSOASduK/nDGX85gkJeJQYKtzIj9wk=
+			yTVgx68WLHJ82MouRkryR838DxNDVqKBvS6I7PMw3N0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4228,6 +4280,13 @@
 			bQVGVyXrb8yLiL6DE01kDQR9rQBmEeVDnqlXW/mm/T8=
 			</data>
 		</dict>
+		<key>retspl_AIRPODSPROV2.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bQVGVyXrb8yLiL6DE01kDQR9rQBmEeVDnqlXW/mm/T8=
+			</data>
+		</dict>
 		<key>retspl_AIRPODSV3.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -4246,7 +4305,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zHSDYBqE27738WXrrBw1HI9eOhB0fjeNz/10C4TqPlc=
+			aQ3UYX9RCoCdG4IczEScAWz4LKG41ZTEdgrb8LilriQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4255,7 +4314,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZRvlmw4U9XNV8ekAN8eiRxGH6q5FXE/mb+blkvYZjwg=
+			ELmhBOG2h+HIetwxGcmJ0YpjAGLNkqJ+sWqXuYOGSz0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4264,7 +4323,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HvRvhNqkvDubkRQpA6GrcmrtjBF6OCe1KZS3qvy8l7Y=
+			tWAjk7f2gQErDMLw/6Vocqyj3Pucz7gaZEL3p//jUBQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4280,7 +4339,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ie8HgZjDcyY+PGEPPo2e5cImJa3nhGdWQQoPvlhJxuY=
+			R0O9+ZmT6mPa/NILxPkNoO8SQuULBbacmnZeQ/im1eg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4289,7 +4348,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LsLAInRxLGnLu5Mxf4AYW6zMrEnjale+rVQh2d670gg=
+			1RXJNzjA275rIyJd2sE2pXP8HyhIo0dGVvBBhLbauhM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4298,7 +4357,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6OQSe7n7kdI/HLh6CZdj7XMXZ/L05CPtdCBYWtW4rw8=
+			9WmWCHRdrZqqbp1q8JswNdpC431DHS7G2gJ6bWEgM+w=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4307,7 +4366,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LkwMHLs3XbwU9oPzgFJX0MKnKHzM0IR44GFt052WcDw=
+			JbEDun+52tLj2o6gPhJRDpKQKBXfBWCn2yP57LsNib0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4316,7 +4375,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FDmLndkCkhXjpiOzsrFMIa23+/ODgDH6ljhdU8mt41A=
+			h9LfnEaLZ6lmtMJwjChi/imHBKLFmmwNSEBR1/oPnJk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4342,6 +4401,13 @@
 			vafOPzLz7vVejLDHlcGO5wSYEKJZHoxVxQuGvCbRYYU=
 			</data>
 		</dict>
+		<key>volume_curve_AIRPODSPROV2.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vafOPzLz7vVejLDHlcGO5wSYEKJZHoxVxQuGvCbRYYU=
+			</data>
+		</dict>
 		<key>volume_curve_AIRPODSV3.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -4360,7 +4426,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			v4Ja3uAYTBn5X5W/VStKMvSHE1qYg0MBi34kCy6AD4k=
+			uDTLuEij6hQj5OAU8PT6y/Qu3NEX9gyfRmo8I3H4t/c=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4369,7 +4435,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+KlcEAzg9oUikJjBzZTvX/tbEZS1Lf6j6/jaa7bc9H8=
+			yAwDO+ojssYuV/KG01J4QgjIeVgU6vdJZKiEO37pUbY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4378,7 +4444,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ls77/KlqqLQQ4F7F8gmms2kI+eqzCMGldHFI2egEH68=
+			bfZ9AVPWJRn6RDs5ry2eQc/EJgrJ4Gy0ZhjnMRyZX30=
 			</data>
 			<key>optional</key>
 			<true/>
