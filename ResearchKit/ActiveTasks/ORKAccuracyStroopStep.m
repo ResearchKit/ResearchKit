@@ -45,7 +45,7 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.baseDisplayColor = ORKAccuracyStroopStep.colors[arc4random_uniform(ORKAccuracyStroopStep.colors.count)];
+        self.baseDisplayColor = ORKAccuracyStroopStep.colors[arc4random_uniform(((uint32_t)ORKAccuracyStroopStep.colors.count))];
         self.isColorMatching = YES;
     }
     
@@ -101,7 +101,7 @@
 - (UIColor *)actualDisplayColor {
     return self.isColorMatching ?
     self.baseDisplayColor :
-    ORKAccuracyStroopStep.colors[arc4random_uniform(ORKAccuracyStroopStep.colors.count)];
+    ORKAccuracyStroopStep.colors[arc4random_uniform(((uint32_t) ORKAccuracyStroopStep.colors.count))];
 }
 
 @end

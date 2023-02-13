@@ -1302,7 +1302,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         questionStep2.placeholder = NSLocalizedString("Placeholder without unit.", comment: "")
         
         // This answer format is similar to the previous one, but this time with a display unit.
-        let questionStep3 = ORKQuestionStep(identifier: String(describing: Identifier.numericDisplayUnitQuestionStep), title: NSLocalizedString("Numeric with Display Unit", comment: ""), question: exampleQuestionText, answer: ORKNumericAnswerFormat(style: .decimal, unit: "weeks", displayUnit: "semanas", minimum: 1, maximum: 120, maximumFractionDigits: 1))
+        let questionStep3 = ORKQuestionStep(identifier: String(describing: Identifier.numericDisplayUnitQuestionStep), title: NSLocalizedString("Numeric with Display Unit", comment: ""), question: exampleQuestionText, answer: ORKNumericAnswerFormat(style: .decimal, unit: "weeks", displayUnit: "semanas", minimum: nil, maximum: nil, maximumFractionDigits: 1))
         
         questionStep3.text = exampleDetailText
         questionStep3.placeholder = NSLocalizedString("Placeholder with display unit.", comment: "")
