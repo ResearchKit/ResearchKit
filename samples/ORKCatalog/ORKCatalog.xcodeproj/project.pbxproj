@@ -585,6 +585,7 @@
 		};
 		050B7A0423ECA11400CC1719 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -600,7 +601,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = "$(ORK_CATALOG_VERSION_NUMBER)";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORK_CATALOG_BUNDLE_ID)";
 				PRODUCT_NAME = ORKCatalog;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -696,6 +697,7 @@
 		};
 		869230E01AAA890A00BFE11B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C39E45D2950EFAD00BD96F6 /* ORKCatalog-Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -713,7 +715,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = "$(ORK_CATALOG_VERSION_NUMBER)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKCatalog";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORK_CATALOG_BUNDLE_ID)";
 				PRODUCT_NAME = ORKCatalog;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

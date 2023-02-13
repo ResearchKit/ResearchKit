@@ -603,7 +603,7 @@ static NSString *const _ORKAddedResultsKey = @"addedResults";
     
     self.parentReviewStep = [coder decodeObjectOfClass:[ORKReviewStep class] forKey:_ORKParentReviewStepKey];
     
-    _addedResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKAddedResultsKey];
+    _addedResults = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSArray.self, ORKResult.self]] forKey:_ORKAddedResultsKey];
 }
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
