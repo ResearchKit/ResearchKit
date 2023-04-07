@@ -3,15 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; };
 		335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */; };
 		5D2DEA6324DB618B000A2A5B /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2DEA5D24DB618A000A2A5B /* ORKESerialization.m */; };
-		712977A922B0917A0049213B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; };
-		712977AA22B0917A0049213B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		712977A922B0917A0049213B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; platformFilter = ios; };
+		712977AA22B0917A0049213B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 712977A622B091500049213B /* ResearchKit.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		866DA52E1D63D1EE00C9AF3F /* ORKDataCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */; };
 		86717A901AC0C0FE00AC2A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A8F1AC0C0FE00AC2A23 /* main.m */; };
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
@@ -727,7 +727,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -746,15 +747,21 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -771,15 +778,22 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -797,7 +811,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ORKTestTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORKTest.app/ORKTest";
@@ -814,7 +832,11 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ORKTestTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORKTest.app/ORKTest";
