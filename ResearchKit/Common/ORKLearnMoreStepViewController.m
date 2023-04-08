@@ -57,6 +57,7 @@ static const CGFloat ORKScrollViewCustomContentInset = 40.0;
         self.view.backgroundColor = [UIColor whiteColor];
         self.navigationController.navigationBar.backgroundColor = UIColor.whiteColor;
     }
+    self.navigationController.navigationBar.tintColor = self.view.tintColor;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
