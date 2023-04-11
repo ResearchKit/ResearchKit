@@ -46,7 +46,7 @@ static const CGFloat ContinueButtonHeight = 50.0;
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
         self.isDoneButton = isDoneButton;
-        [self updateContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
+        self.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
 
         [self setUpConstraints];
     }

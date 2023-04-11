@@ -1501,12 +1501,13 @@ static NSString *const _ORKAnsweredSectionsRestoreKey = @"answeredSections";
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
-    _savedAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswersRestoreKey];
-    _savedAnswerDates = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswerDatesRestoreKey];
-    _savedSystemCalendars = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemCalendarsRestoreKey];
-    _savedSystemTimeZones = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemTimeZonesRestoreKey];
-    _originalAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKOriginalAnswersRestoreKey];
-    _answeredSections = [coder decodeObjectOfClass:[NSMutableSet class] forKey:_ORKAnsweredSectionsRestoreKey];
+    NSSet *decodableAnswerTypes = [NSSet setWithObjects:NSMutableDictionary.self, NSString.self, NSNumber.self, NSDate.self, nil];
+    _savedAnswers = [coder decodeObjectOfClasses:decodableAnswerTypes forKey:_ORKSavedAnswersRestoreKey];
+    _savedAnswerDates = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self, NSDate.self]] forKey:_ORKSavedAnswerDatesRestoreKey];
+    _savedSystemCalendars = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self, NSCalendar.self]] forKey:_ORKSavedSystemCalendarsRestoreKey];
+    _savedSystemTimeZones = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self,  NSTimeZone.self]] forKey:_ORKSavedSystemTimeZonesRestoreKey];
+    _originalAnswers = [coder decodeObjectOfClasses:decodableAnswerTypes forKey:_ORKOriginalAnswersRestoreKey];
+    _answeredSections = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableSet.self, NSNumber.self]] forKey:_ORKAnsweredSectionsRestoreKey];
 }
 
 #pragma mark Rotate

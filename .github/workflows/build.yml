@@ -1,0 +1,41 @@
+name: Build XCArchive
+
+on:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build-xcarchive:
+    name: Build XCArchive
+    runs-on: macos-12
+    strategy:
+      matrix:
+        sdk: [iphoneos, iphonesimulator]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Check environment
+      run: |
+          xcodebuild -version
+          swift --version
+          echo Release version: ${{ inputs.version }}
+          echo SDK: ${{ matrix.sdk }}
+    - name: Archive for iOS 
+      run: |
+          xcodebuild archive \
+            -workspace RKWorkspace.xcworkspace \
+            -scheme ResearchKit \
+            -configuration Release \
+            -sdk ${{ matrix.sdk }} \
+            -archivePath './.build/ResearchKit-${{ matrix.sdk }}.xcarchive' \
+            SKIP_INSTALL=NO \
+            BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+            ONLY_ACTIVE_ARCH=NO
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ResearchKit-${{ matrix.sdk }}.xcarchive
+        path: ./.build/ResearchKit-${{ matrix.sdk }}.xcarchive

@@ -567,7 +567,7 @@ static NSString *const _ORKRecorderResultsRestoreKey = @"recorderResults";
     [super decodeRestorableStateWithCoder:coder];
     
     self.finished = [coder decodeBoolForKey:_ORKFinishedRestoreKey];
-    _recorderResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKRecorderResultsRestoreKey];
+    _recorderResults = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSArray.self, ORKResult.self]] forKey:_ORKRecorderResultsRestoreKey];
 }
 
 @end
