@@ -169,6 +169,12 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         case .completed, .earlyTermination, .failed:
             // For any other reason, we also reset restoration data
             resetRestorationDataFor(taskViewController);
+
+            // For testing tintColor propagation: specifically for the tintColor task
+            if taskViewController.result.identifier == String(describing: TaskListRow.Identifier.tintColorTask) {
+                updateForTintColorTaskResult(taskViewController.result)
+            }
+
             break;
 
         default:
@@ -251,6 +257,28 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         }
         
         restorationDataByTaskID[taskID] = nil
+    }
+
+    // MARK: Helpers
+
+    func updateForTintColorTaskResult(_ taskResult: ORKTaskResult) {
+        let stepIdentifier = String(describing: TaskListRow.Identifier.tintColorStep)
+        let stepResult = taskResult.stepResult(forStepIdentifier: stepIdentifier)
+
+        let questionResultIdentifier = String(describing: TaskListRow.Identifier.tintColorQuestion)
+        let result = stepResult?.result(forIdentifier: questionResultIdentifier)
+        guard let questionResult = result as? ORKChoiceQuestionResult else {
+            fatalError("Expected tintColor task result to have a result of type ORKChoiceQuestionResult for identifier \(questionResultIdentifier)")
+        }
+        guard
+            let colorName = questionResult.choiceAnswers?.first as? String,
+            let color = UIColor.value(forKey: colorName) as? UIColor
+        else {
+            fatalError("Couldn't create a color from question result \(questionResult)")
+        }
+
+        // Finally, set the tintColor
+        self.view.window?.tintColor = color
     }
 
 }
