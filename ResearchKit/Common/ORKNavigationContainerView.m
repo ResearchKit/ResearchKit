@@ -162,10 +162,8 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 }
 
 - (void)didMoveToWindow {
-    _appTintColor = ORKViewTintColor(self);
-    
-    _continueButton.normalTintColor = _appTintColor;
-    _skipButton.normalTintColor = _appTintColor;
+    [self udpateTintColor];
+    [super didMoveToWindow];
 }
 
 - (void)setSkipButtonStyle:(ORKNavigationContainerButtonStyle)skipButtonStyle {
@@ -559,8 +557,15 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 }
 
 - (void)tintColorDidChange {
+    [self udpateTintColor];
     [super tintColorDidChange];
-    [self didMoveToWindow];
+}
+
+- (void)udpateTintColor {
+    _appTintColor = ORKViewTintColor(self);
+    
+    _continueButton.normalTintColor = _appTintColor;
+    _skipButton.normalTintColor = _appTintColor;
 }
 
 @end
