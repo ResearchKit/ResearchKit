@@ -123,7 +123,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case contrastSensitivityPeakLandoltC
     case videoInstruction
     case webView
-    
+    case tintColor
     
     class TaskListRowSection {
         var title: String
@@ -213,6 +213,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 ]),
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
+                    .tintColor,
                     .videoInstruction,
                     .webView
                 ])]
@@ -409,7 +410,10 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .webView:
             return NSLocalizedString("Web View", comment: "")
-            
+
+        case .tintColor:
+            return NSLocalizedString("Tint Color", comment: "")
+
         }
     }
     
@@ -615,6 +619,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case webViewTask
         case webViewStep
         
+        // Tint color
+        case tintColorTask
+        case tintColorStep
+        case tintColorQuestion
+
     }
     
     // MARK: Properties
@@ -799,6 +808,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .contrastSensitivityPeakLandoltC:
             return contrastSensitivityPeakLandoltC
             
+        case .tintColor:
+            return tintColor
+
         case .videoInstruction:
             return videoInstruction
             
@@ -2060,7 +2072,32 @@ enum TaskListRow: Int, CustomStringConvertible {
         webViewStep.showSignatureAfterContent = true
         return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
     }
-    
+
+    private var tintColor: ORKTask {
+        let customStep = ORKFormStep(identifier: String(describing: Identifier.tintColorStep))
+        customStep.formItems = [
+            ORKFormItem(
+                identifier: String(describing: Identifier.tintColorQuestion),
+                text: NSLocalizedString("Select a Tint Color", comment: ""),
+                detailText: NSLocalizedString("The tint color you select will be propagated to the app window after the task completes", comment: ""),
+                learnMoreItem: nil,
+                showsProgress: false,
+                answerFormat: ORKAnswerFormat.choiceAnswerFormat(
+                    with: .singleChoice,
+                    textChoices: [
+                        ORKTextChoice(text: "Green", value: NSString(string: #keyPath(UIColor.green))),
+                        ORKTextChoice(text: "Red", value: NSString(string: #keyPath(UIColor.red))),
+                        ORKTextChoice(text: "Yellow", value: NSString(string: #keyPath(UIColor.yellow))),
+                        ORKTextChoice(text: "Blue", value: NSString(string: #keyPath(UIColor.blue))),
+                    ]
+                ),
+                tagText: nil,
+                optional: true
+            )
+        ]
+        return ORKOrderedTask(identifier: String(describing: Identifier.tintColorTask), steps: [customStep])
+    }
+
     // MARK: `ORKTask` Reused Text Convenience
     
     private var exampleDescription: String {
