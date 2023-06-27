@@ -32,7 +32,7 @@ ORK_FRAMEWORK_BUILD_NUMBER_CI_TRUE = $(CI_BUILD_NUMBER)
 ORK_FRAMEWORK_BUILD_NUMBER_CI_FALSE = $(ORK_FRAMEWORK_VERSION_NUMBER) // When not building in CI, assume build and version number are the same
 ORK_FRAMEWORK_BUILD_NUMBER_CI_ = $(ORK_FRAMEWORK_BUILD_NUMBER_CI_FALSE)
 
-
+CURRENT_PROJECT_VERSION = $(ORK_FRAMEWORK_BUILD_NUMBER)
 
 #include? "samples/ORKCatalog/ResearchKit-Shared.xcconfig"
 #include? "../xcconfig/ResearchKit-Shared.xcconfig"
