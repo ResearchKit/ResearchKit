@@ -6250,6 +6250,13 @@
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
+      "offset": 2217,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
       "offset": 2354,
       "length": 1,
       "value": "0"
@@ -6299,9 +6306,219 @@
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "StringLiteral",
+      "offset": 3888,
+      "length": 26,
+      "value": "\"iCNDialPointerWithShadow\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4260,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4304,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4350,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4653,
+      "length": 1,
+      "value": "7"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4897,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4924,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 5241,
+      "length": 4,
+      "value": "30.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5364,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5409,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5498,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5560,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5596,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5641,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5673,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5912,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5954,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 6119,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6126,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6480,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6520,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6566,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6688,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7159,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
+      "kind": "StringLiteral",
       "offset": 1682,
       "length": 17,
       "value": "\"ResearchKit.EyeActivitySlider\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1979,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2538,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 2910,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 2960,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3286,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3336,
+      "length": 3,
+      "value": "0.0"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
@@ -6309,6 +6526,83 @@
       "offset": 1710,
       "length": 26,
       "value": "\"ResearchKit.ORKLandoltCStepContentView\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2364,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2897,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 3011,
+      "length": 10,
+      "value": "\"Left Eye\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 3024,
+      "length": 11,
+      "value": "\"Right Eye\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 3383,
+      "length": 3,
+      "value": "5.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3459,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3682,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3844,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3899,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4645,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4803,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
@@ -6341,6 +6635,251 @@
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
+      "offset": 5618,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5977,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6120,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 6209,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 6219,
+      "length": 4,
+      "value": "20.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6406,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 6530,
+      "length": 65,
+      "value": "\"Move the dial to where you think the opening in the letter was.\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 6687,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 6697,
+      "length": 4,
+      "value": "20.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6742,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 6898,
+      "length": 4,
+      "value": "60.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 6935,
+      "length": 6,
+      "value": "\"Next\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7246,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7324,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7401,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7474,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 7805,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 8168,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 8214,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 8526,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 8901,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 8947,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 9249,
+      "length": 3,
+      "value": "0.8"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 9295,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 9610,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 9981,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 10027,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 10328,
+      "length": 3,
+      "value": "0.8"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 10374,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 10677,
+      "length": 3,
+      "value": "0.8"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 10723,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 11024,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 11070,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 11369,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 11415,
+      "length": 5,
+      "value": "-20.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
+      "kind": "StringLiteral",
       "offset": 4883,
       "length": 19,
       "value": "\"ResearchKit.ORKLandoltCStepView\""
@@ -6354,6 +6893,55 @@
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "FloatLiteral",
+      "offset": 2029,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "FloatLiteral",
+      "offset": 2351,
+      "length": 3,
+      "value": "2.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "FloatLiteral",
+      "offset": 2391,
+      "length": 3,
+      "value": "2.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "FloatLiteral",
+      "offset": 2580,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2608,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "StringLiteral",
+      "offset": 2788,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4009,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "StringLiteral",
       "offset": 1682,
       "length": 10,
@@ -6393,6 +6981,41 @@
       "offset": 1820,
       "length": 19,
       "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2279,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2596,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
+      "kind": "StringLiteral",
+      "offset": 2950,
+      "length": 10,
+      "value": "\"stepType\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
+      "kind": "StringLiteral",
+      "offset": 3106,
+      "length": 11,
+      "value": "\"eyeToTest\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3666,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
@@ -6535,6 +7158,153 @@
       "value": "20.0"
     },
     {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4051,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4125,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 5027,
+      "length": 12,
+      "value": "\"colorLabel\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 5068,
+      "length": 17,
+      "value": "\"buttonStackView\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 5186,
+      "length": 59,
+      "value": "\"V:|-(==30)-[colorLabel]-(>=10)-[buttonStackView]-(==30)-|\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 5818,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6189,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6235,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6669,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6719,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3144,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3674,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4245,
+      "length": 176,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4316,
+      "length": 1,
+      "value": "\"; color: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4336,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4339,
+      "length": 4,
+      "value": "\" text: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4356,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4359,
+      "length": 13,
+      "value": "\" colorSelected: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4394,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4397,
+      "length": 1,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4420,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
       "kind": "IntegerLiteral",
       "offset": 1740,
@@ -6549,6 +7319,146 @@
       "value": "10"
     },
     {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2049,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2195,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2233,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2272,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "StringLiteral",
+      "offset": 2473,
+      "length": 69,
+      "value": "\"number of attempts should be greater or equal to \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "StringLiteral",
+      "offset": 2541,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2618,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2703,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3435,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2853,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "FloatLiteral",
+      "offset": 2952,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "FloatLiteral",
+      "offset": 3049,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3131,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4051,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4203,
+      "length": 286,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4285,
+      "length": 1,
+      "value": "\";\nOutcome: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4334,
+      "length": 1,
+      "value": "\"; LetterAngle: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4383,
+      "length": 1,
+      "value": "\";\nSliderAngle: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4440,
+      "length": 1,
+      "value": "\"; Score: \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4477,
+      "length": 46,
+      "value": "\"\""
+    },
+    {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
       "offset": 1708,
@@ -6556,11 +7466,53 @@
       "value": "\"ResearchKit.ORKLandoltCResult\""
     },
     {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/ORKStepNavigationRule.swift",
+      "kind": "Array",
+      "offset": 2020,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/ORKStepNavigationRule.swift",
+      "kind": "Array",
+      "offset": 2074,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/ORKStepNavigationRule.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2487,
+      "length": 4,
+      "value": "true"
+    },
+    {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
       "kind": "FloatLiteral",
       "offset": 1869,
       "length": 5,
       "value": "115.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2197,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3437,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3480,
+      "length": 2,
+      "value": "16"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
@@ -6575,6 +7527,321 @@
       "offset": 3890,
       "length": 2,
       "value": "20"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4205,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4313,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4459,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4560,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4566,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4572,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4621,
+      "length": 2,
+      "value": "16"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4739,
+      "length": 2,
+      "value": "12"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5600,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5617,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 5736,
+      "length": 23,
+      "value": "\"checkmark.circle.fill\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 5762,
+      "length": 8,
+      "value": "\"circle\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5855,
+      "length": 2,
+      "value": "25"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5867,
+      "length": 2,
+      "value": "25"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6054,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6119,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6169,
+      "length": 2,
+      "value": "12"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 6366,
+      "length": 36,
+      "value": "\"arrow.up.left.and.arrow.down.right\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6471,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6483,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6611,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6664,
+      "length": 3,
+      "value": "0.4"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6696,
+      "length": 3,
+      "value": "5.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7278,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7295,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7448,
+      "length": 3,
+      "value": "100"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "FloatLiteral",
+      "offset": 7537,
+      "length": 4,
+      "value": "0.23"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 8003,
+      "length": 6,
+      "value": "\"Done\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 9773,
+      "length": 60,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 9792,
+      "length": 1,
+      "value": "\"-\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/Common\/TextChoiceView.swift",
+      "kind": "StringLiteral",
+      "offset": 9832,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1787,
+      "length": 3,
+      "value": "180"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "FloatLiteral",
+      "offset": 2461,
+      "length": 5,
+      "value": "180.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "FloatLiteral",
+      "offset": 2517,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "FloatLiteral",
+      "offset": 2541,
+      "length": 5,
+      "value": "360.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2778,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2924,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2955,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3043,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3100,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3107,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3196,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3381,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3421,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3619,
+      "length": 3,
+      "value": "360"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
@@ -6752,6 +8019,153 @@
       "value": "\"\""
     },
     {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2859,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2949,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3761,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 4332,
+      "length": 3,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 4672,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 5019,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 5367,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 5716,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 5937,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6256,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7564,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7796,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7820,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8900,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8956,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9011,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9068,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9181,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9236,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9290,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9346,
+      "length": 4,
+      "value": "true"
+    },
+    {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
       "offset": 2139,
@@ -6775,6 +8189,27 @@
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
+      "offset": 2417,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3117,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3123,
+      "length": 3,
+      "value": "100"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "FloatLiteral",
       "offset": 3592,
       "length": 3,
       "value": "0.5"
@@ -6791,7 +8226,7 @@
       "kind": "IntegerLiteral",
       "offset": 4087,
       "length": 3,
-      "value": "90"
+      "value": "-90"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
@@ -6834,6 +8269,125 @@
       "offset": 4460,
       "length": 3,
       "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5255,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "StringLiteral",
+      "offset": 5545,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5941,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5947,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6076,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6082,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 6494,
+      "length": 5,
+      "value": "100.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 6505,
+      "length": 5,
+      "value": "100.0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7058,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8142,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8148,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8269,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8275,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 9093,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 10376,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "FloatLiteral",
+      "offset": 10395,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10402,
+      "length": 1,
+      "value": "5"
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
@@ -7012,6 +8566,125 @@
     },
     {
       "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2259,
+      "length": 11,
+      "value": "\"iPhone5,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2272,
+      "length": 11,
+      "value": "\"iPhone5,2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2310,
+      "length": 11,
+      "value": "\"iPhone5,3\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2323,
+      "length": 11,
+      "value": "\"iPhone5,4\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2362,
+      "length": 11,
+      "value": "\"iPhone6,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2375,
+      "length": 11,
+      "value": "\"iPhone6,2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2414,
+      "length": 11,
+      "value": "\"iPhone7,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2456,
+      "length": 11,
+      "value": "\"iPhone7,2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2494,
+      "length": 11,
+      "value": "\"iPhone8,2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2537,
+      "length": 11,
+      "value": "\"iPhone8,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2576,
+      "length": 11,
+      "value": "\"iPhone9,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2589,
+      "length": 11,
+      "value": "\"iPhone9,3\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2627,
+      "length": 11,
+      "value": "\"iPhone9,2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2640,
+      "length": 11,
+      "value": "\"iPhone9,4\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2682,
+      "length": 11,
+      "value": "\"iPhone8,4\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2730,
+      "length": 9,
+      "value": "\"iPod5,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2771,
+      "length": 9,
+      "value": "\"iPod7,1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "IntegerLiteral",
       "offset": 2992,
       "length": 3,
@@ -7037,6 +8710,48 @@
       "offset": 3097,
       "length": 4,
       "value": "1.15"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 3676,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3785,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4184,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "FloatLiteral",
+      "offset": 4242,
+      "length": 3,
+      "value": "2.9"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4267,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4306,
+      "length": 5,
+      "value": "false"
     }
   ]
 }
