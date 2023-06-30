@@ -72,7 +72,7 @@ The primary *ResearchKit framework* codebase supports *iOS* and requires *Xcode 
 *ResearchKit framework* has a *Base SDK* version of *8.0*, meaning that apps using the *ResearchKit
 framework* can run on devices with *iOS 8.0* or newer.
 
-Integrating the ResearchKit framework using the [Swift Package Manager](https://www.swift.org/package-manager/) requires Xcode 14.3 and Swift 5.8 or newer.
+Integrating the ResearchKit framework using the [Swift Package Manager](https://www.swift.org/package-manager/) requires Xcode 14.2 and Swift 5.7 or newer.
 
 Note: You can also import *ResearchKit* into your project using a
  [alternative installation](./docs-standalone/alternative-installation.md) such as *CocoaPods*, *Carthage*, or as a dynamic framework using previous Xcode versions.
