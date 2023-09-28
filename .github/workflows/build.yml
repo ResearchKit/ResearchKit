@@ -30,9 +30,6 @@ jobs:
           echo SDK: ${{ matrix.sdk }}
     - name: Archive for iOS 
       run: |
-          CI=true
-          CI_BUILD_NUMBER=${{ inputs.version }}
-
           xcodebuild archive \
             -workspace RKWorkspace.xcworkspace \
             -scheme ResearchKit \
@@ -42,6 +39,9 @@ jobs:
             SKIP_INSTALL=NO \
             BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
             ONLY_ACTIVE_ARCH=NO
+      env:
+        CI: true
+        CI_BUILD_NUMBER: ${{ inputs.version }}
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
