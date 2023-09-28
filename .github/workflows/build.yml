@@ -4,6 +4,11 @@ on:
   pull_request:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      version:
+        description: 'The version number of the framework embedded in the XCArchives'
+        type: string
+        required: true
 
 jobs:
   build-xcarchive:
@@ -25,6 +30,9 @@ jobs:
           echo SDK: ${{ matrix.sdk }}
     - name: Archive for iOS 
       run: |
+          CI=true
+          ORK_FRAMEWORK_BUILD_NUMBER=${{ inputs.version }}
+
           xcodebuild archive \
             -workspace RKWorkspace.xcworkspace \
             -scheme ResearchKit \

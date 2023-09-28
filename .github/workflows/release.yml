@@ -12,6 +12,8 @@ jobs:
   build-xcarchive:
     name: Build XCArchive
     uses: ./.github/workflows/build.yml
+    with:
+      version: ${{ inputs.version }}
   create-xcframework:
     name: Build XCFramework
     runs-on: macos-13
