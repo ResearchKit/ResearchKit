@@ -572,6 +572,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
           }
         ]
       },
@@ -679,6 +686,13 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
           },
           {
             "kind": "Conformance",
@@ -4132,6 +4146,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
           }
         ]
       },
@@ -5284,6 +5305,13 @@
           },
           {
             "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "__DefaultCustomPlaygroundQuickLookable",
             "printedName": "__DefaultCustomPlaygroundQuickLookable",
             "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
@@ -5867,6 +5895,34 @@
             "mangledName": "$sSY"
           }
         ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "Import",
+        "name": "DeveloperToolsSupport",
+        "printedName": "DeveloperToolsSupport",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
       },
       {
         "kind": "TypeDecl",
@@ -8752,6 +8808,741 @@
       "offset": 4306,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 737,
+      "length": 14,
+      "value": "\"ContrastExam\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 869,
+      "length": 6,
+      "value": "\"Face\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1009,
+      "length": 14,
+      "value": "\"GuideCorners\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1153,
+      "length": 12,
+      "value": "\"VisualExam\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1289,
+      "length": 9,
+      "value": "\"airpods\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1431,
+      "length": 14,
+      "value": "\"airpods_gen3\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1576,
+      "length": 13,
+      "value": "\"airpods_max\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1720,
+      "length": 13,
+      "value": "\"airpods_pro\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1863,
+      "length": 12,
+      "value": "\"amslerGrid\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2005,
+      "length": 12,
+      "value": "\"annotation\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2145,
+      "length": 11,
+      "value": "\"arrowLeft\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2302,
+      "length": 20,
+      "value": "\"arrowLeftLandscape\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2452,
+      "length": 12,
+      "value": "\"arrowRight\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2612,
+      "length": 21,
+      "value": "\"arrowRightLandscape\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2763,
+      "length": 12,
+      "value": "\"audioGraph\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2905,
+      "length": 12,
+      "value": "\"audiometry\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3045,
+      "length": 11,
+      "value": "\"checkmark\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3185,
+      "length": 12,
+      "value": "\"consent_01\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3326,
+      "length": 12,
+      "value": "\"consent_02\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3467,
+      "length": 12,
+      "value": "\"consent_03\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3608,
+      "length": 12,
+      "value": "\"consent_04\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3749,
+      "length": 12,
+      "value": "\"consent_05\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3890,
+      "length": 12,
+      "value": "\"consent_06\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4031,
+      "length": 12,
+      "value": "\"consent_07\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4167,
+      "length": 9,
+      "value": "\"earpods\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4312,
+      "length": 15,
+      "value": "\"handtapping01\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4463,
+      "length": 15,
+      "value": "\"handtapping02\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4608,
+      "length": 12,
+      "value": "\"headphones\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4755,
+      "length": 15,
+      "value": "\"heart-fitness\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4898,
+      "length": 11,
+      "value": "\"heartbeat\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5043,
+      "length": 14,
+      "value": "\"holepegtest1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5191,
+      "length": 14,
+      "value": "\"holepegtest2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5339,
+      "length": 14,
+      "value": "\"holepegtest3\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5487,
+      "length": 14,
+      "value": "\"holepegtest4\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5635,
+      "length": 14,
+      "value": "\"holepegtest5\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5783,
+      "length": 14,
+      "value": "\"holepegtest6\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5955,
+      "length": 26,
+      "value": "\"iCNDialPointerWithShadow\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6113,
+      "length": 13,
+      "value": "\"iCNLandoltC\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6268,
+      "length": 19,
+      "value": "\"knee_maximum_left\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6431,
+      "length": 20,
+      "value": "\"knee_maximum_right\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6589,
+      "length": 17,
+      "value": "\"knee_start_left\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6746,
+      "length": 18,
+      "value": "\"knee_start_right\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6886,
+      "length": 8,
+      "value": "\"memory\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7042,
+      "length": 22,
+      "value": "\"memory-second-screen\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7206,
+      "length": 18,
+      "value": "\"orangeGrayCircle\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7358,
+      "length": 14,
+      "value": "\"pdfThumbnail\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7505,
+      "length": 14,
+      "value": "\"phone-memory\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7666,
+      "length": 22,
+      "value": "\"phone-tower-of-hanoi\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7836,
+      "length": 21,
+      "value": "\"phonefrequencywaves\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7991,
+      "length": 14,
+      "value": "\"phoneholepeg\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8133,
+      "length": 11,
+      "value": "\"phonepsat\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8274,
+      "length": 12,
+      "value": "\"phoneshake\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8428,
+      "length": 18,
+      "value": "\"phoneshakecircle\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8586,
+      "length": 17,
+      "value": "\"phonesoundwaves\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8747,
+      "length": 19,
+      "value": "\"phonestroopbutton\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8908,
+      "length": 18,
+      "value": "\"phonestrooplabel\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9060,
+      "length": 14,
+      "value": "\"phonetapping\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9219,
+      "length": 20,
+      "value": "\"phonetapping_notap\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9369,
+      "length": 12,
+      "value": "\"phonewaves\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9528,
+      "length": 21,
+      "value": "\"phonewaves_inverted\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9694,
+      "length": 20,
+      "value": "\"phonewaves_tapping\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9856,
+      "length": 18,
+      "value": "\"phonewavesspeech\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10012,
+      "length": 16,
+      "value": "\"phonewavestext\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10146,
+      "length": 6,
+      "value": "\"play\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10274,
+      "length": 8,
+      "value": "\"pocket\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10408,
+      "length": 10,
+      "value": "\"psatDice\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10540,
+      "length": 8,
+      "value": "\"search\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10668,
+      "length": 7,
+      "value": "\"share\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 10825,
+      "length": 23,
+      "value": "\"shoulder_maximum_left\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11000,
+      "length": 24,
+      "value": "\"shoulder_maximum_right\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11170,
+      "length": 21,
+      "value": "\"shoulder_start_left\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11339,
+      "length": 22,
+      "value": "\"shoulder_start_right\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11491,
+      "length": 12,
+      "value": "\"sittingman\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11659,
+      "length": 25,
+      "value": "\"socioEconomicLadderRung\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11820,
+      "length": 15,
+      "value": "\"speechInNoise\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 11993,
+      "length": 27,
+      "value": "\"timed-walkingman-outbound\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 12174,
+      "length": 25,
+      "value": "\"timed-walkingman-return\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 12319,
+      "length": 7,
+      "value": "\"timer\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 12492,
+      "length": 30,
+      "value": "\"touchAbilityHorizontalScroll\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 12678,
+      "length": 25,
+      "value": "\"touchAbilityInstruction\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 12847,
+      "length": 19,
+      "value": "\"touchAbilityPinch\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 13016,
+      "length": 22,
+      "value": "\"touchAbilityRotation\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 13184,
+      "length": 20,
+      "value": "\"touchAbilitySwipe1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 13350,
+      "length": 20,
+      "value": "\"touchAbilitySwipe2\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 13516,
+      "length": 20,
+      "value": "\"touchAbilitySwipe3\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 13682,
+      "length": 20,
+      "value": "\"touchAbilitySwipe4\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 13842,
+      "length": 17,
+      "value": "\"touchAbilityTap\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14021,
+      "length": 28,
+      "value": "\"touchAbilityVerticalScroll\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14211,
+      "length": 30,
+      "value": "\"tower-of-hanoi-second-screen\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14373,
+      "length": 13,
+      "value": "\"trailmaking\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14518,
+      "length": 13,
+      "value": "\"tremortest1\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14665,
+      "length": 14,
+      "value": "\"tremortest3a\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14813,
+      "length": 14,
+      "value": "\"tremortest3b\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 14961,
+      "length": 14,
+      "value": "\"tremortest4a\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15109,
+      "length": 14,
+      "value": "\"tremortest4b\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15257,
+      "length": 14,
+      "value": "\"tremortest5a\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15405,
+      "length": 14,
+      "value": "\"tremortest5b\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15553,
+      "length": 14,
+      "value": "\"tremortest6a\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15701,
+      "length": 14,
+      "value": "\"tremortest6b\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15847,
+      "length": 13,
+      "value": "\"tremortest7\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 15998,
+      "length": 16,
+      "value": "\"tremortestLeft\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 16154,
+      "length": 17,
+      "value": "\"tremortestRight\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 16301,
+      "length": 12,
+      "value": "\"turnaround\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 16443,
+      "length": 12,
+      "value": "\"walkingman\""
+    },
+    {
+      "filePath": "\/Users\/runner\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-bnwdlpfnofcnymdenwvnbddiuwwz\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-iphoneos\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 16600,
+      "length": 20,
+      "value": "\"walkingman_monitor\""
     }
   ]
 }

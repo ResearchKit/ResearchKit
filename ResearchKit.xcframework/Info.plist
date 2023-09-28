@@ -5,6 +5,8 @@
 	<key>AvailableLibraries</key>
 	<array>
 		<dict>
+			<key>BinaryPath</key>
+			<string>ResearchKit.framework/ResearchKit</string>
 			<key>LibraryIdentifier</key>
 			<string>ios-arm64_x86_64-simulator</string>
 			<key>LibraryPath</key>
@@ -20,6 +22,8 @@
 			<string>simulator</string>
 		</dict>
 		<dict>
+			<key>BinaryPath</key>
+			<string>ResearchKit.framework/ResearchKit</string>
 			<key>LibraryIdentifier</key>
 			<string>ios-arm64</string>
 			<key>LibraryPath</key>
