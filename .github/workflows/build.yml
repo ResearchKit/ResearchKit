@@ -31,7 +31,7 @@ jobs:
     - name: Archive for iOS 
       run: |
           CI=true
-          ORK_FRAMEWORK_BUILD_NUMBER=${{ inputs.version }}
+          CI_BUILD_NUMBER=${{ inputs.version }}
 
           xcodebuild archive \
             -workspace RKWorkspace.xcworkspace \
