@@ -40,8 +40,8 @@ jobs:
             BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
             ONLY_ACTIVE_ARCH=NO
       env:
-        CI: true
-        CI_BUILD_NUMBER: ${{ inputs.version }}
+        CI: TRUE
+        ORK_FRAMEWORK_VERSION_NUMBER: ${{ inputs.version }}
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:

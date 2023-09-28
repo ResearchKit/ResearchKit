@@ -19,6 +19,6 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(ORK_FRAMEWORK_BUILD_NUMBER)</string>
+	<string>$(ORK_FRAMEWORK_VERSION_NUMBER)</string>
 </dict>
 </plist>
