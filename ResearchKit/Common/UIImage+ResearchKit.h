@@ -35,5 +35,6 @@
 @interface UIImage (ResearchKit)
 
 - (UIImage *)ork_flippedImage:(UIImageOrientation)orientation;
+- (UIImage *)ork_imageWithRenderingModeForUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle API_AVAILABLE(ios(12.0));
 
 @end

@@ -67,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL useExtendedPadding;
 
+@property (nonatomic) BOOL shouldAutomaticallyAdjustImageTintColor;
+
 @property (nonatomic, weak) id<ORKStepContentLearnMoreItemDelegate> delegate;
 
 - (instancetype)initWithStandardPadding;

@@ -4,3 +4,4 @@
 
 #import "ResearchKit.h"
 #import "ResearchKit_Private.h"
+#import "ORKQuestionStepViewController+TestingSupport.h"
