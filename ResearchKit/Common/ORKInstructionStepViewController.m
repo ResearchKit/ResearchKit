@@ -71,6 +71,7 @@
     if (self.step && [self isViewLoaded]) {
         self.stepView = [[ORKInstructionStepContainerView alloc] initWithInstructionStep:[self instructionStep]];
         _stepView.delegate = self;
+        _stepView.stepContentView.shouldAutomaticallyAdjustImageTintColor = [self instructionStep].shouldAutomaticallyAdjustImageTintColor;
         _stepView.stepContentView.bodyContainerView.bodyItemDelegate = self;
         [self.view addSubview:self.stepView];
         [self setNavigationFooterView];

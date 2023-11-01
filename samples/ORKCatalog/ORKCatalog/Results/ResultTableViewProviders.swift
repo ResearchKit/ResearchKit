@@ -94,6 +94,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
     case is ORKScaleQuestionResult:
         providerType = ScaleQuestionResultTableViewProvider.self
         
+    case is ORKSESQuestionResult:
+        providerType = SESQuestionResultTableViewProvider.self
+        
     case is ORKTextQuestionResult:
         providerType = TextQuestionResultTableViewProvider.self
         
@@ -493,6 +496,20 @@ class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKSESQuestionResult` instance.
+class SESQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let rungQuestionResult = result as! ORKSESQuestionResult
+        
+        return super.resultRowsForSection(section) + [
+            // The value returned from the socieoeconomic rung selected.
+            ResultRow(text: "rungPicked", detail: rungQuestionResult.rungPicked)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKScaleQuestionResult` instance.
 class ScaleQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
@@ -544,6 +561,7 @@ class TimeOfDayQuestionResultTableViewProvider: ResultTableViewProvider {
         
         // Format the date components received in the result.
         let dateComponentsFormatter = DateComponentsFormatter()
+        dateComponentsFormatter.unitsStyle = .full
         let dateComponentsAnswerText = dateComponentsFormatter.string(from: questionResult.dateComponentsAnswer!)
 
         return super.resultRowsForSection(section) + [

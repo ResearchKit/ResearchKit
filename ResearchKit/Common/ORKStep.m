@@ -118,6 +118,7 @@
     step.iconImage = self.iconImage;
     step.bodyItems = [_bodyItems copy];
     step.earlyTerminationConfiguration = self.earlyTerminationConfiguration;
+    step.shouldAutomaticallyAdjustImageTintColor = _shouldAutomaticallyAdjustImageTintColor;
 #endif
 
     return step;
@@ -152,6 +153,7 @@
             && ORKEqualObjects(self.iconImage, castObject.iconImage)
             && ORKEqualObjects(self.bodyItems, castObject.bodyItems)
             && ORKEqualObjects(self.earlyTerminationConfiguration, castObject.earlyTerminationConfiguration)
+            && _shouldAutomaticallyAdjustImageTintColor == castObject->_shouldAutomaticallyAdjustImageTintColor
 #endif
             );
 }
@@ -160,7 +162,7 @@
     // Ignore the task reference - it's not part of the content of the step.
     return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment  ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0)
 #if TARGET_OS_IOS
-    ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ _bodyItems.hash ^_earlyTerminationConfiguration.hash
+    ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ _bodyItems.hash ^_earlyTerminationConfiguration.hash ^ (_shouldAutomaticallyAdjustImageTintColor ? 0xf : 0x0)
 #endif
     ;
 }
@@ -195,6 +197,7 @@
         ORK_DECODE_OBJ_ARRAY(aDecoder, bodyItems, ORKBodyItem);
         ORK_DECODE_BOOL(aDecoder, buildInBodyItems);
         ORK_DECODE_OBJ_CLASS(aDecoder, earlyTerminationConfiguration, ORKEarlyTerminationConfiguration);
+        ORK_DECODE_BOOL(aDecoder, shouldAutomaticallyAdjustImageTintColor);
 #endif
     }
     return self;
@@ -221,6 +224,7 @@
     ORK_ENCODE_OBJ(aCoder, bodyItems);
     ORK_ENCODE_BOOL(aCoder, buildInBodyItems);
     ORK_ENCODE_OBJ(aCoder, earlyTerminationConfiguration);
+    ORK_ENCODE_BOOL(aCoder, shouldAutomaticallyAdjustImageTintColor);
 #endif
     if ([_task isKindOfClass:[ORKOrderedTask class]]) {
         ORK_ENCODE_OBJ(aCoder, task);

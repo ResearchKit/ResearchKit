@@ -48,8 +48,6 @@
     if (self) {
         if (steps) {
             _steps = [steps copy];
-        } else {
-            _steps = @[];
         }
         _resultSource = resultSource;
         _excludeInstructionSteps = NO;
