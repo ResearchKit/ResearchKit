@@ -15,19 +15,17 @@ on:
         description: 'The version number of the framework embedded in the XCArchives. This version number is also used for the release tag.'
         type: string
         required: true
-      configuration:
-        description: 'The build configuration to use when archiving the scheme, either Debug or Release.'
-        type: string
-        required: false
-        default: 'Release'
 
 jobs:
   create-xcframework-and-release-workflow:
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
-      workspaceFile: 'RKWorkspace.xcworkspace'
-      xcFrameworkName: 'ResearchKit'
-      scheme: 'ResearchKit'
+      workspaceFile: RKWorkspace.xcworkspace
+      xcFrameworkName: ResearchKit
+      scheme: ResearchKit
       version: ${{ inputs.version }}
-      configuration: ${{ inputs.configuration }}
+      configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'
+      user: PaulsAutomationBot
+    secrets:
+      access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

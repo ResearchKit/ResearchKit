@@ -17,19 +17,14 @@ on:
         description: 'The version number of the framework embedded in the XCArchives.'
         type: string
         required: true
-      configuration:
-        description: 'The build configuration to use when archiving the scheme, either Debug or Release.'
-        type: string
-        required: false
-        default: 'Release'
 
 jobs:
   build-xcarchive:
     uses: StanfordBDHG/.github/.github/workflows/archive.yml@v2
     with:
-      workspaceFile: 'RKWorkspace.xcworkspace'
-      xcArchiveName: 'ResearchKit'
-      scheme: 'ResearchKit'
+      workspaceFile: RKWorkspace.xcworkspace
+      xcArchiveName: ResearchKit
+      scheme: ResearchKit
       version: ${{ inputs.version }}
-      configuration: ${{ inputs.configuration || 'Release' }}
+      configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'

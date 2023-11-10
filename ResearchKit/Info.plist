@@ -15,10 +15,10 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(ORK_FRAMEWORK_VERSION_NUMBER)</string>
+	<string>$(VERSION_NUMBER)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(ORK_FRAMEWORK_VERSION_NUMBER)</string>
+	<string>$(VERSION_NUMBER)</string>
 </dict>
 </plist>

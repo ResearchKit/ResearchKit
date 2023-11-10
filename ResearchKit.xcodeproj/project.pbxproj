@@ -5632,7 +5632,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "$(ORK_FRAMEWORK_VERSION_NUMBER)";
+				MARKETING_VERSION = "$(VERSION_NUMBER)";
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MODULEMAP_PRIVATE_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -5712,7 +5712,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "$(ORK_FRAMEWORK_VERSION_NUMBER)";
+				MARKETING_VERSION = "$(VERSION_NUMBER)";
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MODULEMAP_PRIVATE_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
