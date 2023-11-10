@@ -97,6 +97,9 @@ NS_ASSUME_NONNULL_BEGIN
 // internal method for updating iPadBackgroundViewColor.
 - (void)setiPadBackgroundViewColor:(UIColor *)color;
 
+// internal method for enabling back navigation.
+- (void)enableBackNavigation;
+
 @end
 #endif
 

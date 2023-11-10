@@ -1,3 +1,11 @@
+#
+# This source file is part of the Stanford Biodesign Digital Health Group open-source organization
+#
+# SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
 name: Build XCArchive
 
 on:
@@ -6,43 +14,22 @@ on:
   workflow_call:
     inputs:
       version:
-        description: 'The version number of the framework embedded in the XCArchives'
+        description: 'The version number of the framework embedded in the XCArchives.'
         type: string
         required: true
+      configuration:
+        description: 'The build configuration to use when archiving the scheme, either Debug or Release.'
+        type: string
+        required: false
+        default: 'Release'
 
 jobs:
   build-xcarchive:
-    name: Build XCArchive
-    runs-on: macos-13
-    strategy:
-      matrix:
-        sdk: [iphoneos, iphonesimulator]
-    steps:
-    - uses: actions/checkout@v3
-    - uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: latest-stable
-    - name: Check environment
-      run: |
-          xcodebuild -version
-          swift --version
-          echo Release version: ${{ inputs.version }}
-          echo SDK: ${{ matrix.sdk }}
-    - name: Archive for iOS 
-      run: |
-          xcodebuild archive \
-            -workspace RKWorkspace.xcworkspace \
-            -scheme ResearchKit \
-            -configuration Release \
-            -sdk ${{ matrix.sdk }} \
-            -archivePath './.build/ResearchKit-${{ matrix.sdk }}.xcarchive' \
-            SKIP_INSTALL=NO \
-            BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-            ONLY_ACTIVE_ARCH=NO \
-            CI=TRUE \
-            ORK_FRAMEWORK_VERSION_NUMBER=${{ inputs.version }}
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ResearchKit-${{ matrix.sdk }}.xcarchive
-        path: ./.build/ResearchKit-${{ matrix.sdk }}.xcarchive
+    uses: StanfordBDHG/.github/.github/workflows/archive.yml@v2
+    with:
+      workspaceFile: 'RKWorkspace.xcworkspace'
+      xcArchiveName: 'ResearchKit'
+      scheme: 'ResearchKit'
+      version: ${{ inputs.version }}
+      configuration: ${{ inputs.configuration || 'Release' }}
+      runsonlabels: '["macOS", "self-hosted"]'

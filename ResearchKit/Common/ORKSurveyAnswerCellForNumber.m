@@ -76,10 +76,14 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
    
     _dontKnowButtonActive = NO;
     
-    ORKNumericAnswerFormat *numericAnswerFormat = (ORKNumericAnswerFormat *)self.step.answerFormat;
-
+    ORKAnswerFormat *answerFormat = self.step.answerFormat;
+    {
+        ORKNumericAnswerFormat *numericAnswerFormat = ORKDynamicCast(answerFormat, ORKNumericAnswerFormat);
+        _textFieldView.hideUnitWhenAnswerEmpty = numericAnswerFormat ? numericAnswerFormat.hideUnitWhenAnswerIsEmpty : NO;
+    }
+    
     _textFieldView = [[ORKTextFieldView alloc] init];
-    _textFieldView.hideUnitWhenAnswerEmpty = numericAnswerFormat.hideUnitWhenAnswerIsEmpty;
+
     ORKUnitTextField *textField = _textFieldView.textField;
     
     textField.delegate = self;
@@ -101,10 +105,10 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
     _errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_errorLabel];
     
-    if (numericAnswerFormat.shouldShowDontKnowButton) {
+    if (answerFormat.shouldShowDontKnowButton) {
         if (!_dontKnowButton) {
             _dontKnowButton = [ORKDontKnowButton new];
-            _dontKnowButton.customDontKnowButtonText = numericAnswerFormat.customDontKnowButtonText;
+            _dontKnowButton.customDontKnowButtonText = answerFormat.customDontKnowButtonText;
             _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
             [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
         }

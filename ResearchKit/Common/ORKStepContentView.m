@@ -36,7 +36,7 @@
 #import "ORKCompletionCheckmarkView.h"
 #import "ORKBodyContainerView.h"
 #import "ORKSkin.h"
-
+#import "UIImageView+ResearchKit.h"
 
 /*
  +_________________________+
@@ -177,7 +177,32 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         _topContentImageView.image = [self topContentAndAuxiliaryImage];
     }
     
+    [self updateViewColors];
     [[NSNotificationCenter defaultCenter] postNotificationName:ORKStepTopContentImageChangedKey object:nil];
+}
+
+- (void)setShouldAutomaticallyAdjustImageTintColor:(BOOL)shouldAutomaticallyAdjustImageTintColor {
+    _shouldAutomaticallyAdjustImageTintColor = shouldAutomaticallyAdjustImageTintColor;
+    [self updateViewColors];
+}
+
+- (void)updateViewColors {
+    if (!_shouldAutomaticallyAdjustImageTintColor) {
+        return;
+    }
+    if (@available(iOS 12.0, *)) {        
+        [_topContentImageView updateRenderingModeForUserInterfaceStyle:self.traitCollection.userInterfaceStyle];
+        [_iconImageView updateRenderingModeForUserInterfaceStyle:self.traitCollection.userInterfaceStyle];
+        
+        UIColor *imageViewTintColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : nil;
+        _topContentImageView.tintColor = imageViewTintColor;
+        _iconImageView.tintColor = imageViewTintColor;
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self updateViewColors];
 }
 
 - (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
@@ -299,6 +324,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
 
     [self addSubview:_iconImageView];
+    [self updateViewColors];
     [self setIconImageViewConstraints];
 }
 

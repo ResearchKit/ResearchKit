@@ -116,12 +116,14 @@ enum TaskListRow: Int, CustomStringConvertible {
     case walkBackAndForth
     case heightQuestion
     case weightQuestion
+    case healthQuantity
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
     case trailMaking
     case visualAcuityLandoltC
     case contrastSensitivityPeakLandoltC
     case videoInstruction
+    case review
     case webView
     case tintColor
     
@@ -155,6 +157,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .date3DayLimitQuestionTask,
                     .heightQuestion,
                     .weightQuestion,
+                    .healthQuantity,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
@@ -179,7 +182,8 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .accountCreation,
                     .login,
                     .passcode,
-                    .biometricPasscode
+                    .biometricPasscode,
+                    .review
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
@@ -257,6 +261,9 @@ enum TaskListRow: Int, CustomStringConvertible {
     
         case .weightQuestion:
             return NSLocalizedString("Weight Question", comment: "")
+        
+        case .healthQuantity:
+            return NSLocalizedString("Health Quantity Question", comment: "")
             
         case .imageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
@@ -309,6 +316,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .requestPermissions:
             return NSLocalizedString("Request Permissions Step", comment: "")
 
+        case .review:
+            return NSLocalizedString("Review Step", comment: "")
+            
         case .eligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
 
@@ -483,6 +493,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case weightQuestionStep6
         case weightQuestionStep7
         
+        // Task with an ORKHealthQuantity questions
+        case healthQuantityTask
+        case healthQuantityQuestion1
+        case healthQuantityQuestion2
+
         // Task with an image choice question.
         case imageChoiceQuestionTask
         case imageChoiceQuestionStep1
@@ -498,6 +513,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case numericNoUnitQuestionStep
         case numericDisplayUnitQuestionStep
 
+        // Task with examples of review Steps.
+        case reviewTask
+        case embeddedReviewStep
+        case standAloneReviewStep
+        
         // Task with examples of questions with sliding scales.
         case scaleQuestionTask
         case discreteScaleQuestionStep
@@ -664,6 +684,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .weightQuestion:
             return weightQuestionTask
             
+        case .healthQuantity:
+            return healthQuantityTypeTask
+            
         case .imageChoiceQuestion:
             return imageChoiceQuestionTask
             
@@ -672,6 +695,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .numericQuestion:
             return numericQuestionTask
+            
+        case .review:
+            return reviewTask
             
         case .scaleQuestion:
             return scaleQuestionTask
@@ -1163,7 +1189,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         step4.text = "HealthKit, height"
         
-        let step4NonOptional = ORKQuestionStep(identifier: String(describing: Identifier.heightQuestionStep4)  + "NonOptional", title: NSLocalizedString("Height", comment: ""), question: exampleQuestionText, answer: answerFormat1)
+        let step4NonOptional = ORKQuestionStep(identifier: String(describing: Identifier.heightQuestionStep4)  + "NonOptional", title: NSLocalizedString("Height", comment: ""), question: exampleQuestionText, answer: answerFormat4)
         step4NonOptional.text = "HealthKit, height (Non Optional"
         step4NonOptional.isOptional = false
         
@@ -1247,6 +1273,20 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(describing: Identifier.weightQuestionTask), steps: [step1, step1NonOptional, step2,  step2NonOptional, step3, step3NonOptional, step4, step4NonOptional, step5,  step5NonOptional, step6, step6NonOptional, step7NonOptional, step7])
     }
     
+    private var healthQuantityTypeTask: ORKTask {
+        let heartRateHealthKitQuantityTypeAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, unit: nil, style: .decimal)
+        let heartRateQuestion = ORKQuestionStep(identifier: String(describing: Identifier.healthQuantityQuestion1), title: NSLocalizedString("Heart Rate", comment: ""), question: "What is your Heart Rate?", answer: heartRateHealthKitQuantityTypeAnswerFormat)
+        heartRateQuestion.text = "Heart Rate"
+        heartRateQuestion.isOptional = false
+        
+        
+        let bloodType = HKCharacteristicType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.bloodType)!
+        let bloodTypeAnswerFormat = ORKHealthKitCharacteristicTypeAnswerFormat(characteristicType: bloodType)
+        let bloodTypeQuestion = ORKQuestionStep(identifier: String(describing: Identifier.healthQuantityQuestion2), title: NSLocalizedString("Blood Type", comment: ""), question: "What is your Blood Type?", answer: bloodTypeAnswerFormat)
+        
+        return ORKOrderedTask(identifier: String(describing: Identifier.healthQuantityTask), steps: [heartRateQuestion, bloodTypeQuestion])
+    }
+    
     /**
     This task demonstrates a survey question involving picking from a series of
     image choices. A more realistic applciation of this type of question might be to
@@ -1270,7 +1310,7 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         questionStep1.text = exampleDetailText
 
-        let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .singleChoice, vertical: true)
+        let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .multipleChoice, vertical: true)
         
         let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.imageChoiceQuestionStep2), title: NSLocalizedString("Image Choice", comment: ""), question: exampleQuestionText, answer: answerFormat2)
 
@@ -1290,6 +1330,36 @@ enum TaskListRow: Int, CustomStringConvertible {
         questionStep.placeholder = NSLocalizedString("Address", comment: "")
         
         return ORKOrderedTask(identifier: String(describing: Identifier.locationQuestionTask), steps: [questionStep])
+    }
+    
+    /// This task presents a few different ORKReviewSteps
+    private var reviewTask: ORKTask {
+        let embeddedReviewStep = ORKReviewStep.embeddedReviewStep(withIdentifier: String(describing: Identifier.embeddedReviewStep))
+        embeddedReviewStep.bodyItems = [
+            ORKBodyItem(text: "Review Item #1", detailText: nil, image: nil, learnMoreItem: nil, bodyItemStyle: .bulletPoint),
+            ORKBodyItem(text: "Review Item #2", detailText: nil, image: nil, learnMoreItem: nil, bodyItemStyle: .bulletPoint),
+            ORKBodyItem(text: "Review Item #3", detailText: nil, image: nil, learnMoreItem: nil, bodyItemStyle: .bulletPoint),
+            ORKBodyItem(text: "Review Item #4", detailText: nil, image: nil, learnMoreItem: nil, bodyItemStyle: .bulletPoint)
+        ]
+        embeddedReviewStep.title = "Embedded Review Step"
+        
+        let standAloneInstructionStep1 =  ORKInstructionStep(identifier: "standAloneInstruction1")
+        standAloneInstructionStep1.text = "First Item"
+        standAloneInstructionStep1.detailText = "There is a lot of detail to cover in this Instruction Step"
+        
+        let standAloneInstructionStep2 =  ORKInstructionStep(identifier: "standAloneInstruction2")
+        standAloneInstructionStep2.text = "Second Item"
+        standAloneInstructionStep2.detailText = "There is a lot of detail to cover in this Instruction Step"
+
+        let standAloneInstructionStep3 =  ORKInstructionStep(identifier: "standAloneInstruction3")
+        standAloneInstructionStep3.text = "Third Item"
+        standAloneInstructionStep3.detailText = "There is a lot of detail to cover in this Instruction Step"
+        
+        let questionStep = ORKQuestionStep(identifier: "questionStep", title: "Question Step", question: "What is your name?", answer: ORKTextAnswerFormat())
+        
+        let standAloneReviewStep = ORKReviewStep.standaloneReviewStep(withIdentifier:String(describing: Identifier.standAloneReviewStep), steps:[standAloneInstructionStep1, standAloneInstructionStep2, standAloneInstructionStep3, questionStep], resultSource: nil)
+        standAloneReviewStep.title = "Standalone Review"
+        return ORKOrderedTask(identifier: String(describing: Identifier.reviewTask), steps: [embeddedReviewStep, standAloneReviewStep])
     }
     
     /**

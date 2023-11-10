@@ -1326,6 +1326,9 @@
     XCTAssertEqual([[answerFormat defaultComponents] month], 01);
     XCTAssertEqual([[answerFormat defaultComponents] day], 24);
     XCTAssertEqual([[answerFormat defaultComponents] year], 1984);
+    
+    //check that `hideUnitWhenAnswerIsEmpty` only works on `ORKNumericAnswerFormat`
+    XCTAssertThrows([(ORKNumericAnswerFormat*)answerFormat hideUnitWhenAnswerIsEmpty]);
 }
 
 - (void)testNumericAnswerFormat {
@@ -1342,6 +1345,7 @@
     XCTAssertEqual([answerFormatWithIntegerStyle maximum], [NSNumber numberWithInteger:100]);
     XCTAssertEqual([answerFormatWithIntegerStyle maximumFractionDigits], @(0));
     
+    XCTAssertTrue([answerFormatWithIntegerStyle hideUnitWhenAnswerIsEmpty]);
     
     ORKNumericAnswerFormat *answerFormatWithDecimalStyle = [[ORKNumericAnswerFormat alloc] initWithStyle:ORKNumericAnswerStyleDecimal];
     XCTAssertEqual([answerFormatWithDecimalStyle style ], ORKNumericAnswerStyleDecimal);

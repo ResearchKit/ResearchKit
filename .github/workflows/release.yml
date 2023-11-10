@@ -1,58 +1,33 @@
-name: Release
+#
+# This source file is part of the Stanford Biodesign Digital Health Group open-source organization
+#
+# SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
 
-on:
+name: Create XCFramework and Release
+
+on: 
   workflow_dispatch:
     inputs:
       version:
-        description: 'The version number that should be used to tag the release'
+        description: 'The version number of the framework embedded in the XCArchives. This version number is also used for the release tag.'
         type: string
         required: true
+      configuration:
+        description: 'The build configuration to use when archiving the scheme, either Debug or Release.'
+        type: string
+        required: false
+        default: 'Release'
 
 jobs:
-  build-xcarchive:
-    name: Build XCArchive
-    uses: ./.github/workflows/build.yml
+  create-xcframework-and-release-workflow:
+    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
+      workspaceFile: 'RKWorkspace.xcworkspace'
+      xcFrameworkName: 'ResearchKit'
+      scheme: 'ResearchKit'
       version: ${{ inputs.version }}
-  create-xcframework:
-    name: Build XCFramework
-    runs-on: macos-13
-    needs: build-xcarchive
-    steps:
-    - uses: actions/checkout@v3
-    - uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: latest-stable
-    - name: Check environment
-      run: |
-          xcodebuild -version
-          swift --version
-          echo Release version: ${{ inputs.version }}
-    - uses: actions/download-artifact@v3
-      with:
-        path: ./.build
-    - name: Create XCFramework
-      run: |
-          rm -rf ResearchKit.xcframework
-          xcodebuild -create-xcframework \
-            -framework ./.build/ResearchKit-iphoneos.xcarchive/Products/Library/Frameworks/ResearchKit.framework \
-            -framework ./.build/ResearchKit-iphonesimulator.xcarchive/Products/Library/Frameworks/ResearchKit.framework \
-            -output ResearchKit.xcframework
-          rm -rf .build
-    - name: Commit and push XCFramework
-      uses: EndBug/add-and-commit@v9
-      with:
-        add: ResearchKit.xcframework
-        message: Create XCFramework for release ${{ inputs.version }}
-        tag: '${{ inputs.version }} --force'
-        tag_push: '--force'
-    - name: Create Artifacts
-      run: |
-          tar -zcvf ResearchKit.xcframework.tar.gz ResearchKit.xcframework
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ inputs.version }}
-        generate_release_notes: true
-        fail_on_unmatched_files: true
-        files: ResearchKit.xcframework.tar.gz
+      configuration: ${{ inputs.configuration }}
+      runsonlabels: '["macOS", "self-hosted"]'
