@@ -331,7 +331,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         }
     }
     
-    ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] init];
+    ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] initWithIdentifier:self.step.identifier];
     result.signature = _currentSignature;
     result.identifier = _currentSignature.identifier;
     result.consented = _documentReviewed;

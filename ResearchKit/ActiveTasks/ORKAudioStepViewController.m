@@ -59,6 +59,7 @@
     ORKAudioContentView *_audioContentView;
     ORKAudioRecorder *_audioRecorder;
     ORKActiveStepTimer *_timer;
+    NSTimer *_intervalTimer;
     NSError *_audioRecorderError;
 }
 
@@ -83,12 +84,31 @@
     // Do any additional setup after loading the view.
     _audioContentView = [ORKAudioContentView new];
     _audioContentView.timeLeft = self.audioStep.stepDuration;
+    _audioContentView.useRecordButton = self.audioStep.useRecordButton && self.audioStep.stepDuration == 0;
+    
+    __weak typeof(self) weakSelf = self;
+    [_audioContentView setViewEventHandler:^(ORKAudioContentViewEvent event) {
+        [weakSelf handleContentViewEvent:event];
+    }];
 
     if (self.alertThreshold > 0) {
         _audioContentView.alertThreshold = self.alertThreshold;
     }
 
     self.activeStepView.activeCustomView = _audioContentView;
+}
+
+- (void)handleContentViewEvent:(ORKAudioContentViewEvent)event {
+    
+    switch (event) {
+        case ORKAudioContentViewEventStartRecording:
+            [self start];
+            break;
+            
+        case ORKAudioContentViewEventStopRecording:
+            [self finish];
+            break;
+    }
 }
 
 - (void)audioRecorderDidChange {
@@ -116,42 +136,72 @@
     if (_audioRecorderError) {
         return;
     }
+
     [_avAudioRecorder updateMeters];
     float value = [_avAudioRecorder averagePowerForChannel:0];
     // Assume value is in range roughly -60dB to 0dB
     float clampedValue = MAX(value / 60.0, -1) + 1;
     [_audioContentView addSample:@(clampedValue)];
-    _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
+    
+    if (!self.audioStep.useRecordButton) {
+        _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
+    }
 }
 
 - (void)startNewTimerIfNeeded {
-    if (!_timer) {
-        NSTimeInterval duration = self.audioStep.stepDuration;
-        ORKWeakTypeOf(self) weakSelf = self;
-        _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration / 100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-            ORKStrongTypeOf(self) strongSelf = weakSelf;
-            [strongSelf doSample];
-            if (finished) {
-                [strongSelf finish];
-            }
-        }];
-        [_timer resume];
+    if (self.audioStep.useRecordButton) {
+        
+        if (!_intervalTimer) {
+            
+            _intervalTimer = [NSTimer scheduledTimerWithTimeInterval: 20 / 100
+                                                              target:self selector:@selector(doSample)
+                                                            userInfo:nil
+                                                             repeats:YES];
+        }
+    } else {
+        
+        if (!_timer) {
+            NSTimeInterval duration = self.audioStep.stepDuration;
+            ORKWeakTypeOf(self) weakSelf = self;
+            _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration / 100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
+                ORKStrongTypeOf(self) strongSelf = weakSelf;
+                [strongSelf doSample];
+                if (finished) {
+                    [strongSelf finish];
+                }
+            }];
+            [_timer resume];
+        }
     }
+    
     _audioContentView.finished = NO;
 }
 
 - (void)start {
     [super start];
     [self audioRecorderDidChange];
-    [_timer reset];
-    _timer = nil;
-    [self startNewTimerIfNeeded];
     
+    if (!self.audioStep.useRecordButton) {
+        [_timer reset];
+        _timer = nil;
+    } else {
+        [_intervalTimer invalidate];
+        _intervalTimer = nil;
+    }
+
+    [self startNewTimerIfNeeded];
 }
 
 - (void)suspend {
     [super suspend];
-    [_timer pause];
+    
+    if (!self.audioStep.useRecordButton) {
+        [_timer pause];
+    } else {
+        [_intervalTimer invalidate];
+        _intervalTimer = nil;
+    }
+    
     if (_avAudioRecorder) {
         [_audioContentView addSample:@(0)];
     }
@@ -160,8 +210,12 @@
 - (void)resume {
     [super resume];
     [self audioRecorderDidChange];
+    
     [self startNewTimerIfNeeded];
-    [_timer resume];
+    
+    if (!self.audioStep.useRecordButton) {
+        [_timer resume];
+    }
 }
 
 - (void)finish {
@@ -169,8 +223,14 @@
         return;
     }
     [super finish];
-    [_timer reset];
-    _timer = nil;
+    
+    if (!self.audioStep.useRecordButton) {
+        [_timer reset];
+        _timer = nil;
+    } else {
+        [_intervalTimer invalidate];
+        _intervalTimer = nil;
+    }
 }
 
 - (void)stepDidFinish {
@@ -189,3 +249,4 @@
 }
 
 @end
+

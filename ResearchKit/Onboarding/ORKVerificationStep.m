@@ -90,7 +90,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, verificationViewControllerString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, verificationViewControllerString, NSString);
     }
     return self;
 }

@@ -100,7 +100,15 @@
 }
 
 + (BOOL)isPasscodeStoredInKeychain {
-    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
+    NSError *error;
+    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectOfClass:NSDictionary.self
+                                                                          forKey:PasscodeKey
+                                                                           error:&error];
+    
+    if (dictionary == nil) {
+        return NO;
+    }
+    
     return ([dictionary objectForKey:KeychainDictionaryPasscodeKey]) ? YES : NO;
 }
 

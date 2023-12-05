@@ -278,14 +278,22 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 - (void)loadCurrentLocationIfNecessary {
     if (_useCurrentLocation) {
-        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        CLAuthorizationStatus status = kCLAuthorizationStatusNotDetermined;
         
+        if (@available(iOS 14.0, *)) {
+            status = _locationManager.authorizationStatus;
+        } else {
+            status = [CLLocationManager authorizationStatus];
+        }
+
         if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
             _userLocationNeedsUpdate = YES;
             _mapView.showsUserLocation = YES;
-        } else {
+        } else if (_locationManager == nil) {
             _locationManager = [[CLLocationManager alloc] init];
             _locationManager.delegate = self;
+        }
+        if (status == kCLAuthorizationStatusNotDetermined) {
             [_locationManager requestWhenInUseAuthorization];
         }
     }
@@ -433,10 +441,8 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 # pragma mark CLLocationManagerDelegate
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
         [self loadCurrentLocationIfNecessary];
-    }
 }
 
 #pragma mark MKMapViewDelegate

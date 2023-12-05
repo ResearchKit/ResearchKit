@@ -148,4 +148,14 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+// A simple audio streaming configuration which does not save any audio. Only streams audio buffers.
+ORK_CLASS_AVAILABLE
+@interface ORKAudioStreamerConfiguration : ORKRecorderConfiguration
+
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+@end
+
 NS_ASSUME_NONNULL_END

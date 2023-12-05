@@ -67,7 +67,7 @@
 
 - (void)prepareView {
     _selectionView = [[ORKLocationSelectionView alloc] initWithFormMode:NO
-                                                     useCurrentLocation:((ORKLocationAnswerFormat *)self.step.answerFormat).useCurrentLocation
+                                                     useCurrentLocation:((ORKLocationAnswerFormat *)self.step.impliedAnswerFormat).useCurrentLocation
                                                           leadingMargin:self.separatorInset.left];
     _selectionView.delegate = self;
     _selectionView.tintColor = self.tintColor;

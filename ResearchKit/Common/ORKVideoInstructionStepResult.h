@@ -35,7 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKVideoInstructionStepResult` class represents the result of a video insruction step (`ORKVideoInstructionStep`).
+ The `ORKVideoInstructionStepResult` class represents the result of a video instruction step (`ORKVideoInstructionStep`).
  
  A video instruction result is produced by the task view controller when it presents a video instruction step.
  
@@ -44,12 +44,12 @@ ORK_CLASS_AVAILABLE
 @interface ORKVideoInstructionStepResult : ORKResult
 
 /**
- The time (in seconds) after video playback stopped, or NaN if the video was never played.
+ The time (in seconds) after video playback stopped, or DBL_MAX if the video was never played.
  */
 @property (nonatomic) Float64 playbackStoppedTime;
 
 /**
- Returns 'YES' if the video was watched until the end, or 'NO' if video playback was stopped half way.
+ Returns 'YES' if the video was watched until the end, or 'NO' if video playback was stopped part way.
  */
 @property (nonatomic) BOOL playbackCompleted;
 

@@ -16,7 +16,7 @@ for medical research or for other research projects.
 Getting More Information
 ========================
 
-* Join the [*ResearchKit* Forum](https://forums.developer.apple.com/community/researchkit) for discussing uses of the *ResearchKit framework and* related projects.
+* Join the [*ResearchKit* Forum](https://developer.apple.com/forums/tags/researchkit) for discussing uses of the *ResearchKit framework and* related projects.
 
 Use Cases
 ===========
@@ -82,10 +82,24 @@ The latest stable version of *ResearchKit framework* can be cloned with
 git clone -b stable https://github.com/ResearchKit/ResearchKit.git
 ```
 
-Or, for the latest changes, use the `master` branch:
+Or, for the latest changes, use the `main` branch:
 
 ```
 git clone https://github.com/ResearchKit/ResearchKit.git
+```
+
+CocoaPods Installation
+------------
+For latest stable release
+
+```
+pod 'ResearchKit'
+```
+
+For early development releases
+
+```
+  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'main'
 ```
 
 Building

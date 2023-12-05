@@ -75,6 +75,7 @@
 
             if (fileResult.fileURL) {
                 // Setting these properties in this order allows us to reuse the existing file on disk
+                _previewImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:fileResult.fileURL]];
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];
                 _fileURL = fileResult.fileURL;
             }
@@ -177,7 +178,8 @@
         photoSettings = [AVCapturePhotoSettings photoSettingsWithRawPixelFormatType:rawPixelFormatType
                                                                     processedFormat:@{AVVideoCodecKey: AVVideoCodecTypeJPEG}];
     }
-    [photoSettings setAutoStillImageStabilizationEnabled:NO];
+
+    [photoSettings setPhotoQualityPrioritization:AVCapturePhotoQualityPrioritizationSpeed];
     [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
     
     return photoSettings;
@@ -194,9 +196,9 @@
         _imageDataExtension = @"jpeg";
     }
     
-    [photoSettings setAutoStillImageStabilizationEnabled: [_photoOutput isStillImageStabilizationSupported]];
+    [photoSettings setPhotoQualityPrioritization:AVCapturePhotoQualityPrioritizationSpeed];
     [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
-
+    
     return photoSettings;
 }
 
@@ -288,6 +290,14 @@
     }
     
     [super viewWillDisappear:animated];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    if (_imageCaptureView) {
+        [_imageCaptureView orientationDidChange];
+    }
 }
 
 - (void)queue_SetupCaptureSession {
@@ -406,6 +416,7 @@
     NSString *contentType = [NSString stringWithFormat:@"image/%@", _imageDataExtension];
     fileResult.contentType = contentType;
     fileResult.fileURL = _fileURL;
+    fileResult.fileName = [_fileURL lastPathComponent];
     [results addObject:fileResult];
     stepResult.results = [results copy];
     return stepResult;

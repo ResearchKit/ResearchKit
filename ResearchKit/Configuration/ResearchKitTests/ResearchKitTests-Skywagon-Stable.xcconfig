@@ -1,0 +1,8 @@
+//
+// ResearchKitTests-Skywagon-Stable.xcconfig
+//
+
+#include "ResearchKitTests-Shared.xcconfig"
+
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 $(inherited)
+SWIFT_OBJC_BRIDGING_HEADER = ResearchKitTests/ResearchKitTests-Bridging-Header.h

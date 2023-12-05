@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "A9C8689E-BBEE-4643-8C5D-DBA6A5AF01B2",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:ResearchKit.xcodeproj",
+        "identifier" : "86CC8E991AC09332001CCD89",
+        "name" : "ResearchKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

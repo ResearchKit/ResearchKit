@@ -35,6 +35,7 @@
 
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep.h"
+#import "ORKQuestionStep_Internal.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -52,7 +53,7 @@
 - (void)prepareView {
     [super prepareView];
     
-    _selectionView = [[ORKImageSelectionView alloc] initWithImageChoiceAnswerFormat:(ORKImageChoiceAnswerFormat *)self.step.answerFormat answer:self.answer];
+    _selectionView = [[ORKImageSelectionView alloc] initWithImageChoiceAnswerFormat:(ORKImageChoiceAnswerFormat *)self.step.impliedAnswerFormat answer:self.answer];
     _selectionView.delegate = self;
     _selectionView.frame = self.bounds;
     

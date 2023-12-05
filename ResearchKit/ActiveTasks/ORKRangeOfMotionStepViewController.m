@@ -189,7 +189,7 @@
  */
 - (double)getDeviceAngleInDegreesFromAttitude:(CMAttitude *)attitude {
     if (!_orientation) {
-        _orientation = [UIApplication sharedApplication].statusBarOrientation;
+        _orientation = self.view.window.windowScene.interfaceOrientation;
     }
     double angle;
     if (UIInterfaceOrientationIsLandscape(_orientation)) {

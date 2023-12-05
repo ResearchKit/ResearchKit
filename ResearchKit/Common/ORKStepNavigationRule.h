@@ -389,6 +389,8 @@ ORK_CLASS_AVAILABLE
  A key-value mapping to apply to the modified step if the result predicate matches.
  The keys in this are assumed to map using key-value coding.
  
+ When serialized with secure coding, the items must be of property list types.
+ 
  See https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/
  */
 @property (nonatomic, strong, readonly) NSDictionary<NSString *, NSObject *> *keyValueMap;

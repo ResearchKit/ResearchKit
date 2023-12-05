@@ -31,6 +31,7 @@
 
 #import "ORKEnvironmentSPLMeterStepViewController.h"
 
+
 #import "ORKActiveStepView.h"
 #import "ORKStepView.h"
 #import "ORKStepContainerView_Private.h"
@@ -40,6 +41,7 @@
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
 
 #import "ORKCollectionResult_Private.h"
 #import "ORKEnvironmentSPLMeterResult.h"
@@ -50,6 +52,8 @@
 #import "ORKHelpers_Internal.h"
 #import <AVFoundation/AVFoundation.h>
 #include <sys/sysctl.h>
+
+static const NSTimeInterval SPL_METER_PLAY_DELAY_VOICEOVER = 3.0;
 
 @interface ORKEnvironmentSPLMeterStepViewController ()<ORKRingViewDelegate, ORKEnvironmentSPLMeterContentViewVoiceOverDelegate> {
     AVAudioEngine *_audioEngine;
@@ -74,6 +78,7 @@
     AVAudioSessionCategoryOptions _savedSessionCategoryOptions;
     UINotificationFeedbackGenerator *_notificationFeedbackGenerator;
     dispatch_semaphore_t _voiceOverAnnouncementSemaphore;
+    NSTimer *_timeoutTimer;
 }
 
 @property (nonatomic, strong) ORKEnvironmentSPLMeterContentView *environmentSPLMeterContentView;
@@ -95,6 +100,8 @@
         _requiredContiguousSamples = 1;
         _sensitivityOffset = -23.3;
         _recordedSamples = [NSMutableArray new];
+        _audioEngine = [[AVAudioEngine alloc] init];
+        _eqUnit = [[AVAudioUnitEQ alloc] initWithNumberOfBands:6];
     }
     
     return self;
@@ -109,20 +116,12 @@
     _environmentSPLMeterContentView.voiceOverDelegate = self;
     _environmentSPLMeterContentView.ringView.delegate = self;
     self.activeStepView.activeCustomView = _environmentSPLMeterContentView;
-    self.activeStepView.customContentFillsAvailableSpace = YES;
-    [self requestMicrophoneAuthorization];
+
+    [self requestRecordPermissionIfNeeded];
     [self configureAudioSession];
-    _audioEngine = [[AVAudioEngine alloc] init];
-    _eqUnit = [[AVAudioUnitEQ alloc] initWithNumberOfBands:6];
-    _inputNode = [_audioEngine inputNode];
-    _inputNodeOutputFormat = [_inputNode inputFormatForBus:0];
-    _sampleRate = (uint32_t)_inputNodeOutputFormat.sampleRate;
-    _bufferSize = _sampleRate/10;
-    _countToFetch = _sampleRate/(int)_bufferSize;
-    [self configureEQ];
-    [_audioEngine attachNode:_eqUnit];
-    [_audioEngine connect:_inputNode to:_eqUnit format:_inputNodeOutputFormat];
     [self setupFeedbackGenerator];
+    
+    [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
 }
 
 - (void)saveAudioSession {
@@ -133,6 +132,7 @@
 }
 
 - (void)setNavigationFooterView {
+
     self.activeStepView.navigationFooterView.continueButtonItem = self.continueButtonItem;
     self.activeStepView.navigationFooterView.continueEnabled = NO;
     [self.activeStepView.navigationFooterView updateContinueAndSkipEnabled];
@@ -143,6 +143,19 @@
     _navigationFooterView.continueButtonItem = continueButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!_audioEngine.isRunning) {
+        [self saveAudioSession];
+        _sensitivityOffset = [self sensitivityOffsetForDevice];
+        [self requestRecordPermissionIfNeeded];
+        [self configureAudioSession];
+        [self setupFeedbackGenerator];
+        
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -151,15 +164,21 @@
     _samplingInterval = [self environmentSPLMeterStep].samplingInterval;
     _requiredContiguousSamples = [self environmentSPLMeterStep].requiredContiguousSamples;
     _thresholdValue = [self environmentSPLMeterStep].thresholdValue;
+
+    [self configureInputNode];
     [self splWorkBlock];
+    
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SPL_METER_PLAY_DELAY_VOICEOVER * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"ENVIRONMENTSPL_CALCULATING", nil));
+        });
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self stopAudioEngine];
     [self resetAudioSession];
-    [_eqUnit removeTapOnBus:0];
-    [_audioEngine stop];
-    [_rmsBuffer removeAllObjects];
 }
 
 - (NSString *)deviceType {
@@ -194,43 +213,87 @@
     return sResult;
 }
 
-- (void)requestMicrophoneAuthorization {
-    [[AVAudioSession sharedInstance] recordPermission];
+
+- (void)requestRecordPermissionIfNeeded
+{
+    [self handleRecordPermission:[[AVAudioSession sharedInstance] recordPermission]];
+}
+
+- (void)handleRecordPermission:(AVAudioSessionRecordPermission)recordPermission
+{
+    switch (recordPermission)
+    {
+        case AVAudioSessionRecordPermissionGranted:
+            break;
+            
+        case AVAudioSessionRecordPermissionDenied:
+        {
+            ORK_Log_Error("User has denied record permission for a step which requires microphone access.");
+            break;
+        }
+        case AVAudioSessionRecordPermissionUndetermined:
+        {
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+                [self handleRecordPermission:granted ? AVAudioSessionRecordPermissionGranted : AVAudioSessionRecordPermissionDenied];
+            }];
+            break;
+        }
+    }
 }
 
 - (void)configureAudioSession {
     NSError *error = nil;
+
+    AVAudioSession * session = [AVAudioSession sharedInstance];
     
     // Stop any existing audio
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:&error];
+    [session setCategory:AVAudioSessionCategorySoloAmbient error:&error];
     if (error) {
         ORK_Log_Error("Setting AVAudioSessionCategory failed with error message: \"%@\"", error.localizedDescription);
     }
     
-    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    [session setActive:YES error:&error];
+
     if (error) {
         ORK_Log_Error("Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
     }
     
     // Force input/output from iOS device
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeMeasurement options:AVAudioSessionCategoryOptionDuckOthers | AVAudioSessionCategoryOptionMixWithOthers | AVAudioSessionCategoryOptionAllowBluetoothA2DP error:&error];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeMeasurement options:AVAudioSessionCategoryOptionDuckOthers | AVAudioSessionCategoryOptionMixWithOthers | AVAudioSessionCategoryOptionAllowBluetoothA2DP error:&error];
+
     if (error) {
         ORK_Log_Error("Setting AVAudioSessionCategory failed with error message: \"%@\"", error.localizedDescription);
     }
     
-    // Override Output (and Input) to use built-in mic and speaker.
-    // We need to make sure audio output is to the Headphones and Audio Input is uing the built-in mic.
-    // Although this forces both to the built-in mic AND Speaker, we need to also override the speaker.
-    [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&error];
-    if (error)
-    {
-        ORK_Log_Error("Setting AVAudioSessionPortOverrideSpeaker failed with error message: \"%@\"", error.localizedDescription);
+    // When setting the input like this, we do not need to set the input AND the output to the iPhone.
+    NSArray<AVAudioSessionPortDescription *> * inputs = [session availableInputs];
+    for (AVAudioSessionPortDescription* desc in inputs) {
+        if ([desc.portType isEqualToString:AVAudioSessionPortBuiltInMic]) {
+            // go ahead and set our preferred input to the built-in mic
+            [session setPreferredInput:desc error:&error];
+            
+            if (error) {
+                ORK_Log_Error("Setting AVAudioSession preferred input failed with error message: \"%@\"", error.localizedDescription);
+            }
+        }
     }
     
-    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    [session setActive:YES error:&error];
+
     if (error) {
         ORK_Log_Error("Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
     }
+}
+
+- (void)configureInputNode {
+    _inputNode = [_audioEngine inputNode];
+    _inputNodeOutputFormat = [_inputNode inputFormatForBus:0];
+    _sampleRate = (uint32_t)_inputNodeOutputFormat.sampleRate;
+    _bufferSize = _sampleRate/10;
+    _countToFetch = _sampleRate > 0 ? _sampleRate/(int)_bufferSize : 0;
+    [self configureEQ];
+    [_audioEngine attachNode:_eqUnit];
+    [_audioEngine connect:_inputNode to:_eqUnit format:_inputNodeOutputFormat];
 }
 
 - (void)configureEQ {
@@ -320,12 +383,23 @@
                                            });
                                            [self evaluateThreshold:_spl];
                                            [_rmsBuffer removeAllObjects];
+                                       } else {
+                                           if (rms > 0.0 && _sampleRate > 0.0) {
+                                               float spl = (20 * log10f(sqrtf(rms/(float)_sampleRate))) - _sensitivityOffset + 96;
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                   [self.environmentSPLMeterContentView setProgressBar:(spl/_thresholdValue)];
+                                               });
+                                           } else {
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                   [self.environmentSPLMeterContentView setProgressBar:(_spl/_thresholdValue)];
+                                               });
+                                           }
                                        }
                                        dispatch_semaphore_signal(_semaphoreRms);
                                    });
                                    dispatch_semaphore_wait(_semaphoreRms, DISPATCH_TIME_FOREVER);
                                } else if ([AVAudioSession sharedInstance].recordPermission == AVAudioSessionRecordPermissionDenied) {
-                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                        [_eqUnit removeTapOnBus:0];
                                        [_audioEngine stop];
                                        [_rmsBuffer removeAllObjects];
@@ -336,9 +410,7 @@
             NSError *error = nil;
             [_audioEngine startAndReturnError:&error];
         } else {
-            [_eqUnit removeTapOnBus:0];
-            [_audioEngine stop];
-            [_rmsBuffer removeAllObjects];
+            [self stopAudioEngine];
         }
     }
 }
@@ -381,9 +453,19 @@
     }
 }
 
+- (void)stopAudioEngine {
+    if ([_audioEngine isRunning]) {
+        dispatch_semaphore_signal(_semaphoreRms);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [_eqUnit removeTapOnBus:0];
+            [_audioEngine stop];
+            [_rmsBuffer removeAllObjects];
+        });
+    }
+}
+
 - (void)reachedOptimumNoiseLevel {
     [self resetAudioSession];
-    [_audioEngine stop];
 }
 
 - (void)stepDidFinish {
@@ -403,6 +485,7 @@
 #pragma mark - ORKRingViewDelegate
 
 - (void)ringViewDidFinishFillAnimation {
+    [self reachedOptimumNoiseLevel];
     [self.environmentSPLMeterContentView reachedOptimumNoiseLevel];
     self.activeStepView.navigationFooterView.continueEnabled = YES;
 }
@@ -417,19 +500,17 @@
 
 - (void)sendHapticEvent:(UINotificationFeedbackType)eventType
 {
-    [_notificationFeedbackGenerator notificationOccurred:eventType];
-    [_notificationFeedbackGenerator prepare];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_notificationFeedbackGenerator notificationOccurred:eventType];
+        [_notificationFeedbackGenerator prepare];
+    });
 }
 
 #pragma mark - ORKEnvironmentSPLMeterContentViewVoiceOverDelegate
 
 - (void)contentView:(ORKEnvironmentSPLMeterContentView *)contentView shouldAnnounce:(NSString *)inAnnouncement
 {
-    if ([_audioEngine isRunning] == NO)
-    {
-        // Only make this announcement if the audio engine is not running.
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, inAnnouncement);
-    }
+    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, inAnnouncement);
 }
 
 @end

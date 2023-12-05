@@ -159,22 +159,24 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (void)attemptDidFinish {
-    void (^completion)(void) = ^{
-        if (_results.count == [self reactionTimeStep].numberOfAttempts) {
-            [self finish];
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        void (^completion)(void) = ^{
+            if (_results.count == [self reactionTimeStep].numberOfAttempts) {
+                [self finish];
+            } else {
+                [self resetAfterDelay:2];
+            }
+        };
+        if (_validResult) {
+            [self indicateSuccess:completion];
         } else {
-            [self resetAfterDelay:2];
+            [self indicateFailure:completion];
         }
-    };
-    if (_validResult) {
-        [self indicateSuccess:completion];
-    } else {
-        [self indicateFailure:completion];
-    }
-    _validResult = NO;
-    _timedOut = NO;
-    [_stimulusTimer invalidate];
-    [_timeoutTimer invalidate];
+        _validResult = NO;
+        _timedOut = NO;
+        [_stimulusTimer invalidate];
+        [_timeoutTimer invalidate];
+    });
 }
 
 - (void)indicateSuccess:(void(^)(void))completion {

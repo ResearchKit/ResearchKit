@@ -68,10 +68,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (ORKStepViewController *)viewControllerForStep:(ORKStep *)step;
 
+- (void)stepViewController:(ORKStepViewController *)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction
+                  animated:(BOOL)animated;
+
 /**
- Locks the device volume to a specific value. Will ignore a new locked value if the method was called before.
+ Forces navigation to the step with the specified identifier.
+ 
+ Call this method to force navigation to the specified step. Any skipped steps are not part of the navigation stack,
+ so going back will go back to the step that was current when this method was called. Any skipped steps will not be part
+ of the task result either.
  */
-- (void)lockDeviceVolume:(float)volume;
+- (void)goToStepWithIdentifier:(NSString *)identifier;
 
 @end
 

@@ -45,6 +45,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) ORKBorderedButton * GButton;
 @property (nonatomic) ORKBorderedButton * BButton;
 @property (nonatomic) ORKBorderedButton * YButton;
+@property (nonatomic) BOOL useTextForStimuli;
+@property (nonatomic) BOOL useGridLayoutForButtons;
+
+- (void)setUseGridLayoutForButtons:(bool)useGridLayoutForButtons;
+- (void)setUseTextForStimuli:(bool)useTextForStimuli;
 
 @end
 NS_ASSUME_NONNULL_END

@@ -29,9 +29,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <ResearchKit/ORKCollectionResult.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -60,15 +58,28 @@ ORK_CLASS_AVAILABLE
 @end
 
 
+#if TARGET_OS_IOS
 @interface ORKStepResult ()
 
 @property (nonatomic) BOOL isPreviousResult;
 
 @end
+#endif // TARGET_OS_IOS
 
 @interface ORKTaskResult ()
 
 - (void)setTaskRunUUID:(NSUUID * _Nonnull)taskRunUUID;
+
+@end
+
+@class ORKDevice;
+
+@interface ORKTaskResult ()
+
+// To support serialization
+- (instancetype)initWithTaskIdentifier:(NSString *)identifier taskRunUUID:(NSUUID *)taskRunUUID outputDirectory:(nullable NSURL *)outputDirectory device:(ORKDevice *)device NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, readonly) ORKDevice *device;
 
 @end
 

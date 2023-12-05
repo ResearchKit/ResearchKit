@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <Speech/SFTranscription.h>
 #import <Speech/SFTranscriptionSegment.h>
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+#import <Speech/SFSpeechRecognitionMetadata.h>
+#endif
 
 #import <ResearchKit/ORKResult.h>
 
@@ -51,8 +53,10 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) SFTranscription *transcription;
 
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+@property (nonatomic, copy, nullable) SFSpeechRecognitionMetadata *recognitionMetadata API_AVAILABLE(ios(14.5));
+#endif
+
 @end
 
 NS_ASSUME_NONNULL_END
-
-

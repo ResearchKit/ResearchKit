@@ -28,9 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <ResearchKit/ORKResult.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -135,7 +133,11 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithTaskIdentifier:(NSString *)identifier
                            taskRunUUID:(NSUUID *)taskRunUUID
-                       outputDirectory:(nullable NSURL *)outputDirectory;
+                       outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
 
 /**
  A unique identifier (UUID) for the presentation of the task that generated
@@ -177,6 +179,7 @@ ORK_CLASS_AVAILABLE
  The `results` property of the `ORKCollectionResult` object contains the step results
  for the task.
  */
+
 ORK_CLASS_AVAILABLE
 @interface ORKStepResult : ORKCollectionResult
 

@@ -60,7 +60,7 @@ public class ORKSwiftStroopResult: ORKResult {
         aCoder.encode(colorSelected, forKey: Keys.colorSelected.rawValue)
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         startTime = aDecoder.decodeObject(forKey: Keys.startTime.rawValue) as? Double
         endTime = aDecoder.decodeObject(forKey: Keys.endTime.rawValue) as? Double

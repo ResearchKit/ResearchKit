@@ -72,6 +72,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic) NSArray<ORKBodyItem *> *bodyItems;
 
+@property (nonatomic, nullable) UIImage *centeredVerticallyImage;
+
 @property (nonatomic, nullable) ORKNavigationContainerView *navigationFooterView;
 
 @property (nonatomic, weak) id<ORKStepViewLearnMoreItemDelegate> delegate;

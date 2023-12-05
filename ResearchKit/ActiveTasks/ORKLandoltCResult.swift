@@ -63,7 +63,7 @@ public class ORKLandoltCResult: ORKResult {
         aCoder.encode(score, forKey: Keys.score.rawValue)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         outcome = aDecoder.decodeObject(forKey: Keys.outcome.rawValue) as? Bool ?? false
@@ -99,7 +99,11 @@ public class ORKLandoltCResult: ORKResult {
     }
     
     override public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: UInt) -> String {
-        let descriptionString = " \(descriptionPrefix(withNumberOfPaddingSpaces: numberOfPaddingSpaces)); Outcome: \(String(describing: outcome)); LetterAngle: \(String(describing: letterAngle)); SliderAngle: \(String(describing: sliderAngle)); Score: \(String(describing: score))"
+        let descriptionString = """
+        \(descriptionPrefix(withNumberOfPaddingSpaces: numberOfPaddingSpaces));
+        Outcome: \(String(describing: outcome)); LetterAngle: \(String(describing: letterAngle));
+        SliderAngle: \(String(describing: sliderAngle)); Score: \(String(describing: score))
+        """
         return descriptionString
     }
 }

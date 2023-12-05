@@ -34,6 +34,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKLearnMoreInstructionStep;
+@class ORKLearnMoreView;
+@protocol ORKLearnMoreViewDelegate;
 
 ORK_CLASS_AVAILABLE
 @interface ORKLearnMoreItem : NSObject <NSCopying, NSSecureCoding>
@@ -68,6 +70,8 @@ ORK_CLASS_AVAILABLE
  The `ORKLearnMoreInstructionStep` to be presented when the button is pressed.
  */
 @property (nonatomic, nonnull) ORKLearnMoreInstructionStep *learnMoreInstructionStep;
+
+@property (nonatomic, weak) id<ORKLearnMoreViewDelegate> delegate;
 
 @end
 

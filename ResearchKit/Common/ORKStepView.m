@@ -32,6 +32,7 @@
 #import "ORKStepContentView_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKSkin.h"
+#import "ORKQuestionStepView.h"
 
 @interface ORKStepView ()<ORKStepContentLearnMoreItemDelegate>
 
@@ -52,7 +53,12 @@
 
 - (void)setupStepContentView {
     if (!self.stepContentView) {
-        self.stepContentView = [ORKStepContentView new];
+        
+        if ([[self class] isSubclassOfClass:[ORKQuestionStepView class]]) {
+            self.stepContentView = [[ORKStepContentView alloc] initWithStandardPadding];
+        } else {
+            self.stepContentView = [ORKStepContentView new];
+        }
     }
     self.stepContentView.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stepContentViewImageChanged:) name:ORKStepTopContentImageChangedKey object:nil];
@@ -133,6 +139,10 @@
     [_stepContentView setBuildsInBodyItems:_buildInBodyItems];
 }
 
+- (void)setCenteredVerticallyImage:(UIImage *)centeredVerticallyImage {
+    _centeredVerticallyImage = centeredVerticallyImage;
+    [_stepContentView setCenteredVerticallyImage:_centeredVerticallyImage];
+}
 
 - (void)setUseExtendedPadding:(BOOL)useExtendedPadding {
     _useExtendedPadding = useExtendedPadding;

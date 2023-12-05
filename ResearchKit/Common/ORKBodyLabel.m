@@ -40,8 +40,7 @@
 }
 
 + (UIFont *)defaultFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
-    return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+    return [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
 }
 
 @end

@@ -29,6 +29,10 @@
  */
 
 #import "ORKHealthKitPermissionType.h"
+#import "ORKNotificationPermissionType.h"
+#import "ORKSensorPermissionType.h"
+#import "ORKMotionActivityPermissionType.h"
+#import "ORKLocationPermissionType.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKPermissionType.h"
 
@@ -39,5 +43,20 @@
                                                         objectTypesToRead:objectTypesToRead];
 }
 
-@end
++ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions) options {
+    return [[ORKNotificationPermissionType alloc] initWithAuthorizationOptions:options];
+}
 
++ (ORKSensorPermissionType *)sensorPermissionType:(NSSet<SRSensor> *)sensors {
+    return [[ORKSensorPermissionType alloc] initWithSensors:sensors];
+}
+
++ (ORKMotionActivityPermissionType *)deviceMotionPermissionType {
+    return [[ORKMotionActivityPermissionType alloc] init];
+}
+
++ (ORKLocationPermissionType *) locationPermissionType {
+    return [[ORKLocationPermissionType alloc] init];
+}
+
+@end

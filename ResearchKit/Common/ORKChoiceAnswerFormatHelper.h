@@ -28,9 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 @import Foundation;
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,6 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTextChoice;
 @protocol ORKAnswerOption;
 
+@protocol ORKChoiceAnswerFormatHelper <NSObject>
+
+- (NSArray *)choices;
+
+- (BOOL)isValuePicker;
+
+@end
+
 @interface ORKChoiceAnswerFormatHelper : NSObject
 
 - (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat;
@@ -46,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSUInteger)choiceCount;
 
 - (nullable id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index;
-- (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
+
 - (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
 
 - (nullable id)answerForSelectedIndex:(NSUInteger)index;
@@ -59,5 +65,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)labelForChoiceAnswer:(id)answer;
 
 @end
+
+#if TARGET_OS_IOS
+#pragma mark - iOS
+@interface ORKChoiceAnswerFormatHelper ()
+
+- (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
+
+@end
+#endif
 
 NS_ASSUME_NONNULL_END

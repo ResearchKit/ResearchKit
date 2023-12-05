@@ -30,6 +30,7 @@
 
 
 #import "ORKFitnessStep.h"
+#import "ORKHelpers_Internal.h"
 
 #import "ORKFitnessStepViewController.h"
 
@@ -43,6 +44,7 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
+        self.userInfo = [[NSDictionary alloc] init];
         self.shouldShowDefaultTimer = NO;
     }
     return self;
@@ -58,13 +60,48 @@
     }
 }
 
+- (BOOL)startsFinished {
+    return NO;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        ORK_DECODE_OBJ_PLIST(coder, userInfo);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    ORK_ENCODE_OBJ(coder, userInfo);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKFitnessStep *step = [super copyWithZone:zone];
+    step.userInfo = [self.userInfo copy];
     return step;
 }
 
-- (BOOL)startsFinished {
-    return NO;
+- (BOOL)isEqual:(id)other
+{
+    if ([self class] != [other class]) {
+        return NO;
+    }
+
+    __typeof(self) castObject = other;
+    return ORKEqualObjects(self.userInfo, castObject.userInfo);
+}
+
+- (NSUInteger)hash
+{
+    return [super hash] ^ self.userInfo.hash;
 }
 
 @end

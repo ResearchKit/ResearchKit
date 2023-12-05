@@ -31,7 +31,7 @@
 
 #import "ORKEnvironmentSPLMeterStep.h"
 #import "ORKEnvironmentSPLMeterStepViewController.h"
-
+#import "ORKRecorder_Private.h"
 #import "ORKHelpers_Internal.h"
 
 #define ORKEnvironmentSPLMeterTaskDefaultThresholdValue 35.0
@@ -58,6 +58,10 @@
     self.requiredContiguousSamples = ORKEnvironmentSPLMeterTaskDefaultRequiredContiguousSamples;
     self.stepDuration = CGFLOAT_MAX;
     self.shouldShowDefaultTimer = NO;
+
+    // This is inserted here because it is required for any task that requires the SPL Meter step
+    ORKAudioStreamerConfiguration *config = [[ORKAudioStreamerConfiguration alloc] initWithIdentifier:[NSString stringWithFormat:@"%@_streamerConfiguration",self.identifier]];
+    self.recorderConfigurations = @[config];
 }
 
 - (void)validateParameters {

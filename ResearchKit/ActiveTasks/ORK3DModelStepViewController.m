@@ -45,7 +45,7 @@
 
 @implementation ORK3DModelStepViewController {
     ORK3DModelManager *_modelManager;
-    ORK3DModelStepContentView *_stepContentview;
+    ORK3DModelStepContentView *_stepContentView;
     ORK3DModelStep *_step;
 }
 
@@ -62,13 +62,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _stepContentview = [ORK3DModelStepContentView new];
-    _stepContentview.translatesAutoresizingMaskIntoConstraints = NO;
-    self.activeStepView.activeCustomView = _stepContentview;
+    _stepContentView = [ORK3DModelStepContentView new];
+    _stepContentView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.activeStepView.activeCustomView = _stepContentView;
     self.activeStepView.customContentFillsAvailableSpace = NO;
     self.activeStepView.navigationFooterView.neverHasContinueButton = NO;
     
-    [[_stepContentview.bottomAnchor constraintEqualToAnchor:self.activeStepView.navigationFooterView.topAnchor] setActive:YES];
+    [[_stepContentView.bottomAnchor constraintEqualToAnchor:self.activeStepView.navigationFooterView.topAnchor] setActive:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(disableContinueButton:)
@@ -97,7 +97,7 @@
 - (void)activate3DModelManager {
     _modelManager = _step.modelManager;
     
-    [_modelManager addContentToView:_stepContentview];
+    [_modelManager addContentToView:_stepContentView];
 }
 
 - (void)stepDidFinish {
@@ -118,7 +118,7 @@
     ORKStepResult *stepResult = [super result];
     
     if (_modelManager) {
-        NSArray<ORKResult *> *managerResults = [_modelManager provideResults];
+        NSArray<ORKResult *> *managerResults = [_modelManager provideResultsWithIdentifier:self.step.identifier];
         if (managerResults) {
             stepResult.results = [managerResults copy];
         }

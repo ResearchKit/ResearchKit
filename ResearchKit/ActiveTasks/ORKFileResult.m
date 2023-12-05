@@ -45,6 +45,7 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_URL(aCoder, fileURL);
     ORK_ENCODE_OBJ(aCoder, contentType);
+    ORK_ENCODE_OBJ(aCoder, fileName);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -52,6 +53,7 @@
     if (self) {
         ORK_DECODE_URL(aDecoder, fileURL);
         ORK_DECODE_OBJ_CLASS(aDecoder, contentType, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, fileName, NSString);
     }
     return self;
 }
@@ -66,7 +68,8 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualFileURLs(self.fileURL, castObject.fileURL) &&
-            ORKEqualObjects(self.contentType, castObject.contentType));
+            ORKEqualObjects(self.contentType, castObject.contentType) &&
+            ORKEqualObjects(self.fileName, castObject.fileName));
 }
 
 - (NSUInteger)hash {
@@ -77,6 +80,7 @@
     ORKFileResult *result = [super copyWithZone:zone];
     result.fileURL = [self.fileURL copy];
     result.contentType = [self.contentType copy];
+    result.fileName = [self.fileName copy];
     return result;
 }
 

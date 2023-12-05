@@ -30,10 +30,31 @@
 
 
 #import "ORKBodyItem.h"
+#import "ORKBodyItem_Internal.h"
 #import "ORKLearnMoreInstructionStep.h"
 #import "ORKHelpers_Internal.h"
 
 @implementation ORKBodyItem
+{
+    // For our internal custom button type
+    BOOL _isCustomButtonType;
+}
+
+- (instancetype)initWithCustomButtonConfigurationHandler:(void(^)(UIButton *button))configurationHandler
+{
+    self = [super init];
+    if (self)
+    {
+        _isCustomButtonType = YES;
+        self.customButtonConfigurationHandler = [configurationHandler copy];
+    }
+    return self;
+}
+
+- (BOOL)isCustomButtonItemType
+{
+    return _isCustomButtonType;
+}
 
 - (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle {
     return [self initWithText:text detailText:detailText image:image learnMoreItem:learnMoreItem bodyItemStyle:bodyItemStyle useCardStyle:NO];

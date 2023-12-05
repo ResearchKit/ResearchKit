@@ -38,12 +38,22 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, transcription);
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+    if (@available(iOS 14.5, *)) {
+        ORK_ENCODE_OBJ(aCoder, recognitionMetadata);
+    }
+#endif
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, transcription, SFTranscription);
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+        if (@available(iOS 14.5, *)) {
+            ORK_DECODE_OBJ_CLASS(aDecoder, recognitionMetadata, SFSpeechRecognitionMetadata);
+        }
+#endif
     }
     return self;
 }
@@ -53,16 +63,24 @@
 }
 
 - (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
     __typeof(self) castObject = object;
-    return (isParentSame &&
-            ORKEqualObjects(self.transcription, castObject.transcription));
+    BOOL isParentSame = [super isEqual:object] && ORKEqualObjects(self.transcription, castObject.transcription);
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+    if (@available(iOS 14.5, *)) {
+        return isParentSame && ORKEqualObjects(self.recognitionMetadata, castObject.recognitionMetadata);
+    }
+#endif
+    return isParentSame;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKSpeechRecognitionResult *result = [super copyWithZone:zone];
     result.transcription = [self.transcription copy];
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+    if (@available(iOS 14.5, *)) {
+        result.recognitionMetadata = [self.recognitionMetadata copy];
+    }
+#endif
     return result;
 }
 

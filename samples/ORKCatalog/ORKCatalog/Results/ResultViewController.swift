@@ -47,11 +47,11 @@ class ResultViewController: UITableViewController {
     
     // MARK: Properties
 
-    var result: ORKResult? = ORKTaskResult()
+    var result: ORKResult?
 
-    var currentResult: ORKResult? = ORKTaskResult()
+    var currentResult: ORKResult?
 
-    var resultTableViewProvider: UITableViewDataSource & UITableViewDelegate = resultTableViewProviderForResult(ORKTaskResult())
+    var resultTableViewProvider: UITableViewDataSource & UITableViewDelegate = resultTableViewProviderForResult(nil, delegate: nil)
     
     // MARK: View Life Cycle
     
@@ -82,7 +82,7 @@ class ResultViewController: UITableViewController {
             we need to maintain a reference to it so that it can remain "alive"
             while its the table view's delegate and data source.
         */
-        resultTableViewProvider = resultTableViewProviderForResult(result)
+        resultTableViewProvider = resultTableViewProviderForResult(result, delegate: self)
         
         tableView.dataSource = resultTableViewProvider
         tableView.delegate = resultTableViewProvider
@@ -123,3 +123,10 @@ class ResultViewController: UITableViewController {
         return false
     }
 }
+
+extension ResultViewController: ResultProviderDelegate {
+    func presentShareSheet(shareSheet: UIActivityViewController) {
+        present(shareSheet, animated: true, completion: nil)
+    }
+}
+

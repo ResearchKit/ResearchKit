@@ -36,8 +36,12 @@
 #import "ORKBorderedButton.h"
 
 
-static const CGFloat minimumButtonHeight = 60;
+CGFloat minimumButtonHeight = 60;
+UILayoutConstraintAxis alignment = UILayoutConstraintAxisHorizontal;
+CGFloat labelHeight = 250.0;
+CGFloat labelWidth = 250.0;
 static const CGFloat buttonStackViewSpacing = 20.0;
+
 
 @implementation ORKStroopContentView {
     UILabel *_colorLabel;
@@ -52,39 +56,124 @@ static const CGFloat buttonStackViewSpacing = 20.0;
         _colorLabel.numberOfLines = 1;
         _colorLabel.textAlignment = NSTextAlignmentCenter;
         _colorLabel.translatesAutoresizingMaskIntoConstraints = NO;
+
         [_colorLabel setFont:[UIFont systemFontOfSize:60]];
         [_colorLabel setAdjustsFontSizeToFitWidth:YES];
         
+        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
         
-        _RButton = [[ORKBorderedButton alloc] init];
-        _RButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_RButton setTitle:ORKLocalizedString(@"STROOP_COLOR_RED_INITIAL", nil) forState:UIControlStateNormal];
-        
-        _GButton = [[ORKBorderedButton alloc] init];
-        _GButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_GButton setTitle:ORKLocalizedString(@"STROOP_COLOR_GREEN_INITIAL", nil) forState:UIControlStateNormal];
-        
-        _BButton = [[ORKBorderedButton alloc] init];
-        _BButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_BButton setTitle:ORKLocalizedString(@"STROOP_COLOR_BLUE_INITIAL", nil) forState:UIControlStateNormal];
-        
-        _YButton = [[ORKBorderedButton alloc] init];
-        _YButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_YButton setTitle:ORKLocalizedString(@"STROOP_COLOR_YELLOW_INITIAL", nil) forState:UIControlStateNormal];
-        
-        if (!_buttonStackView) {
-            _buttonStackView = [[UIStackView alloc] initWithArrangedSubviews:@[_RButton, _GButton, _BButton, _YButton]];
+        if (screenType == ORKScreenTypeiPhone5 ) {
+            labelWidth = 200.0;
+            labelHeight = 200.0;
+        } else {
+            labelWidth = 250.0;
+            labelHeight = 250.0;
         }
-        _buttonStackView.translatesAutoresizingMaskIntoConstraints = NO;
-        _buttonStackView.spacing = buttonStackViewSpacing;
-        _buttonStackView.axis = UILayoutConstraintAxisHorizontal;
+    
+        [self setupDefaultButtons];
         
         [self addSubview:_colorLabel];
-        [self addSubview:_buttonStackView];
         
         [self setUpConstraints];
     }
     return self;
+}
+
+
+-(void)setupButtons {
+    _RButton = [[ORKBorderedButton alloc] init];
+    [_RButton setNormalTintColor:[UIColor blackColor]];
+
+    _RButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_RButton setTitle:ORKLocalizedString(@"STROOP_COLOR_RED_INITIAL", nil) forState:UIControlStateNormal];
+
+    _GButton = [[ORKBorderedButton alloc] init];
+    [_GButton setNormalTintColor:[UIColor blackColor]];
+
+    _GButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_GButton setTitle:ORKLocalizedString(@"STROOP_COLOR_GREEN_INITIAL", nil) forState:UIControlStateNormal];
+
+    _BButton = [[ORKBorderedButton alloc] init];
+    [_BButton setNormalTintColor:[UIColor blackColor]];
+
+    _BButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_BButton setTitle:ORKLocalizedString(@"STROOP_COLOR_BLUE_INITIAL", nil) forState:UIControlStateNormal];
+
+    _YButton = [[ORKBorderedButton alloc] init];
+    [_YButton setNormalTintColor:[UIColor blackColor]];
+
+    _YButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_YButton setTitle:ORKLocalizedString(@"STROOP_COLOR_YELLOW_INITIAL", nil) forState:UIControlStateNormal];
+    
+}
+
+-(void)setupDefaultButtons {
+    [self setupButtons];
+    if (!_buttonStackView) {
+        _buttonStackView = [[UIStackView alloc] initWithArrangedSubviews:@[_RButton, _GButton, _BButton, _YButton]];
+        alignment = UILayoutConstraintAxisHorizontal;
+    }
+    
+    minimumButtonHeight = 60;
+    
+    _buttonStackView.translatesAutoresizingMaskIntoConstraints = NO;
+    _buttonStackView.spacing = buttonStackViewSpacing;
+    _buttonStackView.axis = alignment;
+    [self addSubview:_buttonStackView];
+    
+}
+
+-(void)setupGridButtons {
+    if (_useGridLayoutForButtons) {
+        [self setupButtons];
+
+        [_buttonStackView removeFromSuperview];
+        UIStackView* stack1 = [[UIStackView alloc] initWithArrangedSubviews:@[_RButton, _GButton]];
+        UIStackView* stack2 = [[UIStackView alloc] initWithArrangedSubviews:@[_BButton, _YButton]];
+        
+        stack1.translatesAutoresizingMaskIntoConstraints = NO;
+        stack1.spacing = buttonStackViewSpacing;
+        stack1.axis = UILayoutConstraintAxisHorizontal;
+        
+        stack2.translatesAutoresizingMaskIntoConstraints = NO;
+        stack2.spacing = buttonStackViewSpacing;
+        stack2.axis = UILayoutConstraintAxisHorizontal;
+        
+        _buttonStackView = [[UIStackView alloc] initWithArrangedSubviews:@[stack1,stack2]];
+        
+        _buttonStackView.axis = UILayoutConstraintAxisVertical;
+        
+        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
+        
+        if (screenType == ORKScreenTypeiPhone6) {
+            minimumButtonHeight = 150.0;
+        } else if (screenType == ORKScreenTypeiPhone5 ) {
+            minimumButtonHeight = 100.0;
+        } else {
+            minimumButtonHeight = 200;
+        }
+        
+        alignment = UILayoutConstraintAxisVertical;
+        _buttonStackView.translatesAutoresizingMaskIntoConstraints = NO;
+        _buttonStackView.spacing = buttonStackViewSpacing;
+        _buttonStackView.axis = alignment;
+        
+        [self addSubview:_buttonStackView];
+        [self setUpConstraints];
+    }
+}
+
+- (void)setUseGridLayoutForButtons:(bool)useGridLayoutForButtons{
+    _useGridLayoutForButtons = useGridLayoutForButtons;
+    [self setupGridButtons];
+
+}
+
+-(void)setUseTextForStimuli:(bool)useTextForStimuli{
+    _useTextForStimuli = useTextForStimuli;
+    if (!_useTextForStimuli) {
+        [_colorLabel setFont:[UIFont boldSystemFontOfSize:60]];
+    }
 }
 
 - (void)setColorLabelText:(NSString *)colorLabelText {
@@ -94,6 +183,9 @@ static const CGFloat buttonStackViewSpacing = 20.0;
 
 - (void)setColorLabelColor:(UIColor *)colorLabelColor {
     [_colorLabel setTextColor:colorLabelColor];
+    if (!_useTextForStimuli) {
+        [_colorLabel setBackgroundColor:colorLabelColor];
+    }
     [self setNeedsDisplay];
 }
 
@@ -106,31 +198,60 @@ static const CGFloat buttonStackViewSpacing = 20.0;
 }
 
 - (void)setUpConstraints {
-    
+
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
     NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _buttonStackView);
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==30)-[_colorLabel]-(>=10)-[_buttonStackView]-(==30)-|"
+
+    int bottomStackViewSpace = _useGridLayoutForButtons ? 90 : 30;
+
+    NSString * constraintString = [NSString stringWithFormat: @"V:|-(==30)-[_colorLabel]-(>=10)-[_buttonStackView]-(==%d)-|", bottomStackViewSpace];
+
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:constraintString
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:views]];
-    
-    [constraints addObjectsFromArray:@[
-                                       [NSLayoutConstraint constraintWithItem:_buttonStackView
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:_buttonStackView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0]
-                                       ]];
+    NSArray *baseLayouts = @[[NSLayoutConstraint constraintWithItem:_buttonStackView
+                                       attribute:NSLayoutAttributeHeight
+                                       relatedBy:NSLayoutRelationEqual
+                                          toItem:nil
+                                       attribute:NSLayoutAttributeNotAnAttribute
+                                      multiplier:1.0
+                                        constant:minimumButtonHeight],
+          [NSLayoutConstraint constraintWithItem:_buttonStackView
+                                       attribute:NSLayoutAttributeCenterX
+                                       relatedBy:NSLayoutRelationEqual
+                                          toItem:self
+                                       attribute:NSLayoutAttributeCenterX
+                                      multiplier:1.0
+                                        constant:0.0]];
+
+    [constraints addObjectsFromArray:baseLayouts];
+
+    if (!_useTextForStimuli) {
+
+        [constraints addObjectsFromArray: @[[NSLayoutConstraint constraintWithItem:_colorLabel
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:labelWidth],
+                                           [NSLayoutConstraint constraintWithItem:_colorLabel
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant: labelHeight],
+                                           [NSLayoutConstraint constraintWithItem:_buttonStackView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:minimumButtonHeight]]];
+    }
+
     for (ORKBorderedButton *button in @[_RButton, _GButton, _BButton, _YButton]) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:button
                                                             attribute:NSLayoutAttributeWidth

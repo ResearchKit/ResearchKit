@@ -51,13 +51,16 @@
         self.shouldShowDefaultTimer = NO;
         self.shouldContinueOnFinish = YES;
         self.stepDuration = NSIntegerMax;
+        self.randomizeVisualAndColorAlignment = YES;
+        self.useTextForStimuli = YES;
+        self.useGridLayoutForButtons = NO;
     }
     return self;
 }
 
 - (void)validateParameters {
     [super validateParameters];
-    NSInteger minimumAttempts = 10;
+    NSInteger minimumAttempts = 3;
     if (self.numberOfAttempts < minimumAttempts) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of attempts should be greater or equal to %ld.", (long)minimumAttempts]  userInfo:nil];
     }
@@ -67,13 +70,12 @@
     return NO;
 }
 
-- (BOOL)allowsBackNavigation {
-    return NO;
-}
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStroopStep *step = [super copyWithZone:zone];
     step.numberOfAttempts = self.numberOfAttempts;
+    step.useTextForStimuli = self.useTextForStimuli;
+    step.useGridLayoutForButtons = self.useGridLayoutForButtons;
+    step.randomizeVisualAndColorAlignment = self.randomizeVisualAndColorAlignment;
     return step;
 }
 
@@ -81,6 +83,9 @@
     self = [super initWithCoder:aDecoder];
     if (self ) {
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
+        ORK_DECODE_BOOL(aDecoder, useTextForStimuli);
+        ORK_DECODE_BOOL(aDecoder, useGridLayoutForButtons);
+        ORK_DECODE_BOOL(aDecoder, randomizeVisualAndColorAlignment);
     }
     return self;
 }
@@ -88,13 +93,20 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
+    ORK_ENCODE_BOOL(aCoder, useTextForStimuli);
+    ORK_ENCODE_BOOL(aCoder, useGridLayoutForButtons);
+    ORK_ENCODE_BOOL(aCoder, randomizeVisualAndColorAlignment);
 }
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && (self.numberOfAttempts == castObject.numberOfAttempts));
+    return (isParentSame
+            && (self.numberOfAttempts == castObject.numberOfAttempts)
+            && (self.useTextForStimuli == castObject.useTextForStimuli)
+            && (self.useGridLayoutForButtons == castObject.useGridLayoutForButtons)
+            && (self.randomizeVisualAndColorAlignment == castObject.randomizeVisualAndColorAlignment));
 }
 
 @end

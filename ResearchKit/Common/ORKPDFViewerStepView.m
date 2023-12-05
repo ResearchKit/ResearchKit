@@ -161,7 +161,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     if (!_clearAnnotationsButton) {
         _clearAnnotationsButton = [ORKBorderedButton new];
     }
-    _clearAnnotationsButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+    [_clearAnnotationsButton updateContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
     _clearAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _clearButtonView = [UIView new];
     _clearButtonView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -197,7 +197,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     if (!_applyAnnotationsButton) {
         _applyAnnotationsButton = [ORKBorderedButton new];
     }
-    _applyAnnotationsButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+    [_applyAnnotationsButton updateContentInsets:NSDirectionalEdgeInsetsMake(0, 6, 0, 6)];
     _applyAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _applyButtonView = [UIView new];
     _applyButtonView.translatesAutoresizingMaskIntoConstraints = NO;

@@ -1,4 +1,3 @@
-
 /*
  Copyright (c) 2016, Sage Bionetworks
  Copyright (c) 2016, Apple Inc. All rights reserved.
@@ -70,6 +69,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     [super viewWillAppear:animated];
 
     [self.taskViewController setRegisteredScrollView:_tableView];
+    [self.taskViewController setNavigationBarColor:self.view.backgroundColor];
     
     if (_tableContainer) {
         [_tableContainer sizeHeaderToFit];
@@ -306,7 +306,6 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // FIXME:- temporary fix for estimating tableFooterView's height
     if (indexPath == tableView.indexPathsForVisibleRows.lastObject) {
         [self.view setNeedsLayout];
     }

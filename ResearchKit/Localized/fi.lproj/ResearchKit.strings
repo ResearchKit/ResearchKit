@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Liitä AirPods- tai EarPods-kuulokkeet testin suorittamista varten.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ suoritettu";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Kuulokkeet";
-"HEADPHONES_UNKNOWN" = "Tuntematon";
-"HEADPHONES_NONE" = "Ei mitään";
-"CONNECTED" = "Yhdistetty";
-"NOT_CONNECTED" = "Ei yhteydessä";
-"HEADPHONE_CONNECTED_%@" = "Yhdistetty – %@";
-"HEADPHONE_DETECT_TITLE" = "Liitä kuulokkeet";
-"HEADPHONE_DETECT_TEXT" = "Tämä testi vaatii Apple AirPods- tai Apple EarPods -kuulokkeet";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Avaruudellinen muisti";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tämä aktiiviteetti mittaa lyhytaikaista avaruudellista muistiasi. Toista järjestys, jossa %@ syttyy.";

@@ -84,12 +84,28 @@ static const CGFloat rungButtonPadding = 10.0;
     self = [super init];
     if (self) {
         _rungIndex = rungIndex;
+        
+        if (@available(iOS 13.0, *)) {
+            self.tintColor = ORKViewTintColor(self);
+        }
+        
         [self setupLabels];
         [self setText:text];
         [self setupCheckmarkView];
         [self setupRungImageView];
         [self setupVariableConstraints];
     }
+    return self;
+}
+
+- (instancetype)initWithDontKnowText:(NSString *)text {
+    self = [super init];
+    if (self) {
+        [self setupDontKnowButtonWithText:text];
+        [self setupCheckmarkView];
+        [self setupDontKnowButtonConstraints];
+    }
+    
     return self;
 }
 
@@ -120,6 +136,7 @@ static const CGFloat rungButtonPadding = 10.0;
     _rungImageView.contentMode = UIViewContentModeScaleAspectFit;
     _rungImageView.image = [[UIImage imageNamed:@"socioEconomicLadderRung" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _rungImageView.tintColor = self.tintColor;
+
     [self addSubview:_rungImageView];
 }
 
@@ -167,8 +184,37 @@ static const CGFloat rungButtonPadding = 10.0;
     [[self.bottomAnchor constraintEqualToAnchor:_rungImageView.bottomAnchor] setActive:YES];
 }
 
+- (void)setupDontKnowButtonWithText:(NSString *)text {
+    _frontLabel = [UILabel new];
+    _frontLabel.numberOfLines = 1;
+    _frontLabel.font = [self bodyTextFont];
+    _frontLabel.textColor = [UIColor grayColor];
+    _frontLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _frontLabel.textAlignment = NSTextAlignmentLeft;
+    [_frontLabel setText:text];
+    
+    [self addSubview:_frontLabel];
+}
+
+- (void)setupDontKnowButtonConstraints {
+    [[_checkmarkView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-rungButtonPadding] setActive:YES];
+    [[_checkmarkView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor] setActive:YES];
+    
+    [[_frontLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:rungButtonPadding + labelToRungPadding] setActive:YES];
+    [[_frontLabel.centerYAnchor constraintEqualToAnchor:self.centerYAnchor] setActive:YES];
+    [[_frontLabel.trailingAnchor constraintEqualToAnchor:_checkmarkView.leadingAnchor constant: -labelToRungPadding] setActive:YES];
+    
+    [[self.heightAnchor constraintEqualToConstant:rungHeight] setActive:YES];
+    [[self.bottomAnchor constraintEqualToAnchor:_frontLabel.bottomAnchor] setActive:YES];
+}
+
 - (void)setChecked:(BOOL)checked {
     [_checkmarkView setChecked:checked];
+}
+
+- (void)didMoveToWindow {
+    self.tintColor = ORKViewTintColor(self);
+    _rungImageView.tintColor = self.tintColor;
 }
 
 @end
@@ -176,6 +222,7 @@ static const CGFloat rungButtonPadding = 10.0;
 @interface ORKSESRungButton : UIButton
 
 @property (nonatomic) NSUInteger rungIndex;
+@property (nonatomic) BOOL isDontKnowButton;
 
 - (instancetype)initTopRungButtonWithText:(NSString *)text;
 - (instancetype)initBottomRungButtonWithText:(NSString *)text;
@@ -193,6 +240,7 @@ static const CGFloat rungButtonPadding = 10.0;
                                text:(nullable NSString *)text {
     self = [super init];
     if (self) {
+        _isDontKnowButton = NO;
         _rungIndex = rungIndex;
         _rungView = [[ORKSESRungView alloc] initWithRungAtIndex:rungIndex text:text];
         [_rungView setUserInteractionEnabled:NO];
@@ -227,6 +275,19 @@ static const CGFloat rungButtonPadding = 10.0;
     return [self initWithRungAtIndex:rungIndex text:nil];
 }
 
+- (instancetype)initWithDontKnowText:(NSString *)text {
+    self = [super init];
+    if (self) {
+        _isDontKnowButton = YES;
+        _rungView = [[ORKSESRungView alloc] initWithDontKnowText:text];
+        [_rungView setUserInteractionEnabled:NO];
+        [self setupRungView];
+        [self updateFillColor];
+        self.layer.backgroundColor = _fillColor.CGColor;
+    }
+    return self;
+}
+
 - (void)setSelected:(BOOL)selected highlight:(BOOL)highlight {
     [super setSelected:selected];
     [_rungView setChecked:selected];
@@ -259,7 +320,7 @@ static const CGFloat rungButtonPadding = 10.0;
 - (void)updateFillColor {
     if (@available(iOS 13.0, *)) {
         _fillColor = [UIColor secondarySystemGroupedBackgroundColor];
-        // FIXME:- dark mode color displays solid black after animation ends if the views are stacked
+
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
             _fillColor = [UIColor colorWithRed:0.173 green:0.173 blue:0.180 alpha:1.0];
         }
@@ -288,6 +349,7 @@ static const CGFloat rungButtonPadding = 10.0;
 @implementation ORKSESSelectionView {
     NSMutableArray<ORKSESRungButton *> *_buttons;
     ORKSESAnswerFormat *_answerFormat;
+    ORKSESRungButton *_dontKnowRungButton;
 }
 
 - (instancetype)initWithAnswerFormat:(ORKSESAnswerFormat *)answerFormat answer:(nullable id)answer {
@@ -325,11 +387,12 @@ static const CGFloat rungButtonPadding = 10.0;
         [[rungButton.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
         [[rungButton.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
         [[rungButton.topAnchor constraintEqualToAnchor:(i==0) ? self.topAnchor : _buttons[i-1].bottomAnchor constant:(i==0) ? rungButtonPadding : rungToRungPadding] setActive:YES];
-        if (i==_buttons.count-1) {
+
+        if (i==_buttons.count-1 && ![_answerFormat shouldShowDontKnowButton]) {
             [[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:rungButton.bottomAnchor constant:rungButtonPadding] setActive:YES];
         }
         
-        if (self.answer && ![self.answer isEqual:[NSNull null]]) {
+        if (self.answer && ![self.answer isEqual:[NSNull null]] && [self.answer class] != [ORKDontKnowAnswer class]) {
             // calling intValue on NSNull will cause a crash
             if ([self.answer intValue] == i) {
                 [rungButton setSelected:YES highlight:NO];
@@ -347,6 +410,24 @@ static const CGFloat rungButtonPadding = 10.0;
         
         rungButton.accessibilityLabel = [NSString stringWithFormat:@"%@ %d %@", topOrBottomText, buttonPercentageRange, ORKLocalizedString(@"AX_SES_PERCENT", nil)];
     }
+    
+    if ([_answerFormat shouldShowDontKnowButton]) {
+        _dontKnowRungButton = [[ORKSESRungButton alloc] initWithDontKnowText:_answerFormat.customDontKnowButtonText ? : ORKLocalizedString(@"SLIDER_I_DONT_KNOW", nil)];
+        _dontKnowRungButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _dontKnowRungButton.accessibilityLabel = _answerFormat.customDontKnowButtonText ? : ORKLocalizedString(@"SLIDER_I_DONT_KNOW", nil);
+        [_dontKnowRungButton addTarget:self action:@selector(rungButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_dontKnowRungButton];
+        
+        ORKSESRungButton *currentBottomButton = _buttons[_buttons.count - 1];
+        [[_dontKnowRungButton.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
+        [[_dontKnowRungButton.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
+        [[_dontKnowRungButton.topAnchor constraintEqualToAnchor:currentBottomButton.bottomAnchor constant: rungToRungPadding] setActive:YES];
+        [[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_dontKnowRungButton.bottomAnchor constant:rungButtonPadding] setActive:YES];
+        
+        if (self.answer && ![self.answer isEqual:[NSNull null]] && [self.answer class] == [ORKDontKnowAnswer class]) {
+            [_dontKnowRungButton setSelected:YES highlight:YES];
+        }
+    }
 }
 
 - (void)rungButtonPressed:(id)sender {
@@ -357,8 +438,15 @@ static const CGFloat rungButtonPadding = 10.0;
             [button setSelected:NO highlight:NO];
         }
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(buttonPressedAtIndex:)]) {
+    
+    if (!buttonPressed.isDontKnowButton && _dontKnowRungButton) {
+        [_dontKnowRungButton setSelected:NO highlight:NO];
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(buttonPressedAtIndex:)] && !buttonPressed.isDontKnowButton) {
         [self.delegate buttonPressedAtIndex:buttonPressed.tag];
+    } else if (self.delegate && [self.delegate respondsToSelector:@selector(dontKnowButtonPressed)] && buttonPressed.isDontKnowButton) {
+        [self.delegate dontKnowButtonPressed];
     }
 }
 

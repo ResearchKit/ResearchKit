@@ -78,6 +78,7 @@
     result -> _color = [self.color copy];
     result -> _text = [self.text copy];
     result -> _colorSelected = [self.colorSelected copy];
+
     return result;
 }
 

@@ -239,7 +239,6 @@
 
 @end
 
-
 @implementation ORKStreamingAudioRecorderConfiguration
 
 #pragma clang diagnostic push

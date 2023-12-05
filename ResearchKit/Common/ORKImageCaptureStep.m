@@ -57,8 +57,8 @@
     if (self) {
         ORK_DECODE_IMAGE(aDecoder, templateImage);
         ORK_DECODE_UIEDGEINSETS(aDecoder, templateImageInsets);
-        ORK_DECODE_OBJ(aDecoder, accessibilityHint);
-        ORK_DECODE_OBJ(aDecoder, accessibilityInstructions);
+        ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityHint, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityInstructions, NSString);
         ORK_DECODE_BOOL(aDecoder, captureRaw);
     }
     return self;

@@ -36,16 +36,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- Fitness step.
- 
- Displays usual header, a counting-up timer, read outs for distance and/or
- heart rate if corresponding recorders are attached.
- 
- Also displays an image during the task.
- */
 ORK_CLASS_AVAILABLE
 @interface ORKFitnessStep : ORKActiveStep
+
+@property (nonatomic, copy) NSDictionary *userInfo;
 
 @end
 

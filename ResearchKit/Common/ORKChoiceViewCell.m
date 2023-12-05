@@ -53,12 +53,13 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 @property (nonatomic) ORKSelectionSubTitleLabel *detailLabel;
 @property (nonatomic) ORKCheckmarkView *checkView;
 @property (nonatomic) NSMutableArray<NSLayoutConstraint *> *containerConstraints;
+@property (nonatomic, readonly) CGFloat leftRightMargin;
+@property (nonatomic, readonly) CGFloat intraCellSpacing;
 
 @end
 
 @implementation ORKChoiceViewCell {
     
-    CGFloat _leftRightMargin;
     CGFloat _topBottomMargin;
     CAShapeLayer *_contentMaskLayer;
     UIColor *_fillColor;
@@ -71,7 +72,6 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.clipsToBounds = YES;
-        _leftRightMargin = 0.0;
         _topBottomMargin = 0.0;
         [self setupContainerView];
         [self setupCheckView];
@@ -79,72 +79,107 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     return self;
 }
 
-- (void) drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     [self setMaskLayers];
 }
 
+- (CGFloat)leftRightMargin {
+    return self.useCardView ? ORKCardLeftRightMarginForWindow(self.window) : 0.0;
+}
+
+- (CGFloat)intraCellSpacing {
+    return 0;
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    if (@available(iOS 13.0, *)) {
-        _fillColor = [UIColor secondarySystemGroupedBackgroundColor];
-        // FIXME:- dark mode color displays solid black after animation ends if the views are stacked
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-            _fillColor = [UIColor colorWithRed:0.173 green:0.173 blue:0.180 alpha:1.0];
+    _fillColor = [self __fillColor];
+}
+
+- (void)clearLayerIfNeeded:(CALayer *)layer {
+    
+    if (layer) {
+        for (CALayer *sublayer in [layer.sublayers mutableCopy]) {
+            [sublayer removeFromSuperlayer];
         }
-    } else {
-        _fillColor = [UIColor ork_borderGrayColor];
+        
+        [layer removeFromSuperlayer];
+        layer = nil;
     }
 }
 
+- (UIColor *)__fillColor {
+    
+    UIColor *color;
+    
+    if (@available(iOS 13.0, *)) {
+        
+        color = [UIColor secondarySystemGroupedBackgroundColor];
+        
+        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            color = [UIColor colorWithRed:0.173 green:0.173 blue:0.180 alpha:1.0];
+        }
+        
+    } else {
+        color = [UIColor ork_borderGrayColor];
+    }
+    
+    return color;
+}
+
+- (UIColor *)__borderColor {
+    if (@available(iOS 13.0, *)) {
+        return UIColor.separatorColor;
+    } else {
+        return [UIColor ork_midGrayTintColor];
+    }
+}
+
+- (UIRectCorner)roundedCorners {
+        
+    if (_isLastItem && !_isFirstItemInSectionWithoutTitle) {
+        
+        return UIRectCornerBottomLeft | UIRectCornerBottomRight;
+        
+    } else if (!_isLastItem && _isFirstItemInSectionWithoutTitle) {
+        
+        return UIRectCornerTopLeft | UIRectCornerTopRight;
+        
+    } else {
+        
+        return UIRectCornerAllCorners;
+    }
+}
+
+- (BOOL)shouldApplyMaskLayers {
+    return _isLastItem || _isFirstItemInSectionWithoutTitle;
+}
+
 - (void)setMaskLayers {
+    
     if (_useCardView && !_animationLayer) {
-        if (_contentMaskLayer) {
-            for (CALayer *sublayer in [_contentMaskLayer.sublayers mutableCopy]) {
-                [sublayer removeFromSuperlayer];
-            }
-            [_contentMaskLayer removeFromSuperlayer];
-            _contentMaskLayer = nil;
-        }
+        
+        UIColor *borderColor = [self __borderColor];
+        _fillColor = [self __fillColor];
+        
+        [self clearLayerIfNeeded:_contentMaskLayer];
         _contentMaskLayer = [[CAShapeLayer alloc] init];
-        UIColor *borderColor;
-        if (@available(iOS 13.0, *)) {
-            _fillColor = [UIColor secondarySystemGroupedBackgroundColor];
-            // FIXME:- dark mode color displays solid black after animation ends if the views are stacked
-            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                _fillColor = [UIColor colorWithRed:0.173 green:0.173 blue:0.180 alpha:1.0];
-            }
-            borderColor = UIColor.separatorColor;
-        } else {
-            _fillColor = [UIColor ork_borderGrayColor];
-            borderColor = [UIColor ork_midGrayTintColor];
-        }
         [_contentMaskLayer setFillColor:[_fillColor CGColor]];
         
-        [_foreLayer removeFromSuperlayer];
-        _foreLayer = nil;
+        [self clearLayerIfNeeded:_foreLayer];
         _foreLayer = [CAShapeLayer layer];
         [_foreLayer setFillColor:[_fillColor CGColor]];
         _foreLayer.zPosition = 0.0f;
         
-        CAShapeLayer *lineLayer = [CAShapeLayer layer];
-        
-        if (_isLastItem || _isFirstItemInSectionWithoutTitle) {
-            NSUInteger rectCorners;
-            if (_isLastItem && !_isFirstItemInSectionWithoutTitle) {
-                rectCorners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
-            }
-            else if (!_isLastItem && _isFirstItemInSectionWithoutTitle) {
-                rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight;
-            }
-            else {
-                rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight;
-            }
+        if ([self shouldApplyMaskLayers]) {
+            
+            UIRectCorner rectCorners = [self roundedCorners];
             
             _foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height - ORKCardDefaultBorderWidth);
             
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.containerView.bounds
-                                                           byRoundingCorners: rectCorners
+                                                           byRoundingCorners:rectCorners
                                                                  cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
             
             CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
@@ -152,34 +187,43 @@ static const CGFloat LabelCheckViewPadding = 10.0;
             _foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: _foreLayerBounds
                                                    byRoundingCorners: rectCorners
                                                          cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
-        }
-        else {
+        } else {
+            
             _foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
             _foreLayer.path = [UIBezierPath bezierPathWithRect:_foreLayerBounds].CGPath;
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:self.containerView.bounds].CGPath;
-            
-            CGRect lineBounds = CGRectMake(ORKSurveyItemMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - ORKSurveyItemMargin, 0.5);
-            lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
-            lineLayer.zPosition = 0.0f;
         }
         
-        lineLayer.fillColor = borderColor.CGColor;
         if (_cardViewStyle == ORKCardViewStyleBordered) {
             _contentMaskLayer.fillColor = borderColor.CGColor;
         }
         
         [_contentMaskLayer addSublayer:_foreLayer];
+          
+        [_contentMaskLayer addSublayer:[self lineLayer]];
         
-        [_contentMaskLayer addSublayer:lineLayer];
         [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
     }
+}
+
+- (nullable CAShapeLayer *)lineLayer {
+    CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    if (!_isLastItem) {
+        CGRect lineBounds = CGRectMake(ORKSurveyItemMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - ORKSurveyItemMargin, 0.5);
+        lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
+        lineLayer.zPosition = 0.0f;
+    }
+    lineLayer.fillColor = [self __borderColor].CGColor;
+    
+    return lineLayer;
 }
 
 - (void)setupContainerView {
     if (!_containerView) {
         _containerView = [UIView new];
     }
-    [self addSubview:_containerView];
+
+    [self.contentView addSubview:_containerView];
 }
 
 - (void)addContainerViewToSelfConstraints {
@@ -187,24 +231,31 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeTop
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeTop
                                     multiplier:1.0
                                       constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeLeft
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeLeft
                                     multiplier:1.0
-                                      constant:_leftRightMargin],
+                                      constant:self.leftRightMargin],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeRight
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:self
+                                        toItem:self.contentView
                                      attribute:NSLayoutAttributeRight
                                     multiplier:1.0
-                                      constant:-_leftRightMargin]
+                                      constant:-self.leftRightMargin],
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeBottom
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self.contentView
+                                     attribute:NSLayoutAttributeBottom
+                                    multiplier:1.0
+                                      constant:-self.intraCellSpacing],
     ]];
 }
 
@@ -297,7 +348,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
                                                                      toItem:_containerView
                                                                   attribute:NSLayoutAttributeBottom
                                                                  multiplier:1.0
-                                                                   constant:0.0]];
+                                                                   constant:self.intraCellSpacing]];
     
     [NSLayoutConstraint activateConstraints:_containerConstraints];
 }
@@ -311,7 +362,6 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 
 - (void)setUseCardView:(bool)useCardView {
     _useCardView = useCardView;
-    _leftRightMargin = ORKCardLeftRightMarginForWindow(self.window);
     _topBottomMargin = CardTopBottomMargin;
     [self setBackgroundColor:[UIColor clearColor]];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -324,7 +374,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 }
 
 - (void)updateSelectedItem {
-        [self updateCheckView];
+    [self updateCheckView];
 }
 
 - (void)setImmediateNavigation:(BOOL)immediateNavigation {
@@ -403,24 +453,6 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     }
 }
 
-- (UIImage *)unCheckedImage {
-    if (@available(iOS 13.0, *)) {
-        UIImageConfiguration *configuration = [UIImageSymbolConfiguration configurationWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody] scale:UIImageSymbolScaleLarge];
-        return [UIImage systemImageNamed:@"circle" withConfiguration:configuration];
-    } else {
-        return nil;
-    }
-}
-
-- (UIImage *)checkedImage {
-    if (@available(iOS 13.0, *)) {
-        UIImageConfiguration *configuration = [UIImageSymbolConfiguration configurationWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody] scale:UIImageSymbolScaleLarge];
-        return [UIImage systemImageNamed:@"checkmark.circle.fill" withConfiguration:configuration];
-    } else {
-        return [[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    }
-}
-
 - (void)setupCheckView {
     if (!_checkView) {
         _checkView = [[ORKCheckmarkView alloc] initWithDefaults];
@@ -480,12 +512,15 @@ static const CGFloat LabelCheckViewPadding = 10.0;
 }
 
 - (void)setPrimaryLabelFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
-    [_primaryLabel setFont:[UIFont fontWithDescriptor:descriptor size:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    if (!_primaryLabel.attributedText) {
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+        [_primaryLabel setFont:[UIFont fontWithDescriptor:descriptor size:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    }
 }
 
 - (void)updateCheckView {
     if (_checkView) {
+        _checkView.tintColor = self.tintColor;
         [_checkView setChecked:_cellSelected];
     }
 }
@@ -636,6 +671,30 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     if (self.delegate && [self.delegate respondsToSelector:@selector(textChoiceOtherCellDidResignFirstResponder:)]) {
         [self.delegate textChoiceOtherCellDidResignFirstResponder:self];
     }
+}
+
+@end
+
+#pragma mark - ORKChoiceViewPlatterCell
+
+@implementation ORKChoiceViewPlatterCell
+
+#pragma mark - ORKTextChoiceCell Overrides
+
+- (BOOL)shouldApplyMaskLayers {
+    return YES;
+}
+
+- (UIRectCorner)roundedCorners {
+    return UIRectCornerAllCorners;
+}
+
+- (CGFloat)intraCellSpacing {
+    return 10;
+}
+
+- (nullable CAShapeLayer *)lineLayer {
+    return nil;
 }
 
 @end

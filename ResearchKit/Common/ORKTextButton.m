@@ -72,6 +72,14 @@
     [self setTitleColor:[[self tintColor] colorWithAlphaComponent:0.7] forState:UIControlStateHighlighted];
 }
 
+- (void)updateContentInsets:(NSDirectionalEdgeInsets)contentInsets {
+    if (@available(iOS 15.0, *)) {
+        UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration plainButtonConfiguration];
+        [buttonConfiguration setContentInsets:contentInsets];
+        [self setConfiguration:buttonConfiguration];
+    }
+}
+
 - (void)updateAppearance {
     
     self.titleLabel.font = [[self class] defaultFont];

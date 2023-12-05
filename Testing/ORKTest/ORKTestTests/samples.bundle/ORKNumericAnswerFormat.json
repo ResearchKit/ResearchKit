@@ -1,1 +1,1 @@
-{"_class":"ORKNumericAnswerFormat","style":"decimal","minimum":123,"maximum":123,"unit":"","defaultNumericAnswer":123,"maximumFractionDigits":123,"showDontKnowButton":false,"customDontKnowButtonText":"","placeholder":"","hideUnitWhenAnswerIsEmpty":true}
+{"_class":"ORKNumericAnswerFormat","style":"decimal","minimum":123,"maximum":123,"unit":"weeks", "displayUnit":"semanas","defaultNumericAnswer":123,"maximumFractionDigits":123,"showDontKnowButton":false,"customDontKnowButtonText":"","dontKnowButtonStyle":0,"placeholder":"","hideUnitWhenAnswerIsEmpty":true}

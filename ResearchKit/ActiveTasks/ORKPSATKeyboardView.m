@@ -30,7 +30,7 @@
 
 
 #import "ORKPSATKeyboardView.h"
-
+#import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
 
 
@@ -80,6 +80,7 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
 - (void)setEnabled:(BOOL)enabled {
     for (ORKBorderedButton *answerButton in self.answerButtons) {
         [answerButton setEnabled:enabled];
+        [answerButton setBackgroundColor:ORKViewTintColor(self)];
     }
 }
 

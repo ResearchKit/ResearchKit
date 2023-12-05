@@ -243,7 +243,6 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 - (void)setBounds:(CGRect)bounds {
     [super setBounds:bounds];
-    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
     [self setNeedsLayout];
 }
 

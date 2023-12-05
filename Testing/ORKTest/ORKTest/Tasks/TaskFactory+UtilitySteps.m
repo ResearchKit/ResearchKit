@@ -34,7 +34,38 @@
 
 #import "TaskFactory+UtilitySteps.h"
 
-@import ResearchKit;
+@import ResearchKit.Private;
+
+
+@interface ORKWebViewTaskViewController: ORKTaskViewController <ORKWebViewStepDelegate>
+
+@end
+
+
+@implementation ORKWebViewTaskViewController
+
+- (void)stepViewController:(ORKStepViewController *)stepViewController
+didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction {
+    ORKStep *nextStep = [self.task stepAfterStep:stepViewController.step withResult:self.result];
+    if (direction == ORKStepViewControllerNavigationDirectionForward
+        && [nextStep isKindOfClass:[ORKWebViewStep class]]) {
+        ORKWebViewStepViewController *webStepViewController = ORKDynamicCast([self viewControllerForStep:nextStep], ORKWebViewStepViewController);
+        webStepViewController.webViewDelegate = self;
+        [webStepViewController startPreload];
+    } else {
+        [super stepViewController:stepViewController didFinishWithNavigationDirection:direction];
+    }
+}
+
+- (void)didFinishLoadingWebStepViewController:(nonnull ORKWebViewStepViewController *)webStepViewController {
+    [super stepViewController:self.currentStepViewController didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
+}
+
+- (WKNavigationActionPolicy)handleLinkNavigationWithURL:(nonnull NSURL *)url {
+    return WKNavigationActionPolicyCancel;
+}
+
+@end
 
 
 @implementation TaskFactory (UtilitySteps)
@@ -652,27 +683,11 @@
     firstStep.text = @"Example of an ORKWebViewStep";
     [steps addObject:firstStep];
     
-    NSString * html = @"<!DOCTYPE html>"
-    "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">"
-    "<head>"
-    "<meta name=\"viewport\" content=\"width=400, user-scalable=no\">"
-    "<script type=\"text/javascript\">"
-    "function completeStep() {"
-    "    var answer = document.getElementById(\"answer\").value;"
-    "    window.webkit.messageHandlers.ResearchKit.postMessage(answer);"
-    "}"
-    "</script>"
-    "</head>"
-    "<body>"
-    "<div class=\"container\">"
-    "<input type=\"text\" id=\"answer\" class=\"answer-box\" placeholder=\"Answer\" />"
-    "<button onclick=\"completeStep();\" class=\"continue-button\">Continue</button>"
-    "</div>"
-    "</body>"
-    "</html>";
+    NSString *html = @"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body style=\"font-size:20px\"><h1 style=\"font-size:70px!important\">Consent</h1><p>This is a legal document</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></body></html>";
     
     ORKWebViewStep *webViewStep = [ORKWebViewStep webViewStepWithIdentifier:@"webViewStep" html:html];
     webViewStep.title = @"Web View";
+    webViewStep.showSignatureAfterContent = YES;
     [steps addObject:webViewStep];
     
     ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
@@ -680,6 +695,13 @@
     [steps addObject:lastStep];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+}
+
+- (ORKTaskViewController *)makeWebViewStepTaskViewControllerWithIdentifier:(NSString *)identifier
+                                                                      task:(id<ORKTask>)task
+                                                           restorationData:(NSData *)restorationData
+                                                                  delegate:(id<ORKTaskViewControllerDelegate>)delegate {
+    return [[ORKWebViewTaskViewController alloc] initWithTask:task restorationData:restorationData delegate:delegate error:NULL];
 }
 
 // Update progress on the Wait Task

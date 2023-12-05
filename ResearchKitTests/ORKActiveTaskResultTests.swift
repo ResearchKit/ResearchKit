@@ -245,7 +245,7 @@ class ORKReactionTimeResultTests: XCTestCase {
         result = ORKReactionTimeResult(identifier: identifier)
         
         result.timestamp = 10
-        fileResult = ORKFileResult()
+        fileResult = ORKFileResult(identifier: identifier)
         url = URL(fileURLWithPath: "FILEURL")
         fileResult.fileURL = url
         result.fileResult = fileResult
@@ -307,6 +307,44 @@ class ORKSpatialSpanMemoryResultTests: XCTestCase {
         newResult.numberOfGames = 20
         newResult.numberOfFailures = 20
         newResult.gameRecords = [gameRecord]
+        newResult.startDate = date
+        newResult.endDate = date
+        
+        XCTAssert(result.isEqual(newResult))
+    }
+}
+
+class ORKSpeechInNoiseResultTests: XCTestCase {
+    var result: ORKSpeechInNoiseResult!
+    var identifier: String!
+    var targetSentence: String!
+    var filename: String!
+    let date = Date()
+    
+    override func setUp() {
+        super.setUp()
+        identifier = "Result"
+        result = ORKSpeechInNoiseResult(identifier: identifier)
+        
+        targetSentence = "The Result Object Contains The Target Sentence."
+        filename = "filename.wav"
+        result.targetSentence = targetSentence
+        result.filename = filename
+    }
+    
+    func testProperties() {
+        XCTAssertEqual(result.identifier, identifier)
+        XCTAssertEqual(result.targetSentence, targetSentence)
+        XCTAssertEqual(result.filename, filename)
+    }
+    
+    func testIsEqual() {
+        result.startDate = date
+        result.endDate = date
+        
+        let newResult = ORKSpeechInNoiseResult(identifier: identifier)
+        newResult.targetSentence = targetSentence
+        newResult.filename = filename
         newResult.startDate = date
         newResult.endDate = date
         
@@ -528,7 +566,7 @@ class ORKdBHLToneAudiometryResultTests: XCTestCase {
         result.outputVolume = 100
         result.tonePlaybackDuration = 360
         result.postStimulusDelay = 10
-        result.headphoneType = ORKHeadphoneTypeIdentifier.airPods
+        result.headphoneType = ORKHeadphoneTypeIdentifier.airPodsGen1
         sample = ORKdBHLToneAudiometryFrequencySample()
         sample.frequency = 100
         result.samples = [sample]
@@ -539,7 +577,7 @@ class ORKdBHLToneAudiometryResultTests: XCTestCase {
         XCTAssertEqual(result.outputVolume, 100)
         XCTAssertEqual(result.tonePlaybackDuration, 360)
         XCTAssertEqual(result.postStimulusDelay, 10)
-        XCTAssertEqual(result.headphoneType, ORKHeadphoneTypeIdentifier.airPods)
+        XCTAssertEqual(result.headphoneType, ORKHeadphoneTypeIdentifier.airPodsGen1)
         XCTAssertEqual(result.samples, [sample])
     }
     
@@ -551,7 +589,7 @@ class ORKdBHLToneAudiometryResultTests: XCTestCase {
         newResult.outputVolume = 100
         newResult.tonePlaybackDuration = 360
         newResult.postStimulusDelay = 10
-        newResult.headphoneType = ORKHeadphoneTypeIdentifier.airPods
+        newResult.headphoneType = ORKHeadphoneTypeIdentifier.airPodsGen1
         newResult.samples = [sample]
         newResult.startDate = date
         newResult.endDate = date

@@ -33,9 +33,9 @@
 #import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilityTrack.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
+#import "ORKTouchAbilityTapTrial.h"
 
 #import "ORKHelpers_Internal.h"
-
 
 @implementation ORKTouchAbilityTrial
 
@@ -53,10 +53,10 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, startDate);
-        ORK_DECODE_OBJ(aDecoder, endDate);
-        ORK_DECODE_OBJ(aDecoder, tracks);
-        ORK_DECODE_OBJ(aDecoder, gestureRecognizerEvents);
+        ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, endDate, NSDate);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, tracks, ORKTouchAbilityTapTrial);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gestureRecognizerEvents, ORKTouchAbilityGestureRecoginzerEvent);
     }
     return self;
 }

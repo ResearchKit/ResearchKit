@@ -48,6 +48,7 @@
 #import "ORKKeychainWrapper.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKTaskViewController_Internal.h"
+#import "ORKSkin.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -89,6 +90,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     if (self.step && [self isViewLoaded]) {
         
+        [self.taskViewController setNavigationBarColor:ORKColor(ORKBackgroundColorKey)];
+        [self.view setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+        
         _accessibilityPasscodeField = [UITextField new];
         _accessibilityPasscodeField.hidden = YES;
         _accessibilityPasscodeField.delegate = self;
@@ -126,8 +130,8 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
             _originalForgotPasscodeY = self.view.bounds.size.height - kForgotPasscodeVerticalPadding - kForgotPasscodeHeight;
             CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
 
-            UIButton *forgotPasscodeButton = [ORKTextButton new];
-            forgotPasscodeButton.contentEdgeInsets = (UIEdgeInsets){12, 10, 8, 10};
+            ORKTextButton *forgotPasscodeButton = [ORKTextButton new];
+            [forgotPasscodeButton updateContentInsets: NSDirectionalEdgeInsetsMake(12, 10, 8, 10)];
             forgotPasscodeButton.frame = CGRectMake(x, _originalForgotPasscodeY, width, kForgotPasscodeHeight);
             
             NSString *buttonTitle = [self forgotPasscodeButtonText];
@@ -396,6 +400,18 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     }
 }
 
+- (BOOL)canIgnoreError:(NSError *)error {
+    return ([self passcodeStep].passcodeFlow == ORKPasscodeFlowCreate || [self passcodeStep].passcodeFlow == ORKPasscodeFlowEdit) && error.code == LAErrorBiometryNotAvailable;
+}
+
+- (void)moveForwardOrShowTextEntry {
+    if ([self passcodeStep].passcodeFlow == ORKPasscodeFlowCreate || [self passcodeStep].passcodeFlow == ORKPasscodeFlowEdit) {
+        [self finishTouchId];
+    } else {
+        [self makePasscodeViewBecomeFirstResponder];
+    }
+}
+
 - (void)promptTouchId {
     _touchContext = [LAContext new];
     _touchContext.localizedFallbackTitle = @"";
@@ -409,6 +425,10 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         [self makePasscodeViewResignFirstResponder];
         
         NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
+        if (_touchContext.biometryType == LABiometryTypeFaceID) {
+            localizedReason = ORKLocalizedString(@"PASSCODE_FACE_ID_MESSAGE", nil);
+        }
+        
         ORKWeakTypeOf(self) weakSelf = self;
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
@@ -425,21 +445,31 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                     if ([strongSelf passcodeStep].passcodeFlow == ORKPasscodeFlowAuthenticate) {
                         [strongSelf.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:strongSelf];
                     }
-                } else if (error.code != LAErrorUserCancel) {
-                    // Display the error message.
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE", nil)
-                                                                                   message:error.localizedDescription
-                                                                            preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {
-                                                                ORKStrongTypeOf(self) innerStrongSelf = weakSelf;
-                                                                [innerStrongSelf makePasscodeViewBecomeFirstResponder];
-                                                            }]];
-                    [strongSelf presentViewController:alert animated:YES completion:nil];
+                    
+                    [strongSelf finishTouchId];
+                } else {
+                    if ([self canIgnoreError:error]) {
+                        [strongSelf finishTouchId];
+                    } else {
+                        // Display the error message.
+                        NSString* alertTitle = ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE", nil);
+                        if (_touchContext.biometryType == LABiometryTypeFaceID) {
+                            alertTitle = ORKLocalizedString(@"PASSCODE_FACE_ID_ERROR_ALERT_TITLE", nil);
+                        }
+
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                                       message:error.localizedDescription
+                                                                                preferredStyle:UIAlertControllerStyleAlert];
+                        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction * action) {
+                                                                    ORKStrongTypeOf(self) innerStrongSelf = weakSelf;
+                                                                    [innerStrongSelf moveForwardOrShowTextEntry];
+                                                                }]];
+                        [strongSelf presentViewController:alert animated:YES completion:nil];
+                    }
+        
                 }
-                
-                [strongSelf finishTouchId];
             });
         }];
         
@@ -499,9 +529,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)removePasscodeFromKeychain {
     NSError *error;
-    [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
+    id storedValue = [ORKKeychainWrapper objectOfClass:NSDictionary.self forKey:PasscodeKey error:&error];
     
-    if (!error) {
+    if (storedValue != nil) {
         [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:&error];
     
         if (error) {
@@ -512,8 +542,10 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (BOOL)passcodeMatchesKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    if (error) {
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectOfClass:NSDictionary.self
+                                                                           forKey:PasscodeKey
+                                                                            error:&error];
+    if (dictionary == nil) {
         [self throwExceptionWithKeychainError:error];
     }
     
@@ -523,8 +555,11 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)setValuesFromKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    if (error) {
+    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectOfClass:NSDictionary.self
+                                                                          forKey:PasscodeKey
+                                                                           error:&error];
+    
+    if (dictionary == nil) {
         [self throwExceptionWithKeychainError:error];
     }
     

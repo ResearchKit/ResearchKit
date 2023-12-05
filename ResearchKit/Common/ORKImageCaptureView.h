@@ -56,6 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIImage *capturedImage;
 @property (nonatomic, strong, nullable) NSError *error;
 
+- (void)orientationDidChange;
+
 @end
 
 NS_ASSUME_NONNULL_END

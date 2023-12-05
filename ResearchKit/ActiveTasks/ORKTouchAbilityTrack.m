@@ -48,7 +48,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, touches);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, touches, ORKTouchAbilityTouch);
     }
     return self;
 }

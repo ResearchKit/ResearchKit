@@ -50,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) ORKBorderedButton *skipButton;
 @property (nonatomic, strong, readonly) ORKFootnoteLabel *footnoteLabel;
 @property (nonatomic, strong, readonly) ORKBorderedButton *cancelButton;
+@property (nonatomic, strong, readonly) ORKLabel *detailTextLabel;
 
 @property (nonatomic) BOOL useNextForSkip;
 @property (nonatomic, getter=isOptional) BOOL optional;

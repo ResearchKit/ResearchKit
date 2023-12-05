@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "CE2DCF31-672A-4F3F-A538-AF0ADA4806F4",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ORKCatalog.xcodeproj",
+      "identifier" : "869230BD1AAA890A00BFE11B",
+      "name" : "ORKCatalog"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:ORKCatalog.xcodeproj",
+        "identifier" : "9622282924F04D780056E74D",
+        "name" : "ORKCatalogUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

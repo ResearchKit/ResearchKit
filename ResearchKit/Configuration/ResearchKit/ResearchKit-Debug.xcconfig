@@ -1,0 +1,11 @@
+//
+// ResearchKit-Debug.xcconfig
+//
+
+
+RUN_CLANG_STATIC_ANALYZER = YES
+
+#include "ResearchKit-Shared.xcconfig"
+
+SUPPORTS_MACCATALYST = NO
+TARGETED_DEVICE_FAMILY = 1

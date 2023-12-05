@@ -31,6 +31,7 @@
 #import "ORKIconButton.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKLabel.h"
+#import "ORKBorderedButton.h"
 
 @implementation ORKIconButton {
     UIView *_customView;
@@ -66,6 +67,8 @@
 
 - (void)init_ORKIconButton {
     self.layer.cornerRadius = 10.0;
+    [self.layer setCornerCurveContinuous];
+     
     self.clipsToBounds = YES;
     
     [self setupCustomView];

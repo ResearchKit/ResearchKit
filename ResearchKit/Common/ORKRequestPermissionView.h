@@ -31,6 +31,8 @@
 @import UIKit;
 @import Foundation;
 
+@class ORKRequestPermissionButton;
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString * ORKRequestPermissionsNotification NS_STRING_ENUM;
@@ -42,7 +44,7 @@ extern ORKRequestPermissionsNotification const ORKRequestPermissionsNotification
                             title:(NSString *)title
                        detailText:(NSString *)detailText;
 
-@property (nonatomic, strong) UIButton *requestPermissionButton;
+@property (nonatomic, strong) ORKRequestPermissionButton *requestPermissionButton;
 @property (nonatomic) BOOL enableContinueButton;
 
 - (void)updateIconTintColor:(UIColor *)iconTintColor;

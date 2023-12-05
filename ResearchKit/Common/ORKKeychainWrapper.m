@@ -32,6 +32,7 @@
 #import "ORKKeychainWrapper.h"
 
 #import "ORKHelpers_Internal.h"
+#import "ResearchKit/ResearchKit-Swift.h"
 
 
 static NSString *ORKKeychainWrapperDefaultService() {
@@ -50,7 +51,9 @@ static NSString *ORKKeychainWrapperDefaultService() {
 + (BOOL)setObject:(id<NSSecureCoding>)object
            forKey:(NSString *)key
             error:(NSError **)errorOut {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object
+                                         requiringSecureCoding:YES
+                                                         error:errorOut];
     return [self setData:data
                   forKey:key
                  service:ORKKeychainWrapperDefaultService()
@@ -58,13 +61,14 @@ static NSString *ORKKeychainWrapperDefaultService() {
                    error:errorOut];
 }
 
-+ (id<NSSecureCoding>)objectForKey:(NSString *)key
-             error:(NSError **)errorOut {
-    NSData *data = [self dataForKey:key
-                            service:ORKKeychainWrapperDefaultService()
-                        accessGroup:nil
-                              error:errorOut];
-    return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
++ (id<NSSecureCoding>)objectOfClass:(Class)objectClass forKey:(NSString *)key
+       error:(NSError **)errorOut {
+  NSData *data = [self dataForKey:key
+              service:ORKKeychainWrapperDefaultService()
+            accessGroup:nil
+               error:errorOut];
+  
+  return data ? [NSKeyedUnarchiver unarchivedObjectOfClass:objectClass fromData:data error:errorOut] : nil;
 }
 
 + (BOOL)removeObjectForKey:(NSString *)key

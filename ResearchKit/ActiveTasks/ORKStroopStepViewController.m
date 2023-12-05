@@ -40,8 +40,9 @@
 #import "ORKStroopStep.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
+#import "ORKNavigationContainerView.h"
+#import "ORKTaskViewController_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
-
 
 @interface ORKStroopStepViewController ()
 
@@ -93,7 +94,7 @@
     _red = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0];
     _green = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
     _blue = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
-    _yellow = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
+    _yellow = [UIColor colorWithRed:245.0/225.0 green:221.0/225.0 blue:66.0/255.0 alpha:1.0];
     
     self.colors = @{
                     _redString: _red,
@@ -151,6 +152,14 @@
     }
 }
 
+- (void)startNextQuestionTimer {
+    _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+                                                         target:self
+                                                       selector:@selector(startNextQuestionOrFinish)
+                                                       userInfo:nil
+                                                        repeats:NO];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
@@ -198,26 +207,35 @@
 }
 
 - (void)startQuestion {
-    int pattern = arc4random() % 2;
-    if (pattern == 0) {
+    if ([self stroopStep].randomizeVisualAndColorAlignment) {
+        int pattern = arc4random() % 2;
+        if (pattern == 0) {
+            int index = arc4random() % [self.colors.allKeys count];
+            NSString *text = [self.colors.allKeys objectAtIndex:index];
+            self.stroopContentView.colorLabelText = text;
+            UIColor *color = [self.colors valueForKey:text];
+            self.stroopContentView.colorLabelColor = color;
+        }
+        else {
+            int index = arc4random() % [self.differentColorLabels.allKeys count];
+            NSString *text = [self.differentColorLabels.allKeys objectAtIndex:index];
+            self.stroopContentView.colorLabelText = text;
+            NSArray *colorArray = [self.differentColorLabels valueForKey:text];
+            int randomColor = arc4random() % colorArray.count;
+            UIColor *color = [colorArray objectAtIndex:randomColor];
+            self.stroopContentView.colorLabelColor = color;
+        }
+    } else {
         int index = arc4random() % [self.colors.allKeys count];
         NSString *text = [self.colors.allKeys objectAtIndex:index];
         self.stroopContentView.colorLabelText = text;
         UIColor *color = [self.colors valueForKey:text];
         self.stroopContentView.colorLabelColor = color;
     }
-    else {
-        int index = arc4random() % [self.differentColorLabels.allKeys count];
-        NSString *text = [self.differentColorLabels.allKeys objectAtIndex:index];
-        self.stroopContentView.colorLabelText = text;
-        NSArray *colorArray = [self.differentColorLabels valueForKey:text];
-        int randomColor = arc4random() % colorArray.count;
-        UIColor *color = [colorArray objectAtIndex:randomColor];
-        self.stroopContentView.colorLabelColor = color;
-    }
     [self setButtonsEnabled];
     _startTime = [NSProcessInfo processInfo].systemUptime;
 }
+
 
 - (void)setButtonsDisabled {
     [self.stroopContentView.RButton setEnabled: NO];

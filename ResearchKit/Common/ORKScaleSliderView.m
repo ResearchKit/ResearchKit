@@ -54,6 +54,7 @@ static const CGFloat MoveSliderLabelBottomPadding = 38.0;
 static const CGFloat RangeViewHorizontalPadding = 16.0;
 static const CGFloat SliderBottomPadding = 16.0;
 static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
+static const CGFloat DontKnowButtonMaxWidthOffset = 16.0;
 static const CGFloat kMargin = 25.0;
 
 
@@ -87,7 +88,7 @@ static const CGFloat kMargin = 25.0;
         _slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
         _slider.hideValueMarkers = [formatProvider shouldHideValueMarkers];
         _slider.isWaitingForUserFeedback = ([formatProvider defaultAnswer] == nil && ![formatProvider isVertical]) ? YES : NO;
-        _slider.minimumTrackTintColor = [UIColor systemBlueColor];
+        _slider.minimumTrackTintColor = self.tintColor;
         _slider.userInteractionEnabled = YES;
         _slider.contentMode = UIViewContentModeRedraw;
         self.accessibilityElements = [self.accessibilityElements arrayByAddingObject:_slider];
@@ -207,6 +208,14 @@ static const CGFloat kMargin = 25.0;
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (self.frame.size.width > 0 && _dontKnowButton) {
+        [[_dontKnowButton.widthAnchor constraintLessThanOrEqualToConstant:self.frame.size.width - DontKnowButtonMaxWidthOffset] setActive:YES];
+    }
+}
+
 - (void)setupTopLabels {
     _moveSliderLabel = [UILabel new];
     _moveSliderLabel.text = ORKLocalizedString(@"SLIDER_MOVE_SLIDER_FOR_VALUE", nil);
@@ -228,7 +237,7 @@ static const CGFloat kMargin = 25.0;
     UIFontDescriptor *valueLabelDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleTitle2];
     UIFontDescriptor *valueLabelFontDescriptor = [valueLabelDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
     [_valueLabel setFont: [UIFont fontWithDescriptor:valueLabelFontDescriptor size:[[valueLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
-    [_valueLabel setTextColor:[UIColor systemBlueColor]];
+    [_valueLabel setTextColor:self.tintColor];
 }
 
 - (void)setUpSliderAndRangeLabels {
@@ -645,6 +654,11 @@ static const CGFloat kMargin = 25.0;
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
+- (void)tintColorDidChange {
+    _valueLabel.textColor = self.tintColor;
+    _slider.minimumTrackTintColor = self.tintColor;
+}
+
 - (id<ORKTextScaleAnswerFormatProvider>)textScaleFormatProvider {
     if ([[_formatProvider class] conformsToProtocol:@protocol(ORKTextScaleAnswerFormatProvider)]) {
         return (id<ORKTextScaleAnswerFormatProvider>)_formatProvider;
@@ -691,8 +705,8 @@ static const CGFloat kMargin = 25.0;
         [self resetViewToDefault];
     }
     
-    if (_dontKnowButton && [_dontKnowButton isDontKnowButtonActive]) {
-        [_dontKnowButton setButtonInactive];
+    if (_dontKnowButton) {
+        [_dontKnowButton setActive:NO];
     }
     
     _currentNumberValue = [_formatProvider normalizedValueForNumber:@(_slider.value)];
@@ -714,9 +728,9 @@ static const CGFloat kMargin = 25.0;
 
 - (void)dontKnowButtonWasPressed {
 
-    if (_dontKnowButton && ![_dontKnowButton isDontKnowButtonActive]) {
+    if (_dontKnowButton && ![_dontKnowButton active]) {
         [_slider setShowThumb:YES];
-        [_dontKnowButton setButtonActive];
+        [_dontKnowButton setActive:YES];
         _currentNumberValue = nil;
         [self notifyDelegate];
     }
@@ -748,7 +762,7 @@ static const CGFloat kMargin = 25.0;
     }
 }
 
-- (void)setCurrentTextChoiceValue:(id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
+- (void)setCurrentTextChoiceValue:(NSObject<NSCopying, NSSecureCoding> *)currentTextChoiceValue {
     
     if (currentTextChoiceValue) {
         NSUInteger index = [[self textScaleFormatProvider] textChoiceIndexForValue:currentTextChoiceValue];
@@ -762,17 +776,18 @@ static const CGFloat kMargin = 25.0;
     }
 }
 
-- (id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
-    id<NSCopying, NSCoding, NSObject> value = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]].value;
+- (NSObject<NSCopying, NSSecureCoding> *)currentTextChoiceValue {
+    NSObject<NSCopying, NSSecureCoding> *value = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]].value;
     return value;
 }
 
 - (id)currentAnswerValue {
-    if ([_dontKnowButton isDontKnowButtonActive]) {
+    
+    if ([_dontKnowButton active]) {
         return [ORKDontKnowAnswer answer];
     }
     if ([self textScaleFormatProvider]) {
-        id<NSCopying, NSCoding, NSObject> value = [self currentTextChoiceValue];
+        NSObject<NSCopying, NSSecureCoding> *value = [self currentTextChoiceValue];
         return value ? @[value] : @[];
     } else {
         return _currentNumberValue;

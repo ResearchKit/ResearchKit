@@ -46,4 +46,8 @@
     return [UIFont fontWithDescriptor:fontDescriptor size:0];
 }
 
+- (UIAccessibilityTraits)accessibilityTraits {
+    return [super accessibilityTraits] | UIAccessibilityTraitHeader;
+}
+
 @end

@@ -46,6 +46,10 @@
 
 static const float ReviewCellTopBottomPadding = 15.0;
 static const float EditAnswerButtonTopBottomPadding = 10.0;
+static const float EditAnswerButtonCornerRadius = 14.0;
+static const float EditAnswerButtonLeftPadding = 16.0;
+static const float EditAnswerButtonTopBottomInsetSpacing = 6.0;
+static const float EditAnswerButtomLeftRightInsetSpacing = 12.0;
 static const float ReviewCardBottomPadding = 10.0;
 static const float ReviewQuestionAnswerPadding = 2.0;
 
@@ -256,6 +260,8 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     [_contentLayer addSublayer:foreLayer];
     [_contentLayer setFillColor:[borderColor CGColor]];
     [_containerView.layer insertSublayer:_contentLayer atIndex:0];
+
+    _button.layer.cornerRadius = _button.bounds.size.height == 0 ? EditAnswerButtonCornerRadius : (_button.bounds.size.height / 2);
 }
 
 - (void)setupContainerView {
@@ -283,10 +289,19 @@ static const float ReviewQuestionAnswerPadding = 2.0;
         _button = [[UIButton alloc] init];
     }
     [_button setTitle:ORKLocalizedString(@"REVIEW_EDIT_ANSWER", nil) forState:UIControlStateNormal];
-    [_button setTitleColor:self.tintColor forState:UIControlStateNormal];
+    [_button setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
     
-    UIFontDescriptor *buttonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
-    [_button.titleLabel setFont:[UIFont fontWithDescriptor:buttonDescriptor size:[[buttonDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    if (@available(iOS 13.0, *)) {
+        [_button setBackgroundColor:[UIColor tertiarySystemFillColor]];
+    } else {
+        [_button setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    [_button setContentEdgeInsets:UIEdgeInsetsMake(EditAnswerButtonTopBottomInsetSpacing, EditAnswerButtomLeftRightInsetSpacing, EditAnswerButtonTopBottomInsetSpacing, EditAnswerButtomLeftRightInsetSpacing)];
+    _button.clipsToBounds = YES;
+
+    UIFontDescriptor *buttonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
+    UIFontDescriptor *boldDescriptor = [buttonDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    [_button.titleLabel setFont:[UIFont fontWithDescriptor:boldDescriptor size:0.0]];
     
     _button.translatesAutoresizingMaskIntoConstraints = NO;
     [_containerView addSubview:_button];
@@ -301,7 +316,7 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     [[_containerView.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:leftRightPadding] setActive:YES];
     [[_containerView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-leftRightPadding] setActive:YES];
     [[_button.topAnchor constraintEqualToAnchor:_containerView.topAnchor constant:EditAnswerButtonTopBottomPadding] setActive:YES];
-    [[_button.centerXAnchor constraintEqualToAnchor:_containerView.centerXAnchor] setActive:YES];
+    [[_button.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor constant:EditAnswerButtonLeftPadding] setActive:YES];
     [[_containerView.bottomAnchor constraintEqualToAnchor:_button.bottomAnchor constant:EditAnswerButtonTopBottomPadding] setActive:YES];
     
     [_separator.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale].active = YES;

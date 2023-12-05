@@ -37,7 +37,7 @@
 #import "DragonPokerStep.h"
 #import "DynamicTask.h"
 
-@import ResearchKit;
+@import ResearchKit.Private;
 
 
 @implementation TaskFactory (TaskCustomization)

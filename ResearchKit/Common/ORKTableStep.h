@@ -142,6 +142,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  The array of items in table. These items must conform to NSCopying and NSSecureCoding protocols.
+ When serialized with secure coding, the items must be of property list types.
  */
 @property (nonatomic, copy, nullable) NSArray <id <NSObject, NSCopying, NSSecureCoding>> *items;
 

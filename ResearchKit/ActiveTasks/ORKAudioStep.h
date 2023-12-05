@@ -38,6 +38,18 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKAudioStep : ORKActiveStep
 
+/**
+ A Boolean value that determines if audio recording will start and stop
+ automatcially or be controlled via a ORKRecordButton
+ 
+ When set to YES the user will be able to start and stop the audio recording
+ by the ORKRecordButton
+ 
+ The default value of this property is `NO`.
+ */
+@property (nonatomic) BOOL useRecordButton;
+
 @end
 
 NS_ASSUME_NONNULL_END
+

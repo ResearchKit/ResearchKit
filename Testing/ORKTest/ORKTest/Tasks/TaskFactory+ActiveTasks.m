@@ -34,7 +34,7 @@
 
 #import "TaskFactory+ActiveTasks.h"
 
-@import ResearchKit;
+@import ResearchKit.Private;
 
 
 @implementation TaskFactory (ActiveTasks)

@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Csatlakoztassa újra az AirPods vagy EarPods fülhallgatóját a teszt elvégzéséhez.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ teljesítve";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Fejhallgató";
-"HEADPHONES_UNKNOWN" = "Ismeretlen";
-"HEADPHONES_NONE" = "Nincs";
-"CONNECTED" = "Csatlakoztatva";
-"NOT_CONNECTED" = "Nem kapcsolódik";
-"HEADPHONE_CONNECTED_%@" = "Csatlakoztatva – %@";
-"HEADPHONE_DETECT_TITLE" = "Fejhallgató csatlakoztatása";
-"HEADPHONE_DETECT_TEXT" = "Ehhez a vizsgálathoz Apple AirPodsra vagy Apple EarPodsra van szükség";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Térbeli memória";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ez a tevékenység a rövidtávú térbeli memóriát vizsgálja. Ehhez ismételje meg a felvillanó %@ képeinek sorrendjét.";

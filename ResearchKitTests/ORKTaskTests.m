@@ -48,8 +48,17 @@
 
 @interface MockTaskViewController : ORKTaskViewController
 @property (nonatomic) NSMutableArray <MethodObject *> *methodCalled;
+@property (nonatomic, nullable) NSNumber *overrideHasSaveableResults;
 @end
 
+@interface ORKTaskViewController (Testing)
+- (BOOL)hasSaveableResults;
+- (BOOL)canDiscardResults;
+@end
+
+@interface ORKReviewStep (Testing)
+- (BOOL)isStandalone;
+@end
 
 @implementation ORKTaskTests {
     NSArray *_orderedTaskStepIdentifiers;
@@ -280,8 +289,7 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     
     if (resultOptions & (TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSymptomDizziness | TestsTaskResultOptionSymptomNausea)) {
         stepIdentifier = SymptomStepIdentifier;
-        questionResult = [[ORKChoiceQuestionResult alloc] init];
-        questionResult.identifier = stepIdentifier;
+        questionResult = [[ORKChoiceQuestionResult alloc] initWithIdentifier:stepIdentifier];
         if (resultOptions & TestsTaskResultOptionSymptomHeadache) {
             questionResult.answer = @[HeadacheChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomDizziness) {
@@ -302,8 +310,7 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     
     if (resultOptions & (TestsTaskResultOptionSeverityYes | TestsTaskResultOptionSeverityNo)) {
         stepIdentifier = SeverityStepIdentifier;
-        questionResult = [[ORKBooleanQuestionResult alloc] init];
-        questionResult.identifier = stepIdentifier;
+        questionResult = [[ORKBooleanQuestionResult alloc] initWithIdentifier:stepIdentifier];
         if (resultOptions & TestsTaskResultOptionSeverityYes) {
             questionResult.answer = @(YES);
         } else if (resultOptions & TestsTaskResultOptionSeverityNo) {
@@ -342,8 +349,8 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
 }
 
 - (void)testOrderedTask {
-    ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] init];
-    
+    ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:_orderedTask.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
+
     XCTAssertEqualObjects(_orderedTask.identifier, OrderedTaskIdentifier);
     XCTAssertEqualObjects(_orderedTask.steps, _orderedTaskSteps);
     
@@ -808,7 +815,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     
     {
         // Predicate matching, no additional task results, matching
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         
         resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
@@ -855,7 +864,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
                                                               destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
                                                                    defaultStepIdentifier:DefaultDestinationStepIdentifier];
         
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
         
@@ -976,7 +987,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     
     {
         // Predicate matching, no additional task results, matching
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         
         resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
@@ -1017,7 +1030,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
         predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
         predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
         
-        taskResult = [ORKTaskResult new];
+        taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                       taskRunUUID:[NSUUID new]
+                                                   outputDirectory:nil];
         taskResult.identifier = OrderedTaskIdentifier;
         XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
         
@@ -1114,7 +1129,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
 - (void)testDirectStepNavigationRule {
     ORKDirectStepNavigationRule *directRule = nil;
-    ORKTaskResult *mockTaskResult = [ORKTaskResult new];
+    ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"foo"
+                                                                      taskRunUUID:[NSUUID new]
+                                                                  outputDirectory:nil];
     
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:MatchedDestinationStepIdentifier];
     XCTAssertEqualObjects(directRule.destinationStepIdentifier, [MatchedDestinationStepIdentifier copy] );
@@ -1417,7 +1434,119 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     XCTAssertEqualObjects(delegate.methodCalled.firstObject.selectorName, @"taskViewController:stepViewControllerWillDisappear:navigationDirection:");
     NSArray *expectedArgs = @[taskViewController, stepViewController, @(ORKStepViewControllerNavigationDirectionForward)];
     XCTAssertEqualObjects(delegate.methodCalled.firstObject.arguments, expectedArgs);
+}
+
+- (void)testTaskViewControllerCanDiscardLogic {
+    TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
+    ORKStep *reviewableStep = [ORKQuestionStep questionStepWithIdentifier:@"Who's there?" title:nil question:nil answer:nil];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"TestTask" steps:@[
+        [[ORKInstructionStep alloc] initWithIdentifier:@"instuction-0"],
+        [ORKReviewStep standaloneReviewStepWithIdentifier:@"review" steps:@[reviewableStep] resultSource:nil],
+    ]];
+
+    // test cases where hasSaveableResults == NO
+    {
+        MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+        taskViewController.delegate = delegate;
+        taskViewController.overrideHasSaveableResults = @(NO);
+
+        XCTAssertFalse(taskViewController.modalInPresentation, "modalInPresentation should default to NO");
+        [taskViewController viewWillAppear:false]; // get the first step loaded
+        XCTAssertFalse(taskViewController.modalInPresentation, "modalInPresentation should be NO after viewWillAppear if hasSaveableResults = NO and the current stepViewController is an instructionStep");
+
+        // if currentStep == instructionStep and not saveable -> canDiscardResults
+        XCTAssertEqual(taskViewController.currentStepViewController.step.identifier , @"instuction-0");
+        XCTAssertTrue([taskViewController canDiscardResults]);
+        
+        // if currentStep is standalone review step and not saveable => canDiscardResults
+        [taskViewController goForward];
+        ORKReviewStep *reviewStep = ORKDynamicCast(taskViewController.currentStepViewController.step, ORKReviewStep);
+        XCTAssertTrue([reviewStep isStandalone]);
+        XCTAssertTrue([taskViewController canDiscardResults]);
+    }
     
+    // test cases where hasSaveableResults == YES
+    {
+        MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+        taskViewController.delegate = delegate;
+        taskViewController.overrideHasSaveableResults = @(YES);
+
+        XCTAssertFalse(taskViewController.modalInPresentation, "modalInPresentation should default to NO");
+        [taskViewController viewWillAppear:false]; // get the first step loaded
+        XCTAssertTrue(taskViewController.modalInPresentation, "modalInPresentation should be YES after viewWillAppear if hasSaveableResults = YES and the current stepViewController is an instructionStep");
+
+        // if currentStep == instructionStep and saveable -> CANNOT discardResults
+        XCTAssertEqual(taskViewController.currentStepViewController.step.identifier , @"instuction-0");
+        XCTAssertFalse([taskViewController canDiscardResults]);
+
+        // if currentStep is standalone review step and saveable => canDiscardResults
+        [taskViewController goForward];
+        ORKReviewStep *reviewStep = ORKDynamicCast(taskViewController.currentStepViewController.step, ORKReviewStep);
+        XCTAssertTrue([reviewStep isStandalone]);
+        XCTAssertTrue([taskViewController canDiscardResults]);
+    }
+    
+    {
+        // create a reviewStep with steps
+        ORKStep *reviewableStep = [ORKQuestionStep questionStepWithIdentifier:@"Who's there?" title:nil question:nil answer:nil];
+        ORKReviewStep *standaloneReviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standalone-review" steps:@[reviewableStep] resultSource:nil];
+        [task addStep:standaloneReviewStep];
+        XCTAssertTrue(ORKDynamicCast([[task steps] lastObject], ORKReviewStep).isStandalone, "review step either was in the wrong spot in the task.steps array, or computed an unexpected value for `isStandalone`. reviewStep with steps != nil should return YES for isStandalone");
+
+        MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+        [taskViewController viewWillAppear:false]; // get the first step loaded
+
+        // step forward to the standalone reviewStep
+        [taskViewController goForward];
+        [taskViewController goForward];
+        ORKReviewStep *testStep = ORKDynamicCast(taskViewController.currentStepViewController.step, ORKReviewStep);
+        XCTAssertEqual([testStep identifier], @"standalone-review");
+
+        ORKReviewStepViewController *reviewViewController = ORKDynamicCast(taskViewController.currentStepViewController, ORKReviewStepViewController);
+        XCTAssertNotNil(reviewViewController, "taskViewController.currentStepViewController should be of type ORKReviewStepViewController at this point");
+
+        
+        // before reviewStepViewController:willReviewStep, currentStepViewController should not be in readOnlyMode
+        XCTAssertFalse(taskViewController.currentStepViewController.readOnlyMode);
+        
+        // call reviewStepViewController:willReviewStep: to prepare the stepViewController for review
+        [taskViewController reviewStepViewController:reviewViewController willReviewStep:testStep];
+
+        // if current viewController.readOnly -> canDiscardResults
+        XCTAssertTrue(taskViewController.currentStepViewController.readOnlyMode);
+        XCTAssertTrue([taskViewController canDiscardResults]);
+    }
+    
+    {
+        ORKStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"Who's there?" title:nil question:nil answer:nil];
+        ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"basic task" steps:@[
+            questionStep
+        ]];
+        MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+        [taskViewController viewWillAppear:false]; // get the first step loaded
+
+        // confirm we have the expected currentStepViewController
+        XCTAssertEqual(taskViewController.currentStepViewController.step.identifier, @"Who's there?");
+
+        // if current viewController.readOnly is FALSE -> CANNOT discardResults
+        XCTAssertFalse(taskViewController.currentStepViewController.readOnlyMode);
+        XCTAssertFalse([taskViewController canDiscardResults]);
+    }
+
+}
+
+- (void)testTaskViewControllerReviewStepDiscardLogic {
+    ORKReviewStep *embeddedReviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier: @"embeddedReviewStep"];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"embeddedReviewMockTask"
+        steps:@[
+        embeddedReviewStep
+    ]];
+    MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+    [taskViewController viewWillAppear:false];
+    
+    // Test if currentStep is reviewStep but not standalone -> CANNOT discardResults
+    XCTAssertFalse(embeddedReviewStep.isStandalone);
+    XCTAssertFalse([taskViewController canDiscardResults]);
 }
 
 - (void)testIndexOfStep {
@@ -1719,7 +1848,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     ORKBooleanQuestionResult *result = [[ORKBooleanQuestionResult alloc] initWithIdentifier:@"question"];
     result.booleanAnswer = @(YES);
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"question" results:@[result]];
-    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithIdentifier:NavigableOrderedTaskIdentifier];
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:NavigableOrderedTaskIdentifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
     taskResult.results = @[stepResult];
     
     // For the case where the answer is YES, then the title should be "Yes" (unmodified)
@@ -1793,6 +1922,18 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     obj.selectorName = NSStringFromSelector(@selector(flipToPreviousPageFrom:));
     obj.arguments = @[fromController ?: [NSNull null]];
     [self.methodCalled addObject:obj];
+}
+
+- (BOOL)hasSaveableResults {
+    BOOL result = NO;
+    
+    if (self.overrideHasSaveableResults == nil) {
+        result = [super hasSaveableResults];
+    } else {
+        result = self.overrideHasSaveableResults.boolValue;
+    }
+    
+    return  result;
 }
 
 @end

@@ -140,7 +140,7 @@
     [self setContinueEnabled:!self.enableContinueAfterSelection];
     _parentView = view;
     
-    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     [_parentView addSubview:_spinner];
     [self setSpinnerConstraints];
     [_spinner startAnimating];
@@ -194,13 +194,12 @@
     }
 }
 
-- (NSArray<ORKResult *> *)provideResults {
+- (NSArray<ORKResult *> *)provideResultsWithIdentifier:(NSString *)identifier {
     SCNNode *currentSelectedNode = [_usdzModelManagerScene currentSelectedNode];
     
-    ORKUSDZModelManagerResult *result = [ORKUSDZModelManagerResult new];
+    ORKUSDZModelManagerResult *result = [[ORKUSDZModelManagerResult alloc] initWithIdentifier:identifier];
     result.identifierOfObjectSelectedAtClose = currentSelectedNode.name;
     result.identifiersOfSelectedObjects = [_usdzModelManagerScene selectedNodeIdentifierHistory];
-    
     return @[result];
 }
 

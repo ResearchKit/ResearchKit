@@ -620,7 +620,7 @@
         XCTAssertNotNil(cell, @"");
         XCTAssertEqualObjects(cell.reuseIdentifier, @"abc", @"");
         XCTAssertEqual(cell.immediateNavigation, YES, @"");
-        
+
         if (choice.textViewStartsHidden) {
             XCTAssertTrue(cell.textView.isHidden);
         }

@@ -1,0 +1,9 @@
+//
+// ResearchKit-Release.xcconfig
+//
+
+#include "ResearchKit-Shared.xcconfig"
+
+GCC_SYMBOLS_PRIVATE_EXTERN = YES
+SUPPORTS_MACCATALYST = NO
+TARGETED_DEVICE_FAMILY = 1

@@ -35,6 +35,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKBundleAsset;
+
 /**
  An `ORKVideoInstructionStep` object gives the participant video-based instructions for a task.
  
@@ -45,9 +47,14 @@ ORK_CLASS_AVAILABLE
 @interface ORKVideoInstructionStep : ORKInstructionStep
 
 /**
- The URL of the video to play (local or remote)
+ The URL of the video to play (local or remote). If set, this will take precedence over the bundle asset.
  */
 @property (nonatomic, copy, nullable) NSURL *videoURL;
+
+/**
+ An asset available in a local bundle. This will only be used if the videoURL property is not set.
+ */
+@property (nonatomic, copy, nullable) ORKBundleAsset *bundleAsset;
 
 /**
  The time (in seconds) at which the thumbnail image is created.

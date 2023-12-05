@@ -392,6 +392,36 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     XCTAssertEqual(_errorCount, 2);
 }
 
+- (void)testDataCollectorSerialization {
+
+    ORKMotionActivityCollector *motionCollector;
+    ORKHealthCollector *healthCollector;
+    ORKHealthCorrelationCollector *healthCorrelationCollector;
+    NSError *error;
+    // Create
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
+                                                                    [NSDate date],
+                                                                    &motionCollector,
+                                                                    &healthCollector,
+                                                                    &healthCorrelationCollector,
+                                                                    &error);
+
+    XCTAssertNil(error);
+    XCTAssertEqual(manager.collectors.count, 3);
+
+    ORKDataCollectionState *state = [[ORKDataCollectionState alloc] init];
+    [state setCollectors:manager.collectors];
+
+    id data = [NSKeyedArchiver archivedDataWithRootObject:state requiringSecureCoding:YES error:&error];
+
+    XCTAssertNil(error);
+
+    id decodedState = [NSKeyedUnarchiver unarchivedObjectOfClass:[ORKDataCollectionState self] fromData:data error:nil];
+
+    XCTAssertNotNil(decodedState);
+    XCTAssertTrue([decodedState isKindOfClass:[ORKDataCollectionState self]]);
+}
+
 #pragma mark - delegate
 
 - (BOOL)healthCollector:(ORKHealthCollector *)collector

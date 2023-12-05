@@ -75,6 +75,9 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSURL *fileURL;
 
+
+@property (nonatomic, copy, nullable) NSString *fileName;
+
 @end
 
 NS_ASSUME_NONNULL_END

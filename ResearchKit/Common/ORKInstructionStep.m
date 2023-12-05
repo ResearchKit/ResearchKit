@@ -30,7 +30,9 @@
 
 
 #import "ORKInstructionStep.h"
+#if TARGET_OS_IOS
 #import "ORKInstructionStepViewController.h"
+#endif
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 
@@ -38,10 +40,11 @@
 @implementation ORKInstructionStep
 
 
-
+#if TARGET_OS_IOS
 + (Class)stepViewControllerClass {
     return [ORKInstructionStepViewController class];
 }
+#endif
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];

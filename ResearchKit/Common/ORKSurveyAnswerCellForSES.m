@@ -50,6 +50,7 @@
 
 - (void)prepareView {
     [super prepareView];
+
     _selectionView = [[ORKSESSelectionView alloc] initWithAnswerFormat:(ORKSESAnswerFormat *)self.step.answerFormat answer:self.answer];
     _selectionView.delegate = self;
     _selectionView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -66,6 +67,11 @@
 
 - (void)buttonPressedAtIndex:(NSInteger)index {
     _selectionView.answer = [NSNumber numberWithInteger:index];
+    [self ork_setAnswer:_selectionView.answer];
+}
+
+- (void)dontKnowButtonPressed {
+    _selectionView.answer = [ORKDontKnowAnswer answer];
     [self ork_setAnswer:_selectionView.answer];
 }
 

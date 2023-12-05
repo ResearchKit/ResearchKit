@@ -4,3 +4,7 @@
 
 #import "ResearchKit.h"
 #import "ResearchKit_Private.h"
+#import "ORKQuestionStepViewController+TestingSupport.h"
+#import "ORKFormStepViewController+TestingSupport.h"
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h"
