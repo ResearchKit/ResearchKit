@@ -57,5 +57,29 @@
                 }
             }
         ]
+    },
+    "recognitionMetadata" : {
+        "speakingRate" : 1.5,
+        "averagePauseDuration" : 1.0,
+        "speechStartTimestamp" : 0.0,
+        "speechDuration" : 0.0,
+        "voiceAnalytics" : {
+            "jitter" : {
+                "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                "frameDuration" : 0.5
+            },
+            "shimmer" : {
+                "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                "frameDuration" : 0.5
+            },
+            "pitch" : {
+                "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                "frameDuration" : 0.5
+            },
+            "voicing" : {
+                "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                "frameDuration" : 0.5
+            }
+        }
     }
 }

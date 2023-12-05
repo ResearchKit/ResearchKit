@@ -30,6 +30,10 @@
 
 #import "ORKDontKnowButton.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKBorderedButton.h"
+#import "ORKCheckmarkView.h"
+#import "ORKSkin.h"
+#import "ORKLabel.h"
 
 static const CGFloat DontKnowButtonCornerRadius = 10.0;
 static const CGFloat DontKnowButtonEdgeInsetHorizontalSpacing = 10.0;
@@ -39,7 +43,10 @@ static const CGFloat CheckMarkImageTrailingPadding = 2.0;
 
 @implementation ORKDontKnowButton {
     UIView *_dontKnowButtonCustomView;
-    UILabel *_dontKnowButtonTextLabel;
+    UIImageView *_dontKnowButtonCustomImageView;
+    ORKLabel *_dontKnowButtonTextLabel;
+    ORKCheckmarkView *_checkmarkView;
+    NSMutableArray<NSLayoutConstraint *> *_constraints;
 }
 
 - (instancetype)init {
@@ -59,122 +66,290 @@ static const CGFloat CheckMarkImageTrailingPadding = 2.0;
 }
 
 - (void)init_ORKDontKnowButton {
-    _isDontKnowButtonActive = NO;
-    
-    [self setButtonInactive];
+    _dontKnowButtonStyle = ORKDontKnowButtonStyleStandard;
+    [self setActive:NO];
     [self tintColorDidChange];
 }
 
-- (void)updateAppearance {
-    self.layer.cornerRadius = DontKnowButtonCornerRadius;
-    self.clipsToBounds = YES;
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (_dontKnowButtonCustomView && _dontKnowButtonCustomView.frame.size.width > 0 && _dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
+        _dontKnowButtonCustomView.layer.cornerRadius = _dontKnowButtonCustomView.frame.size.height / 2;
+        [_dontKnowButtonCustomView.layer setCornerCurveContinuous];
+    }
+}
+
+- (void)setActive:(BOOL)active {
+    _active = active;
+    
+    switch (_dontKnowButtonStyle) {
+        case ORKDontKnowButtonStyleStandard:
+            [self setButtonConstraintsStandard];
+            break;
+        case ORKDontKnowButtonStyleCircleChoice:
+            [self setupCircleChoiceView];
+            break;
+    }
+}
+
+- (void)setCustomDontKnowButtonText:(NSString *)customDontKnowButtonText {
+    _customDontKnowButtonText = [customDontKnowButtonText copy];
+    
+    if (_customDontKnowButtonText) {
+        _dontKnowButtonTextLabel.text = _customDontKnowButtonText;
+    }
+    
+    [self setActive:_active];
+}
+
+- (void)setDontKnowButtonStyle:(ORKDontKnowButtonStyle)dontKnowButtonStyle {
+    _dontKnowButtonStyle = dontKnowButtonStyle;
+    
+    [self setActive:_active];
+}
+
+- (void)createDontKnowButtonTextLabel {
+
+    if (!_dontKnowButtonTextLabel) {
+        _dontKnowButtonTextLabel = [[ORKLabel alloc] init];
+        _dontKnowButtonTextLabel.text = _customDontKnowButtonText ? _customDontKnowButtonText : ORKLocalizedString(@"SLIDER_I_DONT_KNOW", nil);
+        _dontKnowButtonTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _dontKnowButtonTextLabel.numberOfLines = 0;
+        _dontKnowButtonTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    
+    [_dontKnowButtonTextLabel setFont:[self dontKnowButtonTextLabelFont]];
+    [_dontKnowButtonTextLabel setTextAlignment:[self dontKnowButtonTextLabelAlignment]];
+    [_dontKnowButtonTextLabel setTextColor:[self dontKnowButtonTextLabelColor]];
+}
+
+- (void)createDontKnowButtonCustomView {
     
     if (_dontKnowButtonCustomView) {
         [_dontKnowButtonCustomView removeFromSuperview];
+        _dontKnowButtonCustomView = nil;
     }
     
-    _dontKnowButtonCustomView = [UIView new];
+    _dontKnowButtonCustomView = [[UIView alloc] init];
     [_dontKnowButtonCustomView setUserInteractionEnabled:NO];
     _dontKnowButtonCustomView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:_dontKnowButtonCustomView];
+    [_dontKnowButtonCustomView setBackgroundColor:[self customViewBackgroundColor]];
     
-    _dontKnowButtonTextLabel = [UILabel new];
-    _dontKnowButtonTextLabel.text = _customDontKnowButtonText ? : ORKLocalizedString(@"SLIDER_I_DONT_KNOW", nil);
-    _dontKnowButtonTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _dontKnowButtonTextLabel.numberOfLines = 0;
+    [self addSubview:_dontKnowButtonCustomView];
+}
+
+- (void)updateAppearance {
+    
+    // Backing Layer
+    self.layer.cornerRadius = DontKnowButtonCornerRadius;
+    [self.layer setCornerCurveContinuous];
+    self.clipsToBounds = YES;
+    
+    // _Custom View
+    [self createDontKnowButtonCustomView];
+    
+    // Dont Know Button Text Label
+    [self createDontKnowButtonTextLabel];
+    [_dontKnowButtonCustomView addSubview:_dontKnowButtonTextLabel];
+    
+    if (_dontKnowButtonStyle == ORKDontKnowButtonStyleCircleChoice) {
+        [_dontKnowButtonCustomView addSubview:_checkmarkView];
+    }
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setButtonInactive {
-    _isDontKnowButtonActive = NO;
-    [self updateAppearance];
+- (void)setButtonConstraintsStandard {
     
-    UIFontDescriptor *dontKnowButtonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
-    UIFontDescriptor *dontKnowButtonFontDescriptor = [dontKnowButtonDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
-    [_dontKnowButtonTextLabel setFont:[UIFont fontWithDescriptor:dontKnowButtonFontDescriptor size:[[dontKnowButtonDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
-    
-    [_dontKnowButtonCustomView addSubview:_dontKnowButtonTextLabel];
-    
-    if (@available(iOS 13.0, *)) {
-        [_dontKnowButtonCustomView setBackgroundColor:[UIColor systemFillColor]];
-        [_dontKnowButtonTextLabel setTextColor:[UIColor secondaryLabelColor]];
-    } else {
-        [_dontKnowButtonCustomView setBackgroundColor:[UIColor grayColor]];
-        [_dontKnowButtonTextLabel setTextColor:[UIColor grayColor]];
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
     }
 
-    CGSize neededSize = [_dontKnowButtonTextLabel sizeThatFits:CGSizeMake( _dontKnowButtonTextLabel.frame.size.width, CGFLOAT_MAX)];
-    [[_dontKnowButtonTextLabel.heightAnchor constraintEqualToConstant:neededSize.height] setActive: YES];
-    [[_dontKnowButtonTextLabel.centerYAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.centerYAnchor] setActive:YES];
+    _constraints = [NSMutableArray new];
     
-    [[_dontKnowButtonCustomView.trailingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.trailingAnchor constant:DontKnowButtonEdgeInsetHorizontalSpacing] setActive:YES];
-    [[_dontKnowButtonCustomView.leadingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.leadingAnchor constant:-DontKnowButtonEdgeInsetHorizontalSpacing] setActive:YES];
-    [[_dontKnowButtonCustomView.heightAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.heightAnchor multiplier:1.0 constant:DontKnowButtonEdgeInsetVerticalSpacing * 2] setActive:YES];
+    [self updateAppearance];
+        
+    if (@available(iOS 13.0, *)) {
+            
+        if (_active) {
+                
+            UIImageSymbolConfiguration *imageConfig = [UIImageSymbolConfiguration configurationWithScale:UIImageSymbolScaleSmall];
+            UIImage *checkMarkImage = [UIImage systemImageNamed:@"checkmark.circle.fill" withConfiguration:imageConfig];
+            UIImage *tintedCheckMarkImage = [checkMarkImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
+            _dontKnowButtonCustomImageView = [[UIImageView alloc] initWithImage:tintedCheckMarkImage];
+            _dontKnowButtonCustomImageView.translatesAutoresizingMaskIntoConstraints = NO;
+            [_dontKnowButtonCustomImageView setTintColor:_dontKnowButtonTextLabel.textColor];
+            [_dontKnowButtonCustomView addSubview:_dontKnowButtonCustomImageView];
+
+            [_constraints addObjectsFromArray:@[
+                [_dontKnowButtonCustomImageView.heightAnchor constraintEqualToAnchor:_dontKnowButtonCustomImageView.widthAnchor],
+                [_dontKnowButtonCustomImageView.heightAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.heightAnchor constant:CheckMarkImageHeightOffset],
+                [_dontKnowButtonCustomImageView.trailingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.leadingAnchor constant:-CheckMarkImageTrailingPadding],
+                [_dontKnowButtonCustomImageView.centerYAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.centerYAnchor]
+            ]];
+        } else {
+            [_dontKnowButtonCustomImageView removeFromSuperview];
+            _dontKnowButtonCustomImageView = nil;
+        }
+    }
     
-    [[self.trailingAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.trailingAnchor constant:0.0] setActive:YES];
-    [[self.leadingAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.leadingAnchor constant:0.0] setActive:YES];
-    [[self.topAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.topAnchor constant:0.0] setActive:YES];
-    [[self.bottomAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.bottomAnchor constant:0.0] setActive:YES];
+    if (_active && _dontKnowButtonCustomImageView) {
+        [_constraints addObject:[_dontKnowButtonCustomView.leadingAnchor constraintEqualToAnchor:_dontKnowButtonCustomImageView.leadingAnchor constant:-DontKnowButtonEdgeInsetHorizontalSpacing]];
+    } else {
+        [_constraints addObject:[_dontKnowButtonTextLabel.centerXAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.centerXAnchor]];
+        [_constraints addObject:[_dontKnowButtonCustomView.leadingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.leadingAnchor constant:-DontKnowButtonEdgeInsetHorizontalSpacing]];
+    }
+    
+    [_constraints addObjectsFromArray:@[
+        [_dontKnowButtonTextLabel.centerYAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.centerYAnchor],
+        
+        [_dontKnowButtonCustomView.topAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.topAnchor constant:-DontKnowButtonEdgeInsetVerticalSpacing],
+        [_dontKnowButtonCustomView.bottomAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.bottomAnchor constant:DontKnowButtonEdgeInsetVerticalSpacing],
+        [_dontKnowButtonCustomView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+        [_dontKnowButtonCustomView.trailingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.trailingAnchor constant:DontKnowButtonEdgeInsetHorizontalSpacing],
+        
+        [self.topAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.topAnchor],
+        [self.bottomAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.bottomAnchor],
+        [self.widthAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.widthAnchor]
+    ]];
+
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
-- (void)setButtonActive {
-    _isDontKnowButtonActive = YES;
+- (void)setupCircleChoiceView {
+    if (!_checkmarkView) {
+        [self setupCheckMarkView];
+    }
+    
+    [_checkmarkView setChecked:_active];
+    
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    
+    _constraints = [NSMutableArray new];
+    
     [self updateAppearance];
     
-    UIFontDescriptor *dontKnowButtonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
-    UIFontDescriptor *dontKnowButtonFontDescriptor = [dontKnowButtonDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
-    [_dontKnowButtonTextLabel setFont:[UIFont fontWithDescriptor:dontKnowButtonFontDescriptor size:[[dontKnowButtonDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    [_constraints addObjectsFromArray:@[
+        
+        [_dontKnowButtonTextLabel.topAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.topAnchor],
+        [_dontKnowButtonTextLabel.bottomAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.bottomAnchor],
+        [_dontKnowButtonTextLabel.leadingAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.leadingAnchor constant:8.0],
+        [_dontKnowButtonTextLabel.trailingAnchor constraintEqualToAnchor:_checkmarkView.leadingAnchor constant:-8.0],
+        
+        [_checkmarkView.trailingAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.trailingAnchor constant:-ORKSurveyItemMargin],
+        [_checkmarkView.centerYAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.centerYAnchor],
+        
+        [_dontKnowButtonCustomView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
+        [_dontKnowButtonCustomView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+        [_dontKnowButtonCustomView.topAnchor constraintEqualToAnchor:self.topAnchor],
+        [_dontKnowButtonCustomView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
+        
+        [self.widthAnchor constraintGreaterThanOrEqualToAnchor:_dontKnowButtonCustomView.widthAnchor]
+    ]];
     
-    [_dontKnowButtonCustomView addSubview:_dontKnowButtonTextLabel];
-    
-    if (@available(iOS 13.0, *)) {
-        [_dontKnowButtonTextLabel setTextColor:[UIColor systemBackgroundColor]];
-        
-        //image, image view and add to custom view
-        UIImageSymbolConfiguration *imageConfig = [UIImageSymbolConfiguration configurationWithScale:UIImageSymbolScaleSmall];
-        UIImage *checkMarkImage = [UIImage systemImageNamed:@"checkmark.circle.fill" withConfiguration:imageConfig];
-        UIImage *tintedCheckMarkImage = [checkMarkImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:tintedCheckMarkImage];
-        imageView.translatesAutoresizingMaskIntoConstraints = NO;
-        [imageView setTintColor:_dontKnowButtonTextLabel.textColor];
-        
-        [_dontKnowButtonCustomView addSubview:imageView];
-        
-        CGSize neededSize = [_dontKnowButtonTextLabel sizeThatFits:CGSizeMake( _dontKnowButtonTextLabel.frame.size.width, CGFLOAT_MAX)];
-        [[_dontKnowButtonTextLabel.heightAnchor constraintEqualToConstant:neededSize.height] setActive: YES];
-        
-        [imageView.trailingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.leadingAnchor constant:-CheckMarkImageTrailingPadding].active = YES;
-        [[imageView.heightAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.heightAnchor multiplier:1.0 constant:CheckMarkImageHeightOffset] setActive:YES];
-        [[imageView.widthAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.heightAnchor multiplier:1.0] setActive:YES];
-        [imageView.centerYAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.centerYAnchor].active = YES;
-        
-        [_dontKnowButtonCustomView.trailingAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.trailingAnchor constant:DontKnowButtonEdgeInsetHorizontalSpacing].active = YES;
-        [_dontKnowButtonCustomView.topAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.topAnchor constant:-DontKnowButtonEdgeInsetVerticalSpacing].active = YES;
-        [_dontKnowButtonCustomView.bottomAnchor constraintEqualToAnchor:_dontKnowButtonTextLabel.bottomAnchor constant:DontKnowButtonEdgeInsetVerticalSpacing].active = YES;
-        [_dontKnowButtonCustomView.leadingAnchor constraintEqualToAnchor:imageView.leadingAnchor constant:-DontKnowButtonEdgeInsetHorizontalSpacing].active = YES;
-        
-        [[self.trailingAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.trailingAnchor constant:0.0] setActive:YES];
-        [[self.leadingAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.leadingAnchor constant:0.0] setActive:YES];
-        [[self.topAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.topAnchor constant:0.0] setActive:YES];
-        [[self.bottomAnchor constraintEqualToAnchor:_dontKnowButtonCustomView.bottomAnchor constant:0.0] setActive:YES];
-    } else {
-        [_dontKnowButtonTextLabel setTextColor:[UIColor whiteColor]];
-    }
-    
-    [_dontKnowButtonCustomView setBackgroundColor:[UIColor systemBlueColor]];
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
-- (void)setCustomDontKnowButtonText:(NSString *)customDontKnowButtonText {
-    _customDontKnowButtonText = customDontKnowButtonText;
-    
-    if (_isDontKnowButtonActive) {
-        [self setButtonActive];
-    } else {
-        [self setButtonInactive];
+- (void)setupCheckMarkView {
+    _checkmarkView = [[ORKCheckmarkView alloc] initWithDefaults];
+    _checkmarkView.contentMode = UIViewContentModeScaleAspectFill;
+    _checkmarkView.translatesAutoresizingMaskIntoConstraints = NO;
+}
+
+#pragma mark - Styling
+
+- (NSTextAlignment)dontKnowButtonTextLabelAlignment {
+    switch (_dontKnowButtonStyle) {
+        case ORKDontKnowButtonStyleStandard:
+            return NSTextAlignmentCenter;
+        case ORKDontKnowButtonStyleCircleChoice:
+            return NSTextAlignmentLeft;
     }
+}
+
+- (UIColor *)dontKnowButtonTextLabelColor {
+    
+    UIColor *color;
+    
+    switch (_dontKnowButtonStyle) {
+        case ORKDontKnowButtonStyleStandard:
+        {
+            if (@available(iOS 13.0, *)) {
+                color = _active ? [UIColor systemBackgroundColor] : [UIColor secondaryLabelColor];
+            } else {
+                color = _active ? [UIColor whiteColor] : [UIColor grayColor];
+            }
+            break;
+        }
+        case ORKDontKnowButtonStyleCircleChoice:
+        {
+            if (@available(iOS 13.0, *)) {
+                color = [UIColor labelColor];
+            } else {
+                color = [UIColor blackColor];
+            }
+            break;
+        }
+    }
+    
+    return color;
+}
+
+- (UIFont *)dontKnowButtonTextLabelFont {
+    
+    switch (_dontKnowButtonStyle) {
+        case ORKDontKnowButtonStyleStandard:
+        {
+            UIFontDescriptor *dontKnowButtonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
+            UIFontDescriptor *dontKnowButtonFontDescriptor = [dontKnowButtonDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+            return [UIFont fontWithDescriptor:dontKnowButtonFontDescriptor size:[[dontKnowButtonDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+        }
+        case ORKDontKnowButtonStyleCircleChoice:
+        {
+            UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+            return [UIFont fontWithDescriptor:descriptor size:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+        }
+    }
+}
+
+- (UIColor *)customViewBackgroundColor {
+    
+    UIColor *color;
+    
+    switch (_dontKnowButtonStyle) {
+        case ORKDontKnowButtonStyleStandard:
+        {
+            if (!_active) {
+                if (@available(iOS 13.0, *)) {
+                    color = [UIColor systemFillColor];
+                } else {
+                    color = [UIColor grayColor];
+                }
+            } else {
+                color = ORKViewTintColor(self);
+            }
+            
+            break;
+        }
+        case ORKDontKnowButtonStyleCircleChoice:
+        {
+            if (@available(iOS 13.0, *)) {
+                color = [UIColor secondarySystemGroupedBackgroundColor];
+            } else {
+                color = [UIColor whiteColor];
+            }
+            
+            break;
+        }
+    }
+    
+    return color;
 }
 
 #pragma mark - Accessibility
@@ -184,9 +359,9 @@ static const CGFloat CheckMarkImageTrailingPadding = 2.0;
 }
 
 - (NSString *)accessibilityLabel {
-    NSString *accessibilityLabelText = [NSString stringWithFormat:@"%@ %@", [self isDontKnowButtonActive] ? ORKLocalizedString(@"AX_SELECTED", nil) : ORKLocalizedString(@"AX_UNSELECTED", nil), _customDontKnowButtonText != nil ? _customDontKnowButtonText : ORKLocalizedString(@"SLIDER_I_DONT_KNOW", nil)];
+    NSString *accessibilityLabelText = [NSString stringWithFormat:@"%@ %@", [self active] ? ORKLocalizedString(@"AX_SELECTED", nil) : ORKLocalizedString(@"AX_UNSELECTED", nil), _customDontKnowButtonText != nil ? _customDontKnowButtonText : ORKLocalizedString(@"SLIDER_I_DONT_KNOW", nil)];
     
-    if ([self isDontKnowButtonActive]) {
+    if ([self active]) {
         accessibilityLabelText = [accessibilityLabelText stringByAppendingFormat:@", %@", ORKLocalizedString(@"AX_BUTTON", nil)];
     }
     
@@ -194,5 +369,3 @@ static const CGFloat CheckMarkImageTrailingPadding = 2.0;
 }
 
 @end
-
-

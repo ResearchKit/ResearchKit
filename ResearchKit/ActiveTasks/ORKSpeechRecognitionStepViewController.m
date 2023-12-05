@@ -39,38 +39,43 @@
 #import "ORKTask.h"
 #import "ORKActiveStepView.h"
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKBodyItem_Internal.h"
+#import "ORKStepContainerView_Private.h"
 
 #import "ORKSpeechRecognitionContentView.h"
 #import "ORKStreamingAudioRecorder.h"
+#import "ORKAudioStreamer.h"
 #import "ORKSpeechRecognizer.h"
 #import "ORKSpeechRecognitionStep.h"
 #import "ORKSpeechRecognitionError.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
+#import "ORKRecordButton.h"
 #import "ORKSpeechRecognitionResult.h"
 #import "ORKResult_Private.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
 #import "ORKTaskViewController.h"
 
 #import "ORKOrderedTask.h"
 
 
-@interface ORKSpeechRecognitionStepViewController () <ORKStreamingAudioResultDelegate, ORKSpeechRecognitionDelegate, UITextFieldDelegate>
+@interface ORKSpeechRecognitionStepViewController () <ORKStreamingAudioResultDelegate, ORKSpeechRecognitionDelegate, UITextFieldDelegate, ORKSpeechRecognitionContentViewDelegate>
 
 @end
 
-
 @implementation ORKSpeechRecognitionStepViewController {
     ORKSpeechRecognitionContentView *_speechRecognitionContentView;
-    ORKStreamingAudioRecorder *_audioRecorder;
+    ORKAudioStreamer *_audioRecorder;
     ORKSpeechRecognizer *_speechRecognizer;
     
     dispatch_queue_t _speechRecognitionQueue;
     ORKSpeechRecognitionResult *_localResult;
     BOOL _errorState;
     float _peakPower;
+    BOOL _allowUserToRecordInsteadOnNextStep;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
@@ -83,24 +88,57 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setAllowUserToRecordInsteadOnNextStep:NO];
     ORKSpeechRecognitionStep *step = (ORKSpeechRecognitionStep *) self.step;
     _speechRecognitionContentView = [ORKSpeechRecognitionContentView new];
     _speechRecognitionContentView.shouldHideTranscript = step.shouldHideTranscript;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     self.activeStepView.activeCustomView = _speechRecognitionContentView;
     _speechRecognitionContentView.speechRecognitionImage = step.speechRecognitionImage;
     _speechRecognitionContentView.speechRecognitionText = step.speechRecognitionText;
-    
-    [_speechRecognitionContentView.recordButton addTarget:self
-                                                   action:@selector(recordButtonPressed:)
-                                         forControlEvents:UIControlEventTouchDown];
+    _speechRecognitionContentView.delegate = self;
     
     _errorState = NO;
-   
-    [ORKSpeechRecognizer requestAuthorization];
-
+    
+    [self requestSpeechRecognizerAuthorizationIfNeeded];
+    
     _localResult = [[ORKSpeechRecognitionResult alloc] initWithIdentifier:self.step.identifier];
     _speechRecognitionQueue = dispatch_queue_create("SpeechRecognitionQueue", DISPATCH_QUEUE_SERIAL);
+}
+
+- (void)requestSpeechRecognizerAuthorizationIfNeeded
+{
+    [self handleSpeechRecognizerAuthorizationStatus:[ORKSpeechRecognizer authorizationStatus]];
+}
+
+- (void)handleSpeechRecognizerAuthorizationStatus:(SFSpeechRecognizerAuthorizationStatus)status
+{
+    switch (status)
+    {
+        case SFSpeechRecognizerAuthorizationStatusAuthorized:
+        {
+            [_speechRecognitionContentView.recordButton setButtonState:ORKRecordButtonStateEnabled];
+            break;
+        }
+        case SFSpeechRecognizerAuthorizationStatusRestricted:
+        case SFSpeechRecognizerAuthorizationStatusDenied:
+        {
+            [_speechRecognitionContentView.recordButton setButtonState:ORKRecordButtonStateDisabled];
+            break;
+        }
+        case SFSpeechRecognizerAuthorizationStatusNotDetermined:
+        {
+            [ORKSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus authorizationStatus)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self handleSpeechRecognizerAuthorizationStatus:authorizationStatus == SFSpeechRecognizerAuthorizationStatusAuthorized ?
+                    SFSpeechRecognizerAuthorizationStatusAuthorized:
+                     SFSpeechRecognizerAuthorizationStatusDenied];
+                });
+            }];
+            break;
+        }
+    }
 }
 
 - (void)initializeRecognizer {
@@ -115,36 +153,83 @@
     }
 }
 
-- (void)recordButtonPressed:(id)sender {
-    if (sender == _speechRecognitionContentView.recordButton) {
-        if ([_speechRecognitionContentView.recordButton.titleLabel.text
-             isEqualToString:ORKLocalizedString(@"SPEECH_RECOGNITION_STOP_RECORD_LABEL", nil)]) {
-            [self stopWithError:nil];
-        } else {
+- (void)start
+{
+    [super start];
+    
+    // Remove any errors on the content view.
+    [_speechRecognitionContentView addRecognitionError:nil];
+}
+
+- (void)didPressRecordButton:(ORKRecordButton *)recordButton
+{
+    switch ([recordButton buttonType])
+    {
+        case ORKRecordButtonTypeRecord:
             
             [self initializeRecognizer];
-            
             [self start];
-            [_speechRecognitionContentView.recordButton setTitle:ORKLocalizedString(@"SPEECH_RECOGNITION_STOP_RECORD_LABEL", nil)
-                                                        forState:UIControlStateNormal];
-            _speechRecognitionContentView.recordButton.enabled = YES;
-        }
+            break;
+            
+        default:
+            [self stopWithError:nil];
+            break;
     }
 }
 
+- (void)didPressUseKeyboardButton
+{
+    [self setAllowUserToRecordInsteadOnNextStep:YES];
+    
+    [self goForward];
+}
+
+
+- (void)setAllowUserToRecordInsteadOnNextStep:(BOOL)allowUserToRecordInsteadOnNextStep
+{    
+    _allowUserToRecordInsteadOnNextStep = (allowUserToRecordInsteadOnNextStep && [SFSpeechRecognizer authorizationStatus] != SFSpeechRecognizerAuthorizationStatusDenied);
+}
+
+- (CAShapeLayer *)recordingShapeLayer
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 30, 30)];
+    layer.path = circlePath.CGPath;
+    layer.strokeColor = UIColor.systemRedColor.CGColor;
+    return layer;
+}
+
+- (UIImage *)imageFromLayer:(CALayer *)layer
+{
+    UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+- (UIFont *)buttonTextFont
+{
+    CGFloat fontSize = [[UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleCallout] pointSize];
+    return [UIFont systemFontOfSize:fontSize weight:UIFontWeightSemibold];
+}
+
 - (void)recordersDidChange {
-    ORKStreamingAudioRecorder *audioRecorder = nil;
+    ORKAudioStreamer *audioRecorder = nil;
     for (ORKRecorder *recorder in self.recorders) {
-        if ([recorder isKindOfClass:[ORKStreamingAudioRecorder class]]) {
-            audioRecorder = (ORKStreamingAudioRecorder *)recorder;
+        if ([recorder isKindOfClass:[ORKAudioStreamer class]]) {
+            audioRecorder = (ORKAudioStreamer *)recorder;
             break;
         }
     }
     _audioRecorder = audioRecorder;
 }
 
-- (ORKStepResult *)result {
+- (ORKStepResult *)result
+{
     ORKStepResult *sResult = [super result];
+    
+    
     if (_speechRecognitionQueue) {
         dispatch_sync(_speechRecognitionQueue, ^{
             if (_localResult != nil) {
@@ -157,38 +242,130 @@
     return sResult;
 }
 
-- (void)stopWithError:(NSError *)error {
-    if (_speechRecognizer) {
+- (void)stopWithError:(NSError *)error
+{
+    [_speechRecognitionContentView.recordButton setButtonType:ORKRecordButtonTypeRecord animated:YES];
+    
+    [_speechRecognitionContentView updateButtonStates];
+    
+    if (_speechRecognizer)
+    {
         [_speechRecognizer endAudio];
     }
     
-    if (error) {
+    if (error)
+    {
         ORK_Log_Error("Speech recognition failed with error message: \"%@\"", error.localizedDescription);
+        
+        if (error.code == ORKSpeechRecognitionErrorRecognitionFailed)
+        {
+            // Speech Recognition Failed, let the user try again.
+            [_speechRecognitionContentView addRecognitionError:ORKLocalizedString(@"SPEECH_RECOGNITION_FAILED_TRY_AGAIN", nil)];
+            return;
+        }
+        
+        // Speech Recogntion Failed (Fatal)
+        // In this case, the user can't try again and they will need to cancel out of the task.
+        // Disable the Record button.
         [_speechRecognitionContentView addRecognitionError:error.localizedDescription];
-        _speechRecognitionContentView.recordButton.enabled = NO;
+        _speechRecognitionContentView.recordButton.userInteractionEnabled = NO;
+        [_speechRecognitionContentView.recordButton setButtonState:ORKRecordButtonStateDisabled];
         _errorState = YES;
     }
+    
     [self stopRecorders];
+}
+
+- (void)suspend
+{
+    [super suspend];
+    
+    [_speechRecognitionContentView removeAllSamples];
+    
+    [_speechRecognitionContentView.recordButton setButtonType:ORKRecordButtonTypeRecord animated:YES];
+    
+    [_speechRecognitionContentView updateButtonStates];
 }
 
 - (void)resume {
     // Background processing is not supported
 }
 
-- (void)goForward {
-    if ([self hasNextStep]) {
-        ORKQuestionStep *nextStep = [self nextStep];
-        if (nextStep) {
-            [((ORKTextAnswerFormat *)nextStep.answerFormat) setDefaultTextAnswer: [_localResult.transcription formattedString]];
-        }
-    }
+- (void)goForward
+{
+    [self setupNextStepForAllowingUserToRecordInstead:_allowUserToRecordInsteadOnNextStep];
     [super goForward];
 }
 
+- (void)setupNextStepForAllowingUserToRecordInstead:(BOOL)allowUserToRecordInsteadOnNextStep
+{
+
+
+        if ([[self nextStep] isKindOfClass:[ORKQuestionStep class]] && [[[self nextStep] answerFormat] isKindOfClass:[ORKTextAnswerFormat class]]) {
+            
+            NSString *substitutedTextAnswer = [self substitutedStringWithString:[_localResult.transcription formattedString]];
+            
+            [((ORKTextAnswerFormat *)self.nextStep.answerFormat) setDefaultTextAnswer:substitutedTextAnswer];
+        }
+    
+}
+
+- (nullable NSString *)substitutedStringWithString:(nullable NSString *)string
+{
+    if (!string)
+    {
+        return nil;
+    }
+    
+    // Known substitutions
+    static NSDictionary *substitutions = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        substitutions = @{ @"for"  : @"four",
+                           @"to"   : @"two",
+                           @"too"  : @"two",
+                           @"10"   : @"ten",
+                           @"11"   : @"eleven",
+                           @"12"   : @"twelve",
+                           @"13"   : @"thirteen",
+                           @"14"   : @"fourteen",
+                           @"15"   : @"fifteen",
+                           @"16"   : @"sixteen",
+                           @"17"   : @"seventeen",
+                           @"read" : @"red"
+        };
+    });
+    
+    NSArray *words = [string componentsSeparatedByString:@" "];
+    
+    NSMutableArray *substitutedWords = [NSMutableArray new];
+    
+    for (NSString *word in words)
+    {
+        [substitutedWords addObject:[substitutions objectForKey:word] ? : word];
+    }
+
+    NSString *substitutedString = [substitutedWords componentsJoinedByString:@" "];
+
+    // Test For Non-Whitespace/Newline Characters
+    NSCharacterSet *inverted = [[NSCharacterSet whitespaceAndNewlineCharacterSet] invertedSet];
+    NSRange range = [substitutedString rangeOfCharacterFromSet:inverted];
+    BOOL empty = (range.location == NSNotFound);
+    
+    return empty ? nil : substitutedString;
+}
+
 - (nullable ORKQuestionStep *)nextStep {
+    
     ORKOrderedTask *task = (ORKOrderedTask *)[self.taskViewController task];
+    
     NSUInteger nextStepIndex = [task indexOfStep:[self step]] + 1;
-    ORKStep *nextStep = [task steps][nextStepIndex];
+    
+    ORKStep *nextStep = nil;
+    
+    if ([[task steps] count] > nextStepIndex) {
+        nextStep = [[task steps] objectAtIndex:nextStepIndex];
+    }
     
     if ([nextStep isKindOfClass:[ORKQuestionStep class]]) {
         return (ORKQuestionStep *)nextStep;
@@ -252,6 +429,24 @@
     });
 }
 
+- (void)didFinishRecognition:(SFSpeechRecognitionResult *)recognitionResult {
+    if (_errorState) {
+        return;
+    }
+    dispatch_sync(_speechRecognitionQueue, ^{
+        _localResult.transcription = recognitionResult.bestTranscription;
+#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
+        if (@available(iOS 14.5, *)) {
+            _localResult.recognitionMetadata = recognitionResult.speechRecognitionMetadata;
+        }
+#endif
+    });
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_speechRecognitionContentView updateRecognitionText:[recognitionResult.bestTranscription formattedString]];
+    });
+}
+
 - (void)didHypothesizeTranscription:(SFTranscription *)transcription {
     if (_errorState) {
         return;
@@ -259,7 +454,7 @@
     dispatch_sync(_speechRecognitionQueue, ^{
         _localResult.transcription = transcription;
     });
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [_speechRecognitionContentView updateRecognitionText:[transcription formattedString]];
     });

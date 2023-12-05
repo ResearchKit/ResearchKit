@@ -68,11 +68,7 @@
                 self.customContentView = _progressView;
                 break;
             case ORKProgressIndicatorTypeIndeterminate:
-                if (@available(iOS 13.0, *)) {
-                    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
-                } else {
-                    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
-                }
+                _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
                 [_activityIndicatorView startAnimating];
                 self.customContentView = _activityIndicatorView;
                 break;

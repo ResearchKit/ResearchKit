@@ -87,6 +87,8 @@
         _waitStepView.stepHeaderTextAlignment = self.step.headerTextAlignment;
         _waitStepView.bodyItems = self.step.bodyItems;
         _waitStepView.stepTopContentImageContentMode = self.step.imageContentMode;
+        
+        [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
     }
 }
 

@@ -31,7 +31,6 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKErrors.h>
 #import <ResearchKit/ORKDefines.h>
 
 

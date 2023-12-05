@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "For å ta denne testen koble til AirPods eller EarPods på nytt.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ fullført";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Hodetelefoner";
-"HEADPHONES_UNKNOWN" = "Ukjent";
-"HEADPHONES_NONE" = "Ingen";
-"CONNECTED" = "Tilkoblet";
-"NOT_CONNECTED" = "Ikke tilkoblet";
-"HEADPHONE_CONNECTED_%@" = "Tilkoblet – %@";
-"HEADPHONE_DETECT_TITLE" = "Koble til hodetelefonene dine";
-"HEADPHONE_DETECT_TEXT" = "Denne testen krever Apple AirPods eller Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Denne aktiviteten måler den visuelle korttidshukommelsen din ved å be deg gjenta i hvilken rekkefølge %@ lyser.";

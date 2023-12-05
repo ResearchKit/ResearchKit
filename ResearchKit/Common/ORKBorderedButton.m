@@ -34,21 +34,51 @@
 
 static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
 
+@implementation CALayer (ORKCornerCurveContinuousCategory)
+
+- (void)setCornerCurveContinuous {
+    if (@available(iOS 13.0, *)) {
+        self.cornerCurve = kCACornerCurveContinuous;
+    }
+}
+
+- (void)setCornerCurveCircular {
+    if (@available(iOS 13.0, *)) {
+        self.cornerCurve = kCACornerCurveCircular;
+    }
+}
+
+@end
+
+
 @implementation ORKBorderedButton {
 
     BOOL _appearsAsTextButton;
     BOOL _useBoldFont;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.disabledButtonStyle = ORKBorderedButtonDisabledStyleDefault;
+    }
+    return self;
+}
+
 - (void)init_ORKTextButton {
     [super init_ORKTextButton];
-    [self setLayerAndFadeDelay];
+    [self setupLayer];
+    [self setFadeDelay];
     [self setEnabled:YES];
     [self setDefaultTintColors];
 }
 
-- (void)setLayerAndFadeDelay {
+- (void)setupLayer {
     self.layer.cornerRadius = ORKBorderedButtonCornerRadii;
+    [self.layer setCornerCurveContinuous];
+}
+
+- (void)setFadeDelay {
     self.fadeDelay = 0.0;
 }
 
@@ -56,21 +86,28 @@ static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
     [super tintColorDidChange];
     
     if (!_appearsAsTextButton) {
-        [self setLayerAndFadeDelay];
+        [self setFadeDelay];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7f] forState:UIControlStateHighlighted];
         [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7f] forState:UIControlStateSelected];
         [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3f] forState:UIControlStateDisabled];
-    }
-    else {
+    } else {
         [self setTitleColor:_normalTintColor forState:UIControlStateNormal];
         [self setTitleColor:_normalHighlightOrSelectTintColor forState:UIControlStateHighlighted];
         [self setTitleColor:_normalHighlightOrSelectTintColor forState:UIControlStateSelected];
         [self setTitleColor:_disableTintColor forState:UIControlStateDisabled];
     }
-    [self setDefaultTintColors];
+    
+    // Always override the title color for ORKBorderedButtonDisabledStyleSystemGray
+    if (_disabledButtonStyle == ORKBorderedButtonDisabledStyleSystemGray) {
+        if (@available(iOS 13.0, *)) {
+            [self setTitleColor:[UIColor tertiaryLabelColor] forState:UIControlStateDisabled];
+        } else {
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        }
+    }
+    
     [self updateBackgroundColor];
-
 }
 
 - (void)setDefaultTintColors {
@@ -82,7 +119,10 @@ static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
     _normalTintColor = normalTintColor;
     _normalHighlightOrSelectTintColor = [normalTintColor colorWithAlphaComponent:0.7f];
     
-    _disableTintColor = [normalTintColor colorWithAlphaComponent:0.3f];
+    if (self.disabledButtonStyle == ORKBorderedButtonDisabledStyleDefault) {
+        _disableTintColor = [normalTintColor colorWithAlphaComponent:0.3f];
+    }
+
     [self updateBackgroundColor];
 }
 
@@ -94,6 +134,11 @@ static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
 - (void)setDisableTintColor:(UIColor *)disableTintColor {
     _disableTintColor = disableTintColor;
     [self updateBackgroundColor];
+}
+
+- (void)setDisabledButtonStyle:(ORKBorderedButtonDisabledStyle)disabledButtonStyle {
+    _disabledButtonStyle = disabledButtonStyle;
+    [self tintColorDidChange];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -134,6 +179,13 @@ static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
                 [self fadeHighlightOrSelectColor];
             }
         } else {
+            if (self.disabledButtonStyle == ORKBorderedButtonDisabledStyleSystemGray) {
+                if (@available(iOS 13.0, *)) {
+                    _disableTintColor = [UIColor tertiarySystemFillColor];
+                } else {
+                    _disableTintColor = [UIColor lightGrayColor];
+                }
+            }
             self.backgroundColor = _disableTintColor;
             self.layer.borderColor = [_disableTintColor CGColor];
         }

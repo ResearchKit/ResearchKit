@@ -47,8 +47,8 @@ public extension TaskFactory {
 
         // Form step
         textChoices = [
-            ORKTextChoice(text: "Good", value: "good" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Bad", value: "bad" as NSCoding & NSCopying & NSObjectProtocol)
+            ORKTextChoice(text: "Good", value: "good" as NSString),
+            ORKTextChoice(text: "Bad", value: "bad" as NSString)
         ]
         answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
         let formItemFeeling: ORKFormItem = ORKFormItem(identifier: "formFeeling", text: "How do you feel", answerFormat: answerFormat)
@@ -60,9 +60,9 @@ public extension TaskFactory {
         
         // Question steps
         textChoices = [
-            ORKTextChoice(text: "Headache", value: "headache" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Dizziness", value: "dizziness" as NSCoding & NSCopying & NSObjectProtocol),
-            ORKTextChoice(text: "Nausea", value: "nausea" as NSCoding & NSCopying & NSObjectProtocol)
+            ORKTextChoice(text: "Headache", value: "headache" as NSString),
+            ORKTextChoice(text: "Dizziness", value: "dizziness" as NSString),
+            ORKTextChoice(text: "Nausea", value: "nausea" as NSString)
         ]
         answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
         step = ORKQuestionStep(identifier: "symptom", title: "Symptoms", question: "Which is your most severe symptom?", answer: answerFormat)
@@ -110,9 +110,9 @@ public extension TaskFactory {
         
         // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
         var resultSelector = ORKResultSelector(stepIdentifier: "introForm", resultIdentifier: "formFeeling")
-        let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSString)
         resultSelector = ORKResultSelector(stepIdentifier: "introForm", resultIdentifier: "formMood")
-        let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSString)
         let predicateGoodMoodAndFeeling: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
             [ (predicateGoodMoodAndFeeling, "surveySkipped") ])
@@ -128,7 +128,7 @@ public extension TaskFactory {
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
         //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
         resultSelector = ORKResultSelector(resultIdentifier: "symptom")
-        let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "headache" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "headache" as NSString)
         
         // User didn't chose headache at the symptom step
         let predicateNotHeadache: NSCompoundPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)

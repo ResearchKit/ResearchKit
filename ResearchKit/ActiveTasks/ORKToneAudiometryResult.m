@@ -46,7 +46,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, outputVolume);
+        ORK_DECODE_OBJ_CLASS(aDecoder, outputVolume, NSNumber);
         ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKToneAudiometrySample);
     }
     return self;

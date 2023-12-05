@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKSESSelectionViewDelegate <NSObject>
 
 - (void)buttonPressedAtIndex:(NSInteger)index;
+- (void)dontKnowButtonPressed;
 
 @end
 

@@ -31,7 +31,6 @@
 #import "ORKSurveyAnswerCellForSES.h"
 #import "ORKSESSelectionView.h"
 #import "ORKQuestionStep.h"
-#import "ORKQuestionStep_Internal.h"
 
 
 @interface ORKSurveyAnswerCellForSES() <ORKSESSelectionViewDelegate>
@@ -51,7 +50,8 @@
 
 - (void)prepareView {
     [super prepareView];
-    _selectionView = [[ORKSESSelectionView alloc] initWithAnswerFormat:(ORKSESAnswerFormat *)self.step.impliedAnswerFormat answer:self.answer];
+
+    _selectionView = [[ORKSESSelectionView alloc] initWithAnswerFormat:(ORKSESAnswerFormat *)self.step.answerFormat answer:self.answer];
     _selectionView.delegate = self;
     _selectionView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_selectionView];
@@ -67,6 +67,11 @@
 
 - (void)buttonPressedAtIndex:(NSInteger)index {
     _selectionView.answer = [NSNumber numberWithInteger:index];
+    [self ork_setAnswer:_selectionView.answer];
+}
+
+- (void)dontKnowButtonPressed {
+    _selectionView.answer = [ORKDontKnowAnswer answer];
     [self ork_setAnswer:_selectionView.answer];
 }
 

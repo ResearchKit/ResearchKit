@@ -33,6 +33,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 #import "ORKBodyItem.h"
+#import "ORKBodyItem_Internal.h"
 #import "ORKLearnMoreView.h"
 #import "ORKLearnMoreInstructionStep.h"
 #import "ORKTagLabel.h"
@@ -61,6 +62,7 @@ static const CGFloat ORKCardStyleBuildInPostitionStart = 31.0;
 static const CGFloat ORKCardStyleBuildInPostitionEnd = 26.0;
 
 static NSString *ORKBulletUnicode = @"\u2981";
+
 
 @protocol ORKBodyItemViewDelegate <NSObject>
 
@@ -109,11 +111,15 @@ static NSString *ORKBulletUnicode = @"\u2981";
 }
 
 - (void)setupBodyStyleView {
-    // FIXME:- remove cardStyle property, not using it anymore
     if (_bodyItem.useCardStyle == YES) {
         _cardView = [[UIView alloc] init];
         _cardView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addArrangedSubview:_cardView];
+    }
+
+    if ([_bodyItem isCustomButtonItemType])
+    {
+        [self setupCustomButtonViewWithConfigurationHandler:_bodyItem.customButtonConfigurationHandler];
     }
     
     if (_bodyItem.bodyItemStyle == ORKBodyItemStyleText) {
@@ -176,6 +182,17 @@ static NSString *ORKBulletUnicode = @"\u2981";
     UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitLooseLeading)];
     return [UIFont fontWithDescriptor:fontDescriptor size:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
     
+}
+
+- (void)setupCustomButtonViewWithConfigurationHandler:(void(^)(UIButton *button))configurationHandler
+{
+    UIButton *button = [[UIButton alloc] init];
+    configurationHandler(button);
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addArrangedSubview:button];
+    [NSLayoutConstraint activateConstraints:@[
+        [button.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:ORKStepContainerLeftRightPaddingForWindow(self.window)]
+    ]];
 }
 
 - (void)setupBodyStyleHorizontalRule {
@@ -245,7 +262,7 @@ static NSString *ORKBulletUnicode = @"\u2981";
         ORKLearnMoreView *learnMoreView = _bodyItem.learnMoreItem.text ? [ORKLearnMoreView learnMoreCustomButtonViewWithText:_bodyItem.learnMoreItem.text LearnMoreInstructionStep:_bodyItem.learnMoreItem.learnMoreInstructionStep] : [ORKLearnMoreView learnMoreDetailDisclosureButtonViewWithLearnMoreInstructionStep:_bodyItem.learnMoreItem.learnMoreInstructionStep];
         [learnMoreView setLearnMoreButtonFont:[ORKBodyItemView bodyTextFont]];
         [learnMoreView setLearnMoreButtonTextAlignment:_textAlignment];
-        learnMoreView.delegate = self;
+        learnMoreView.delegate = _bodyItem.learnMoreItem.delegate ? : self;
         learnMoreView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addArrangedSubview:learnMoreView];
         if (detailTextLabel) {
@@ -343,7 +360,18 @@ static NSString *ORKBulletUnicode = @"\u2981";
     
     ORKTagLabel *tagLabel = [ORKTagLabel new];
     tagLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    tagLabel.text = _bodyItem.text;
+    
+    if (_bodyItem.image != nil) {
+        NSMutableAttributedString *iconText = [self icon:_bodyItem.image withText:_bodyItem.text font:tagLabel.font color:tagLabel.textColor];
+        if (iconText != nil) {
+            tagLabel.attributedText = iconText;
+        } else {
+            tagLabel.text = _bodyItem.text;
+        }
+    } else {
+        tagLabel.text = _bodyItem.text;
+    }
+    
     [container addSubview:tagLabel];
     
     [tagLabel.topAnchor constraintEqualToAnchor:container.topAnchor].active = YES;
@@ -425,6 +453,25 @@ static NSString *ORKBulletUnicode = @"\u2981";
         learnMoreView.translatesAutoresizingMaskIntoConstraints = NO;
         [subStackView addArrangedSubview:learnMoreView];
     }
+}
+
+- (NSMutableAttributedString *)icon:(UIImage *)image withText:(NSString *)text font:(UIFont *)font color:(UIColor *)color {
+    NSString *textString = [[NSString alloc] initWithFormat:@" %@", text];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:textString];
+    NSTextAttachment *imageAttachment = [[NSTextAttachment alloc] init];
+    
+    if (@available(iOS 13.0, *)) {
+        UIImage *iconImage = image;
+        if (iconImage.isSymbolImage) {
+            UIImageSymbolConfiguration *configuration = [UIImageSymbolConfiguration configurationWithFont:font];
+            iconImage = [[image imageWithConfiguration:configuration] imageWithTintColor:color];
+        }
+        imageAttachment.image = iconImage;
+        NSAttributedString *imageString = [NSAttributedString attributedStringWithAttachment:imageAttachment];
+        [attributedText insertAttributedString:imageString atIndex:0];
+    }
+    
+    return attributedText;
 }
 
 #pragma mark - ORKLearnMoreViewDelegate
@@ -527,7 +574,11 @@ static NSString *ORKBulletUnicode = @"\u2981";
     } else if (aboveStyle == ORKBodyItemStyleText) {
         return belowStyle == ORKBodyItemStyleText ? (_bodyItems[belowItemIndex].text ? ORKBodyToBodyParagraphPaddingStandard : ORKBodyToBodyPaddingStandard) : ORKBodyToBulletPaddingStandard;
     } else if (aboveStyle == ORKBodyItemStyleTag) {
-        return ORKTagLabelBottomPadding;
+        if (belowStyle == ORKBodyItemStyleBulletPoint) {
+            return ORKBulletToBulletPaddingStandard;
+        } else {
+            return ORKTagLabelBottomPadding;
+        }
     } else {
         return belowStyle == ORKBodyItemStyleText ? ORKBodyToBulletPaddingStandard : ORKBulletToBulletPaddingStandard;
     }

@@ -40,6 +40,7 @@
 #import <ResearchKit/ORKSpatialSpanMemoryResult.h>
 #import <ResearchKit/ORKSpeechRecognitionResult.h>
 #import <ResearchKit/ORKStroopResult.h>
+#import <ResearchKit/ORKAccuracyStroopResult.h>
 #import <ResearchKit/ORKTappingIntervalResult.h>
 #import <ResearchKit/ORKTimedWalkResult.h>
 #import <ResearchKit/ORKToneAudiometryResult.h>
@@ -52,3 +53,4 @@
 #import <ResearchKit/ORKTouchAbilityScrollResult.h>
 #import <ResearchKit/ORKTouchAbilityPinchResult.h>
 #import <ResearchKit/ORKTouchAbilityRotationResult.h>
+#import <ResearchKit/ORKSpeechInNoiseResult.h>

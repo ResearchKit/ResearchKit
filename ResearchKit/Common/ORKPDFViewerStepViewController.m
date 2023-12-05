@@ -71,6 +71,8 @@
         [self.view addSubview:_pdfView];
         [self setNavigationFooterView];
         [self setupConstraints];
+        
+        [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
     }
 }
 
@@ -195,6 +197,7 @@
         fileResult.endDate = now;
         fileResult.contentType = @"document/pdf";
         fileResult.fileURL = fileURL;
+        fileResult.fileName = [fileURL lastPathComponent];
         [results addObject:fileResult];
         stepResult.results = [results copy];
     }

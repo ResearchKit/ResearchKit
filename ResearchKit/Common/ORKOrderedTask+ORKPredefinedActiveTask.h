@@ -120,6 +120,29 @@ NS_ASSUME_NONNULL_BEGIN
                                            options:(ORKPredefinedTaskOption)options;
 
 /**
+ Returns a predefined task that consists of a 6 Minute Walk Test (6MWT).
+
+ In a 6MWT task, the participant is asked to walk as far as they can in a 6 minute interval.
+ During this period, various sensor data is collected and returned by the task view controller's
+ delegate. Sensor data can include accelerometer, device motion, pedometer, location, and
+ heart rate data where available.
+
+ By default, the task includes an instruction step that explains what the user needs to do during
+ the task, but this can be excluded with `ORKPredefinedTaskOptionExcludeInstructions`.
+
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the default
+                                    localized text is displayed.
+ @param options                 Options that affect the features of the predefined task.
+
+ @return A 6 Minute Walk Test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)sixMinuteWalkTaskWithIdentifier:(NSString *)identifier
+                             intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                            options:(ORKPredefinedTaskOption)options API_AVAILABLE(ios(14.0));
+
+/**
  Returns a predefined task that consists of a short walk.
  
  In a short walk task, the participant is asked to walk a short distance, which may be indoors.
@@ -473,7 +496,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return An active dBHL tone audiometry task that can be presented with an `ORKTaskViewController` object.
  */
-+ (ORKOrderedTask *)dBHLToneAudiometryTaskWithIdentifier:(NSString *)identifier
++ (ORKNavigableOrderedTask *)dBHLToneAudiometryTaskWithIdentifier:(NSString *)identifier
                                   intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                  options:(ORKPredefinedTaskOption)options;
 
@@ -531,7 +554,57 @@ NS_ASSUME_NONNULL_BEGIN
                                       failureSound:(UInt32)failureSoundID
                                            options:(ORKPredefinedTaskOption)options;
 
-
+/**
+ Returns a predefined task that tests the participant's normalized reaction time.
+ 
+ In a reaction time task, the participant is asked to tap the "hold" button and not release the tap until seeing the visual cue,
+ in which they should they should tap the visual cue. You can use this task to accurately assess the participant's simple reaction time.
+ 
+ A reaction time task finishes when the participant has completed the required
+ number of attempts successfully. An attempt is successful when the participant exerts acceleration
+ greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
+ `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
+ `thresholdAcceleration` is applied to the device before the stimulus or if this does not occur
+ before `timeout` has elapsed. If unsuccessful, the result is not reported and the participant must
+ try again to proceed with the task.
+ 
+ Data collected by the task is in the form of ORKNormalizedReactionTimeResult objects. These
+ objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult, which
+ references the motion data collected during an attempt. The researcher can use these to evaluate
+ the response to the stimulus and calculate the reaction time.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the
+                                        study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                        collected. If the value of this parameter is `nil`, the
+                                        default localized text is displayed.
+ @param maximumStimulusInterval     The maximum interval before the stimulus is delivered.
+ @param minimumStimulusInterval     The minimum interval before the stimulus is delivered.
+ @param thresholdAcceleration       The acceleration required to end a reaction time test.
+ @param numberOfAttempts            The number of successful attempts required before the task is
+                                        complete. The active step result will contain this many
+                                        child results if the task is completed.
+ @param timeout                     The interval permitted after the stimulus until the test fails,
+                                        if the threshold is not reached.
+ @param successSoundID              The sound to play after a successful attempt.
+ @param timeoutSoundID              The sound to play after an attempt that times out.
+ @param failureSoundID              The sound to play after an unsuccessful attempt.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)normalizedReactionTimeTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                           minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                             thresholdAcceleration:(double)thresholdAcceleration
+                                  numberOfAttempts:(int)numberOfAttempts
+                                           timeout:(NSTimeInterval)timeout
+                                      successSound:(UInt32)successSoundID
+                                      timeoutSound:(UInt32)timeoutSoundID
+                                      failureSound:(UInt32)failureSoundID
+                                                     options:(ORKPredefinedTaskOption)options;
+    
 /**
  Returns a predefined task that consists of a Tower of Hanoi puzzle.
  

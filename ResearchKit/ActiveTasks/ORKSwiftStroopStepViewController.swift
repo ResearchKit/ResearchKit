@@ -98,13 +98,21 @@ public class ORKSwiftStroopStepViewController: ORKActiveStepViewController {
             if let button = sender as? ORKBorderedButton {
                 
                 if button == stroopContentView.redButton {
-                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first as? String ?? "", withText: stroopContentView.colorLabelText!, withColorSelected: redString)
+                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first
+                                 as? String ?? "", withText: stroopContentView.colorLabelText!,
+                                 withColorSelected: redString)
                 } else if button == stroopContentView.greenButton {
-                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first as? String ?? "", withText: stroopContentView.colorLabelText!, withColorSelected: greenString)
+                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first
+                                 as? String ?? "", withText: stroopContentView.colorLabelText!,
+                                 withColorSelected: greenString)
                 } else if button == stroopContentView.blueButton {
-                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first as? String ?? "", withText: stroopContentView.colorLabelText!, withColorSelected: blueString)
+                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first
+                                 as? String ?? "", withText: stroopContentView.colorLabelText!,
+                                 withColorSelected: blueString)
                 } else if button == stroopContentView.yellowButton {
-                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first as? String ?? "", withText: stroopContentView.colorLabelText!, withColorSelected: yellowString)
+                    createResult(color: (colors as NSDictionary).allKeys(for: stroopContentView.colorLabelColor!).first
+                                 as? String ?? "", withText: stroopContentView.colorLabelText!,
+                                 withColorSelected: yellowString)
                 }
                 
                 nextQuestionTimer = Timer.scheduledTimer(timeInterval: 0.5,

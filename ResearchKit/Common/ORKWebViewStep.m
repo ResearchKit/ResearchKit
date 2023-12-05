@@ -92,8 +92,8 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            [self.html isEqual:castObject.html] &&
-            [self.customCSS isEqual:castObject.customCSS] &&
+            ORKEqualObjects(self.html, castObject.html) &&
+            ORKEqualObjects(self.customCSS, castObject.customCSS) &&
             self.showSignatureAfterContent == castObject.showSignatureAfterContent);
 }
 

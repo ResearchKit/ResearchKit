@@ -312,7 +312,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, recorderSettings, NSDictionary);
+        ORK_DECODE_OBJ_PLIST(aDecoder, recorderSettings);
     }
     return self;
 }

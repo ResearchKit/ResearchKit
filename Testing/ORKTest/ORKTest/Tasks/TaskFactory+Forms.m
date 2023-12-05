@@ -507,6 +507,12 @@
         }
         
         {
+            // Continuous scale
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scaleFraction" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:100 minimumValue:1 defaultValue:0.0 maximumFractionDigits:3]];
+            [items addObject:item];
+        }
+        
+        {
             // Continuous scale, with default value
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale4" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:100 minimumValue:0 defaultValue:87.34 maximumFractionDigits:2]];
             [items addObject:item];
@@ -817,7 +823,7 @@
         
         step.shouldPresentStepBlock = ^BOOL(ORKTaskViewController *taskViewController, ORKStep *step) {
             ORKTextQuestionResult *textResult = (ORKTextQuestionResult *)[[taskViewController.result stepResultForStepIdentifier:@"step5"] resultForIdentifier:@"text"];
-            BOOL isValid = [textResult.answer isEqualToString:@"Valid"];
+            BOOL isValid = [textResult.textAnswer isEqualToString:@"Valid"];
             if (!isValid) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                                message:@"Invalid text field value."

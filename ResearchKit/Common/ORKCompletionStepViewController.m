@@ -39,46 +39,74 @@
 #import "ORKStepView_Private.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKStepContentView_Private.h"
-
+#import "ORKTaskViewController_Internal.h"
 #import "ORKInstructionStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKCompletionCheckmarkView.h"
 #import "ORKSkin.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKCompletionStep.h"
+#import "ORKTaskViewController.h"
 
 
 @implementation ORKCompletionStepViewController {
     ORKCompletionCheckmarkView *_completionCheckmarkView;
+    ORKTaskViewControllerFinishReason _reasonForCompletion;
 }
 
 - (void)stepDidChange {
     [super stepDidChange];
     
+    ORKCompletionStep *completionStep = (ORKCompletionStep *)self.step;
+    _reasonForCompletion = completionStep.reasonForCompletion;
+    
     self.cancelButtonItem = nil;
-    _completionCheckmarkView = [self.stepView.stepContentView completionCheckmarkView];
-    [_completionCheckmarkView setNeedsLayout];
-    if (self.checkmarkColor) {
-        _completionCheckmarkView.tintColor = self.checkmarkColor;
+    
+    if (_reasonForCompletion == ORKTaskViewControllerFinishReasonCompleted) {
+        _completionCheckmarkView = [self.stepView.stepContentView completionCheckmarkView];
+        [_completionCheckmarkView setNeedsLayout];
+        if (self.checkmarkColor) {
+            _completionCheckmarkView.tintColor = self.checkmarkColor;
+        }
+    } else {
+        self.continueButtonItem.target = self;
+        self.continueButtonItem.action = @selector(continueWasPressed);
     }
+    
     self.stepView.customContentFillsAvailableSpace = YES;
+    
 }
+
+- (void)continueWasPressed {
+    ORKStrongTypeOf(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
+    if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
+        [strongDelegate taskViewController:self.taskViewController didFinishWithReason:_reasonForCompletion error:nil];
+    }
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    _completionCheckmarkView.animationPoint = animated ? 0 : 1;
+    if (_completionCheckmarkView) {
+        _completionCheckmarkView.animationPoint = animated ? 0 : 1;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (animated) {
+
+    if (animated && _completionCheckmarkView) {
         [_completionCheckmarkView setAnimationPoint:1 animated:YES];
     }
 }
 
 - (void)setCheckmarkColor:(UIColor *)checkmarkColor {
     _checkmarkColor = [checkmarkColor copy];
-    _completionCheckmarkView.tintColor = checkmarkColor;
+
+    if (_completionCheckmarkView) {
+        _completionCheckmarkView.tintColor = checkmarkColor;
+    }
 }
 
 @end

@@ -30,8 +30,8 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKDefines.h>
 
+#import <ResearchKit/ORKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -115,6 +115,9 @@ ORK_EXTERN CGFloat ORKQuestionStepMinimumHeaderHeight;
 
 /// Default CGFloat used for rounded corner radii for card view
 ORK_EXTERN CGFloat ORKCardDefaultCornerRadii;
+
+/// Default CGFloat used for rounded corner radii for image choice button image view
+ORK_EXTERN CGFloat ORKImageChoiceButtonCornerRadii;
 
 /// Default CGFloat used for border width for card view
 ORK_EXTERN CGFloat ORKCardDefaultBorderWidth;
@@ -219,12 +222,14 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhone6Plus,
     ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
+    ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
     ORKScreenTypeiPad10_5,
     ORKScreenTypeiPad12_9,
     ORKScreenType_COUNT
 };
 
+#if TARGET_OS_IOS
 ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow * _Nullable window);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow * _Nullable window);
 
@@ -248,5 +253,6 @@ CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window);
 CGFloat ORKCardLeftRightMarginForWindow(UIWindow *window);
 
 UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window);
+#endif
 
 NS_ASSUME_NONNULL_END

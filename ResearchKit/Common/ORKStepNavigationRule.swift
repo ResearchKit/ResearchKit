@@ -28,17 +28,23 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import Foundation
+import ResearchKit.Private
 
 public extension ORKPredicateStepNavigationRule {
-
-    convenience init(resultPredicatesAndDestinationStepIdentifiers tuples: [ (resultPredicate: NSPredicate, destinationStepIdentifier: String) ], defaultStepIdentifierOrNil: String? = nil ) {
+    
+    convenience init(resultPredicatesAndDestinationStepIdentifiers tuples: [ (resultPredicate: NSPredicate,
+                                                                              destinationStepIdentifier: String) ],
+                     defaultStepIdentifierOrNil: String? = nil ) {
         var resultPredicates: [NSPredicate] = []
         var destinationStepIdentifiers: [String] = []
         for tuple in tuples {
             resultPredicates.append(tuple.resultPredicate)
             destinationStepIdentifiers.append(tuple.destinationStepIdentifier)
         }
-        self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifierOrNil, validateArrays: true)
+
+        self.init(resultPredicates: resultPredicates,
+                  destinationStepIdentifiers: destinationStepIdentifiers,
+                  defaultStepIdentifier: defaultStepIdentifierOrNil,
+                  validateArrays: true)
     }
 }

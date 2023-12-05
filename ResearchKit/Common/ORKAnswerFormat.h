@@ -34,19 +34,15 @@
 
 
 @import UIKit;
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
-
-
-NS_ASSUME_NONNULL_BEGIN
-
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
 @class ORKTextScaleAnswerFormat;
 @class ORKValuePickerAnswerFormat;
 @class ORKMultipleValuePickerAnswerFormat;
 @class ORKImageChoiceAnswerFormat;
-@class ORKTextChoiceAnswerFormat;
-@class ORKBooleanAnswerFormat;
 @class ORKNumericAnswerFormat;
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
@@ -57,9 +53,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKWeightAnswerFormat;
 @class ORKLocationAnswerFormat;
 @class ORKSESAnswerFormat;
+@class ORKImageChoice;
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class ORKTextChoiceAnswerFormat;
+@class ORKBooleanAnswerFormat;
 
 @class ORKTextChoice;
-@class ORKImageChoice;
 
 /**
  The `ORKAnswerFormat` class is the abstract base class for classes that describe the
@@ -109,8 +111,281 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, nullable) NSString *customDontKnowButtonText;
 
-/// @name Factory methods
+@property (nonatomic) ORKDontKnowButtonStyle dontKnowButtonStyle;
 
++ (ORKBooleanAnswerFormat *)booleanAnswerFormat;
+
++ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes
+                                                    noString:(NSString *)no;
+
++ (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
+                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices;
+
+/// @name Validation
+
+/**
+ Validates the parameters of the answer format to ensure that they can be displayed.
+ 
+ Typically, this method is called by the validation methods of the owning objects, which are
+ themselves called when a step view controller that contains this answer format is
+ about to be displayed.
+ */
+- (void)validateParameters;
+
+/**
+ Some answer formats are constructed of other answer formats. This method allows
+ a subclass to return a different answer format for use in defining the UI/UX for
+ the answer format type. For example, a Boolean answer format is presented in the 
+ same way as a single-choice answer format with the choices Yes and No mapping to 
+ `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
+ `ORKTextChoiceAnswerFormat` with those options.
+ */
+- (ORKAnswerFormat *)impliedAnswerFormat;
+
+@end
+
+/**
+ The `ORKTextChoiceAnswerFormat` class represents an answer format that lets participants choose
+ from a fixed set of text choices in a multiple or single choice question.
+ 
+ The text choices are presented in a table view, using one row for each answer.
+ The text for each answer is given more prominence than the `detailText` in the row, but
+ both are shown.
+ 
+ The text choice answer format produces an `ORKChoiceQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTextChoiceAnswerFormat : ORKAnswerFormat
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns an initialized text choice answer format using the specified question style and array of
+ text choices.
+ 
+ @param style           The style of question, such as single or multiple choice.
+ @param textChoices     An array of `ORKTextChoice` objects.
+ 
+ @return An initialized text choice answer format.
+ */
+- (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
+                  textChoices:(NSArray<ORKTextChoice *> *)textChoices NS_DESIGNATED_INITIALIZER;
+
+/**
+ The style of the question (that is, single or multiple choice).
+ */
+@property (readonly) ORKChoiceAnswerStyle style;
+
+/**
+ An array of `ORKTextChoice` objects that represent the choices that are displayed to participants.
+ 
+ The choices are presented as a table view, using one row for each answer.
+ The text for each answer is given more prominence than the `detailText` in the row, but
+ both are shown.
+ */
+@property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
+
+@end
+
+
+/**
+ The `ORKBooleanAnswerFormat` class behaves the same as the `ORKTextChoiceAnswerFormat` class,
+ except that it is preconfigured to use only Yes and No answers.
+ 
+ The Boolean answer format produces an `ORKBooleanQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKBooleanAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized Boolean answer format using the specified strings for Yes and No answers.
+ 
+ @param yes         A string that describes the Yes answer.
+ @param no          A string that describes the No answer.
+ 
+ @return An initialized Boolean answer format.
+ */
+- (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no;
+
+/**
+ The string to describe the Yes answer. (read-only)
+ */
+@property (copy, readonly) NSString *yes;
+
+/**
+ The string to describe the No answer. (read-only)
+ */
+@property (copy, readonly) NSString *no;
+
+@end
+
+
+/**
+ The `ORKTextChoice` class defines the text for a choice in answer formats such
+ as `ORKTextChoiceAnswerFormat` and `ORKValuePickerAnswerFormat`.
+ 
+ When a participant chooses a text choice item, the value recorded in a result
+ is specified by the `value` property.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTextChoice : NSObject <NSSecureCoding, NSCopying, NSObject>
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns a text choice object that includes the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
+ @param value                        The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(nullable NSString *)text
+   primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
+                    detailText:(nullable NSString *)detailText
+    detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value
+                     exclusive:(BOOL)exclusive;
+
+/**
+ Returns a text choice object that includes the specified primary text, detail text,
+ and exclusivity.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param detailText  The detail text to display below the primary text, in a localized string.
+ @param value       The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(NSString *)text
+                    detailText:(nullable NSString *)detailText
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value
+                     exclusive:(BOOL)exclusive;
+
+/**
+ Returns a choice object that includes the specified primary text.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param value       The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(NSString *)text value:(NSObject<NSCopying, NSSecureCoding> *)value;
+
+/**
+ Returns a choice object that includes the specified primary text.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param image       The image that will be presented to the left of the text provided.
+ @param value       The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(NSString *)text image:(UIImage *)image value:(NSObject<NSCopying, NSSecureCoding> *)value;
+
+/**
+ Returns an initialized text choice object using the specified primary text, detail text,
+ and exclusivity.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param detailText  The detail text to display below the primary text, in a localized string.
+ @param value       The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return An initialized text choice.
+ */
+- (instancetype)initWithText:(NSString *)text
+                  detailText:(nullable NSString *)detailText
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
+                    exclusive:(BOOL)exclusive;
+
+/**
+ Returns an initialized text choice object using the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
+ 
+ This method is the designated initializer.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
+ @param value                        The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return An initialized text choice.
+ */
+- (instancetype)initWithText:(nullable NSString *)text
+ primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
+                  detailText:(nullable NSString *)detailText
+  detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
+                   exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
+
+/**
+ The text that describes the choice in a localized string.
+ 
+ In general, it's best when the text can fit on one line.
+  */
+@property (copy, readonly) NSString *text;
+
+/**
+ The text that describes the choice in an attributed string.
+ 
+ In general, it's best when the text can fit on one line.
+ */
+@property (copy, readonly, nullable) NSAttributedString *primaryTextAttributedString;
+
+/**
+ The value to return when this choice is selected.
+ 
+ The value of this property is expected to be a `NSNumber`, `NSString` or `NSDate`. If no value is provided, the index of the option in the options list in the
+ answer format is used.
+ */
+@property (copy, readonly) NSObject<NSCopying, NSSecureCoding> *value;
+
+/**
+ The text that provides additional details about the choice in a localized string.
+ 
+ The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
+ text.
+  */
+@property (copy, readonly, nullable) NSString *detailText;
+
+/**
+ The text that provides additional details about the choice in an attributed string.
+ 
+ The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
+ text.
+ */
+@property (copy, readonly, nullable) NSAttributedString *detailTextAttributedString;
+
+/**
+ The image that will be presented to the left of the text provided for the textChoice
+ */
+@property (strong, nullable) UIImage *image;
+
+/**
+ In a multiple choice format, this indicates whether this choice requires all other choices to be
+ unselected.
+ 
+ In general, this is used to indicate a "None of the above" choice.
+ */
+@property (readonly) BOOL exclusive;
+
+@end
+
+#pragma mark - iOS
+
+#if TARGET_OS_IOS
+@interface ORKAnswerFormat()
+
+/// @name Factory methods
 + (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
                                                minimumValue:(NSInteger)scaleMinimum
                                                defaultValue:(NSInteger)defaultValue
@@ -131,22 +406,15 @@ ORK_CLASS_AVAILABLE
                                                       defaultIndex:(NSInteger)defaultIndex
                                                           vertical:(BOOL)vertical;
 
-+ (ORKBooleanAnswerFormat *)booleanAnswerFormat;
-
-+ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes
-                                                    noString:(NSString *)no;
-
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
 + (ORKMultipleValuePickerAnswerFormat *)multipleValuePickerAnswerFormatWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
+
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices
                                                              style:(ORKChoiceAnswerStyle)style
                                                           vertical:(BOOL)vertical;
-
-+ (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
-                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
 + (ORKNumericAnswerFormat *)decimalAnswerFormatWithUnit:(nullable NSString *)unit;
 + (ORKNumericAnswerFormat *)integerAnswerFormatWithUnit:(nullable NSString *)unit;
@@ -160,11 +428,19 @@ ORK_CLASS_AVAILABLE
                                                  maximumDate:(nullable NSDate *)maximumDate
                                                     calendar:(nullable NSCalendar *)calendar;
 
++ (ORKDateAnswerFormat *)dateTimeAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
+                                                  daysAfterCurrentDate:(NSInteger)daysAfter
+                                                              calendar:(nullable NSCalendar *)calendar;
+
 + (ORKDateAnswerFormat *)dateAnswerFormat;
 + (ORKDateAnswerFormat *)dateAnswerFormatWithDefaultDate:(nullable NSDate *)defaultDate
                                              minimumDate:(nullable NSDate *)minimumDate
                                              maximumDate:(nullable NSDate *)maximumDate
                                                 calendar:(nullable NSCalendar *)calendar;
+
++ (ORKDateAnswerFormat *)dateAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
+                                              daysAfterCurrentDate:(NSInteger)daysAfter
+                                                          calendar:(nullable NSCalendar *)calendar;
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
 
@@ -201,27 +477,6 @@ ORK_CLASS_AVAILABLE
 
 + (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText bottomRungText:(NSString *)bottomRungText;
 
-/// @name Validation
-
-/**
- Validates the parameters of the answer format to ensure that they can be displayed.
- 
- Typically, this method is called by the validation methods of the owning objects, which are
- themselves called when a step view controller that contains this answer format is
- about to be displayed.
- */
-- (void)validateParameters;
-
-/**
- Some answer formats are constructed of other answer formats. This method allows
- a subclass to return a different answer format for use in defining the UI/UX for
- the answer format type. For example, a Boolean answer format is presented in the 
- same way as a single-choice answer format with the choices Yes and No mapping to 
- `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
- `ORKTextChoiceAnswerFormat` with those options.
- */
-- (ORKAnswerFormat *)impliedAnswerFormat;
-
 @end
 
 
@@ -241,6 +496,7 @@ ORK_CLASS_AVAILABLE
  * The upper bound value in scale answer format cannot be more than 10000.
 
  */
+
 ORK_CLASS_AVAILABLE
 @interface ORKScaleAnswerFormat : ORKAnswerFormat
 
@@ -382,7 +638,7 @@ ORK_CLASS_AVAILABLE
 /**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that
  lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
- the array corresond to the maximum side of the scale. 
+ the array corresond to the maximum side of the scale.
  
  Setting this value to nil results in no gradient being drawn. Defaults to nil.
  
@@ -393,7 +649,7 @@ ORK_CLASS_AVAILABLE
 /**
  Indicates the position of gradient stops for the colors specified in `gradientColors`.
  Gradient stops are specified as values between 0 and 1. The values must be monotonically
- increasing. 
+ increasing.
  
  If nil, the stops are spread uniformly across the range. Defaults to nil.
  */
@@ -513,7 +769,7 @@ ORK_CLASS_AVAILABLE
 /**
  The default value for the slider. (read-only)
  
- If the value of this property is less than `minimum` or greater than `maximum`, the slider has no 
+ If the value of this property is less than `minimum` or greater than `maximum`, the slider has no
  default value.
  */
 @property (readonly) double defaultValue;
@@ -555,13 +811,13 @@ ORK_CLASS_AVAILABLE
 @property (readonly, nullable) NSString *minimumValueDescription;
 
 /**
- An image for the upper bound of the slider. 
+ An image for the upper bound of the slider.
  @discussion The recommended image size is 30 x 30 points. The maximum range label will not be visible.
  */
 @property (strong, nullable) UIImage *maximumImage;
 
 /**
- An image for the lower bound of the slider. 
+ An image for the lower bound of the slider.
  @discussion The recommended image size is 30 x 30 points. The minimum range label will not be visible.
  */
 @property (strong, nullable) UIImage *minimumImage;
@@ -607,7 +863,7 @@ ORK_CLASS_AVAILABLE
  The `ORKTextScaleAnswerFormat` represents an answer format that includes a discrete slider control
  with a text label next to each step.
  
- The scale answer format produces an `ORKChoiceQuestionResult` object that contains the selected text 
+ The scale answer format produces an `ORKChoiceQuestionResult` object that contains the selected text
  choice's value. */
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
@@ -765,7 +1021,7 @@ ORK_CLASS_AVAILABLE
  multiple-component value picker to choose from a fixed set of text choices.
  
  Note that the multiple value picker answer format reports itself as being of the multiple picker question
- type. The multiple-component value picker answer format produces an `ORKMultipleComponentQuestionResult` 
+ type. The multiple-component value picker answer format produces an `ORKMultipleComponentQuestionResult`
  object where the index into the array matches the array of `ORKValuePickerAnswerFormat` objects.
  
  For example, if the picker shows two columns with choices of `[[A, B, C], [1, 2, 3, 4]]` and the user picked
@@ -868,221 +1124,6 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
-/**
- The `ORKTextChoiceAnswerFormat` class represents an answer format that lets participants choose
- from a fixed set of text choices in a multiple or single choice question.
- 
- The text choices are presented in a table view, using one row for each answer.
- The text for each answer is given more prominence than the `detailText` in the row, but
- both are shown.
- 
- The text choice answer format produces an `ORKChoiceQuestionResult` object.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKTextChoiceAnswerFormat : ORKAnswerFormat
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
- Returns an initialized text choice answer format using the specified question style and array of
- text choices.
- 
- @param style           The style of question, such as single or multiple choice.
- @param textChoices     An array of `ORKTextChoice` objects.
- 
- @return An initialized text choice answer format.
- */
-- (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
-                  textChoices:(NSArray<ORKTextChoice *> *)textChoices NS_DESIGNATED_INITIALIZER;
-
-/**
- The style of the question (that is, single or multiple choice).
- */
-@property (readonly) ORKChoiceAnswerStyle style;
-
-/**
- An array of `ORKTextChoice` objects that represent the choices that are displayed to participants.
- 
- The choices are presented as a table view, using one row for each answer.
- The text for each answer is given more prominence than the `detailText` in the row, but
- both are shown.
- */
-@property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
-
-@end
-
-
-/**
- The `ORKBooleanAnswerFormat` class behaves the same as the `ORKTextChoiceAnswerFormat` class,
- except that it is preconfigured to use only Yes and No answers.
- 
- The Boolean answer format produces an `ORKBooleanQuestionResult` object.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKBooleanAnswerFormat : ORKAnswerFormat
-
-/**
- Returns an initialized Boolean answer format using the specified strings for Yes and No answers.
- 
- @param yes         A string that describes the Yes answer.
- @param no          A string that describes the No answer.
- 
- @return An initialized Boolean answer format.
- */
-- (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no;
-
-/**
- The string to describe the Yes answer. (read-only)
- */
-@property (copy, readonly) NSString *yes;
-
-/**
- The string to describe the No answer. (read-only)
- */
-@property (copy, readonly) NSString *no;
-
-@end
-
-
-/**
- The `ORKTextChoice` class defines the text for a choice in answer formats such
- as `ORKTextChoiceAnswerFormat` and `ORKValuePickerAnswerFormat`.
- 
- When a participant chooses a text choice item, the value recorded in a result
- is specified by the `value` property.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKTextChoice : NSObject <NSSecureCoding, NSCopying, NSObject>
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
- Returns a text choice object that includes the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
- 
- @param text                         The primary text that describes the choice in a localized string.
- @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
- @param detailText                   The detail text to display below the primary text, in a localized string.
- @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
- @param value                        The value to record in a result object when this item is selected.
- @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
- 
- @return A text choice instance.
- */
-+ (instancetype)choiceWithText:(nullable NSString *)text primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString detailText:(nullable NSString *)detailText detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
-
-/**
- Returns a text choice object that includes the specified primary text, detail text,
- and exclusivity.
- 
- @param text        The primary text that describes the choice in a localized string.
- @param detailText  The detail text to display below the primary text, in a localized string.
- @param value       The value to record in a result object when this item is selected.
- @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
- 
- @return A text choice instance.
- */
-+ (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
-
-/**
- Returns a choice object that includes the specified primary text.
- 
- @param text        The primary text that describes the choice in a localized string.
- @param value       The value to record in a result object when this item is selected.
- 
- @return A text choice instance.
- */
-+ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
-
-/**
- Returns an initialized text choice object using the specified primary text, detail text,
- and exclusivity.
- 
- @param text        The primary text that describes the choice in a localized string.
- @param detailText  The detail text to display below the primary text, in a localized string.
- @param value       The value to record in a result object when this item is selected.
- @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
- 
- @return An initialized text choice.
- */
-- (instancetype)initWithText:(NSString *)text
-                  detailText:(nullable NSString *)detailText
-                       value:(id<NSCopying, NSCoding, NSObject>)value
-                    exclusive:(BOOL)exclusive;
-
-/**
- Returns an initialized text choice object using the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
- 
- This method is the designated initializer.
- 
- @param text                         The primary text that describes the choice in a localized string.
- @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
- @param detailText                   The detail text to display below the primary text, in a localized string.
- @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
- @param value                        The value to record in a result object when this item is selected.
- @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
- 
- @return An initialized text choice.
- */
-- (instancetype)initWithText:(nullable NSString *)text
- primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
-                  detailText:(nullable NSString *)detailText
-  detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
-                       value:(id<NSCopying, NSCoding, NSObject>)value
-                   exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
-
-/**
- The text that describes the choice in a localized string.
- 
- In general, it's best when the text can fit on one line.
-  */
-@property (copy, readonly) NSString *text;
-
-/**
- The text that describes the choice in an attributed string.
- 
- In general, it's best when the text can fit on one line.
- */
-@property (copy, readonly, nullable) NSAttributedString *primaryTextAttributedString;
-
-/**
- The value to return when this choice is selected.
- 
- The value of this property is expected to be a scalar property list type, such as `NSNumber`
- or `NSString`. If no value is provided, the index of the option in the options list in the
- answer format is used.
- */
-@property (copy, readonly) id<NSCopying, NSCoding, NSObject> value;
-
-/**
- The text that provides additional details about the choice in a localized string.
- 
- The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
- text.
-  */
-@property (copy, readonly, nullable) NSString *detailText;
-
-/**
- The text that provides additional details about the choice in an attributed string.
- 
- The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
- text.
- */
-@property (copy, readonly, nullable) NSAttributedString *detailTextAttributedString;
-
-/**
- In a multiple choice format, this indicates whether this choice requires all other choices to be
- unselected.
- 
- In general, this is used to indicate a "None of the above" choice.
- */
-@property (readonly) BOOL exclusive;
-
-@end
-
-
 /**
  The `ORKTextChoiceOther` class defines the choice option to describe an answer not
  included in provided choices.
@@ -1100,7 +1141,7 @@ ORK_CLASS_AVAILABLE
  
  @param text                         The primary text that describes the choice in a localized string.
  @param detailText                   The detail text to display below the primary text, in a localized string.
- @param value                        The value to record in a result object when this item is selected.
+ @param value                        The value to record in a result object when this item is selected.  Only `NSString`, `NSNumber`, and `NSDate` values are supported.
  @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
  @param textViewPlaceholderText      The placeholder text for the text view.
  
@@ -1108,7 +1149,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)choiceWithText:(nullable NSString *)text
                     detailText:(nullable NSString *)detailText
-                         value:(id<NSCopying, NSCoding, NSObject>)value
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value
                      exclusive:(BOOL)exclusive
        textViewPlaceholderText:(NSString *)textViewPlaceholderText;
 
@@ -1121,7 +1162,7 @@ ORK_CLASS_AVAILABLE
  @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
  @param detailText                   The detail text to display below the primary text, in a localized string.
  @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
- @param value                        The value to record in a result object when this item is selected.
+ @param value                        The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
  @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
  @param textViewPlaceholderText      The placeholder text for the text view.
  @param textViewInputOptional        Whether the user is required to provide additional text when selecting this choice.
@@ -1133,7 +1174,7 @@ ORK_CLASS_AVAILABLE
  primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
                   detailText:(nullable NSString *)detailText
   detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
-                       value:(id<NSCopying, NSCoding, NSObject>)value
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
                    exclusive:(BOOL)exclusive
      textViewPlaceholderText:(NSString *)textViewPlaceholderText
        textViewInputOptional:(BOOL)textViewInputOptional
@@ -1172,14 +1213,14 @@ ORK_CLASS_AVAILABLE
  @param normal      The image to display in the unselected state.
  @param selected    The image to display in the selected state.
  @param text        The text to display when the image is selected.
- @param value       The value to record in a result object when the image is selected.
+ @param value       The value to record in a result object when the image is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
  
  @return An image choice instance.
  */
 + (instancetype)choiceWithNormalImage:(nullable UIImage *)normal
                         selectedImage:(nullable UIImage *)selected
                                  text:(nullable NSString *)text
-                                value:(id<NSCopying, NSCoding, NSObject>)value;
+                                value:(NSObject<NSCopying, NSSecureCoding> *)value;
 
 /**
  Returns an initialized image choice using the specified images and text.
@@ -1189,14 +1230,14 @@ ORK_CLASS_AVAILABLE
  @param normal      The image to display in the unselected state.
  @param selected    The image to display in the selected state.
  @param text        The text to display when the image is selected.
- @param value       The value to record in a result object when the image is selected.
+ @param value       The value to record in a result object when the image is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
  
  @return An initialized image choice.
  */
 - (instancetype)initWithNormalImage:(nullable UIImage *)normal
                       selectedImage:(nullable UIImage *)selected
                                text:(nullable NSString *)text
-                              value:(id<NSCopying, NSCoding, NSObject>)value NS_DESIGNATED_INITIALIZER;
+                              value:(NSObject<NSCopying, NSSecureCoding> *)value NS_DESIGNATED_INITIALIZER;
 
 /**
  The image to display when the choice is not selected. (read-only)
@@ -1227,11 +1268,11 @@ ORK_CLASS_AVAILABLE
 /**
  The value to return when the image is selected. (read-only)
  
- The value of this property is expected to be a scalar property list type, such as `NSNumber` or
- `NSString`. If no value is provided, the index of the option in the `ORKImageChoiceAnswerFormat`
+ Expected to be a `NSNumber`, `NSString` or `NSDate` (a JSON-serializable value).
+ If no value is provided, the index of the option in the `ORKImageChoiceAnswerFormat`
  options list is used.
  */
-@property (copy, readonly) id<NSCopying, NSCoding, NSObject> value;
+@property (copy, readonly) NSObject<NSCopying, NSSecureCoding> *value;
 
 @end
 
@@ -1309,11 +1350,9 @@ Returns an initialized numeric answer format using the specified style, unit des
 /**
  Returns an initialized numeric answer format using the specified style, unit designation, range
  values, and precision.
- 
- This method is the designated initializer.
- 
- @param style                   The style of the numeric answer (decimal or integer).
- @param unit                    A string that displays a localized version of the unit designation.
+  
+ @param style                     The style of the numeric answer (decimal or integer).
+ @param unit                        A string that displays a localized version of the unit designation.
  @param minimum                 The minimum value to apply, or `nil` if none is specified.
  @param maximum                 The maximum value to apply, or `nil` if none is specified.
  @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
@@ -1324,6 +1363,28 @@ Returns an initialized numeric answer format using the specified style, unit des
                          unit:(nullable NSString *)unit
                       minimum:(nullable NSNumber *)minimum
                       maximum:(nullable NSNumber *)maximum
+        maximumFractionDigits:(NSNumber *)maximumFractionDigits;
+
+/**
+ Returns an initialized numeric answer format using the specified style, unit designation, range
+ values, and precision.
+ 
+ This method is the designated initializer.
+ 
+ @param style                     The style of the numeric answer (decimal or integer).
+ @param unit                        A string that displays the unit designation in the results.
+ @param displayUnit        An string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+ @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
+
+ @return An initialized numeric answer format.
+ */
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(nullable NSString *)unit
+                  displayUnit:(nullable NSString *)displayUnit
+                      minimum:(nullable NSNumber *)minimum
+                      maximum:(nullable NSNumber *)maximum
         maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -1332,13 +1393,25 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (readonly) ORKNumericAnswerStyle style;
 
 /**
- A string that displays a localized version of the unit designation next to the numeric value.
+ A string that displays the unit designation next to the numeric value in the results.
  (read-only)
- 
+ If displayUnit is not set, the answerFormat will display the unit instead
+
  Examples of unit designations are days, lbs, and liters.
  The unit string is included in the `ORKNumericQuestionResult` object.
  */
 @property (copy, readonly, nullable) NSString *unit;
+
+/**
+ A string that displays a localized version of the display unit designation next to the numeric value.
+ This property will only be used for display UI purposes.
+ If this property is not set, the answerFormat will display the unit instead
+ (read-only)
+ 
+ Examples of unit designations are days, lbs, and liters.
+ The displayUnit string is included in the `ORKNumericQuestionResult` object.
+ */
+@property (copy, readonly, nullable) NSString *displayUnit;
 
 /**
  The minimum allowed value for the numeric answer.
@@ -1470,9 +1543,9 @@ ORK_CLASS_AVAILABLE
  @param style           The style of date answer, such as date, or date and time.
  @param defaultDate     The default date to display. When the value of this parameter is `nil`, the
                             picker displays the current time.
- @param minimumDate     The minimum date that is accessible in the picker. If the value of this 
+ @param minimumDate     The minimum date that is accessible in the picker. If the value of this
                             parameter is `nil`, there is no minimum.
- @param maximumDate     The maximum date that is accessible in the picker. If the value of this 
+ @param maximumDate     The maximum date that is accessible in the picker. If the value of this
                             parameter is `nil`, there is no maximum.
  @param calendar        The calendar to use. If the value of this parameter is `nil`, the picker
                             uses the default calendar for the current locale.
@@ -1511,6 +1584,26 @@ When the value of this property is `nil`, there is no minimum.
  When the value of this property is `nil`, there is no maximum.
  */
 @property (copy, readonly, nullable) NSDate *maximumDate;
+
+/**
+ This number passed to this property will set the minimum date to the relative amount of days
+ before the current date.
+ */
+@property (nonatomic) NSInteger daysBeforeCurrentDateToSetMinimumDate;
+
+/**
+ This number passed to this property will set the minimum date to the relative amount of days
+ after the current date.
+ */
+@property (nonatomic) NSInteger daysAfterCurrentDateToSetMinimumDate;
+
+
+/**
+ A boolean property that determines if the max date should be set to the current time or not
+ 
+ When the value of this property is `true`, the max date is set to the current time
+ */
+@property (nonatomic, assign) BOOL isMaxDateCurrentTime;
 
 /**
  The calendar to use in the picker.
@@ -1594,6 +1687,8 @@ ORK_CLASS_AVAILABLE
  */
 @property NSInteger maximumLength;
 
+
+
 /**
  A Boolean value indicating whether to expect more than one line of input.
  
@@ -1618,6 +1713,20 @@ This only applies if multipleLines is set to YES.
 This By default, the value of this property is `NO`.
 */
 @property BOOL hideCharacterCountLabel;
+
+/**
+ Identifies whether the text object should hide the text being entered.
+ 
+ By default, the value of this property is NO.
+ */
+@property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+
+/**
+ The placeholder to dislpay when the answer is empty.
+ 
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+  */
+@property (copy, nullable) NSString *placeholder;
 
 /**
  The autocapitalization type that applies to the user's input.
@@ -1662,20 +1771,6 @@ This By default, the value of this property is `NO`.
  */
 @property (nonatomic, copy, nullable) UITextInputPasswordRules *passwordRules API_AVAILABLE(ios(12));
 
-/**
- Identifies whether the text object should hide the text being entered.
- 
- By default, the value of this property is NO.
- */
-@property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
-
-/**
- The placeholder to dislpay when the answer is empty.
- 
- Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
-  */
-@property (copy, nullable) NSString *placeholder;
-
 @end
 
 
@@ -1718,7 +1813,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKTimeIntervalAnswerFormat : ORKAnswerFormat
 
 /**
- Returns an initialized time interval answer format using the specified default interval and step 
+ Returns an initialized time interval answer format using the specified default interval and step
  value.
  
  This method is the designated initializer.
@@ -1963,5 +2058,6 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+#endif
 
 NS_ASSUME_NONNULL_END

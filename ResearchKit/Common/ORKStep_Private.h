@@ -28,12 +28,24 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <ResearchKit/ORKStep.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface ORKStep ()
+
+@property (nonatomic, assign) BOOL shouldTintImages;
+
+// Whether to allow navigation back from this step.
+@property (nonatomic, assign, readonly) BOOL allowsBackNavigation;
+
+@property (nonatomic, assign) BOOL useSurveyMode;
+
+@end
+
+#pragma mark - iOS
+
+#if TARGET_OS_IOS
 @interface ORKStep ()
 
 /**
@@ -51,13 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (Class)stepViewControllerClass;
 
-@property (nonatomic, assign) BOOL shouldTintImages;
-
-// Whether to allow navigation back from this step.
-@property (nonatomic, assign, readonly) BOOL allowsBackNavigation;
-
-@property (nonatomic, assign) BOOL useSurveyMode;
-
 @end
+
+#endif
 
 NS_ASSUME_NONNULL_END

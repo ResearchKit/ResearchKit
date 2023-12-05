@@ -97,6 +97,30 @@
     return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey: UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
 }
 
+- (CGSize)intrinsicContentSize {
+    UILabel *label = nil;
+    
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            label = (UILabel *)view;
+            break;
+        }
+    }
+    
+    // This is to avoid calling self.titleLabel when recalculation of content size is not needed.
+    // Calling self.titleLabel at here can cause weird layout error.
+    if (label && label.preferredMaxLayoutWidth > 0 && self.currentTitle.length > 0) {
+        CGSize labelSize = [self.titleLabel sizeThatFits:CGSizeMake(self.titleLabel.preferredMaxLayoutWidth, CGFLOAT_MAX)];
+        
+        CGFloat verticalPadding = MAX(self.contentEdgeInsets.top, self.titleEdgeInsets.top) +  MAX(self.contentEdgeInsets.bottom, self.titleEdgeInsets.bottom);
+        CGFloat horizontalPadding = MAX(self.contentEdgeInsets.left, self.titleEdgeInsets.left) + MAX(self.contentEdgeInsets.right, self.titleEdgeInsets.right);
+        
+        return CGSizeMake(labelSize.width+horizontalPadding,
+                          labelSize.height+verticalPadding);
+    }
+    return [super intrinsicContentSize];
+}
+
 - (UIAccessibilityTraits)accessibilityTraits {
     // prevent VoiceOver from speaking "dimmed" when transitioning between pages
     if (self.isInTransition) {

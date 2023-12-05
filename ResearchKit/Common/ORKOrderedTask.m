@@ -29,20 +29,21 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKOrderedTask.h"
-#import "ORKFormStep.h"
 #import "ORKQuestionStep.h"
-#import "ORKFormStepViewController.h"
 #import "ORKAnswerFormat.h"
 #import "ORKInstructionStep.h"
 #import "ORKCompletionStep.h"
-#import "ORKFormItem_Internal.h"
-
-#import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#if TARGET_OS_IOS
+#import "ORKFormStep.h"
+#import "ORKFormStepViewController.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKActiveStep_Internal.h"
+#import "ORKEarlyTerminationConfiguration.h"
+#endif
 
 @implementation ORKOrderedTask {
     NSString *_identifier;
@@ -108,9 +109,19 @@
 #pragma mark - ORKTask
 
 - (void)validateParameters {
-    NSArray *uniqueIdentifiers = [self.steps valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( self.steps.count != uniqueIdentifiers.count );
-    
+    NSInteger stepCount = 0;
+    NSMutableSet<NSString *> *uniqueStepIdentifiers = [NSMutableSet new];
+    for (ORKStep *step in self.steps) {
+        [uniqueStepIdentifiers addObject:step.identifier];
+        stepCount++;
+        #if TARGET_OS_IOS
+        if (step.earlyTerminationConfiguration.earlyTerminationStep != nil) {
+            [uniqueStepIdentifiers addObject:step.earlyTerminationConfiguration.earlyTerminationStep.identifier];
+            stepCount++;
+        }
+        #endif
+    }
+    BOOL itemsHaveNonUniqueIdentifiers = ( stepCount != uniqueStepIdentifiers.count );
     if (itemsHaveNonUniqueIdentifiers) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Each step should have a unique identifier" userInfo:nil];
     }
@@ -139,20 +150,34 @@
     }
 }
 
-- (void)appendSteps:(NSArray<ORKStep *> *)additionalSteps {
+- (void)addStepsFromArray:(NSArray<ORKStep *> *)stepsToAdd {
     NSMutableArray *newSteps = [_steps mutableCopy];
-    
-    [newSteps addObjectsFromArray:additionalSteps];
-    
+    [newSteps addObjectsFromArray:stepsToAdd];
     _steps = [newSteps copy];
+    [self validateParameters];
+}
+
+- (void)addStep:(ORKStep *)stepToAdd {
+    [self addStepsFromArray:@[stepToAdd]];
+    [self validateParameters];
+}
+
+- (void)insertSteps:(NSArray<ORKStep *> *)stepsToInsert atIndexes:(NSIndexSet *)indexSet {
+    NSMutableArray *newSteps = [_steps mutableCopy];
+    [newSteps insertObjects:stepsToInsert atIndexes:indexSet];
+    _steps = [newSteps copy];
+    [self validateParameters];
+}
+
+- (void)insertStep:(ORKStep *)stepToInsert atIndex:(NSUInteger)index {
+    NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:index];
+    [self insertSteps:@[stepToInsert] atIndexes:indexSet];
+    [self validateParameters];
 }
 
 - (NSUInteger)indexOfStep:(ORKStep *)step {
-    NSUInteger index = [_steps indexOfObject:step];
-    if (index == NSNotFound) {
-        NSArray *identifiers = [_steps valueForKey:@"identifier"];
-        index = [identifiers indexOfObject:step.identifier];
-    }
+    NSArray *identifiers = [_steps valueForKey:@"identifier"];
+    NSUInteger index = [identifiers indexOfObject:step.identifier];
     return index;
 }
 
@@ -207,6 +232,11 @@
         if ([obj.identifier isEqualToString:identifier]) {
             step = obj;
             *stop = YES;
+        #if TARGET_OS_IOS
+        } else if ([obj.earlyTerminationConfiguration.earlyTerminationStep.identifier isEqualToString:identifier]) {
+            step = obj.earlyTerminationConfiguration.earlyTerminationStep;
+            *stop = YES;
+        #endif
         }
     }];
     return step;
@@ -234,6 +264,7 @@
     int currentStepStartingProgressNumber = 0;
     
     for (ORKStep *step in self.steps) {
+#if TARGET_OS_IOS
         if ([step isKindOfClass:[ORKFormStep class]]) {
             ORKFormStep *formStep = (ORKFormStep *)step;
             if (formStep.identifier == currentStep.identifier) {
@@ -247,6 +278,14 @@
             }
             totalQuestions += 1;
         }
+#else
+        if ([step isKindOfClass:[ORKQuestionStep class]]) {
+            if (step.identifier == currentStep.identifier) {
+                currentStepStartingProgressNumber = (totalQuestions + 1);
+            }
+            totalQuestions += 1;
+        }
+#endif
     }
     
     totalProgress.currentStepStartingProgressPosition = currentStepStartingProgressNumber;
@@ -255,6 +294,7 @@
     return totalProgress;
 }
 
+#if TARGET_OS_IOS
 - (NSMutableArray *)calculateSectionsForFormItems:(NSArray *)formItems {
     NSMutableArray<NSMutableArray *> *_sections = [NSMutableArray new];
     NSMutableArray *section = nil;
@@ -335,6 +375,22 @@
     return NO;
 }
 
+- (BOOL)providesBackgroundAudioPrompts {
+    BOOL providesAudioPrompts = NO;
+    for (ORKStep *step in self.steps) {
+        if ([step isKindOfClass:[ORKActiveStep class]]) {
+            ORKActiveStep *activeStep = (ORKActiveStep *)step;
+            if ([activeStep hasVoice] || [activeStep hasCountDown]) {
+                providesAudioPrompts = YES;
+                break;
+            }
+        }
+    }
+    return providesAudioPrompts;
+}
+
+#endif
+
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
     for (ORKStep *step in self.steps) {
@@ -356,20 +412,6 @@
         mask |= [step requestedPermissions];
     }
     return mask;
-}
-
-- (BOOL)providesBackgroundAudioPrompts {
-    BOOL providesAudioPrompts = NO;
-    for (ORKStep *step in self.steps) {
-        if ([step isKindOfClass:[ORKActiveStep class]]) {
-            ORKActiveStep *activeStep = (ORKActiveStep *)step;
-            if ([activeStep hasVoice] || [activeStep hasCountDown]) {
-                providesAudioPrompts = YES;
-                break;
-            }
-        }
-    }
-    return providesAudioPrompts;
 }
 
 #pragma mark - NSSecureCoding

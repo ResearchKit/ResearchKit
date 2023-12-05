@@ -1,5 +1,0 @@
-language: objective-c
-osx_image: xcode12
-xcode_project: ResearchKit.xcodeproj
-xcode_scheme: ResearchKit
-xcode_destination: platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro Max

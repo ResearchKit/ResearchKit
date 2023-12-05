@@ -137,6 +137,7 @@
     
     if (self.step && [self isViewLoaded]) {
         [_videoCaptureView removeFromSuperview];
+        [_videoCaptureView.playerViewController removeFromParentViewController];
         _videoCaptureView = nil;
         _movieFileOutput = nil;
         
@@ -144,6 +145,7 @@
         _videoCaptureView.videoCaptureStep = (ORKVideoCaptureStep *)self.step;
         _videoCaptureView.delegate = self;
         _videoCaptureView.cancelButtonItem = self.cancelButtonItem;
+        [self addChildViewController:_videoCaptureView.playerViewController];
         [self.view addSubview:_videoCaptureView];
         
         
@@ -303,6 +305,7 @@
     fileResult.endDate = now;
     fileResult.contentType = @"video/mp4";
     fileResult.fileURL = _fileURL;
+    fileResult.fileName = [_fileURL lastPathComponent];
     [results addObject:fileResult];
     stepResult.results = [results copy];
     return stepResult;

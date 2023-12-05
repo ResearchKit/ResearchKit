@@ -34,6 +34,7 @@
 
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKConsentReviewStep.h>
 #import <ResearchKit/ORKConsentSharingStep.h>
 #import <ResearchKit/ORKFormStep.h>
@@ -48,11 +49,11 @@
 #import <ResearchKit/ORKRegistrationStep.h>
 #import <ResearchKit/ORKReviewStep.h>
 #import <ResearchKit/ORKSignatureStep.h>
+#import <ResearchKit/ORKAccuracyStroopStep.h>
 #import <ResearchKit/ORKTableStep.h>
 #import <ResearchKit/ORKTouchAnywhereStep.h>
 #import <ResearchKit/ORKVerificationStep.h>
 #import <ResearchKit/ORKVideoCaptureStep.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
 #import <ResearchKit/ORKWaitStep.h>
 #import <ResearchKit/ORKVideoInstructionStep.h>
 #import <ResearchKit/ORKFrontFacingCameraStep.h>
@@ -98,11 +99,11 @@
 #import <ResearchKit/ORKCompletionStepViewController.h>
 #import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKInstructionStepViewController.h>
+#import <ResearchKit/ORKLearnMoreStepViewController.h>
 #import <ResearchKit/ORKLoginStepViewController.h>
 #import <ResearchKit/ORKPageStepViewController.h>
 #import <ResearchKit/ORKPasscodeViewController.h>
 #import <ResearchKit/ORKPDFViewerStepViewController.h>
-#import <ResearchKit/ORKQuestionStepViewController.h>
 #import <ResearchKit/ORKTableStepViewController.h>
 #import <ResearchKit/ORKTaskViewController.h>
 #import <ResearchKit/ORKTouchAnywhereStepViewController.h>
@@ -113,6 +114,9 @@
 #import <ResearchKit/ORKCustomStepViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
+
+#import <ResearchKit/ORKAudiometryStimulus.h>
+#import <ResearchKit/ORKAudiometryProtocol.h>
 
 #import <ResearchKit/ORKConsentDocument.h>
 #import <ResearchKit/ORKConsentSection.h>
@@ -126,11 +130,23 @@
 #import <ResearchKit/ORKLineGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
 
+#import <ResearchKit/ORKPicker.h>
+
 #import <ResearchKit/ORKBodyItem.h>
 #import <ResearchKit/ORKLearnMoreItem.h>
 
 #import <ResearchKit/ORKDataCollectionManager.h>
 #import <ResearchKit/ORKCollector.h>
+
+#import <ResearchKit/ORK3DModelManager.h>
+#import <ResearchKit/ORKUSDZModelManager.h>
+
+#import <ResearchKit/ORKPermissionType.h>
+#import <ResearchKit/ORKHealthKitPermissionType.h>
+#import <ResearchKit/ORKNotificationPermissionType.h>
+#import <ResearchKit/ORKSensorPermissionType.h>
+#import <ResearchKit/ORKMotionActivityPermissionType.h>
+#import <ResearchKit/ORKLocationPermissionType.h>
 
 #import <ResearchKit/ORKTouchAbilityTouch.h>
 #import <ResearchKit/ORKTouchAbilityTrack.h>
@@ -143,11 +159,9 @@
 #import <ResearchKit/ORKTouchAbilityPinchTrial.h>
 #import <ResearchKit/ORKTouchAbilityRotationTrial.h>
 
-#import <ResearchKit/ORK3DModelManager.h>
-#import <ResearchKit/ORKUSDZModelManager.h>
-#import <ResearchKit/ORKPermissionType.h>
-#import <ResearchKit/ORKHealthKitPermissionType.h>
-#import <ResearchKit/ORKNotificationPermissionType.h>
-#import <ResearchKit/ORKMotionActivityPermissionType.h>
-
 #import <ResearchKit/ORKDeprecated.h>
+
+#import <ResearchKit/ORKEarlyTerminationConfiguration.h>
+#import <ResearchKit/ORKBundleAsset.h>
+
+

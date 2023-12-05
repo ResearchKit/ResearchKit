@@ -104,7 +104,7 @@
         ORK_DECODE_UINT32(aDecoder, timeoutSound);
         ORK_DECODE_UINT32(aDecoder, failureSound);
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
-        ORK_DECODE_OBJ_CLASS(aDecoder, currentInterval, NSNumber);
+        ORK_DECODE_INTEGER(aDecoder, currentInterval);
     }
     return self;
 }
@@ -119,7 +119,7 @@
         ORK_ENCODE_UINT32(aCoder, timeoutSound);
         ORK_ENCODE_UINT32(aCoder, failureSound);
         ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
-        ORK_ENCODE_OBJ(aCoder, currentInterval);
+        ORK_ENCODE_INTEGER(aCoder, currentInterval);
 }
 
 + (BOOL)supportsSecureCoding {

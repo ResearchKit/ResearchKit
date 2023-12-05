@@ -33,6 +33,7 @@
 @import ResearchKit;
 @import ResearchKit.Private;
 @import UIKit;
+#import "ORKReviewStep_Internal.h"
 
 @interface ORKStepTests : XCTestCase
 
@@ -323,7 +324,8 @@
     result.booleanAnswer = @(YES);
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"stepOne" results:@[result]];
-    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithIdentifier:@"task"];
+    
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:@"task" taskRunUUID:[NSUUID UUID] outputDirectory:nil];
     taskResult.results = @[stepResult];
     
     // Creating predicates
@@ -501,6 +503,7 @@
 - (void)testAttributes {
     NSString *identifier = @"STEP";
     ORKLearnMoreInstructionStep *step = [[ORKLearnMoreInstructionStep alloc] initWithIdentifier:identifier];
+
     XCTAssertEqual([step identifier], identifier);
 }
 
@@ -536,4 +539,66 @@
     XCTAssert([step isEqual:step]);
 }
 
+@end
+
+@interface ORKAudioFitnessStepTests : XCTestCase
+
+@end
+
+@implementation ORKAudioFitnessStepTests
+
+- (void)testAttributes {
+
+    NSString *identifier = @"abc";
+    NSString *bundleID = @"com.fake.bundle";
+    NSString *name = @"song";
+    NSString *extension = @".mp3";
+
+    ORKBundleAsset *audio = [[ORKBundleAsset alloc] initWithName:name
+                                                bundleIdentifier:bundleID
+                                                   fileExtension:extension];
+
+    ORKAudioFitnessStep *step = [[ORKAudioFitnessStep alloc] initWithIdentifier:identifier
+                                                                     audioAsset:audio
+                                                                      vocalCues:nil];
+    XCTAssertEqual(step.identifier, identifier);
+    XCTAssertEqual(step.audioAsset.bundleIdentifier, bundleID);
+    XCTAssertEqual(step.audioAsset.name, name);
+    XCTAssertEqual(step.audioAsset.fileExtension, extension);
+    XCTAssertEqual(step.stepDuration, 180);
+    XCTAssertEqual(step.shouldShowDefaultTimer, NO);
+    XCTAssertEqual(step.vocalCues.count, 0);
+    XCTAssert([step isEqual:step]);
+}
+
+@end
+
+@interface ORKReviewStepTests : XCTestCase
+
+@end
+
+@implementation ORKReviewStepTests
+
+// ORKReviewStep's implementation of `isStandalone` is
+//        return _steps != nil;
+
+- (void)testEmbeddedReviewStep {
+    // test that embeddedReviewStep always has isStandalone set to false
+    ORKReviewStep* embeddedReviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"embeddedReviewStep"];
+    XCTAssertFalse(embeddedReviewStep.isStandalone);
+    
+    // test that standaloneReviewStep with nil steps has isStandalone set to false
+    ORKReviewStep* standAloneReviewStepWithNilSteps = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standAloneReviewStepWithNilSteps" steps:nil resultSource:nil];
+    XCTAssertFalse(standAloneReviewStepWithNilSteps.isStandalone);
+}
+
+- (void)testStandAloneReviewStep {
+    // test that standaloneReviewStep with non nil steps always has isStandalone set to true
+    ORKReviewStep* standAloneReviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standAloneReviewStep" steps:@[] resultSource:nil];
+    XCTAssertTrue(standAloneReviewStep.isStandalone);
+    
+    // test that standaloneReviewStep with defined steps always has isStandalone set to true
+    ORKReviewStep* standAloneReviewStepWithSteps = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standAloneReviewStep" steps:@[[[ORKInstructionStep alloc] initWithIdentifier:@"instructionStep"]] resultSource:nil];
+    XCTAssertTrue(standAloneReviewStepWithSteps.isStandalone);
+}
 @end

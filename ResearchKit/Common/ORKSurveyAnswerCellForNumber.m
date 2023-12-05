@@ -76,10 +76,14 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
    
     _dontKnowButtonActive = NO;
     
-    ORKNumericAnswerFormat *numericAnswerFormat = (ORKNumericAnswerFormat *)[self.step impliedAnswerFormat];
-
+    ORKAnswerFormat *answerFormat = self.step.answerFormat;
+    {
+        ORKNumericAnswerFormat *numericAnswerFormat = ORKDynamicCast(answerFormat, ORKNumericAnswerFormat);
+        _textFieldView.hideUnitWhenAnswerEmpty = numericAnswerFormat ? numericAnswerFormat.hideUnitWhenAnswerIsEmpty : NO;
+    }
+    
     _textFieldView = [[ORKTextFieldView alloc] init];
-    _textFieldView.hideUnitWhenAnswerEmpty = numericAnswerFormat.hideUnitWhenAnswerIsEmpty;
+
     ORKUnitTextField *textField = _textFieldView.textField;
     
     textField.delegate = self;
@@ -101,10 +105,10 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
     _errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_errorLabel];
     
-    if (numericAnswerFormat.shouldShowDontKnowButton) {
+    if (answerFormat.shouldShowDontKnowButton) {
         if (!_dontKnowButton) {
             _dontKnowButton = [ORKDontKnowButton new];
-            _dontKnowButton.customDontKnowButtonText = numericAnswerFormat.customDontKnowButtonText;
+            _dontKnowButton.customDontKnowButtonText = answerFormat.customDontKnowButtonText;
             _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
             [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -123,7 +127,7 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
         [self addSubview:_dividerView];
         
         if (self.answer == [ORKDontKnowAnswer answer]) {
-            [_dontKnowButton setButtonActive];
+            [_dontKnowButton setActive:YES];
         }
     }
    
@@ -147,8 +151,8 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
 }
 
 - (void)dontKnowButtonWasPressed {
-    if (![_dontKnowButton isDontKnowButtonActive]) {
-        [_dontKnowButton setButtonActive];
+    if (![_dontKnowButton active]) {
+        [_dontKnowButton setActive:YES];
         [_textFieldView.textField setText:nil];
         [_textFieldView endEditing:YES];
         [self textFieldShouldClear:_textFieldView.textField];
@@ -187,7 +191,7 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
         [[_dividerView.topAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
         [[_dividerView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
         [[_dividerView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
-        [[_dividerView.heightAnchor constraintGreaterThanOrEqualToConstant:separatorHeight] setActive:YES];
+        [[_dividerView.heightAnchor constraintEqualToConstant:separatorHeight] setActive:YES];
 
         [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
         [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor] setActive:YES];
@@ -249,12 +253,12 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
     (self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil));
 
     self.textField.manageUnitAndPlaceholder = YES;
-    self.textField.unit = numericAnswerFormat.unit;
+    self.textField.unit = numericAnswerFormat.displayUnit ?: numericAnswerFormat.unit;
     self.textField.placeholder = placeholder;
 
     if (answer == [ORKDontKnowAnswer answer]) {
         [self dontKnowButtonWasPressed];
-    } else if (answer != ORKNullAnswerValue() && ![_dontKnowButton isDontKnowButtonActive]) {
+    } else if (answer != ORKNullAnswerValue() && ![_dontKnowButton active]) {
         if (!answer) {
             [self assignDefaultAnswer];
         }
@@ -313,13 +317,14 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
         [self setUpConstraints];
     }
     
-    if (_dontKnowButton && [_dontKnowButton isDontKnowButtonActive]) {
-        [_dontKnowButton setButtonInactive];
+    if (_dontKnowButton && [_dontKnowButton active]) {
+        [_dontKnowButton setActive:NO];
    }
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    if ([_dontKnowButton isDontKnowButtonActive]) {
+
+    if ([_dontKnowButton active]) {
         [self ork_setAnswer:[ORKDontKnowAnswer answer]];
     } else {
         [self ork_setAnswer:ORKNullAnswerValue()];
@@ -375,8 +380,8 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (_dontKnowButton && [_dontKnowButton isDontKnowButtonActive]) {
-        [_dontKnowButton setButtonInactive];
+    if (_dontKnowButton && [_dontKnowButton active]) {
+        [_dontKnowButton setActive:NO];
     }
 }
 @end

@@ -69,8 +69,8 @@ static NSString *const invalidKey = @"RK invalid key";
     
     // Set an object in the keychain.
     BOOL success = [ORKKeychainWrapper setObject:inObject
-                           forKey:key
-                            error:&error];
+                                          forKey:key
+                                           error:&error];
     XCTAssertNil(error);
     XCTAssertTrue(success);
     
@@ -94,8 +94,8 @@ static NSString *const invalidKey = @"RK invalid key";
     
     // Set an object in the keychain.
     BOOL success = [ORKKeychainWrapper setObject:inObject
-                           forKey:key
-                            error:&error];
+                                          forKey:key
+                                           error:&error];
     XCTAssertNil(error);
     XCTAssertTrue(success);
     

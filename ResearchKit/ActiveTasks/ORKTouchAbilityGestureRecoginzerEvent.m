@@ -65,10 +65,10 @@
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
         ORK_DECODE_ENUM(aDecoder, state);
-        ORK_DECODE_OBJ(aDecoder, allowedTouchTypes);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, allowedTouchTypes, NSNumber);
         ORK_DECODE_CGPOINT(aDecoder, locationInWindow);
         ORK_DECODE_INTEGER(aDecoder, numberOfTouches);
-        ORK_DECODE_OBJ(aDecoder, locationInWindowOfTouchAtIndex);
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, locationInWindowOfTouchAtIndex, NSNumber, NSValue);
     }
     return self;
 }

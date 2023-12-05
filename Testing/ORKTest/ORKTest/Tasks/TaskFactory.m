@@ -158,6 +158,27 @@ ORKTCopyExtensionProperty_Implementation(shouldPresentStepBlock,
     return task;
 }
 
+- (ORKTaskViewController *)makeTaskViewControllerWithIdentifier:(NSString *)identifier
+                                                           task:(id<ORKTask>)task
+                                                restorationData:(NSData *)data
+                                                       delegate:(id<ORKTaskViewControllerDelegate>)delegate {
+    ORKTaskViewController *taskViewController = nil;
+    // convert @"SampleTaskIdentifier" into @"makeSampleTaskViewControllerWithIdentifier:task:restorationData:delegate:"
+    NSString *makeTaskViewControllerSelectorName = [NSString stringWithFormat:@"make%@ViewControllerWithIdentifier:task:restorationData:delegate:",
+                                      [identifier substringToIndex:identifier.length - 10]];
+    SEL makeTaskViewControllerSelector = NSSelectorFromString(makeTaskViewControllerSelectorName);
+    NSError *error;
+    if ([self respondsToSelector:makeTaskViewControllerSelector]) {
+        // Equivalent to [self peformSelector:buttonSelector], but ARC safe
+        IMP imp = [self methodForSelector:makeTaskViewControllerSelector];
+        ORKTaskViewController *(*func)(id, SEL, NSString *, id<ORKTask>, NSData *, id<ORKTaskViewControllerDelegate>) = (void *)imp;
+        taskViewController = func(self, makeTaskViewControllerSelector, identifier, task, data, delegate);
+    } else {
+        taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:delegate error:&error];
+    }
+    return taskViewController;
+}
+
 /*
  Builds a test consent document.
  */

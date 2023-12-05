@@ -30,6 +30,7 @@
 
 
 @import UIKit;
+
 #import <ResearchKit/ORKTask.h>
 
 
@@ -132,12 +133,35 @@ ORK_CLASS_AVAILABLE
 - (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps identifier:(NSString *)identifier;
 
 /**
- Append the passed steps to the end of the current task.
- 
- @param additionalSteps The steps to append to the task.
- */
+ Adds the steps contained in the given array to the end of the step array.
 
-- (void)appendSteps:(NSArray<ORKStep *> *)additionalSteps;
+ @param steps An array of steps to add to the end of the step array.
+ */
+- (void)addStepsFromArray:(NSArray<ORKStep *> *)steps;
+
+/**
+ Inserts a given step at the end of the step array.
+
+ @param step A steps to add to the end of the step array.
+ */
+- (void)addStep:(ORKStep *)step;
+
+/**
+ Inserts the steps in the provided array into the step array at the specified indexes.
+
+ @param steps An array of steps to be inserted into the task's step array.
+ @param indexes The indexes at which the objects in objects should be inserted. The count of locations in indexes must equal the count of objects. For more details, see the Discussion.
+ 
+ */
+- (void)insertSteps:(NSArray<ORKStep *> *)steps atIndexes:(NSIndexSet *)indexes;
+
+/**
+ Inserts the provided step the step array at the specified index.
+
+ @param step A step to be inserted into the task's step array.
+ @param index The index in the step array at which to insert anObject. This value must not be greater than the count of elements in the step array.
+ */
+- (void)insertStep:(ORKStep *)step atIndex:(NSUInteger)index;
 
 /**
  Find the index of a given step.

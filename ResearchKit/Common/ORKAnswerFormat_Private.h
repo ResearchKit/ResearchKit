@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <ResearchKit/ORKAnswerFormat.h>
 
 
@@ -57,6 +56,7 @@ ORK_EXTERN id ORKNullAnswerValue(void) ORK_AVAILABLE_DECL;
  
  An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
  */
+#if TARGET_OS_IOS
 ORK_CLASS_AVAILABLE
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
@@ -89,6 +89,15 @@ ORK_CLASS_AVAILABLE
  The error message displayed if validation fails.
  */
 @property (nonatomic, copy, readonly) NSString *errorMessage;
+
+@end
+#endif
+
+@protocol ORKAnswerFormatPlatterPresentable <NSObject>
+
+@end
+
+@interface ORKTextChoiceAnswerFormat () <ORKAnswerFormatPlatterPresentable>
 
 @end
 
