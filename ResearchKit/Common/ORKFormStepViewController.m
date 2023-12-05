@@ -57,9 +57,11 @@
 #import "ORKFormStep_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"
+#import "ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h"
 
 #import "ORKSESSelectionView.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKAnswerTextView.h"
 #import "ORKSkin.h"
 
 static const CGFloat TableViewYOffsetStandard = 30.0;
@@ -466,6 +468,26 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
     _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
+}
+
+- (void)restoreTextChoiceOtherCellStateWithSavedAnswer:(NSArray *)savedAnswer formItem:(ORKFormItem *)formItem choiceOtherViewCell:(ORKChoiceOtherViewCell *)choiceOtherViewCell {
+    id savedAnswerValue = ORKDynamicCast(savedAnswer, NSArray).firstObject;
+    if (savedAnswerValue != nil) {
+        ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = ORKDynamicCast(formItem.impliedAnswerFormat, ORKTextChoiceAnswerFormat);
+        NSString *textChoiceAnswer = ORKDynamicCast(savedAnswerValue, NSString);
+        
+        if (textChoiceAnswer && [textChoiceAnswerFormat hasStandardTextChoiceOtherArrangement]) {
+            ORKTextChoiceOther *textChoiceOther = ORKDynamicCast(formItem.impliedAnswerFormat.choices.lastObject, ORKTextChoiceOther);
+            // You can use ORKTextChoice and ORKTextChoiceOther as the choices of the ORKTextChoiceAnswerFormat.
+            // However, ResearchKit only supports restoring the ORKTextChoiceOther if it is the last choice.
+            if (textChoiceOther) {
+                [choiceOtherViewCell setCellSelected:YES highlight:NO];
+                textChoiceOther.textViewText = textChoiceAnswer;
+                choiceOtherViewCell.textViewHidden = NO;
+                choiceOtherViewCell.textView.text = textChoiceOther.textViewText;
+            }
+        }
+    }
 }
 
 - (void)refreshDefaults {
@@ -1154,9 +1176,10 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             section.textChoiceCellGroup.delegate = self;
             ORKChoiceViewCell *choiceViewCell = nil;
             choiceViewCell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
-            if ([choiceViewCell isKindOfClass:[ORKChoiceOtherViewCell class]]) {
-                ORKChoiceOtherViewCell *choiceOtherViewCell = (ORKChoiceOtherViewCell *)choiceViewCell;
+            ORKChoiceOtherViewCell *choiceOtherViewCell = ORKDynamicCast(choiceViewCell, ORKChoiceOtherViewCell);
+            if (choiceOtherViewCell) {
                 choiceOtherViewCell.delegate = self;
+                [self restoreTextChoiceOtherCellStateWithSavedAnswer:answer formItem:formItem choiceOtherViewCell:choiceOtherViewCell];
             }
             choiceViewCell.tintColor = ORKViewTintColor(self.view);
             choiceViewCell.useCardView = [self formStep].useCardView;
@@ -1571,7 +1594,9 @@ static NSString *const _ORKAnsweredSectionsRestoreKey = @"answeredSections";
     if (_currentFirstResponderCell == choiceOtherViewCell) {
         _currentFirstResponderCell = nil;
     }
-    NSIndexPath *indexPath = [_tableView indexPathForCell:choiceOtherViewCell];
+    // we need to use `indexPathForRowAtPoint` because `indexPathForCell`
+    // will return nil if the cell is off the screen, which will happen if we are scrolling
+    NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:choiceOtherViewCell.center];
     ORKTableSection *section = _sections[indexPath.section];
     [section.textChoiceCellGroup textViewDidResignResponderForCellAtIndexPath:indexPath];
 }
