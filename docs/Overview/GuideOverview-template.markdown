@@ -1,27 +1,27 @@
 # 
 <sub>These materials are for informational purposes only and do not constitute legal advice. You should contact an attorney to obtain advice with respect to the development of a research app and any applicable laws.</sub>
 
-#ResearchKit Framework Programming Guide
+# ResearchKit Framework Programming Guide
 
 The *ResearchKit™ framework* is an open source software framework that makes it easy for app
 developers and researchers to create research apps. This new framework takes advantage of sensors
 and capabilities of iPhone to track movement, take measurements, and record data. Users can perform
 activities and generate data from anywhere.
 
-##Modules
+## Modules
 
 The *ResearchKit framework* provides three customizable modules that address some of  the most
 common elements of research: *surveys*, *consent*, and *active tasks*. You can use these modules as they
 are, build on them, and even create completely new modules of your own.
 
-###Surveys
+### Surveys
 
 The survey module's predefined user interface lets you quickly build surveys simply by specifying
 the questions and types of answers. The survey module is already localized, so all you need to do is
 to localize your questions. To learn more about surveys, see
 [Creating Surveys](CreatingSurveys-template).
 
-###Consent
+### Consent
 
 Participants in research studies are often asked to share sensitive information as part of their
 enrollment and involvement in the study. That’s why it’s critical to clarify exactly what
@@ -36,7 +36,7 @@ collection capabilities of the *HealthKit* and *CoreMotion* APIs on *iOS*. Activ
 to perform activities under partially controlled conditions using iPhone sensors to actively collect
 data. To learn more about active tasks, see [Active Tasks](ActiveTasks-template).
 
-##Tasks and Steps
+## Tasks and Steps
 
 A task in the *ResearchKit framework* can be a simple ordered sequence of steps, or it can be
 dynamic, with previous results informing what is presented. The task view controller supports saving
@@ -58,7 +58,7 @@ download predefined surveys from a server and deserialize them to produce a *Res
 object hierarchy. Similarly, results from tasks can be serialized and uploaded to a server for later
 analysis.
 
-##Current Limitations
+## Current Limitations
 
 The *ResearchKit framework* feature list will continue to grow as useful modules are contributed by
 the community.  Keep in mind that the *ResearchKit framework* currently doesn’t include:
@@ -91,5 +91,5 @@ You have to set any of these preprocessor macros in your ResearchKit subproject,
 
 See these resources if you are using ResearchKit through CocoaPods and need to change the log level: [[1]](http://stackoverflow.com/a/30038120/269753) [[2]](http://www.mokacoding.com/blog/cocoapods-and-custom-build-configurations/).
 
-##Digital Object Identifier for ResearchKit
+## Digital Object Identifier for ResearchKit
 The ResearchKit repository has an assigned digital object identifier (DOI), which is a persistent identifier that can be used to reference ResearchKit in academic papers. The DOI is registered on zenodo.org.  See  https://doi.org/10.5281/zenodo.826964 .
