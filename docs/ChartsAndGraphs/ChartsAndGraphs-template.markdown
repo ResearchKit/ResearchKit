@@ -20,7 +20,7 @@ Each of these charts is shown in Figure 1. 
 <figcaption> <center>Figure 1. Types of charts</center></figcaption>
 <p>
 
-##Add a Chart to Your App
+## Add a Chart to Your App
 Chart objects adhere to the Model-View-Controller (MVC) paradigm. MVC emphasizes separation between the data (model), the presentation of that data (view), and the class required to coordinate the data and its view (controller). This design pattern is pervasive in iOS programming and is an integral part of the charts feature.
 
 In a research app, the chart object (view) must be connected to a data source object (model) which is responsible for supplying the data. The chart is then presented to a view controller object (controller) which establishes the necessary connections between the data source and the view.
@@ -332,7 +332,7 @@ Figure 5 shows a discrete graph that uses the same data source class created for
 </center>
 
 
-###Draw Multiple Lines in a Graph     
+### Draw Multiple Lines in a Graph     
 By default, the graph object assumes that it has a single plot to draw. To draw more than one plot on a graph, use the `numberOfPlotsInGraphChartView` method and specify the number of plots in the graph. This optional data source method is useful when drawing more than one plot on a graph chart.
 
 This code shows how a graph object can draw two plots:
@@ -342,7 +342,7 @@ This code shows how a graph object can draw two plots:
         return 2
     }
 
-###Add Titles to a Graph Chart
+### Add Titles to a Graph Chart
 To add titles along the x axis in a line or discrete graph, implement the `titleForXAxisAtPointIndex` method in the data source class and return the title to display adjacent to each division on the x axis. For the y axis, display maximum or minimum values using the `maximumValueForGraphChartView:` or `minimumValueForGraphChartView:` properties (to display images instead of values, use the `maximumValueImage` and  `minimumValueImage` properties).
 
 The following code displays titles on the x axis of a discrete graph chart:

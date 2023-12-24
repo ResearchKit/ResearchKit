@@ -10,7 +10,7 @@ The basic operations of the Account module include:
  * Verification, when your app can vet new users. In order to properly vet new users, your app can opt to perform a verification step after registration.
  * Login, which allows registered and verified users to access your app. After your user has registered and verified their registration, this operation allows them to log in to your app.
 
-##Register New Users
+## Register New Users
 To register new users, use the `ORKRegistrationStep` class. The resulting view shows a title and helpful registration text. There, the user can type an email address and password, along with other optional information.
 
 The following example specifies a registration step that includes requesting the user's full name, gender, and birthday:
@@ -35,7 +35,7 @@ Figure 1 shows the registration view.
 
 After all of the information has been properly set, the user can touch the Done button to proceed. Your app is responsible for sending the user-provided data to a server to perform the actual registration.
 
-##Verify Users
+## Verify Users
 Email verification is a common way to validate proper registration for a user. After the user registers, your backend server can send an email to the provided email address.
 
 To enable email verification in your app, use a combination of the `ORKVerificationStep` class along with a subclass of the `ORKVerificationStepViewController`. Subclassing `ORKVerificationStepViewController` allows you to provide custom behavior when the user taps the Resend Email Verification button. Here's how to set up your subclass:

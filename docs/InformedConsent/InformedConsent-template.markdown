@@ -1,7 +1,7 @@
- # 
+#
 <sub>These materials are for informational purposes only and do not constitute legal advice. You should contact an attorney to obtain advice with respect to the development of a research app and any applicable laws.</sub>
 
-#Obtaining Consent
+# Obtaining Consent
 
 Research studies that involve human subjects typically require some form of ethics review. Depending on the country, this may be review by an institutional review board (IRB), or by an ethics committee (EC). For some studies, consent may be required to conduct a research study, which means that the researcher must ensure that each participant is fully informed about the nature of the study, and must obtain a signed consent from each participant.  Additionally, consent may be required as a condition of app review.
 
@@ -12,7 +12,7 @@ In the consent document model, encode each section of your consent document, and
 
 You can also add other steps into your consent sequence. For example, a consent-sharing step (`ORKConsentSharingStep`) can be used to explicitly obtain permission to share the data your study is collecting with other researchers, if allowed by your IRB or EC. Or, add an instruction, form, or question steps to ask comprehension questions to verify that your prospective participants understand the nature of the study.
 
-##Create the Consent Document Model
+## Create the Consent Document Model
 
 To create a consent document model, first decide how you want to present your consent document. Categorize your content into sections based on what information you present to users. After you have the structure for your consent document, you can replicate the same structure using the consent document model object (`ORKConsentDocument`).
 
@@ -148,7 +148,7 @@ The consent-sharing step is shown in Figure 3.
 </figure>
 </center>
 
-##Create the Consent Task
+## Create the Consent Task
 
 After you create the step(s), create an `ORKOrderedTask` task and add them to it. To present the task, attach your task to a task view controller and present it.
 
@@ -174,7 +174,7 @@ This code snippet shows how to create a task with a visual consent step and a co
 
     // And then present the task view controller.
 
-##Generate a PDF
+## Generate a PDF
 
 The ResearchKit framework can help you generate a PDF of the signed consent form and provide it to the user. For example, your app could generate the PDF locally, write it to disk, email it to the participant, display it in the app, or send it to a server.
 
@@ -194,7 +194,7 @@ To do this, first take any signature results from the completed consent review, 
 
 You can only apply a signature result to a new copy of a consent document. 
 
-##Enhanced PDF Viewing
+## Enhanced PDF Viewing
 
 Providing clear and concise material for the user to review is an important part of the data collection process. With `ORKPDFViewerStep`, the user can view a PDF in detail, perform text search, and mark up sections of the document. Other available features include viewing the pages of the PDF as thumbnails for quick perusal, printing, and saving the document.
 

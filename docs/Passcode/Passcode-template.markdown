@@ -13,7 +13,7 @@ Supporting Passcode in your app involves several operations:
 
 The user's keychain on the device stores the passcode.
 
-##Create a Passcode
+## Create a Passcode
 The creation of a passcode starts with the creation of an `ORKPasscodeStep` object. The `ORKPasscodeStep` class inherits from the `ORKStep` class and provides step functionality that is common in ResearchKit.
 
 This code demonstrates how to create a passcode step using a four-digit passcode.
