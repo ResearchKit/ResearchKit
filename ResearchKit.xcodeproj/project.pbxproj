@@ -222,7 +222,6 @@
 		511B8AA8293A764900049947 /* ORKTouchAbilityTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AA6293A764900049947 /* ORKTouchAbilityTrial.m */; };
 		511B8AAA293A766300049947 /* ORKTouchAbilityTrial_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 511B8AA9293A766300049947 /* ORKTouchAbilityTrial_Internal.h */; };
 		511B8AAD293A767C00049947 /* ORKTouchAbilityTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AAB293A767C00049947 /* ORKTouchAbilityTouchTracker.m */; };
-		511B8AAE293A767C00049947 /* ORKTouchAbilityTouchTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 511B8AAC293A767C00049947 /* ORKTouchAbilityTouchTracker.h */; };
 		511B8AB1293A76A100049947 /* ORKTouchAbilityTapStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AAF293A76A100049947 /* ORKTouchAbilityTapStep.m */; };
 		511B8AB2293A76A100049947 /* ORKTouchAbilityTapStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 511B8AB0293A76A100049947 /* ORKTouchAbilityTapStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		511B8AB5293A76B200049947 /* ORKTouchAbilityTapStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AB3293A76B200049947 /* ORKTouchAbilityTapStepViewController.m */; };
@@ -1045,9 +1044,9 @@
 		05F3765923C797930068E166 /* ResearchKit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ResearchKit.xctestplan; sourceTree = "<group>"; };
 		0B59A6BD28C1738D005035B4 /* ORKPickerTestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKPickerTestDelegate.h; sourceTree = "<group>"; };
 		0B59A6BE28C1738D005035B4 /* ORKPickerTestDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKPickerTestDelegate.m; sourceTree = "<group>"; };
+		0B7D32E92AE6F8040071C576 /* ORKQuestionStepViewController+TestingSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ORKQuestionStepViewController+TestingSupport.h"; sourceTree = "<group>"; };
 		0B9CC5652A68C02C00080E29 /* UIImageView+ResearchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ResearchKit.h"; sourceTree = "<group>"; };
 		0B9CC5662A68C02C00080E29 /* UIImageView+ResearchKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ResearchKit.m"; sourceTree = "<group>"; };
-		0B7D32E92AE6F8040071C576 /* ORKQuestionStepViewController+TestingSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ORKQuestionStepViewController+TestingSupport.h"; sourceTree = "<group>"; };
 		0BA0F4B12A1C1FD300A55672 /* ORKHealthKitQuestionStepViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKHealthKitQuestionStepViewControllerTests.swift; sourceTree = "<group>"; };
 		0BAF9796291088ED00EF138A /* ORKNormalizedReactionTimeResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeResult.h; sourceTree = "<group>"; };
 		0BAF9797291088EE00EF138A /* ORKNormalizedReactionTimeStimulusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeStimulusView.h; sourceTree = "<group>"; };
@@ -5529,6 +5528,7 @@
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -5539,6 +5539,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};

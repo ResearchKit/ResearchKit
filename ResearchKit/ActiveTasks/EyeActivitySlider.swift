@@ -73,8 +73,8 @@ internal class EyeActivitySlider: UIView {
     private var slider: CircleSlider?
     
     internal init(testType: VisionStepType) {
-        super.init(frame: CGRect())
-        
+        super.init(frame: .zero)
+
         self.testType = testType
         commonInit()
     }
@@ -112,7 +112,7 @@ internal class EyeActivitySlider: UIView {
         
         letterAngle = Double(letterAngles[Int(arc4random_uniform(7))])
         letterImageView.transform = CGAffineTransform.identity
-        letterImageView.frame = CGRect(origin: CGPoint(), size: CGSize(width: letterSize, height: letterSize))
+        letterImageView.frame = CGRect(origin: .zero, size: CGSize(width: letterSize, height: letterSize))
         letterImageView.center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         letterImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Math.degreesToRadians(letterAngle)))
         letterImageView.alpha = getAlpha()

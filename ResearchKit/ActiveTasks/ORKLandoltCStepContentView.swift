@@ -37,7 +37,7 @@ internal class ORKLandoltCStepContentView: UIView {
     private var testType: VisionStepType?
     
     internal init(testType: VisionStepType) {
-        super.init(frame: CGRect())
+        super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
         self.testType = testType
