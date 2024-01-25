@@ -225,7 +225,6 @@
 		511B8AA8293A764900049947 /* ORKTouchAbilityTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AA6293A764900049947 /* ORKTouchAbilityTrial.m */; };
 		511B8AAA293A766300049947 /* ORKTouchAbilityTrial_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 511B8AA9293A766300049947 /* ORKTouchAbilityTrial_Internal.h */; };
 		511B8AAD293A767C00049947 /* ORKTouchAbilityTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AAB293A767C00049947 /* ORKTouchAbilityTouchTracker.m */; };
-		511B8AAE293A767C00049947 /* ORKTouchAbilityTouchTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 511B8AAC293A767C00049947 /* ORKTouchAbilityTouchTracker.h */; };
 		511B8AB1293A76A100049947 /* ORKTouchAbilityTapStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AAF293A76A100049947 /* ORKTouchAbilityTapStep.m */; };
 		511B8AB2293A76A100049947 /* ORKTouchAbilityTapStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 511B8AB0293A76A100049947 /* ORKTouchAbilityTapStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		511B8AB5293A76B200049947 /* ORKTouchAbilityTapStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B8AB3293A76B200049947 /* ORKTouchAbilityTapStepViewController.m */; };
@@ -5026,7 +5025,6 @@
 				714151D0225C4A23002CA33B /* ORKPasscodeViewControllerTests.swift in Sources */,
 				0324C1D825439E1800BBE77B /* ORKVideoInstructionStepViewControllerTests.swift in Sources */,
 				14E79040226A5F72009D8083 /* ORKStepViewControllerHelpers.swift in Sources */,
-				0BC803602B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m in Sources */,
 				86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */,
 				1490DCFC224D4867003FEEDA /* ORKEnvironmentSPLMeterResultTests.swift in Sources */,
 				7141EA2222EFBC0C00650145 /* ORKLoggingTests.m in Sources */,
@@ -5734,6 +5732,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ResearchKit;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				SUPPORTS_MACCATALYST = NO;
