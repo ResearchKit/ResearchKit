@@ -385,8 +385,8 @@ ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseCol
 }
 
 // Localization
-ORK_EXTERN NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
+extern NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
+extern NSBundle *ORKDefaultLocaleBundle(void);
 
 ORK_INLINE NSString *ORKLocalizedHiddenString(NSString *key) {
     // try to find on hidden table
@@ -409,6 +409,6 @@ ORKLocalizedHiddenString(key)
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
 
-NSString* ORKSwiftLocalizedString(NSString *key, NSString *comment);
+ORK_EXTERN NSString* ORKSwiftLocalizedString(NSString *key, NSString *comment);
 
 NS_ASSUME_NONNULL_END
