@@ -33,6 +33,7 @@
 @import ResearchKit;
 @import ResearchKit.Private;
 @import UIKit;
+#import "ORKReviewStep_Internal.h"
 
 @interface ORKStepTests : XCTestCase
 
@@ -570,4 +571,34 @@
     XCTAssert([step isEqual:step]);
 }
 
+@end
+
+@interface ORKReviewStepTests : XCTestCase
+
+@end
+
+@implementation ORKReviewStepTests
+
+// ORKReviewStep's implementation of `isStandalone` is
+//        return _steps != nil;
+
+- (void)testEmbeddedReviewStep {
+    // test that embeddedReviewStep always has isStandalone set to false
+    ORKReviewStep* embeddedReviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"embeddedReviewStep"];
+    XCTAssertFalse(embeddedReviewStep.isStandalone);
+    
+    // test that standaloneReviewStep with nil steps has isStandalone set to false
+    ORKReviewStep* standAloneReviewStepWithNilSteps = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standAloneReviewStepWithNilSteps" steps:nil resultSource:nil];
+    XCTAssertFalse(standAloneReviewStepWithNilSteps.isStandalone);
+}
+
+- (void)testStandAloneReviewStep {
+    // test that standaloneReviewStep with non nil steps always has isStandalone set to true
+    ORKReviewStep* standAloneReviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standAloneReviewStep" steps:@[] resultSource:nil];
+    XCTAssertTrue(standAloneReviewStep.isStandalone);
+    
+    // test that standaloneReviewStep with defined steps always has isStandalone set to true
+    ORKReviewStep* standAloneReviewStepWithSteps = [ORKReviewStep standaloneReviewStepWithIdentifier:@"standAloneReviewStep" steps:@[[[ORKInstructionStep alloc] initWithIdentifier:@"instructionStep"]] resultSource:nil];
+    XCTAssertTrue(standAloneReviewStepWithSteps.isStandalone);
+}
 @end

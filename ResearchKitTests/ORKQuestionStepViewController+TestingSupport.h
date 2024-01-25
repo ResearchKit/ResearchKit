@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2018, Muh-Tarng Lin. All rights reserved.
+ Copyright (c) 2023, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,45 +29,20 @@
  */
 
 
-#import "ORKTouchAbilityLongPressStep.h"
-#import "ORKTouchAbilityLongPressStepViewController.h"
-#import "ORKhelpers_Internal.h"
+#import <ResearchKit/ORKQuestionStepViewController.h>
 
-@implementation ORKTouchAbilityLongPressStep
 
-+ (Class)stepViewControllerClass {
-    return [ORKTouchAbilityLongPressStepViewController class];
-}
+NS_ASSUME_NONNULL_BEGIN
 
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        self.shouldShowDefaultTimer = NO;
-        self.shouldContinueOnFinish = YES;
-    }
-    return self;
-}
+@interface ORKQuestionStepViewController () <ORKQuestionStepCustomViewDelegate>
 
-- (void)validateParameters {
-    [super validateParameters];
-    
-}
-
-- (BOOL)startsFinished {
-    return NO;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityLongPressStep *step = [super copyWithZone:zone];
-    return step;
-}
-
-- (BOOL)isEqual:(id)other {
-    return other == self || [super isEqual:other];
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
+- (nullable id)answer;
+- (BOOL)hasChangedAnswer;
+/**
+ Set the step answer.
+ */
+- (void)testAnswerDidChangeTo:(id)answer;
 
 @end
+
+NS_ASSUME_NONNULL_END

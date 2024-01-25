@@ -3,6 +3,7 @@
     "targetSentence":"",
     "speechFilePath": "",
     "footnote": "",
+    "shouldAutomaticallyAdjustImageTintColor":0,
     "shouldContinueOnFinish": true,
     "recorderConfigurations":[],
     "shouldSpeakCountDown": false,
