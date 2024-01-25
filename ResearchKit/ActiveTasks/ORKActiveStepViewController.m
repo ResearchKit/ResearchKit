@@ -45,6 +45,9 @@
 #import "ORKTaskViewController_Internal.h"
 #import "ORKRecorder_Internal.h"
 
+#import "ORKStepView_Private.h"
+#import "ORKStepContentView.h"
+
 #import "ORKActiveStep_Internal.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKResult.h"
@@ -125,6 +128,7 @@
     if (_customView) {
         _activeStepView.customContentView = _customView;
     }
+    _activeStepView.stepContentView.shouldAutomaticallyAdjustImageTintColor = YES;
     [self.view addSubview:_activeStepView];
 }
 

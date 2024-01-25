@@ -173,7 +173,8 @@ static const CGFloat PickerMinimumHeight = 34.0;
 - (void)pickerWillAppear {
     // Report current value, since ORKHeightPicker always has a value
     [self pickerView];
-    [self valueDidChange:self];
+    // only do the assignment that's done in `valueDidChange`
+    _answer = [self selectedAnswerValue];
     [self accessibilityFocusOnPickerElement];
 }
 

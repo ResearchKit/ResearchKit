@@ -116,6 +116,9 @@ ORK_EXTERN CGFloat ORKQuestionStepMinimumHeaderHeight;
 /// Default CGFloat used for rounded corner radii for card view
 ORK_EXTERN CGFloat ORKCardDefaultCornerRadii;
 
+/// Default CGFloat used for rounded corner radii for image choice button image view
+ORK_EXTERN CGFloat ORKImageChoiceButtonCornerRadii;
+
 /// Default CGFloat used for border width for card view
 ORK_EXTERN CGFloat ORKCardDefaultBorderWidth;
 
