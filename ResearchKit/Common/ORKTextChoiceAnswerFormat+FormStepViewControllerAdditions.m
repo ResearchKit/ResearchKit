@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2018, Muh-Tarng Lin. All rights reserved.
+ Copyright (c) 2023, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,46 +28,22 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h"
+#import "ORKAnswerFormat.h"
+#import "ORKHelpers_Internal.h"
 
-#import "ORKTouchAbilityLongPressStep.h"
-#import "ORKTouchAbilityLongPressStepViewController.h"
-#import "ORKhelpers_Internal.h"
+@implementation ORKTextChoiceAnswerFormat (FormStepViewControllerAdditions)
 
-@implementation ORKTouchAbilityLongPressStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKTouchAbilityLongPressStepViewController class];
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        self.shouldShowDefaultTimer = NO;
-        self.shouldContinueOnFinish = YES;
+- (BOOL)hasStandardTextChoiceOtherArrangement {
+    NSMutableArray *otherTextChoices = [[NSMutableArray alloc] init];
+    BOOL isLastItemTextChoiceOther = [self.textChoices.lastObject isKindOfClass:[ORKTextChoiceOther class]];
+    for (ORKTextChoice *textChoice in self.textChoices) {
+        ORKTextChoiceOther *textChoiceOther = ORKDynamicCast(textChoice, ORKTextChoiceOther);
+        if (textChoiceOther) {
+            [otherTextChoices addObject:textChoiceOther];
+        }
     }
-    return self;
-}
-
-- (void)validateParameters {
-    [super validateParameters];
-    
-}
-
-- (BOOL)startsFinished {
-    return NO;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityLongPressStep *step = [super copyWithZone:zone];
-    return step;
-}
-
-- (BOOL)isEqual:(id)other {
-    return other == self || [super isEqual:other];
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
+    return otherTextChoices.count == 1 && isLastItemTextChoiceOther;
 }
 
 @end

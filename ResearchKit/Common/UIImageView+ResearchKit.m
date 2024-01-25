@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2018, Muh-Tarng Lin. All rights reserved.
+ Copyright (c) 2023, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,46 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "UIImage+ResearchKit.h"
+#import "UIImageView+ResearchKit.h"
 
-#import "ORKTouchAbilityLongPressStep.h"
-#import "ORKTouchAbilityLongPressStepViewController.h"
-#import "ORKhelpers_Internal.h"
+@implementation UIImageView (ResearchKit)
 
-@implementation ORKTouchAbilityLongPressStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKTouchAbilityLongPressStepViewController class];
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        self.shouldShowDefaultTimer = NO;
-        self.shouldContinueOnFinish = YES;
-    }
-    return self;
-}
-
-- (void)validateParameters {
-    [super validateParameters];
-    
-}
-
-- (BOOL)startsFinished {
-    return NO;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityLongPressStep *step = [super copyWithZone:zone];
-    return step;
-}
-
-- (BOOL)isEqual:(id)other {
-    return other == self || [super isEqual:other];
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
+- (void)updateRenderingModeForUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
+    self.image = [self.image ork_imageWithRenderingModeForUserInterfaceStyle:userInterfaceStyle];
 }
 
 @end

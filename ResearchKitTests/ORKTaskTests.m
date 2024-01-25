@@ -1438,9 +1438,10 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
 - (void)testTaskViewControllerCanDiscardLogic {
     TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
+    ORKStep *reviewableStep = [ORKQuestionStep questionStepWithIdentifier:@"Who's there?" title:nil question:nil answer:nil];
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"TestTask" steps:@[
         [[ORKInstructionStep alloc] initWithIdentifier:@"instuction-0"],
-        [ORKReviewStep standaloneReviewStepWithIdentifier:@"review" steps:nil resultSource:nil],
+        [ORKReviewStep standaloneReviewStepWithIdentifier:@"review" steps:@[reviewableStep] resultSource:nil],
     ]];
 
     // test cases where hasSaveableResults == NO
@@ -1463,7 +1464,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
         XCTAssertTrue([reviewStep isStandalone]);
         XCTAssertTrue([taskViewController canDiscardResults]);
     }
-
+    
     // test cases where hasSaveableResults == YES
     {
         MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
@@ -1504,10 +1505,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
         ORKReviewStepViewController *reviewViewController = ORKDynamicCast(taskViewController.currentStepViewController, ORKReviewStepViewController);
         XCTAssertNotNil(reviewViewController, "taskViewController.currentStepViewController should be of type ORKReviewStepViewController at this point");
 
-    
-        // [TODO]:Test if currentStep is reviewStep but not standalone -> CANNOT discardResults
         
-
         // before reviewStepViewController:willReviewStep, currentStepViewController should not be in readOnlyMode
         XCTAssertFalse(taskViewController.currentStepViewController.readOnlyMode);
         
@@ -1535,6 +1533,20 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
         XCTAssertFalse([taskViewController canDiscardResults]);
     }
 
+}
+
+- (void)testTaskViewControllerReviewStepDiscardLogic {
+    ORKReviewStep *embeddedReviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier: @"embeddedReviewStep"];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"embeddedReviewMockTask"
+        steps:@[
+        embeddedReviewStep
+    ]];
+    MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+    [taskViewController viewWillAppear:false];
+    
+    // Test if currentStep is reviewStep but not standalone -> CANNOT discardResults
+    XCTAssertFalse(embeddedReviewStep.isStandalone);
+    XCTAssertFalse([taskViewController canDiscardResults]);
 }
 
 - (void)testIndexOfStep {
