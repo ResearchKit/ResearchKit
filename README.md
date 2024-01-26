@@ -1,6 +1,12 @@
 ResearchKit Framework
 ===========
 
+> [!NOTE]  
+> This repository is a [StanfordBDHG](https://github.com/StanfordBDHG) fork of the [ResearchKit project](https://github.com/ResearchKit/ResearchKit) by Apple, adding support for:
+> - The [Swift Package Manager](https://www.swift.org/documentation/package-manager/) by building ResearchKit to an [XCFramework](https://developer.apple.com/documentation/xcode/creating-a-multi-platform-binary-framework-bundle) via GitHub Actions and exposing the built XCFramework as a SPM binary target to speed up build times of projects / packages consuming our ResearchKit fork.
+> - Building ResearchKit with enabled [Swift's C++ Interoperability](https://www.swift.org/documentation/cxx-interop/), requiring minor code adjustments (not additive) to the ResearchKit codebase.
+
+
 ![Platform](https://img.shields.io/cocoapods/p/ResearchKit.svg) ![SwiftPackageManager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange) ![CocoaPods](https://img.shields.io/cocoapods/v/ResearchKit.svg) ![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license) ![](https://travis-ci.com/ResearchKit/ResearchKit.svg?branch=master)
 
 The *ResearchKit™ framework* is an open source software framework that makes it easy to create apps

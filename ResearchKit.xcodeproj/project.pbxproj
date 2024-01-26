@@ -55,6 +55,9 @@
 		0BAF97A6291088F200EF138A /* ORKNormalizedReactionTimeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAF979C291088F000EF138A /* ORKNormalizedReactionTimeContentView.m */; };
 		0BAF97A8291088F200EF138A /* ORKNormalizedReactionTimeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAF979E291088F100EF138A /* ORKNormalizedReactionTimeResult.m */; };
 		0BAF97A9291088F200EF138A /* ORKNormalizedReactionTimeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BAF979F291088F200EF138A /* ORKNormalizedReactionTimeStep.m */; };
+		0BC8034F2B07F6B100618E4F /* ORKFormStepViewControllerORKTextChoiceOtherRestorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC8034E2B07F6B100618E4F /* ORKFormStepViewControllerORKTextChoiceOtherRestorationTests.swift */; };
+		0BC8035E2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BC8035C2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h */; };
+		0BC8035F2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC8035D2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m */; };
 		106FF29E1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF29C1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		106FF29F1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 106FF29D1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m */; };
 		106FF2A21B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF2A01B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1058,6 +1061,10 @@
 		0BAF979D291088F000EF138A /* ORKNormalizedReactionTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKNormalizedReactionTimeViewController.h; sourceTree = "<group>"; };
 		0BAF979E291088F100EF138A /* ORKNormalizedReactionTimeResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeResult.m; sourceTree = "<group>"; };
 		0BAF979F291088F200EF138A /* ORKNormalizedReactionTimeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKNormalizedReactionTimeStep.m; sourceTree = "<group>"; };
+		0BC8034D2B07F60600618E4F /* ORKFormStepViewController+TestingSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ORKFormStepViewController+TestingSupport.h"; sourceTree = "<group>"; };
+		0BC8034E2B07F6B100618E4F /* ORKFormStepViewControllerORKTextChoiceOtherRestorationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKFormStepViewControllerORKTextChoiceOtherRestorationTests.swift; sourceTree = "<group>"; };
+		0BC8035C2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h"; sourceTree = "<group>"; };
+		0BC8035D2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m"; sourceTree = "<group>"; };
 		106FF29C1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestPlaceStep.h; sourceTree = "<group>"; };
 		106FF29D1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHolePegTestPlaceStep.m; sourceTree = "<group>"; };
 		106FF2A01B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestPlaceStepViewController.h; sourceTree = "<group>"; };
@@ -3128,6 +3135,7 @@
 				86CC8EA81AC09383001CCD89 /* ORKAccessibilityTests.m */,
 				248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */,
 				0B7D32E92AE6F8040071C576 /* ORKQuestionStepViewController+TestingSupport.h */,
+				0BC8034D2B07F60600618E4F /* ORKFormStepViewController+TestingSupport.h */,
 				0B59A6BD28C1738D005035B4 /* ORKPickerTestDelegate.h */,
 				0B59A6BE28C1738D005035B4 /* ORKPickerTestDelegate.m */,
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
@@ -3149,6 +3157,7 @@
 				1490DD01224D6A21003FEEDA /* ORKResultPredicateTests.swift */,
 				1490DD03224D6A61003FEEDA /* ORKTestResultPredicateType.swift */,
 				14F7AC8A2269035200D52F41 /* ORKStepViewControllerTests.swift */,
+				0BC8034E2B07F6B100618E4F /* ORKFormStepViewControllerORKTextChoiceOtherRestorationTests.swift */,
 				0BA0F4B12A1C1FD300A55672 /* ORKHealthKitQuestionStepViewControllerTests.swift */,
 				14E7903F226A5F72009D8083 /* ORKStepViewControllerHelpers.swift */,
 			);
@@ -3466,6 +3475,8 @@
 				86C40B651A8D7C5B00081FAC /* ORKAnswerFormat.m */,
 				86C40B661A8D7C5B00081FAC /* ORKAnswerFormat_Internal.h */,
 				244EFAD11BCEFD83001850D9 /* ORKAnswerFormat_Private.h */,
+				0BC8035C2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h */,
+				0BC8035D2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m */,
 				86C40B8A1A8D7C5C00081FAC /* ORKHealthAnswerFormat.h */,
 				86C40B8B1A8D7C5C00081FAC /* ORKHealthAnswerFormat.m */,
 				BABBB19B2093299A00CB29E5 /* ORKSurveyCardHeaderView.h */,
@@ -4561,6 +4572,7 @@
 				86C40CEE1A8D7C5C00081FAC /* ORKAnswerTextView.h in Headers */,
 				FF919A271E81A87B005C2A1E /* ORKActiveTaskResult.h in Headers */,
 				86C40C421A8D7C5C00081FAC /* ORKSpatialSpanMemoryStep.h in Headers */,
+				0BC8035E2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.h in Headers */,
 				86C40C6E1A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.h in Headers */,
 				B11C54991A9EEF8800265E61 /* ORKConsentSharingStep.h in Headers */,
 				805685791C90C19500BF437A /* UIImage+ResearchKit.h in Headers */,
@@ -5020,6 +5032,7 @@
 				14BE7091220A201E005DEF07 /* ORKDataLoggerTests.m in Sources */,
 				148E58BD227B36DB00EEF915 /* ORKCompletionStepViewControllerTests.swift in Sources */,
 				86CC8EB31AC09383001CCD89 /* ORKAccessibilityTests.m in Sources */,
+				0BC8034F2B07F6B100618E4F /* ORKFormStepViewControllerORKTextChoiceOtherRestorationTests.swift in Sources */,
 				1490DD02224D6A21003FEEDA /* ORKResultPredicateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5410,6 +5423,7 @@
 				BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */,
 				2489F7B41D65214D008DEF20 /* ORKVideoCaptureStepViewController.m in Sources */,
 				861D2AF71B843968008C4CD0 /* ORKCompletionStepViewController.m in Sources */,
+				0BC8035F2B1578D500618E4F /* ORKTextChoiceAnswerFormat+FormStepViewControllerAdditions.m in Sources */,
 				BCB6E65F1B7D534C000D5B34 /* ORKGraphChartView.m in Sources */,
 				24BC5CEF1BC345D900846B43 /* ORKLoginStep.m in Sources */,
 				511B8A92293A757E00049947 /* ORKTouchAbilityContentView.m in Sources */,

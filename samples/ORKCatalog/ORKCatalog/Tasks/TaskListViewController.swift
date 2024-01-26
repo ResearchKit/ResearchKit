@@ -274,7 +274,8 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             let colorName = questionResult.choiceAnswers?.first as? String,
             let color = UIColor.value(forKey: colorName) as? UIColor
         else {
-            fatalError("Couldn't create a color from question result \(questionResult)")
+            // Couldn't create a color from question result -- may have been skipped
+            return
         }
 
         // Finally, set the tintColor

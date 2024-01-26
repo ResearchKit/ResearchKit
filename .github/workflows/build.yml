@@ -21,10 +21,18 @@ on:
 jobs:
   build-xcarchive:
     uses: StanfordBDHG/.github/.github/workflows/archive.yml@v2
+    strategy:
+      matrix:
+        include:
+          - configuration: Release
+            cxxInterop: false
+          - configuration: Debug  # It's only possible to build ResearchKit with enabled C++ interop in Debug configuration
+            cxxInterop: true
     with:
       workspaceFile: RKWorkspace.xcworkspace
       xcArchiveName: ResearchKit
       scheme: ResearchKit
       version: ${{ inputs.version }}
-      configuration: Release
+      configuration: ${{ matrix.configuration }}
+      cxxInterop: ${{ matrix.cxxInterop }}
       runsonlabels: '["macOS", "self-hosted"]'

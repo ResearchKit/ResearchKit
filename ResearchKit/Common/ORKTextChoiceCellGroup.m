@@ -97,7 +97,7 @@
             ORKTextChoiceOther *textChoiceOther = (ORKTextChoiceOther *)textChoice;
             choiceOtherViewCell.textView.placeholder = textChoiceOther.textViewPlaceholderText;
             choiceOtherViewCell.textView.text = textChoiceOther.textViewText;
-            [choiceOtherViewCell hideTextView:textChoiceOther.textViewStartsHidden];
+            [self updateTextViewForChoiceOtherCell:choiceOtherViewCell withTextChoiceOther:textChoiceOther];
             cell = choiceOtherViewCell;
         } else {
             
@@ -126,10 +126,16 @@
 }
 
 - (void)updateTextViewForChoiceOtherCell:(ORKChoiceOtherViewCell *)choiceCell withTextChoiceOther:(ORKTextChoiceOther *)choiceOther {
-    if (choiceOther.textViewStartsHidden && choiceCell.textView.text.length <= 0) {
-        [choiceCell hideTextView:!choiceCell.textViewHidden];
-        [self.delegate tableViewCellHeightUpdated];
+    BOOL shouldHideTextView = NO;
+
+    if(choiceOther.textViewStartsHidden) {
+       if(choiceCell.textView.text.length <= 0) {
+           shouldHideTextView = choiceCell.isSelected == NO;
+       }
     }
+    
+    [choiceCell hideTextView:shouldHideTextView];
+    [self.delegate tableViewCellHeightUpdated];
 }
 
 - (void)textViewDidResignResponderForCellAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,9 +178,17 @@
     
     if (_singleChoice) {
         [touchedCell setCellSelected:YES highlight:YES];
-        for (ORKChoiceViewCell *cell in _cells.allValues) {
+        for (NSNumber *key in _cells) {
+            ORKChoiceViewCell *cell = _cells[key];
             if (cell != touchedCell) {
+                ORKChoiceOtherViewCell *otherViewCell = ORKDynamicCast(cell, ORKChoiceOtherViewCell);
+                ORKTextChoice *cellTextChoice = [_helper textChoiceAtIndex:key.intValue];
+                ORKTextChoiceOther *textChoiceOther = ORKDynamicCast(cellTextChoice, ORKTextChoiceOther);
                 [cell setCellSelected:NO highlight:NO];
+
+                if (otherViewCell != nil && textChoiceOther != nil) {
+                    [self updateTextViewForChoiceOtherCell:otherViewCell withTextChoiceOther:textChoiceOther];
+                }
             }
         }
     } else {

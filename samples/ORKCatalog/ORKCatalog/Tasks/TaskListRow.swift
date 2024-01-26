@@ -451,7 +451,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case formItem02
         case formItem03
         case formItem04
-
+        case textChoiceFormItem
+        
         // Survey task specific identifiers.
         case surveyTask
         case introStep
@@ -874,7 +875,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         scaleAnswerFormat.shouldHideRanges = true
         let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, answerFormat: scaleAnswerFormat)
 
-        let textChoices: [ORKTextChoice] = [
+        var textChoices: [ORKTextChoice] = [
             ORKTextChoice(text: "choice 1", detailText: "detail 1", value: 1 as NSNumber, exclusive: false),
             ORKTextChoice(text: "choice 2", detailText: "detail 2", value: 2 as NSNumber, exclusive: false),
             ORKTextChoice(text: "choice 3", detailText: "detail 3", value: 3 as NSNumber, exclusive: false),
@@ -882,11 +883,17 @@ enum TaskListRow: Int, CustomStringConvertible {
             ORKTextChoice(text: "choice 5", detailText: "detail 5", value: 5 as NSNumber, exclusive: false),
             ORKTextChoice(text: "choice 6", detailText: "detail 6", value: 6 as NSNumber, exclusive: false)
         ]
-        
+
         let textScaleAnswerFormat = ORKTextScaleAnswerFormat(textChoices: textChoices, defaultIndex: 10)
         textScaleAnswerFormat.shouldHideLabels = true
         textScaleAnswerFormat.shouldShowDontKnowButton = true
+        
+        textChoices.append(ORKTextChoiceOther.choice(withText: "choice 7", detailText: "", value: 7 as NSNumber, exclusive: true, textViewPlaceholderText: "Tap to write your answer"))
+        let textChoiceAnswerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: textChoices)
+
         let formItem04 = ORKFormItem(identifier: String(describing: Identifier.formItem04), text: exampleQuestionText, answerFormat: textScaleAnswerFormat)
+        
+        let textChoiceFormItem = ORKFormItem(identifier: String(describing: Identifier.textChoiceFormItem), text: exampleQuestionText, answerFormat: textChoiceAnswerFormat)
         
         let appleChoices: [ORKTextChoice] = [ORKTextChoice(text: "Granny Smith", value: 1 as NSNumber), ORKTextChoice(text: "Honeycrisp", value: 2 as NSNumber), ORKTextChoice(text: "Fuji", value: 3 as NSNumber), ORKTextChoice(text: "McIntosh", value: 10 as NSNumber), ORKTextChoice(text: "Kanzi", value: 5 as NSNumber)]
         
@@ -907,6 +914,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             formItem04,
             formItem01,
             formItem02,
+            textChoiceFormItem,
             freeTextSection,
             freeTextItem
         ]
