@@ -18,7 +18,7 @@ on:
 
 jobs:
   create-xcframework-and-release-workflow:
-    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
+    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@sdk
     with:
       workspaceFile: RKWorkspace.xcworkspace
       xcFrameworkName: ResearchKit
