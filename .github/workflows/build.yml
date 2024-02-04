@@ -20,7 +20,7 @@ on:
 
 jobs:
   build-xcarchive:
-    uses: StanfordBDHG/.github/.github/workflows/archive.yml@sdk
+    uses: StanfordBDHG/.github/.github/workflows/archive.yml@v2
     strategy:
       matrix:
         include:

@@ -18,7 +18,7 @@ on:
 
 jobs:
   create-xcframework-and-release-workflow:
-    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@sdk
+    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
       workspaceFile: RKWorkspace.xcworkspace
       xcFrameworkName: ResearchKit
@@ -26,7 +26,7 @@ jobs:
       version: ${{ inputs.version }}
       configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'
-      sdk: '["xros", "xrsimulator"]'
+      sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
       user: PaulsAutomationBot
     secrets:
       access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
