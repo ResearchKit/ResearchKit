@@ -34,6 +34,7 @@
 
 #import "ORKGraphChartView.h"
 #import "ORKChartTypes.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKHelpers_Private.h"
 
 

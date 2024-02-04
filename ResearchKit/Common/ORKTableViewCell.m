@@ -30,7 +30,7 @@
 
 
 #import "ORKTableViewCell.h"
-
+#import "ORKHelpers_Internal.h"
 #import "ORKSelectionTitleLabel.h"
 
 #import "ORKSkin.h"
