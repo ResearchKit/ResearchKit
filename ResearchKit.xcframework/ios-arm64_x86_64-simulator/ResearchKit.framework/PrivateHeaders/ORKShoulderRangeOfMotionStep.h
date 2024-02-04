@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import <ResearchKit/ORKRangeOfMotionStep.h>
 
@@ -40,3 +42,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKShoulderRangeOfMotionStep : ORKRangeOfMotionStep
 
 @end
+
+#endif

@@ -195,7 +195,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  or Next buttons, set the `learnMoreButtonTitle` or `continueButtonTitle`
  properties in your implementation of this delegate method.
  */
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 ORK_CLASS_AVAILABLE
 @interface ORKStepViewController : UIViewController
 

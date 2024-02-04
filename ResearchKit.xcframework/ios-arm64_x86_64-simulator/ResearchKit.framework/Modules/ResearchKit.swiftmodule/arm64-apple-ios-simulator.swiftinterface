@@ -63,36 +63,6 @@ import _SwiftConcurrencyShims
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class ORKSwiftStroopResult : ResearchKit.ORKResult {
-  public var startTime: Foundation.TimeInterval?
-  public var endTime: Foundation.TimeInterval?
-  public var color: Swift.String?
-  public var text: Swift.String?
-  public var colorSelected: Swift.String?
-  @objc override dynamic public init(identifier: Swift.String)
-  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
-  @objc required dynamic public init(coder aDecoder: Foundation.NSCoder)
-  public class func supportsSecureCoding() -> Swift.Bool
-  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc override dynamic public func description(withNumberOfPaddingSpaces numberOfPaddingSpaces: Swift.UInt) -> Swift.String
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ORKSwiftStroopStep : ResearchKit.ORKActiveStep {
-  public var numberOfAttempts: Swift.Int
-  @objc override dynamic public class func stepViewControllerClass() -> Swift.AnyClass
-  public class func supportsSecureCoding() -> Swift.Bool
-  @objc override dynamic public init(identifier: Swift.String)
-  @objc override dynamic public func validateParameters()
-  @objc override dynamic public func startsFinished() -> Swift.Bool
-  @objc override dynamic public var allowsBackNavigation: Swift.Bool {
-    @objc get
-  }
-  @objc override dynamic public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc override dynamic public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-  @objc deinit
-}
 @objc @_hasMissingDesignatedInitializers public class ORKLandoltCResult : ResearchKit.ORKResult {
   public var outcome: Swift.Bool?
   public var letterAngle: Swift.Double?
@@ -107,17 +77,6 @@ import _SwiftConcurrencyShims
 }
 extension ResearchKit.ORKPredicateStepNavigationRule {
   convenience public init(resultPredicatesAndDestinationStepIdentifiers tuples: [(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)], defaultStepIdentifierOrNil: Swift.String? = nil)
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class ORKSwiftStroopStepViewController : ResearchKit.ORKActiveStepViewController {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(step: ResearchKit.ORKStep?)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func stepDidFinish()
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var result: ResearchKit.ORKStepResult? {
-    @objc get
-  }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func start()
-  @objc deinit
 }
 public enum CircleSliderOption {
   case startAngle(Swift.Double)

@@ -56,7 +56,7 @@ ORK_EXTERN id ORKNullAnswerValue(void) ORK_AVAILABLE_DECL;
  
  An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
  */
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 ORK_CLASS_AVAILABLE
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 

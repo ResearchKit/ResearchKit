@@ -315,20 +315,14 @@
         "name": "ResearchKit.Private",
         "printedName": "ResearchKit.Private",
         "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
+        "moduleName": "ResearchKit"
       },
       {
         "kind": "Import",
         "name": "ResearchKit.Private",
         "printedName": "ResearchKit.Private",
         "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
+        "moduleName": "ResearchKit"
       },
       {
         "kind": "TypeDecl",
@@ -876,8 +870,7 @@
         "moduleName": "ResearchKit",
         "declAttributes": [
           "AccessControl",
-          "ObjC",
-          "RawDocComment"
+          "ObjC"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -1745,1339 +1738,7 @@
         "name": "ResearchKit.Private",
         "printedName": "ResearchKit.Private",
         "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "ORKSwiftStroopResult",
-        "printedName": "ORKSwiftStroopResult",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "startTime",
-            "printedName": "startTime",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.Double?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Double",
-                    "printedName": "Swift.Double",
-                    "usr": "s:Sd"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvp",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.Double?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Double",
-                        "printedName": "Swift.Double",
-                        "usr": "s:Sd"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvg",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.Double?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Double",
-                        "printedName": "Swift.Double",
-                        "usr": "s:Sd"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvs",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvM",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "endTime",
-            "printedName": "endTime",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.Double?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Double",
-                    "printedName": "Swift.Double",
-                    "usr": "s:Sd"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvp",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.Double?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Double",
-                        "printedName": "Swift.Double",
-                        "usr": "s:Sd"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvg",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.Double?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Double",
-                        "printedName": "Swift.Double",
-                        "usr": "s:Sd"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvs",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvM",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "color",
-            "printedName": "color",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.String?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvp",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvg",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvs",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvM",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "text",
-            "printedName": "text",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.String?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvp",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvg",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvs",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvM",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "colorSelected",
-            "printedName": "colorSelected",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.String?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvp",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvg",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvs",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvM",
-                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(identifier:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKSwiftStroopResult",
-                "printedName": "ResearchKit.ORKSwiftStroopResult",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)initWithIdentifier:",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC10identifierACSS_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "initWithIdentifier:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "encode",
-            "printedName": "encode(with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "NSCoder",
-                "printedName": "Foundation.NSCoder",
-                "usr": "c:objc(cs)NSCoder"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)encodeWithCoder:",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC6encode4withySo7NSCoderC_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "encodeWithCoder:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(coder:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKSwiftStroopResult",
-                "printedName": "ResearchKit.ORKSwiftStroopResult",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "NSCoder",
-                "printedName": "Foundation.NSCoder",
-                "usr": "c:objc(cs)NSCoder"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)initWithCoder:",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5coderACSo7NSCoderC_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "initWithCoder:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Required",
-              "AccessControl"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "supportsSecureCoding",
-            "printedName": "supportsSecureCoding()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:11ResearchKit20ORKSwiftStroopResultC20supportsSecureCodingSbyFZ",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC20supportsSecureCodingSbyFZ",
-            "moduleName": "ResearchKit",
-            "static": true,
-            "declAttributes": [
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "isEqual",
-            "printedName": "isEqual(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Any?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "Any"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)isEqual:",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7isEqualySbypSgF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "isEqual:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "AccessControl",
-              "Override"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "copy",
-            "printedName": "copy(with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ProtocolComposition",
-                "printedName": "Any"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ObjectiveC.NSZone?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "NSZone",
-                    "printedName": "ObjectiveC.NSZone",
-                    "usr": "s:10ObjectiveC6NSZoneV"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)copyWithZone:",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4copy4withyp10ObjectiveC6NSZoneVSg_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "copyWithZone:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "AccessControl",
-              "Override"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "description",
-            "printedName": "description(withNumberOfPaddingSpaces:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UInt",
-                "printedName": "Swift.UInt",
-                "usr": "s:Su"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)descriptionWithNumberOfPaddingSpaces:",
-            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC11description25withNumberOfPaddingSpacesSSSu_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "descriptionWithNumberOfPaddingSpaces:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult",
-        "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)ORKResult",
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "ResearchKit.ORKResult",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "ORKSwiftStroopStep",
-        "printedName": "ORKSwiftStroopStep",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "numberOfAttempts",
-            "printedName": "numberOfAttempts",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
-            "moduleName": "ResearchKit",
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
-                "moduleName": "ResearchKit",
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "stepViewControllerClass",
-            "printedName": "stepViewControllerClass()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ExistentialMetatype",
-                "printedName": "AnyObject.Type",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "AnyObject"
-                  }
-                ]
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(cm)stepViewControllerClass",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC23stepViewControllerClassyXlXpyFZ",
-            "moduleName": "ResearchKit",
-            "static": true,
-            "overriding": true,
-            "objc_name": "stepViewControllerClass",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "supportsSecureCoding",
-            "printedName": "supportsSecureCoding()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
-            "moduleName": "ResearchKit",
-            "static": true,
-            "declAttributes": [
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(identifier:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKSwiftStroopStep",
-                "printedName": "ResearchKit.ORKSwiftStroopStep",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)initWithIdentifier:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC10identifierACSS_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "initWithIdentifier:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "validateParameters",
-            "printedName": "validateParameters()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)validateParameters",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC18validateParametersyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "validateParameters",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "startsFinished",
-            "printedName": "startsFinished()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)startsFinished",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC14startsFinishedSbyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "startsFinished",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Var",
-            "name": "allowsBackNavigation",
-            "printedName": "allowsBackNavigation",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(py)allowsBackNavigation",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvp",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "allowsBackNavigation",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)allowsBackNavigation",
-                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvg",
-                "moduleName": "ResearchKit",
-                "overriding": true,
-                "objc_name": "allowsBackNavigation",
-                "declAttributes": [
-                  "Dynamic",
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "copy",
-            "printedName": "copy(with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ProtocolComposition",
-                "printedName": "Any"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ObjectiveC.NSZone?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "NSZone",
-                    "printedName": "ObjectiveC.NSZone",
-                    "usr": "s:10ObjectiveC6NSZoneV"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)copyWithZone:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC4copy4withyp10ObjectiveC6NSZoneVSg_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "copyWithZone:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "encode",
-            "printedName": "encode(with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "NSCoder",
-                "printedName": "Foundation.NSCoder",
-                "usr": "c:objc(cs)NSCoder"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)encodeWithCoder:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC6encode4withySo7NSCoderC_tF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "encodeWithCoder:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "isEqual",
-            "printedName": "isEqual(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Any?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "Any"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)isEqual:",
-            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC7isEqualySbypSgF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "isEqual:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep",
-        "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)ORKActiveStep",
-        "hasMissingDesignatedInitializers": true,
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "ResearchKit.ORKActiveStep",
-          "ResearchKit.ORKStep",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "ResearchKit.Private",
-        "printedName": "ResearchKit.Private",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
+        "moduleName": "ResearchKit"
       },
       {
         "kind": "TypeDecl",
@@ -3837,326 +2498,6 @@
         ]
       },
       {
-        "kind": "Import",
-        "name": "ResearchKit.Private",
-        "printedName": "ResearchKit.Private",
-        "declKind": "Import",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "ORKSwiftStroopStepViewController",
-        "printedName": "ORKSwiftStroopStepViewController",
-        "children": [
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(step:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ORKSwiftStroopStepViewController",
-                "printedName": "ResearchKit.ORKSwiftStroopStepViewController",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ResearchKit.ORKStep?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ORKStep",
-                    "printedName": "ResearchKit.ORKStep",
-                    "usr": "c:objc(cs)ORKStep"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)initWithStep:",
-            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC4stepACSo7ORKStepCSg_tcfc",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "initWithStep:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "viewDidLoad",
-            "printedName": "viewDidLoad()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)viewDidLoad",
-            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC11viewDidLoadyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "viewDidLoad",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "viewDidAppear",
-            "printedName": "viewDidAppear(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)viewDidAppear:",
-            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC13viewDidAppearyySbF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "viewDidAppear:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "stepDidFinish",
-            "printedName": "stepDidFinish()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)stepDidFinish",
-            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC13stepDidFinishyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "stepDidFinish",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Var",
-            "name": "result",
-            "printedName": "result",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "ResearchKit.ORKStepResult?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ORKStepResult",
-                    "printedName": "ResearchKit.ORKStepResult",
-                    "usr": "c:objc(cs)ORKStepResult"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(py)result",
-            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC6resultSo13ORKStepResultCSgvp",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "result",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "ResearchKit.ORKStepResult?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ORKStepResult",
-                        "printedName": "ResearchKit.ORKStepResult",
-                        "usr": "c:objc(cs)ORKStepResult"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)result",
-                "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC6resultSo13ORKStepResultCSgvg",
-                "moduleName": "ResearchKit",
-                "overriding": true,
-                "objc_name": "result",
-                "declAttributes": [
-                  "Dynamic",
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "start",
-            "printedName": "start()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)start",
-            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC5startyyF",
-            "moduleName": "ResearchKit",
-            "overriding": true,
-            "objc_name": "start",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController",
-        "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC",
-        "moduleName": "ResearchKit",
-        "declAttributes": [
-          "Custom",
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)ORKActiveStepViewController",
-        "hasMissingDesignatedInitializers": true,
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "ResearchKit.ORKActiveStepViewController",
-          "ResearchKit.ORKStepViewController",
-          "UIKit.UIViewController",
-          "UIKit.UIResponder",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Sendable",
-            "printedName": "Sendable",
-            "usr": "s:s8SendableP",
-            "mangledName": "$ss8SendableP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "UITraitChangeObservable",
-            "printedName": "UITraitChangeObservable",
-            "usr": "s:5UIKit23UITraitChangeObservableP",
-            "mangledName": "$s5UIKit23UITraitChangeObservableP"
-          }
-        ]
-      },
-      {
         "kind": "TypeDecl",
         "name": "CircleSliderOption",
         "printedName": "CircleSliderOption",
@@ -4767,8 +3108,7 @@
         "mangledName": "$s11ResearchKit18CircleSliderOptionO",
         "moduleName": "ResearchKit",
         "declAttributes": [
-          "AccessControl",
-          "RawDocComment"
+          "AccessControl"
         ]
       },
       {
@@ -5853,8 +4193,7 @@
         "mangledName": "$s11ResearchKit10DeviceTypeO",
         "moduleName": "ResearchKit",
         "declAttributes": [
-          "AccessControl",
-          "RawDocComment"
+          "AccessControl"
         ],
         "enumRawTypeName": "String",
         "conformances": [
@@ -6278,1246 +4617,889 @@
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 1797,
+      "offset": 1810,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "FloatLiteral",
-      "offset": 1837,
+      "offset": 1850,
       "length": 4,
       "value": "20.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "FloatLiteral",
-      "offset": 1875,
+      "offset": 1888,
       "length": 4,
       "value": "22.5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "Array",
-      "offset": 1911,
+      "offset": 1924,
       "length": 36,
       "value": "[0, 45, 90, 135, 180, 225, 270, 315]"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 2217,
+      "offset": 2230,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 2354,
+      "offset": 2367,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "Array",
-      "offset": 2399,
+      "offset": 2412,
       "length": 78,
       "value": "[5.82, 4.65, 3.72, 2.91, 2.33, 1.86, 1.45, 1.16, 0.93, 0.73, 0.58, 0.47, 0.37]"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "Array",
-      "offset": 2522,
+      "offset": 2535,
       "length": 71,
       "value": "[0.9, 0.92, 0.937, 0.95, 0.96, 0.968, 0.975, 0.98, 0.984, 0.9875, 0.99]"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "Array",
-      "offset": 2630,
+      "offset": 2643,
       "length": 55,
       "value": "[50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110]"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "FloatLiteral",
-      "offset": 2716,
+      "offset": 2729,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "StringLiteral",
-      "offset": 2820,
+      "offset": 2833,
       "length": 13,
       "value": "\"iCNLandoltC\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "StringLiteral",
-      "offset": 3147,
+      "offset": 3160,
       "length": 18,
       "value": "\"orangeGrayCircle\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "StringLiteral",
-      "offset": 3877,
+      "offset": 3890,
       "length": 26,
       "value": "\"iCNDialPointerWithShadow\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4249,
+      "offset": 4262,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4293,
+      "offset": 4306,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4339,
+      "offset": 4352,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4642,
+      "offset": 4655,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4882,
+      "offset": 4895,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4909,
+      "offset": 4922,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "FloatLiteral",
-      "offset": 5226,
+      "offset": 5239,
       "length": 4,
       "value": "30.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5349,
+      "offset": 5362,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5394,
+      "offset": 5407,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5483,
+      "offset": 5496,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 5545,
+      "offset": 5558,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5581,
+      "offset": 5594,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 5626,
+      "offset": 5639,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 5658,
+      "offset": 5671,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5897,
+      "offset": 5910,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5939,
+      "offset": 5952,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "FloatLiteral",
-      "offset": 6104,
+      "offset": 6117,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 6111,
+      "offset": 6124,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 6465,
+      "offset": 6478,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 6505,
+      "offset": 6518,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 6551,
+      "offset": 6564,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 6673,
+      "offset": 6686,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 7144,
+      "offset": 7157,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/EyeActivitySlider.swift",
       "kind": "StringLiteral",
-      "offset": 1682,
+      "offset": 1695,
       "length": 17,
       "value": "\"ResearchKit.EyeActivitySlider\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "BooleanLiteral",
-      "offset": 1976,
+      "offset": 1989,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "BooleanLiteral",
-      "offset": 2535,
+      "offset": 2548,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "FloatLiteral",
-      "offset": 2907,
+      "offset": 2920,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "FloatLiteral",
-      "offset": 2957,
+      "offset": 2970,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "FloatLiteral",
-      "offset": 3283,
+      "offset": 3296,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "FloatLiteral",
-      "offset": 3333,
+      "offset": 3346,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepContentView.swift",
       "kind": "StringLiteral",
-      "offset": 1710,
+      "offset": 1723,
       "length": 26,
       "value": "\"ResearchKit.ORKLandoltCStepContentView\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 2364,
+      "offset": 2377,
       "length": 39,
       "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2897,
+      "offset": 2910,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3011,
+      "offset": 3024,
       "length": 10,
       "value": "\"Left Eye\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3024,
+      "offset": 3037,
       "length": 11,
       "value": "\"Right Eye\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 3383,
+      "offset": 3396,
       "length": 3,
       "value": "5.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3459,
+      "offset": 3472,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3682,
+      "offset": 3695,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3844,
+      "offset": 3857,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3899,
+      "offset": 3912,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4645,
+      "offset": 4658,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4803,
+      "offset": 4816,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 5024,
+      "offset": 5037,
       "length": 4,
       "value": "12.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 5067,
+      "offset": 5080,
       "length": 4,
       "value": "20.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 5118,
+      "offset": 5131,
       "length": 4,
       "value": "15.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 5166,
+      "offset": 5179,
       "length": 4,
       "value": "10.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5618,
+      "offset": 5631,
       "length": 39,
       "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5977,
+      "offset": 5990,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6120,
+      "offset": 6133,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6209,
+      "offset": 6222,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 6219,
+      "offset": 6232,
       "length": 4,
       "value": "20.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6406,
+      "offset": 6419,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6530,
+      "offset": 6543,
       "length": 65,
       "value": "\"Move the dial to where you think the opening in the letter was.\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6687,
+      "offset": 6700,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 6697,
+      "offset": 6710,
       "length": 4,
       "value": "20.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6742,
+      "offset": 6755,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 6898,
+      "offset": 6911,
       "length": 4,
       "value": "60.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6935,
+      "offset": 6948,
       "length": 6,
       "value": "\"Next\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7246,
+      "offset": 7259,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7324,
+      "offset": 7337,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7401,
+      "offset": 7414,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7474,
+      "offset": 7487,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 7805,
+      "offset": 7818,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 8168,
+      "offset": 8181,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 8214,
+      "offset": 8227,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 8526,
+      "offset": 8539,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 8901,
+      "offset": 8914,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 8947,
+      "offset": 8960,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 9249,
+      "offset": 9262,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 9295,
+      "offset": 9308,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 9610,
+      "offset": 9623,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 9981,
+      "offset": 9994,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10027,
+      "offset": 10040,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10328,
+      "offset": 10341,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10374,
+      "offset": 10387,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10677,
+      "offset": 10690,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10723,
+      "offset": 10736,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 11024,
+      "offset": 11037,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 11070,
+      "offset": 11083,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 11369,
+      "offset": 11382,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 11415,
+      "offset": 11428,
       "length": 5,
       "value": "-20.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStepViewController.swift",
       "kind": "StringLiteral",
-      "offset": 4883,
+      "offset": 4896,
       "length": 19,
       "value": "\"ResearchKit.ORKLandoltCStepView\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 1955,
+      "offset": 1968,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2029,
+      "offset": 2042,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2351,
+      "offset": 2364,
       "length": 3,
       "value": "2.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2391,
+      "offset": 2404,
       "length": 3,
       "value": "2.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2580,
+      "offset": 2593,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 2608,
+      "offset": 2621,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "StringLiteral",
-      "offset": 2788,
+      "offset": 2801,
       "length": 39,
       "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 4009,
+      "offset": 4022,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "StringLiteral",
-      "offset": 1682,
+      "offset": 1695,
       "length": 10,
       "value": "\"ResearchKit.TrackLayer\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/TrackLayer.swift",
       "kind": "StringLiteral",
-      "offset": 1682,
+      "offset": 1695,
       "length": 10,
       "value": "\"ResearchKit.TrackLayer\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 1740,
+      "offset": 1753,
       "length": 5,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 1740,
+      "offset": 1753,
       "length": 5,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 1820,
+      "offset": 1833,
       "length": 19,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 1820,
+      "offset": 1833,
       "length": 19,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "BooleanLiteral",
-      "offset": 2279,
+      "offset": 2292,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "BooleanLiteral",
-      "offset": 2596,
+      "offset": 2609,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "StringLiteral",
-      "offset": 2950,
+      "offset": 2963,
       "length": 10,
       "value": "\"stepType\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "StringLiteral",
-      "offset": 3106,
+      "offset": 3119,
       "length": 11,
       "value": "\"eyeToTest\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "BooleanLiteral",
-      "offset": 3666,
+      "offset": 3679,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCStep.swift",
       "kind": "StringLiteral",
-      "offset": 1862,
+      "offset": 1875,
       "length": 15,
       "value": "\"ResearchKit.ORKLandoltCStep\""
     },
     {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "BooleanLiteral",
-      "offset": 1943,
+      "offset": 2866,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 1997,
-      "length": 26,
-      "value": "\"STROOP_COLOR_RED_INITIAL\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2025,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2229,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2283,
-      "length": 28,
-      "value": "\"STROOP_COLOR_GREEN_INITIAL\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2313,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2516,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2570,
-      "length": 27,
-      "value": "\"STROOP_COLOR_BLUE_INITIAL\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2599,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2804,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2858,
-      "length": 29,
-      "value": "\"STROOP_COLOR_YELLOW_INITIAL\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 2889,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "FloatLiteral",
-      "offset": 3055,
-      "length": 4,
-      "value": "60.0"
+      "offset": 2965,
+      "length": 3,
+      "value": "0.0"
     },
     {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
+      "kind": "FloatLiteral",
+      "offset": 3062,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "IntegerLiteral",
-      "offset": 3090,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 3113,
-      "length": 3,
-      "value": "\" \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3213,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3328,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 3464,
-      "length": 4,
-      "value": "60.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 3519,
-      "length": 4,
-      "value": "20.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4051,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4125,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 5027,
-      "length": 12,
-      "value": "\"colorLabel\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 5068,
-      "length": 17,
-      "value": "\"buttonStackView\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "StringLiteral",
-      "offset": 5186,
-      "length": 59,
-      "value": "\"V:|-(==30)-[colorLabel]-(>=10)-[buttonStackView]-(==30)-|\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 5818,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 6189,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 6235,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 6669,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
-      "kind": "FloatLiteral",
-      "offset": 6719,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "BooleanLiteral",
       "offset": 3144,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3674,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4245,
-      "length": 176,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4316,
-      "length": 1,
-      "value": "\"; color: \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4336,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4339,
-      "length": 4,
-      "value": "\" text: \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4356,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4359,
-      "length": 13,
-      "value": "\" colorSelected: \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4394,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4397,
-      "length": 1,
-      "value": "\" \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
-      "kind": "StringLiteral",
-      "offset": 4420,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1740,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1776,
-      "length": 2,
-      "value": "10"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2049,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2195,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2233,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2272,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "StringLiteral",
-      "offset": 2473,
-      "length": 69,
-      "value": "\"number of attempts should be greater or equal to \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "StringLiteral",
-      "offset": 2541,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2618,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2703,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3435,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2853,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
-      "kind": "FloatLiteral",
-      "offset": 2952,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
-      "kind": "FloatLiteral",
-      "offset": 3049,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3131,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "BooleanLiteral",
-      "offset": 4051,
+      "offset": 4064,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 4203,
+      "offset": 4216,
       "length": 286,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 4285,
+      "offset": 4298,
       "length": 1,
       "value": "\";\nOutcome: \""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 4334,
+      "offset": 4347,
       "length": 1,
       "value": "\"; LetterAngle: \""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 4383,
+      "offset": 4396,
       "length": 1,
       "value": "\";\nSliderAngle: \""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 4440,
+      "offset": 4453,
       "length": 1,
       "value": "\"; Score: \""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 4477,
-      "length": 46,
+      "offset": 4490,
+      "length": 54,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "StringLiteral",
-      "offset": 1708,
+      "offset": 1721,
       "length": 17,
       "value": "\"ResearchKit.ORKLandoltCResult\""
     },
@@ -7804,1008 +5786,686 @@
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 1787,
+      "offset": 1800,
       "length": 3,
       "value": "180"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "FloatLiteral",
-      "offset": 2461,
+      "offset": 2474,
       "length": 5,
       "value": "180.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "FloatLiteral",
-      "offset": 2517,
+      "offset": 2530,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "FloatLiteral",
-      "offset": 2541,
+      "offset": 2554,
       "length": 5,
       "value": "360.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 2778,
+      "offset": 2791,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 2924,
+      "offset": 2937,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 2955,
+      "offset": 2968,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3043,
+      "offset": 3056,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3100,
+      "offset": 3113,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3107,
+      "offset": 3120,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3196,
+      "offset": 3209,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3381,
+      "offset": 3394,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3421,
+      "offset": 3434,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/Math.swift",
       "kind": "IntegerLiteral",
-      "offset": 3619,
+      "offset": 3632,
       "length": 3,
       "value": "360"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1950,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 1992,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2004,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2015,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2027,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2069,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2081,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2092,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2104,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2145,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2157,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2168,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2180,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2223,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2235,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2246,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 2258,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2320,
-      "length": 18,
-      "value": "\"STROOP_COLOR_RED\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2340,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2398,
-      "length": 20,
-      "value": "\"STROOP_COLOR_GREEN\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2420,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2477,
-      "length": 19,
-      "value": "\"STROOP_COLOR_BLUE\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2498,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2557,
-      "length": 21,
-      "value": "\"STROOP_COLOR_YELLOW\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2580,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2859,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 2949,
-      "length": 39,
-      "value": "\"init(coder:) has not been implemented\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3761,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 4332,
-      "length": 3,
-      "value": "\" \""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 4672,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 5019,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 5367,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 5716,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 5937,
-      "length": 3,
-      "value": "0.5"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6256,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 7564,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 7796,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 7820,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 8900,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 8956,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9011,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9068,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9181,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9236,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9290,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 9346,
-      "length": 4,
-      "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 2139,
+      "offset": 2152,
       "length": 2,
       "value": "44"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 2181,
+      "offset": 2194,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 2219,
+      "offset": 2232,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 2417,
+      "offset": 2430,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 3117,
+      "offset": 3130,
       "length": 3,
       "value": "360"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 3123,
+      "offset": 3136,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 3592,
+      "offset": 3605,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 4010,
+      "offset": 4023,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4087,
+      "offset": 4100,
       "length": 3,
       "value": "-90"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4260,
+      "offset": 4273,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4297,
+      "offset": 4310,
       "length": 3,
       "value": "101"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4335,
+      "offset": 4348,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 4369,
+      "offset": 4382,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 4411,
+      "offset": 4424,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 4460,
+      "offset": 4473,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5255,
+      "offset": 5268,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "StringLiteral",
-      "offset": 5545,
+      "offset": 5558,
       "length": 39,
       "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5941,
+      "offset": 5954,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 5947,
+      "offset": 5960,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 6076,
+      "offset": 6089,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 6082,
+      "offset": 6095,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 6494,
+      "offset": 6507,
       "length": 5,
       "value": "100.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 6505,
+      "offset": 6518,
       "length": 5,
       "value": "100.0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "BooleanLiteral",
-      "offset": 7058,
+      "offset": 7071,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 8142,
+      "offset": 8155,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 8148,
+      "offset": 8161,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 8269,
+      "offset": 8282,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 8275,
+      "offset": 8288,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 9093,
+      "offset": 9106,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 10376,
+      "offset": 10389,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "FloatLiteral",
-      "offset": 10395,
+      "offset": 10408,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "IntegerLiteral",
-      "offset": 10402,
+      "offset": 10415,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",
       "kind": "StringLiteral",
-      "offset": 2059,
+      "offset": 2072,
       "length": 12,
       "value": "\"ResearchKit.CircleSlider\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1731,
+      "offset": 1744,
       "length": 9,
       "value": "\"iPhone5\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1767,
+      "offset": 1780,
       "length": 10,
       "value": "\"iPhone5C\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1804,
+      "offset": 1817,
       "length": 10,
       "value": "\"iPhone5S\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1841,
+      "offset": 1854,
       "length": 13,
       "value": "\"iPhone6Plus\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1881,
+      "offset": 1894,
       "length": 9,
       "value": "\"iPhone6\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1917,
+      "offset": 1930,
       "length": 10,
       "value": "\"iPhone6S\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1954,
+      "offset": 1967,
       "length": 14,
       "value": "\"iPhone6SPlus\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1995,
+      "offset": 2008,
       "length": 9,
       "value": "\"iPhone7\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2031,
+      "offset": 2044,
       "length": 13,
       "value": "\"iPhone7Plus\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2071,
+      "offset": 2084,
       "length": 10,
       "value": "\"iPhoneSE\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2113,
+      "offset": 2126,
       "length": 9,
       "value": "\"iPod5,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2149,
+      "offset": 2162,
       "length": 9,
       "value": "\"iPod7,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1731,
+      "offset": 1744,
       "length": 9,
       "value": "\"iPhone5\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1767,
+      "offset": 1780,
       "length": 10,
       "value": "\"iPhone5C\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1804,
+      "offset": 1817,
       "length": 10,
       "value": "\"iPhone5S\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1841,
+      "offset": 1854,
       "length": 13,
       "value": "\"iPhone6Plus\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1881,
+      "offset": 1894,
       "length": 9,
       "value": "\"iPhone6\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1917,
+      "offset": 1930,
       "length": 10,
       "value": "\"iPhone6S\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1954,
+      "offset": 1967,
       "length": 14,
       "value": "\"iPhone6SPlus\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 1995,
+      "offset": 2008,
       "length": 9,
       "value": "\"iPhone7\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2031,
+      "offset": 2044,
       "length": 13,
       "value": "\"iPhone7Plus\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2071,
+      "offset": 2084,
       "length": 10,
       "value": "\"iPhoneSE\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2113,
+      "offset": 2126,
       "length": 9,
       "value": "\"iPod5,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2149,
+      "offset": 2162,
       "length": 9,
       "value": "\"iPod7,1\""
-    },
-    {
-      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
-      "kind": "StringLiteral",
-      "offset": 2259,
-      "length": 11,
-      "value": "\"iPhone5,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
       "offset": 2272,
       "length": 11,
-      "value": "\"iPhone5,2\""
+      "value": "\"iPhone5,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2310,
+      "offset": 2285,
       "length": 11,
-      "value": "\"iPhone5,3\""
+      "value": "\"iPhone5,2\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
       "offset": 2323,
       "length": 11,
-      "value": "\"iPhone5,4\""
+      "value": "\"iPhone5,3\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2362,
+      "offset": 2336,
       "length": 11,
-      "value": "\"iPhone6,1\""
+      "value": "\"iPhone5,4\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
       "offset": 2375,
       "length": 11,
+      "value": "\"iPhone6,1\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
+      "kind": "StringLiteral",
+      "offset": 2388,
+      "length": 11,
       "value": "\"iPhone6,2\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2414,
+      "offset": 2427,
       "length": 11,
       "value": "\"iPhone7,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2456,
+      "offset": 2469,
       "length": 11,
       "value": "\"iPhone7,2\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2494,
+      "offset": 2507,
       "length": 11,
       "value": "\"iPhone8,2\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2537,
+      "offset": 2550,
       "length": 11,
       "value": "\"iPhone8,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2576,
+      "offset": 2589,
       "length": 11,
       "value": "\"iPhone9,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2589,
+      "offset": 2602,
       "length": 11,
       "value": "\"iPhone9,3\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2627,
+      "offset": 2640,
       "length": 11,
       "value": "\"iPhone9,2\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2640,
+      "offset": 2653,
       "length": 11,
       "value": "\"iPhone9,4\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2682,
+      "offset": 2695,
       "length": 11,
       "value": "\"iPhone8,4\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2730,
+      "offset": 2743,
       "length": 9,
       "value": "\"iPod5,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 2771,
+      "offset": 2784,
       "length": 9,
       "value": "\"iPod7,1\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 2992,
+      "offset": 3005,
       "length": 3,
       "value": "401"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3031,
+      "offset": 3044,
       "length": 3,
       "value": "326"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "FloatLiteral",
-      "offset": 3061,
+      "offset": 3074,
       "length": 4,
       "value": "25.4"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "FloatLiteral",
-      "offset": 3097,
+      "offset": 3110,
       "length": 4,
       "value": "1.15"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "StringLiteral",
-      "offset": 3676,
+      "offset": 3689,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3785,
+      "offset": 3798,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4184,
+      "offset": 4197,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "FloatLiteral",
-      "offset": 4242,
+      "offset": 4255,
       "length": 3,
       "value": "2.9"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4267,
+      "offset": 4280,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ExtensionModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4306,
+      "offset": 4319,
       "length": 5,
       "value": "false"
     },

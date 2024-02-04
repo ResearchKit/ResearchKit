@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 @import UIKit;
 #import <ResearchKit/ORKFormStep.h>
@@ -174,3 +176,5 @@ passcodeValidationRegularExpression:(nullable NSRegularExpression *)passcodeVali
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

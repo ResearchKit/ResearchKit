@@ -229,7 +229,7 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenType_COUNT
 };
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow * _Nullable window);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow * _Nullable window);
 
