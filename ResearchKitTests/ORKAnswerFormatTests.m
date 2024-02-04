@@ -1446,11 +1446,13 @@
     XCTAssertEqual([regexAnswerFormat isAnswerValidWithString:incorrectPhoneNumber], NO, @"Should return NO since it is not in the correct format");
 }
 
+#if !TARGET_OS_VISION
 - (void)testLocationAnswerFormat {
     ORKLocationAnswerFormat *answerFormat = [ORKAnswerFormat locationAnswerFormat];
     [answerFormat setUseCurrentLocation:YES];
     XCTAssertEqual(answerFormat.useCurrentLocation, YES);
 }
+#endif
 
 - (void)testWeightAnswerFormat {
     ORKWeightAnswerFormat *answerFormat = [ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric

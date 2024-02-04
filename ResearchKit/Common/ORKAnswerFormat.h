@@ -473,7 +473,9 @@ ORK_CLASS_AVAILABLE
                                                       maximumValue:(double)maximumValue
                                                       defaultValue:(double)defaultValue;
 
+#if !TARGET_OS_VISION
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
+#endif
 
 + (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText bottomRungText:(NSString *)bottomRungText;
 
