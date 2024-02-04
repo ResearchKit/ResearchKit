@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKGraphChartView.h"
 #import "ORKChartTypes.h"
@@ -185,3 +187,5 @@ ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPl
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

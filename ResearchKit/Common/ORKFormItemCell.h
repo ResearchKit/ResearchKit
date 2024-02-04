@@ -114,10 +114,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
+#if !TARGET_OS_VISION
 @interface ORKFormItemLocationCell : ORKFormItemCell
 
 @end
+#endif
 
 @interface ORKFormItemSESCell : ORKFormItemCell
 

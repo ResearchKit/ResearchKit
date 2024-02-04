@@ -1848,6 +1848,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
 
 @end
 
+#if !TARGET_OS_VISION
 #pragma mark - ORKFormItemLocationCell
 
 @interface ORKFormItemLocationCell () <ORKLocationSelectionViewDelegate>
@@ -1965,7 +1966,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
 }
 
 @end
-
+#endif
 
 @interface ORKFormItemSESCell()<ORKSESSelectionViewDelegate>
 

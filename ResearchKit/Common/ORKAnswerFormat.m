@@ -474,15 +474,19 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                                        defaultValue:defaultValue];
 }
 
-+ (ORKLocationAnswerFormat *)locationAnswerFormat {
-    return [ORKLocationAnswerFormat new];
-}
-
 + (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText
                                                                       bottomRungText:(NSString *)bottomRungText {
     return [[ORKSESAnswerFormat alloc] initWithTopRungText:topRungText
                                                                 bottomRungText:bottomRungText];
 }
+#endif
+
+#if !TARGET_OS_VISION
+
++ (ORKLocationAnswerFormat *)locationAnswerFormat {
+    return [ORKLocationAnswerFormat new];
+}
+
 #endif
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -3543,7 +3547,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 
 @end
 
-
+#if !TARGET_OS_VISION
 #pragma mark - ORKLocationAnswerFormat
 @implementation ORKLocationAnswerFormat
 
@@ -3614,6 +3618,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 }
 
 @end
+#endif
 
 #pragma mark ORKSESAnswerFormat
 

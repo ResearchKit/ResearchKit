@@ -100,11 +100,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     static CGFloat textFieldBottomMargin = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        #if TARGET_OS_IOS
         textFieldBottomMargin = 1.0 / ScreenScale();
-        #else
-        textFieldBottomMargin = 1.0;
-        #endif
     });
     return textFieldBottomMargin;
 }

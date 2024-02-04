@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
 
 #import "ORKPDFViewerStepView.h"
 
@@ -40,3 +41,5 @@
 @property (nonatomic, assign)BOOL hideShareButton;
 
 @end
+
+#endif
