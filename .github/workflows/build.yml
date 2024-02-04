@@ -20,7 +20,7 @@ on:
 
 jobs:
   build-xcarchive:
-    uses: StanfordBDHG/.github/.github/workflows/archive.yml@v2
+    uses: StanfordBDHG/.github/.github/workflows/archive.yml@sdk
     strategy:
       matrix:
         include:
@@ -35,4 +35,5 @@ jobs:
       version: ${{ inputs.version }}
       configuration: ${{ matrix.configuration }}
       cxxInterop: ${{ matrix.cxxInterop }}
+      sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
       runsonlabels: '["macOS", "self-hosted"]'
