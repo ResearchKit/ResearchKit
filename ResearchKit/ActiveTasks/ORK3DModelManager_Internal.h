@@ -28,8 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 @import Foundation;
 
 extern NSNotificationName const ORK3DModelDisableContinueButtonNotification;
 extern NSNotificationName const ORK3DModelEnableContinueButtonNotification;
 extern NSNotificationName const ORK3DModelEndStepNotification;
+
+#endif

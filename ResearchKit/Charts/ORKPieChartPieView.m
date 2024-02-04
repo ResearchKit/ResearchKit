@@ -30,6 +30,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKPieChartPieView.h"
 
@@ -404,3 +406,5 @@ static const CGFloat InterAnimationDelay = 0.05;
 }
 
 @end
+
+#endif

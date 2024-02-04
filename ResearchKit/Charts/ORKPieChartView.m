@@ -31,6 +31,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKPieChartView.h"
 #import "ORKPieChartView_Internal.h"
@@ -528,3 +530,5 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 @end
+
+#endif

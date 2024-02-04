@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORKEnvironmentSPLMeterBarView.h"
 
 
@@ -290,3 +292,5 @@ static const int ORKEnvironmentSPLMeterNumberOfRows = 4;
 }
 
 @end
+
+#endif

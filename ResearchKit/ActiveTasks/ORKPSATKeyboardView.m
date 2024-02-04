@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKPSATKeyboardView.h"
 #import "ORKHelpers_Internal.h"
@@ -152,3 +154,5 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
 }
 
 @end
+
+#endif

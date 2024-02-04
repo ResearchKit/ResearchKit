@@ -28,6 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
+
 #import "ORKRequestPermissionsStep.h"
 #import "ORKPermissionType.h"
 #import "ORKRequestPermissionsStepViewController.h"
@@ -89,3 +92,5 @@
 }
 
 @end
+
+#endif

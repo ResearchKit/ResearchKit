@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "CMMotionActivity+ORKJSONDictionary.h"
 
@@ -82,3 +84,5 @@ static NSString *const ConfidenceKey = @"confidence";
 }
 
 @end
+
+#endif

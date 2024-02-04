@@ -35,7 +35,7 @@
 
 @import UIKit;
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKTypes.h>
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
@@ -382,7 +382,7 @@ ORK_CLASS_AVAILABLE
 
 #pragma mark - iOS
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 @interface ORKAnswerFormat()
 
 /// @name Factory methods
@@ -473,7 +473,9 @@ ORK_CLASS_AVAILABLE
                                                       maximumValue:(double)maximumValue
                                                       defaultValue:(double)defaultValue;
 
+#if !TARGET_OS_VISION
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
+#endif
 
 + (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText bottomRungText:(NSString *)bottomRungText;
 

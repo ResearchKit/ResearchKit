@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if os(iOS)
+
 @objc
 public enum VisionStepLeftOrRightEye: Int {
     case left
@@ -103,3 +105,5 @@ public class ORKLandoltCStep: ORKActiveStep {
     
 }
 
+
+#endif

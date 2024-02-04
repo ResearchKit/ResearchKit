@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStep.h>
@@ -66,3 +68,5 @@ By default, this property is set to `NO`
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

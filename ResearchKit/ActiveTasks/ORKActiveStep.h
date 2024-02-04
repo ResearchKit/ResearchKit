@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 @import UIKit;
 @import HealthKit;
@@ -209,3 +211,5 @@ The default value of this property is `NO`.
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

@@ -28,6 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
+
 #import <UserNotifications/UserNotifications.h>
 
 #import "ORKNotificationPermissionType.h"
@@ -139,3 +142,5 @@ static const uint32_t IconDarkTintColor = 0xFFD005;
 }
 
 @end
+
+#endif

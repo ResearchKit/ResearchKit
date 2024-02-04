@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 internal class ORKSwiftStroopContentView: ORKActiveStepCustomView {
     
@@ -166,3 +168,5 @@ internal class ORKSwiftStroopContentView: ORKActiveStepCustomView {
         NSLayoutConstraint.activate(constraints)
     }
 }
+
+#endif

@@ -274,7 +274,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         [_constraints addObject:[_bottomSeperatorView.topAnchor constraintEqualToAnchor:_textView.bottomAnchor constant:TextViewTopPadding]];
         [_constraints addObject:[_bottomSeperatorView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
         [_constraints addObject:[_bottomSeperatorView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
-        [_constraints addObject:[_bottomSeperatorView.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale]];
+        [_constraints addObject:[_bottomSeperatorView.heightAnchor constraintEqualToConstant:1.0 / ScreenScale()]];
     }
     
     if (bottomMostElement && !createEmptySpaceForPossibleErrorMessage) {
@@ -315,7 +315,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / ScreenScale();
         
         if (createEmptySpaceForPossibleErrorMessage) {
             [[_dividerView.topAnchor constraintEqualToAnchor:bottomMostElement.bottomAnchor constant:CellBottomPadding + TextViewBottomPadding + ClearTextButtonMinimumHeight] setActive:YES];
@@ -659,7 +659,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / ScreenScale();
         
         [[_dividerView.topAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
         [[_dividerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];

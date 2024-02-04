@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKTowerOfHanoiStep.h"
 
@@ -104,3 +106,5 @@ static const NSUInteger MaximumNumberOfDisks = 8;
 }
 
 @end
+
+#endif

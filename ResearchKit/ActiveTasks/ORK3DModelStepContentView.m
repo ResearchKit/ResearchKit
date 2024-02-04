@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORK3DModelStepContentView.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -49,3 +51,5 @@
 @end
 
 
+
+#endif

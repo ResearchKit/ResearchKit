@@ -29,9 +29,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKGraphChartView.h"
 #import "ORKChartTypes.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKHelpers_Private.h"
 
 
@@ -69,7 +72,7 @@ extern const CGFloat ORKGraphChartViewAxisTickLength;
 extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
 ORK_INLINE CGFloat scalePixelAdjustment() {
-    return (1.0 / [UIScreen mainScreen].scale);
+    return (1.0 / ScreenScale());
 }
 
 ORK_INLINE CAShapeLayer *graphLineLayer() {
@@ -185,3 +188,5 @@ ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPl
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

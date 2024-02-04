@@ -48,10 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKLocation ()
 
+#if TARGET_OS_IOS
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                             region:(nullable CLCircularRegion *)region
                          userInput:(nullable NSString *)userInput
                      postalAddress:(nullable CNPostalAddress *)postalAddress;
+#endif
 
 - (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
 

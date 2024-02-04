@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKCollector.h"
 #import "ORKDataCollectionManager_Internal.h"
@@ -80,3 +82,5 @@
 @property (copy) NSDate *lastDate;
 
 @end
+
+#endif

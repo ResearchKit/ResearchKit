@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORKFrontFacingCameraStep.h"
 #import "ORKFrontFacingCameraStepViewController.h"
 #import "ORKHelpers_Internal.h"
@@ -127,3 +129,5 @@ static const NSTimeInterval MAX_RECORDING_DURATION = 300.0;
 
 @end
 
+
+#endif

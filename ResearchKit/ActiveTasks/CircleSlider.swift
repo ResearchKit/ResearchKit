@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if os(iOS)
+
 public enum CircleSliderOption {
     case startAngle(Double)
     case barColor(UIColor)
@@ -281,3 +283,5 @@ open class CircleSlider: UISlider {
     }
 }
 
+
+#endif

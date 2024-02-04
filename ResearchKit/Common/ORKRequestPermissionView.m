@@ -28,6 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
+
 #import "ORKRequestPermissionView.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKHelpers_Internal.h"
@@ -250,3 +253,5 @@ static const CGFloat ButtonWidth = 150;
 }
 
 @end
+
+#endif

@@ -135,7 +135,7 @@ static NSMutableDictionary *colors() {
     dispatch_once(&onceToken, ^{
         UIColor *backgroundColor = [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1.0];
         UIColor *fillColor = ORKRGB(0xD7D7D7);
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
         if (@available(iOS 13.0, *)) {
             backgroundColor = [UIColor secondarySystemBackgroundColor];
             fillColor = UIColor.quaternarySystemFillColor;
@@ -188,7 +188,7 @@ const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
 const CGSize ORKiPad10_5ScreenSize = (CGSize){834, 1112};
 const CGSize ORKiPad12_9ScreenSize = (CGSize){1024, 1366};
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 static ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     CGFloat maximumDimension = MAX(bounds.size.width, bounds.size.height);
@@ -236,7 +236,7 @@ static ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
 }
 #endif
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 static UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
     if (!window) {
         // Use this method instead of UIApplication's keyWindow or UIApplication's delegate's window

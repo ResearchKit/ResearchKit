@@ -53,7 +53,7 @@ NSBundle *ORKAssetsBundle(void) {
     return bundle;
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 ORK_INLINE CGFloat ORKCGFloor(CGFloat value) {
     if (sizeof(value) == sizeof(float)) {
         return (CGFloat)floorf((float)value);
@@ -63,13 +63,13 @@ ORK_INLINE CGFloat ORKCGFloor(CGFloat value) {
 }
 #endif
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 ORK_INLINE CGFloat ORKAdjustToScale(CGFloat (adjustFunction)(CGFloat), CGFloat value, CGFloat scale) {
     if (scale == 0) {
         static CGFloat screenScale = 1.0;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            screenScale = [UIScreen mainScreen].scale;
+            screenScale = ScreenScale();
         });
         scale = screenScale;
     }
@@ -114,6 +114,17 @@ NSDate *ORKDateFromStringISO8601(NSString *string) {
         [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
     return [formatter dateFromString:string];
+}
+
+CGFloat ScreenScale() {
+    #if TARGET_OS_IOS
+    return ScreenScale();
+    #else
+    // Assuming VisionOS or any other non-iOS platform
+    // Choose a "best possible value" for VisionOS here. For instance, 2.0 could be a sensible default
+    // representing @2x retina display, which is quite common.
+    return 2.0;
+    #endif
 }
 
 NSString *ORKSignatureStringFromDate(NSDate *date) {
@@ -170,7 +181,7 @@ NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode) {
     return NSFileProtectionNone;
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 CGFloat ORKExpectedLabelHeight(UILabel *label) {
     CGSize expectedLabelSize = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, CGFLOAT_MAX)
                                                         options:NSStringDrawingUsesLineFragmentOrigin
@@ -223,7 +234,7 @@ UIImage *ORKImageWithColor(UIColor *color) {
     return image;
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 void ORKEnableAutoLayoutForViews(NSArray *views) {
     [views enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [(UIView *)obj setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -524,7 +535,7 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
     }
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews) {
     for (NSLayoutConstraint *constraint in [constraints copy]) {
         for (UIView *view in removedViews) {
@@ -540,7 +551,7 @@ const double ORKDoubleInvalidValue = DBL_MAX;
 
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {
     if ([UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
         *direction = (*direction == UIPageViewControllerNavigationDirectionForward) ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;

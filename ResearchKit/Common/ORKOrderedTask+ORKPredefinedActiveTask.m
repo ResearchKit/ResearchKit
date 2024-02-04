@@ -29,7 +29,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#if !TARGET_OS_VISION
 #import "ORKOrderedTask+ORKPredefinedActiveTask.h"
 #import "ORKOrderedTask_Private.h"
 
@@ -3306,3 +3306,4 @@ NSString *const ORKTouchAbilityHorizontalScrollStepIdentifier = @"touchAbilityHo
 }
 
 @end
+#endif

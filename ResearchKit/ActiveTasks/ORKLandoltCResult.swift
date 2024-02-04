@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if os(iOS)
+
 import ResearchKit.Private
 
 public class ORKLandoltCResult: ORKResult {
@@ -108,3 +110,5 @@ public class ORKLandoltCResult: ORKResult {
     }
 }
 
+
+#endif

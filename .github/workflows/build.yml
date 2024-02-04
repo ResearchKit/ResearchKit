@@ -35,4 +35,5 @@ jobs:
       version: ${{ inputs.version }}
       configuration: ${{ matrix.configuration }}
       cxxInterop: ${{ matrix.cxxInterop }}
+      sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
       runsonlabels: '["macOS", "self-hosted"]'

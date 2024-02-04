@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKBarGraphChartView.h"
 
@@ -288,3 +290,5 @@ static const CGFloat BarWidth = 10.0;
 
 
 @end
+
+#endif

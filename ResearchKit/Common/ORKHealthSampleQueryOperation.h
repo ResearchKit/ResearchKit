@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import <Foundation/Foundation.h>
 #import "ORKOperation.h"
@@ -47,3 +49,5 @@
 - (instancetype)initWithCollector:(ORKCollector<ORKHealthCollectable> *)collector mananger:(ORKDataCollectionManager *)manager;
 
 @end
+
+#endif

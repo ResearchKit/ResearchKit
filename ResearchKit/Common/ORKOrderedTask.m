@@ -37,7 +37,7 @@
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import "ORKFormStep.h"
 #import "ORKFormStepViewController.h"
 #import "ORKFormItem_Internal.h"
@@ -114,7 +114,7 @@
     for (ORKStep *step in self.steps) {
         [uniqueStepIdentifiers addObject:step.identifier];
         stepCount++;
-        #if TARGET_OS_IOS
+        #if TARGET_OS_IOS || TARGET_OS_VISION
         if (step.earlyTerminationConfiguration.earlyTerminationStep != nil) {
             [uniqueStepIdentifiers addObject:step.earlyTerminationConfiguration.earlyTerminationStep.identifier];
             stepCount++;
@@ -232,7 +232,7 @@
         if ([obj.identifier isEqualToString:identifier]) {
             step = obj;
             *stop = YES;
-        #if TARGET_OS_IOS
+        #if TARGET_OS_IOS || TARGET_OS_VISION
         } else if ([obj.earlyTerminationConfiguration.earlyTerminationStep.identifier isEqualToString:identifier]) {
             step = obj.earlyTerminationConfiguration.earlyTerminationStep;
             *stop = YES;
@@ -264,7 +264,7 @@
     int currentStepStartingProgressNumber = 0;
     
     for (ORKStep *step in self.steps) {
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
         if ([step isKindOfClass:[ORKFormStep class]]) {
             ORKFormStep *formStep = (ORKFormStep *)step;
             if (formStep.identifier == currentStep.identifier) {
@@ -294,7 +294,7 @@
     return totalProgress;
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 - (NSMutableArray *)calculateSectionsForFormItems:(NSArray *)formItems {
     NSMutableArray<NSMutableArray *> *_sections = [NSMutableArray new];
     NSMutableArray *section = nil;
@@ -375,8 +375,12 @@
     return NO;
 }
 
+#endif
+
 - (BOOL)providesBackgroundAudioPrompts {
     BOOL providesAudioPrompts = NO;
+    
+    #if !TARGET_OS_VISION
     for (ORKStep *step in self.steps) {
         if ([step isKindOfClass:[ORKActiveStep class]]) {
             ORKActiveStep *activeStep = (ORKActiveStep *)step;
@@ -386,10 +390,10 @@
             }
         }
     }
+    #endif
+    
     return providesAudioPrompts;
 }
-
-#endif
 
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];

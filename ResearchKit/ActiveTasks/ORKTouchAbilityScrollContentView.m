@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORKTouchAbilityScrollContentView.h"
 #import "ORKTouchAbilityPinchGuideView.h"
 
@@ -332,3 +334,5 @@ UICollectionViewDelegate
 }
 
 @end
+
+#endif

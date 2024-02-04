@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
 
 #import "ORKOperation.h"
 #import "ORKErrors.h"
@@ -170,3 +171,5 @@ static BOOL stateTransitionIsValid(ORKOperationState fromState, ORKOperationStat
 }
 
 @end
+
+#endif

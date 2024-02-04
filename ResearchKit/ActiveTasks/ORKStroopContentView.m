@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKStroopContentView.h"
 #import "ORKUnitLabel.h"
@@ -268,3 +270,5 @@ static const CGFloat buttonStackViewSpacing = 20.0;
 
 @end
 
+
+#endif

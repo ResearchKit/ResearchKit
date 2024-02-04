@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if os(iOS)
+
 internal class Math {
     
     internal class func degreesToRadians(_ angle: Double) -> Double {
@@ -74,3 +76,5 @@ internal class Math {
     }
 }
 
+
+#endif

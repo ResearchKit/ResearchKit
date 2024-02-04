@@ -161,10 +161,12 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
+#if TARGET_OS_IOS
 /**
  The region describes the size of the placemark of the location.
  */
 @property (nonatomic, copy, readonly, nullable) CLCircularRegion *region;
+#endif
 
 /**
  The human readable address typed in by user.

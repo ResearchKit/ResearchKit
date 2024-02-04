@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import <ResearchKit/ResearchKit.h>
 
@@ -44,3 +46,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKVideoCaptureStepViewController : ORKStepViewController
 
 @end
+
+#endif

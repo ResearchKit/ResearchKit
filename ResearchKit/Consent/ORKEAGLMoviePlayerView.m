@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKEAGLMoviePlayerView.h"
 
@@ -136,7 +138,7 @@ const GLfloat DefaultPreferredRotation = 0;
 - (instancetype)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Use 2x scale factor on Retina displays.
-        self.contentScaleFactor = [UIScreen mainScreen].scale;
+        self.contentScaleFactor = ScreenScale();
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -735,3 +737,5 @@ const GLfloat DefaultPreferredRotation = 0;
 
 @end
 #pragma clang diagnostic pop
+
+#endif

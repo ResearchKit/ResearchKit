@@ -819,7 +819,9 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
                                @(ORKQuestionTypeWeight) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeMultiplePicker) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger): [ORKSurveyAnswerCellForNumber class],
+                               #if !TARGET_OS_VISION
                                @(ORKQuestionTypeLocation): [ORKSurveyAnswerCellForLocation class],
+                               #endif
                                @(ORKQuestionTypeSES): [ORKSurveyAnswerCellForSES class]};
     });
     

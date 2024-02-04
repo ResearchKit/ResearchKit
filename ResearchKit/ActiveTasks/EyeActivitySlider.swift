@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if os(iOS)
+
 internal class EyeActivitySlider: UIView {
     
     private var testType: VisionStepType?
@@ -179,3 +181,5 @@ internal class EyeActivitySlider: UIView {
     }
 }
 
+
+#endif

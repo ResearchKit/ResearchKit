@@ -136,7 +136,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #pragma mark - iOS
 
 @interface ORKQuestionStep ()

@@ -166,6 +166,8 @@ UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
 _Nullable id ORKFindInArrayByKey(NSArray *array, NSString *key, id value);
 
+CGFloat ScreenScale(void);
+
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
 NSURL *ORKCreateRandomBaseURL(void);
@@ -173,7 +175,7 @@ NSURL *ORKCreateRandomBaseURL(void);
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 
 CGFloat ORKExpectedLabelHeight(UILabel *label);
 
@@ -202,7 +204,7 @@ BOOL ORKCurrentLocalePresentsFamilyNameFirst(void);
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view);
 #endif
 
@@ -282,7 +284,7 @@ extern const double ORKDoubleInvalidValue;
 
 extern const CGFloat ORKCGFloatInvalidValue;
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 #endif
 

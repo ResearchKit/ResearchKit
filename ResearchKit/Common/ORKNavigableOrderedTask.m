@@ -192,8 +192,8 @@
     if (_shouldReportProgress) {
         return [super progressOfCurrentStep:step withResult:result];
     }
-
-    return ORKTaskProgressMake(0, 0);
+    
+    return (ORKTaskProgress){0, 0, false};
 }
 
 #pragma mark Serialization private methods

@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 @import AVFoundation;
 @import Speech;
 
@@ -109,3 +111,5 @@
 - (void)endAudio;
 
 @end
+
+#endif

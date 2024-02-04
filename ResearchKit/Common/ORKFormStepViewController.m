@@ -1240,11 +1240,12 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
                     class = [ORKFormItemScaleCell class];
                     break;
                 }
-                    
+                #if !TARGET_OS_VISION
                 case ORKQuestionTypeLocation: {
                     class = [ORKFormItemLocationCell class];
                     break;
                 }
+                #endif
                 case ORKQuestionTypeSES: {
                     class = [ORKFormItemSESCell class];
                     break;

@@ -187,7 +187,7 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
     [[_errorLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
     
     if (_dontKnowButton) {
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / ScreenScale();
         [[_dividerView.topAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
         [[_dividerView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
         [[_dividerView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];

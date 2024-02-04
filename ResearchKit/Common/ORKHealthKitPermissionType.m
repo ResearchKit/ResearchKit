@@ -28,6 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
+
 #import "ORKRequestPermissionButton.h"
 #import "ORKHealthKitPermissionType.h"
 #import "ORKHelpers_Internal.h"
@@ -141,3 +144,5 @@ static uint32_t const IconTintColor = 0xFF5E5E;
 
 @end
 
+
+#endif

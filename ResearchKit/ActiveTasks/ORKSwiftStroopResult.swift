@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 import ResearchKit.Private
 
@@ -104,3 +106,5 @@ public class ORKSwiftStroopResult: ORKResult {
         return "\(descriptionPrefix(withNumberOfPaddingSpaces: numberOfPaddingSpaces)); color: \(color ?? "") text: \(text ?? "") colorSelected: \(colorSelected ?? "") \(descriptionSuffix())"
     }
 }
+
+#endif
