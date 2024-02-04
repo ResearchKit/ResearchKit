@@ -26,7 +26,7 @@ jobs:
       version: ${{ inputs.version }}
       configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'
-      sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
+      sdk: '["xros", "xrsimulator"]'
       user: PaulsAutomationBot
     secrets:
       access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
