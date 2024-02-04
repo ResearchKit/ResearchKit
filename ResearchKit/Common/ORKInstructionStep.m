@@ -30,7 +30,7 @@
 
 
 #import "ORKInstructionStep.h"
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import "ORKInstructionStepViewController.h"
 #endif
 #import "ORKStep_Private.h"
@@ -40,7 +40,7 @@
 @implementation ORKInstructionStep
 
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 + (Class)stepViewControllerClass {
     return [ORKInstructionStepViewController class];
 }

@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 @import Foundation;
 #import <ResearchKit/ORKStep.h>
@@ -72,3 +74,5 @@ API_DEPRECATED("Use ORKInstructionStep for obtaining consent.", ios(3.0, 11.0)) 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 import ResearchKit.Private
 
 internal class ORKLandoltCStepContentView: UIView {
@@ -79,3 +81,5 @@ internal class ORKLandoltCStepContentView: UIView {
             ])
     }
 }
+
+#endif

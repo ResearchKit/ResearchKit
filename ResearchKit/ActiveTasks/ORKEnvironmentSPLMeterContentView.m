@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKEnvironmentSPLMeterContentView.h"
 #import "ORKEnvironmentSPLMeterBarView.h"
@@ -230,3 +232,5 @@ static const CGFloat BarViewHeight = 50.0;
 }
 
 @end
+
+#endif

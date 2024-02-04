@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 @import UIKit;
 
@@ -47,3 +49,5 @@ API_DEPRECATED("Use ORKInstructionStep for obtaining consent.", ios(2.0, 11.0)) 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

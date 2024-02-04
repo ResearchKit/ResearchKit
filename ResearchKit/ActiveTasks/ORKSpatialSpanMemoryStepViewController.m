@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKSpatialSpanMemoryStepViewController.h"
 
@@ -781,3 +783,5 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 @end
+
+#endif

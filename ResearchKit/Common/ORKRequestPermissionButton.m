@@ -28,6 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
+
 #import "ORKRequestPermissionButton.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -157,3 +160,5 @@ static const CGFloat HighlightedOpacity = 0.5;
 }
 
 @end
+
+#endif

@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKCustomStepView_Internal.h"
 #import "ORKSpatialSpanTargetView.h"
@@ -86,3 +88,5 @@ typedef struct {
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

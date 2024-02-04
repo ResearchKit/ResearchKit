@@ -69,7 +69,7 @@ extern const CGFloat ORKGraphChartViewAxisTickLength;
 extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
 ORK_INLINE CGFloat scalePixelAdjustment() {
-    return (1.0 / [UIScreen mainScreen].scale);
+    return (1.0 / ScreenScale());
 }
 
 ORK_INLINE CAShapeLayer *graphLineLayer() {

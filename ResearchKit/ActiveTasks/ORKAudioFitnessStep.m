@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORKAudioFitnessStep.h"
 #import "ORKAudioFitnessStepViewController.h"
 #import "ORKBundleAsset.h"
@@ -144,3 +146,5 @@
 }
 
 @end
+
+#endif

@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 import ResearchKit.Private
 
 public class ORKLandoltCStepViewController: ORKActiveStepViewController {
@@ -266,3 +268,5 @@ public class ORKLandoltCStepView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
 }
+
+#endif

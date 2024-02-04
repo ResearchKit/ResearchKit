@@ -167,7 +167,11 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     }
     
     UIColor *tintColor = self.tintColor;
+    #if TARGET_OS_IOS
     CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
+    #else
+    CGFloat screenScale = 1.0;
+    #endif
     if (screenScale > 0 && (![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
         _appliedTintColor = tintColor;
         _appliedScaleFactor = screenScale;

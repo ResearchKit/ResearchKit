@@ -73,7 +73,9 @@
                                    target:self action:@selector(keyboardAccessoryViewDoneButtonPressed)];
     accessoryViewWithDoneButton.items = @[flexibleSpace, doneButton];
     [accessoryViewWithDoneButton setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+    #if !TARGET_OS_VISION
     self.inputAccessoryView = accessoryViewWithDoneButton;
+    #endif
 }
 
 - (void)keyboardAccessoryViewDoneButtonPressed {

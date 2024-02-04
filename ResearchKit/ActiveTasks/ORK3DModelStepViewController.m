@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORK3DModelManager.h"
 #import "ORK3DModelManager_Internal.h"
 #import "ORK3DModelStep.h"
@@ -143,3 +145,5 @@
 
 @end
 
+
+#endif

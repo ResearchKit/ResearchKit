@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKSpeechInNoiseContentView.h"
 #import "ORKAudioMeteringView.h"
@@ -193,3 +195,5 @@ static CGFloat const ORKSpeechInNoiseContentViewVerticalMargin = 44;
 
 @end
 
+
+#endif

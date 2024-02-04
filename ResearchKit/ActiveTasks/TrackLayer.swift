@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 internal class TrackLayer: CAShapeLayer {
     
     struct Setting {
@@ -103,3 +105,5 @@ internal class TrackLayer: CAShapeLayer {
     }
 }
 
+
+#endif

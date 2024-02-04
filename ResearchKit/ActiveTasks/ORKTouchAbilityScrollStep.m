@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import "ORKTouchAbilityScrollStep.h"
 #import "ORKTouchAbilityScrollStepViewController.h"
 #import "ORKhelpers_Internal.h"
@@ -87,3 +89,5 @@
 }
 
 @end
+
+#endif

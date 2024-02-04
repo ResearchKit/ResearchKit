@@ -30,14 +30,14 @@
 
 
 #import "ORKCompletionStep.h"
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import "ORKCompletionStepViewController.h"
 #endif
 #import "ORKHelpers_Internal.h"
 
 
 @implementation ORKCompletionStep
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 + (Class)stepViewControllerClass {
     return [ORKCompletionStepViewController class];
 }

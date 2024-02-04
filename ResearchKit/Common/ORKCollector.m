@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKCollector.h"
 #import "ORKCollector_Internal.h"
@@ -357,3 +359,5 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 
 @end
 
+
+#endif

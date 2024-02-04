@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 import Foundation
 
@@ -92,3 +94,5 @@ public class ORKSwiftStroopStep: ORKActiveStep {
         return false
     }
 }
+
+#endif

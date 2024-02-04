@@ -29,6 +29,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKAudioLevelNavigationRule.h"
 
@@ -217,3 +219,5 @@ Float32 const VolumeClamp = 60.0;
 
 @end
 
+
+#endif

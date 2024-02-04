@@ -253,7 +253,7 @@ Whether to show progress for this step when it is presented. The default is YES.
 
 #pragma mark - iOS
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 
 @class ORKBodyItem;
 

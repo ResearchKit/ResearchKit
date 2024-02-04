@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
@@ -35,3 +37,5 @@
 @interface ORKSpeechInNoiseStepViewController : ORKActiveStepViewController
 
 @end
+
+#endif

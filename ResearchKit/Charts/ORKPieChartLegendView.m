@@ -30,6 +30,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKPieChartLegendView.h"
 
@@ -193,3 +195,5 @@ static NSString *const CellIdentifier = @"ORKPieChartLegendCell";
 }
 
 @end
+
+#endif

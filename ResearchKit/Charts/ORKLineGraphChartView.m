@@ -30,6 +30,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKLineGraphChartView.h"
 
@@ -365,3 +367,5 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 @end
+
+#endif

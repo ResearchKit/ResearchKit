@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKTaskViewController.h"
 
 #import "ORKActiveStepViewController.h"
@@ -115,7 +114,11 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
         
         if ((status == kCLAuthorizationStatusNotDetermined) && (allowedWhenInUse || allowedAlways)) {
             if (allowedAlways) {
+                #if TARGET_OS_IOS
                 [_manager requestAlwaysAuthorization];
+                #else
+                [_manager requestWhenInUseAuthorization];
+                #endif
             } else {
                 [_manager requestWhenInUseAuthorization];
             }
@@ -360,6 +363,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }];
 }
 
+#if TARGET_OS_IOS
 - (void)requestPedometerAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
     if (![CMPedometer isStepCountingAvailable]) {
@@ -395,6 +399,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                   pedometer = nil;
                               }];
 }
+#endif
 
 - (void)requestAudioRecordingAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
@@ -470,6 +475,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         if (permissions & ORKPermissionCoreMotionAccelerometer) {
             _grantedPermissions |= ORKPermissionCoreMotionAccelerometer;
         }
+        #if TARGET_OS_IOS
         if (permissions & ORKPermissionCoreMotionActivity) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug("Requesting pedometer access");
@@ -485,6 +491,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
+        #endif
         if (permissions & ORKPermissionAudioRecording) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug("Requesting audio access");
@@ -791,12 +798,16 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)suspend {
     [self finishAudioPromptSession];
+    #if !TARGET_OS_VISION
     [ORKDynamicCast(_currentStepViewController, ORKActiveStepViewController) suspend];
+    #endif
 }
 
 - (void)resume {
     [self startAudioPromptSessionIfNeeded];
+    #if !TARGET_OS_VISION
     [ORKDynamicCast(_currentStepViewController, ORKActiveStepViewController) resume];
+    #endif
 }
 
 - (void)goForward {
@@ -1450,9 +1461,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!previousStep) {
         previousStep = [self.task stepBeforeStep:thisStep withResult:self.result];
     }
+    #if !TARGET_OS_VISION
     if ([previousStep isKindOfClass:[ORKActiveStep class]] || ([thisStep allowsBackNavigation] == NO)) {
         previousStep = nil; // Can't go back to an active step
     }
+    #endif
     return (previousStep != nil);
 }
 

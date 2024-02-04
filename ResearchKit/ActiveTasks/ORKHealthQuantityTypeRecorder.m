@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKHealthQuantityTypeRecorder.h"
 #import "ORKHelpers_Internal.h"
@@ -368,3 +370,5 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 @end
+
+#endif

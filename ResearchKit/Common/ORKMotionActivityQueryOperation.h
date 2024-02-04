@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKOperation.h"
 #import "ORKDataCollectionManager_Internal.h"
@@ -46,3 +48,5 @@
                          manager:(ORKDataCollectionManager *)manager;
 
 @end
+
+#endif

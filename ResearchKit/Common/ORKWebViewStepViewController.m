@@ -188,7 +188,9 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
     _signatureFooterView.customViewProvider = [self webViewStep].customViewProvider;
 
     if ([_signatureFooterView.customViewProvider respondsToSelector:@selector(keyboardDismissModeForCustomView)]) {
+        #if TARGET_OS_IOS
         [_scrollView setKeyboardDismissMode:[_signatureFooterView.customViewProvider keyboardDismissModeForCustomView]];
+        #endif
     }
 }
 
@@ -507,8 +509,6 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
             [self didFinishLoadingHTML];
         }
     }];
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = false;
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {

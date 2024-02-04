@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKDataCollectionManager_Internal.h"
 #import "ORKCollector_Internal.h"
@@ -392,3 +394,5 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
 }
 
 @end
+
+#endif

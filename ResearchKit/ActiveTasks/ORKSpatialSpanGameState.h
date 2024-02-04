@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 @import Foundation;
 
@@ -77,3 +79,5 @@ typedef NS_ENUM(NSInteger, ORKSpatialSpanTargetState) {
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

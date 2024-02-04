@@ -34,7 +34,7 @@
 #import "ORKStep.h"
 #import "ORKStep_Private.h"
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import "ORKBodyItem.h"
 #import "ORKStepViewController.h"
 #import "ORKStepViewController_Internal.h"
@@ -109,7 +109,7 @@
     step.useSurveyMode = _useSurveyMode;
     step.useExtendedPadding = _useExtendedPadding;
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     step.bodyItemTextAlignment = _bodyItemTextAlignment;
     step.buildInBodyItems = _buildInBodyItems;
     step.image = self.image;
@@ -144,7 +144,7 @@
             && (self.shouldTintImages == castObject.shouldTintImages)
             && (self.useSurveyMode == castObject.useSurveyMode)
             && (self.useExtendedPadding == castObject.useExtendedPadding)
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
             && (self.bodyItemTextAlignment == castObject.bodyItemTextAlignment)
             && (self.buildInBodyItems == castObject.buildInBodyItems)
             && ORKEqualObjects(self.image, castObject.image)
@@ -161,7 +161,7 @@
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step.
     return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment  ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0)
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ _bodyItems.hash ^_earlyTerminationConfiguration.hash ^ (_shouldAutomaticallyAdjustImageTintColor ? 0xf : 0x0)
 #endif
     ;
@@ -189,7 +189,7 @@
         ORK_DECODE_BOOL(aDecoder, shouldTintImages);
         ORK_DECODE_BOOL(aDecoder, useSurveyMode);
         ORK_DECODE_BOOL(aDecoder, useExtendedPadding);
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
         ORK_DECODE_ENUM(aDecoder, bodyItemTextAlignment);
         ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_ENUM(aDecoder, imageContentMode);
@@ -215,7 +215,7 @@
     ORK_ENCODE_BOOL(aCoder, shouldTintImages);
     ORK_ENCODE_BOOL(aCoder, useSurveyMode);
     ORK_ENCODE_BOOL(aCoder, useExtendedPadding);
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     ORK_ENCODE_ENUM(aCoder, bodyItemTextAlignment);
     ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_ENUM(aCoder, imageContentMode);
@@ -231,7 +231,7 @@
     }
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #pragma mark - iOS
 
 + (Class)stepViewControllerClass {

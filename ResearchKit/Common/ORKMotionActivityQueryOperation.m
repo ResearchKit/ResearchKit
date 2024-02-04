@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKMotionActivityQueryOperation.h"
 #import <CoreMotion/CoreMotion.h>
@@ -204,3 +206,5 @@
 }
 
 @end
+
+#endif

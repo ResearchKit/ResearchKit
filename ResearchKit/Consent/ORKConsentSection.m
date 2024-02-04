@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKConsentSection.h"
 
@@ -43,7 +45,7 @@ static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
 }
 
 NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
-    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat scale = ScreenScale();
     
     // For iPad, use the movie for the next scale up
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && scale < 3) {
@@ -273,3 +275,5 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
 }
 
 @end
+
+#endif

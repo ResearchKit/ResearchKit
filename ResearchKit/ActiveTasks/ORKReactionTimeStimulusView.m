@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKReactionTimeStimulusView.h"
 
@@ -163,3 +165,5 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
 }
 
 @end
+
+#endif

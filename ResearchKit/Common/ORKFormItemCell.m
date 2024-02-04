@@ -637,7 +637,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.containerView.bottomAnchor] setActive:YES];
         
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / ScreenScale();
         [[_dividerView.topAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
         [[_dividerView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor] setActive:YES];
         [[_dividerView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
@@ -1151,7 +1151,9 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
     _lastSeenLineCount = 1;
     self.labelLabel.text = nil;
     _textView = [[ORKFormTextView alloc] init];
+    #if !TARGET_OS_VISION
     _textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    #endif
     _textView.delegate = self;
     _textView.textAlignment = NSTextAlignmentNatural;
     _textView.scrollEnabled = YES;
@@ -1227,7 +1229,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.containerView.bottomAnchor] setActive:YES];
         
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / ScreenScale();
         [[_dividerView.topAnchor constraintEqualToAnchor:topViewToConstrainTo.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
         [[_dividerView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor] setActive:YES];
         [[_dividerView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
@@ -1883,7 +1885,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
     
     NSDictionary *dictionary = @{@"_selectionView":_selectionView};
     ORKEnableAutoLayoutForViews([dictionary allValues]);
-    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(ORKSurveyItemMargin), @"verticalMarginBottom":@(VerticalMargin - (1.0 / [UIScreen mainScreen].scale))};
+    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(ORKSurveyItemMargin), @"verticalMarginBottom":@(VerticalMargin - (1.0 / ScreenScale()))};
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
@@ -1938,7 +1940,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
 
 - (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
     _heightConstraint.constant = _selectionView.intrinsicContentSize.height;
-    _bottomConstraint.constant = -(VerticalMargin - (1.0 / [UIScreen mainScreen].scale));
+    _bottomConstraint.constant = -(VerticalMargin - (1.0 / ScreenScale()));
     
     [self cellNeedsToResize];
 }

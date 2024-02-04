@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import <ResearchKit/ORKDefines.h>
 
 typedef NS_ENUM(NSInteger, ORKSpeechRecognitionErrorCode) {
@@ -35,3 +37,5 @@ typedef NS_ENUM(NSInteger, ORKSpeechRecognitionErrorCode) {
     ORKSpeechRecognitionErrorResumeNotSupported,
     ORKSpeechRecognitionErrorRecognitionFailed
 } ORK_ENUM_AVAILABLE;
+
+#endif

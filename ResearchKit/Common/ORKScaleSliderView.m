@@ -627,7 +627,7 @@ static const CGFloat kMargin = 25.0;
             [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
             [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
 
-             CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+             CGFloat separatorHeight = 1.0 / ScreenScale();
 
             [[_dividerView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
             [[_dividerView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];

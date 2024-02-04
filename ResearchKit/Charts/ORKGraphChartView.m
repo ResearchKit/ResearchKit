@@ -32,6 +32,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 
 #import "ORKGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
@@ -432,11 +434,11 @@ ORK_INLINE UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color
 
         CAShapeLayer *referenceLineLayer = [CAShapeLayer new];
         referenceLineLayer.path = referenceLinePath.CGPath;
-        referenceLineLayer.lineWidth = [UIScreen mainScreen].scale;
+        referenceLineLayer.lineWidth = ScreenScale();
         referenceLineLayer.strokeColor = color.CGColor;
         referenceLineLayer.lineDashPattern = @[@6, @4];
         
-        UIGraphicsBeginImageContextWithOptions((CGSize){1, height}, NO, [UIScreen mainScreen].scale);
+        UIGraphicsBeginImageContextWithOptions((CGSize){1, height}, NO, ScreenScale());
         [referenceLineLayer renderInContext:UIGraphicsGetCurrentContext()];
         lineImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
@@ -596,7 +598,7 @@ ORK_INLINE UIImage *graphPointLayerImageWithColor(UIColor *color) {
         pointLayer.strokeColor = color.CGColor;
         pointLayer.lineWidth = pointLineWidth;
         
-        UIGraphicsBeginImageContextWithOptions((CGSize){pointSize, pointSize}, NO, [UIScreen mainScreen].scale);
+        UIGraphicsBeginImageContextWithOptions((CGSize){pointSize, pointSize}, NO, ScreenScale());
         [pointLayer renderInContext:UIGraphicsGetCurrentContext()];
         pointImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
@@ -1329,3 +1331,5 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 }
 
 @end
+
+#endif
