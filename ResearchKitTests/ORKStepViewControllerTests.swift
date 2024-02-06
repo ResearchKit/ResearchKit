@@ -213,6 +213,7 @@ class ORKStepViewControllerTests: XCTestCase {
         }
     }
     
+    #if TARGET_OS_IOS
     func testViewDelegates() {
         failExpectation = expectation(description: "ORKStepViewController notifies delegate it did fail")
         testController.delegate?.stepViewControllerDidFail(testController, withError: nil)
@@ -234,6 +235,7 @@ class ORKStepViewControllerTests: XCTestCase {
         }
         
     }
+    #endif
 }
 
 extension ORKStepViewControllerTests: ORKStepViewControllerDelegate {
@@ -259,9 +261,11 @@ extension ORKStepViewControllerTests: ORKStepViewControllerDelegate {
         failExpectation.fulfill()
     }
     
+    #if TARGET_OS_IOS
     func stepViewController(_ stepViewController: ORKStepViewController, recorder: ORKRecorder, didFailWithError error: Error) {
         recorderExpectation.fulfill()
     }
+    #endif
     
     func stepViewControllerHasNextStep(_ stepViewController: ORKStepViewController) -> Bool {
         if negativeTest { return false }

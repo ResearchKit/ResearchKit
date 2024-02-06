@@ -53,6 +53,7 @@
 
 @implementation ORKResultTests
 
+#if TARGET_OS_IOS
 - (ORKTaskResult *)createTaskResultTree {
     // Construction
     ORKFileResult *fileResult1 = [[ORKFileResult alloc] initWithIdentifier:@"fileResultIdentifier"];
@@ -132,6 +133,7 @@
         }];
     }];
 }
+#endif
 
 - (void)testTaskViewControllerNullDataRestorationThrows {
     NSData *taskData = [NSData data];
@@ -189,6 +191,7 @@
     }
 }
 
+#if TARGET_OS_IOS
 - (void)testTaskViewControllerRestorationWorks {
     ORKFormStep *formItemStep = [[ORKFormStep alloc] initWithIdentifier:@"step"];
     
@@ -302,6 +305,7 @@
     
     XCTAssertEqualObjects(taskResult1, taskResult2);
 }
+#endif
 
 - (void)testCollectionResult {
     ORKCollectionResult *result = [[ORKCollectionResult alloc] initWithIdentifier:@"001"];

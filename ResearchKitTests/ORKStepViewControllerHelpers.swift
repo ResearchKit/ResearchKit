@@ -37,7 +37,7 @@ class TopLevelUIUtilities<T: UIViewController> {
     private var rootWindow: UIWindow!
     
     func setupTopLevelUI(withViewController viewController: T) {
-        rootWindow = UIWindow(frame: UIScreen.main.bounds)
+        rootWindow = UIWindow()
         rootWindow.isHidden = false
         rootWindow.rootViewController = viewController
         _ = viewController.view

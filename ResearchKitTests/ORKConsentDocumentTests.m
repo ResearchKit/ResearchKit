@@ -29,6 +29,8 @@
  */
 
 
+#if TARGET_OS_IOS
+
 @import XCTest;
 @import ResearchKit.Private;
 
@@ -192,3 +194,5 @@ body, p, h1, h2, h3 { font-family: Helvetica; }\n\
 }
 
 @end
+
+#endif

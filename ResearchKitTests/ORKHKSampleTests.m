@@ -29,6 +29,8 @@
  */
 
 
+#if TARGET_OS_IOS
+
 @import XCTest;
 @import ResearchKit.Private;
 
@@ -109,3 +111,5 @@
 }
 
 @end
+
+#endif

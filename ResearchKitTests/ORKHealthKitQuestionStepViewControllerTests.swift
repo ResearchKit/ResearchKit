@@ -117,9 +117,11 @@ extension ORKHealthKitQuestionStepViewControllerTests: ORKStepViewControllerDele
         failExpectation.fulfill()
     }
     
+    #if TARGET_OS_IOS
     func stepViewController(_ stepViewController: ORKStepViewController, recorder: ORKRecorder, didFailWithError error: Error) {
         recorderExpectation.fulfill()
     }
+    #endif
     
     func stepViewControllerHasNextStep(_ stepViewController: ORKStepViewController) -> Bool {
         if negativeTest { return false }

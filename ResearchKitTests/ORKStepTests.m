@@ -193,6 +193,7 @@
 
 @end
 
+#if TARGET_OS_IOS
 @interface ORKReactionTimeStepTests : XCTestCase
 
 @end
@@ -241,6 +242,7 @@
 }
 
 @end
+#endif
 
 @interface ORKPageStepTests : XCTestCase
 
@@ -366,6 +368,7 @@
 
 @end
 
+#if TARGET_OS_IOS
 @implementation ORKPasscodeStepTests
 
 - (void)testAttributes {
@@ -377,6 +380,7 @@
 }
 
 @end
+#endif
 
 @interface ORKQuestionStepTests : XCTestCase
 
@@ -418,6 +422,7 @@
 
 @end
 
+#if TARGET_OS_IOS
 @interface ORKPDFViewerStepTests : XCTestCase
 
 @end
@@ -602,3 +607,5 @@
     XCTAssertTrue(standAloneReviewStepWithSteps.isStandalone);
 }
 @end
+
+#endif

@@ -76,11 +76,7 @@
         [self addSubview:_bottomSeparator];
         _bottomSeparator.translatesAutoresizingMaskIntoConstraints = NO;
         
-        #if TARGET_OS_IOS
         CGFloat separatorHeight = 1.0 / ScreenScale();
-        #else
-        CGFloat separatorHeight = 1.0;
-        #endif
         
         NSMutableArray *constraints = [NSMutableArray array];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_bottomSeparator
@@ -132,11 +128,7 @@
         [self addSubview:_topSeparator];
         _topSeparator.translatesAutoresizingMaskIntoConstraints = NO;
         
-        #if TARGET_OS_IOS
         CGFloat separatorHeight = 1.0 / ScreenScale();
-        #else
-        CGFloat separatorHeight = 1.0;
-        #endif
         
         NSMutableArray *constraints = [NSMutableArray array];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_topSeparator

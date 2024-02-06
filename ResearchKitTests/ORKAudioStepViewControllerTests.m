@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
+
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKAudioFitnessStepViewController.h>
 
@@ -122,3 +124,5 @@
 }
 
 @end
+
+#endif

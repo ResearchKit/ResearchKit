@@ -117,13 +117,10 @@ NSDate *ORKDateFromStringISO8601(NSString *string) {
 }
 
 CGFloat ScreenScale() {
-    #if TARGET_OS_IOS
-    return ScreenScale();
-    #else
-    // Assuming VisionOS or any other non-iOS platform
-    // Choose a "best possible value" for VisionOS here. For instance, 2.0 could be a sensible default
-    // representing @2x retina display, which is quite common.
+    #if TARGET_OS_VISION
     return 2.0;
+    #else
+    return [UIScreen mainScreen].scale;
     #endif
 }
 

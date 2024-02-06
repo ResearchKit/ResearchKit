@@ -182,11 +182,7 @@ static const float ReviewQuestionAnswerPadding = 2.0;
 }
 
 - (void)setupConstraints {
-    #if TARGET_OS_IOS
-    CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
-    #else
-    CGFloat screenScale = 1.0;
-    #endif
+    CGFloat screenScale = ScreenScale(); // Use screen.scale; self.contentScaleFactor remains 1.0 until later
     
     [[_containerView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:1.0 / screenScale] setActive:YES];
     [[_containerView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:ORKCardLeftRightMarginForWindow(self.window)] setActive:YES];
@@ -325,11 +321,7 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     [[_button.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor constant:EditAnswerButtonLeftPadding] setActive:YES];
     [[_containerView.bottomAnchor constraintEqualToAnchor:_button.bottomAnchor constant:EditAnswerButtonTopBottomPadding] setActive:YES];
     
-    #if TARGET_OS_IOS
-    CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
-    #else
-    CGFloat screenScale = 1.0;
-    #endif
+    CGFloat screenScale = ScreenScale();
     
     [_separator.heightAnchor constraintEqualToConstant:1.0 / screenScale].active = YES;
     [_separator.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor].active = YES;

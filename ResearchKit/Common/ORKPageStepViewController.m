@@ -209,12 +209,14 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     return [self hasPreviousStep] || ([self stepInDirection:ORKPageNavigationDirectionReverse] != nil);
 }
 
+#if TARGET_OS_IOS
 - (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     ORKStrongTypeOf(self.delegate) delegate = self.delegate;
     if ([delegate respondsToSelector:@selector(stepViewController:recorder:didFailWithError:)]) {
         [delegate stepViewController:self recorder:recorder didFailWithError:error];
     }
 }
+#endif
 
 #pragma mark Navigation
 

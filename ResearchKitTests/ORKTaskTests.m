@@ -670,11 +670,13 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     return stepResult;
 };
 
+#if TARGET_OS_IOS
 static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^ORKStepResult *(NSString *stepIdentifier, NSString *signatureIdentifier, BOOL consented) {
     ORKConsentSignatureResult *consentSignatureResult = [[ORKConsentSignatureResult alloc] initWithIdentifier:signatureIdentifier];
     consentSignatureResult.consented = consented;
     return [[ORKStepResult alloc] initWithStepIdentifier:stepIdentifier results:@[consentSignatureResult]];
 };
+#endif
 
 - (ORKTaskResult *)getGeneralTaskResultTree {
     NSMutableArray *stepResults = [NSMutableArray new];
@@ -710,6 +712,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     return taskResult;
 }
 
+#if TARGET_OS_IOS
 - (ORKTaskResult *)getTaskResultTreeWithConsent:(BOOL)consented {
     NSMutableArray *stepResults = [NSMutableArray new];
     
@@ -722,6 +725,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     
     return taskResult;
 }
+#endif
 
 - (ORKTaskResult *)getSmallTaskResultTreeWithIsAdditionalTask:(BOOL)isAdditionalTask {
     NSMutableArray *stepResults = [NSMutableArray new];
@@ -1380,6 +1384,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     XCTAssertFalse([[ORKResultPredicate predicateForNilQuestionResultWithResultSelector:resultSelector] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
 }
 
+#if TARGET_OS_IOS
 - (void)testConsentPredicate {
     ORKResultSelector *resultSelector = [[ORKResultSelector alloc] initWithTaskIdentifier:OrderedTaskIdentifier
                                                                            stepIdentifier:SignConsentStepIdentifier
@@ -1401,6 +1406,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
                                                                        didConsent:YES] evaluateWithObject:@[didNotConsentTaskResult] substitutionVariables:nil]);
     }
 }
+#endif
 
 - (void)testResultPredicates {
     ORKTaskResult *taskResult = [self getGeneralTaskResultTree];
@@ -1419,6 +1425,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
                                      taskResults:taskResults];
 }
 
+#if TARGET_OS_IOS
 - (void)testStepViewControllerWillDisappear {
     TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
     ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test" intendedUseDescription:nil duration:30 handOptions:0 options:0];
@@ -1435,6 +1442,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     NSArray *expectedArgs = @[taskViewController, stepViewController, @(ORKStepViewControllerNavigationDirectionForward)];
     XCTAssertEqualObjects(delegate.methodCalled.firstObject.arguments, expectedArgs);
 }
+#endif
 
 - (void)testTaskViewControllerCanDiscardLogic {
     TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
@@ -1549,6 +1557,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     XCTAssertFalse([taskViewController canDiscardResults]);
 }
 
+#if TARGET_OS_IOS
 - (void)testIndexOfStep {
     ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"tapping" intendedUseDescription:nil duration:30 handOptions:0 options:0];
     
@@ -1817,6 +1826,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     XCTAssertGreaterThan(leftCount, threshold);
     XCTAssertGreaterThan(rightCount, threshold);
 }
+#endif
 
 
 #pragma mark - Test Tremor Task navigation
