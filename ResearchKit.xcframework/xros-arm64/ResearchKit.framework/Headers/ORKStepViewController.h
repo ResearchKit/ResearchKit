@@ -108,6 +108,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  */
 - (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(nullable NSError *)error;
 
+#if TARGET_OS_IOS
 /**
  Tells the delegate when a recorder error has been detected during the step.
  
@@ -119,6 +120,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  @param error                  The error detected.
  */
 - (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
+#endif
 
 @optional
 /**
