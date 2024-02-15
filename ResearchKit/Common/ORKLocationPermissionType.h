@@ -33,6 +33,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ A permission type object that requests access for location data.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKLocationPermissionType : ORKPermissionType
 

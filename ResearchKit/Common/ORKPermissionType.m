@@ -38,6 +38,34 @@
 
 @implementation ORKPermissionType
 
+- (NSString *)localizedTitle {
+    ORKThrowMethodUnavailableException();
+}
+
+- (NSString *)localizedDetailText {
+    ORKThrowMethodUnavailableException();
+}
+
+- (UIImage * _Nullable)image {
+    ORKThrowMethodUnavailableException();
+}
+
+- (UIColor *)iconTintColor {
+    ORKThrowMethodUnavailableException();
+}
+
+- (ORKRequestPermissionsState)permissionState {
+    ORKThrowMethodUnavailableException();
+}
+
+- (BOOL)canContinue {
+    ORKThrowMethodUnavailableException();
+}
+
+- (void)requestPermission {
+    ORKThrowMethodUnavailableException();
+}
+
 + (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(NSSet<HKSampleType *> *)sampleTypesToWrite objectTypesToRead:(NSSet<HKObjectType *> *)objectTypesToRead {
     return [[ORKHealthKitPermissionType alloc] initWithSampleTypesToWrite:sampleTypesToWrite
                                                         objectTypesToRead:objectTypesToRead];
@@ -60,3 +88,4 @@
 }
 
 @end
+

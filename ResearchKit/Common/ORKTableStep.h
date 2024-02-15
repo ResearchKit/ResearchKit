@@ -35,6 +35,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ An enumeration for bullet style options.
+ */
+
 typedef NS_ENUM(NSInteger, ORKBulletType) {
     ORKBulletTypeNone = 0,
     ORKBulletTypeCircle,

@@ -29,14 +29,9 @@
  */
 
 #import "ORKWebViewStep.h"
-#import "ORKWebViewStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
 @implementation ORKWebViewStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKWebViewStepViewController class];
-}
 
 + (instancetype)webViewStepWithIdentifier:(NSString *)identifier
                                      html:(NSString *)html {

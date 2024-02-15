@@ -222,6 +222,18 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForNilQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector;
 
 /**
+ Returns a predicate matching a result whose answer's class equals `[ORKDontKnow class]`.
+ A  result is a `[ORKDontKnow class]`  if the don't know button was selected for the question that
+ generated that result.
+ 
+ @param resultSelector      The result selector object which specifies the question result you are
+ interested in.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForDontKnowResultWithResultSelector:(ORKResultSelector *)resultSelector;
+
+/**
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
  specified integer value.
  

@@ -29,11 +29,10 @@
  */
 
 #import "ORKLocationPermissionType.h"
-#import "ORKRequestPermissionView.h"
 #import "ORKHelpers_Internal.h"
-#import "ORKRequestPermissionButton.h"
 
-@import CoreLocation;
+#import <CoreLocation/CLLocationManagerDelegate.h>
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
 
 static NSString *const Symbol = @"location.circle";
 static const uint32_t IconLightTintColor = 0x50C878;
@@ -49,15 +48,6 @@ static const uint32_t IconDarkTintColor = 0x00A36C;
     return [[ORKLocationPermissionType alloc] init];
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self setupCardView];
-    }
-    return self;
-}
-
 - (CLLocationManager *)locationManager {
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -66,60 +56,56 @@ static const uint32_t IconDarkTintColor = 0x00A36C;
     return _locationManager;
 }
 
-- (void)setupCardView {
-    
-    UIImage *image;
-    if (@available(iOS 13, *)) {
-        image = [UIImage systemImageNamed:Symbol];
-    }
-    
-    self.cardView = [[ORKRequestPermissionView alloc]
-                     initWithIconImage:image
-                     title:ORKLocalizedString(@"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE", nil)
-                     detailText:ORKLocalizedString(@"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION", nil)];
-
-    [self.cardView.requestPermissionButton addTarget:self action:@selector(requestPermissionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Set the tint color for the icon
-    if (@available(iOS 13, *)) {
-        UIColor *dynamicTint = [[UIColor alloc] initWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            return traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? ORKRGB(IconDarkTintColor) : ORKRGB(IconLightTintColor);
-        }];
-        [self.cardView updateIconTintColor:dynamicTint];
-    } else {
-        [self.cardView updateIconTintColor:ORKRGB(IconLightTintColor)];
-    }
-    
-    [self checkLocationAuthStatus];
+- (NSString *)localizedTitle {
+    return ORKLocalizedString(@"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE", nil);
 }
 
--(void)checkLocationAuthStatus {
+- (NSString *)localizedDetailText {
+    return ORKLocalizedString(@"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION", nil);
+}
+
+- (UIImage * _Nullable)image {
+    return [UIImage systemImageNamed:Symbol];
+}
+
+- (UIColor *)iconTintColor {
+    return [[UIColor alloc] initWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+        return traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? ORKRGB(IconDarkTintColor) : ORKRGB(IconLightTintColor);
+    }];
+}
+
+- (ORKRequestPermissionsState)permissionState {
     switch (CLLocationManager.authorizationStatus) {
         case kCLAuthorizationStatusNotDetermined:
-            [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
-            break;
+            return ORKRequestPermissionsStateDefault;
 
         case kCLAuthorizationStatusAuthorizedAlways:
         case kCLAuthorizationStatusAuthorizedWhenInUse:
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied:
-            [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
-            break;
+            return ORKRequestPermissionsStateConnected;
     }
 }
 
+- (BOOL)canContinue {
+    return self.permissionState == ORKRequestPermissionsStateConnected;
+}
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    [self checkLocationAuthStatus];
+    if (self.permissionsStatusUpdateCallback != nil) {
+        self.permissionsStatusUpdateCallback();
+    }
 }
 
 // Request for always permission.
-- (void)requestPermissionButtonPressed {
+- (void)requestPermission {
     [self.locationManager requestAlwaysAuthorization];
-}
-
-- (void)setState:(ORKRequestPermissionsButtonState)state canContinue:(BOOL)canContinue {
-    [self.cardView setEnableContinueButton:canContinue];
-    [self.cardView.requestPermissionButton setState:state];
+    
+    BOOL requestWasDelivered = [self.locationManager ork_requestAlwaysAuthorization];
+    
+    // if the auth request was not delivered, that means ResearchKit was built with CoreLocation requests disabled
+    // Presenting the location permission step in this case is probably programmer error
+    NSAssert(requestWasDelivered, @"Tried to invoke -[CLLocationManager requestAlwaysAuthorization] but ResearchKit was compiled with CoreLocation authorization requests disabled. This is a programmer error. Check build settings for ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION");
 }
 
 - (BOOL)isEqual:(id)object {

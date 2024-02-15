@@ -28,13 +28,18 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKResult.h>
+#endif
 
-@import CoreLocation;
+
+#import <CoreLocation/CLLocation.h>
+
 @import Contacts;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CLCircularRegion;
 @class ORKQuestionStep;
 @class ORKFormItem;
 @class ORKFormStep;

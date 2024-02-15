@@ -30,7 +30,9 @@
 
 import XCTest
 @testable import ResearchKit
-import ResearchKit.Private
+import ResearchKit_Private
+@testable import ResearchKitUI
+import ResearchKitUI_Private
 
 class ORKPasscodeViewControllerTests: XCTestCase {
     

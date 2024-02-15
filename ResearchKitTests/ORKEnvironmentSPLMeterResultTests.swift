@@ -29,6 +29,7 @@
  */
 
 import XCTest
+import ResearchKitActiveTask
 
 class ORKEnvironmentSPLMeterResultTests: XCTestCase {
     

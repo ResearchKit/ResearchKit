@@ -41,7 +41,9 @@
 #import "ORKHelpers_Internal.h"
 #if TARGET_OS_IOS
 #import "ORKHealthAnswerFormat.h"
+#import "ResearchKit/ResearchKit-Swift.h"
 #endif
+
 
 @import HealthKit;
 @import MapKit;
@@ -49,7 +51,7 @@
 
 NSString *const EmailValidationRegularExpressionPattern = @"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
-id ORKNullAnswerValue() {
+id ORKNullAnswerValue(void) {
     return [NSNull null];
 }
 
@@ -317,6 +319,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                                         vertical:vertical];
 }
 
+
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
     return [[ORKValuePickerAnswerFormat alloc] initWithTextChoices:textChoices];
 }
@@ -483,6 +486,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return [[ORKSESAnswerFormat alloc] initWithTopRungText:topRungText
                                                                 bottomRungText:bottomRungText];
 }
+
 #endif
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -497,6 +501,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                                textChoices:(NSArray<ORKTextChoice *> *)textChoices {
     return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
 }
+
 
 - (void)validateParameters {
 }
@@ -626,9 +631,8 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return _showDontKnowButton;
 }
 
-- (NSArray *)choices {
-    NSString *exceptionReason = [NSString stringWithFormat:@"%@ is not a currently supported answer format for the choice answer format helper.", NSStringFromClass([self class])];
-    @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
+- (nullable NSArray *)choices {
+    return nil;
 }
 
 - (BOOL)isValuePicker {
@@ -655,7 +659,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         if (![textObject isKindOfClass:[ORKTextChoice class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"The textChoices array should only containt objects of the ORKTextChoice kind." userInfo:@{@"nonConformingObject": textObject}];
         }
-
 #if TARGET_OS_IOS
         [choices addObject:[textObject isKindOfClass:[ORKTextChoiceOther class]] ? [textObject copyWithZone:nil] : textObject];
 #else
@@ -1106,6 +1109,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @end
 
 
+
+
 #pragma mark - ORKTextChoice
 
 NSArray<Class> *ORKAllowableValueClasses(void) {
@@ -1265,7 +1270,10 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
 @end
 
 
+
+
 #pragma mark - ORKTextChoiceOther
+#if TARGET_OS_IOS
 @implementation ORKTextChoiceOther
 
 + (instancetype)new {
@@ -1281,6 +1289,7 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
                          value:(NSObject<NSCopying, NSSecureCoding> *)value
                      exclusive:(BOOL)exclusive
        textViewPlaceholderText:(NSString *)textViewPlaceholderText {
+    ORKThrowInvalidArgumentExceptionIfNotEqual(text, value);
     ORKTextChoiceOther *option = [[ORKTextChoiceOther alloc] initWithText:text
                                               primaryTextAttributedString:nil
                                                                detailText:detailText
@@ -1378,7 +1387,6 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
 - (BOOL)shouldShowDontKnowButton {
     return NO;
 }
-
 
 @end
 
@@ -1489,6 +1497,7 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
 }
 
 @end
+#endif
 
 
 #pragma mark - ORKBooleanAnswerFormat
@@ -1696,19 +1705,29 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
     return self;
 }
 
+- (void)_setCurrentDateOverride:(NSDate *)currentDateOverride {
+    _currentDateOverride = currentDateOverride;
+}
+
+- (NSDate *)_currentDate {
+    return _currentDateOverride ? : [NSDate date];
+}
+
 - (void)setIsMaxDateCurrentTime:(BOOL)isMaxDateCurrentTime {
     _isMaxDateCurrentTime = isMaxDateCurrentTime;
     
     if (isMaxDateCurrentTime) {
-        _maximumDate = [NSDate date];
+        _maximumDate = [self _currentDate];
     }
 }
 
 - (void)setDaysBeforeCurrentDateToSetMinimumDate:(NSInteger)daysBefore {
+    _daysBeforeCurrentDateToSetMinimumDate = daysBefore;
     _minimumDate = [self fetchDateBasedOnDays:daysBefore forBefore:YES];
 }
 
 - (void)setDaysAfterCurrentDateToSetMinimumDate:(NSInteger)daysAfter {
+    _daysAfterCurrentDateToSetMinimumDate = daysAfter;
     _maximumDate = [self fetchDateBasedOnDays:daysAfter forBefore:NO];
 }
 
@@ -1717,7 +1736,7 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"The value passed in for daysBeforeCurrentDateToSetMinimumDate must be greater than 0."  userInfo:nil];
     }
     
-    NSDate *currentDate = [NSDate date];
+    NSDate *currentDate = [self _currentDate];
     
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     [dateComponents setDay:forBefore ? -days : days];
@@ -1800,7 +1819,7 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
 }
 
 - (NSDate *)pickerDefaultDate {
-    return (self.defaultDate ? : [NSDate date]);
+    return (self.defaultDate ? : [self _currentDate]);
     
 }
 
@@ -2803,12 +2822,19 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
 }
 
 @end
+
 #endif
 
 
 #pragma mark - ORKTextAnswerFormat
 
+@interface ORKTextAnswerFormat()
+
+
+@end
+
 @implementation ORKTextAnswerFormat
+
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
@@ -2825,7 +2851,9 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
     _multipleLines = NO;
     _hideClearButton = NO;
     _hideCharacterCountLabel = NO;
+    
 }
+
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
     self = [super init];
@@ -2888,7 +2916,6 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
     answerFormat->_spellCheckingType = _spellCheckingType;
     answerFormat->_keyboardType = _keyboardType;
     answerFormat->_textContentType = _textContentType;
-
     if (@available(iOS 12.0, *)) {
         answerFormat->_passwordRules = _passwordRules;
     }
@@ -3062,7 +3089,8 @@ NSArray<Class> *ORKAllowableValueClasses(void) {
              self.hideClearButton == castObject.hideClearButton &&
              self.hideCharacterCountLabel == castObject.hideCharacterCountLabel) &&
              self.secureTextEntry == castObject.secureTextEntry) &&
-             ORKEqualObjects(self.placeholder, castObject.placeholder);
+             ORKEqualObjects(self.placeholder, castObject.placeholder)
+             ;
 }
 
 static NSString *const kSecureTextEntryEscapeString = @"*";

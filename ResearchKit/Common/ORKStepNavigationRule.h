@@ -280,6 +280,10 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ A navigation rule that determines whether to skip a step.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateSkipStepNavigationRule : ORKSkipStepNavigationRule
 

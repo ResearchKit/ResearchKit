@@ -31,7 +31,10 @@
 @import Foundation;
 @import UIKit;
 
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKDefines.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -126,7 +129,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /**
      In a socio-economic ladder, participant can pick their socio economic status.
      */
-    ORKQuestionTypeSES
+    ORKQuestionTypeSES,
+    
 } ORK_ENUM_AVAILABLE;
 
 
@@ -395,7 +399,10 @@ ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods;
 /// Other vendors or even apple ones but not mapped.
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierUnknown;
 
-
+/**
+ A base class object that you subclass to represent
+ results that aren't actual answers.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKNoAnswer : NSObject<NSCopying, NSSecureCoding>
 
@@ -404,6 +411,10 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ An Answer object attached to results when a
+ person selects the Don't Know Button for an answer.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKDontKnowAnswer : ORKNoAnswer
 
@@ -722,14 +733,5 @@ ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseHK;
 /// Chinese (Taiwan)
 ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW;
 
-typedef NS_OPTIONS(NSUInteger, ORKTouchAbilityTaskOption) {
-    ORKTouchAbilityTaskOptionTap              = 1 << 0,
-    ORKTouchAbilityTaskOptionLongPress        = 1 << 1,
-    ORKTouchAbilityTaskOptionSwipe            = 1 << 2,
-    ORKTouchAbilityTaskOptionVerticalScroll   = 1 << 3,
-    ORKTouchAbilityTaskOptionHorizontalScroll = 1 << 4,
-    ORKTouchAbilityTaskOptionPinch            = 1 << 5,
-    ORKTouchAbilityTaskOptionRotation         = 1 << 6
-} ORK_ENUM_AVAILABLE;
 
 NS_ASSUME_NONNULL_END

@@ -1,0 +1,13 @@
+framework module ResearchKitActiveTask {
+    umbrella header "ResearchKitActiveTask.h"
+    
+    export *
+    module * { export * }
+}
+
+framework module ResearchKitActiveTask_Private {
+    umbrella header "ResearchKitActiveTask_Private.h"
+    
+    export *
+    module * { export * }
+}

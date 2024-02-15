@@ -40,16 +40,10 @@
 
 #import "ORKWaitStep.h"
 
-#import "ORKWaitStepViewController.h"
-
 #import "ORKHelpers_Internal.h"
 
 
 @implementation ORKWaitStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKWaitStepViewController class];
-}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];

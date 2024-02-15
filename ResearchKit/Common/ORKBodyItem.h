@@ -34,6 +34,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ An enumeration for body item style options.
+ */
+
 typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
     /**
      text style body item
@@ -62,6 +66,11 @@ typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
 } ORK_ENUM_AVAILABLE;
 
 @class ORKLearnMoreItem;
+
+/**
+ An object that represents textual information to
+ attach to a step.
+ */
 
 ORK_CLASS_AVAILABLE
 @interface ORKBodyItem : NSObject <NSSecureCoding, NSCopying>

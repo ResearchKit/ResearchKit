@@ -450,7 +450,7 @@
 "TIMED_WALK_FORM_TITLE" = "Assistive device";
 "TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
 "TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle-foot orthosis?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Do you use an assistive device?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "None";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";

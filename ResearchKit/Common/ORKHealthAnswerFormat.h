@@ -34,11 +34,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ An enumeration of biological sex options.
+ */
+
 typedef NSString *ORKBiologicalSexIdentifier NS_STRING_ENUM;
 
 ORK_EXTERN ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierFemale;
 ORK_EXTERN ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale;
 ORK_EXTERN ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther;
+
+/**
+ An enumeration of blood type options.
+ */
 
 typedef NSString *ORKBloodTypeIdentifier NS_STRING_ENUM;
 

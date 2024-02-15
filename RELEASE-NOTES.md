@@ -1,5 +1,33 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.0 Release Notes
+
+*ResearchKit 3.0* is a beta release
+
+In addition to general stability and performance improvements, ResearchKit 3.0 includes the following new features and enhancements.
+
+### Framework Updates
+
+In order to modularize ResearchKit we have separated its functionality into the following modules.
+
+- **ResearchKit**
+contains the core classes and objects needed to run ResearchKit in any environment.
+
+- **ResearchKitUI**
+contains the UI classes and objects needed to present ResearchKit views in an IOS environment.
+
+- **ResearchKitActiveTask**
+contains the classes and objects needed to present Active Tasks in an IOS enviroment. These tasks usually require access to device sensors.
+
+### Deprecations
+All apis that are labeled as deprecated are scheduled to be removed spring of 2025.
+
+- **Consent**
+Our `ORKConsent` apis have been labeled as deprecated in favor of using existing functionality to achieve informed consent. Please visit the `ORKCatalog` app to view a recommended example.
+
+- **Question Step**
+The `ORKQuestionStep` has been labeled as deprecated in favor of using the `ORKFormStep`. Certain answer formats will present slightly different UI when used with a `ORKFormStep`. Updates will be made to ensure backwards compatibility before the question step is removed.
+
 ## ResearchKit 2.0 Release Notes
 
 *ResearchKit 2.0* supports *iOS* and requires *Xcode 9.0* or newer. 

@@ -39,7 +39,6 @@
 #import "ORKSkin.h"
 #if TARGET_OS_IOS
 #import "ORKFormStep.h"
-#import "ORKFormStepViewController.h"
 #import "ORKFormItem_Internal.h"
 #import "ORKActiveStep_Internal.h"
 #import "ORKEarlyTerminationConfiguration.h"

@@ -1,0 +1,5 @@
+//
+// ResearchKitUI-iOS-Debug.xcconfig
+//
+
+#include "ResearchKitUI-iOS-Shared.xcconfig"

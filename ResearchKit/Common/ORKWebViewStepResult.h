@@ -42,6 +42,16 @@ ORK_CLASS_AVAILABLE
 /**
  The answer produced by the webview.
  */
-@property (nonatomic, nullable) NSString* result;
+@property (nonatomic, nullable) NSString *result;
+
+/**
+ The html stored within the userInfo of the result.
+ */
+@property (nonatomic, nullable, readonly, getter=getHTML) NSString *html;
+
+/**
+ The html with a signature added stored within the userInfo of the result.
+ */
+@property (nonatomic, nullable, readonly, getter=getHTMLWithSignature) NSString *htmlWithSignature;
 
 @end

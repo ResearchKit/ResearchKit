@@ -34,15 +34,6 @@ modally on an *iPhone*, *iPod Touch*, or *iPad*. See
  information.
 
 
-Consent
-----------------
-
-The *ResearchKit framework* provides visual consent templates that you can customize to explain the
-details of your research study and obtain a signature if needed.
-See *[Obtaining Consent](docs/InformedConsent/)* for
-more information.
-
-
 Active Tasks
 ------------
 
@@ -53,12 +44,6 @@ while *iPhone* sensors actively collect data. See
 *[Active Tasks](docs/ActiveTasks/)* for more
 information.
 ResearchKit active tasks are not diagnostic tools nor medical devices of any kind and output from those active tasks may not be used for diagnosis. Developers and researchers are responsible for complying with all applicable laws and regulations with respect to further development and use of the active tasks.
-
-Charts
-------------
-*ResearchKit* includes a *Charts module*. It features three chart types: a *pie chart* (`ORKPieChartView`), a *line graph chart* (`ORKLineGraphChartView`), and a *discrete graph chart* (`ORKDiscreteGraphChartView`).
-
-The views in the *Charts module* can be used independently of the rest of *ResearchKit*. They don't automatically connect with any other part of *ResearchKit*: the developer has to supply the data to be displayed through the views' `dataSources`, which allows for maximum flexibility.
 
 
 Getting Started<a name="gettingstarted"></a>
@@ -215,7 +200,7 @@ This has just one required method, which you must implement in order to handle t
 
 ```objc
 - (void)taskViewController:(ORKTaskViewController *)taskViewController
-       didFinishWithReason:(ORKTaskViewControllerFinishReason)reason
+       didFinishWith:(ORKTaskFinishReason)reason
                      error:(NSError *)error {
 
     ORKTaskResult *taskResult = [taskViewController result];
@@ -230,7 +215,7 @@ This has just one required method, which you must implement in order to handle t
 
 ```swift
 func taskViewController(_ taskViewController: ORKTaskViewController, 
-                didFinishWith reason: ORKTaskViewControllerFinishReason, 
+                didFinishWith reason: ORKTaskFinishReason, 
                                     error: Error?) {
     let taskResult = taskViewController.result
     // You could do something with the result here.
@@ -257,7 +242,7 @@ What else can the ResearchKit framework do?
 The *ResearchKit* [`ORKCatalog`](samples/ORKCatalog) sample app is a good place to start. Find the
 project in ResearchKit's [`samples`](samples) directory. This project includes a list of all the
 types of steps supported by the *ResearchKit framework* in the first tab, and displays a browser for the
-results of the last completed task in the second tab. The third tab shows some examples from the *Charts module*.
+results of the last completed task in the second tab.
 
 
 

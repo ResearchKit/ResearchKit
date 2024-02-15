@@ -31,11 +31,13 @@
 
 @import Foundation;
 
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKTaskViewController.h>
+#import <ResearchKit/ORKTask.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 /**
  The `ORKCompletionStep` class is a subclass of `ORKInstructionStep` which behaves like
@@ -51,7 +53,7 @@ ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
 
 @interface ORKCompletionStep ()
 
-@property (nonatomic) ORKTaskViewControllerFinishReason reasonForCompletion;
+@property (nonatomic) ORKTaskFinishReason reasonForCompletion;
 
 @end
 

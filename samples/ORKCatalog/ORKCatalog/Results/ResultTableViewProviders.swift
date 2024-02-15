@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import UIKit
 import ResearchKit
+import ResearchKitActiveTask
+import ResearchKitActiveTask_Private
 import MapKit
 import Speech
 
@@ -129,9 +131,6 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
     case is ORKStroopResult:
         providerType = StroopResultTableViewProvider.self
         
-    case is ORKSwiftStroopResult:
-        providerType = SwiftStroopResultTableViewProvider.self
-        
     case is ORKTappingIntervalResult:
         providerType = TappingIntervalResultTableViewProvider.self
     
@@ -176,14 +175,12 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
     case is ORKWebViewStepResult:
         providerType = WebViewStepResultTableViewProvider.self
         
-    case is ORKLandoltCResult:
-        providerType = LandoltCStepResultProvider.self
-
     case is ORKEnvironmentSPLMeterResult:
         providerType = SPLMeterStepResultTableViewProvider.self
         
     case is ORKdBHLToneAudiometryResult:
         providerType = dBHLToneAudiometryResultTableViewProvider.self
+
 
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
@@ -299,11 +296,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         // Show an empty row if there isn't any metadata in the rows for this section.
         if resultRows.isEmpty {
             let noChildResultsCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.noChildResults.rawValue, for: indexPath)
-            
-            if #available(iOS 13.0, *) {
-                noChildResultsCell.textLabel?.textColor = UIColor.label
-            }
-            
+            noChildResultsCell.textLabel?.textColor = UIColor.label
             return noChildResultsCell
         }
 
@@ -317,10 +310,8 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
                 cell.textLabel!.text = text
                 cell.detailTextLabel!.text = detailText
                 
-                if #available(iOS 13.0, *) {
-                    cell.textLabel?.textColor = UIColor.label
-                    cell.detailTextLabel?.textColor = UIColor.secondaryLabel
-                }
+                cell.textLabel?.textColor = UIColor.label
+                cell.detailTextLabel?.textColor = UIColor.secondaryLabel
                 
                 /*
                     In this sample, the accessory type should be a disclosure
@@ -336,10 +327,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
 
                 cell.leftTextLabel.text = text
                 cell.rightImageView.image = image
-                
-                if #available(iOS 13.0, *) {
-                    cell.leftTextLabel.textColor = UIColor.label
-                }
+                cell.leftTextLabel.textColor = UIColor.label
 
                 return cell
 
@@ -431,7 +419,7 @@ class ChoiceQuestionResultTableViewProvider: ResultTableViewProvider {
         let choiceResult = result as! ORKChoiceQuestionResult
         
         return super.resultRowsForSection(section) + [
-            ResultRow(text: "choices", detail: choiceResult.choiceAnswers)
+            ResultRow(text: "choices", detail: choiceResult.choiceAnswers?.description)
         ]
     }
 }
@@ -823,40 +811,6 @@ class StroopResultTableViewProvider: ResultTableViewProvider {
     
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let stroopResult = result as! ORKStroopResult
-        
-        let rows = super.resultRowsForSection(section)
-        
-        if section == 0 {
-            return rows
-        }
-        return [
-            ResultRow(text: "Color", detail: stroopResult.color),
-            ResultRow(text: "Text", detail: stroopResult.text),
-            ResultRow(text: "Color Selected", detail: stroopResult.colorSelected)
-        ]
-    }
-}
-
-/// Table view provider specific to an `ResearchKit.ORKSStroopResult` instance.
-class SwiftStroopResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "Samples"
-    }
-    
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
-        let stroopResult = result as! ResearchKit.ORKSwiftStroopResult
         
         let rows = super.resultRowsForSection(section)
         
@@ -1342,6 +1296,7 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+
 /// Table view provider specific to an `ORKVideoInstructionStepResult` instance.
 class VideoInstructionStepResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
@@ -1378,27 +1333,6 @@ class WebViewStepResultTableViewProvider: ResultTableViewProvider {
         if section == 0 {
             return rows + [
                 ResultRow(text: "result", detail: webViewStepResult.result)
-            ]
-        }
-        
-        return rows
-    }
-}
-
-class LandoltCStepResultProvider: ResultTableViewProvider {
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
-        let landoltCResult = result as! ORKLandoltCResult
-
-        let rows = super.resultRowsForSection(section)
-        
-        if section == 0 {
-            return rows + [
-                ResultRow(text: "outcome", detail: landoltCResult.outcome),
-                ResultRow(text: "letterAngle", detail: landoltCResult.letterAngle),
-                ResultRow(text: "sliderAngle", detail: landoltCResult.sliderAngle),
-                ResultRow(text: "score", detail: landoltCResult.score)
             ]
         }
         
@@ -1464,3 +1398,5 @@ class SPLMeterStepResultTableViewProvider: ResultTableViewProvider {
         return rows
     }
 }
+
+
