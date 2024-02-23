@@ -1742,6 +1742,1329 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "ORKSwiftStroopResult",
+        "printedName": "ORKSwiftStroopResult",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "startTime",
+            "printedName": "startTime",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvp",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvg",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvs",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvM",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC9startTimeSdSgvM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "endTime",
+            "printedName": "endTime",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvp",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvg",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvs",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvM",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7endTimeSdSgvM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "color",
+            "printedName": "color",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvp",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvg",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvs",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC5colorSSSgvM",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5colorSSSgvM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "text",
+            "printedName": "text",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvp",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvg",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvs",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC4textSSSgvM",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4textSSSgvM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "colorSelected",
+            "printedName": "colorSelected",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvp",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvg",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvs",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvM",
+                "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC13colorSelectedSSSgvM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(identifier:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKSwiftStroopResult",
+                "printedName": "ResearchKit.ORKSwiftStroopResult",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)initWithIdentifier:",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC10identifierACSS_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "initWithIdentifier:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)encodeWithCoder:",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC6encode4withySo7NSCoderC_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "encodeWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(coder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKSwiftStroopResult",
+                "printedName": "ResearchKit.ORKSwiftStroopResult",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)initWithCoder:",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC5coderACSo7NSCoderC_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "initWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Required",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "supportsSecureCoding",
+            "printedName": "supportsSecureCoding()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11ResearchKit20ORKSwiftStroopResultC20supportsSecureCodingSbyFZ",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC20supportsSecureCodingSbyFZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isEqual",
+            "printedName": "isEqual(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)isEqual:",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC7isEqualySbypSgF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "isEqual:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "Override"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "copy",
+            "printedName": "copy(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ObjectiveC.NSZone?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "NSZone",
+                    "printedName": "ObjectiveC.NSZone",
+                    "usr": "s:10ObjectiveC6NSZoneV"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)copyWithZone:",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC4copy4withyp10ObjectiveC6NSZoneVSg_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "copyWithZone:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "Override"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "description",
+            "printedName": "description(withNumberOfPaddingSpaces:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult(im)descriptionWithNumberOfPaddingSpaces:",
+            "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC11description25withNumberOfPaddingSpacesSSSu_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "descriptionWithNumberOfPaddingSpaces:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopResult",
+        "mangledName": "$s11ResearchKit20ORKSwiftStroopResultC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ORKResult",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ResearchKit.ORKResult",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ORKSwiftStroopStep",
+        "printedName": "ORKSwiftStroopStep",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "numberOfAttempts",
+            "printedName": "numberOfAttempts",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivp",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivg",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivs",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC16numberOfAttemptsSivM",
+                "moduleName": "ResearchKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "stepViewControllerClass",
+            "printedName": "stepViewControllerClass()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ExistentialMetatype",
+                "printedName": "AnyObject.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "AnyObject"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(cm)stepViewControllerClass",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC23stepViewControllerClassyXlXpyFZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "overriding": true,
+            "objc_name": "stepViewControllerClass",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "supportsSecureCoding",
+            "printedName": "supportsSecureCoding()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20supportsSecureCodingSbyFZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(identifier:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKSwiftStroopStep",
+                "printedName": "ResearchKit.ORKSwiftStroopStep",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)initWithIdentifier:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC10identifierACSS_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "initWithIdentifier:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "validateParameters",
+            "printedName": "validateParameters()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)validateParameters",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC18validateParametersyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "validateParameters",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "startsFinished",
+            "printedName": "startsFinished()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)startsFinished",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC14startsFinishedSbyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "startsFinished",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "allowsBackNavigation",
+            "printedName": "allowsBackNavigation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(py)allowsBackNavigation",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvp",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "allowsBackNavigation",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)allowsBackNavigation",
+                "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC20allowsBackNavigationSbvg",
+                "moduleName": "ResearchKit",
+                "overriding": true,
+                "objc_name": "allowsBackNavigation",
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "copy",
+            "printedName": "copy(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ObjectiveC.NSZone?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "NSZone",
+                    "printedName": "ObjectiveC.NSZone",
+                    "usr": "s:10ObjectiveC6NSZoneV"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)copyWithZone:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC4copy4withyp10ObjectiveC6NSZoneVSg_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "copyWithZone:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)encodeWithCoder:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC6encode4withySo7NSCoderC_tF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "encodeWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isEqual",
+            "printedName": "isEqual(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep(im)isEqual:",
+            "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC7isEqualySbypSgF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "isEqual:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStep",
+        "mangledName": "$s11ResearchKit18ORKSwiftStroopStepC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ORKActiveStep",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ResearchKit.ORKActiveStep",
+          "ResearchKit.ORKStep",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit.Private",
+        "printedName": "ResearchKit.Private",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "TypeDecl",
         "name": "ORKLandoltCResult",
         "printedName": "ORKLandoltCResult",
         "children": [
@@ -2495,6 +3818,323 @@
         "moduleName": "ResearchKit",
         "declAttributes": [
           "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit.Private",
+        "printedName": "ResearchKit.Private",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ORKSwiftStroopStepViewController",
+        "printedName": "ORKSwiftStroopStepViewController",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(step:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKSwiftStroopStepViewController",
+                "printedName": "ResearchKit.ORKSwiftStroopStepViewController",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ResearchKit.ORKStep?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ORKStep",
+                    "printedName": "ResearchKit.ORKStep",
+                    "usr": "c:objc(cs)ORKStep"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)initWithStep:",
+            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC4stepACSo7ORKStepCSg_tcfc",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "initWithStep:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "viewDidLoad",
+            "printedName": "viewDidLoad()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)viewDidLoad",
+            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC11viewDidLoadyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "viewDidLoad",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "viewDidAppear",
+            "printedName": "viewDidAppear(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)viewDidAppear:",
+            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC13viewDidAppearyySbF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "viewDidAppear:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stepDidFinish",
+            "printedName": "stepDidFinish()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)stepDidFinish",
+            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC13stepDidFinishyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "stepDidFinish",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "result",
+            "printedName": "result",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ResearchKit.ORKStepResult?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ORKStepResult",
+                    "printedName": "ResearchKit.ORKStepResult",
+                    "usr": "c:objc(cs)ORKStepResult"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(py)result",
+            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC6resultSo13ORKStepResultCSgvp",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "result",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "ResearchKit.ORKStepResult?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ORKStepResult",
+                        "printedName": "ResearchKit.ORKStepResult",
+                        "usr": "c:objc(cs)ORKStepResult"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)result",
+                "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC6resultSo13ORKStepResultCSgvg",
+                "moduleName": "ResearchKit",
+                "overriding": true,
+                "objc_name": "result",
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "start",
+            "printedName": "start()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController(im)start",
+            "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC5startyyF",
+            "moduleName": "ResearchKit",
+            "overriding": true,
+            "objc_name": "start",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKit@objc(cs)ORKSwiftStroopStepViewController",
+        "mangledName": "$s11ResearchKit32ORKSwiftStroopStepViewControllerC",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "Custom",
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ORKActiveStepViewController",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ResearchKit.ORKActiveStepViewController",
+          "ResearchKit.ORKStepViewController",
+          "UIKit.UIViewController",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
+          }
         ]
       },
       {
@@ -5420,6 +7060,363 @@
       "value": "\"ResearchKit.ORKLandoltCStep\""
     },
     {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1956,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2010,
+      "length": 26,
+      "value": "\"STROOP_COLOR_RED_INITIAL\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2038,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2242,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2296,
+      "length": 28,
+      "value": "\"STROOP_COLOR_GREEN_INITIAL\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2326,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2529,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2583,
+      "length": 27,
+      "value": "\"STROOP_COLOR_BLUE_INITIAL\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2612,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2817,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2871,
+      "length": 29,
+      "value": "\"STROOP_COLOR_YELLOW_INITIAL\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 2902,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3068,
+      "length": 4,
+      "value": "60.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3103,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 3126,
+      "length": 3,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3226,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3341,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3477,
+      "length": 4,
+      "value": "60.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3532,
+      "length": 4,
+      "value": "20.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4064,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4138,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 5040,
+      "length": 12,
+      "value": "\"colorLabel\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 5081,
+      "length": 17,
+      "value": "\"buttonStackView\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "StringLiteral",
+      "offset": 5199,
+      "length": 59,
+      "value": "\"V:|-(==30)-[colorLabel]-(>=10)-[buttonStackView]-(==30)-|\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 5831,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6202,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6248,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6682,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopContentView.swift",
+      "kind": "FloatLiteral",
+      "offset": 6732,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3157,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3687,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4258,
+      "length": 176,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4329,
+      "length": 1,
+      "value": "\"; color: \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4349,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4352,
+      "length": 4,
+      "value": "\" text: \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4369,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4372,
+      "length": 13,
+      "value": "\" colorSelected: \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4407,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4410,
+      "length": 1,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopResult.swift",
+      "kind": "StringLiteral",
+      "offset": 4433,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1753,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1789,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2062,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2208,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2246,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2285,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "StringLiteral",
+      "offset": 2486,
+      "length": 69,
+      "value": "\"number of attempts should be greater or equal to \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "StringLiteral",
+      "offset": 2554,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2631,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2716,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3448,
+      "length": 5,
+      "value": "false"
+    },
+    {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKLandoltCResult.swift",
       "kind": "BooleanLiteral",
       "offset": 2866,
@@ -5880,6 +7877,328 @@
       "offset": 3632,
       "length": 3,
       "value": "360"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1963,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2005,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2017,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2028,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2040,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2082,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2094,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2105,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2117,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2158,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2170,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2181,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2193,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2236,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2248,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2259,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2271,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2333,
+      "length": 18,
+      "value": "\"STROOP_COLOR_RED\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2353,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2411,
+      "length": 20,
+      "value": "\"STROOP_COLOR_GREEN\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2433,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2490,
+      "length": 19,
+      "value": "\"STROOP_COLOR_BLUE\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2511,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2570,
+      "length": 21,
+      "value": "\"STROOP_COLOR_YELLOW\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2593,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2872,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 2962,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3774,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 4345,
+      "length": 3,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 4685,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 5032,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 5380,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 5729,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 5950,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6269,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7577,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7809,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7833,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8913,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8969,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9024,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9081,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9194,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9249,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9303,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/ORKSwiftStroopStepViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 9359,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKit\/ActiveTasks\/CircleSlider.swift",

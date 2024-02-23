@@ -366,6 +366,43 @@ SWIFT_CLASS("_TtC11ResearchKit29ORKLandoltCStepViewController")
 @end
 
 
+
+SWIFT_CLASS("_TtC11ResearchKit20ORKSwiftStroopResult")
+@interface ORKSwiftStroopResult : ORKResult
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_CLASS("_TtC11ResearchKit18ORKSwiftStroopStep")
+@interface ORKSwiftStroopStep : ORKActiveStep
++ (Class _Nonnull)stepViewControllerClass SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier OBJC_DESIGNATED_INITIALIZER;
+- (void)validateParameters;
+- (BOOL)startsFinished SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) BOOL allowsBackNavigation;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_CLASS("_TtC11ResearchKit32ORKSwiftStroopStepViewController")
+@interface ORKSwiftStroopStepViewController : ORKActiveStepViewController
+- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)stepDidFinish;
+@property (nonatomic, readonly, strong) ORKStepResult * _Nullable result;
+- (void)start;
+@end
+
 @class ORKAnswerFormat;
 
 SWIFT_CLASS("_TtC11ResearchKit18SwiftUIViewFactory")
@@ -763,6 +800,43 @@ SWIFT_CLASS("_TtC11ResearchKit29ORKLandoltCStepViewController")
 - (void)stepDidFinish;
 @end
 
+
+
+SWIFT_CLASS("_TtC11ResearchKit20ORKSwiftStroopResult")
+@interface ORKSwiftStroopResult : ORKResult
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_CLASS("_TtC11ResearchKit18ORKSwiftStroopStep")
+@interface ORKSwiftStroopStep : ORKActiveStep
++ (Class _Nonnull)stepViewControllerClass SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier OBJC_DESIGNATED_INITIALIZER;
+- (void)validateParameters;
+- (BOOL)startsFinished SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) BOOL allowsBackNavigation;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_CLASS("_TtC11ResearchKit32ORKSwiftStroopStepViewController")
+@interface ORKSwiftStroopStepViewController : ORKActiveStepViewController
+- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)stepDidFinish;
+@property (nonatomic, readonly, strong) ORKStepResult * _Nullable result;
+- (void)start;
+@end
 
 @class ORKAnswerFormat;
 
