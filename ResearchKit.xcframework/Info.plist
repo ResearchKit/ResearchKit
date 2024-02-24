@@ -8,20 +8,6 @@
 			<key>BinaryPath</key>
 			<string>ResearchKit.framework/ResearchKit</string>
 			<key>LibraryIdentifier</key>
-			<string>xros-arm64</string>
-			<key>LibraryPath</key>
-			<string>ResearchKit.framework</string>
-			<key>SupportedArchitectures</key>
-			<array>
-				<string>arm64</string>
-			</array>
-			<key>SupportedPlatform</key>
-			<string>xros</string>
-		</dict>
-		<dict>
-			<key>BinaryPath</key>
-			<string>ResearchKit.framework/ResearchKit</string>
-			<key>LibraryIdentifier</key>
 			<string>xros-arm64_x86_64-simulator</string>
 			<key>LibraryPath</key>
 			<string>ResearchKit.framework</string>
@@ -39,7 +25,7 @@
 			<key>BinaryPath</key>
 			<string>ResearchKit.framework/ResearchKit</string>
 			<key>LibraryIdentifier</key>
-			<string>ios-arm64</string>
+			<string>xros-arm64</string>
 			<key>LibraryPath</key>
 			<string>ResearchKit.framework</string>
 			<key>SupportedArchitectures</key>
@@ -47,7 +33,7 @@
 				<string>arm64</string>
 			</array>
 			<key>SupportedPlatform</key>
-			<string>ios</string>
+			<string>xros</string>
 		</dict>
 		<dict>
 			<key>BinaryPath</key>
@@ -65,6 +51,20 @@
 			<string>ios</string>
 			<key>SupportedPlatformVariant</key>
 			<string>simulator</string>
+		</dict>
+		<dict>
+			<key>BinaryPath</key>
+			<string>ResearchKit.framework/ResearchKit</string>
+			<key>LibraryIdentifier</key>
+			<string>ios-arm64</string>
+			<key>LibraryPath</key>
+			<string>ResearchKit.framework</string>
+			<key>SupportedArchitectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>SupportedPlatform</key>
+			<string>ios</string>
 		</dict>
 	</array>
 	<key>CFBundlePackageType</key>
