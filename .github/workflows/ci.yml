@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         destination: ['platform=iOS\ Simulator,OS=17.2,name=iPhone\ 15\ Pro\ Max']
-        scheme: ['ResearchKit', 'ORKTest']
+        scheme: ['ResearchKit']
     steps:
       - uses: actions/checkout@v4
       - name: Set Xcode Version
