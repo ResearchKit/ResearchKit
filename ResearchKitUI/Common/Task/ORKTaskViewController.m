@@ -1048,7 +1048,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!learnMoreViewController) {
         learnMoreViewController = [[ORKLearnMoreStepViewController alloc] initWithStep:step];
     }
-    
+
+    learnMoreViewController.view.tintColor = ORKViewTintColor(self.view);
+
     return learnMoreViewController;
 }
 
