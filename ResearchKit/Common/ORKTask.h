@@ -64,6 +64,9 @@ typedef NS_ENUM(NSInteger, ORKTaskFinishReason) {
     ORKTaskFinishReasonEarlyTermination
 };
 
+ORK_TO_BE_DEPRECATED("Use the ORKTaskFinishReason instead")
+typedef ORKTaskFinishReason ORKTaskViewControllerFinishReason;
+
 /**
 
  `ORKTaskProgress` is a structure that represents how far a task has progressed.
