@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, ORKTaskFinishReason) {
     ORKTaskFinishReasonEarlyTermination
 };
 
-ORK_TO_BE_DEPRECATED("Use the ORKTaskFinishReason instead")
+ORK_TO_BE_DEPRECATED("Use ORKTaskFinishReason instead")
 typedef ORKTaskFinishReason ORKTaskViewControllerFinishReason;
 
 /**
