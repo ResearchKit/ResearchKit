@@ -37,3 +37,17 @@ jobs:
       cxxInterop: ${{ matrix.cxxInterop }}
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
       runsonlabels: '["macOS", "self-hosted"]'
+  ios:
+    name: Build and Test iOS
+    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    with:
+      path: 'Tests/UITests'
+      scheme: TestApp
+      resultBundle: TestApp-iOS.xcresult
+      artifactname: TestApp-iOS.xcresult
+  uploadcoveragereport:
+    name: Upload Coverage Report
+    needs: [ios]
+    uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
+    with:
+      coveragereports: TestApp-iOS.xcresult
