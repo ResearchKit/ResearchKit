@@ -30,7 +30,7 @@ jobs:
             cxxInterop: true
     with:
       workspaceFile: RKWorkspace.xcworkspace
-      xcArchiveName: ResearchKit
+      xcArchiveName: ResearchKit-${{ matrix.configuration }}
       scheme: ResearchKit
       version: ${{ inputs.version }}
       configuration: ${{ matrix.configuration }}

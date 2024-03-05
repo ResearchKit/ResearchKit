@@ -62,8 +62,13 @@ static const CGFloat buttonStackViewSpacing = 20.0;
         [_colorLabel setFont:[UIFont systemFontOfSize:60]];
         [_colorLabel setAdjustsFontSizeToFitWidth:YES];
         
-        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
-        
+        ORKScreenType screenType;
+        if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
+            screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
+        } else {
+            screenType = ORKGetVerticalScreenTypeForWindow(NULL);
+        }
+
         if (screenType == ORKScreenTypeiPhone5 ) {
             labelWidth = 200.0;
             labelHeight = 200.0;
@@ -145,8 +150,13 @@ static const CGFloat buttonStackViewSpacing = 20.0;
         
         _buttonStackView.axis = UILayoutConstraintAxisVertical;
         
-        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
-        
+        ORKScreenType screenType;
+        if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
+            screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
+        } else {
+            screenType = ORKGetVerticalScreenTypeForWindow(NULL);
+        }
+
         if (screenType == ORKScreenTypeiPhone6) {
             minimumButtonHeight = 150.0;
         } else if (screenType == ORKScreenTypeiPhone5 ) {

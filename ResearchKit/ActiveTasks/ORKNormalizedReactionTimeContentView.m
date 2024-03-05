@@ -78,7 +78,12 @@ CGFloat BackgroundViewSpaceMultiplier = 2.0;
 }
 
 -(void)resizeConstraints {
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
+    ORKScreenType screenType;
+    if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
+        screenType = ORKGetVerticalScreenTypeForWindow([[[UIApplication sharedApplication] delegate] window]);
+    } else {
+        screenType = ORKGetVerticalScreenTypeForWindow(NULL);
+    }
     if (screenType == ORKScreenTypeiPhone5 ) {
         NormalizeButtonSize = 70.0;
         BackgroundViewSpaceMultiplier = 1.75;
