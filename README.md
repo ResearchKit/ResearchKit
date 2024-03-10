@@ -4,11 +4,15 @@ ResearchKit Framework
 > [!NOTE]  
 > This repository is a [StanfordBDHG](https://github.com/StanfordBDHG) fork of the [ResearchKit project](https://github.com/ResearchKit/ResearchKit) by Apple, adding support for:
 > - The [Swift Package Manager](https://www.swift.org/documentation/package-manager/) by building ResearchKit to an [XCFramework](https://developer.apple.com/documentation/xcode/creating-a-multi-platform-binary-framework-bundle) via GitHub Actions and exposing the built XCFramework as a SPM binary target to speed up build times of projects / packages consuming our ResearchKit fork.
+> - SwiftUI support to easily interact with the `ORKTaskViewController` using the [`ORKOrderedTaskView`](https://swiftpackageindex.com/stanfordbdhg/researchkit/documentation/researchkitswiftui/orkorderedtaskview).
 > - Building ResearchKit with enabled [Swift's C++ Interoperability](https://www.swift.org/documentation/cxx-interop/), requiring minor code adjustments (not additive) to the ResearchKit codebase.
 > - Building ResearchKit natively on [visionOS to run on Apple Vision Pro](https://developer.apple.com/visionos/).
 
+[![Create XCFramework and Release](https://github.com/StanfordBDHG/ResearchKit/actions/workflows/release.yml/badge.svg)](https://github.com/StanfordBDHG/ResearchKit/actions/workflows/release.yml)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordBDHG%2FResearchKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/StanfordBDHG/ResearchKit)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordBDHG%2FResearchKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/StanfordBDHG/ResearchKit)
+[![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license)
 
-![Platform](https://img.shields.io/cocoapods/p/ResearchKit.svg) ![SwiftPackageManager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange) ![CocoaPods](https://img.shields.io/cocoapods/v/ResearchKit.svg) ![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license) ![](https://travis-ci.com/ResearchKit/ResearchKit.svg?branch=master)
 
 The *ResearchKit™ framework* is an open source software framework that makes it easy to create apps
 for medical research or for other research projects.

@@ -10,17 +10,6 @@ import ResearchKit
 import SwiftUI
 
 
-/// The result of a `ORKOrderedTask` presented using `ORKOrderedTaskView`.
-public enum TaskResult {
-    /// The task was successfully completed with the provided `ORKTaskResult`.
-    case completed(_ result: ORKTaskResult)
-    /// The task was cancelled by the user.
-    case cancelled
-    /// An error occurred while completing the task.
-    case failed(_ error: Error)
-}
-
-
 /// Present an `ORKOrderedTask`.
 ///
 /// This view allows you to present a ResearchKit `ORKOrderedTask` to the user.
@@ -65,19 +54,28 @@ public enum TaskResult {
 public struct ORKOrderedTaskView: UIViewControllerRepresentable {
     public class Coordinator: NSObject, ORKTaskViewControllerDelegate {
         fileprivate var result: @MainActor (TaskResult) async -> Void
-        fileprivate var shouldConfirmCancel: Bool
+        fileprivate var cancelBehavior: CancelBehavior
 
 
         init(
             result: @escaping @MainActor (TaskResult) async -> Void,
-            shouldConfirmCancel: Bool
+            cancelBehavior: CancelBehavior
         ) {
             self.result = result
-            self.shouldConfirmCancel = shouldConfirmCancel
+            self.cancelBehavior = cancelBehavior
         }
 
         public func taskViewControllerShouldConfirmCancel(_ taskViewController: ORKTaskViewController) -> Bool {
-            shouldConfirmCancel
+            cancelBehavior == .shouldConfirmCancel
+        }
+        
+        public func taskViewController(
+            _ taskViewController: ORKTaskViewController,
+            stepViewControllerWillAppear stepViewController: ORKStepViewController
+        ) {
+            if cancelBehavior == .disabled {
+                stepViewController.cancelButtonItem = nil
+            }
         }
 
         public func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -126,7 +124,7 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
     private let taskId: UUID
     private let tasks: ORKOrderedTask
     private let tintColor: Color
-    private let shouldConfirmCancel: Bool
+    private let cancelBehavior: CancelBehavior
 
     private let result: @MainActor (TaskResult) async -> Void
 
@@ -152,24 +150,46 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
     /// - Parameters:
     ///   - tasks: The `ORKOrderedTask` that should be displayed by the underlying `ORKTaskViewController`.
     ///   - tintColor: The tint color to use with ResearchKit views.
-    ///   - shouldConfirmCancel: Specifies the behavior of the "Cancel" button if it should ask for confirmation.
+    ///   - shouldConfirmCancel: Specifies the behavior of the "Cancel" button if it should ask for confirmation. The button is always presented.
+    ///   - result: A closure receiving the ``TaskResult`` for the task view.
+    @available(*, deprecated, message: "Use init(tasks:tintColor:cancelBehavior:result:) instead")
+    public init( // swiftlint:disable:this function_default_parameter_at_end
+        tasks: ORKOrderedTask,
+        tintColor: Color = Color(UIColor(named: "AccentColor") ?? .systemBlue),
+        shouldConfirmCancel: Bool,
+        result: @escaping @MainActor (TaskResult) async -> Void
+    ) {
+        self.init(
+            tasks: tasks,
+            tintColor: tintColor,
+            cancelBehavior: shouldConfirmCancel ? .shouldConfirmCancel : .cancel,
+            result: result
+        )
+    }
+    
+    /// Create a new `ORKOrderedTaskView`.
+    ///
+    /// - Parameters:
+    ///   - tasks: The `ORKOrderedTask` that should be displayed by the underlying `ORKTaskViewController`.
+    ///   - tintColor: The tint color to use with ResearchKit views.
+    ///   - cancelBehavior: Specifies the behavior of the "Cancel" button.
     ///   - result: A closure receiving the ``TaskResult`` for the task view.
     public init(
         tasks: ORKOrderedTask,
         tintColor: Color = Color(UIColor(named: "AccentColor") ?? .systemBlue),
-        shouldConfirmCancel: Bool = true,
+        cancelBehavior: CancelBehavior = .shouldConfirmCancel,
         result: @escaping @MainActor (TaskResult) async -> Void
     ) {
         self.taskId = UUID()
         self.tasks = tasks
         self.tintColor = tintColor
-        self.shouldConfirmCancel = shouldConfirmCancel
+        self.cancelBehavior = cancelBehavior
         self.result = result
     }
 
 
     public func makeCoordinator() -> Coordinator {
-        Coordinator(result: result, shouldConfirmCancel: shouldConfirmCancel)
+        Coordinator(result: result, cancelBehavior: cancelBehavior)
     }
 
     public func updateUIViewController(_ uiViewController: ORKTaskViewController, context: Context) {
@@ -177,7 +197,7 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
         uiViewController.delegate = context.coordinator
 
         context.coordinator.result = result
-        context.coordinator.shouldConfirmCancel = shouldConfirmCancel
+        context.coordinator.cancelBehavior = cancelBehavior
     }
 
     public func makeUIViewController(context: Context) -> ORKTaskViewController {

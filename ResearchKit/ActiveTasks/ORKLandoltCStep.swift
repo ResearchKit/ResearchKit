@@ -29,7 +29,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if os(iOS)
+// Unfortunately, CoreFoundation types can not be used in public interfaces when using C++ interoperability mode in Swift.
+// CircleSlider is using these types, and we therefore disabled the Landolt C Visual Acuity Task for now.
+#if os(iOS) && false
 
 @objc
 public enum VisionStepLeftOrRightEye: Int {

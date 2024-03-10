@@ -3009,6 +3009,9 @@ NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
 
 #pragma mark - landoltC Visual Acuity
 
+// Unfortunately, CoreFoundation types can not be used in public interfaces when using C++ interoperability mode in Swift.
+// CircleSlider is using these types, and we therefore disabled the Landolt C Visual Acuity Task for now.
+#if false
 + (ORKOrderedTask *)landoltCVisualAcuityTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedDescription {
     
@@ -3085,6 +3088,7 @@ NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
     
     return task;
 }
+#endif
 
 #pragma mark - touch ability
 

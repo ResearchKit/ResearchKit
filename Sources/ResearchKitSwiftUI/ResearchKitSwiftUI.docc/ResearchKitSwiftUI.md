@@ -22,3 +22,4 @@ This target provides additional support to easily integrate ResearchKit function
 
 - ``ORKOrderedTaskView``
 - ``TaskResult``
+- ``CancelBehavior``
