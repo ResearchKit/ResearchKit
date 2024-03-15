@@ -105,22 +105,14 @@ static const CGFloat CheckmarkViewBorderWidth = 2.0;
 - (void)updateCheckView {
     if (_checked) {
         self.image = _checkedImage;
-        //        FIXME: Need to be replaced.
-        if (@available(iOS 13.0, *)) {
+        if (![self.tintColor isEqual: ORKViewTintColor(self)]) {
             self.tintColor = ORKViewTintColor(self);
-        } else {
-            self.backgroundColor = [self tintColor];
-            self.tintColor = UIColor.whiteColor;
         }
     }
     else {
         self.image = _uncheckedImage;
-        if (@available(iOS 13.0, *)) {
+        if (![self.tintColor isEqual: [UIColor systemGray3Color]]) {
             self.tintColor = [UIColor systemGray3Color];
-        } else {
-            self.tintColor = nil;
-            self.image = nil;
-            self.backgroundColor = UIColor.clearColor;
         }
     }
 }
