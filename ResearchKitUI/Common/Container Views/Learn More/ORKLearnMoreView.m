@@ -122,6 +122,7 @@ ORK_CLASS_AVAILABLE
     if (!_learnMoreButton) {
         _learnMoreButton = [ORKLearnMoreButton learnMoreCustomButtonWithText:text];
     }
+    [self setLearnMoreButtonColor];
     [self addSubview:_learnMoreButton];
     [_learnMoreButton addTarget:self action:@selector(presentLearnMoreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self setupConstraints];
@@ -131,6 +132,7 @@ ORK_CLASS_AVAILABLE
     if (!_learnMoreButton) {
         _learnMoreButton = [ORKLearnMoreButton learnMoreDetailDisclosureButton];
     }
+    [self setLearnMoreButtonColor];
     [self addSubview:_learnMoreButton];
     [_learnMoreButton addTarget:self action:@selector(presentLearnMoreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self setupConstraints];
@@ -139,6 +141,13 @@ ORK_CLASS_AVAILABLE
 - (void)setLearnMoreButtonFont: (UIFont *)font {
     if (_learnMoreButton) {
         [_learnMoreButton.titleLabel setFont:font];
+    }
+}
+
+- (void)setLearnMoreButtonColor {
+    if (_learnMoreButton) {
+        [_learnMoreButton setTitleColor:self.tintColor forState:UIControlStateNormal];
+        _learnMoreButton.tintColor = self.tintColor;
     }
 }
 
@@ -193,6 +202,11 @@ ORK_CLASS_AVAILABLE
 - (void)presentLearnMoreViewController {
     NSAssert(_delegate, @"Learn More View requires a delegate");
     [_delegate learnMoreButtonPressedWithStep:_learnMoreInstructionStep];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self setLearnMoreButtonColor];
 }
 
 @end
