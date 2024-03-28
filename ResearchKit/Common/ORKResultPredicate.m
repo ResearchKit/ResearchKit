@@ -250,6 +250,12 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ ]];
 }
 
++ (NSPredicate *)predicateForDontKnowResultWithResultSelector:(ORKResultSelector *)resultSelector {
+    return [self predicateMatchingResultSelector:resultSelector
+                         subPredicateFormatArray:@[ @"answer isKindOfClass: %@" ]
+                 subPredicateFormatArgumentArray:@[ [ORKDontKnowAnswer class] ]];
+}
+
 + (NSPredicate *)predicateForScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                     expectedAnswer:(NSInteger)expectedAnswer {
     return [self predicateForNumericQuestionResultWithResultSelector:resultSelector

@@ -29,15 +29,15 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKFormStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKRegistrationStepOption` flags let you include particular fields in addition
- to the default fields (email and password) in the registration step.
+ Flags that let you include particular fields in addition
+ to the default fields in the registration step.
  */
 typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
     /// Default behavior.
@@ -74,8 +74,7 @@ ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierPhoneNumber ORK_AVAI
 
 
 /**
- The `ORKRegistrationStep` class represents a form step that provides fields commonly used
- for account registration.
+ A form step subclass that provides fields for account registration.
  
  The registration step contains email and password fields by default. Optionally, any 
  of the additional fields can be included based on context and requirements.

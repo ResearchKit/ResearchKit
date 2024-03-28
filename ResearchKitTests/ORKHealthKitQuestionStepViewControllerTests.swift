@@ -29,7 +29,7 @@
  */
 
 import XCTest
-import ResearchKit.Private
+import ResearchKit_Private
 
 final class ORKHealthKitQuestionStepViewControllerTests: XCTestCase {
     var testController: ORKStepViewController!

@@ -18,10 +18,27 @@
   },
   "testTargets" : [
     {
+      "selectedTests" : [
+        "PreSubmissionTests\/testAccessActiveTasks()",
+        "PreSubmissionTests\/testAccessSurveyQuestions()",
+        "PreSubmissionTests\/testAccessSurveyTasks()",
+        "PreSubmissionTests\/testImageMultipleChoice()",
+        "PreSubmissionTests\/testSQPickerWheel()",
+        "PreSubmissionTests\/testSQSliders()",
+        "PreSubmissionTests\/testSQTextEntry()",
+        "PreSubmissionTests\/testWrittenMultipleChoice()"
+      ],
       "target" : {
         "containerPath" : "container:ORKCatalog.xcodeproj",
         "identifier" : "9622282924F04D780056E74D",
         "name" : "ORKCatalogUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:ORKCatalog.xcodeproj",
+        "identifier" : "51AF19762B59F1E400D3B399",
+        "name" : "ORKCatalogTests"
       }
     }
   ],

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1310"
+   LastUpgradeVersion = "1500"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -41,6 +41,17 @@
                BlueprintIdentifier = "9622282924F04D780056E74D"
                BuildableName = "ORKCatalogUITests.xctest"
                BlueprintName = "ORKCatalogUITests"
+               ReferencedContainer = "container:ORKCatalog.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "51AF19762B59F1E400D3B399"
+               BuildableName = "ORKCatalogTests.xctest"
+               BlueprintName = "ORKCatalogTests"
                ReferencedContainer = "container:ORKCatalog.xcodeproj">
             </BuildableReference>
          </TestableReference>

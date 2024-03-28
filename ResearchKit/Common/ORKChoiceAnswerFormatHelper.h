@@ -35,11 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKAnswerFormat;
 @class ORKImageChoice;
 @class ORKTextChoice;
+
+
 @protocol ORKAnswerOption;
 
 @protocol ORKChoiceAnswerFormatHelper <NSObject>
 
-- (NSArray *)choices;
+- (nullable NSArray *)choices;
 
 - (BOOL)isValuePicker;
 
@@ -71,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKChoiceAnswerFormatHelper ()
 
 - (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
+
 
 @end
 #endif

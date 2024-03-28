@@ -31,9 +31,7 @@
 #import <SensorKit/SensorKit.h>
 
 #import "ORKSensorPermissionType.h"
-#import "ORKRequestPermissionView.h"
 #import "ORKHelpers_Internal.h"
-#import "ORKRequestPermissionButton.h"
 
 static NSString *const Symbol = @"gauge";
 static const uint32_t IconLightTintColor = 0xA278FE;
@@ -68,39 +66,38 @@ static const uint32_t IconDarkTintColor = 0x9D71F7;
             [readers addObject:reader];
         }
         _readers = [readers copy];
-        [self setupCardView];
     }
     return self;
 }
 
-- (void)setupCardView {
-    UIImage *image;
-    if (@available(iOS 13, *)) {
-        image = [UIImage systemImageNamed:Symbol];
-    }
+- (NSString *)localizedTitle {
+    return ORKLocalizedString(@"REQUEST_SENSOR_STEP_VIEW_TITLE", nil);
+}
 
-    self.cardView = [[ORKRequestPermissionView alloc] initWithIconImage:image
-                                                                  title:ORKLocalizedString(@"REQUEST_SENSOR_STEP_VIEW_TITLE", nil)
-                                                             detailText:ORKLocalizedString(@"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION", nil)];
+- (NSString *)localizedDetailText {
+    return ORKLocalizedString(@"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION", nil);
+}
 
-    [self.cardView.requestPermissionButton addTarget:self action:@selector(requestPermissionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+- (UIImage * _Nullable)image {
+    return [UIImage systemImageNamed:Symbol];
+}
 
-    // Set the tint color for the icon
-    if (@available(iOS 13, *)) {
-        UIColor *dynamicTint = [[UIColor alloc] initWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            return traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? ORKRGB(IconDarkTintColor) : ORKRGB(IconLightTintColor);
-        }];
-        [self.cardView updateIconTintColor:dynamicTint];
-    } else {
-        [self.cardView updateIconTintColor:ORKRGB(IconLightTintColor)];
-    }
+- (UIColor *)iconTintColor {
+    return [[UIColor alloc] initWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+        return traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? ORKRGB(IconDarkTintColor) : ORKRGB(IconLightTintColor);
+    }];
+}
 
 
+- (ORKRequestPermissionsState)permissionState {
     if ([self hasRequestedAllSensors]) {
-        [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
-    } else {
-        [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
+        return ORKRequestPermissionsStateConnected;
     }
+    return ORKRequestPermissionsStateDefault;
+}
+
+- (BOOL)canContinue {
+    return self.permissionState == ORKRequestPermissionsStateConnected;
 }
 
 - (BOOL)hasRequestedAllSensors {
@@ -112,23 +109,18 @@ static const uint32_t IconDarkTintColor = 0x9D71F7;
     return YES;
 }
 
-- (void)requestPermissionButtonPressed {
+- (void)requestPermission {
     [SRSensorReader requestAuthorizationForSensors:self.sensors completion:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 ORK_Log_Error("Error requesting sensor permissions: %@", error);
-                [self setState:ORKRequestPermissionsButtonStateError canContinue:YES];
-                return;
             }
 
-            [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
+            if (self.permissionsStatusUpdateCallback != nil) {
+                self.permissionsStatusUpdateCallback();
+            }
         });
     }];
-}
-
-- (void)setState:(ORKRequestPermissionsButtonState)state canContinue:(BOOL)canContinue {
-    [self.cardView setEnableContinueButton:canContinue];
-    [self.cardView.requestPermissionButton setState:state];
 }
 
 - (BOOL)isEqual:(id)object {

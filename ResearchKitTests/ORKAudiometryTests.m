@@ -30,7 +30,9 @@
 
 #import <XCTest/XCTest.h>
 
-@import ResearchKit.Private;
+@import ResearchKit_Private;
+@import ResearchKitActiveTask;
+@import ResearchKitActiveTask_Private;
 
 @interface ORKAudiometryTests : XCTestCase
 
@@ -74,6 +76,7 @@
 
 - (void)runTestForAudiometryClass:(id<ORKAudiometryProtocol> (^_Nonnull)(void))audiometryConstructor {
     [self.audiogramPool enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull audiogramDict, NSUInteger idx, BOOL * _Nonnull stop) {
+        
         [self runTestForAudiogram:audiogramDict onAudiometryEngine:audiometryConstructor()];
     }];
 }

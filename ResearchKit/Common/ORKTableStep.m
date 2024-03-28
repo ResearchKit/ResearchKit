@@ -30,7 +30,6 @@
 
 
 #import "ORKTableStep.h"
-#import "ORKTableStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
 static const CGFloat CellPadding = 20.0;
@@ -43,10 +42,6 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 @implementation ORKTableStep {
     UIImage * _circleBulletImage;
-}
-
-+ (Class)stepViewControllerClass {
-    return [ORKTableStepViewController class];
 }
 
 - (NSInteger)numberOfSections {

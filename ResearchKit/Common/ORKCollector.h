@@ -80,7 +80,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- ORKHealthCollector collects HKSample.
+ An object that collects HKSample.
  
  It cannot be initiated directly. 
  Use `addHealthCollectorWithSampleType:`to add one to a `ORKDataCollectionManager`.
@@ -112,7 +112,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- ORKHealthCollector collects HKCorrelation.
+ An object that collects HKCorrelation.
  
  It cannot be initiated directly.
  Use `addHealthCorrelationCollectorWithCorrelationType:`to add one to a `ORKDataCollectionManager`.
@@ -149,7 +149,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- ORKHealthCollector collects CMMotionActivity.
+ An object that collects CMMotionActivity.
  
  It cannot be initiated directly.
  Use `addMotionActivityCollectorWithStartDate:`to add one to a `ORKDataCollectionManager`.
