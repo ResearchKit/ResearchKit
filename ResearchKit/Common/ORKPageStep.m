@@ -30,7 +30,6 @@
 
 #import "ORKPageStep_Private.h"
 #import "ORKHelpers_Internal.h"
-#import "ORKPageStepViewController.h"
 #import "ORKResult.h"
 
 
@@ -63,12 +62,6 @@
 
 - (NSArray<ORKStep *> *)steps {
     return self.pageTask.steps;
-}
-
-#pragma mark - view controller instantiation
-
-+ (Class)stepViewControllerClass {
-    return [ORKPageStepViewController class];
 }
 
 #pragma mark - permissions

@@ -32,11 +32,16 @@
 
 @import UIKit;
 
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKHelpers_Private.h>
 #import <ResearchKit/ORKErrors.h>
+#endif
+
+
 #import <Foundation/Foundation.h>
 #import <os/log.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -273,6 +278,7 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 
 #define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" cannot be nil." userInfo:nil]; }
+#define ORKThrowInvalidArgumentExceptionIfNotEqual(argument1, argument2)  if (![argument1 isEqual:argument2]) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"text argument(%@) and value argument(%@) are not equal",argument1, argument2] userInfo:nil]; }
 
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
@@ -389,11 +395,8 @@ ORK_EXTERN NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
 
 ORK_INLINE NSString *ORKLocalizedHiddenString(NSString *key) {
-    // try to find on hidden table
-    NSString *value = [ORKBundle() localizedStringForKey:key value:key table:@"No-Localization"];
+    NSString *value = [ORKBundle() localizedStringForKey:key value:key table:@"ResearchKit"];
     if ([value isEqualToString:key]) {
-        value = [ORKBundle() localizedStringForKey:key value:key table:@"ResearchKit"];
-    } if ([value isEqualToString:key]) {
         // If it fails try to find on default table
         value = [ORKDefaultLocaleBundle() localizedStringForKey:key value:key table:@"ResearchKit"];
     }
@@ -408,7 +411,5 @@ ORKLocalizedHiddenString(key)
 
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
-
-NSString* ORKSwiftLocalizedString(NSString *key, NSString *comment);
 
 NS_ASSUME_NONNULL_END

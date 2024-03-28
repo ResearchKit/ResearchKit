@@ -32,6 +32,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ A step that appears with provided custom content.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKCustomStep : ORKStep
 

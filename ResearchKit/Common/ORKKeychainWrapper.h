@@ -29,15 +29,14 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKKeychainWrapper` class is an abstraction layer for the iOS keychain
- communication.
+ An abstraction layer for iOS keychain communication.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKKeychainWrapper : NSObject
@@ -66,7 +65,7 @@ ORK_CLASS_AVAILABLE
  
  @return An object or `nil` if key is not valid.
  */
-+ (nullable id<NSSecureCoding>)objectOfClass:(Class)objectClass forKey:(NSString *)key error:(NSError * __autoreleasing _Nullable *)errorOut;
++ (nullable id<NSSecureCoding>)objectForKey:(nonnull NSString *)key error:(NSError * __autoreleasing _Nullable *)error;
 
 /**
  Removes the object in the keychain for the provided key.

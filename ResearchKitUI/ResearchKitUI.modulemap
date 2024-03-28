@@ -1,0 +1,14 @@
+framework module ResearchKitUI {
+    umbrella header "ResearchKitUI.h"
+    module iOS {
+    }
+    export *
+    module * { export * }
+}
+
+framework module ResearchKitUI_Private {
+    umbrella header "ResearchKitUI_Private.h"
+    
+    export *
+    module * { export * }
+}

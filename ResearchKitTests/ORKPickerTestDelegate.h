@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020, Apple Inc. All rights reserved.
+ Copyright (c) 2022, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,7 +29,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <ResearchKit/ORKPicker.h>
+#import <ResearchKitUI/ORKPicker.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

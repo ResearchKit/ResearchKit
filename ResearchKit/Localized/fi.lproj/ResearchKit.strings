@@ -306,7 +306,7 @@
 "AUDIO_TASK_TITLE" = "Ääni";
 "AUDIO_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
 "AUDIO_INSTRUCTION" = "Sano ”aaa” mikrofoniin niin kauan kuin voit.";
-"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano \”Aaaaa\” mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
+"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano ”Aaaaa\" mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
 "AUDIO_INTENDED_USE" = "Tämä aktiviteetti arvioi ääntäsi tallentamalla sitä laitteen alareunassa olevalla mikrofonilla.";
 "AUDIO_TOO_LOUD_LABEL" = "Liian kovaa";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ei voida äänittää";

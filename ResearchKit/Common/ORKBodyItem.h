@@ -28,11 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+/**
+ An enumeration for body item style options.
+ */
 
 typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
     /**
@@ -62,6 +66,11 @@ typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
 } ORK_ENUM_AVAILABLE;
 
 @class ORKLearnMoreItem;
+
+/**
+ An object that represents textual information to
+ attach to a step.
+ */
 
 ORK_CLASS_AVAILABLE
 @interface ORKBodyItem : NSObject <NSSecureCoding, NSCopying>

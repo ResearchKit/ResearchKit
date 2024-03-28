@@ -30,6 +30,7 @@
 
 import XCTest
 @testable import ResearchKit
+@testable import ResearchKitActiveTask
 
 class ORKAmslerGridResultTests: XCTestCase {
     var result: ORKAmslerGridResult!

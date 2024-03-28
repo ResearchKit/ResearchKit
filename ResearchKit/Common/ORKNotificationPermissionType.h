@@ -33,6 +33,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ A permission type object that requests permission to send user notifications.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKNotificationPermissionType : ORKPermissionType
 
