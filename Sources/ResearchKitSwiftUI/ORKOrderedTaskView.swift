@@ -56,6 +56,10 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
         fileprivate var result: @MainActor (TaskResult) async -> Void
         fileprivate var cancelBehavior: CancelBehavior
 
+        fileprivate var stepWillAppear: ((ORKTaskViewController, ORKStepViewController) -> Void)?
+        fileprivate var stepWillDisappear: ((ORKTaskViewController, ORKStepViewController, ORKStepViewControllerNavigationDirection) -> Void)?
+        fileprivate var shouldPresentStep: ((ORKTaskViewController, ORKStep) -> Bool)?
+
 
         init(
             result: @escaping @MainActor (TaskResult) async -> Void,
@@ -76,6 +80,16 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
             if cancelBehavior == .disabled {
                 stepViewController.cancelButtonItem = nil
             }
+
+            stepWillAppear?(taskViewController, stepViewController)
+        }
+
+        public func taskViewController(
+            _ taskViewController: ORKTaskViewController,
+            stepViewControllerWillDisappear stepViewController: ORKStepViewController,
+            navigationDirection direction: ORKStepViewControllerNavigationDirection
+        ) {
+            stepWillDisappear?(taskViewController, stepViewController, direction)
         }
 
         public func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -115,6 +129,10 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
                 }
             }
         }
+
+        public func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
+            shouldPresentStep?(taskViewController, step) ?? true
+        }
     }
 
     
@@ -127,6 +145,14 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
     private let cancelBehavior: CancelBehavior
 
     private let result: @MainActor (TaskResult) async -> Void
+
+
+    @Environment(\.onStepWillAppear)
+    private var onStepWillAppear
+    @Environment(\.onStepWillDisappear)
+    private var onStepWillDisappear
+    @Environment(\.shouldPresentStep)
+    private var shouldPresentStep
 
 
     private var outputDirectory: URL {
@@ -189,7 +215,9 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
 
 
     public func makeCoordinator() -> Coordinator {
-        Coordinator(result: result, cancelBehavior: cancelBehavior)
+        let coordinator = Coordinator(result: result, cancelBehavior: cancelBehavior)
+        updateClosures(for: coordinator)
+        return coordinator
     }
 
     public func updateUIViewController(_ uiViewController: ORKTaskViewController, context: Context) {
@@ -198,6 +226,7 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
 
         context.coordinator.result = result
         context.coordinator.cancelBehavior = cancelBehavior
+        updateClosures(for: context.coordinator)
     }
 
     public func makeUIViewController(context: Context) -> ORKTaskViewController {
@@ -207,5 +236,11 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
         viewController.delegate = context.coordinator
         viewController.outputDirectory = outputDirectory
         return viewController
+    }
+
+    private func updateClosures(for coordinator: Coordinator) {
+        coordinator.stepWillAppear = onStepWillAppear
+        coordinator.stepWillDisappear = onStepWillDisappear
+        coordinator.shouldPresentStep = shouldPresentStep
     }
 }

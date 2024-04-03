@@ -22,18 +22,19 @@ jobs:
   create-xcframework-and-release-workflow:
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
+      runsonlabels: '["macOS", "self-hosted"]'
       workspaceFile: RKWorkspace.xcworkspace
       xcFrameworkName: ResearchKit
       scheme: ResearchKit
       dryRun: true
       version: ${{ inputs.version }}
       configuration: Release
-      runsonlabels: '["macOS", "self-hosted"]'
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
   ios:
     name: Build and Test iOS
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
+      runsonlabels: '["macOS", "self-hosted"]'
       path: 'Tests/UITests'
       scheme: TestApp
       resultBundle: TestApp-iOS.xcresult

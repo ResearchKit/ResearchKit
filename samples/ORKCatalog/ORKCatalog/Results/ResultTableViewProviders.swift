@@ -176,8 +176,10 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
     case is ORKWebViewStepResult:
         providerType = WebViewStepResultTableViewProvider.self
         
-    case is ORKLandoltCResult:
-        providerType = LandoltCStepResultProvider.self
+    // Unfortunately, CoreFoundation types can not be used in public interfaces when using C++ interoperability mode in Swift.
+    // CircleSlider is using these types, and we therefore disabled the Landolt C Visual Acuity Task for now.
+    // case is ORKLandoltCResult:
+    //     providerType = LandoltCStepResultProvider.self
 
     case is ORKEnvironmentSPLMeterResult:
         providerType = SPLMeterStepResultTableViewProvider.self
@@ -1388,6 +1390,10 @@ class WebViewStepResultTableViewProvider: ResultTableViewProvider {
 class LandoltCStepResultProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
+    /*
+    // Unfortunately, CoreFoundation types can not be used in public interfaces when using C++ interoperability mode in Swift.
+    // CircleSlider is using these types, and we therefore disabled the Landolt C Visual Acuity Task for now.
+
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let landoltCResult = result as! ORKLandoltCResult
 
@@ -1404,6 +1410,7 @@ class LandoltCStepResultProvider: ResultTableViewProvider {
         
         return rows
     }
+    */
 }
 
 /// Table view provider specific to an `ORKdBHLToneAudiometryResult` instance.
