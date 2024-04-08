@@ -46,7 +46,7 @@ struct AllowScreens {
     
     func allowHealthAccess() {
         if healthAccessScreen.exists {
-            app.tables.staticTexts["Turn All Categories On"].tap()
+            app.tables.staticTexts["Turn On All"].tap()
             sleep(1)
             app.navigationBars["Health Access"].buttons["Allow"].tap()
         }
