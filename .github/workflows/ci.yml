@@ -1,10 +1,10 @@
-name: CI
+name: ci
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ 'main', 'stable' ]
   pull_request:
-    branches: [ 'main' ]
+    branches: [ 'main', 'stable' ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -12,7 +12,7 @@ concurrency:
 
 jobs:        
   test:
-    runs-on: macos-13
+    runs-on: macos-latest
     strategy:
       matrix:
         destination: ['platform=iOS\ Simulator,OS=17.2,name=iPhone\ 15\ Pro\ Max']
