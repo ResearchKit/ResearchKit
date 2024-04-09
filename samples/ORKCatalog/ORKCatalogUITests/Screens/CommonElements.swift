@@ -59,7 +59,7 @@ struct CommonElements {
     }
     
     func getExitButton() -> XCUIElement? {
-        let otherElements = app.sheets.scrollViews.otherElements
+        let otherElements = app.otherElements.scrollViews.otherElements
         if otherElements.buttons["Discard Results"].exists {
             return otherElements.buttons["Discard Results"]
         }
