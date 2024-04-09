@@ -46,7 +46,7 @@ struct AllowScreens {
     
     func allowHealthAccess() {
         if healthAccessScreen.exists {
-            app.tables.staticTexts["Turn All Categories On"].tap()
+            app.tables.staticTexts["Turn On All"].tap()
             sleep(1)
             app.navigationBars["Health Access"].buttons["Allow"].tap()
         }
@@ -59,7 +59,7 @@ struct AllowScreens {
     }
     
     func triggerAllowScreens() -> Bool {
-        let healthTriggers = ["Height Question", "Weight Question"]
+        let healthTriggers = ["Height Question", "Weight Question", "Health Quantity Question"]
         XCTAssert(commonElements.verifyElement(taskScreen.mainTaskScreen))
 
         for task in healthTriggers {
