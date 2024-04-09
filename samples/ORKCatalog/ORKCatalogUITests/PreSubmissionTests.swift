@@ -71,6 +71,14 @@ class PreSubmissionTests: XCTestCase {
         }
     }
 
+    func testAccessOnboarding() throws {
+        XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
+
+        for task in taskScreen.onboardingTasks {
+            XCTAssert(helpers.launchAndLeave(task))
+        }
+    }
+
     func testWrittenMultipleChoice() throws {
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
         let options = ["Choice 1", "Choice 2", "Choice 3", "Other"]

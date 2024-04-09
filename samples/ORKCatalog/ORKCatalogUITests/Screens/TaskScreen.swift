@@ -103,7 +103,18 @@ struct TaskScreen {
         
         return tasks
     }
-    
+
+    var onboardingTasks = [
+        "Account Creation",
+        "Biometric Passcode Creation and Authorization",
+        "Consent Document Review",
+        "Consent Task",
+        "Eligibility Task Example",
+        // "Login",
+        "Passcode Creation",
+        "Review Step"
+    ]
+
     var mainTaskScreen: XCUIElement {
         app.navigationBars["ORKCatalog"].staticTexts["ORKCatalog"]
     }
