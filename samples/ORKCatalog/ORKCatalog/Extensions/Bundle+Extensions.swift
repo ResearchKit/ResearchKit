@@ -39,7 +39,7 @@ extension Bundle {
     }
     
     var buildNumber: String {
-        return infoDictionary?["CFBundleVersion"] as? String ?? "0"
+        return infoDictionary?["CFBundleVersion"] as? String ?? "0.0"
     }
     
     var appVersionAndBuild: String {
