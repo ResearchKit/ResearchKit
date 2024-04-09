@@ -1066,7 +1066,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let dateTimeQuestionSectionHeaderFormItem = ORKFormItem(sectionTitle: TaskListRowStrings.exampleQuestionText)
         let dateTimeQuestionFormItem = ORKFormItem(identifier: String(describing: Identifier.dateTimeQuestionFormStep), text: nil, answerFormat: dateTimeAnswerFormat)
         dateTimeQuestionFormItem.placeholder = "Select Date & Time"
-        let dateTimeQuestionFormStep = ORKFormStep(identifier: String(describing: Identifier.dateTimeQuestionFormItem), title: NSLocalizedString("Date and Time", comment: ""), text: TaskListRowStrings.exampleQuestionText)
+        let dateTimeQuestionFormStep = ORKFormStep(identifier: String(describing: Identifier.dateTimeQuestionFormItem), title: NSLocalizedString("Date and Time", comment: ""), text: "Your text here")
         dateTimeQuestionFormStep.formItems = [dateTimeQuestionSectionHeaderFormItem, dateTimeQuestionFormItem]
         
         return ORKOrderedTask(identifier: String(describing: Identifier.dateTimeQuestionTask), steps: [dateTimeQuestionFormStep])
