@@ -47,7 +47,7 @@ struct CommonElements {
     }
     
     var nextButton: XCUIElement? {
-        app.scrollViews.otherElements.staticTexts["Next"]
+        app.buttons["Next"]
     }
     
     var backButton: XCUIElement? {
@@ -55,7 +55,7 @@ struct CommonElements {
     }
     
     var skipButton: XCUIElement? {
-        app.scrollViews.otherElements.staticTexts["Skip"]
+        app.buttons["Skip"]
     }
     
     func getExitButton() -> XCUIElement? {

@@ -191,13 +191,6 @@ class PreSubmissionTests: XCTestCase {
         XCTAssert(helpers.sliderScreenCheck(.slider5))
         XCTAssert(helpers.sliderScreenCheck(.slider6))
         
-        XCTAssert(helpers.sliderScreenCheck(.slider1))
-        XCTAssert(helpers.sliderScreenCheck(.slider2))
-        XCTAssert(helpers.sliderScreenCheck(.slider3))
-        XCTAssert(helpers.sliderScreenCheck(.slider4))
-        XCTAssert(helpers.sliderScreenCheck(.slider5))
-        XCTAssert(helpers.sliderScreenCheck(.slider6))
-        
         XCTAssert(taskScreen.mainTaskScreen.waitForExistence(timeout: 5))
         return
     }
