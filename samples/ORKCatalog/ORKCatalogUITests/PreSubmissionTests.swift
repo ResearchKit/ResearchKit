@@ -41,7 +41,6 @@ class PreSubmissionTests: XCTestCase {
         continueAfterFailure = false
         helpers.monitorAlerts()
         app.launch()
-
     }
 
     override func tearDownWithError() throws {
@@ -62,8 +61,6 @@ class PreSubmissionTests: XCTestCase {
         for task in taskScreen.surveyQuestions {
             XCTAssert(helpers.launchAndLeave(task))
         }
-        
-        return
     }
     
     func testAccessActiveTasks() throws {
@@ -72,8 +69,6 @@ class PreSubmissionTests: XCTestCase {
         for task in taskScreen.activeTasks {
             XCTAssert(helpers.launchAndLeave(task))
         }
-        
-        return
     }
 
     func testWrittenMultipleChoice() throws {
@@ -90,7 +85,6 @@ class PreSubmissionTests: XCTestCase {
         XCTAssert(helpers.verifyElementByText(options.randomElement()!, true))
         
         XCTAssert(helpers.verifyElementByType(.button, "Next", true))
-        return
     }
     
     func testImageMultipleChoice() throws {
@@ -120,7 +114,6 @@ class PreSubmissionTests: XCTestCase {
         
         XCTAssert(helpers.verifyElementByType(.button, "Done", true))
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
-        return
     }
     
     func testSQPickerWheel() throws {
@@ -177,8 +170,6 @@ class PreSubmissionTests: XCTestCase {
         
         dt.tap()
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
-    
-        return
     }
     
     func testSQSliders() throws {
@@ -192,7 +183,6 @@ class PreSubmissionTests: XCTestCase {
         XCTAssert(helpers.sliderScreenCheck(.slider6))
         
         XCTAssert(taskScreen.mainTaskScreen.waitForExistence(timeout: 5))
-        return
     }
     
     func testSQTextEntry() throws {
@@ -228,8 +218,6 @@ class PreSubmissionTests: XCTestCase {
         done.tap()
         
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
-        
-        return
     }
 
 }

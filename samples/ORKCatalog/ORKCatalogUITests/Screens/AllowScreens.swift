@@ -59,7 +59,7 @@ struct AllowScreens {
     }
     
     func triggerAllowScreens() -> Bool {
-        let healthTriggers = ["Height Question", "Weight Question"]
+        let healthTriggers = ["Height Question", "Weight Question", "Health Quantity Question"]
         XCTAssert(commonElements.verifyElement(taskScreen.mainTaskScreen))
 
         for task in healthTriggers {

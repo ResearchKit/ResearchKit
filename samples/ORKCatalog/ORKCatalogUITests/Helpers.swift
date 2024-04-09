@@ -113,7 +113,7 @@ class Helpers: XCTestCase {
             if tap && item.isEnabled {
                 item.tap()
             }
-        return item
+            return item
         }
         XCTFail("Unable to locate Element based on text \(identifier)")
         return nil
@@ -140,7 +140,7 @@ class Helpers: XCTestCase {
     //Enter any ORKCatalog task based on the name of the task and leave without taking action
     func launchAndLeave(_ task: String) -> Bool {
         XCTAssert(verifyElement(taskScreen.mainTaskScreen))
-        let currentTask = verifyAndAssignByText(task)!
+        let currentTask = taskScreen.getCurrentTask(task: task)!
         currentTask.tap()
         
         sleep(1)
