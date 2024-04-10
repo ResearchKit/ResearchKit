@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B183A4731A8535D100C76870"
-               BuildableName = ".framework"
+               BuildableName = "ResearchKit.framework"
                BlueprintName = "ResearchKit"
                ReferencedContainer = "container:ResearchKit.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B183A4731A8535D100C76870"
-            BuildableName = ".framework"
+            BuildableName = "ResearchKit.framework"
             BlueprintName = "ResearchKit"
             ReferencedContainer = "container:ResearchKit.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B183A4731A8535D100C76870"
-            BuildableName = ".framework"
+            BuildableName = "ResearchKit.framework"
             BlueprintName = "ResearchKit"
             ReferencedContainer = "container:ResearchKit.xcodeproj">
          </BuildableReference>
