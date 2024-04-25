@@ -149,10 +149,10 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 @implementation ORKOrderedTask (ORKMakeTaskUtilities)
 
 + (NSArray<ORKRecorderConfiguration*>*)makeRecorderConfigurationsWithOptions:(ORKPredefinedTaskOption)options {
-
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *heartRateType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-
+#endif
     NSMutableArray<ORKRecorderConfiguration*> *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
 
     if (!(ORKPredefinedTaskOptionExcludePedometer & options)) {
@@ -169,10 +169,13 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     if (!(ORKPredefinedTaskOptionExcludeLocation & options)) {
         [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
     }
+    
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     if (!(ORKPredefinedTaskOptionExcludeHeartRate & options)) {
         [recorderConfigurations addObject:[[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:ORKHeartRateRecorderIdentifier
                                                                                               healthQuantityType:heartRateType unit:bpmUnit]];
     }
+#endif 
     return [recorderConfigurations copy];
 }
 

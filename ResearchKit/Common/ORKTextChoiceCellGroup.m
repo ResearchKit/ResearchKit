@@ -130,7 +130,7 @@
 
     if(choiceOther.textViewStartsHidden) {
        if(choiceCell.textView.text.length <= 0) {
-           shouldHideTextView = choiceCell.isSelected == NO;
+           shouldHideTextView = (choiceCell.isCellSelected == NO);
        }
     }
     
@@ -170,6 +170,9 @@
     if ([textChoice isKindOfClass:[ORKTextChoiceOther class]] && [touchedCell isKindOfClass:[ORKChoiceOtherViewCell class]]) {
         ORKTextChoiceOther *otherTextChoice = (ORKTextChoiceOther *)textChoice;
         ORKChoiceOtherViewCell *touchedOtherCell = (ORKChoiceOtherViewCell *)touchedCell;
+        if (otherTextChoice.textViewInputOptional || touchedOtherCell.textView.text.length > 0) {
+            [touchedOtherCell setCellSelected:YES highlight:NO];
+        }
         [self updateTextViewForChoiceOtherCell:touchedOtherCell withTextChoiceOther:otherTextChoice];
         if (!otherTextChoice.textViewInputOptional && otherTextChoice.textViewText.length <= 0) {
             return;

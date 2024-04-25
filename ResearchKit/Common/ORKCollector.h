@@ -30,8 +30,11 @@
 
 
 #import <Foundation/Foundation.h>
-#import <HealthKit/HealthKit.h>
 #import <ResearchKit/ORKDefines.h>
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -85,6 +88,8 @@ ORK_CLASS_AVAILABLE
  It cannot be initiated directly. 
  Use `addHealthCollectorWithSampleType:`to add one to a `ORKDataCollectionManager`.
  */
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 ORK_CLASS_AVAILABLE
 @interface ORKHealthCollector : ORKCollector
 
@@ -146,7 +151,7 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly) HKQueryAnchor *lastAnchor;
 
 @end
-
+#endif 
 
 /**
  ORKHealthCollector collects CMMotionActivity.

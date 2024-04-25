@@ -33,7 +33,8 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKRequestPermissionButton.h"
 
-@import CoreLocation;
+#import <CoreLocation/CLLocationManagerDelegate.h>
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
 
 static NSString *const Symbol = @"location.circle";
 static const uint32_t IconLightTintColor = 0x50C878;
@@ -114,7 +115,11 @@ static const uint32_t IconDarkTintColor = 0x00A36C;
 
 // Request for always permission.
 - (void)requestPermissionButtonPressed {
-    [self.locationManager requestAlwaysAuthorization];
+    BOOL requestWasDelivered = [self.locationManager ork_requestAlwaysAuthorization];
+    
+    // if the auth request was not delivered, that means ResearchKit was built with CoreLocation requests disabled
+    // Presenting the location permission step in this case is probably programmer error
+    NSAssert(requestWasDelivered, @"Tried to invoke -[CLLocationManager requestAlwaysAuthorization] but ResearchKit was compiled with CoreLocation authorization requests disabled. This is a programmer error. Check build settings for ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION");
 }
 
 - (void)setState:(ORKRequestPermissionsButtonState)state canContinue:(BOOL)canContinue {

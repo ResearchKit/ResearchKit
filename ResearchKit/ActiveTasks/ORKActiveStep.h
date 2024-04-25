@@ -30,7 +30,6 @@
 
 
 @import UIKit;
-@import HealthKit;
 #import <ResearchKit/ORKStep.h>
 
 

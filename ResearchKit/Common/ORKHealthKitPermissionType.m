@@ -32,7 +32,10 @@
 #import "ORKHealthKitPermissionType.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKRequestPermissionView.h"
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #import <HealthKit/HealthKit.h>
+#endif
 
 static NSString *const Symbol = @"heart.fill";
 static uint32_t const IconTintColor = 0xFF5E5E;
@@ -77,6 +80,8 @@ static uint32_t const IconTintColor = 0xFF5E5E;
 }
 
 - (void)checkHealthKitAuthorizationStatus {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+
     if (![HKHealthStore isHealthDataAvailable]) {
         [self setState:ORKRequestPermissionsButtonStateNotSupported canContinue:YES];
         return;
@@ -107,9 +112,12 @@ static uint32_t const IconTintColor = 0xFF5E5E;
     } else {
         [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
     }
+    
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 }
 
 - (void)requestPermissionButtonPressed {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     [[HKHealthStore new] requestAuthorizationToShareTypes:_sampleTypesToWrite readTypes:_objectTypesToRead completion:^(BOOL success, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
 
@@ -121,6 +129,7 @@ static uint32_t const IconTintColor = 0xFF5E5E;
             [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
         });
     }];
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 }
 
 - (void)setState:(ORKRequestPermissionsButtonState)state canContinue:(BOOL)canContinue {

@@ -146,7 +146,9 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
     if (self) {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
         _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
+#endif
     }
     return self;
 }
@@ -452,8 +454,10 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 }
 
 - (void)requestAndRefreshDefaults {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     NSMutableSet *types = [NSMutableSet set];
     ORKAnswerFormat *format = [[self questionStep] answerFormat];
+    
     HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
     if (objType) {
         [types addObject:objType];
@@ -475,6 +479,10 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
     }
     if (!scheduledRefresh) {
         [self refreshDefaults];
+    }
+#endif
+    if (_tableView) {
+        [_tableView reloadData];
     }
 }
 

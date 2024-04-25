@@ -43,7 +43,10 @@
 #import "ORKHealthAnswerFormat.h"
 #endif
 
-@import HealthKit;
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
+
 @import MapKit;
 @import Contacts;
 
@@ -93,6 +96,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     NSMutableDictionary *_unitsTable;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @synthesize healthStore=_healthStore;
 
 + (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore {
@@ -201,8 +205,10 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         [healthStore executeQuery:sampleQuery];
     });
 }
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 
 - (void)fetchDefaultValueForAnswerFormat:(ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKObjectType *objectType = [answerFormat healthKitObjectType];
     BOOL handled = NO;
     if (objectType) {
@@ -223,7 +229,12 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     if (!handled) {
         handler(nil, nil);
     }
+#else
+    handler(nil, nil);
+#endif 
 }
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 
 - (HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat {
     __block HKUnit *unit = [answerFormat healthKitUnit];
@@ -267,9 +278,11 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     }
 }
 
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+
 @end
 
-#endif
+#endif // TARGET_OS_IOS
 
 #pragma mark - ORKAnswerFormat
 
@@ -552,6 +565,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return NO;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (HKObjectType *)healthKitObjectType {
     return nil;
 }
@@ -571,6 +585,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 - (void)setHealthKitUserUnit:(HKUnit *)unit {
     
 }
+#endif
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeNone;

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2023, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,19 +28,26 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-@import UIKit;
-
-#import "ORKDefaultFont.h"
-#import "ORKDefines.h"
+#import <CoreLocation/CLLocationManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface CLLocationManager (ResearchKit)
+
 /**
- Answer's text field.
+ These categories on CLLocationManager provide ResearchKit code with a common way of requesting authorization that can be disabled by
+ an Xcode build setting. Callers don't have to add compile-time conditional #if blocks. Instead callers should interpret return value of YES to mean
+ the authorization request was made, and NO to mean the ResearchKit binary was built with CLLocationManager authorization request calls
+ compiled out.
+ 
+ The impetus for this approach was to prevent apps using ResearchKit, but not ResearchKit's CoreLocation-powered features, from needlessly
+ defining an NSLocationWhenInUseUsageDescription Info.plist entry to silence build errors.
  */
-ORK_CLASS_AVAILABLE
-@interface ORKAnswerTextField : UITextField <ORKDefaultFont>
+- (BOOL)ork_requestWhenInUseAuthorization;
+- (BOOL)ork_requestAlwaysAuthorization;
+
+- (void)ork_startUpdatingLocation;
+- (void)ork_stopUpdatingLocation;
 
 @end
 

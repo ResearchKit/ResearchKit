@@ -31,9 +31,12 @@
 
 
 @import UIKit;
-@import HealthKit;
 #import <ResearchKit/ORKDefines.h>
 #import <Availability.h>
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -106,7 +109,9 @@ ORK_CLASS_AVAILABLE
  If your recorder requires or would benefit from read access to HealthKit at
  runtime during the task, return the appropriate set of `HKSampleType` objects.
  */
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (nullable NSSet<HKObjectType *> *)requestedHealthKitTypesForReading;
+#endif
 
 @end
 
@@ -355,6 +360,8 @@ ORK_CLASS_AVAILABLE
  of an `ORKActiveStep` object, include that step in a task, and present it with
  a task view controller.
  */
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 ORK_CLASS_AVAILABLE
 @interface ORKHealthQuantityTypeRecorderConfiguration : ORKRecorderConfiguration
 
@@ -433,7 +440,7 @@ API_AVAILABLE(ios(12.0))
 
 @end
 #endif
-
+#endif 
 /**
  The `ORKStreamingAudioRecorderConfiguration` class represents a configuration that records streaming
  audio data during an active step.

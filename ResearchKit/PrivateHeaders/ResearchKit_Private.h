@@ -183,3 +183,6 @@
 
 #import <ResearchKit/ORKLearnMoreView.h>
 #import <ResearchKit/ORKBodyContainerView.h>
+// Class extensions
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
+

@@ -89,9 +89,12 @@
     return nil;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     return nil;
 }
+#endif
+
 - (ORKPermissionMask)requestedPermissionMask {
     return ORKPermissionNone;
 }
