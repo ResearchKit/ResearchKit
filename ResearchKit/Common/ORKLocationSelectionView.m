@@ -48,8 +48,9 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-@import MapKit;
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
 
+@import MapKit;
 
 static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
@@ -294,7 +295,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
             _locationManager.delegate = self;
         }
         if (status == kCLAuthorizationStatusNotDetermined) {
-            [_locationManager requestWhenInUseAuthorization];
+            [_locationManager ork_requestWhenInUseAuthorization];
         }
     }
 }
@@ -441,8 +442,10 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 # pragma mark CLLocationManagerDelegate
 
-- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self loadCurrentLocationIfNecessary];
+    }
 }
 
 #pragma mark MKMapViewDelegate

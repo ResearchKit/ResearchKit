@@ -61,7 +61,8 @@
 
 @import AVFoundation;
 @import CoreMotion;
-#import <CoreLocation/CoreLocation.h>
+#import <CoreLocation/CLLocationManagerDelegate.h>
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
 
 typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 
@@ -100,28 +101,22 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     }
     
     _started = YES;
-
-    NSString *allowedWhenInUse = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"];
-    NSString *allowedAlways = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysAndWhenInUseUsageDescription"];
+    NSString *whenInUseKey = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"];
+    NSString *alwaysKey = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysAndWhenInUseUsageDescription"];
     
-    if (_manager) {
-        CLAuthorizationStatus status = kCLAuthorizationStatusNotDetermined;
-        
-        if (@available(iOS 14.0, *)) {
-            status = _manager.authorizationStatus;
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if ((status == kCLAuthorizationStatusNotDetermined) && (whenInUseKey || alwaysKey)) {
+        BOOL requestWasDelivered = YES;
+        if (alwaysKey) {
+            requestWasDelivered = [_manager ork_requestAlwaysAuthorization];
         } else {
-            status = [CLLocationManager authorizationStatus];
+            requestWasDelivered = [_manager ork_requestWhenInUseAuthorization];
         }
-        
-        if ((status == kCLAuthorizationStatusNotDetermined) && (allowedWhenInUse || allowedAlways)) {
-            if (allowedAlways) {
-                [_manager requestAlwaysAuthorization];
-            } else {
-                [_manager requestWhenInUseAuthorization];
-            }
-        } else {
-            [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
+        if (requestWasDelivered == NO) {
+            [self finishWithResult:NO];
         }
+    } else {
+        [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
     }
 }
 
@@ -132,18 +127,10 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     }
 }
 
-- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
-    CLAuthorizationStatus status = kCLAuthorizationStatusNotDetermined;
-    
-    if (@available(iOS 14.0, *)) {
-        status = manager.authorizationStatus;
-    } else {
-        status = [CLLocationManager authorizationStatus];
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (_handler && _started && status != kCLAuthorizationStatusNotDetermined) {
+        [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
     }
-    
-    if (_started && status != kCLAuthorizationStatusNotDetermined) {
-       [self finishWithResult:(status != kCLAuthorizationStatusDenied)];
-   }
 }
 
 @end
@@ -340,16 +327,24 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                    writeTypes:(NSSet *)writeTypes
                                       handler:(void (^)(void))handler {
     NSParameterAssert(handler != nil);
-    if ((![HKHealthStore isHealthDataAvailable]) || (!readTypes && !writeTypes)) {
+    BOOL needsHealthKitAuthRequest = NO;
+    
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+    needsHealthKitAuthRequest = ([HKHealthStore isHealthDataAvailable]);
+    needsHealthKitAuthRequest = needsHealthKitAuthRequest && ((readTypes != nil) || (writeTypes != nil));
+#endif
+        
+    if (needsHealthKitAuthRequest == NO) {
         _requestedHealthTypesForRead = nil;
         _requestedHealthTypesForWrite = nil;
-        handler();
+        dispatch_async(dispatch_get_main_queue(), handler);
         return;
     }
     
     _requestedHealthTypesForRead = readTypes;
     _requestedHealthTypesForWrite = writeTypes;
     
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     __block HKHealthStore *healthStore = [HKHealthStore new];
     [healthStore requestAuthorizationToShareTypes:writeTypes readTypes:readTypes completion:^(BOOL success, NSError *error) {
         ORK_Log_Error("Health access: error=%@", error);
@@ -358,6 +353,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         // Clear self-ref.
         healthStore = nil;
     }];
+#endif
 }
 
 - (void)requestPedometerAccessWithHandler:(void (^)(BOOL success))handler {
@@ -443,6 +439,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         return;
     }
     
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     NSSet *readTypes = nil;
     if ([self.task respondsToSelector:@selector(requestedHealthKitTypesForReading)]) {
         readTypes = [self.task requestedHealthKitTypesForReading];
@@ -452,6 +449,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([self.task respondsToSelector:@selector(requestedHealthKitTypesForWriting)]) {
         writeTypes = [self.task requestedHealthKitTypesForWriting];
     }
+#endif
     
     ORKPermissionMask permissions = [self desiredPermissions];
     
@@ -459,12 +457,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
             ORK_Log_Debug("Requesting health access");
             [self requestHealthStoreAccessWithReadTypes:readTypes
                                              writeTypes:writeTypes
                                                 handler:^{
                                                     dispatch_semaphore_signal(semaphore);
                                                 }];
+#endif
         });
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         if (permissions & ORKPermissionCoreMotionAccelerometer) {
@@ -1585,8 +1585,15 @@ static NSString *const _ORKProgressMode = @"progressMode";
         }
         
         if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
+            
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
             _requestedHealthTypesForRead = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSSet.self, HKObjectType.self]] forKey:_ORKRequestedHealthTypesForReadRestoreKey];
             _requestedHealthTypesForWrite = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSSet.self, HKObjectType.self]] forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
+#else
+            _requestedHealthTypesForRead = nil;
+            _requestedHealthTypesForWrite = nil;
+#endif
+            
             _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
             _lastBeginningInstructionStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKLastBeginningInstructionStepIdentifierKey];
             

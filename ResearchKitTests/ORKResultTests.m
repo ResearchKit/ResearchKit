@@ -204,13 +204,14 @@
         // create the task as if we were to present it
         ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
         
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
         // Trigger requestHealth access to fill in the read/write types ivars
         NSSet *readTypes = [NSSet setWithObjects:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate], nil];
         NSSet *writeTypes = [NSSet setWithObjects:[HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierBloating], nil];
         [taskViewController requestHealthStoreAccessWithReadTypes:readTypes writeTypes:writeTypes handler:^(){
            // intentionally left empty
         }];
-
+#endif
         // viewWillAppear fills in the _managedStepIdentifiers in the taskViewController
         [taskViewController viewWillAppear:false];
         
@@ -244,10 +245,11 @@
         ORKResultTestsHelper *taskDelegate = [[ORKResultTestsHelper alloc] init];
         ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:encodedTaskViewControllerData delegate:taskDelegate error:nil];
         
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
         // confirm the read/write HK type info made it across the encode/decode bridge
         XCTAssertEqualObjects([taskViewController requestedHealthTypesForRead], [NSSet setWithObject:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate]]);
         XCTAssertEqualObjects([taskViewController requestedHealthTypesForWrite], [NSSet setWithObject:[HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierBloating]]);
-        
+#endif 
         ORKStepResult *stepResult = (ORKStepResult *)[[[taskViewController result] results] firstObject];
         NSArray<ORKQuestionResult*> *questionResults = (NSArray<ORKQuestionResult*> *)[stepResult results];
         XCTAssertEqual([questionResults count], 3);

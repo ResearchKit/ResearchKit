@@ -30,11 +30,13 @@
 
 #import <ResearchKit/ORKResult.h>
 
-@import CoreLocation;
+#import <CoreLocation/CLLocation.h>
+
 @import Contacts;
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CLCircularRegion;
 @class ORKQuestionStep;
 @class ORKFormItem;
 @class ORKFormStep;

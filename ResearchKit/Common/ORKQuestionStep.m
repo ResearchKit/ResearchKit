@@ -39,6 +39,10 @@
 #import "ORKLearnMoreItem.h"
 #endif
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
+
 #if TARGET_OS_IOS
 ORKQuestionStepPresentationStyle const ORKQuestionStepPresentationStyleDefault = @"default";
 ORKQuestionStepPresentationStyle const ORKQuestionStepPresentationStylePlatter = @"platter";
@@ -110,10 +114,12 @@ ORKQuestionStepPresentationStyle const ORKQuestionStepPresentationStylePlatter =
     return [impliedAnswerFormat isKindOfClass:[ORKTextAnswerFormat class]] && ![(ORKTextAnswerFormat *)impliedAnswerFormat multipleLines];
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     HKObjectType *objType = [[self answerFormat] healthKitObjectTypeForAuthorization];
     return (objType != nil) ? [NSSet setWithObject:objType] : nil;
 }
+#endif
 
 #endif
 

@@ -335,7 +335,10 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 }
 
 - (instancetype)ORKFormStepViewController_initWithResult:(ORKResult *)result {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
+#endif
+
     if (result) {
         NSAssert([result isKindOfClass:[ORKStepResult class]], @"Expect a ORKStepResult instance");
 
@@ -377,6 +380,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateAnsweredSections];
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     NSMutableSet *types = [NSMutableSet set];
     for (ORKFormItem *item in [self formItems]) {
         ORKAnswerFormat *format = [item answerFormat];
@@ -404,7 +408,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
     if (!refreshDefaultsPending) {
         [self refreshDefaults];
     }
-    
+#endif
     // Reset skipped flag - result can now be non-empty
     _skipped = NO;
     
@@ -491,6 +495,8 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 }
 
 - (void)refreshDefaults {
+    // defaults only come from HealthKit
+    
     NSArray *formItems = [self formItems];
     ORKAnswerDefaultSource *source = _defaultSource;
     ORKWeakTypeOf(self) weakSelf = self;
@@ -516,10 +522,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
             [strongSelf updateDefaults:defaults];
         });
-        
-    });
-    
-    
+    });    
 }
 
 - (void)removeAnswerForIdentifier:(NSString *)identifier {

@@ -33,7 +33,7 @@
 #import <ResearchKit/ORKRecorder.h>
 #import <Availability.h>
 
-
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -68,5 +68,5 @@ API_AVAILABLE(ios(12.0))
 
 @end
 #endif
-
 NS_ASSUME_NONNULL_END
+#endif

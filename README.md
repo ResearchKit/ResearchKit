@@ -260,6 +260,28 @@ types of steps supported by the *ResearchKit framework* in the first tab, and di
 results of the last completed task in the second tab. The third tab shows some examples from the *Charts module*.
 
 
+App Store Submissions
+-----------------------------
+
+For apps that don’t use ResearchKit’s HealthKit features:
+If you are looking to submit your app with ResearchKit to the App Store, you can compile out unnecessary references to HealthKit in your app by editing the following project file:
+`ResearchKit/Configuration/ResearchKit/ResearchKit-Shared.xcconfig`
+And changing
+`ORK_FEATURE_HEALTHKIT_AUTHORIZATION=1`
+To
+`ORK_FEATURE_HEALTHKIT_AUTHORIZATION=0`
+
+With this change, the embedded ResearchKit framework in your app will not contain any HealthKit related functionality or any references to HealthKit API that might trigger AppStore review to require HealthKit entries in your app’s Info.plist.
+
+Similarly, if you would like to compile out references to CoreLocation. In the same `ResearchKit-Shared.xcconfig`
+And changing
+`ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=1`
+To
+`ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0`
+
+Also please ensure that your `info.plist` does not have any HealthKit privacy messages
+
+Similarly, if you would like to use the ResearchKit’s HealthKit features. Make sure to enable the HealthKit Entitlement
 
 License<a name="license"></a>
 =======

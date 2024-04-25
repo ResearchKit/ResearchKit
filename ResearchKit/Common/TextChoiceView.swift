@@ -79,7 +79,6 @@ struct TextChoiceView: View {
         var dividerPadding: CGFloat = 20
         dividerPadding += (imageWidth + 16)
         
-        
         return dividerPadding
     }
     

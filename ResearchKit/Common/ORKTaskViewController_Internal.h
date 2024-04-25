@@ -32,7 +32,10 @@
 #import <ResearchKit/ORKTaskViewController_Private.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
 #import <ResearchKit/ORKActiveStep_Internal.h>
-@import HealthKit;
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 
 NS_ASSUME_NONNULL_BEGIN

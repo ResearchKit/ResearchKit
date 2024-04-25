@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2023, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,20 +28,44 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "CLLocationManager+ResearchKit.h"
 
-@import UIKit;
-
-#import "ORKDefaultFont.h"
 #import "ORKDefines.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation CLLocationManager (ResearchKit)
 
-/**
- Answer's text field.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKAnswerTextField : UITextField <ORKDefaultFont>
+- (BOOL)ork_requestWhenInUseAuthorization {
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    [self requestWhenInUseAuthorization];
+    return YES;
+#else
+    return NO;
+#endif
+}
+
+- (BOOL)ork_requestAlwaysAuthorization {
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    [self requestAlwaysAuthorization];
+    return YES;
+#else
+    return NO;
+#endif
+}
+
+- (void)ork_startUpdatingLocation {
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    [self startUpdatingLocation];
+#else
+    // noop
+#endif
+}
+
+- (void)ork_stopUpdatingLocation {
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    [self stopUpdatingLocation];
+#else
+    // noop
+#endif
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -33,8 +33,10 @@
 #import "ORKCollector_Internal.h"
 #import "ORKOperation.h"
 #import "ORKHelpers_Internal.h"
-#import <HealthKit/HealthKit.h>
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 // The file names for persisting the state of our collectors
 static  NSString *const ORKDataCollectionPersistenceFileNamev1 = @".dataCollection.ork.data"; // pre-secureCoding
@@ -45,9 +47,11 @@ static  NSString *const ORKDataCollectionPersistenceFileNamev2 = @".dataCollecti
     NSOperationQueue *_operationQueue;
     NSString * _Nonnull _managedDirectory;
     NSArray<ORKCollector *> *_collectors;
-    HKHealthStore *_healthStore;
     CMMotionActivityManager *_activityManager;
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+    HKHealthStore *_healthStore;
     NSMutableArray<HKObserverQueryCompletionHandler> *_completionHandlers;
+#endif
 }
 
 - (instancetype)initWithPersistenceDirectoryURL:(NSURL *)directoryURL {
@@ -119,12 +123,14 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     });
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (HKHealthStore *)healthStore {
     if (!_healthStore && [HKHealthStore isHealthDataAvailable]){
         _healthStore = [[HKHealthStore alloc] init];
     }
     return _healthStore;
 }
+#endif
 
 - (CMMotionActivityManager *)activityManager {
     if (!_activityManager && [CMMotionActivityManager isActivityAvailable]) {
@@ -183,6 +189,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     _collectors = [collectors copy];
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (ORKHealthCollector *)addHealthCollectorWithSampleType:(HKSampleType*)sampleType unit:(HKUnit *)unit startDate:(NSDate *)startDate error:(NSError**)error {
     
     if (!sampleType) {
@@ -235,6 +242,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     
     return healthCorrelationCollector;
 }
+#endif 
 
 - (ORKMotionActivityCollector *)addMotionActivityCollectorWithStartDate:(NSDate *)startDate
                                                                   error:(NSError* __autoreleasing *)error {
@@ -336,11 +344,12 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
                     [_delegate dataCollectionManagerDidCompleteCollection:self];
                 }
                 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
                 for (HKObserverQueryCompletionHandler handler in _completionHandlers) {
                     handler();
                 }
                 [_completionHandlers removeAllObjects];
-                
+#endif
                 return NO;
             }];
         }];

@@ -65,7 +65,6 @@
 #import <ResearchKit/ORKRequestPermissionsStep.h>
 #import <ResearchKit/ORK3DModelStep.h>
 
-
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
 #import <ResearchKit/ORKOrderedTask+ORKPredefinedActiveTask.h>

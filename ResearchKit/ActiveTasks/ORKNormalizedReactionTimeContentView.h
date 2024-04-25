@@ -31,9 +31,9 @@
 
 
 @import UIKit;
-#import "ORKCustomStepView_Internal.h"
-#import "ORKNormalizedReactionTimeStimulusView.h"
-#import "ORKRoundTappingButton.h"
+#import <ResearchKit/ORKCustomStepView_Internal.h>
+#import <ResearchKit/ORKNormalizedReactionTimeStimulusView.h>
+#import <ResearchKit/ORKRoundTappingButton.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
