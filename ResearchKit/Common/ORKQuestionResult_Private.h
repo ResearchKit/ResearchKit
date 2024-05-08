@@ -34,7 +34,7 @@
 #import <ResearchKit/ORKQuestionResult.h>
 #endif
 
-@import MapKit;
+#import <MapKit/MapKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

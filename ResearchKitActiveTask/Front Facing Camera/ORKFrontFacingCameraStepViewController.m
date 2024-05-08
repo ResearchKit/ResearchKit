@@ -35,7 +35,6 @@
 
 #import "ORKActiveStepView.h"
 #import "ORKActiveStepViewController_Internal.h"
-#import "ORKBorderedButton.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKFrontFacingCameraStep.h"
 #import "ORKFrontFacingCameraStepContentView.h"

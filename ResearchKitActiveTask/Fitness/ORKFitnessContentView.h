@@ -29,8 +29,8 @@
  */
 
 
-#import "ORKCustomStepView_Internal.h"
-
+#import <ResearchKitUI/ORKCustomStepView.h>
+#import "ORKActiveStepCustomView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

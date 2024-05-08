@@ -31,6 +31,7 @@
 #import "ORKDontKnowButton.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
+#import "ORKBorderedButton_Internal.h"
 #import "ORKCheckmarkView.h"
 #import "ORKSkin.h"
 #import "ORKLabel.h"

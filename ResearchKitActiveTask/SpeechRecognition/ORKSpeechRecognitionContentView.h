@@ -28,9 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#import <ResearchKitActiveTask/ORKActiveStepCustomView.h>
 #import <ResearchKitUI/ResearchKitUI_Private.h>
-#import <ResearchKitUI/ORKCustomStepView_Internal.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

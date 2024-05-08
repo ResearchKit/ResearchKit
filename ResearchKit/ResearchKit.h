@@ -111,3 +111,6 @@
 #import <ResearchKit/ORKEarlyTerminationConfiguration.h>
 #import <ResearchKit/ORKBundleAsset.h>
 #import <ResearchKit/ORKSkin.h>
+
+#import <ResearchKit/HKSample+ORKJSONDictionary.h>
+#import <ResearchKit/CMMotionActivity+ORKJSONDictionary.h>

@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKTypes.h"
 
 

@@ -43,6 +43,8 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+NSString * const ORKPDFViewerStepViewAccessibilityIdentifier = @"ORKPDFViewerStepView";
+
 @interface ORKPDFViewerStepViewController() <ORKPDFViewerStepViewDelegate>
 
 @end
@@ -68,6 +70,7 @@
         _pdfView = [ORKPDFViewerStepView new];
         [self hidePDFViewerButtons];
         _pdfView.delegate = self;
+        _pdfView.accessibilityIdentifier = ORKPDFViewerStepViewAccessibilityIdentifier;
         [self.view addSubview:_pdfView];
         [self setNavigationFooterView];
         [self setupConstraints];

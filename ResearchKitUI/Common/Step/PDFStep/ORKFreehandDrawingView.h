@@ -30,8 +30,8 @@
  */
 
 
-@import UIKit;
-@import PDFKit;
+#import <UIKit/UIKit.h>
+#import <PDFKit/PDFKit.h>
 #import <ResearchKit/ORKDefines.h>
 
 

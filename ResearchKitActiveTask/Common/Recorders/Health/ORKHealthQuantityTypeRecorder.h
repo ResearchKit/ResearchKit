@@ -29,12 +29,14 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKRecorder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class HKQuantityType;
+@class HKUnit;
 @class ORKHealthQuantityTypeRecorder;
 
 @protocol ORKHealthQuantityTypeRecorderDelegate <ORKRecorderDelegate>
@@ -74,6 +76,56 @@ ORK_CLASS_AVAILABLE
                               unit:(HKUnit *)unit
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+
+@end
+
+/**
+ A configuration object that records data from a HealthKit quantity type during an active step.
+ 
+ Before you can use this configuration, you must use Xcode to enable the appropriate HealthKit entitlement
+ for your app.
+ 
+ HealthKit quantity type data is serialized to JSON and returned as an `ORKFileResult` object.
+ For details on the format, see `HKSample+ORKJSONDictionary`.
+ 
+ To use a recorder, include its configuration in the `recorderConfigurations` property
+ of an `ORKActiveStep` object, include that step in a task, and present it with
+ a task view controller.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKHealthQuantityTypeRecorderConfiguration : ORKRecorderConfiguration
+
+/**
+ Returns an initialized health quantity type recorder configuration using the specified quantity type and unit designation.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier      The unique identifier of the recorder configuration.
+ @param quantityType    The quantity type that should be collected during the active task.
+ @param unit            The unit for the data that should be collected and serialized.
+ 
+ @return An initialized health quantity type recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new health quantity type recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the health quantity type recorder configuration.
+ 
+ @return A new health quantity type recorder configuration.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ The quantity type to be collected from HealthKit. (read-only)
+ */
+@property (nonatomic, readonly, copy) HKQuantityType *quantityType;
+
+/**
+ The unit in which to serialize the data from HealthKit. (read-only)
+ */
+@property (nonatomic, readonly, copy) HKUnit *unit;
 
 @end
 

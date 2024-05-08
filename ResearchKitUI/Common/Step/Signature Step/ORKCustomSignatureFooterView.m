@@ -37,6 +37,8 @@
 #import "ORKResult_Private.h"
 
 static const CGFloat ORKSignatureToClearPadding = 15.0;
+NSString * const SignatureViewAccessibilityIdentifier = @"ORKSignatureView";
+NSString * const ORKSignatureViewClearButtonAccessibilityIdentifier = @"ORKSignatureViewClearButton";
 
 @implementation ORKCustomSignatureFooterView {
     NSMutableArray<NSLayoutConstraint *> *_constraints;
@@ -57,6 +59,7 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
 - (void)configure {
     if (!_signatureView) {
         _signatureView = [[ORKSignatureView alloc] initWithoutDefaultWidth];
+        _signatureView.accessibilityIdentifier = SignatureViewAccessibilityIdentifier;
         [self addSubview:_signatureView];
     }
     
@@ -65,6 +68,7 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
         [_clearButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]];
         [_clearButton setTitle:ORKLocalizedString(@"BUTTON_CLEAR_SIGNATURE", nil) forState:UIControlStateNormal];
         [_clearButton addTarget:self action:@selector(clear) forControlEvents:UIControlEventTouchUpInside];
+        _clearButton.accessibilityIdentifier = ORKSignatureViewClearButtonAccessibilityIdentifier;
         [self addSubview:_clearButton];
     }
     

@@ -28,7 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <ResearchKitActiveTask/ORKAudiometryProtocol.h>
 
 NS_ASSUME_NONNULL_BEGIN

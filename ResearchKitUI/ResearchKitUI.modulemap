@@ -5,10 +5,3 @@ framework module ResearchKitUI {
     export *
     module * { export * }
 }
-
-framework module ResearchKitUI_Private {
-    umbrella header "ResearchKitUI_Private.h"
-    
-    export *
-    module * { export * }
-}

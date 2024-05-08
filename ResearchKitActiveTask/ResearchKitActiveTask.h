@@ -43,6 +43,7 @@ FOUNDATION_EXPORT const unsigned char ResearchKitActiveTaskVersionString[];
 #import <ResearchKitActiveTask/ORKAccuracyStroopResult.h>
 #import <ResearchKitActiveTask/ORKAccuracyStroopStep.h>
 #import <ResearchKitActiveTask/ORKAccuracyStroopStepViewController.h>
+#import <ResearchKitActiveTask/ORKActiveStepCustomView.h>
 #import <ResearchKitActiveTask/ORKActiveStepViewController.h>
 #import <ResearchKitActiveTask/ORKActiveTaskResult.h>
 #import <ResearchKitActiveTask/ORKAmslerGridResult.h>

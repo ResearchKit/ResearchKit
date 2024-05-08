@@ -31,7 +31,7 @@
 
 #import "ORKRangeOfMotionStepViewController.h"
 
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"

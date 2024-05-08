@@ -361,7 +361,7 @@ ORK_CLASS_AVAILABLE
  
  @return A new task view controller.
  */
-- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut;
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut NS_DESIGNATED_INITIALIZER;
 
 /**
  Creates a new task view controller that starts the task at the step that has the specified step identifier.
@@ -380,6 +380,26 @@ ORK_CLASS_AVAILABLE
                ongoingResult:(nullable ORKTaskResult *)ongoingResult
          defaultResultSource:(nullable id<ORKTaskResultSource>)defaultResultSource
                     delegate:(id<ORKTaskViewControllerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+
+/**
+ Creates a new task view controller that starts the task at the step that has the specified step identifier.
+ 
+ Call this method to start a task from a specific step. Additionally, you can supply a defaultResultSource to resume a
+ partially completed task, or to provide your own prefilled results.
+ 
+ @param task                    The task to be presented.
+ @param ongoingResult           An optional task result from a previous run of the task. If you provide an ongoingResult, the task will start at the step corresponding to the last result.
+ @param restoreAtFirstStep     A boolean that determines if the restored task starts from the last or first step.
+ @param defaultResultSource     A source that the task view controller can consult to obtain default answers for questions provided in question steps and form steps.
+ @param delegate                The delegate for the task view controller.
+ 
+ @return A new task view controller.
+ */
+- (instancetype)initWithTask:(id<ORKTask>)task
+               ongoingResult:(nullable ORKTaskResult *)ongoingResult
+          restoreAtFirstStep:(BOOL)restoreAtFirstStep
+         defaultResultSource:(nullable id<ORKTaskResultSource>)defaultResultSource
+                    delegate:(id<ORKTaskViewControllerDelegate>)delegate;
 
 /**
  The delegate for the task view controller.

@@ -111,6 +111,14 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic) ORKCardViewStyle cardViewStyle;
 
+/**
+ A boolean to determine if the form will auto scroll when a
+ answer is selected.
+ 
+ The default value is YES.
+ */
+@property (nonatomic) BOOL autoScrollEnabled;
+
 @end
 
 

@@ -30,6 +30,7 @@
 
 
 #import "ORKBorderedButton.h"
+#import "ORKBorderedButton_Internal.h"
 #import "ORKTextButton_Internal.h"
 
 

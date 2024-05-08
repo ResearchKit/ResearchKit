@@ -34,7 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
 #import "ORKAudioContentView.h"
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKVerticalContainerView.h"
 
 #import "ORKActiveStepViewController_Internal.h"

@@ -35,7 +35,6 @@
 #import "ORK3DModelStepViewController.h"
 #import "ORKActiveStepView.h"
 #import "ORKActiveStepViewController_Internal.h"
-#import "ORKBorderedButton.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"

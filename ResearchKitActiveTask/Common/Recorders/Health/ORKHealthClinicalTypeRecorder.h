@@ -29,7 +29,7 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKRecorder.h>
 #import <Availability.h>
 
@@ -67,6 +67,47 @@ API_AVAILABLE(ios(12.0))
                    outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
 
 @end
+
+ORK_CLASS_AVAILABLE
+API_AVAILABLE(ios(12.0))
+@interface ORKHealthClinicalTypeRecorderConfiguration : ORKRecorderConfiguration
+
+/**
+ Returns an initialized health clinical type recorder configuration using the specified clinical type.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier              The unique identifier of the recorder configuration.
+ @param healthClinicalType      The HKClinicalType that should be collected during the active task.
+ @param healthFHIRResourceType  The HKFHIRResourceType that should be used as predicate while querying for the healthClinicalType. Providing a HKFHIRResourceType that does not correspond to a HKClinicalType will NOT generate any result.
+ 
+ @return An initialized health clinical type recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthClinicalType:(HKClinicalType *)healthClinicalType
+            healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
+
+/**
+ Returns a new health clinical type recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the health clinical type recorder configuration.
+ 
+ @return A new health clinical type recorder configuration.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ The HKClinicalType to be collected from HealthKit. (read-only)
+ */
+@property (nonatomic, readonly, copy) HKClinicalType *healthClinicalType;
+
+/**
+ The HKFHIRResourceType to used as predicate for HKQuery. (read-only)
+ */
+@property (nonatomic, readonly, copy) HKFHIRResourceType healthFHIRResourceType;
+
+@end
+
 #endif
 
 NS_ASSUME_NONNULL_END

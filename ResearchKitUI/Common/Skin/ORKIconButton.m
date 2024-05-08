@@ -32,6 +32,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKLabel.h"
 #import "ORKBorderedButton.h"
+#import "ORKBorderedButton_Internal.h"
 
 @implementation ORKIconButton {
     UIView *_customView;

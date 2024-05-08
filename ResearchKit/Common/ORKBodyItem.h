@@ -79,6 +79,8 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle;
 
+- (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle alignImageToTop:(BOOL)alignImageToTop;
+
 - (instancetype)initWithHorizontalRule;
 
 @property (nonatomic, nullable) NSString *text;
@@ -94,6 +96,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL useCardStyle;
 
 @property (nonatomic) BOOL useSecondaryColor;
+
+@property (nonatomic) BOOL alignImageToTop;
 
 @end
 

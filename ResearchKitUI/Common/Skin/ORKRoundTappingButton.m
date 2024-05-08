@@ -30,6 +30,7 @@
 
 #import "ORKTextButton_Internal.h"
 #import "ORKRoundTappingButton.h"
+#import "ORKBorderedButton_Internal.h"
 
 
 static const CGFloat RoundTappingButtonDefaultDiameter = 104;

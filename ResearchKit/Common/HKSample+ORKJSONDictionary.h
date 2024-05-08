@@ -29,26 +29,33 @@
  */
 
 
-#import <ResearchKitUI/ORKCustomStepView.h>
-
+#import <HealthKit/HealthKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKActiveStepViewController;
+typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
+    ORKSampleIncludeMetadata = 0x1,
+    ORKSampleIncludeSource = 0x2,
+    ORKSampleIncludeUUID = 0x4
+};
 
-@interface ORKActiveStepCustomView : UIView
+/**
+ JSON serialization aid for HKSample.
+ */
+@interface HKSample (ORKJSONDictionary)
 
-@property (nonatomic, weak, nullable) ORKActiveStepViewController *activeStepViewController;
+- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(nullable HKUnit *)unit;
 
-- (void)resetStep:(ORKActiveStepViewController *)viewController;
-- (void)startStep:(ORKActiveStepViewController *)viewController;
-- (void)suspendStep:(ORKActiveStepViewController *)viewController;
-- (void)resumeStep:(ORKActiveStepViewController *)viewController;
-- (void)finishStep:(ORKActiveStepViewController *)viewController;
+@end
 
-- (void)updateDisplay:(ORKActiveStepViewController *)viewController;
+
+/**
+ JSON serialization aid for HKCorrelation.
+ */
+@interface HKCorrelation (ORKJSONDictionary)
+
+- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units;
 
 @end
 
 NS_ASSUME_NONNULL_END
-

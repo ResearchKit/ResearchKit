@@ -45,6 +45,16 @@ const CGFloat PDFInactiveButtonAlpha = 0.5;
 
 const CGFloat PDFhideViewAnimationDuration = 0.5;
 
+NSString * const ORKPDFViewerStepShowPDFThumbnailActionButtonAccessibilityIdentifier = @"ORKPDFViewerStep_showPDF_thumbnailActionButton";
+NSString * const ORKPDFViewerStepHidePDFThumbnailActionButtonAccessibilityIdentifier = @"ORKPDFViewerStep_hidePDF_thumbnailActionButton";
+NSString * const ORKPDFViewerStepAnnotationActionButtonAccessibilityIdentifier = @"ORKPDFViewerStep_annotationActionButton";
+NSString * const ORKPDFViewerStepShowSearchActionButtonAccessibilityIdentifier = @"ORKPDFViewerStep_showSearchActionButton";
+NSString * const ORKPDFViewerStepHideSearchActionButtonAccessibilityIdentifier = @"ORKPDFViewerStep_hideSearchActionButton";
+NSString * const ORKPDFViewerStepShareActionButtonAccessibilityIdentifier = @"ORKPDFViewerStep_shareActionButton";
+NSString * const ORKPDFViewerActionViewExitButtonAccessibilityIdentifier = @"ORKPDFViewerActionView_exitButton";
+NSString * const ORKPDFViewerActionViewApplyButtonAccessibilityIdentifier = @"ORKPDFViewerActionView_applyButton";
+NSString * const ORKPDFViewerActionViewClearButtonAccessibilityIdentifier = @"ORKPDFViewerActionView_clearButton";
+
 @interface ORKPDFViewerActionsView: UIView
     
 @property (nonatomic, nonnull) UIView *thumbnailActionView;
@@ -165,6 +175,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     _clearAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _clearButtonView = [UIView new];
     _clearButtonView.translatesAutoresizingMaskIntoConstraints = NO;
+    _clearButtonView.accessibilityIdentifier = ORKPDFViewerActionViewClearButtonAccessibilityIdentifier;
     [_clearAnnotationsButton setTitle:ORKLocalizedString(@"BUTTON_CLEAR", nil) forState:UIControlStateNormal];
     [_clearButtonView addSubview:_clearAnnotationsButton];
     [_stackView addArrangedSubview:_clearButtonView];
@@ -201,6 +212,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     _applyAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _applyButtonView = [UIView new];
     _applyButtonView.translatesAutoresizingMaskIntoConstraints = NO;
+    _applyButtonView.accessibilityIdentifier = ORKPDFViewerActionViewApplyButtonAccessibilityIdentifier;
     [_applyAnnotationsButton setTitle:ORKLocalizedString(@"BUTTON_APPLY", nil) forState:UIControlStateNormal];
     [_applyButtonView addSubview:_applyAnnotationsButton];
     [_stackView addArrangedSubview:_applyButtonView];
@@ -238,6 +250,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     _exitAnnotationsButton.translatesAutoresizingMaskIntoConstraints = NO;
     _exitButtonView = [UIView new];
     _exitButtonView.translatesAutoresizingMaskIntoConstraints = NO;
+    _exitButtonView.accessibilityIdentifier = ORKPDFViewerActionViewExitButtonAccessibilityIdentifier;
     [_exitButtonView addSubview:_exitAnnotationsButton];
     [_stackView addArrangedSubview:_exitButtonView];
     [self activateConstraintsForButton:_exitAnnotationsButton withView:_exitButtonView];
@@ -521,6 +534,11 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     _pdfActionsView.annotationActionButton.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_ANNOTATE" , nil);
     _pdfActionsView.searchActionButton.accessibilityLabel = _searchBar.isHidden ? ORKLocalizedString(@"AX_BUTTON_SHOW_SEARCH", nil) : ORKLocalizedString(@"AX_BUTTON_HIDE_SEARCH", nil);
     _pdfActionsView.shareActionButton.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_SHARE", nil);
+    
+    _pdfActionsView.thumbnailActionButton.accessibilityIdentifier = _pdfThumbnailView.isHidden ?ORKPDFViewerStepShowPDFThumbnailActionButtonAccessibilityIdentifier : ORKPDFViewerStepHidePDFThumbnailActionButtonAccessibilityIdentifier;
+    _pdfActionsView.annotationActionButton.accessibilityIdentifier = ORKPDFViewerStepAnnotationActionButtonAccessibilityIdentifier;
+    _pdfActionsView.searchActionButton.accessibilityIdentifier = _searchBar.isHidden ? ORKPDFViewerStepShowSearchActionButtonAccessibilityIdentifier : ORKPDFViewerStepHideSearchActionButtonAccessibilityIdentifier;
+    _pdfActionsView.shareActionButton.accessibilityIdentifier = ORKPDFViewerStepShareActionButtonAccessibilityIdentifier;
 }
 
 - (void)shareButtonAction {

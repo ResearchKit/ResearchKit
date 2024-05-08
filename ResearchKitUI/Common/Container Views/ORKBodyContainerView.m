@@ -299,7 +299,7 @@ static NSString *ORKBulletUnicode = @"\u2981";
 
 - (void)setupBodyStyleImage {
     UIImageView *imageView = [self imageView];
-    self.alignment = UIStackViewAlignmentCenter;
+    self.alignment = _bodyItem.alignImageToTop ? UIStackViewAlignmentTop : UIStackViewAlignmentCenter;
     
     if (_bodyItem.useCardStyle == YES) {
         imageView.translatesAutoresizingMaskIntoConstraints = NO;

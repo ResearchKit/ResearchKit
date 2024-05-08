@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKSpatialSpanTargetView.h"
 #import "ORKBorderedButton.h"
 

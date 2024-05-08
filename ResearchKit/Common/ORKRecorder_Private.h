@@ -37,38 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKStep;
 
-/**
- The `ORKTouchRecorderConfiguration` is a recorder configuration class for
- generating an `ORKTouchRecorder`.
- 
- It is currently considered private, and is not used in any of the active tasks.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKTouchRecorderConfiguration : ORKRecorderConfiguration
-
-/**
- Returns an initialized touch recorder configuration.
- 
- This method is the designated initializer.
- 
- @param identifier   The unique identifier of the recorder configuration.
- 
- @return An initialized touch recorder configuration.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
-
-/**
- Returns a new touch recorder configuration initialized from data in the given unarchiver.
- 
- @param aDecoder    Coder from which to initialize the touch recorder configuration.
- 
- @return A new touch recorder configuration.
- */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
-@end
-
-
 @interface ORKRecorder ()
 
 /**

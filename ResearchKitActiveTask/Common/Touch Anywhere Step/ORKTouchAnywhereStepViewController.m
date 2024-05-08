@@ -32,7 +32,7 @@
 #import "ORKTouchAnywhereStepViewController.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKLabel.h"
 #import "ORKActiveStepView.h"
 #import "ORKProgressView.h"

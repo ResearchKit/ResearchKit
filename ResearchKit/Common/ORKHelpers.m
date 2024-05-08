@@ -559,3 +559,4 @@ NSNumberFormatter *ORKDecimalNumberFormatter(void) {
     numberFormatter.usesGroupingSeparator = NO;
     return numberFormatter;
 }
+

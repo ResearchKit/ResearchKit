@@ -38,11 +38,16 @@
 
 static const CGFloat ORKScrollViewCustomContentInset = 40.0;
 
+NSString * const ORKLearnMoreStepViewAccessibilityIdentifier = @"ORKLearnMoreStepView";
+NSString * const ORKLearnMoreViewDoneButtonAccessibilityIdentifier = @"ORKLearnMoreStepViewDoneButton";
+
 @implementation ORKLearnMoreStepViewController
 
 - (void)stepDidChange {
     [super stepDidChange];
     [self.stepView.navigationFooterView setHidden:YES];
+    
+    self.stepView.accessibilityIdentifier = ORKLearnMoreStepViewAccessibilityIdentifier;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,6 +64,7 @@ static const CGFloat ORKScrollViewCustomContentInset = 40.0;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem.accessibilityIdentifier = ORKLearnMoreViewDoneButtonAccessibilityIdentifier;
     
     if (self.stepView.navigationFooterView.isHidden) {
         [self.stepView setScrollViewCustomContentInset: ORKScrollViewCustomContentInset];

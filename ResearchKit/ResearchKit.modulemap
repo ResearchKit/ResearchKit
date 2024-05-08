@@ -6,10 +6,3 @@ framework module ResearchKit {
         export *
     }
 }
-
-framework module ResearchKit_Private {
-    umbrella header "ResearchKit_Private.h"
-    
-    export *
-    module * { export * }
-}

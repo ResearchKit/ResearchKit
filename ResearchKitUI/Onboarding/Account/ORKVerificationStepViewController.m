@@ -41,6 +41,9 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+NSString * const ORKVerificationStepViewAccessibilityIdentifier = @"ORKVerificationStepView";
+NSString * const ORKVerificationStepViewResendEmailButtonAccessibilityIdentifier = @"ORKVerificationStepViewResendEmailButton";
+
 @implementation ORKVerificationStepViewController {
     ORKVerificationStepView *_verificationStepView;
     NSArray<NSLayoutConstraint *> *_constraints;
@@ -59,6 +62,7 @@
         
         _verificationStepView = [ORKVerificationStepView new];
         _verificationStepView.headerView.instructionLabel.text = [[self verificationStep].text stringByAppendingString:[NSString stringWithFormat:@"\n\n%@", ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil)]];
+        _verificationStepView.accessibilityIdentifier = ORKVerificationStepViewAccessibilityIdentifier;
         
         _iPadContentView = [self viewForiPadLayoutConstraints];
         if (_iPadContentView) {
@@ -71,6 +75,7 @@
         [_verificationStepView.resendEmailButton addTarget:self
                                                    action:@selector(resendEmailButtonHandler:)
                                          forControlEvents:UIControlEventTouchUpInside];
+        _verificationStepView.resendEmailButton.accessibilityIdentifier = ORKVerificationStepViewResendEmailButtonAccessibilityIdentifier;
     }
 }
 

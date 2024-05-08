@@ -50,6 +50,8 @@
 
 #import "ORKHelpers_Internal.h"
 
+NSString * const ORKWaitStepViewAccessibilityIdentifier = @"ORKWaitStepView";
+
 
 @implementation ORKWaitStepViewController {
     ORKWaitStepView *_waitStepView;
@@ -87,6 +89,7 @@
         _waitStepView.stepHeaderTextAlignment = self.step.headerTextAlignment;
         _waitStepView.bodyItems = self.step.bodyItems;
         _waitStepView.stepTopContentImageContentMode = self.step.imageContentMode;
+        _waitStepView.accessibilityIdentifier = ORKWaitStepViewAccessibilityIdentifier;
         
         [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
     }

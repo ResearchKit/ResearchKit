@@ -30,6 +30,7 @@
 
 #import <ResearchKitUI/ORKFormStepViewController_Private.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class ORKTableCellItemIdentifier;
 
@@ -68,4 +69,7 @@ returns a list of all the answerable formItems
  fetches the associated ORKFormItem from a formItemIdentifier (potential performance hit)
  */
 - (nullable ORKFormItem *)_formItemForFormItemIdentifier:(NSString *)formItemIdentifier;
+
 @end
+
+NS_ASSUME_NONNULL_END

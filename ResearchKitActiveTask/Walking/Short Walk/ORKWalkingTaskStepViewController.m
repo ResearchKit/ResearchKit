@@ -32,7 +32,7 @@
 #import "ORKWalkingTaskStepViewController.h"
 
 #import "ORKActiveStepView.h"
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKProgressView.h"
 #import "ORKVerticalContainerView_Internal.h"
 

@@ -44,7 +44,6 @@
 #import <ResearchKitUI/ORKCountdownLabel.h>
 #import <ResearchKitUI/ORKCustomStepView.h>
 #import <ResearchKitUI/ORKCustomStepViewController.h>
-#import <ResearchKitUI/ORKCustomStepView_Internal.h>
 #import <ResearchKitUI/ORKDateTimePicker.h>
 #import <ResearchKitUI/ORKDefaultFont.h>
 #import <ResearchKitUI/ORKDontKnowButton.h>
@@ -96,6 +95,7 @@
 #import <ResearchKitUI/ORKSurveyAnswerCellForSES.h>
 #import <ResearchKitUI/ORKSurveyAnswerCellForScale.h>
 #import <ResearchKitUI/ORKSurveyAnswerCellForText.h>
+#import <ResearchKitUI/ORKSurveyCardHeaderView.h>
 #import <ResearchKitUI/ORKTableStepViewController.h>
 #import <ResearchKitUI/ORKTableViewCell.h>
 #import <ResearchKitUI/ORKTagLabel.h>

@@ -30,7 +30,7 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 #if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
@@ -210,6 +210,7 @@ UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor
 #if TARGET_OS_IOS
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view);
 #endif
+
 
 ORK_INLINE bool
 ORKEqualObjects(id o1, id o2) {

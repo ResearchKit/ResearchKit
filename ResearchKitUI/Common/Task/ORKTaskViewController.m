@@ -31,7 +31,7 @@
 
 #import "ORKTaskViewController.h"
 
-#import "ORKActiveStepViewController.h"
+#import "ORKBorderedButton.h"
 #import "ORKInstructionStepViewController_Internal.h"
 #import "ORKFormStepViewController.h"
 #import "ORKReviewStepViewController_Internal.h"
@@ -48,13 +48,11 @@
 #import "ORKResult_Private.h"
 #import "ORKReviewStep_Internal.h"
 #import "ORKStep_Private.h"
-#import "ORKTappingIntervalStep.h"
 #import "ORKViewControllerProviding.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKObserver.h"
 #import "ORKSkin.h"
-#import "ORKBorderedButton.h"
 #import "ORKTaskReviewViewController.h"
 
 #import <CoreLocation/CLLocationManagerDelegate.h>
@@ -242,7 +240,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut {
-    self = [[self initWithNibName:nil bundle:nil] commonInitWithTask:task taskRunUUID:nil];
+    self = [[super initWithNibName:nil bundle:nil] commonInitWithTask:task taskRunUUID:nil];
     
     if (self) {
         self.delegate = delegate;
@@ -250,6 +248,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             self.restorationClass = [self class];
             NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:errorOut];
             [self decodeRestorableStateWithCoder:unarchiver];
+            [unarchiver finishDecoding];
             [self applicationFinishedRestoringState];
             
             if (unarchiver == nil && errorOut != nil) {
@@ -279,6 +278,21 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 _managedResults[stepResultIdentifier] = stepResult;
             }
             _restoredStepIdentifier = ongoingResult.results.lastObject.identifier;
+        }
+    }
+    return self;
+}
+
+- (instancetype)initWithTask:(id<ORKTask>)task
+               ongoingResult:(ORKTaskResult *)ongoingResult
+          restoreAtFirstStep:(BOOL)restoreAtFirstStep
+         defaultResultSource:(id<ORKTaskResultSource>)defaultResultSource
+                    delegate:(id<ORKTaskViewControllerDelegate>)delegate {
+    self = [self initWithTask:task ongoingResult:ongoingResult defaultResultSource:defaultResultSource delegate:delegate];
+    
+    if (self) {
+        if (restoreAtFirstStep && ongoingResult != nil) {
+            _restoredStepIdentifier = ongoingResult.results.firstObject.identifier;
         }
     }
     return self;
@@ -973,9 +987,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         stepViewController = lastStepViewController;
         _currentStepViewController = lastStepViewController;
     }
-    
-    UIColor *tintColor = ORKViewTintColor(self.view);
-    stepViewController.view.tintColor = tintColor;
 
     [newViewControllers addObject:stepViewController];
 
@@ -1578,7 +1589,14 @@ static NSString *const _ORKProgressMode = @"progressMode";
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
-    _taskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
+    NSUUID *decodedTaskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
+    if (decodedTaskRunUUID != nil) {
+        _taskRunUUID = decodedTaskRunUUID;
+    } else {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:[NSString stringWithFormat:@"Restored task data taskRunUUID was nil"]
+                                     userInfo:nil];
+    }
     self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
     self.discardable = [coder decodeBoolForKey:_ORKDiscardableTaskRestoreKey];
     self.progressMode = [coder decodeIntegerForKey:_ORKProgressMode];
@@ -1588,10 +1606,8 @@ static NSString *const _ORKProgressMode = @"progressMode";
     
     // Must have a task object already provided by this point in the restoration, in order to restore any other state.
     if (_task) {
-        
-        // Recover partially entered results, even if we may not be able to jump to the desired step.
-        _managedResults = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKManagedResultsRestoreKey];
-        _managedStepIdentifiers = [coder decodeObjectOfClass:[NSMutableArray class] forKey:_ORKManagedStepIdentifiersRestoreKey];
+        _managedResults = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self, ORKResult.self, ORKStepResult.self]]  forKey:_ORKManagedResultsRestoreKey];
+        _managedStepIdentifiers = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableArray.self, NSString.self]] forKey:_ORKManagedStepIdentifiersRestoreKey];
         
         _restoredTaskIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKTaskIdentifierRestoreKey];
         if (_restoredTaskIdentifier) {
@@ -1603,11 +1619,10 @@ static NSString *const _ORKProgressMode = @"progressMode";
         }
         
         if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
-            _requestedHealthTypesForRead = [coder decodeObjectOfClass:[NSSet class] forKey:_ORKRequestedHealthTypesForReadRestoreKey];
-            _requestedHealthTypesForWrite = [coder decodeObjectOfClass:[NSSet class] forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
+            _requestedHealthTypesForRead = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSSet.self, HKObjectType.self]] forKey:_ORKRequestedHealthTypesForReadRestoreKey];
+            _requestedHealthTypesForWrite = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSSet.self, HKObjectType.self]] forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
             _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
             _lastBeginningInstructionStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKLastBeginningInstructionStepIdentifierKey];
-            
             _restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
         } else {
             ORK_Log_Info("Not restoring current step of task %@ because it does not implement -stepWithIdentifier:", _task.identifier);

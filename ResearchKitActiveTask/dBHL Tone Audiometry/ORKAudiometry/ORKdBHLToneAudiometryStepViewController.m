@@ -108,7 +108,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureStep];
 }
 
 - (ORKdBHLToneAudiometryAudioGenerator *)createAudioGeneratorFromHeadphoneType:(ORKHeadphoneTypeIdentifier)type {
@@ -140,6 +139,11 @@
 - (void)removeObservers {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureStep];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

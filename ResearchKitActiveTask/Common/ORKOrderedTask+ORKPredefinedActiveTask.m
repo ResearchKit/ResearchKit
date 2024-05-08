@@ -48,6 +48,7 @@
 #import "ORKTouchAnywhereStep.h"
 #import "ORKFitnessStep.h"
 #import "ORKFormStep.h"
+#import "ORKHealthQuantityTypeRecorder.h"
 #import "ORKNavigableOrderedTask.h"
 #import "ORKPSATStep.h"
 #import "ORKQuestionStep.h"
