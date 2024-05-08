@@ -29,7 +29,7 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStep.h>
 #import <ResearchKit/ORKOrderedTask.h>

@@ -31,7 +31,7 @@
 
 
 @import UIKit;
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKNormalizedReactionTimeStimulusView.h"
 #import "ORKRoundTappingButton.h"
 

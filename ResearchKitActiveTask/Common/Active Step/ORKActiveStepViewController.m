@@ -133,6 +133,10 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     [self.view addSubview:_activeStepView];
 }
 
+- (void)setNavigationFooterViewHidden:(BOOL)hidden {
+    [_navigationFooterView setHidden:hidden];
+}
+
 - (void)setNavigationFooterView {
     if (!_navigationFooterView) {
         _navigationFooterView = _activeStepView.navigationFooterView;
@@ -573,7 +577,7 @@ static NSString *const _ORKRecorderResultsRestoreKey = @"recorderResults";
     [super decodeRestorableStateWithCoder:coder];
     
     self.finished = [coder decodeBoolForKey:_ORKFinishedRestoreKey];
-    _recorderResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKRecorderResultsRestoreKey];
+    _recorderResults = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSArray.self, ORKResult.self]] forKey:_ORKRecorderResultsRestoreKey];
 }
 
 @end

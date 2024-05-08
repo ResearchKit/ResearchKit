@@ -37,8 +37,8 @@
 #import "ORKDataLogger.h"
 #import "ORKRecorder_Private.h"
 #import "ORKRecorder_Internal.h"
-#import "HKSample+ORKJSONDictionary.h"
 
+#import <ResearchKit/HKSample+ORKJSONDictionary.h>
 
 @interface ORKHealthClinicalTypeRecorder () {
     ORKDataLogger *_logger;

@@ -4,10 +4,3 @@ framework module ResearchKitActiveTask {
     export *
     module * { export * }
 }
-
-framework module ResearchKitActiveTask_Private {
-    umbrella header "ResearchKitActiveTask_Private.h"
-    
-    export *
-    module * { export * }
-}

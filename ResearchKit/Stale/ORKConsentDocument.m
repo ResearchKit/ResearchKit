@@ -43,6 +43,8 @@
 #import "ORKErrors.h"
 #import "ORKSkin_Private.h"
 
+static NSString *const _ORKSignaturesKey = @"signatures";
+
 @implementation ORKConsentDocument {
     NSMutableArray<ORKConsentSignature *> *_signatures;
 }
@@ -233,8 +235,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, signaturePageTitle, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, signaturePageContent, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, htmlReviewContent, NSString);
-        NSArray *signatures = (NSArray *)[aDecoder decodeObjectOfClass:[NSArray class] forKey:@"signatures"];
-        _signatures = [signatures mutableCopy];
+        _signatures = [aDecoder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableArray.self, ORKConsentSignature.self]] forKey:_ORKSignaturesKey];
         ORK_DECODE_OBJ_ARRAY(aDecoder, sections, ORKConsentSection);
     }
     return self;

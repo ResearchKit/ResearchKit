@@ -164,6 +164,7 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
     */
     case is ORKCollectionResult where !(result is ORKTaskResult):
         providerType = CollectionResultTableViewProvider.self
+        
       
     case is ORKVideoInstructionStepResult:
         providerType = VideoInstructionStepResultTableViewProvider.self
@@ -179,7 +180,6 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
         
     case is ORKSignatureResult:
         providerType = SignatureResultTableViewProvider.self
-
 
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")

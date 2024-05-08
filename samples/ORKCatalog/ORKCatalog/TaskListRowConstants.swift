@@ -287,6 +287,9 @@ enum Identifier {
     case webViewTask
     case webViewStep
     
+    // 3DModelStep tasks
+    case usdzModelStep
+    case usdzModelTask
 }
 
 

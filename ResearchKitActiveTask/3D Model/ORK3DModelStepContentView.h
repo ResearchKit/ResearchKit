@@ -31,7 +31,7 @@
 @import UIKit;
 
 #import "ORK3DModelStep.h"
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

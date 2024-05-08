@@ -32,9 +32,6 @@
 #import "ORKDataLogger.h"
 
 #import "ORKHelpers_Internal.h"
-#import "CMMotionActivity+ORKJSONDictionary.h"
-#import "HKSample+ORKJSONDictionary.h"
-
 #include <sys/xattr.h>
 
 

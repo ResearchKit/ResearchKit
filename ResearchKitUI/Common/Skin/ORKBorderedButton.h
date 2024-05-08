@@ -47,12 +47,6 @@ typedef NS_ENUM(NSInteger, ORKBorderedButtonDisabledStyle) {
 
 ORK_CLASS_AVAILABLE
 
-@interface CALayer (ORKCornerCurveContinuousCategory)
-
-- (void)setCornerCurveContinuous;
-- (void)setCornerCurveCircular;
-
-@end
 
 @interface ORKBorderedButton : ORKTextButton
 

@@ -51,8 +51,8 @@
  */
 
 
-@import UIKit;
-@import AVFoundation;
+#import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import <ResearchKit/ORKTypes.h>
 
 

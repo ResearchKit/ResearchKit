@@ -43,7 +43,6 @@
 #import "ORKAmslerGridResult.h"
 #import "ORKResult_Private.h"
 #import "ORKCollectionResult_Private.h"
-#import "ORKBorderedButton.h"
 
 
 @interface ORKAmslerGridStepViewController () {

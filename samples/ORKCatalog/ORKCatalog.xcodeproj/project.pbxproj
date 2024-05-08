@@ -14,6 +14,7 @@
 		3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FF1ABF683F00C2ABE5 /* Images.xcassets */; };
 		3ED967B81AC13D37007E2D83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3ED967BA1AC13D37007E2D83 /* Localizable.strings */; };
 		51AF19862B59F3A900D3B399 /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 51AF19852B59F3A900D3B399 /* ORKKeychainWrapperTests.m */; };
+		51C173282BA4B4E1006604FB /* sphere_model.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 51C173272BA4B4E1006604FB /* sphere_model.usdz */; };
 		51F210EF2B4634FC0072B536 /* TaskListRowSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F210EE2B4634FC0072B536 /* TaskListRowSteps.swift */; };
 		51F210FE2B49D04F0072B536 /* TaskListRowConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F210FD2B49D04F0072B536 /* TaskListRowConstants.swift */; };
 		863CCD821ACF545E009FD3B4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 863CCD811ACF545E009FD3B4 /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -121,6 +122,7 @@
 		5116D0BF2677FB780010FAB1 /* ResearchKit-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ResearchKit-Shared.xcconfig"; sourceTree = "<group>"; };
 		51AF19772B59F1E400D3B399 /* ORKCatalogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORKCatalogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51AF19852B59F3A900D3B399 /* ORKKeychainWrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKKeychainWrapperTests.m; sourceTree = "<group>"; };
+		51C173272BA4B4E1006604FB /* sphere_model.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = sphere_model.usdz; sourceTree = "<group>"; };
 		51F210EE2B4634FC0072B536 /* TaskListRowSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRowSteps.swift; sourceTree = "<group>"; };
 		51F210FD2B49D04F0072B536 /* TaskListRowConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRowConstants.swift; sourceTree = "<group>"; };
 		863CCD811ACF545E009FD3B4 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -309,6 +311,7 @@
 		BC74787A1B990EED0072BFE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				51C173272BA4B4E1006604FB /* sphere_model.usdz */,
 				BAAC3FD520C4EF1C0065B9E1 /* ResearchKit.pdf */,
 				3E39B9FF1ABF683F00C2ABE5 /* Images.xcassets */,
 				3E39B9FC1ABF683700C2ABE5 /* LaunchScreen.xib */,
@@ -483,6 +486,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51C173282BA4B4E1006604FB /* sphere_model.usdz in Resources */,
 				3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */,
 				3E39B9FB1ABF682D00C2ABE5 /* Main.storyboard in Resources */,
 				BAAC3FD620C4EF1C0065B9E1 /* ResearchKit.pdf in Resources */,

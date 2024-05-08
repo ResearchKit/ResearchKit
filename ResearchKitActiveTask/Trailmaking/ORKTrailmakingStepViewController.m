@@ -34,7 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
 #import "ORKTrailmakingContentView.h"
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKRoundTappingButton.h"
 
 #import "ORKActiveStepViewController_Internal.h"

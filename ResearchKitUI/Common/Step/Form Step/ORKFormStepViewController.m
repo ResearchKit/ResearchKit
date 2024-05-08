@@ -1337,6 +1337,10 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 
 // Return NO if we didn't autoscroll
 - (BOOL)didAutoScrollToNextItem:(ORKFormItemCell *)cell {
+    if (![self _isAutoScrollEnabled]) {
+        return NO;
+    }
+    
     NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
     
     if (cell.isLastItem) {
@@ -1357,6 +1361,10 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 }
 
 - (BOOL)shouldAutoScrollToNextSection:(NSIndexPath *)indexPath {
+    if (![self _isAutoScrollEnabled]) {
+        return NO;
+    }
+    
     BOOL result = YES;
     
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.section + 1)];
@@ -1383,6 +1391,10 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 }
 
 - (void)autoScrollToNextSection:(NSIndexPath *)indexPath {
+    if (![self _isAutoScrollEnabled]) {
+        return;
+    }
+    
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.section + 1)];
     UITableView *tableView = self.tableView;
     UITableViewCell *nextCell = [tableView cellForRowAtIndexPath:nextIndexPath];
@@ -1399,16 +1411,28 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 }
 
 - (void)scrollToFirstUnansweredSection {
+    if (![self _isAutoScrollEnabled]) {
+        return;
+    }
+    
     ORKFormItem *formItem = [self fetchFirstUnansweredNonOptionalFormItem:[self answerableFormItems]];
     [self scrollToFormItem:formItem];
 }
 
 - (void)scrollToFooter {
+    if (![self _isAutoScrollEnabled]) {
+        return;
+    }
+    
     CGRect tableFooterRect = [self.tableView convertRect:self.tableView.tableFooterView.bounds fromView:self.tableView.tableFooterView];
     [self.tableView scrollRectToVisible:tableFooterRect animated:YES];
 }
 
 - (void)scrollToFormItem:(ORKFormItem *)formItem {
+    if (![self _isAutoScrollEnabled]) {
+        return;
+    }
+    
     NSString *sectionIdentifier = [self fetchSectionThatContainsFormItem:formItem];
     NSInteger section = [[_diffableDataSource snapshot] indexOfSectionIdentifier:sectionIdentifier];
     if (section != NSNotFound) {
@@ -1417,6 +1441,11 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
             [_tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
     }
+}
+
+- (BOOL)_isAutoScrollEnabled {
+    ORKFormStep *formStep = [self formStep];
+    return formStep.autoScrollEnabled;
 }
 
 - (nullable ORKTextChoiceAnswerFormat *)textChoiceAnswerFormatForIndexPath:(NSIndexPath *)indexPath {
@@ -1705,9 +1734,11 @@ static CGFloat ORKLabelWidth(NSString *text) {
     ORKFormItemCell *formItemCell = ORKDynamicCast(cell, ORKFormItemCell);
     if (formItemCell != nil) {
         [formItemCell becomeFirstResponder];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        });
+        if ([self _isAutoScrollEnabled]) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            });
+        }
     }
 
     ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = ORKDynamicCast(formItem.impliedAnswerFormat, ORKTextChoiceAnswerFormat);
@@ -1979,7 +2010,9 @@ static CGFloat ORKLabelWidth(NSString *text) {
                         [formItemCell becomeFirstResponder];
                     }
                     
-                    [_tableView scrollToRowAtIndexPath:nextPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                    if ([self _isAutoScrollEnabled]) {
+                        [_tableView scrollToRowAtIndexPath:nextPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                    }
                 }
             });
         }
@@ -2040,12 +2073,13 @@ static NSString *const _ORKAnsweredSectionIdentifiersRestoreKey = @"answeredSect
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
-    _savedAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswersRestoreKey];
-    _savedAnswerDates = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswerDatesRestoreKey];
-    _savedSystemCalendars = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemCalendarsRestoreKey];
-    _savedSystemTimeZones = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemTimeZonesRestoreKey];
-    _originalAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKOriginalAnswersRestoreKey];
-    _identifiersOfAnsweredSections = [coder decodeObjectOfClass:[NSMutableSet class] forKey:_ORKAnsweredSectionIdentifiersRestoreKey];
+    NSSet *decodableAnswerTypes = [NSSet setWithObjects:NSMutableDictionary.self, NSString.self, NSNumber.self, NSDate.self, nil];
+    _savedAnswers = [coder decodeObjectOfClasses:decodableAnswerTypes forKey:_ORKSavedAnswersRestoreKey];
+    _savedAnswerDates = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self, NSDate.self]] forKey:_ORKSavedAnswerDatesRestoreKey];
+    _savedSystemCalendars = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self, NSCalendar.self]] forKey:_ORKSavedSystemCalendarsRestoreKey];
+    _savedSystemTimeZones = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableDictionary.self, NSString.self,  NSTimeZone.self]] forKey:_ORKSavedSystemTimeZonesRestoreKey];
+    _originalAnswers = [coder decodeObjectOfClasses:decodableAnswerTypes forKey:_ORKOriginalAnswersRestoreKey];
+    _identifiersOfAnsweredSections = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSMutableSet.self, NSString.self]] forKey:_ORKAnsweredSectionIdentifiersRestoreKey];
 }
 
 #pragma mark Rotate

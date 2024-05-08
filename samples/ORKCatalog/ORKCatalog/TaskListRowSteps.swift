@@ -28,7 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import ResearchKit
+import ResearchKitActiveTask
 
 enum TaskListRowSteps {
     
@@ -195,6 +195,54 @@ enum TaskListRowSteps {
         emailFormStep.formItems = [sectionHeaderFormItem, emailFormItem]
         
         return emailFormStep
+    }
+    
+    static var groupFormExample: ORKFormStep {
+        let step = ORKFormStep(identifier: String(describing: Identifier.groupedFormStep),
+                               title: NSLocalizedString("Form Step", comment: ""),
+                               text: TaskListRowStrings.exampleDetailText)
+        
+        //Start of first section
+        let learnMoreInstructionStep01 = ORKLearnMoreInstructionStep(identifier: "LearnMoreInstructionStep01")
+        learnMoreInstructionStep01.title = NSLocalizedString("Learn more title", comment: "")
+        learnMoreInstructionStep01.text = NSLocalizedString("Learn more text", comment: "")
+        let learnMoreItem01 = ORKLearnMoreItem(text: nil, learnMoreInstructionStep: learnMoreInstructionStep01)
+        let section01 = ORKFormItem(sectionTitle: NSLocalizedString("Section title", comment: ""), detailText: NSLocalizedString("Section detail text", comment: ""), learnMoreItem: learnMoreItem01, showsProgress: true)
+        
+        // A first field, for entering an integer.
+        let formItem01Text = NSLocalizedString("Field01", comment: "")
+        let formItem01 = ORKFormItem(identifier: String(describing: Identifier.formItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormat(withUnit: nil))
+        formItem01.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        
+        // A second field, for entering a time interval.
+        let formItem02Text = NSLocalizedString("Field02", comment: "")
+        let formItem02 = ORKFormItem(identifier: String(describing: Identifier.formItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
+        formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        
+        let textOnlySection = ORKFormItem(sectionTitle: NSLocalizedString("Text Only Section", comment: ""), detailText: NSLocalizedString("Text section text", comment: ""), learnMoreItem: learnMoreItem01, showsProgress: true)
+        let textOnlyFormItemA = ORKFormItem(identifier: "text-section-text-item-a", text: "Text Field A", answerFormat: ORKTextAnswerFormat())
+        let textOnlyFormItemB = ORKFormItem(identifier: "text-section-text-item-b", text: "Text Field B", answerFormat: ORKTimeIntervalAnswerFormat())
+        
+        let sesAnswerFormat = ORKSESAnswerFormat(topRungText: "Best Off", bottomRungText: "Worst Off")
+        let sesFormItem = ORKFormItem(identifier: "sesIdentifier", text: "Select where you are on the socioeconomic ladder.", answerFormat: sesAnswerFormat)
+        
+        //Start of section for scale question
+        let formItem03Text = TaskListRowStrings.exampleQuestionText
+        let scaleAnswerFormat = ORKContinuousScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0.0, maximumFractionDigits: 1)
+        let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, detailText: nil, learnMoreItem: nil, showsProgress: true, answerFormat: scaleAnswerFormat, tagText: nil, optional: true)
+        
+        step.formItems = [
+            section01,
+            formItem01,
+            formItem02,
+            textOnlySection,
+            textOnlyFormItemA,
+            textOnlyFormItemB,
+            formItem03,
+            sesFormItem
+        ]
+        
+        return step
     }
     
     static var heartRateExample: ORKFormStep {
@@ -612,25 +660,33 @@ enum TaskListRowSteps {
                                                     detailText: nil,
                                                     image: UIImage(systemName: "heart.fill"),
                                                     learnMoreItem: nil,
-                                                    bodyItemStyle: .image)
+                                                    bodyItemStyle: .image,
+                                                    useCardStyle: false,
+                                                    alignImageToTop: true)
         
         let completingTasksBodyItem = ORKBodyItem(text: "You will be asked to complete various tasks over the duration of the study.",
                                                   detailText: nil,
                                                   image: UIImage(systemName: "checkmark.circle.fill"),
                                                   learnMoreItem: nil,
-                                                  bodyItemStyle: .image)
+                                                  bodyItemStyle: .image,
+                                                  useCardStyle: false,
+                                                  alignImageToTop: true)
         
         let signatureBodyItem = ORKBodyItem(text: "Before joining, we will ask you to sign an informed consent document.",
                                             detailText: nil,
                                             image: UIImage(systemName: "signature"),
                                             learnMoreItem: nil,
-                                            bodyItemStyle: .image)
+                                            bodyItemStyle: .image,
+                                            useCardStyle: false,
+                                            alignImageToTop: true)
         
         let secureDataBodyItem = ORKBodyItem(text: "Your data is kept private and secure.",
                                              detailText: nil,
                                              image: UIImage(systemName: "lock.fill"),
                                              learnMoreItem: nil,
-                                             bodyItemStyle: .image)
+                                             bodyItemStyle: .image,
+                                             useCardStyle: false,
+                                             alignImageToTop: true)
         
         instructionStep.bodyItems = [
             sharingHealthDataBodyItem,
@@ -711,6 +767,21 @@ enum TaskListRowSteps {
         embeddedReviewStep.title = "Embedded Review Step"
         
         return embeddedReviewStep
+    }
+    
+    // MARK: - ORK3DModelStep
+    
+    static var usdzModelExample: ORK3DModelStep {
+        let modelManager = ORKUSDZModelManager(usdzFileName: "sphere_model")
+        modelManager.allowsSelection = true
+        modelManager.enableContinueAfterSelection = true
+        modelManager.highlightColor = .systemBlue
+        
+        let usdzModelStep = ORK3DModelStep(identifier: String(describing: Identifier.usdzModelStep), modelManager: modelManager)
+        usdzModelStep.title = "Example USDZ Model"
+        usdzModelStep.text = "Tap the model to continue"
+        
+        return usdzModelStep
     }
     
     // MARK: - Helpers

@@ -29,7 +29,7 @@
  */
 
 
-@import HealthKit;
+#import <HealthKit/HealthKit.h>
 #if TARGET_OS_IOS
 #import <ResearchKit/ORKAnswerFormat_Private.h>
 #import <ResearchKit/ORKChoiceAnswerFormatHelper.h>

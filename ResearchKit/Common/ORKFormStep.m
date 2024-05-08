@@ -53,6 +53,7 @@
         self.optional = YES;
         self.useSurveyMode = YES;
         self.useCardView = YES;
+        self.autoScrollEnabled = YES;
         self.cardViewStyle = ORKCardViewStyleDefault;
     }
     return self;
@@ -64,6 +65,7 @@
         self.optional = YES;
         self.useSurveyMode = YES;
         self.useCardView = YES;
+        self.autoScrollEnabled = YES;
         self.cardViewStyle = ORKCardViewStyleDefault;
     }
     return self;
@@ -93,6 +95,7 @@
     ORKFormStep *step = [super copyWithZone:zone];
     step.formItems = ORKArrayCopyObjects(_formItems);
     step.cardViewStyle = self.cardViewStyle;
+    step.autoScrollEnabled = self.autoScrollEnabled;
     return step;
 }
 
@@ -102,7 +105,8 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             (ORKEqualObjects(self.formItems, castObject.formItems)) &&
-            self.cardViewStyle == castObject.cardViewStyle);
+            self.cardViewStyle == castObject.cardViewStyle &&
+            self.autoScrollEnabled == castObject.autoScrollEnabled);
 }
 
 - (NSUInteger)hash {
@@ -145,6 +149,7 @@
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
         ORK_DECODE_BOOL(aDecoder, useCardView);
+        ORK_DECODE_BOOL(aDecoder, autoScrollEnabled);
         ORK_DECODE_OBJ_CLASS(aDecoder, footerText, NSString);
         ORK_DECODE_ENUM(aDecoder, cardViewStyle);
     }
@@ -155,6 +160,7 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, formItems);
     ORK_ENCODE_BOOL(aCoder, useCardView);
+    ORK_ENCODE_BOOL(aCoder, autoScrollEnabled);
     ORK_ENCODE_OBJ(aCoder, footerText);
     ORK_ENCODE_ENUM(aCoder, cardViewStyle);
 }

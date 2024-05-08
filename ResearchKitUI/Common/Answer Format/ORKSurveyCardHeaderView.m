@@ -46,7 +46,6 @@ NSString * const ORKSurveyCardHeaderViewTitleLabelAccessibilityIdentifier = @"OR
 NSString * const ORKSurveyCardHeaderViewProgressLabelAccessibilityIdentifier = @"ORKSurveyCardHeaderView_progressLabel";
 NSString * const ORKSurveyCardHeaderViewDetailTextLabelAccessibilityIdentifier = @"ORKSurveyCardHeaderView_detailTextLabel";
 NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIdentifier = @"ORKSurveyCardHeaderView_selectAllThatApplyLabel";
-NSString * const UITestLaunchArgument = @"UITest";
 
 @implementation ORKSurveyCardHeaderView {
     

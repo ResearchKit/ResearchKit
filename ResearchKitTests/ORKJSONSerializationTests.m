@@ -40,7 +40,7 @@
 #import "ORKESerialization.h"
 #import <objc/runtime.h>
 
-BOOL ORKIsResearchKitClass(Class class) {
+static BOOL ORKIsResearchKitClass(Class class) {
     NSString *name = NSStringFromClass(class);
     return [name hasPrefix:@"ORK"];
 }

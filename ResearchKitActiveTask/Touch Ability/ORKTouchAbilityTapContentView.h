@@ -30,7 +30,9 @@
 
 
 @import UIKit;
+
 #import "ORKTouchAbilityContentView.h"
+#import <ResearchKitUI/ORKCustomStepView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

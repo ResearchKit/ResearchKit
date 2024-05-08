@@ -644,6 +644,7 @@ static ORKESerializableProperty *imagePropertyObject(NSString *propertyName,
 
 static id propFromDict(NSDictionary *dict, NSString *propName, ORKESerializationContext *context) {
     Class class = NSClassFromString(dict[_ClassKey]);
+
     NSArray *classEncodings = classEncodingsForClass(class);
     ORKESerializableProperty *propertyEntry = nil;
     for (ORKESerializableTableEntry *classEncoding in classEncodings) {
@@ -918,7 +919,8 @@ static NSMutableDictionary<NSString *, ORKESerializableTableEntry *> *ORKESerial
                                                                          image:nil
                                                                  learnMoreItem:GETPROP(dict, learnMoreItem)
                                                                  bodyItemStyle:[GETPROP(dict, bodyItemStyle) intValue]
-                                                                  useCardStyle:GETPROP(dict, useCardStyle)];
+                                                                  useCardStyle:GETPROP(dict, useCardStyle)
+                                                               alignImageToTop:GETPROP(dict, alignImageToTop)];
                      return bodyItem;
                  },
                  (@{
@@ -929,6 +931,7 @@ static NSMutableDictionary<NSString *, ORKESerializableTableEntry *> *ORKESerial
                     PROPERTY(learnMoreItem, ORKLearnMoreItem, NSObject, YES, nil, nil),
                     PROPERTY(useCardStyle, NSNumber, NSObject, YES, nil, nil),
                     PROPERTY(useSecondaryColor, NSNumber, NSObject, YES, nil, nil),
+                    PROPERTY(alignImageToTop, NSNumber, NSObject, YES, nil, nil),
                     })),
            ENTRY(ORKLearnMoreItem,
                  ^id(__unused NSDictionary *dict, __unused ORKESerializationPropertyGetter getter) {
@@ -1578,6 +1581,7 @@ static NSMutableDictionary<NSString *, ORKESerializableTableEntry *> *ORKESerial
                     PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil),
                     PROPERTY(footnote, NSString, NSObject, YES, nil, nil),
                     PROPERTY(useCardView, NSNumber, NSObject, YES, nil, nil),
+                    PROPERTY(autoScrollEnabled, NSNumber, NSObject, YES, nil, nil),
                     PROPERTY(footerText, NSString, NSObject, YES, nil, nil),
                     PROPERTY(cardViewStyle, NSNumber, NSObject, YES, nil, nil),
                     })),

@@ -51,7 +51,6 @@
 #import "ORKSpeechRecognitionError.h"
 
 #import "ORKHelpers_Internal.h"
-#import "ORKBorderedButton.h"
 #import "ORKRecordButton.h"
 #import "ORKSpeechRecognitionResult.h"
 #import "ORKResult_Private.h"

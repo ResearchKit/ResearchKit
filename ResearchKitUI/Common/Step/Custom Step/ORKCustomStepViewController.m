@@ -36,6 +36,8 @@
 #import "ORKStepContainerView_Private.h"
 #import "ORKStepView_Private.h"
 
+NSString * const ORKCustomStepViewAccessibilityIdentifier = @"ORKCustomStepView";
+
 @interface ORKCustomStepViewController ()
 
 @end
@@ -65,6 +67,7 @@
     
     if (self.step && [self isViewLoaded]) {
         _containerView = [[ORKStepContainerView alloc] init];
+        _containerView.accessibilityIdentifier = ORKCustomStepViewAccessibilityIdentifier;
         [self configureContainerView];
         [_containerView setPinNavigationContainer:self.customStep.pinNavigationContainer];
         [_containerView setCustomContentView:[self customStep].contentView withTopPadding:0.0 sidePadding:0.0];

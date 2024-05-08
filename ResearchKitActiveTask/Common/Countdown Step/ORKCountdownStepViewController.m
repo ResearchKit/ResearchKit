@@ -33,7 +33,7 @@
 
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
-#import "ORKCustomStepView_Internal.h"
+#import "ORKActiveStepCustomView.h"
 #import "ORKLabel.h"
 #import "ORKSubheadlineLabel.h"
 

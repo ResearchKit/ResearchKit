@@ -29,7 +29,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 #if TARGET_OS_IOS
 #import <ResearchKit/ORKSkin.h>

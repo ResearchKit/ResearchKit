@@ -57,6 +57,8 @@ static CGFloat const kForgotPasscodeVerticalPadding     = 50.0f;
 static CGFloat const kForgotPasscodeHorizontalPadding   = 30.0f;
 static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
+NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepView";
+
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;
     CGFloat _originalForgotPasscodeY;
@@ -103,6 +105,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         _passcodeStepView = [ORKPasscodeStepView new];
         _passcodeStepView.stepText = [self passcodeStep].text;
         _passcodeStepView.textField.delegate = self;
+        _passcodeStepView.accessibilityIdentifier = ORKPasscodeStepViewAccessibilityIdentifier;
         
         [_passcodeStepView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideKeyboard)]];
         

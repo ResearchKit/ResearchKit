@@ -29,7 +29,7 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKitUI/ORKStepContainerView.h>
 
 

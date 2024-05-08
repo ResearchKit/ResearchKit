@@ -1,5 +1,18 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.0.1 Release Notes
+In addition to general stability and performance improvements, ResearchKit 3.0.1 includes the following updates:
+
+- **ORKFormStep**
+The `ORKFormStep` has an additional property named `autoScrollEnabled` that allows developers to disable autoscrolling.
+
+- **ORKBodyItem**
+The `ORKBodyItem` has an additional property named `alignImageToTop` that will align a body item's image and text to the top of each other.
+
+- **ORK3DModelStep**
+An example of the `ORK3DModelStep` has been added to the ORKCatalog app.
+
+
 ## ResearchKit 3.0 Release Notes
 
 *ResearchKit 3.0* is a beta release
