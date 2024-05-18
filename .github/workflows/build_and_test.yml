@@ -8,6 +8,10 @@
 
 name: Build XCArchive
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
   workflow_dispatch:
@@ -19,17 +23,31 @@ on:
         required: true
 
 jobs:
-  create-xcframework-and-release-workflow:
+  create-xcframework-and-release-workflow-researchkit:
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
+    strategy:
+      matrix:
+        framework: [ResearchKit, ResearchKitUI]
     with:
       runsonlabels: '["macOS", "self-hosted"]'
       workspaceFile: RKWorkspace.xcworkspace
-      xcFrameworkName: ResearchKit
-      scheme: ResearchKit
+      xcFrameworkName: ${{ matrix.framework }}
+      scheme: ${{ matrix.framework }}
       dryRun: true
       version: ${{ inputs.version }}
       configuration: Release
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
+  create-xcframework-and-release-workflow-researchkit-active-tasks:
+    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
+    with:
+      runsonlabels: '["macOS", "self-hosted"]'
+      workspaceFile: RKWorkspace.xcworkspace
+      xcFrameworkName: ResearchKitActiveTask
+      scheme: ResearchKitActiveTask
+      dryRun: true
+      version: ${{ inputs.version }}
+      configuration: Release
+      sdk: '["iphoneos", "iphonesimulator"]'
   ios:
     name: Build and Test iOS
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
