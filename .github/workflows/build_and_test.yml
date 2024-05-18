@@ -24,6 +24,7 @@ on:
 
 jobs:
   create-xcframework-and-release-workflow-researchkit:
+    name: XCFramework
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     strategy:
       matrix:
@@ -38,6 +39,7 @@ jobs:
       configuration: Release
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
   create-xcframework-and-release-workflow-researchkit-active-tasks:
+    name: XCFramework (ResearchKitActiveTask)
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
       runsonlabels: '["macOS", "self-hosted"]'
