@@ -68,11 +68,13 @@ NS_ASSUME_NONNULL_BEGIN
         result = matchesType ? [ORKFormItemScaleCell class] : result;
     }
 
+#if !TARGET_OS_VISION
     if (result == nil) {
         BOOL matchesType = NO;
         matchesType = matchesType || (type == ORKQuestionTypeLocation);
         result = matchesType ? [ORKFormItemLocationCell class] : result;
     }
+#endif
 
     if (result == nil) {
         BOOL matchesType = NO;

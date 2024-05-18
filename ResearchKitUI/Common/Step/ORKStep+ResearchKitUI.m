@@ -74,6 +74,7 @@
 
 @end
 
+#if !TARGET_OS_VISION
 @implementation ORKImageCaptureStep (ViewControllerProviding)
 
 - (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {
@@ -81,6 +82,7 @@
 }
 
 @end
+#endif
 
 @implementation ORKInstructionStep (ViewControllerProviding)
 
@@ -109,6 +111,7 @@
 
 // ORKNavigablePageStep is intentionally omitted, as it didn't have its own `stepViewControllerClass implementation`.
 
+#if !TARGET_OS_VISION
 @implementation ORKPDFViewerStep (ViewControllerProviding)
 
 - (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {
@@ -116,6 +119,7 @@
 }
 
 @end
+#endif
 
 @implementation ORKPageStep (ViewControllerProviding)
 
@@ -143,6 +147,7 @@
 
 // ORKRegistrationStep is intentionally omitted, as it didn't have its own `stepViewControllerClass implementation`.
 
+#if !TARGET_OS_VISION
 @implementation ORKRequestPermissionsStep(ViewControllerProviding)
 
 - (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {
@@ -150,6 +155,7 @@
 }
 
 @end
+#endif
 
 @implementation ORKReviewStep (ViewControllerProviding)
 
@@ -200,6 +206,7 @@
 
 @end
 
+#if !TARGET_OS_VISION
 @implementation ORKVideoCaptureStep (ViewControllerProviding)
 
 - (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {
@@ -207,6 +214,7 @@
 }
 
 @end
+#endif
 
 @implementation ORKVideoInstructionStep (ViewControllerProviding)
 

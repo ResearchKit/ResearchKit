@@ -30,6 +30,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
 
 #import <UIKit/UIKit.h>
 #import <ResearchKitUI/ORKSurveyAnswerCell.h>
@@ -42,3 +44,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

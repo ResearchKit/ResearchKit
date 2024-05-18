@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
 
 #import "ORKStepViewController_Internal.h"
 
@@ -418,3 +420,5 @@
 }
 
 @end
+
+#endif

@@ -36,6 +36,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
 #import "ORKLocationSelectionView.h"
 
 #import "ORKAnswerTextField.h"
@@ -493,3 +495,5 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 @end
+
+#endif

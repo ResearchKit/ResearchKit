@@ -1213,6 +1213,7 @@
 		2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKUIViewAccessibilityTests.m; sourceTree = "<group>"; };
 		2EBFE11E1AE1B68800CB8254 /* ORKVoiceEngine_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKVoiceEngine_Internal.h; sourceTree = "<group>"; };
 		2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVoiceEngineTests.m; sourceTree = "<group>"; };
+		2F04E08B2BF94023007C8CF3 /* ResearchKitUI_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResearchKitUI_Prefix.pch; sourceTree = "<group>"; };
 		51198767245CA50D004FC2C7 /* ORKUSDZModelManagerScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKUSDZModelManagerScene.h; sourceTree = "<group>"; };
 		51198768245CA50D004FC2C7 /* ORKUSDZModelManagerScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKUSDZModelManagerScene.m; sourceTree = "<group>"; };
 		51198799245FC33C004FC2C7 /* ORK3DModelManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORK3DModelManager.h; sourceTree = "<group>"; };
@@ -1972,9 +1973,9 @@
 		CA1C7A5B288B0C69004DAB3A /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		CA23A31C2899941700EC6E91 /* ORKSkin_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKSkin_Private.h; sourceTree = "<group>"; };
 		CA2B902528A187390025B773 /* ORKTask_Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTask_Util.m; sourceTree = "<group>"; };
-		CA481E8128CBD6D9001C4D49 /* ResearchKitUI-iOS-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-iOS-Shared.xcconfig"; sourceTree = "<group>"; };
-		CA481E8228CBD79B001C4D49 /* ResearchKitUI-iOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-iOS-Debug.xcconfig"; sourceTree = "<group>"; };
-		CA481E8428CBD835001C4D49 /* ResearchKitUI-iOS-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-iOS-Release.xcconfig"; sourceTree = "<group>"; };
+		CA481E8128CBD6D9001C4D49 /* ResearchKitUI-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-Shared.xcconfig"; sourceTree = "<group>"; };
+		CA481E8228CBD79B001C4D49 /* ResearchKitUI-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-Debug.xcconfig"; sourceTree = "<group>"; };
+		CA481E8428CBD835001C4D49 /* ResearchKitUI-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-Release.xcconfig"; sourceTree = "<group>"; };
 		CA481E8C28CBD9F1001C4D49 /* ResearchKitActiveTask-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "ResearchKitActiveTask-Release.xcconfig"; sourceTree = "<group>"; };
 		CA481E8D28CBD9F1001C4D49 /* ResearchKitActiveTask-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "ResearchKitActiveTask-Debug.xcconfig"; sourceTree = "<group>"; };
 		CA481E8E28CBD9F1001C4D49 /* ResearchKitActiveTask-Shared.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "ResearchKitActiveTask-Shared.xcconfig"; sourceTree = "<group>"; };
@@ -2630,7 +2631,7 @@
 				5D000EC92620F27100E5442A /* docs */,
 				5D000ECB2620F27100E5442A /* Project */,
 				5D000ED32620F27100E5442A /* ResearchKitTests */,
-				CA481E8028CBD6B7001C4D49 /* ResearchKitUI-iOS */,
+				CA481E8028CBD6B7001C4D49 /* ResearchKitUI */,
 				CA481E8B28CBD9F1001C4D49 /* ResearchKitActiveTask */,
 			);
 			path = Configuration;
@@ -2683,6 +2684,7 @@
 				CA1C7ABE288B3786004DAB3A /* Onboarding */,
 				CA1C7AC0288B3AC1004DAB3A /* Accessibility */,
 				5D06632F24FEF272005D9B40 /* ResearchKitUI.h */,
+				2F04E08B2BF94023007C8CF3 /* ResearchKitUI_Prefix.pch */,
 				CA6A0D9F288F1F3C0048C1EF /* ResearchKitUI.modulemap */,
 				CA6A0D9D288F1BDC0048C1EF /* ResearchKitUI_Private.h */,
 				0B0852752BD872D800149963 /* PrivacyInfo.xcprivacy */,
@@ -3755,14 +3757,14 @@
 			path = "Front Facing Camera";
 			sourceTree = "<group>";
 		};
-		CA481E8028CBD6B7001C4D49 /* ResearchKitUI-iOS */ = {
+		CA481E8028CBD6B7001C4D49 /* ResearchKitUI */ = {
 			isa = PBXGroup;
 			children = (
-				CA481E8228CBD79B001C4D49 /* ResearchKitUI-iOS-Debug.xcconfig */,
-				CA481E8428CBD835001C4D49 /* ResearchKitUI-iOS-Release.xcconfig */,
-				CA481E8128CBD6D9001C4D49 /* ResearchKitUI-iOS-Shared.xcconfig */,
+				CA481E8228CBD79B001C4D49 /* ResearchKitUI-Debug.xcconfig */,
+				CA481E8428CBD835001C4D49 /* ResearchKitUI-Release.xcconfig */,
+				CA481E8128CBD6D9001C4D49 /* ResearchKitUI-Shared.xcconfig */,
 			);
-			path = "ResearchKitUI-iOS";
+			path = ResearchKitUI;
 			sourceTree = "<group>";
 		};
 		CA481E8B28CBD9F1001C4D49 /* ResearchKitActiveTask */ = {
@@ -5819,7 +5821,7 @@
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos xrsimulator xros";
@@ -5839,7 +5841,7 @@
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos xrsimulator xros";
 				SUPPORTS_MACCATALYST = YES;
@@ -5906,10 +5908,9 @@
 		};
 		CA1C7A55288B0C68004DAB3A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA481E8228CBD79B001C4D49 /* ResearchKitUI-iOS-Debug.xcconfig */;
+			baseConfigurationReference = CA481E8228CBD79B001C4D49 /* ResearchKitUI-Debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CURRENT_PROJECT_VERSION = "";
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				MODULEMAP_PRIVATE_FILE = ResearchKitUI/ResearchKitUI_Private.modulemap;
@@ -5917,23 +5918,20 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) -runtime-compatibility-version none";
 				PRODUCT_NAME = ResearchKitUI;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
 		CA1C7A57288B0C68004DAB3A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA481E8428CBD835001C4D49 /* ResearchKitUI-iOS-Release.xcconfig */;
+			baseConfigurationReference = CA481E8428CBD835001C4D49 /* ResearchKitUI-Release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CURRENT_PROJECT_VERSION = "";
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				MODULEMAP_PRIVATE_FILE = ResearchKitUI/ResearchKitUI_Private.modulemap;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				PRODUCT_NAME = ResearchKitUI;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

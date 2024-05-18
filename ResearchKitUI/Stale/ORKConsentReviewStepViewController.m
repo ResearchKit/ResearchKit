@@ -43,6 +43,7 @@
 #import "ORKConsentReviewStep.h"
 #import "ORKConsentSignature.h"
 #import "ORKConsentSignatureResult.h"
+#import "ORKConsentReviewStepViewController.h"
 #import "ORKFormStep.h"
 #import "ORKQuestionResult_Private.h"
 #import "ORKResult.h"
@@ -458,12 +459,14 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     return [self hasPreviousStep];
 }
 
+#if !TARGET_OS_VISION
 - (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(stepViewController:recorder:didFailWithError:)]) {
         [strongDelegate stepViewController:self recorder:recorder didFailWithError:error];
     }
 }
+#endif
 
 #pragma mark ORKConsentReviewControllerDelegate
 

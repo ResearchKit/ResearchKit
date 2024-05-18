@@ -29,6 +29,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
+
+
 #import "ORKHelpers_Internal.h"
 #import "ORKFreehandDrawingView.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
@@ -508,3 +511,4 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 
 @end
 
+#endif
