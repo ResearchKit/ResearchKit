@@ -1,0 +1,2187 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ResearchKitUI",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "ResearchKitUI"
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit",
+        "printedName": "ResearchKit",
+        "declKind": "Import",
+        "moduleName": "ResearchKitUI"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftUIViewFactory",
+        "printedName": "SwiftUIViewFactory",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "answerDidUpdateClosure",
+            "printedName": "answerDidUpdateClosure",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Any) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Any) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory(py)answerDidUpdateClosure",
+            "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvp",
+            "moduleName": "ResearchKitUI",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Any) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Any) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory(im)answerDidUpdateClosure",
+                "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Any) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Any) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory(im)setAnswerDidUpdateClosure:",
+                "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvs",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvM",
+                "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryC22answerDidUpdateClosureyypcSgvM",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "makeSwiftUIView",
+            "printedName": "makeSwiftUIView(answerFormat:answer:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIView",
+                    "printedName": "UIKit.UIView",
+                    "usr": "c:objc(cs)UIView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ORKAnswerFormat",
+                "printedName": "ResearchKit.ORKAnswerFormat",
+                "usr": "c:objc(cs)ORKAnswerFormat"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory(im)makeSwiftUIViewWithAnswerFormat:answer:",
+            "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryC04makedE012answerFormat0H0So0E0CSgSo09ORKAnswerI0C_yptF",
+            "moduleName": "ResearchKitUI",
+            "isOpen": true,
+            "objc_name": "makeSwiftUIViewWithAnswerFormat:answer:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftUIViewFactory",
+                "printedName": "ResearchKitUI.SwiftUIViewFactory",
+                "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory(im)init",
+            "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryCACycfc",
+            "moduleName": "ResearchKitUI",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ResearchKitUI@objc(cs)SwiftUIViewFactory",
+        "mangledName": "$s13ResearchKitUI18SwiftUIViewFactoryC",
+        "moduleName": "ResearchKitUI",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "WidthPreferenceKey",
+        "printedName": "WidthPreferenceKey",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "defaultValue",
+            "printedName": "defaultValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreGraphics.CGFloat?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI18WidthPreferenceKeyV12defaultValue14CoreFoundation7CGFloatVSgvpZ",
+            "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyV12defaultValue12CoreGraphics7CGFloatVSgvpZ",
+            "moduleName": "ResearchKitUI",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreGraphics.CGFloat?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI18WidthPreferenceKeyV12defaultValue14CoreFoundation7CGFloatVSgvgZ",
+                "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyV12defaultValue12CoreGraphics7CGFloatVSgvgZ",
+                "moduleName": "ResearchKitUI",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreGraphics.CGFloat?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI18WidthPreferenceKeyV12defaultValue14CoreFoundation7CGFloatVSgvsZ",
+                "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyV12defaultValue12CoreGraphics7CGFloatVSgvsZ",
+                "moduleName": "ResearchKitUI",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI18WidthPreferenceKeyV12defaultValue14CoreFoundation7CGFloatVSgvMZ",
+                "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyV12defaultValue12CoreGraphics7CGFloatVSgvMZ",
+                "moduleName": "ResearchKitUI",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "reduce",
+            "printedName": "reduce(value:nextValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreGraphics.CGFloat?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "paramValueOwnership": "InOut",
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> CoreGraphics.CGFloat?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreGraphics.CGFloat?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "typeAttributes": [
+                  "noescape"
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13ResearchKitUI18WidthPreferenceKeyV6reduce5value9nextValuey14CoreFoundation7CGFloatVSgz_AJyXEtFZ",
+            "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyV6reduce5value9nextValuey12CoreGraphics7CGFloatVSgz_AJyXEtFZ",
+            "moduleName": "ResearchKitUI",
+            "static": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WidthPreferenceKey",
+                "printedName": "ResearchKitUI.WidthPreferenceKey",
+                "usr": "s:13ResearchKitUI18WidthPreferenceKeyV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:13ResearchKitUI18WidthPreferenceKeyVACycfc",
+            "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyVACycfc",
+            "moduleName": "ResearchKitUI",
+            "implicit": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:13ResearchKitUI18WidthPreferenceKeyV",
+        "mangledName": "$s13ResearchKitUI18WidthPreferenceKeyV",
+        "moduleName": "ResearchKitUI",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "PreferenceKey",
+            "printedName": "PreferenceKey",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Value",
+                "printedName": "Value",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreGraphics.CGFloat?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:7SwiftUI13PreferenceKeyP",
+            "mangledName": "$s7SwiftUI13PreferenceKeyP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "FullScreenModifier",
+        "printedName": "FullScreenModifier",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "isPresented",
+            "printedName": "isPresented",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Binding",
+                "printedName": "SwiftUI.Binding<Swift.Bool>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:7SwiftUI7BindingV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI18FullScreenModifierV11isPresented05SwiftC07BindingVySbGvp",
+            "mangledName": "$s13ResearchKitUI18FullScreenModifierV11isPresented05SwiftC07BindingVySbGvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 0,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Binding",
+                    "printedName": "SwiftUI.Binding<Swift.Bool>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:7SwiftUI7BindingV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI18FullScreenModifierV11isPresented05SwiftC07BindingVySbGvg",
+                "mangledName": "$s13ResearchKitUI18FullScreenModifierV11isPresented05SwiftC07BindingVySbGvg",
+                "moduleName": "ResearchKitUI",
+                "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+                "sugared_genericSig": "<V where V : SwiftUI.View>",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "builder",
+            "printedName": "builder",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> τ_0_0",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI18FullScreenModifierV7builderxycvp",
+            "mangledName": "$s13ResearchKitUI18FullScreenModifierV7builderxycvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 1,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> τ_0_0",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GenericTypeParam",
+                        "printedName": "τ_0_0"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI18FullScreenModifierV7builderxycvg",
+                "mangledName": "$s13ResearchKitUI18FullScreenModifierV7builderxycvg",
+                "moduleName": "ResearchKitUI",
+                "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+                "sugared_genericSig": "<V where V : SwiftUI.View>",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "body",
+            "printedName": "body(content:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "_ViewModifier_Content",
+                "printedName": "SwiftUI._ViewModifier_Content<ResearchKitUI.FullScreenModifier<τ_0_0>>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FullScreenModifier",
+                    "printedName": "ResearchKitUI.FullScreenModifier<τ_0_0>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GenericTypeParam",
+                        "printedName": "τ_0_0"
+                      }
+                    ],
+                    "usr": "s:13ResearchKitUI18FullScreenModifierV"
+                  }
+                ],
+                "usr": "s:7SwiftUI21_ViewModifier_ContentV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13ResearchKitUI18FullScreenModifierV4body7contentQr05SwiftC005_ViewF8_ContentVyACyxGG_tF",
+            "mangledName": "$s13ResearchKitUI18FullScreenModifierV4body7contentQr05SwiftC005_ViewF8_ContentVyACyxGG_tF",
+            "moduleName": "ResearchKitUI",
+            "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+            "sugared_genericSig": "<V where V : SwiftUI.View>",
+            "declAttributes": [
+              "Custom",
+              "Custom"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(isPresented:builder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FullScreenModifier",
+                "printedName": "ResearchKitUI.FullScreenModifier<τ_0_0>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "usr": "s:13ResearchKitUI18FullScreenModifierV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Binding",
+                "printedName": "SwiftUI.Binding<Swift.Bool>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:7SwiftUI7BindingV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> τ_0_0",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:13ResearchKitUI18FullScreenModifierV11isPresented7builderACyxG05SwiftC07BindingVySbG_xyctcfc",
+            "mangledName": "$s13ResearchKitUI18FullScreenModifierV11isPresented7builderACyxG05SwiftC07BindingVySbG_xyctcfc",
+            "moduleName": "ResearchKitUI",
+            "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+            "sugared_genericSig": "<V where V : SwiftUI.View>",
+            "implicit": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:13ResearchKitUI18FullScreenModifierV",
+        "mangledName": "$s13ResearchKitUI18FullScreenModifierV",
+        "moduleName": "ResearchKitUI",
+        "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+        "sugared_genericSig": "<V where V : SwiftUI.View>",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "ViewModifier",
+            "printedName": "ViewModifier",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Body",
+                "printedName": "Body",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "OpaqueTypeArchetype",
+                    "printedName": "some SwiftUI.View",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "View",
+                        "printedName": "SwiftUI.View",
+                        "usr": "s:7SwiftUI4ViewP"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "usr": "s:7SwiftUI12ViewModifierP",
+            "mangledName": "$s7SwiftUI12ViewModifierP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "ResearchKitUI",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "ResearchKit",
+        "printedName": "ResearchKit",
+        "declKind": "Import",
+        "moduleName": "ResearchKitUI"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "TextChoiceView",
+        "printedName": "TextChoiceView",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "textChoiceHelper",
+            "printedName": "textChoiceHelper",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftUITextChoiceHelper",
+                "printedName": "ResearchKitUI.SwiftUITextChoiceHelper",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0Cvp",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0Cvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "Custom",
+              "ProjectedValueProperty",
+              "Custom"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SwiftUITextChoiceHelper",
+                    "printedName": "ResearchKitUI.SwiftUITextChoiceHelper",
+                    "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0Cvg",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0Cvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SwiftUITextChoiceHelper",
+                    "printedName": "ResearchKitUI.SwiftUITextChoiceHelper",
+                    "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0Cvs",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0Cvs",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "intro_Macosx": "10.15",
+                "intro_iOS": "13.0",
+                "intro_tvOS": "13.0",
+                "intro_watchOS": "6.0",
+                "declAttributes": [
+                  "Available",
+                  "Available",
+                  "Available",
+                  "Available"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0CvM",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV04textE6HelperAA011SwiftUITexteH0CvM",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "intro_Macosx": "10.15",
+                "intro_iOS": "13.0",
+                "intro_tvOS": "13.0",
+                "intro_watchOS": "6.0",
+                "declAttributes": [
+                  "Available",
+                  "Available",
+                  "Available",
+                  "Available"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "$textChoiceHelper",
+            "printedName": "$textChoiceHelper",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Wrapper",
+                "printedName": "SwiftUI.ObservedObject<ResearchKitUI.SwiftUITextChoiceHelper>.Wrapper",
+                "usr": "s:7SwiftUI14ObservedObjectV7WrapperV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV05$textE6Helper05SwiftC014ObservedObjectV7WrapperVyAA0i6UITexteH0C_Gvp",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV05$textE6Helper05SwiftC014ObservedObjectV7WrapperVyAA0i6UITexteH0C_Gvp",
+            "moduleName": "ResearchKitUI",
+            "implicit": true,
+            "declAttributes": [
+              "Custom"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Wrapper",
+                    "printedName": "SwiftUI.ObservedObject<ResearchKitUI.SwiftUITextChoiceHelper>.Wrapper",
+                    "usr": "s:7SwiftUI14ObservedObjectV7WrapperV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV05$textE6Helper05SwiftC014ObservedObjectV7WrapperVyAA0i6UITexteH0C_Gvg",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV05$textE6Helper05SwiftC014ObservedObjectV7WrapperVyAA0i6UITexteH0C_Gvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "_textChoiceHelper",
+            "printedName": "_textChoiceHelper",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ObservedObject",
+                "printedName": "SwiftUI.ObservedObject<ResearchKitUI.SwiftUITextChoiceHelper>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SwiftUITextChoiceHelper",
+                    "printedName": "ResearchKitUI.SwiftUITextChoiceHelper",
+                    "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC"
+                  }
+                ],
+                "usr": "s:7SwiftUI14ObservedObjectV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV05_textE6Helper33_E979516E4559B68EED02C463786973ADLL05SwiftC014ObservedObjectVyAA0o6UITexteH0CGvp",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV05_textE6Helper33_E979516E4559B68EED02C463786973ADLL05SwiftC014ObservedObjectVyAA0o6UITexteH0CGvp",
+            "moduleName": "ResearchKitUI",
+            "implicit": true,
+            "isInternal": true,
+            "declAttributes": [
+              "HasStorage",
+              "Custom"
+            ],
+            "fixedbinaryorder": 0,
+            "hasStorage": true
+          },
+          {
+            "kind": "Var",
+            "name": "answerDidUpdateClosure",
+            "printedName": "answerDidUpdateClosure",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Any) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Any) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvp",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "Custom"
+            ],
+            "fixedbinaryorder": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Any) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Any) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvg",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Any) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Any) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvs",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvs",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvM",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV22answerDidUpdateClosureyypcSgvM",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "imageWidth",
+            "printedName": "imageWidth",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV10imageWidth33_E979516E4559B68EED02C463786973ADLL14CoreFoundation7CGFloatVvp",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV10imageWidth33_E979516E4559B68EED02C463786973ADLL12CoreGraphics7CGFloatVvp",
+            "moduleName": "ResearchKitUI",
+            "isInternal": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "Custom",
+              "AccessControl"
+            ],
+            "fixedbinaryorder": 2,
+            "isLet": true,
+            "hasStorage": true
+          },
+          {
+            "kind": "Var",
+            "name": "body",
+            "printedName": "body",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV4bodyQrvp",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV4bodyQrvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "Custom"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "OpaqueTypeArchetype",
+                    "printedName": "some SwiftUI.View",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "View",
+                        "printedName": "SwiftUI.View",
+                        "usr": "s:7SwiftUI4ViewP"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV4bodyQrvg",
+                "mangledName": "$s13ResearchKitUI14TextChoiceViewV4bodyQrvg",
+                "moduleName": "ResearchKitUI",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(textChoiceHelper:answerDidUpdateClosure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "TextChoiceView",
+                "printedName": "ResearchKitUI.TextChoiceView",
+                "usr": "s:13ResearchKitUI14TextChoiceViewV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftUITextChoiceHelper",
+                "printedName": "ResearchKitUI.SwiftUITextChoiceHelper",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Any) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Any) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:13ResearchKitUI14TextChoiceViewV04textE6Helper22answerDidUpdateClosureAcA011SwiftUITexteH0C_yypcSgtcfc",
+            "mangledName": "$s13ResearchKitUI14TextChoiceViewV04textE6Helper22answerDidUpdateClosureAcA011SwiftUITexteH0C_yypcSgtcfc",
+            "moduleName": "ResearchKitUI",
+            "implicit": true,
+            "declAttributes": [
+              "Nonisolated"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:13ResearchKitUI14TextChoiceViewV",
+        "mangledName": "$s13ResearchKitUI14TextChoiceViewV",
+        "moduleName": "ResearchKitUI",
+        "declAttributes": [
+          "Custom"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "View",
+            "printedName": "View",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Body",
+                "printedName": "Body",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "OpaqueTypeArchetype",
+                    "printedName": "some SwiftUI.View",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "View",
+                        "printedName": "SwiftUI.View",
+                        "usr": "s:7SwiftUI4ViewP"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "usr": "s:7SwiftUI4ViewP",
+            "mangledName": "$s7SwiftUI4ViewP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftUITextChoiceHelper",
+        "printedName": "SwiftUITextChoiceHelper",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "answer",
+            "printedName": "answer",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvp",
+            "moduleName": "ResearchKitUI",
+            "isOpen": true,
+            "declAttributes": [
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 0,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvg",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvs",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvs",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvM",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC6answerypvM",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "answerFormat",
+            "printedName": "answerFormat",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKTextChoiceAnswerFormat",
+                "printedName": "ResearchKit.ORKTextChoiceAnswerFormat",
+                "usr": "c:objc(cs)ORKTextChoiceAnswerFormat"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC12answerFormatSo07ORKTextf6AnswerI0Cvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC12answerFormatSo07ORKTextf6AnswerI0Cvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 1,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ORKTextChoiceAnswerFormat",
+                    "printedName": "ResearchKit.ORKTextChoiceAnswerFormat",
+                    "usr": "c:objc(cs)ORKTextChoiceAnswerFormat"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC12answerFormatSo07ORKTextf6AnswerI0Cvg",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC12answerFormatSo07ORKTextf6AnswerI0Cvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "textChoices",
+            "printedName": "textChoices",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[ResearchKit.ORKTextChoice]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ORKTextChoice",
+                    "printedName": "ResearchKit.ORKTextChoice",
+                    "usr": "c:objc(cs)ORKTextChoice"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC11textChoicesSaySo07ORKTextF0CGvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC11textChoicesSaySo07ORKTextF0CGvp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 2,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[ResearchKit.ORKTextChoice]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ORKTextChoice",
+                        "printedName": "ResearchKit.ORKTextChoice",
+                        "usr": "c:objc(cs)ORKTextChoice"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC11textChoicesSaySo07ORKTextF0CGvg",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC11textChoicesSaySo07ORKTextF0CGvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "size",
+            "printedName": "size",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC4sizeSivp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC4sizeSivp",
+            "moduleName": "ResearchKitUI",
+            "declAttributes": [
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 3,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC4sizeSivg",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC4sizeSivg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "swiftUItextChoices",
+            "printedName": "swiftUItextChoices",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[ResearchKitUI.SwiftUITextChoice]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SwiftUITextChoice",
+                    "printedName": "ResearchKitUI.SwiftUITextChoice",
+                    "usr": "s:13ResearchKitUI17SwiftUITextChoice33_E979516E4559B68EED02C463786973ADLLV"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC18swiftUItextChoices33_E979516E4559B68EED02C463786973ADLLSayAA0deF0AELLVGvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC18swiftUItextChoices33_E979516E4559B68EED02C463786973ADLLSayAA0deF0AELLVGvp",
+            "moduleName": "ResearchKitUI",
+            "isInternal": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "fixedbinaryorder": 4,
+            "hasStorage": true
+          },
+          {
+            "kind": "Var",
+            "name": "selectedIndexes",
+            "printedName": "selectedIndexes",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.Int]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvp",
+            "moduleName": "ResearchKitUI",
+            "isOpen": true,
+            "declAttributes": [
+              "ProjectedValueProperty",
+              "Custom"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Swift.Int]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvg",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Swift.Int]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvs",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvs",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "intro_Macosx": "10.15",
+                "intro_iOS": "13.0",
+                "intro_tvOS": "13.0",
+                "intro_watchOS": "6.0",
+                "declAttributes": [
+                  "Available",
+                  "Available",
+                  "Available",
+                  "Available"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvM",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC15selectedIndexesSaySiGvM",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "intro_Macosx": "10.15",
+                "intro_iOS": "13.0",
+                "intro_tvOS": "13.0",
+                "intro_watchOS": "6.0",
+                "declAttributes": [
+                  "Available",
+                  "Available",
+                  "Available",
+                  "Available"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "$selectedIndexes",
+            "printedName": "$selectedIndexes",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Publisher",
+                "printedName": "Combine.Published<Swift.Array<Swift.Int>>.Publisher",
+                "usr": "s:7Combine9PublishedV9PublisherV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_Gvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_Gvp",
+            "moduleName": "ResearchKitUI",
+            "implicit": true,
+            "isOpen": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Publisher",
+                    "printedName": "Combine.Published<Swift.Array<Swift.Int>>.Publisher",
+                    "usr": "s:7Combine9PublishedV9PublisherV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_Gvg",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_Gvg",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Publisher",
+                    "printedName": "Combine.Published<Swift.Array<Swift.Int>>.Publisher",
+                    "usr": "s:7Combine9PublishedV9PublisherV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_Gvs",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_Gvs",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "intro_Macosx": "11.0",
+                "intro_iOS": "14.0",
+                "intro_tvOS": "14.0",
+                "intro_watchOS": "7.0",
+                "declAttributes": [
+                  "Available",
+                  "Available",
+                  "Available",
+                  "Available"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_GvM",
+                "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC16$selectedIndexes7Combine9PublishedV9PublisherVySaySiG_GvM",
+                "moduleName": "ResearchKitUI",
+                "implicit": true,
+                "isOpen": true,
+                "intro_Macosx": "11.0",
+                "intro_iOS": "14.0",
+                "intro_tvOS": "14.0",
+                "intro_watchOS": "7.0",
+                "declAttributes": [
+                  "Available",
+                  "Available",
+                  "Available",
+                  "Available"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "_selectedIndexes",
+            "printedName": "_selectedIndexes",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Published",
+                "printedName": "Combine.Published<[Swift.Int]>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Swift.Int]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "usr": "s:7Combine9PublishedV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC16_selectedIndexes33_E979516E4559B68EED02C463786973ADLL7Combine9PublishedVySaySiGGvp",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC16_selectedIndexes33_E979516E4559B68EED02C463786973ADLL7Combine9PublishedVySaySiGGvp",
+            "moduleName": "ResearchKitUI",
+            "implicit": true,
+            "isInternal": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 5,
+            "hasStorage": true
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(answer:answerFormat:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftUITextChoiceHelper",
+                "printedName": "ResearchKitUI.SwiftUITextChoiceHelper",
+                "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ORKTextChoiceAnswerFormat",
+                "printedName": "ResearchKit.ORKTextChoiceAnswerFormat",
+                "usr": "c:objc(cs)ORKTextChoiceAnswerFormat"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC6answer0H6FormatACyp_So07ORKTextf6AnswerI0Ctcfc",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC6answer0H6FormatACyp_So07ORKTextf6AnswerI0Ctcfc",
+            "moduleName": "ResearchKitUI",
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "didSelectRowAtIndex",
+            "printedName": "didSelectRowAtIndex(index:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC19didSelectRowAtIndex5indexySi_tF",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC19didSelectRowAtIndex5indexySi_tF",
+            "moduleName": "ResearchKitUI",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "answersForSelectedIdexes",
+            "printedName": "answersForSelectedIdexes()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC24answersForSelectedIdexesypyF",
+            "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC24answersForSelectedIdexesypyF",
+            "moduleName": "ResearchKitUI",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:13ResearchKitUI23SwiftUITextChoiceHelperC",
+        "mangledName": "$s13ResearchKitUI23SwiftUITextChoiceHelperC",
+        "moduleName": "ResearchKitUI",
+        "isOpen": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "ObservableObject",
+            "printedName": "ObservableObject",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ObjectWillChangePublisher",
+                "printedName": "ObjectWillChangePublisher",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ObservableObjectPublisher",
+                    "printedName": "Combine.ObservableObjectPublisher",
+                    "usr": "s:7Combine25ObservableObjectPublisherC"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:7Combine16ObservableObjectP",
+            "mangledName": "$s7Combine16ObservableObjectP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "View",
+        "printedName": "View",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "compatibleFullScreen",
+            "printedName": "compatibleFullScreen(isPresented:content:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Binding",
+                "printedName": "SwiftUI.Binding<Swift.Bool>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:7SwiftUI7BindingV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> τ_1_0",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:7SwiftUI4ViewP011ResearchKitB0E20compatibleFullScreen11isPresented7contentQrAA7BindingVySbG_qd__yctAaBRd__lF",
+            "mangledName": "$s7SwiftUI4ViewP011ResearchKitB0E20compatibleFullScreen11isPresented7contentQrAA7BindingVySbG_qd__yctAaBRd__lF",
+            "moduleName": "ResearchKitUI",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : SwiftUI.View, τ_1_0 : SwiftUI.View>",
+            "sugared_genericSig": "<Self, Content where Self : SwiftUI.View, Content : SwiftUI.View>",
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:7SwiftUI4ViewP",
+        "mangledName": "$s7SwiftUI4ViewP",
+        "moduleName": "SwiftUI",
+        "genericSig": "<τ_0_0.Body : SwiftUI.View>",
+        "sugared_genericSig": "<Self.Body : SwiftUI.View>",
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "intro_tvOS": "13.0",
+        "intro_watchOS": "6.0",
+        "declAttributes": [
+          "TypeEraser",
+          "Available",
+          "Available",
+          "Available",
+          "Available"
+        ],
+        "isExternal": true
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKitUI\/Common\/Answer Format\/SwiftUI Views\/TextChoiceView.swift",
+      "kind": "FloatLiteral",
+      "offset": 1864,
+      "length": 5,
+      "value": "115.0"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKitUI\/Common\/Answer Format\/SwiftUI Views\/TextChoiceView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3812,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/githubaction\/runner\/_work\/ResearchKit\/ResearchKit\/ResearchKitUI\/Common\/Answer Format\/SwiftUI Views\/TextChoiceView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3876,
+      "length": 2,
+      "value": "20"
+    }
+  ]
+}

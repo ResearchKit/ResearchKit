@@ -8,6 +8,6 @@
 
 @_exported import ResearchKit
 @_exported import ResearchKitUI
-#if TARGET_OS_IOS
-@_exported import ResearchKitActiveTasks
+#if os(iOS)
+@_exported import ResearchKitActiveTask
 #endif

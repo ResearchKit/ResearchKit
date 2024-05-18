@@ -1,0 +1,3457 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "ResearchKit_Private",
+        "printedName": "ResearchKit_Private",
+        "declKind": "Import",
+        "moduleName": "ResearchKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "Import",
+        "name": "DeveloperToolsSupport",
+        "printedName": "DeveloperToolsSupport",
+        "declKind": "Import",
+        "moduleName": "ResearchKit"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ORKPredicateStepNavigationRule",
+        "printedName": "ORKPredicateStepNavigationRule",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(resultPredicatesAndDestinationStepIdentifiers:defaultStepIdentifierOrNil:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ORKPredicateStepNavigationRule",
+                "printedName": "ResearchKit.ORKPredicateStepNavigationRule",
+                "usr": "c:objc(cs)ORKPredicateStepNavigationRule"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "NSPredicate",
+                        "printedName": "Foundation.NSPredicate",
+                        "usr": "c:objc(cs)NSPredicate"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:So30ORKPredicateStepNavigationRuleC11ResearchKitE030resultPredicatesAndDestinationB11Identifiers07defaultB15IdentifierOrNilABSaySo11NSPredicateC0G9Predicate_SS011destinationbM0tG_SSSgtcfc",
+            "mangledName": "$sSo30ORKPredicateStepNavigationRuleC11ResearchKitE030resultPredicatesAndDestinationB11Identifiers07defaultB15IdentifierOrNilABSaySo11NSPredicateC0G9Predicate_SS011destinationbM0tG_SSSgtcfc",
+            "moduleName": "ResearchKit",
+            "declAttributes": [
+              "Convenience"
+            ],
+            "isFromExtension": true,
+            "init_kind": "Convenience"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:objc(cs)ORKPredicateStepNavigationRule",
+        "moduleName": "ResearchKit",
+        "isOpen": true,
+        "objc_name": "ORKPredicateStepNavigationRule",
+        "declAttributes": [
+          "ObjC",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)ORKStepNavigationRule",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ResearchKit.ORKStepNavigationRule",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ImageResource",
+        "printedName": "ImageResource",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "face",
+            "printedName": "face",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE4faceACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE4faceACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE4faceACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE4faceACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "guideCorners",
+            "printedName": "guideCorners",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12guideCornersACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12guideCornersACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12guideCornersACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12guideCornersACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "airpods",
+            "printedName": "airpods",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE7airpodsACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE7airpodsACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE7airpodsACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE7airpodsACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "airpodsGen3",
+            "printedName": "airpodsGen3",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11airpodsGen3ACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11airpodsGen3ACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11airpodsGen3ACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11airpodsGen3ACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "airpodsMax",
+            "printedName": "airpodsMax",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsMaxACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsMaxACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsMaxACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsMaxACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "airpodsPro",
+            "printedName": "airpodsPro",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsProACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsProACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsProACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10airpodsProACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "amslerGrid",
+            "printedName": "amslerGrid",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10amslerGridACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10amslerGridACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10amslerGridACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10amslerGridACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "annotation",
+            "printedName": "annotation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10annotationACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10annotationACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10annotationACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10annotationACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "arrowLeft",
+            "printedName": "arrowLeft",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE9arrowLeftACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE9arrowLeftACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE9arrowLeftACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE9arrowLeftACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "arrowLeftLandscape",
+            "printedName": "arrowLeftLandscape",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE18arrowLeftLandscapeACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE18arrowLeftLandscapeACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE18arrowLeftLandscapeACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE18arrowLeftLandscapeACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "arrowRight",
+            "printedName": "arrowRight",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10arrowRightACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10arrowRightACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10arrowRightACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10arrowRightACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "arrowRightLandscape",
+            "printedName": "arrowRightLandscape",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE19arrowRightLandscapeACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE19arrowRightLandscapeACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE19arrowRightLandscapeACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE19arrowRightLandscapeACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "audioGraph",
+            "printedName": "audioGraph",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audioGraphACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audioGraphACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audioGraphACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audioGraphACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "audiometry",
+            "printedName": "audiometry",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audiometryACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audiometryACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audiometryACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10audiometryACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "checkmark",
+            "printedName": "checkmark",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE9checkmarkACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE9checkmarkACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE9checkmarkACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE9checkmarkACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "earpods",
+            "printedName": "earpods",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE7earpodsACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE7earpodsACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE7earpodsACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE7earpodsACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "headphones",
+            "printedName": "headphones",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10headphonesACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10headphonesACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10headphonesACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10headphonesACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "heartFitness",
+            "printedName": "heartFitness",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12heartFitnessACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12heartFitnessACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12heartFitnessACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12heartFitnessACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "heartbeat",
+            "printedName": "heartbeat",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE9heartbeatACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE9heartbeatACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE9heartbeatACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE9heartbeatACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "holepegtest1",
+            "printedName": "holepegtest1",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12holepegtest1ACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12holepegtest1ACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12holepegtest1ACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12holepegtest1ACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "kneeMaximumLeft",
+            "printedName": "kneeMaximumLeft",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE15kneeMaximumLeftACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE15kneeMaximumLeftACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE15kneeMaximumLeftACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE15kneeMaximumLeftACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "kneeMaximumRight",
+            "printedName": "kneeMaximumRight",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE16kneeMaximumRightACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE16kneeMaximumRightACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE16kneeMaximumRightACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE16kneeMaximumRightACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "kneeStartLeft",
+            "printedName": "kneeStartLeft",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE13kneeStartLeftACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE13kneeStartLeftACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE13kneeStartLeftACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE13kneeStartLeftACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "kneeStartRight",
+            "printedName": "kneeStartRight",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE14kneeStartRightACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE14kneeStartRightACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE14kneeStartRightACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE14kneeStartRightACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "memory",
+            "printedName": "memory",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE6memoryACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE6memoryACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE6memoryACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE6memoryACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "pdfThumbnail",
+            "printedName": "pdfThumbnail",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12pdfThumbnailACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12pdfThumbnailACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12pdfThumbnailACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12pdfThumbnailACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phoneshake",
+            "printedName": "phoneshake",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phoneshakeACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phoneshakeACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phoneshakeACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phoneshakeACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phonestrooplabel",
+            "printedName": "phonestrooplabel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonestrooplabelACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonestrooplabelACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonestrooplabelACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonestrooplabelACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phonetapping",
+            "printedName": "phonetapping",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12phonetappingACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12phonetappingACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12phonetappingACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12phonetappingACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phonewaves",
+            "printedName": "phonewaves",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phonewavesACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phonewavesACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phonewavesACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10phonewavesACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phonewavesInverted",
+            "printedName": "phonewavesInverted",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE18phonewavesInvertedACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE18phonewavesInvertedACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE18phonewavesInvertedACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE18phonewavesInvertedACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phonewavesspeech",
+            "printedName": "phonewavesspeech",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonewavesspeechACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonewavesspeechACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonewavesspeechACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE16phonewavesspeechACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phonewavestext",
+            "printedName": "phonewavestext",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE14phonewavestextACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE14phonewavestextACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE14phonewavestextACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE14phonewavestextACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "play",
+            "printedName": "play",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE4playACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE4playACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE4playACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE4playACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "pocket",
+            "printedName": "pocket",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE6pocketACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE6pocketACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE6pocketACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE6pocketACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "psatDice",
+            "printedName": "psatDice",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE8psatDiceACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE8psatDiceACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE8psatDiceACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE8psatDiceACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "search",
+            "printedName": "search",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE6searchACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE6searchACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE6searchACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE6searchACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "share",
+            "printedName": "share",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE5shareACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE5shareACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE5shareACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE5shareACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "socioEconomicLadderRung",
+            "printedName": "socioEconomicLadderRung",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE23socioEconomicLadderRungACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE23socioEconomicLadderRungACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE23socioEconomicLadderRungACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE23socioEconomicLadderRungACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "speechInNoise",
+            "printedName": "speechInNoise",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE13speechInNoiseACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE13speechInNoiseACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE13speechInNoiseACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE13speechInNoiseACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "towerOfHanoiSecondScreen",
+            "printedName": "towerOfHanoiSecondScreen",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE24towerOfHanoiSecondScreenACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE24towerOfHanoiSecondScreenACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE24towerOfHanoiSecondScreenACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE24towerOfHanoiSecondScreenACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "trailmaking",
+            "printedName": "trailmaking",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11trailmakingACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11trailmakingACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11trailmakingACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11trailmakingACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest1",
+            "printedName": "tremortest1",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest1ACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest1ACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest1ACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest1ACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest3A",
+            "printedName": "tremortest3A",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3AACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3AACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3AACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3AACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest3B",
+            "printedName": "tremortest3B",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3BACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3BACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3BACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest3BACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest4A",
+            "printedName": "tremortest4A",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4AACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4AACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4AACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4AACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest4B",
+            "printedName": "tremortest4B",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4BACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4BACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4BACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest4BACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest5A",
+            "printedName": "tremortest5A",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5AACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5AACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5AACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5AACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest5B",
+            "printedName": "tremortest5B",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5BACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5BACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5BACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest5BACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest6A",
+            "printedName": "tremortest6A",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6AACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6AACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6AACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6AACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest6B",
+            "printedName": "tremortest6B",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6BACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6BACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6BACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE12tremortest6BACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortest7",
+            "printedName": "tremortest7",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest7ACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest7ACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest7ACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE11tremortest7ACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortestLeft",
+            "printedName": "tremortestLeft",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE14tremortestLeftACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE14tremortestLeftACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE14tremortestLeftACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE14tremortestLeftACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tremortestRight",
+            "printedName": "tremortestRight",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE15tremortestRightACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE15tremortestRightACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE15tremortestRightACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE15tremortestRightACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "walkingman",
+            "printedName": "walkingman",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResource",
+                "printedName": "DeveloperToolsSupport.ImageResource",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10walkingmanACvpZ",
+            "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10walkingmanACvpZ",
+            "moduleName": "ResearchKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageResource",
+                    "printedName": "DeveloperToolsSupport.ImageResource",
+                    "usr": "s:21DeveloperToolsSupport13ImageResourceV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:21DeveloperToolsSupport13ImageResourceV11ResearchKitE10walkingmanACvgZ",
+                "mangledName": "$s21DeveloperToolsSupport13ImageResourceV11ResearchKitE10walkingmanACvgZ",
+                "moduleName": "ResearchKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:21DeveloperToolsSupport13ImageResourceV",
+        "mangledName": "$s21DeveloperToolsSupport13ImageResourceV",
+        "moduleName": "DeveloperToolsSupport",
+        "intro_Macosx": "14.0",
+        "intro_iOS": "17.0",
+        "intro_tvOS": "17.0",
+        "intro_watchOS": "10.0",
+        "declAttributes": [
+          "Available",
+          "Available",
+          "Available",
+          "Available"
+        ],
+        "isExternal": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 685,
+      "length": 6,
+      "value": "\"Face\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 847,
+      "length": 14,
+      "value": "\"GuideCorners\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1007,
+      "length": 9,
+      "value": "\"airpods\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1171,
+      "length": 14,
+      "value": "\"airpods_gen3\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1338,
+      "length": 13,
+      "value": "\"airpods_max\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1504,
+      "length": 13,
+      "value": "\"airpods_pro\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1669,
+      "length": 12,
+      "value": "\"amslerGrid\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1833,
+      "length": 12,
+      "value": "\"annotation\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 1995,
+      "length": 11,
+      "value": "\"arrowLeft\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2174,
+      "length": 20,
+      "value": "\"arrowLeftLandscape\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2346,
+      "length": 12,
+      "value": "\"arrowRight\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2528,
+      "length": 21,
+      "value": "\"arrowRightLandscape\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2701,
+      "length": 12,
+      "value": "\"audioGraph\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2865,
+      "length": 12,
+      "value": "\"audiometry\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3027,
+      "length": 11,
+      "value": "\"checkmark\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3184,
+      "length": 9,
+      "value": "\"earpods\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3345,
+      "length": 12,
+      "value": "\"headphones\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3514,
+      "length": 15,
+      "value": "\"heart-fitness\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3679,
+      "length": 11,
+      "value": "\"heartbeat\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3846,
+      "length": 14,
+      "value": "\"holepegtest1\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4024,
+      "length": 19,
+      "value": "\"knee_maximum_left\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4209,
+      "length": 20,
+      "value": "\"knee_maximum_right\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4389,
+      "length": 17,
+      "value": "\"knee_start_left\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4568,
+      "length": 18,
+      "value": "\"knee_start_right\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4730,
+      "length": 8,
+      "value": "\"memory\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 4894,
+      "length": 14,
+      "value": "\"pdfThumbnail\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5060,
+      "length": 12,
+      "value": "\"phoneshake\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5236,
+      "length": 18,
+      "value": "\"phonestrooplabel\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5410,
+      "length": 14,
+      "value": "\"phonetapping\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5576,
+      "length": 12,
+      "value": "\"phonewaves\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5757,
+      "length": 21,
+      "value": "\"phonewaves_inverted\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 5942,
+      "length": 18,
+      "value": "\"phonewavesspeech\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6120,
+      "length": 16,
+      "value": "\"phonewavestext\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6276,
+      "length": 6,
+      "value": "\"play\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6426,
+      "length": 8,
+      "value": "\"pocket\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6582,
+      "length": 10,
+      "value": "\"psatDice\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6736,
+      "length": 8,
+      "value": "\"search\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 6886,
+      "length": 7,
+      "value": "\"share\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7071,
+      "length": 25,
+      "value": "\"socioEconomicLadderRung\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7254,
+      "length": 15,
+      "value": "\"speechInNoise\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7453,
+      "length": 30,
+      "value": "\"tower-of-hanoi-second-screen\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7637,
+      "length": 13,
+      "value": "\"trailmaking\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7804,
+      "length": 13,
+      "value": "\"tremortest1\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 7973,
+      "length": 14,
+      "value": "\"tremortest3a\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8143,
+      "length": 14,
+      "value": "\"tremortest3b\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8313,
+      "length": 14,
+      "value": "\"tremortest4a\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8483,
+      "length": 14,
+      "value": "\"tremortest4b\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8653,
+      "length": 14,
+      "value": "\"tremortest5a\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8823,
+      "length": 14,
+      "value": "\"tremortest5b\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 8993,
+      "length": 14,
+      "value": "\"tremortest6a\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9163,
+      "length": 14,
+      "value": "\"tremortest6b\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9331,
+      "length": 13,
+      "value": "\"tremortest7\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9504,
+      "length": 16,
+      "value": "\"tremortestLeft\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9682,
+      "length": 17,
+      "value": "\"tremortestRight\""
+    },
+    {
+      "filePath": "\/Users\/githubaction\/Library\/Developer\/Xcode\/DerivedData\/RKWorkspace-hgpxaklgkzpqixcosvhqpmrtzddb\/Build\/Intermediates.noindex\/ArchiveIntermediates\/ResearchKit\/IntermediateBuildFilesPath\/ResearchKit.build\/Release-xrsimulator\/ResearchKit.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 9851,
+      "length": 12,
+      "value": "\"walkingman\""
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+#import <UIKit/UIKit.h>
+#if TARGET_OS_IOS || TARGET_OS_VISION
+#import <ResearchKit/ORKDefines.h>
+#endif
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+/// Color used for toolbar
+ORK_EXTERN NSString *const ORKToolBarTintColorKey;
+
+/// Color used for view's backgroud
+ORK_EXTERN NSString *const ORKBackgroundColorKey;
+
+/// Color used for consent view's backgroud
+ORK_EXTERN NSString *const ORKConsentBackgroundColorKey;
+
+/// Color used for signature
+ORK_EXTERN NSString *const ORKSignatureColorKey;
+
+/// Color used for a light-colored tint
+ORK_EXTERN NSString *const ORKLightTintColorKey;
+
+/// Color used for a dark-colored tint
+ORK_EXTERN NSString *const ORKDarkTintColorKey;
+
+/// Color used for caption text
+ORK_EXTERN NSString *const ORKCaptionTextColorKey;
+
+/// Color used for a "blue" highlight
+ORK_EXTERN NSString *const ORKBlueHighlightColorKey;
+
+/// Default color used for auxiliary image tint of ORKInstructionStepView
+ORK_EXTERN NSString *const ORKAuxiliaryImageTintColorKey;
+
+/// Default color used for navigation container view
+ORK_EXTERN NSString *const ORKNavigationContainerColorKey;
+
+/// Color used for view's backgroud
+ORK_EXTERN NSString *const ORKNavigationContainerShadowColorKey;
+
+/// Default color progress label
+ORK_EXTERN NSString *const ORKProgressLabelColorKey;
+
+/// Default color used by iPadBackgroundView
+ORK_EXTERN NSString *const ORKiPadBackgroundViewColorKey;
+
+/// Background color of TopContentImageView in ORKStepContainerView
+ORK_EXTERN NSString *const ORKTopContentImageViewBackgroundColorKey;
+
+/// Font color for detail text in bullet item
+ORK_EXTERN NSString *const ORKBulletItemTextColorKey;
+
+/// ORKStepContentView stepTopContentImage  KVO keyPath image changed
+ORK_EXTERN NSString *const ORKStepTopContentImageChangedKey;
+
+/// Name of notification that is triggered when the keyboard's done button is pressed
+ORK_EXTERN NSString *const ORKDoneButtonPressedKey;
+
+/// Name of notification that is triggered when the keyboard's done button is pressed
+ORK_EXTERN NSString *const ORKResetDoneButtonKey;
+
+/// Return the color for a specified ORK...ColorKey
+ORK_EXTERN UIColor *ORKColor(NSString *colorKey);
+
+/// Return minimum height for form step header view
+ORK_EXTERN CGFloat ORKFormStepMinimumHeaderHeight;
+
+/// Return minimum height for large text form step header view
+ORK_EXTERN CGFloat ORKFormStepLargeTextMinimumHeaderHeight;
+
+/// Return step container title to body topPadding standard
+ORK_EXTERN CGFloat ORKStepContainerTitleToBodyTopPaddingStandard;
+
+/// Return minimum height for question step header view
+ORK_EXTERN CGFloat ORKQuestionStepMinimumHeaderHeight;
+
+/// Default CGFloat used for rounded corner radii for card view
+ORK_EXTERN CGFloat ORKCardDefaultCornerRadii;
+
+/// Default CGFloat used for rounded corner radii for image choice button image view
+ORK_EXTERN CGFloat ORKImageChoiceButtonCornerRadii;
+
+/// Default CGFloat used for border width for card view
+ORK_EXTERN CGFloat ORKCardDefaultBorderWidth;
+
+/// Default font size for card view
+ORK_EXTERN CGFloat ORKCardDefaultFontSize;
+
+/// Default Top and Bottom margin for card view
+ORK_EXTERN CGFloat ORKSurveyItemMargin;
+
+/// Padding for Form and Question Step Table Containers
+ORK_EXTERN CGFloat ORKSurveyTableContainerLeftRightPadding;
+
+/// Default corner radius for iPadBackgroundView;
+ORK_EXTERN CGFloat ORKiPadBackgroundViewCornerRadius;
+
+/// Default Bottom margin for iPadBackgroundView;
+ORK_EXTERN CGFloat ORKiPadBackgroundViewBottomPadding;
+
+/// Default Left Right margin for iPadBackgroundView;
+ORK_EXTERN CGFloat ORKiPadBackgroundViewLeftRightPadding;
+
+/// Default body to body item padding;
+ORK_EXTERN CGFloat ORKBodyToBodyPaddingStandard;
+
+/// Default body to body item padding;
+ORK_EXTERN CGFloat ORKBodyToBodyParagraphPaddingStandard;
+
+/// Step Content Icon Image View Dimension
+ORK_EXTERN CGFloat ORKStepContentIconImageViewDimension;
+
+/// Navigation Container Effect View Style
+ORK_EXTERN CGFloat ORKEffectViewOpacityHidden;
+
+/// Navigation Container Effect View Style
+ORK_EXTERN CGFloat ORKEffectViewOpacityVisible;
+
+/// Checkmark View dimension
+ORK_EXTERN CGFloat CheckmarkViewDimension;
+
+/// Modify the color for a specified ORK...ColorKey. (for customization)
+void ORKColorSetColorForKey(NSString *key, UIColor *color);
+
+@interface UIColor (ORKColor)
+
++ (UIColor *)ork_midGrayTintColor;
++ (UIColor *)ork_redColor;
++ (UIColor *)ork_grayColor;
++ (UIColor *)ork_darkGrayColor;
++ (UIColor *)ork_borderGrayColor;
+
++ (UIColor *)ork_splGrayColor;
++ (UIColor *)ork_ringViewStrokeColor;
+
+@end
+
+extern const CGFloat ORKScreenMetricMaxDimension;
+
+typedef NS_ENUM(NSInteger, ORKScreenMetric) {
+    ORKScreenMetricTopToCaptionBaseline,
+    ORKScreenMetricFontSizeHeadline,
+    ORKScreenMetricMaxFontSizeHeadline,
+    ORKScreenMetricFontSizeSurveyHeadline,
+    ORKScreenMetricMaxFontSizeSurveyHeadline,
+    ORKScreenMetricFontSizeSubheadline,
+    ORKScreenMetricFontSizeFootnote,
+    ORKScreenMetricCaptionBaselineToFitnessTimerTop,
+    ORKScreenMetricCaptionBaselineToTappingLabelTop,
+    ORKScreenMetricCaptionBaselineToInstructionBaseline,
+    ORKScreenMetricInstructionBaselineToLearnMoreBaseline,
+    ORKScreenMetricLearnMoreBaselineToStepViewTop,
+    ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore,
+    ORKScreenMetricContinueButtonTopMargin,
+    ORKScreenMetricContinueButtonTopMarginForIntroStep,
+    ORKScreenMetricTopToIllustration,
+    ORKScreenMetricIllustrationToCaptionBaseline,
+    ORKScreenMetricIllustrationHeight,
+    ORKScreenMetricInstructionImageHeight,
+    ORKScreenMetricContinueButtonWidth,
+    ORKScreenMetricMinimumStepHeaderHeightForMemoryGame,
+    ORKScreenMetricMinimumGameViewHeightForMemoryGame,
+    ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle,
+    ORKScreenMetricTableCellDefaultHeight,
+    ORKScreenMetricTextFieldCellHeight,
+    ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
+    ORKScreenMetricChoiceCellLastBaselineToBottom,
+    ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline,
+    ORKScreenMetricLearnMoreButtonSideMargin,
+    ORKScreenMetricHeadlineSideMargin,
+    ORKScreenMetricToolbarHeight,
+    ORKScreenMetricVerticalScaleHeight,
+    ORKScreenMetricSignatureViewHeight,
+    ORKScreenMetricPSATKeyboardViewWidth,
+    ORKScreenMetricPSATKeyboardViewHeight,
+    ORKScreenMetricLocationQuestionMapHeight,
+    ORKScreenMetricTopToIconImageViewTop,
+    ORKScreenMetricIconImageViewToCaptionBaseline,
+    ORKScreenMetricVerificationTextBaselineToResendButtonBaseline,
+    ORKScreenMetric_COUNT
+};
+
+typedef NS_ENUM(NSInteger, ORKScreenType) {
+    ORKScreenTypeiPhoneX,
+    ORKScreenTypeiPhoneXSMax,
+    ORKScreenTypeiPhone6Plus,
+    ORKScreenTypeiPhone6,
+    ORKScreenTypeiPhone5,
+    ORKScreenTypeiPhone4,
+    ORKScreenTypeiPad,
+    ORKScreenTypeiPad10_5,
+    ORKScreenTypeiPad12_9,
+    ORKScreenType_COUNT
+};
+
+#if TARGET_OS_IOS || TARGET_OS_VISION
+ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow * _Nullable window);
+CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow * _Nullable window);
+
+CGFloat ORKStandardLeftMarginForTableViewCell(UIView *view);
+CGFloat ORKStandardHorizontalMarginForView(UIView *view);
+UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UIView *view);
+UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view);
+UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view);
+CGFloat ORKWidthForSignatureView(UIWindow * _Nullable window);
+BOOL ORKNeedWideScreenDesign(UIView *view);
+
+void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
+
+CGFloat ORKStepContainerLeftRightPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerExtendedLeftRightPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTopPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTopContentHeightForWindow(UIWindow *window);
+CGFloat ORKStepContainerFirstItemTopPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTitleToBodyTopPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window);
+CGFloat ORKCardLeftRightMarginForWindow(UIWindow *window);
+
+UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window);
+#endif
+
+NS_ASSUME_NONNULL_END

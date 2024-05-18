@@ -1,0 +1,13 @@
+framework module ResearchKit {
+    umbrella header "ResearchKit.h"
+    
+    export *
+    module * {
+        export *
+    }
+}
+
+module ResearchKit.Swift {
+  header "ResearchKit-Swift.h"
+  requires objc
+}
