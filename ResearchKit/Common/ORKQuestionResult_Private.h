@@ -30,7 +30,7 @@
 
 
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKQuestionResult.h>
 #endif
 

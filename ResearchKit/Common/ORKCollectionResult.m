@@ -263,7 +263,7 @@
 }
 
 - (void)updateEnabledAssistiveTechnology {
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     if (UIAccessibilityIsVoiceOverRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
     } else if (UIAccessibilityIsSwitchControlRunning()) {

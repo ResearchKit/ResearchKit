@@ -32,7 +32,7 @@
 #import "ORKDevice.h"
 #import "ORKHelpers_Internal.h"
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import <UIKit/UIDevice.h>
 #endif
 
@@ -128,7 +128,7 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
     self->_product = [self _product];
     self->_osBuild = [self _osBuild];
     NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     self->_platform = [[UIDevice currentDevice] systemName];
     self->_osVersion = [NSString stringWithFormat:@"%ld.%ld.%ld", (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
 #endif

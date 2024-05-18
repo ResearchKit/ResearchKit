@@ -125,7 +125,7 @@ ORKCachedColorMethod(ork_borderGrayColor, 239.0 / 255.0, 239.0 / 255.0, 244.0 / 
 #undef ORKCachedColorMethod
 
 + (UIColor *)ork_splGrayColor {
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traits) {
         return traits.userInterfaceStyle == UIUserInterfaceStyleDark ? UIColor.systemGray5Color : UIColor.systemGray6Color;
     }];
@@ -135,7 +135,7 @@ ORKCachedColorMethod(ork_borderGrayColor, 239.0 / 255.0, 239.0 / 255.0, 244.0 / 
 }
 
 + (UIColor *)ork_ringViewStrokeColor {
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
     return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traits) {
         return traits.userInterfaceStyle == UIUserInterfaceStyleDark ? UIColor.systemGray5Color : UIColor.systemGray6Color;
     }];
@@ -152,7 +152,7 @@ static NSMutableDictionary *colors(void) {
     dispatch_once(&onceToken, ^{
         colors = [@{
                     ORKSignatureColorKey: ORKRGB(0x000000),
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
                     ORKBackgroundColorKey: [UIColor secondarySystemBackgroundColor],
 #endif
                     ORKConsentBackgroundColorKey: ORKRGB(0xffffff),
@@ -166,7 +166,7 @@ static NSMutableDictionary *colors(void) {
                     ORKNavigationContainerShadowColorKey: [UIColor blackColor],
                     ORKProgressLabelColorKey: [UIColor colorWithRed:142.0/255.0 green:142.0/255.0 blue:142.0/255.0 alpha:1.0],
                     ORKiPadBackgroundViewColorKey: [UIColor colorWithRed:249.0 / 255.0 green:249.0 / 255.0 blue:251.0 / 255.0 alpha:1.0],
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
                     ORKTopContentImageViewBackgroundColorKey: UIColor.quaternarySystemFillColor,
 #endif
                     ORKBulletItemTextColorKey: [UIColor colorWithRed:0.56 green:0.56 blue:0.58 alpha:1.0]

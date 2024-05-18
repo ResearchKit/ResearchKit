@@ -30,7 +30,7 @@
 
 
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKQuestionStep.h>
 #import <ResearchKit/ORKAnswerFormat_Private.h>
 #endif
@@ -48,7 +48,7 @@ ORK_EXTERN ORKQuestionStepPresentationStyle const ORKQuestionStepPresentationSty
 
 @protocol ORKQuestionStepPresentation <NSObject>
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 @property (nonatomic, copy) ORKQuestionStepPresentationStyle presentationStyle;
 #endif
 
@@ -56,7 +56,7 @@ ORK_EXTERN ORKQuestionStepPresentationStyle const ORKQuestionStepPresentationSty
 
 @interface ORKQuestionStep () <ORKQuestionStepPresentation>
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 /**
  
  Platter presentation style initializer. Since this uses a custom layout for step details, this is the recommended way use the ORKQuestionStepPresentationStylePlatter.

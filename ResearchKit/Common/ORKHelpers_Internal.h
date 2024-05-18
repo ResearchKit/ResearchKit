@@ -32,7 +32,7 @@
 
 #import <UIKit/UIKit.h>
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKHelpers_Private.h>
 #import <ResearchKit/ORKErrors.h>
