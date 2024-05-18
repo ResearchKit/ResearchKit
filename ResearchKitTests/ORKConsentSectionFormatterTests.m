@@ -31,7 +31,7 @@
 #if TARGET_OS_IOS
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
 
 #import "ORKConsentSectionFormatter.h"
 

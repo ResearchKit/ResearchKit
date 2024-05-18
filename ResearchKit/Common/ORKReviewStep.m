@@ -32,8 +32,6 @@
 #import "ORKReviewStep.h"
 #import "ORKReviewStep_Internal.h"
 
-#import "ORKReviewStepViewController.h"
-
 #import "ORKResult.h"
 #import "ORKCollectionResult_Private.h"
 
@@ -63,10 +61,6 @@
 
 + (instancetype)embeddedReviewStepWithIdentifier:(NSString *)identifier {
     return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:nil resultSource:nil];
-}
-
-+ (Class)stepViewControllerClass {
-    return [ORKReviewStepViewController class];
 }
 
 + (BOOL)supportsSecureCoding {

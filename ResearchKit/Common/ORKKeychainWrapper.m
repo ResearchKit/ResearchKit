@@ -35,7 +35,7 @@
 #import "ResearchKit/ResearchKit-Swift.h"
 
 
-static NSString *ORKKeychainWrapperDefaultService() {
+static NSString *ORKKeychainWrapperDefaultService(void) {
     static NSString *defaultService;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -61,14 +61,14 @@ static NSString *ORKKeychainWrapperDefaultService() {
                    error:errorOut];
 }
 
-+ (id<NSSecureCoding>)objectOfClass:(Class)objectClass forKey:(NSString *)key
-       error:(NSError **)errorOut {
-  NSData *data = [self dataForKey:key
-              service:ORKKeychainWrapperDefaultService()
-            accessGroup:nil
-               error:errorOut];
-  
-  return data ? [NSKeyedUnarchiver unarchivedObjectOfClass:objectClass fromData:data error:errorOut] : nil;
++ (id<NSSecureCoding>)objectForKey:(NSString *)key
+             error:(NSError **)errorOut {
+    NSData *data = [self dataForKey:key
+                            service:ORKKeychainWrapperDefaultService()
+                        accessGroup:nil
+                              error:errorOut];
+    NSSet *expectedClasses = [NSSet setWithObjects:[NSMutableDictionary<NSData*, NSString *> class], [NSData class], [NSString class], [NSNumber class], nil];
+    return data ? [NSKeyedUnarchiver unarchivedObjectOfClasses:expectedClasses fromData:data error:NULL] : nil;
 }
 
 + (BOOL)removeObjectForKey:(NSString *)key

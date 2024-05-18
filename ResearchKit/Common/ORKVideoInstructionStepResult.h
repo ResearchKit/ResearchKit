@@ -35,7 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKVideoInstructionStepResult` class represents the result of a video instruction step (`ORKVideoInstructionStep`).
+ A result object from a video instruction step.
  
  A video instruction result is produced by the task view controller when it presents a video instruction step.
  

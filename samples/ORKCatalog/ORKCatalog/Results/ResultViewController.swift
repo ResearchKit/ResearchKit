@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 
+
 /**
     The purpose of this view controller is to show you the kinds of data
     you can fetch from a specific `ORKResult`. The intention is for this view
@@ -58,9 +59,7 @@ class ResultViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 13.0, *) {
-            self.tableView.backgroundColor = UIColor.systemGroupedBackground
-        }
+        self.tableView.backgroundColor = UIColor.systemGroupedBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +70,7 @@ class ResultViewController: UITableViewController {
             displayed result, and the result that has been most recently set on
             the `ResultViewController`.
         */
-//        guard result != currentResult || currentResult == nil else { return }
+        guard result != currentResult || currentResult == nil else { return }
         
         // Update the currently displayed result.
         currentResult = result
@@ -99,13 +98,12 @@ class ResultViewController: UITableViewController {
                let segueIdentifier = SegueIdentifier(rawValue: identifier), segueIdentifier == .showTaskResult {
             
             let cell = sender as! UITableViewCell
-            
+
             let indexPath = tableView.indexPath(for: cell)!
             
             let destinationViewController = segue.destination as! ResultViewController
             
             let collectionResult = result as! ORKCollectionResult
-            
             destinationViewController.result = collectionResult.results![(indexPath as NSIndexPath).row]
         }
     }

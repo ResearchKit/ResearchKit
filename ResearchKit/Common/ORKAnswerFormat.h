@@ -33,10 +33,12 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
+
 
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKTypes.h>
+
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
 @class ORKTextScaleAnswerFormat;
@@ -58,9 +60,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
-
+@class ORKTextChoiceAnswerFormat;
 @class ORKTextChoice;
 
 /**
@@ -100,16 +101,17 @@ ORK_CLASS_AVAILABLE
 /**
  Determines if the "I Don't Know" button will show.
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldShowDontKnowButton) BOOL showDontKnowButton;
 
 /**
  Custom text that will be shown inside of the "I Don't Know" button if showDontKnowButton is set to true.
  
- Defults to nil.
+ Defaults to nil.
  */
 @property (nonatomic, nullable) NSString *customDontKnowButtonText;
+
 
 @property (nonatomic) ORKDontKnowButtonStyle dontKnowButtonStyle;
 
@@ -120,6 +122,7 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
                                                textChoices:(NSArray<ORKTextChoice *> *)textChoices;
+
 
 /// @name Validation
 
@@ -187,6 +190,7 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
 
 @end
+
 
 
 /**
@@ -368,6 +372,7 @@ ORK_CLASS_AVAILABLE
 /**
  The image that will be presented to the left of the text provided for the textChoice
  */
+
 @property (strong, nullable) UIImage *image;
 
 /**
@@ -379,6 +384,9 @@ ORK_CLASS_AVAILABLE
 @property (readonly) BOOL exclusive;
 
 @end
+
+
+
 
 #pragma mark - iOS
 
@@ -640,7 +648,7 @@ ORK_CLASS_AVAILABLE
 /**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that
  lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
- the array corresond to the maximum side of the scale.
+ the array correspond to the maximum side of the scale.
  
  Setting this value to nil results in no gradient being drawn. Defaults to nil.
  
@@ -660,21 +668,21 @@ ORK_CLASS_AVAILABLE
 /**
  Determines if the minimum and maximum numbers are hidden on the slider.
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
 
 /**
  Determines if the bottom left and bottom right description labels are hidden
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
 
 /**
  Determines if the value markers on the slider are hidden
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideValueMarkers) BOOL hideValueMarkers;
 
@@ -741,7 +749,7 @@ ORK_CLASS_AVAILABLE
                             vertical:(BOOL)vertical;
 
 /**
- Returns an initialized horizontal continous scale answer format using the specified values.
+ Returns an initialized horizontal continuous scale answer format using the specified values.
  
  This method is a convenience initializer.
  
@@ -827,7 +835,7 @@ ORK_CLASS_AVAILABLE
 /**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that
  lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
- the array corresond to the maximum side of the scale.
+ the array correspond to the maximum side of the scale.
  
  Setting this value to nil results in no gradient being drawn. Defaults to nil.
  
@@ -847,14 +855,14 @@ ORK_CLASS_AVAILABLE
 /**
  Determines if the minimum and maximum numbers are hidden on the slider.
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
 
 /**
  Determines if the bottom left and bottom right description labels are hidden
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
 
@@ -936,7 +944,7 @@ ORK_CLASS_AVAILABLE
 /**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that
  lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
- the array corresond to the maximum side of the scale.
+ the array correspond to the maximum side of the scale.
  
  Setting this value to nil results in no gradient being drawn. Defaults to nil.
  
@@ -956,21 +964,21 @@ ORK_CLASS_AVAILABLE
 /**
  Determines if the minimum and maximum numbers are hidden on the slider.
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
 
 /**
  Determines if the bottom left and bottom right description labels are hidden
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
 
 /**
  Determines if the value markers on the slider are hidden
  
- Defults to false.
+ Defaults to false.
  */
 @property (nonatomic, assign, getter=shouldHideValueMarkers) BOOL hideValueMarkers;
 
@@ -1168,7 +1176,7 @@ ORK_CLASS_AVAILABLE
  @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
  @param textViewPlaceholderText      The placeholder text for the text view.
  @param textViewInputOptional        Whether the user is required to provide additional text when selecting this choice.
- @param textViewStartsHidden         Whether the text view should be hidden untill the cell is selected.
+ @param textViewStartsHidden         Whether the text view should be hidden until the cell is selected.
  
  @return An initialized text choice other object.
  */
@@ -1395,7 +1403,7 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (readonly) ORKNumericAnswerStyle style;
 
 /**
- A string that displays the unit designation next to the numeric value in the results.
+ A string that displays a the unit designation next to the numeric value in the results.
  (read-only)
  If displayUnit is not set, the answerFormat will display the unit instead
 
@@ -1451,9 +1459,9 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (assign) BOOL hideUnitWhenAnswerIsEmpty;
 
 /**
-The placeholder to dislpay when the answer is empty.
+The placeholder to display when the answer is empty.
  
-Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+Overrides any specified step placeholder. Setting it to `nil` displays the default placeholder.
 */
 @property (copy, nullable) NSString *placeholder;
 
@@ -1661,6 +1669,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
 
+
 /**
  The regular expression used to validate user's input.
  
@@ -1724,9 +1733,9 @@ This By default, the value of this property is `NO`.
 @property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
 /**
- The placeholder to dislpay when the answer is empty.
+ The placeholder to display when the answer is empty.
  
- Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholder.
   */
 @property (copy, nullable) NSString *placeholder;
 
@@ -1769,7 +1778,7 @@ This By default, the value of this property is `NO`.
 /**
  The password generation rules to use for Automatic Secure Passwords.
  
- If specified, overrides the default passsword generation rules for fields with secureTextEntry.
+ If specified, overrides the default password generation rules for fields with secureTextEntry.
  */
 @property (nonatomic, copy, nullable) UITextInputPasswordRules *passwordRules API_AVAILABLE(ios(12));
 
@@ -1959,7 +1968,7 @@ ORK_CLASS_AVAILABLE
                                     metric measurement system and 1,450 lbs when using the USC
                                     measurement system.
  @param defaultValue            The default value to be initially selected in the picker. If you
-                                    specify `ORKDefaultValue`, the initally selected values are
+                                    specify `ORKDefaultValue`, the initially selected values are
                                     60 kg when using the metric measurement system and 133 lbs when
                                     using the USC measurement system. This value must be between
                                     `minimumValue` and `maximumValue`.
@@ -2011,7 +2020,7 @@ ORK_CLASS_AVAILABLE
 /**
  The default value to initially selected in the picker.
  
- When this property has a value equal to `ORKDefaultValue`, the initally selected values are 60 kg
+ When this property has a value equal to `ORKDefaultValue`, the initially selected values are 60 kg
  when using the metric measurement system and 133 lbs when using the USC measurement system. This
  value must be between `minimumValue` and `maximumValue`.
  */
@@ -2037,9 +2046,9 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) BOOL useCurrentLocation;
 
 /**
- The placeholder to dislpay when the answer is empty.
+ The placeholder to display when the answer is empty.
  
- Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholder.
   */
 @property (copy, nullable) NSString *placeholder;
 

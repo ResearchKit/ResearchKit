@@ -36,6 +36,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ A permission type object that requests access for sensor data.
+ */
+
 API_AVAILABLE(ios(14.0))
 ORK_CLASS_AVAILABLE
 @interface ORKSensorPermissionType : ORKPermissionType

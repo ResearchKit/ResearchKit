@@ -30,15 +30,14 @@
 
 
 #import "ORKQuestionResult_Private.h"
-
 #import "ORKResult_Private.h"
 
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKFormStep.h"
+
+#if TARGET_OS_IOS
 #import "ORKQuestionStep.h"
-
 #import "ORKHelpers_Internal.h"
-
+#import "ORKAnswerFormat_Internal.h"
+#endif
 
 @implementation ORKQuestionResult {
     @protected
@@ -94,7 +93,6 @@
     if (answer == ORKNullAnswerValue()) {
         answer = nil;
     }
-
     NSParameterAssert(!answer || [answer isKindOfClass:[[self class] answerClass]] || [answer isKindOfClass:[ORKNoAnswer class]]);
     return answer;
 }
@@ -203,6 +201,7 @@
     [super setAnswer:answer];
 }
 
+
 - (void)setBooleanAnswer:(NSNumber *)booleanAnswer {
     self.answer = booleanAnswer;
 }
@@ -274,7 +273,6 @@
             // Backwards compatibility, do not change the key
             ORK_DECODE_OBJ_CLASSES_FOR_KEY(aDecoder, typedAnswerOrNoAnswer, [[self class] answerClassesIncludingNoAnswer], dateAnswer);
         }
-
         if (_typedAnswerOrNoAnswer != nil && ![_typedAnswerOrNoAnswer isKindOfClass:[NSDate class]] && ![_typedAnswerOrNoAnswer isKindOfClass:[ORKNoAnswer class]]) {
             ORK_Log_Fault("ORKDateQuestionResult: Discarding answer of wrong class: %{public}@ (%@, identifier: %{public}@)", [_typedAnswerOrNoAnswer class], _typedAnswerOrNoAnswer, self.identifier);
             _typedAnswerOrNoAnswer = nil;
@@ -558,6 +556,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     NSArray *classes = [[super answerClassesIncludingNoAnswer] arrayByAddingObjectsFromArray:ORKAllowableValueClasses()];
     return classes;
 }
+
 
 - (void)setComponentsAnswer:(NSArray<NSObject<NSCopying, NSSecureCoding> *> *)componentsAnswer {
     self.answer = componentsAnswer;

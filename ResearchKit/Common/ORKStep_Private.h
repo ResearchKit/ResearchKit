@@ -28,7 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKStep.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,29 +45,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL useSurveyMode;
 
 @end
-
-#pragma mark - iOS
-
-#if TARGET_OS_IOS || TARGET_OS_VISION
-@interface ORKStep ()
-
-/**
- Returns the class that the task view controller should instantiate to display
- this step.
- 
- This method is used within the framework so that steps can define their
- step view controller pairing.
- 
- Outside the framework, developers should instantiate the required view
- controller in their task view controller delegate to override the task
- view controller's default.
- */
-+ (Class)stepViewControllerClass;
-
-- (Class)stepViewControllerClass;
-
-@end
-
-#endif
 
 NS_ASSUME_NONNULL_END

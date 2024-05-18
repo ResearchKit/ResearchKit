@@ -31,7 +31,7 @@
 #if TARGET_OS_IOS
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKFormStep.h>
 
 

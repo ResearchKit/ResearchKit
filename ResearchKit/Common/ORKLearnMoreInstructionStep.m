@@ -30,13 +30,8 @@
 
 
 #import "ORKLearnMoreInstructionStep.h"
-#import "ORKLearnMoreStepViewController.h"
 
 @implementation ORKLearnMoreInstructionStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKLearnMoreStepViewController class];
-}
 
 + (BOOL)supportsSecureCoding {
     return YES;

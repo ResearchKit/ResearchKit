@@ -80,8 +80,4 @@
     return step;
 }
 
-+ (Class)stepViewControllerClass {
-    return [ORKCustomStepViewController class];
-}
-
 @end

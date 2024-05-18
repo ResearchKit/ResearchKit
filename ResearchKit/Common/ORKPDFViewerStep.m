@@ -32,7 +32,6 @@
 
 
 #import "ORKPDFViewerStep.h"
-#import "ORKPDFViewerStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
 @implementation ORKPDFViewerStep {
@@ -60,12 +59,6 @@
         self.pdfURL = pdfURL;
     }
     return self;
-}
-
-#pragma mark - view controller instantiation
-
-+ (Class)stepViewControllerClass {
-    return [ORKPDFViewerStepViewController class];
 }
 
 #pragma mark - NSCopying

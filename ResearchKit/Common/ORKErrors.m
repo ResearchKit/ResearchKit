@@ -34,3 +34,4 @@
 
 NSString *const ORKErrorDomain = @"ORKErrorDomain";
 NSString *const ORKInvalidArgumentException = @"ORKInvalidArgumentException";
+NSString *const ORKUnderlyingExceptionKey = @"ORKUnderlyingExceptionKey";

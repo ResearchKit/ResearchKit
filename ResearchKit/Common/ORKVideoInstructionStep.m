@@ -30,16 +30,11 @@
 
 
 #import "ORKVideoInstructionStep.h"
-#import "ORKVideoInstructionStepViewController.h"
 #import "ORKHelpers_Internal.h"
 #import <AVFoundation/AVFoundation.h>
 
 
 @implementation ORKVideoInstructionStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKVideoInstructionStepViewController class];
-}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];

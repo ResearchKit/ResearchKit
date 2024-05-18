@@ -30,7 +30,6 @@
  */
 
 #import "ORKOrderedTask.h"
-#import "ORKQuestionStep.h"
 #import "ORKAnswerFormat.h"
 #import "ORKInstructionStep.h"
 #import "ORKCompletionStep.h"
@@ -38,8 +37,8 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 #if TARGET_OS_IOS || TARGET_OS_VISION
+#import "ORKQuestionStep.h"
 #import "ORKFormStep.h"
-#import "ORKFormStepViewController.h"
 #import "ORKFormItem_Internal.h"
 #import "ORKActiveStep_Internal.h"
 #import "ORKEarlyTerminationConfiguration.h"

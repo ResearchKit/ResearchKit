@@ -37,6 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKPermissionType;
 
+/**
+ A step that presents a configured list of permissions necessary
+ for the app using it.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKRequestPermissionsStep : ORKStep <NSSecureCoding, NSCopying>
 - (instancetype)initWithIdentifier:(NSString *)identifier

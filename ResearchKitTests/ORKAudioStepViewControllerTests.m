@@ -31,7 +31,7 @@
 #if TARGET_OS_IOS
 
 #import <Foundation/Foundation.h>
-#import <ResearchKit/ORKAudioFitnessStepViewController.h>
+#import <ResearchKitActiveTask/ORKAudioFitnessStepViewController.h>
 
 @import XCTest;
 
