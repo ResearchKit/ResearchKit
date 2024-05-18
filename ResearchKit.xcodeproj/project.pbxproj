@@ -5011,9 +5011,9 @@
 			productReference = B183A5951A8535D100C76870 /* ResearchKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		CA1C7A40288B0C68004DAB3A /* ResearchKitUI (iOS) */ = {
+		CA1C7A40288B0C68004DAB3A /* ResearchKitUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA1C7A54288B0C68004DAB3A /* Build configuration list for PBXNativeTarget "ResearchKitUI (iOS)" */;
+			buildConfigurationList = CA1C7A54288B0C68004DAB3A /* Build configuration list for PBXNativeTarget "ResearchKitUI" */;
 			buildPhases = (
 				CA1C7A43288B0C68004DAB3A /* Headers */,
 				CA1C7A45288B0C68004DAB3A /* Sources */,
@@ -5026,7 +5026,7 @@
 			dependencies = (
 				CA1C7A5F288B0CA2004DAB3A /* PBXTargetDependency */,
 			);
-			name = "ResearchKitUI (iOS)";
+			name = ResearchKitUI;
 			productName = ResearchKitUI;
 			productReference = CA1C7A5A288B0C68004DAB3A /* ResearchKitUI.framework */;
 			productType = "com.apple.product-type.framework";
@@ -5134,7 +5134,7 @@
 			targets = (
 				B183A4731A8535D100C76870 /* ResearchKit */,
 				86CC8E991AC09332001CCD89 /* ResearchKitTests */,
-				CA1C7A40288B0C68004DAB3A /* ResearchKitUI (iOS) */,
+				CA1C7A40288B0C68004DAB3A /* ResearchKitUI */,
 				CAD08966289DD747007B2A98 /* ResearchKitActiveTask */,
 			);
 		};
@@ -5730,7 +5730,7 @@
 		};
 		CAF8D2BA288F2DCB001E6992 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CA1C7A40288B0C68004DAB3A /* ResearchKitUI (iOS) */;
+			target = CA1C7A40288B0C68004DAB3A /* ResearchKitUI */;
 			targetProxy = CAF8D2B9288F2DCB001E6992 /* PBXContainerItemProxy */;
 		};
 		CAFAA6C728A19E2F0010BBDE /* PBXTargetDependency */ = {
@@ -5740,7 +5740,7 @@
 		};
 		CAFAA6C928A19E330010BBDE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CA1C7A40288B0C68004DAB3A /* ResearchKitUI (iOS) */;
+			target = CA1C7A40288B0C68004DAB3A /* ResearchKitUI */;
 			targetProxy = CAFAA6C828A19E330010BBDE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -6114,7 +6114,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		CA1C7A54288B0C68004DAB3A /* Build configuration list for PBXNativeTarget "ResearchKitUI (iOS)" */ = {
+		CA1C7A54288B0C68004DAB3A /* Build configuration list for PBXNativeTarget "ResearchKitUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CA1C7A55288B0C68004DAB3A /* Debug */,
