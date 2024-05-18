@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS || TARGET_OS_VISION
-
 
 #import "ORKVerificationStep.h"
 #import "ORKVerificationStep_Internal.h"
@@ -109,5 +107,3 @@
 }
 
 @end
-
-#endif

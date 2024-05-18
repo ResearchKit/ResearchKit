@@ -31,7 +31,6 @@
 #if !TARGET_OS_VISION
 
 
-#import "ORKRequestPermissionButton.h"
 #import "ORKHealthKitPermissionType.h"
 #import "ORKHelpers_Internal.h"
 #import <HealthKit/HealthKit.h>

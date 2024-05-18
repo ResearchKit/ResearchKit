@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS || TARGET_OS_VISION
-
 
 #import "ORKConsentSection.h"
 
@@ -275,5 +273,3 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
 }
 
 @end
-
-#endif

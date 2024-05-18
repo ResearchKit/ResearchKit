@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS || TARGET_OS_VISION
-
 
 #import <HealthKit/HealthKit.h>
 
@@ -61,5 +59,3 @@ typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
 @end
 
 NS_ASSUME_NONNULL_END
-
-#endif
