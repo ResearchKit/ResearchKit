@@ -137,4 +137,3 @@ NSString * const ORKVerificationStepViewResendEmailButtonAccessibilityIdentifier
 }
 
 @end
-

@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKRequestPermissionButton.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -160,4 +159,3 @@ NSString * const ORKRequestPermissionButtonAccessibilityIdentifier = @"ORKReques
 }
 
 @end
-

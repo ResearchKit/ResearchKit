@@ -858,4 +858,3 @@ NSString * const ORKPDFViewerActionViewClearButtonAccessibilityIdentifier = @"OR
 }
 
 @end
-

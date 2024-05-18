@@ -55,4 +55,3 @@
 #import <ResearchKitUI/ORKTintedImageView.h>
 #import <ResearchKitUI/ORKVerticalContainerView.h>
 #import <ResearchKitUI/ORKViewControllerProviding.h>
-

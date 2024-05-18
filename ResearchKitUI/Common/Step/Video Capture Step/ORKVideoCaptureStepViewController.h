@@ -44,4 +44,3 @@ ORK_CLASS_AVAILABLE
 @interface ORKVideoCaptureStepViewController : ORKStepViewController
 
 @end
-

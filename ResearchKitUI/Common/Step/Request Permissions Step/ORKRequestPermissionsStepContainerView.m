@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKRequestPermissionsStepContainerView.h"
 #import "ORKRequestPermissionView.h"
 #import "ORKHelpers_Internal.h"
@@ -82,5 +81,4 @@
 }
 
 @end
-
 

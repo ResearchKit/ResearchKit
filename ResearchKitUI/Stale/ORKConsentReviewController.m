@@ -251,4 +251,3 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 }
 
 @end
-
