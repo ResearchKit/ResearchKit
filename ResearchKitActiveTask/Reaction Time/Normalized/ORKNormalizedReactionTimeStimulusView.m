@@ -164,4 +164,3 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
 }
 
 @end
-

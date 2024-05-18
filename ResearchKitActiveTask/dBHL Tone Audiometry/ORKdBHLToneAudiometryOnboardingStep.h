@@ -35,4 +35,3 @@ ORK_CLASS_AVAILABLE
 @interface ORKdBHLToneAudiometryOnboardingStep : ORKFormStep
 
 @end
-

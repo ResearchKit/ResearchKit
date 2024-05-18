@@ -255,7 +255,7 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_leftView, _rightView, _metricKeyline);
     
     // Leave space for the keyline between these views, and then constrain it to be 1px wide and go from top to bottom baseline of metric views.
-    CGFloat scale = ScreenScale();
+    CGFloat scale = [UIScreen mainScreen].scale;
     NSArray *vertConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftView]|"
                                                                        options:(NSLayoutFormatOptions)0
                                                                        metrics:nil
@@ -331,4 +331,3 @@
 }
 
 @end
-

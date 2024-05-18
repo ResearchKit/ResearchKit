@@ -368,4 +368,3 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 @end
-

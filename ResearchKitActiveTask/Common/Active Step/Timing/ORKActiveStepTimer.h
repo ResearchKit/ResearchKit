@@ -68,4 +68,3 @@ typedef void (^ORKActiveStepTimerHandler)(ORKActiveStepTimer *timer, BOOL finish
 @end
 
 NS_ASSUME_NONNULL_END
-

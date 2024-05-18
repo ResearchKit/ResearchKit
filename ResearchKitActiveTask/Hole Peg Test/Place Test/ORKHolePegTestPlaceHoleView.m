@@ -171,4 +171,3 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
 }
 
 @end
-

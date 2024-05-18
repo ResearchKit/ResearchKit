@@ -77,4 +77,3 @@ typedef NS_ENUM(NSInteger, ORKSpatialSpanTargetState) {
 @end
 
 NS_ASSUME_NONNULL_END
-

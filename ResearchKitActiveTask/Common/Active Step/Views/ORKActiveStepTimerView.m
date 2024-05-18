@@ -232,4 +232,3 @@ static const CGFloat CountDownLabelToButtonMargin = 2.0;
 }
 
 @end
-

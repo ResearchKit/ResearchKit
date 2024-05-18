@@ -58,4 +58,3 @@ extern NSArray<NSNumber *> * ORKLastNSamples(NSArray<NSNumber *> *samples, NSInt
 @end
 
 NS_ASSUME_NONNULL_END
-

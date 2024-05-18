@@ -306,4 +306,3 @@ static const CGFloat TestingInProgressIndicatorRadius = 6.0;
 }
 
 @end
-

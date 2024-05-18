@@ -35,4 +35,3 @@
 @interface ORKSpeechInNoiseStepViewController : ORKActiveStepViewController
 
 @end
-

@@ -280,4 +280,3 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
 }
 
 @end
-

@@ -192,4 +192,3 @@ static CGFloat const ORKSpeechInNoiseContentViewVerticalMargin = 44;
 
 @end
 
-

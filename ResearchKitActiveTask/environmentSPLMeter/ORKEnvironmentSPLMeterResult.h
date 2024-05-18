@@ -39,4 +39,3 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSArray<NSNumber *> *recordedSPLMeterSamples;
 
 @end
-

@@ -224,4 +224,3 @@ static const CGFloat BarViewHeight = 50.0;
 }
 
 @end
-

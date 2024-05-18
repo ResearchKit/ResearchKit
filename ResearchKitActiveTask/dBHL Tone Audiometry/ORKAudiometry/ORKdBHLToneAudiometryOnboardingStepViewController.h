@@ -35,4 +35,3 @@
 @interface ORKdBHLToneAudiometryOnboardingStepViewController : ORKFormStepViewController
 
 @end
-

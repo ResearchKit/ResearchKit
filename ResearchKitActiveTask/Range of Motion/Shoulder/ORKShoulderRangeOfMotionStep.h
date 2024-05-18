@@ -40,4 +40,3 @@ ORK_CLASS_AVAILABLE
 @interface ORKShoulderRangeOfMotionStep : ORKRangeOfMotionStep
 
 @end
-

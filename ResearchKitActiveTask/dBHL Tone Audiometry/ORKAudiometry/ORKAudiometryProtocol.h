@@ -93,4 +93,3 @@ typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
 - (NSArray<ORKdBHLToneAudiometryFrequencySample *> *)resultSamples;
 
 @end
-

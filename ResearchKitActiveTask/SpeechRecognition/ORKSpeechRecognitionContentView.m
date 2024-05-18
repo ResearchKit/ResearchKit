@@ -346,4 +346,3 @@ static CGFloat const ORKSpeechRecognitionContentBottomLayoutMargin = 44.0;
 
 @end
 
-

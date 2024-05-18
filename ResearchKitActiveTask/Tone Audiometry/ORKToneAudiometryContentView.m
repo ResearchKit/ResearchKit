@@ -259,4 +259,3 @@ static const CGFloat CaptionLabelToButtonMinPadding = 5.0;
 }
 
 @end
-

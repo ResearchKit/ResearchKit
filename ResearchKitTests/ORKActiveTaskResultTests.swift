@@ -677,4 +677,3 @@ class ORKTrailmakingResultTests: XCTestCase {
         XCTAssert(result.isEqual(newResult))
     }
 }
-

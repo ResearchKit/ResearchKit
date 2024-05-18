@@ -269,4 +269,3 @@ static const CGFloat TapCountLabelTopPadding = 10.0;
 }
 
 @end
-

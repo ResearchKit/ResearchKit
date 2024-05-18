@@ -269,4 +269,3 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 
 @end
-

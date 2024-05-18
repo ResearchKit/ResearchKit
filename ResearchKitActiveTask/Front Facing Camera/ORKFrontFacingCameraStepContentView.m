@@ -576,4 +576,3 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
 }
 
 @end
-

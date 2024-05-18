@@ -36,4 +36,3 @@
 @implementation ORKShoulderRangeOfMotionStep
 
 @end
-
