@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -368,7 +368,7 @@
 		CA08054028AD7CC8001695EF /* ORKViewControllerProviding.h in Headers */ = {isa = PBXBuildFile; fileRef = CA08053F28AD7CC8001695EF /* ORKViewControllerProviding.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CA0AC56928BD4FAC00E80040 /* ORKStepViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AC56828BD4FAB00E80040 /* ORKStepViewControllerHelpers.swift */; };
 		CA1C7A44288B0C68004DAB3A /* ResearchKitUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D06632F24FEF272005D9B40 /* ResearchKitUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CA1C7A5C288B0CA2004DAB3A /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B183A5951A8535D100C76870 /* ResearchKit.framework */; };
+		CA1C7A5C288B0CA2004DAB3A /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B183A5951A8535D100C76870 /* ResearchKit.framework */; platformFilters = (ios, xros, ); };
 		CA23A31D2899941700EC6E91 /* ORKSkin_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CA23A31C2899941700EC6E91 /* ORKSkin_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CA2616D32894649A008B1425 /* ORKRequestPermissionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E03D6C2491B6DB008F8406 /* ORKRequestPermissionView.m */; };
 		CA2616D42894649A008B1425 /* ORKRequestPermissionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5170009C254A197300CACE12 /* ORKRequestPermissionButton.m */; };
@@ -5716,6 +5716,10 @@
 		};
 		CA1C7A5F288B0CA2004DAB3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				xros,
+			);
 			target = B183A4731A8535D100C76870 /* ResearchKit */;
 			targetProxy = CA1C7A5E288B0CA2004DAB3A /* PBXContainerItemProxy */;
 		};
@@ -5883,7 +5887,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) -runtime-compatibility-version none";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
@@ -5895,7 +5899,7 @@
 				MODULEMAP_PRIVATE_FILE = ResearchKit/ResearchKit_Private.modulemap;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
@@ -5912,10 +5916,10 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) -runtime-compatibility-version none";
 				PRODUCT_NAME = ResearchKitUI;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -5930,10 +5934,10 @@
 				MODULEMAP_PRIVATE_FILE = ResearchKitUI/ResearchKitUI_Private.modulemap;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
 				PRODUCT_NAME = ResearchKitUI;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
 		};
