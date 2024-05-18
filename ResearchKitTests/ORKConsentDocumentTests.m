@@ -28,9 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#if TARGET_OS_IOS
-
 @import XCTest;
 @import ResearchKit;
 @import ResearchKit_Private;
@@ -195,5 +192,3 @@ body, p, h1, h2, h3 { font-family: Helvetica; }\n\
 }
 
 @end
-
-#endif

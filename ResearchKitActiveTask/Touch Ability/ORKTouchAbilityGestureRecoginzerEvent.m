@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 #import "ORKHelpers_Internal.h"
@@ -510,4 +508,3 @@
 
 @end
 
-#endif

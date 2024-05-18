@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKRecorder.h>
@@ -114,4 +112,3 @@ API_AVAILABLE(ios(12.0))
 
 NS_ASSUME_NONNULL_END
 
-#endif

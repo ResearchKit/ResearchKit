@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import "ORK3DModelManager.h"
 #import "ORK3DModelManager_Internal.h"
 #import "ORKHelpers_Internal.h"
@@ -126,4 +124,3 @@ NSNotificationName const ORK3DModelEndStepNotification = @"ORK3DModelEndStepNoti
 
 @end
 
-#endif

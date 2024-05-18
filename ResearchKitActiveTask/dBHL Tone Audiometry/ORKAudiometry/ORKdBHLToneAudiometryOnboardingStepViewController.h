@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import <ResearchKit/ResearchKit.h>
 #import <ResearchKitUI/ORKFormStepViewController.h>
@@ -38,4 +36,3 @@
 
 @end
 
-#endif

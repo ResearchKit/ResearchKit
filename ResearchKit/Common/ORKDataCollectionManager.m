@@ -346,3 +346,5 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
 }
 
 @end
+
+#endif

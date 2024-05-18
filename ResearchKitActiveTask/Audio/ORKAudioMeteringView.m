@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import "ORKAudioMeteringView.h"
 #import "ORKAudioGraphView.h"
 
@@ -132,4 +130,3 @@ NSArray<NSNumber *> * ORKLastNSamples(NSArray<NSNumber *> *samples, NSInteger li
 @end
 
 
-#endif

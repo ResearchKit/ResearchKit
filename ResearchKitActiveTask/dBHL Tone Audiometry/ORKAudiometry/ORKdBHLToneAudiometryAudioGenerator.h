@@ -50,8 +50,6 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 
-#if TARGET_OS_IOS
-
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
@@ -90,4 +88,3 @@ ORK_CLASS_AVAILABLE
 NS_ASSUME_NONNULL_END
 
 
-#endif

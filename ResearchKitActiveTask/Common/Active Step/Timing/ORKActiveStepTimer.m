@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKActiveStepTimer.h"
 #import "ORKHelpers_Internal.h"
@@ -198,4 +196,3 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
 
 @end
 
-#endif

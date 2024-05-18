@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKConsentReviewController.h"
 
@@ -254,4 +252,3 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 
 @end
 
-#endif

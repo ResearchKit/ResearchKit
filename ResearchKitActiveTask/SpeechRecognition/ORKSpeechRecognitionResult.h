@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import <Speech/SFTranscription.h>
 #import <Speech/SFTranscriptionSegment.h>
 #if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
@@ -63,4 +61,3 @@ ORK_CLASS_AVAILABLE
 
 NS_ASSUME_NONNULL_END
 
-#endif

@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKEnvironmentSPLMeterStep.h"
 #import "ORKRecorder_Private.h"
@@ -122,4 +120,3 @@
 
 
 
-#endif

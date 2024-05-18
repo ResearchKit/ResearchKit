@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKTowerOfHanoiTowerView.h"
 
@@ -276,4 +274,3 @@ static const CGFloat BaseSpacing = 10;
 
 @end
 
-#endif

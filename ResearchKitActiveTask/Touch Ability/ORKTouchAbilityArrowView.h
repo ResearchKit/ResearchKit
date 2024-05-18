@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -49,4 +47,3 @@ typedef NS_ENUM(NSUInteger, ORKTouchAbilityArrowViewStyle) {
 
 NS_ASSUME_NONNULL_END
 
-#endif

@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
 @import XCTest;
 @import ResearchKit_Private;
 @import ResearchKitActiveTask;
@@ -652,4 +651,3 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 @end
-#endif

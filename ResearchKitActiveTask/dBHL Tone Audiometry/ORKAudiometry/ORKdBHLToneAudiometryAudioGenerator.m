@@ -50,8 +50,6 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKdBHLToneAudiometryAudioGenerator.h"
 
@@ -444,4 +442,3 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
 @end
 
 
-#endif

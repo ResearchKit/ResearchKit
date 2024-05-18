@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import <ResearchKitActiveTask/ORKRangeOfMotionStepViewController.h>
 
@@ -43,4 +41,3 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-#endif

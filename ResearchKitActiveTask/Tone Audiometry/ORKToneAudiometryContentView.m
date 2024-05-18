@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKToneAudiometryContentView.h"
 
@@ -262,4 +260,3 @@ static const CGFloat CaptionLabelToButtonMinPadding = 5.0;
 
 @end
 
-#endif

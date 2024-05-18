@@ -116,7 +116,7 @@ NSDate *ORKDateFromStringISO8601(NSString *string) {
     return [formatter dateFromString:string];
 }
 
-CGFloat ScreenScale() {
+CGFloat ScreenScale(void) {
     #if TARGET_OS_VISION
     return 2.0;
     #else

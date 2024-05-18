@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKitUI/ORKStepViewController.h>
@@ -42,4 +40,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#endif

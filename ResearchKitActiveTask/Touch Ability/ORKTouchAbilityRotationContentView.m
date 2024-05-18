@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import "ORKTouchAbilityRotationContentView.h"
 #import "ORKTouchAbilityArrowView.h"
 #import "ORKTouchAbilityRotationTrial.h"
@@ -179,4 +177,3 @@
 
 @end
 
-#endif

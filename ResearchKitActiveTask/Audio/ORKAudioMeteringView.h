@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 
 #import <UIKit/UIKit.h>
@@ -61,4 +59,3 @@ extern NSArray<NSNumber *> * ORKLastNSamples(NSArray<NSNumber *> *samples, NSInt
 
 NS_ASSUME_NONNULL_END
 
-#endif

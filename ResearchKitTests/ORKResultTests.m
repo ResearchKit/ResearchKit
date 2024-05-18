@@ -135,7 +135,6 @@
         }];
     }];
 }
-#endif
 
 - (void)testTaskViewControllerPrematureViewLoading {
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"test" steps:@[

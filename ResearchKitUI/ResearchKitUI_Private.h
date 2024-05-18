@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import <ResearchKitUI/ORKBodyContainerView.h>
 #import <ResearchKitUI/ORKCheckmarkView.h>
 #import <ResearchKitUI/ORKDirectionView.h>
@@ -58,4 +56,3 @@
 #import <ResearchKitUI/ORKVerticalContainerView.h>
 #import <ResearchKitUI/ORKViewControllerProviding.h>
 
-#endif

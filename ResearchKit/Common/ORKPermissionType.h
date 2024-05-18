@@ -52,7 +52,6 @@ typedef NS_ENUM(NSInteger, ORKRequestPermissionsState) {
     ORKRequestPermissionsStateError,
 };
 
-typedef NS_OPTIONS(NSUInteger, UNAuthorizationOptions);
 typedef NSString * SRSensor NS_TYPED_ENUM API_AVAILABLE(ios(14.0));
 
 /**

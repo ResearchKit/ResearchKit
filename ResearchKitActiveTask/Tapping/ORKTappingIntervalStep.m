@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKTappingIntervalStep.h"
 
@@ -56,4 +54,3 @@
 
 @end
 
-#endif

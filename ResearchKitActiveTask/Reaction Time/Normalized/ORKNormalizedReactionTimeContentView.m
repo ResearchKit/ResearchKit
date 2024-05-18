@@ -29,8 +29,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKNormalizedReactionTimeContentView.h"
 
@@ -204,4 +202,3 @@ CGFloat BackgroundViewSpaceMultiplier = 2.0;
 
 @end
 
-#endif

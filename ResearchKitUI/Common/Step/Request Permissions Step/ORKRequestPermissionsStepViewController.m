@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if !TARGET_OS_VISION
-
 
 #import "ORKRequestPermissionsStepViewController.h"
 #import "ORKRequestPermissionsStep.h"
@@ -216,5 +214,3 @@ NSString * const ORKRequestPermissionsStepViewAccessibilityIdentifier = @"ORKReq
 }
 
 @end
-
-#endif

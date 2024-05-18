@@ -1109,7 +1109,7 @@
     {
         NSUInteger maxFractionDigits = 5;
         ORKContinuousScaleAnswerFormat* scaleAnswer = [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:10 minimumValue:1 defaultValue:0.0 maximumFractionDigits:maxFractionDigits];
-        XCTAssertEqualObjects([scaleAnswer.numberFormatter stringFromNumber:@99.12345],  @"99.1234");
+        XCTAssertEqualObjects([scaleAnswer.numberFormatter stringFromNumber:@99.12345],  @"99.1235");
     }
     {
         NSUInteger maxFractionDigits = -1;

@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKHeightPicker.h"
 #import "ORKResult_Private.h"
 #import "ORKAnswerFormat_Internal.h"
@@ -322,3 +321,4 @@ static const CGFloat PickerMinimumHeight = 34.0;
 }
 
 @end
+

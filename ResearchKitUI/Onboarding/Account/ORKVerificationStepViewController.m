@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKVerificationStepViewController.h"
 
@@ -140,4 +138,3 @@ NSString * const ORKVerificationStepViewResendEmailButtonAccessibilityIdentifier
 
 @end
 
-#endif

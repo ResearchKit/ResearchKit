@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -65,4 +63,3 @@ typedef void (^ORKFrontFacingCameraStepContentViewEventHandler)(ORKFrontFacingCa
 
 NS_ASSUME_NONNULL_END
 
-#endif

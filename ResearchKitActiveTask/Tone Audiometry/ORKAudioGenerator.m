@@ -49,8 +49,6 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKAudioGenerator.h"
 
@@ -284,4 +282,3 @@ static OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 
 @end
 
-#endif

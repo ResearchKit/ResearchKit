@@ -92,7 +92,7 @@ ORK_EXTERN NSString *const ORKDoneButtonPressedKey;
 ORK_EXTERN NSString *const ORKResetDoneButtonKey;
 
 /// Return the color for a specified ORK...ColorKey
-UIColor *ORKColor(NSString *colorKey);
+ORK_EXTERN UIColor *ORKColor(NSString *colorKey);
 
 /// Return minimum height for form step header view
 ORK_EXTERN CGFloat ORKFormStepMinimumHeaderHeight;

@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import <ResearchKitActiveTask/ORKAudiometryStimulus.h>
 
 typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
@@ -96,4 +94,3 @@ typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
 
 @end
 
-#endif

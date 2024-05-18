@@ -78,6 +78,7 @@ static const uint32_t IconDarkTintColor = 0x9D71F7;
             [readers addObject:reader];
         }
         _readers = [readers copy];
+#endif
     }
     return self;
 }

@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKHolePegTestPlaceHoleView.h"
 
@@ -174,4 +172,3 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
 
 @end
 
-#endif

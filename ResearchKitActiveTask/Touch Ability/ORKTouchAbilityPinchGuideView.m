@@ -28,8 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 #import "ORKTouchAbilityPinchGuideView.h"
 
 @implementation ORKTouchAbilityPinchGuideView
@@ -85,4 +83,3 @@
 
 @end
 
-#endif
