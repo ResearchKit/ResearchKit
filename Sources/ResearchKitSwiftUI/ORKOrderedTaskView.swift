@@ -98,7 +98,7 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
 
         public func taskViewController(
             _ taskViewController: ORKTaskViewController,
-            didFinishWith reason: ORKTaskViewControllerFinishReason,
+            didFinishWith reason: ORKTaskFinishReason,
             error: Error?
         ) {
             let taskResult = taskViewController.result

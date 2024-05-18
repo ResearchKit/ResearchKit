@@ -1,0 +1,12 @@
+framework module ResearchKitUI {
+    umbrella header "ResearchKitUI.h"
+    module iOS {
+    }
+    export *
+    module * { export * }
+}
+
+module ResearchKitUI.Swift {
+  header "ResearchKitUI-Swift.h"
+  requires objc
+}

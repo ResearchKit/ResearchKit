@@ -30,7 +30,8 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit;
+@import ResearchKit_Private;
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKPicker.h"
 #import "ORKPickerTestDelegate.h"
@@ -957,6 +958,7 @@
                                      expectedRow:cm
                                expectedSecondRow:ORKDoubleInvalidValue]);
 }
+
 
 - (void)testContinuousScaleAnswerFormat {
     

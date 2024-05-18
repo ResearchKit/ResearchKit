@@ -29,10 +29,9 @@
  */
 
 
-#if TARGET_OS_IOS
-
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit;
+@import ResearchKit_Private;
 
 #import "ORKConsentSectionFormatter.h"
 #import "ORKConsentSignatureFormatter.h"
@@ -194,5 +193,3 @@ body, p, h1, h2, h3 { font-family: Helvetica; }\n\
 }
 
 @end
-
-#endif

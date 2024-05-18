@@ -28,9 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 import XCTest
+import ResearchKitActiveTask
 
 class ORKEnvironmentSPLMeterResultTests: XCTestCase {
     
@@ -65,5 +64,3 @@ class ORKEnvironmentSPLMeterResultTests: XCTestCase {
         XCTAssert(result.isEqual(newResult))
     }
 }
-
-#endif

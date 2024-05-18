@@ -33,7 +33,6 @@
 
 #import "ORKRequestPermissionsStep.h"
 #import "ORKPermissionType.h"
-#import "ORKRequestPermissionsStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
 @implementation ORKRequestPermissionsStep
@@ -44,10 +43,6 @@
         self.permissionTypes = permissionTypes;
     }
     return self;
-}
-
-+ (Class)stepViewControllerClass {
-    return [ORKRequestPermissionsStepViewController class];
 }
 
 - (void)validateParameters {

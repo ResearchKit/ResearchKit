@@ -28,10 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 import XCTest
 @testable import ResearchKit
+@testable import ResearchKitActiveTask
 
 class ORKAmslerGridResultTests: XCTestCase {
     var result: ORKAmslerGridResult!
@@ -678,5 +677,3 @@ class ORKTrailmakingResultTests: XCTestCase {
         XCTAssert(result.isEqual(newResult))
     }
 }
-
-#endif

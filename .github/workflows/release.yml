@@ -8,6 +8,10 @@
 
 name: Create XCFramework and Release
 
+concurrency:
+  group: Release
+  cancel-in-progress: false
+
 on: 
   workflow_dispatch:
     inputs:
@@ -17,16 +21,36 @@ on:
         required: true
 
 jobs:
-  create-xcframework-and-release-workflow:
+  create-xcframework-and-release-workflow-researchkit:
+    name: XCFramework
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
+    strategy:
+      matrix:
+        framework: [ResearchKit, ResearchKitUI]
     with:
       workspaceFile: RKWorkspace.xcworkspace
-      xcFrameworkName: ResearchKit
-      scheme: ResearchKit
+      xcFrameworkName: ${{ matrix.framework }}
+      scheme: ${{ matrix.framework }}
       version: ${{ inputs.version }}
       configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
+      outputpath: './Sources'
+      user: PaulsAutomationBot
+    secrets:
+      access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+  create-xcframework-and-release-workflow-researchkit-active-tasks:
+    name: XCFramework (ResearchKitActiveTask)
+    uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
+    with:
+      workspaceFile: RKWorkspace.xcworkspace
+      xcFrameworkName: ResearchKitActiveTask
+      scheme: ResearchKitActiveTask
+      version: ${{ inputs.version }}
+      configuration: Release
+      runsonlabels: '["macOS", "self-hosted"]'
+      sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
+      outputpath: './Sources'
       user: PaulsAutomationBot
     secrets:
       access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

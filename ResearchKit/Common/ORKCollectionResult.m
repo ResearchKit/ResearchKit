@@ -28,9 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_WATCH
-@import WatchKit;
-#endif
 
 #import "ORKCollectionResult.h"
 
@@ -244,7 +241,9 @@
 }
 
 - (ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier {
-    return (ORKStepResult *)[self resultForIdentifier:stepIdentifier];
+    ORKResult *genericResult = [self resultForIdentifier:stepIdentifier];
+    ORKStepResult *stepResult = ORKDynamicCast(genericResult, ORKStepResult);
+    return stepResult;
 }
 
 @end
@@ -264,11 +263,14 @@
 }
 
 - (void)updateEnabledAssistiveTechnology {
+#if TARGET_OS_IOS || TARGET_OS_VISION
     if (UIAccessibilityIsVoiceOverRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
     } else if (UIAccessibilityIsSwitchControlRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
     }
+#endif
+    
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKSkin.h"
+#import "ORKSkin_Private.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -42,12 +42,6 @@ NSString *const ORKLightTintColorKey = @"ORKLightTintColorKey";
 NSString *const ORKDarkTintColorKey = @"ORKDarkTintColorKey";
 NSString *const ORKCaptionTextColorKey = @"ORKCaptionTextColorKey";
 NSString *const ORKBlueHighlightColorKey = @"ORKBlueHighlightColorKey";
-NSString *const ORKChartDefaultTextColorKey = @"ORKChartDefaultTextColorKey";
-NSString *const ORKGraphAxisColorKey = @"ORKGraphAxisColorKey";
-NSString *const ORKGraphAxisTitleColorKey = @"ORKGraphAxisTitleColorKey";
-NSString *const ORKGraphReferenceLineColorKey = @"ORKGraphReferenceLineColorKey";
-NSString *const ORKGraphScrubberLineColorKey = @"ORKGraphScrubberLineColorKey";
-NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey";
 NSString *const ORKAuxiliaryImageTintColorKey = @"ORKAuxiliaryImageTintColorKey";
 NSString *const ORKNavigationContainerColorKey = @"ORKNavigationContainerColorKey";
 NSString *const ORKNavigationContainerShadowColorKey = @"ORKNavigationContainerShadowColorKey";
@@ -58,6 +52,9 @@ NSString *const ORKBulletItemTextColorKey = @"ORKBulletItemTextColorKey";
 NSString *const ORKStepTopContentImageChangedKey = @"ORKStepTopContentImageChanged";
 NSString *const ORKDoneButtonPressedKey = @"ORKDoneButtonPressed";
 NSString *const ORKResetDoneButtonKey = @"ORKResetDoneButton";
+
+CGFloat ORKFormStepLargeTextMinimumHeaderHeight = 80.0;
+CGFloat ORKFormStepMinimumHeaderHeight = 50.0;
 CGFloat ORKQuestionStepMinimumHeaderHeight = 29.75;
 CGFloat ORKCardDefaultCornerRadii = 10.0;
 CGFloat ORKImageChoiceButtonCornerRadii = 5.0;
@@ -127,42 +124,51 @@ ORKCachedColorMethod(ork_borderGrayColor, 239.0 / 255.0, 239.0 / 255.0, 244.0 / 
 
 #undef ORKCachedColorMethod
 
++ (UIColor *)ork_splGrayColor {
+#if TARGET_OS_IOS || TARGET_OS_VISION
+    return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traits) {
+        return traits.userInterfaceStyle == UIUserInterfaceStyleDark ? UIColor.systemGray5Color : UIColor.systemGray6Color;
+    }];
+#else
+    return UIColor.grayColor;
+#endif
+}
+
++ (UIColor *)ork_ringViewStrokeColor {
+#if TARGET_OS_IOS || TARGET_OS_VISION
+    return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traits) {
+        return traits.userInterfaceStyle == UIUserInterfaceStyleDark ? UIColor.systemGray5Color : UIColor.systemGray6Color;
+    }];
+#else
+    return UIColor.grayColor;
+#endif
+}
+
 @end
 
-static NSMutableDictionary *colors() {
+static NSMutableDictionary *colors(void) {
     static NSMutableDictionary *colors = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UIColor *backgroundColor = [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1.0];
-        UIColor *fillColor = ORKRGB(0xD7D7D7);
-#if TARGET_OS_IOS || TARGET_OS_VISION
-        if (@available(iOS 13.0, *)) {
-            backgroundColor = [UIColor secondarySystemBackgroundColor];
-            fillColor = UIColor.quaternarySystemFillColor;
-        }
-#endif
-
         colors = [@{
                     ORKSignatureColorKey: ORKRGB(0x000000),
-                    ORKBackgroundColorKey: backgroundColor,
+#if TARGET_OS_IOS || TARGET_OS_VISION
+                    ORKBackgroundColorKey: [UIColor secondarySystemBackgroundColor],
+#endif
                     ORKConsentBackgroundColorKey: ORKRGB(0xffffff),
                     ORKToolBarTintColorKey: ORKRGB(0xffffff),
                     ORKLightTintColorKey: ORKRGB(0xeeeeee),
                     ORKDarkTintColorKey: ORKRGB(0x888888),
                     ORKCaptionTextColorKey: ORKRGB(0xcccccc),
                     ORKBlueHighlightColorKey: [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0],
-                    ORKChartDefaultTextColorKey: [UIColor lightGrayColor],
-                    ORKGraphAxisColorKey: [UIColor colorWithRed:217.0 / 255.0 green:217.0 / 255.0 blue:217.0 / 255.0 alpha:1.0],
-                    ORKGraphAxisTitleColorKey: [UIColor colorWithRed:142.0 / 255.0 green:142.0 / 255.0 blue:147.0 / 255.0 alpha:1.0],
-                    ORKGraphReferenceLineColorKey: [UIColor colorWithRed:225.0 / 255.0 green:225.0 / 255.0 blue:229.0 / 255.0 alpha:1.0],
-                    ORKGraphScrubberLineColorKey: [UIColor grayColor],
-                    ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0],
                     ORKAuxiliaryImageTintColorKey: [UIColor colorWithRed:228.0 / 255.0 green:233.0 / 255.0 blue:235.0 / 255.0 alpha:1.0],
                     ORKNavigationContainerColorKey: [UIColor colorWithRed:249.0 / 255.0 green:249.0 / 255.0 blue:251.0 / 255.0 alpha:0.0],
                     ORKNavigationContainerShadowColorKey: [UIColor blackColor],
                     ORKProgressLabelColorKey: [UIColor colorWithRed:142.0/255.0 green:142.0/255.0 blue:142.0/255.0 alpha:1.0],
                     ORKiPadBackgroundViewColorKey: [UIColor colorWithRed:249.0 / 255.0 green:249.0 / 255.0 blue:251.0 / 255.0 alpha:1.0],
-                    ORKTopContentImageViewBackgroundColorKey: fillColor,
+#if TARGET_OS_IOS || TARGET_OS_VISION
+                    ORKTopContentImageViewBackgroundColorKey: UIColor.quaternarySystemFillColor,
+#endif
                     ORKBulletItemTextColorKey: [UIColor colorWithRed:0.56 green:0.56 blue:0.58 alpha:1.0]
                     } mutableCopy];
     });
@@ -192,7 +198,9 @@ const CGSize ORKiPad12_9ScreenSize = (CGSize){1024, 1366};
 static ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     CGFloat maximumDimension = MAX(bounds.size.width, bounds.size.height);
-    if (maximumDimension < ORKiPhone5ScreenSize.height + 1) {
+    if (maximumDimension < ORKiPhone4ScreenSize.height + 1) {
+        screenType = ORKScreenTypeiPhone4;
+    } else if (maximumDimension < ORKiPhone5ScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone5;
     } else if (maximumDimension < ORKiPhone6ScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone6;
@@ -215,7 +223,9 @@ static ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
 static ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     CGFloat minimumDimension = MIN(bounds.size.width, bounds.size.height);
-    if (minimumDimension < ORKiPhone5ScreenSize.width + 1) {
+    if (minimumDimension < ORKiPhone4ScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPhone4;
+    } else if (minimumDimension < ORKiPhone5ScreenSize.width + 1) {
         screenType = ORKScreenTypeiPhone5;
     } else if (minimumDimension < ORKiPhone6ScreenSize.width + 1) {
         screenType = ORKScreenTypeiPhone6;
@@ -242,14 +252,7 @@ static UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
         // Use this method instead of UIApplication's keyWindow or UIApplication's delegate's window
         // because we may need the window before the keyWindow is set (e.g., if a view controller
         // loads programmatically on the app delegate to be assigned as the root view controller)
-        
-        for (UIScene *scene in UIApplication.sharedApplication.connectedScenes) {
-            if ([scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
-                window = [(id<UIWindowSceneDelegate>)scene.delegate window];
-                break;
-            }
-        }
-        
+        window = [UIApplication sharedApplication].windows.firstObject;
     }
     return window;
 }
@@ -336,6 +339,7 @@ const CGFloat ORKLayoutMarginWidthiPad = 0.0;
 static CGFloat ORKStandardLeftTableViewCellMarginForWindow(UIWindow *window) {
     CGFloat margin = 0;
     switch (ORKGetHorizontalScreenTypeForWindow(window)) {
+        case ORKScreenTypeiPhone4:
         case ORKScreenTypeiPhone5:
         case ORKScreenTypeiPhone6:
             margin = ORKLayoutMarginWidthRegularBezel;
@@ -369,6 +373,7 @@ static CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window); // need a proper window to use bounds
     CGFloat margin = 0;
     switch (ORKGetHorizontalScreenTypeForWindow(window)) {
+        case ORKScreenTypeiPhone4:
         case ORKScreenTypeiPhone5:
         case ORKScreenTypeiPhone6:
         case ORKScreenTypeiPhoneX:
@@ -450,7 +455,7 @@ void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInse
         
         insets = scrollView.verticalScrollIndicatorInsets;
         insets.bottom = bottomInset;
-        scrollView.scrollIndicatorInsets = insets;
+        scrollView.verticalScrollIndicatorInsets = insets;
         
         scrollView.contentOffset = savedOffset;
     }
@@ -543,7 +548,6 @@ CGFloat ORKStepContainerFirstItemTopPaddingForWindow(UIWindow *window) {
     return ceil((ORKStepContainerFirstItemTopPaddingPercentage / 100.0) * windowSize.height);
 }
 
-//FIXME: Consolidate title/Icon to Body/Bullet methods into one. remove copy paste.
 
 CGFloat ORKStepContainerTitleToBodyTopPaddingForWindow(UIWindow *window) {
     CGFloat padding = 0;
@@ -591,6 +595,15 @@ UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window) {
         default:
             return UIFontTextStyleLargeTitle;
     }
+}
+
+UIFont *ORKDefaultFontForStyle(UIFontTextStyle style, CGFloat sizeAdjustment) {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+    return [UIFont systemFontOfSize:[[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue] + sizeAdjustment];
+}
+
+CGFloat ORKDefaultFontSizeForStyle(UIFontTextStyle style, CGFloat sizeAdjustment) {
+    return ORKDefaultFontForStyle(style, sizeAdjustment).pointSize;
 }
 
 #endif

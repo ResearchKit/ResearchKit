@@ -28,7 +28,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import ResearchKit.Private
+import ResearchKit_Private
 
 public extension ORKPredicateStepNavigationRule {
     
@@ -41,7 +41,6 @@ public extension ORKPredicateStepNavigationRule {
             resultPredicates.append(tuple.resultPredicate)
             destinationStepIdentifiers.append(tuple.destinationStepIdentifier)
         }
-
         self.init(resultPredicates: resultPredicates,
                   destinationStepIdentifiers: destinationStepIdentifiers,
                   defaultStepIdentifier: defaultStepIdentifierOrNil,

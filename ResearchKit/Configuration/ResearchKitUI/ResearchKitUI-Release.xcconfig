@@ -1,0 +1,5 @@
+//
+// ResearchKitUI-Release.xcconfig
+//
+
+#include "ResearchKitUI-Shared.xcconfig"

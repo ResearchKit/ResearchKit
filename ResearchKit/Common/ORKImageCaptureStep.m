@@ -28,12 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if TARGET_OS_IOS
-
 
 #import "ORKImageCaptureStep.h"
-
-#import "ORKImageCaptureStepViewController.h"
 
 #import "ORKStep_Private.h"
 
@@ -41,10 +37,6 @@
 
 
 @implementation ORKImageCaptureStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKImageCaptureStepViewController class];
-}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
@@ -101,5 +93,3 @@
 }
 
 @end
-
-#endif

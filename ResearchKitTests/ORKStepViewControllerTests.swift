@@ -30,6 +30,9 @@
 
 import XCTest
 import ResearchKit
+@testable import ResearchKitUI
+@testable import ResearchKitUI_Private
+import ResearchKitActiveTask
 
 class ORKStepViewControllerTests: XCTestCase {
     
@@ -261,11 +264,9 @@ extension ORKStepViewControllerTests: ORKStepViewControllerDelegate {
         failExpectation.fulfill()
     }
     
-    #if TARGET_OS_IOS
     func stepViewController(_ stepViewController: ORKStepViewController, recorder: ORKRecorder, didFailWithError error: Error) {
         recorderExpectation.fulfill()
     }
-    #endif
     
     func stepViewControllerHasNextStep(_ stepViewController: ORKStepViewController) -> Bool {
         if negativeTest { return false }

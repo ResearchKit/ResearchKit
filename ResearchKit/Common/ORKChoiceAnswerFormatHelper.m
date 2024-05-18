@@ -46,7 +46,7 @@
 - (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        _choices = [[answerFormat choices] copy];
+        _choices = [answerFormat choices];
         _isValuePicker = [answerFormat isValuePicker];
     }
     return self;
@@ -68,6 +68,8 @@
     id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
     return option && [option isKindOfClass:[ORKImageChoice class]] ? (ORKImageChoice *) option : nil;
 }
+
+
 #endif
 
 - (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
@@ -101,7 +103,6 @@
 #else
         id value = choice.value;
 #endif
-
         if (value == nil) {
             value = _isValuePicker ? @(index - 1) : @(index);
         }
@@ -165,7 +166,7 @@
                 
                 if (![answerValue isKindOfClass:[NSNumber class]]) {
                     @throw [NSException exceptionWithName:@"No matching choice found"
-                                                   reason:[NSString stringWithFormat:@"Provided choice of type %@ not found in available choices", [answerValue class]]
+                                                   reason:[NSString stringWithFormat:@"Provided choice of type %@ not found in available choices. Answer is %@ and choices are %@", [answerValue class], answer, _choices]
                                                  userInfo:nil];
                 }
                 
