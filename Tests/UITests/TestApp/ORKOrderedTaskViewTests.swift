@@ -54,7 +54,7 @@ extension ORKOrderedTask {
         .stroopTask(
             withIdentifier: "StroopTask",
             intendedUseDescription: "Tests selective attention capacity and processing speed",
-            numberOfAttempts: 5,
+            numberOfAttempts: 10,
             options: [.excludeAudio]
         )
     }
