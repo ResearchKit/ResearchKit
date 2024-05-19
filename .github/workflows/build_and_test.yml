@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-name: Build XCArchive
+name: Build and Test
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,40 +16,36 @@ on:
   pull_request:
   workflow_dispatch:
   workflow_call:
-    inputs:
-      version:
-        description: 'The version number of the framework embedded in the XCArchives.'
-        type: string
-        required: true
 
 jobs:
-  create-xcframework-and-release-workflow-researchkit:
+  create-xcframework-researchkit:
     name: XCFramework
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     strategy:
       matrix:
         framework: [ResearchKit, ResearchKitUI]
     with:
-      runsonlabels: '["macOS", "self-hosted"]'
       workspaceFile: RKWorkspace.xcworkspace
       xcFrameworkName: ${{ matrix.framework }}
       scheme: ${{ matrix.framework }}
-      dryRun: true
-      version: ${{ inputs.version }}
-      configuration: Release
+      runsonlabels: '["macOS", "self-hosted"]'
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
-  create-xcframework-and-release-workflow-researchkit-active-tasks:
+  create-xcframework-researchkit-active-tasks:
     name: XCFramework (ResearchKitActiveTask)
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
-      runsonlabels: '["macOS", "self-hosted"]'
       workspaceFile: RKWorkspace.xcworkspace
       xcFrameworkName: ResearchKitActiveTask
       scheme: ResearchKitActiveTask
-      dryRun: true
-      version: ${{ inputs.version }}
-      configuration: Release
+      runsonlabels: '["macOS", "self-hosted"]'
       sdk: '["iphoneos", "iphonesimulator"]'
+  commit-and-release-xcframeworks:
+    name: Commit and Release XCFrameworks
+    needs: [create-xcframework-researchkit, create-xcframework-researchkit-active-tasks]
+    uses: StanfordBDHG/.github/.github/workflows/xcframework-commit-and-release.yml@v2
+    with:
+      dryrun: true
+      outputpath: './Sources'
   ios:
     name: Build and Test iOS
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2

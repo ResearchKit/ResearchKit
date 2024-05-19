@@ -16,12 +16,12 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'The version number of the framework embedded in the XCArchives. This version number is also used for the release tag.'
+        description: 'The version number of the framework embedded in the XCArchives & XCFrameworks. This version number is also used for the release tag.'
         type: string
         required: true
 
 jobs:
-  create-xcframework-and-release-workflow-researchkit:
+  create-xcframework-researchkit:
     name: XCFramework
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     strategy:
@@ -35,11 +35,7 @@ jobs:
       configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'
       sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
-      outputpath: './Sources'
-      user: PaulsAutomationBot
-    secrets:
-      access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-  create-xcframework-and-release-workflow-researchkit-active-tasks:
+  create-xcframework-researchkit-active-tasks:
     name: XCFramework (ResearchKitActiveTask)
     uses: StanfordBDHG/.github/.github/workflows/xcframework.yml@v2
     with:
@@ -49,7 +45,12 @@ jobs:
       version: ${{ inputs.version }}
       configuration: Release
       runsonlabels: '["macOS", "self-hosted"]'
-      sdk: '["iphoneos", "iphonesimulator", "xros", "xrsimulator"]'
+      sdk: '["iphoneos", "iphonesimulator"]'
+  commit-and-release-xcframeworks:
+    name: Commit and Release XCFrameworks
+    needs: [create-xcframework-researchkit, create-xcframework-researchkit-active-tasks]
+    uses: StanfordBDHG/.github/.github/workflows/xcframework-commit-and-release.yml@v2
+    with:
       outputpath: './Sources'
       user: PaulsAutomationBot
     secrets:
