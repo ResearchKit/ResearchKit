@@ -96,6 +96,7 @@ NSString *ORKStringFromDateISO8601(NSDate *date) {
         formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
         [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        [formatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
     });
     return [formatter stringFromDate:date];
 }
@@ -107,6 +108,7 @@ NSDate *ORKDateFromStringISO8601(NSString *string) {
         formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
         [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        [formatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
     });
     return [formatter dateFromString:string];
 }

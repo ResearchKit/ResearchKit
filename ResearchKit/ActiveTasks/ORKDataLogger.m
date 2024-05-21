@@ -845,6 +845,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         dateFromatter = [NSDateFormatter new];
         [dateFromatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
         dateFromatter.dateFormat = @"yyyyMMddHHmmss";
+        dateFromatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
     
     NSString *datedLog = [NSString stringWithFormat:@"%@-%@",logName, [dateFromatter stringFromDate:[NSDate date]]];
