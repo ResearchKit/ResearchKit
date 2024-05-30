@@ -5,6 +5,6 @@
 #include "../ResearchKit/ResearchKit-Shared.xcconfig"
 
 GCC_PREFIX_HEADER = ResearchKitUI/ResearchKitUI_Prefix.pch
-INFOPLIST_FILE = ResearchKitUI/Info-iOS.plist
+INFOPLIST_FILE = ResearchKitUI/Info.plist
 MODULEMAP_FILE = ResearchKitUI/ResearchKitUI.modulemap
 PRODUCT_NAME = ResearchKitUI

@@ -1970,7 +1970,6 @@
 		CA08054328AD7EBA001695EF /* ORKStep+ResearchKitUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ORKStep+ResearchKitUI.m"; sourceTree = "<group>"; };
 		CA0AC56828BD4FAB00E80040 /* ORKStepViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKStepViewControllerHelpers.swift; sourceTree = "<group>"; };
 		CA1C7A5A288B0C68004DAB3A /* ResearchKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ResearchKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA1C7A5B288B0C69004DAB3A /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		CA23A31C2899941700EC6E91 /* ORKSkin_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKSkin_Private.h; sourceTree = "<group>"; };
 		CA2B902528A187390025B773 /* ORKTask_Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTask_Util.m; sourceTree = "<group>"; };
 		CA481E8128CBD6D9001C4D49 /* ResearchKitUI-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ResearchKitUI-Shared.xcconfig"; sourceTree = "<group>"; };
@@ -2689,7 +2688,6 @@
 				CA6A0D9D288F1BDC0048C1EF /* ResearchKitUI_Private.h */,
 				0B0852752BD872D800149963 /* PrivacyInfo.xcprivacy */,
 				5D06633024FEF272005D9B40 /* Info.plist */,
-				CA1C7A5B288B0C69004DAB3A /* Info-iOS.plist */,
 				51FBAC582BC86E6E009CA28F /* ResearchKitUI_Private.modulemap */,
 			);
 			path = ResearchKitUI;
