@@ -22,23 +22,6 @@
 			<key>BinaryPath</key>
 			<string>ResearchKitUI.framework/ResearchKitUI</string>
 			<key>LibraryIdentifier</key>
-			<string>xros-arm64_x86_64-simulator</string>
-			<key>LibraryPath</key>
-			<string>ResearchKitUI.framework</string>
-			<key>SupportedArchitectures</key>
-			<array>
-				<string>arm64</string>
-				<string>x86_64</string>
-			</array>
-			<key>SupportedPlatform</key>
-			<string>xros</string>
-			<key>SupportedPlatformVariant</key>
-			<string>simulator</string>
-		</dict>
-		<dict>
-			<key>BinaryPath</key>
-			<string>ResearchKitUI.framework/ResearchKitUI</string>
-			<key>LibraryIdentifier</key>
 			<string>ios-arm64_x86_64-simulator</string>
 			<key>LibraryPath</key>
 			<string>ResearchKitUI.framework</string>
@@ -65,6 +48,23 @@
 			</array>
 			<key>SupportedPlatform</key>
 			<string>xros</string>
+		</dict>
+		<dict>
+			<key>BinaryPath</key>
+			<string>ResearchKitUI.framework/ResearchKitUI</string>
+			<key>LibraryIdentifier</key>
+			<string>xros-arm64_x86_64-simulator</string>
+			<key>LibraryPath</key>
+			<string>ResearchKitUI.framework</string>
+			<key>SupportedArchitectures</key>
+			<array>
+				<string>arm64</string>
+				<string>x86_64</string>
+			</array>
+			<key>SupportedPlatform</key>
+			<string>xros</string>
+			<key>SupportedPlatformVariant</key>
+			<string>simulator</string>
 		</dict>
 	</array>
 	<key>CFBundlePackageType</key>
