@@ -227,7 +227,7 @@ ORK_CLASS_AVAILABLE
  
  @return A newly initialized step view controller.
  */
-- (instancetype)initWithStep:(ORKStep *)step result:(nullable ORKResult *)result;
+- (instancetype)initWithStep:(ORKStep *)step result:(nullable ORKResult *)result NS_DESIGNATED_INITIALIZER;
 
 /**
  The step presented by the step view controller.
