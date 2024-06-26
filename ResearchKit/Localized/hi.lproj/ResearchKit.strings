@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "यह परीक्षण करने के लिए अपने AirPods या EarPods को फिर से कनेक्ट करें।";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ पूर्ण";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "हेडफ़ोन";
-"HEADPHONES_UNKNOWN" = "अज्ञात";
-"HEADPHONES_NONE" = "कोई नहीं";
-"CONNECTED" = "कनेक्टेड";
-"NOT_CONNECTED" = "कनेक्टेड नहीं है";
-"HEADPHONE_CONNECTED_%@" = "कनेक्टेड - %@";
-"HEADPHONE_DETECT_TITLE" = "अपने हेडफ़ोन को कनेक्ट करें";
-"HEADPHONE_DETECT_TEXT" = "इस परीक्षण के लिए Apple AirPods या Apple EarPods आवश्यक हैं";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "स्थानिक याददाश्त";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "%@ के चमकने के क्रम को दोहराने के लिए कहकर इस गतिविधि द्वारा आपकी अल्पावधि स्थानिक याददाश्त का मापन किया जाता है।";

@@ -31,6 +31,8 @@
 
 #import <ResearchKit/ORKStep.h>
 
+@class ORKInstructionStep;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKCustomSignatureAccessoryViewProtocol;
@@ -61,6 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (UIView<ORKCustomSignatureAccessoryViewProtocol> * _Nullable)customHeaderViewForSignatureContent;
 
+@optional
+- (UIScrollViewKeyboardDismissMode)keyboardDismissModeForCustomView;
+
 @end
 
 /**
@@ -90,9 +95,24 @@ ORK_CLASS_AVAILABLE
                                      html:(NSString *)html;
 
 /**
+ Returns a new web view step that includes the specified identifier and will display the html
+ constructed from the provided instruction steps.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param instructionSteps  Instruction steps used to construct presented html.
+ */
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                         instructionSteps:(NSArray<ORKInstructionStep *> *)instructionSteps;
+
+/**
  Embedded html used for displaying the webview.
  */
 @property (nonatomic, copy, nullable) NSString *html;
+
+/**
+ Instruction steps used to generate html for webview..
+ */
+@property (nonatomic, copy, nullable) NSArray<ORKInstructionStep *> *instructionSteps;
 
 @property (nonatomic, copy, nullable) NSString *customCSS;
 

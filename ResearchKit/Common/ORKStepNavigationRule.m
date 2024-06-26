@@ -564,7 +564,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, resultPredicate, NSPredicate);
-        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, keyValueMap, NSString, NSObject);
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY_PROPS(aDecoder, keyValueMap, NSString);
     }
     return self;
 }

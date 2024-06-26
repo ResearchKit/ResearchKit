@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "יש לחבר מחדש את ה-AirPods או ה-EarPods כדי להתחיל בבדיקה.";
 "dBHL_PROGRESS_COMPLETION_%@" = "‏%@ הושלם";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "אזניות";
-"HEADPHONES_UNKNOWN" = "לא ידוע";
-"HEADPHONES_NONE" = "ללא";
-"CONNECTED" = "מחובר";
-"NOT_CONNECTED" = "לא מחובר";
-"HEADPHONE_CONNECTED_%@" = "מחובר - %@";
-"HEADPHONE_DETECT_TITLE" = "כעת עליך לחבר אזניות";
-"HEADPHONE_DETECT_TEXT" = "בדיקה זו דורשת שימוש ב-Apple AirPods או Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "זכרון מרחבי";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "פעילות זו מודדת את הזכרון המרחבי שלך לטווח קצר על-ידי הנחיה לחזור על הסדר שבו נדלקו ה%@.";

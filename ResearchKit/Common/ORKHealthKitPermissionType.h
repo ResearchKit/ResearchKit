@@ -33,6 +33,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class HKSampleType, HKObjectType;
+
+/**
+ A permission type object that requests access for HealthKit data.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKHealthKitPermissionType : ORKPermissionType
 

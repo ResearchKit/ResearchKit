@@ -341,7 +341,7 @@
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Zorg ervoor dat het volume van het apparaat op het hoogste niveau is ingesteld.\n\nTijdens deze taak wordt er een subtiele toon afgespeeld in het linker- of rechteroor.\n\nLuister aandachtig en tik telkens wanneer je een toon hoort op de knop.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Deze test stelt vast hoe hard een geluid moet zijn, zodat jij het kunt horen.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Intakevragenlijst.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \“beter oor\”, indien van toepassing";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \"beter oor\", indien van toepassing";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "links";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "rechts";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "geen voorkeur";
@@ -350,18 +350,6 @@
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "Annuleer test";
 "dBHL_ALERT_TEXT" = "Verbind je AirPods of EarPods opnieuw om deze test uit te voeren.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ voltooid";
-
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Koptelefoon";
-"HEADPHONES_UNKNOWN" = "Onbekend";
-"HEADPHONES_NONE" = "Geen";
-"CONNECTED" = "Verbonden";
-"NOT_CONNECTED" = "Geen verbinding";
-"HEADPHONE_CONNECTED_%@" = "Verbonden - %@";
-"HEADPHONE_DETECT_TITLE" = "Sluit je koptelefoon aan";
-"HEADPHONE_DETECT_TEXT" = "Voor deze test zijn Apple AirPods of Apple EarPods vereist";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Ruimtelijk geheugen";

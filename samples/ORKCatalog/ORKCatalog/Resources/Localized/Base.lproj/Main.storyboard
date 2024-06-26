@@ -1,184 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Charts-->
-        <scene sceneID="5ff-zI-qS2">
-            <objects>
-                <tableViewController id="Zza-OH-2fF" customClass="ChartListViewController" customModule="ORKCatalog" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="250" sectionHeaderHeight="22" sectionFooterHeight="22" id="igJ-g1-C2g">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphChartCell" rowHeight="250" id="KFi-ZJ-545" customClass="DiscreteGraphChartTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="375" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KFi-ZJ-545" id="e5L-1y-jED">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrete Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sip-g6-ysz">
-                                            <rect key="frame" x="16" y="11" width="343" height="23"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-di-t1R" customClass="ORKDiscreteGraphChartView">
-                                            <rect key="frame" x="16" y="42" width="343" height="197"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="sip-g6-ysz" firstAttribute="trailing" secondItem="e5L-1y-jED" secondAttribute="trailingMargin" id="3BL-pm-TlY"/>
-                                        <constraint firstItem="lT7-di-t1R" firstAttribute="bottom" secondItem="e5L-1y-jED" secondAttribute="bottomMargin" id="FCe-et-6qT"/>
-                                        <constraint firstItem="lT7-di-t1R" firstAttribute="trailing" secondItem="e5L-1y-jED" secondAttribute="trailingMargin" id="G6N-qn-0tu"/>
-                                        <constraint firstItem="lT7-di-t1R" firstAttribute="top" secondItem="sip-g6-ysz" secondAttribute="bottom" constant="8" id="HxY-Hd-oJl"/>
-                                        <constraint firstItem="lT7-di-t1R" firstAttribute="leading" secondItem="e5L-1y-jED" secondAttribute="leadingMargin" id="d80-gI-Dq8"/>
-                                        <constraint firstItem="sip-g6-ysz" firstAttribute="top" secondItem="e5L-1y-jED" secondAttribute="topMargin" id="hPi-36-sDw"/>
-                                        <constraint firstItem="sip-g6-ysz" firstAttribute="leading" secondItem="e5L-1y-jED" secondAttribute="leadingMargin" id="yaq-Oo-xbC"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="graphView" destination="lT7-di-t1R" id="w75-Ly-1tP"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LineGraphChartCell" rowHeight="250" id="2i1-4y-xyD" customClass="LineGraphChartTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="272" width="375" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2i1-4y-xyD" id="YJs-Dw-TiB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hR5-cR-Okz">
-                                            <rect key="frame" x="16" y="11" width="343" height="23"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVp-LO-PWd" customClass="ORKLineGraphChartView">
-                                            <rect key="frame" x="16" y="42" width="343" height="197"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="KVp-LO-PWd" firstAttribute="bottom" secondItem="YJs-Dw-TiB" secondAttribute="bottomMargin" id="5Gm-Hf-I0N"/>
-                                        <constraint firstItem="hR5-cR-Okz" firstAttribute="leading" secondItem="YJs-Dw-TiB" secondAttribute="leadingMargin" id="985-F7-2Ek"/>
-                                        <constraint firstItem="hR5-cR-Okz" firstAttribute="trailing" secondItem="YJs-Dw-TiB" secondAttribute="trailingMargin" id="I14-r7-67c"/>
-                                        <constraint firstItem="KVp-LO-PWd" firstAttribute="top" secondItem="hR5-cR-Okz" secondAttribute="bottom" constant="8" id="fvj-s0-Qwc"/>
-                                        <constraint firstItem="KVp-LO-PWd" firstAttribute="leading" secondItem="YJs-Dw-TiB" secondAttribute="leadingMargin" id="h3d-N5-2y1"/>
-                                        <constraint firstItem="hR5-cR-Okz" firstAttribute="top" secondItem="YJs-Dw-TiB" secondAttribute="topMargin" id="moT-W7-Bvj"/>
-                                        <constraint firstItem="KVp-LO-PWd" firstAttribute="trailing" secondItem="YJs-Dw-TiB" secondAttribute="trailingMargin" id="qiE-86-gIQ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="graphView" destination="KVp-LO-PWd" id="xfV-gc-IdN"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BarGraphChartCell" rowHeight="250" id="82K-e7-ZBc" userLabel="BarGraphChartCell" customClass="BarGraphChartTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="522" width="375" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="82K-e7-ZBc" id="S0l-aQ-QSG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRx-P4-pZB">
-                                            <rect key="frame" x="16" y="11" width="343" height="23"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0y-y6-0Pk" customClass="ORKBarGraphChartView">
-                                            <rect key="frame" x="16" y="42" width="343" height="197"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="fRx-P4-pZB" firstAttribute="trailing" secondItem="S0l-aQ-QSG" secondAttribute="trailingMargin" id="72F-8E-rL2"/>
-                                        <constraint firstItem="fRx-P4-pZB" firstAttribute="top" secondItem="S0l-aQ-QSG" secondAttribute="topMargin" id="CRR-cr-gcx"/>
-                                        <constraint firstItem="a0y-y6-0Pk" firstAttribute="leading" secondItem="S0l-aQ-QSG" secondAttribute="leadingMargin" id="De2-hk-aUy"/>
-                                        <constraint firstItem="fRx-P4-pZB" firstAttribute="leading" secondItem="S0l-aQ-QSG" secondAttribute="leadingMargin" id="NVv-NJ-mH7"/>
-                                        <constraint firstItem="a0y-y6-0Pk" firstAttribute="trailing" secondItem="S0l-aQ-QSG" secondAttribute="trailingMargin" id="hUH-bx-VAT"/>
-                                        <constraint firstItem="a0y-y6-0Pk" firstAttribute="top" secondItem="fRx-P4-pZB" secondAttribute="bottom" constant="8" id="hV7-q4-PIy"/>
-                                        <constraint firstItem="a0y-y6-0Pk" firstAttribute="bottom" secondItem="S0l-aQ-QSG" secondAttribute="bottomMargin" id="rRO-YH-jPB"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="graphView" destination="a0y-y6-0Pk" id="WKI-pk-Zw8"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PieChartCell" rowHeight="400" id="0oB-ve-dS5" customClass="PieChartTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="772" width="375" height="400"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0oB-ve-dS5" id="r38-NH-vJN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="399.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pie Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drx-as-avJ">
-                                            <rect key="frame" x="8" y="8" width="359" height="23"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDa-vq-n8q" customClass="ORKPieChartView">
-                                            <rect key="frame" x="8" y="39" width="359" height="352.5"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="yDa-vq-n8q" firstAttribute="bottom" secondItem="r38-NH-vJN" secondAttribute="bottomMargin" id="DZT-CC-84j"/>
-                                        <constraint firstItem="Drx-as-avJ" firstAttribute="trailing" secondItem="r38-NH-vJN" secondAttribute="trailingMargin" id="EfF-qN-gaS"/>
-                                        <constraint firstItem="Drx-as-avJ" firstAttribute="leading" secondItem="r38-NH-vJN" secondAttribute="leadingMargin" id="F7X-po-Qa8"/>
-                                        <constraint firstItem="yDa-vq-n8q" firstAttribute="top" secondItem="Drx-as-avJ" secondAttribute="bottom" constant="8" id="UuM-Ma-KQe"/>
-                                        <constraint firstItem="yDa-vq-n8q" firstAttribute="trailing" secondItem="r38-NH-vJN" secondAttribute="trailingMargin" id="cEo-bq-312"/>
-                                        <constraint firstItem="yDa-vq-n8q" firstAttribute="leading" secondItem="r38-NH-vJN" secondAttribute="leadingMargin" id="qVZ-T5-niS"/>
-                                        <constraint firstItem="Drx-as-avJ" firstAttribute="top" secondItem="r38-NH-vJN" secondAttribute="topMargin" id="taR-fa-Vfj"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="pieChartView" destination="yDa-vq-n8q" id="LFh-1S-Jb5"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Zza-OH-2fF" id="ViC-n6-CEl"/>
-                            <outlet property="delegate" destination="Zza-OH-2fF" id="ZuE-XR-glV"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Charts" id="qv6-PD-D8m"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7lk-3Y-Sa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="572" y="-821"/>
-        </scene>
-        <!--Charts-->
-        <scene sceneID="r9p-Of-oF7">
-            <objects>
-                <navigationController id="S5E-Mr-SmI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Charts" image="third_tab" id="3cG-hV-lxU"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="M8W-4H-Z8H">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Zza-OH-2fF" kind="relationship" relationship="rootViewController" id="foc-GY-beg"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eYb-qq-8se" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-234" y="-826"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -192,7 +20,6 @@
                     <connections>
                         <segue destination="cen-uC-gUX" kind="relationship" relationship="viewControllers" id="jAI-EE-UxR"/>
                         <segue destination="zvk-pu-ZEF" kind="relationship" relationship="viewControllers" id="Spm-Ff-EZl"/>
-                        <segue destination="S5E-Mr-SmI" kind="relationship" relationship="viewControllers" id="RCf-pc-tpa"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -209,14 +36,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Default" textLabel="DTV-gL-7Cs" style="IBUITableViewCellStyleDefault" id="YNf-jp-RdT">
-                                <rect key="frame" x="0.0" y="22" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="44.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YNf-jp-RdT" id="960-JE-eZp">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Table view cell title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DTV-gL-7Cs">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -245,7 +72,7 @@
                     <tabBarItem key="tabBarItem" title="Tasks" image="first_tab" id="2mU-FW-pzx" userLabel="Catalog"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="z0R-bd-mkt">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -266,14 +93,14 @@
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoResultSet" textLabel="Vcj-5j-Y1m" style="IBUITableViewCellStyleDefault" id="W2d-9z-G85">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="32" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W2d-9z-G85" id="Xrf-OX-0wH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="No result set yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vcj-5j-Y1m">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -283,10 +110,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Default" textLabel="Gue-sK-VnU" detailTextLabel="JKW-Og-Jf0" style="IBUITableViewCellStyleValue2" id="tbG-Sb-ylw">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tbG-Sb-ylw" id="Lx9-Sg-j5g">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gue-sK-VnU">
@@ -310,10 +137,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextImage" rowHeight="210" id="Beg-AA-D0T" customClass="TextImageTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="143.5" width="375" height="210"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="210"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Beg-AA-D0T" id="Ajx-o2-wnx">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="209.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Image" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K12-vB-Qdj">
@@ -326,7 +153,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BC6-je-Dky">
-                                            <rect key="frame" x="121" y="24" width="238" height="161.5"/>
+                                            <rect key="frame" x="121" y="24" width="238" height="162"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
@@ -344,14 +171,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoChildResults" textLabel="cyr-Hu-0MA" style="IBUITableViewCellStyleDefault" id="909-af-Wof">
-                                <rect key="frame" x="0.0" y="353.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="330" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="909-af-Wof" id="9Me-cy-r3o">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="No child results." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cyr-Hu-0MA">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -361,10 +188,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Image" id="s1W-oe-ufC" customClass="ImageTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="397.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="374" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s1W-oe-ufC" id="Rbc-9j-Axi">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1L5-c3-13Z">
@@ -402,7 +229,7 @@
                 <navigationController id="zvk-pu-ZEF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Results" image="second_tab" id="V4l-dc-6zP" userLabel="Task Result"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="FBU-x3-Ziq">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -417,6 +244,5 @@
     <resources>
         <image name="first_tab" width="40" height="40"/>
         <image name="second_tab" width="24" height="24"/>
-        <image name="third_tab" width="29" height="21"/>
     </resources>
 </document>

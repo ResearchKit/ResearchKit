@@ -29,7 +29,7 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKOrderedTask.h>
 
 
@@ -40,8 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStepModifier;
 
 /**
- The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from
- the `ORKOrderedTask` class.
+  A collection of steps that are presented with possible conditional step navigation behavior.
  
  For implementing conditional task navigation, you must instantiate concrete subclasses of
  `ORKStepNavigationRule` and `ORKSkipStepNavigationRule` and attach them to trigger steps by using
