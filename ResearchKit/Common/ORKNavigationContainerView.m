@@ -103,9 +103,6 @@ static const CGFloat shadowHeight = 0.75;
     _continueButton.exclusiveTouch = YES;
     _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    if (_appTintColor) {
-        _continueButton.normalTintColor = _appTintColor;
-    }
     
     _continueButton.accessibilityIdentifier = ORKNavigationAccessibility.continueButton;
 }
@@ -121,9 +118,6 @@ static const CGFloat shadowHeight = 0.75;
     _cancelButtonView.translatesAutoresizingMaskIntoConstraints = NO;
 
     [_cancelButtonView addSubview:_cancelButton];
-    if (_appTintColor) {
-        _cancelButton.normalTintColor = _appTintColor;
-    }
     [self setCancelButtonConstraints];
     
     _cancelButton.accessibilityIdentifier = ORKNavigationAccessibility.cancelButton;
@@ -195,9 +189,6 @@ static const CGFloat shadowHeight = 0.75;
     _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
     _skipButtonView.translatesAutoresizingMaskIntoConstraints = NO;
     [_skipButtonView addSubview:_skipButton];
-    if (_appTintColor) {
-        _skipButton.normalTintColor = _appTintColor;
-    }
     [self setSkipButtonConstraints];
     
     _skipButton.accessibilityIdentifier = ORKNavigationAccessibility.skipButton;
