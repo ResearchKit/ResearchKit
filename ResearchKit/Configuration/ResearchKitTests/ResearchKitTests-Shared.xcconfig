@@ -1,0 +1,25 @@
+//
+// ResearchKitTests-Shared.xcconfig
+//
+
+CLANG_CXX_LANGUAGE_STANDARD = gnu++0x
+GCC_C_LANGUAGE_STANDARD = gnu99
+GCC_WARN_SHADOW = NO
+INFOPLIST_FILE = ResearchKitTests/Info.plist
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+PRODUCT_BUNDLE_IDENTIFIER = org.researchkit.$(PRODUCT_NAME:rfc1034identifier)
+PRODUCT_NAME = $(TARGET_NAME)
+SWIFT_VERSION = 5.0
+
+// Control whether ResearchKitTests expect CLLocationManager calls requesting authorization for location
+// ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0 compiles out the feature
+// ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=1 compiles RK with the feature intact
+// Use prefix ORKTEST_ so that we can use different values for 1) whether to test as if locationManager auth was
+// enabled and 2)whether RK actually has locationManager auth compiled in for testing.
+ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS = $(ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS_$(ORKTEST_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION))
+ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS_0 = ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0
+ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS_1 = ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=1
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) $(ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS)
+
+

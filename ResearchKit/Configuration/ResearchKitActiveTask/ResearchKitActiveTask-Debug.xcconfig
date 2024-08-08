@@ -1,0 +1,5 @@
+//
+// ResearchKitActiveTask-Debug.xcconfig
+//
+
+#include "ResearchKitActiveTask-Shared.xcconfig"

@@ -31,7 +31,7 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
 
 #import "ORKChoiceViewCell.h"
 #import "ORKTextChoiceCellGroup.h"
@@ -620,7 +620,6 @@
         XCTAssertNotNil(cell, @"");
         XCTAssertEqualObjects(cell.reuseIdentifier, @"abc", @"");
         XCTAssertEqual(cell.immediateNavigation, YES, @"");
-        
         if (choice.textViewStartsHidden) {
             XCTAssertTrue(cell.textView.isHidden);
         }

@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Bu test için AirPods veya EarPods bağlayın.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ Tamamlandı";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Kulaklık";
-"HEADPHONES_UNKNOWN" = "Bilinmeyen";
-"HEADPHONES_NONE" = "Yok";
-"CONNECTED" = "Bağlı";
-"NOT_CONNECTED" = "Bağlı Değil";
-"HEADPHONE_CONNECTED_%@" = "Bağlı - %@";
-"HEADPHONE_DETECT_TITLE" = "Kulaklığınızı bağlayın";
-"HEADPHONE_DETECT_TEXT" = "Bu test Apple AirPods veya Apple EarPods gerektiriyor";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Konumsal Bellek";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Bu aktivite, %@ görüntülerinin sırasını yinelemenizi isteyerek kısa süreli konumsal belleğinizi ölçer.";

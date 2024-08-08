@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Перепідʼєднайте свої AirPods або EarPods, щоб виконати цей тест.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ виконано";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Навушники";
-"HEADPHONES_UNKNOWN" = "Невідомі";
-"HEADPHONES_NONE" = "Немає";
-"CONNECTED" = "Зʼєднано";
-"NOT_CONNECTED" = "Не зʼєднано";
-"HEADPHONE_CONNECTED_%@" = "Зʼєднано - %@";
-"HEADPHONE_DETECT_TITLE" = "Підʼєднайте свої навушники";
-"HEADPHONE_DETECT_TEXT" = "Для цього тесту необхідні Apple AirPods або Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Просторова пам’ять";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Цей тест оцінює вашу короткострокову пам’ять, коли вам потрібно повторити порядок загоряння %@.";

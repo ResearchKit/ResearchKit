@@ -1,5 +1,46 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.0.1 Release Notes
+In addition to general stability and performance improvements, ResearchKit 3.0.1 includes the following updates:
+
+- **ORKFormStep**
+The `ORKFormStep` has an additional property named `autoScrollEnabled` that allows developers to disable autoscrolling.
+
+- **ORKBodyItem**
+The `ORKBodyItem` has an additional property named `alignImageToTop` that will align a body item's image and text to the top of each other.
+
+- **ORK3DModelStep**
+An example of the `ORK3DModelStep` has been added to the ORKCatalog app.
+
+
+## ResearchKit 3.0 Release Notes
+
+*ResearchKit 3.0* is a beta release
+
+In addition to general stability and performance improvements, ResearchKit 3.0 includes the following updates.
+
+### Framework Updates
+
+In order to modularize ResearchKit we have separated its functionality into the following modules.
+
+- **ResearchKit**
+contains the core classes and objects needed to run ResearchKit in any environment.
+
+- **ResearchKitUI**
+contains the UI classes and objects needed to present ResearchKit views in an IOS environment.
+
+- **ResearchKitActiveTask**
+contains the classes and objects needed to present Active Tasks in an IOS enviroment. These tasks usually require access to device sensors.
+
+### Future Deprecations
+The following APIs will be labeled deprecated spring of 2025.
+
+- **Consent**
+Our `ORKConsent` APIs will be deprecated in favor of using existing functionality (e.g `ORKInstructionStep` and `ORKWebViewStep`) to achieve informed consent. Please visit the `ORKCatalog` app to view a recommended example.
+
+- **Question Step**
+The `ORKQuestionStep` will be deprecated in favor of using the `ORKFormStep`. Certain answer formats will present slightly different UI when used with a `ORKFormStep`. Updates will be made to ensure backwards compatibility before the question step is removed.
+
 ## ResearchKit 2.0 Release Notes
 
 *ResearchKit 2.0* supports *iOS* and requires *Xcode 9.0* or newer. 
