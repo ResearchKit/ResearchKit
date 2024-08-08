@@ -5819,7 +5819,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D000ED12620F27100E5442A /* Project-Debug.xcconfig */;
 			buildSettings = {
-				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 			};
@@ -5897,7 +5896,6 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CURRENT_PROJECT_VERSION = "";
-				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				MODULEMAP_PRIVATE_FILE = ResearchKitUI/ResearchKitUI_Private.modulemap;
 				PRODUCT_NAME = ResearchKitUI;
@@ -5913,7 +5911,6 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CURRENT_PROJECT_VERSION = "";
-				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				MODULEMAP_PRIVATE_FILE = ResearchKitUI/ResearchKitUI_Private.modulemap;
 				PRODUCT_NAME = ResearchKitUI;
