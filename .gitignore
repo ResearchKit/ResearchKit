@@ -19,5 +19,14 @@ DerivedData
 
 .DS_Store
 *.pyc
-.build
 .swiftpm
+
+# Swift Package Manager
+Package.resolved
+*.xcodeproj
+.swiftpm
+.build
+.xcodebuild
+.derivedData
+coverage.lcov
+*.xcresult

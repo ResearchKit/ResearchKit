@@ -16,3 +16,6 @@ public enum CancelBehavior {
     /// Cancel button without a confirmation dialog.
     case cancel
 }
+
+
+extension CancelBehavior: Sendable, Hashable {}

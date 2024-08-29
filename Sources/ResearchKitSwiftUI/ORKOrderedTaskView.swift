@@ -52,33 +52,39 @@ import SwiftUI
 ///     You can check the results of a `taskResult` if it contains an object of type `ORKFileResult` and save its corresponding content.
 ///     After your async closure returns the temporary directory will be automatically deleted otherwise.
 public struct ORKOrderedTaskView: UIViewControllerRepresentable {
-    public class Coordinator: NSObject, ORKTaskViewControllerDelegate {
-        fileprivate var result: @MainActor (TaskResult) async -> Void
+    public final class Coordinator: NSObject, ORKTaskViewControllerDelegate {
+        @MainActor
+        fileprivate struct Closure {
+            @MainActor fileprivate var result: @MainActor (TaskResult) async -> Void
+        }
+        fileprivate var closure: Closure
         fileprivate var cancelBehavior: CancelBehavior
 
         fileprivate var stepWillAppear: ((ORKTaskViewController, ORKStepViewController) -> Void)?
         fileprivate var stepWillDisappear: ((ORKTaskViewController, ORKStepViewController, ORKStepViewControllerNavigationDirection) -> Void)?
         fileprivate var shouldPresentStep: ((ORKTaskViewController, ORKStep) -> Bool)?
 
-
+        @MainActor
         init(
             result: @escaping @MainActor (TaskResult) async -> Void,
             cancelBehavior: CancelBehavior
         ) {
-            self.result = result
+            self.closure = Closure(result: result)
             self.cancelBehavior = cancelBehavior
         }
 
         public func taskViewControllerShouldConfirmCancel(_ taskViewController: ORKTaskViewController) -> Bool {
             cancelBehavior == .shouldConfirmCancel
         }
-        
+
         public func taskViewController(
             _ taskViewController: ORKTaskViewController,
             stepViewControllerWillAppear stepViewController: ORKStepViewController
         ) {
             if cancelBehavior == .disabled {
-                stepViewController.cancelButtonItem = nil
+                MainActor.assumeIsolated {
+                    stepViewController.cancelButtonItem = nil
+                }
             }
 
             stepWillAppear?(taskViewController, stepViewController)
@@ -101,30 +107,35 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
             didFinishWith reason: ORKTaskFinishReason,
             error: Error?
         ) {
-            let taskResult = taskViewController.result
+            let closure = closure // avoid self Sendable warning
 
-            _Concurrency.Task { @MainActor in
-                switch reason {
-                case .completed:
-                    await result(.completed(taskResult))
-                case .discarded, .earlyTermination:
-                    await result(.cancelled)
-                case .failed:
-                    guard let error else {
-                        preconditionFailure("ResearchKit broke API contract. Didn't supply error when indicating task failure.")
+            MainActor.assumeIsolated {
+                let taskResult = taskViewController.result
+                let result = closure.result
+
+                _Concurrency.Task { @MainActor in
+                    switch reason {
+                    case .completed:
+                        await result(.completed(taskResult))
+                    case .discarded, .earlyTermination:
+                        await result(.cancelled)
+                    case .failed:
+                        guard let error else {
+                            preconditionFailure("ResearchKit broke API contract. Didn't supply error when indicating task failure.")
+                        }
+                        await result(.failed(error))
+                    case .saved:
+                        break // we don't support that currently
+                    @unknown default:
+                        break
                     }
-                    await result(.failed(error))
-                case .saved:
-                    break // we don't support that currently
-                @unknown default:
-                    break
-                }
 
-                if let outputDirectory = taskViewController.outputDirectory {
-                    do {
-                        try FileManager.default.removeItem(at: outputDirectory)
-                    } catch {
-                        logger.error("Failed to delete the temporary output directory: \(error)")
+                    if let outputDirectory = taskViewController.outputDirectory {
+                        do {
+                            try FileManager.default.removeItem(at: outputDirectory)
+                        } catch {
+                            logger.error("Failed to delete the temporary output directory: \(error)")
+                        }
                     }
                 }
             }
@@ -224,7 +235,7 @@ public struct ORKOrderedTaskView: UIViewControllerRepresentable {
         uiViewController.view.tintColor = UIColor(tintColor)
         uiViewController.delegate = context.coordinator
 
-        context.coordinator.result = result
+        context.coordinator.closure.result = result
         context.coordinator.cancelBehavior = cancelBehavior
         updateClosures(for: context.coordinator)
     }

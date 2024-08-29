@@ -17,6 +17,7 @@ class ORKOrderedTaskViewTests: XCTestCase {
     }
     
 
+    @MainActor
     func testStroopTest() throws {
         let app = XCUIApplication()
         app.launch()

@@ -13,15 +13,21 @@ import SwiftUI
 
 
 private struct ORKWillAppearMethod: EnvironmentKey {
-    static let defaultValue: ((ORKTaskViewController, ORKStepViewController) -> Void)? = nil
+    static var defaultValue: ((ORKTaskViewController, ORKStepViewController) -> Void)? {
+        nil
+    }
 }
 
 private struct ORKWillDisappearMethod: EnvironmentKey {
-    static let defaultValue: ((ORKTaskViewController, ORKStepViewController, ORKStepViewControllerNavigationDirection) -> Void)? = nil
+    static var defaultValue: ((ORKTaskViewController, ORKStepViewController, ORKStepViewControllerNavigationDirection) -> Void)? {
+        nil
+    }
 }
 
 private struct ORKShouldPresentMethod: EnvironmentKey {
-    static let defaultValue: ((ORKTaskViewController, ORKStep) -> Bool)? = nil
+    static var defaultValue: ((ORKTaskViewController, ORKStep) -> Bool)? {
+        nil
+    }
 }
 
 
