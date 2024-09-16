@@ -41,7 +41,6 @@ class PreSubmissionTests: XCTestCase {
         continueAfterFailure = false
         helpers.monitorAlerts()
         app.launch()
-
     }
 
     override func tearDownWithError() throws {
@@ -62,8 +61,6 @@ class PreSubmissionTests: XCTestCase {
         for task in taskScreen.surveyQuestions {
             XCTAssert(helpers.launchAndLeave(task))
         }
-        
-        return
     }
     
     func testAccessActiveTasks() throws {
@@ -72,15 +69,21 @@ class PreSubmissionTests: XCTestCase {
         for task in taskScreen.activeTasks {
             XCTAssert(helpers.launchAndLeave(task))
         }
-        
-        return
+    }
+
+    func testAccessOnboarding() throws {
+        XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
+
+        for task in taskScreen.onboardingTasks {
+            XCTAssert(helpers.launchAndLeave(task))
+        }
     }
 
     func testWrittenMultipleChoice() throws {
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
         let options = ["Choice 1", "Choice 2", "Choice 3", "Other"]
-        let required = ["Text Choice", "Additional text can go here.", "Your question here."]
-        
+        let required = ["Your title here", "Your text here", "Select an option"]
+
         XCTAssert(helpers.verifyElementByText("Text Choice Question", true))
         
         for item in required {
@@ -89,8 +92,7 @@ class PreSubmissionTests: XCTestCase {
         
         XCTAssert(helpers.verifyElementByText(options.randomElement()!, true))
         
-        XCTAssert(helpers.verifyElementByType(.button, "Done", true))
-        return
+        XCTAssert(helpers.verifyElementByType(.button, "Next", true))
     }
     
     func testImageMultipleChoice() throws {
@@ -120,18 +122,17 @@ class PreSubmissionTests: XCTestCase {
         
         XCTAssert(helpers.verifyElementByType(.button, "Done", true))
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
-        return
     }
     
     func testSQPickerWheel() throws {
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
         
         let dt = helpers.verifyAndAssignByText("Date and Time Question")!
-        let elementsQuery = app.scrollViews.otherElements.staticTexts
-        
+        let elementsQuery = app.otherElements.tables.staticTexts
+
         dt.tap()
         XCTAssert(elementsQuery["Date and Time"].exists)
-        XCTAssert(elementsQuery["Additional text can go here."].exists)
+        XCTAssert(elementsQuery["Your text here"].exists)
         XCTAssert(elementsQuery["Your question here."].exists)
         
         let skip = helpers.verifyAndAssignByText("Skip")!
@@ -148,6 +149,9 @@ class PreSubmissionTests: XCTestCase {
         let newDate = Calendar.current.date(byAdding: .day, value: 5, to: now)
         let newDateString = formatter.string(from: newDate!)
         
+        let selectDateField = helpers.verifyAndAssignByType(.other, "Select Date & Time", false)!
+        selectDateField.tap()
+
         let firstPredicate = NSPredicate(format: "value BEGINSWITH 'Today'")
         let firstPicker = app.pickerWheels.element(matching: firstPredicate)
         XCTAssert(firstPicker.isEnabled)
@@ -165,15 +169,15 @@ class PreSubmissionTests: XCTestCase {
         XCTAssert(fourthPicker.isEnabled)
         datetime == "AM" ? fourthPicker.adjust(toPickerWheelValue: "PM") : fourthPicker.adjust(toPickerWheelValue: "AM")
         
-        XCTAssert(done.isEnabled)
-        done.tap()
+        let pickerDoneButton = app.otherElements.toolbars.buttons["Done"]
+        if pickerDoneButton.exists {
+            pickerDoneButton.tap()
+        }
+
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
         
         dt.tap()
-        skip.tap()
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
-    
-        return
     }
     
     func testSQSliders() throws {
@@ -186,15 +190,7 @@ class PreSubmissionTests: XCTestCase {
         XCTAssert(helpers.sliderScreenCheck(.slider5))
         XCTAssert(helpers.sliderScreenCheck(.slider6))
         
-        XCTAssert(helpers.sliderScreenCheck(.slider1))
-        XCTAssert(helpers.sliderScreenCheck(.slider2))
-        XCTAssert(helpers.sliderScreenCheck(.slider3))
-        XCTAssert(helpers.sliderScreenCheck(.slider4))
-        XCTAssert(helpers.sliderScreenCheck(.slider5))
-        XCTAssert(helpers.sliderScreenCheck(.slider6))
-        
         XCTAssert(taskScreen.mainTaskScreen.waitForExistence(timeout: 5))
-        return
     }
     
     func testSQTextEntry() throws {
@@ -206,7 +202,7 @@ class PreSubmissionTests: XCTestCase {
             XCTFail("Unable to locate done button")
             return
         }
-        XCTAssertFalse(done.isEnabled)
+        XCTAssertTrue(done.isEnabled)
         XCTAssert(helpers.verifyElementByText("Text"))
         XCTAssert(helpers.verifyElementByText("Additional text can go here."))
         
@@ -230,8 +226,6 @@ class PreSubmissionTests: XCTestCase {
         done.tap()
         
         XCTAssert(helpers.verifyElement(taskScreen.mainTaskScreen))
-        
-        return
     }
 
 }

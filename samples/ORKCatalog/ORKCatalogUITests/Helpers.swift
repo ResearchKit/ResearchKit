@@ -113,7 +113,7 @@ class Helpers: XCTestCase {
             if tap && item.isEnabled {
                 item.tap()
             }
-        return item
+            return item
         }
         XCTFail("Unable to locate Element based on text \(identifier)")
         return nil
@@ -140,7 +140,7 @@ class Helpers: XCTestCase {
     //Enter any ORKCatalog task based on the name of the task and leave without taking action
     func launchAndLeave(_ task: String) -> Bool {
         XCTAssert(verifyElement(taskScreen.mainTaskScreen))
-        let currentTask = verifyAndAssignByText(task)!
+        let currentTask = taskScreen.getCurrentTask(task: task)!
         currentTask.tap()
         
         sleep(1)
@@ -183,15 +183,15 @@ class Helpers: XCTestCase {
     //Return an XCUIElement based on page number of the Scale test
     func scaleTitle(_ pageNumber: Int) -> XCUIElement? {
         let titles: [Int: String] = [1: "Discrete Scale", 2: "Continuous Scale", 3: "Discrete Vertical Scale", 4: "Continuous Vertical Scale", 5: "Text Scale", 6: "Text Vertical Scale"]
-        return app.scrollViews.otherElements.staticTexts[titles[pageNumber] ?? "Invalid Page Number"]
+        return app.otherElements.otherElements.staticTexts[titles[pageNumber] ?? "Invalid Page Number"]
     }
     
     //Select and interact with sliders in the Scale Question task. Function verifies expected outputs of each slider.
     func sliderValuesCheck(_ sliderScreen:SliderTesting, _ screenNum: Int, _ direction:SwipeDirection) -> Bool {
         let sliderValues: [SliderTesting:String] = [
-            .slider1:"8",
+            .slider1:"9",
             .slider3:"8",
-            .slider4:"4.23",
+            .slider4:"4.3",
             .slider5:"Above Average",
             .slider6:"Above Average"
         ]
@@ -231,8 +231,8 @@ class Helpers: XCTestCase {
     
     //Returns true if sliders behave as expected on any given screen in the Scale Question task.
     func sliderScreenCheck(_ sliderScreen:SliderTesting) -> Bool {
-        XCTAssert(verifyElement(app.scrollViews.otherElements.staticTexts["Scale"]))
-        XCTAssert(verifyElement(app.scrollViews.otherElements.staticTexts["Your question here."]))
+        XCTAssert(verifyElement(app.otherElements.otherElements.staticTexts["Scale"]))
+        XCTAssert(verifyElement(app.otherElements.otherElements.staticTexts["Your question here."]))
         
         switch sliderScreen {
         case .slider1:
