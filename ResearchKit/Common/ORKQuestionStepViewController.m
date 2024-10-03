@@ -83,10 +83,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKStepHeaderView *_headerView;
     ORKNavigationContainerView *_navigationFooterView;
     ORKAnswerDefaultSource *_defaultSource;
-    
-    NSCalendar *_savedSystemCalendar;
-    NSTimeZone *_savedSystemTimeZone;
-    
+        
     ORKTextChoiceCellGroup *_choiceCellGroup;
     ORKQuestionStepCellHolderView *_cellHolderView;
     
@@ -126,8 +123,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result {
-    self = [self initWithStep:step];
+    self = [super initWithStep:step];
     if (self) {
+        _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
 		ORKStepResult *stepResult = (ORKStepResult *)result;
 		if (stepResult && [stepResult results].count > 0) {
             ORKQuestionResult *questionResult = ORKDynamicCast([stepResult results].firstObject, ORKQuestionResult);
@@ -555,9 +553,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
             ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
             if (dateQuestionResult.dateAnswer) {
-                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar] ? : _savedSystemCalendar;
-                dateQuestionResult.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier ? : [NSCalendar currentCalendar].calendarIdentifier];
-                dateQuestionResult.timeZone = _savedSystemTimeZone ? : [NSTimeZone systemTimeZone];
+                dateQuestionResult.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+                dateQuestionResult.timeZone = [NSTimeZone systemTimeZone];
             }
         } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
@@ -588,8 +585,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)saveAnswer:(id)answer {
     self.answer = answer;
-    _savedSystemCalendar = [NSCalendar currentCalendar];
-    _savedSystemTimeZone = [NSTimeZone systemTimeZone];
     [self notifyDelegateOnResultChange];
 }
 

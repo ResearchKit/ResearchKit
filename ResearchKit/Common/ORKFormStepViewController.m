@@ -460,7 +460,7 @@
     }
     _savedAnswers[identifier] = answer;
     _savedAnswerDates[identifier] = [NSDate date];
-    _savedSystemCalendars[identifier] = [NSCalendar currentCalendar];
+    _savedSystemCalendars[identifier] = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     _savedSystemTimeZones[identifier] = [NSTimeZone systemTimeZone];
 }
 
@@ -789,12 +789,11 @@
         
         id answer = ORKNullAnswerValue();
         NSDate *answerDate = now;
-        NSCalendar *systemCalendar = [NSCalendar currentCalendar];
+        NSCalendar *systemCalendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
         NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
         if (!_skipped) {
             answer = _savedAnswers[item.identifier];
             answerDate = _savedAnswerDates[item.identifier] ? : now;
-            systemCalendar = _savedSystemCalendars[item.identifier];
             NSAssert(answer == nil || answer == ORKNullAnswerValue() || systemCalendar != nil, @"systemCalendar NOT saved");
             systemTimeZone = _savedSystemTimeZones[item.identifier];
             NSAssert(answer == nil || answer == ORKNullAnswerValue() || systemTimeZone != nil, @"systemTimeZone NOT saved");
@@ -806,8 +805,7 @@
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
             ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
             if (dqr.dateAnswer) {
-                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar] ? : systemCalendar;
-                dqr.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier];
+                dqr.calendar = systemCalendar;
                 dqr.timeZone = systemTimeZone;
             }
         } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
