@@ -1281,7 +1281,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return ORKTimeOfDayDateFromComponents(self.defaultComponents);
     }
     
-    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] componentsInTimeZone:[NSTimeZone systemTimeZone] fromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] componentsInTimeZone:[NSTimeZone systemTimeZone] fromDate:[NSDate date]];
     NSDateComponents *newDateComponents = [[NSDateComponents alloc] init];
     newDateComponents.calendar = ORKTimeOfDayReferenceCalendar();
     newDateComponents.hour = dateComponents.hour;
@@ -1382,7 +1382,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSCalendar *)currentCalendar {
-    return (_calendar ? : [NSCalendar currentCalendar]);
+    return (_calendar ? : [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]);
 }
 
 - (NSDateFormatter *)resultDateFormatter {
@@ -1422,7 +1422,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 {
     if (!self.defaultDate)
     {
-        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
         NSCalendarUnit unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
         if (self.questionType == ORKQuestionTypeDateAndTime)
         {

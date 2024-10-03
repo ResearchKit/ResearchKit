@@ -187,7 +187,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             _impliedAnswerFormat = format;
             
         } else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
-            NSCalendar *calendar = _calendar ? : [NSCalendar currentCalendar];
+            NSCalendar *calendar = _calendar ? : [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
             NSDate *now = [NSDate date];
             NSDate *defaultDate = _defaultDate ? : [calendar dateByAddingUnit:NSCalendarUnitYear value:-35 toDate:now options:0];
             NSDate *minimumDate = _minimumDate ? : [calendar dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:now options:0];
