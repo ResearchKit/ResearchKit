@@ -112,7 +112,7 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 
 @end
 
-
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @implementation ORKHealthCollector : ORKCollector
 
 - (instancetype)initWithSampleType:(HKSampleType*)sampleType unit:(HKUnit*)unit startDate:(NSDate*)startDate {
@@ -288,7 +288,7 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 }
 
 @end
-
+#endif 
 
 @implementation ORKMotionActivityCollector : ORKCollector
 

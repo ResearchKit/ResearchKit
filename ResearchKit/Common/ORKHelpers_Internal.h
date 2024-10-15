@@ -372,6 +372,13 @@ ORK_INLINE double ORKPoundsToKilograms(double pounds) {
     return ORKPoundsAndOuncesToKilograms(pounds, 0);
 }
 
+ORK_INLINE double ORKForceDoubleToLimits(double value) {
+    if (value == NAN || value == INFINITY) {
+        return DBL_MAX;
+    }
+    return fmin(fmax(value, -DBL_MAX), DBL_MAX);
+}
+
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
     UIColor *color = baseColor;
     if (totalColors > 1) {

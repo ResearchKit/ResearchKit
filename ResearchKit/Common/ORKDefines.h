@@ -40,14 +40,5 @@
 
 #define ORK_IOS_10_WATCHOS_3_AVAILABLE (NSClassFromString(@"HKWorkoutConfiguration") != nil)
 
-// Some CLLocationManager API calls would trigger authorization to use location. The presence of those
-// API calls in ResearchKit **at compile time** mean apps that link ResearchKit also need Info.plist entries
-// for NSLocationAlwaysAndWhenInUseUsageDescription and NSLocationWhenInUseUsageDescription.
-// If your app doesn't use ORKLocationRecorder and doesn't specify these Info.plist strings, disable
-// ResearchKit's CLLocationManager authorization
-#ifndef ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
-#define ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION 1
-#endif
-
 #define ORK_TO_BE_DEPRECATED(message) \
 __deprecated_msg(message)

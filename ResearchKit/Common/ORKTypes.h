@@ -131,6 +131,15 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
      */
     ORKQuestionTypeSES,
     
+    /**
+     In an age question, the participant can enter an age by using an age picker.
+     */
+    ORKQuestionTypeAge,
+    
+    /**
+     In an age question, the participant can enter an age by using an age picker. ORKQuestionTypeYear will be used if the useYearForResult property of the question's ORKAgeAnswerFormat is set to true.
+     */
+    ORKQuestionTypeYear
 } ORK_ENUM_AVAILABLE;
 
 
@@ -391,7 +400,6 @@ ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro
 
 /// AirPods Max
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMax;
-
 /// Lightning and Audio Jack Earpods
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods;
 

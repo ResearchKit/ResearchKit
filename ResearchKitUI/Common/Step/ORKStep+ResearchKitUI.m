@@ -66,6 +66,14 @@
 
 @end
 
+@implementation ORKFamilyHistoryStep (ViewControllerProviding)
+
+- (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {
+    return [[ORKFamilyHistoryStepViewController alloc] initWithStep:self result:result];
+}
+
+@end
+
 @implementation ORKFormStep (ViewControllerProviding)
 
 - (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {

@@ -31,6 +31,7 @@
 #import "ORKLocationPermissionType.h"
 #import "ORKHelpers_Internal.h"
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 #import <CoreLocation/CLLocationManagerDelegate.h>
 #import <ResearchKit/CLLocationManager+ResearchKit.h>
 
@@ -116,3 +117,4 @@ static const uint32_t IconDarkTintColor = 0x00A36C;
 }
 
 @end
+#endif

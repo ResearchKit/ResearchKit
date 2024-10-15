@@ -113,9 +113,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @interface ORKFormItemLocationCell : ORKFormItemCell
 
 @end
+#endif 
 
 @interface ORKFormItemSESCell : ORKFormItemCell
 

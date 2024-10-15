@@ -127,9 +127,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 + (NSArray<ORKRecorderConfiguration*>*)makeRecorderConfigurationsWithOptions:(ORKPredefinedTaskOption)options {
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *heartRateType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-
+#endif
+    
     NSMutableArray<ORKRecorderConfiguration*> *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
 
     if (!(ORKPredefinedTaskOptionExcludePedometer & options)) {
@@ -143,13 +145,18 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                  frequency:100]];
     }
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     if (!(ORKPredefinedTaskOptionExcludeLocation & options)) {
         [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
     }
+#endif
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     if (!(ORKPredefinedTaskOptionExcludeHeartRate & options)) {
         [recorderConfigurations addObject:[[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:ORKHeartRateRecorderIdentifier
                                                                                               healthQuantityType:heartRateType unit:bpmUnit]];
     }
+#endif
+    
     return [recorderConfigurations copy];
 }
 
@@ -1699,7 +1706,7 @@ NSString *const ORKSpeechInNoiseStep2Identifier = @"speech.in.noise2";
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
         step.title = ORKLocalizedString(@"SPEECH_IN_NOISE_TITLE", nil);
         step.detailText = intendedUseDescription;
-        step.text = intendedUseDescription ? : ORKLocalizedString(@"SPEECH_IN_NOISE_INTRO_TEXT", nil);
+        step.text = ORKLocalizedString(@"SPEECH_IN_NOISE_INTRO_TEXT", nil);
         step.image = [UIImage imageNamed:@"speechInNoise" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
         step.imageContentMode = UIViewContentModeCenter;
         step.shouldTintImages = YES;
@@ -2342,10 +2349,12 @@ NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
             [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                      frequency:100]];
         }
+        
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
         if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
             [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
         }
-
+#endif
         {
             ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTrial1StepIdentifier];
             step.title = ORKLocalizedString(@"TIMED_WALK_TITLE", nil);

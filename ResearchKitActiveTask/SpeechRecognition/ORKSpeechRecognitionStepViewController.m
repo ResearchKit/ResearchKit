@@ -445,6 +445,11 @@
     if (_errorState) {
         return;
     }
+    
+    if ([_localResult.transcription formattedString].length > 0 && ![recognitionResult.bestTranscription formattedString].length) {
+        return;
+    }
+    
     dispatch_sync(_speechRecognitionQueue, ^{
         _localResult.transcription = recognitionResult.bestTranscription;
 #if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5

@@ -266,6 +266,7 @@ enum Identifier {
     case speechRecognitionTask
     case speechInNoiseTask
     case stroopTask
+
     case timedWalkWithTurnAroundTask
     case toneAudiometryTask
     case dBHLToneAudiometryTask
@@ -287,9 +288,20 @@ enum Identifier {
     case webViewTask
     case webViewStep
     
-    // 3DModelStep tasks
+    // 3DModelStep tasks.
     case usdzModelStep
     case usdzModelTask
+    
+    // ORKColorChoice tasks.
+    case colorChoiceQuestionTask
+    case colorChoiceQuestionStep
+    case colorChoiceQuestionStepSwatchOnly
+    case colorChoiceQuestionFormItem
+    
+    // Family History tasks.
+    case familyHistoryStep
+    case familyHistoryTask
+    
 }
 
 
@@ -355,4 +367,6 @@ enum TaskListRowStrings {
     static var loremIpsumLongText: String {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
     }
+    
+
 }

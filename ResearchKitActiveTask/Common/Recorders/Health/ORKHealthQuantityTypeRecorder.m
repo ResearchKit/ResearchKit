@@ -29,14 +29,14 @@
  */
 
 
+#import <ResearchKit/HKSample+ORKJSONDictionary.h>
 #import "ORKHealthQuantityTypeRecorder.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKDataLogger.h"
 #import "ORKRecorder_Private.h"
 #import "ORKRecorder_Internal.h"
 
-#import <ResearchKit/HKSample+ORKJSONDictionary.h>
-
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @interface ORKHealthQuantityTypeRecorder () {
     ORKDataLogger *_logger;
     BOOL _isRecording;
@@ -368,3 +368,4 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 @end
+#endif 

@@ -101,7 +101,7 @@ struct TextChoiceView: View {
                 if let img = image {
                     Image(uiImage: img)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 115)
                         .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.clear,
                                                                           lineWidth: 1))

@@ -15,6 +15,10 @@ Obtain information from a step.
 
 - ``ORKTaskResultSource``
 
+### Family History
+
+- ``ORKFamilyHistoryResult``
+
 ### File storage
 
 - ``ORKFileResult``
@@ -25,14 +29,6 @@ Obtain information from a step.
 - ``ORKSignatureResult``
 - ``ORKConsentSignatureResult``
 
-### Hearing
-
-- ``ORKdBHLToneAudiometryResult``
-- ``ORKEnvironmentSPLMeterResult``
-- ``ORKToneAudiometryResult``
-- ``ORKSpeechInNoiseResult``
-- ``ORKSpeechRecognitionResult``
-
 ### Data collection
 
 - ``ORKCollector``
@@ -40,30 +36,7 @@ Obtain information from a step.
 - ``ORKHealthCorrelationCollector``
 - ``ORKDataCollectionManager``
 - ``ORKDataCollectionManagerDelegate``
-- ``ORKRangeOfMotionResult``
-- ``ORKReactionTimeResult``
 - ``ORKBundleAsset``
-
-### Dexterity
-
-- ``ORKTimedWalkResult``
-- ``ORKTowerOfHanoiResult``
-- ``ORKTrailmakingResult``
-- ``ORKHolePegTestResult``
-- ``ORKTappingIntervalResult``
-- ``ORKHolePegTestResult``
-- ``ORKNormalizedReactionTimeResult``
-- ``ORKPSATResult``
-
-### Memory
-
-- ``ORKSpatialSpanMemoryResult``
-
-### Vision
-
-- ``ORKStroopResult``
-- ``ORKAccuracyStroopResult``
-- ``ORKAmslerGridResult``
 
 ### Surveys
 
@@ -88,7 +61,3 @@ Obtain information from a step.
 ### Web
 
 - ``ORKWebViewStepResult``
-
-### 3-D models
-
-- ``ORKUSDZModelManagerResult``

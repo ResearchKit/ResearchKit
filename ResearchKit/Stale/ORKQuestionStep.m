@@ -131,11 +131,12 @@ ORKQuestionStepPresentationStyle const ORKQuestionStepPresentationStylePlatter =
     return [impliedAnswerFormat isKindOfClass:[ORKTextAnswerFormat class]] && ![(ORKTextAnswerFormat *)impliedAnswerFormat multipleLines];
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     HKObjectType *objType = [[self answerFormat] healthKitObjectTypeForAuthorization];
     return (objType != nil) ? [NSSet setWithObject:objType] : nil;
 }
-
+#endif
 #endif
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

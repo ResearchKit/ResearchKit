@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
         matchesType = matchesType || (type == ORKQuestionTypeMultiplePicker);
         matchesType = matchesType || (type == ORKQuestionTypeHeight);
         matchesType = matchesType || (type == ORKQuestionTypeWeight);
+        matchesType = matchesType || (type == ORKQuestionTypeAge);
+        matchesType = matchesType || (type == ORKQuestionTypeYear);
         result = matchesType ? [ORKFormItemPickerCell class] : result;
     }
     
@@ -68,12 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
         result = matchesType ? [ORKFormItemScaleCell class] : result;
     }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     if (result == nil) {
         BOOL matchesType = NO;
         matchesType = matchesType || (type == ORKQuestionTypeLocation);
         result = matchesType ? [ORKFormItemLocationCell class] : result;
     }
-
+#endif
+    
     if (result == nil) {
         BOOL matchesType = NO;
         matchesType = matchesType || (type == ORKQuestionTypeSES);

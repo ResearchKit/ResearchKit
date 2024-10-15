@@ -33,7 +33,7 @@
 
 #import "ORKHelpers_Internal.h"
 
-
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @implementation CLLocation (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionary {
@@ -71,3 +71,4 @@
 }
 
 @end
+#endif

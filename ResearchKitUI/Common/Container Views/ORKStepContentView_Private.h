@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable ORKCompletionCheckmarkView *)completionCheckmarkView;
 
+- (void)setStepContentViewBottomConstraint:(CGFloat)bottomConstraint;
+
 @end
 
 NS_ASSUME_NONNULL_END

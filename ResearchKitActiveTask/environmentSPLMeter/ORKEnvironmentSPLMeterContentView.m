@@ -45,6 +45,8 @@ static const CGFloat InstructionLabelPadding = 8.0;
 static const CGFloat HalfCircleSize = 14.0;
 static const CGFloat BarViewHeight = 50.0;
 
+NSString * const ORKEnvironmentSPLMeterOptimumNoiseLevelLabelAccessibilityIdentifier = @"ORKEnvironmentSPLMeterOptimumNoiseLevelLabel";
+
 @interface ORKEnvironmentSPLMeterContentView ()
 @property(nonatomic, strong) ORKRingView *ringView;
 @property(nonatomic, strong) ORKEnvironmentSPLMeterBarView *barView;
@@ -213,6 +215,8 @@ static const CGFloat BarViewHeight = 50.0;
     _xmarkView.tintColor = UIColor.systemGreenColor;
 
     _DBInstructionLabel.text = ORKLocalizedString(@"ENVIRONMENTSPL_OK", nil);
+    
+    _DBInstructionLabel.accessibilityIdentifier = ORKEnvironmentSPLMeterOptimumNoiseLevelLabelAccessibilityIdentifier;
     
     if (UIAccessibilityIsVoiceOverRunning() && [self.voiceOverDelegate respondsToSelector:@selector(contentView:shouldAnnounce:)]) {
         [self.voiceOverDelegate contentView:self shouldAnnounce:_DBInstructionLabel.text];

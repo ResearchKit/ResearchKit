@@ -358,6 +358,10 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     _navigationFooterView.continueEnabled = continueButtonEnabled;
 }
 
+- (void)setSkipButtonEnabled:(BOOL)skipButtonEnabled {
+    _navigationFooterView.skipEnabled = skipButtonEnabled;
+}
+
 - (void)setNavigationDetailText:(NSString *)navigationDetailText {
     _navigationFooterView.navigationDetailText = navigationDetailText;
 }
