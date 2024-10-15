@@ -83,9 +83,11 @@
     return [[ORKMotionActivityPermissionType alloc] init];
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 + (ORKLocationPermissionType *) locationPermissionType {
     return [[ORKLocationPermissionType alloc] init];
 }
+#endif 
 
 @end
 

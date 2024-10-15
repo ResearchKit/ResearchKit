@@ -29,10 +29,14 @@
  */
 
 #import <ResearchKitActiveTask/ORKAudiometryStimulus.h>
+#import <ResearchKitActiveTask/ORKdBHLToneAudiometryResult.h>
 
 typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
+typedef void(^ORKAudiometryStatusBlock)(BOOL, ORKAudiometryStimulus *_Nullable);
 
 @class ORKdBHLToneAudiometryFrequencySample;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Defines the interface of an audiometry algorithm.
@@ -55,21 +59,25 @@ typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
 @property (nonatomic, strong) ORKAudiometryTimestampProvider timestampProvider;
 
 /**
- This method should return a `ORKAudiometryStimulus` providing the parameters of the tone that should presented next, if available.
- */
-- (ORKAudiometryStimulus *)nextStimulus;
-
-/**
  Called just before presenting tone.
  */
 - (void)registerStimulusPlayback;
+
+/**
+ Used by to create a new ORKdBHLToneAudiometryUnit that will register the timestamps of the tone being played
+ 
+ @param double The value of the preStimulusDelay
+ @param NSTimeInterval The value of the startOfUnitTimeStamp
+ */
+@optional
+- (ORKdBHLToneAudiometryUnit *)createUnitWith:(double)preStimulusDelay startOfUnitTimeStamp:(NSTimeInterval)startOfUnitTimeStamp;
 
 /**
  Register the user response for the last presented tone.
  
  @param response  A Boolean representing if the user acknowledged the last presented tone.
  */
-- (void)registerResponse:(BOOL)response;
+- (void)registerResponse:(BOOL)response forUnit:(ORKdBHLToneAudiometryUnit *_Nullable)unit;
 
 /**
  Informs the audiometry algorithm that the last provided tone could not be reproduced due to signal clipping. Optional.
@@ -86,6 +94,12 @@ typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
 - (void)registerPreStimulusDelay:(double)preStimulusDelay;
 
 /**
+ This method should return a `ORKAudiometryStimulus` providing the parameters of the tone that should presented next, if available.
+ */
+@optional
+- (ORKAudiometryStimulus *)nextStimulus;
+
+/**
  Returns an array of containing the results of the audiometry test.
   
  @return An array of  `ORKdBHLToneAudiometryFrequencySample` representing the results of the audiometry test..
@@ -93,3 +107,5 @@ typedef NSTimeInterval(^ORKAudiometryTimestampProvider)(void);
 - (NSArray<ORKdBHLToneAudiometryFrequencySample *> *)resultSamples;
 
 @end
+
+NS_ASSUME_NONNULL_END

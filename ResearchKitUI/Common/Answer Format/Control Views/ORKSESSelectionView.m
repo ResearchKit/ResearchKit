@@ -143,6 +143,8 @@ static const CGFloat rungButtonPadding = 10.0;
     for (UILabel *label in @[_frontLabel, _rearLabel]) {
         label.numberOfLines = 1;
         label.font = [self bodyTextFont];
+        label.adjustsFontSizeToFitWidth = YES;
+        label.minimumScaleFactor = 0.2;
         label.textColor = [UIColor grayColor];
         label.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:label];
@@ -185,6 +187,8 @@ static const CGFloat rungButtonPadding = 10.0;
     _frontLabel = [UILabel new];
     _frontLabel.numberOfLines = 1;
     _frontLabel.font = [self bodyTextFont];
+    _frontLabel.adjustsFontSizeToFitWidth = YES;
+    _frontLabel.minimumScaleFactor = 0.9;
     _frontLabel.textColor = [UIColor grayColor];
     _frontLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _frontLabel.textAlignment = NSTextAlignmentLeft;

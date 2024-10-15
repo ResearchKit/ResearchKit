@@ -38,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, strong) NSMutableDictionary *savedAnswers;
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder;
+- (void)removeInvalidSavedAnswers;
+
+
 /**
 returns a list of all the formItems
  */

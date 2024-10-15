@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 #import "CLLocationManager+ResearchKit.h"
 
 #import "ORKDefines.h"
@@ -35,37 +36,22 @@
 @implementation CLLocationManager (ResearchKit)
 
 - (BOOL)ork_requestWhenInUseAuthorization {
-#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     [self requestWhenInUseAuthorization];
     return YES;
-#else
-    return NO;
-#endif
 }
 
 - (BOOL)ork_requestAlwaysAuthorization {
-#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     [self requestAlwaysAuthorization];
     return YES;
-#else
-    return NO;
-#endif
 }
 
 - (void)ork_startUpdatingLocation {
-#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     [self startUpdatingLocation];
-#else
-    // noop
-#endif
 }
 
 - (void)ork_stopUpdatingLocation {
-#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     [self stopUpdatingLocation];
-#else
-    // noop
-#endif
 }
 
 @end
+#endif

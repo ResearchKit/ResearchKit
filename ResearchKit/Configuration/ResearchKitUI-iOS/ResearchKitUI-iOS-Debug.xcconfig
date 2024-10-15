@@ -3,3 +3,5 @@
 //
 
 #include "ResearchKitUI-iOS-Shared.xcconfig"
+
+DEBUG_INFORMATION_FORMAT = dwarf

@@ -32,14 +32,14 @@
 
 #if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
 
+#import <ResearchKit/HKSample+ORKJSONDictionary.h>
 #import "ORKHealthClinicalTypeRecorder.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKDataLogger.h"
 #import "ORKRecorder_Private.h"
 #import "ORKRecorder_Internal.h"
 
-#import <ResearchKit/HKSample+ORKJSONDictionary.h>
-
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @interface ORKHealthClinicalTypeRecorder () {
     ORKDataLogger *_logger;
     BOOL _isRecording;
@@ -234,3 +234,4 @@
 
 @end
 #endif
+#endif 

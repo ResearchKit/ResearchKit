@@ -46,7 +46,6 @@ ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro = @"AIRPOD
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsProGen2 = @"AIRPODSPROV2";
 
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMax = @"AIRPODSMAX";
-
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods = @"EARPODS";
 
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierUnknown = @"UNKNOWN";

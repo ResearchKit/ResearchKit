@@ -1,6 +1,7 @@
 framework module ResearchKitUI {
     umbrella header "ResearchKitUI.h"
     module iOS {
+        exclude header "ORKColorChoiceCellGroup.h"
     }
     export *
     module * { export * }

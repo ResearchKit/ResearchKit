@@ -183,6 +183,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL pinNavigationContainer;
 
 /**
+ A property that manually overrides the bottomPadding of the content view
+ */
+@property (nonatomic, copy, nullable) NSNumber *bottomPadding;
+
+/**
  Returns the number of sections in the tableview used to display this step. Default = `1`.
  
  @return                The number of sections in the tableview.

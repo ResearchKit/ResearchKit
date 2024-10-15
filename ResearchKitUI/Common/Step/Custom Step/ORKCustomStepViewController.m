@@ -142,6 +142,10 @@ NSString * const ORKCustomStepViewAccessibilityIdentifier = @"ORKCustomStepView"
         [_containerView setStepDetailText:self.customStep.detailText];
     }
     
+    if (self.customStep.bodyItems) {
+        [_containerView setBodyItems:self.customStep.bodyItems];
+    }
+
     if (self.customStep.headerTextAlignment) {
         [_containerView setStepHeaderTextAlignment:self.customStep.headerTextAlignment];
     }

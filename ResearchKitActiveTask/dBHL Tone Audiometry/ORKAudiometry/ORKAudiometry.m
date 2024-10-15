@@ -32,6 +32,7 @@
 #import "ORKdBHLToneAudiometryStep.h"
 #import "ORKdBHLToneAudiometryResult.h"
 #import "ORKAudiometryStimulus.h"
+#import "ORKHelpers_Internal.h"
 
 @interface ORKAudiometryTransition: NSObject
 
@@ -136,7 +137,7 @@
     _preStimulusResponse = NO;
 }
 
-- (void)registerResponse:(BOOL)response {
+- (void)registerResponse:(BOOL)response forUnit:(ORKdBHLToneAudiometryUnit *_Nullable)unit {
     if (response) {
         [self stimulusAcknowledged];
     } else {
@@ -201,8 +202,8 @@
         _prevFreq = [freq doubleValue];
         _resultSample = [ORKdBHLToneAudiometryFrequencySample new];
         _resultSample.channel = _audioChannel;
-        _resultSample.frequency = [freq doubleValue];
-        _resultSample.calculatedThreshold = ORKInvalidDBHLValue;
+        _resultSample.frequency = ORKForceDoubleToLimits([freq doubleValue]);
+        _resultSample.calculatedThreshold = ORKForceDoubleToLimits(ORKInvalidDBHLValue);
         [_arrayOfResultSamples addObject:_resultSample];
     } else {
         _numberOfTransitionsPerFreq += 1;
@@ -220,7 +221,7 @@
     }
     
     _resultUnit = [ORKdBHLToneAudiometryUnit new];
-    _resultUnit.dBHLValue = _currentdBHL;
+    _resultUnit.dBHLValue = ORKForceDoubleToLimits(_currentdBHL);
     _resultUnit.startOfUnitTimeStamp = _getTimestamp();
     [_arrayOfResultUnits addObject:_resultUnit];
     
@@ -278,7 +279,7 @@
         ORKAudiometryTransition *currentTransitionObject = [_transitionsDictionary objectForKey:currentKey];
         currentTransitionObject.userInitiated -= 1;
     } else if ([self validateResultFordBHL:_currentdBHL]) {
-        _resultSample.calculatedThreshold = _currentdBHL;
+        _resultSample.calculatedThreshold = ORKForceDoubleToLimits(_currentdBHL);
         _indexOfFreqLoopList += 1;
         if (_indexOfFreqLoopList >= _freqLoopList.count) {
             _resultSample.units = [_arrayOfResultUnits copy];
@@ -316,18 +317,18 @@
         if (((previousTransitionObject.userInitiated/previousTransitionObject.totalTransitions <= 0.5) && (previousTransitionObject.totalTransitions >= 2)) || dBHL == _dBHLMinimumThreshold) {
             if (currentTransitionObject.totalTransitions == 2) {
                 if (currentTransitionObject.userInitiated/currentTransitionObject.totalTransitions == 1.0) {
-                    _resultSample.calculatedThreshold = dBHL;
+                    _resultSample.calculatedThreshold = ORKForceDoubleToLimits(dBHL);
                     return YES;
                 } else {
                     return NO;
                 }
             } else {
-                _resultSample.calculatedThreshold = dBHL;
+                _resultSample.calculatedThreshold = ORKForceDoubleToLimits(dBHL);
                 return YES;
             }
         }
     } else if (_minimumThresholdCounter > 2) {
-        _resultSample.calculatedThreshold = dBHL;
+        _resultSample.calculatedThreshold = ORKForceDoubleToLimits(dBHL);
         return YES;
     }
     return NO;

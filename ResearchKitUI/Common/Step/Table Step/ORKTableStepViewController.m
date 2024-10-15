@@ -42,6 +42,7 @@
 
 #import "ORKTableStep.h"
 #import "ORKStepContentView.h"
+#import "ORKStepContentView_Private.h"
 #import "ORKBodyItem.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -75,7 +76,6 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     if (_tableContainer) {
         [_tableContainer sizeHeaderToFit];
         [_tableContainer resizeFooterToFitUsingMinHeight:NO];
-        [_tableContainer layoutIfNeeded];
     }
     
     if (_tableView) {
@@ -85,6 +85,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [_tableContainer layoutIfNeeded];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
@@ -181,6 +182,10 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         
         if (self.tableStepRef.pinNavigationContainer == NO) {
             [_navigationFooterView removeStyling];
+        }
+        
+        if ([self tableStepRef].bottomPadding) {
+            [_headerView setStepContentViewBottomConstraint:[self tableStepRef].bottomPadding.doubleValue];
         }
     }
 }

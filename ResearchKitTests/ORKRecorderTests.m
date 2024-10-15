@@ -34,9 +34,11 @@
 @import ResearchKitActiveTask;
 @import ResearchKitActiveTask_Private;
 
-@import CoreLocation;
 @import CoreMotion;
 
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+@import CoreLocation;
 
 @interface ORKMockLocationManager : CLLocationManager
 
@@ -64,6 +66,7 @@
 }
 
 @end
+#endif
 
 
 @interface ORKMockTouch : UITouch
@@ -396,6 +399,7 @@ static const NSInteger kNumberOfSamples = 5;
     _items = items;
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 - (void)testLocationRecorder {
     
     ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:@"location"]];
@@ -465,6 +469,7 @@ static const NSInteger kNumberOfSamples = 5;
         XCTAssertTrue(ork_doubleEqual(longitude, ((NSNumber *)sample[@"coordinate"][@"longitude"]).doubleValue), @"");
     }
 }
+#endif
 
 - (void)testAccelerometerRecorder {
     
@@ -641,7 +646,7 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 - (void)testHealthQuantityTypeRecorder {
-    
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *hbQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     ORKHealthQuantityTypeRecorderConfiguration *recorderConfiguration = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:@"healtQuantityTypeRecorder" healthQuantityType:hbQuantityType unit:bpmUnit];
@@ -649,6 +654,7 @@ static const NSInteger kNumberOfSamples = 5;
     ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
+#endif
 }
 
 @end

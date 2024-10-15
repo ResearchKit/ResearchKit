@@ -29,6 +29,7 @@
  */
 
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @import CoreLocation;
 
 
@@ -41,3 +42,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+#endif

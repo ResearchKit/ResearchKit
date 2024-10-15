@@ -13,43 +13,19 @@ A task can be a simple ordered sequence of steps, or be dynamic with previous re
 - ``ORKTask``
 - ``ORKOrderedTask``
 - ``ORKNavigableOrderedTask``
-- ``SwiftUIViewFactory``
-
-### View controllers
-
-- ``ORKTaskViewController``
-- ``ORKTaskViewControllerDelegate``
-- ``ORKTaskViewControllerFinishReason``
-- ``ORKTaskViewControllerReviewMode``
 
 ### Audio
 
-- ``ORKAudiometryStimulus``
 - ``ORKAudioRecorderConfiguration``
-- ``ORKToneAudiometrySample``
-- ``ORKdBHLToneAudiometryFrequencySample``
-- ``ORKdBHLTaskContext``
-- ``ORKdBHLToneAudiometryUnit``
 
 ### Dexterity
 
 - ``ORKPredefinedTaskHandOption``
 - ``ORKPredefinedTaskOption``
 - ``ORKPredefinedTaskLimbOption``
-- ``ORKPSATSample``
 - ``ORKPSATPresentationMode``
-- ``ORKTappingSample``
-- ``ORKTappingButtonIdentifier``
-- ``ORKTowerOfHanoiMove``
-- ``ORKTrailmakingTap``
 - ``ORKTrailMakingTypeIdentifier``
 - ``ORKTremorActiveTaskOption``
-
-### Memory
-
-- ``ORKSpatialSpanMemoryGameRecord``
-- ``ORKSpatialSpanMemoryGameStatus``
-- ``ORKSpatialSpanMemoryGameTouchSample``
 
 ### Navigation
 
@@ -63,7 +39,6 @@ A task can be a simple ordered sequence of steps, or be dynamic with previous re
 - ``ORKStepModifier``
 - ``ORKResultPredicateTaskIdentifierVariableName``
 - ``ORKNullStepIdentifier``
-- ``ORKStepViewControllerNavigationDirection``
 - ``ORKKeyValueStepModifier``
 - ``ORKResultPredicate``
 - ``ORKResultSelector``
@@ -73,4 +48,3 @@ A task can be a simple ordered sequence of steps, or be dynamic with previous re
 - ``ORKTaskProgress``
 - ``ORKTaskTotalProgress``
 - ``ORKProgressIndicatorType``
-- ``ORKTaskViewControllerProgressMode``

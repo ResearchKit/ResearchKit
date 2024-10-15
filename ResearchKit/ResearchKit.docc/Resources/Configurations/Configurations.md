@@ -8,8 +8,6 @@ Provide collection and presentation information to a step.
 
 - ``ORKAccelerometerRecorderConfiguration``
 - ``ORKDeviceMotionRecorderConfiguration``
-- ``ORKHealthClinicalTypeRecorderConfiguration``
-- ``ORKHealthQuantityTypeRecorderConfiguration``
 - ``ORKLocationRecorderConfiguration``
 - ``ORKPedometerRecorderConfiguration``
 - ``ORKRecorderConfiguration``
@@ -26,8 +24,4 @@ Provide collection and presentation information to a step.
 
 ### Style selection
 
-- ``ORKTextButton``
-- ``ORKContinueButton``
-- ``ORKBorderedButton``
-- ``ORKBorderedButtonDisabledStyle``
 - ``ORKNavigationContainerButtonStyle``

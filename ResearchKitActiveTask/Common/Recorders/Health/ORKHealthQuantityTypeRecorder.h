@@ -35,8 +35,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class HKQuantityType;
-@class HKUnit;
 @class ORKHealthQuantityTypeRecorder;
 
 @protocol ORKHealthQuantityTypeRecorderDelegate <ORKRecorderDelegate>
@@ -51,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
  The `ORKHealthQuantityTypeRecorder` class represents a recorder for collecting real time sample data from HealthKit, such as heart rate, during
  an active task.
  */
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+@class HKQuantityType;
+@class HKUnit;
+
 ORK_CLASS_AVAILABLE
 @interface ORKHealthQuantityTypeRecorder : ORKRecorder
 
@@ -128,5 +130,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly, copy) HKUnit *unit;
 
 @end
-
+#endif
 NS_ASSUME_NONNULL_END

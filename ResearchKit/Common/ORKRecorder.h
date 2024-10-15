@@ -31,10 +31,12 @@
 
 
 #import <UIKit/UIKit.h>
-#import <HealthKit/HealthKit.h>
 #import <ResearchKit/ORKDefines.h>
 #import <Availability.h>
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -105,8 +107,9 @@ ORK_CLASS_AVAILABLE
  If your recorder requires or would benefit from read access to HealthKit at
  runtime during the task, return the appropriate set of `HKSampleType` objects.
  */
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (nullable NSSet<HKObjectType *> *)requestedHealthKitTypesForReading;
-
+#endif
 @end
 
 
@@ -309,6 +312,8 @@ ORK_CLASS_AVAILABLE
  
  No additional parameters besides the identifier are required.
  */
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 ORK_CLASS_AVAILABLE
 @interface ORKLocationRecorderConfiguration : ORKRecorderConfiguration
 
@@ -333,7 +338,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
-
+#endif 
 
 /**
  A configuration object that records streaming audio data during an active step.

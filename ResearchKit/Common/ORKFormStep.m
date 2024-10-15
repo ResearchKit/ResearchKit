@@ -182,6 +182,7 @@
     }
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     NSMutableSet<HKObjectType *> *healthTypes = [NSMutableSet set];
     
@@ -195,6 +196,7 @@
     
     return healthTypes.count ? healthTypes : nil;
 }
+#endif
 
 @end
 

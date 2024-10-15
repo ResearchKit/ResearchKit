@@ -1511,6 +1511,7 @@
     XCTAssertEqual([[[answerFormat textChoices] objectAtIndex:1] value], [NSNumber numberWithInteger:2]);
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (void)testHealthKitCharacteristicTypeAnswerFormat {
     
     HKCharacteristicType *biologicalSex = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
@@ -1598,6 +1599,7 @@
     XCTAssertEqual([answerFormat numericAnswerStyle], ORKNumericAnswerStyleInteger);
     XCTAssertEqual([answerFormat quantityType], calories);
 }
+#endif
 
 - (void)testDateAnswerFormat {
     

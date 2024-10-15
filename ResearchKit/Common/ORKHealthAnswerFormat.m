@@ -38,7 +38,7 @@
 #import "ORKQuestionResult_Private.h"
 #import "ORKResult.h"
 
-
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #pragma mark - ORKHealthAnswerFormat
 
 ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierFemale = @"HKBiologicalSexFemale";
@@ -420,3 +420,4 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 }
 
 @end
+#endif

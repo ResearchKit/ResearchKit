@@ -137,8 +137,9 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 - (void)setupFootnoteLabel {
     _footnoteLabel = [ORKFootnoteLabel new];
     _footnoteLabel.numberOfLines = 0;
-    _footnoteLabel.textAlignment = NSTextAlignmentNatural;
+    _footnoteLabel.textAlignment = NSTextAlignmentCenter;
     _footnoteLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _footnoteLabel.textColor = UIColor.secondaryLabelColor;
     [self addSubview:_footnoteLabel];
 }
 
@@ -478,9 +479,36 @@ static const CGFloat detailTextBottomSpacing = 16.0;
     }
     
     UIView *lastView = _skipButton ? : _continueButton;
+
+    if (![self neverHasFootnote]) {
+        UIView *lastButton = [self neverHasSkipButton] ? _continueButton : _skipButton;
+        [_regularConstraints addObjectsFromArray:@[
+            [NSLayoutConstraint constraintWithItem:_footnoteLabel
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:lastButton ? : self.safeAreaLayoutGuide
+                                         attribute:lastButton ? NSLayoutAttributeBottom : NSLayoutAttributeTop
+                                        multiplier:1.0
+                                          constant:lastButton ? standardSpacing : topSpacing],
+            [NSLayoutConstraint constraintWithItem:_footnoteLabel
+                                         attribute:NSLayoutAttributeLeft
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self.safeAreaLayoutGuide
+                                         attribute:NSLayoutAttributeLeft
+                                        multiplier:1.0
+                                          constant:leftRightPadding],
+            [NSLayoutConstraint constraintWithItem:_footnoteLabel
+                                         attribute:NSLayoutAttributeRight
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self.safeAreaLayoutGuide
+                                         attribute:NSLayoutAttributeRight
+                                        multiplier:1.0
+                                          constant:-leftRightPadding],
+        ]];
+        lastView = _footnoteLabel;
+    }
     
     if (lastView) {
-        
         [_regularConstraints addObject:[NSLayoutConstraint constraintWithItem:self
                                                                     attribute:NSLayoutAttributeBottom
                                                                     relatedBy:NSLayoutRelationEqual

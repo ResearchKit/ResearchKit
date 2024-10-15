@@ -114,3 +114,11 @@
 
 #import <ResearchKit/HKSample+ORKJSONDictionary.h>
 #import <ResearchKit/CMMotionActivity+ORKJSONDictionary.h>
+
+// Family History
+#import <ResearchKit/ORKConditionStepConfiguration.h>
+#import <ResearchKit/ORKFamilyHistoryResult.h>
+#import <ResearchKit/ORKFamilyHistoryStep.h>
+#import <ResearchKit/ORKHealthCondition.h>
+#import <ResearchKit/ORKRelatedPerson.h>
+#import <ResearchKit/ORKRelativeGroup.h>

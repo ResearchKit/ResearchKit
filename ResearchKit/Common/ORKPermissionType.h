@@ -79,7 +79,9 @@ ORK_CLASS_AVAILABLE
 
 + (ORKMotionActivityPermissionType *) deviceMotionPermissionType;
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 + (ORKLocationPermissionType *) locationPermissionType;
+#endif
 
 @end
 

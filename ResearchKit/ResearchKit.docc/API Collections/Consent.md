@@ -11,11 +11,10 @@ Obtain a participant's consent to collect research data.
 - ``ORKCustomSignatureAccessoryViewDelegate``
 - ``ORKCustomSignatureAccessoryViewProtocol``
 - ``ORKCustomSignatureAccessoryViewProvider``
-- ``ORKCustomSignatureFooterViewStatusDelegate``
 - ``ORKConsentSectionType``
 
 ### Signature acquisition
 
-- ``ORKSignatureView``
 - ``ORKConsentSignature``
-- ``ORKSignatureViewDelegate``
+- ``ORKSignatureFormatter``
+- ``ORKHTMLPDFWriter``
