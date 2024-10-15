@@ -1,3 +1,5 @@
+![researchkit_banner](https://github.com/user-attachments/assets/0384c1a6-ec67-45d3-be68-136a2e4cacff)
+
 ResearchKit Framework
 ===========
 
