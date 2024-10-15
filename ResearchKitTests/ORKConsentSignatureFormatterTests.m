@@ -30,7 +30,7 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit;
 
 #import "ORKConsentSignatureFormatter.h"
 

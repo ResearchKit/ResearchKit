@@ -6,7 +6,7 @@ codebase. However, other types of contributions are welcome too, in
 keeping with the ResearchKit™ framework [best practices](../../wiki/best-practices). For example,
 contributions of original free-to-use survey content, back-end integrations,
 validation data, and analysis or processing tools are all welcome. Ask
-on the [*ResearchKit* Forum](https://forums.developer.apple.com/community/researchkit) or [contact us](https://developer.apple.com/contact/researchkit/) for guidance.
+on the [*ResearchKit* Forum](https://developer.apple.com/forums/tags/researchkit) or [contact us](mailto:researchkit@apple.com) for guidance.
 
 
 Contributing software
@@ -16,8 +16,7 @@ This page assumes you already know how to check out and build the
 code. Contributions to the ResearchKit framework are expected to comply with the
 [ResearchKit Contribution Terms and License Policy](#contribution); please familiarize yourself
 with this policy prior to submitting a pull request. For any contribution, ensure that you own
-the rights or have permission from the copyright holder.  (e.g. code, images, surveys, videos
-and other content you may include)
+the rights or have permission from the copyright holder  (e.g. code, images, surveys, videos and other content you may include).
 
 To contribute to ResearchKit:
 
@@ -27,7 +26,7 @@ To contribute to ResearchKit:
 4. [Run the tests.](#test)
 5. [Submit a pull request.](#request)
 6. Make any changes requested by the reviewer, and update your pull request as needed.
-7. Once accepted, your pull request will be merged into master.
+7. Once accepted, your pull request will be merged into main.
 
 Choosing an issue to work on<a name="create"></a>
 ----------------------------
@@ -36,13 +35,12 @@ To find an issue to work on, either pick something that you need for
 your app, or select one of the issues from our [issue list](../../issues). Or,
 consider one of the areas where we'd like to extend ResearchKit:
 
-* Faster 'get started' to a useful app
-* More active tasks
-* Data analysis for active tasks
-* More consent sections
-* Back end integrations
+* Improving the APIs needed to get started with a ResearchKit project
+* New Active Tasks
+* Data analysis for Active Tasks
+* Backend integrations
 
-If in doubt, bring your idea up on the [*ResearchKit* Forum](https://forums.developer.apple.com/community/researchkit).
+If in doubt, bring your idea up on the [ResearchKit Forum](https://developer.apple.com/forums/tags/researchkit).
 
 
 Creating a personal fork<a name="fork"></a>
@@ -56,8 +54,7 @@ Develop your changes in your fork<a name="develop"></a>
 ---------------------------------
 
 Develop your changes using your normal development process. If you
-already have code from an existing project, you may need to adjust its
-style to more closely match the [ResearchKit framework coding style](./docs-standalone/coding-style-guide.md).
+already have code from an existing project, you may need to adjust its style to more closely match the [ResearchKit framework coding style](./docs-standalone/coding-style-guide.md).
 
 New components may need to expose new Public or Private
 headers. Public headers are for APIs that are likely to be a stable
@@ -78,7 +75,7 @@ code to other existing demo apps to exercise your feature.
 When adding UI driven components, make sure that they are accessible. 
 Follow the steps outlined in the [Best Practices](../../wiki/best-practices) 
 section under Accessibility. Before submitting the pull request, you should 
-audit your components with Voice Over (or other relevant assistive technologies) 
+audit your components with VoiceOver (or other relevant assistive technologies) 
 enabled.
 
 Keep changes that fix different issues separate. For bug fixes,
@@ -99,11 +96,11 @@ verify that test apps run on both device and simulator.
 
 Where your code affects UI presentation, also test:
 
-* Multiple device form factors (for instance, iPhone 4S, iPhone 5, iPhone 6, iPhone 6 Plus).
+* Multiple device form factors (for instance, iPhone SE, iPhone 14, iPhone 15 Pro, iPhone 15 Pro Max).
 * Dynamic text, especially at the "Large" setting.
 * Rotation between portrait and landscape, where appropriate.
 
-You can use the apps in the `Testing` and `samples` directories to
+You can use the `ORKCatalog` app in the `samples` directory to
 test your changes.
 
 Submit a pull request<a name="request"></a>
@@ -120,7 +117,7 @@ After acceptance<a name="after"></a>
 ----------------
 
 Once your pull request has been accepted, your changes will be merged
-to master. You are still responsible for your change after it is
+to main. You are still responsible for your change after it is
 accepted. Stay in contact, in case bugs are detected that may require
 your attention.
 
@@ -134,7 +131,7 @@ documentation, or other issues during this process.
 Release process
 -----------------
 
-The `master` branch is used for work in progress. On `master`:
+The `main` branch is used for work in progress. On `main`:
 
 * All test apps should build and run error free.
 * Unit tests should all pass.
@@ -142,9 +139,9 @@ The `master` branch is used for work in progress. On `master`:
   base language).
 
   The project will make periodic releases. When preparing a stable release, we
-  will branch from `master` to a convergence branch. During this process,
+  will branch from `main` to a convergence branch. During this process,
   changes will be made first to the convergence branch, and then merged into
-  `master`. On the convergence branch, changes will be made only to:
+  `main`. On the convergence branch, changes will be made only to:
 
   * Fix high priority issues.
   * Update documentation.

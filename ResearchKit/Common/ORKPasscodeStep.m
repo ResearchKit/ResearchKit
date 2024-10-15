@@ -31,16 +31,10 @@
 
 #import "ORKPasscodeStep.h"
 
-#import "ORKPasscodeStepViewController.h"
-
 #import "ORKHelpers_Internal.h"
 
 
 @implementation ORKPasscodeStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKPasscodeStepViewController class];
-}
 
 + (instancetype)passcodeStepWithIdentifier:(NSString *)identifier
                               passcodeFlow:(ORKPasscodeFlow)passcodeFlow {

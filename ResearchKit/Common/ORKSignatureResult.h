@@ -35,7 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKSignatureResult` class represents the result of a signature step (`ORKSignatureStep`).
+ A result object of the signature step.
  
  A signature result is produced by the task view controller when it presents a signature step.
  

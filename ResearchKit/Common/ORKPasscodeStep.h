@@ -29,14 +29,14 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- An enumeration of values used in `ORKPasscodeStepViewController` to indicate the type of flow used
+ An enumeration of values used in passcode view controller to indicate the type of flow used
  by the view controller.
  */
 typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {

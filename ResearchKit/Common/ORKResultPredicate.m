@@ -250,6 +250,12 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ ]];
 }
 
++ (NSPredicate *)predicateForDontKnowResultWithResultSelector:(ORKResultSelector *)resultSelector {
+    return [self predicateMatchingResultSelector:resultSelector
+                         subPredicateFormatArray:@[ @"answer isKindOfClass: %@" ]
+                 subPredicateFormatArgumentArray:@[ [ORKDontKnowAnswer class] ]];
+}
+
 + (NSPredicate *)predicateForScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                     expectedAnswer:(NSInteger)expectedAnswer {
     return [self predicateForNumericQuestionResultWithResultSelector:resultSelector
@@ -302,14 +308,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>)expectedAnswerValue {
+                                                expectedAnswerValue:(NSObject<NSCopying, NSSecureCoding> *)expectedAnswerValue {
     return [self predicateForChoiceQuestionResultWithResultSelector:resultSelector
                                                     expectedAnswers:@[ expectedAnswerValue ]
                                                         usePatterns:NO];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues {
+                                               expectedAnswerValues:(NSArray<NSObject<NSCopying, NSSecureCoding> *> *)expectedAnswerValues {
     return [self predicateForChoiceQuestionResultWithResultSelector:resultSelector
                                                     expectedAnswers:expectedAnswerValues
                                                         usePatterns:NO];
