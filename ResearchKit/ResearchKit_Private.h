@@ -28,30 +28,35 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/CLLocationManager+ResearchKit.h>
-#import <ResearchKit/ORKActiveStep_Internal.h>
 #import <ResearchKit/ORKAnswerFormat_Internal.h>
 #import <ResearchKit/ORKAnswerFormat_Private.h>
 #import <ResearchKit/ORKBodyItem_Internal.h>
 #import <ResearchKit/ORKChoiceAnswerFormatHelper.h>
 #import <ResearchKit/ORKCollectionResult_Private.h>
+#import <ResearchKit/ORKErrors.h>
+#import <ResearchKit/ORKHelpers_Internal.h>
+#import <ResearchKit/ORKHelpers_Private.h>
+#import <ResearchKit/ORKQuestionResult_Private.h>
+#import <ResearchKit/ORKQuestionStep_Private.h>
+#import <ResearchKit/ORKResult_Private.h>
+#import <ResearchKit/ORKStep_Private.h>
+#import <ResearchKit/ORKDevice.h>
+#import <ResearchKit/ORKStepNavigationRule_Private.h>
+
+#if !TARGET_OS_WATCH && !TARGET_OS_VISION
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
+#import <ResearchKit/ORKActiveStep_Internal.h>
 #import <ResearchKit/ORKConsentDocument_Private.h>
 #import <ResearchKit/ORKConsentSection_Private.h>
 #import <ResearchKit/ORKDataLogger.h>
 #import <ResearchKit/ORKDevice_Private.h>
-#import <ResearchKit/ORKErrors.h>
-#import <ResearchKit/ORKHelpers_Internal.h>
-#import <ResearchKit/ORKHelpers_Private.h>
 #import <ResearchKit/ORKOrderedTask_Private.h>
 #import <ResearchKit/ORKPageStep_Private.h>
 #import <ResearchKit/ORKPredicateFormItemVisibilityRule_Private.h>
-#import <ResearchKit/ORKQuestionResult_Private.h>
-#import <ResearchKit/ORKQuestionStep_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
-#import <ResearchKit/ORKResult_Private.h>
 #import <ResearchKit/ORKSignatureResult_Private.h>
 #import <ResearchKit/ORKSkin_Private.h>
-#import <ResearchKit/ORKStepNavigationRule_Private.h>
-#import <ResearchKit/ORKStep_Private.h>
 #import <ResearchKit/ORKTypes_Private.h>
 #import <ResearchKit/ORKWebViewStepResult_Private.h>
+
+#endif

@@ -28,15 +28,18 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ORKAnswerFormat_Internal.h>
+#import <ResearchKit/ORKAnswerFormat_Private.h>
+#import <ResearchKit/ORKHelpers_Internal.h>
+#import <ResearchKit/ORKQuestionResult.h>
+#import <ResearchKit/ORKQuestionStep.h>
+#import <ResearchKit/ORKQuestionStep_Private.h>
+#import <ResearchKit/ORKResult_Private.h>
+#import <ResearchKit/ORKStep_Private.h>
 
-#import "ORKQuestionResult_Private.h"
-#import "ORKResult_Private.h"
-
-
-#if TARGET_OS_IOS
-#import "ORKQuestionStep.h"
-#import "ORKHelpers_Internal.h"
-#import "ORKAnswerFormat_Internal.h"
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION && TARGET_OS_IOS
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 #endif
 
 @implementation ORKQuestionResult {
@@ -326,7 +329,7 @@
 
 @end
 
-#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION && TARGET_OS_IOS
 #pragma mark - ORKLocationQuestionResult
 
 @implementation ORKLocation
@@ -468,7 +471,6 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
-
 #endif
 
 #pragma mark - ORKSESQuestionResult

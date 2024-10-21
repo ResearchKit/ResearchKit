@@ -30,10 +30,9 @@
 
 
 #import <Foundation/Foundation.h>
-
+#import <ResearchKit/ORKInstructionStep.h>
 
 #if TARGET_OS_IOS
-#import <ResearchKit/ORKInstructionStep.h>
 #import <ResearchKit/ORKTask.h>
 #endif
 

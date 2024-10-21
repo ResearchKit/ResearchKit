@@ -30,11 +30,7 @@
  */
 
 #import <UIKit/UIKit.h>
-
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKSkin.h>
-#endif
-
 
 #if TARGET_OS_IOS
 

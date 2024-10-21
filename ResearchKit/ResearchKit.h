@@ -29,26 +29,42 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKTypes.h>
-
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKAnswerFormat.h>
+#import <ResearchKit/ORKCollectionResult.h>
 #import <ResearchKit/ORKCompletionStep.h>
+#import <ResearchKit/ORKFormItemVisibilityRule.h>
+#import <ResearchKit/ORKFormStep.h>
+#import <ResearchKit/ORKInstructionStep.h>
+#import <ResearchKit/ORKLearnMoreInstructionStep.h>
+#import <ResearchKit/ORKLearnMoreItem.h>
+#import <ResearchKit/ORKOrderedTask.h>
+#import <ResearchKit/ORKQuestionResult.h>
+#import <ResearchKit/ORKQuestionStep.h>
+#import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKSkin.h>
+#import <ResearchKit/ORKStep.h>
+#import <ResearchKit/ORKTask.h>
+#import <ResearchKit/ORKTypes.h>
+#import <ResearchKit/ORKResultPredicate.h>
+#import <ResearchKit/ORKBodyItem.h>
+#import <ResearchKit/ORKEarlyTerminationConfiguration.h>
+#import <ResearchKit/ORKNavigableOrderedTask.h>
+#import <ResearchKit/ORKStepNavigationRule.h>
+
+// Import these files for iOS only.
+#if !TARGET_OS_WATCH && !TARGET_OS_VISION
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKActiveStep.h>
 #import <ResearchKit/ORKConsentReviewStep.h>
 #import <ResearchKit/ORKConsentSharingStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKFormItemVisibilityRule.h>
 #import <ResearchKit/ORKHTMLPDFWriter.h>
 #import <ResearchKit/ORKImageCaptureStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
 #import <ResearchKit/ORKLoginStep.h>
 #import <ResearchKit/ORKNavigablePageStep.h>
 #import <ResearchKit/ORKPageStep.h>
 #import <ResearchKit/ORKPasscodeStep.h>
 #import <ResearchKit/ORKPDFViewerStep.h>
 #import <ResearchKit/ORKPredicateFormItemVisibilityRule.h>
-#import <ResearchKit/ORKQuestionStep.h>
 #import <ResearchKit/ORKRegistrationStep.h>
 #import <ResearchKit/ORKReviewStep.h>
 #import <ResearchKit/ORKSignatureFormatter.h>
@@ -61,24 +77,15 @@
 #import <ResearchKit/ORKFrontFacingCameraStep.h>
 #import <ResearchKit/ORKWebViewStep.h>
 #import <ResearchKit/ORKCustomStep.h>
-#import <ResearchKit/ORKLearnMoreInstructionStep.h>
 #import <ResearchKit/ORKSecondaryTaskStep.h>
 #import <ResearchKit/ORKRequestPermissionsStep.h>
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKCollectionResult.h>
 #import <ResearchKit/ORKConsentSignatureResult.h>
 #import <ResearchKit/ORKFrontFacingCameraStepResult.h>
 #import <ResearchKit/ORKPasscodeResult.h>
-#import <ResearchKit/ORKQuestionResult.h>
 #import <ResearchKit/ORKSignatureResult.h>
 #import <ResearchKit/ORKVideoInstructionStepResult.h>
 #import <ResearchKit/ORKWebViewStepResult.h>
@@ -92,10 +99,6 @@
 #import <ResearchKit/ORKConsentSignature.h>
 
 #import <ResearchKit/ORKKeychainWrapper.h>
-
-#import <ResearchKit/ORKBodyItem.h>
-#import <ResearchKit/ORKLearnMoreItem.h>
-
 #import <ResearchKit/ORKDataCollectionManager.h>
 #import <ResearchKit/ORKCollector.h>
 
@@ -107,11 +110,7 @@
 #import <ResearchKit/ORKLocationPermissionType.h>
 
 #import <ResearchKit/ORKDeprecated.h>
-
-#import <ResearchKit/ORKEarlyTerminationConfiguration.h>
 #import <ResearchKit/ORKBundleAsset.h>
-#import <ResearchKit/ORKSkin.h>
-
 #import <ResearchKit/HKSample+ORKJSONDictionary.h>
 #import <ResearchKit/CMMotionActivity+ORKJSONDictionary.h>
 
@@ -122,3 +121,5 @@
 #import <ResearchKit/ORKHealthCondition.h>
 #import <ResearchKit/ORKRelatedPerson.h>
 #import <ResearchKit/ORKRelativeGroup.h>
+
+#endif

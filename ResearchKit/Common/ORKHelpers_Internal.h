@@ -29,19 +29,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import <UIKit/UIKit.h>
-
-#if TARGET_OS_IOS
-#import <ResearchKit/ORKTypes.h>
-#import <ResearchKit/ORKHelpers_Private.h>
-#import <ResearchKit/ORKErrors.h>
-#endif
-
-
 #import <Foundation/Foundation.h>
 #import <os/log.h>
+#import <UIKit/UIKit.h>
 
+#import <ResearchKit/ORKErrors.h>
+#import <ResearchKit/ORKHelpers_Private.h>
+#import <ResearchKit/ORKTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

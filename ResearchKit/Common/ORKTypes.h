@@ -30,11 +30,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-
-#if TARGET_OS_IOS
 #import <ResearchKit/ORKDefines.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

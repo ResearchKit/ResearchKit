@@ -28,15 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ORKAnswerFormat_Internal.h>
+#import <ResearchKit/ORKAnswerFormat_Private.h>
+#import <ResearchKit/ORKHelpers_Internal.h>
+#import <ResearchKit/ORKQuestionStep_Private.h>
+#import <ResearchKit/ORKQuestionStep.h>
+#import <ResearchKit/ORKStep_Private.h>
 
 #if TARGET_OS_IOS
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKAnswerFormat_Private.h"
-#import "ORKHelpers_Internal.h"
 #import "ORKLearnMoreItem.h"
-#import "ORKQuestionStep_Private.h"
-#import "ORKStep_Private.h"
-#import "ORKQuestionStep.h"
 #endif
 
 #if TARGET_OS_IOS
