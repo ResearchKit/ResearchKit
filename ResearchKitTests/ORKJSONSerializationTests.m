@@ -55,7 +55,7 @@ static BOOL ORKIsResearchKitClass(Class class) {
 
 + (NSArray<NSString *> *)_fetchExclusionList {
     NSArray<NSString *> *classesToExclude = @[];
-
+    
 #if !ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     NSArray<NSString *> *locationClasses = @[
         @"ORKLocation",

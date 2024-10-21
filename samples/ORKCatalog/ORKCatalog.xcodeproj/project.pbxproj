@@ -400,7 +400,6 @@
 					};
 					9622282924F04D780056E74D = {
 						CreatedOnToolsVersion = 11.6;
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 						TestTargetID = 869230BD1AAA890A00BFE11B;
 					};

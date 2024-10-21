@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if !TARGET_OS_VISION
 
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
@@ -200,3 +201,5 @@ ORK_CLASS_AVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

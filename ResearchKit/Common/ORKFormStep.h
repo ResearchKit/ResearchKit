@@ -30,12 +30,8 @@
 
 
 #import <Foundation/Foundation.h>
-
-
-#if TARGET_OS_IOS
-#import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKDefines.h>
-#endif
+#import <ResearchKit/ORKStep.h>
 
 /**
  Values that determine the style

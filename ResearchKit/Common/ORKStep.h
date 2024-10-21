@@ -28,13 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#if TARGET_OS_IOS
-#import <ResearchKit/ORKTypes.h>
-#endif
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <ResearchKit/ORKTypes.h>
 
 @class HKObjectType;
 @class ORKResult;
@@ -252,7 +248,7 @@ ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
 
 #pragma mark - iOS
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_VISION
 
 @class ORKBodyItem;
 
@@ -311,6 +307,9 @@ API_AVAILABLE(ios(11))
 
 @end
 #endif
+
+
+#pragma mark - watchOS / VisionOS
 
 
 NS_ASSUME_NONNULL_END

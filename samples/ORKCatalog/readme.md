@@ -27,7 +27,6 @@ The *ORKCatalog* sample app is written in *Swift*.
 For more conceptual information about the *ResearchKit framework*, see the
 [ResearchKit Framework Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html).
 
-
 ## Build Requirements
 
 + Xcode 7.0.
