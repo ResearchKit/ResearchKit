@@ -32,10 +32,8 @@
 
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKQuestionResult.h>
-#endif
 
 #import <MapKit/MapKit.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION && TARGET_OS_IOS
 @interface ORKLocation ()
 
 #if TARGET_OS_IOS
@@ -62,5 +60,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
 
 @end
+#endif 
 
 NS_ASSUME_NONNULL_END

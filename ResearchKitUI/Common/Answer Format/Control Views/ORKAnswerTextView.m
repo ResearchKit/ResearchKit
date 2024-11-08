@@ -70,6 +70,7 @@
     _placeholderTextView = [[UITextView alloc] initWithFrame:CGRectZero];
     _placeholderTextView.textColor = [UIColor placeholderTextColor];
     _placeholderTextView.userInteractionEnabled = NO;
+    _placeholderTextView.isAccessibilityElement = NO;
     _placeholderTextView.translatesAutoresizingMaskIntoConstraints = NO;
     [self insertSubview:_placeholderTextView atIndex:0];
     
@@ -181,6 +182,19 @@
 {
     [self resignFirstResponder];
     return YES;
+}
+
+- (NSString *)accessibilityLabel {
+    if (!_placeholderTextView.hidden) {
+        return _placeholderTextView.text;
+    } else {
+        return [super accessibilityLabel];
+    }
+}
+
+- (NSArray *)automationElements {
+    // Placeholder TextView is excluded as an accessibility element but should still be available to automation.
+    return [[super automationElements] arrayByAddingObject:_placeholderTextView];
 }
 
 - (NSArray<UIAccessibilityCustomAction *> *)accessibilityCustomActions

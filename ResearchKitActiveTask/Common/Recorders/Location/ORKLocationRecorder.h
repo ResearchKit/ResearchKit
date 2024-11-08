@@ -28,7 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <ResearchKit/ORKRecorder.h>
@@ -69,3 +69,4 @@ ORK_CLASS_AVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+#endif 

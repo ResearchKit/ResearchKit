@@ -379,7 +379,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithTask:(id<ORKTask>)task
                ongoingResult:(nullable ORKTaskResult *)ongoingResult
          defaultResultSource:(nullable id<ORKTaskResultSource>)defaultResultSource
-                    delegate:(id<ORKTaskViewControllerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+                    delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
  Creates a new task view controller that starts the task at the step that has the specified step identifier.
@@ -399,7 +399,7 @@ ORK_CLASS_AVAILABLE
                ongoingResult:(nullable ORKTaskResult *)ongoingResult
           restoreAtFirstStep:(BOOL)restoreAtFirstStep
          defaultResultSource:(nullable id<ORKTaskResultSource>)defaultResultSource
-                    delegate:(id<ORKTaskViewControllerDelegate>)delegate;
+                    delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate;
 
 /**
  The delegate for the task view controller.
@@ -574,6 +574,8 @@ ORK_CLASS_AVAILABLE
  the value to `YES`.
  */
 @property (nonatomic, assign) BOOL discardable;
+
+@property (nonatomic, assign) BOOL skipSaveResultsConfirmation;
 
 @property (nonatomic) ORKTaskViewControllerReviewMode reviewMode;
 

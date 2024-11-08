@@ -41,6 +41,7 @@
 #import <ResearchKitActiveTask/ORKAudioStep.h>
 #import <ResearchKitActiveTask/ORKCountdownStep.h>
 #import <ResearchKitActiveTask/ORKdBHLToneAudiometryAudioGenerator.h>
+#import <ResearchKitActiveTask/ORKdBHLToneAudiometryContentView.h>
 #import <ResearchKitActiveTask/ORKdBHLToneAudiometryOnboardingStep.h>
 #import <ResearchKitActiveTask/ORKDeviceMotionRecorder.h>
 #import <ResearchKitActiveTask/ORKEnvironmentSPLMeterStepViewController_Private.h>

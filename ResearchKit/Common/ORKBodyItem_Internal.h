@@ -34,9 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKBodyItem ()
 
+#if !TARGET_OS_WATCH
 @property (nonatomic, copy, nullable) void (^customButtonConfigurationHandler)(UIButton *button);
 
 - (instancetype)initWithCustomButtonConfigurationHandler:(void(^)(UIButton *button))configurationHandler;
+#endif
 
 - (BOOL)isCustomButtonItemType;
 

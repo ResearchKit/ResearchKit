@@ -39,9 +39,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @interface ORKSurveyAnswerCellForLocation : ORKSurveyAnswerCell
 
 @end
+#endif 
 
 NS_ASSUME_NONNULL_END
 

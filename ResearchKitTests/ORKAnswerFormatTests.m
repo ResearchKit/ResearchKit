@@ -1448,7 +1448,7 @@
     XCTAssertEqual([regexAnswerFormat isAnswerValidWithString:incorrectPhoneNumber], NO, @"Should return NO since it is not in the correct format");
 }
 
-#if !TARGET_OS_VISION
+#if !TARGET_OS_VISION && ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 - (void)testLocationAnswerFormat {
     ORKLocationAnswerFormat *answerFormat = [ORKAnswerFormat locationAnswerFormat];
     [answerFormat setUseCurrentLocation:YES];
@@ -1513,6 +1513,7 @@
     XCTAssertEqual([[[answerFormat textChoices] objectAtIndex:1] value], [NSNumber numberWithInteger:2]);
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (void)testHealthKitCharacteristicTypeAnswerFormat {
     
     HKCharacteristicType *biologicalSex = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
@@ -1600,6 +1601,7 @@
     XCTAssertEqual([answerFormat numericAnswerStyle], ORKNumericAnswerStyleInteger);
     XCTAssertEqual([answerFormat quantityType], calories);
 }
+#endif
 
 - (void)testDateAnswerFormat {
     

@@ -31,6 +31,7 @@
 #import <ResearchKitUI/ORKBodyContainerView.h>
 #import <ResearchKitUI/ORKCheckmarkView.h>
 #import <ResearchKitUI/ORKDirectionView.h>
+#import <ResearchKitUI/ORKFamilyHistoryStepViewController_Private.h>
 #import <ResearchKitUI/ORKFormStepViewController_Private.h>
 #import <ResearchKitUI/ORKFreehandDrawingView.h>
 #import <ResearchKitUI/ORKInstructionStepContainerView.h>

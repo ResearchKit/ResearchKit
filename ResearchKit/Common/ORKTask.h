@@ -30,6 +30,8 @@
 
 
 #import <Foundation/Foundation.h>
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #import <HealthKit/HealthKit.h>
 
 
@@ -37,6 +39,7 @@
 #import <ResearchKit/ORKTypes.h>
 #endif
 
+#import <ResearchKit/ORKTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -271,6 +274,7 @@ requests access to these HealthKit types.
  
  See also: `requestedHealthKitTypesForWriting`.
  */
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
 
 /**
@@ -283,7 +287,7 @@ requests access to these HealthKit types.
  See also: `requestedHealthKitTypesForReading`.
  */
 @property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForWriting;
-
+#endif
 /**
  The set of permissions requested by the task.
  

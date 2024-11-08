@@ -93,6 +93,7 @@ NSString * const filenameExtension = @"plist";
 
 @end
 
+const double DeviceVolumeMinimumValue = 0.0625;
 const double ORKdBHLSineWaveToneGeneratorSampleRateDefault = 44100.0f;
 
 static OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
@@ -407,7 +408,7 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
     // get current volume
     float currentVolume = [self getCurrentSystemVolume];
     
-    currentVolume = (int)(currentVolume / 0.0625) * 0.0625;
+    currentVolume = ((int)(currentVolume / 0.0625) * 0.0625) >= DeviceVolumeMinimumValue ?: DeviceVolumeMinimumValue;
     
     // check in volume curve table for offset
     NSDecimalNumber *offsetDueToVolume = [NSDecimalNumber decimalNumberWithString:_volumeCurve[[NSString stringWithFormat:@"%.4f",currentVolume]]];

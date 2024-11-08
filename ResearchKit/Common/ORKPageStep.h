@@ -32,8 +32,6 @@
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKOrderedTask.h>
-#endif
-
 
 NS_ASSUME_NONNULL_BEGIN
 

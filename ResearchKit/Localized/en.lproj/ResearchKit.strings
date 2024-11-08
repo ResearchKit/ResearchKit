@@ -609,7 +609,7 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Measuring…";
 "ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Background Noise OK";
+"ENVIRONMENTSPL_OK" = "Good";
 "ENVIRONMENTSPL_NOISE" = "Too Loud";
 "ENVIRONMENTSPL_TITLE_2" = "Find a Quiet Place";
 "ENVIRONMENTSPL_INTRO_TEXT_2" = "For accurate results, this task should be completed in a quiet location. Once the background noise measurement reading is completed, you may continue.";
@@ -794,3 +794,21 @@
 "KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee.\n\nTap the screen and extend your right knee as far as you can.\n";
 "KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left knee to the start position.\n\nThen tap anywhere.";
 "KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position.\n\nThen tap anywhere.";
+
+/* Family History */
+"FAMILY_HISTORY_I_DONT_KNOW" = "I don't know";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Have they been diagnosed with any of the following diseases or health conditions?";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Health Conditions";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Answer these questions to the best of your ability";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Task Complete";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "None of the above";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "I prefer not to answer";
+"FAMILY_HISTORY_CONDITIONS" = "Conditions";
+"FAMILY_HISTORY_NONE_SELECTED" = "None selected";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Edit Entry";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Are you sure you want to delete this entry from your Family Health History?";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Delete Entry";
+"FAMILY_HISTORY_CANCEL" = "Cancel";
+"FAMILY_HISTORY_ADD" = "Add %@";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Confirm any diagnosed diseases or health conditions.";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Edit button";

@@ -73,12 +73,14 @@
     return ORKPermissionNone;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     if ([self.pageTask respondsToSelector:@selector(requestedHealthKitTypesForReading)]) {
         return [self.pageTask requestedHealthKitTypesForReading];
     }
     return nil;
 }
+#endif
 
 #pragma mark - NSCopying
 

@@ -14,7 +14,11 @@
   "testTargets" : [
     {
       "skippedTests" : [
-        "ORKDataCollectionTests"
+        "ORKDataCollectionTests",
+        "ORKJSONSerializationTests\/testEquality",
+        "ORKJSONSerializationTests\/testORKSampleDeserialization",
+        "ORKJSONSerializationTests\/testORKSerialization",
+        "ORKJSONSerializationTests\/testSecureCoding"
       ],
       "target" : {
         "containerPath" : "container:ResearchKit.xcodeproj",

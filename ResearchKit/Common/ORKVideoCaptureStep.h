@@ -89,12 +89,14 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, getter=isAudioMute) BOOL audioMute;
 
+#if !TARGET_OS_VISION
 /**
  Constants indicating the desired torch mode to use
  
  The default value is `AVCaptureTorchModeAuto` (see `AVCaptureTorchMode`).
  */
 @property (nonatomic) AVCaptureTorchMode torchMode;
+#endif
 
 /**
  Constants indicating the physical position of an AVCaptureDevice's hardware on the system.

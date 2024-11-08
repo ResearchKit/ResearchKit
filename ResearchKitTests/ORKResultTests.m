@@ -34,6 +34,7 @@
 @import ResearchKitUI;
 @import ResearchKitUI_Private;
 @import ResearchKit_Private;
+#import "ORKFormStepViewController+TestingSupport.h"
 
 @interface ORKResultTestsHelper: NSObject <ORKTaskViewControllerDelegate>
 @end
@@ -142,7 +143,7 @@
     ]];
     ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
     ORKStepViewController *viewController = [((ORKOrderedTask *)ORKDynamicCast(taskViewController.task, ORKOrderedTask)).steps.firstObject makeViewControllerWithResult:nil];
-    
+
     XCTAssertFalse(viewController.isViewLoaded, "TaskViewController's viewControllerForStep should return a viewController *without* its view loaded");
 }
 
@@ -372,6 +373,118 @@
         XCTAssertEqual(questionResults[1].identifier, @"item2");
         XCTAssertEqualObjects(questionResults[2].answer, @(42));
         XCTAssertEqual(questionResults[2].identifier, @"item3");
+    }
+
+}
+
+/*
+ We are testing if an ORKFormStepViewController that is saved with results
+ is restored from an ORKTaskViewController, with a new bundle, or form,
+ that has removed or modified one of the ORKAnswerFormats, then the
+ savedResults should remove the invalid answer.
+ */
+- (void)testTaskViewControllerRestorationWorksAfterTaskChanges {
+    ORKFormStep *formItemStep = [[ORKFormStep alloc] initWithIdentifier:@"step"];
+
+    formItemStep.formItems = @[
+        [[ORKFormItem alloc] initWithIdentifier:@"item1" text:nil answerFormat:ORKAnswerFormat.booleanAnswerFormat],
+        [[ORKFormItem alloc] initWithIdentifier:@"item2" text:nil answerFormat:ORKAnswerFormat.textAnswerFormat],
+        [[ORKFormItem alloc] initWithIdentifier:@"item3" text:nil answerFormat:
+        [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[
+            [[ORKTextChoice alloc] initWithText:@"text1" detailText:@"text1" value:@"text1" exclusive:true],
+            [[ORKTextChoice alloc] initWithText:@"text2" detailText:@"text2" value:@"text2" exclusive:true],
+            [[ORKTextChoice alloc] initWithText:@"text3" detailText:@"text3" value:@"text3" exclusive:true],
+        ]]]
+    ];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"test" steps:@[formItemStep]];
+
+    NSData *encodedTaskViewControllerData;
+    {
+        // create the task as if we were to present it
+        ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+
+        // viewWillAppear fills in the _managedStepIdentifiers in the taskViewController
+        [taskViewController viewWillAppear:false];
+
+        // make a few answers to test with, simulating answers entered by a user
+        __auto_type booleanAnswer = [[ORKBooleanQuestionResult alloc] initWithIdentifier:@"item1"];
+        booleanAnswer.booleanAnswer = @(YES);
+
+        __auto_type textAnswer = [[ORKTextQuestionResult alloc] initWithIdentifier:@"item2"];
+        textAnswer.textAnswer = @"there is no answer, only questions";
+
+        __auto_type choiceAnswerResult = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"item3"];
+        choiceAnswerResult.choiceAnswers = @[@"text3"];
+
+        ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"step" results:@[
+            booleanAnswer, textAnswer, choiceAnswerResult
+        ]];
+        // set the answers using taskViewController-internal method, to simulate user data entry
+        [taskViewController setManagedResult:stepResult forKey:@"step"];
+
+        // archive it
+        __auto_type keyedArchiver = [[NSKeyedArchiver alloc] initRequiringSecureCoding:YES];
+        [taskViewController encodeRestorableStateWithCoder:keyedArchiver];
+        encodedTaskViewControllerData = [keyedArchiver encodedData];
+    }
+    XCTAssertNotNil(encodedTaskViewControllerData);
+
+    // init a new taskViewController with the restoration data
+    {
+        // important to start with the same task so the identifiers match
+        ORKResultTestsHelper *taskDelegate = [[ORKResultTestsHelper alloc] init];
+        
+        ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:encodedTaskViewControllerData delegate:taskDelegate error:nil];
+        
+        [taskViewController viewWillAppear:true];
+        
+        ORKFormStepViewController *formVc = (ORKFormStepViewController *)taskViewController.currentStepViewController;
+        
+        // encode the VC with encodedData of a task that supports the  [[ORKTextChoice alloc] initWithText:@"text3" detailText:@"text3" value:@"text3" exclusive:true],
+        __auto_type keyedArchiver = [[NSKeyedArchiver alloc] initRequiringSecureCoding:YES];
+        [formVc encodeRestorableStateWithCoder:keyedArchiver];
+        encodedTaskViewControllerData = [keyedArchiver encodedData];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        __auto_type keyedUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:encodedTaskViewControllerData];
+#pragma clang diagnostic pop
+        
+        ORKFormStep *formItemStep = [[ORKFormStep alloc] initWithIdentifier:@"step"];
+        
+        formItemStep.formItems = @[
+            [[ORKFormItem alloc] initWithIdentifier:@"item1" text:nil answerFormat:ORKAnswerFormat.booleanAnswerFormat],
+            [[ORKFormItem alloc] initWithIdentifier:@"item2" text:nil answerFormat:ORKAnswerFormat.textAnswerFormat],
+            [[ORKFormItem alloc] initWithIdentifier:@"item3" text:nil answerFormat:
+             [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[
+                [[ORKTextChoice alloc] initWithText:@"text1" detailText:@"text1" value:@"text1" exclusive:true],
+                [[ORKTextChoice alloc] initWithText:@"text2" detailText:@"text2" value:@"text2" exclusive:true],
+             ]]]
+        ];
+        ORKFormStepViewController *formVc2 = [[ORKFormStepViewController alloc] initWithStep:formItemStep];
+        XCTAssertNotNil(formVc2);
+
+        // expect savedAnswers to be empty, because nothing has been restored
+        XCTAssertEqual(formVc2.savedAnswers.count, 0);
+        // expect the unarchiver to decode 3 saved answers, but the invalid one will be removed
+        // so we should expect 2 saved anwers
+        [formVc2 decodeRestorableStateWithCoder:keyedUnarchiver];
+        XCTAssertEqual(formVc2.savedAnswers.count, 2);
+    
+        // test restoration logic directly
+        NSSet *decodableAnswerTypes = [NSSet setWithObjects:NSMutableDictionary.self, NSString.self, NSNumber.self, NSDate.self, nil];
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        __auto_type keyedUnarchiver2 = [[NSKeyedUnarchiver alloc] initForReadingWithData:encodedTaskViewControllerData];
+#pragma clang diagnostic pop
+
+        NSMutableDictionary *savedAnswers = [keyedUnarchiver2 decodeObjectOfClasses:decodableAnswerTypes forKey:@"savedAnswers"];
+        // we expect 3 saved answers from the unarchiver
+        XCTAssertEqual(savedAnswers.count, 3);
+        formVc2.savedAnswers = savedAnswers;
+        [formVc2 removeInvalidSavedAnswers];
+        // after removing 1 invalid answer, we expect 2 saved answers 
+        XCTAssertEqual(savedAnswers.count, 2);
     }
 
 }

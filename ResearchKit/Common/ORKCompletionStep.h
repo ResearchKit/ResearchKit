@@ -30,7 +30,7 @@
 
 
 #import <Foundation/Foundation.h>
-
+#import <ResearchKit/ORKInstructionStep.h>
 
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKInstructionStep.h>

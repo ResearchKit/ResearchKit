@@ -87,9 +87,10 @@ func resultTableViewProviderForResult(_ result: ORKResult?, delegate: ResultProv
     case is ORKDateQuestionResult:
         providerType = DateQuestionResultTableViewProvider.self
         
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     case is ORKLocationQuestionResult:
         providerType = LocationQuestionResultTableViewProvider.self
-        
+#endif
     case is ORKNumericQuestionResult:
         providerType = NumericQuestionResultTableViewProvider.self
         
@@ -444,6 +445,7 @@ class DateQuestionResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 /// Table view provider specific to an `ORKLocationQuestionResult` instance.
 class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
@@ -462,7 +464,7 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
         return rows
     }
 }
-
+#endif 
 /// Table view provider specific to an `ORKNumericQuestionResult` instance.
 class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
@@ -1388,3 +1390,5 @@ class SignatureResultTableViewProvider: ResultTableViewProvider {
         return UITableView.automaticDimension
     }
 }
+
+

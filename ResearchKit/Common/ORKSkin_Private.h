@@ -33,8 +33,6 @@
 
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKSkin.h>
-#endif
-
 
 #if TARGET_OS_IOS || TARGET_OS_VISION
 

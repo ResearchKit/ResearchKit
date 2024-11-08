@@ -49,7 +49,6 @@ class ResultViewController: UITableViewController {
     // MARK: Properties
 
     var result: ORKResult?
-
     var currentResult: ORKResult?
 
     var resultTableViewProvider: UITableViewDataSource & UITableViewDelegate = resultTableViewProviderForResult(nil, delegate: nil)
@@ -127,4 +126,5 @@ extension ResultViewController: ResultProviderDelegate {
         present(shareSheet, animated: true, completion: nil)
     }
 }
+
 

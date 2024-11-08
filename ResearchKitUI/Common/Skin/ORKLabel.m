@@ -67,6 +67,7 @@
 }
 
 - (void)updateAppearance {
+    self.font = [[self class] defaultFont];
     [self invalidateIntrinsicContentSize];
 }
 

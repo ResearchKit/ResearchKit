@@ -38,6 +38,8 @@
 
 static const CGFloat TopToProgressViewMinPadding = 10.0;
 
+NSString * const ORKdBHLToneAudiometryTestInProgressLabelAccessibilityIdentifier = @"ORKdBHLToneAudiometryTestInProgressLabel";
+
 @interface TestingInProgressView : UIView
 
 @property (nonatomic, assign, getter=isActive) BOOL active;
@@ -136,6 +138,7 @@ static const CGFloat TestingInProgressIndicatorRadius = 6.0;
                                                                 compatibleWithTraitCollection:self.traitCollection];
         _textLabel.font = [UIFont fontWithDescriptor:descriptor size:2 * TestingInProgressIndicatorRadius];
         _textLabel.text = ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS", nil);
+        _textLabel.accessibilityIdentifier = ORKdBHLToneAudiometryTestInProgressLabelAccessibilityIdentifier;
         [self addSubview:_textLabel];
         
         [NSLayoutConstraint activateConstraints:@[

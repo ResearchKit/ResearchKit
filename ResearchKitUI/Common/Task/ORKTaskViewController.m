@@ -30,7 +30,6 @@
 
 #import "ORKTaskViewController.h"
 
-#import "ORKBorderedButton.h"
 #import "ORKInstructionStepViewController_Internal.h"
 #import "ORKFormStepViewController.h"
 #import "ORKReviewStepViewController_Internal.h"
@@ -52,13 +51,18 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKObserver.h"
 #import "ORKSkin.h"
+#import "ORKBorderedButton.h"
 #import "ORKTaskReviewViewController.h"
-
-#import <CoreLocation/CLLocationManagerDelegate.h>
-#import <ResearchKit/CLLocationManager+ResearchKit.h>
 
 @import AVFoundation;
 @import CoreMotion;
+
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+#import <CoreLocation/CLLocationManagerDelegate.h>
+#import <ResearchKit/CLLocationManager+ResearchKit.h>
+
+
 
 
 typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
@@ -70,8 +74,10 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 - (void)resume;
 
 @end
+#endif
 
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @implementation ORKLocationAuthorizationRequester {
     CLLocationManager *_manager;
     _ORKLocationAuthorizationRequestHandler _handler;
@@ -135,7 +141,7 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 }
 
 @end
-
+#endif
 
 /// An interface for managing a task in a view.
 ///
@@ -144,8 +150,6 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     ORKScrollViewObserver *_scrollViewObserver;
     BOOL _hasBeenPresented;
     BOOL _hasRequestedHealthData;
-    
-    BOOL _saveable;
     ORKPermissionMask _grantedPermissions;
     NSSet<HKObjectType *> *_requestedHealthTypesForRead;
     NSSet<HKObjectType *> *_requestedHealthTypesForWrite;
@@ -208,8 +212,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     self.showsProgressInNavigationBar = YES;
     self.discardable = NO;
+    self.skipSaveResultsConfirmation = NO;
     self.progressMode = ORKTaskViewControllerProgressModeQuestionsPerStep;
-    _saveable = NO;
     
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
@@ -219,7 +223,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Ensure taskRunUUID has non-nil valuetaskRunUUID
     (void)[self taskRunUUID];
     self.restorationClass = [ORKTaskViewController class];
-
 
     return self;
 }
@@ -275,7 +278,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             for (ORKResult *stepResult in ongoingResult.results) {
                 NSString *stepResultIdentifier = stepResult.identifier;
                 if ([task stepWithIdentifier:stepResultIdentifier] == nil) {
-                    @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"ongoingResults has results for identifiers not found within the task steps" userInfo:nil];
+                    ORK_Log_Error("ongoingResults has results for identifiers not found within the task steps, skipping adding result for step %@", stepResultIdentifier);
+                    continue;
                 }
                 [_managedStepIdentifiers addObject:stepResultIdentifier];
                 _managedResults[stepResultIdentifier] = stepResult;
@@ -343,16 +347,24 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                    writeTypes:(NSSet *)writeTypes
                                       handler:(void (^)(void))handler {
     NSParameterAssert(handler != nil);
-    if ((![HKHealthStore isHealthDataAvailable]) || (!readTypes && !writeTypes)) {
+    BOOL needsHealthKitAuthRequest = NO;
+    
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+    needsHealthKitAuthRequest = ([HKHealthStore isHealthDataAvailable]);
+    needsHealthKitAuthRequest = needsHealthKitAuthRequest && ((readTypes != nil) || (writeTypes != nil));
+#endif
+
+    if (needsHealthKitAuthRequest == NO) {
         _requestedHealthTypesForRead = nil;
         _requestedHealthTypesForWrite = nil;
-        handler();
+        dispatch_async(dispatch_get_main_queue(), handler);
         return;
     }
     
     _requestedHealthTypesForRead = readTypes;
     _requestedHealthTypesForWrite = writeTypes;
     
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     __block HKHealthStore *healthStore = [HKHealthStore new];
     [healthStore requestAuthorizationToShareTypes:writeTypes readTypes:readTypes completion:^(BOOL success, NSError *error) {
         ORK_Log_Error("Health access: error=%@", error);
@@ -361,6 +373,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         // Clear self-ref.
         healthStore = nil;
     }];
+#endif
+
 }
 
 #if TARGET_OS_IOS
@@ -419,6 +433,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }];
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 - (void)requestLocationAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
     
@@ -433,6 +448,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     [requester resume];
 }
+#endif
 
 - (ORKPermissionMask)desiredPermissions {
     ORKPermissionMask permissions = ORKPermissionNone;
@@ -452,6 +468,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         return;
     }
     
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     NSSet *readTypes = nil;
     if ([self.task respondsToSelector:@selector(requestedHealthKitTypesForReading)]) {
         readTypes = [self.task requestedHealthKitTypesForReading];
@@ -461,19 +478,22 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([self.task respondsToSelector:@selector(requestedHealthKitTypesForWriting)]) {
         writeTypes = [self.task requestedHealthKitTypesForWriting];
     }
-    
+#endif
+
     ORKPermissionMask permissions = [self desiredPermissions];
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
             ORK_Log_Debug("Requesting health access");
             [self requestHealthStoreAccessWithReadTypes:readTypes
                                              writeTypes:writeTypes
                                                 handler:^{
                                                     dispatch_semaphore_signal(semaphore);
                                                 }];
+#endif
         });
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         if (permissions & ORKPermissionCoreMotionAccelerometer) {
@@ -507,6 +527,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
+        
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
         if (permissions & ORKPermissionCoreLocation) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug("Requesting location access");
@@ -522,6 +544,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
+#endif 
         if (permissions & ORKPermissionCamera) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug("Requesting camera access");
@@ -667,7 +690,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Clear endDate if current TaskVC got presented again
     _dismissedDate = nil;
     
-    if ([self shouldDismissWithSwipe] == NO) {
+    if ([self isSafeToSkipConfirmation] == NO) {
         self.modalInPresentation = YES;
     }
     
@@ -1165,6 +1188,28 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return stepViewController;
 }
 
+- (nullable ORKResult *)getCurrentStepResult:(ORKStep *)step {
+    ORKResult *result = [self.result resultForIdentifier:step.identifier];
+    if (result) {
+        return result;
+    }
+    ORKStepResult *previousResult = _managedResults[step.identifier];
+    
+    // Check the default source first
+    BOOL alwaysCheckForDefaultResult = ([self.defaultResultSource respondsToSelector:@selector(alwaysCheckForDefaultResult)] &&
+                                        [self.defaultResultSource alwaysCheckForDefaultResult]);
+    if ((previousResult == nil) || alwaysCheckForDefaultResult) {
+        result = [self.defaultResultSource stepResultForStepIdentifier:step.identifier];
+    }
+    
+    // If nil, assign to the previous result (if available) otherwise create new instance
+    if (!result) {
+        result = previousResult ? : [[ORKStepResult alloc] initWithIdentifier:step.identifier];
+    }
+    
+    return result;
+}
+
 - (ORKStepViewController *)viewControllerForStep:(ORKStep *)step {
     return [self viewControllerForStep:step isPreviousViewController:NO];
 }
@@ -1199,21 +1244,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // no-op
 }
 
-- (void)presentCancelOptions:(BOOL)saveable sender:(id)sender {
-    
-    if ([self.delegate respondsToSelector:@selector(taskViewControllerShouldConfirmCancel:)] &&
-        ![self.delegate taskViewControllerShouldConfirmCancel:self]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self finishWithReason:ORKTaskFinishReasonDiscarded error:nil];
-        });
-        return;
-    }
-    
-    BOOL supportSaving = NO;
-    if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)]) {
-        supportSaving = [self.delegate taskViewControllerSupportsSaveAndRestore:self];
-    }
-    
+- (void)showRestorationStateAlertControllerWithSender:(id)sender
+                                             saveable:(BOOL)saveable
+                                        supportSaving:(BOOL)supportSaving {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -1227,6 +1260,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         alert.popoverPresentationController.barButtonItem = sender;
     }
     
+    
+    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", nil) : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
+    
     if (supportSaving && saveable) {
         [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
                                                   style:UIAlertActionStyleDefault
@@ -1237,57 +1273,88 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                 }]];
     }
     
-    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", nil) : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
-    
     [alert addAction:[UIAlertAction actionWithTitle:discardTitle
-                                              style:UIAlertActionStyleDestructive
-                                            handler:^(UIAlertAction *action) {
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [self finishWithReason:ORKTaskFinishReasonDiscarded error:nil];
-                                                });
-                                            }]];
-    
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction *action) {
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        [self finishWithReason:ORKTaskFinishReasonDiscarded error:nil];
+                                                    });
+                                                }]];
+
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
-    
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)presentCancelOptionsWithSender:(id)sender {
+    BOOL saveable = [self hasSaveableResults];
+    if ([self.delegate respondsToSelector:@selector(taskViewControllerShouldConfirmCancel:)] &&
+        ![self.delegate taskViewControllerShouldConfirmCancel:self]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self finishWithReason:ORKTaskFinishReasonDiscarded error:nil];
+        });
+        return;
+    }
+    
+    BOOL supportSaving = NO;
+    if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)]) {
+        supportSaving = [self.delegate taskViewControllerSupportsSaveAndRestore:self];
+    }
+     
+    if (_skipSaveResultsConfirmation && supportSaving && saveable) {
+        [self finishWithReason:ORKTaskFinishReasonSaved error:nil];
+    } else {
+        [self showRestorationStateAlertControllerWithSender:self
+                                                   saveable:saveable
+                                              supportSaving:supportSaving];
+    }
 }
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
     if (self.discardable) {
         [self finishWithReason:ORKTaskFinishReasonDiscarded error:nil];
     } else {
-        [self presentCancelOptions:_saveable sender:sender];
+        [self presentCancelOptionsWithSender:sender];
     }
 }
 
-- (BOOL)shouldDismissWithSwipe {
-    // Should we also include visualConsentStep here? Others?
-    BOOL isCurrentInstructionStep = [self.currentStepViewController.step isKindOfClass:[ORKInstructionStep class]];
+/// Compute whether it's safe to discard results because there wouldn't be any user data to lose. When `isSafeToSkipConfirmation` returns
+/// YES, we know there's no need to present a confirmation dialog about potential data loss from ending the task.
+- (BOOL)isSafeToSkipConfirmation {
+    BOOL result = NO;
     
-    // [self result] would not include any results beyond current step.
-    // Use _managedResults to get the completed result set.
+    ORKStep *currentStep = self.currentStepViewController.step;
+    
+    // true if currentStep is NOT capable of contributing results, AND there are no other saveable results
+    result = result || (([self.currentStepViewController.step isKindOfClass:[ORKInstructionStep class]]) && ([self hasSaveableResults] == NO));
+    
+    // true if currentStep is a standalone reviewStep. No results will be lost by dismissing.
+    result = result || (ORKDynamicCast(currentStep, ORKReviewStep).isStandalone);
+
+    // true if currentStep is in readOnly mode. Nothing can be lost.
+    result = result || self.currentStepViewController.readOnlyMode;
+    
+    return result;
+}
+
+- (BOOL)hasSaveableResults {
+    /* [self result] would not include any results beyond current step, because managedResultsArray
+     [self result] depends on only iterates over _managedStepIdentifiers. If the user hits the back button
+     during the task, the _managedStepIdentifiers is truncated so it ends with the current step. This is even
+     thought _managedResults still retains results from a step that comes *after* the current one.
+     
+     So, instead, use _managedResults to check all completed results for isSaveable.
+     */
     NSArray *results = _managedResults.allValues;
-    _saveable = NO;
-    for (ORKStepResult *result in results) {
-        if ([result isSaveable]) {
-            _saveable = YES;
-            break;
+    
+    for (ORKStepResult *stepResult in results) {
+        if ([stepResult isSaveable]) {
+            return YES;
         }
     }
     
-    BOOL isStandaloneReviewStep = NO;
-    if ([self.currentStepViewController.step isKindOfClass:[ORKReviewStep class]]) {
-        ORKReviewStep *reviewStep = (ORKReviewStep *)self.currentStepViewController.step;
-        isStandaloneReviewStep = reviewStep.isStandalone;
-    }
-    
-    if ((isCurrentInstructionStep && _saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return NO;
 }
 
 - (IBAction)learnMoreAction:(id)sender {
@@ -1628,8 +1695,13 @@ static NSString *const _ORKProgressMode = @"progressMode";
         }
         
         if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
             _requestedHealthTypesForRead = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSSet.self, HKObjectType.self]] forKey:_ORKRequestedHealthTypesForReadRestoreKey];
             _requestedHealthTypesForWrite = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSSet.self, HKObjectType.self]] forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
+#else
+            _requestedHealthTypesForRead = nil;
+            _requestedHealthTypesForWrite = nil;
+#endif
             _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
             _lastBeginningInstructionStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKLastBeginningInstructionStepIdentifierKey];
             _restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];

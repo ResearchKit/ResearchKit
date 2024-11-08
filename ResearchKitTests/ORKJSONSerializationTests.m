@@ -56,6 +56,18 @@ static BOOL ORKIsResearchKitClass(Class class) {
 + (NSArray<NSString *> *)_fetchExclusionList {
     NSArray<NSString *> *classesToExclude = @[];
     
+#if !ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    NSArray<NSString *> *locationClasses = @[
+        @"ORKLocation",
+        @"ORKLocationQuestionResult",
+        @"ORKLocationAnswerFormat",
+        @"ORKLocationRecorderConfiguration"
+    ];
+   
+   classesToExclude = [classesToExclude arrayByAddingObjectsFromArray:locationClasses];
+#endif
+    
+    
     return classesToExclude;
 }
 
@@ -275,11 +287,11 @@ ORK_MAKE_TEST_INIT(ORKWebViewStep, ^{
     return webViewStep;
 });
 ORK_MAKE_TEST_INIT(ORK3DModelStep, ^{return [[self.class alloc] initWithIdentifier:NSUUID.UUID.UUIDString modelManager: [[ORK3DModelManager alloc] init]]; });
+ORK_MAKE_TEST_INIT(ORKAgeAnswerFormat, ^{return [self initWithMinimumAge:0 maximumAge:80 minimumAgeCustomText:nil maximumAgeCustomText:nil showYear:NO useYearForResult:NO treatMinAgeAsRange:false treatMaxAgeAsRange:false defaultValue:0];});
 
 
 ORK_MAKE_TEST_INIT(ORKImageChoice, ^{return [super init];});
-
-
+ORK_MAKE_TEST_INIT(ORKColorChoice, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKTextChoice, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKTextChoiceOther, ^{return [self initWithText:@"test" primaryTextAttributedString:nil detailText:@"test1" detailTextAttributedString:nil value:@"value" exclusive:YES textViewPlaceholderText:@"test2" textViewInputOptional:NO textViewStartsHidden:YES];});
 ORK_MAKE_TEST_INIT(ORKPredicateStepNavigationRule, ^{return [self initWithResultPredicates:@[[ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:[ORKResultSelector selectorWithResultIdentifier:@"test"] expectedAnswer:YES]] destinationStepIdentifiers:@[@"test2"]];});
@@ -300,6 +312,8 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
 ORK_MAKE_TEST_INIT_ALT(CLCircularRegion, (^{
     return [self initWithCenter:CLLocationCoordinate2DMake(3.0, 4.0) radius:150.0 identifier:@"identifier"];
 }));
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 ORK_MAKE_TEST_INIT(ORKLocation, (^{
     CNMutablePostalAddress *postalAddress = [[CNMutablePostalAddress alloc] init];
     postalAddress.city = @"cityA";
@@ -314,6 +328,8 @@ ORK_MAKE_TEST_INIT_ALT(ORKLocation, (^{
     ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(4.0, 5.0) region:[[CLCircularRegion alloc] orktest_init_alt] userInput:@"addressStringB" postalAddress:postalAddress];
     return location;
 }));
+#endif
+
 ORK_MAKE_TEST_INIT(HKSampleType, (^{
     return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
 }));
@@ -592,6 +608,9 @@ ORK_MAKE_TEST_INIT(ORKAccuracyStroopStep, (^{ return [[ORKAccuracyStroopStep all
                                           @"ORKTextAnswerFormat.passwordRules",
                                           @"ORKTextAnswerFormat.spellCheckingType",
                                           @"ORKTextAnswerFormat.textContentType",
+                                          @"ORKColorChoice.value",
+                                          @"ORKColorChoice.value",
+                                          @"ORKHealthCondition.value",
                                           @"ORKTextChoice.detailTextAttributedString",
                                           @"ORKTextChoice.primaryTextAttributedString",
                                           @"ORKTextChoice.value",
@@ -1006,8 +1025,14 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
             [(ORKDateAnswerFormat *)instance _setCurrentDateOverride:dateFormatOverrideDate];
             [(ORKDateAnswerFormat *)instance setDaysAfterCurrentDateToSetMinimumDate:1];
             [(ORKDateAnswerFormat *)instance setDaysBeforeCurrentDateToSetMinimumDate:1];
+        } else if ([aClass isSubclassOfClass:[ORKAgeAnswerFormat class]]) {
+            [instance setValue:@(0) forKey:@"minimumAge"];
+            [instance setValue:@(80) forKey:@"maximumAge"];
+            [instance setValue:@(0) forKey:@"defaultValue"];
+            [instance setValue:@(2023) forKey:@"relativeYear"];
+        } else if ([aClass isSubclassOfClass:[ORKColorChoice class]]) {
+            [instance setValue:@"blah" forKey:@"value"];
         }
-        
 
         // Serialization
         NSDictionary *instanceDictionary = [ORKESerializer JSONObjectForObject:instance context:context error:NULL];
@@ -1127,9 +1152,13 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
         [instance setValue:index?[NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese]:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
     } else if (p.propertyClass == [NSTimeZone class]) {
         [instance setValue:index?[NSTimeZone timeZoneWithName:[NSTimeZone knownTimeZoneNames][0]]:[NSTimeZone timeZoneForSecondsFromGMT:1000] forKey:p.propertyName];
-    } else if (p.propertyClass == [ORKLocation class]) {
+    } 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    else if (p.propertyClass == [ORKLocation class]) {
         [instance setValue:(index ? [[ORKLocation alloc] orktest_init] : [[ORKLocation alloc] orktest_init_alt]) forKey:p.propertyName];
-    } else if (p.propertyClass == [CLCircularRegion class]) {
+    }
+#endif
+     else if (p.propertyClass == [CLCircularRegion class]) {
         [instance setValue:index?[[CLCircularRegion alloc] orktest_init_alt]:[[CLCircularRegion alloc] orktest_init] forKey:p.propertyName];
     } else if (p.propertyClass == [NSPredicate class]) {
         [instance setValue:[NSPredicate predicateWithFormat:index?@"1 == 1":@"1 == 2"] forKey:p.propertyName];
@@ -1382,6 +1411,10 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
                                        @"ORKSpeechRecognitionStep.shouldHideTranscript",
                                        @"ORKWebViewStepResult.html",
                                        @"ORKWebViewStepResult.htmlWithSignature",
+                                       @"ORKAgeAnswerFormat.minimumAge",
+                                       @"ORKAgeAnswerFormat.maximumAge",
+                                       @"ORKAgeAnswerFormat.relativeYear",
+                                       @"ORKAgeAnswerFormat.defaultValue",
                                        @"ORKTableStep.isBulleted",
                                        @"ORKTableStep.allowsSelection",
                                        @"ORKPDFViewerStep.actionBarOption",

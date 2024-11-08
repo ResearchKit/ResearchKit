@@ -69,7 +69,10 @@
     return option && [option isKindOfClass:[ORKImageChoice class]] ? (ORKImageChoice *) option : nil;
 }
 
-
+- (ORKColorChoice *)colorChoiceAtIndex:(NSUInteger)index {
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKColorChoice class]] ? (ORKColorChoice *) option : nil;
+}
 #endif
 
 - (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
@@ -139,6 +142,8 @@
         
         for (id answerValue in (NSArray *)answer) {
             id<ORKAnswerOption> matchedChoice = nil;
+            BOOL isTextChoiceOtherResult = [self _isTextChoiceOtherResult:answerValue choices:_choices];
+            
             for ( id<ORKAnswerOption> choice in _choices) {
 #if TARGET_OS_IOS || TARGET_OS_VISION
                 if ([choice isKindOfClass:[ORKTextChoiceOther class]]) {
@@ -149,7 +154,12 @@
                     } else if (textChoiceOther.textViewInputOptional && textChoiceOther.textViewText.length <= 0 && [textChoiceOther.value isEqual:answerValue]) {
                         matchedChoice = choice;
                         break;
+                    } else if (isTextChoiceOtherResult) {
+                        textChoiceOther.textViewText = answerValue;
+                        matchedChoice = choice;
+                        break;
                     }
+                    
                 } else if ([choice.value isEqual:answerValue]) {
                     matchedChoice = choice;
                     break;
@@ -190,6 +200,20 @@
     
     return [indexArray copy];
     
+}
+
+- (BOOL)_isTextChoiceOtherResult:(id)answerValue choices:(NSArray *)choices {
+    if (answerValue == nil) {
+        return NO;
+    }
+    
+    for (id<ORKAnswerOption> choice in _choices) {
+        if ([choice.value isEqual:answerValue]){
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (NSString *)stringForChoiceAnswer:(id)answer {

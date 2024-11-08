@@ -11,26 +11,18 @@ Using ResearchKit, you can build apps that obtain consent, give instructions, pr
 ### Essentials
 
 - ``ORKStep``
-- ``ORKStepViewController``
-- ``ORKStepViewControllerDelegate``
 
 ### Active steps
 
 - ``ORKActiveStep``
-- ``ORKActiveStepViewController``
 - ``ORKMotionActivityCollector``
 - ``ORKMotionActivityPermissionType``
-- ``ORKHolePegTestSample``
-- ``ORKEnvironmentSPLMeterStep``
-- ``ORKBodySagittal``
 
 ### Authentication and consent steps
 
 - ``ORKLoginStep``
-- ``ORKLoginStepViewController``
 - ``ORKSignatureStep``
 - ``ORKVerificationStep``
-- ``ORKVerificationStepViewController``
 - ``ORKLoginFormItemIdentifierEmail``
 - ``ORKLoginFormItemIdentifierPassword``
 - ``ORKKeychainWrapper``
@@ -52,18 +44,22 @@ Using ResearchKit, you can build apps that obtain consent, give instructions, pr
 - ``ORKConsentReviewStep``
 - ``ORKConsentSharingStep``
 - ``ORKCompletionStep``
-- ``ORKCompletionStepViewController``
-- ``ORKCompletionStepIdentifier``
 
 ### Custom steps
 
 - ``ORKCustomStep``
-- ``ORKCustomStepViewController``
+
+### Family History
+
+- ``ORKFamilyHistoryStep``
+- ``ORKConditionStepConfiguration``
+- ``ORKHealthCondition``
+- ``ORKRelatedPerson``
+- ``ORKRelativeGroup``
 
 ### Form steps
 
 - ``ORKFormStep``
-- ``ORKFormStepViewController``
 - ``ORKBodyItem``
 - ``ORKBulletType``
 - ``ORKBodyItemStyle``
@@ -76,43 +72,31 @@ Using ResearchKit, you can build apps that obtain consent, give instructions, pr
 
 ### Image and 3D model steps
 
-- ``ORK3DModelStep``
-- ``ORK3DModelManager``
-- ``ORKUSDZModelManager``
-- ``ORK3DModelManagerProtocol``
 - ``ORKFrontFacingCameraStep``
 - ``ORKImageCaptureStep``
-- ``ORKPlaybackButton``
 
 ### Location steps
 
 - ``ORKLocation``
 - ``ORKLocationPermissionType``
-- ``ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION``
 
 ### Passcode steps
 
 - ``ORKPasscodeStep``
-- ``ORKPasscodeViewController``
-- ``ORKPasscodeDelegate``
 - ``ORKPasscodeFlow``
 - ``ORKPasscodeType``
 
 ### PDF and page steps
 
 - ``ORKPDFViewerStep``
-- ``ORKPDFViewerStepViewController``
 - ``ORKPageStep``
-- ``ORKPageStepViewController``
 - ``ORKPDFViewerActionBarOption``
 
 ### Question and instruction steps
 
 - ``ORKQuestionStep``
 - ``ORKInstructionStep``
-- ``ORKInstructionStepViewController``
 - ``ORKLearnMoreInstructionStep``
-- ``ORKLearnMoreStepViewController``
 - ``ORKNavigablePageStep``
 
 ### Registration steps
@@ -130,8 +114,6 @@ Using ResearchKit, you can build apps that obtain consent, give instructions, pr
 ### Review steps
 
 - ``ORKReviewStep``
-- ``ORKReviewViewController``
-- ``ORKReviewViewControllerDelegate``
 
 ### Step recording
 
@@ -142,7 +124,6 @@ Using ResearchKit, you can build apps that obtain consent, give instructions, pr
 ### Table steps
 
 - ``ORKTableStep``
-- ``ORKTableStepViewController``
 - ``ORKTableStepSource``
 
 ### Video steps
@@ -157,19 +138,12 @@ Using ResearchKit, you can build apps that obtain consent, give instructions, pr
 ### Wait steps
 
 - ``ORKWaitStep``
-- ``ORKWaitStepViewController``
 
 ### Web steps
 
 - ``ORKWebViewStep``
-- ``ORKWebViewStepDelegate``
-- ``ORKWebViewStepViewController``
 
 ### Other steps
 
 - ``ORKSecondaryTaskStep``
 - ``ORKSkipStepNavigationRule``
-- ``ORKTouchAnywhereStep``
-- ``ORKTouchAnywhereStepViewController``
-- ``ORKAccuracyStroopStep``
-

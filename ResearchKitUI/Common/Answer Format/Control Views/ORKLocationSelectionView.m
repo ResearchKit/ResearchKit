@@ -36,7 +36,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if !TARGET_OS_VISION
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION && TARGET_OS_IOS && !TARGET_OS_VISION
 
 #import "ORKLocationSelectionView.h"
 
@@ -356,7 +356,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     ORKLocation *location = isAnswerClassORKLocation ? (ORKLocation *)_answer : nil;
     
     if (location) {
-        
+
         if (!location.userInput || !location.region |!location.postalAddress) {
             // redo geo decoding if any of them is missing
             [self reverseGeocodeAndDisplay:location];

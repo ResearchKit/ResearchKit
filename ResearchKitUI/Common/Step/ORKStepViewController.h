@@ -274,6 +274,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) BOOL continueButtonEnabled;
 
 /**
+ The enabled state of the skip button.
+
+ The default state is enabled. Setting the skip button to disabled will add a visual treatment
+ to the button, and prevent it from being selectable.
+ */
+@property (nonatomic, assign) BOOL skipButtonEnabled;
+
+/**
  A localized string that represents the title of the Learn More button.
  
  Many steps have a button that lets users view more information about the

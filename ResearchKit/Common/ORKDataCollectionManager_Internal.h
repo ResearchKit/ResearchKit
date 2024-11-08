@@ -37,7 +37,9 @@
 
 @interface ORKDataCollectionManager ()
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @property (nonatomic, strong, readonly) HKHealthStore *healthStore;
+#endif
 
 @property (nonatomic, strong, readonly) CMMotionActivityManager *activityManager;
 

@@ -29,7 +29,9 @@
  */
 
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #import <HealthKit/HealthKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -59,3 +61,5 @@ typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

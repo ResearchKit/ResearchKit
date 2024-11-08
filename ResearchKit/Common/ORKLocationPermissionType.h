@@ -40,10 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
  A permission type object that requests access for location data.
  */
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 ORK_CLASS_AVAILABLE
 @interface ORKLocationPermissionType : ORKPermissionType
 
 @end
+#endif 
 
 NS_ASSUME_NONNULL_END
 

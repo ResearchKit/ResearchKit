@@ -540,6 +540,7 @@ within the specified `NSTimeInterval` values.
                                         refer to the contained `ORKConsentSignatureResult`
                                         corresponding to the signature collected by the consent
                                         review step.
+ @param didConsent   Boolean to indicate if the user consented.
  @return A result predicate.
  */
 + (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector

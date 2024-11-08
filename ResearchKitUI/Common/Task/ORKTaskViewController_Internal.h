@@ -31,7 +31,11 @@
 
 #import <ResearchKit/ORKActiveStep_Internal.h>
 #import <ResearchKitUI/ORKReviewStepViewController.h>
+#import <ResearchKitUI/ORKTaskViewController_Private.h>
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #import <HealthKit/HealthKit.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

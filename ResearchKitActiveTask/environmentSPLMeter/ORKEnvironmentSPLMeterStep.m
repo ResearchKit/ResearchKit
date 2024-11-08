@@ -55,7 +55,7 @@
     self.shouldShowDefaultTimer = NO;
     // This is inserted here because it is required for any task that requires the SPL Meter step
     ORKAudioStreamerConfiguration *config = [[ORKAudioStreamerConfiguration alloc] initWithIdentifier:[NSString stringWithFormat:@"%@_streamerConfiguration",self.identifier]];
-    
+    config.bypassAudioEngineStart = YES;
     self.recorderConfigurations = @[config];
 }
 

@@ -30,10 +30,10 @@
  */
 
 
-@import UIKit;
-#import "ORKActiveStepCustomView.h"
-#import "ORKUnitLabel.h"
-#import "ORKRoundTappingButton.h"
+#import <UIKit/UIKit.h>
+#import <ResearchKitActiveTask/ORKActiveStepCustomView.h>
+#import <ResearchKitUI/ORKUnitLabel.h>
+#import <ResearchKitUI/ORKRoundTappingButton.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

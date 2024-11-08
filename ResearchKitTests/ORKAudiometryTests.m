@@ -90,7 +90,7 @@
         if ([audiometry respondsToSelector:@selector(registerStimulusPlayback)]) {
             [audiometry registerStimulusPlayback];
         }
-        [audiometry registerResponse:stimulus.level >= referenceLevel.doubleValue];
+        [audiometry registerResponse:stimulus.level >= referenceLevel.doubleValue forUnit:nil];
     }
     
     NSArray<ORKdBHLToneAudiometryFrequencySample *> *result = [audiometry resultSamples];

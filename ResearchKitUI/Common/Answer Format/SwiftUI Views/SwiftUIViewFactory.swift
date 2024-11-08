@@ -29,8 +29,8 @@
  */
 
 import Foundation
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
 @objc
 public class SwiftUIViewFactory: NSObject {

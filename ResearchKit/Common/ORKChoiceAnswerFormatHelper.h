@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKAnswerFormat;
 @class ORKImageChoice;
 @class ORKTextChoice;
-
+@class ORKColorChoice;
 
 @protocol ORKAnswerOption;
 
@@ -74,6 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
 
+- (nullable ORKColorChoice *)colorChoiceAtIndex:(NSUInteger)index;
 
 @end
 #endif

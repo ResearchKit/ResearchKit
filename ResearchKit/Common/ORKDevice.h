@@ -31,8 +31,6 @@
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKDefines.h>
-#endif
-
 
 NS_ASSUME_NONNULL_BEGIN
 

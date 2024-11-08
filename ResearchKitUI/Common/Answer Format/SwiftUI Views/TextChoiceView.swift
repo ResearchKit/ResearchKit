@@ -28,8 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
 struct TextChoiceView: View {
     @ObservedObject var textChoiceHelper: SwiftUITextChoiceHelper
@@ -101,7 +101,7 @@ struct TextChoiceView: View {
                 if let img = image {
                     Image(uiImage: img)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 115)
                         .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.clear,
                                                                           lineWidth: 1))

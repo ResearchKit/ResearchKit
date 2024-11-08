@@ -35,7 +35,7 @@
 #if TARGET_OS_IOS || TARGET_OS_VISION
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKDefines.h>
-#endif
+#import <ResearchKit/ORKStep.h>
 
 /**
  Values that determine the style
@@ -176,6 +176,7 @@ ORK_CLASS_AVAILABLE
  @param learnMoreItem    The `ORKLearnMoreItem` to be presented when button is pressed.
  @param showsProgress    A Boolean that determines if the formItem will display a progress indicator
  @param answerFormat  The answer format for the form item.
+ @param tagText   The tag text to be presented in the card header view.
  @param optional      A Boolean that determines whether the item is optional
  
  @return An initialized form item.
