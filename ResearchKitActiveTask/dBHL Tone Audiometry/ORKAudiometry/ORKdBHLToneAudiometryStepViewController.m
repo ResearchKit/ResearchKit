@@ -122,18 +122,20 @@ NSString * const ORKdBHLToneAudiometryStepViewAccessibilityIdentifier = @"ORKdBH
 - (void)configureStep {
     ORKdBHLToneAudiometryStep *dBHLTAStep = [self dBHLToneAudiometryStep];
     
-    self.dBHLToneAudiometryContentView = [[ORKdBHLToneAudiometryContentView alloc] init];
-    self.activeStepView.activeCustomView = self.dBHLToneAudiometryContentView;
-    self.activeStepView.customContentFillsAvailableSpace = YES;
-    [self.activeStepView.navigationFooterView setHidden:YES];
+    if (!self.dBHLToneAudiometryContentView) {
+        self.dBHLToneAudiometryContentView = [[ORKdBHLToneAudiometryContentView alloc] init];
+        self.activeStepView.activeCustomView = self.dBHLToneAudiometryContentView;
+        self.activeStepView.customContentFillsAvailableSpace = YES;
+        [self.activeStepView.navigationFooterView setHidden:YES];
 
-    [self.dBHLToneAudiometryContentView.tapButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
-    
-    _audioChannel = dBHLTAStep.earPreference;
-    _audioGenerator = [self createAudioGeneratorFromHeadphoneType:dBHLTAStep.headphoneType];
-    _audioGenerator.delegate = self;
+        [self.dBHLToneAudiometryContentView.tapButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
+        
+        _audioChannel = dBHLTAStep.earPreference;
+        _audioGenerator = [self createAudioGeneratorFromHeadphoneType:dBHLTAStep.headphoneType];
+        _audioGenerator.delegate = self;
 
-    _hapticFeedback = [[UIImpactFeedbackGenerator alloc] initWithStyle: UIImpactFeedbackStyleHeavy];
+        _hapticFeedback = [[UIImpactFeedbackGenerator alloc] initWithStyle: UIImpactFeedbackStyleHeavy];
+    }
 }
 
 - (void)addObservers {

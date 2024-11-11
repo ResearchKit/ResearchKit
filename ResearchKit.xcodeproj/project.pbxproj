@@ -11,7 +11,6 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 0BC672D92BD9C52D005798AC /* Build configuration list for PBXAggregateTarget "ResearchKitAllTargets" */;
 			buildPhases = (
-				0BC672E82BD9C69C005798AC /* ShellScript */,
 			);
 			dependencies = (
 				0BC672E02BD9C541005798AC /* PBXTargetDependency */,
@@ -6018,6 +6017,24 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0BC672DA2BD9C52D005798AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0BC672DC2BD9C52D005798AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		3FFF18691829DB1E00167070 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D000ED12620F27100E5442A /* Project-Debug.xcconfig */;

@@ -19,12 +19,6 @@
 		51F210FE2B49D04F0072B536 /* TaskListRowConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F210FD2B49D04F0072B536 /* TaskListRowConstants.swift */; };
 		863CCD821ACF545E009FD3B4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 863CCD811ACF545E009FD3B4 /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */; };
-		8C67958C2BC3B09B00DE7286 /* TaskListRowConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F210FD2B49D04F0072B536 /* TaskListRowConstants.swift */; };
-		9622283924F04DBF0056E74D /* TaskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622283824F04DBF0056E74D /* TaskScreen.swift */; };
-		9622283B24F04DFE0056E74D /* CommonElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622283A24F04DFE0056E74D /* CommonElements.swift */; };
-		9622283D24F04E6F0056E74D /* AllowScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622283C24F04E6F0056E74D /* AllowScreens.swift */; };
-		9622283F24F04EBA0056E74D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622283E24F04EBA0056E74D /* Helpers.swift */; };
-		9622284124F04EEF0056E74D /* PreSubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622284024F04EEF0056E74D /* PreSubmissionTests.swift */; };
 		B125E3D41B1BA47600FF8759 /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = B125E3D31B1BA47600FF8759 /* tap.aif */; };
 		BAAC3FD620C4EF1C0065B9E1 /* ResearchKit.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BAAC3FD520C4EF1C0065B9E1 /* ResearchKit.pdf */; };
 		BC2A3CD91C58F1CA00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CD81C58F1CA00DA64B7 /* ResearchKit.framework */; };
@@ -43,13 +37,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		51AF197B2B59F1E500D3B399 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 869230B61AAA890A00BFE11B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 869230BD1AAA890A00BFE11B;
-			remoteInfo = ORKCatalog;
-		};
-		9622282F24F04D780056E74D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 869230B61AAA890A00BFE11B /* Project object */;
 			proxyType = 1;
@@ -131,14 +118,6 @@
 		869230BE1AAA890A00BFE11B /* ORKCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORKCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B89A981AB2C0A5001626A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ORKCatalog/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
-		9622282A24F04D780056E74D /* ORKCatalogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORKCatalogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9622282E24F04D780056E74D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9622283824F04DBF0056E74D /* TaskScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskScreen.swift; sourceTree = "<group>"; };
-		9622283A24F04DFE0056E74D /* CommonElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonElements.swift; sourceTree = "<group>"; };
-		9622283C24F04E6F0056E74D /* AllowScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowScreens.swift; sourceTree = "<group>"; };
-		9622283E24F04EBA0056E74D /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		9622284024F04EEF0056E74D /* PreSubmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSubmissionTests.swift; sourceTree = "<group>"; };
-		9632B5D524F093070010818C /* ORKCatalogUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ORKCatalogUI.xctestplan; sourceTree = "<group>"; };
 		B125E3D31B1BA47600FF8759 /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = tap.aif; sourceTree = "<group>"; };
 		BAAC3FD520C4EF1C0065B9E1 /* ResearchKit.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ResearchKit.pdf; sourceTree = "<group>"; };
 		BAFAD7AA1EFB2907004DEC45 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = fr_CA.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -169,13 +148,6 @@
 				CA6A0D8F288F04260048C1EF /* ResearchKitUI.framework in Frameworks */,
 				BC2A3CD91C58F1CA00DA64B7 /* ResearchKit.framework in Frameworks */,
 				863CCD821ACF545E009FD3B4 /* HealthKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9622282724F04D780056E74D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +205,6 @@
 			children = (
 				5116D0BF2677FB780010FAB1 /* ResearchKit-Shared.xcconfig */,
 				3E39B9E81ABF675000C2ABE5 /* README.md */,
-				9622282B24F04D780056E74D /* ORKCatalogUITests */,
 				51AF19782B59F1E500D3B399 /* ORKCatalogTests */,
 				BC2A3C9E1C58E81500DA64B7 /* Frameworks */,
 				869230C01AAA890A00BFE11B /* ORKCatalog */,
@@ -245,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				869230BE1AAA890A00BFE11B /* ORKCatalog.app */,
-				9622282A24F04D780056E74D /* ORKCatalogUITests.xctest */,
 				51AF19772B59F1E400D3B399 /* ORKCatalogTests.xctest */,
 			);
 			name = Products;
@@ -272,28 +242,6 @@
 				863CCD831ACF545E009FD3B4 /* ORKCatalog.entitlements */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8CDBF98A2AFD9FC800AF767B /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				9622283824F04DBF0056E74D /* TaskScreen.swift */,
-				9622283A24F04DFE0056E74D /* CommonElements.swift */,
-				9622283C24F04E6F0056E74D /* AllowScreens.swift */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		9622282B24F04D780056E74D /* ORKCatalogUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8CDBF98A2AFD9FC800AF767B /* Screens */,
-				9622282E24F04D780056E74D /* Info.plist */,
-				9622283E24F04EBA0056E74D /* Helpers.swift */,
-				9622284024F04EEF0056E74D /* PreSubmissionTests.swift */,
-				9632B5D524F093070010818C /* ORKCatalogUI.xctestplan */,
-			);
-			path = ORKCatalogUITests;
 			sourceTree = "<group>";
 		};
 		BC2A3C9E1C58E81500DA64B7 /* Frameworks */ = {
@@ -360,24 +308,6 @@
 			productReference = 869230BE1AAA890A00BFE11B /* ORKCatalog.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9622282924F04D780056E74D /* ORKCatalogUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9622283624F04D780056E74D /* Build configuration list for PBXNativeTarget "ORKCatalogUITests" */;
-			buildPhases = (
-				9622282624F04D780056E74D /* Sources */,
-				9622282724F04D780056E74D /* Frameworks */,
-				9622282824F04D780056E74D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9622283024F04D780056E74D /* PBXTargetDependency */,
-			);
-			name = ORKCatalogUITests;
-			productName = ORKCatalogUITests;
-			productReference = 9622282A24F04D780056E74D /* ORKCatalogUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -397,12 +327,6 @@
 						CreatedOnToolsVersion = 6.2;
 						LastSwiftMigration = 1530;
 						ProvisioningStyle = Automatic;
-					};
-					9622282924F04D780056E74D = {
-						CreatedOnToolsVersion = 11.6;
-						DevelopmentTeam = "";
-						ProvisioningStyle = Automatic;
-						TestTargetID = 869230BD1AAA890A00BFE11B;
 					};
 				};
 			};
@@ -467,7 +391,6 @@
 			projectRoot = "";
 			targets = (
 				869230BD1AAA890A00BFE11B /* ORKCatalog */,
-				9622282924F04D780056E74D /* ORKCatalogUITests */,
 				51AF19762B59F1E400D3B399 /* ORKCatalogTests */,
 			);
 		};
@@ -492,13 +415,6 @@
 				B125E3D41B1BA47600FF8759 /* tap.aif in Resources */,
 				3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */,
 				3ED967B81AC13D37007E2D83 /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9622282824F04D780056E74D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,19 +447,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9622282624F04D780056E74D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9622283924F04DBF0056E74D /* TaskScreen.swift in Sources */,
-				9622283B24F04DFE0056E74D /* CommonElements.swift in Sources */,
-				8C67958C2BC3B09B00DE7286 /* TaskListRowConstants.swift in Sources */,
-				9622284124F04EEF0056E74D /* PreSubmissionTests.swift in Sources */,
-				9622283F24F04EBA0056E74D /* Helpers.swift in Sources */,
-				9622283D24F04E6F0056E74D /* AllowScreens.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -551,11 +454,6 @@
 			isa = PBXTargetDependency;
 			target = 869230BD1AAA890A00BFE11B /* ORKCatalog */;
 			targetProxy = 51AF197B2B59F1E500D3B399 /* PBXContainerItemProxy */;
-		};
-		9622283024F04D780056E74D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 869230BD1AAA890A00BFE11B /* ORKCatalog */;
-			targetProxy = 9622282F24F04D780056E74D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -860,68 +758,6 @@
 			};
 			name = Debug;
 		};
-		9622283124F04D780056E74D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ORKCatalogUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HRP.ORKCatalogUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ORKCatalog;
-			};
-			name = Debug;
-		};
-		9622283424F04D780056E74D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ORKCatalogUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HRP.ORKCatalogUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ORKCatalog;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -948,15 +784,6 @@
 			buildConfigurations = (
 				869230E01AAA890A00BFE11B /* Debug */,
 				050B7A0423ECA11400CC1719 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		9622283624F04D780056E74D /* Build configuration list for PBXNativeTarget "ORKCatalogUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9622283124F04D780056E74D /* Debug */,
-				9622283424F04D780056E74D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

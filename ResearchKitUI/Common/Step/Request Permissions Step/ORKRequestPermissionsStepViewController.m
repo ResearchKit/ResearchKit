@@ -91,7 +91,16 @@ NSString * const ORKRequestPermissionsStepViewAccessibilityIdentifier = @"ORKReq
 }
 
 - (void)dealloc {
+    [self _cleanupPermissionTypes];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ORKRequestPermissionsNotificationCardViewStatusChanged object:nil];
+}
+
+- (void)_cleanupPermissionTypes {
+    ORKRequestPermissionsStep *requestPermissionStep = [self requestPermissionsStep];
+    
+    for (ORKPermissionType *permissionType in requestPermissionStep.permissionTypes) {
+        [permissionType cleanUp];
+    }
 }
 
 - (ORKStepResult *)result {
@@ -185,9 +194,13 @@ NSString * const ORKRequestPermissionsStepViewAccessibilityIdentifier = @"ORKReq
     NSMutableArray<ORKRequestPermissionView *> *cardViews = [NSMutableArray new];
     
     for (ORKPermissionType *permissionType in requestPermissionStep.permissionTypes) {
-        ORKRequestPermissionView *cardView = [[ORKRequestPermissionView alloc] initWithIconImage:permissionType.image title:permissionType.localizedTitle detailText:permissionType.localizedDetailText];
+        ORKRequestPermissionView *cardView = [[ORKRequestPermissionView alloc] initWithIconImage:permissionType.image
+                                                                                           title:permissionType.localizedTitle
+                                                                                      detailText:permissionType.localizedDetailText];
         [cardView updateIconTintColor:permissionType.iconTintColor];
-        [cardView.requestPermissionButton addTarget:permissionType action:@selector(requestPermission) forControlEvents:UIControlEventTouchUpInside];
+        [cardView.requestPermissionButton addTarget:permissionType
+                                             action:@selector(requestPermission)
+                                   forControlEvents:UIControlEventTouchUpInside];
         [self permissionStatusUpdatedForPermissionType:permissionType cardView:cardView];
 
         // create the update callback

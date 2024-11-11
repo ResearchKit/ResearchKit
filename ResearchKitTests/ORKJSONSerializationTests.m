@@ -55,7 +55,7 @@ static BOOL ORKIsResearchKitClass(Class class) {
 
 + (NSArray<NSString *> *)_fetchExclusionList {
     NSArray<NSString *> *classesToExclude = @[];
-
+ 
 #if !ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     NSArray<NSString *> *locationClasses = @[
         @"ORKLocation",
@@ -485,6 +485,7 @@ ORK_MAKE_TEST_INIT(ORKAccuracyStroopStep, (^{ return [[ORKAccuracyStroopStep all
                                                  [ORKTouchAbilityPinchStep class],
                                                  [ORKTouchAbilitySwipeStep class],
                                                  [ORKTouchAbilityTapResult class],
+                                                 [ORKTouchAbilityTouchTracker class],
                                                  [ORKTouchAbilityRotationStep class],
                                                  [ORKTouchAbilityLongPressStep class],
                                                  [ORKTouchAbilityScrollStep class],
@@ -619,6 +620,7 @@ ORK_MAKE_TEST_INIT(ORKAccuracyStroopStep, (^{ return [[ORKAccuracyStroopStep all
                                           @"ORKTimeIntervalAnswerFormat.defaultInterval",
                                           @"ORKTimeIntervalAnswerFormat.maximumInterval",
                                           @"ORKTimeIntervalAnswerFormat.step",
+                                          @"ORKTouchAbilityTouchTracker.delegate",
                                           @"ORKVerificationStep.verificationViewControllerClass",
                                           @"ORKVideoCaptureStep.templateImage",
                                           @"ORKWeightAnswerFormat.useMetricSystem",
