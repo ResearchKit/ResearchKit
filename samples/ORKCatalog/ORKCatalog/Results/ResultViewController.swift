@@ -126,3 +126,5 @@ extension ResultViewController: ResultProviderDelegate {
         present(shareSheet, animated: true, completion: nil)
     }
 }
+
+

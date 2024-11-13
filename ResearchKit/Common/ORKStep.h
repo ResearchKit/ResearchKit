@@ -180,14 +180,14 @@ ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
 /**
  A property that gates automatic tint color image changes based on appearance changes.
  
- The default value for this property is  NO.
+ The default value for this property is NO.
  */
 @property (nonatomic) BOOL shouldAutomaticallyAdjustImageTintColor;
 
 /**
  A property that determines whether  to show progress for this step when presented.
  
- The default is  YES.
+ The default is YES.
  */
 @property (nonatomic, assign) BOOL showsProgress;
 

@@ -69,6 +69,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign, readonly) BOOL canContinue;
 
 - (void)requestPermission;
+- (void)cleanUp;
 
 + (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
                                                             objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;

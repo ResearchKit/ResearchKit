@@ -18,7 +18,7 @@ Present a specific question and collect an answer.
 - ``ORKAnswerFormat``
 - ``ORKNumericPrecision``
 
-### Height, and Weight
+### Height and Weight
 
 - ``ORKHeightAnswerFormat``
 - ``ORKWeightAnswerFormat``

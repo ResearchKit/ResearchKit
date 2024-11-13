@@ -43,18 +43,23 @@ static const uint32_t IconDarkTintColor = 0xEF6FD8;
 @property (nonatomic, readonly, assign) BOOL canContinue;
 @end
 
-@implementation ORKMotionActivityPermissionType
+@implementation ORKMotionActivityPermissionType {
+    __weak NSTimer *_checkStatusTimer;
+}
 
 + (instancetype)new {
     return [[ORKMotionActivityPermissionType alloc] init];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
     }
     return self;
+}
+
+- (void)cleanUp {
+    [self _invalidateCheckStatusTimer];
 }
 
 - (CMMotionActivityManager *)activityManager {
@@ -105,8 +110,32 @@ static const uint32_t IconDarkTintColor = 0xEF6FD8;
     [self.activityManager startActivityUpdatesToQueue:[NSOperationQueue mainQueue]
                                           withHandler:^(CMMotionActivity * _Nullable activity) {}];
     [self.activityManager stopActivityUpdates];
+    
     if (self.permissionsStatusUpdateCallback != nil) {
         self.permissionsStatusUpdateCallback();
+    }
+    
+    if (!_checkStatusTimer) {
+        __weak typeof(self) weakSelf = self;
+        _checkStatusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                             target:weakSelf
+                                                           selector:@selector(_checkPermissionStatus)
+                                                           userInfo:nil
+                                                            repeats:YES];
+    }
+}
+
+- (void)_checkPermissionStatus {
+    if ([self permissionState] == ORKRequestPermissionsStateConnected && self.permissionsStatusUpdateCallback != nil) {
+        self.permissionsStatusUpdateCallback();
+        [self _invalidateCheckStatusTimer];
+    }
+}
+
+- (void)_invalidateCheckStatusTimer {
+    if (_checkStatusTimer) {
+        [_checkStatusTimer invalidate];
+        _checkStatusTimer = nil;
     }
 }
 
