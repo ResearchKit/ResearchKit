@@ -29,17 +29,26 @@
  */
 
 
-@import HealthKit;
-#import "ORKAnswerFormat_Private.h"
-#import "ORKChoiceAnswerFormatHelper.h"
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
+#if TARGET_OS_IOS
+#import <ResearchKit/ORKAnswerFormat_Private.h>
+#import <ResearchKit/ORKChoiceAnswerFormatHelper.h>
+#endif
+@class ORKChoiceAnswerFormatHelper;
 
 NS_ASSUME_NONNULL_BEGIN
 
 BOOL ORKIsAnswerEmpty(_Nullable id answer);
 
+#if TARGET_OS_IOS
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex);
 NSString *ORKHKBloodTypeString(HKBloodType bloodType);
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#endif // TARGET_OS_IOS
 NSString *ORKQuestionTypeString(ORKQuestionType questionType);
 
 // Need to mark these as designated initializers to avoid warnings once we designate the others.
@@ -49,11 +58,10 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType);
 @end
 
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKAnswerFormat)
+#if TARGET_OS_IOS
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKImageChoiceAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKValuePickerAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKMultipleValuePickerAnswerFormat)
-ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoiceAnswerFormat)
-ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoice)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKImageChoice)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeOfDayAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKDateAnswerFormat)
@@ -66,6 +74,10 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKAgeAnswerFormat)
+#endif
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoiceAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoice)
 
 
 @class ORKQuestionResult;
@@ -74,14 +86,18 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
+#if TARGET_OS_IOS
 - (BOOL)isHealthKitAnswerFormat;
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (nullable HKObjectType *)healthKitObjectType;
 - (nullable HKObjectType *)healthKitObjectTypeForAuthorization;
 
 @property (nonatomic, strong, readonly, nullable) HKUnit *healthKitUnit;
 
 @property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#endif // TARGET_OS_IOS
 
 - (nullable NSString *)localizedInvalidValueStringWithAnswerString:(nullable NSString *)text;
 
@@ -90,11 +106,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 @end
 
 
+#if TARGET_OS_IOS
 @interface ORKNumericAnswerFormat ()
 
 - (nullable NSString *)sanitizedTextFieldText:(nullable NSString *)text decimalSeparator:(nullable NSString *)separator;
 
 @end
+#endif
 
 
 /**
@@ -110,14 +128,14 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 /**
  The value to be returned if this option is selected.
 
- Expected to be a scalar type serializable to JSON, e.g. `NSNumber` or `NSString`.
+ Expected to be a`NSNumber`, `NSString` or `NSDate` (a JSON-serializable value).
  If no value is provided, the index of the option in the `ORK*ChoiceAnswerFormat` options list will be used.
  */
-- (nullable id)value;
+- (nullable NSObject<NSCopying, NSSecureCoding> *)value;
 
 @end
 
-
+#if TARGET_OS_IOS
 @protocol ORKScaleAnswerFormatProvider <NSObject>
 
 - (nullable NSNumber *)minimumNumber;
@@ -142,12 +160,11 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 @end
 
-
 @protocol ORKTextScaleAnswerFormatProvider <ORKScaleAnswerFormatProvider>
 
 - (NSArray<ORKTextChoice *> *)textChoices;
 - (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
-- (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value;
+- (NSUInteger)textChoiceIndexForValue:(NSObject<NSCopying, NSSecureCoding> *)value;
 
 @end
 
@@ -172,12 +189,15 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 @interface ORKTextScaleAnswerFormat () <ORKTextScaleAnswerFormatProvider>
 
 @end
+#endif
 
+NSArray<Class> *ORKAllowableValueClasses(void);
 
 @interface ORKTextChoice () <ORKAnswerOption>
 
 @end
 
+#if TARGET_OS_IOS
 @interface ORKValuePickerAnswerFormat ()
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice NS_DESIGNATED_INITIALIZER;
@@ -199,13 +219,17 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 @end
 
 
-@interface ORKDateAnswerFormat ()
+@interface ORKDateAnswerFormat () {
+    NSDate *_currentDateOverride;
+}
 
 - (NSDate *)pickerDefaultDate;
 - (nullable NSDate *)pickerMinimumDate;
 - (nullable NSDate *)pickerMaximumDate;
 
 - (NSCalendar *)currentCalendar;
+
+- (void)_setCurrentDateOverride:(NSDate *)currentDateOverride;
 
 @end
 
@@ -238,21 +262,26 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 @interface ORKAnswerDefaultSource : NSObject
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 + (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore;
 - (instancetype)initWithHealthStore:(HKHealthStore *)healthStore NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, strong, readonly, nullable) HKHealthStore *healthStore;
-
-- (void)fetchDefaultValueForAnswerFormat:(nullable ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler;
-
 - (nullable HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat;
 - (void)updateHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat force:(BOOL)force;
+#endif
 
+- (void)fetchDefaultValueForAnswerFormat:(nullable ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler;
 @end
 
 @interface ORKTextChoiceOther()
 
 @property (nonatomic, nullable) NSString *textViewText;
+
+@end
+#endif
+
+@interface ORKAnswerFormat () <ORKChoiceAnswerFormatHelper>
 
 @end
 

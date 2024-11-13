@@ -29,14 +29,11 @@
  */
 
 #import "ORKWebViewStep.h"
-#import "ORKWebViewStepViewController.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKInstructionStep.h"
+#import "ORKInstructionStepHTMLFormatter.h"
 
 @implementation ORKWebViewStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKWebViewStepViewController class];
-}
 
 + (instancetype)webViewStepWithIdentifier:(NSString *)identifier
                                      html:(NSString *)html {
@@ -45,12 +42,19 @@
     return step;
 }
 
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                         instructionSteps:(NSArray *)instructionSteps {
+    ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:identifier];
+    step.instructionSteps = [instructionSteps copy];
+    return step;
+}
+
 - (void)validateParameters {
     [super validateParameters];
     
-    if (self.html == nil) {
+    if (self.html == nil && self.instructionSteps == nil) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"WebViewStep requires html property."
+                                       reason:@"WebViewStep requires html or instructionSteps property."
                                      userInfo:nil];
     }
 }
@@ -59,6 +63,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, html, NSString);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, instructionSteps, ORKInstructionStep);
         ORK_DECODE_OBJ_CLASS(aDecoder, customCSS, NSString);
         ORK_DECODE_BOOL(aDecoder, showSignatureAfterContent);
         ORK_DECODE_OBJ_CLASS(aDecoder, customViewProvider, NSObject<ORKCustomSignatureAccessoryViewProvider>);
@@ -69,6 +74,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, html);
+    ORK_ENCODE_OBJ(aCoder, instructionSteps);
     ORK_ENCODE_OBJ(aCoder, customCSS);
     ORK_ENCODE_BOOL(aCoder, showSignatureAfterContent);
     ORK_ENCODE_OBJ(aCoder, customViewProvider);
@@ -81,6 +87,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKWebViewStep *step = [super copyWithZone:zone];
     step.html = self.html;
+    step.instructionSteps = [self.instructionSteps copy];
     step.customCSS = self.customCSS;
     step.customViewProvider = self.customViewProvider;
     step.showSignatureAfterContent = self.showSignatureAfterContent;
@@ -92,9 +99,19 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            [self.html isEqual:castObject.html] &&
-            [self.customCSS isEqual:castObject.customCSS] &&
+            ORKEqualObjects(self.html, castObject.html) &&
+            ORKEqualObjects(self.instructionSteps, castObject.instructionSteps) &&
+            ORKEqualObjects(self.customCSS, castObject.customCSS) &&
             self.showSignatureAfterContent == castObject.showSignatureAfterContent);
+}
+
+- (void)setInstructionSteps:(NSArray<ORKInstructionStep *> *)instructionSteps {
+    _instructionSteps = instructionSteps;
+    
+    if (_instructionSteps.count > 0) {
+        ORKInstructionStepHTMLFormatter *formatter = [ORKInstructionStepHTMLFormatter new];
+        _html = [formatter HTMLForInstructionSteps:_instructionSteps];
+    }
 }
 
 @end

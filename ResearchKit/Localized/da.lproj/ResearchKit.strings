@@ -188,7 +188,7 @@
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fod";
-"MEASURING_UNIT_IN" = "\\\“";
+"MEASURING_UNIT_IN" = "\\\"";
 "MEASURING_UNIT_KG" = "kg";
 "MEASURING_UNIT_LB" = "lb";
 "MEASURING_UNIT_OZ" = "oz";
@@ -350,18 +350,6 @@
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "Annuller test";
 "dBHL_ALERT_TEXT" = "Tilslut dine AirPods eller EarPods igen for at udføre testen.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ færdig";
-
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Hovedtelefoner";
-"HEADPHONES_UNKNOWN" = "Ukendt";
-"HEADPHONES_NONE" = "Ingen";
-"CONNECTED" = "Tilsluttet";
-"NOT_CONNECTED" = "Ikke tilsluttet";
-"HEADPHONE_CONNECTED_%@" = "Tilsluttet – %@";
-"HEADPHONE_DETECT_TITLE" = "Tilslut dine hovedtelefoner";
-"HEADPHONE_DETECT_TEXT" = "Denne test kræver Apple AirPods eller Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Rumlig hukommelse";

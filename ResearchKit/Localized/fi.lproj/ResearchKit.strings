@@ -306,7 +306,7 @@
 "AUDIO_TASK_TITLE" = "Ääni";
 "AUDIO_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
 "AUDIO_INSTRUCTION" = "Sano ”aaa” mikrofoniin niin kauan kuin voit.";
-"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano \”Aaaaa\” mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
+"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano ”Aaaaa\" mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
 "AUDIO_INTENDED_USE" = "Tämä aktiviteetti arvioi ääntäsi tallentamalla sitä laitteen alareunassa olevalla mikrofonilla.";
 "AUDIO_TOO_LOUD_LABEL" = "Liian kovaa";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ei voida äänittää";
@@ -350,18 +350,6 @@
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "Kumoa testi";
 "dBHL_ALERT_TEXT" = "Liitä AirPods- tai EarPods-kuulokkeet testin suorittamista varten.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ suoritettu";
-
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Kuulokkeet";
-"HEADPHONES_UNKNOWN" = "Tuntematon";
-"HEADPHONES_NONE" = "Ei mitään";
-"CONNECTED" = "Yhdistetty";
-"NOT_CONNECTED" = "Ei yhteydessä";
-"HEADPHONE_CONNECTED_%@" = "Yhdistetty – %@";
-"HEADPHONE_DETECT_TITLE" = "Liitä kuulokkeet";
-"HEADPHONE_DETECT_TEXT" = "Tämä testi vaatii Apple AirPods- tai Apple EarPods -kuulokkeet";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Avaruudellinen muisti";

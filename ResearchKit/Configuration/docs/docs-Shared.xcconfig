@@ -1,0 +1,5 @@
+//
+// docs-Shared.xcconfig
+//
+
+PRODUCT_NAME = $(TARGET_NAME)
