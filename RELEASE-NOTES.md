@@ -1,5 +1,18 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.1.1 Release Notes
+General bug fixes for the following:
+
+- **ORKMotionActivityPermissionType**
+Fixed issue that caused the next button to remain disabled after gaining permission from user.
+
+- **ORKRegistrationStep**
+Removed yellow overlay that prevented password entry.
+
+- **ORKdBHLToneAudiometryStep**
+Fixed issue that caused the tap button to appear twice.
+
+
 ## ResearchKit 3.1 Release Notes
 In addition to general stability and performance improvements, ResearchKit 3.1 includes the following updates:
 
