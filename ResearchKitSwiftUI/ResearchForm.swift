@@ -149,7 +149,10 @@ public struct ResearchFormStep<Header: View, Content: View>: View {
                                     {
                                         let questionNumber = questionIndex + 1
                                         Text(
-                                            "Question \(questionNumber) of \(questions.count)"
+                                            questionProgress(
+                                                firstValue: questionNumber,
+                                                secondValue: questions.count
+                                            )
                                         )
                                         .foregroundColor(.secondary)
                                         .font(.footnote)
@@ -212,6 +215,19 @@ public struct ResearchFormStep<Header: View, Content: View>: View {
         }
     }
 
+    private func questionProgress(
+        firstValue: Int,
+        secondValue: Int
+    ) -> String {
+        String(
+            format: NSLocalizedString(
+                "QUESTION_PROGRESS",
+                comment: ""
+            ),
+            firstValue,
+            secondValue
+        )
+    }
 }
 
 extension ResearchFormStep where Header == EmptyView {

@@ -65,7 +65,7 @@ struct ResearchFormStepContentView<Content: View>: View {
                             Button {
                                 onStepCompletion?(.discarded)
                             } label: {
-                                Text("Cancel")
+                                Text("BUTTON_CANCEL")
                             }
                         }
                     }
@@ -78,7 +78,8 @@ struct ResearchFormStepContentView<Content: View>: View {
                     onStepCompletion?(.saved(managedFormResult))
                 }
             } label: {
-                Text(isLastStep ? "Done" : "Next")
+                let buttonString: LocalizedStringKey = isLastStep ? "BUTTON_DONE" : "BUTTON_NEXT"
+                Text(buttonString)
                     .fontWeight(.bold)
                     .frame(maxWidth: maxWidthForDoneButton)
                     .padding(.vertical, 8)
