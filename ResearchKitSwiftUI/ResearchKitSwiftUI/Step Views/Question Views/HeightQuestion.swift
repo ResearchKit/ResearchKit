@@ -169,7 +169,7 @@ public struct HeightQuestion: View {
         QuestionCard {
             Question(title: title, detail: detail) {
                 HStack {
-                    Text("Select Height")
+                    Text("QUESTION_HEIGHT")
                         .foregroundStyle(Color.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Button {
