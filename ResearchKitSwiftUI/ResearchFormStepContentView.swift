@@ -42,6 +42,10 @@ struct ResearchFormStepContentView<Content: View>: View {
     @State
     private var doneButtonEnabled: Bool = true
 
+    private var buttonString: LocalizedStringKey {
+        isLastStep ? "BUTTON_DONE" : "BUTTON_NEXT"
+    }
+
     init(
         isLastStep: Bool,
         onStepCompletion: ((ResearchFormCompletion) -> Void)? = nil,
@@ -78,7 +82,6 @@ struct ResearchFormStepContentView<Content: View>: View {
                     onStepCompletion?(.saved(managedFormResult))
                 }
             } label: {
-                let buttonString: LocalizedStringKey = isLastStep ? "BUTTON_DONE" : "BUTTON_NEXT"
                 Text(buttonString)
                     .fontWeight(.bold)
                     .frame(maxWidth: maxWidthForDoneButton)
