@@ -45,7 +45,7 @@ struct StepIconForegroundStyle: ShapeStyle {
         #if os(visionOS)
             .white
         #else
-            .blue
+            Color.accentColor
         #endif
     }
 

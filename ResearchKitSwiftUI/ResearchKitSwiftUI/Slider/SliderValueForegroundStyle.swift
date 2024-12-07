@@ -45,7 +45,7 @@ struct SliderValueForegroundStyle: ShapeStyle {
         #if os(visionOS)
             Color(.label)
         #else
-            .blue
+            Color.accentColor
         #endif
     }
 }

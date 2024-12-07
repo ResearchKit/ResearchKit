@@ -56,7 +56,7 @@ struct TextChoiceOption: View {
 
             Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                 .imageScale(.large)
-                .foregroundColor(isSelected ? .blue : deselectedCheckmarkColor)
+                .foregroundColor(isSelected ? .accentColor : deselectedCheckmarkColor)
                 .font(.body)
         }
         .padding(.vertical, 8)
