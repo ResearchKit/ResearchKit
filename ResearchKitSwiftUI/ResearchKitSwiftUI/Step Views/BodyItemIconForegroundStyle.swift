@@ -45,7 +45,7 @@ struct BodyItemIconForegroundStyle: ShapeStyle {
         #if os(visionOS)
             .white
         #else
-            .blue
+            Color.accentColor
         #endif
     }
 }

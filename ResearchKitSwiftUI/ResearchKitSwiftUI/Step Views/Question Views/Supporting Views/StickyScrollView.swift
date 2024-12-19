@@ -301,7 +301,7 @@ struct ToolbarButton: ButtonStyle {
     }
 
     var buttonColor: Color {
-        return isDisabled ? .gray : .blue
+        return isDisabled ? .gray : .accentColor
     }
 
     public func makeBody(configuration: Configuration) -> some View {

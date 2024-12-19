@@ -111,7 +111,7 @@ private struct ResearchFormStepButtonStyle: ButtonStyle {
                 .foregroundStyle(.white)
                 .frame(height: 50)
                 .background(
-                    isEnabled ? Color.blue : Color.blue.opacity(0.5),
+                    isEnabled ? Color.accentColor : Color.accentColor.opacity(0.5),
                     in: RoundedRectangle(cornerRadius: 12)
                 )
         #elseif os(visionOS)
