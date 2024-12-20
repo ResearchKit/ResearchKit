@@ -71,7 +71,12 @@ struct NavigationalLayout: View {
                 } content: {
                     firstStep
                 }
-                .navigationTitle("1 of \(steps.count)")
+                .navigationTitle(
+                    navigationBarTitle(
+                        firstValue: 1,
+                        secondValue: steps.count
+                    )
+                )
                 .navigationDestination(for: Subview.ID.self) { subviewID in
                     ResearchFormStepContentView(
                         isLastStep: isLastStep(for: subviewID)
@@ -101,6 +106,20 @@ struct NavigationalLayout: View {
                 key: ResearchFormCompletionKey.self,
                 value: researchFormCompletion)
         #endif
+    }
+
+    private func navigationBarTitle(
+        firstValue: Int,
+        secondValue: Int
+    ) -> String {
+        String(
+            format: NSLocalizedString(
+                "NAVIGATION_TITLE",
+                comment: ""
+            ),
+            firstValue,
+            secondValue
+        )
     }
 
     private func handle(
