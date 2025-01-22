@@ -35,20 +35,40 @@ public struct MultipleChoiceQuestion: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedResults: [ResultValue]?
 
     private var resolvedResult: Binding<[ResultValue]?> {
         switch selection {
         case let .automatic(key: key):
             return Binding(
                 get: {
-                    managedFormResult.resultForStep(key: key) ?? nil
+                    let result: [ResultValue]?
+                    if let managedResults {
+                        result = managedResults
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            result = managedFormResult.resultForStep(key: key) ?? nil
+                        case .standalone:
+                            result = nil
+                        }
+                    }
+                    return result
                 },
                 set: {
-                    managedFormResult.setResultForStep(
-                        .multipleChoice($0), key: key)
+                    managedResults = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.multipleChoice($0), key: key)
+                    }
                 }
             )
         case let .manual(value):

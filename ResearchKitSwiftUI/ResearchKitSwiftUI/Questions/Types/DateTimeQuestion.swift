@@ -35,9 +35,15 @@ public struct DateTimeQuestion<Header: View>: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedDate: Date?
 
     @State
     private var showDatePickerModal = false
@@ -55,8 +61,27 @@ public struct DateTimeQuestion<Header: View>: View {
         switch selection {
         case let .automatic(key: key):
             return Binding(
-                get: { managedFormResult.resultForStep(key: key) ?? Date() },
-                set: { managedFormResult.setResultForStep(.date($0), key: key) }
+                get: {
+                    let date: Date?
+                    if let managedDate {
+                        date = managedDate
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            date = managedFormResult.resultForStep(key: key) ?? Date()
+                        case .standalone:
+                            date = Date()
+                        }
+                    }
+                    return date
+                },
+                set: {
+                    managedDate = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.date($0), key: key)
+                    }
+                }
             )
         case let .manual(value):
             return value

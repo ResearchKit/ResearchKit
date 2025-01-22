@@ -141,9 +141,15 @@ public struct ImageChoiceQuestion: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedResults: [ResultValue]?
 
     private let id: String
     private let title: String
@@ -157,9 +163,26 @@ public struct ImageChoiceQuestion: View {
         switch selection {
         case .automatic(let key):
             return Binding(
-                get: { managedFormResult.resultForStep(key: key) ?? [] },
+                get: {
+                    let result: [ResultValue]?
+                    if let managedResults {
+                        result = managedResults
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            result = managedFormResult.resultForStep(key: key) ?? []
+                        case .standalone:
+                            result = []
+                        }
+                    }
+                    return result
+                },
                 set: {
-                    managedFormResult.setResultForStep(.image($0), key: key)
+                    managedResults = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.image($0), key: key)
+                    }
                 }
             )
         case .manual(let value):

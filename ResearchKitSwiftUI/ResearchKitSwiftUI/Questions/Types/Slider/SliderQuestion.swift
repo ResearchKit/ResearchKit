@@ -118,9 +118,15 @@ public struct SliderQuestion: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedSelectedValue: Double?
 
     @State
     private var isWaitingForUserFeedback: Bool = true
@@ -171,16 +177,22 @@ public struct SliderQuestion: View {
                         scaleSelectionBinding = .textChoice(
                             .init(
                                 get: {
-                                    guard
-                                        let sliderValue =
-                                            managedFormResult.resultForStep(
-                                                key: key)
-                                    else {
-                                        return TextChoice(
-                                            id: "", choiceText: "", value: 0)
+                                    let textChoice: TextChoice
+                                    if let managedSelectedValue {
+                                        textChoice = multipleChoiceOptions[Int(managedSelectedValue)]
+                                    } else {
+                                        switch questionContext {
+                                        case .formEmbedded:
+                                            if let selectedIndex = managedFormResult.resultForStep(key: key) {
+                                                textChoice = multipleChoiceOptions[Int(selectedIndex)]
+                                            } else {
+                                                textChoice = TextChoice(id: "", choiceText: "", value: 0)
+                                            }
+                                        case .standalone:
+                                            textChoice = TextChoice(id: "", choiceText: "", value: 0)
+                                        }
                                     }
-                                    return multipleChoiceOptions[
-                                        Int(sliderValue)]
+                                    return textChoice
                                 },
                                 set: { multipleChoiceOption in
                                     guard
@@ -194,8 +206,13 @@ public struct SliderQuestion: View {
                                     else {
                                         return
                                     }
-                                    managedFormResult.setResultForStep(
-                                        .scale(Double(index)), key: key)
+                                    
+                                    managedSelectedValue = Double(index)
+                                    
+                                    if case .formEmbedded = questionContext {
+                                        managedFormResult.setResultForStep(
+                                            .scale(Double(index)), key: key)
+                                    }
                                 }
                             )
                         )
@@ -204,19 +221,32 @@ public struct SliderQuestion: View {
                     scaleSelectionBinding = .int(
                         .init(
                             get: {
-                                guard
-                                    let sliderValue =
-                                        managedFormResult.resultForStep(
-                                            key: key)
-                                else {
-                                    return 0
+                                let integerValue: Int?
+                                if let managedSelectedValue {
+                                    integerValue = Int(managedSelectedValue)
+                                } else {
+                                    switch questionContext {
+                                    case .formEmbedded:
+                                        if let value = managedFormResult.resultForStep(key: key) {
+                                            integerValue = Int(value)
+                                        } else {
+                                            integerValue = 0
+                                        }
+                                    case .standalone:
+                                        integerValue = 0
+                                    }
                                 }
-                                return Int(sliderValue)
+                                return integerValue
                             },
                             set: {
                                 guard let result = $0 else { return }
-                                managedFormResult.setResultForStep(
-                                    .scale(Double(result)), key: key)
+                                
+                                managedSelectedValue = Double(result)
+                                
+                                if case .formEmbedded = questionContext {
+                                    managedFormResult.setResultForStep(
+                                        .scale(Double(result)), key: key)
+                                }
                             }
                         )
                     )
@@ -224,19 +254,32 @@ public struct SliderQuestion: View {
                     scaleSelectionBinding = .double(
                         .init(
                             get: {
-                                guard
-                                    let sliderValue =
-                                        managedFormResult.resultForStep(
-                                            key: key)
-                                else {
-                                    return 0
+                                let doubleValue: Double
+                                if let managedSelectedValue {
+                                    doubleValue = managedSelectedValue
+                                } else {
+                                    switch questionContext {
+                                    case .formEmbedded:
+                                        if let value = managedFormResult.resultForStep(key: key) {
+                                            doubleValue = value
+                                        } else {
+                                            doubleValue = 0
+                                        }
+                                    case .standalone:
+                                        doubleValue = 0
+                                    }
                                 }
-                                return sliderValue
+                                return doubleValue
                             },
                             set: {
                                 guard let result = $0 else { return }
-                                managedFormResult.setResultForStep(
-                                    .scale(result), key: key)
+                                
+                                managedSelectedValue = result
+                                
+                                if case .formEmbedded = questionContext {
+                                    managedFormResult.setResultForStep(
+                                        .scale(result), key: key)
+                                }
                             }
                         )
                     )
@@ -257,20 +300,35 @@ public struct SliderQuestion: View {
                         .textChoice(binding), .textChoice(multipleChoiceOptions)
                     ):
                         let index =
-                            multipleChoiceOptions.firstIndex(
-                                where: { binding.wrappedValue.id == $0.id }
-                            ) ?? 0
-                        managedFormResult.setResultForStep(
-                            .scale(Double(index)), key: key)
+                        multipleChoiceOptions.firstIndex(
+                            where: { binding.wrappedValue.id == $0.id }
+                        ) ?? 0
+                    
+                        managedSelectedValue = Double(index)
+                        
+                        if case .formEmbedded = questionContext {
+                            managedFormResult.setResultForStep(
+                                .scale(Double(index)), key: key)
+                        }
                 #endif
                 case let (.int(binding), .integerRange):
                     guard let result = binding.wrappedValue else { return }
-                    managedFormResult.setResultForStep(
-                        .scale(Double(result)), key: key)
+                    
+                    managedSelectedValue = Double(result)
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(
+                            .scale(Double(result)), key: key)
+                    }
 
                 case let (.double(binding), .doubleRange):
                     guard let result = binding.wrappedValue else { return }
-                    managedFormResult.setResultForStep(.scale(result), key: key)
+                    
+                    managedSelectedValue = result
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.scale(result), key: key)
+                    }
 
                 default:
                     break
@@ -540,7 +598,8 @@ public struct SliderQuestion: View {
                     .padding()
                     .onAppear {
                         guard case .automatic(let key) = stateManagementType,
-                            let sliderValue = managedFormResult.resultForStep(
+                              case .formEmbedded = questionContext,
+                              let sliderValue = managedFormResult.resultForStep(
                                 key: key)
                         else {
                             return
