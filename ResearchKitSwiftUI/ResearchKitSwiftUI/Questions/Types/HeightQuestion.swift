@@ -49,9 +49,15 @@ public struct HeightQuestion: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedHeight: Double?
 
     @State private var isInputActive = false
     @State private var hasChanges: Bool
@@ -69,11 +75,25 @@ public struct HeightQuestion: View {
         case let .automatic(key: key):
             return Binding(
                 get: {
-                    managedFormResult.resultForStep(key: key)
-                        ?? initialPrimaryValue
+                    let height: Double?
+                    if let managedHeight {
+                        height = managedHeight
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            height = managedFormResult.resultForStep(key: key) ?? initialPrimaryValue
+                        case .standalone:
+                            height = initialPrimaryValue
+                        }
+                    }
+                    return height
                 },
                 set: {
-                    managedFormResult.setResultForStep(.height($0), key: key)
+                    managedHeight = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.height($0), key: key)
+                    }
                 }
             )
         case let .manual(value):

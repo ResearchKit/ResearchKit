@@ -70,12 +70,18 @@ public struct WeightQuestion: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @State private var isInputActive = false
     @State private var hasChanges: Bool
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedWeight: Double?
 
     private let defaultWeightInKilograms = 68.039
 
@@ -93,9 +99,26 @@ public struct WeightQuestion: View {
         switch selection {
         case let .automatic(key: key):
             return Binding(
-                get: { managedFormResult.resultForStep(key: key) ?? nil },
+                get: {
+                    let weight: Double?
+                    if let managedWeight {
+                        weight = managedWeight
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            weight = managedFormResult.resultForStep(key: key) ?? nil
+                        case .standalone:
+                            weight = nil
+                        }
+                    }
+                    return weight
+                },
                 set: {
-                    managedFormResult.setResultForStep(.numeric($0), key: key)
+                    managedWeight = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.numeric($0), key: key)
+                    }
                 }
             )
         case let .manual(value):

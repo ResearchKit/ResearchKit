@@ -49,17 +49,40 @@ public struct NumericQuestion<Header: View>: View {
     private let prompt: String?
     @FocusState private var focusTarget: FocusTarget?
     private let selection: StateManagementType<Double?>
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedNumber: Double?
 
     private var resolvedResult: Binding<Double?> {
         switch selection {
         case let .automatic(key: key):
             return Binding(
-                get: { managedFormResult.resultForStep(key: key) ?? nil },
+                get: {
+                    let number: Double?
+                    if let managedNumber {
+                        number = managedNumber
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            number = managedFormResult.resultForStep(key: key) ?? nil
+                        case .standalone:
+                            number = nil
+                        }
+                    }
+                    return number
+                },
                 set: {
-                    managedFormResult.setResultForStep(.numeric($0), key: key)
+                    managedNumber = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.numeric($0), key: key)
+                    }
                 }
             )
         case let .manual(value):

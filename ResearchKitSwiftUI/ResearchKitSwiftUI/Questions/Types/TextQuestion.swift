@@ -45,9 +45,15 @@ public struct TextQuestion<Header: View>: View {
 
     @EnvironmentObject
     private var managedFormResult: ResearchFormResult
+    
+    @Environment(\.questionContext)
+    private var questionContext: QuestionContext
 
     @Environment(\.questionRequired)
     private var isRequired: Bool
+    
+    @State
+    private var managedText: String?
 
     private enum FocusTarget {
         case textQuestion
@@ -68,8 +74,27 @@ public struct TextQuestion<Header: View>: View {
         switch selection {
         case let .automatic(key: key):
             return Binding(
-                get: { managedFormResult.resultForStep(key: key) ?? nil },
-                set: { managedFormResult.setResultForStep(.text($0), key: key) }
+                get: {
+                    let text: String?
+                    if let managedText {
+                        text = managedText
+                    } else {
+                        switch questionContext {
+                        case .formEmbedded:
+                            text = managedFormResult.resultForStep(key: key) ?? nil
+                        case .standalone:
+                            text = nil
+                        }
+                    }
+                    return text
+                },
+                set: {
+                    managedText = $0
+                    
+                    if case .formEmbedded = questionContext {
+                        managedFormResult.setResultForStep(.text($0), key: key)
+                    }
+                }
             )
         case let .manual(value):
             return value

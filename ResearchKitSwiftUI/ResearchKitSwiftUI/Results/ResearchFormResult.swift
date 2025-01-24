@@ -80,8 +80,7 @@ extension AnswerFormat: Equatable {
 /// Captures the responses to questions for which no binding has been provided. It is passed through ``ResearchForm``'s `onResearchFormCompletion` handler, which is passed through the initializer, upon survey completion.
 public final class ResearchFormResult: ObservableObject {
 
-    @Published
-    var stepResults: [String: AnswerFormat]
+    private var stepResults: [String: AnswerFormat]
 
     /// Initializes an instance of ``ResearchFormResult`` that contains no responses.
     public convenience init() {
@@ -190,4 +189,29 @@ extension ResearchFormResult: Equatable {
         lhs.stepResults == rhs.stepResults
     }
 
+}
+
+extension EnvironmentValues {
+    
+    var questionContext: QuestionContext {
+        get {
+            self[QuestionContextKey.self]
+        }
+        set {
+            self[QuestionContextKey.self] = newValue
+        }
+    }
+    
+}
+
+enum QuestionContext {
+    
+    case standalone, formEmbedded
+    
+}
+
+private struct QuestionContextKey: EnvironmentKey {
+    
+    static var defaultValue: QuestionContext = .standalone
+    
 }
