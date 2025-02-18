@@ -61,6 +61,10 @@
 }
 
 - (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle {
+    return [self initWithText:text detailText:detailText image:image learnMoreItem:learnMoreItem bodyItemStyle:bodyItemStyle useCardStyle:NO alignImageToTop:false];
+}
+
+- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle alignImageToTop:(BOOL)alignImageToTop {
     self = [super init];
     if (self) {
         self.text = text;
@@ -70,6 +74,7 @@
         self.image = image;
         self.useCardStyle = useCardStyle;
         self.useSecondaryColor = NO;
+        self.alignImageToTop = alignImageToTop;
     }
     [self validateParameters];
     return self;
@@ -127,6 +132,7 @@
     bodyItem->_image = [self.image copy];
     bodyItem->_useCardStyle = self.useCardStyle;
     bodyItem->_useSecondaryColor = self.useSecondaryColor;
+    bodyItem->_alignImageToTop = self.alignImageToTop;
     return bodyItem;
 }
 
@@ -146,7 +152,8 @@
             && (self.bodyItemStyle == castObject.bodyItemStyle)
             && ORKEqualObjects(self.image, castObject.image)
             && (self.useCardStyle == castObject.useCardStyle)
-            && (self.useSecondaryColor == castObject.useSecondaryColor));
+            && (self.useSecondaryColor == castObject.useSecondaryColor)
+            && (self.alignImageToTop == castObject.alignImageToTop));
 }
 
 @end

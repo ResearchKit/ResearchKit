@@ -29,11 +29,15 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+/**
+ An enumeration for bullet style options.
+ */
 
 typedef NS_ENUM(NSInteger, ORKBulletType) {
     ORKBulletTypeNone = 0,
@@ -43,8 +47,9 @@ typedef NS_ENUM(NSInteger, ORKBulletType) {
 } ORK_ENUM_AVAILABLE;
 
 /**
- The `ORKTableStepSource` is a protocol that can be used for presenting a list of model
- objects in a UITableView. Any `ORKStep` subclass that implements this protocol can be used with
+ A protocol that you use to present a list of model objects in a table view.
+ 
+ You can use any `ORKStep` subclass that implements this protocol with
  an `ORKTableStepViewController` to display the list of items.
  */
 @protocol ORKTableStepSource <NSObject>
@@ -123,8 +128,7 @@ typedef NS_ENUM(NSInteger, ORKBulletType) {
 @end
 
 /**
- The `ORKTableStep` class is a concrete subclass of `ORKStep`, used for presenting a list of model 
- objects in a UITableView.
+ A concrete subclass that presents a list of model objects in a table view.
  
  To use `ORKTableStep`, instantiate the object, fill in its properties, and include it
  in a task. Next, create a task view controller for the task and present it.
@@ -177,6 +181,11 @@ ORK_CLASS_AVAILABLE
  Default value is NO
  */
 @property (nonatomic) BOOL pinNavigationContainer;
+
+/**
+ A property that manually overrides the bottomPadding of the content view
+ */
+@property (nonatomic, copy, nullable) NSNumber *bottomPadding;
 
 /**
  Returns the number of sections in the tableview used to display this step. Default = `1`.

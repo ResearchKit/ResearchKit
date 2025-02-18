@@ -33,6 +33,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ A step that a Learn More Item object uses to display
+ additional information with a question.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKLearnMoreInstructionStep : ORKInstructionStep
 

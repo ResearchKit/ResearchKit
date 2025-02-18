@@ -341,7 +341,7 @@
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Zorg ervoor dat het volume van het apparaat op het hoogste niveau is ingesteld.\n\nTijdens deze taak wordt er een subtiele toon afgespeeld in het linker- of rechteroor.\n\nLuister aandachtig en tik telkens wanneer je een toon hoort op de knop.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Deze test stelt vast hoe hard een geluid moet zijn, zodat jij het kunt horen.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Intakevragenlijst.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \“beter oor\”, indien van toepassing";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \"beter oor\", indien van toepassing";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "links";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "rechts";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "geen voorkeur";

@@ -30,7 +30,7 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
 
 #import "HKSample+ORKJSONDictionary.h"
 
@@ -108,5 +108,5 @@
     XCTAssertTrue([dict[@"objects"] containsObject:dd], @"");
     XCTAssertTrue([dict[@"objects"] containsObject:ds], @"");
 }
-#endif 
+#endif
 @end

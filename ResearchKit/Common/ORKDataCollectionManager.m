@@ -33,14 +33,13 @@
 #import "ORKCollector_Internal.h"
 #import "ORKOperation.h"
 #import "ORKHelpers_Internal.h"
+#import <HealthKit/HealthKit.h>
 
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #import <HealthKit/HealthKit.h>
 #endif
 
-// The file names for persisting the state of our collectors
-static  NSString *const ORKDataCollectionPersistenceFileNamev1 = @".dataCollection.ork.data"; // pre-secureCoding
-static  NSString *const ORKDataCollectionPersistenceFileNamev2 = @".dataCollection.ork.archive"; // current
+static  NSString *const ORKDataCollectionPersistenceFileName = @".dataCollection.ork.data";
 
 @implementation ORKDataCollectionManager {
     dispatch_queue_t _queue;
@@ -50,8 +49,8 @@ static  NSString *const ORKDataCollectionPersistenceFileNamev2 = @".dataCollecti
     CMMotionActivityManager *_activityManager;
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKHealthStore *_healthStore;
-    NSMutableArray<HKObserverQueryCompletionHandler> *_completionHandlers;
 #endif
+    NSMutableArray<HKObserverQueryCompletionHandler> *_completionHandlers;
 }
 
 - (instancetype)initWithPersistenceDirectoryURL:(NSURL *)directoryURL {
@@ -141,45 +140,31 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
 
 - (NSArray<ORKCollector *> *)collectors {
     if (_collectors == nil) {
-        NSError *error;
         NSData *data = [NSData dataWithContentsOfFile:[self persistFilePath]];
-        ORKDataCollectionState *state = [NSKeyedUnarchiver unarchivedObjectOfClass:ORKDataCollectionState.self fromData:data error:&error];
-        
-        if (state == nil) {
-            NSDictionary *userInfo = @{NSUnderlyingErrorKey:error};
-            @throw [NSException exceptionWithName:NSGenericException reason: [NSString stringWithFormat:@"Failed to read from path %@", [self persistFilePath]] userInfo:userInfo];
-        } else {
-            _collectors = state.collectors ? : @[];
+        NSError* error = nil;
+        _collectors = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSArray class] fromData:data error:&error];
+        if (_collectors == nil || error != nil) {
+            @throw [NSException exceptionWithName:NSGenericException reason: [NSString stringWithFormat:@"Failed to read from path %@", [self persistFilePath]] userInfo:nil];
         }
     }
     return _collectors;
 }
 
 - (NSString * _Nonnull)persistFilePath {
-    return [_managedDirectory stringByAppendingPathComponent:ORKDataCollectionPersistenceFileNamev2];
+    return [_managedDirectory stringByAppendingPathComponent:ORKDataCollectionPersistenceFileName];
 }
 
 - (void)persistCollectors {
     NSArray *collectors = self.collectors;
-    
-    NSError *error = nil;
 
-    ORKDataCollectionState* state = [[ORKDataCollectionState alloc] init];
-    state.collectors = collectors;
-    state.archiveVersion = (NSString *)[[NSBundle bundleForClass:ORKDataCollectionManager.self] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:state requiringSecureCoding:YES error:&error];
-    
-    if (data == nil) {
-        NSDictionary *userInfo = @{NSUnderlyingErrorKey:error};
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Failed to archive collectors" userInfo:userInfo];
+    NSError *error;
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:collectors requiringSecureCoding:YES error:&error];
+    if (data != nil) {
+        [data writeToFile:[self persistFilePath] options:NSDataWritingAtomic|NSDataWritingFileProtectionComplete error:&error];
     }
     
-    error = nil;
-    BOOL success = [data writeToFile:[self persistFilePath] options:NSDataWritingAtomic|NSDataWritingFileProtectionComplete error:&error];
-
-    if (success != YES) {
-        NSDictionary *userInfo = @{NSUnderlyingErrorKey:error};
-        @throw [NSException exceptionWithName:NSGenericException reason: [NSString stringWithFormat:@"Failed to write to path %@", [self persistFilePath]] userInfo:userInfo];
+    if (error) {
+        @throw [NSException exceptionWithName:NSGenericException reason: [NSString stringWithFormat:@"Failed to write to path %@", [self persistFilePath]] userInfo:nil];
     }
 }
 
@@ -242,7 +227,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     
     return healthCorrelationCollector;
 }
-#endif 
+#endif
 
 - (ORKMotionActivityCollector *)addMotionActivityCollectorWithStartDate:(NSDate *)startDate
                                                                   error:(NSError* __autoreleasing *)error {
@@ -343,14 +328,16 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
                 if (_delegate && [_delegate respondsToSelector:@selector(dataCollectionManagerDidCompleteCollection:)]) {
                     [_delegate dataCollectionManagerDidCompleteCollection:self];
                 }
-                
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
                 for (HKObserverQueryCompletionHandler handler in _completionHandlers) {
                     handler();
                 }
                 [_completionHandlers removeAllObjects];
-#endif
+                
                 return NO;
+#else
+                return NO;
+#endif
             }];
         }];
         
@@ -365,39 +352,6 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
         // No need to persist collectors
         return NO;
     }];
-
-}
-
-@end
-
-@implementation ORKDataCollectionState
-
-/// Sentinel value for archiveVersion to indicate missing version info
-+ (NSString *)absentVersionInfoSentinelValue {
-    return @"0.0.0";
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (aDecoder.allowsKeyedCoding != YES) {
-        return nil;
-    }
-
-    self = [super init];
-    
-  
-    ORK_DECODE_OBJ_ARRAY(aDecoder, collectors, ORKCollector);
-    ORK_DECODE_OBJ_CLASS(aDecoder, archiveVersion, NSString);
-
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, archiveVersion ? : [self.class absentVersionInfoSentinelValue]);
-    ORK_ENCODE_OBJ(aCoder, collectors);
 }
 
 @end

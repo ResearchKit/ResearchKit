@@ -32,6 +32,7 @@
 #import "ORKDataCollectionManager.h"
 #import <CoreMotion/CoreMotion.h>
 
+
 @interface ORKDataCollectionManager ()
 
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION

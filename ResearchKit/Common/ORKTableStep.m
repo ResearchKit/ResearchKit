@@ -30,7 +30,6 @@
 
 
 #import "ORKTableStep.h"
-#import "ORKTableStepViewController.h"
 #import "ORKHelpers_Internal.h"
 
 static const CGFloat CellPadding = 20.0;
@@ -43,10 +42,6 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 @implementation ORKTableStep {
     UIImage * _circleBulletImage;
-}
-
-+ (Class)stepViewControllerClass {
-    return [ORKTableStepViewController class];
 }
 
 - (NSInteger)numberOfSections {
@@ -174,6 +169,8 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     step->_bulletType = _bulletType;
     step->_bulletIconNames = ORKArrayCopyObjects(_bulletIconNames);
     step->_allowsSelection = _allowsSelection;
+    step->_bottomPadding = _bottomPadding;
+
     return step;
 }
 
@@ -191,6 +188,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         ORK_DECODE_OBJ_ARRAY(aDecoder, bulletIconNames, NSString);
         ORK_DECODE_BOOL(aDecoder, allowsSelection);
         ORK_DECODE_BOOL(aDecoder, pinNavigationContainer);
+        ORK_DECODE_OBJ_CLASS(aDecoder, bottomPadding, NSNumber);
     }
     return self;
 }
@@ -202,6 +200,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     ORK_ENCODE_OBJ(aCoder, bulletIconNames);
     ORK_ENCODE_BOOL(aCoder, allowsSelection);
     ORK_ENCODE_BOOL(aCoder, pinNavigationContainer);
+    ORK_ENCODE_OBJ(aCoder, bottomPadding);
 }
 
 #pragma mark - Equality
@@ -215,11 +214,12 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
             && (self.bulletType == castObject.bulletType)
             && (self.allowsSelection == castObject.allowsSelection)
             && ORKEqualObjects(self.bulletIconNames, castObject.bulletIconNames)
-            && self.pinNavigationContainer == castObject.pinNavigationContainer);
+            && self.pinNavigationContainer == castObject.pinNavigationContainer)
+            && ORKEqualObjects(self.bottomPadding, castObject.bottomPadding);
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.items.hash ^ self.bulletIconNames.hash ^ (_bulletType ? 0xf : 0x0) ^ (_allowsSelection ? 0xf : 0x0) ^ (_pinNavigationContainer ? 0xf : 0x0);
+    return super.hash ^ self.items.hash ^ self.bulletIconNames.hash ^ self.bottomPadding.hash ^ (_bulletType ? 0xf : 0x0) ^ (_allowsSelection ? 0xf : 0x0) ^ (_pinNavigationContainer ? 0xf : 0x0);
 }
 
 @end

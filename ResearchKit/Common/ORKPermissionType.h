@@ -28,7 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import Foundation;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import <ResearchKit/ORKDefines.h>
 
@@ -39,16 +40,36 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKSensorPermissionType;
 @class ORKMotionActivityPermissionType;
 @class ORKLocationPermissionType;
-@class ORKRequestPermissionView;
 @class HKSampleType, HKObjectType;
+
+typedef NS_ENUM(NSInteger, ORKRequestPermissionsState) {
+    ORKRequestPermissionsStateDefault = 0,
+    ORKRequestPermissionsStateConnected,
+    ORKRequestPermissionsStateNotSupported,
+    ORKRequestPermissionsStateError,
+};
 
 typedef NS_OPTIONS(NSUInteger, UNAuthorizationOptions);
 typedef NSString * SRSensor NS_TYPED_ENUM API_AVAILABLE(ios(14.0));
 
+/**
+ An abstract class that all permission types subclass from.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKPermissionType : NSObject
 
-@property (nonatomic) ORKRequestPermissionView *cardView;
+@property (nonatomic, copy) void (^permissionsStatusUpdateCallback)(void);
+
+@property (nonatomic, copy, readonly) NSString *localizedTitle;
+@property (nonatomic, copy, readonly) NSString *localizedDetailText;
+@property (nonatomic, strong, readonly) UIImage * _Nullable image;
+@property (nonatomic, copy, readonly) UIColor *iconTintColor;
+@property (nonatomic, assign, readonly) ORKRequestPermissionsState permissionState;
+@property (nonatomic, assign, readonly) BOOL canContinue;
+
+- (void)requestPermission;
+- (void)cleanUp;
 
 + (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
                                                             objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
@@ -59,7 +80,9 @@ ORK_CLASS_AVAILABLE
 
 + (ORKMotionActivityPermissionType *) deviceMotionPermissionType;
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 + (ORKLocationPermissionType *) locationPermissionType;
+#endif
 
 @end
 

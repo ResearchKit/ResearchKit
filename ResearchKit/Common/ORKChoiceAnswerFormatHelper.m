@@ -46,7 +46,7 @@
 - (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        _choices = [[answerFormat choices] copy];
+        _choices = [answerFormat choices];
         _isValuePicker = [answerFormat isValuePicker];
     }
     return self;
@@ -67,6 +67,11 @@
 - (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
     id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
     return option && [option isKindOfClass:[ORKImageChoice class]] ? (ORKImageChoice *) option : nil;
+}
+
+- (ORKColorChoice *)colorChoiceAtIndex:(NSUInteger)index {
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKColorChoice class]] ? (ORKColorChoice *) option : nil;
 }
 #endif
 
@@ -91,7 +96,6 @@
         }
         
         id<ORKAnswerOption> choice = _choices[index];
-
 #if TARGET_OS_IOS
         ORKTextChoiceOther *textChoiceOther;
         if ([choice isKindOfClass: [ORKTextChoiceOther class]]) {
@@ -101,7 +105,6 @@
 #else
         id value = choice.value;
 #endif
-
         if (value == nil) {
             value = _isValuePicker ? @(index - 1) : @(index);
         }
@@ -138,6 +141,8 @@
         
         for (id answerValue in (NSArray *)answer) {
             id<ORKAnswerOption> matchedChoice = nil;
+            BOOL isTextChoiceOtherResult = [self _isTextChoiceOtherResult:answerValue choices:_choices];
+            
             for ( id<ORKAnswerOption> choice in _choices) {
 #if TARGET_OS_IOS
                 if ([choice isKindOfClass:[ORKTextChoiceOther class]]) {
@@ -148,7 +153,12 @@
                     } else if (textChoiceOther.textViewInputOptional && textChoiceOther.textViewText.length <= 0 && [textChoiceOther.value isEqual:answerValue]) {
                         matchedChoice = choice;
                         break;
+                    } else if (isTextChoiceOtherResult) {
+                        textChoiceOther.textViewText = answerValue;
+                        matchedChoice = choice;
+                        break;
                     }
+                    
                 } else if ([choice.value isEqual:answerValue]) {
                     matchedChoice = choice;
                     break;
@@ -165,7 +175,7 @@
                 
                 if (![answerValue isKindOfClass:[NSNumber class]]) {
                     @throw [NSException exceptionWithName:@"No matching choice found"
-                                                   reason:[NSString stringWithFormat:@"Provided choice of type %@ not found in available choices", [answerValue class]]
+                                                   reason:[NSString stringWithFormat:@"Provided choice of type %@ not found in available choices. Answer is %@ and choices are %@", [answerValue class], answer, _choices]
                                                  userInfo:nil];
                 }
                 
@@ -189,6 +199,20 @@
     
     return [indexArray copy];
     
+}
+
+- (BOOL)_isTextChoiceOtherResult:(id)answerValue choices:(NSArray *)choices {
+    if (answerValue == nil) {
+        return NO;
+    }
+    
+    for (id<ORKAnswerOption> choice in _choices) {
+        if ([choice.value isEqual:answerValue]){
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (NSString *)stringForChoiceAnswer:(id)answer {

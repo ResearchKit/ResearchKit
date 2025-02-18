@@ -29,7 +29,7 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -41,7 +41,7 @@ ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAI
 #define ORKIgnoreTimeIntervalValue (ORKIgnoreDoubleValue)
 
 /**
- The `ORKResultSelector` class unequivocally identifies a result within a set of task results.
+ A class that identifies a result within a set of task results.
  
  You must use an instance of this object to specify the question result you are interested in when
  building a result predicate. See `ORKResultPredicate` for more information.
@@ -172,8 +172,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKResultPredicate` class provides convenience class methods to build predicates for most of
- the `ORKQuestionResult` subtypes.
+ A class that provides convenience class methods to build predicates for most of
+ the question-result subtypes.
  
  You use result predicates to create `ORKPredicateStepNavigationRule` objects. The result predicates
  are used to match specific ORKQuestionResult instances (created in response to the participant's
@@ -220,6 +220,18 @@ ORK_CLASS_AVAILABLE
  @return A result predicate.
  */
 + (NSPredicate *)predicateForNilQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector;
+
+/**
+ Returns a predicate matching a result whose answer's class equals `[ORKDontKnow class]`.
+ A  result is a `[ORKDontKnow class]`  if the don't know button was selected for the question that
+ generated that result.
+ 
+ @param resultSelector      The result selector object which specifies the question result you are
+ interested in.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForDontKnowResultWithResultSelector:(ORKResultSelector *)resultSelector;
 
 /**
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
@@ -528,6 +540,7 @@ within the specified `NSTimeInterval` values.
                                         refer to the contained `ORKConsentSignatureResult`
                                         corresponding to the signature collected by the consent
                                         review step.
+ @param didConsent   Boolean to indicate if the user consented.
  @return A result predicate.
  */
 + (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector

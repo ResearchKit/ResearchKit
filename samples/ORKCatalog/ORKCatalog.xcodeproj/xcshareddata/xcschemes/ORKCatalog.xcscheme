@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1310"
+   LastUpgradeVersion = "1500"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -26,21 +26,17 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <TestPlans>
-         <TestPlanReference
-            reference = "container:ORKCatalogUITests/ORKCatalogUI.xctestplan"
-            default = "YES">
-         </TestPlanReference>
-      </TestPlans>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9622282924F04D780056E74D"
-               BuildableName = "ORKCatalogUITests.xctest"
-               BlueprintName = "ORKCatalogUITests"
+               BlueprintIdentifier = "51AF19762B59F1E400D3B399"
+               BuildableName = "ORKCatalogTests.xctest"
+               BlueprintName = "ORKCatalogTests"
                ReferencedContainer = "container:ORKCatalog.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -29,8 +29,6 @@
  */
 
 #import "ORKMotionActivityPermissionType.h"
-#import "ORKRequestPermissionView.h"
-#import "ORKRequestPermissionButton.h"
 #import "ORKHelpers_Internal.h"
 
 @import CoreMotion;
@@ -41,21 +39,27 @@ static const uint32_t IconDarkTintColor = 0xEF6FD8;
 
 @interface ORKMotionActivityPermissionType()
 @property (nonatomic) CMMotionActivityManager *activityManager;
+@property (nonatomic, readonly, assign) ORKRequestPermissionsState permissionState;
+@property (nonatomic, readonly, assign) BOOL canContinue;
 @end
 
-@implementation ORKMotionActivityPermissionType
+@implementation ORKMotionActivityPermissionType {
+    __weak NSTimer *_checkStatusTimer;
+}
 
 + (instancetype)new {
     return [[ORKMotionActivityPermissionType alloc] init];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
-        [self setupCardView];
     }
     return self;
+}
+
+- (void)cleanUp {
+    [self _invalidateCheckStatusTimer];
 }
 
 - (CMMotionActivityManager *)activityManager {
@@ -65,60 +69,74 @@ static const uint32_t IconDarkTintColor = 0xEF6FD8;
     return _activityManager;
 }
 
-- (void)setupCardView {
-
-    UIImage *image;
-    if (@available(iOS 13, *)) {
-        image = [UIImage systemImageNamed:Symbol];
-    }
-
-    self.cardView = [[ORKRequestPermissionView alloc]
-                     initWithIconImage:image
-                     title:ORKLocalizedString(@"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE", nil)
-                     detailText:ORKLocalizedString(@"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION", nil)];
-
-    [self.cardView.requestPermissionButton addTarget:self action:@selector(requestPermissionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-
-    // Set the tint color for the icon
-    if (@available(iOS 13, *)) {
-        UIColor *dynamicTint = [[UIColor alloc] initWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            return traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? ORKRGB(IconDarkTintColor) : ORKRGB(IconLightTintColor);
-        }];
-        [self.cardView updateIconTintColor:dynamicTint];
-    } else {
-        [self.cardView updateIconTintColor:ORKRGB(IconLightTintColor)];
-    }
-
-    [self checkMotionAuthStatus];
+- (NSString *)localizedTitle {
+    return ORKLocalizedString(@"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE", nil);
 }
 
--(void)checkMotionAuthStatus {
+- (NSString *)localizedDetailText {
+    return ORKLocalizedString(@"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION", nil);
+}
+
+- (UIImage * _Nullable)image {
+    return [UIImage systemImageNamed:Symbol];
+}
+
+- (UIColor *)iconTintColor {
+    return [[UIColor alloc] initWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+        return traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? ORKRGB(IconDarkTintColor) : ORKRGB(IconLightTintColor);
+    }];
+}
+
+- (ORKRequestPermissionsState)permissionState {
     switch (CMMotionActivityManager.authorizationStatus) {
         case CMAuthorizationStatusNotDetermined:
-            [self setState:ORKRequestPermissionsButtonStateDefault canContinue:NO];
-            break;
+            return ORKRequestPermissionsStateDefault;
 
         case CMAuthorizationStatusDenied:
         case CMAuthorizationStatusAuthorized:
         case CMAuthorizationStatusRestricted:
-            [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
-            break;
+            return ORKRequestPermissionsStateConnected;
     }
+}
+
+- (BOOL)canContinue {
+    return self.permissionState == ORKRequestPermissionsStateConnected;
 }
 
 // There is no explicit API for requesting device motion permission.
 // It is requested automatically when you try read data for the first time.
 // This method tries to read data in order to trigger the permission dialogue.
-- (void)requestPermissionButtonPressed {
+- (void)requestPermission {
     [self.activityManager startActivityUpdatesToQueue:[NSOperationQueue mainQueue]
                                           withHandler:^(CMMotionActivity * _Nullable activity) {}];
     [self.activityManager stopActivityUpdates];
-    [self setState:ORKRequestPermissionsButtonStateConnected canContinue:YES];
+    
+    if (self.permissionsStatusUpdateCallback != nil) {
+        self.permissionsStatusUpdateCallback();
+    }
+    
+    if (!_checkStatusTimer) {
+        __weak typeof(self) weakSelf = self;
+        _checkStatusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                             target:weakSelf
+                                                           selector:@selector(_checkPermissionStatus)
+                                                           userInfo:nil
+                                                            repeats:YES];
+    }
 }
 
-- (void)setState:(ORKRequestPermissionsButtonState)state canContinue:(BOOL)canContinue {
-    [self.cardView setEnableContinueButton:canContinue];
-    [self.cardView.requestPermissionButton setState:state];
+- (void)_checkPermissionStatus {
+    if ([self permissionState] == ORKRequestPermissionsStateConnected && self.permissionsStatusUpdateCallback != nil) {
+        self.permissionsStatusUpdateCallback();
+        [self _invalidateCheckStatusTimer];
+    }
+}
+
+- (void)_invalidateCheckStatusTimer {
+    if (_checkStatusTimer) {
+        [_checkStatusTimer invalidate];
+        _checkStatusTimer = nil;
+    }
 }
 
 - (BOOL)isEqual:(id)object {

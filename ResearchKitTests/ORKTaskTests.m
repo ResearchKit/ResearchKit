@@ -30,8 +30,9 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
-
+@import ResearchKit_Private;
+@import ResearchKitUI;
+@import ResearchKitActiveTask;
 
 @interface ORKTaskTests : XCTestCase
 
@@ -53,7 +54,7 @@
 
 @interface ORKTaskViewController (Testing)
 - (BOOL)hasSaveableResults;
-- (BOOL)canDiscardResults;
+- (BOOL)isSafeToSkipConfirmation;
 @end
 
 @interface ORKReviewStep (Testing)
@@ -1438,10 +1439,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
 - (void)testTaskViewControllerCanDiscardLogic {
     TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
-    ORKStep *reviewableStep = [ORKQuestionStep questionStepWithIdentifier:@"Who's there?" title:nil question:nil answer:nil];
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"TestTask" steps:@[
         [[ORKInstructionStep alloc] initWithIdentifier:@"instuction-0"],
-        [ORKReviewStep standaloneReviewStepWithIdentifier:@"review" steps:@[reviewableStep] resultSource:nil],
+        [ORKReviewStep standaloneReviewStepWithIdentifier:@"review" steps:nil resultSource:nil],
     ]];
 
     // test cases where hasSaveableResults == NO
@@ -1456,15 +1456,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
         // if currentStep == instructionStep and not saveable -> canDiscardResults
         XCTAssertEqual(taskViewController.currentStepViewController.step.identifier , @"instuction-0");
-        XCTAssertTrue([taskViewController canDiscardResults]);
-        
-        // if currentStep is standalone review step and not saveable => canDiscardResults
-        [taskViewController goForward];
-        ORKReviewStep *reviewStep = ORKDynamicCast(taskViewController.currentStepViewController.step, ORKReviewStep);
-        XCTAssertTrue([reviewStep isStandalone]);
-        XCTAssertTrue([taskViewController canDiscardResults]);
+        XCTAssertTrue([taskViewController isSafeToSkipConfirmation]);
     }
-    
+
     // test cases where hasSaveableResults == YES
     {
         MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
@@ -1477,13 +1471,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
         // if currentStep == instructionStep and saveable -> CANNOT discardResults
         XCTAssertEqual(taskViewController.currentStepViewController.step.identifier , @"instuction-0");
-        XCTAssertFalse([taskViewController canDiscardResults]);
-
-        // if currentStep is standalone review step and saveable => canDiscardResults
-        [taskViewController goForward];
-        ORKReviewStep *reviewStep = ORKDynamicCast(taskViewController.currentStepViewController.step, ORKReviewStep);
-        XCTAssertTrue([reviewStep isStandalone]);
-        XCTAssertTrue([taskViewController canDiscardResults]);
+        XCTAssertFalse([taskViewController isSafeToSkipConfirmation]);
     }
     
     {
@@ -1504,17 +1492,6 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
         ORKReviewStepViewController *reviewViewController = ORKDynamicCast(taskViewController.currentStepViewController, ORKReviewStepViewController);
         XCTAssertNotNil(reviewViewController, "taskViewController.currentStepViewController should be of type ORKReviewStepViewController at this point");
-
-        
-        // before reviewStepViewController:willReviewStep, currentStepViewController should not be in readOnlyMode
-        XCTAssertFalse(taskViewController.currentStepViewController.readOnlyMode);
-        
-        // call reviewStepViewController:willReviewStep: to prepare the stepViewController for review
-        [taskViewController reviewStepViewController:reviewViewController willReviewStep:testStep];
-
-        // if current viewController.readOnly -> canDiscardResults
-        XCTAssertTrue(taskViewController.currentStepViewController.readOnlyMode);
-        XCTAssertTrue([taskViewController canDiscardResults]);
     }
     
     {
@@ -1529,24 +1506,9 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
         XCTAssertEqual(taskViewController.currentStepViewController.step.identifier, @"Who's there?");
 
         // if current viewController.readOnly is FALSE -> CANNOT discardResults
-        XCTAssertFalse(taskViewController.currentStepViewController.readOnlyMode);
-        XCTAssertFalse([taskViewController canDiscardResults]);
+        XCTAssertFalse([taskViewController isSafeToSkipConfirmation]);
     }
 
-}
-
-- (void)testTaskViewControllerReviewStepDiscardLogic {
-    ORKReviewStep *embeddedReviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier: @"embeddedReviewStep"];
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"embeddedReviewMockTask"
-        steps:@[
-        embeddedReviewStep
-    ]];
-    MockTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
-    [taskViewController viewWillAppear:false];
-    
-    // Test if currentStep is reviewStep but not standalone -> CANNOT discardResults
-    XCTAssertFalse(embeddedReviewStep.isStandalone);
-    XCTAssertFalse([taskViewController canDiscardResults]);
 }
 
 - (void)testIndexOfStep {
@@ -1883,7 +1845,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     return self;
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskFinishReason)reason error:(NSError *)error {
     
     // Add results of method call
     MethodObject *obj = [[MethodObject alloc] init];

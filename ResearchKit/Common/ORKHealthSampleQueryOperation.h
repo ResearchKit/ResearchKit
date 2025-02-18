@@ -29,12 +29,11 @@
  */
 
 
+#import <Foundation/Foundation.h>
 #import "ORKOperation.h"
 #import "ORKDefines.h"
 
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
-
-
 @class ORKDataCollectionManager;
 @class ORKCollector;
 @protocol ORKHealthCollectable;

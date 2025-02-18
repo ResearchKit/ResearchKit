@@ -30,11 +30,15 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
+@import ResearchKitActiveTask;
+@import ResearchKitActiveTask_Private;
 
-@import CoreLocation;
 @import CoreMotion;
 
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+@import CoreLocation;
 
 @interface ORKMockLocationManager : CLLocationManager
 
@@ -62,6 +66,7 @@
 }
 
 @end
+#endif
 
 
 @interface ORKMockTouch : UITouch
@@ -394,6 +399,7 @@ static const NSInteger kNumberOfSamples = 5;
     _items = items;
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 - (void)testLocationRecorder {
     
     ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:@"location"]];
@@ -463,6 +469,7 @@ static const NSInteger kNumberOfSamples = 5;
         XCTAssertTrue(ork_doubleEqual(longitude, ((NSNumber *)sample[@"coordinate"][@"longitude"]).doubleValue), @"");
     }
 }
+#endif
 
 - (void)testAccelerometerRecorder {
     

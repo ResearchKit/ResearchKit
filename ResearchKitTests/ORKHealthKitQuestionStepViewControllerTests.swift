@@ -29,8 +29,8 @@
  */
 
 import XCTest
-import ResearchKit.Private
-#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+import ResearchKit_Private
+
 final class ORKHealthKitQuestionStepViewControllerTests: XCTestCase {
     var testController: ORKStepViewController!
     var step: ORKStep!
@@ -131,4 +131,4 @@ extension ORKHealthKitQuestionStepViewControllerTests: ORKStepViewControllerDele
         return true
     }
 }
-#endif
+

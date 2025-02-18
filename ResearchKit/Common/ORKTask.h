@@ -29,15 +29,17 @@
  */
 
 
-@import Foundation;
-
-#import <ResearchKit/ORKDefines.h>
+#import <Foundation/Foundation.h>
 
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 #import <HealthKit/HealthKit.h>
 #endif
 
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
+#endif
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,8 +47,29 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTaskResult;
 
 /**
+ The `ORKTaskFinishReason` value indicates how the task has finished.
+ */
+typedef NS_ENUM(NSInteger, ORKTaskFinishReason) {
+    
+    /// The task was canceled by the participant or the developer, and the participant asked to save the current result.
+    ORKTaskFinishReasonSaved,
+    
+    /// The task was canceled by the participant or the developer, and the participant asked to discard the current result.
+    ORKTaskFinishReasonDiscarded,
+    
+    /// The task has completed successfully, because all steps have been completed.
+    ORKTaskFinishReasonCompleted,
+    
+    /// An error was detected during the current step.
+    ORKTaskFinishReasonFailed,
+    
+    /// Interntional early termination of a task
+    ORKTaskFinishReasonEarlyTermination
+};
 
- `ORKTaskProgress` is a structure that represents how far a task has progressed.
+/**
+
+ A structure that represents how far a task has progressed.
  
  Objects that implement the `ORKTask` protocol return the task progress structure to indicate
  to the task view controller how far the task has progressed.
@@ -76,7 +99,7 @@ ORK_EXTERN ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger to
 
 /**
 
- `ORKTaskTotalProgress` is a structure that represents how far a task has progressed based on the total amount of questions.
+ A structure that represents how far a task has progressed based on the total amount of questions.
   
  Note that the values in an `ORKTotalTaskProgress` structure are used only for display; you don't use the values to access the steps in a task.
  */
@@ -103,8 +126,9 @@ typedef struct {
 ORK_EXTERN ORKTaskTotalProgress ORKTaskTotalProgressMake(NSUInteger currentStepStartingProgressPosition, NSUInteger total, BOOL stepShouldShowTotalProgress) ORK_AVAILABLE_DECL;
 
 /**
- The `ORKTask` protocol defines a task to be carried out by a participant
- in a research study. To present the ResearchKit framework UI in your app, instantiate an
+ A protocol that defines a task that a participant carries out in a research study.
+ 
+ To present the ResearchKit framework UI in your app, instantiate an
  object that implements the `ORKTask` protocol (such as `ORKOrderedTask`) and
  provide it to an `ORKTaskViewController` object.
  
@@ -264,7 +288,6 @@ requests access to these HealthKit types.
  */
 @property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForWriting;
 #endif
-
 /**
  The set of permissions requested by the task.
  

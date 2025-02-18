@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKHelpers_Internal.h"
 #import "ORKOrderedTask.h"
 #import "ORKStep.h"
@@ -36,8 +35,6 @@
 
 #if TARGET_OS_IOS
 #import "ORKBodyItem.h"
-#import "ORKStepViewController.h"
-#import "ORKStepViewController_Internal.h"
 #import "ORKEarlyTerminationConfiguration.h"
 #endif
 
@@ -108,7 +105,6 @@
     step.shouldTintImages = _shouldTintImages;
     step.useSurveyMode = _useSurveyMode;
     step.useExtendedPadding = _useExtendedPadding;
-
 #if TARGET_OS_IOS
     step.bodyItemTextAlignment = _bodyItemTextAlignment;
     step.buildInBodyItems = _buildInBodyItems;
@@ -120,7 +116,6 @@
     step.earlyTerminationConfiguration = self.earlyTerminationConfiguration;
     step.shouldAutomaticallyAdjustImageTintColor = _shouldAutomaticallyAdjustImageTintColor;
 #endif
-
     return step;
 }
 
@@ -233,26 +228,6 @@
 
 #if TARGET_OS_IOS
 #pragma mark - iOS
-
-+ (Class)stepViewControllerClass {
-    return [ORKStepViewController class];
-}
-
-- (Class)stepViewControllerClass {
-    return [[self class] stepViewControllerClass];
-}
-
-- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
-    Class stepViewControllerClass = [self stepViewControllerClass];
-    
-    ORKStepViewController *stepViewController = [[stepViewControllerClass alloc] initWithStep:self result:result];
-    
-    // Set the restoration info using the given class
-    stepViewController.restorationIdentifier = self.identifier;
-    stepViewController.restorationClass = stepViewControllerClass;
-    
-    return stepViewController;
-}
 
 - (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
     _auxiliaryImage = auxiliaryImage;
