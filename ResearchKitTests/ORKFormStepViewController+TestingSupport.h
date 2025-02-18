@@ -28,16 +28,52 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import <ResearchKit/ORKFormStepViewController.h>
-
+#import <ResearchKitUI/ORKFormStepViewController_Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKFormStepViewController ()
-- (void)restoreTextChoiceOtherCellStateWithSavedAnswer:(NSArray *)savedAnswer
-                                              formItem:(ORKFormItem *)formItem
-                                   choiceOtherViewCell:(ORKChoiceOtherViewCell *)choiceOtherViewCell;
+@class ORKTableCellItemIdentifier;
+
+@interface ORKFormStepViewController (TestingSupport)
+
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableDictionary *savedAnswers;
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder;
+- (void)removeInvalidSavedAnswers;
+
+
+/**
+returns a list of all the formItems
+ */
+- (nonnull NSArray<ORKFormItem*> *)allFormItems;
+
+/**
+returns a list of all the visible formItems
+ */
+- (nonnull NSArray<ORKFormItem*> *)visibleFormItems;
+
+/**
+returns a list of all the answerable formItems
+ */
+- (nonnull NSArray<ORKFormItem*> *)answerableFormItems;
+
+/**
+ returns delegate_ongoingTaskResult from the ORKTaskViewController Delegate
+ */
+- (nonnull ORKTaskResult *)_ongoingTaskResult;
+
+- (void)buildDataSource:(UITableViewDiffableDataSource<NSString *, ORKTableCellItemIdentifier *> *)dataSource withCompletion:(void (^ _Nullable)(void))completion;
+
+/**
+ fetches the associated ORKFormItem from an indexPath which calls  _formItemForFormItemIdentifier (potential performance hit)
+ */
+- (nullable ORKFormItem *)_formItemForIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ fetches the associated ORKFormItem from a formItemIdentifier (potential performance hit)
+ */
+- (nullable ORKFormItem *)_formItemForFormItemIdentifier:(NSString *)formItemIdentifier;
 
 @end
 

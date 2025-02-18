@@ -30,22 +30,15 @@
 
 
 #import "ORKCompletionStep.h"
-#if TARGET_OS_IOS
-#import "ORKCompletionStepViewController.h"
-#endif
 #import "ORKHelpers_Internal.h"
 
 
 @implementation ORKCompletionStep
 #if TARGET_OS_IOS
-+ (Class)stepViewControllerClass {
-    return [ORKCompletionStepViewController class];
-}
-
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _reasonForCompletion = ORKTaskViewControllerFinishReasonCompleted;
+        _reasonForCompletion = ORKTaskFinishReasonCompleted;
     }
     
     return self;
@@ -82,7 +75,7 @@
 }
 
 - (BOOL)allowsBackNavigation {
-    return !(_reasonForCompletion == ORKTaskViewControllerFinishReasonDiscarded);
+    return !(_reasonForCompletion == ORKTaskFinishReasonDiscarded);
 }
 #endif
 @end

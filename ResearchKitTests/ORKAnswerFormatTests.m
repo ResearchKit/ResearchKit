@@ -30,7 +30,8 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit;
+@import ResearchKit_Private;
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKPicker.h"
 #import "ORKPickerTestDelegate.h"
@@ -958,6 +959,7 @@
                                expectedSecondRow:ORKDoubleInvalidValue]);
 }
 
+
 - (void)testContinuousScaleAnswerFormat {
     
     XCTAssertThrowsSpecificNamed([ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
@@ -1107,7 +1109,7 @@
     {
         NSUInteger maxFractionDigits = 5;
         ORKContinuousScaleAnswerFormat* scaleAnswer = [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:10 minimumValue:1 defaultValue:0.0 maximumFractionDigits:maxFractionDigits];
-        XCTAssertEqualObjects([scaleAnswer.numberFormatter stringFromNumber:@99.12345],  @"99.1235");
+        XCTAssertEqualObjects([scaleAnswer.numberFormatter stringFromNumber:@99.12345],  @"99.1234");
     }
     {
         NSUInteger maxFractionDigits = -1;

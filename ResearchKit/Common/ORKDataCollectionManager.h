@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  until the data is accepted.
  */
 - (BOOL)healthCorrelationCollector:(ORKHealthCorrelationCollector *)collector didCollectCorrelations:(NSArray<HKCorrelation *> *)correlations;
-#endif 
+#endif
 /**
  Method for delivering the collected motion activities.
  
@@ -168,8 +168,7 @@ ORK_CLASS_AVAILABLE
                                                                               units:(NSArray<HKUnit *> *)units
                                                                           startDate:(NSDate *)startDate
                                                                               error:(NSError * _Nullable *)error;
-#endif
-
+#endif 
 /**
  Add a collector for motion activity.
  
@@ -197,15 +196,6 @@ ORK_CLASS_AVAILABLE
  When the collection is completed, delegate recieves a method call `dataCollectionManagerDidCompleteCollection:`.
  */
 - (void)startCollection;
-
-@end
-
-ORK_CLASS_AVAILABLE
-@interface ORKDataCollectionState : NSObject <NSSecureCoding>
-
-@property(nonatomic, nullable, readwrite) NSString *archiveVersion;
-
-@property(nonatomic, nonnull, readwrite) NSArray<ORKCollector *> *collectors;
 
 @end
 

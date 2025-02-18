@@ -86,7 +86,7 @@
 "REVIEW_EDIT_ANSWER" = "EDIT";
 
 /* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Invalid value";
+"RANGE_ALERT_TITLE" = "Invalid Value";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
@@ -103,7 +103,7 @@
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text is limited to %@ characters";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
@@ -134,7 +134,7 @@
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot Password?";
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
@@ -149,7 +149,7 @@
 "PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
 "PASSCODE_FACE_ID_MESSAGE" = "Please authenticate with Face ID";
-"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID error";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID Error";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode entry progress indicator";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
@@ -216,17 +216,17 @@
 "BUTTON_DISAGREE" = "Disagree";
 "BUTTON_DONE" = "Done";
 "BUTTON_GET_STARTED" = "Get Started";
-"BUTTON_LEARN_MORE" = "Learn more";
+"BUTTON_LEARN_MORE" = "Learn More";
 "BUTTON_NEXT" = "Next";
 "BUTTON_SKIP" = "Skip";
-"BUTTON_SKIP_QUESTION" = "Skip this question";
+"BUTTON_SKIP_QUESTION" = "Skip This Question";
 "BUTTON_START_TIMER" = "Start Timer";
 "BUTTON_OPTION_SAVE" = "Save for Later";
 "BUTTON_OPTION_DISCARD" = "Discard Results";
 "BUTTON_OPTION_STOP_TASK" = "End Task";
 "BUTTON_SAVE" = "Save";
-"BUTTON_CLEAR_ANSWER" = "Clear answer";
-"BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
+"BUTTON_CLEAR_ANSWER" = "Clear Answer";
+"BUTTON_READ_ONLY_MODE" = "This Answer Cannot Be Modified.";
 "BUTTON_COPYRIGHT" = "Copyright";
 "BUTTON_CLOSE" = "Close";
 "BUTTON_START_TEST" = "Start Test";
@@ -357,7 +357,6 @@
 "dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST IN PROGRESS";
 "dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST IN PROGRESS \U2022 %@";
 
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "This activity measures your short-term spatial memory by asking you to repeat the order in which %@ light up.";
@@ -384,13 +383,13 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
-"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "hold";
 "REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
 "REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tap the hold button, and then the blue circle";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "hold";
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Stroop";
@@ -406,11 +405,6 @@
 "STROOP_COLOR_GREEN_INITIAL" = "G";
 "STROOP_COLOR_BLUE_INITIAL" = "B";
 "STROOP_COLOR_YELLOW_INITIAL" = "Y";
-"TIME_OUT_TILE" = "Time Out";
-"TIME_OUT_BODY" = "You have not responded in 30 seconds. Would you like to restart?";
-"TIME_OUT_RESTART_ACTION" = "Restart";
-"TIME_OUT_END_ACTION" = "End Task";
-
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
@@ -436,10 +430,6 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Return to the start position and tap again when you are done.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Return to the start position and tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee.\n\nTap the screen and extend your left knee as far as you can.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee.\n\nTap the screen and extend your right knee as far as you can.\n";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left knee to the start position.\n\nThen tap anywhere.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position.\n\nThen tap anywhere.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
@@ -462,10 +452,10 @@
 "TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you’ve passed the finish line.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
-"TIMED_WALK_FORM_TITLE" = "Assistive device";
+"TIMED_WALK_FORM_TITLE" = "Assistive Device";
 "TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
 "TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Do you use an assistive device?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "None";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
@@ -573,6 +563,7 @@
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Your transcription will appear here.";
 "SPEECH_RECOGNITION_FAILED" = "Speech recognition failed.";
 "SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Could not record. Tap to try again.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Speech was not detected in your recording. Tap to try again.";
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
 
 /* Speech In Noise active task. */
@@ -588,24 +579,6 @@
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
 "SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeat what you heard.";
 "SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Use Keyboard Instead";
-
-/* Touch Ability active task. */
-"TOUCH_ABILITY_INSTRUCTION_TITLE" = "Touch Ability Activity";
-"TOUCH_ABILITY_INSTRUCTION_DETAIL" = "This activity will measure your touch screen usability. Please locate a comfortable spot to proceed with this activity.";
-"TOUCH_ABILITY_TAP_TITLE" = "Tap Ability";
-"TOUCH_ABILITY_TAP_TEXT" = "Please click on the squares appear on the screen. Square will disappear upon clicking. Please await for next square to appear before next click.";
-"TOUCH_ABILITY_LONG_PRESS_TITLE" = "Long Press Ability";
-"TOUCH_ABILITY_LONG_PRESS_TEXT" = "Please long press on the squares appear on the screen for at least one second before lift up from screen. Once finger lift up, square will disappear despite whether it is long pressed for one second or not. Please await for next square to appear before next press.";
-"TOUCH_ABILITY_SWIPE_TITLE" = "Swipe Ability";
-"TOUCH_ABILITY_SWIPE_TEXT" = "Please swipe in direction of the arrow on the screen. arrow will disappear upon swiping completion. Please await for next arrow to appear before next swipe.";
-"TOUCH_ABILITY_VERTICAL_SCROLL_TITLE" = "Vertical Scroll Ability";
-"TOUCH_ABILITY_VERTICAL_SCROLL_TEXT" = "This test will require you to scroll through a list of number, and drag the item labeled by the color into a dotted line box. Once hand is lifted up from the list and stop scrolling for one second, list and box will disappear. Please await for next list to appear before next test.";
-"TOUCH_ABILITY_HORIZONTAL_SCROLL_TITLE" = "Horizontal Scroll Ability";
-"TOUCH_ABILITY_HORIZONTAL_SCROLL_TEXT" = "This test will require you to scroll through a horizontal list of number, and drag the item labeled by the color into a dotted line box. Once hand is lifted up from the list and stop scrolling for one second, list and box will disappear. Please await for next list to appear before next trial.";
-"TOUCH_ABILITY_PINCH_TITLE" = "Pinch Ability";
-"TOUCH_ABILITY_PINCH_TEXT" = "Please use two finger pinching gesture to readjust the size of cube similar the dash line box. Once completing and lifting up your fingers, cube and box will disappear. Please await for cube and box to appear before next trial.";
-"TOUCH_ABILITY_ROTATION_TITLE" = "Rotation Ability";
-"TOUCH_ABILITY_ROTATION_TEXT" = "Please use two finger rotating gesture to readjust the arrow to align with dashed arrow.  Once completing and lifting up your fingers, arrow will disappear. Please await for cube and box to appear before next trial.";
 
 /* ORKRecordButton */
 "PLAY" = "Play";
@@ -636,7 +609,7 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Measuring…";
 "ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Background Noise OK";
+"ENVIRONMENTSPL_OK" = "Good";
 "ENVIRONMENTSPL_NOISE" = "Too Loud";
 "ENVIRONMENTSPL_TITLE_2" = "Find a Quiet Place";
 "ENVIRONMENTSPL_INTRO_TEXT_2" = "For accurate results, this task should be completed in a quiet location. Once the background noise measurement reading is completed, you may continue.";
@@ -736,8 +709,43 @@
 /* This contains the visual text, followed by a VoiceOver-specific description. */
 "AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Using VoiceOver, the button will be directly tappable. It will be located near the center of the screen.";
 
-/* 6 minute walk test task. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
 
+"AX_SES_TOP" = "Top";
+"AX_SES_BOTTOM" = "Bottom";
+"AX_SES_PERCENT" = "Percent";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Cannot decode restoreData for initialization";
+
+/* Request Permission Step */
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Review";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Reviewed";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Not Supported";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Error";
+
+/* Request Health Data Step */
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health Data";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to health data.";
+
+/* Request Notification Permission Step */
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notifications";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "The study is requesting to send you notifications.";
+
+/* Request Sensor Permission Step */
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensor Data";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "The study is requesting access to sensor data from your devices.";
+
+/* Request Device Motion Permission Step */
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Device Motion";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "The study is requesting access to motion data from your devices.";
+
+/* Request Location Permission Step */
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Location Data";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to location data from your devices.";
+
+/* 6 minute walk test task. */
 "6MWT_TASK_TITLE" = "6 Minute Walk Test";
 "6MWT_INTRO" = "The goal of this test is to walk as far as possible at a comfortable pace for 6 minutes.";
 "6MWT_INTRO_DETAILS" = "Details";
@@ -759,6 +767,11 @@
 "6MWT_LOW_SCORE" = "1: Not Any";
 "6MWT_HIGH_SCORE" = "10: A Lot";
 
+/* Fitness test. */
+"FITNESS_STOP_TEST_CONFIRMATION" = "Are you sure you want to end this activity early?";
+"FITNESS_STOP_TEST_DETAIL" = "Your progress will be saved and this test will be marked as completed.";
+"FITNESS_RESUME_TEST" = "Resume Activity";
+
 /* Tecumseh cube active task. */
 "TC_TASK_TITLE" = "Tecumseh Cube Test";
 "TC_INTRO" = "The goal of this test is to raise your heart rate while you are stepping up and down for 3 minutes following a beat.";
@@ -777,38 +790,25 @@
 "TC_COMPLETION_TITLE" = "Nicely Done";
 "TC_COMPLETION_DETAIL" = "Congratulation on completing the Tecumseh Cube Test!";
 
-/* Request Permission Step */
-"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Review";
-"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Reviewed";
-"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Not Supported";
-"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Error";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee.\n\nTap the screen and extend your left knee as far as you can.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee.\n\nTap the screen and extend your right knee as far as you can.\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left knee to the start position.\n\nThen tap anywhere.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position.\n\nThen tap anywhere.";
 
-/* Request Health Data Step */
-"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health Data";
-"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to Health data.";
-
-/* Request Notification Permission Step */
-"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notifications";
-"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "The study is requesting to send you notifications.";
-
-/* Request Sensor Permission Step */
-"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensor Data";
-"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "The study is requesting access to sensor data from your devices.";
-
-/* Request Device Motion Permission Step */
-"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Device Motion";
-"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "The study is requesting access to motion data from your devices.";
-
-/* Request Location Permission Step */
-"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Location Data";
-"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to location data from your device.";
-
-/* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
-
-"AX_SES_TOP" = "Top";
-"AX_SES_BOTTOM" = "Bottom";
-"AX_SES_PERCENT" = "Percent";
-
-/* Restore error */
-"RESTORE_ERROR_CANNOT_DECODE" = "Cannot decode restoreData for initialization";
+/* Family History */
+"FAMILY_HISTORY_I_DONT_KNOW" = "I don't know";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Have they been diagnosed with any of the following diseases or health conditions?";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Health Conditions";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Answer these questions to the best of your ability";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Task Complete";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "None of the above";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "I prefer not to answer";
+"FAMILY_HISTORY_CONDITIONS" = "Conditions";
+"FAMILY_HISTORY_NONE_SELECTED" = "None selected";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Edit Entry";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Are you sure you want to delete this entry from your Family Health History?";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Delete Entry";
+"FAMILY_HISTORY_CANCEL" = "Cancel";
+"FAMILY_HISTORY_ADD" = "Add %@";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Confirm any diagnosed diseases or health conditions.";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Edit button";

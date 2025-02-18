@@ -28,15 +28,20 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
+#endif
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKResult` class defines the attributes of a result from one step or a group
- of steps. When you use the ResearchKit framework APIs, you typically get a result from the `result` property
+ A class that defines the attributes of a result from one step or a group
+ of steps.
+ 
+ When you use the ResearchKit framework APIs, you typically get a result from the `result` property
  of either `ORKTaskViewController` or `ORKStepViewController`.
  Certain types of results can contain other results, which together express a hierarchy; examples of these types of results are `ORKCollectionResult` subclasses, such as `ORKStepResult` and `ORKTaskResult`.
  

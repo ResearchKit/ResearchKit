@@ -36,7 +36,6 @@
 #import "ORKDataCollectionManager_Internal.h"
 
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
-
 static NSUInteger const QueryLimitSize = 1000;
 
 @implementation ORKHealthSampleQueryOperation {
@@ -246,4 +245,4 @@ static NSUInteger const QueryLimitSize = 1000;
 }
 
 @end
-#endif 
+#endif

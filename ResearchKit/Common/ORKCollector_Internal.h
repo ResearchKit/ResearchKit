@@ -43,7 +43,6 @@
 
 @end
 
-
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @protocol ORKHealthCollectable <NSObject>
 
@@ -72,7 +71,7 @@
 @property (copy) HKQueryAnchor *lastAnchor;
 
 @end
-#endif 
+#endif
 
 @interface ORKMotionActivityCollector()
 
