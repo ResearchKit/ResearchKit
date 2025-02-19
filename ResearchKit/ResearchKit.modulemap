@@ -1,8 +1,0 @@
-framework module ResearchKit {
-    umbrella header "ResearchKit.h"
-    
-    export *
-    module * {
-        export *
-    }
-}

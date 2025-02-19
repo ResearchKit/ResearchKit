@@ -1,6 +1,0 @@
-framework module ResearchKitActiveTask {
-    umbrella header "ResearchKitActiveTask.h"
-    
-    export *
-    module * { export * }
-}

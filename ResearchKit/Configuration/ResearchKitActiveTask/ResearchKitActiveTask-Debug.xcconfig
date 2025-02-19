@@ -1,7 +1,0 @@
-//
-// ResearchKitActiveTask-Debug.xcconfig
-//
-
-#include "ResearchKitActiveTask-Shared.xcconfig"
-
-DEBUG_INFORMATION_FORMAT = dwarf
