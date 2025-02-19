@@ -1,0 +1,3202 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKSpeechRecognizerLocale"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKSpeechRecognizerLocale"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "ORKSpeechRecognizerLocale"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKSpeechRecognizerLocale"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH",
+        "doc:\/\/com.apple.ResearchKit\/SY",
+        "doc:\/\/com.apple.ResearchKit\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAudioChannel",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodySagittal",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeadphoneTypeIdentifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsState",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSampleJSONOptions",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskFinishReason"
+      ],
+      "title" : "Enumerations"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/arabic",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/cantonese",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/catalan",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/chineseCN",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/chineseHK",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/chineseTW",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/croatian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/czech",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/danish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/dutchBE",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/dutchNL",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishAE",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishAU",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishCA",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishGB",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishID",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishIE",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishIN",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishNZ",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishPH",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishSA",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishSG",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishUS",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishZA",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/finnish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchBE",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchCA",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchCH",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchFR",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/germanAT",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/germanCH",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/germanDE",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/greek",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hebrew",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hindi",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hindiINTRANSLIT",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hindiLATN",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hungarian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/indonesian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/italianCH",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/italianIT",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/japaneseJP",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/korean",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/malay",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/norwegian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/polish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/portugeseBR",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/portugesePT",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/romanian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/russian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/shanghainese",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/slovak",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishCL",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishCO",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishES",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishMX",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishUS",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/swedish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/thai",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/turkish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/ukranian",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/vietnamese"
+      ],
+      "title" : "Type Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/Equatable-Implementations",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/_SwiftNewtypeWrapper-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkspeechrecognizerlocale"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SY": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Enumerations": {
+  "abstract" : [
+    {
+      "text" : "Enumerations utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Enumerations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/enumerations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAudioChannel": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAudioChannel"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAudioChannel",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAudioChannel"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAudioChannel",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkaudiochannel"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBodySagittal": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodySagittal"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodySagittal",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodySagittal"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBodySagittal",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbodysagittal"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHeadphoneTypeIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeadphoneTypeIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeadphoneTypeIdentifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeadphoneTypeIdentifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHeadphoneTypeIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkheadphonetypeidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRequestPermissionsState": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsState"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsState",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsState"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRequestPermissionsState",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrequestpermissionsstate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSampleJSONOptions": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSampleJSONOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSampleJSONOptions",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSampleJSONOptions"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSampleJSONOptions",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksamplejsonoptions"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetric"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetric"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScreenMetric",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScreenType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreentype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSpeechRecognizerLocale",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/equatable-implementations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/_SwiftNewtypeWrapper-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/_SwiftNewtypeWrapper-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "_SwiftNewtypeWrapper Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/_swiftnewtypewrapper-implementations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/arabic": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "arabic"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/arabic",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "arabic",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/arabic"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/cantonese": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cantonese"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/cantonese",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "cantonese",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/cantonese"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/catalan": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "catalan"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/catalan",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "catalan",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/catalan"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/chineseCN": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "chineseCN"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/chineseCN",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "chineseCN",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/chinesecn"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/chineseHK": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "chineseHK"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/chineseHK",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "chineseHK",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/chinesehk"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/chineseTW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "chineseTW"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/chineseTW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "chineseTW",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/chinesetw"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/croatian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "croatian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/croatian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "croatian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/croatian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/czech": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "czech"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/czech",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "czech",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/czech"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/danish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "danish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/danish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "danish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/danish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/dutchBE": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "dutchBE"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/dutchBE",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "dutchBE",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/dutchbe"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/dutchNL": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "dutchNL"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/dutchNL",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "dutchNL",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/dutchnl"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishAE": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishAE"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishAE",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishAE",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishae"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishAU": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishAU"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishAU",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishAU",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishau"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishCA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishCA"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishCA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishCA",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishca"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishGB": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishGB"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishGB",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishGB",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishgb"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishID": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishID",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishID",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishid"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishIE": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishIE"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishIE",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishIE",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishie"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishIN": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishIN"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishIN",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishIN",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishin"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishNZ": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishNZ"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishNZ",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishNZ",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishnz"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishPH": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishPH"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishPH",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishPH",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishph"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishSA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishSA"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishSA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishSA",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishsa"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishSG": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishSG"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishSG",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishSG",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishsg"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishUS": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishUS"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishUS",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishUS",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishus"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/englishZA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "englishZA"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/englishZA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "englishZA",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/englishza"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/finnish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "finnish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/finnish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "finnish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/finnish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/frenchBE": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "frenchBE"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchBE",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "frenchBE",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/frenchbe"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/frenchCA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "frenchCA"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchCA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "frenchCA",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/frenchca"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/frenchCH": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "frenchCH"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchCH",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "frenchCH",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/frenchch"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/frenchFR": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "frenchFR"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/frenchFR",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "frenchFR",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/frenchfr"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/germanAT": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "germanAT"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/germanAT",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "germanAT",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/germanat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/germanCH": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "germanCH"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/germanCH",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "germanCH",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/germanch"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/germanDE": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "germanDE"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/germanDE",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "germanDE",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/germande"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/greek": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "greek"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/greek",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "greek",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/greek"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/hebrew": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hebrew"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hebrew",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hebrew",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/hebrew"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/hindi": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hindi"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hindi",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hindi",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/hindi"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/hindiINTRANSLIT": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hindiINTRANSLIT"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hindiINTRANSLIT",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hindiINTRANSLIT",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/hindiintranslit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/hindiLATN": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hindiLATN"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hindiLATN",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hindiLATN",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/hindilatn"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/hungarian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hungarian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/hungarian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hungarian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/hungarian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/indonesian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "indonesian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/indonesian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "indonesian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/indonesian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/init(rawvalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/italianCH": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "italianCH"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/italianCH",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "italianCH",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/italianch"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/italianIT": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "italianIT"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/italianIT",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "italianIT",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/italianit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/japaneseJP": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "japaneseJP"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/japaneseJP",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "japaneseJP",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/japanesejp"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/korean": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "korean"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/korean",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "korean",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/korean"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/malay": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "malay"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/malay",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "malay",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/malay"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/norwegian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "norwegian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/norwegian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "norwegian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/norwegian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/polish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "polish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/polish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "polish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/polish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/portugeseBR": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "portugeseBR"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/portugeseBR",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "portugeseBR",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/portugesebr"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/portugesePT": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "portugesePT"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/portugesePT",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "portugesePT",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/portugesept"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/romanian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "romanian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/romanian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "romanian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/romanian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/russian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "russian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/russian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "russian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/russian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/shanghainese": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shanghainese"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/shanghainese",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shanghainese",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/shanghainese"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/slovak": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "slovak"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/slovak",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "slovak",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/slovak"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/spanishCL": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spanishCL"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishCL",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spanishCL",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/spanishcl"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/spanishCO": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spanishCO"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishCO",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spanishCO",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/spanishco"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/spanishES": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spanishES"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishES",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spanishES",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/spanishes"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/spanishMX": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spanishMX"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishMX",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spanishMX",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/spanishmx"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/spanishUS": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spanishUS"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/spanishUS",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spanishUS",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/spanishus"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/swedish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "swedish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/swedish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "swedish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/swedish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/thai": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "thai"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/thai",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "thai",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/thai"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/turkish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "turkish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/turkish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "turkish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/turkish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/ukranian": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ukranian"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/ukranian",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ukranian",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/ukranian"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale/vietnamese": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "vietnamese"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKTypes.h@T@ORKSpeechRecognizerLocale",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale\/vietnamese",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "vietnamese",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale\/vietnamese"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskFinishReason": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskFinishReason"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskFinishReason",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskFinishReason"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTaskFinishReason",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktaskfinishreason"
+},
+"doc://com.apple.ResearchKit/s8SendableP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

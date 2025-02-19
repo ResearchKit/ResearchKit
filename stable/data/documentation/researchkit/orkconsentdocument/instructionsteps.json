@@ -1,0 +1,258 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/instructionSteps"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "ResearchKit",
+    "externalID" : "c:objc(cs)ORKConsentDocument(py)instructionSteps",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "instructionSteps"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:objc(cs)ORKInstructionStep",
+        "text" : "ORKInstructionStep"
+      },
+      {
+        "kind" : "text",
+        "text" : "]"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "instructionSteps"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "instructionSteps"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKInstructionStep",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(cs)ORKInstructionStep",
+              "text" : "ORKInstructionStep"
+            },
+            {
+              "kind" : "text",
+              "text" : "] { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkconsentdocument\/instructionsteps"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Consent": {
+  "abstract" : [
+    {
+      "text" : "Obtain a participant’s consent to collect research data.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentDocument"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentDocument"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKConsentDocument",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/instructionSteps": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "instructionSteps"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKInstructionStep",
+      "text" : "ORKInstructionStep"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/instructionSteps",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "instructionSteps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/instructionsteps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKInstructionStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKInstructionStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKInstructionStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKInstructionStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKInstructionStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkinstructionstep"
+}
+}
+}

@@ -1,0 +1,246 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier\/female"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "ResearchKit",
+    "externalID" : "c:@ORKBiologicalSexIdentifierFemale",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "female"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:ORKHealthAnswerFormat.h@T@ORKBiologicalSexIdentifier",
+        "text" : "ORKBiologicalSexIdentifier"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "female"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "female"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:ORKHealthAnswerFormat.h@T@ORKBiologicalSexIdentifier",
+              "text" : "ORKBiologicalSexIdentifier"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkbiologicalsexidentifier\/female"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBiologicalSexIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBiologicalSexIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBiologicalSexIdentifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBiologicalSexIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbiologicalsexidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBiologicalSexIdentifier/female": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "female"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:ORKHealthAnswerFormat.h@T@ORKBiologicalSexIdentifier",
+      "text" : "ORKBiologicalSexIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier\/female",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "female",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbiologicalsexidentifier\/female"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps": {
+  "abstract" : [
+    {
+      "text" : "Create tasks for participants to perform.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+}
+}
+}

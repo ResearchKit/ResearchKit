@@ -1,0 +1,646 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsStep"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKRequestPermissionsStep",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKRequestPermissionsStep"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKRequestPermissionsStep"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ORKRequestPermissionsStep"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKRequestPermissionsStep"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStep"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+        "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+        "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPermissionType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthKitPermissionType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSensorPermissionType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/SRSensor",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPermissionMask",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNotificationPermissionType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBloodTypeIdentifier"
+      ],
+      "title" : "Permissions"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsStep\/init(identifier:permissionTypes:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsStep\/permissionTypes"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkrequestpermissionsstep"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBiologicalSexIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBiologicalSexIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBiologicalSexIdentifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBiologicalSexIdentifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBiologicalSexIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbiologicalsexidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBloodTypeIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBloodTypeIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBloodTypeIdentifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBloodTypeIdentifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBloodTypeIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbloodtypeidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthKitPermissionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthKitPermissionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthKitPermissionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthKitPermissionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHealthKitPermissionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthkitpermissiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNotificationPermissionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNotificationPermissionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNotificationPermissionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNotificationPermissionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNotificationPermissionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknotificationpermissiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKPermissionMask": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKPermissionMask"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPermissionMask",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKPermissionMask"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKPermissionMask",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkpermissionmask"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKPermissionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKPermissionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPermissionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKPermissionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKPermissionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkpermissiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRequestPermissionsStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRequestPermissionsStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrequestpermissionsstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRequestPermissionsStep/init(identifier:permissionTypes:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "identifier"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "permissionTypes"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKPermissionType",
+      "text" : "ORKPermissionType"
+    },
+    {
+      "kind" : "text",
+      "text" : "])"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsStep\/init(identifier:permissionTypes:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(identifier:permissionTypes:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrequestpermissionsstep\/init(identifier:permissiontypes:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRequestPermissionsStep/permissionTypes": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "permissionTypes"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKPermissionType",
+      "text" : "ORKPermissionType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsStep\/permissionTypes",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "permissionTypes",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrequestpermissionsstep\/permissiontypes"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSensorPermissionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSensorPermissionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSensorPermissionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSensorPermissionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSensorPermissionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksensorpermissiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/SRSensor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SRSensor"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/SRSensor",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SRSensor"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SRSensor",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/srsensor"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps": {
+  "abstract" : [
+    {
+      "text" : "Create tasks for participants to perform.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCopying": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+  "title" : "Foundation.NSCopying",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSSecureCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+  "title" : "Foundation.NSSecureCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s7CVarArgP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

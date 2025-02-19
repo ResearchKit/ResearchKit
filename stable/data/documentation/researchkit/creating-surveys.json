@@ -1,0 +1,1761 @@
+{
+  "abstract" : [
+    {
+      "text" : "Configure and present surveys with ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Creating surveys"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A survey is a sequence of questions that you use to collect data from your users. In a ResearchKit app, a survey is composed of a survey task that has a collection of step objects (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : "). ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " instances can be added to the collection of steps to handle one or more questions each such as “What medications are you taking?” or “How many hours did you sleep last night?”.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can collect results for the individual steps or for the task as a whole. There are two types of survey tasks: an ordered task (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKOrderedTask",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ") and a navigable ordered task (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigableOrderedTask",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ") which can be used to apply conditional logic.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In an ordered task, the order that the steps appear are always the same.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "creating-surveys-ordered-tasks",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In a navigable ordered task, the order of the tasks can change, or branch out, depending on how the user answered a question in a previous task.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "creating-surveys-navigable-ordered-tasks",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The steps for creating a task to present a survey are:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Create one or more steps",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Create a task",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Collect results",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "anchor" : "1-Create-steps",
+          "level" : 2,
+          "text" : "1. Create steps",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The survey module provides a form step that can contain one or more questions",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : "). You can also use an instruction step",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKInstructionStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ") or a video instruction step (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKVideoInstructionStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ") to introduce the survey or provide instructions.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Instruction-step",
+          "level" : 3,
+          "text" : "Instruction step",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "An instruction step explains the purpose of a task and provides",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "instructions for the user. An ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKInstructionStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " object includes an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "identifier, title, text, detail text, and an image. An",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "instruction step doesn’t collect any data and yields an empty",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepResult",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " that records how long the instruction was",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "on screen.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let instructionStep = ORKInstructionStep(identifier: \"identifier\")",
+            "instructionStep.title = \"Selection Survey\"",
+            "instructionStep.text = \"This survey helps us understand your eligibility for the fitness study.\""
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Creating a step as shown in the code above, including it in a task, and presenting with a task view controller, yields something like this:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "creating-surveys-instruction-step",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Form-Step",
+          "level" : 3,
+          "text" : "Form Step",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Whether your survey has one question or several related questions, you can use a form step (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ") to present them on one page. Each question in a form step is represented as a form item (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormItem",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : "), each with its",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "own answer format.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The result of a form step contains one question result for each form",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "item. The results are matched to their corresponding form items using",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "their identifier property.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The following code shows how to create a form that requests some basic details:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let sectionHeaderFormItem = ORKFormItem(sectionTitle: \"Basic Information\")",
+            "let nameFormItem = ORKFormItem(identifier: \"NameIdentifier\", text: \"What is your name?\", answerFormat: ORKTextAnswerFormat())",
+            "let emailFormItem = ORKFormItem(identifier: \"EmailIdentifier\", text: \"What is your email?\", answerFormat: ORKEmailAnswerFormat())",
+            "let headacheFormItem = ORKFormItem(identifier: \"HeadacheIdentifier\", text: \"Do you have a headache?\", answerFormat: ORKBooleanAnswerFormat())",
+            " ",
+            "let formStep = ORKFormStep(identifier: \"FormStepIdentifier\")",
+            "formStep.title = \"Basic Information\"",
+            "formStep.detailText = \"please answer the questions below\"",
+            "formStep.formItems = [sectionHeaderFormItem, nameFormItem, emailFormItem, headacheFormItem]"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The code above creates this form step:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "creating-surveys-form-step",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Answer-Formats",
+          "level" : 3,
+          "text" : "Answer Formats",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the ResearchKit™ framework, an answer format defines how the user should be asked to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "answer a question or an item in a form.  For example, consider a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "survey question such as “On a scale of 1 to 10, how much pain do you",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "feel?” The answer format for this question would naturally be a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "discrete scale on that range, so you can use scale answer format (",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScaleAnswerFormat",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : "),",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and set its minimum and maximum",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "properties to reflect the desired range.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The screenshots below show the standard answer formats that the ResearchKit framework provides.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-background-check",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-blood-type",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-symptom-choice",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-age",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-time-of-day",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-next-meeting",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-feeling-text-entry",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-slider",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-email",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "creating-surveys-location",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "anchor" : "2-Create-a-survey-task",
+          "level" : 2,
+          "text" : "2. Create a survey task",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Once you create one or more steps, create an ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKOrderedTask",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " object to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "contain the steps. The code below shows the steps created above being added to a task.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Create a task wrapping the instruction and form steps created earlier.",
+            "let orderedTask = ORKOrderedTask(identifier: \"OrderedTaskIdentifier\", steps: [instructionStep, formStep])"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You must assign a string identifier to each step. The step identifier must be unique within the task, because it’s the key that connects a step in the task hierarchy with the step result in the result hierarchy.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To present the task, attach it to a task view controller and present",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "it. The code below shows how to create a task view controller and present it modally.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let taskViewController = ORKTaskViewController(task: task, taskRun: nil)",
+            "taskViewController.delegate = self",
+            "",
+            "present(taskViewController, animated: true)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "3-Collect-Results",
+          "level" : 2,
+          "text" : "3. Collect Results",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The result property of the task view controller gives you the results of the task.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Each step view controller that the user views produces a step result",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepResult",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : "). The task view controller collates these results as",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the user navigates through the task, in order to produce an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskResult",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Both the task result and step result are collection results, in that",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "they can contain other result objects. For example, a task result contains an array of step results.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The results contained in a step result vary depending on the type of",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "step. For example, a form step produces one question result for",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "every form item; and an active task with recorders generally produces",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "one result for each recorder.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The hierarchy of results corresponds closely to the input",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "model hierarchy of task and steps as you can see here:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "creating-surveys-results-hierarchy",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Among other properties, every result has an identifier. This",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "identifier is what connects the result to the model object (task,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "step, form item, or recorder) that produced it. Every result also",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "includes start and end times, using the startDate and endDate",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "properties respectively. Use these properties to infer how long the user",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "spent on the step.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Saving-Results-on-Task-Completion",
+          "level" : 4,
+          "text" : "Saving Results on Task Completion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "After a task is completed, you can save or upload the results. This approach",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "will likely include serializing the result hierarchy in some form,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "either using the built-in ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSSecureCoding",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " support, or another",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "format appropriate for your application.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If your task can produce file output, the files are generally referenced by an ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFileResult",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " object and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, compress the entire output",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "directory, and share it.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the following example, the result is archived with",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSKeyedArchiver",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " on successful completion. If you choose to support",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "saving and restoring tasks, the user may save the task. This",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "example also demonstrates how to obtain the restoration data that",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "would later be needed to restore the task.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            " func taskViewController(_ taskViewController: ORKTaskViewController, ",
+            "                         didFinishWith reason: ORKTaskFinishReason, ",
+            "                         error: Error?) {",
+            "\tswitch reason {",
+            "\tcase .completed:",
+            "\t    \/\/ Archive the result object first",
+            "\t    do {",
+            "\t        let data = try NSKeyedArchiver.archivedData(withRootObject: taskViewController.result, ",
+            "\t                                                    requiringSecureCoding: true)",
+            "\t\t\t \/\/ Save the data to disk with file protection",
+            "\t   \t \t \/\/ or upload to a remote server securely.",
+            "\t    ",
+            "\t    \t \/\/ If any file results are expected, also zip up the outputDirectory.",
+            "\t    } catch {",
+            "\t        print(\"error archiving result data: \\(error.localizedDescription)\")",
+            "\t    }",
+            "\t    ",
+            "\t    break;",
+            "\tcase .failed, .discarded, .earlyTermination:",
+            "\t    \/\/ Generally, discard the result.",
+            "\t    \/\/ Consider clearing the contents of the output directory.",
+            "\t    break;",
+            "\tcase .saved:",
+            "\t    let data = taskViewController.restorationData",
+            "\t    \/\/ Store the restoration data persistently for later use.",
+            "\t    \/\/ Normally, keep the output directory for when you will restore.",
+            "\t    break;",
+            "\t}",
+            "\t    ",
+            "\ttaskViewController.dismiss(animated: true, completion: nil)",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks"
+      ],
+      "title" : "Articles"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/creating-surveys"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"creating-surveys-age": {
+  "alt" : "Age Question",
+  "identifier" : "creating-surveys-age",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-age@3x.png"
+    }
+  ]
+},
+"creating-surveys-background-check": {
+  "alt" : "Background Check Question",
+  "identifier" : "creating-surveys-background-check",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-background-check@3x.png"
+    }
+  ]
+},
+"creating-surveys-blood-type": {
+  "alt" : "Blood Type Question",
+  "identifier" : "creating-surveys-blood-type",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-blood-type@3x.png"
+    }
+  ]
+},
+"creating-surveys-email": {
+  "alt" : "Email Question",
+  "identifier" : "creating-surveys-email",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-email@3x.png"
+    }
+  ]
+},
+"creating-surveys-feeling-text-entry": {
+  "alt" : "Text Entry Question",
+  "identifier" : "creating-surveys-feeling-text-entry",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-feeling-text-entry@3x.png"
+    }
+  ]
+},
+"creating-surveys-form-step": {
+  "alt" : "Form Step",
+  "identifier" : "creating-surveys-form-step",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-form-step@3x.png"
+    }
+  ]
+},
+"creating-surveys-instruction-step": {
+  "alt" : "Instruction Step",
+  "identifier" : "creating-surveys-instruction-step",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-instruction-step@3x.png"
+    }
+  ]
+},
+"creating-surveys-location": {
+  "alt" : "Location Question",
+  "identifier" : "creating-surveys-location",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-location@3x.png"
+    }
+  ]
+},
+"creating-surveys-navigable-ordered-tasks": {
+  "alt" : "Navigable Ordered Tasks",
+  "identifier" : "creating-surveys-navigable-ordered-tasks",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "2x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-navigable-ordered-tasks@2x.png"
+    }
+  ]
+},
+"creating-surveys-next-meeting": {
+  "alt" : "Next Meeting Question",
+  "identifier" : "creating-surveys-next-meeting",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-next-meeting@3x.png"
+    }
+  ]
+},
+"creating-surveys-ordered-tasks": {
+  "alt" : "Ordered Tasks",
+  "identifier" : "creating-surveys-ordered-tasks",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-ordered-tasks@1x.png"
+    }
+  ]
+},
+"creating-surveys-results-hierarchy": {
+  "alt" : "Results Hierarchy",
+  "identifier" : "creating-surveys-results-hierarchy",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-results-hierarchy@1x.png"
+    }
+  ]
+},
+"creating-surveys-slider": {
+  "alt" : "Mood Question",
+  "identifier" : "creating-surveys-slider",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-slider@3x.png"
+    }
+  ]
+},
+"creating-surveys-symptom-choice": {
+  "alt" : "Symptoms Question",
+  "identifier" : "creating-surveys-symptom-choice",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-symptom-choice@3x.png"
+    }
+  ]
+},
+"creating-surveys-time-of-day": {
+  "alt" : "Time of Day Question",
+  "identifier" : "creating-surveys-time-of-day",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/creating-surveys-time-of-day@3x.png"
+    }
+  ]
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Conditional-Logic-in-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "How to use conditional logic for ResearchKit steps and forms.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Conditional Logic in ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/conditional-logic-in-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Family-History-Step": {
+  "abstract" : [
+    {
+      "text" : "Use the Family History Step to collect insightful health trends.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Family History Step",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/family-history-step"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFileResult": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFileResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFileResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFileResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFileResult",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkfileresult"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormItem": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormItem"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormItem",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormItem"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFormItem",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformitem"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFormStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKInstructionStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKInstructionStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKInstructionStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKInstructionStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKInstructionStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkinstructionstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNavigableOrderedTask": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNavigableOrderedTask"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigableOrderedTask",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNavigableOrderedTask"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNavigableOrderedTask",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknavigableorderedtask"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKOrderedTask": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKOrderedTask"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKOrderedTask",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKOrderedTask"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKOrderedTask",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkorderedtask"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScaleAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScaleAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScaleAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScaleAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScaleAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscaleanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepResult": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKStepResult",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepresult"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskResult": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTaskResult",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktaskresult"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKVideoInstructionStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKVideoInstructionStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKVideoInstructionStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKVideoInstructionStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKVideoInstructionStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkvideoinstructionstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Obtaining-Consent": {
+  "abstract" : [
+    {
+      "text" : "Guide your participants through the Informed Consent process.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Obtaining Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/obtaining-consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Setting-up-Your-Project-to-Use-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Add the ResearchKit framework to your app as a dynamic framework",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Setting up your project to use ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/setting-up-your-project-to-use-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Understanding-Active-Tasks": {
+  "abstract" : [
+    {
+      "text" : "Learn more about the Active Tasks provided by ResearchKit™.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Understanding Active Tasks",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/understanding-active-tasks"
+}
+}
+}

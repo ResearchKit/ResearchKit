@@ -1,0 +1,193 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBulletType"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBulletType\/number"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@E@ORKBulletType@ORKBulletTypeNumber",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "number"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "ORKBulletType.number"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "number"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkbullettype\/number"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBulletType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBulletType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBulletType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBulletType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBulletType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbullettype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBulletType/number": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "number"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBulletType\/number",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKBulletType.number",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbullettype\/number"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps": {
+  "abstract" : [
+    {
+      "text" : "Create tasks for participants to perform.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+}
+}
+}

@@ -1,0 +1,921 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKConsentDocument",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKConsentDocument"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKConsentDocument"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ORKConsentDocument"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKConsentDocument"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(cs)NSObject"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+        "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+        "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentSection",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCustomSignatureAccessoryViewDelegate",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCustomSignatureAccessoryViewProtocol",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCustomSignatureAccessoryViewProvider",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentSectionType"
+      ],
+      "title" : "Consent presentation"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/init(coder:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/htmlReviewContent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/instructionSteps",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/sections",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/signaturePageContent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/signaturePageTitle",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/signatures",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/title"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/addSignature(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/consentReviewStep(from:withIdentifier:signature:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/makePDF(completionHandler:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkconsentdocument"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Consent": {
+  "abstract" : [
+    {
+      "text" : "Obtain a participant’s consent to collect research data.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentDocument"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentDocument"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKConsentDocument",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/addSignature(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "addSignature"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKConsentSignature",
+      "text" : "ORKConsentSignature"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/addSignature(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "addSignature(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/addsignature(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/consentReviewStep(from:withIdentifier:signature:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "consentReviewStep"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKInstructionStep",
+      "text" : "ORKInstructionStep"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "withIdentifier"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "signature"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKConsentSignature",
+      "text" : "ORKConsentSignature"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKConsentReviewStep",
+      "text" : "ORKConsentReviewStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/consentReviewStep(from:withIdentifier:signature:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "consentReviewStep(from:withIdentifier:signature:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/consentreviewstep(from:withidentifier:signature:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/htmlReviewContent": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "htmlReviewContent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/htmlReviewContent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "htmlReviewContent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/htmlreviewcontent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/init(coder:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "coder"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSCoder",
+      "text" : "NSCoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/init(coder:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(coder:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/init(coder:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/instructionSteps": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "instructionSteps"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKInstructionStep",
+      "text" : "ORKInstructionStep"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/instructionSteps",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "instructionSteps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/instructionsteps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/makePDF(completionHandler:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "makePDF"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completionHandler"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/makePDF(completionHandler:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "makePDF(completionHandler:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/makepdf(completionhandler:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/sections": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sections"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKConsentSection",
+      "text" : "ORKConsentSection"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/sections",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sections",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/sections"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/signaturePageContent": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signaturePageContent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/signaturePageContent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signaturePageContent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/signaturepagecontent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/signaturePageTitle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signaturePageTitle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/signaturePageTitle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signaturePageTitle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/signaturepagetitle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/signatures": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signatures"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKConsentSignature",
+      "text" : "ORKConsentSignature"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/signatures",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signatures",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/signatures"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentDocument/title": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "title"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentDocument\/title",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "title",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentdocument\/title"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentSection": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentSection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentSection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentSection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKConsentSection",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentsection"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentSectionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentSectionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentSectionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentSectionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKConsentSectionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentsectiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCustomSignatureAccessoryViewDelegate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCustomSignatureAccessoryViewDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCustomSignatureAccessoryViewDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKCustomSignatureAccessoryViewDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKCustomSignatureAccessoryViewDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcustomsignatureaccessoryviewdelegate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCustomSignatureAccessoryViewProtocol": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCustomSignatureAccessoryViewProtocol"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCustomSignatureAccessoryViewProtocol",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKCustomSignatureAccessoryViewProtocol"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKCustomSignatureAccessoryViewProtocol",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcustomsignatureaccessoryviewprotocol"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCustomSignatureAccessoryViewProvider": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCustomSignatureAccessoryViewProvider"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCustomSignatureAccessoryViewProvider",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKCustomSignatureAccessoryViewProvider"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKCustomSignatureAccessoryViewProvider",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcustomsignatureaccessoryviewprovider"
+},
+"doc://com.apple.ResearchKit/objc(cs)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(cs)NSObject",
+  "title" : "ObjectiveC.NSObject",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCopying": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+  "title" : "Foundation.NSCopying",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSSecureCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+  "title" : "Foundation.NSSecureCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s7CVarArgP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

@@ -1,0 +1,470 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierFamilyName"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@ORKRegistrationFormItemIdentifierFamilyName",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKRegistrationFormItemIdentifierFamilyName"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Global Variable",
+    "symbolKind" : "var",
+    "title" : "ORKRegistrationFormItemIdentifierFamilyName"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKRegistrationFormItemIdentifierFamilyName"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationStep",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationStepOption",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierDOB",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierEmail",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierGender",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierGivenName",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierPassword",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierPhoneNumber"
+      ],
+      "title" : "Registration steps"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkregistrationformitemidentifierfamilyname"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierDOB": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierDOB"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierDOB",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierDOB",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifierdob"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierEmail": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierEmail"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierEmail",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierEmail",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifieremail"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierFamilyName": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierFamilyName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierFamilyName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierFamilyName",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifierfamilyname"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierGender": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierGender"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierGender",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierGender",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifiergender"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierGivenName": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierGivenName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierGivenName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierGivenName",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifiergivenname"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierPassword": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierPassword"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierPassword",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierPassword",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifierpassword"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationFormItemIdentifierPhoneNumber": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationFormItemIdentifierPhoneNumber"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationFormItemIdentifierPhoneNumber",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKRegistrationFormItemIdentifierPhoneNumber",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationformitemidentifierphonenumber"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRegistrationStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRegistrationStepOption": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationStepOption"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRegistrationStepOption",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRegistrationStepOption"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRegistrationStepOption",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkregistrationstepoption"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps": {
+  "abstract" : [
+    {
+      "text" : "Create tasks for participants to perform.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+}
+}
+}

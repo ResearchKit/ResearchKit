@@ -1,0 +1,450 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat\/choiceAnswerFormat(with:textChoices:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKAnswerFormat(cm)choiceAnswerFormatWithStyle:textChoices:",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "choiceAnswerFormat"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "with"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:@E@ORKChoiceAnswerStyle",
+        "text" : "ORKChoiceAnswerStyle"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "textChoices"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:objc(cs)ORKTextChoice",
+        "text" : "ORKTextChoice"
+      },
+      {
+        "kind" : "text",
+        "text" : "]) -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "c:objc(cs)ORKTextChoiceAnswerFormat",
+        "text" : "ORKTextChoiceAnswerFormat"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Method",
+    "symbolKind" : "method",
+    "title" : "choiceAnswerFormat(with:textChoices:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "choiceAnswerFormat"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "with"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "style"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKChoiceAnswerStyle",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:@E@ORKChoiceAnswerStyle",
+              "text" : "ORKChoiceAnswerStyle"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "textChoices"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoice",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(cs)ORKTextChoice",
+              "text" : "ORKTextChoice"
+            },
+            {
+              "kind" : "text",
+              "text" : "]) -> "
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoiceAnswerFormat",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(cs)ORKTextChoiceAnswerFormat",
+              "text" : "ORKTextChoiceAnswerFormat"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkanswerformat\/choiceanswerformat(with:textchoices:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/AnswerFormats": {
+  "abstract" : [
+    {
+      "text" : "Present a specific question and collect an answer.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Answer formats",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/answerformats"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAnswerFormat/choiceAnswerFormat(with:textChoices:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "choiceAnswerFormat"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@ORKChoiceAnswerStyle",
+      "text" : "ORKChoiceAnswerStyle"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "textChoices"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKTextChoice",
+      "text" : "ORKTextChoice"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKTextChoiceAnswerFormat",
+      "text" : "ORKTextChoiceAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat\/choiceAnswerFormat(with:textChoices:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "choiceAnswerFormat(with:textChoices:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkanswerformat\/choiceanswerformat(with:textchoices:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKChoiceAnswerStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKChoiceAnswerStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKChoiceAnswerStyle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKChoiceAnswerStyle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKChoiceAnswerStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkchoiceanswerstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextChoice": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoice"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoice",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoice"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextChoice",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextchoice"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextChoiceAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoiceAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoiceAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoiceAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextChoiceAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextchoiceanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Surveys": {
+  "abstract" : [
+    {
+      "text" : "Construct surveys that ask a wide range of questions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/surveys"
+}
+}
+}

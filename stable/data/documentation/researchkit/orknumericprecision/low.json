@@ -1,0 +1,193 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericPrecision"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericPrecision\/low"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@E@ORKNumericPrecision@ORKNumericPrecisionLow",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "low"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "ORKNumericPrecision.low"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "low"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orknumericprecision\/low"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/AnswerFormats": {
+  "abstract" : [
+    {
+      "text" : "Present a specific question and collect an answer.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Answer formats",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/answerformats"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumericPrecision": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericPrecision"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericPrecision",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericPrecision"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNumericPrecision",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumericprecision"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumericPrecision/low": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "low"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericPrecision\/low",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKNumericPrecision.low",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumericprecision\/low"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Surveys": {
+  "abstract" : [
+    {
+      "text" : "Construct surveys that ask a wide range of questions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/surveys"
+}
+}
+}

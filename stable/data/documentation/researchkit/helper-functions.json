@@ -1,0 +1,104 @@
+{
+  "abstract" : [
+    {
+      "text" : "Helper Functions utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Helper-Functions"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "Helper Functions"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations"
+      ],
+      "title" : "Other"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/helper-functions"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Constants": {
+  "abstract" : [
+    {
+      "text" : "Constants utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Constants",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/constants"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Enumerations": {
+  "abstract" : [
+    {
+      "text" : "Enumerations utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Enumerations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/enumerations"
+}
+}
+}

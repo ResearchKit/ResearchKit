@@ -1,0 +1,602 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Results"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKHealthCorrelationCollector",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKHealthCorrelationCollector"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKHealthCorrelationCollector"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ORKHealthCorrelationCollector"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKHealthCorrelationCollector"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCollector"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+        "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+        "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCollector",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCollector",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDataCollectionManager",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDataCollectionManagerDelegate",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBundleAsset"
+      ],
+      "title" : "Data collection"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/correlationType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/lastAnchor",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/sampleTypes",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/startDate",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/units"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkhealthcorrelationcollector"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBundleAsset": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBundleAsset"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBundleAsset",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBundleAsset"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBundleAsset",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbundleasset"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCollector": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCollector"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCollector",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKCollector"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKCollector",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcollector"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDataCollectionManager": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDataCollectionManager"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDataCollectionManager",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKDataCollectionManager"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKDataCollectionManager",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdatacollectionmanager"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDataCollectionManagerDelegate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDataCollectionManagerDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDataCollectionManagerDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKDataCollectionManagerDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKDataCollectionManagerDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdatacollectionmanagerdelegate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCollector": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthCollector"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCollector",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthCollector"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHealthCollector",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcollector"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCorrelationCollector": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthCorrelationCollector"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthCorrelationCollector"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHealthCorrelationCollector",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcorrelationcollector"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCorrelationCollector/correlationType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "correlationType"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)HKCorrelationType",
+      "text" : "HKCorrelationType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/correlationType",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "correlationType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcorrelationcollector\/correlationtype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCorrelationCollector/lastAnchor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "lastAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)HKQueryAnchor",
+      "text" : "HKQueryAnchor"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/lastAnchor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "lastAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcorrelationcollector\/lastanchor"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCorrelationCollector/sampleTypes": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sampleTypes"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)HKSampleType",
+      "text" : "HKSampleType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/sampleTypes",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sampleTypes",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcorrelationcollector\/sampletypes"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCorrelationCollector/startDate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "startDate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/startDate",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "startDate",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcorrelationcollector\/startdate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCorrelationCollector/units": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "units"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)HKUnit",
+      "text" : "HKUnit"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCorrelationCollector\/units",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "units",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcorrelationcollector\/units"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Results": {
+  "abstract" : [
+    {
+      "text" : "Obtain information from a step.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/results"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCopying": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+  "title" : "Foundation.NSCopying",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSSecureCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+  "title" : "Foundation.NSSecureCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s7CVarArgP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

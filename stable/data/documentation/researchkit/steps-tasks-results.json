@@ -1,0 +1,232 @@
+{
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "Steps, tasks, and results"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In ResearchKit, you collect information by having participants complete a ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "task",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : " such as walking or listening to audio. To complete a task, participants perform a series of discrete ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "steps",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ". You can build a task to perform the same steps over and over, or change steps dynamically so a previous result informs what appears next. You collect data from tasks using ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "results",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ". A result can represent how the task was performed, or whether the participant successfuly completed it.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Configurations"
+      ],
+      "title" : "Essentials"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Tasks",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Results"
+      ],
+      "title" : "Data collection and analysis"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/steps-tasks-results"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Configurations": {
+  "abstract" : [
+    {
+      "text" : "Provide collection and presentation information to a step.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Configurations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Configurations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/configurations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Obtaining-Consent": {
+  "abstract" : [
+    {
+      "text" : "Guide your participants through the Informed Consent process.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Obtaining Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/obtaining-consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Results": {
+  "abstract" : [
+    {
+      "text" : "Obtain information from a step.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/results"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Setting-up-Your-Project-to-Use-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Add the ResearchKit framework to your app as a dynamic framework",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Setting up your project to use ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/setting-up-your-project-to-use-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps": {
+  "abstract" : [
+    {
+      "text" : "Create tasks for participants to perform.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Tasks": {
+  "abstract" : [
+    {
+      "text" : "Build research apps to collect information.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Tasks",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Tasks",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/tasks"
+}
+}
+}

@@ -1,0 +1,1309 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKContinuousScaleAnswerFormat",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKContinuousScaleAnswerFormat"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKContinuousScaleAnswerFormat"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ORKContinuousScaleAnswerFormat"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKContinuousScaleAnswerFormat"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)ORKChoiceAnswerFormatHelper",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)ORKScaleAnswerFormatProvider",
+        "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+        "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScaleAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumberFormattingStyle"
+      ],
+      "title" : "Scale"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/defaultValue",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/gradientColors",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/gradientLocations",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/isVertical",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximum",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximumFractionDigits",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximumImage",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximumValueDescription",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/minimum",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/minimumImage",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/minimumValueDescription",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/numberFormatter",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/numberStyle",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/shouldHideLabels",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/shouldHideRanges",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/shouldHideSelectedValueLabel"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkcontinuousscaleanswerformat"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/AnswerFormats": {
+  "abstract" : [
+    {
+      "text" : "Present a specific question and collect an answer.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Answer formats",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/answerformats"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKContinuousScaleAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKContinuousScaleAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKContinuousScaleAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/defaultValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "defaultValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/defaultValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "defaultValue",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/defaultvalue"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/gradientColors": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "gradientColors"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIColor",
+      "text" : "UIColor"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/gradientColors",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "gradientColors",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/gradientcolors"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/gradientLocations": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "gradientLocations"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSNumber",
+      "text" : "NSNumber"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/gradientLocations",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "gradientLocations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/gradientlocations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "defaultValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumFractionDigits"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/init(maximumvalue:minimumvalue:defaultvalue:maximumfractiondigits:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "defaultValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumFractionDigits"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "vertical"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/init(maximumvalue:minimumvalue:defaultvalue:maximumfractiondigits:vertical:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "defaultValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumFractionDigits"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "vertical"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumValueDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumValueDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(maximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/init(maximumvalue:minimumvalue:defaultvalue:maximumfractiondigits:vertical:maximumvaluedescription:minimumvaluedescription:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/isVertical": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isVertical"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/isVertical",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isVertical",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/isvertical"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/maximum": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maximum"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximum",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "maximum",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/maximum"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/maximumFractionDigits": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maximumFractionDigits"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximumFractionDigits",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "maximumFractionDigits",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/maximumfractiondigits"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/maximumImage": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maximumImage"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIImage",
+      "text" : "UIImage"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximumImage",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "maximumImage",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/maximumimage"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/maximumValueDescription": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maximumValueDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/maximumValueDescription",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "maximumValueDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/maximumvaluedescription"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/minimum": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "minimum"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/minimum",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "minimum",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/minimum"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/minimumImage": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "minimumImage"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIImage",
+      "text" : "UIImage"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/minimumImage",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "minimumImage",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/minimumimage"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/minimumValueDescription": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "minimumValueDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/minimumValueDescription",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "minimumValueDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/minimumvaluedescription"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/numberFormatter": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "numberFormatter"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSNumberFormatter",
+      "text" : "NumberFormatter"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/numberFormatter",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "numberFormatter",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/numberformatter"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/numberStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "numberStyle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@ORKNumberFormattingStyle",
+      "text" : "ORKNumberFormattingStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/numberStyle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "numberStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/numberstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/shouldHideLabels": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldHideLabels"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/shouldHideLabels",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldHideLabels",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/shouldhidelabels"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/shouldHideRanges": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldHideRanges"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/shouldHideRanges",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldHideRanges",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/shouldhideranges"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat/shouldHideSelectedValueLabel": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldHideSelectedValueLabel"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat\/shouldHideSelectedValueLabel",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldHideSelectedValueLabel",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat\/shouldhideselectedvaluelabel"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumberFormattingStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumberFormattingStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumberFormattingStyle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumberFormattingStyle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNumberFormattingStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumberformattingstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScaleAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScaleAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScaleAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScaleAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScaleAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscaleanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Surveys": {
+  "abstract" : [
+    {
+      "text" : "Construct surveys that ask a wide range of questions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/surveys"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCopying": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+  "title" : "Foundation.NSCopying",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSSecureCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+  "title" : "Foundation.NSSecureCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)ORKChoiceAnswerFormatHelper": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)ORKChoiceAnswerFormatHelper",
+  "title" : "ResearchKit_Private.ORKChoiceAnswerFormatHelperProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)ORKScaleAnswerFormatProvider": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)ORKScaleAnswerFormatProvider",
+  "title" : "ResearchKit_Private.ORKScaleAnswerFormatProvider",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s7CVarArgP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

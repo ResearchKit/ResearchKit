@@ -1,0 +1,1262 @@
+{
+  "abstract" : [
+    {
+      "text" : "Present a specific question and collect an answer.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/AnswerFormats"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "collectionGroup",
+    "roleHeading" : "API Collection",
+    "title" : "Answer formats"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAgeAnswerFormat"
+      ],
+      "title" : "Age"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColorChoiceAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColorChoice"
+      ],
+      "title" : "Color Choice"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericPrecision"
+      ],
+      "title" : "Essentials"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeightAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKWeightAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDoubleDefaultValue",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMeasurementSystem"
+      ],
+      "title" : "Height and Weight"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDateAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTimeIntervalAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTimeOfDayAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDateAnswerStyle"
+      ],
+      "title" : "Date and time"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthKitQuantityTypeAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthKitCharacteristicTypeAnswerFormat"
+      ],
+      "title" : "HealthKit"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKImageChoice",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKImageChoiceAnswerFormat"
+      ],
+      "title" : "Image"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericAnswerStyle"
+      ],
+      "title" : "Numeric"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScaleAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumberFormattingStyle"
+      ],
+      "title" : "Scale"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoiceAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextScaleAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoice",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoiceOther",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKChoiceAnswerStyle",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKQuestionType"
+      ],
+      "title" : "Text"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBooleanAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKEmailAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKLocationAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMultipleValuePickerAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSESAnswerFormat",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKValuePickerAnswerFormat"
+      ],
+      "title" : "Other formats"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/answerformats"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAgeAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAgeAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAgeAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAgeAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAgeAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkageanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBooleanAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBooleanAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBooleanAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBooleanAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBooleanAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbooleananswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKChoiceAnswerStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKChoiceAnswerStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKChoiceAnswerStyle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKChoiceAnswerStyle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKChoiceAnswerStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkchoiceanswerstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKColorChoice": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKColorChoice"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColorChoice",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKColorChoice"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKColorChoice",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcolorchoice"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKColorChoiceAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKColorChoiceAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColorChoiceAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKColorChoiceAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKColorChoiceAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcolorchoiceanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKContinuousScaleAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKContinuousScaleAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKContinuousScaleAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKContinuousScaleAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKContinuousScaleAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcontinuousscaleanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDateAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDateAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDateAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKDateAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKDateAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdateanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDateAnswerStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDateAnswerStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDateAnswerStyle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKDateAnswerStyle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKDateAnswerStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdateanswerstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDoubleDefaultValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDoubleDefaultValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDoubleDefaultValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKDoubleDefaultValue",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdoubledefaultvalue"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKEmailAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKEmailAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKEmailAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKEmailAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKEmailAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkemailanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthKitCharacteristicTypeAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthKitCharacteristicTypeAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthKitCharacteristicTypeAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthKitCharacteristicTypeAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHealthKitCharacteristicTypeAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthkitcharacteristictypeanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthKitQuantityTypeAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthKitQuantityTypeAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthKitQuantityTypeAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthKitQuantityTypeAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHealthKitQuantityTypeAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthkitquantitytypeanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHeightAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeightAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeightAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeightAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHeightAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkheightanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKImageChoice": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKImageChoice"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKImageChoice",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKImageChoice"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKImageChoice",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkimagechoice"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKImageChoiceAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKImageChoiceAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKImageChoiceAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKImageChoiceAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKImageChoiceAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkimagechoiceanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKLocationAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKLocationAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKLocationAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKLocationAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKLocationAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orklocationanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKMeasurementSystem": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKMeasurementSystem"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMeasurementSystem",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKMeasurementSystem"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKMeasurementSystem",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkmeasurementsystem"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKMultipleValuePickerAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKMultipleValuePickerAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMultipleValuePickerAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKMultipleValuePickerAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKMultipleValuePickerAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkmultiplevaluepickeranswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumberFormattingStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumberFormattingStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumberFormattingStyle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumberFormattingStyle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNumberFormattingStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumberformattingstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumericAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNumericAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumericanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumericAnswerStyle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericAnswerStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericAnswerStyle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericAnswerStyle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNumericAnswerStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumericanswerstyle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNumericPrecision": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericPrecision"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNumericPrecision",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNumericPrecision"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNumericPrecision",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknumericprecision"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKQuestionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKQuestionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKQuestionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKQuestionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKQuestionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkquestiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSESAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSESAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSESAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSESAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSESAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksesanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScaleAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScaleAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScaleAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScaleAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScaleAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscaleanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextChoice": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoice"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoice",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoice"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextChoice",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextchoice"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextChoiceAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoiceAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoiceAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoiceAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextChoiceAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextchoiceanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextChoiceOther": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoiceOther"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextChoiceOther",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextChoiceOther"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextChoiceOther",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextchoiceother"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTextScaleAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextScaleAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTextScaleAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTextScaleAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTextScaleAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktextscaleanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTimeIntervalAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTimeIntervalAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTimeIntervalAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTimeIntervalAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTimeIntervalAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktimeintervalanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTimeOfDayAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTimeOfDayAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTimeOfDayAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTimeOfDayAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTimeOfDayAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktimeofdayanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKValuePickerAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKValuePickerAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKValuePickerAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKValuePickerAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKValuePickerAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkvaluepickeranswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKWeightAnswerFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKWeightAnswerFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKWeightAnswerFormat",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKWeightAnswerFormat"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKWeightAnswerFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkweightanswerformat"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Surveys": {
+  "abstract" : [
+    {
+      "text" : "Construct surveys that ask a wide range of questions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/surveys"
+}
+}
+}

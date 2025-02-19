@@ -1,0 +1,1476 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewCornerRadius"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@ORKiPadBackgroundViewCornerRadius",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKiPadBackgroundViewCornerRadius"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+        "text" : "CGFloat"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Global Variable",
+    "symbolKind" : "var",
+    "title" : "ORKiPadBackgroundViewCornerRadius"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKiPadBackgroundViewCornerRadius"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+              "text" : "CGFloat"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/CheckmarkViewDimension",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAuxiliaryImageTintColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBackgroundColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBlueHighlightColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodyToBodyPaddingStandard",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodyToBodyParagraphPaddingStandard",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBulletItemTextColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCaptionTextColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardDefaultBorderWidth",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardDefaultCornerRadii",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardDefaultFontSize",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentBackgroundColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDarkTintColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDoneButtonPressedKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKEffectViewOpacityHidden",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKEffectViewOpacityVisible",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStepLargeTextMinimumHeaderHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStepMinimumHeaderHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKImageChoiceButtonCornerRadii",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKLightTintColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigationContainerColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigationContainerShadowColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKProgressLabelColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKQuestionStepMinimumHeaderHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResetDoneButtonKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetricMaxDimension",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSignatureColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTitleToBodyTopPaddingStandard",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContentIconImageViewDimension",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepTopContentImageChangedKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSurveyItemMargin",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSurveyTableContainerLeftRightPadding",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKToolBarTintColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTopContentImageViewBackgroundColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewBottomPadding",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewColorKey",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewLeftRightPadding"
+      ],
+      "title" : "Constants"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkipadbackgroundviewcornerradius"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/CheckmarkViewDimension": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CheckmarkViewDimension"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/CheckmarkViewDimension",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "CheckmarkViewDimension",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/checkmarkviewdimension"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Constants": {
+  "abstract" : [
+    {
+      "text" : "Constants utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Constants",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/constants"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAuxiliaryImageTintColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAuxiliaryImageTintColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAuxiliaryImageTintColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKAuxiliaryImageTintColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkauxiliaryimagetintcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBackgroundColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBackgroundColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBackgroundColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKBackgroundColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbackgroundcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBlueHighlightColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBlueHighlightColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBlueHighlightColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKBlueHighlightColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbluehighlightcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBodyToBodyPaddingStandard": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodyToBodyPaddingStandard"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodyToBodyPaddingStandard",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKBodyToBodyPaddingStandard",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbodytobodypaddingstandard"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBodyToBodyParagraphPaddingStandard": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodyToBodyParagraphPaddingStandard"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodyToBodyParagraphPaddingStandard",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKBodyToBodyParagraphPaddingStandard",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbodytobodyparagraphpaddingstandard"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBulletItemTextColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBulletItemTextColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBulletItemTextColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKBulletItemTextColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbulletitemtextcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCaptionTextColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCaptionTextColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCaptionTextColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKCaptionTextColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcaptiontextcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCardDefaultBorderWidth": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCardDefaultBorderWidth"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardDefaultBorderWidth",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKCardDefaultBorderWidth",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcarddefaultborderwidth"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCardDefaultCornerRadii": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCardDefaultCornerRadii"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardDefaultCornerRadii",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKCardDefaultCornerRadii",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcarddefaultcornerradii"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCardDefaultFontSize": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCardDefaultFontSize"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardDefaultFontSize",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKCardDefaultFontSize",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcarddefaultfontsize"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConsentBackgroundColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKConsentBackgroundColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConsentBackgroundColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKConsentBackgroundColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconsentbackgroundcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDarkTintColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDarkTintColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDarkTintColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKDarkTintColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdarktintcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDoneButtonPressedKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDoneButtonPressedKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDoneButtonPressedKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKDoneButtonPressedKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdonebuttonpressedkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKEffectViewOpacityHidden": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKEffectViewOpacityHidden"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKEffectViewOpacityHidden",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKEffectViewOpacityHidden",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkeffectviewopacityhidden"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKEffectViewOpacityVisible": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKEffectViewOpacityVisible"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKEffectViewOpacityVisible",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKEffectViewOpacityVisible",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkeffectviewopacityvisible"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormStepLargeTextMinimumHeaderHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStepLargeTextMinimumHeaderHeight"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStepLargeTextMinimumHeaderHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKFormStepLargeTextMinimumHeaderHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformsteplargetextminimumheaderheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormStepMinimumHeaderHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStepMinimumHeaderHeight"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStepMinimumHeaderHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKFormStepMinimumHeaderHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformstepminimumheaderheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKImageChoiceButtonCornerRadii": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKImageChoiceButtonCornerRadii"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKImageChoiceButtonCornerRadii",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKImageChoiceButtonCornerRadii",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkimagechoicebuttoncornerradii"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKLightTintColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKLightTintColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKLightTintColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKLightTintColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orklighttintcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNavigationContainerColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNavigationContainerColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigationContainerColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKNavigationContainerColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknavigationcontainercolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNavigationContainerShadowColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNavigationContainerShadowColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigationContainerShadowColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKNavigationContainerShadowColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknavigationcontainershadowcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKProgressLabelColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKProgressLabelColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKProgressLabelColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKProgressLabelColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkprogresslabelcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKQuestionStepMinimumHeaderHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKQuestionStepMinimumHeaderHeight"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKQuestionStepMinimumHeaderHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKQuestionStepMinimumHeaderHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkquestionstepminimumheaderheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResetDoneButtonKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKResetDoneButtonKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResetDoneButtonKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKResetDoneButtonKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresetdonebuttonkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetricMaxDimension": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetricMaxDimension"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetricMaxDimension",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetricMaxDimension",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetricmaxdimension"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSignatureColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSignatureColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSignatureColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKSignatureColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksignaturecolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerTitleToBodyTopPaddingStandard": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerTitleToBodyTopPaddingStandard"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTitleToBodyTopPaddingStandard",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerTitleToBodyTopPaddingStandard",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainertitletobodytoppaddingstandard"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContentIconImageViewDimension": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContentIconImageViewDimension"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContentIconImageViewDimension",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContentIconImageViewDimension",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontenticonimageviewdimension"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepTopContentImageChangedKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepTopContentImageChangedKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepTopContentImageChangedKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepTopContentImageChangedKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksteptopcontentimagechangedkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSurveyItemMargin": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSurveyItemMargin"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSurveyItemMargin",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKSurveyItemMargin",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksurveyitemmargin"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSurveyTableContainerLeftRightPadding": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSurveyTableContainerLeftRightPadding"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSurveyTableContainerLeftRightPadding",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKSurveyTableContainerLeftRightPadding",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksurveytablecontainerleftrightpadding"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKToolBarTintColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKToolBarTintColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKToolBarTintColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKToolBarTintColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktoolbartintcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTopContentImageViewBackgroundColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTopContentImageViewBackgroundColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTopContentImageViewBackgroundColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKTopContentImageViewBackgroundColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktopcontentimageviewbackgroundcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKiPadBackgroundViewBottomPadding": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKiPadBackgroundViewBottomPadding"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewBottomPadding",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKiPadBackgroundViewBottomPadding",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkipadbackgroundviewbottompadding"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKiPadBackgroundViewColorKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKiPadBackgroundViewColorKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewColorKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKiPadBackgroundViewColorKey",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkipadbackgroundviewcolorkey"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKiPadBackgroundViewCornerRadius": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKiPadBackgroundViewCornerRadius"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewCornerRadius",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKiPadBackgroundViewCornerRadius",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkipadbackgroundviewcornerradius"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKiPadBackgroundViewLeftRightPadding": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKiPadBackgroundViewLeftRightPadding"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKiPadBackgroundViewLeftRightPadding",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKiPadBackgroundViewLeftRightPadding",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkipadbackgroundviewleftrightpadding"
+}
+}
+}

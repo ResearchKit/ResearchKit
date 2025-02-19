@@ -1,0 +1,2528 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Tasks"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKResultPredicate",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKResultPredicate"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKResultPredicate"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ORKResultPredicate"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKResultPredicate"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(cs)NSObject"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+        "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+        "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepNavigationRule",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDirectStepNavigationRule",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormItemVisibilityRule",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigableOrderedTask",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPredicateFormItemVisibilityRule",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPredicateSkipStepNavigationRule",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPredicateStepNavigationRule",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepModifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicateTaskIdentifierVariableName",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNullStepIdentifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKKeyValueStepModifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultSelector"
+      ],
+      "title" : "Navigation"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForBooleanQuestionResult(with:expectedAnswer:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:expectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:expectedAnswerValues:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:matchingPattern:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:matchingPatterns:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForConsent(with:didConsent:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForDateQuestionResult(with:minimumExpectedAnswer:maximumExpectedAnswer:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForDontKnowResult(with:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNilQuestionResult(with:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:expectedAnswer:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:maximumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:expectedAnswer:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:maximumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTextQuestionResult(with:expectedString:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTextQuestionResult(with:matchingPattern:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeIntervalQuestionResult(with:maximumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeOfDayQuestionResult(with:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:)"
+      ],
+      "title" : "Type Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkresultpredicate"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKDirectStepNavigationRule": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKDirectStepNavigationRule"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKDirectStepNavigationRule",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKDirectStepNavigationRule"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKDirectStepNavigationRule",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkdirectstepnavigationrule"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormItemVisibilityRule": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormItemVisibilityRule"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormItemVisibilityRule",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormItemVisibilityRule"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFormItemVisibilityRule",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformitemvisibilityrule"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKKeyValueStepModifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKKeyValueStepModifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKKeyValueStepModifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKKeyValueStepModifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKKeyValueStepModifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkkeyvaluestepmodifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNavigableOrderedTask": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNavigableOrderedTask"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNavigableOrderedTask",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKNavigableOrderedTask"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKNavigableOrderedTask",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknavigableorderedtask"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNullStepIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNullStepIdentifier"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNullStepIdentifier",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKNullStepIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orknullstepidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKPredicateFormItemVisibilityRule": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKPredicateFormItemVisibilityRule"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPredicateFormItemVisibilityRule",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKPredicateFormItemVisibilityRule"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKPredicateFormItemVisibilityRule",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkpredicateformitemvisibilityrule"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKPredicateSkipStepNavigationRule": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKPredicateSkipStepNavigationRule"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPredicateSkipStepNavigationRule",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKPredicateSkipStepNavigationRule"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKPredicateSkipStepNavigationRule",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkpredicateskipstepnavigationrule"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKPredicateStepNavigationRule": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKPredicateStepNavigationRule"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPredicateStepNavigationRule",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKPredicateStepNavigationRule"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKPredicateStepNavigationRule",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkpredicatestepnavigationrule"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKResultPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKResultPredicate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKResultPredicate",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForBooleanQuestionResult(with:expectedAnswer:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForBooleanQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectedAnswer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForBooleanQuestionResult(with:expectedAnswer:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForBooleanQuestionResult(with:expectedAnswer:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforbooleanquestionresult(with:expectedanswer:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForChoiceQuestionResult(with:expectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForChoiceQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(pl)NSCopying",
+      "text" : "NSCopying"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(pl)NSSecureCoding",
+      "text" : "NSSecureCoding"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(pl)NSObject",
+      "text" : "NSObjectProtocol"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:expectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForChoiceQuestionResult(with:expectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforchoicequestionresult(with:expectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForChoiceQuestionResult(with:expectedAnswerValues:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForChoiceQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectedAnswerValues"
+    },
+    {
+      "kind" : "text",
+      "text" : ": [any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(pl)NSCopying",
+      "text" : "NSCopying"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(pl)NSSecureCoding",
+      "text" : "NSSecureCoding"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(pl)NSObject",
+      "text" : "NSObjectProtocol"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:expectedAnswerValues:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForChoiceQuestionResult(with:expectedAnswerValues:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforchoicequestionresult(with:expectedanswervalues:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForChoiceQuestionResult(with:matchingPattern:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForChoiceQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "matchingPattern"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:matchingPattern:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForChoiceQuestionResult(with:matchingPattern:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforchoicequestionresult(with:matchingpattern:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForChoiceQuestionResult(with:matchingPatterns:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForChoiceQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "matchingPatterns"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForChoiceQuestionResult(with:matchingPatterns:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForChoiceQuestionResult(with:matchingPatterns:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforchoicequestionresult(with:matchingpatterns:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForConsent(with:didConsent:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForConsent"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didConsent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForConsent(with:didConsent:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForConsent(with:didConsent:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforconsent(with:didconsent:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForDateQuestionResult(with:minimumExpectedAnswer:maximumExpectedAnswer:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForDateQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForDateQuestionResult(with:minimumExpectedAnswer:maximumExpectedAnswer:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForDateQuestionResult(with:minimumExpectedAnswer:maximumExpectedAnswer:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefordatequestionresult(with:minimumexpectedanswer:maximumexpectedanswer:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForDontKnowResult(with:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForDontKnowResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForDontKnowResult(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForDontKnowResult(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefordontknowresult(with:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForNilQuestionResult(with:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForNilQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNilQuestionResult(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForNilQuestionResult(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefornilquestionresult(with:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForNumericQuestionResult(with:expectedAnswer:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForNumericQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectedAnswer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:expectedAnswer:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForNumericQuestionResult(with:expectedAnswer:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefornumericquestionresult(with:expectedanswer:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForNumericQuestionResult(with:maximumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForNumericQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:maximumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForNumericQuestionResult(with:maximumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefornumericquestionresult(with:maximumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForNumericQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefornumericquestionresult(with:minimumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForNumericQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForNumericQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefornumericquestionresult(with:minimumexpectedanswervalue:maximumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForScaleQuestionResult(with:expectedAnswer:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForScaleQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectedAnswer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:expectedAnswer:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForScaleQuestionResult(with:expectedAnswer:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforscalequestionresult(with:expectedanswer:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForScaleQuestionResult(with:maximumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForScaleQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:maximumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForScaleQuestionResult(with:maximumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforscalequestionresult(with:maximumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForScaleQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforscalequestionresult(with:minimumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForScaleQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForScaleQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicateforscalequestionresult(with:minimumexpectedanswervalue:maximumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForTextQuestionResult(with:expectedString:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForTextQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectedString"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTextQuestionResult(with:expectedString:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForTextQuestionResult(with:expectedString:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefortextquestionresult(with:expectedstring:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForTextQuestionResult(with:matchingPattern:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForTextQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "matchingPattern"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTextQuestionResult(with:matchingPattern:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForTextQuestionResult(with:matchingPattern:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefortextquestionresult(with:matchingpattern:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForTimeIntervalQuestionResult(with:maximumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForTimeIntervalQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeIntervalQuestionResult(with:maximumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForTimeIntervalQuestionResult(with:maximumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefortimeintervalquestionresult(with:maximumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForTimeIntervalQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefortimeintervalquestionresult(with:minimumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForTimeIntervalQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedAnswerValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForTimeIntervalQuestionResult(with:minimumExpectedAnswerValue:maximumExpectedAnswerValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefortimeintervalquestionresult(with:minimumexpectedanswervalue:maximumexpectedanswervalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicate/predicateForTimeOfDayQuestionResult(with:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "predicateForTimeOfDayQuestionResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKResultSelector",
+      "text" : "ORKResultSelector"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedHour"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "minimumExpectedMinute"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedHour"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maximumExpectedMinute"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSPredicate",
+      "text" : "NSPredicate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicate\/predicateForTimeOfDayQuestionResult(with:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "predicateForTimeOfDayQuestionResult(with:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicate\/predicatefortimeofdayquestionresult(with:minimumexpectedhour:minimumexpectedminute:maximumexpectedhour:maximumexpectedminute:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultPredicateTaskIdentifierVariableName": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKResultPredicateTaskIdentifierVariableName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultPredicateTaskIdentifierVariableName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKResultPredicateTaskIdentifierVariableName",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultpredicatetaskidentifiervariablename"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKResultSelector": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKResultSelector"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKResultSelector",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKResultSelector"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKResultSelector",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkresultselector"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepModifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepModifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepModifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepModifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKStepModifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepmodifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepNavigationRule": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepNavigationRule"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepNavigationRule",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepNavigationRule"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKStepNavigationRule",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepnavigationrule"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Tasks": {
+  "abstract" : [
+    {
+      "text" : "Build research apps to collect information.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Tasks",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Tasks",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/tasks"
+},
+"doc://com.apple.ResearchKit/objc(cs)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(cs)NSObject",
+  "title" : "ObjectiveC.NSObject",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s7CVarArgP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}

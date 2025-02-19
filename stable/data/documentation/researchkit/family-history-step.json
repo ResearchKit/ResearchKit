@@ -1,0 +1,1029 @@
+{
+  "abstract" : [
+    {
+      "text" : "Use the Family History Step to collect insightful health trends.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Family History Step"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Accurate family health history is a highly valuable data set that can help patients prepare for or avoid common health conditions they might face in the future. However, obtaining this information has always been a struggle to collect manually and even digitally. Now, with ResearchKit, developers and researchers can quickly construct an ORKFamilyHistoryStep and present a survey to collect data for family health history that is tailored to their specific needs.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "With the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " you can specify:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Relative Types",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Determine the exact type of family members the survey asks about.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Survey Questions",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Use the same questions for each relative group or create a different survey for each.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Health Conditions",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Include a list of health conditions that can be the same or different for each relative group.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Displayed Results",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Determine which results are displayed back to the user after completing each relative’s survey.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "anchor" : "Understanding-the-Family-History-Step-classes",
+          "level" : 2,
+          "text" : "Understanding the Family History Step classes",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Before initializing an ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " you should familiarize yourself with the classes required.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "ORKHealthCondition",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - This represents a single health condition presented in your survey.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "ORKConditionStepConfiguration",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - This object provides the information needed for the health conditions list presented to the user.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "ORKRelativeGroup",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - This represents a specific relative group such as Grandparents, Children, or Siblings.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "ORKRelatedPerson",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " -This represents a family member added during the survey. Retrieve this object from the result of the ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the next section, we will construct an ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " using the classes above.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Constructing-a-Family-History-Step",
+          "level" : 2,
+          "text" : "Constructing a Family History Step",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Following the example below, we will recreate the same Family History Step only for the parent group.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "family-history-step-instruction-step",
+              "type" : "image"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "family-history-step-no-relatives",
+              "type" : "image"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "family-history-step-parent-added",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Creating-Health-Condition-Objects",
+          "level" : 3,
+          "text" : "Creating Health Condition Objects",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "First, create the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCondition",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " objects necessary to display the health conditions specific to your survey.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            " let healthConditions = [",
+            "        ORKHealthCondition(identifier: \"healthConditionIdentifier1\", displayName: \"Diabetes\", value: \"Diabetes\" as NSString),",
+            "        ORKHealthCondition(identifier: \"healthConditionIdentifier2\", displayName: \"Heart Attack\", value: \"Heart Attack\" as NSString),",
+            "        ORKHealthCondition(identifier: \"healthConditionIdentifier3\", displayName: \"Stroke\", value: \"Stroke\" as NSString)",
+            "        ]"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Create-Condition-Step-Configuration",
+          "level" : 3,
+          "text" : "Create Condition Step Configuration",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Next, initialize an ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConditionStepConfiguration",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and add the necessary information, which includes the health conditions array created before this.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let conditionStepConfiguration = ORKConditionStepConfiguration(stepIdentifier: \"FamilyHistoryConditionStepIdentifier\", ",
+            "                                                               conditionsFormItemIdentifier: \"HealthConditionsFormItemIdentifier\",",
+            "                                                               conditions: healthConditions,",
+            "                                                               formItems: [])"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "stepIdentifier",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - When the user is presented with the health conditions to select, they are technically looking at an ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " that was initialized by the ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " itself. The value you set for this property is the step identifier for the health conditions form step.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "conditionsFormItemIdentifier",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - The string used as the identifier for the health conditions text choice question. Use this identifier to locate each family member’s health condition selected in the ORKResult.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "conditions",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - The user will be presented with an individual text choice for each “ORKHealthCondition” in this list.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "formItems",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Optionally, provide more form items to present additional questions under the health conditions text choices.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "anchor" : "Create-Relative-Group",
+          "level" : 3,
+          "text" : "Create Relative Group",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The last object needed for the family history step is the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRelativeGroup",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let parentFormStep = ORKFormStep(identifier: \"ParentSurveyIdentifier\")",
+            "parentFormStep.isOptional = false",
+            "parentFormStep.title = \"Parent\"",
+            "parentFormStep.detailText = \"Answer these questions to the best of your ability.\"",
+            "parentFormStep.formItems = parentFormStepFormItems()",
+            "",
+            "let parentRelativeGroup = ORKRelativeGroup(identifier: \"ParentGroupIdentifier\",",
+            "                                           name: \"Biological Parent\",",
+            "                                           sectionTitle: \"Biological Parents\",",
+            "                                           sectionDetailText: \"Include your blood-related parents.\",",
+            "                                           identifierForCellTitle: \"ParentNameIdentifier\",",
+            "                                           maxAllowed: 2,",
+            "                                           formSteps: [parentFormStep],",
+            "                                           detailTextIdentifiers: [\"ParentSexAtBirthIdentifier\", \"ParentVitalStatusIdentifier\", \"ParentAgeFormItemIdentifier\"])"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Create-Family-History-Step",
+          "level" : 3,
+          "text" : "Create Family History Step",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For the last step, we will construct an ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and pass in the initialized objects from above.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let familyHistoryStep = ORKFamilyHistoryStep(identifier: \"FamilyHistoryStepIdentifier)",
+            "familyHistoryStep.title = \"Family Health History\"",
+            "familyHistoryStep.detailText = \"The overview of your biological family members can inform health risks and lifestyle.\"",
+            "familyHistoryStep.conditionStepConfiguration = conditionStepConfiguration",
+            "familyHistoryStep.relativeGroups = relativeGroups"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Parsing-Family-History-Step-Result",
+          "level" : 3,
+          "text" : "Parsing Family History Step Result",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "After presenting the task, parse the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskResult",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to access the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryResult",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "guard let stepResult = (taskViewController.result.results?[1] as? ORKStepResult) else { return }",
+            "        ",
+            "if let familyHistoryResult = stepResult.results?.first as? ORKFamilyHistoryResult {",
+            "\tlet relatedPersons = familyHistoryResult.relatedPersons",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks"
+      ],
+      "title" : "Articles"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/family-history-step"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Conditional-Logic-in-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "How to use conditional logic for ResearchKit steps and forms.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Conditional Logic in ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/conditional-logic-in-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Creating-Surveys": {
+  "abstract" : [
+    {
+      "text" : "Configure and present surveys with ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Creating surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/creating-surveys"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKConditionStepConfiguration": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKConditionStepConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKConditionStepConfiguration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKConditionStepConfiguration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKConditionStepConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkconditionstepconfiguration"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFamilyHistoryResult": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFamilyHistoryResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFamilyHistoryResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFamilyHistoryResult",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkfamilyhistoryresult"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFamilyHistoryStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFamilyHistoryStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFamilyHistoryStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFamilyHistoryStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFamilyHistoryStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkfamilyhistorystep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFormStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHealthCondition": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthCondition"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHealthCondition",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHealthCondition"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHealthCondition",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhealthcondition"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRelativeGroup": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRelativeGroup"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRelativeGroup",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRelativeGroup"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRelativeGroup",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrelativegroup"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskResult": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTaskResult",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktaskresult"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Obtaining-Consent": {
+  "abstract" : [
+    {
+      "text" : "Guide your participants through the Informed Consent process.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Obtaining Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/obtaining-consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Setting-up-Your-Project-to-Use-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Add the ResearchKit framework to your app as a dynamic framework",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Setting up your project to use ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/setting-up-your-project-to-use-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Understanding-Active-Tasks": {
+  "abstract" : [
+    {
+      "text" : "Learn more about the Active Tasks provided by ResearchKit™.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Understanding Active Tasks",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/understanding-active-tasks"
+},
+"family-history-step-instruction-step": {
+  "alt" : "Instruction Step",
+  "identifier" : "family-history-step-instruction-step",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/family-history-step-instruction-step@3x.png"
+    }
+  ]
+},
+"family-history-step-no-relatives": {
+  "alt" : "Family History Step With No Relatives",
+  "identifier" : "family-history-step-no-relatives",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/family-history-step-no-relatives@3x.png"
+    }
+  ]
+},
+"family-history-step-parent-added": {
+  "alt" : "Family History Step With Parent Added",
+  "identifier" : "family-history-step-parent-added",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/family-history-step-parent-added@3x.png"
+    }
+  ]
+}
+}
+}

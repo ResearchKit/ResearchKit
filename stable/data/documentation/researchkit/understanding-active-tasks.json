@@ -1,0 +1,6394 @@
+{
+  "abstract" : [
+    {
+      "text" : "Learn more about the Active Tasks provided by ResearchKit™.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Understanding Active Tasks"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Active tasks invite users to perform activities under partially",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "controlled conditions while iPhone sensors are used to collect data.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "For example, an active task for analyzing gait and balance might ask",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the user to walk a short distance, while collecting accelerometer data on the device.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Predefined-Active-Tasks",
+          "level" : 2,
+          "text" : "Predefined Active Tasks",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "ResearchKit includes a number of predefined tasks, which fall into seven categories: motor activities, fitness, cognition, speech, hearing, hand dexterity, and vision. The table below summarizes each task and describes the data it generates.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "extendedData" : {
+            "10_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "11_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "12_0" : {
+              "colspan" : 1,
+              "rowspan" : 3
+            },
+            "13_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "14_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "15_0" : {
+              "colspan" : 1,
+              "rowspan" : 3
+            },
+            "16_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "17_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "1_0" : {
+              "colspan" : 1,
+              "rowspan" : 3
+            },
+            "2_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "3_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "4_0" : {
+              "colspan" : 1,
+              "rowspan" : 2
+            },
+            "5_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "6_0" : {
+              "colspan" : 1,
+              "rowspan" : 6
+            },
+            "7_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "8_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            },
+            "9_0" : {
+              "colspan" : 1,
+              "rowspan" : 0
+            }
+          },
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Category",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Task",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Sensor",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Data Collected",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Motor Skills",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Range of Motion",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Accelerometer, Gyroscope",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Device Motion",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Gait and Balance",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Accelerometer, Gyroscope",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Device Motion, Pedometer",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Tapping Speed",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display, Accelerometer (optional)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Touch Activity",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Fitness",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Fitness",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "GPS, Gyroscope",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Device motion, Pedometer, Location, Heart rate",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Timed Walk",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "GPS, Gyroscope",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Device motion, Pedometer, Location, Heart rate",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Cognition",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Spatial Memory",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display, Accelerometer (optional)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Touch Activity, Actual sequences",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Stroop Test",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "User selection, Completion time",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Trail Making Test",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Completion time, Touch activity",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Paced Serial Addition (PSAT)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Addition results from user",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Tower of Hanoi",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Every move taken by user",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Reaction Time",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Accelerometer, Gyroscope",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Device motion",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Speech",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Sustained Phonation",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Microphone",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Uncompressed audio",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Speech Recognition",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Microphone",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Raw audio, Transcription, Edited transcript",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Speech-in-Noise",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Microphone",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Raw audio, Transcription, Edited transcript, Reception Threshold (SRT)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Hearing",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Environment SPL",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Microphone",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Environment sound pressure level in dBA",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Tone Audiometry",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "AirPods Headphones",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Minimum amplitude recognized by the user",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "DBHL Tone Audiometry",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "AirPods Headphones",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Hearing threshold in dB HL scale",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Hand Dexterity",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "9-Hole Peg",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Completion time, Move distance",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Vision",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Amsler Grid",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Multi-Touch display",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Touch activity, Eye side, Areas of distortion annotated by the user",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can disable the instruction or completion steps that are automatically",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "included in the framework by passing appropriate options when you create an active task. See the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKPredefinedTaskOption",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " constants for the available options.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can use options flags to exclude data collection for data types that are not needed for your study. For example, to perform the fitness task without recording heart rate data, use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKPredefinedTaskOptionExcludeHeartRate",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " option.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Range-of-Motion",
+          "level" : 2,
+          "text" : "Range of Motion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the range of motion task, participants follow movement instructions while accelerometer and gyroscope data is captured to measure flexed and extended positions for the knee or shoulder. Range of motion steps for the knee are shown in Figure 1.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "knee-range-of-motion-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "knee-range-of-motion-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "knee-range-of-motion-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "knee-range-of-motion-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 1. Range of motion steps for the right knee",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Gait-and-Balance",
+          "level" : 2,
+          "text" : "Gait and Balance",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the gait and balance task,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the user walks for a short distance, which may be indoors. You might",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "use this semi-controlled task to collect objective measurements that",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "can be used to estimate stride length, smoothness, sway, and other",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "aspects of the participant’s walking.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Gait and balance steps are shown in Figure 2.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "short-walk-task-7",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 2. Gait and balance steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Tapping-Speed",
+          "level" : 2,
+          "text" : "Tapping Speed",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the tapping task, the user rapidly alternates between tapping two",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "targets on the touch screen. The resulting touch data can be used to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "assess basic motor capabilities such as speed, accuracy, and rhythm.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Touch data, and optionally accelerometer data from CoreMotion in iOS, are",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "collected using public APIs. No analysis is performed by the ResearchKit framework on the data.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Tapping speed steps are shown in Figure 3.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "two-finger-tapping-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "two-finger-tapping-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "two-finger-tapping-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "two-finger-tapping-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "two-finger-tapping-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "two-finger-tapping-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 3. Tapping speed steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Fitness",
+          "level" : 2,
+          "text" : "Fitness",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the fitness task, the user walks for a specified duration (usually",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "several minutes). Sensor data is collected and returned through the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "task view controller’s delegate. Sensor data can include",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "accelerometer, device motion, pedometer, location, and heart rate data",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "where available.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Toward the end of the walk, if heart rate data is available, the user",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "is asked to sit down and rest for a period. Data collection continues",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "during the rest period.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Fitness steps are shown in Figure 4.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "fitness-task-7",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 4. Fitness task",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "All of the data is collected from public ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/CoreMotion\/Reference\/CoreMotion_Reference\/index.html",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/HealthKit\/Reference\/HealthKit_Framework\/",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " APIs on iOS, and serialized to JSON. No analysis is applied to the data by the ResearchKit framework.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Timed-Walk",
+          "level" : 2,
+          "text" : "Timed Walk",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the timed walk task, the user is asked to walk quickly and safely for a specific distance. The task is immediately administered again by having the user walk the same distance in the opposite direction. The timed walk task differs from both the fitness and the short walk tasks in that the distance walked by the user is fixed. A timed walk task measures the user’s lower-extremity function.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The data collected by this task includes accelerometer, device motion, pedometer data, and location of the user. Note that the location is available only if the user agrees to share their location.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Data collected by the task is in the form of an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKTimedWalkResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " object.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Timed walk steps are shown in Figure 5.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-7",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "timed-walk-task-8",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 5. Timed walk steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Spatial-Memory",
+          "level" : 2,
+          "text" : "Spatial Memory",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the spatial memory task,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the user is asked to observe and then recall pattern sequences of",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "increasing length in a game-like environment. The task collects data that",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "can be used to assess visuospatial memory and executive function.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The span (that is, the length of the pattern sequence) is automatically varied",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "during the task, increasing after successful completion of a sequence,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and decreasing after failures, in the range from ",
+              "type" : "text"
+            },
+            {
+              "code" : "minimumSpan",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "maximumSpan",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". The ",
+              "type" : "text"
+            },
+            {
+              "code" : "playSpeed",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property lets you control the speed of sequence",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "playback, and the ",
+              "type" : "text"
+            },
+            {
+              "code" : "customTargetImage",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property lets you customize the shape of the tap target. The game finishes when either ",
+              "type" : "text"
+            },
+            {
+              "code" : "maxTests",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " tests have been",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "completed, or the user has made ",
+              "type" : "text"
+            },
+            {
+              "code" : "maxConsecutiveFailures",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " errors in a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "row.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The results collected are scores derived from the game, the details of",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the game, and the touch inputs made by the user.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Spatial memory test steps are shown in Figure 6.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spatial-span-memory-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spatial-span-memory-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spatial-span-memory-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spatial-span-memory-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 6. Spatial memory steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Stroop-Test",
+          "level" : 2,
+          "text" : "Stroop Test",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the Stroop test, the participant is shown a series of words that are displayed in color, and must select the first letter of the color’s name. Stroop test steps are shown in Figure 7.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "stroop-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "stroop-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "stroop-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "stroop-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "stroop-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 7. Stroop test steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Trail-Making-Test",
+          "level" : 2,
+          "text" : "Trail Making Test",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the trail making test, the participant connects a series of labelled circles, in order. The time to complete the test is recorded. The circles can be labelled with sequential numbers (1, 2, 3, …) or with alternating numbers and letters  (1, a, 2, b, 3, c, …).",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Trail making test steps are shown in Figure 8.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "trail-making-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "trail-making-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "trail-making-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "trail-making-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "trail-making-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "trail-making-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 8. Trail making test steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Paced-Serial-Addition-Test-PSAT",
+          "level" : 2,
+          "text" : "Paced Serial Addition Test (PSAT)",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The Paced Serial Addition Test (PSAT) task measures the cognitive function that assesses auditory and\/or visual information processing speed, flexibility, and the calculation ability of the user.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Single digits are presented every two or three seconds and the user must add each new digit to the one immediately before.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "There are three variations of this test:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "PASAT: Paced Auditory Serial Addition Test - the device speaks the digit every two or three seconds.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "PVSAT: Paced Visual Serial Addition Test - the device shows the digit on screen.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "PAVSAT: Paced Auditory and Visual Serial Addition Test - the device speaks the digit and shows it onscreen every two to three seconds.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The score for the PSAT task is the total number of correct answers out of the number of possible correct answers. Data collected by the task is in the form of an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKPSATResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " object.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "PVSAT steps are shown in Figure 9.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Note that the visual and auditory components of the task are optional. You can choose to include either of them or both.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "psat-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "psat-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "psat-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "psat-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "psat-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 9. PVSAT memory steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Tower-of-Hanoi",
+          "level" : 2,
+          "text" : "Tower of Hanoi",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the Tower of Hanoi task, the user is asked to solve the classic Tower of Hanoi puzzle in a minimum number of moves. To solve the puzzle, the user must move the entire stack to the highlighted platform in as few moves as possible. This task measures the user’s problem solving skills. A Tower of Hanoi task finishes when the user completes the puzzle correctly or concedes that they cannot solve the puzzle.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Data collected by this task is in the form of an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKTowerOfHanoiResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " object. It contains every move taken by the user and indicates whether the puzzle was successfully completed or not.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Tower of Hanoi steps are shown in Figure 10.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tower-of-hanoi-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tower-of-hanoi-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tower-of-hanoi-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tower-of-hanoi-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 10. Tower of Hanoi steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Reaction-Time",
+          "level" : 2,
+          "text" : "Reaction Time",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the reaction time task, the user shakes the device in response to a visual cue on the device’s screen. The task is divided into a number of attempts, which you determine. To complete an attempt in a task, the user must shake or move the device with an acceleration that exceeds a threshold value ( ",
+              "type" : "text"
+            },
+            {
+              "code" : "thresholdAcceleration",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property) within the given time. The task finishes when the user successfully completes all the attempts as instructed in the task. Use this task to evaluate a user’s response to the stimulus and calculate their reaction time.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Data collected by this task is in the form of ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKReactionTimeResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " objects. Each of these objects contain a timestamp representing the delivery of the stimulus and an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKFileResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " object that references the motion data collected during an attempt. To present this task, use an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKTaskViewController",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " object.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Reaction time steps are shown in Figure 11.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "reaction-time-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "reaction-time-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "reaction-time-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "reaction-time-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 11. Reaction time steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Sustained-Phonation",
+          "level" : 2,
+          "text" : "Sustained Phonation",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the sustained phonation task, the user makes a sustained sound, and an audio",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "recording is made. The ResearchKit framework uses the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/AVFoundation\/Reference\/AVFoundationFramework\/",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " framework to collect this",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "data and to present volume indication during recording. Analysis of the audio data is not included in the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "ResearchKit framework, but might naturally involve looking at the power spectrum",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and how it relates to the ability to produce certain",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "sounds. You can define your analysis on this",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "task according to your own requirements.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Audio steps are shown in Figure 12.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "audio-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "audio-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "audio-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "audio-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "audio-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 12. Audio steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Speech-Recognition",
+          "level" : 2,
+          "text" : "Speech Recognition",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Researchers and developers can use ResearchKit to record audio data and produce transcriptions generated by Apple’s speech recognition system. ResearchKit also provides word alignments, confidence scores, and alternative speech recognition hypotheses in the form of an n-best list. Medical researchers and developers can leverage this information to analyze speech and language features like speaking rate, word usage, and pause durations.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The n-best list and the confidence measure detect uncertainty in the speech recognition system’s hypothesis in certain cases of unintelligible speech or speech containing word fragments or meaningless words. These conditions are found to be a useful indicator of cognitive decline associated with Alzheimer’s disease and related dementias (1, 2), as well as other mental health issues (3). Additionally, researchers and developers can use the raw audio data captured through ResearchKit to investigate and deploy speech indicators for research and system design.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKSpeechRecognitionStep",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " class represents a single recording step. In this step, the user’s speech is recorded from the microphone.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Speech recognition steps showing capturing and displaying recorded text are in Figure 13.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-recognition-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-recognition-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-recognition-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-recognition-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-recognition-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 13. Speech recognition steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Once a user completes the recording, they are given the option to edit the transcript generated by the speech recognition engine. The data collected by this task consists of three main components:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "The raw audio recording of what the user said.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "The transcription generated by the speech recognition engine returned as an object of type ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "SFTranscript",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "The edited transcript, if any, by the user.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "anchor" : "Speech-in-Noise",
+          "level" : 2,
+          "text" : "Speech-in-Noise",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Understanding speech in noisy environments depends on both the level of the background noise and the hearing health of the listener. A speech-in-noise test quantifies the difficulty of understanding speech in noisy environments.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A speech-in-noise test consists of presenting spoken sentences at different noise levels and asking listeners to repeat what they heard. Based on the sentence and word recognition rate, a metric is calculated. The speech intelligibility metric used in this test is the Speech Reception Threshold (SRT). It represents the SNR at which 50% of the words are correctly repeated by the user. The SRT is calculated using the Tillman-Olsen formula (4).",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKSpeechInNoiseStep",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " class plays the speech from a file set by the ",
+              "type" : "text"
+            },
+            {
+              "code" : "speechFileNameWithExtension",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property mixed with noise from a file set by the ",
+              "type" : "text"
+            },
+            {
+              "code" : "noiseFileNameWithExtension",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property. The noise gain is set through the ",
+              "type" : "text"
+            },
+            {
+              "code" : "gainAppliedToNoise",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property. Use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "filterFileNameWithExtension",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property to specify a ramp-up\/ramp-down filter.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Speech-in-noise steps are shown in Figure 14.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 14. Speech-in-noise steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Environment-SPL-Meter",
+          "level" : 2,
+          "text" : "Environment SPL Meter",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The Environment SPL Meter is not a task, but a single step that detects the sound pressure level in the user’s environment. Configure this step with the following properties:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "thresholdValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is the maximum permissible value for the environment sound pressure level in dBA.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "samplingInterval",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is the rate at which the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "AVAudioPCMBuffer",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is queried and A-weighted filter is applied.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "requiredContiguousSamples",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is the number of consecutive samples less than threshold value required for the step to proceed.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spl-meter-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spl-meter-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "spl-meter-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The environment SPL meter step is shown in Figure 15.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Tone-Audiometry",
+          "level" : 2,
+          "text" : "Tone Audiometry",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the tone audiometry task, users listen through headphones to a series of tones, and tap left or right buttons on the screen when they hear each tone.  These tones are of different audio frequencies, playing on different channels (left and right), with the volume being progressively increased until the user taps one of the buttons. A tone audiometry task measures different properties of a user’s hearing ability, based on their reaction to a wide range of frequencies.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Data collected in this task consists of audio signal amplitude for specific frequencies and channels for each ear.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Tone audiometry steps are shown in Figure 16.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tone-audiometry-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tone-audiometry-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tone-audiometry-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tone-audiometry-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "tone-audiometry-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "speech-in-noise-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 16. Tone audiometry steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "dBHL-Tone-Audiometry",
+          "level" : 2,
+          "text" : "dBHL Tone Audiometry",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The dBHL tone audiometry task implements the Hughson-Westlake method of determining hearing threshold. It is similar to the tone audiometry task, except that it utilizes a dB HL scale.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Data collected in this task consists of audio signal amplitude for specific frequencies and channels for each ear.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "dBHL tone audiometry steps are shown in Figure 17.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-7",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-8",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "dbhl-tone-audiometry-task-9",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 17. dBHL tone audiometry steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "9-Hole-Peg-Test",
+          "level" : 2,
+          "text" : "9-Hole Peg Test",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The 9-hole peg test is a two-step test of hand dexterity to measure the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "http:\/\/www.nationalmssociety.org\/For-Professionals\/Researchers\/Resources-for-Researchers\/Clinical-Study-Measures\/9-Hole-Peg-Test-(9-HPT)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", or signs of ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "http:\/\/www.rehabmeasures.org\/Lists\/RehabMeasures\/DispForm.aspx?ID=925",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ". This task is well documented in the scientific literature (see ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22020457",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ").",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The data collected by this task includes the number of pegs, an array of move samples, and the total duration that the user spent taking the test. Practically speaking, this task generates a two-step test in which the participant must put a variable number of pegs in a hole (the place step), and then remove them (the remove step). This task tests both hands.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKHolePegTestPlaceStep",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " class represents the place step. In this step, the user uses two fingers to touch the peg and drag it into the hole using their left hand. The ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKHolePegTestRemoveStep",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " class represents the remove step. Here, the user moves the peg over a line using two fingers on their right hand.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "9-Hole peg test steps are shown in Figure 18.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "hole-peg-task-7",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 18. 9-hole peg test steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Amsler-Grid",
+          "level" : 2,
+          "text" : "Amsler Grid",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The Amsler Grid task is a tool used to detect the onset of vision problems such as macular degeneration.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKAmslerGridStep",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " class represents a single measurement step. In this step, the user observes the grid while closing one eye for any anomalies and marks the areas that appear distorted, using their finger or a stylus.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Data collected by this task is in the form of an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKAmslerGridResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " object for the eye. It contains the eye side (specified by ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKAmslerGridEyeSide",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ") and the image of the grid, along with the user’s annotations for the corresponding eye.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Amsler grid steps for the left and right eyes are shown in Figure 19.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "amsler-grid-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "amsler-grid-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "amsler-grid-3",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "amsler-grid-4",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "amsler-grid-5",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "amsler-grid-6",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Figure 19. Amsler grid steps",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Collect-the-Data",
+          "level" : 2,
+          "text" : "Collect the Data",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The data collected in active tasks is recorded in a hierarchy of ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " objects in memory. It is up to you to serialize this hierarchy for storage or transmission in a way that’s appropriate for your application.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For high sample rate data, such as from the accelerometer, use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKFileResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " in the hierarchy. This object references a file in the output directory (specified by the ",
+              "type" : "text"
+            },
+            {
+              "code" : "outputDirectory",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property of ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKTaskViewController",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ") where the data is logged.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The recommended approach for handling file-based output is to create a new directory per task and to remove it after you have processed the results of the task.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Active steps support attaching recorder configurations",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKRecorderConfiguration",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "). A recorder configuration defines a type of",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "data that should be collected for the duration of the step from a sensor or",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "a database on the device. For example:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "The pedometer sensor returns a ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "CMPedometerData",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " object that provides step counts computed by the motion coprocessor on supported devices.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "The accelerometer sensor returns a ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "CMAccelerometerData",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " object that provides raw accelerometer samples indicating the forces on the device.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "A ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "CMDeviceMotion",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " object provides information about the orientation and movement of the device by combining data collected from the accelerometer, gyroscope, and magnetometer.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "HealthKit returns sample types, such as heart rate.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "CoreLocation returns location data (combined from GPS, Wi-Fi and cell tower information).",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The recorders used by ResearchKit’s predefined active tasks always use",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSFileProtectionCompleteUnlessOpen",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " while writing data to disk, and",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "then change the file protection level on any files generated to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSFileProtectionComplete",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " when recording is finished.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Access-Health-Data",
+          "level" : 3,
+          "text" : "Access Health Data",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For HealthKit related data, there are two recorder configurations:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKHealthQuantityTypeRecorderConfiguration",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " to access quantity data such as heart rate.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKHealthClinicalTypeRecorderConfiguration",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " to access health records data.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Access to health quantity data and health records requires explicit permission that the user must grant explicitly. More information about accessing health records ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/documentation\/healthkit\/health_and_fitness_samples\/accessing_health_records?language=objc",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "–",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "References",
+          "level" : 3,
+          "text" : "References",
+          "type" : "heading"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "[Yancheva et. al., 2015] M. Yancheva, K. C. Fraser and F. Rudzicz, “Using linguistic features longitudinally to predict clinical scores for Alzheimer’s disease and related dementias,” Proceedings of SLPAT 2015: 6th Workshop on Speech and Language Processing for Assistive Technologies, 2015.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "[Konig et al., 2015] A. König, A. Satt, A. Sorin, R. Hoory, O. Toledo-Ronen, A. Derreumaux, V. Manera, F. Verhey, P. Aalten, P. H. Robert, and R. David. “Automatic speech analysis for the assessment of patients with predementia and Alzheimer’s disease,” Alzheimers Dement (Amst). 2015 Mar; 1(1): 112–124.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "[Gong and Poellabauer’ 17] Y. Gong and C. Poellabauer, “Topic Modeling Based Multi-modal Depression Detection,” AVEC@ACM Multimedia, 2017.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "[T.W. Tillman and W.O. Olsen] “Speech audiometry, Modern Development in Audiology (2nd Edition),” 1972.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys"
+      ],
+      "title" : "Research components"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/understanding-active-tasks"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"amsler-grid-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "amsler-grid-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/amsler-grid-1@3x.PNG"
+    }
+  ]
+},
+"amsler-grid-2": {
+  "alt" : "Instruct the user how to measure the left eye",
+  "identifier" : "amsler-grid-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/amsler-grid-2@3x.PNG"
+    }
+  ]
+},
+"amsler-grid-3": {
+  "alt" : "Perform the left eye test",
+  "identifier" : "amsler-grid-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/amsler-grid-3@3x.PNG"
+    }
+  ]
+},
+"amsler-grid-4": {
+  "alt" : "Instruct the user how to measure the right eye",
+  "identifier" : "amsler-grid-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/amsler-grid-4@3x.PNG"
+    }
+  ]
+},
+"amsler-grid-5": {
+  "alt" : "Perform the right eye test",
+  "identifier" : "amsler-grid-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/amsler-grid-5@3x.PNG"
+    }
+  ]
+},
+"amsler-grid-6": {
+  "alt" : "Task completion",
+  "identifier" : "amsler-grid-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/amsler-grid-6@3x.PNG"
+    }
+  ]
+},
+"audio-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "audio-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/audio-task-1@3x.PNG"
+    }
+  ]
+},
+"audio-task-2": {
+  "alt" : "Instruction step describes user action during the task",
+  "identifier" : "audio-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/audio-task-2@3x.PNG"
+    }
+  ]
+},
+"audio-task-3": {
+  "alt" : "Count down a specified duration to begin the task",
+  "identifier" : "audio-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/audio-task-3@3x.PNG"
+    }
+  ]
+},
+"audio-task-4": {
+  "alt" : "Displays a graph during audio playback (audio collection step)",
+  "identifier" : "audio-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/audio-task-4@3x.PNG"
+    }
+  ]
+},
+"audio-task-5": {
+  "alt" : "Confirms task completion",
+  "identifier" : "audio-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/audio-task-5@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "dbhl-tone-audiometry-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-1@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-2": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "dbhl-tone-audiometry-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-2@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-3": {
+  "alt" : "Further instructions",
+  "identifier" : "dbhl-tone-audiometry-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-3@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-4": {
+  "alt" : "Check noise levels",
+  "identifier" : "dbhl-tone-audiometry-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-4@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-5": {
+  "alt" : "Instruction step displaying which ear the user will hear sounds from",
+  "identifier" : "dbhl-tone-audiometry-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-5@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-6": {
+  "alt" : "The tone test screen with buttons for the right ear",
+  "identifier" : "dbhl-tone-audiometry-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-6@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-7": {
+  "alt" : "Instruction step displaying which ear the user will hear sounds from",
+  "identifier" : "dbhl-tone-audiometry-task-7",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-7@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-8": {
+  "alt" : "The tone test screen with buttons for the left ear",
+  "identifier" : "dbhl-tone-audiometry-task-8",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-8@3x.PNG"
+    }
+  ]
+},
+"dbhl-tone-audiometry-task-9": {
+  "alt" : "Confirms task completion",
+  "identifier" : "dbhl-tone-audiometry-task-9",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/dbhl-tone-audiometry-task-9@3x.PNG"
+    }
+  ]
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Consent": {
+  "abstract" : [
+    {
+      "text" : "Obtain a participant’s consent to collect research data.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Surveys": {
+  "abstract" : [
+    {
+      "text" : "Construct surveys that ask a wide range of questions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/surveys"
+},
+"fitness-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "fitness-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-1@3x.PNG"
+    }
+  ]
+},
+"fitness-task-2": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "fitness-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-2@3x.PNG"
+    }
+  ]
+},
+"fitness-task-3": {
+  "alt" : "Health access alert",
+  "identifier" : "fitness-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-3@3x.PNG"
+    }
+  ]
+},
+"fitness-task-4": {
+  "alt" : "Count down a specified duration to begin the task",
+  "identifier" : "fitness-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-4@3x.PNG"
+    }
+  ]
+},
+"fitness-task-5": {
+  "alt" : "Displays distance and heart rate",
+  "identifier" : "fitness-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-5@3x.PNG"
+    }
+  ]
+},
+"fitness-task-6": {
+  "alt" : "The rest step, which can be skipped if heart rate data is unavailable",
+  "identifier" : "fitness-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-6@3x.PNG"
+    }
+  ]
+},
+"fitness-task-7": {
+  "alt" : "Confirms task completion",
+  "identifier" : "fitness-task-7",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/fitness-task-7@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "hole-peg-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-1@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-2": {
+  "alt" : "Describes what the user must do",
+  "identifier" : "hole-peg-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-2@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-3": {
+  "alt" : "Instructs the user to perform the step with the right hand",
+  "identifier" : "hole-peg-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-3@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-4": {
+  "alt" : "Instructs the user to perform the step with the right hand",
+  "identifier" : "hole-peg-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-4@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-5": {
+  "alt" : "Instructs the user to perform the step with the left hand",
+  "identifier" : "hole-peg-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-5@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-6": {
+  "alt" : "Instructs the user to perform the step with the left hand",
+  "identifier" : "hole-peg-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-6@3x.PNG"
+    }
+  ]
+},
+"hole-peg-task-7": {
+  "alt" : "Task completion",
+  "identifier" : "hole-peg-task-7",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/hole-peg-task-7@3x.PNG"
+    }
+  ]
+},
+"http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/9-Hole-Peg-Test-(9-HPT)": {
+  "identifier" : "http:\/\/www.nationalmssociety.org\/For-Professionals\/Researchers\/Resources-for-Researchers\/Clinical-Study-Measures\/9-Hole-Peg-Test-(9-HPT)",
+  "title" : "MSFC score in Multiple Sclerosis",
+  "titleInlineContent" : [
+    {
+      "text" : "MSFC score in Multiple Sclerosis",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "http:\/\/www.nationalmssociety.org\/For-Professionals\/Researchers\/Resources-for-Researchers\/Clinical-Study-Measures\/9-Hole-Peg-Test-(9-HPT)"
+},
+"http://www.ncbi.nlm.nih.gov/pubmed/22020457": {
+  "identifier" : "http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22020457",
+  "title" : "Earhart et al., 2011",
+  "titleInlineContent" : [
+    {
+      "text" : "Earhart et al., 2011",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "http:\/\/www.ncbi.nlm.nih.gov\/pubmed\/22020457"
+},
+"http://www.rehabmeasures.org/Lists/RehabMeasures/DispForm.aspx?ID=925": {
+  "identifier" : "http:\/\/www.rehabmeasures.org\/Lists\/RehabMeasures\/DispForm.aspx?ID=925",
+  "title" : "Parkinson’s disease or stroke",
+  "titleInlineContent" : [
+    {
+      "text" : "Parkinson’s disease or stroke",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "http:\/\/www.rehabmeasures.org\/Lists\/RehabMeasures\/DispForm.aspx?ID=925"
+},
+"https://developer.apple.com/documentation/healthkit/health_and_fitness_samples/accessing_health_records?language=objc": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/healthkit\/health_and_fitness_samples\/accessing_health_records?language=objc",
+  "title" : "can be found here",
+  "titleInlineContent" : [
+    {
+      "text" : "can be found here",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/healthkit\/health_and_fitness_samples\/accessing_health_records?language=objc"
+},
+"https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVFoundationFramework/": {
+  "identifier" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/AVFoundation\/Reference\/AVFoundationFramework\/",
+  "title" : "AVFoundation",
+  "titleInlineContent" : [
+    {
+      "text" : "AVFoundation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/AVFoundation\/Reference\/AVFoundationFramework\/"
+},
+"https://developer.apple.com/library/ios/documentation/CoreMotion/Reference/CoreMotion_Reference/index.html": {
+  "identifier" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/CoreMotion\/Reference\/CoreMotion_Reference\/index.html",
+  "title" : "CoreMotion",
+  "titleInlineContent" : [
+    {
+      "text" : "CoreMotion",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/CoreMotion\/Reference\/CoreMotion_Reference\/index.html"
+},
+"https://developer.apple.com/library/ios/documentation/HealthKit/Reference/HealthKit_Framework/": {
+  "identifier" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/HealthKit\/Reference\/HealthKit_Framework\/",
+  "title" : "HealthKit",
+  "titleInlineContent" : [
+    {
+      "text" : "HealthKit",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/library\/ios\/documentation\/HealthKit\/Reference\/HealthKit_Framework\/"
+},
+"knee-range-of-motion-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "knee-range-of-motion-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/knee-range-of-motion-1@3x.PNG"
+    }
+  ]
+},
+"knee-range-of-motion-2": {
+  "alt" : "A touch anywhere step",
+  "identifier" : "knee-range-of-motion-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/knee-range-of-motion-2@3x.PNG"
+    }
+  ]
+},
+"knee-range-of-motion-3": {
+  "alt" : "A further touch anywhere step",
+  "identifier" : "knee-range-of-motion-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/knee-range-of-motion-3@3x.PNG"
+    }
+  ]
+},
+"knee-range-of-motion-4": {
+  "alt" : "Confirms task completion",
+  "identifier" : "knee-range-of-motion-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/knee-range-of-motion-4@3x.PNG"
+    }
+  ]
+},
+"psat-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "psat-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/psat-task-1@3x.PNG"
+    }
+  ]
+},
+"psat-task-2": {
+  "alt" : "Describes what the user must do",
+  "identifier" : "psat-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/psat-task-2@3x.PNG"
+    }
+  ]
+},
+"psat-task-3": {
+  "alt" : "Count down a specified duration into the task",
+  "identifier" : "psat-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/psat-task-3@3x.PNG"
+    }
+  ]
+},
+"psat-task-4": {
+  "alt" : "The user must add each new digit on the screen to the one immediately prior to it",
+  "identifier" : "psat-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/psat-task-4@3x.PNG"
+    }
+  ]
+},
+"psat-task-5": {
+  "alt" : "Confirms task completion",
+  "identifier" : "psat-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/psat-task-5@3x.PNG"
+    }
+  ]
+},
+"reaction-time-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "reaction-time-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/reaction-time-task-1@3x.PNG"
+    }
+  ]
+},
+"reaction-time-task-2": {
+  "alt" : "Describes what the user must do",
+  "identifier" : "reaction-time-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/reaction-time-task-2@3x.PNG"
+    }
+  ]
+},
+"reaction-time-task-3": {
+  "alt" : "Actual task",
+  "identifier" : "reaction-time-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/reaction-time-task-3@3x.PNG"
+    }
+  ]
+},
+"reaction-time-task-4": {
+  "alt" : "Confirms task completion",
+  "identifier" : "reaction-time-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/reaction-time-task-4@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "short-walk-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-1@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-2": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "short-walk-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-2@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-3": {
+  "alt" : "Count down a specified duration into the task",
+  "identifier" : "short-walk-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-3@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-4": {
+  "alt" : "Asking user to walk",
+  "identifier" : "short-walk-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-4@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-5": {
+  "alt" : "Asking user to walk",
+  "identifier" : "short-walk-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-5@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-6": {
+  "alt" : "Asking user to rest",
+  "identifier" : "short-walk-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-6@3x.PNG"
+    }
+  ]
+},
+"short-walk-task-7": {
+  "alt" : "Confirms task completion",
+  "identifier" : "short-walk-task-7",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/short-walk-task-7@3x.PNG"
+    }
+  ]
+},
+"spatial-span-memory-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "spatial-span-memory-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spatial-span-memory-task-1@3x.PNG"
+    }
+  ]
+},
+"spatial-span-memory-task-2": {
+  "alt" : "Describes what the user must do",
+  "identifier" : "spatial-span-memory-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spatial-span-memory-task-2@3x.PNG"
+    }
+  ]
+},
+"spatial-span-memory-task-3": {
+  "alt" : "The user must recall the sequence",
+  "identifier" : "spatial-span-memory-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spatial-span-memory-task-3@3x.PNG"
+    }
+  ]
+},
+"spatial-span-memory-task-4": {
+  "alt" : "Confirms task completion",
+  "identifier" : "spatial-span-memory-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spatial-span-memory-task-4@3x.PNG"
+    }
+  ]
+},
+"speech-in-noise-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "speech-in-noise-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-in-noise-1@3x.PNG"
+    }
+  ]
+},
+"speech-in-noise-2": {
+  "alt" : "Instructs the user how to proceed with the task",
+  "identifier" : "speech-in-noise-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-in-noise-2@3x.PNG"
+    }
+  ]
+},
+"speech-in-noise-3": {
+  "alt" : "Plays the spoken sentence with background noise",
+  "identifier" : "speech-in-noise-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-in-noise-3@3x.PNG"
+    }
+  ]
+},
+"speech-in-noise-4": {
+  "alt" : "Records the user’s voice",
+  "identifier" : "speech-in-noise-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-in-noise-4@3x.PNG"
+    }
+  ]
+},
+"speech-in-noise-5": {
+  "alt" : "Displays spoken text and provides transcript editing",
+  "identifier" : "speech-in-noise-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-in-noise-5@3x.PNG"
+    }
+  ]
+},
+"speech-in-noise-6": {
+  "alt" : "Confirms task completion",
+  "identifier" : "speech-in-noise-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-in-noise-6@3x.PNG"
+    }
+  ]
+},
+"speech-recognition-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "speech-recognition-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-recognition-task-1@3x.PNG"
+    }
+  ]
+},
+"speech-recognition-task-2": {
+  "alt" : "Instruct the user to prepare for recording",
+  "identifier" : "speech-recognition-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-recognition-task-2@3x.PNG"
+    }
+  ]
+},
+"speech-recognition-task-3": {
+  "alt" : "Records the user’s speech",
+  "identifier" : "speech-recognition-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-recognition-task-3@3x.PNG"
+    }
+  ]
+},
+"speech-recognition-task-4": {
+  "alt" : "Provides the transcription and allows editing",
+  "identifier" : "speech-recognition-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-recognition-task-4@3x.PNG"
+    }
+  ]
+},
+"speech-recognition-task-5": {
+  "alt" : "Task completion",
+  "identifier" : "speech-recognition-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/speech-recognition-task-5@3x.PNG"
+    }
+  ]
+},
+"spl-meter-1": {
+  "alt" : "Prompt the user if environment is too loud",
+  "identifier" : "spl-meter-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spl-meter-1@3x.PNG"
+    }
+  ]
+},
+"spl-meter-2": {
+  "alt" : "Task collects required samples under the threshold",
+  "identifier" : "spl-meter-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spl-meter-2@3x.PNG"
+    }
+  ]
+},
+"spl-meter-3": {
+  "alt" : "Step is complete",
+  "identifier" : "spl-meter-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/spl-meter-3@3x.PNG"
+    }
+  ]
+},
+"stroop-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "stroop-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/stroop-task-1@3x.PNG"
+    }
+  ]
+},
+"stroop-task-2": {
+  "alt" : "Further instructions",
+  "identifier" : "stroop-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/stroop-task-2@3x.PNG"
+    }
+  ]
+},
+"stroop-task-3": {
+  "alt" : "Count down a specified duration to begin the activity",
+  "identifier" : "stroop-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/stroop-task-3@3x.PNG"
+    }
+  ]
+},
+"stroop-task-4": {
+  "alt" : "A typical Stroop test; the correct answer is “Y” for yellow",
+  "identifier" : "stroop-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/stroop-task-4@3x.PNG"
+    }
+  ]
+},
+"stroop-task-5": {
+  "alt" : "Confirms task completion",
+  "identifier" : "stroop-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/stroop-task-5@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "timed-walk-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-1@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-2": {
+  "alt" : "Gathers information about the user’s assistive device",
+  "identifier" : "timed-walk-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-2@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-3": {
+  "alt" : "Instructions on how to perform the task",
+  "identifier" : "timed-walk-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-3@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-4": {
+  "alt" : "Count down a specified duration to begin the task",
+  "identifier" : "timed-walk-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-4@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-5": {
+  "alt" : "Actual task screen",
+  "identifier" : "timed-walk-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-5@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-6": {
+  "alt" : "Instruct the user to turn around",
+  "identifier" : "timed-walk-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-6@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-7": {
+  "alt" : "Actual task screen",
+  "identifier" : "timed-walk-task-7",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-7@3x.PNG"
+    }
+  ]
+},
+"timed-walk-task-8": {
+  "alt" : "Task completion",
+  "identifier" : "timed-walk-task-8",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/timed-walk-task-8@3x.PNG"
+    }
+  ]
+},
+"tone-audiometry-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "tone-audiometry-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tone-audiometry-task-1@3x.PNG"
+    }
+  ]
+},
+"tone-audiometry-task-2": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "tone-audiometry-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tone-audiometry-task-2@3x.PNG"
+    }
+  ]
+},
+"tone-audiometry-task-3": {
+  "alt" : "Further instructions",
+  "identifier" : "tone-audiometry-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tone-audiometry-task-3@3x.PNG"
+    }
+  ]
+},
+"tone-audiometry-task-4": {
+  "alt" : "Count down a specified duration to begin the activity",
+  "identifier" : "tone-audiometry-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tone-audiometry-task-4@3x.PNG"
+    }
+  ]
+},
+"tone-audiometry-task-5": {
+  "alt" : "The tone test screen with buttons for left and right ears",
+  "identifier" : "tone-audiometry-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tone-audiometry-task-5@3x.PNG"
+    }
+  ]
+},
+"tower-of-hanoi-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "tower-of-hanoi-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tower-of-hanoi-1@3x.PNG"
+    }
+  ]
+},
+"tower-of-hanoi-2": {
+  "alt" : "Describes what the user must do",
+  "identifier" : "tower-of-hanoi-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tower-of-hanoi-2@3x.PNG"
+    }
+  ]
+},
+"tower-of-hanoi-3": {
+  "alt" : "Actual task",
+  "identifier" : "tower-of-hanoi-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tower-of-hanoi-3@3x.PNG"
+    }
+  ]
+},
+"tower-of-hanoi-4": {
+  "alt" : "Confirms task completion",
+  "identifier" : "tower-of-hanoi-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/tower-of-hanoi-4@3x.PNG"
+    }
+  ]
+},
+"trail-making-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "trail-making-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/trail-making-task-1@3x.PNG"
+    }
+  ]
+},
+"trail-making-task-2": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "trail-making-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/trail-making-task-2@3x.PNG"
+    }
+  ]
+},
+"trail-making-task-3": {
+  "alt" : "Further instructions",
+  "identifier" : "trail-making-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/trail-making-task-3@3x.PNG"
+    }
+  ]
+},
+"trail-making-task-4": {
+  "alt" : "Count down a specified duration to begin the activity",
+  "identifier" : "trail-making-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/trail-making-task-4@3x.PNG"
+    }
+  ]
+},
+"trail-making-task-5": {
+  "alt" : "The activity screen, shown mid-task",
+  "identifier" : "trail-making-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/trail-making-task-5@3x.PNG"
+    }
+  ]
+},
+"trail-making-task-6": {
+  "alt" : "Confirms task completion",
+  "identifier" : "trail-making-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/trail-making-task-6@3x.PNG"
+    }
+  ]
+},
+"two-finger-tapping-task-1": {
+  "alt" : "Instruction step introducing the task",
+  "identifier" : "two-finger-tapping-task-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/two-finger-tapping-task-1@3x.PNG"
+    }
+  ]
+},
+"two-finger-tapping-task-2": {
+  "alt" : "Providing instruction for the right hand task",
+  "identifier" : "two-finger-tapping-task-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/two-finger-tapping-task-2@3x.PNG"
+    }
+  ]
+},
+"two-finger-tapping-task-3": {
+  "alt" : "The user rapidly taps on the targets using the right hand",
+  "identifier" : "two-finger-tapping-task-3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/two-finger-tapping-task-3@3x.PNG"
+    }
+  ]
+},
+"two-finger-tapping-task-4": {
+  "alt" : "Providing instruction for the left hand task",
+  "identifier" : "two-finger-tapping-task-4",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/two-finger-tapping-task-4@3x.PNG"
+    }
+  ]
+},
+"two-finger-tapping-task-5": {
+  "alt" : "The user rapidly taps on the targets using the left hand",
+  "identifier" : "two-finger-tapping-task-5",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/two-finger-tapping-task-5@3x.PNG"
+    }
+  ]
+},
+"two-finger-tapping-task-6": {
+  "alt" : "Confirms task completion",
+  "identifier" : "two-finger-tapping-task-6",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/two-finger-tapping-task-6@3x.PNG"
+    }
+  ]
+}
+}
+}

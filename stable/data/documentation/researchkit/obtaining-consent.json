@@ -1,0 +1,1140 @@
+{
+  "abstract" : [
+    {
+      "text" : "Guide your participants through the Informed Consent process.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Obtaining Consent"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Research studies that involve human subjects typically require some form of ethics review. Depending on the country, an institutional review board (IRB) or an ethics committee (EC) might perform this. Some studies may require informed consent to conduct a research study; the researcher must ensure that each participant is fully informed about the nature of the study, and must obtain a signed consent from each participant. Additionally, app review may require consent.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ResearchKit™ framework makes it easy to display your consent document and obtain a participant’s signature. If the signature needs to be verifiable and irrevocable, you’re responsible for producing a digital signature or generating a PDF to attest to the identity of the participant and the time they signed the form.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ResearchKit framework makes obtaining consent easier by providing APIs to help with:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Informing Participants",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKInstructionStep",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Reviewing Consent + Signature",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKWebViewStep",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Consent Sharing",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKFormStep",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "PDF Viewing\/Sharing",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKPDFViewerStep",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "anchor" : "Informing-Participants",
+          "level" : 2,
+          "text" : "Informing Participants",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When providing informed consent to prospective study participants, it’s important to cover the necessary topics pertaining to your study. Here are some common topics usually addressed during informed consent.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Overview",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - A brief, concise description of the purpose and goal of the study.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Data gathering",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - The types of data gathered, where it will be stored, and who will have access to it.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Privacy",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - How your study ensures privacy is maintained while participating.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Data use",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - How you intend to use the data collected during this study.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Time commitment",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - The estimated amount of time a participant should expect to dedicate to your study.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Surveys",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - The types of surveys and questions you present to the participants.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Tasks",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - The tasks the participant must complete for the study.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Withdrawal",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Information about withdrawal from the study and what happens to the participant’s data.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Create two instruction steps to present both a ‘Welcome’ & ‘Before You Join’ page.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Welcome page.",
+            "let welcomeStep = ORKInstructionStep(identifier: String(describing: Identifier.consentWelcomeInstructionStep))",
+            "welcomeStep.iconImage = UIImage(systemName: \"hand.wave\")",
+            "welcomeStep.title = \"Welcome!\"",
+            "welcomeStep.detailText = \"Thank you for joining our study. Tap Next to learn more before signing up.\"",
+            "        ",
+            "\/\/ Before You Join page.",
+            "let beforeYouJoinStep = ORKInstructionStep(identifier: String(describing: Identifier.informedConsentInstructionStep))",
+            "beforeYouJoinStep.iconImage = UIImage(systemName: \"doc.text.magnifyingglass\")",
+            "beforeYouJoinStep.title = \"Before You Join\"",
+            "        ",
+            "let sharingHealthDataBodyItem = ORKBodyItem(text: \"The study will ask you to share some of your Health data.\",",
+            "                                            detailText: nil,",
+            "                                            image: UIImage(systemName: \"heart.fill\"),",
+            "                                            learnMoreItem: nil,",
+            "                                            bodyItemStyle: .image)",
+            "        ",
+            "let completingTasksBodyItem = ORKBodyItem(text: \"You will be asked to complete various tasks over the duration of the study.\",",
+            "                                          detailText: nil,",
+            "                                          image: UIImage(systemName: \"checkmark.circle.fill\"),",
+            "                                          learnMoreItem: nil,",
+            "                                          bodyItemStyle: .image)",
+            "        ",
+            "let signatureBodyItem = ORKBodyItem(text: \"Before joining, we will ask you to sign an informed consent document.\",",
+            "                                    detailText: nil,",
+            "                                    image: UIImage(systemName: \"signature\"),",
+            "                                    learnMoreItem: nil,",
+            "                                    bodyItemStyle: .image)",
+            "        ",
+            "let secureDataBodyItem = ORKBodyItem(text: \"Your data is kept private and secure.\",",
+            "                                     detailText: nil,",
+            "                                     image: UIImage(systemName: \"lock.fill\"),",
+            "                                     learnMoreItem: nil,",
+            "                                     bodyItemStyle: .image)",
+            "        ",
+            "beforeYouJoinStep.bodyItems = [",
+            "    sharingHealthDataBodyItem,",
+            "    completingTasksBodyItem,",
+            "    signatureBodyItem,",
+            "    secureDataBodyItem",
+            "]"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The instruction steps are presented in Figure 1.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "obtaining-consent-welcome-step",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "obtaining-consent-before-you-join-step",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "anchor" : "Review-consent",
+          "level" : 2,
+          "text" : "Review consent",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Participants can review the consent in the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKWebViewStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " as HTML. Depending on your signature requirements, you can also ask participants to write their signature on the same screen.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Produce the content for consent review by converting the previous instructions steps to HTML, or provide entirely separate review content as custom HTML in the web view step’s html property.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let instructionSteps = [welcomeStep, beforeYouJoinStep]",
+            "        ",
+            "let webViewStep = ORKWebViewStep(identifier: \"WebViewStepIdentifier\", instructionSteps: instructionSteps)",
+            "webViewStep.showSignatureAfterContent = true",
+            "return webViewStep"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The web view step appears as shown in Figure 2.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "obtaining-consent-review-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "obtaining-consent-review-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "anchor" : "Consent-sharing",
+          "level" : 2,
+          "text" : "Consent sharing",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Apps that use the ResearchKit framework primarily collect data for a specific study. If you want to ask participants to share their data with other researchers, participants must be able to control that decision.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Use ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to explicitly obtain permission to share participants’ data that you collect for your study with other researchers, if allowed by your IRB or EC. To use a form step, include it in a task, just before a consent review step.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Construct the text choices.",
+            "let textChoices: [ORKTextChoice] = [ORKTextChoice(text: \"Institution and qualified researchers worldwide\", value: 1 as NSNumber),",
+            "                                            ORKTextChoice(text: \"Only institution and its partners\", value: 2 as NSNumber)]",
+            "let textChoiceAnswerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: textChoices)",
+            "        ",
+            "\/\/ Construct a form item for text choices.",
+            "let textChoiceFormItem = ORKFormItem(identifier: \"TextChoiceFormItem\", text: \"Who would you like to share your data with?\", answerFormat: textChoiceAnswerFormat)",
+            "        ",
+            "\/\/ Construct the form step.",
+            "let formStepText = \"Institution and its partners will receive your study data from your participation in this study.\\n \\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.\"    ",
+            "let formStep = ORKFormStep(identifier: \"ConsentSharingFormStepIdentifier\", title: \"Sharing Options\", text: formStepText)",
+            "formStep.formItems = [textChoiceFormItem]",
+            "        ",
+            "return formStep"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The form step is in Figure 3.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "obtaining-consent-sharing",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Enhanced-PDF-Viewing",
+          "level" : 2,
+          "text" : "Enhanced PDF Viewing",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Providing clear and concise material for the user to review is an important part of the data collection process. With ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPDFViewerStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", the user can view a PDF in detail, perform text search, and mark up sections of the document. Other available features include viewing the pages of the PDF as thumbnails for quick perusal, printing, and saving the document.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTask",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " is finished, use ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHTMLPDFWriter",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to store the web view step’s html as a PDF then view it later with the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPDFViewerStep",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "guard let stepResult = taskViewController.result.result(forIdentifier: \"WebViewStepIdentifier\") as? ORKStepResult else {",
+            "\treturn",
+            "}",
+            "        ",
+            "if let webViewStepResult = stepResult.results?.first as? ORKWebViewStepResult, let html = webViewStepResult.htmlWithSignature {",
+            "\tlet htmlFormatter = ORKHTMLPDFWriter()",
+            "            ",
+            "    htmlFormatter.writePDF(fromHTML: html) { data, error in",
+            "       let pdfURL = FileManager.default.temporaryDirectory",
+            "            .appendingPathComponent(\"consentTask\")",
+            "            .appendingPathExtension(\"pdf\")",
+            "        try? data.write(to: pdfURL)",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The PDF viewer step is in Figure 4.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "obtaining-consent-pdf-1",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "obtaining-consent-pdf-2",
+                      "type" : "image"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Configurations"
+      ],
+      "title" : "Essentials"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/obtaining-consent"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Configurations": {
+  "abstract" : [
+    {
+      "text" : "Provide collection and presentation information to a step.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Configurations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Configurations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/configurations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFormStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFormStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFormStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFormStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkformstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHTMLPDFWriter": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHTMLPDFWriter"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHTMLPDFWriter",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHTMLPDFWriter"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHTMLPDFWriter",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkhtmlpdfwriter"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKPDFViewerStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKPDFViewerStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKPDFViewerStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKPDFViewerStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKPDFViewerStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkpdfviewerstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTask": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTask"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTask",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTask"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTask",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktask"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKWebViewStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKWebViewStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKWebViewStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKWebViewStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKWebViewStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkwebviewstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Setting-up-Your-Project-to-Use-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Add the ResearchKit framework to your app as a dynamic framework",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Setting up your project to use ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/setting-up-your-project-to-use-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+},
+"obtaining-consent-before-you-join-step": {
+  "alt" : "Before you join instruction step",
+  "identifier" : "obtaining-consent-before-you-join-step",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-before-you-join-step@3x.png"
+    }
+  ]
+},
+"obtaining-consent-pdf-1": {
+  "alt" : "PDF page 1",
+  "identifier" : "obtaining-consent-pdf-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-pdf-1@3x.png"
+    }
+  ]
+},
+"obtaining-consent-pdf-2": {
+  "alt" : "PDF page 2",
+  "identifier" : "obtaining-consent-pdf-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-pdf-2@3x.png"
+    }
+  ]
+},
+"obtaining-consent-review-1": {
+  "alt" : "Review Consent",
+  "identifier" : "obtaining-consent-review-1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-review-1@3x.png"
+    }
+  ]
+},
+"obtaining-consent-review-2": {
+  "alt" : "Provide signature",
+  "identifier" : "obtaining-consent-review-2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-review-2@3x.png"
+    }
+  ]
+},
+"obtaining-consent-sharing": {
+  "alt" : "Consent sharing",
+  "identifier" : "obtaining-consent-sharing",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-sharing@3x.png"
+    }
+  ]
+},
+"obtaining-consent-welcome-step": {
+  "alt" : "Welcome instruction step",
+  "identifier" : "obtaining-consent-welcome-step",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/obtaining-consent-welcome-step@3x.png"
+    }
+  ]
+}
+}
+}

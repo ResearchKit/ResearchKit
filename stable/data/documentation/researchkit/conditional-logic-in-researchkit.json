@@ -1,0 +1,790 @@
+{
+  "abstract" : [
+    {
+      "text" : "How to use conditional logic for ResearchKit steps and forms.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Conditional Logic in ResearchKit"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Understanding-Conditional-Logic",
+          "level" : 2,
+          "text" : "Understanding Conditional Logic",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When presenting a survey or task, conditionally show specific content based on the participant’s responses. ResearchKit provides two solutions for conditional logic.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Step Navigation rules",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : ": Conditionally navigate to a specific step based on the participant’s response.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Form Item Visibility rules",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " - Conditionally hide or show specific form questions based on results from the same form or a form within another step.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "anchor" : "Navigating-Steps-Conditionally",
+          "level" : 3,
+          "text" : "Navigating Steps Conditionally",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Review the following classes to conditionally navigate to or skip specific steps during an ",
+              "type" : "text"
+            },
+            {
+              "code" : "ORKTask",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKResultSelector",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - A class that identifies a result within a set of task results.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKResultPredicate",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - Creates a predicate by accepting an ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKResultSelector",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and the expected result.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKPredicateStepNavigationRule",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - A class that determines what step to navigate to if a given ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKResultPredicate",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is true.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKNavigableOrderedTask",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - A subclass of the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKOrderedTask",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " that can accept one or more ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKPredicateStepNavigationRule",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " objects and apply the expected conditional navigation.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The task for this example includes the steps seen below.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "conditional-logic-in-researchKit-step1",
+              "type" : "image"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "conditional-logic-in-researchKit-step2",
+              "type" : "image"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "conditional-logic-in-researchKit-step3",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The conditional logic is based on answering ",
+              "type" : "text"
+            },
+            {
+              "code" : "Yes",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "No",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " for the first question (“Do you like Apples?”):",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Answering yes",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : ": navigates to the second screen to select your favorite apple.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Answering no",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : ": skips the second screen and navigates directly to the completion step.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "code" : [
+            "",
+            "\/\/Construct Steps",
+            "let boolFormStep = ORKFormStep(identifier: \"FormStep1\")",
+            "boolFormStep.title = \"Apple Task\"",
+            "boolFormStep.text = \"Please answer the following question.\"",
+            "        ",
+            "let boolAnswerFormat = ORKAnswerFormat.booleanAnswerFormat()",
+            "let boolFormItem = ORKFormItem(identifier: \"BooleanFormItemIdentifier\", ",
+            "\t\t\t\t\t\t\t   text: \"Do you like Apples?\", ",
+            "\t\t\t\t\t\t\t   answerFormat: boolAnswerFormat)",
+            "        ",
+            "boolFormStep.formItems = [boolFormItem]",
+            "",
+            "let appleTextChoiceFormStep = appleTextChoiceFormStepExample()",
+            "let completionStep = completionStepExample()",
+            "",
+            "\/\/Conditional Logic",
+            "let boolResultSelector = ORKResultSelector(stepIdentifier: boolFormStep.identifier, resultIdentifier: boolFormItem.identifier)",
+            "let boolResultPredicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: boolResultSelector, expectedAnswer: false)",
+            "let navigationRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (boolResultPredicate, completionStep.identifier) ])",
+            "",
+            "\/\/Construct Navigable Task + Set Navigation Rule",
+            "let navigableTask = ORKNavigableOrderedTask(identifier: \"NavigableTaskIdentifier\", steps: [formStep1, appleTextChoiceFormStep, completionStep])",
+            "navigableTask.setNavigationRule(navigationRule, forTriggerStepIdentifier: formStep1.identifier)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Selecting yes:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "identifier" : "conditional-logic-in-researchKit-step-yes",
+          "type" : "video"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Selecting no:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "identifier" : "conditional-logic-in-researchKit-step-no",
+          "type" : "video"
+        },
+        {
+          "anchor" : "Managing-Form-Item-Visibility",
+          "level" : 3,
+          "text" : "Managing Form Item Visibility",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Familiarize yourself with the following classes to conditionally hide or show a question based on results from questions within the same form.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKResultSelector",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - A class that identifies a result within a set of task results.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKResultPredicate",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - Creates a predicate by accepting an ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKResultSelector",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and the expected result.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "ORKPredicateFormItemVisibilityRule",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " - A class that determines if the form item it’s attached to is hidden or visible if a given ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ORKResultPredicate",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is true.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Following the previous example, use the same questions but now with both on the same page.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Answering yes",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : ": makes the apple choice question visible.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Answering no",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : ": hides the apple choice question if visible.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "code" : [
+            "\/\/Construct FormStep",
+            "let formStep = ORKFormStep(identifier: \"FormStep1\")",
+            "formStep.title = \"Apple Task\"",
+            "formStep.text = \"Please answer the following question.\"",
+            "        ",
+            "let boolAnswerFormat = ORKAnswerFormat.booleanAnswerFormat()",
+            "let boolFormItem = ORKFormItem(identifier: \"BooleanFormItemIdentifier\", ",
+            "\t\t\t\t\t\t\t   text: \"Do you like Apples?\", ",
+            "\t\t\t\t\t\t\t   answerFormat: boolAnswerFormat)",
+            "\t\t\t\t\t\t\t   ",
+            "\t\t\t\t\t\t\t   ",
+            "let appleChoiceFormItem = appleChoiceFormItem()",
+            "        ",
+            "formStep.formItems = [boolFormItem, appleChoiceFormItem]",
+            "",
+            "let completionStep = completionStepExample()",
+            "",
+            "\/\/Conditional Logic",
+            "let resultSelector: ORKResultSelector = .init(stepIdentifier: formStep.identifier, resultIdentifier: boolFormItem.identifier)",
+            "let predicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)",
+            "let visibilityRule = ORKPredicateFormItemVisibilityRule(predicate: predicate)",
+            "        ",
+            "appleChoiceFormItem.visibilityRule = visibilityRule",
+            "",
+            "\/\/Construct Navigable Task",
+            " let navigableTask = ORKNavigableOrderedTask(identifier: \"NavigableTaskIdentifier\", steps: [formStep, completionStep])"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Selecting yes & no:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "identifier" : "conditional-logic-in-researchKit-formItem-yes-no",
+          "type" : "video"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks"
+      ],
+      "title" : "Articles"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/conditional-logic-in-researchkit"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"conditional-logic-in-researchKit-formItem-yes-no": {
+  "alt" : null,
+  "identifier" : "conditional-logic-in-researchKit-formItem-yes-no",
+  "poster" : null,
+  "type" : "video",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/videos\/conditional-logic-in-researchKit-formItem-yes-no.mov"
+    }
+  ]
+},
+"conditional-logic-in-researchKit-step-no": {
+  "alt" : null,
+  "identifier" : "conditional-logic-in-researchKit-step-no",
+  "poster" : null,
+  "type" : "video",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/videos\/conditional-logic-in-researchKit-step-no.mov"
+    }
+  ]
+},
+"conditional-logic-in-researchKit-step-yes": {
+  "alt" : null,
+  "identifier" : "conditional-logic-in-researchKit-step-yes",
+  "poster" : null,
+  "type" : "video",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/videos\/conditional-logic-in-researchKit-step-yes.mov"
+    }
+  ]
+},
+"conditional-logic-in-researchKit-step1": {
+  "alt" : "Step 1",
+  "identifier" : "conditional-logic-in-researchKit-step1",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/conditional-logic-in-researchKit-step1@3x.png"
+    }
+  ]
+},
+"conditional-logic-in-researchKit-step2": {
+  "alt" : "Step 2",
+  "identifier" : "conditional-logic-in-researchKit-step2",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/conditional-logic-in-researchKit-step2@3x.png"
+    }
+  ]
+},
+"conditional-logic-in-researchKit-step3": {
+  "alt" : "Step 3",
+  "identifier" : "conditional-logic-in-researchKit-step3",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/conditional-logic-in-researchKit-step3@3x.png"
+    }
+  ]
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Creating-Surveys": {
+  "abstract" : [
+    {
+      "text" : "Configure and present surveys with ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Creating surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/creating-surveys"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Family-History-Step": {
+  "abstract" : [
+    {
+      "text" : "Use the Family History Step to collect insightful health trends.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Family History Step",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/family-history-step"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Obtaining-Consent": {
+  "abstract" : [
+    {
+      "text" : "Guide your participants through the Informed Consent process.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Obtaining Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/obtaining-consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Setting-up-Your-Project-to-Use-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Add the ResearchKit framework to your app as a dynamic framework",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Setting up your project to use ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/setting-up-your-project-to-use-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Understanding-Active-Tasks": {
+  "abstract" : [
+    {
+      "text" : "Learn more about the Active Tasks provided by ResearchKit™.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Understanding Active Tasks",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/understanding-active-tasks"
+}
+}
+}

@@ -1,0 +1,400 @@
+{
+  "abstract" : [
+    {
+      "text" : "Enumerations utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "collectionGroup",
+    "roleHeading" : "API Collection",
+    "title" : "Enumerations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Helper-Functions"
+      ],
+      "title" : "Other"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAudioChannel",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodySagittal",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeadphoneTypeIdentifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsState",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSampleJSONOptions",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskFinishReason"
+      ],
+      "title" : "Enumerations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/enumerations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Constants": {
+  "abstract" : [
+    {
+      "text" : "Constants utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Constants",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/constants"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Helper-Functions": {
+  "abstract" : [
+    {
+      "text" : "Helper Functions utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Helper-Functions",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Helper Functions",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/helper-functions"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAudioChannel": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAudioChannel"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAudioChannel",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAudioChannel"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAudioChannel",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkaudiochannel"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBodySagittal": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodySagittal"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodySagittal",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodySagittal"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBodySagittal",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbodysagittal"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHeadphoneTypeIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeadphoneTypeIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeadphoneTypeIdentifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeadphoneTypeIdentifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHeadphoneTypeIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkheadphonetypeidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRequestPermissionsState": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsState"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsState",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsState"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRequestPermissionsState",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrequestpermissionsstate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSampleJSONOptions": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSampleJSONOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSampleJSONOptions",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSampleJSONOptions"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSampleJSONOptions",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksamplejsonoptions"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetric"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetric"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScreenMetric",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScreenType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreentype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSpeechRecognizerLocale",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskFinishReason": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskFinishReason"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskFinishReason",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskFinishReason"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTaskFinishReason",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktaskfinishreason"
+}
+}
+}

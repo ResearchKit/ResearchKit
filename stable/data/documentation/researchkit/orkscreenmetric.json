@@ -1,0 +1,1550 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:@E@ORKScreenMetric",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKScreenMetric"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKScreenMetric"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "ORKScreenMetric"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKScreenMetric"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH",
+        "doc:\/\/com.apple.ResearchKit\/SY",
+        "doc:\/\/com.apple.ResearchKit\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAudioChannel",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodySagittal",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeadphoneTypeIdentifier",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsState",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSampleJSONOptions",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenType",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskFinishReason"
+      ],
+      "title" : "Enumerations"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/captionBaselineToFitnessTimerTop",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/captionBaselineToInstructionBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/captionBaselineToTappingLabelTop",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/choiceCellFirstBaselineOffsetFromTop",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/choiceCellLabelLastBaselineToLabelFirstBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/choiceCellLastBaselineToBottom",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/continueButtonTopMargin",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/continueButtonTopMarginForIntroStep",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/continueButtonWidth",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeFootnote",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeHeadline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeSubheadline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeSurveyHeadline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/headlineSideMargin",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/iconImageViewToCaptionBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/illustrationHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/illustrationToCaptionBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/instructionBaselineToLearnMoreBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/instructionImageHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/learnMoreBaselineToStepViewTop",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/learnMoreBaselineToStepViewTopWithNoLearnMore",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/learnMoreButtonSideMargin",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/locationQuestionMapHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/maxFontSizeHeadline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/maxFontSizeSurveyHeadline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/minimumGameViewHeightForMemoryGame",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/minimumStepHeaderHeightForMemoryGame",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/minimumStepHeaderHeightForTowerOfHanoiPuzzle",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/psatKeyboardViewHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/psatKeyboardViewWidth",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/signatureViewHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/tableCellDefaultHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/textFieldCellHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/toolbarHeight",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/topToCaptionBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/topToIconImageViewTop",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/topToIllustration",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/verificationTextBaselineToResendButtonBaseline",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/verticalScaleHeight"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/Equatable-Implementations",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkscreenmetric"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SY": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Enumerations": {
+  "abstract" : [
+    {
+      "text" : "Enumerations utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Enumerations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/enumerations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKAudioChannel": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKAudioChannel"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKAudioChannel",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKAudioChannel"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKAudioChannel",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkaudiochannel"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKBodySagittal": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodySagittal"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKBodySagittal",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKBodySagittal"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKBodySagittal",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkbodysagittal"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKHeadphoneTypeIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeadphoneTypeIdentifier"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKHeadphoneTypeIdentifier",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKHeadphoneTypeIdentifier"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKHeadphoneTypeIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkheadphonetypeidentifier"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKRequestPermissionsState": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsState"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKRequestPermissionsState",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKRequestPermissionsState"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKRequestPermissionsState",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkrequestpermissionsstate"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSampleJSONOptions": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSampleJSONOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSampleJSONOptions",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSampleJSONOptions"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSampleJSONOptions",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orksamplejsonoptions"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetric"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenMetric"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScreenMetric",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/equatable-implementations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/rawrepresentable-implementations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/captionBaselineToFitnessTimerTop": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "captionBaselineToFitnessTimerTop"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/captionBaselineToFitnessTimerTop",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.captionBaselineToFitnessTimerTop",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/captionbaselinetofitnesstimertop"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/captionBaselineToInstructionBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "captionBaselineToInstructionBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/captionBaselineToInstructionBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.captionBaselineToInstructionBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/captionbaselinetoinstructionbaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/captionBaselineToTappingLabelTop": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "captionBaselineToTappingLabelTop"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/captionBaselineToTappingLabelTop",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.captionBaselineToTappingLabelTop",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/captionbaselinetotappinglabeltop"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/choiceCellFirstBaselineOffsetFromTop": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "choiceCellFirstBaselineOffsetFromTop"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/choiceCellFirstBaselineOffsetFromTop",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.choiceCellFirstBaselineOffsetFromTop",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/choicecellfirstbaselineoffsetfromtop"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/choiceCellLabelLastBaselineToLabelFirstBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "choiceCellLabelLastBaselineToLabelFirstBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/choiceCellLabelLastBaselineToLabelFirstBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.choiceCellLabelLastBaselineToLabelFirstBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/choicecelllabellastbaselinetolabelfirstbaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/choiceCellLastBaselineToBottom": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "choiceCellLastBaselineToBottom"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/choiceCellLastBaselineToBottom",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.choiceCellLastBaselineToBottom",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/choicecelllastbaselinetobottom"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/continueButtonTopMargin": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "continueButtonTopMargin"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/continueButtonTopMargin",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.continueButtonTopMargin",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/continuebuttontopmargin"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/continueButtonTopMarginForIntroStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "continueButtonTopMarginForIntroStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/continueButtonTopMarginForIntroStep",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.continueButtonTopMarginForIntroStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/continuebuttontopmarginforintrostep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/continueButtonWidth": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "continueButtonWidth"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/continueButtonWidth",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.continueButtonWidth",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/continuebuttonwidth"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/fontSizeFootnote": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fontSizeFootnote"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeFootnote",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.fontSizeFootnote",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/fontsizefootnote"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/fontSizeHeadline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fontSizeHeadline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeHeadline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.fontSizeHeadline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/fontsizeheadline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/fontSizeSubheadline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fontSizeSubheadline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeSubheadline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.fontSizeSubheadline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/fontsizesubheadline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/fontSizeSurveyHeadline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fontSizeSurveyHeadline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/fontSizeSurveyHeadline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.fontSizeSurveyHeadline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/fontsizesurveyheadline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/headlineSideMargin": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "headlineSideMargin"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/headlineSideMargin",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.headlineSideMargin",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/headlinesidemargin"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/iconImageViewToCaptionBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "iconImageViewToCaptionBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/iconImageViewToCaptionBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.iconImageViewToCaptionBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/iconimageviewtocaptionbaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/illustrationHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "illustrationHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/illustrationHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.illustrationHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/illustrationheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/illustrationToCaptionBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "illustrationToCaptionBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/illustrationToCaptionBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.illustrationToCaptionBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/illustrationtocaptionbaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/init(rawvalue:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/instructionBaselineToLearnMoreBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "instructionBaselineToLearnMoreBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/instructionBaselineToLearnMoreBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.instructionBaselineToLearnMoreBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/instructionbaselinetolearnmorebaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/instructionImageHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "instructionImageHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/instructionImageHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.instructionImageHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/instructionimageheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/learnMoreBaselineToStepViewTop": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "learnMoreBaselineToStepViewTop"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/learnMoreBaselineToStepViewTop",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.learnMoreBaselineToStepViewTop",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/learnmorebaselinetostepviewtop"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/learnMoreBaselineToStepViewTopWithNoLearnMore": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "learnMoreBaselineToStepViewTopWithNoLearnMore"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/learnMoreBaselineToStepViewTopWithNoLearnMore",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.learnMoreBaselineToStepViewTopWithNoLearnMore",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/learnmorebaselinetostepviewtopwithnolearnmore"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/learnMoreButtonSideMargin": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "learnMoreButtonSideMargin"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/learnMoreButtonSideMargin",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.learnMoreButtonSideMargin",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/learnmorebuttonsidemargin"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/locationQuestionMapHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "locationQuestionMapHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/locationQuestionMapHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.locationQuestionMapHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/locationquestionmapheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/maxFontSizeHeadline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maxFontSizeHeadline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/maxFontSizeHeadline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.maxFontSizeHeadline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/maxfontsizeheadline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/maxFontSizeSurveyHeadline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maxFontSizeSurveyHeadline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/maxFontSizeSurveyHeadline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.maxFontSizeSurveyHeadline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/maxfontsizesurveyheadline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/minimumGameViewHeightForMemoryGame": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "minimumGameViewHeightForMemoryGame"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/minimumGameViewHeightForMemoryGame",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.minimumGameViewHeightForMemoryGame",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/minimumgameviewheightformemorygame"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/minimumStepHeaderHeightForMemoryGame": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "minimumStepHeaderHeightForMemoryGame"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/minimumStepHeaderHeightForMemoryGame",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.minimumStepHeaderHeightForMemoryGame",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/minimumstepheaderheightformemorygame"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/minimumStepHeaderHeightForTowerOfHanoiPuzzle": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "minimumStepHeaderHeightForTowerOfHanoiPuzzle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/minimumStepHeaderHeightForTowerOfHanoiPuzzle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.minimumStepHeaderHeightForTowerOfHanoiPuzzle",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/minimumstepheaderheightfortowerofhanoipuzzle"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/psatKeyboardViewHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "psatKeyboardViewHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/psatKeyboardViewHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.psatKeyboardViewHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/psatkeyboardviewheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/psatKeyboardViewWidth": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "psatKeyboardViewWidth"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/psatKeyboardViewWidth",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.psatKeyboardViewWidth",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/psatkeyboardviewwidth"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/signatureViewHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signatureViewHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/signatureViewHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.signatureViewHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/signatureviewheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/tableCellDefaultHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tableCellDefaultHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/tableCellDefaultHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.tableCellDefaultHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/tablecelldefaultheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/textFieldCellHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "textFieldCellHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/textFieldCellHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.textFieldCellHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/textfieldcellheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/toolbarHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toolbarHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/toolbarHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.toolbarHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/toolbarheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/topToCaptionBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "topToCaptionBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/topToCaptionBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.topToCaptionBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/toptocaptionbaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/topToIconImageViewTop": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "topToIconImageViewTop"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/topToIconImageViewTop",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.topToIconImageViewTop",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/toptoiconimageviewtop"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/topToIllustration": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "topToIllustration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/topToIllustration",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.topToIllustration",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/toptoillustration"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/verificationTextBaselineToResendButtonBaseline": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "verificationTextBaselineToResendButtonBaseline"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/verificationTextBaselineToResendButtonBaseline",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.verificationTextBaselineToResendButtonBaseline",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/verificationtextbaselinetoresendbuttonbaseline"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenMetric/verticalScaleHeight": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "verticalScaleHeight"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenMetric\/verticalScaleHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScreenMetric.verticalScaleHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreenmetric\/verticalscaleheight"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScreenType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScreenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKScreenType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscreentype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKSpeechRecognizerLocale": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKSpeechRecognizerLocale",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKSpeechRecognizerLocale"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKSpeechRecognizerLocale",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkspeechrecognizerlocale"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskFinishReason": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskFinishReason"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskFinishReason",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskFinishReason"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKTaskFinishReason",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktaskfinishreason"
+},
+"doc://com.apple.ResearchKit/s8SendableP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

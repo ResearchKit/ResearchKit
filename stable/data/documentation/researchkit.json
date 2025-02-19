@@ -1,0 +1,1544 @@
+{
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "ResearchKit",
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "role" : "collection",
+    "roleHeading" : "Framework",
+    "symbolKind" : "module",
+    "title" : "ResearchKit"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "ResearchKit is open source software for developers and researchers that",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "leverages iPhone sensors and capabilities to track movement, take measurements, and",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "record data. People can perform activities and generate data from anywhere.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "There are three customizable components that address",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "common elements of research: ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "consent",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "surveys",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ", and ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "active tasks",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ". You can use these components as they",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "are, build on them, and even create completely new components of your own. Whether your app is obtaining consent, giving instructions, or presenting a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "form or survey, every task in ResearchKit is a collection of steps.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Consent provides customizable templates that explain study details and",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "obtain participant consent. Clarifying exactly what information you collect from people, and who",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "can access that information is crucial to help protect participant privacy.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Surveys have a predefined user interface so you can quickly build screens with",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "questions and types of answers. The survey component is localized, so you just need",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "to support localization for your questions.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Active tasks invite people to perform activities in their own environment using",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "iPhone sensors to actively collect data. This is important for studies that require the data-collection",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "capabilities of frameworks such as HealthKit and CoreMotion.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Configurations"
+      ],
+      "title" : "Essentials"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks"
+      ],
+      "title" : "Research components"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks"
+      ],
+      "title" : "Articles"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Helper-Functions"
+      ],
+      "title" : "Other"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardLeftRightMarginForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColor(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColorSetColorForKey(_:_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKGetMetricForWindow(_:_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKGetVerticalScreenTypeForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNeedWideScreenDesign(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScrollIndicatorInsetsForScrollView(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardFullScreenLayoutMarginsForView(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardHorizontalMarginForView(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardLayoutMarginsForTableViewCell(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardLeftMarginForTableViewCell(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerExtendedLeftRightPaddingForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerFirstItemTopPaddingForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerLeftRightPaddingForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTitleToBodyTopPaddingForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTitleToBulletTopPaddingForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTopContentHeightForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTopPaddingForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskProgressMake(_:_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskTotalProgressMake(_:_:_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTitleLabelFontTextStyleForWindow(_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKUpdateScrollViewBottomInset(_:_:)",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKWidthForSignatureView(_:)"
+      ],
+      "title" : "Functions"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Conditional-Logic-in-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "How to use conditional logic for ResearchKit steps and forms.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Conditional-Logic-in-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Conditional Logic in ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/conditional-logic-in-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Configurations": {
+  "abstract" : [
+    {
+      "text" : "Provide collection and presentation information to a step.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Configurations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Configurations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/configurations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Consent": {
+  "abstract" : [
+    {
+      "text" : "Obtain a participant’s consent to collect research data.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Consent",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Constants": {
+  "abstract" : [
+    {
+      "text" : "Constants utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Constants",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Constants",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/constants"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Creating-Surveys": {
+  "abstract" : [
+    {
+      "text" : "Configure and present surveys with ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Creating-Surveys",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Creating surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/creating-surveys"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Enumerations": {
+  "abstract" : [
+    {
+      "text" : "Enumerations utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Enumerations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Enumerations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/enumerations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Family-History-Step": {
+  "abstract" : [
+    {
+      "text" : "Use the Family History Step to collect insightful health trends.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Family-History-Step",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Family History Step",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/family-history-step"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Helper-Functions": {
+  "abstract" : [
+    {
+      "text" : "Helper Functions utilized throughout ResearchKit.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Helper-Functions",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Helper Functions",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/helper-functions"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKCardLeftRightMarginForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKCardLeftRightMarginForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKCardLeftRightMarginForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKCardLeftRightMarginForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcardleftrightmarginforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKColor(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKColor"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIColor",
+      "text" : "UIColor"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColor(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKColor(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcolor(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKColorSetColorForKey(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKColorSetColorForKey"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIColor",
+      "text" : "UIColor"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKColorSetColorForKey(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKColorSetColorForKey(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkcolorsetcolorforkey(_:_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKGetMetricForWindow(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKGetMetricForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@ORKScreenMetric",
+      "text" : "ORKScreenMetric"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKGetMetricForWindow(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKGetMetricForWindow(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkgetmetricforwindow(_:_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKGetVerticalScreenTypeForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKGetVerticalScreenTypeForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@ORKScreenType",
+      "text" : "ORKScreenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKGetVerticalScreenTypeForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKGetVerticalScreenTypeForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkgetverticalscreentypeforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKNeedWideScreenDesign(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKNeedWideScreenDesign"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIView",
+      "text" : "UIView"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKNeedWideScreenDesign(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKNeedWideScreenDesign(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkneedwidescreendesign(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKScrollIndicatorInsetsForScrollView(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKScrollIndicatorInsetsForScrollView"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIView",
+      "text" : "UIView"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@S@UIEdgeInsets",
+      "text" : "UIEdgeInsets"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKScrollIndicatorInsetsForScrollView(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKScrollIndicatorInsetsForScrollView(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkscrollindicatorinsetsforscrollview(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStandardFullScreenLayoutMarginsForView(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStandardFullScreenLayoutMarginsForView"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIView",
+      "text" : "UIView"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@S@UIEdgeInsets",
+      "text" : "UIEdgeInsets"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardFullScreenLayoutMarginsForView(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStandardFullScreenLayoutMarginsForView(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstandardfullscreenlayoutmarginsforview(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStandardHorizontalMarginForView(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStandardHorizontalMarginForView"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIView",
+      "text" : "UIView"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardHorizontalMarginForView(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStandardHorizontalMarginForView(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstandardhorizontalmarginforview(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStandardLayoutMarginsForTableViewCell(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStandardLayoutMarginsForTableViewCell"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIView",
+      "text" : "UIView"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@S@UIEdgeInsets",
+      "text" : "UIEdgeInsets"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardLayoutMarginsForTableViewCell(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStandardLayoutMarginsForTableViewCell(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstandardlayoutmarginsfortableviewcell(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStandardLeftMarginForTableViewCell(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStandardLeftMarginForTableViewCell"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIView",
+      "text" : "UIView"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStandardLeftMarginForTableViewCell(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStandardLeftMarginForTableViewCell(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstandardleftmarginfortableviewcell(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerExtendedLeftRightPaddingForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerExtendedLeftRightPaddingForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerExtendedLeftRightPaddingForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerExtendedLeftRightPaddingForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainerextendedleftrightpaddingforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerFirstItemTopPaddingForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerFirstItemTopPaddingForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerFirstItemTopPaddingForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerFirstItemTopPaddingForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainerfirstitemtoppaddingforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerLeftRightPaddingForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerLeftRightPaddingForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerLeftRightPaddingForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerLeftRightPaddingForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainerleftrightpaddingforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerTitleToBodyTopPaddingForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerTitleToBodyTopPaddingForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTitleToBodyTopPaddingForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerTitleToBodyTopPaddingForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainertitletobodytoppaddingforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerTitleToBulletTopPaddingForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerTitleToBulletTopPaddingForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTitleToBulletTopPaddingForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerTitleToBulletTopPaddingForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainertitletobullettoppaddingforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerTopContentHeightForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerTopContentHeightForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTopContentHeightForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerTopContentHeightForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainertopcontentheightforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStepContainerTopPaddingForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStepContainerTopPaddingForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStepContainerTopPaddingForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKStepContainerTopPaddingForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstepcontainertoppaddingforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskProgressMake(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskProgressMake"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@SA@ORKTaskProgress",
+      "text" : "ORKTaskProgress"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskProgressMake(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKTaskProgressMake(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktaskprogressmake(_:_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTaskTotalProgressMake(_:_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTaskTotalProgressMake"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@SA@ORKTaskTotalProgress",
+      "text" : "ORKTaskTotalProgress"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTaskTotalProgressMake(_:_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKTaskTotalProgressMake(_:_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktasktotalprogressmake(_:_:_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKTitleLabelFontTextStyleForWindow(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKTitleLabelFontTextStyleForWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIFont",
+      "text" : "UIFont"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@UIFontTextStyle",
+      "text" : "TextStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKTitleLabelFontTextStyleForWindow(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKTitleLabelFontTextStyleForWindow(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orktitlelabelfonttextstyleforwindow(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKUpdateScrollViewBottomInset(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKUpdateScrollViewBottomInset"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIScrollView",
+      "text" : "UIScrollView"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKUpdateScrollViewBottomInset(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKUpdateScrollViewBottomInset(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkupdatescrollviewbottominset(_:_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKWidthForSignatureView(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKWidthForSignatureView"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)UIWindow",
+      "text" : "UIWindow"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14CoreFoundation7CGFloatV",
+      "text" : "CGFloat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKWidthForSignatureView(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ORKWidthForSignatureView(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkwidthforsignatureview(_:)"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Obtaining-Consent": {
+  "abstract" : [
+    {
+      "text" : "Guide your participants through the Informed Consent process.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Obtaining-Consent",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Obtaining Consent",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/obtaining-consent"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Setting-up-Your-Project-to-Use-ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Add the ResearchKit framework to your app as a dynamic framework",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Setting-up-Your-Project-to-Use-ResearchKit",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Setting up your project to use ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/setting-up-your-project-to-use-researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Surveys": {
+  "abstract" : [
+    {
+      "text" : "Construct surveys that ask a wide range of questions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Surveys",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Surveys",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/surveys"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Understanding-Active-Tasks": {
+  "abstract" : [
+    {
+      "text" : "Learn more about the Active Tasks provided by ResearchKit™.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Understanding-Active-Tasks",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Understanding Active Tasks",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/understanding-active-tasks"
+}
+}
+}

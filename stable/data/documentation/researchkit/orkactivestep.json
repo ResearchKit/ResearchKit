@@ -1,0 +1,895 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "c:objc(cs)ORKActiveStep",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ORKActiveStep"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ResearchKit"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ORKActiveStep"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "ORKActiveStep"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ORKActiveStep"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStep"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFrontFacingCameraStep"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherited By",
+      "type" : "inheritedBy"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+        "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+        "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+        "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+        "doc:\/\/com.apple.ResearchKit\/SQ",
+        "doc:\/\/com.apple.ResearchKit\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMotionActivityCollector",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMotionActivityPermissionType"
+      ],
+      "title" : "Active steps"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/finishedSpokenInstruction",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/recorderConfigurations",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldContinueOnFinish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldPlaySoundOnFinish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldPlaySoundOnStart",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldShowDefaultTimer",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldSpeakCountDown",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldSpeakRemainingTimeAtHalfway",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldStartTimerAutomatically",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldUseNextAsSkipButton",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldVibrateOnFinish",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldVibrateOnStart",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/spokenInstruction",
+        "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/stepDuration"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/researchkit\/orkactivestep"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.apple.ResearchKit/SH": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/SQ": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit": {
+  "abstract" : [
+    {
+      "text" : "Create apps that securely collect information for research.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ResearchKit",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKActiveStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKActiveStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKActiveStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/finishedSpokenInstruction": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "finishedSpokenInstruction"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/finishedSpokenInstruction",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "finishedSpokenInstruction",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/finishedspokeninstruction"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/recorderConfigurations": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "recorderConfigurations"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ORKRecorderConfiguration",
+      "text" : "ORKRecorderConfiguration"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/recorderConfigurations",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "recorderConfigurations",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/recorderconfigurations"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldContinueOnFinish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldContinueOnFinish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldContinueOnFinish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldContinueOnFinish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldcontinueonfinish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldPlaySoundOnFinish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldPlaySoundOnFinish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldPlaySoundOnFinish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldPlaySoundOnFinish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldplaysoundonfinish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldPlaySoundOnStart": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldPlaySoundOnStart"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldPlaySoundOnStart",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldPlaySoundOnStart",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldplaysoundonstart"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldShowDefaultTimer": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldShowDefaultTimer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldShowDefaultTimer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldShowDefaultTimer",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldshowdefaulttimer"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldSpeakCountDown": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldSpeakCountDown"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldSpeakCountDown",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldSpeakCountDown",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldspeakcountdown"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldSpeakRemainingTimeAtHalfway": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldSpeakRemainingTimeAtHalfway"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldSpeakRemainingTimeAtHalfway",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldSpeakRemainingTimeAtHalfway",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldspeakremainingtimeathalfway"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldStartTimerAutomatically": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldStartTimerAutomatically"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldStartTimerAutomatically",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldStartTimerAutomatically",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldstarttimerautomatically"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldUseNextAsSkipButton": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldUseNextAsSkipButton"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldUseNextAsSkipButton",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldUseNextAsSkipButton",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldusenextasskipbutton"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldVibrateOnFinish": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldVibrateOnFinish"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldVibrateOnFinish",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldVibrateOnFinish",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldvibrateonfinish"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/shouldVibrateOnStart": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldVibrateOnStart"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/shouldVibrateOnStart",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldVibrateOnStart",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/shouldvibrateonstart"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/spokenInstruction": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spokenInstruction"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/spokenInstruction",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spokenInstruction",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/spokeninstruction"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKActiveStep/stepDuration": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "stepDuration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKActiveStep\/stepDuration",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "stepDuration",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkactivestep\/stepduration"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKFrontFacingCameraStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKFrontFacingCameraStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKFrontFacingCameraStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKFrontFacingCameraStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKFrontFacingCameraStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkfrontfacingcamerastep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKMotionActivityCollector": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKMotionActivityCollector"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMotionActivityCollector",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKMotionActivityCollector"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKMotionActivityCollector",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkmotionactivitycollector"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKMotionActivityPermissionType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKMotionActivityPermissionType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKMotionActivityPermissionType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKMotionActivityPermissionType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKMotionActivityPermissionType",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkmotionactivitypermissiontype"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/ORKStep": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ORKStep"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/ORKStep",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ORKStep"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ORKStep",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/orkstep"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps": {
+  "abstract" : [
+    {
+      "text" : "Create tasks for participants to perform.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps"
+},
+"doc://com.apple.ResearchKit/documentation/ResearchKit/Steps-Tasks-Results": {
+  "abstract" : [
+    {
+      "text" : "Design and create research-centered apps that guide the participant.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/documentation\/ResearchKit\/Steps-Tasks-Results",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Steps, tasks, and results",
+  "type" : "topic",
+  "url" : "\/documentation\/researchkit\/steps-tasks-results"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCoding",
+  "title" : "Foundation.NSCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSCopying": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSCopying",
+  "title" : "Foundation.NSCopying",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/objc(pl)NSSecureCoding": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/objc(pl)NSSecureCoding",
+  "title" : "Foundation.NSSecureCoding",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://com.apple.ResearchKit/s7CVarArgP": {
+  "identifier" : "doc:\/\/com.apple.ResearchKit\/s7CVarArgP",
+  "title" : "Swift.CVarArg",
+  "type" : "unresolvable"
+}
+}
+}
