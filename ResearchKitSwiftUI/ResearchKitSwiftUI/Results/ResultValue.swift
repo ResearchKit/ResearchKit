@@ -31,7 +31,7 @@
 import Foundation
 
 /// `ResultValue` is limited to a few question types that have different representations for their selected values.
-public enum ResultValue: Codable {
+public enum ResultValue: Codable, Hashable {
     case int(Int)
     case string(String)
     case date(Date)
