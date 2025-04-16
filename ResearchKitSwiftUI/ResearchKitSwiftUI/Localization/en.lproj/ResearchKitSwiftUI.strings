@@ -31,4 +31,12 @@
 "BUTTON_CANCEL" = "Cancel";
 "BUTTON_NEXT" = "Next";
 "BUTTON_DONE" = "Done";
-"QUESTION_PROGRESS" = "%D OF %D";
+"BUTTON_CLEAR" = "Clear";
+"IMAGE_SELECT_ALL" = "Select all that apply";
+"IMAGE_TAP_SELECT" = "Tap to select";
+"NAVIGATION_TITLE" = "%D of %D";
+"PICKER_TAP" = "Tap Here";
+"QUESTION_HEIGHT" = "Select Height";
+"QUESTION_PROGRESS" = "Question %D of %D";
+"QUESTION_WEIGHT" = "Select Weight";
+"SLIDER_CONFIG_FOR" = "Slider for";

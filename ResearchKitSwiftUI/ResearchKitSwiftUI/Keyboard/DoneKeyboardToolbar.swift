@@ -64,7 +64,7 @@ struct DoneKeyboardToolbar: ViewModifier {
                         if condition() {
                             Spacer()
 
-                            Button("Done") {
+                            Button("BUTTON_DONE") {
                                 action()
                             }
                         }

@@ -257,7 +257,7 @@ public struct WeightQuestion: View {
         QuestionCard {
             Question(title: title, detail: detail) {
                 HStack {
-                    Text("Select Weight")
+                    Text("QUESTION_WEIGHT")
                         .foregroundStyle(Color.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Button {
@@ -535,7 +535,7 @@ struct WeightPickerView: View {
                             .tag(i)
                     }
                 } label: {
-                    Text("Tap Here")
+                    Text("PICKER_TAP")
                 }
                 .pickerStyle(.wheel)
             }

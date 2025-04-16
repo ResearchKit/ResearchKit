@@ -215,7 +215,7 @@ public struct TextQuestion<Header: View>: View {
                                 Button {
                                     resolvedResult.wrappedValue = .none
                                 } label: {
-                                    Text("Clear")
+                                    Text("BUTTON_CLEAR")
                                 }
                             }
                         }
