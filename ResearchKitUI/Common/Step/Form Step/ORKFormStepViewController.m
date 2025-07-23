@@ -1406,7 +1406,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
             return nil;
         }
         NSString *nextReuseIdentifier = [self cellReuseIdentifierFromFormItem:nextFormItem cellItemIdentifier:nextItemIdentifier];
-        // can't autoscroll to something that doesn't exist
+        // Can't autoscroll to something that doesn't exist
         UITableViewCell *nextCell = [_tableView dequeueReusableCellWithIdentifier:nextReuseIdentifier];
         if (!nextCell) {
             return nil;
