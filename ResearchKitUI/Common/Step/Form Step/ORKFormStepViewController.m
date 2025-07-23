@@ -1411,7 +1411,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
         if (!nextCell) {
             return nil;
         }
-        // don't autoscroll to a cell that already has an answer
+        // Don't autoscroll to a cell that already has an answer.
         if (self.savedAnswers[nextFormItem.identifier]) {
             return nil;
         }
