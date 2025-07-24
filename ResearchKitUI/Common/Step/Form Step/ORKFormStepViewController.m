@@ -1385,7 +1385,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 }
 
 
-/// Determines if we should auto-scroll to the next section
+/// The proposed destination index path for auto-scrolling to the nexr section.
 /// @returns The destination index path that should be used when scrolling to the next question, or `nil` if no auto-scroll should occur.
 - (NSIndexPath *_Nullable)indexPathForAutoScrollingToNextSectionAfter:(NSIndexPath *)indexPath {
     if (![self _isAutoScrollEnabled] || _autoScrollCancelled) {
@@ -1429,6 +1429,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
         return nil;
     }
 }
+
 
 /// Determines if we should auto-scroll to the next section
 - (BOOL)shouldAutoScrollToNextSectionAfter:(NSIndexPath *)indexPath {
