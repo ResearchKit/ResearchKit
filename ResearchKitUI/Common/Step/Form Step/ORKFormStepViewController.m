@@ -1387,7 +1387,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 
 /// Determines if we should auto-scroll to the next section
 /// @returns The destination index path that should be used when scrolling to the next question, or `nil` if no auto-scroll should occur.
-- (NSIndexPath *_Nullable)shouldAutoScrollToNextSection:(NSIndexPath *)indexPath {
+- (NSIndexPath *_Nullable)indexPathForAutoScrollingToNextSectionAfter:(NSIndexPath *)indexPath {
     if (![self _isAutoScrollEnabled] || _autoScrollCancelled) {
         return nil;
     }
@@ -1416,7 +1416,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
             return nil;
         }
         return nextIndexPath;
-    } else {
+    } else if (@available(iOS 15, *)) {
         NSString *nextSectionIdentifier = [_diffableDataSource sectionIdentifierForIndex:nextIndexPath.section];
         ORKFormItem *formItem = [self _formItemForFormItemIdentifier:nextSectionIdentifier];
         if (!formItem) {
@@ -1425,25 +1425,34 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
             // We need to scroll to a zero-item section. This requires us to adjust the index path.
             return [NSIndexPath indexPathForRow:NSNotFound inSection:nextIndexPath.section];
         }
+    } else {
+        return nil;
     }
 }
 
-- (void)autoScrollToNextSection:(NSIndexPath *)indexPath {
+/// Determines if we should auto-scroll to the next section
+- (BOOL)shouldAutoScrollToNextSectionAfter:(NSIndexPath *)indexPath {
+    return [self indexPathForAutoScrollingToNextSectionAfter:indexPath] != nil;
+}
+
+
+- (void)autoScrollToNextSectionAfter:(NSIndexPath *)indexPath {
     if (![self _isAutoScrollEnabled]) {
         return;
     }
-    NSIndexPath *scrollDstIndexPath = [self shouldAutoScrollToNextSection:indexPath];
-    if (!scrollDstIndexPath) {
+    NSIndexPath *scrollDestinationIndexPath = [self indexPathForAutoScrollingToNextSectionAfter:indexPath];
+    if (!scrollDestinationIndexPath) {
         // If the index path returned by -shouldAutoScrollToNextSection: is nil, we're not supposed to auto-scroll to the next section.
         return;
     }
-    UITableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:scrollDstIndexPath];
-    if (nextCell && [self focusUnansweredCell:nextCell]) {
-        // if we did change focus, then that will perform the scrolling
-    } else {
+    UITableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:scrollDestinationIndexPath];
+    if (!(nextCell && [self focusUnansweredCell:nextCell])) {
+        // if we didn't change focus, we need to scroll.
+        // otherwise (if we did change focus), that'll take care of the scrolling for us.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [_tableView scrollToRowAtIndexPath:scrollDstIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [_tableView scrollToRowAtIndexPath:scrollDestinationIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
+        // if we did change focus, then that will perform the scrolling
     }
 }
 
@@ -2033,8 +2042,8 @@ static CGFloat ORKLabelWidth(NSString *text) {
     NSString *sectionIdentifier = [[snapshot sectionIdentifiers] objectAtIndex:indexPath.section];
     ORKFormItemCell *cell = ORKDynamicCast([self.tableView cellForRowAtIndexPath:indexPath], ORKFormItemCell);
 
-    if (cell.isLastItem && [self shouldAutoScrollToNextSection:indexPath]) {
-        [self autoScrollToNextSection:indexPath];
+    if (cell.isLastItem && [self shouldAutoScrollToNextSectionAfter:indexPath]) {
+        [self autoScrollToNextSectionAfter:indexPath];
         return;
     } else if (cell.isLastItem && indexPath.section == (snapshot.numberOfSections - 1) && ![_identifiersOfAnsweredSections containsObject:sectionIdentifier]) {
         if (![self allNonOptionalFormItemsHaveAnswers]) {
@@ -2280,7 +2289,7 @@ static NSString *const _ORKAnsweredSectionIdentifiersRestoreKey = @"answeredSect
     if (allowAutoScrolling == YES) {
         // only allow autoscrolling to the next section if the next section exists
         if ((indexPath.section + 1) < [snapshot numberOfSections]) {
-            [self autoScrollToNextSection:indexPath];
+            [self autoScrollToNextSectionAfter:indexPath];
             handledAutoScroll = YES;
         } else {
             // We would go to the next section, but we literally can't
