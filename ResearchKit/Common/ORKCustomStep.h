@@ -32,6 +32,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ A step that appears with provided custom content.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKCustomStep : ORKStep
 
@@ -40,6 +44,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, strong, nullable) UIView *contentView;
 @property (nonatomic) BOOL pinNavigationContainer;
+@property (nonatomic) BOOL hideNavigationContainer;
 
 @end
 

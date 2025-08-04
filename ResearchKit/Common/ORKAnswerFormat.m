@@ -33,24 +33,27 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKAnswerFormat.h"
 #import "ORKAnswerFormat_Internal.h"
-
 #import "ORKChoiceAnswerFormatHelper.h"
-#import "ORKHealthAnswerFormat.h"
 #import "ORKQuestionResult_Private.h"
 #import "ORKResult_Private.h"
-
 #import "ORKHelpers_Internal.h"
+#if TARGET_OS_IOS
+#import "ORKHealthAnswerFormat.h"
+#import "ResearchKit/ResearchKit-Swift.h"
+#endif
 
-@import HealthKit;
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
+
 @import MapKit;
 @import Contacts;
 
 NSString *const EmailValidationRegularExpressionPattern = @"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
-id ORKNullAnswerValue() {
+id ORKNullAnswerValue(void) {
     return [NSNull null];
 }
 
@@ -80,19 +83,23 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Weight);
             SQT_CASE(Location);
             SQT_CASE(SES);
+            SQT_CASE(Age);
+            SQT_CASE(Year);
     }
 #undef SQT_CASE
 }
 
+
+#if TARGET_OS_IOS
 static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle style) {
     return style == ORKNumberFormattingStylePercent ? NSNumberFormatterPercentStyle : NSNumberFormatterDecimalStyle;
 }
-
 
 @implementation ORKAnswerDefaultSource {
     NSMutableDictionary *_unitsTable;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 @synthesize healthStore=_healthStore;
 
 + (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore {
@@ -201,8 +208,10 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         [healthStore executeQuery:sampleQuery];
     });
 }
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 
 - (void)fetchDefaultValueForAnswerFormat:(ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler {
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKObjectType *objectType = [answerFormat healthKitObjectType];
     BOOL handled = NO;
     if (objectType) {
@@ -223,8 +232,12 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     if (!handled) {
         handler(nil, nil);
     }
+#else
+    handler(nil, nil);
+#endif
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat {
     __block HKUnit *unit = [answerFormat healthKitUnit];
     HKObjectType *objectType = [answerFormat healthKitObjectType];
@@ -266,13 +279,17 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         [answerFormat setHealthKitUserUnit:healthKitDefault];
     }
 }
+#endif // ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 
 @end
 
+#endif // TARGET_OS_IOS
 
 #pragma mark - ORKAnswerFormat
 
 @implementation ORKAnswerFormat
+
+#if TARGET_OS_IOS
 
 + (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
                                                minimumValue:(NSInteger)scaleMinimum
@@ -314,13 +331,6 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                                         vertical:vertical];
 }
 
-+ (ORKBooleanAnswerFormat *)booleanAnswerFormat {
-    return [ORKBooleanAnswerFormat new];
-}
-
-+ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes noString:(NSString *)no {
-    return [[ORKBooleanAnswerFormat alloc] initWithYesString:yes noString:no];
-}
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
     return [[ORKValuePickerAnswerFormat alloc] initWithTextChoices:textChoices];
@@ -340,11 +350,6 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:imageChoices
                                                               style:style
                                                            vertical:vertical];
-}
-
-+ (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
-                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices {
-    return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
 }
 
 + (ORKNumericAnswerFormat *)decimalAnswerFormatWithUnit:(NSString *)unit {
@@ -375,6 +380,15 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                              calendar:calendar];
 }
 
++ (ORKDateAnswerFormat *)dateTimeAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
+                                                  daysAfterCurrentDate:(NSInteger)daysAfter
+                                                              calendar:(nullable NSCalendar *)calendar {
+    return [ORKDateAnswerFormat dateAnswerFormatWithStyle:ORKDateAnswerStyleDateAndTime
+                                    daysBeforeCurrentDate:daysBefore
+                                     daysAfterCurrentDate:daysAfter
+                                                 calendar:calendar];
+}
+
 + (ORKDateAnswerFormat *)dateAnswerFormat {
     return [[ORKDateAnswerFormat alloc] initWithStyle:ORKDateAnswerStyleDate];
 }
@@ -387,6 +401,31 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                           minimumDate:minimumDate
                                           maximumDate:maximumDate
                                              calendar:calendar];
+}
+
++ (ORKDateAnswerFormat *)dateAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
+                                              daysAfterCurrentDate:(NSInteger)daysAfter
+                                                          calendar:(nullable NSCalendar *)calendar {
+    return [ORKDateAnswerFormat dateAnswerFormatWithStyle:ORKDateAnswerStyleDate
+                                    daysBeforeCurrentDate:daysBefore
+                                     daysAfterCurrentDate:daysAfter
+                                                 calendar:calendar];
+}
+
++ (ORKDateAnswerFormat *)dateAnswerFormatWithStyle:(ORKDateAnswerStyle)style
+                             daysBeforeCurrentDate:(NSInteger)daysBefore
+                              daysAfterCurrentDate:(NSInteger)daysAfter
+                                          calendar:(nullable NSCalendar *)calendar {
+    NSDate *currentDate = [NSDate date];
+    ORKDateAnswerFormat *answerFormat = [[ORKDateAnswerFormat alloc] initWithStyle:style
+                                                                       defaultDate:currentDate
+                                                                       minimumDate:nil
+                                                                       maximumDate:nil
+                                                                          calendar:calendar];
+    [answerFormat setDaysBeforeCurrentDateToSetMinimumDate:daysBefore];
+    [answerFormat setDaysAfterCurrentDateToSetMinimumDate:daysAfter];
+    
+    return answerFormat;
 }
 
 + (ORKTextAnswerFormat *)textAnswerFormat {
@@ -450,14 +489,36 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
                                                        defaultValue:defaultValue];
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 + (ORKLocationAnswerFormat *)locationAnswerFormat {
     return [ORKLocationAnswerFormat new];
 }
+#endif
 
 + (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText
                                                                       bottomRungText:(NSString *)bottomRungText {
     return [[ORKSESAnswerFormat alloc] initWithTopRungText:topRungText
                                                                 bottomRungText:bottomRungText];
+}
+
+#endif
+
++ (ORKBooleanAnswerFormat *)booleanAnswerFormat {
+    return [ORKBooleanAnswerFormat new];
+}
+
++ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes noString:(NSString *)no {
+    return [[ORKBooleanAnswerFormat alloc] initWithYesString:yes noString:no];
+}
+
++ (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
+                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices {
+    return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
+}
+
++ (ORKColorChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
+                     colorChoices:(NSArray<ORKColorChoice *> *)colorChoices {
+    return [[ORKColorChoiceAnswerFormat alloc] initWithStyle:style colorChoices:colorChoices];
 }
 
 - (void)validateParameters {
@@ -472,6 +533,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     if (self) {
         _showDontKnowButton = NO;
         _customDontKnowButtonText = nil;
+        _dontKnowButtonStyle = ORKDontKnowButtonStyleStandard;
     }
     return self;
 }
@@ -481,7 +543,8 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     
     if (self) {
         ORK_DECODE_BOOL(aDecoder, showDontKnowButton);
-        ORK_DECODE_OBJ(aDecoder, customDontKnowButtonText);
+        ORK_DECODE_OBJ_CLASS(aDecoder, customDontKnowButtonText, NSString);
+        ORK_DECODE_ENUM(aDecoder, dontKnowButtonStyle);
     }
     return self;
 }
@@ -489,6 +552,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_BOOL(aCoder, showDontKnowButton);
     ORK_ENCODE_OBJ(aCoder, customDontKnowButtonText);
+    ORK_ENCODE_ENUM(aCoder, dontKnowButtonStyle);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -511,6 +575,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return NO;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (HKObjectType *)healthKitObjectType {
     return nil;
 }
@@ -530,6 +595,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 - (void)setHealthKitUserUnit:(HKUnit *)unit {
     
 }
+#endif
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeNone;
@@ -550,10 +616,12 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
      ContinuousScale navigation rules always evaluate to false because the result is different from what is displayed in the UI.
      The fraction digits have to be taken into account in self.answer as well.
      */
+#if TARGET_OS_IOS
     if ([self isKindOfClass:[ORKContinuousScaleAnswerFormat class]] && ![answer isKindOfClass:[ORKDontKnowAnswer class]]) {
         NSNumberFormatter* formatter = [(ORKContinuousScaleAnswerFormat*)self numberFormatter];
         answer = [formatter numberFromString:[formatter stringFromNumber:answer]];
     }
+#endif
     
     questionResult.answer = answer;
     questionResult.questionType = self.questionType;
@@ -583,6 +651,14 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return _showDontKnowButton;
 }
 
+- (nullable NSArray *)choices {
+    return nil;
+}
+
+- (BOOL)isValuePicker {
+    return NO;
+}
+
 @end
 
 
@@ -603,12 +679,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         if (![textObject isKindOfClass:[ORKTextChoice class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"The textChoices array should only containt objects of the ORKTextChoice kind." userInfo:@{@"nonConformingObject": textObject}];
         }
+#if TARGET_OS_IOS
         [choices addObject:[textObject isKindOfClass:[ORKTextChoiceOther class]] ? [textObject copyWithZone:nil] : textObject];
+#else
+        [choices addObject:textObject];
+#endif
     }
     return choices;
 }
 
-
+#if TARGET_OS_IOS
 @implementation ORKValuePickerAnswerFormat {
     ORKChoiceAnswerFormatHelper *_helper;
     ORKTextChoice *_nullTextChoice;
@@ -708,8 +788,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return NO;
 }
 
-@end
+- (NSArray *)choices {
+    return [@[self.nullTextChoice] arrayByAddingObjectsFromArray:self.textChoices];
+}
 
+- (BOOL)isValuePicker {
+    return YES;
+}
+
+@end
 
 #pragma mark - ORKMultipleValuePickerAnswerFormat
 
@@ -935,7 +1022,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return NO;
 }
 
+- (NSArray *)choices {
+    return self.imageChoices;
+}
+
 @end
+#endif
 
 
 #pragma mark - ORKTextChoiceAnswerFormat
@@ -1030,14 +1122,132 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return NO;
 }
 
+- (NSArray *)choices {
+    return self.textChoices;
+}
+
+- (BOOL)isAnswerInvalid:(id)answer {
+    @try
+    {
+        [_helper selectedIndexesForAnswer: answer];
+        return NO;
+    } @catch(id anException) {
+        ORK_Log_Error("%@ exception thrown for isAnswerInvalid: for answer:%@", anException, answer);
+        return YES;
+    }
+}
+
+@end
+
+
+#pragma mark - ORKColorChoiceAnswerFormat
+
+@interface ORKColorChoiceAnswerFormat () {
+
+    ORKChoiceAnswerFormatHelper *_helper;
+}
+
+@end
+
+
+@implementation ORKColorChoiceAnswerFormat
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
+                  colorChoices:(NSArray<ORKColorChoice *> *)colorChoices {
+    self = [super init];
+    if (self) {
+        _style = style;
+        _colorChoices = [colorChoices copy];
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    }
+    return self;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKColorChoiceAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] initWithStyle:_style
+                                                                                   colorChoices:[_colorChoices copy]];
+    return answerFormat;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(_colorChoices, castObject.colorChoices) &&
+            (_style == castObject.style));
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _colorChoices.hash ^ _style;
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_ARRAY(aDecoder, colorChoices, ORKColorChoice);
+        ORK_DECODE_ENUM(aDecoder, style);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, colorChoices);
+    ORK_ENCODE_ENUM(aCoder, style);
+    
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (ORKQuestionType)questionType {
+    return (_style == ORKChoiceAnswerStyleSingleChoice) ? ORKQuestionTypeSingleChoice : ORKQuestionTypeMultipleChoice;
+}
+
+- (Class)questionResultClass {
+    return [ORKChoiceQuestionResult class];
+}
+
+- (NSString *)stringForAnswer:(id)answer {
+    return [_helper stringForChoiceAnswer:answer];
+}
+
+- (BOOL)shouldShowDontKnowButton {
+    return NO;
+}
+
+- (NSArray *)choices {
+    return self.colorChoices;
+}
+
 @end
 
 
 #pragma mark - ORKTextChoice
 
+NSArray<Class> *ORKAllowableValueClasses(void) {
+    return @[[NSString class], [NSNumber class], [NSDate class], [NSNull class]];
+}
+
 @implementation ORKTextChoice {
     NSString *_text;
-    id<NSCopying, NSCoding, NSObject> _value;
+    NSObject<NSCopying, NSSecureCoding> *_value;
 }
 
 + (instancetype)new {
@@ -1048,26 +1258,73 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORKThrowMethodUnavailableException();
 }
 
-+ (instancetype)choiceWithText:(NSString *)text primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)detailText detailTextAttributedString:(NSAttributedString *)detailTextAttributedString value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
-    return [[ORKTextChoice alloc] initWithText:text primaryTextAttributedString:primaryTextAttributedString detailText:detailText detailTextAttributedString:detailTextAttributedString value:value exclusive:exclusive];
++ (instancetype)choiceWithText:(NSString *)text
+   primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString
+                    detailText:(NSString *)detailText
+    detailTextAttributedString:(NSAttributedString *)detailTextAttributedString
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value exclusive:(BOOL)exclusive {
+    return [[ORKTextChoice alloc] initWithText:text
+                   primaryTextAttributedString:primaryTextAttributedString
+                                    detailText:detailText
+                    detailTextAttributedString:detailTextAttributedString
+                                         value:value
+                                     exclusive:exclusive];
 }
 
-+ (instancetype)choiceWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive {
-    ORKTextChoice *option = [[ORKTextChoice alloc] initWithText:text detailText:detailText value:value exclusive:exclusive];
++ (instancetype)choiceWithText:(NSString *)text
+                    detailText:(NSString *)detailText
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value exclusive:(BOOL)exclusive {
+    ORKTextChoice *option = [[ORKTextChoice alloc] initWithText:text
+                                                     detailText:detailText
+                                                          value:value
+                                                      exclusive:exclusive];
     return option;
 }
 
-+ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value {
++ (instancetype)choiceWithText:(NSString *)text value:(NSObject<NSCopying, NSSecureCoding> *)value {
     return [ORKTextChoice choiceWithText:text detailText:nil value:value exclusive:NO];
 }
 
-- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
-    return [self initWithText:text primaryTextAttributedString:nil detailText:detailText detailTextAttributedString:nil value:value exclusive:exclusive];
++ (instancetype)choiceWithText:(NSString *)text image:(UIImage *)image value:(NSObject<NSCopying, NSSecureCoding> *)value {
+    ORKTextChoice *option = [ORKTextChoice choiceWithText:text detailText:nil value:value exclusive:NO];
+    option.image = image;
+    
+    return option;
 }
 
-- (instancetype)initWithText:(NSString *)text primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)detailText detailTextAttributedString:(NSAttributedString *)detailTextAttributedString value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
+- (instancetype)initWithText:(NSString *)text
+                  detailText:(NSString *)detailText
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
+                   exclusive:(BOOL)exclusive {
+    return [self initWithText:text
+  primaryTextAttributedString:nil
+                   detailText:detailText
+   detailTextAttributedString:nil
+                        value:value
+                    exclusive:exclusive];
+}
+
+- (instancetype)initWithText:(NSString *)text
+ primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString
+                  detailText:(NSString *)detailText
+  detailTextAttributedString:(NSAttributedString *)detailTextAttributedString
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value exclusive:(BOOL)exclusive {
     if (!text && !primaryTextAttributedString && !detailText && !detailTextAttributedString) {
-        NSAssert(NO, @"All the input parameters cannot be nil, please provide at least one non-nil value.");
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"All the input parameters cannot be nil, please provide at least one non-nil value."
+                                     userInfo:nil];
+    }
+    BOOL isValueAnAllowedClass = NO;
+    for (Class c in ORKAllowableValueClasses()) {
+        if ([value isKindOfClass:c]) {
+            isValueAnAllowedClass = YES;
+            break;
+        }
+    }
+    if (!isValueAnAllowedClass) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"'value' must be an NSString, NSNumber or NSDate"
+                                     userInfo:nil];
     }
     self = [super init];
     if (self) {
@@ -1101,6 +1358,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             && ORKEqualObjects(self.detailText, castObject.detailText)
             && ORKEqualObjects(self.detailTextAttributedString, castObject.detailTextAttributedString)
             && ORKEqualObjects(self.value, castObject.value)
+            && ORKEqualObjects(self.image, castObject.image)
             && self.exclusive == castObject.exclusive);
 }
 
@@ -1116,8 +1374,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ_CLASS(aDecoder, primaryTextAttributedString, NSAttributedString);
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, detailTextAttributedString, NSAttributedString);
-        ORK_DECODE_OBJ(aDecoder, value);
+        ORK_DECODE_OBJ_CLASSES(aDecoder, value, ORKAllowableValueClasses());
         ORK_DECODE_BOOL(aDecoder, exclusive);
+        ORK_DECODE_IMAGE(aDecoder, image);
     }
     return self;
 }
@@ -1127,6 +1386,96 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, primaryTextAttributedString);
     ORK_ENCODE_OBJ(aCoder, detailText);
     ORK_ENCODE_OBJ(aCoder, detailTextAttributedString);
+    ORK_ENCODE_OBJ(aCoder, value);
+    ORK_ENCODE_BOOL(aCoder, exclusive);
+    ORK_ENCODE_IMAGE(aCoder, image);
+}
+
+- (BOOL)shouldShowDontKnowButton {
+    return NO;
+}
+
+@end
+
+
+#pragma mark - ORKColorChoice
+
+@implementation ORKColorChoice
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithColor:(UIColor *)color
+                         text:(NSString *)text
+                   detailText:(NSString *)detailText
+                        value:(NSObject<NSCopying,NSSecureCoding> *)value
+                    exclusive:(BOOL)exclusive {
+    self = [super init];
+    
+    if (self) {
+        _color = [color copy];
+        _text = [text copy];
+        _detailText = [detailText copy];
+        _value = [value copy];
+        _exclusive = exclusive;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithColor:(UIColor *)color
+                         text:(NSString *)text
+                   detailText:(NSString *)detailText
+                        value:(NSObject<NSCopying,NSSecureCoding> *)value {
+    return [self initWithColor:color text:text detailText:detailText value:value exclusive:NO];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(self.text, castObject.text)
+            && ORKEqualObjects(self.detailText, castObject.detailText)
+            && ORKEqualObjects(self.value, castObject.value)
+            && ORKEqualObjects(self.color, castObject.color)
+            && self.exclusive == castObject.exclusive);
+}
+
+- (NSUInteger)hash {
+    return _text.hash ^ _detailText.hash ^ _value.hash ^ _color.hash;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, color, UIColor);
+        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+        ORK_DECODE_OBJ_CLASSES(aDecoder, value, ORKAllowableValueClasses());
+        ORK_DECODE_BOOL(aDecoder, exclusive);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, text);
+    ORK_ENCODE_OBJ(aCoder, color);
+    ORK_ENCODE_OBJ(aCoder, detailText);
     ORK_ENCODE_OBJ(aCoder, value);
     ORK_ENCODE_BOOL(aCoder, exclusive);
 }
@@ -1139,7 +1488,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 
 #pragma mark - ORKTextChoiceOther
-
+#if TARGET_OS_IOS
 @implementation ORKTextChoiceOther
 
 + (instancetype)new {
@@ -1152,10 +1501,19 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 + (instancetype)choiceWithText:(NSString *)text
                     detailText:(NSString *)detailText
-                         value:(id<NSCopying, NSCoding, NSObject>)value
+                         value:(NSObject<NSCopying, NSSecureCoding> *)value
                      exclusive:(BOOL)exclusive
        textViewPlaceholderText:(NSString *)textViewPlaceholderText {
-    ORKTextChoiceOther *option = [[ORKTextChoiceOther alloc] initWithText:text primaryTextAttributedString:nil detailText:detailText detailTextAttributedString:nil value:value exclusive:exclusive textViewPlaceholderText:textViewPlaceholderText textViewInputOptional:YES textViewStartsHidden:YES];
+    ORKThrowInvalidArgumentExceptionIfNotEqual(text, value);
+    ORKTextChoiceOther *option = [[ORKTextChoiceOther alloc] initWithText:text
+                                              primaryTextAttributedString:nil
+                                                               detailText:detailText
+                                               detailTextAttributedString:nil
+                                                                    value:value
+                                                                exclusive:exclusive
+                                                  textViewPlaceholderText:textViewPlaceholderText
+                                                    textViewInputOptional:YES
+                                                     textViewStartsHidden:YES];
     return option;
 }
 
@@ -1163,7 +1521,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
  primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString
                   detailText:(NSString *)detailText
   detailTextAttributedString:(NSAttributedString *)detailTextAttributedString
-                       value:(id<NSCopying,NSCoding,NSObject>)value
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
                    exclusive:(BOOL)exclusive
      textViewPlaceholderText:(NSString *)textViewPlaceholderText
        textViewInputOptional:(BOOL)textViewInputOptional
@@ -1216,7 +1574,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             && self.exclusive == castObject.exclusive
             && ORKEqualObjects(self.textViewPlaceholderText, castObject.textViewPlaceholderText)
             && self.textViewInputOptional == castObject.textViewInputOptional
-            && self.textViewStartsHidden == castObject.textViewStartsHidden);
+            && self.textViewStartsHidden == castObject.textViewStartsHidden)
+            && ORKEqualObjects(self.image, castObject.image);
 }
 
 - (NSUInteger)hash {
@@ -1246,14 +1605,18 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @end
 
+
 #pragma mark - ORKImageChoice
 
 @implementation ORKImageChoice {
     NSString *_text;
-    id<NSCopying, NSCoding, NSObject> _value;
+    NSObject<NSCopying, NSSecureCoding> *_value;
 }
 
-+ (instancetype)choiceWithNormalImage:(UIImage *)normal selectedImage:(UIImage *)selected text:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value {
++ (instancetype)choiceWithNormalImage:(UIImage *)normal
+                        selectedImage:(UIImage *)selected
+                                 text:(NSString *)text
+                                value:(NSObject<NSCopying, NSSecureCoding> *)value {
     return [[ORKImageChoice alloc] initWithNormalImage:normal selectedImage:selected text:text value:value];
 }
 
@@ -1265,7 +1628,22 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)initWithNormalImage:(UIImage *)normal selectedImage:(UIImage *)selected text:(NSString *)text value:(id<NSCopying,NSCoding,NSObject>)value {
+- (instancetype)initWithNormalImage:(UIImage *)normal
+                      selectedImage:(UIImage *)selected
+                               text:(NSString *)text
+                              value:(NSObject<NSCopying, NSSecureCoding> *)value {
+    BOOL isValueAnAllowedClass = NO;
+    for (Class c in ORKAllowableValueClasses()) {
+        if ([value isKindOfClass:c]) {
+            isValueAnAllowedClass = YES;
+            break;
+        }
+    }
+    if (!isValueAnAllowedClass) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"'value' must be an NSString, NSNumber or NSDate"
+                                     userInfo:nil];
+    }
     self = [super init];
     if (self) {
         _text = [text copy];
@@ -1288,7 +1666,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return _text;
 }
 
-- (id<NSCopying, NSCoding>)value {
+- (NSObject<NSCopying, NSSecureCoding> *)value {
     return _value;
 }
 
@@ -1315,7 +1693,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super init];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
-        ORK_DECODE_OBJ(aDecoder, value);
+        ORK_DECODE_OBJ_CLASSES(aDecoder, value, ORKAllowableValueClasses());
         ORK_DECODE_IMAGE(aDecoder, normalStateImage);
         ORK_DECODE_IMAGE(aDecoder, selectedStateImage);
     }
@@ -1334,6 +1712,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 @end
+#endif
 
 
 #pragma mark - ORKBooleanAnswerFormat
@@ -1421,7 +1800,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 
 #pragma mark - ORKTimeOfDayAnswerFormat
-
+#if TARGET_OS_IOS
 @implementation ORKTimeOfDayAnswerFormat
 
 - (instancetype)init {
@@ -1535,9 +1914,49 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _maximumDate = [maximum copy];
         _calendar = [calendar copy];
         _minuteInterval = 1;
+        self.dontKnowButtonStyle = ORKDontKnowButtonStyleCircleChoice;
         [self validateParameters];
     }
     return self;
+}
+
+- (void)_setCurrentDateOverride:(NSDate *)currentDateOverride {
+    _currentDateOverride = currentDateOverride;
+}
+
+- (NSDate *)_currentDate {
+    return _currentDateOverride ? : [NSDate date];
+}
+
+- (void)setIsMaxDateCurrentTime:(BOOL)isMaxDateCurrentTime {
+    _isMaxDateCurrentTime = isMaxDateCurrentTime;
+    
+    if (isMaxDateCurrentTime) {
+        _maximumDate = [self _currentDate];
+    }
+}
+
+- (void)setDaysBeforeCurrentDateToSetMinimumDate:(NSInteger)daysBefore {
+    _daysBeforeCurrentDateToSetMinimumDate = daysBefore;
+    _minimumDate = [self fetchDateBasedOnDays:daysBefore forBefore:YES];
+}
+
+- (void)setDaysAfterCurrentDateToSetMinimumDate:(NSInteger)daysAfter {
+    _daysAfterCurrentDateToSetMinimumDate = daysAfter;
+    _maximumDate = [self fetchDateBasedOnDays:daysAfter forBefore:NO];
+}
+
+- (NSDate *)fetchDateBasedOnDays:(NSInteger)days forBefore:(BOOL)forBefore {
+    if (days < 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"The value passed in for daysBeforeCurrentDateToSetMinimumDate must be greater than 0."  userInfo:nil];
+    }
+    
+    NSDate *currentDate = [self _currentDate];
+    
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:forBefore ? -days : days];
+    
+    return [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:currentDate options:0];
 }
 
 - (void)validateParameters {
@@ -1545,15 +1964,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     if ((_minimumDate && _maximumDate) ? ([_minimumDate compare:_maximumDate] == NSOrderedDescending) : false) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"Minimum date should be before the maximum date"]
+                                       reason:@"Minimum date should be before the maximum date"
                                      userInfo:nil];
     } else if((_defaultDate && _minimumDate) ? ([_defaultDate compare:_minimumDate] == NSOrderedAscending) : false) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"Default date should not be less than the minumum date"]
+                                       reason:@"Default date should not be less than the minumum date"
                                      userInfo:nil];
     } else if ((_defaultDate && _maximumDate) ? ([_defaultDate compare:_maximumDate] == NSOrderedDescending) : false) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"Default date should not be more than the maximum date"]
+                                       reason:@"Default date should not be more than the maximum date"
                                      userInfo:nil];
     }
 }
@@ -1566,6 +1985,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             ORKEqualObjects(self.defaultDate, castObject.defaultDate) &&
             ORKEqualObjects(self.minimumDate, castObject.minimumDate) &&
             ORKEqualObjects(self.maximumDate, castObject.maximumDate) &&
+            self.isMaxDateCurrentTime == castObject.isMaxDateCurrentTime &&
             ORKEqualObjects(self.calendar, castObject.calendar) &&
             (self.minuteInterval == castObject.minuteInterval) &&
             (_style == castObject.style));
@@ -1614,7 +2034,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSDate *)pickerDefaultDate {
-    return (self.defaultDate ? : [NSDate date]);
+    return (self.defaultDate ? : [self _currentDate]);
     
 }
 
@@ -1633,6 +2053,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ_CLASS(aDecoder, minimumDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, maximumDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultDate, NSDate);
+        ORK_DECODE_BOOL(aDecoder, isMaxDateCurrentTime);
         ORK_DECODE_OBJ_CLASS(aDecoder, calendar, NSCalendar);
         ORK_DECODE_INTEGER(aDecoder, minuteInterval);
     }
@@ -1645,6 +2066,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, minimumDate);
     ORK_ENCODE_OBJ(aCoder, maximumDate);
     ORK_ENCODE_OBJ(aCoder, defaultDate);
+    ORK_ENCODE_BOOL(aCoder, isMaxDateCurrentTime);
     ORK_ENCODE_OBJ(aCoder, calendar);
     ORK_ENCODE_INTEGER(aCoder, minuteInterval);
 }
@@ -1689,7 +2111,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          unit:(NSString *)unit
                       minimum:(NSNumber *)minimum
                       maximum:(NSNumber *)maximum {
-    return [self initWithStyle:style unit:unit minimum:minimum maximum:maximum maximumFractionDigits:nil];
+    return [self initWithStyle:style unit:unit displayUnit:unit minimum:minimum maximum:maximum maximumFractionDigits:nil];
 }
 
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
@@ -1697,15 +2119,26 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                       minimum:(NSNumber *)minimum
                       maximum:(NSNumber *)maximum
         maximumFractionDigits:(NSNumber *)maximumFractionDigits {
+    return [self initWithStyle:style unit:unit displayUnit:unit minimum:minimum maximum:maximum maximumFractionDigits:maximumFractionDigits];
+}
+
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(NSString *)unit
+                  displayUnit:(NSString *)displayUnit
+                      minimum:(NSNumber *)minimum
+                      maximum:(NSNumber *)maximum
+        maximumFractionDigits:(NSNumber *)maximumFractionDigits {
     self = [super init];
     if (self) {
         _style = style;
         _unit = [unit copy];
+        _displayUnit = [displayUnit copy];
         _minimum = [minimum copy];
         _maximum = [maximum copy];
         _maximumFractionDigits = [maximumFractionDigits copy];
         _hideUnitWhenAnswerIsEmpty = YES;
         _placeholder = nil;
+        self.dontKnowButtonStyle = ORKDontKnowButtonStyleCircleChoice;
         
         [self validateParameters];
     }
@@ -1725,6 +2158,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self) {
         ORK_DECODE_ENUM(aDecoder, style);
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, displayUnit, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, minimum, NSNumber);
         ORK_DECODE_OBJ_CLASS(aDecoder, maximum, NSNumber);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultNumericAnswer, NSNumber);
@@ -1739,6 +2173,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, style);
     ORK_ENCODE_OBJ(aCoder, unit);
+    ORK_ENCODE_OBJ(aCoder, displayUnit);
     ORK_ENCODE_OBJ(aCoder, minimum);
     ORK_ENCODE_OBJ(aCoder, maximum);
     ORK_ENCODE_OBJ(aCoder, defaultNumericAnswer);
@@ -1754,6 +2189,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKNumericAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] initWithStyle:_style
                                                                                        unit:[_unit copy]
+                                                                                displayUnit:[_displayUnit copy]
                                                                                     minimum:[_minimum copy]
                                                                                     maximum:[_maximum copy]
                                                                       maximumFractionDigits:[_maximumFractionDigits copy]];
@@ -1762,6 +2198,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     answerFormat->_placeholder = [_placeholder copy];
     answerFormat.showDontKnowButton = self.showDontKnowButton;
     answerFormat.customDontKnowButtonText = [self.customDontKnowButtonText copy];
+    answerFormat.dontKnowButtonStyle = self.dontKnowButtonStyle;
     return answerFormat;
 }
 
@@ -1772,6 +2209,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (isParentSame &&
             _style == castObject.style &&
             ORKEqualObjects(self.unit, castObject.unit) &&
+            ORKEqualObjects(self.displayUnit, castObject.displayUnit) &&
             ORKEqualObjects(self.minimum, castObject.minimum) &&
             ORKEqualObjects(self.maximum, castObject.maximum) &&
             ORKEqualObjects(self.defaultNumericAnswer, castObject.defaultNumericAnswer) &&
@@ -2084,8 +2522,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_BOOL(aDecoder, hideRanges);
         ORK_DECODE_BOOL(aDecoder, hideLabels);
         ORK_DECODE_BOOL(aDecoder, hideValueMarkers);
-        ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
-        ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_OBJ_CLASS(aDecoder, maximumValueDescription, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, minimumValueDescription, NSString);
         ORK_DECODE_IMAGE(aDecoder, maximumImage);
         ORK_DECODE_IMAGE(aDecoder, minimumImage);
         ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
@@ -2271,8 +2709,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)validateParameters {
     [super validateParameters];
     
-    const double ORKScaleAnswerFormatValueLowerbound = -10000;
-    const double ORKScaleAnswerFormatValueUpperbound = 10000;
+    const double ORKScaleAnswerFormatValueLowerbound = -100000;
+    const double ORKScaleAnswerFormatValueUpperbound = 100000;
     
     // Just clamp maximumFractionDigits to be 0-4. This is all aimed at keeping the maximum
     // number of digits down to 6 or less.
@@ -2311,8 +2749,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_BOOL(aDecoder, hideSelectedValue);
         ORK_DECODE_BOOL(aDecoder, hideLabels);
         ORK_DECODE_BOOL(aDecoder, hideRanges);
-        ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
-        ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_OBJ_CLASS(aDecoder, maximumValueDescription, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, minimumValueDescription, NSString);
         ORK_DECODE_IMAGE(aDecoder, maximumImage);
         ORK_DECODE_IMAGE(aDecoder, minimumImage);
         ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
@@ -2389,7 +2827,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 
 #pragma mark - ORKTextScaleAnswerFormat
-
+#if TARGET_OS_IOS
 @interface ORKTextScaleAnswerFormat () {
     
     ORKChoiceAnswerFormatHelper *_helper;
@@ -2446,11 +2884,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSNumber *)maximumNumber {
     return @(_textChoices.count);
 }
-- (id<NSObject, NSCopying, NSCoding>)defaultAnswer {
+- (NSObject<NSCopying, NSSecureCoding> *)defaultAnswer {
     if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
         return nil;
     }
-    id<NSCopying, NSCoding, NSObject> value = [self textChoiceAtIndex:_defaultIndex].value;
+    NSObject<NSCopying, NSSecureCoding> *value = [self textChoiceAtIndex:_defaultIndex].value;
     return value ? @[value] : nil;
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
@@ -2495,7 +2933,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return _textChoices[index];
 }
 
-- (ORKTextChoice *)textChoiceForValue:(id<NSCopying, NSCoding, NSObject>)value {
+- (ORKTextChoice *)textChoiceForValue:(NSObject<NSCopying, NSSecureCoding> *)value {
     __block ORKTextChoice *choice = nil;
     
     [_textChoices enumerateObjectsUsingBlock:^(ORKTextChoice * _Nonnull textChoice, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -2508,7 +2946,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return choice;
 }
 
-- (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value {
+- (NSUInteger)textChoiceIndexForValue:(NSObject<NSCopying, NSSecureCoding> *)value {
     ORKTextChoice *choice = [self textChoiceForValue:value];
     return choice ? [_textChoices indexOfObject:choice] : NSNotFound;
 }
@@ -2594,26 +3032,43 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return _hideValueMarkers;
 }
 
+- (NSArray *)choices {
+    return self.textChoices;
+}
+
 @end
+
+#endif
 
 
 #pragma mark - ORKTextAnswerFormat
 
+@interface ORKTextAnswerFormat()
+
+
+@end
+
 @implementation ORKTextAnswerFormat
+
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
 }
 
 - (void)commonInit {
+#if TARGET_OS_IOS
     _autocapitalizationType = UITextAutocapitalizationTypeSentences;
     _autocorrectionType = UITextAutocorrectionTypeDefault;
     _spellCheckingType = UITextSpellCheckingTypeDefault;
     _keyboardType = UIKeyboardTypeDefault;
+    self.dontKnowButtonStyle = ORKDontKnowButtonStyleCircleChoice;
+#endif
     _multipleLines = NO;
     _hideClearButton = NO;
     _hideCharacterCountLabel = NO;
+    
 }
+
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
     self = [super init];
@@ -2662,22 +3117,25 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     answerFormat->_validationRegularExpression = [_validationRegularExpression copy];
     answerFormat->_invalidMessage = [_invalidMessage copy];
     answerFormat->_defaultTextAnswer = [_defaultTextAnswer copy];
-    answerFormat->_autocapitalizationType = _autocapitalizationType;
-    answerFormat->_autocorrectionType = _autocorrectionType;
-    answerFormat->_spellCheckingType = _spellCheckingType;
-    answerFormat->_keyboardType = _keyboardType;
     answerFormat->_multipleLines = _multipleLines;
     answerFormat->_hideClearButton = _hideClearButton;
     answerFormat->_hideCharacterCountLabel = _hideCharacterCountLabel;
     answerFormat->_secureTextEntry = _secureTextEntry;
-    answerFormat->_textContentType = _textContentType;
     answerFormat->_placeholder = _placeholder;
     answerFormat.showDontKnowButton = self.showDontKnowButton;
     answerFormat.customDontKnowButtonText = [self.customDontKnowButtonText copy];
-
+    answerFormat.dontKnowButtonStyle = self.dontKnowButtonStyle;
+#if TARGET_OS_IOS
+    answerFormat->_autocapitalizationType = _autocapitalizationType;
+    answerFormat->_autocorrectionType = _autocorrectionType;
+    answerFormat->_spellCheckingType = _spellCheckingType;
+    answerFormat->_keyboardType = _keyboardType;
+    answerFormat->_textContentType = _textContentType;
+    
     if (@available(iOS 12.0, *)) {
         answerFormat->_passwordRules = _passwordRules;
     }
+#endif
     
     return answerFormat;
 }
@@ -2742,11 +3200,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     // Copy from ORKTextAnswerFormat being confirmed
     answerFormat->_maximumLength = _maximumLength;
-    answerFormat->_keyboardType = _keyboardType;
     answerFormat->_multipleLines = _multipleLines;
     answerFormat->_hideClearButton = _hideClearButton;
     answerFormat->_hideCharacterCountLabel = _hideCharacterCountLabel;
     answerFormat->_secureTextEntry = _secureTextEntry;
+#if TARGET_OS_IOS
+    answerFormat->_keyboardType = _keyboardType;
     answerFormat->_autocapitalizationType = _autocapitalizationType;
     answerFormat->_textContentType = _textContentType;
     
@@ -2757,6 +3216,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     // Always set to no autocorrection or spell checking
     answerFormat->_autocorrectionType = UITextAutocorrectionTypeNo;
     answerFormat->_spellCheckingType = UITextSpellCheckingTypeNo;
+#endif
     answerFormat->_placeholder = _placeholder;
     
     return answerFormat;
@@ -2772,6 +3232,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ_CLASS(aDecoder, validationRegularExpression, NSRegularExpression);
         ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultTextAnswer, NSString);
+#if TARGET_OS_IOS
         ORK_DECODE_OBJ_CLASS(aDecoder, textContentType, NSString);
         if (@available(iOS 12.0, *)) {
             ORK_DECODE_OBJ_CLASS(aDecoder, passwordRules, UITextInputPasswordRules);
@@ -2780,6 +3241,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
         ORK_DECODE_ENUM(aDecoder, keyboardType);
+#endif
         ORK_DECODE_BOOL(aDecoder, multipleLines);
         ORK_DECODE_BOOL(aDecoder, hideClearButton);
         ORK_DECODE_BOOL(aDecoder, hideCharacterCountLabel);
@@ -2795,6 +3257,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, validationRegularExpression);
     ORK_ENCODE_OBJ(aCoder, invalidMessage);
     ORK_ENCODE_OBJ(aCoder, defaultTextAnswer);
+#if TARGET_OS_IOS
     ORK_ENCODE_OBJ(aCoder, textContentType);
     if (@available(iOS 12.0, *)) {
         ORK_ENCODE_OBJ(aCoder, passwordRules);
@@ -2803,6 +3266,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
     ORK_ENCODE_ENUM(aCoder, keyboardType);
+#endif
     ORK_ENCODE_BOOL(aCoder, multipleLines);
     ORK_ENCODE_BOOL(aCoder, hideClearButton);
     ORK_ENCODE_BOOL(aCoder, hideCharacterCountLabel);
@@ -2816,29 +3280,34 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
-    BOOL equalPasswordRules = YES;
+
     
     __typeof(self) castObject = object;
-    
+#if TARGET_OS_IOS
+    BOOL equalPasswordRules = YES;
     if (@available(iOS 12.0, *)) {
         equalPasswordRules = ORKEqualObjects(self.passwordRules, castObject.passwordRules);
     }
+#endif
     return (isParentSame &&
             (self.maximumLength == castObject.maximumLength &&
              ORKEqualObjects(self.validationRegularExpression, castObject.validationRegularExpression) &&
              ORKEqualObjects(self.invalidMessage, castObject.invalidMessage) &&
              ORKEqualObjects(self.defaultTextAnswer, castObject.defaultTextAnswer) &&
+#if TARGET_OS_IOS
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              ORKEqualObjects(self.textContentType, castObject.textContentType) &&
              equalPasswordRules &&
+#endif
              self.multipleLines == castObject.multipleLines &&
              self.hideClearButton == castObject.hideClearButton &&
              self.hideCharacterCountLabel == castObject.hideCharacterCountLabel) &&
              self.secureTextEntry == castObject.secureTextEntry) &&
-             ORKEqualObjects(self.placeholder, castObject.placeholder);
+             ORKEqualObjects(self.placeholder, castObject.placeholder)
+             ;
 }
 
 static NSString *const kSecureTextEntryEscapeString = @"*";
@@ -2848,7 +3317,15 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     if ([self isAnswerValid:answer]) {
         answerString = _secureTextEntry ? [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0] : answer;
     }
+
     return answerString;
+}
+
+
+- (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
+    ORKQuestionResult *questionResult = nil;
+    questionResult = (ORKQuestionResult *)[super resultWithIdentifier:identifier answer:answer];
+    return questionResult;
 }
 
 @end
@@ -2877,12 +3354,15 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         NSString *invalidMessage = ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil);
         _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegularExpression:validationRegularExpression
                                                                                      invalidMessage:invalidMessage];
-        _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
         _impliedAnswerFormat.multipleLines = NO;
+#if TARGET_OS_IOS
+        _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
+
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         _impliedAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _impliedAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         _impliedAnswerFormat.textContentType = UITextContentTypeEmailAddress;
+#endif
     }
     return _impliedAnswerFormat;
 }
@@ -2893,10 +3373,14 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 
 - (void)setUsernameField:(BOOL)usernameField {
     _usernameField = usernameField;
+#if TARGET_OS_IOS
     if ([self.impliedAnswerFormat isMemberOfClass:[ORKTextAnswerFormat class]]) {
         ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)self.impliedAnswerFormat;
+
         textFormat.textContentType = usernameField ? UITextContentTypeUsername : UITextContentTypeEmailAddress;
+
     }
+#endif
 }
 
 @end
@@ -3096,6 +3580,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     self = [super init];
     if (self) {
         _measurementSystem = measurementSystem;
+        self.dontKnowButtonStyle = ORKDontKnowButtonStyleCircleChoice;
     }
     return self;
 }
@@ -3222,6 +3707,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         _minimumValue = minimumValue;
         _maximumValue = maximumValue;
         _defaultValue = defaultValue;
+        self.dontKnowButtonStyle = ORKDontKnowButtonStyleCircleChoice;
     }
     return self;
 }
@@ -3303,8 +3789,238 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 @end
 
 
-#pragma mark - ORKLocationAnswerFormat
+#pragma mark - ORKAgeAnswerFormat
 
+static const NSInteger ORKAgeAnswerDefaultMinAge = 1;
+static const NSInteger ORKAgeAnswerDefaultMaxAge = 125;
+
+@implementation ORKAgeAnswerFormat
+
+- (Class)questionResultClass {
+    return [ORKNumericQuestionResult class];
+}
+
+- (instancetype)init {
+    
+    return [self initWithMinimumAge:ORKAgeAnswerDefaultMinAge
+                         maximumAge:ORKAgeAnswerDefaultMaxAge
+               minimumAgeCustomText:nil
+               maximumAgeCustomText:nil
+                           showYear:NO
+                   useYearForResult:NO
+                       defaultValue:ORKAgeAnswerDefaultMinAge];
+}
+
+- (instancetype)initWithMinimumAge:(NSInteger)minimumAge maximumAge:(NSInteger)maximumAge {
+    return [self initWithMinimumAge:minimumAge
+                         maximumAge:maximumAge
+               minimumAgeCustomText:nil
+               maximumAgeCustomText:nil
+                           showYear:NO
+                   useYearForResult:NO
+                       defaultValue:minimumAge];
+
+}
+
+- (instancetype)initWithMinimumAge:(NSInteger)minimumAge
+                        maximumAge:(NSInteger)maximumAge
+              minimumAgeCustomText:(nullable NSString *)minimumAgeCustomText
+              maximumAgeCustomText:(nullable NSString *)maximumAgeCustomText
+                          showYear:(BOOL)showYear
+                  useYearForResult:(BOOL)useYearForResult
+                      defaultValue:(NSInteger)defaultValue {
+   return [self initWithMinimumAge:minimumAge
+                        maximumAge:maximumAge
+              minimumAgeCustomText:minimumAgeCustomText
+              maximumAgeCustomText:maximumAgeCustomText
+                          showYear:showYear
+                  useYearForResult:useYearForResult
+                treatMinAgeAsRange:NO
+                treatMaxAgeAsRange:NO
+                      defaultValue:defaultValue];
+}
+
+- (instancetype)initWithMinimumAge:(NSInteger)minimumAge
+                        maximumAge:(NSInteger)maximumAge
+              minimumAgeCustomText:(nullable NSString *)minimumAgeCustomText
+              maximumAgeCustomText:(nullable NSString *)maximumAgeCustomText
+                          showYear:(BOOL)showYear
+                  useYearForResult:(BOOL)useYearForResult
+                treatMinAgeAsRange:(BOOL)treatMinAgeAsRange
+                treatMaxAgeAsRange:(BOOL)treatMaxAgeAsRange
+                      defaultValue:(NSInteger)defaultValue {
+    if (minimumAge < 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason: [NSString stringWithFormat:@"minimumAge must be greater than 0. (%li) - (%li)", minimumAge, maximumAge]
+                                     userInfo:nil];
+       
+    }
+    
+    if (maximumAge > 150) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"maximumAge must be lower than 150."
+                                     userInfo:nil];
+    }
+    
+    if (minimumAge >= maximumAge) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:[NSString stringWithFormat:@"minimumAge must be less than maximumAge. (%li) - (%li)", minimumAge, maximumAge]
+                                     userInfo:nil];
+    }
+
+    
+    self = [super init];
+    
+    if (self) {
+        _minimumAge = minimumAge;
+        _maximumAge = maximumAge;
+        _minimumAgeCustomText = [minimumAgeCustomText copy];
+        _maximumAgeCustomText = [maximumAgeCustomText copy];
+        _showYear = showYear;
+        _useYearForResult = useYearForResult;
+        _treatMinAgeAsRange = treatMinAgeAsRange;
+        _treatMaxAgeAsRange = treatMaxAgeAsRange;
+        _relativeYear = [self currentYear];
+        _defaultValue = defaultValue;
+    }
+    
+    return self;
+}
+
++ (int)minimumAgeSentinelValue {
+    return -1;
+}
+
++ (int)maximumAgeSentinelValue {
+    return -2;
+}
+
+- (NSInteger)currentYear {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
+    return [components year];
+}
+
+- (NSString *)stringForAnswer:(id)answer {
+    NSString *answerString = nil;
+    
+    if (!ORKIsAnswerEmpty(answer)) {
+        NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
+        answerString = [formatter stringFromNumber:(NSNumber *)answer];
+    }
+    
+    if (answerString) {
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
+        NSInteger currentYear = [components year];
+        
+        int maxYear = currentYear - _minimumAge;
+        int minYear = currentYear - _maximumAge;
+        
+        NSString *minAgeText = _minimumAgeCustomText ? : [NSString stringWithFormat:ORKLocalizedString(@"AGEPICKER_OR_YOUNGER", ""), (long)_minimumAge];
+        NSString *maxAgeText = _maximumAgeCustomText ? : [NSString stringWithFormat:ORKLocalizedString(@"AGEPICKER_OR_OLDER", ""), (long)_maximumAge];
+        
+        int value = [answerString intValue];
+        
+        if (value < 0) {
+            // pass back necessary text if sentinel value is selected
+            answerString = value == [ORKAgeAnswerFormat minimumAgeSentinelValue] ? minAgeText : maxAgeText;
+        } else if (_useYearForResult) {
+            // pass back necessary text if min or max year is selected
+            if ((value >= maxYear || value <= minYear)) {
+                answerString = value <= minYear ? maxAgeText : minAgeText;
+            }
+        } else if ((value == _minimumAge && _minimumAgeCustomText ) || (value == _maximumAge && _maximumAgeCustomText)) {
+            answerString = value == _minimumAge ? _minimumAgeCustomText : _maximumAgeCustomText;
+        } else if ((value == minYear && _minimumAgeCustomText) || (value == maxYear && _maximumAgeCustomText)) {
+            answerString = value == minYear ? _minimumAgeCustomText : _maximumAgeCustomText;
+        }
+    }
+    
+    return answerString;
+}
+
+- (ORKQuestionType)questionType {
+    return _useYearForResult ? ORKQuestionTypeYear : ORKQuestionTypeAge;
+}
+
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKAgeAnswerFormat *ageAnswerFormat = [super copyWithZone:zone];
+    ageAnswerFormat->_minimumAge = _minimumAge;
+    ageAnswerFormat->_maximumAge = _maximumAge;
+    ageAnswerFormat->_minimumAgeCustomText = [_minimumAgeCustomText copy];
+    ageAnswerFormat->_maximumAgeCustomText = [_maximumAgeCustomText copy];
+    ageAnswerFormat->_showYear = _showYear;
+    ageAnswerFormat->_useYearForResult = _useYearForResult;
+    ageAnswerFormat->_treatMinAgeAsRange = _treatMinAgeAsRange;
+    ageAnswerFormat->_treatMaxAgeAsRange = _treatMaxAgeAsRange;
+    ageAnswerFormat->_relativeYear = _relativeYear;
+    ageAnswerFormat->_defaultValue = _defaultValue;
+    return ageAnswerFormat;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (_minimumAge == castObject->_minimumAge) &&
+            (_maximumAge == castObject->_maximumAge) &&
+            (_relativeYear == castObject->_relativeYear) &&
+            ORKEqualObjects(_minimumAgeCustomText, castObject->_minimumAgeCustomText) &&
+            ORKEqualObjects(_maximumAgeCustomText, castObject->_maximumAgeCustomText) &&
+            (_showYear == castObject->_showYear) &&
+            (_useYearForResult == castObject->_useYearForResult) &&
+            (_treatMinAgeAsRange == castObject->_treatMinAgeAsRange) &&
+            (_treatMaxAgeAsRange == castObject->_treatMaxAgeAsRange) &&
+            (_defaultValue == castObject->_defaultValue));
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, minimumAge);
+        ORK_DECODE_INTEGER(aDecoder, maximumAge);
+        ORK_DECODE_OBJ_CLASS(aDecoder, minimumAgeCustomText, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, maximumAgeCustomText, NSString);
+        ORK_DECODE_BOOL(aDecoder, showYear);
+        ORK_DECODE_BOOL(aDecoder, useYearForResult);
+        ORK_DECODE_BOOL(aDecoder, treatMinAgeAsRange);
+        ORK_DECODE_BOOL(aDecoder, treatMaxAgeAsRange);
+        ORK_DECODE_BOOL(aDecoder, useYearForResult);
+        ORK_DECODE_INTEGER(aDecoder, defaultValue);
+        ORK_DECODE_INTEGER(aDecoder, relativeYear);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, minimumAge);
+    ORK_ENCODE_INTEGER(aCoder, maximumAge);
+    ORK_ENCODE_OBJ(aCoder, minimumAgeCustomText);
+    ORK_ENCODE_OBJ(aCoder, maximumAgeCustomText);
+    ORK_ENCODE_BOOL(aCoder, showYear);
+    ORK_ENCODE_BOOL(aCoder, useYearForResult);
+    ORK_ENCODE_BOOL(aCoder, treatMinAgeAsRange);
+    ORK_ENCODE_BOOL(aCoder, treatMaxAgeAsRange);
+    ORK_ENCODE_INTEGER(aCoder, defaultValue);
+    ORK_ENCODE_INTEGER(aCoder, relativeYear);
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _minimumAgeCustomText.hash ^ _maximumAgeCustomText.hash ^ _minimumAge ^ _maximumAge ^ _showYear ^ _useYearForResult ^ _treatMinAgeAsRange ^ _treatMaxAgeAsRange ^ _relativeYear ^ _defaultValue;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+@end
+
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+#pragma mark - ORKLocationAnswerFormat
 @implementation ORKLocationAnswerFormat
 
 - (instancetype)init {
@@ -3374,6 +4090,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 }
 
 @end
+#endif
 
 #pragma mark ORKSESAnswerFormat
 
@@ -3435,8 +4152,5 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     return [self localizedStringForNumber:answer];
 }
 
-- (BOOL)shouldShowDontKnowButton {
-    return NO;
-}
-
 @end
+#endif

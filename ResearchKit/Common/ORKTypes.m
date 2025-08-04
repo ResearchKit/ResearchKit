@@ -35,8 +35,17 @@
 
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPods = @"AIRPODS";
 
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen1 = @"AIRPODSV1";
+
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen2 = @"AIRPODSV2";
+
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen3 = @"AIRPODSV3";
+
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro = @"AIRPODSPRO";
 
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsProGen2 = @"AIRPODSPROV2";
+
+ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMax = @"AIRPODSMAX";
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods = @"EARPODS";
 
 ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierUnknown = @"UNKNOWN";
@@ -173,7 +182,7 @@ const double ORKDoubleDefaultValue = DBL_MAX;
 
 const CGFloat ORKCGFloatDefaultValue = CGFLOAT_MAX;
 
-@implementation ORKDontKnowAnswer
+@implementation ORKNoAnswer
 
 + (instancetype)new {
     ORKThrowMethodUnavailableException();
@@ -183,17 +192,8 @@ const CGFloat ORKCGFloatDefaultValue = CGFLOAT_MAX;
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)init_ORKDontKnowAnswer {
+- (instancetype)init_ork {
    return [super init];
-}
-
-+ (instancetype)answer {
-    static ORKDontKnowAnswer *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[ORKDontKnowAnswer alloc] init_ORKDontKnowAnswer];
-    });
-    return instance;
 }
 
 - (nonnull id)copyWithZone:(nullable NSZone *)zone {
@@ -205,12 +205,24 @@ const CGFloat ORKCGFloatDefaultValue = CGFLOAT_MAX;
 }
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
-    ORKDontKnowAnswer *instance = [ORKDontKnowAnswer answer];
-    return instance;
+    return [[self class] answer];
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+@end
+
+@implementation ORKDontKnowAnswer
+
++ (instancetype)answer {
+    static ORKDontKnowAnswer *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init_ork];
+    });
+    return instance;
 }
 
 @end

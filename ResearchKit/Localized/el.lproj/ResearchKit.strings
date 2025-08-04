@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Επανασυνδέστε τα AirPods ή EarPods για εκτέλεση αυτού του τεστ.";
 "dBHL_PROGRESS_COMPLETION_%@" = "Έχει ολοκληρωθεί το %@";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Ακουστικά";
-"HEADPHONES_UNKNOWN" = "Άγνωστο";
-"HEADPHONES_NONE" = "Κανένα";
-"CONNECTED" = "Συνδεδεμένο";
-"NOT_CONNECTED" = "Μη συνδεδεμένο";
-"HEADPHONE_CONNECTED_%@" = "Συνδέθηκε - %@";
-"HEADPHONE_DETECT_TITLE" = "Συνδέστε τα ακουστικά σας";
-"HEADPHONE_DETECT_TEXT" = "Για αυτό το τεστ, χρειάζεστε Apple AirPods ή Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Χωρική μνήμη";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Αυτή η δραστηριότητα αξιολογεί τη χωρική μνήμη σας ζητώντας σας να επαναλάβετε τη σειρά με την οποία φωτίζονται οι %@.";

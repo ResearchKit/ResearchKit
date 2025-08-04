@@ -28,11 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+/**
+ An enumeration for body item style options.
+ */
 
 typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
     /**
@@ -63,12 +67,19 @@ typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
 
 @class ORKLearnMoreItem;
 
+/**
+ An object that represents textual information to
+ attach to a step.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKBodyItem : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle;
 
 - (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle;
+
+- (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle alignImageToTop:(BOOL)alignImageToTop;
 
 - (instancetype)initWithHorizontalRule;
 
@@ -85,6 +96,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL useCardStyle;
 
 @property (nonatomic) BOOL useSecondaryColor;
+
+@property (nonatomic) BOOL alignImageToTop;
 
 @end
 

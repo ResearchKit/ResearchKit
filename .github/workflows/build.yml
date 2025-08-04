@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    branches: [ 'main', 'stable' ]
+  pull_request:
+    branches: [ 'main', 'stable' ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:        
+  test:
+    runs-on: macos-14
+    strategy:
+      matrix:
+        destination: ['platform=iOS\ Simulator,OS=17.4,name=iPhone\ 15\ Pro']
+        scheme: ['ResearchKit']
+    name: ${{ matrix.scheme }} Unit Tests
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.3.app
+      - name: Test
+        run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -verbose -workspace RKWorkspace.xcworkspace -scheme ${{ matrix.scheme }} -destination ${{ matrix.destination }} build test | xcpretty

@@ -30,11 +30,15 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
+@import ResearchKitActiveTask;
+@import ResearchKitActiveTask_Private;
 
-@import CoreLocation;
 @import CoreMotion;
 
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+@import CoreLocation;
 
 @interface ORKMockLocationManager : CLLocationManager
 
@@ -62,6 +66,7 @@
 }
 
 @end
+#endif
 
 
 @interface ORKMockTouch : UITouch
@@ -394,6 +399,7 @@ static const NSInteger kNumberOfSamples = 5;
     _items = items;
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 - (void)testLocationRecorder {
     
     ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:@"location"]];
@@ -431,8 +437,26 @@ static const NSInteger kNumberOfSamples = 5;
     }
     
     [recorder stop];
-    [self checkResult];
 
+    // when location features are compiled out, make sure that the "ork_" wrapper functions are
+    // returning false, but don't bother doing the checkResult step
+#if !ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    // when location auth is 0, the [recorder start] earlier immediately stops, which zeros
+    // the locationManager property. So we would expect currentLocationManager == nil
+    XCTAssertNil(currentLocationManager, @"ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0: expected recorder's location manager to be nil");
+    
+    // make a one-time-use locationManager that we test ork_ wrappers with
+    {
+        CLLocationManager *locationManager = [(ORKMockLocationRecorder *)recorder createLocationManager];
+        XCTAssertNotNil(locationManager);
+        XCTAssertFalse([locationManager ork_requestWhenInUseAuthorization]);
+        XCTAssertFalse([locationManager ork_requestAlwaysAuthorization]);
+    }
+
+#else
+    [self checkResult];
+#endif // ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    
     for (NSDictionary *sample in _items) {
         
         XCTAssertTrue(ork_doubleEqual(altitude, ((NSNumber *)sample[@"altitude"]).doubleValue), @"");
@@ -445,6 +469,7 @@ static const NSInteger kNumberOfSamples = 5;
         XCTAssertTrue(ork_doubleEqual(longitude, ((NSNumber *)sample[@"coordinate"][@"longitude"]).doubleValue), @"");
     }
 }
+#endif
 
 - (void)testAccelerometerRecorder {
     
@@ -621,7 +646,7 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 - (void)testHealthQuantityTypeRecorder {
-    
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *hbQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     ORKHealthQuantityTypeRecorderConfiguration *recorderConfiguration = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:@"healtQuantityTypeRecorder" healthQuantityType:hbQuantityType unit:bpmUnit];
@@ -629,6 +654,7 @@ static const NSInteger kNumberOfSamples = 5;
     ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
+#endif
 }
 
 @end

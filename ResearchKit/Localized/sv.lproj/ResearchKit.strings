@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Anslut AirPods eller EarPods på nytt om du vill utföra det här testet.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ klart";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Hörlurar";
-"HEADPHONES_UNKNOWN" = "Okända";
-"HEADPHONES_NONE" = "Inga";
-"CONNECTED" = "Ansluten";
-"NOT_CONNECTED" = "Ej ansluten";
-"HEADPHONE_CONNECTED_%@" = "Anslutna – %@";
-"HEADPHONE_DETECT_TITLE" = "Anslut dina hörlurar";
-"HEADPHONE_DETECT_TEXT" = "Det här testet kräver Apple AirPods eller Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatialt minne";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Den här aktiviteten mäter ditt spatiala korttidsminne genom att be dig upprepa den ordning i vilken %@ lyser upp.";

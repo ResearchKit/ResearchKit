@@ -32,8 +32,6 @@
 
 #import "ORKSignatureStep.h"
 
-#import "ORKSignatureStepViewController.h"
-
 #import "ORKHelpers_Internal.h"
 
 
@@ -47,10 +45,6 @@
         self.text = ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil);
     }
     return self;
-}
-
-+ (Class)stepViewControllerClass {
-    return [ORKSignatureStepViewController class];
 }
 
 + (BOOL)supportsSecureCoding {

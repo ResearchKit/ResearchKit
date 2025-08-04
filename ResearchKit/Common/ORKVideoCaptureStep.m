@@ -32,14 +32,9 @@
 #import "ORKVideoCaptureStep.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKStep_Private.h"
-#import "ORKVideoCaptureStepViewController.h"
 
 
 @implementation ORKVideoCaptureStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKVideoCaptureStepViewController class];
-}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
@@ -58,12 +53,12 @@
     if (self) {
         ORK_DECODE_IMAGE(aDecoder, templateImage);
         ORK_DECODE_UIEDGEINSETS(aDecoder, templateImageInsets);
-        ORK_DECODE_OBJ(aDecoder, duration);
+        ORK_DECODE_OBJ_CLASS(aDecoder, duration, NSNumber);
         ORK_DECODE_BOOL(aDecoder, audioMute);
         ORK_DECODE_ENUM(aDecoder, torchMode);
         ORK_DECODE_ENUM(aDecoder, devicePosition);
-        ORK_DECODE_OBJ(aDecoder, accessibilityHint);
-        ORK_DECODE_OBJ(aDecoder, accessibilityInstructions);
+        ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityHint, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityInstructions, NSString);
     }
     return self;
 }

@@ -73,13 +73,8 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-        
-        if (@available(iOS 12.0, *)) {
-            answerFormat.textContentType = UITextContentTypeNewPassword;
-        } else {
-            answerFormat.textContentType = UITextContentTypePassword;
-        }
-        
+        answerFormat.textContentType = UITextContentTypeOneTimeCode;
+                
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat
