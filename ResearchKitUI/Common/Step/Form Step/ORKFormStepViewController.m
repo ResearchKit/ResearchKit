@@ -1110,7 +1110,7 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
 
 #pragma mark Helpers
 
-- (ORKFormStep *)formStep { 
+- (ORKFormStep *)formStep {
     NSAssert(!self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
     return (ORKFormStep *)self.step;
 }
@@ -1384,53 +1384,76 @@ NSString * const ORKFormStepViewAccessibilityIdentifier = @"ORKFormStepView";
     return YES;
 }
 
-- (BOOL)shouldAutoScrollToNextSection:(NSIndexPath *)indexPath {
-    if (![self _isAutoScrollEnabled]) {
-        return NO;
+
+/// The proposed destination index path for auto-scrolling to the nexr section.
+/// @returns The destination index path that should be used when scrolling to the next question, or `nil` if no auto-scroll should occur.
+- (NSIndexPath *_Nullable)indexPathForAutoScrollingToNextSectionAfter:(NSIndexPath *)indexPath {
+    if (![self _isAutoScrollEnabled] || _autoScrollCancelled) {
+        return nil;
     }
-    
-    BOOL result = YES;
     
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.section + 1)];
     
-    // Technically, cellForRowAtIndexPath could return nil if the tableView hasn't decided to cache the cell
-    // Guarantee ourselves a cell by using dequeueReusableCellWithIdentifier—the only reason we need the cell is to test
-    // the cell's type, not for actual display, so using any cell paired with the reuseIdentifier should be fine
-    // do *not* use dequeueReusableCellWithIdentifier:indexPath: since that method should only be called within the dataSource
-    // tableView:cellForRowAtIndexPath: method
-    ORKFormItem *nextFormItem = [self _formItemForIndexPath:nextIndexPath];
     ORKTableCellItemIdentifier *nextItemIdentifier = [_diffableDataSource itemIdentifierForIndexPath:nextIndexPath];
-    NSString *nextReuseIdentifier = [self cellReuseIdentifierFromFormItem:nextFormItem cellItemIdentifier:nextItemIdentifier];
-
-    result = result && (_autoScrollCancelled == NO);
-
-    // can't autoscroll to something that doesn't exist
-    UITableViewCell *nextCell = [_tableView dequeueReusableCellWithIdentifier:nextReuseIdentifier];
-    result = result && (nextCell != nil);
-    
-    // don't autoscroll to a cell that already has an answer
-    result = result && (self.savedAnswers[nextFormItem.identifier] == nil);
-    
-    return result;
+    if (nextItemIdentifier) {
+        // Technically, cellForRowAtIndexPath could return nil if the tableView hasn't decided to cache the cell
+        // Guarantee ourselves a cell by using dequeueReusableCellWithIdentifier—the only reason we need the cell is to test
+        // the cell's type, not for actual display, so using any cell paired with the reuseIdentifier should be fine
+        // do *not* use dequeueReusableCellWithIdentifier:indexPath: since that method should only be called within the dataSource
+        // tableView:cellForRowAtIndexPath: method
+        ORKFormItem *nextFormItem = [self _formItemForIndexPath:nextIndexPath];
+        if (!nextFormItem) {
+            return nil;
+        }
+        NSString *nextReuseIdentifier = [self cellReuseIdentifierFromFormItem:nextFormItem cellItemIdentifier:nextItemIdentifier];
+        // Can't autoscroll to something that doesn't exist
+        UITableViewCell *nextCell = [_tableView dequeueReusableCellWithIdentifier:nextReuseIdentifier];
+        if (!nextCell) {
+            return nil;
+        }
+        // Don't autoscroll to a cell that already has an answer.
+        if (self.savedAnswers[nextFormItem.identifier]) {
+            return nil;
+        }
+        return nextIndexPath;
+    } else if (@available(iOS 15, *)) {
+        NSString *nextSectionIdentifier = [_diffableDataSource sectionIdentifierForIndex:nextIndexPath.section];
+        ORKFormItem *formItem = [self _formItemForFormItemIdentifier:nextSectionIdentifier];
+        if (!formItem) {
+            return nil;
+        } else {
+            // We need to scroll to a zero-item section. This requires us to adjust the index path.
+            return [NSIndexPath indexPathForRow:NSNotFound inSection:nextIndexPath.section];
+        }
+    } else {
+        return nil;
+    }
 }
 
-- (void)autoScrollToNextSection:(NSIndexPath *)indexPath {
+
+/// Determines if we should auto-scroll to the next section
+- (BOOL)shouldAutoScrollToNextSectionAfter:(NSIndexPath *)indexPath {
+    return [self indexPathForAutoScrollingToNextSectionAfter:indexPath] != nil;
+}
+
+
+- (void)autoScrollToNextSectionAfter:(NSIndexPath *)indexPath {
     if (![self _isAutoScrollEnabled]) {
         return;
     }
-    
-    NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.section + 1)];
-    UITableView *tableView = self.tableView;
-    UITableViewCell *nextCell = [tableView cellForRowAtIndexPath:nextIndexPath];
-    BOOL didChangeFocus = [self focusUnansweredCell:nextCell];
-    
-    if (didChangeFocus == YES) {
-        // if we did change focus, then that will perform the scrolling
-    } else {
-        // if we didn't change focus, then we need to handle the scrolling here
+    NSIndexPath *scrollDestinationIndexPath = [self indexPathForAutoScrollingToNextSectionAfter:indexPath];
+    if (!scrollDestinationIndexPath) {
+        // If the index path returned by -shouldAutoScrollToNextSection: is nil, we're not supposed to auto-scroll to the next section.
+        return;
+    }
+    UITableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:scrollDestinationIndexPath];
+    if (!(nextCell && [self focusUnansweredCell:nextCell])) {
+        // if we didn't change focus, we need to scroll.
+        // otherwise (if we did change focus), that'll take care of the scrolling for us.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DelayBeforeAutoScroll * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [_tableView scrollToRowAtIndexPath:scrollDestinationIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
+        // if we did change focus, then that will perform the scrolling
     }
 }
 
@@ -2020,8 +2043,8 @@ static CGFloat ORKLabelWidth(NSString *text) {
     NSString *sectionIdentifier = [[snapshot sectionIdentifiers] objectAtIndex:indexPath.section];
     ORKFormItemCell *cell = ORKDynamicCast([self.tableView cellForRowAtIndexPath:indexPath], ORKFormItemCell);
 
-    if (cell.isLastItem && [self shouldAutoScrollToNextSection:indexPath]) {
-        [self autoScrollToNextSection:indexPath];
+    if (cell.isLastItem && [self shouldAutoScrollToNextSectionAfter:indexPath]) {
+        [self autoScrollToNextSectionAfter:indexPath];
         return;
     } else if (cell.isLastItem && indexPath.section == (snapshot.numberOfSections - 1) && ![_identifiersOfAnsweredSections containsObject:sectionIdentifier]) {
         if (![self allNonOptionalFormItemsHaveAnswers]) {
@@ -2267,7 +2290,7 @@ static NSString *const _ORKAnsweredSectionIdentifiersRestoreKey = @"answeredSect
     if (allowAutoScrolling == YES) {
         // only allow autoscrolling to the next section if the next section exists
         if ((indexPath.section + 1) < [snapshot numberOfSections]) {
-            [self autoScrollToNextSection:indexPath];
+            [self autoScrollToNextSectionAfter:indexPath];
             handledAutoScroll = YES;
         } else {
             // We would go to the next section, but we literally can't
