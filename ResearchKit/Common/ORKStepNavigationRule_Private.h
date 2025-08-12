@@ -63,6 +63,42 @@ NS_ASSUME_NONNULL_BEGIN
                    defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier
                           validateArrays:(BOOL)validateArrays NS_DESIGNATED_INITIALIZER;
 
+/**
+ To support deserialization, where deserialization of NSPredicates isn't supported, this class extension allows initializing
+ an `ORKPredicateFormItemVisibilityRule` with an array of `NSString` `resultPredicateFormats` instead of an `NSPredicate`
+ and retains the original `resultPredicateFormats` for serialization.
+*/
+- (nullable instancetype)initWithResultPredicateFormats:(NSArray<NSString *> *)resultPredicateFormats
+                             destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
+                                  defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier
+                                         validateArrays:(BOOL)validateArrays;
+
+/**
+ To support deserialization, where deserialization of NSPredicates isn't supported, this class extension allows initializing
+ an `ORKPredicateFormItemVisibilityRule` with an array of `NSString` `resultPredicateFormats` instead of an `NSPredicate`
+ and retains the original `resultPredicateFormats` for serialization by setting this property.
+*/
+@property (nonatomic, nullable, copy, readonly) NSArray<NSString *> *resultPredicateFormats;
+
 @end
 
+
+@interface ORKKeyValueStepModifier ()
+
+/**
+ To support deserialization, where deserialization of NSPredicates isn't supported, this class extension allows initializing
+ an `ORKPredicateFormItemVisibilityRule` with a `predicateFormat` `NSString` instead of an `NSPredicate`
+ and retains the original `predicateFormat` for serialization.
+*/
+- (nullable instancetype)initWithResultPredicateFormat:(NSString *)resultPredicateFormat
+                                           keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap;
+
+/**
+ To support deserialization, where deserialization of NSPredicates isn't supported, this class extension allows initializing
+ an `ORKPredicateFormItemVisibilityRule` with a `predicateFormat` `NSString` instead of an `NSPredicate`
+ and retains the original `predicateFormat` for serialization by setting this property.
+*/
+@property (nonatomic, nullable, copy, readonly) NSString *resultPredicateFormat;
+
+@end
 NS_ASSUME_NONNULL_END

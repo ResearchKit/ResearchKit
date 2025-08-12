@@ -73,25 +73,30 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
 
 @implementation NSURL (ORKDataLogger)
 
+- (NSString *)ork_fileName {
+    NSString *fileName = [[self lastPathComponent] stringByDeletingPathExtension];
+    return fileName;
+}
+
 - (NSString *)ork_logName {
-    NSString *lastComponent = [self lastPathComponent];
-    NSRange idx = [lastComponent rangeOfString:@"-"];
+    NSString *fileName = [self ork_fileName];
+    NSRange idx = [fileName rangeOfString:@"-"];
     if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
 
-    NSString *logName = [lastComponent substringToIndex:idx.location];
+    NSString *logName = [fileName substringToIndex:idx.location];
     return logName;
 }
 
 - (NSString *)ork_logDateComponent {
-    NSString *lastComponent = [self lastPathComponent];
-    NSRange idx = [lastComponent rangeOfString:@"-"];
+    NSString *fileName = [self ork_fileName];
+    NSRange idx = [fileName rangeOfString:@"-"];
     if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
     
-    NSString *logDateComponent = [lastComponent substringFromIndex:idx.location + 1];
+    NSString *logDateComponent = [fileName substringFromIndex:idx.location + 1];
     return logDateComponent;
 }
 
@@ -145,8 +150,8 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a fileURL" userInfo:@{@"url":self}];
     }
     
-    NSString *lastComponent = [self lastPathComponent];
-    NSRange idx = [lastComponent rangeOfString:@"-"];
+    NSString *fileName = [self ork_fileName];
+    NSRange idx = [fileName rangeOfString:@"-"];
     if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
@@ -155,7 +160,7 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not in expected directory" userInfo:@{@"url":self}];
     }
     
-    NSString *logName = [lastComponent substringToIndex:idx.location];
+    NSString *logName = [fileName substringToIndex:idx.location];
     return logName;
 }
 
@@ -446,6 +451,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     ORKObjectObserver *_observer;
     
     NSString *_oldLogsPrefix;
+    NSString *_fileExtension;
     
     NSFileHandle *_currentFileHandle;
     
@@ -457,7 +463,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 + (ORKDataLogger *)JSONDataLoggerWithDirectory:(NSURL *)url logName:(NSString *)logName delegate:(id<ORKDataLoggerDelegate>)delegate {
-    return [[ORKDataLogger alloc] initWithDirectory:url logName:logName formatter:[ORKJSONLogFormatter new] delegate:delegate];
+    return [[ORKDataLogger alloc] initWithDirectory:url logName:logName fileExtension:@"json" formatter:[ORKJSONLogFormatter new] delegate:delegate];
 }
 
 + (instancetype)new {
@@ -468,7 +474,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)initWithDirectory:(NSURL *)url logName:(NSString *)logName formatter:(ORKLogFormatter *)formatter delegate:(id<ORKDataLoggerDelegate>)delegate {
+- (instancetype)initWithDirectory:(NSURL *)url logName:(NSString *)logName fileExtension:(NSString *)fileExtension formatter:(ORKLogFormatter *)formatter delegate:(id<ORKDataLoggerDelegate>)delegate {
     self = [super init];
     if (self) {
         _url = [url copy];
@@ -486,13 +492,13 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         _queue = dispatch_queue_create([queueId cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_SERIAL);
         
         _directoryUpdateGroup = dispatch_group_create();
-        
+
         self.logName = logName;
         self.logFormatter = formatter;
         self.delegate = delegate;
         self.fileProtectionMode = ORKFileProtectionNone;
         _oldLogsPrefix = [_logName stringByAppendingString:@"-"];
-        
+        _fileExtension = fileExtension;
         _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"maximumCurrentLogFileLifetime", @"maximumCurrentLogFileSize"] selector:@selector(fileSizeLimitsDidChange)];
         
         [self setupDirectorySource];
@@ -506,7 +512,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"%@ is not a class", configuration[@"formatterClass"]] userInfo:nil];
     }
     
-    self = [self initWithDirectory:url logName:configuration[@"logName"] formatter:[[formatterClass alloc] init] delegate:delegate];
+    self = [self initWithDirectory:url logName:configuration[@"logName"] fileExtension:configuration[@"fileExtension"] formatter:[[formatterClass alloc] init] delegate:delegate];
     if (self) {
         // Don't notify about initial setup
         [_observer pause];
@@ -519,6 +525,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 - (NSDictionary *)configuration {
     return @{@"logName": self.logName,
+             @"fileExtension": _fileExtension,
              @"formatterClass": NSStringFromClass([self.logFormatter class]),
              @"fileProtectionMode": @(self.fileProtectionMode),
              @"maximumCurrentLogFileSize": @(self.maximumCurrentLogFileSize),
@@ -574,12 +581,18 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (NSURL *)currentLogFileURL {
-    return [_url URLByAppendingPathComponent:_logName];
+    return [[_url URLByAppendingPathComponent:_logName] URLByAppendingPathExtension:_fileExtension];
 }
 
-- (BOOL)urlMatchesLogName:(NSURL *)url {
-    NSString *lastComponent = [url lastPathComponent];
-    return ([lastComponent isEqualToString:_logName] || [lastComponent hasPrefix:_oldLogsPrefix]);
+- (BOOL)doesURLMatchLogName:(NSURL *)url {
+    NSString *fileName = [url ork_fileName];
+    return [fileName isEqualToString:_logName];
+}
+
+- (BOOL)didCreateLogAt:(NSURL *)url {
+    BOOL doesURLMatchLogName = [self doesURLMatchLogName:url];
+    NSString *fileName = [url ork_fileName];
+    return (doesURLMatchLogName || [fileName hasPrefix:_oldLogsPrefix]);
 }
 
 - (NSFileHandle *)fileHandle {
@@ -724,10 +737,10 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSError *error = nil;
     NSMutableArray *urls = [NSMutableArray array];
     for (NSURL *url in enumerator) {
-        if (![self urlMatchesLogName:url]) {
+        if (![self didCreateLogAt:url]) {
             continue;
         }
-        if ( [[url lastPathComponent] isEqualToString:_logName]) {
+        if ([self doesURLMatchLogName:url]) {
             // Don't include the "current" log file
             continue;
         }
@@ -839,7 +852,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     return _currentFileHandle;
 }
 
-+ (NSURL *)nextUrlForDirectoryUrl:(NSURL *)directory logName:(NSString *)logName {
++ (NSURL *)nextUrlForDirectoryUrl:(NSURL *)directory logName:(NSString *)logName fileExtension:(NSString *)fileExtension {
     static NSDateFormatter *dateFromatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -849,14 +862,14 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     });
     
     NSString *datedLog = [NSString stringWithFormat:@"%@-%@",logName, [dateFromatter stringFromDate:[NSDate date]]];
-    NSURL *destinationUrl = [directory URLByAppendingPathComponent:datedLog];
+    NSURL *destinationUrl = [[directory URLByAppendingPathComponent:datedLog] URLByAppendingPathExtension:fileExtension];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     int digit = 0;
     while ([fileManager fileExistsAtPath:[destinationUrl path] isDirectory:NULL]) {
         digit ++;
-        NSString *lastComponent = [datedLog stringByAppendingFormat:@"-%02d",digit];
-        destinationUrl = [directory URLByAppendingPathComponent:lastComponent];
+        NSString *newDatedLog = [datedLog stringByAppendingFormat:@"-%02d",digit];
+        destinationUrl = [[directory URLByAppendingPathComponent:newDatedLog] URLByAppendingPathExtension:fileExtension];
     }
 
     return destinationUrl;
@@ -878,7 +891,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     
     if (((NSNumber *)parameters[NSURLIsRegularFileKey]).boolValue) {
         if (((NSNumber *)parameters[NSURLFileSizeKey]).intValue > 0) {
-            NSURL *destinationUrl = [ORKDataLogger nextUrlForDirectoryUrl:_url logName:_logName];
+            NSURL *destinationUrl = [ORKDataLogger nextUrlForDirectoryUrl:_url logName:_logName fileExtension:_fileExtension];
             ORK_Log_Debug("Rollover: %@ to %@", [url lastPathComponent], [destinationUrl lastPathComponent]);
             [fileManager moveItemAtURL:url toURL:destinationUrl error:nil];
             if (self.fileProtectionMode == ORKFileProtectionCompleteUnlessOpen) {
@@ -1135,17 +1148,17 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
 }
 
 - (ORKDataLogger *)addJSONDataLoggerForLogName:(NSString *)logName {
-    return [self addDataLoggerForLogName:logName formatter:[ORKJSONLogFormatter new]];
+    return [self addDataLoggerForLogName:logName fileExtension:@"json" formatter:[ORKJSONLogFormatter new]];
 }
 
-- (ORKDataLogger *)queue_addDataLoggerForLogName:(NSString *)logName formatter:(ORKLogFormatter *)formatter {
-    ORKDataLogger *dataLogger = [[ORKDataLogger alloc] initWithDirectory:_directory logName:logName formatter:formatter delegate:self];
-    dataLogger.delegate = nil;
+- (ORKDataLogger *)queue_addDataLoggerForLogName:(NSString *)logName fileExtension:(NSString *)fileExtension formatter:(ORKLogFormatter *)formatter {
+    ORKDataLogger *dataLogger = [[ORKDataLogger alloc] initWithDirectory:_directory logName:logName fileExtension:fileExtension formatter:formatter delegate:self];
+    
     // Pick suitable defaults for a typical use pattern
     dataLogger.maximumCurrentLogFileLifetime = ORKDataLoggerManagerDefaultLogFileLifetime;
     dataLogger.maximumCurrentLogFileSize = ORKDataLoggerManagerDefaultLogFileSize;
     dataLogger.delegate = self;
-    
+
     _records[logName] = dataLogger;
     [self queue_synchronizeConfiguration];
     
@@ -1154,14 +1167,14 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     return dataLogger;
 }
 
-- (ORKDataLogger *)addDataLoggerForLogName:(NSString *)logName formatter:(ORKLogFormatter *)formatter {
+- (ORKDataLogger *)addDataLoggerForLogName:(NSString *)logName fileExtension:(NSString *)fileExtension formatter:(ORKLogFormatter *)formatter {
     if (_records[logName]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"Duplicate logger with log name '%@'",logName] userInfo:nil];
     }
     
     __block ORKDataLogger *dataLogger = nil;
     dispatch_sync(_queue, ^{
-        dataLogger = [self queue_addDataLoggerForLogName:logName formatter:formatter];
+        dataLogger = [self queue_addDataLoggerForLogName:logName fileExtension:fileExtension formatter:formatter];
     });
     return dataLogger;
 }

@@ -90,13 +90,18 @@
 }
 
 - (void)updateCheckView {
+    UIColor *existingTintColor = self.tintColor;
     if (_checked) {
         self.image = _checkedImage;
-        self.tintColor = ORKViewTintColor(self);
+        if (existingTintColor != ORKViewTintColor(self)) {
+            self.tintColor = ORKViewTintColor(self);
+        }
     }
     else {
         self.image = _uncheckedImage;
-        self.tintColor = _shouldIgnoreDarkMode ? [UIColor lightGrayColor] : [UIColor systemGray3Color];
+        if (existingTintColor != ORKViewTintColor(self)) {
+            self.tintColor = _shouldIgnoreDarkMode ? [UIColor lightGrayColor] : [UIColor systemGray3Color];
+        }
     }
 }
 
@@ -123,4 +128,3 @@
 }
 
 @end
-

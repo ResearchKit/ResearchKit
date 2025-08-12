@@ -33,35 +33,25 @@
 #import "ORKResult_Private.h"
 #import "ORKHelpers_Internal.h"
 
+#import <ResearchKit/ORKFileResult.h>
+
 @implementation ORKAmslerGridResult
-
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             image:(UIImage *)image
-                              path:(NSArray<UIBezierPath *> *)path
-                           eyeSide:(ORKAmslerGridEyeSide)eyeSide{
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        _image = [image copy];
-        _path = ORKArrayCopyObjects(path);
-        _eyeSide = eyeSide;
-    }
-    return self;
-}
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_OBJ(aCoder, path);
     ORK_ENCODE_ENUM(aCoder, eyeSide);
+    ORK_ENCODE_OBJ(aCoder, imageFileResult);
+    ORK_ENCODE_OBJ(aCoder, drawingPathFileResult);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_OBJ_ARRAY(aDecoder, path, UIBezierPath);
         ORK_DECODE_ENUM(aDecoder, eyeSide);
+        ORK_DECODE_OBJ_CLASS(aDecoder, imageFileResult, ORKFileResult);
+        ORK_DECODE_OBJ_CLASS(aDecoder, drawingPathFileResult, ORKFileResult);
     }
     return self;
 }
@@ -71,7 +61,7 @@
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.image.hash ^ self.path.hash;
+    return super.hash ^ self.path.hash ^ self.imageFileResult.hash ^ self.drawingPathFileResult.hash;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -79,16 +69,18 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.image, castObject.image) &&
             ORKEqualObjects(self.path, castObject.path) &&
+            ORKEqualObjects(self.imageFileResult, castObject.imageFileResult) &&
+            ORKEqualObjects(self.drawingPathFileResult, castObject.drawingPathFileResult) &&
             (self.eyeSide == castObject.eyeSide));
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKAmslerGridResult *result = [super copyWithZone:zone];
-    result->_image = [_image copy];
     result->_path = ORKArrayCopyObjects(_path);
     result->_eyeSide = _eyeSide;
+    result->_imageFileResult = _imageFileResult;
+    result->_drawingPathFileResult = _drawingPathFileResult;
     return result;
 }
 

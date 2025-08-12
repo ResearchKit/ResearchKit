@@ -40,21 +40,25 @@
 @implementation ORKEnvironmentSPLMeterStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier outputDirectory:nil];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier outputDirectory:(NSURL *)outputDirectory {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        [self commonInit];
+        [self commonInitWithOutputDirectory:outputDirectory];
     }
     return self;
 }
 
-- (void)commonInit {
+- (void)commonInitWithOutputDirectory:(NSURL *)outputDirectory {
     self.thresholdValue = ORKEnvironmentSPLMeterTaskDefaultThresholdValue;
     self.samplingInterval = ORKEnvironmentSPLMeterTaskMinimumSamplingInterval;
     self.requiredContiguousSamples = ORKEnvironmentSPLMeterTaskDefaultRequiredContiguousSamples;
     self.stepDuration = CGFLOAT_MAX;
     self.shouldShowDefaultTimer = NO;
     // This is inserted here because it is required for any task that requires the SPL Meter step
-    ORKAudioStreamerConfiguration *config = [[ORKAudioStreamerConfiguration alloc] initWithIdentifier:[NSString stringWithFormat:@"%@_streamerConfiguration",self.identifier]];
+    ORKAudioStreamerConfiguration *config = [[ORKAudioStreamerConfiguration alloc] initWithIdentifier:[NSString stringWithFormat:@"%@_streamerConfiguration",self.identifier] outputDirectory:outputDirectory];
     config.bypassAudioEngineStart = YES;
     self.recorderConfigurations = @[config];
 }

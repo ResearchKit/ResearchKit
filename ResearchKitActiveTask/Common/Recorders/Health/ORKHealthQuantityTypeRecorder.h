@@ -69,7 +69,22 @@ ORK_CLASS_AVAILABLE
  @param quantityType        The quantity type that should be collected during the active task.
  @param unit                The unit for the data that should be collected and serialized.
  @param step                The step that requested this recorder.
- @param outputDirectory     The directory in which the HealthKit data should be stored.
+ 
+ @return An initialized health quantity type recorder.
+*/
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                              step:(nullable ORKStep *)step;
+
+/**
+ Returns an initialized health quantity type recorder using the specified quantity type and unit.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param quantityType        The quantity type that should be collected during the active task.
+ @param unit                The unit for the data that should be collected and serialized.
+ @param step                The step that requested this recorder.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
  
  @return An initialized health quantity type recorder.
 */
@@ -77,7 +92,28 @@ ORK_CLASS_AVAILABLE
                 healthQuantityType:(HKQuantityType *)quantityType
                               unit:(HKUnit *)unit
                               step:(nullable ORKStep *)step
-                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                   outputDirectory:(nullable NSURL *)outputDirectory;
+
+
+/**
+ Returns an initialized health quantity type recorder using the specified quantity type and unit.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param quantityType        The quantity type that should be collected during the active task.
+ @param unit                The unit for the data that should be collected and serialized.
+ @param step                The step that requested this recorder.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized health quantity type recorder.
+*/
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -108,7 +144,44 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized health quantity type recorder configuration.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit;
+
+/**
+ Returns an initialized health quantity type recorder configuration using the specified quantity type and unit designation.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier      The unique identifier of the recorder configuration.
+ @param quantityType    The quantity type that should be collected during the active task.
+ @param unit            The unit for the data that should be collected and serialized.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ 
+ @return An initialized health quantity type recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                   outputDirectory:(nullable NSURL *)outputDirectory;
+
+/**
+ Returns an initialized health quantity type recorder configuration using the specified quantity type and unit designation.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier      The unique identifier of the recorder configuration.
+ @param quantityType    The quantity type that should be collected during the active task.
+ @param unit            The unit for the data that should be collected and serialized.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized health quantity type recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a new health quantity type recorder configuration initialized from data in the given unarchiver.

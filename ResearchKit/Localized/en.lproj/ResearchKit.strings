@@ -54,21 +54,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "Learn More";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered";
-"LEARN_MORE_DATA_USE" = "Learn more about how data is used";
-"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected";
-"LEARN_MORE_WELCOME" = "Learn more about the study first";
-"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey";
-"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study’s impact on your time";
-"LEARN_MORE_TASKS" = "Learn more about the tasks involved";
-"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing";
+"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered.";
+"LEARN_MORE_DATA_USE" = "Learn more about how data is used.";
+"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected.";
+"LEARN_MORE_WELCOME" = "Learn more about the study first.";
+"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey.";
+"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study’s impact on your time.";
+"LEARN_MORE_TASKS" = "Learn more about the tasks involved.";
+"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing.";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Sharing Options";
 "CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
 "CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
-"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
+"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Printed Name";

@@ -125,20 +125,17 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         // Make sure we receive events from `taskViewController`.
         taskViewController.delegate = self
         
-        // Assign a directory to store `taskViewController` output.
-        taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         if let restorationData = restorationDataByTaskID[task.identifier] {
-            
             // we have data we can use to recreate the state of a previous taskViewController
             taskViewController = ORKTaskViewController(task: task, restorationData: restorationData, delegate: self, error: nil)
         } else {
-            
             // making a brand new taskViewController
             taskViewController = ORKTaskViewController(task: task, ongoingResult: nil, defaultResultSource: nil, delegate: self)
-
-            // Assign a directory to store `taskViewController` output.
-            taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         }
+        // Assign a directory to store the `taskViewController` output. Here, we're using the default temporary
+        // output directory provided by `ORKTaskViewController`, but any URL can be specified.
+        taskViewController.outputDirectory = ORKTaskViewController.orkDefaultTemporaryOutputDirectory();
+
         /*
          We present the task directly, but it is also possible to use segues.
          The task property of the task view controller can be set any time before

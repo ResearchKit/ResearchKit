@@ -51,19 +51,19 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
  The base object for composing a task.
  
  ``ORKStep`` is the base class for the steps that can compose a task for presentation
- in an  ORKTaskViewController object. Each ``ORKStep`` object represents one logical piece of data
+ in an ORKTaskViewController object. Each ``ORKStep`` object represents one logical piece of data
  entry or activity in a larger task.
  
  A step can be a question, an active test, or a simple instruction. Pair an ``ORKStep``
- subclass with an  ORKStepViewController subclass to display the step.
+ subclass with an ORKStepViewController subclass to display the step.
  
  To use a step, instantiate an ``ORKStep`` object and populate its properties. Add the step to a task,
  such as an ``ORKOrderedTask`` object, then present the task using ORKTaskViewController.
  
  To implement a new type of step, subclass ``ORKStep`` and add your additional
- properties.Then subclass  ORKStepViewController and implement
+ properties.Then subclass ORKStepViewController and implement
  your user interface. If your step is timed, or requires sensor data collection,
- subclass ``ORKActiveStep`` and  ORKActiveStepViewController.
+ subclass ``ORKActiveStep`` and ORKActiveStepViewController.
  */
 
 ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
@@ -240,7 +240,7 @@ ORK_CLASS_AVAILABLE API_AVAILABLE(ios(11.0), watchos(6.0))
  Checks the parameters of the step and throws exceptions on invalid parameters.
  
  This method is called when there is a need to validate the step's parameters, which is typically
- the case when adding a step to an  ORKStepViewController object, and when presenting the
+ the case when adding a step to an ORKStepViewController object, and when presenting the
  step view controller.
  
  Subclasses should override this method to provide validation of their additional
@@ -303,7 +303,7 @@ API_AVAILABLE(ios(11))
 /**
  A view controller that positions an image inside an image view that the step uses.
  
- Depending on the subclass of the step,  ORKStepView uses a specific UIImageView, and
+ Depending on the subclass of the step, ORKStepView uses a specific UIImageView, and
  ``imageContentMode`` sets the content mode of used image view.
  */
 

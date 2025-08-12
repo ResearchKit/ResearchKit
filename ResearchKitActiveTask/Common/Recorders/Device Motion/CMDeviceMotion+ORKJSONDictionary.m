@@ -30,7 +30,7 @@
 
 
 #import "CMDeviceMotion+ORKJSONDictionary.h"
-
+#import "ResearchKitActiveTask/ResearchKitActiveTask-Swift.h"
 
 @implementation CMDeviceMotion (ORKJSONDictionary)
 
@@ -41,7 +41,9 @@
     CMAcceleration userAccel = self.userAcceleration;
     CMCalibratedMagneticField field = self.magneticField;
     
-    NSDictionary *dictionary = @{@"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
+    NSDictionary *dictionary = @{
+                                 @"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
+                                 @"timestampSince1970": [NSDecimalNumber numberWithDouble:self.timestampSince1970],
                                  @"attitude": @{
                                          @"x": [NSDecimalNumber numberWithDouble:attitude.x],
                                          @"y": [NSDecimalNumber numberWithDouble:attitude.y],
