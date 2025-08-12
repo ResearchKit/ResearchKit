@@ -227,7 +227,7 @@ class ORKStepViewControllerTests: XCTestCase {
         }
         
         recorderExpectation = expectation(description: "ORKStepViewController notifies delegate that it's recorder failed")
-        let recorder = ORKRecorder(identifier: "RECORDER", step: nil, outputDirectory: nil)
+        let recorder = ORKRecorder(identifier: "RECORDER", step: nil)
         testController!.delegate!.stepViewController(testController, recorder: recorder, didFailWithError: TestError.recorderError)
         
         waitForExpectations(timeout: 10) { (error) in

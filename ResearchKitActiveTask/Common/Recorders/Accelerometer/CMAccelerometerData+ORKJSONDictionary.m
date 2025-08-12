@@ -30,12 +30,14 @@
 
 
 #import "CMAccelerometerData+ORKJSONDictionary.h"
-
+#import "ResearchKitActiveTask/ResearchKitActiveTask-Swift.h"
 
 @implementation CMAccelerometerData (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionary {
-    NSDictionary *dictionary = @{ @"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
+    NSDictionary *dictionary = @{
+                                 @"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
+                                 @"timestampSince1970": [NSDecimalNumber numberWithDouble:self.timestampSince1970],
                                  @"x": [NSDecimalNumber numberWithDouble:self.acceleration.x],
                                  @"y": [NSDecimalNumber numberWithDouble:self.acceleration.y],
                                  @"z": [NSDecimalNumber numberWithDouble:self.acceleration.z]

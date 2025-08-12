@@ -45,12 +45,13 @@ class ORKAmslerGridResultTests: XCTestCase {
         let bundle = Bundle(identifier: "org.researchkit.ResearchKit")
         image = UIImage(named: "amslerGrid", in: bundle, compatibleWith: nil)
         path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50))
-        result = ORKAmslerGridResult(identifier: identifier, image: image, path: [path], eyeSide: .left)
+        result = ORKAmslerGridResult(identifier: identifier)
+        result.path = [path]
+        result.eyeSide = .left
     }
     
     func testProperties() {
         XCTAssertEqual(result.identifier, identifier)
-        XCTAssertEqual(result.image, image)
         XCTAssertEqual(result.path, [path])
         XCTAssertEqual(result.eyeSide, ORKAmslerGridEyeSide.left)
     }
@@ -59,7 +60,9 @@ class ORKAmslerGridResultTests: XCTestCase {
         result.startDate = date
         result.endDate = date
 
-        let newResult = ORKAmslerGridResult(identifier: identifier, image: image, path: [path], eyeSide: .left)
+        let newResult = ORKAmslerGridResult(identifier: identifier)
+        newResult.path = [path]
+        newResult.eyeSide = .left
         newResult.startDate = date
         newResult.endDate = date
         XCTAssert(result.isEqual(newResult))
@@ -249,13 +252,13 @@ class ORKReactionTimeResultTests: XCTestCase {
         fileResult = ORKFileResult(identifier: identifier)
         url = URL(fileURLWithPath: "FILEURL")
         fileResult.fileURL = url
-        result.fileResult = fileResult
+        result.fileResults = [fileResult]
     }
 
     func testProperties() {
         XCTAssertEqual(result.identifier, identifier)
         XCTAssertEqual(result.timestamp, 10)
-        XCTAssertEqual(result.fileResult, fileResult)
+        XCTAssertEqual(result.fileResults, [fileResult])
     }
     
     func testIsEqual() {
@@ -264,7 +267,7 @@ class ORKReactionTimeResultTests: XCTestCase {
         
         let newResult = ORKReactionTimeResult(identifier: identifier)
         newResult.timestamp = 10
-        newResult.fileResult = fileResult
+        newResult.fileResults = [fileResult]
         newResult.startDate = date
         newResult.endDate = date
         

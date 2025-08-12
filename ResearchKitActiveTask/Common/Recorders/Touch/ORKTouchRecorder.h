@@ -52,6 +52,33 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong, readonly, nullable) UIView *touchView;
 
+/**
+ Returns an initialized pedometer recorder.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param step                The step that requested this recorder.
+ 
+ @return An initialized pedometer recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(nullable ORKStep *)step;
+
+/**
+ Returns an initialized pedometer recorder.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param step                The step that requested this recorder.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized pedometer recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
+
 @end
 
 /**
@@ -66,13 +93,27 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized touch recorder configuration.
  
- This method is the designated initializer.
- 
  @param identifier   The unique identifier of the recorder configuration.
  
  @return An initialized touch recorder configuration.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier;
+
+/**
+ Returns an initialized touch recorder configuration.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier   The unique identifier of the recorder configuration.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized touch recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+          outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a new touch recorder configuration initialized from data in the given unarchiver.

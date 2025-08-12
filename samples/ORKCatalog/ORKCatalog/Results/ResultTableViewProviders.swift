@@ -566,13 +566,11 @@ class AmslerGridResultTableViewProvider: ResultTableViewProvider {
     
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let amslerGridResult = result as! ORKAmslerGridResult
-        let image = amslerGridResult.image!
         let eyeSide: String = amslerGridResult.eyeSide.rawValue == 0 ? "Not Specified": amslerGridResult.eyeSide.rawValue == 1 ? "Left": "Right"
         
         return super.resultRowsForSection(section) + [
             // The captured image.
             ResultRow(text: "Eye Side", detail: eyeSide),
-            .textImage("image", image: image)
         ]
     }
     
@@ -908,11 +906,11 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
             ]
         }
         
-        let fileResultDetail = reactionTimeResult.fileResult.fileURL!.absoluteString
+        let fileResultRows = reactionTimeResult.fileResults.map { fileResult in
+            ResultRow(text: "File Result", detail: fileResult.fileURL!.absoluteString)
+        }
         
-        return rows + [
-            ResultRow(text: "File Result", detail: fileResultDetail)
-        ]
+        return rows + fileResultRows
     }
 }
 

@@ -1,1 +1,1 @@
-{"identifier":"","_class":"ORKAudioRecorderConfiguration","recorderSettings":{}}
+{"_class":"ORKAudioRecorderConfiguration","identifier":"","rollingFileSizeThreshold":5000000,"outputDirectory":"file:\/\/\/usr\/","recorderSettings":{}}

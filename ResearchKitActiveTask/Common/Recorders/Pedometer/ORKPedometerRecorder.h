@@ -66,13 +66,26 @@ ORK_CLASS_AVAILABLE
  
  @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
  @param step                The step that requested this recorder.
+ 
+ @return An initialized pedometer recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(nullable ORKStep *)step;
+
+/**
+ Returns an initialized pedometer recorder.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the pedometer data should be stored.
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written. If the value is 0, data is written to only one file and not rolled over to multiple files.
  
  @return An initialized pedometer recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                               step:(nullable ORKStep *)step
-                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 @end
 

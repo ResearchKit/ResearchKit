@@ -42,15 +42,30 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns an initialized recorder.
  
+ @param identifier          The unique identifier of the recorder.
+ @param step                The step for which this recorder is being created.
+ 
+ @return An initialized recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier step:(nullable ORKStep *)step;
+
+/**
+ Returns an initialized recorder.
+ 
  This method is the designated initializer.
  
  @param identifier          The unique identifier of the recorder.
  @param step                The step for which this recorder is being created.
- @param outputDirectory     The directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param outputDirectory     The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
  
  @return An initialized recorder.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier step:(nullable ORKStep *)step outputDirectory:(nullable NSURL *)outputDirectory;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 /**
  A preparation step to provide viewController and view before record starting.
@@ -89,14 +104,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns an initialized recorder configuration.
- 
- This method is the designated initializer.
- 
+  
  @param identifier   The unique identifier of the recorder configuration.
  
  @return An initialized recorder configuration.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier;
+
+/**
+ Returns an initialized recorder configuration.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier   The unique identifier of the recorder configuration.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a new recorder configuration initialized from data in the given unarchiver.
@@ -120,7 +149,44 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKAudioStreamerConfiguration : ORKRecorderConfiguration
 
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns an initialized recorder configuration.
+  
+ @param identifier   The unique identifier of the recorder configuration.
+ 
+ @return An initialized recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier;
+
+/**
+ Returns an initialized recorder configuration.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier   The unique identifier of the recorder configuration.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ 
+ @return An initialized recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory;
+
+/**
+ Returns an initialized recorder configuration.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier   The unique identifier of the recorder configuration.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 

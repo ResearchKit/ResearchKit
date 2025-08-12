@@ -64,6 +64,23 @@ ORK_CLASS_AVAILABLE
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory;
 
+/**
+ Returns an initialized accelerometer recorder using the specified frequency.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param frequency           The frequency of accelerometer data collected from CoreMotion, in hertz (Hz).
+ @param step                The step that requested this recorder.
+ @param outputDirectory     The directory in which the accelerometer data should be stored.
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written. If the value is 0, data is written to only one file and not rolled over to multiple files.
+ 
+ @return An initialized accelerometer recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)frequency
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
+
 @end
 
 NS_ASSUME_NONNULL_END
