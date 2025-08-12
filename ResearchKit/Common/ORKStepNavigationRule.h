@@ -29,7 +29,7 @@
  */
 
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -48,7 +48,7 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 @class ORKResultPredicate;
 
 /**
- The `ORKStepNavigationRule` class is the abstract base class for concrete step navigation rules.
+ An abstract base class for concrete step navigation rules.
  
  Step navigation rules can be used within an `ORKNavigableOrderedTask` object. You assign step
  navigation rules to be triggered by the task steps. Each step can have one rule at most.
@@ -84,9 +84,11 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKPredicateStepNavigationRule` can be used to match any answer combination in the results of
- the ongoing task (or in those of previously completed tasks) and jump accordingly. You must provide
- one or more result predicates (each predicate can match one or more step results within the task).
+ A rule that matches any answer combination within the results of an ongoing task and jumps accordingly.
+ 
+ This rule also applies to completed tasks.
+ 
+ You must provide one or more result predicates (each predicate can match one or more step results within the task).
  
  Predicate step navigation rules contain an arbitrary number of result predicates with a
  corresponding number of destination step identifiers, plus an optional default step identifier that
@@ -201,8 +203,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKDirectStepNavigationRule` class can be used to unconditionally jump to a destination step
- specified by its identifier or to finish the task early.
+ A rule that unconditionally jumps to a destination step that its identifier specifies, or
+ to finish the task early.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKDirectStepNavigationRule : ORKStepNavigationRule
@@ -280,6 +282,10 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ A navigation rule that determines whether to skip a step.
+ */
+
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateSkipStepNavigationRule : ORKSkipStepNavigationRule
 
@@ -338,8 +344,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKStepModifier` class is an abstract base class for an object that can be used to modify a step
- if a given navigation rule is matched.
+ An abstract base class for an object that modifies a step
+ if a given navigation rule matches.
  
  Step modifiers can be used within an `ORKNavigableOrderedTask` object. You assign step modifiers 
  to be triggered after a task step is shown. Each step can have one step modifier at most.
@@ -362,8 +368,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKKeyValueStepModifier` class is an class for an object that can be used to modify a step
- if a given navigation rule is matched.
+ A class for an object that modifies a step if a
+ given navigation rule matches.
  
  Step modifiers can be used within an `ORKNavigableOrderedTask` object. You assign step modifiers
  to be triggered after a task step is shown. Each step can have one step modifier at most.
@@ -388,6 +394,8 @@ ORK_CLASS_AVAILABLE
 /**
  A key-value mapping to apply to the modified step if the result predicate matches.
  The keys in this are assumed to map using key-value coding.
+ 
+ When serialized with secure coding, the items must be of property list types.
  
  See https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/
  */

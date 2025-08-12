@@ -1,0 +1,12 @@
+{"_class":"ORKSpatialSpanMemoryGameRecord","seed":0,"sequence":[],"gameSize":0,"targetRects":[{"origin":{"x":44,"y":256.66666666666669},"size":{"h":114,"w":114}},
+    {"origin":{"x":44,"y":370.66666666666669},"size":{"h":114,"w":114}},
+    {"origin":{"x":44,"y":484.66666666666669},"size":{"h":114.00000000000006,"w":114}},
+    {"origin":{"x":158,"y":256.66666666666669},"size":{"h":114,"w":114}},
+    {"origin":{"x":158,"y":370.66666666666669},"size":{"h":114,"w":114}},
+    {"origin":{"x":158,"y":484.66666666666669},"size":{"h":114.00000000000006,"w":114}},
+    {"origin":{"x":272,"y":256.66666666666669},"size":{"h":114,"w":114}},
+    {"origin":{"x":272,"y":370.66666666666669},"size":{"h":114,"w":114}},
+    {"origin":{"x":272,"y":484.66666666666669},"size":{"h":114.00000000000006,"w":114}}
+],"touchSamples":[{"_class":"ORKSpatialSpanMemoryGameTouchSample","correct":true,"location":{"x":335,"y":330},"targetIndex":6,"timestamp":1.0373990833177231},
+    {"_class":"ORKSpatialSpanMemoryGameTouchSample","correct":true,"location":{"x":334,"y":410.66665649414062},"targetIndex":7,"timestamp":1.270191750023514},
+    {"_class":"ORKSpatialSpanMemoryGameTouchSample","correct":true,"location":{"x":220.33332824707031,"y":299},"targetIndex":3,"timestamp":1.7025653750170022}],"gameStatus":0,"score":0}

@@ -29,8 +29,13 @@
  */
 
 #import "ORKWebViewStepResult.h"
-#import "ORKResult_Private.h"
+
 #import "ORKHelpers_Internal.h"
+#import "ORKResult_Private.h"
+
+
+NSString * const HTMLKey = @"html";
+NSString * const HTMLWithSignatureKey = @"htmlWithSignature";
 
 @implementation ORKWebViewStepResult
 
@@ -67,6 +72,22 @@
     ORKWebViewStepResult *result = [super copyWithZone:zone];
     result->_result = self.result;
     return result;
+}
+
+- (nullable NSString *)getHTML {
+    return self.userInfo[[ORKWebViewStepResult getHTMLKey]];
+}
+
+- (NSString *)getHTMLWithSignature {
+    return self.userInfo[[ORKWebViewStepResult getHTMLWithDictionaryKey]];
+}
+
++ (nonnull NSString *)getHTMLKey {
+    return HTMLKey;
+}
+
++ (nonnull NSString *)getHTMLWithDictionaryKey {
+    return HTMLWithSignatureKey;
 }
 
 @end

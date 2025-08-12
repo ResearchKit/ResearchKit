@@ -29,15 +29,69 @@
  */
 
 #import "ORKHealthKitPermissionType.h"
+#import "ORKNotificationPermissionType.h"
+#import "ORKSensorPermissionType.h"
+#import "ORKMotionActivityPermissionType.h"
+#import "ORKLocationPermissionType.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKPermissionType.h"
 
 @implementation ORKPermissionType
 
+- (NSString *)localizedTitle {
+    ORKThrowMethodUnavailableException();
+}
+
+- (NSString *)localizedDetailText {
+    ORKThrowMethodUnavailableException();
+}
+
+- (UIImage * _Nullable)image {
+    ORKThrowMethodUnavailableException();
+}
+
+- (UIColor *)iconTintColor {
+    ORKThrowMethodUnavailableException();
+}
+
+- (ORKRequestPermissionsState)permissionState {
+    ORKThrowMethodUnavailableException();
+}
+
+- (BOOL)canContinue {
+    ORKThrowMethodUnavailableException();
+}
+
+- (void)requestPermission {
+    ORKThrowMethodUnavailableException();
+}
+
+- (void)cleanUp {
+    // left empty for optional subclass override
+}
+
 + (ORKHealthKitPermissionType *)healthKitPermissionTypeWithSampleTypesToWrite:(NSSet<HKSampleType *> *)sampleTypesToWrite objectTypesToRead:(NSSet<HKObjectType *> *)objectTypesToRead {
     return [[ORKHealthKitPermissionType alloc] initWithSampleTypesToWrite:sampleTypesToWrite
                                                         objectTypesToRead:objectTypesToRead];
 }
+
++ (ORKNotificationPermissionType *)notificationPermissionType:(UNAuthorizationOptions) options {
+    return [[ORKNotificationPermissionType alloc] initWithAuthorizationOptions:options];
+}
+
++ (ORKSensorPermissionType *)sensorPermissionType:(NSSet<SRSensor> *)sensors {
+    return [[ORKSensorPermissionType alloc] initWithSensors:sensors];
+}
+
++ (ORKMotionActivityPermissionType *)deviceMotionPermissionType {
+    return [[ORKMotionActivityPermissionType alloc] init];
+}
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
++ (ORKLocationPermissionType *) locationPermissionType {
+    return [[ORKLocationPermissionType alloc] init];
+}
+#endif 
 
 @end
 

@@ -1,5 +1,116 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.2.0 Release Notes
+### API Changes
+- **`ORKRecorderConfiguration`**
+Deprecated `recorder(for:outputDirectory:)` method in favor of setting the `outputDirectory` property when initializing `ORKConfiguration`, then calling its new `recorder(for:)` method. 
+
+### General bug fixes
+- **`ORKRecorder`**
+	- Fixed issue where results for active tasks using `ORKRecorder` did not account for all recorded files.
+	- Added file rolling as an API-level setting for `ORKRecorder` configuration.
+	- Added `timestampSince1970` for logged `CMLogItems` for better usability.
+
+- **Active Tasks**
+	- **Amsler Grid**
+		- Fixed issue where the names of the dat files created for the recorded data contained two periods.
+		- Fixed serialization issue preventing `ORKAmslerGridResult` from being properly serialized.
+
+	- **dBHL Tone Audiometry**
+		- Updated the current retSPL dBSPL tables for improved accuracy in audio-based active tasks.
+
+	- **Reaction Time**
+		- Fixed issue where all device motion files were not taken into account when reporting results.
+
+	- **Shoulder Range of Motion**
+		- Fixed issue where some instructions were not vocalized  during the task.
+
+	- **Spatial Span Memory**
+		- Fixed crash when serializing `ORKSpatialSpanMemoryGameTouchSample` objects.
+
+	- **Tremor Test**
+		- Fixed serialization issue preventing tremor test results from being properly serialized.
+
+- **`ORKFormStepViewController`**
+	- Fixed crash in `ORKFormStepViewController` that could occur during form step 
+navigation.
+
+- **`ORKCheckMarkView`**
+	- Fixed recursive crash that occurred when setting tint color on `ORKCheckMarkView` components.
+
+## ResearchKit 3.1.1 Release Notes
+General bug fixes for the following:
+
+- **ORKMotionActivityPermissionType**
+Fixed issue that caused the next button to remain disabled after gaining permission from user.
+
+- **ORKRegistrationStep**
+Removed yellow overlay that prevented password entry.
+
+- **ORKdBHLToneAudiometryStep**
+Fixed issue that caused the tap button to appear twice.
+
+
+## ResearchKit 3.1 Release Notes
+In addition to general stability and performance improvements, ResearchKit 3.1 includes the following updates:
+
+- **ORKFamilyHistoryStep**
+The `ORKFamilyHistoryStep` can be configured to present a Family Health History survey.
+
+- **ORKColorChoiceAnswerFormat**
+The `ORKColorChoiceAnswerFormat` presents the user with a list of color choices.
+
+- **ORKAgeAnswerFormat**
+The `ORKAgeAnswerFormat` presents a age picker that presents birth year or current age options depending on how you configure it.
+
+- **CLLocation Flag**
+A compiler flag that prevents your app from being flagged during app store submission if your app doesn't require location services.
+
+- **HealthKit Flag**
+A compiler flag that prevents your app from being flagged during app store submission if your app doesn't use HealthKit.
+
+
+## ResearchKit 3.0.1 Release Notes
+In addition to general stability and performance improvements, ResearchKit 3.0.1 includes the following updates:
+
+- **ORKFormStep**
+The `ORKFormStep` has an additional property named `autoScrollEnabled` that allows developers to disable autoscrolling.
+
+- **ORKBodyItem**
+The `ORKBodyItem` has an additional property named `alignImageToTop` that will align a body item's image and text to the top of each other.
+
+- **ORK3DModelStep**
+An example of the `ORK3DModelStep` has been added to the ORKCatalog app.
+
+
+## ResearchKit 3.0 Release Notes
+
+*ResearchKit 3.0* is a beta release
+
+In addition to general stability and performance improvements, ResearchKit 3.0 includes the following updates.
+
+### Framework Updates
+
+In order to modularize ResearchKit we have separated its functionality into the following modules.
+
+- **ResearchKit**
+contains the core classes and objects needed to run ResearchKit in any environment.
+
+- **ResearchKitUI**
+contains the UI classes and objects needed to present ResearchKit views in an IOS environment.
+
+- **ResearchKitActiveTask**
+contains the classes and objects needed to present Active Tasks in an IOS enviroment. These tasks usually require access to device sensors.
+
+### Future Deprecations
+The following APIs will be labeled deprecated spring of 2025.
+
+- **Consent**
+Our `ORKConsent` APIs will be deprecated in favor of using existing functionality (e.g `ORKInstructionStep` and `ORKWebViewStep`) to achieve informed consent. Please visit the `ORKCatalog` app to view a recommended example.
+
+- **Question Step**
+The `ORKQuestionStep` will be deprecated in favor of using the `ORKFormStep`. Certain answer formats will present slightly different UI when used with a `ORKFormStep`. Updates will be made to ensure backwards compatibility before the question step is removed.
+
 ## ResearchKit 2.0 Release Notes
 
 *ResearchKit 2.0* supports *iOS* and requires *Xcode 9.0* or newer. 

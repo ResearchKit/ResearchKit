@@ -30,7 +30,7 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
 
 #import "ORKHelpers_Internal.h"
 
@@ -122,6 +122,25 @@
     NSDictionary *jsonOut = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:_finishedLogFiles[0]] options:(NSJSONReadingOptions)0 error:&error];
     XCTAssertNil(error);
     XCTAssertEqualObjects(jsonOut[@"items"][0], jsonObject);
+}
+
+- (void)testJSONFileExtension {
+    NSDictionary *jsonObject = @{@"test": @[@"a", @"b"], @"blah": @(1) };
+
+    [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
+    [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
+    [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
+
+    __block int count = 0;
+
+    [_dataLogger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
+        count ++;
+        NSString *fileExtension = [logFileUrl pathExtension];
+        NSLog(@"%@", fileExtension);
+        XCTAssertEqualObjects(fileExtension, @"json");
+    } error:nil];
+
+    XCTAssertEqual(count, 3);
 }
 
 - (void)testContinuesExistingLog {

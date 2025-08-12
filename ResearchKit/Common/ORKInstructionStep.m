@@ -30,18 +30,12 @@
 
 
 #import "ORKInstructionStep.h"
-#import "ORKInstructionStepViewController.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 
 
 @implementation ORKInstructionStep
 
-
-
-+ (Class)stepViewControllerClass {
-    return [ORKInstructionStepViewController class];
-}
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
