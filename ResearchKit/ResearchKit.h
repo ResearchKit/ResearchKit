@@ -122,5 +122,13 @@
 // Medable ---
 // Extra headers
 #import <ResearchKit/MedableResearchKit.h>
+#import <ResearchKit/ORKAnswerTextView.h>
+#import <ResearchKit/ORKBodyLabel.h>
+#import <ResearchKit/ORKCountdownLabel.h>
+#import <ResearchKit/ORKFormSectionTitleLabel.h>
+#import <ResearchKit/ORKFormTextView.h>
+#import <ResearchKit/ORKTextFieldView.h>
+#import <ResearchKit/ORKSelectionSubTitleLabel.h>
+#import <ResearchKit/ORKSelectionTitleLabel.h>
 // Medable ---
 
