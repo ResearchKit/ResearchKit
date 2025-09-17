@@ -405,9 +405,6 @@ ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
 ORK_INLINE NSString *ORKLocalizedHiddenString(NSString *key) {
     NSString *value = [[NSBundle mainBundle] localizedStringForKey:key value:key table:@"ResearchKit"];
     if ([value isEqualToString:key]) {
-        value = [[NSBundle mainBundle] localizedStringForKey:key value:key table:nil];
-    }
-    if ([value isEqualToString:key]) {
         value = [ORKBundle() localizedStringForKey:key value:key table:@"ResearchKit"];
     }
     if ([value isEqualToString:key]) {
