@@ -43,13 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable instancetype)initWithPredicateFormat:(NSString *)predicateFormat {
-    NSPredicate *predicate;
-    @try {
-        predicate = [NSPredicate predicateWithFormat:predicateFormat];
-    } @catch (NSException *exception) {
-        ORK_Log_Fault("ORKPredicateFormItemVisibilityRule: Error creating predicate from predicateFormat string: '%{public}@' (error: %{public}@)", predicateFormat, [exception debugDescription]);
-        predicate = nil;
-    }
+    NSPredicate *predicate = ORKPredicateWithFormat(predicateFormat, @"ORKPredicateFormItemVisibilityRule");
+    
     if (predicate != nil) {
         self = [self initWithPredicate:predicate];
         _predicateFormat = [predicateFormat copy];

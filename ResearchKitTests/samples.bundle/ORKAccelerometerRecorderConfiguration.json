@@ -1,1 +1,1 @@
-{"identifier":"","_class":"ORKAccelerometerRecorderConfiguration","frequency":0}
+{"_class":"ORKAccelerometerRecorderConfiguration","identifier":"","outputDirectory":"file:\/\/\/usr\/","rollingFileSizeThreshold":5000000,"frequency":0}

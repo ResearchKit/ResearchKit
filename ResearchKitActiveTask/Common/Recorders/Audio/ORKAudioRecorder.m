@@ -35,6 +35,8 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ResearchKit/ResearchKit-Swift.h"
+
 
 @interface ORKAudioRecorder ()
 
@@ -62,11 +64,28 @@
              AVSampleRateKey            : @(44100.0)};
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier
                   recorderSettings:(NSDictionary *)recorderSettings
                               step:(ORKStep *)step
                    outputDirectory:(NSURL *)outputDirectory {
-    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
+    return [self initWithIdentifier:identifier recorderSettings:recorderSettings step:step outputDirectory:outputDirectory rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                  recorderSettings:(NSDictionary *)recorderSettings
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)sizeThreshold {
+    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory rollingFileSizeThreshold:sizeThreshold];
     if (self) {
         
         self.continuesInBackground = YES;
@@ -80,6 +99,7 @@
     }
     return self;
 }
+#pragma clang diagnostic pop
 
 - (void)restoreSavedAudioSessionCategory {
     if (_savedSessionCategory) {
@@ -153,7 +173,7 @@
         fileUrl = nil;
     }
     
-    [self reportFileResultWithFile:fileUrl error:nil];
+    [self reportFileResultsWithFiles:@[fileUrl] error:nil];
     
     [super stop];
 }
@@ -284,13 +304,30 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    return [super initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier recorderSettings:(NSDictionary *)recorderSettings {
+    return [self initWithIdentifier:identifier recorderSettings:recorderSettings outputDirectory:nil rollingFileSizeThreshold:0];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                  recorderSettings:(NSDictionary *)recorderSettings {
-    self = [super initWithIdentifier:identifier];
+                  recorderSettings:(NSDictionary *)recorderSettings
+                   outputDirectory:(nullable NSURL *)outputDirectory {
+    return [self initWithIdentifier:identifier
+                   recorderSettings:recorderSettings
+                    outputDirectory:outputDirectory
+           rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                  recorderSettings:(NSDictionary *)recorderSettings
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    self = [super initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
     if (self) {
         if (recorderSettings && ![recorderSettings isKindOfClass:[NSDictionary class]]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"recorderSettings should be a dictionary" userInfo:recorderSettings];
@@ -301,12 +338,12 @@
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-                 outputDirectory:(NSURL *)outputDirectory {
+- (ORKRecorder *)recorderForStep:(ORKStep *)step {
     return [[ORKAudioRecorder alloc] initWithIdentifier:self.identifier
                                        recorderSettings:self.recorderSettings
                                                    step:step
-                                        outputDirectory:outputDirectory];
+                                        outputDirectory:self.outputDirectory
+                               rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

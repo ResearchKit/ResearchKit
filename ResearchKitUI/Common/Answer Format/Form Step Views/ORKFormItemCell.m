@@ -1779,6 +1779,32 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     [super inputValueDidChange];
 }
 
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+- (NSArray *)accessibilityElements {
+    NSMutableArray<UIView *> *accessibilityElements = [[NSMutableArray alloc] init];
+    if (_sliderView) {
+        [accessibilityElements addObject:_sliderView];
+    }
+    return accessibilityElements;
+}
+
+- (NSInteger)accessibilityElementCount {
+    return self.accessibilityElements.count;
+}
+
+- (id)accessibilityElementAtIndex:(NSInteger)index {
+    return [self.accessibilityElements objectAtIndex:index];
+}
+
+- (NSInteger)indexOfAccessibilityElement:(id)element {
+    return [self.accessibilityElements indexOfObject:element];
+}
+
 @end
 
 #pragma mark - ORKFormItemPickerCell

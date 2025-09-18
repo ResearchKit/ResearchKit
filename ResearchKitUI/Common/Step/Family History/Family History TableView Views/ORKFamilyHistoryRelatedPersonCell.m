@@ -153,7 +153,7 @@ typedef void (^ORKFamilyHistoryEditDeleteViewEventHandler)(ORKFamilyHistoryEditD
     }
 }
 
-- (void)setupSubViews {
+- (void)setUpSubViews {
     _backgroundView = [UIView new];
     _backgroundView.clipsToBounds = YES;
     _backgroundView.layer.cornerRadius = 12.0;
@@ -193,8 +193,6 @@ typedef void (^ORKFamilyHistoryEditDeleteViewEventHandler)(ORKFamilyHistoryEditD
     _conditionsLabel = [self _primaryLabel];
     _conditionsLabel.text = ORKLocalizedString(@"FAMILY_HISTORY_CONDITIONS", @"");
     [_backgroundView addSubview:_conditionsLabel];
-    
-    [self updateViewColors];
 }
 
 - (void)updateViewColors {
@@ -301,7 +299,7 @@ typedef void (^ORKFamilyHistoryEditDeleteViewEventHandler)(ORKFamilyHistoryEditD
     ];
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     [self _clearActiveConstraints];
     _viewConstraints = [NSMutableArray new];
     
@@ -425,8 +423,9 @@ isLastItemBeforeAddRelativeButton:(BOOL)isLastItemBeforeAddRelativeButton {
     _conditionValues = conditionsValues;
     _isLastItemBeforeAddRelativeButton = isLastItemBeforeAddRelativeButton;
     
-    [self setupSubViews];
-    [self setupConstraints];
+    [self setUpSubViews];
+    [self setUpConstraints];
+    [self updateViewColors];
 }
 
 - (UIFont *)titleLabelFont {

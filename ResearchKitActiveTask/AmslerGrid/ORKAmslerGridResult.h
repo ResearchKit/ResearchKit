@@ -33,6 +33,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKFileResult;
+
 
 /**
  The `ORKAmslerGridResult` class represents the result of a successful attempt of `ORKAmslerGridStep`.
@@ -42,25 +44,26 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKAmslerGridResult : ORKResult
 
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             image:(UIImage *)image
-                              path:(NSArray <UIBezierPath *> *)path
-                           eyeSide:(ORKAmslerGridEyeSide)eyeSide;
-
 /**
  Eye side closed.
  */
 @property (nonatomic) ORKAmslerGridEyeSide eyeSide;
-/**
- The image for the step.
- */
-@property (nonatomic, nullable) UIImage *image;
 
 /**
  The path used to mark the area in the image.
  */
 @property (nonatomic, copy, nullable) NSArray <UIBezierPath *> *path;
+
+/**
+ The file result for the image generated during the step.
+ */
+@property (nonatomic, copy, nullable) ORKFileResult *imageFileResult;
+
+/**
+ The file result for the drawing paths made by the user
+ during the step.
+ */
+@property (nonatomic, copy, nullable) ORKFileResult *drawingPathFileResult;
 
 @end
 

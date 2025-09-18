@@ -53,6 +53,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) NSInteger requiredContiguousSamples;
 
+- (instancetype)initWithIdentifier:(NSString *)identifier outputDirectory:(nullable NSURL *)outputDirectory;
+
 @end
 
 NS_ASSUME_NONNULL_END

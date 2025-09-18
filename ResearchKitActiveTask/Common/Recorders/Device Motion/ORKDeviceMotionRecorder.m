@@ -56,11 +56,23 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          frequency:(double)frequency
+                              step:(ORKStep *)step {
+    return [self initWithIdentifier:identifier
+                          frequency:frequency
+                               step:step
+                    outputDirectory:nil
+           rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)frequency
                               step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory {
+                   outputDirectory:(NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
     self = [super initWithIdentifier:identifier
                                 step:step
-                     outputDirectory:outputDirectory];
+                     outputDirectory:outputDirectory
+            rollingFileSizeThreshold:rollingFileSizeThreshold];
     if (self) {
         self.frequency = frequency;
         self.continuesInBackground = YES;
@@ -129,12 +141,13 @@
     [_logger finishCurrentLog];
     
     NSError *error = nil;
-    __block NSURL *fileUrl = nil;
+    __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
     [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
-        fileUrl = logFileUrl;
-    } error:&error];
+        [fileUrls addObject:logFileUrl];
+    }
+                     error:&error];
     
-    [self reportFileResultWithFile:fileUrl error:error];
+    [self reportFileResultsWithFiles:fileUrls error:error];
     
     [super stop];
 }
@@ -172,24 +185,34 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)freq {
+    return [self initWithIdentifier:identifier frequency:freq outputDirectory:nil rollingFileSizeThreshold:0];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)freq {
-    self = [super initWithIdentifier:identifier];
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)freq
+                   outputDirectory:(nullable NSURL *)outputDirectory {
+    return [self initWithIdentifier:identifier
+                          frequency:freq
+                    outputDirectory:outputDirectory
+           rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency outputDirectory:(nullable NSURL *)outputDirectory rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    self = [super initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
     if (self) {
-        _frequency = freq;
+        _frequency = frequency;
     }
     return self;
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+- (ORKRecorder *)recorderForStep:(ORKStep *)step {
     return [[ORKDeviceMotionRecorder alloc] initWithIdentifier:self.identifier
                                                      frequency:self.frequency
                                                           step:step
-                                               outputDirectory:outputDirectory];
+                                               outputDirectory:self.outputDirectory
+                                      rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) ORKStep *step;
 
-@property (nonatomic, strong, nullable) ORKRecorderConfiguration *configuration;
+@property (nonatomic, strong) ORKRecorderConfiguration *configuration;
 
 @property (nonatomic) BOOL continuesInBackground;
 
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reset NS_REQUIRES_SUPER;
 
-- (void)reportFileResultWithFile:(nullable NSURL *)fileUrl error:(nullable NSError *)error;
+- (void)reportFileResultsWithFiles:(NSArray<NSURL *> *)fileUrls error:(nullable NSError *)error;
 
 - (nullable NSURL *)recordingDirectoryURL;
 

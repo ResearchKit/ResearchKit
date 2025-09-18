@@ -137,6 +137,27 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
     return self;
 }
 
+- (nullable instancetype)initWithResultPredicateFormats:(NSArray<NSString *> *)resultPredicateFormats
+                             destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
+                                  defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier
+                                         validateArrays:(BOOL)validateArrays {
+    NSMutableArray<NSPredicate *> *resultPredicates = [NSMutableArray arrayWithCapacity:[resultPredicateFormats count]];
+    for (NSString *resultPredicateFormat in resultPredicateFormats) {
+        NSPredicate *predicate = ORKPredicateWithFormat(resultPredicateFormat, @"ORKPredicateStepNavigationRule");
+        if (predicate != nil) {
+            [resultPredicates addObject:predicate];
+        }
+    }
+    
+    if ([resultPredicates count] != 0) {
+        self = [self initWithResultPredicates:[resultPredicates copy]
+                   destinationStepIdentifiers:destinationStepIdentifiers
+                        defaultStepIdentifier:defaultStepIdentifier validateArrays:validateArrays];
+        _resultPredicateFormats = [resultPredicateFormats copy];
+    }
+    return self;
+}
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
@@ -218,6 +239,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, resultPredicates, NSPredicate);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, resultPredicateFormats, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, destinationStepIdentifiers, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultStepIdentifier, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, additionalTaskResults, ORKTaskResult);
@@ -228,6 +250,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, resultPredicates);
+    ORK_ENCODE_OBJ(aCoder, resultPredicateFormats);
     ORK_ENCODE_OBJ(aCoder, destinationStepIdentifiers);
     ORK_ENCODE_OBJ(aCoder, defaultStepIdentifier);
     ORK_ENCODE_OBJ(aCoder, additionalTaskResults);
@@ -241,6 +264,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
                                                               defaultStepIdentifier:[_defaultStepIdentifier copy]
                                                                      validateArrays:YES];
     rule->_additionalTaskResults = ORKArrayCopyObjects(_additionalTaskResults);
+    rule->_resultPredicateFormats = [_resultPredicateFormats copy];
     return rule;
 }
 
@@ -249,13 +273,14 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     __typeof(self) castObject = object;
     return (isParentSame
             && ORKEqualObjects(self.resultPredicates, castObject.resultPredicates)
+            && ORKEqualObjects(self.resultPredicateFormats, castObject.resultPredicateFormats)
             && ORKEqualObjects(self.destinationStepIdentifiers, castObject.destinationStepIdentifiers)
             && ORKEqualObjects(self.defaultStepIdentifier, castObject.defaultStepIdentifier)
             && ORKEqualObjects(self.additionalTaskResults, castObject.additionalTaskResults));
 }
 
 - (NSUInteger)hash {
-    return _resultPredicates.hash ^ _destinationStepIdentifiers.hash ^ _defaultStepIdentifier.hash ^ _additionalTaskResults.hash;
+    return _resultPredicates.hash ^ _destinationStepIdentifiers.hash ^ _defaultStepIdentifier.hash ^ _additionalTaskResults.hash ^ _resultPredicateFormats.hash;
 }
 
 @end
@@ -536,6 +561,16 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     return self;
 }
 
+- (nullable instancetype)initWithResultPredicateFormat:(NSString *)resultPredicateFormat
+                                           keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap {
+    NSPredicate *resultPredicate = ORKPredicateWithFormat(resultPredicateFormat, @"ORKPredicateStepNavigationRule");
+    if (resultPredicate != nil) {
+        self = [self initWithResultPredicate:resultPredicate keyValueMap:keyValueMap];
+        _resultPredicateFormat = [resultPredicateFormat copy];
+    }
+    return self;
+}
+
 - (void)modifyStep:(ORKStep *)step withTaskResult:(ORKTaskResult *)taskResult {
     
     // The predicate can either have:
@@ -564,6 +599,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, resultPredicate, NSPredicate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, resultPredicateFormat, NSString);
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY_PROPS(aDecoder, keyValueMap, NSString);
     }
     return self;
@@ -572,14 +608,16 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, resultPredicate);
+    ORK_ENCODE_OBJ(aCoder, resultPredicateFormat);
     ORK_ENCODE_OBJ(aCoder, keyValueMap);
 }
 
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [[[self class] allocWithZone:zone] initWithResultPredicate:self.resultPredicate
-                                                          keyValueMap:self.keyValueMap];
+    __typeof(self) stepModifier = [[[self class] allocWithZone:zone] initWithResultPredicate:self.resultPredicate keyValueMap:self.keyValueMap];
+    stepModifier->_resultPredicateFormat = [_resultPredicateFormat copy];
+    return stepModifier;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -587,11 +625,12 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     __typeof(self) castObject = object;
     return (isParentSame
             && ORKEqualObjects(self.resultPredicate, castObject.resultPredicate)
+            && ORKEqualObjects(self.resultPredicateFormat, castObject.resultPredicateFormat)
             && ORKEqualObjects(self.keyValueMap, castObject.keyValueMap));
 }
 
 - (NSUInteger)hash {
-    return _resultPredicate.hash ^ _keyValueMap.hash;
+    return _resultPredicate.hash ^ _keyValueMap.hash ^ _resultPredicateFormat.hash;
 }
 
 @end

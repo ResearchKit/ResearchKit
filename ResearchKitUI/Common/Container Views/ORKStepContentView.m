@@ -193,8 +193,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         return;
     }
     
-    // this requires the image to be set to the UIImageRenderingModeAlwaysTemplate rendering mode
-    // in the UIImageRenderingModeAlwaysOriginal rendering mode, tintColor does not apply
     [_topContentImageView updateRenderingModeForUserInterfaceStyle:self.traitCollection.userInterfaceStyle];
     [_iconImageView updateRenderingModeForUserInterfaceStyle:self.traitCollection.userInterfaceStyle];
     

@@ -809,6 +809,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
 }
 
++ (NSURL *)ORKDefaultTemporaryOutputDirectory {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    return [NSURL fileURLWithPath:documentsPath];
+}
+
 - (void)setOutputDirectory:(NSURL *)outputDirectory {
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change outputDirectory after presenting task controller" userInfo:nil];

@@ -54,7 +54,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) NSTimeInterval timestamp;
 
-@property (nonatomic, strong) ORKFileResult *fileResult;
+@property (nonatomic, strong) NSArray<ORKFileResult *> *fileResults;
 
 @end
 

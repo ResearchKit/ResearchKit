@@ -65,14 +65,30 @@ ORK_CLASS_AVAILABLE
  @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
  @param frequency           The frequency of motion data collection from CoreMotion in hertz (Hz).
  @param step                The step that requested this recorder.
- @param outputDirectory     The directory in which the device motion data should be stored.
+ 
+ @return An initialized motion data recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)frequency
+                              step:(nullable ORKStep *)step;
+
+/**
+ Returns an initialized device motion recorder using the specified frequency.
+ 
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param frequency           The frequency of motion data collection from CoreMotion in hertz (Hz).
+ @param step                The step that requested this recorder.
+ @param outputDirectory The url to the directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @param rollingFileSizeThreshold The file-size threshold in bytes used to determine when data is rolled over to multiple files as data is being written.
+ If the value is 0, data is written to only one file and not rolled over to multiple files.
  
  @return An initialized motion data recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          frequency:(double)frequency
                               step:(nullable ORKStep *)step
-                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 @end
 

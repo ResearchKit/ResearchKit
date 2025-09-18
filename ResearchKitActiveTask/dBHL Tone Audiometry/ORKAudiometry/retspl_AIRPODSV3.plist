@@ -3,26 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>125</key>
-	<string>31</string>
+	<string>39.05</string>
 	<key>250</key>
-	<string>21</string>
+	<string>26.68</string>
 	<key>500</key>
-	<string>13</string>
+	<string>14.31</string>
 	<key>750</key>
-	<string>9</string>
+	<string>13.16</string>
 	<key>1000</key>
-	<string>7</string>
+	<string>12.01</string>
 	<key>1500</key>
-	<string>10</string>
+	<string>12.64</string>
 	<key>2000</key>
-	<string>12</string>
+	<string>13.27</string>
 	<key>3000</key>
-	<string>13.5</string>
+	<string>14.48</string>
 	<key>4000</key>
-	<string>16</string>
+	<string>15.69</string>
 	<key>6000</key>
-	<string>16</string>
+	<string>14.77</string>
 	<key>8000</key>
-	<string>15.5</string>
+	<string>13.85</string>
 </dict>
 </plist>
