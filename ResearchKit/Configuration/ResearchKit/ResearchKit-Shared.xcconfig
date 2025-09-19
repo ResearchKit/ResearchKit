@@ -1,0 +1,70 @@
+//
+// ResearchKit-Shared.xcconfig
+//
+
+BUILD_LIBRARY_FOR_DISTRIBUTION = YES
+CODE_SIGN_IDENTITY =
+CODE_SIGN_STYLE = Manual
+DEFINES_MODULE = YES
+DEVELOPMENT_TEAM = 
+DYLIB_COMPATIBILITY_VERSION = 1
+DYLIB_CURRENT_VERSION = 1
+DYLIB_INSTALL_NAME_BASE = @rpath
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = ResearchKit/ResearchKit_Prefix.pch
+INFOPLIST_FILE = ResearchKit/Info.plist
+INSTALL_PATH = $(LOCAL_LIBRARY_DIR)/Frameworks
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap
+PRODUCT_BUNDLE_IDENTIFIER = org.researchkit.${PRODUCT_NAME:rfc1034identifier}
+PRODUCT_NAME = ResearchKit
+PROVISIONING_PROFILE_SPECIFIER = 
+PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*] =
+SWIFT_VERSION = 5.0
+CLANG_STATIC_ANALYZER_MODE = deep
+
+ORK_FRAMEWORK_VERSION_NUMBER = 3.2.0
+
+ORK_FRAMEWORK_BUILD_NUMBER = $(ORK_FRAMEWORK_BUILD_NUMBER_CI_$(CI)) // ORK_FRAMEWORK_BUILD_NUMBER_CI_TRUE or ORK_FRAMEWORK_BUILD_NUMBER_CI_
+ORK_FRAMEWORK_BUILD_NUMBER_CI_TRUE = $(CI_BUILD_NUMBER)
+ORK_FRAMEWORK_BUILD_NUMBER_CI_FALSE = $(ORK_FRAMEWORK_VERSION_NUMBER) // When not building in CI, assume build and version number are the same
+ORK_FRAMEWORK_BUILD_NUMBER_CI_ = $(ORK_FRAMEWORK_BUILD_NUMBER_CI_FALSE)
+
+// Some CLLocationManager API calls would trigger authorization to use location. The presence of those
+// API calls in ResearchKit **at compile time** mean apps that link ResearchKit also need Info.plist entries
+// for NSLocationAlwaysAndWhenInUseUsageDescription and NSLocationWhenInUseUsageDescription.
+// If your app doesn't use ORKLocationRecorder and doesn't specify these Info.plist strings, disable
+// ResearchKit's CLLocationManager authorization
+ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION = 1
+
+// Control whether ResearchKit compiles out CLLocationManager calls that would request authorization for location
+// ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0 compiles out the feature
+// ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=1 compiles RK with the feature intact
+ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS = $(ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS_$(ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION))
+ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS_0 = ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0
+ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS_1 = ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=1
+
+
+// Some HealthKit API calls used within the framework require your app to disclose using HealthKit and provide a reason during app store review.
+// If your app does not use HealthKit or any of the ResearchKit HealthKit APIs, disable ResearchKit's HealthKit authorization.
+ORK_FEATURE_HEALTHKIT_AUTHORIZATION = 1
+
+// GCC Preprocessor definitions
+ORK_FEATURE_HEALTHKIT_DEFINITIONS_GCC = $(ORK_FEATURE_HEALTHKIT_DEFINITIONS_GCC_$(ORK_FEATURE_HEALTHKIT_AUTHORIZATION))
+ORK_FEATURE_HEALTHKIT_DEFINITIONS_GCC_0 = ORK_FEATURE_HEALTHKIT_AUTHORIZATION=0
+ORK_FEATURE_HEALTHKIT_DEFINITIONS_GCC_1 = ORK_FEATURE_HEALTHKIT_AUTHORIZATION=1
+
+// Swift active compilation conditions
+ORK_FEATURE_HEALTHKIT_DEFINITIONS_SWIFT = $(ORK_FEATURE_HEALTHKIT_DEFINITIONS_SWIFT_$(ORK_FEATURE_HEALTHKIT_AUTHORIZATION))
+ORK_FEATURE_HEALTHKIT_DEFINITIONS_SWIFT_0 =
+ORK_FEATURE_HEALTHKIT_DEFINITIONS_SWIFT_1 = ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+
+#include? "../../../../xcconfig/ResearchKit-Shared.xcconfig"
+
+
+#include? "samples/ORKCatalog/ResearchKit-Shared.xcconfig"
+#include? "../xcconfig/ResearchKit-Shared.xcconfig"
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) GLES_SILENCE_DEPRECATION=1 $(ORK_GCC_PREPROCESSOR_DEFINITIONS) $(ORK_FEATURE_CLLOCATIONMANAGER_DEFINITIONS) $(ORK_FEATURE_HEALTHKIT_DEFINITIONS_GCC)
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) $(ORK_FEATURE_HEALTHKIT_DEFINITIONS_SWIFT)

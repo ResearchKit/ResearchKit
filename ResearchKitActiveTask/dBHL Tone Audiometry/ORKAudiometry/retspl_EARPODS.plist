@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>125</key>
+	<string>38.78</string>
+	<key>250</key>
+	<string>28.99</string>
+	<key>500</key>
+	<string>21.66</string>
+	<key>750</key>
+	<string>17.97</string>
+	<key>1000</key>
+	<string>14.28</string>
+	<key>1500</key>
+	<string>13.02</string>
+	<key>2000</key>
+	<string>11.75</string>
+	<key>3000</key>
+	<string>13.69</string>
+	<key>4000</key>
+	<string>15.62</string>
+	<key>6000</key>
+	<string>16.77</string>
+	<key>8000</key>
+	<string>17.92</string>
+</dict>
+</plist>

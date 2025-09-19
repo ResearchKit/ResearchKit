@@ -30,11 +30,15 @@
 
 
 @import XCTest;
-@import ResearchKit.Private;
+@import ResearchKit_Private;
+@import ResearchKitActiveTask;
+@import ResearchKitActiveTask_Private;
 
-@import CoreLocation;
 @import CoreMotion;
 
+
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+@import CoreLocation;
 
 @interface ORKMockLocationManager : CLLocationManager
 
@@ -62,6 +66,7 @@
 }
 
 @end
+#endif
 
 
 @interface ORKMockTouch : UITouch
@@ -192,6 +197,10 @@
     return 1000.0;
 }
 
+- (NSTimeInterval)timestampSince1970 {
+    return 1200.0;
+}
+
 @end
 
 
@@ -286,6 +295,10 @@
     return 1000.0;
 }
 
+- (NSTimeInterval)timestampSince1970 {
+    return 1200.0;
+}
+
 - (CMAttitude *)attitude {
     return [ORKMockAttitude new];
 }
@@ -324,8 +337,9 @@ static BOOL ork_doubleEqual(double x, double y) {
 
 @implementation ORKRecorderTests {
     NSString  *_outputPath;
+    NSNumber *_rollingFileSizeThreshold;
     ORKRecorder *_recorder;
-    ORKResult *_result;
+    NSArray<ORKResult *> *_result;
     NSArray   *_items;
 }
 
@@ -345,7 +359,7 @@ static const NSInteger kNumberOfSamples = 5;
             ORK_Log_Error("Failed to create directory %@", error);
         }
     }
-    
+    _rollingFileSizeThreshold = @5000000;
     _recorder = nil;
     _result = nil;
     _items = nil;
@@ -355,10 +369,10 @@ static const NSInteger kNumberOfSamples = 5;
     [super tearDown];
 }
 
-- (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-     ORK_Log_Debug("didCompleteWithResult: %@", result);
+- (void)recorder:(ORKRecorder *)recorder didCompleteWithResults:(NSArray<ORKFileResult *> *)results {
+    ORK_Log_Debug("didCompleteWithResults: %@", results);
     _recorder = recorder;
-    _result = result;
+    _result = results;
 }
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
@@ -368,8 +382,7 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 - (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)recorderConfiguration {
-    ORKRecorder *recorder = [recorderConfiguration recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
-                                                   outputDirectory:[NSURL fileURLWithPath:_outputPath]];
+    ORKRecorder *recorder = [recorderConfiguration recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]];
     XCTAssert([recorder.identifier isEqualToString:recorderConfiguration.identifier], @"");
     recorder.delegate = self;
     return recorder;
@@ -378,30 +391,37 @@ static const NSInteger kNumberOfSamples = 5;
 - (void)checkResult {
     
     XCTAssertNotNil(_result, @"");
-    XCTAssert([_result isKindOfClass:[ORKFileResult class]], @"");
-    XCTAssert([_recorder.identifier isEqualToString:_result.identifier], @"");
+    XCTAssert([_result isKindOfClass:[NSArray<ORKFileResult *> class]], @"");
     
-    ORKFileResult *fileResult = (ORKFileResult *)_result;
+    for (ORKFileResult *fileResult in _result) {
+        XCTAssert([_recorder.identifier isEqualToString:fileResult.identifier], @"");
+    }
     
-    NSError *error;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:fileResult.fileURL ] options:(NSJSONReadingOptions)0 error:&error];
-    XCTAssertNil(error, @"");
-    XCTAssertNotNil(dict, @"");
-    
-    NSArray *items = dict[@"items"];
-    XCTAssertEqual(items.count, kNumberOfSamples, @"");
-    
-    _items = items;
+    for (ORKFileResult *fileResult in _result) {
+        NSError *error;
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:fileResult.fileURL ] options:(NSJSONReadingOptions)0 error:&error];
+        XCTAssertNil(error, @"");
+        XCTAssertNotNil(dict, @"");
+        
+        NSArray *items = dict[@"items"];
+        XCTAssertEqual(items.count, kNumberOfSamples, @"");
+        
+        _items = items;
+    }
 }
 
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 - (void)testLocationRecorder {
     
-    ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:@"location"]];
+    ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:@"location"
+                                                                                                                             outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                                                                    rollingFileSizeThreshold:_rollingFileSizeThreshold]];
     XCTAssertTrue([recorder isKindOfClass:[ORKLocationRecorder class]], @"");
     
     recorder = [[ORKMockLocationRecorder alloc] initWithIdentifier:@"location"
                                                               step:recorder.step
-                                                   outputDirectory:recorder.outputDirectory];
+                                                   outputDirectory:recorder.outputDirectory
+                                          rollingFileSizeThreshold:recorder.rollingFileSizeThreshold];
     recorder.delegate = self;
     [recorder start];
     
@@ -431,8 +451,26 @@ static const NSInteger kNumberOfSamples = 5;
     }
     
     [recorder stop];
-    [self checkResult];
 
+    // when location features are compiled out, make sure that the "ork_" wrapper functions are
+    // returning false, but don't bother doing the checkResult step
+#if !ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    // when location auth is 0, the [recorder start] earlier immediately stops, which zeros
+    // the locationManager property. So we would expect currentLocationManager == nil
+    XCTAssertNil(currentLocationManager, @"ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION=0: expected recorder's location manager to be nil");
+    
+    // make a one-time-use locationManager that we test ork_ wrappers with
+    {
+        CLLocationManager *locationManager = [(ORKMockLocationRecorder *)recorder createLocationManager];
+        XCTAssertNotNil(locationManager);
+        XCTAssertFalse([locationManager ork_requestWhenInUseAuthorization]);
+        XCTAssertFalse([locationManager ork_requestAlwaysAuthorization]);
+    }
+
+#else
+    [self checkResult];
+#endif // ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
+    
     for (NSDictionary *sample in _items) {
         
         XCTAssertTrue(ork_doubleEqual(altitude, ((NSNumber *)sample[@"altitude"]).doubleValue), @"");
@@ -445,17 +483,25 @@ static const NSInteger kNumberOfSamples = 5;
         XCTAssertTrue(ork_doubleEqual(longitude, ((NSNumber *)sample[@"coordinate"][@"longitude"]).doubleValue), @"");
     }
 }
+#endif
 
 - (void)testAccelerometerRecorder {
     
-    ORKAccelerometerRecorderConfiguration *recorderConfiguration = [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"accelerometer" frequency:60.0];
+    ORKAccelerometerRecorderConfiguration *recorderConfiguration = [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"accelerometer"
+                                                                                                                           frequency:60.0
+                                                                                                                     outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                                                            rollingFileSizeThreshold:_rollingFileSizeThreshold];
     Class recorderClass = [ORKAccelerometerRecorder class];
     ORKAccelerometerRecorder *recorder = (ORKAccelerometerRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     XCTAssertTrue([recorder.identifier isEqualToString:recorderConfiguration.identifier], @"");
     
-    ORKMockAccelerometerRecorder *newRecorder = [[ORKMockAccelerometerRecorder alloc] initWithIdentifier:@"accelerometer" frequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
+    ORKMockAccelerometerRecorder *newRecorder = [[ORKMockAccelerometerRecorder alloc] initWithIdentifier:@"accelerometer"
+                                                                                               frequency:recorder.frequency
+                                                                                                    step:recorder.step
+                                                                                         outputDirectory:recorder.outputDirectory
+                                                                                rollingFileSizeThreshold:recorder.rollingFileSizeThreshold];
     
     newRecorder.delegate = self;
     ORKMockMotionManager *manager = [ORKMockMotionManager new];
@@ -484,6 +530,8 @@ static const NSInteger kNumberOfSamples = 5;
     
     for (NSDictionary *sample in _items) {
         XCTAssertTrue(ork_doubleEqual(data.timestamp, ((NSNumber *)sample[@"timestamp"]).doubleValue), @"");
+        XCTAssertTrue(ork_doubleEqual(data.timestampSince1970, ((NSNumber *)sample[@"timestampSince1970"]).doubleValue), @"");
+        
         XCTAssertTrue(ork_doubleEqual(data.acceleration.x, ((NSNumber *)sample[@"x"]).doubleValue), @"");
         XCTAssertTrue(ork_doubleEqual(data.acceleration.y, ((NSNumber *)sample[@"y"]).doubleValue), @"");
         XCTAssertTrue(ork_doubleEqual(data.acceleration.z, ((NSNumber *)sample[@"z"]).doubleValue), @"");
@@ -492,13 +540,20 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testDeviceMotionRecorder {
     
-    ORKDeviceMotionRecorderConfiguration *recorderConfiguration = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"deviceMotion" frequency:60.0];
+    ORKDeviceMotionRecorderConfiguration *recorderConfiguration = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"deviceMotion"
+                                                                                                                         frequency:60.0
+                                                                                                                   outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                                                          rollingFileSizeThreshold:_rollingFileSizeThreshold];
     Class recorderClass = [ORKDeviceMotionRecorder class];
     ORKDeviceMotionRecorder *recorder = (ORKDeviceMotionRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
-    recorder = [[ORKMockDeviceMotionRecorder alloc] initWithIdentifier:@"deviceMotion" frequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
+    recorder = [[ORKMockDeviceMotionRecorder alloc] initWithIdentifier:@"deviceMotion"
+                                                             frequency:recorder.frequency
+                                                                  step:recorder.step
+                                                       outputDirectory:recorder.outputDirectory
+                                              rollingFileSizeThreshold:recorder.rollingFileSizeThreshold];
     recorder.delegate = self;
     ORKMockMotionManager *manager = [ORKMockMotionManager new];
     [(ORKMockAccelerometerRecorder*)recorder setMockManager:manager];
@@ -515,6 +570,7 @@ static const NSInteger kNumberOfSamples = 5;
     
     for (NSDictionary *sample in _items) {
         XCTAssertTrue(ork_doubleEqual(motion.timestamp, ((NSNumber *)sample[@"timestamp"]).doubleValue), @"");
+        XCTAssertTrue(ork_doubleEqual(motion.timestampSince1970, ((NSNumber *)sample[@"timestampSince1970"]).doubleValue), @"");
         
         XCTAssertTrue(ork_doubleEqual(motion.attitude.quaternion.x, ((NSNumber *)sample[@"attitude"][@"x"]).doubleValue), @"");
         XCTAssertTrue(ork_doubleEqual(motion.attitude.quaternion.y, ((NSNumber *)sample[@"attitude"][@"y"]).doubleValue), @"");
@@ -543,11 +599,16 @@ static const NSInteger kNumberOfSamples = 5;
 - (void)testPedometerRecorder {
     
     Class recorderClass = [ORKPedometerRecorder class];
-    ORKPedometerRecorder *recorder = (ORKPedometerRecorder *)[self createRecorder:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:@"pedometer"]];
+    ORKPedometerRecorder *recorder = (ORKPedometerRecorder *)[self createRecorder:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:@"pedometer"
+                                                                                                                                outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                                                                       rollingFileSizeThreshold:_rollingFileSizeThreshold]];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
-    recorder = [[ORKMockPedometerRecorder alloc] initWithIdentifier:@"pedometer" step:recorder.step outputDirectory:recorder.outputDirectory];
+    recorder = [[ORKMockPedometerRecorder alloc] initWithIdentifier:@"pedometer"
+                                                               step:recorder.step
+                                                    outputDirectory:recorder.outputDirectory
+                                           rollingFileSizeThreshold:recorder.rollingFileSizeThreshold];
     recorder.delegate = self;
     ORKMockPedometer *pedometer = [ORKMockPedometer new];
     [(ORKMockPedometerRecorder*)recorder setMockPedometer:pedometer];
@@ -577,7 +638,9 @@ static const NSInteger kNumberOfSamples = 5;
 - (void)testTouchRecorder {
     
     Class recorderClass = [ORKTouchRecorder class];
-    ORKTouchRecorder *recorder = (ORKTouchRecorder *)[self createRecorder:[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"touch"]];
+    ORKTouchRecorder *recorder = (ORKTouchRecorder *)[self createRecorder:[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"touch"
+                                                                                                                    outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                                                           rollingFileSizeThreshold:0]];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
@@ -621,7 +684,7 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 - (void)testHealthQuantityTypeRecorder {
-    
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *hbQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     ORKHealthQuantityTypeRecorderConfiguration *recorderConfiguration = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:@"healtQuantityTypeRecorder" healthQuantityType:hbQuantityType unit:bpmUnit];
@@ -629,6 +692,7 @@ static const NSInteger kNumberOfSamples = 5;
     ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
+#endif
 }
 
 @end

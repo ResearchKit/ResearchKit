@@ -29,8 +29,12 @@
  */
 
 
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKQuestionResult.h>
-@import MapKit;
+#endif
+
+#import <MapKit/MapKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,11 +45,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable Class)answerClass;
 
 // Used internally for unit testing.
-@property (nonatomic, strong, nullable) id answer;
+@property (nonatomic, strong, nullable) NSObject<NSCopying, NSSecureCoding> *answer;
 
 @end
 
-
+#if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @interface ORKLocation ()
 
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
@@ -56,5 +60,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
 
 @end
-
+#endif
 NS_ASSUME_NONNULL_END

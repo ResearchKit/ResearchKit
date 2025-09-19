@@ -305,8 +305,8 @@
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Hlas";
 "AUDIO_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
-"AUDIO_INSTRUCTION" = "Řekněte \“Ááááá\” do mikrofonu a vydržte co nejdéle.";
-"AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \“Ááááá\”. Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
+"AUDIO_INSTRUCTION" = "Řekněte \"Ááááá\" do mikrofonu a vydržte co nejdéle.";
+"AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \"Ááááá\". Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
 "AUDIO_INTENDED_USE" = "Tato aktivita nahraje váš hlas pomocí mikrofonu u dolního okraje zařízení a vyhodnotí ho.";
 "AUDIO_TOO_LOUD_LABEL" = "Příliš nahlas";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nelze zaznamenávat zvuk";
@@ -350,18 +350,6 @@
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "Zrušit test";
 "dBHL_ALERT_TEXT" = "Před provedením testu znovu připojte AirPody nebo EarPody.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ dokončeno";
-
-/* Headphones. */
-"AIRPODS" = "AirPody";
-"EARPODS" = "EarPody";
-"HEADPHONES" = "Sluchátka";
-"HEADPHONES_UNKNOWN" = "Neznámá";
-"HEADPHONES_NONE" = "Žádná";
-"CONNECTED" = "Připojeno";
-"NOT_CONNECTED" = "Nepřipojeno";
-"HEADPHONE_CONNECTED_%@" = "Připojeno – %@";
-"HEADPHONE_DETECT_TITLE" = "Připojte sluchátka";
-"HEADPHONE_DETECT_TEXT" = "Tento test vyžaduje AirPody nebo EarPody značky Apple";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Prostorová paměť";
