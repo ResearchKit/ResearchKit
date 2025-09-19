@@ -36,11 +36,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  To support deserialization, where deserialization of NSPredicates isn't supported, this class extension allows initializing
- an `ORKPredicateFormItemVisibilityRule` with a predicateFormat `NSString` instead of an `NSPredicate`
- and retains the original predicateFormat for serialization.
+ an `ORKPredicateFormItemVisibilityRule` with a `predicateFormat` `NSString` instead of an `NSPredicate`
+ and retains the original `predicateFormat` for serialization.
 */
 - (nullable instancetype)initWithPredicateFormat:(NSString *)predicateFormat;
 
+/**
+ To support deserialization, where deserialization of NSPredicates isn't supported, this class extension allows initializing
+ an `ORKPredicateFormItemVisibilityRule` with a `predicateFormat` `NSString` instead of an `NSPredicate`
+ and retains the original `predicateFormat` for serialization by setting this property.
+*/
 @property (nonatomic, nullable, copy, readonly) NSString *predicateFormat;
 
 @end

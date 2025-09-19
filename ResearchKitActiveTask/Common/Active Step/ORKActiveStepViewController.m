@@ -63,7 +63,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     ORKActiveStepView *_activeStepView;
     ORKActiveStepTimer *_activeStepTimer;
 
-    NSArray *_recorderResults;
+    NSArray<ORKFileResult *> *_recorderResults;
     
     SystemSoundID _alertSound;
     NSURL *_alertSoundURL;
@@ -298,11 +298,10 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     NSMutableArray *recorders = [NSMutableArray array];
     
     for (ORKRecorderConfiguration * provider in self.activeStep.recorderConfigurations) {
-        // If the outputDirectory is nil, recorders which require one will generate an error.
-        // We start them anyway, because we don't know which recorders will require an outputDirectory.
-        ORKRecorder *recorder = [provider recorderForStep:self.step
-                                          outputDirectory:self.outputDirectory];
-        recorder.configuration = provider;
+        if (self.outputDirectory != nil) { // Deprecation strategy
+            provider.outputDirectory = [self.outputDirectory copy]; // Needed while the output directory can be set from ORKTaskViewController.
+        }
+        ORKRecorder *recorder = [provider recorderForStep:self.step];
         recorder.delegate = self;
         if (recorder) {
             [recorders addObject:recorder];
@@ -540,8 +539,8 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
 
 #pragma mark - ORKRecorderDelegate
 
-- (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-    _recorderResults = [_recorderResults arrayByAddingObject:result];
+- (void)recorder:(ORKRecorder *)recorder didCompleteWithResults:(NSArray<ORKFileResult *> *)results {
+    _recorderResults = [_recorderResults arrayByAddingObjectsFromArray:results];
     [self notifyDelegateOnResultChange];
 }
 

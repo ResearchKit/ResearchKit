@@ -35,6 +35,7 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ResearchKit/ResearchKit-Swift.h"
 
 @interface ORKStreamingAudioRecorder ()
 
@@ -57,7 +58,14 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
                               step:(ORKStep *)step
                    outputDirectory:(NSURL *)outputDirectory {
-    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
+    return [self initWithIdentifier:identifier step:step outputDirectory:outputDirectory rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
     if (self) {
         
         self.continuesInBackground = YES;
@@ -195,7 +203,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:[[self recordingFileURL] path]]) {
         fileUrl = nil;
     }
-    [self reportFileResultWithFile:fileUrl error:nil];
+    [self reportFileResultsWithFiles:@[fileUrl] error:nil];
     
     [super stop];
 }
@@ -244,19 +252,27 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 
-
 - (instancetype)initWithIdentifier:(NSString *)identifier {
-    self = [super initWithIdentifier:identifier];
-    
-    return self;
+    return [self initWithIdentifier:identifier outputDirectory:nil rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory {
+    return [super initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    return [super initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-                 outputDirectory:(NSURL *)outputDirectory {
+- (ORKRecorder *)recorderForStep:(ORKStep *)step {
     ORKStreamingAudioRecorder *obj = [[ORKStreamingAudioRecorder alloc] initWithIdentifier:self.identifier
                                                                                       step:step
-                                                                           outputDirectory:outputDirectory];
+                                                                           outputDirectory:self.outputDirectory
+                                                                  rollingFileSizeThreshold:self.rollingFileSizeThreshold];
     return obj;
 }
 

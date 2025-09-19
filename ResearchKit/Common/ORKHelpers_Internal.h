@@ -421,3 +421,18 @@ ORKLocalizedHiddenString(key)
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
 
 NS_ASSUME_NONNULL_END
+
+// MARK: - NSPredicate
+
+/**
+ This function attempts to create an `NSPredicate` from a predicate format `NSString`.
+ If this fails, an error message starting with the provided `callerID` `NSString` will be logged,
+ and the `NSPredicate` returned will be `nil`.
+ 
+ @param predicateFormat The `NSString` to attempt creating the `NSPredicate` from.
+ @param callerID An `NSString` identifying the calling class for error logging purposes.
+ 
+ @return An `NSPredicate` created from `predicateFormat` if the operation was successful, `nil` if not.
+ */
+NSPredicate* _Nullable ORKPredicateWithFormat(NSString * _Nonnull predicateFormat,
+                                              NSString * _Nonnull callerID);

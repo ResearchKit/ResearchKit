@@ -104,6 +104,17 @@
 
 @implementation ORKTouchRecorder
 
+- (instancetype)initWithIdentifier:(NSString *)identifier step:(ORKStep *)step {
+    return [self initWithIdentifier:identifier step:step outputDirectory:nil rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    return [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
+}
+
 - (void)dealloc {
     [_logger finishCurrentLog];
 }
@@ -151,12 +162,13 @@
     [_logger finishCurrentLog];
     
     NSError *error = nil;
-    __block NSURL *fileUrl = nil;
+    __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
     [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
-        fileUrl = logFileUrl;
-    } error:&error];
+        [fileUrls addObject:logFileUrl];
+    }
+                     error:&error];
     
-    [self reportFileResultWithFile:fileUrl error:error];
+    [self reportFileResultsWithFiles:fileUrls error:error];
     
     [super stop];
 }
@@ -208,13 +220,22 @@
 @implementation ORKTouchRecorderConfiguration
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
-    return [super initWithIdentifier:identifier];
+    return [self initWithIdentifier:identifier outputDirectory:nil rollingFileSizeThreshold:0];
 }
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    return [super initWithIdentifier:identifier
+                     outputDirectory: outputDirectory
+            rollingFileSizeThreshold:rollingFileSizeThreshold];
+}
+
+- (ORKRecorder *)recorderForStep:(ORKStep *)step {
     ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithIdentifier:self.identifier
                                                                          step:step
-                                                              outputDirectory:outputDirectory];
+                                                              outputDirectory:self.outputDirectory
+                                                     rollingFileSizeThreshold:self.rollingFileSizeThreshold];
     return recorder;
 }
 

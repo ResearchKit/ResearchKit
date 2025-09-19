@@ -560,3 +560,24 @@ NSNumberFormatter *ORKDecimalNumberFormatter(void) {
     return numberFormatter;
 }
 
+
+// MARK: - NSPredicate
+         
+NSPredicate* _Nullable ORKPredicateWithFormat(NSString * _Nonnull predicateFormat,
+                                              NSString * _Nonnull callerID) {
+    NSPredicate *predicate;
+    @try {
+        predicate = [NSPredicate predicateWithFormat:predicateFormat];
+    } @catch (NSException *exception) {
+        ORK_Log_Fault(
+            "%{public}@: Error creating predicate from predicateWithFormat string: \
+            '%{public}@' (error: %{public}@)",
+                      callerID,
+                      predicateFormat,
+                      [exception debugDescription]
+                      );
+        predicate = nil;
+    }
+    return predicate;
+}
+

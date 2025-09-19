@@ -1,1 +1,1 @@
-{"defaultStepIdentifier":"","destinationStepIdentifiers":[],"additionalTaskResults":[],"_class":"ORKPredicateStepNavigationRule","resultPredicates":[]}
+{"_class":"ORKPredicateStepNavigationRule","defaultStepIdentifier":"","destinationStepIdentifiers":[],"additionalTaskResults":[],"resultPredicateFormats":["SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"test\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"test\" AND $z.answer == 1).@count > 0).@count > 0).@count > 0"]}

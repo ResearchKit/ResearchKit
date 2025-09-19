@@ -72,11 +72,38 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthQuantityType:(HKQuantityType *)quantityType
                               unit:(HKUnit *)unit
+                              step:(ORKStep *)step {
+    return [self initWithIdentifier:identifier
+                 healthQuantityType:quantityType
+                               unit:unit
+                               step:step
+                    outputDirectory:nil
+           rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
                               step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory {
+                   outputDirectory:(nullable NSURL *)outputDirectory {
+    return [self initWithIdentifier:identifier
+                 healthQuantityType:quantityType
+                               unit:unit
+                               step:step
+                    outputDirectory:outputDirectory
+           rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                              step:(ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory
+                     rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
     self = [super initWithIdentifier:identifier
                                 step:step
-                     outputDirectory:outputDirectory];
+                     outputDirectory:outputDirectory
+            rollingFileSizeThreshold:rollingFileSizeThreshold];
     if (self) {
         NSParameterAssert(quantityType != nil);
         NSParameterAssert(unit != nil);
@@ -262,12 +289,13 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [_logger finishCurrentLog];
     
     NSError *error = nil;
-    __block NSURL *fileUrl = nil;
+    __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
     [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
-        fileUrl = logFileUrl;
-    } error:&error];
+        [fileUrls addObject:logFileUrl];
+    }
+                     error:&error];
     
-    [self reportFileResultWithFile:fileUrl error:error];
+    [self reportFileResultsWithFiles:fileUrls error:error];
     
     [super stop];
 }
@@ -316,7 +344,26 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit {
-    self = [super initWithIdentifier:identifier];
+    return [self initWithIdentifier:identifier healthQuantityType:quantityType unit:unit outputDirectory:nil rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                   outputDirectory:(nullable NSURL *)outputDirectory {
+    return [self initWithIdentifier:identifier
+                 healthQuantityType:quantityType
+                               unit:unit
+                    outputDirectory:outputDirectory
+           rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    self = [super initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:rollingFileSizeThreshold];
     if (self) {
         NSParameterAssert(quantityType != nil);
         NSParameterAssert(unit != nil);
@@ -328,12 +375,13 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+- (ORKRecorder *)recorderForStep:(ORKStep *)step {
     return [[ORKHealthQuantityTypeRecorder alloc] initWithIdentifier:self.identifier
                                                   healthQuantityType:_quantityType
                                                                 unit:_unit
                                                                 step:step
-                                                     outputDirectory:outputDirectory];
+                                                     outputDirectory:self.outputDirectory
+                                            rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

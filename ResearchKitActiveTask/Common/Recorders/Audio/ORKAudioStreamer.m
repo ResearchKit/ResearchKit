@@ -37,8 +37,20 @@
 
 @implementation ORKAudioStreamerConfiguration
 
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    self = [super initWithIdentifier:identifier];
+- (instancetype) initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier outputDirectory:nil rollingFileSizeThreshold:0];
+}
+
+- (instancetype) initWithIdentifier:(NSString *)identifier outputDirectory:(nullable NSURL *)outputDirectory {
+    return [self initWithIdentifier:identifier outputDirectory:outputDirectory rollingFileSizeThreshold:0];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                   outputDirectory:(nullable NSURL *)outputDirectory
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold {
+    self = [super initWithIdentifier:identifier
+                     outputDirectory:outputDirectory
+            rollingFileSizeThreshold:rollingFileSizeThreshold];
     
     if (self != nil) {
         _bypassAudioEngineStart = NO;
@@ -47,12 +59,15 @@
     return self;
 }
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+- (ORKRecorder *)recorderForStep:(ORKStep *)step {
     if (_bypassAudioEngineStart) {
         return nil;
     }
     
-    ORKAudioStreamer *obj = [[ORKAudioStreamer alloc] initWithIdentifier:self.identifier step:step];
+    ORKAudioStreamer *obj = [[ORKAudioStreamer alloc] initWithIdentifier:self.identifier
+                                                                    step:step
+                                                         outputDirectory:self.outputDirectory
+                                                rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 
     return obj;
 }
@@ -92,7 +107,7 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier step:(ORKStep *)step
 {
-    self = [super initWithIdentifier:identifier step:step outputDirectory:nil];
+    self = [super initWithIdentifier:identifier step:step];
     if (self)
     {
         self.continuesInBackground = YES;

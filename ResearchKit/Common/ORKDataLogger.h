@@ -122,12 +122,13 @@ ORK_CLASS_AVAILABLE
  @param url         The URL of the directory in which to place log files
  @param logName     The prefix on the log file name in an ASCII string. Note that
  the string must not contain the hyphen character ("-"), because a hyphen is used as a separator in the log naming scheme.
+ @param fileExtension    The file extension to use when creating files on disk.
  @param formatter   The type of formatter to use for the log, such as `ORKJSONLogFormatter`.
  @param delegate    The initial delegate. May be `nil`.
  
  @return An initialized data logger.
  */
-- (instancetype)initWithDirectory:(NSURL *)url logName:(NSString *)logName formatter:(ORKLogFormatter *)formatter delegate:(nullable id<ORKDataLoggerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDirectory:(NSURL *)url logName:(NSString *)logName fileExtension:(NSString *)fileExtension formatter:(ORKLogFormatter *)formatter delegate:(nullable id<ORKDataLoggerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /// The delegate to be notified when file sizes change or the log rolls over.
 @property (weak, nullable) id<ORKDataLoggerDelegate> delegate;
@@ -483,12 +484,13 @@ ORK_CLASS_AVAILABLE
  Adds a data logger with a particular formatter to the directory.
  
  @param logName     The log name prefix for the data logger.
+ @param fileExtension   The file extension to use when creating files on disk.
  @param formatter   The log formatter instance to use for this logger.
  
  @return The `ORKDataLogger` object that was added, or the existing one if one already existed for
  that log name.
  */
-- (ORKDataLogger *)addDataLoggerForLogName:(NSString *)logName formatter:(ORKLogFormatter *)formatter;
+- (ORKDataLogger *)addDataLoggerForLogName:(NSString *)logName fileExtension:(NSString *)fileExtension formatter:(ORKLogFormatter *)formatter;
 
 /**
  Retrieves the already existing data logger for a log name.

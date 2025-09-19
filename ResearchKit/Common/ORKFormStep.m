@@ -55,6 +55,7 @@
         self.useCardView = YES;
         self.autoScrollEnabled = YES;
         self.cardViewStyle = ORKCardViewStyleDefault;
+        self.headerTextAlignment = NSTextAlignmentNatural;
     }
     return self;
 }

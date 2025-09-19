@@ -1,5 +1,43 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.2.0 Release Notes
+### API Changes
+- **`ORKRecorderConfiguration`**
+Deprecated `recorder(for:outputDirectory:)` method in favor of setting the `outputDirectory` property when initializing `ORKConfiguration`, then calling its new `recorder(for:)` method. 
+
+### General bug fixes
+- **`ORKRecorder`**
+	- Fixed issue where results for active tasks using `ORKRecorder` did not account for all recorded files.
+	- Added file rolling as an API-level setting for `ORKRecorder` configuration.
+	- Added `timestampSince1970` for logged `CMLogItems` for better usability.
+
+- **Active Tasks**
+	- **Amsler Grid**
+		- Fixed issue where the names of the dat files created for the recorded data contained two periods.
+		- Fixed serialization issue preventing `ORKAmslerGridResult` from being properly serialized.
+
+	- **dBHL Tone Audiometry**
+		- Updated the current retSPL dBSPL tables for improved accuracy in audio-based active tasks.
+
+	- **Reaction Time**
+		- Fixed issue where all device motion files were not taken into account when reporting results.
+
+	- **Shoulder Range of Motion**
+		- Fixed issue where some instructions were not vocalized  during the task.
+
+	- **Spatial Span Memory**
+		- Fixed crash when serializing `ORKSpatialSpanMemoryGameTouchSample` objects.
+
+	- **Tremor Test**
+		- Fixed serialization issue preventing tremor test results from being properly serialized.
+
+- **`ORKFormStepViewController`**
+	- Fixed crash in `ORKFormStepViewController` that could occur during form step 
+navigation.
+
+- **`ORKCheckMarkView`**
+	- Fixed recursive crash that occurred when setting tint color on `ORKCheckMarkView` components.
+
 ## ResearchKit 3.1.1 Release Notes
 General bug fixes for the following:
 

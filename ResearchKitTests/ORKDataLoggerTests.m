@@ -124,6 +124,25 @@
     XCTAssertEqualObjects(jsonOut[@"items"][0], jsonObject);
 }
 
+- (void)testJSONFileExtension {
+    NSDictionary *jsonObject = @{@"test": @[@"a", @"b"], @"blah": @(1) };
+
+    [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
+    [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
+    [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
+
+    __block int count = 0;
+
+    [_dataLogger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
+        count ++;
+        NSString *fileExtension = [logFileUrl pathExtension];
+        NSLog(@"%@", fileExtension);
+        XCTAssertEqualObjects(fileExtension, @"json");
+    } error:nil];
+
+    XCTAssertEqual(count, 3);
+}
+
 - (void)testContinuesExistingLog {
     // Test that if you create a logger, and then kill it and create a new logger, the new one
     // continues from the right place without forcing a roll-over

@@ -51,6 +51,7 @@
 @implementation ORKReactionTimeViewController {
     ORKReactionTimeContentView *_reactionTimeContentView;
     NSMutableArray *_results;
+    NSMutableArray<ORKFileResult *> *_fileResults;
     NSTimer *_stimulusTimer;
     NSTimer *_timeoutTimer;
     NSTimeInterval _stimulusTimestamp;
@@ -68,6 +69,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     // Do any additional setup after loading the view.
     [self configureTitle];
     _results = [NSMutableArray new];
+    _fileResults = [NSMutableArray new];
     _reactionTimeContentView = [ORKReactionTimeContentView new];
     self.activeStepView.activeCustomView = _reactionTimeContentView;
     [_reactionTimeContentView setStimulusHidden:YES];
@@ -126,13 +128,20 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 #pragma mark - ORKRecorderDelegate
 
-- (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
+- (void)recorder:(ORKRecorder *)recorder didCompleteWithResults:(NSArray<ORKFileResult *> *)results {
+    [_fileResults addObjectsFromArray:results];
+    
     if (_validResult) {
         ORKReactionTimeResult *reactionTimeResult = [[ORKReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
         reactionTimeResult.timestamp = _stimulusTimestamp;
-        reactionTimeResult.fileResult = (ORKFileResult *)result;
+        
+        // Save the list of file results related to that result, then reset the array for the next step
+        reactionTimeResult.fileResults = [_fileResults copy];
+        [_fileResults removeAllObjects];
+        
         [_results addObject:reactionTimeResult];
     }
+    
     [self attemptDidFinish];
 }
 

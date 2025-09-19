@@ -55,7 +55,10 @@ static BOOL ORKIsResearchKitClass(Class class) {
 
 + (NSArray<NSString *> *)_fetchExclusionList {
     NSArray<NSString *> *classesToExclude = @[];
- 
+
+    
+    
+    
 #if !ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
     NSArray<NSString *> *locationClasses = @[
         @"ORKLocation",
@@ -274,8 +277,12 @@ ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKFormItemVisibilityRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKStepModifier, ^{return [super init];});
-ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier, ^{return [super init];});
-ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier,
+                   ^{ NSPredicate* resultPredicate = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:[ORKResultSelector selectorWithResultIdentifier:@"test"]
+                                                                                                              expectedAnswer:YES];
+    ORKKeyValueStepModifier* stepModifier = [self initWithResultPredicate:resultPredicate keyValueMap:@{@"title":@"YES"}];
+    return stepModifier;
+});ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKDontKnowAnswer, ^{return [ORKDontKnowAnswer answer];});
 ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
 ORK_MAKE_TEST_INIT(ORKVerificationStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString text:@"text" verificationViewControllerClass:NSClassFromString(@"ORKVerificationStepViewController") ];});
@@ -520,9 +527,13 @@ ORK_MAKE_TEST_INIT(ORKAccuracyStroopStep, (^{ return [[ORKAccuracyStroopStep all
                                    @"ORKTextAnswerFormat.validationRegex",
                                    @"ORKFileResult.fileURL",
                                    @"ORKFrontFacingCameraTask.fileURL",
+                                   @"ORKAmslerGridResult.imageFileResult.fileURL",
+                                   @"ORKAmslerGridResult.drawingPathFileResult.fileURL",
                                    @"ORKTaskResult.outputDirectory",
                                    @"ORKPageResult.outputDirectory",
                                    @"ORKPredicateFormItemVisibilityRule.predicateFormat", // Prevent trying to assign a bogus empty string as predicateFormat during testing
+                                   @"ORKPredicateStepNavigationRule.resultPredicateFormats", // Prevent trying to assign bogus empty strings as resultPredicateFormats during testing
+                                   @"ORKKeyValueStepModifier.resultPredicateFormat", // Prevent trying to assign a bogus empty string as resultPredicateFormat during testing
                                    @"ORKAccuracyStroopStep.actualDisplayColor",
                                    @"ORKAccuracyStroopResult.didSelectCorrectColor",
                                    @"ORKAccuracyStroopResult.timeTakenToSelect",
@@ -534,6 +545,7 @@ ORK_MAKE_TEST_INIT(ORKAccuracyStroopStep, (^{ return [[ORKAccuracyStroopStep all
         _knownNotSerializedProperties = @[
                                           @"ORKActiveStep.image",
                                           @"ORKAmslerGridResult.image",
+                                          @"ORKAmslerGridResult.path",
                                           @"ORKAnswerFormat.formStepViewControllerCellClass",
                                           @"ORKAnswerFormat.healthKitUnit",
                                           @"ORKAnswerFormat.healthKitUserUnit",
@@ -577,6 +589,8 @@ ORK_MAKE_TEST_INIT(ORKAccuracyStroopStep, (^{ return [[ORKAccuracyStroopStep all
                                           @"ORKOrderedTask.requestedPermissions",
                                           @"ORKPageStep.steps",
                                           @"ORKPredicateFormItemVisibilityRule.predicate", // roundtripping format->predicate->format is unsupported in NSPredicate, so no point in serializing the predicate as text.
+                                          @"ORKPredicateStepNavigationRule.resultPredicates", // roundtripping format->predicate->format is unsupported in NSPredicate, so no point in serializing the predicate as text.
+                                          @"ORKKeyValueStepModifier.resultPredicate", // roundtripping format->predicate->format is unsupported in NSPredicate, so no point in serializing the predicate as text.
                                           @"ORKQuestionResult.answer",
                                           @"ORKQuestionStep.question",
                                           @"ORKQuestionStep.questionType",
@@ -1021,6 +1035,13 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
         } else if ([aClass isSubclassOfClass:[ORKPredicateFormItemVisibilityRule class]]) {
             // predicateFormat cannot be an empty sring for deserialization to work
             [instance setValue:@"$title == 'testSerialization' && $className == 'ORKPredicateFormItemVisibilityRule'" forKey:@"predicateFormat"];
+        } else if ([aClass isSubclassOfClass:[ORKPredicateStepNavigationRule class]]) {
+            // resultPredicateFormats cannot be an empty string array for deserialization to work
+            NSArray<NSString *> *resultPredicateFormats = @[@"$title == 'testSerialization' && $className == 'ORKPredicateStepNavigationRule'"];
+            [instance setValue:resultPredicateFormats forKey:@"resultPredicateFormats"];
+        } else if ([aClass isSubclassOfClass:[ORKKeyValueStepModifier class]]) {
+            // resultPredicateFormat cannot be an empty string array for deserialization to work
+            [instance setValue:@"$title == 'testSerialization' && $className == 'ORKKeyValueStepModifier'" forKey:@"resultPredicateFormat"];
         } else if ([aClass isSubclassOfClass:[ORKDateAnswerFormat class]]) {
             // Seems to be unstable for some input timestamps
             [instance setValue:dateFormatOverrideDate forKey:@"defaultDate"];
@@ -1034,6 +1055,26 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
             [instance setValue:@(2023) forKey:@"relativeYear"];
         } else if ([aClass isSubclassOfClass:[ORKColorChoice class]]) {
             [instance setValue:@"blah" forKey:@"value"];
+        } else if ([aClass isSubclassOfClass:[ORKSpatialSpanMemoryGameRecord class]]) {
+            ORKSpatialSpanMemoryGameTouchSample *touchSample1 = [[ORKSpatialSpanMemoryGameTouchSample alloc] init];
+            touchSample1.timestamp = 1.0373990833177231;
+            touchSample1.targetIndex = 6;
+            touchSample1.location = CGPointMake(335, 330);
+            touchSample1.correct = true;
+            
+            ORKSpatialSpanMemoryGameTouchSample *touchSample2 = [[ORKSpatialSpanMemoryGameTouchSample alloc] init];
+            touchSample2.timestamp = 1.270191750023514;
+            touchSample2.targetIndex = 7;
+            touchSample2.location = CGPointMake(334, 410);
+            touchSample2.correct = false;
+            
+            NSArray<ORKSpatialSpanMemoryGameTouchSample *> *touchSamples = @[touchSample1, touchSample2];
+            [instance setValue:touchSamples forKey:@"touchSamples"];
+            
+            CGRect rect1 = CGRectMake(44, 256, 114, 114);
+            CGRect rect2 = CGRectMake(44, 370, 114, 114);
+            NSArray<NSValue *> *targetRects = @[[NSValue valueWithCGRect:rect1], [NSValue valueWithCGRect:rect2]];
+            [instance setValue:targetRects forKey:@"targetRects"];
         }
 
         // Serialization
@@ -1179,8 +1220,6 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
     } else if (p.propertyClass == [ORKNoAnswer class]) {
         ORKNoAnswer *value = (index ? [ORKDontKnowAnswer answer] : [_ORKTestNoAnswer answer]);
         [instance setValue:value forKey:p.propertyName];
-    } else if (aClass == [ORKKeyValueStepModifier class] && [p.propertyName isEqual:@"keyValueMap"]) {
-        [instance setValue:@{@"prop": index?@"value":@"value1"} forKey:p.propertyName];
     } else if (aClass == [ORKTableStep class] && [p.propertyName isEqual:@"items"]) {
         [instance setValue:@[index?@"item":@"item2"] forKey:p.propertyName];
     } else if ([aClass isSubclassOfClass:ORK3DModelStep.class] && [p.propertyName isEqualToString:@"modelManager"]) {
@@ -1368,8 +1407,8 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
         
         if (ORKIsResearchKitClass(aClass) &&
             [aClass conformsToProtocol:@protocol(NSSecureCoding)] &&
-            [aClass conformsToProtocol:@protocol(NSCopying)]) {
-            
+            [aClass conformsToProtocol:@protocol(NSCopying)])
+        {
             [classesWithSecureCodingAndCopying addObject:aClass];
         }
     }
@@ -1421,6 +1460,8 @@ ORKESerializationPropertyInjector *ORKSerializationTestPropertyInjector(void) {
                                        @"ORKTableStep.allowsSelection",
                                        @"ORKPDFViewerStep.actionBarOption",
                                        @"ORKPredicateFormItemVisibilityRule.predicate", // when testing equality, test_init instance of this rule has nonnull predicate which breaks assumptions about instance and copiedInstance in our test. So exclude this property for equality testing.
+                                       @"ORKPredicateStepNavigationRule.resultPredicates", // when testing equality, test_init instance of this rule has nonnull predicates which breaks assumptions about instance and copiedInstance in our test. So exclude this property for equality testing.
+                                       @"ORKKeyValueStepModifier.resultPredicate", // when testing equality, test_init instance of this rule has nonnull predicate which breaks assumptions about instance and copiedInstance in our test. So exclude this property for equality testing.
                                        @"ORKBodyItem.customButtonConfigurationHandler",
                                        @"ORKAccuracyStroopStep.actualDisplayColor",
                                        @"ORKAccuracyStroopResult.didSelectCorrectColor",
