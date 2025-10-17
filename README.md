@@ -41,7 +41,7 @@ View the *ResearchKit framework* documentation by setting ResearchKit as your ta
 
 ### Install as an embedded framework <a name="installation"></a>
 
-1. Clone or download the project source code to your desired location for your project.
+1. Clone or download the project source code to the desired location in your project.
 2. Drag the `ResearchKit.xcodeproj` into your project. Select the "Reference files in place" option in the dialog that appears.
 3. Embed *ResearchKit* as a dynamic framework within your app by adding it to the "Frameworks, Libraries, and Embedded Content" section for your target, as illustrated in the figure below.
 
