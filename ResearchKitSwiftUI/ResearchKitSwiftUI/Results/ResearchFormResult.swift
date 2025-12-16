@@ -204,7 +204,7 @@ extension EnvironmentValues {
     
 }
 
-enum QuestionContext {
+enum QuestionContext: Sendable {
     
     case standalone, formEmbedded
     
