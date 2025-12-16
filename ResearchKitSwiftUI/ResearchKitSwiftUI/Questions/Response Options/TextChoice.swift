@@ -31,7 +31,11 @@
 import Foundation
 
 /// Represents a text choice.
+<<<<<<< HEAD
 public struct TextChoice: Identifiable {
+=======
+public struct TextChoice: Identifiable, Codable, Hashable, Sendable {
+>>>>>>> 7b764cf5 (fix: Make types Sendable)
 
     /// The id for this multiple choice option.
     public let id: String

@@ -126,7 +126,11 @@ public struct ImageChoice: Identifiable, Equatable {
 }
 
 /// Represents the number of of choices that can be selected.
+<<<<<<< HEAD
 public enum ChoiceSelectionLimit {
+=======
+public enum ChoiceSelectionLimit: String, Codable, Hashable, Sendable {
+>>>>>>> 7b764cf5 (fix: Make types Sendable)
 
     /// Allows for the selection of only one choice.
     case single
