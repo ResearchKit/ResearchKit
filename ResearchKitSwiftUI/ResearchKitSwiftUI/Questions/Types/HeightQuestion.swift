@@ -31,7 +31,7 @@
 import SwiftUI
 
 /// Represents the different measurement systems that can be used.
-public enum MeasurementSystem: Codable, Hashable {
+public enum MeasurementSystem: Codable, Hashable, Sendable {
 
     /// The US Customary measurement system.
     case USC
