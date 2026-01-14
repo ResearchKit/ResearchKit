@@ -631,6 +631,15 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 - (BOOL)isAnswerValid:(id)answer {
     ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
     return impliedFormat == self ? YES : [impliedFormat isAnswerValid:answer];
+    return YES;
+}
+
+- (BOOL)validateAnswer:(id)answer error:(NSError **)error {
+    BOOL isValid = [self isAnswerValid:answer];
+    if (!isValid && error != NULL) {
+        *error = [NSError errorWithDomain:@"ORKAnswerValid" code:1001 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"The answer is not valid.", nil)}];
+    }
+    return isValid;
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {

@@ -445,6 +445,14 @@ ORK_CLASS_AVAILABLE
 #if TARGET_OS_IOS
 @interface ORKAnswerFormat()
 
+/**
+ Validates the given answer. If it is invalid, returns NO and provides an NSError with a description of the reason.
+ @param answer The answer to validate.
+ @param error  If the answer is invalid, an NSError with details is placed here.
+ @return YES if the answer is valid; NO otherwise.
+ **/
+- (BOOL)validateAnswer:(id)answer error:(NSError **)error;
+
 /// @name Factory methods
 + (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
                                                minimumValue:(NSInteger)scaleMinimum
