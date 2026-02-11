@@ -3253,7 +3253,7 @@ NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
                                                   options:(ORKPredefinedTaskOption)options {
     return [ORKOrderedTask tremorTestTaskWithIdentifier:identifier
                           intendedUseDescription:intendedUseDescription
-                              activeStepDuration:activeTaskOptions
+                              activeStepDuration:activeStepDuration
                                activeTaskOptions:activeTaskOptions
                                      handOptions:handOptions
                                          options:options
