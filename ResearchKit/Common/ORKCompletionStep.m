@@ -30,18 +30,52 @@
 
 
 #import "ORKCompletionStep.h"
-
-#import "ORKCompletionStepViewController.h"
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKCompletionStep
+#if TARGET_OS_IOS
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        _reasonForCompletion = ORKTaskFinishReasonCompleted;
+    }
+    
+    return self;
+}
 
-+ (Class)stepViewControllerClass {
-    return [ORKCompletionStepViewController class];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, reasonForCompletion);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, reasonForCompletion);
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKCompletionStep *step = [super copyWithZone:zone];
+    step.reasonForCompletion = self.reasonForCompletion;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+
+    __typeof(self) castObject = object;
+    return isParentSame && self.reasonForCompletion == castObject.reasonForCompletion;
+}
+
+- (BOOL)allowsBackNavigation {
+    return !(_reasonForCompletion == ORKTaskFinishReasonDiscarded);
+}
+#endif
 @end

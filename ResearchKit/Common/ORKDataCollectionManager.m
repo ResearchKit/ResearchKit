@@ -35,6 +35,9 @@
 #import "ORKHelpers_Internal.h"
 #import <HealthKit/HealthKit.h>
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 static  NSString *const ORKDataCollectionPersistenceFileName = @".dataCollection.ork.data";
 
@@ -43,8 +46,10 @@ static  NSString *const ORKDataCollectionPersistenceFileName = @".dataCollection
     NSOperationQueue *_operationQueue;
     NSString * _Nonnull _managedDirectory;
     NSArray<ORKCollector *> *_collectors;
-    HKHealthStore *_healthStore;
     CMMotionActivityManager *_activityManager;
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+    HKHealthStore *_healthStore;
+#endif
     NSMutableArray<HKObserverQueryCompletionHandler> *_completionHandlers;
 }
 
@@ -117,12 +122,14 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     });
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (HKHealthStore *)healthStore {
     if (!_healthStore && [HKHealthStore isHealthDataAvailable]){
         _healthStore = [[HKHealthStore alloc] init];
     }
     return _healthStore;
 }
+#endif
 
 - (CMMotionActivityManager *)activityManager {
     if (!_activityManager && [CMMotionActivityManager isActivityAvailable]) {
@@ -133,8 +140,10 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
 
 - (NSArray<ORKCollector *> *)collectors {
     if (_collectors == nil) {
-        _collectors = [NSKeyedUnarchiver unarchiveObjectWithFile:[self persistFilePath]];
-        if (_collectors == nil) {
+        NSData *data = [NSData dataWithContentsOfFile:[self persistFilePath]];
+        NSError* error = nil;
+        _collectors = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSArray class] fromData:data error:&error];
+        if (_collectors == nil || error != nil) {
             @throw [NSException exceptionWithName:NSGenericException reason: [NSString stringWithFormat:@"Failed to read from path %@", [self persistFilePath]] userInfo:nil];
         }
     }
@@ -147,10 +156,12 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
 
 - (void)persistCollectors {
     NSArray *collectors = self.collectors;
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:collectors];
+
     NSError *error;
-    [data writeToFile:[self persistFilePath] options:NSDataWritingAtomic|NSDataWritingFileProtectionComplete error:&error];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:collectors requiringSecureCoding:YES error:&error];
+    if (data != nil) {
+        [data writeToFile:[self persistFilePath] options:NSDataWritingAtomic|NSDataWritingFileProtectionComplete error:&error];
+    }
     
     if (error) {
         @throw [NSException exceptionWithName:NSGenericException reason: [NSString stringWithFormat:@"Failed to write to path %@", [self persistFilePath]] userInfo:nil];
@@ -163,6 +174,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     _collectors = [collectors copy];
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (ORKHealthCollector *)addHealthCollectorWithSampleType:(HKSampleType*)sampleType unit:(HKUnit *)unit startDate:(NSDate *)startDate error:(NSError**)error {
     
     if (!sampleType) {
@@ -215,6 +227,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     
     return healthCorrelationCollector;
 }
+#endif
 
 - (ORKMotionActivityCollector *)addMotionActivityCollectorWithStartDate:(NSDate *)startDate
                                                                   error:(NSError* __autoreleasing *)error {
@@ -315,13 +328,16 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
                 if (_delegate && [_delegate respondsToSelector:@selector(dataCollectionManagerDidCompleteCollection:)]) {
                     [_delegate dataCollectionManagerDidCompleteCollection:self];
                 }
-                
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
                 for (HKObserverQueryCompletionHandler handler in _completionHandlers) {
                     handler();
                 }
                 [_completionHandlers removeAllObjects];
                 
                 return NO;
+#else
+                return NO;
+#endif
             }];
         }];
         
@@ -336,7 +352,6 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
         // No need to persist collectors
         return NO;
     }];
-
 }
 
 @end

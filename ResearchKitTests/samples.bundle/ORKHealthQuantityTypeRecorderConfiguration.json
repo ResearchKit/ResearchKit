@@ -1,0 +1,1 @@
+{"_class":"ORKHealthQuantityTypeRecorderConfiguration","identifier":"","outputDirectory":"file:\/\/\/usr\/","rollingFileSizeThreshold":5000000,"quantityType":"HKQuantityTypeIdentifierBodyMass","unit":"kg"}

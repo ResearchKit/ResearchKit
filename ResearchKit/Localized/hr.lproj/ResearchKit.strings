@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Ponovno spojite svoje AirPods ili EarPods slušalice za provođenje ovog testa.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ dovršeno";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Slušalice";
-"HEADPHONES_UNKNOWN" = "Nepoznato";
-"HEADPHONES_NONE" = "Bez";
-"CONNECTED" = "Spojeno";
-"NOT_CONNECTED" = "Nije spojeno";
-"HEADPHONE_CONNECTED_%@" = "Spojeno - %@";
-"HEADPHONE_DETECT_TITLE" = "Spojite slušalice";
-"HEADPHONE_DETECT_TEXT" = "Ovaj test zahtijeva Apple AirPods ili Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Prostorna memorija";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ova aktivnost mjeri vašu kratkotrajnu prostornu memoriju dok dodirujete %@ redoslijedom kojim su zasvijetlili.";

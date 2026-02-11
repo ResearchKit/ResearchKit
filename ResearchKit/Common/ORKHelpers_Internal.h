@@ -30,10 +30,15 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
+
+#if TARGET_OS_IOS
 #import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKHelpers_Private.h>
 #import <ResearchKit/ORKErrors.h>
+#endif
+
+
 #import <Foundation/Foundation.h>
 #import <os/log.h>
 
@@ -77,20 +82,26 @@ ORK_EXTERN BOOL ORKLoggingEnabled;
 #define ORK_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, N, ...) N
 #define ORK_RSEQ_N()   10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 
-#define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_URL(c,x)  [c encodeObject:ORKRelativePathForURL(_ ## x) forKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@ORK_STRINGIFY(x)]
 #define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class], nil] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_DICTIONARY(d,x,kcl,cl)  _ ## x = (NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class], nil] forKey:@ORK_STRINGIFY(x)]
 #define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class], nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
 #define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class], nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_ARRAY_PROPS(d,x)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[NSDictionary class],[NSNumber class],[NSString class],[NSData class], nil] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY_PROPS(d,x,kcl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[kcl class],[NSDictionary class],[NSArray class],[NSNumber class],[NSString class],[NSData class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+
+#define ORK_DECODE_OBJ_CLASSES(d,x,clsArray)  _ ## x = [d decodeObjectOfClasses:[NSSet setWithArray:clsArray] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_PLIST(d,x)  _ ## x = [d decodePropertyListForKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_CLASSES_FOR_KEY(d,x,clsArray,k)  _ ## x = [d decodeObjectOfClasses:[NSSet setWithArray:clsArray] forKey:@ORK_STRINGIFY(k)]
 
 #define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@ORK_STRINGIFY(x)]
-#define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * orkTemp_ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:orkTemp_ ## x forKey:@ORK_STRINGIFY(x)]; } }
+#define ORK_ENCODE_IMAGE(c,x) [c encodeObject:_ ## x forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_DECODE_URL(d,x)  _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@ORK_STRINGIFY(x)])
 #define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@ORK_STRINGIFY(x)])
@@ -105,7 +116,7 @@ ORK_EXTERN BOOL ORKLoggingEnabled;
 #define ORK_ENCODE_INTEGER(c,x)  [c encodeInteger:_ ## x forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_ENCODE_UINT32(c,x)  [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@ORK_STRINGIFY(x)]
-#define ORK_DECODE_UINT32(d,x)  _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@ORK_STRINGIFY(x)] unsignedLongValue]
+#define ORK_DECODE_UINT32(d,x) _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectOfClass:[NSNumber class] forKey:@ORK_STRINGIFY(x)] unsignedLongValue]
 
 #define ORK_DECODE_ENUM(d,x)  _ ## x = [d decodeIntegerForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_ENUM(c,x)  [c encodeInteger:(NSInteger)_ ## x forKey:@ORK_STRINGIFY(x)]
@@ -167,7 +178,15 @@ NSURL *ORKCreateRandomBaseURL(void);
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
 
+#if TARGET_OS_IOS
+
 CGFloat ORKExpectedLabelHeight(UILabel *label);
+
+UIColor * _Nullable ORKWindowTintcolor(UIWindow *window);
+
+UIColor * ORKViewTintColor(UIView *view);
+
+#endif
 
 // build a image with color
 UIImage *ORKImageWithColor(UIColor *color);
@@ -188,7 +207,10 @@ BOOL ORKCurrentLocalePresentsFamilyNameFirst(void);
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
+#if TARGET_OS_IOS
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view);
+#endif
+
 
 ORK_INLINE bool
 ORKEqualObjects(id o1, id o2) {
@@ -236,8 +258,8 @@ UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
 
-NSURL *ORKURLFromBookmarkData(NSData *data);
-NSData *ORKBookmarkDataFromURL(NSURL *url);
+NSURL * _Nullable ORKURLFromBookmarkData(NSData *data);
+NSData * _Nullable ORKBookmarkDataFromURL(NSURL *url);
 
 NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
 NSURL *ORKURLForRelativePath(NSString *relativePath);
@@ -257,6 +279,7 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 
 #define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" cannot be nil." userInfo:nil]; }
+#define ORKThrowInvalidArgumentExceptionIfNotEqual(argument1, argument2)  if (![argument1 isEqual:argument2]) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"text argument(%@) and value argument(%@) are not equal",argument1, argument2] userInfo:nil]; }
 
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
@@ -266,7 +289,9 @@ extern const double ORKDoubleInvalidValue;
 
 extern const CGFloat ORKCGFloatInvalidValue;
 
+#if TARGET_OS_IOS
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
+#endif
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
 
@@ -347,6 +372,13 @@ ORK_INLINE double ORKPoundsToKilograms(double pounds) {
     return ORKPoundsAndOuncesToKilograms(pounds, 0);
 }
 
+ORK_INLINE double ORKForceDoubleToLimits(double value) {
+    if (value == NAN || value == INFINITY) {
+        return DBL_MAX;
+    }
+    return fmin(fmax(value, -DBL_MAX), DBL_MAX);
+}
+
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
     UIColor *color = baseColor;
     if (totalColors > 1) {
@@ -370,15 +402,40 @@ ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseCol
 ORK_EXTERN NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
 
+ORK_INLINE NSString *ORKLocalizedHiddenString(NSString *key) {
+    NSString *value = [[NSBundle mainBundle] localizedStringForKey:key value:key table:@"ResearchKit"];
+    if ([value isEqualToString:key]) {
+        value = [ORKBundle() localizedStringForKey:key value:key table:@"ResearchKit"];
+    }
+    if ([value isEqualToString:key]) {
+        // If it fails try to find on default table
+        value = [ORKDefaultLocaleBundle() localizedStringForKey:key value:key table:@"ResearchKit"];
+    }
+    return value;
+}
+
 #define ORKDefaultLocalizedValue(key) \
 [ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
 
 #define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
+ORKLocalizedHiddenString(key)
 
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
 
-NSString* ORKSwiftLocalizedString(NSString *key, NSString *comment);
-
 NS_ASSUME_NONNULL_END
+
+// MARK: - NSPredicate
+
+/**
+ This function attempts to create an `NSPredicate` from a predicate format `NSString`.
+ If this fails, an error message starting with the provided `callerID` `NSString` will be logged,
+ and the `NSPredicate` returned will be `nil`.
+ 
+ @param predicateFormat The `NSString` to attempt creating the `NSPredicate` from.
+ @param callerID An `NSString` identifying the calling class for error logging purposes.
+ 
+ @return An `NSPredicate` created from `predicateFormat` if the operation was successful, `nil` if not.
+ */
+NSPredicate* _Nullable ORKPredicateWithFormat(NSString * _Nonnull predicateFormat,
+                                              NSString * _Nonnull callerID);

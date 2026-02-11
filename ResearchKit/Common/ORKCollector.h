@@ -30,10 +30,11 @@
 
 
 #import <Foundation/Foundation.h>
-#import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKErrors.h>
 #import <ResearchKit/ORKDefines.h>
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+#import <HealthKit/HealthKit.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -81,11 +82,13 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- ORKHealthCollector collects HKSample.
+ An object that collects HKSample.
  
  It cannot be initiated directly. 
  Use `addHealthCollectorWithSampleType:`to add one to a `ORKDataCollectionManager`.
  */
+
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 ORK_CLASS_AVAILABLE
 @interface ORKHealthCollector : ORKCollector
 
@@ -113,7 +116,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- ORKHealthCollector collects HKCorrelation.
+ An object that collects HKCorrelation.
  
  It cannot be initiated directly.
  Use `addHealthCorrelationCollectorWithCorrelationType:`to add one to a `ORKDataCollectionManager`.
@@ -147,10 +150,10 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly) HKQueryAnchor *lastAnchor;
 
 @end
-
+#endif
 
 /**
- ORKHealthCollector collects CMMotionActivity.
+ An object that collects CMMotionActivity.
  
  It cannot be initiated directly.
  Use `addMotionActivityCollectorWithStartDate:`to add one to a `ORKDataCollectionManager`.

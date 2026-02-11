@@ -30,7 +30,10 @@
 */
 
 import UIKit
-import ResearchKit
+import ResearchKit_Private
+import ResearchKitUI
+
+
 
 /**
     This example displays a catalog of tasks, each consisting of one or two steps,
@@ -47,6 +50,10 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     var waitStepUpdateTimer: Timer?
     var waitStepProgress: CGFloat = 0.0
 
+
+    // In-memory store for taskViewController restoration data
+    var restorationDataByTaskID: [String:Data] = [:]
+    
     // MARK: Types
     
     enum TableViewCellIdentifier: String {
@@ -66,9 +73,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 13.0, *) {
-            self.tableView.backgroundColor = UIColor.systemGroupedBackground
-        }
+        self.tableView.backgroundColor = UIColor.systemGroupedBackground
     }
     
     // MARK: UITableViewDataSource
@@ -91,10 +96,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
         
         cell.textLabel!.text = "\(taskListRow)"
-        
-        if #available(iOS 13.0, *) {
-            cell.textLabel?.textColor = UIColor.label
-        }
+        cell.textLabel?.textColor = UIColor.label
         
         return cell
     }
@@ -107,32 +109,66 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         // Present the task view controller that the user asked for.
         let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
         
+        displayTaskViewController(taskListRow: taskListRow)
+    }
+    
+    func displayTaskViewController(taskListRow: TaskListRow) {
         // Create a task from the `TaskListRow` to present in the `ORKTaskViewController`.
         let task = taskListRow.representedTask
         
         /*
-            Passing `nil` for the `taskRunUUID` lets the task view controller
-            generate an identifier for this run of the task.
-        */
-        let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
-
+         Passing `nil` for the `taskRunUUID` lets the task view controller
+         generate an identifier for this run of the task.
+         */
+        var taskViewController = ORKTaskViewController(task: task, taskRun: nil)
+        
         // Make sure we receive events from `taskViewController`.
         taskViewController.delegate = self
         
-        // Assign a directory to store `taskViewController` output.
-        taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        if let restorationData = restorationDataByTaskID[task.identifier] {
+            // we have data we can use to recreate the state of a previous taskViewController
+            taskViewController = ORKTaskViewController(task: task, restorationData: restorationData, delegate: self, error: nil)
+        } else {
+            // making a brand new taskViewController
+            taskViewController = ORKTaskViewController(task: task, ongoingResult: nil, defaultResultSource: nil, delegate: self)
+        }
+        // Assign a directory to store the `taskViewController` output. Here, we're using the default temporary
+        // output directory provided by `ORKTaskViewController`, but any URL can be specified.
+        taskViewController.outputDirectory = ORKTaskViewController.orkDefaultTemporaryOutputDirectory();
 
         /*
          We present the task directly, but it is also possible to use segues.
          The task property of the task view controller can be set any time before
          the task view controller is presented.
          */
-        present(taskViewController, animated: true, completion: nil)
+        present(taskViewController, animated: true)
+    }
+    
+    
+    func storePDFIfConsentTaskDetectedIn(taskViewController: ORKTaskViewController) {
+        guard taskViewController.task?.identifier == String(describing: Identifier.consentTask) else {
+            return
+        }
+        
+        guard let stepResult = taskViewController.result.result(forIdentifier: String(describing: Identifier.webViewStep)) as? ORKStepResult else {
+            return
+        }
+        
+        if let webViewStepResult = stepResult.results?.first as? ORKWebViewStepResult, let html = webViewStepResult.htmlWithSignature {
+            let htmlFormatter = ORKHTMLPDFWriter()
+            
+            htmlFormatter.writePDF(fromHTML: html) { data, error in
+               let pdfURL = FileManager.default.temporaryDirectory
+                    .appendingPathComponent("consentTask")
+                    .appendingPathExtension("pdf")
+                try? data.write(to: pdfURL)
+            }
+        }
     }
     
     // MARK: ORKTaskViewControllerDelegate
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskFinishReason, error: Error?) {
         /*
             The `reason` passed to this method indicates why the task view
             controller finished: Did the user cancel, save, or actually complete
@@ -141,22 +177,46 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             The actual result of the task is on the `result` property of the task
             view controller.
         */
+        
+        storePDFIfConsentTaskDetectedIn(taskViewController: taskViewController)
         taskResultFinishedCompletionHandler?(taskViewController.result)
+        
+        switch (reason) {
+        case .saved:
+            saveRestorationData(for: taskViewController);
+            break;
+            
+        case .discarded:
+            /* If the user chose to discard the edits, we also remove previous restorationData.
+             This way, if the user launches the same task again, it'll behave like it's been
+             launched for the first time.
+             */
+            resetRestorationData(for: taskViewController);
+            break;
 
+        case .completed, .earlyTermination, .failed:
+            // For any other reason, we also reset restoration data
+            resetRestorationData(for: taskViewController);
+            break;
+
+        default:
+            break;
+        }
+        
         taskViewController.dismiss(animated: true, completion: nil)
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         // Example data processing for the wait step.
-        if stepViewController.step?.identifier == "WaitStepIndeterminate" ||
-            stepViewController.step?.identifier == "WaitStep" ||
-            stepViewController.step?.identifier == "LoginWaitStep" {
+        if stepViewController.step?.identifier == String(describing: Identifier.waitStepIndeterminate) ||
+            stepViewController.step?.identifier == String(describing: Identifier.waitStep) ||
+            stepViewController.step?.identifier == String(describing: Identifier.loginStep) {
             delay(5.0, closure: { () -> Void in
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
                     stepViewController.goForward()
                 }
             })
-        } else if stepViewController.step?.identifier == "WaitStepDeterminate" {
+        } else if stepViewController.step?.identifier == String(describing: Identifier.waitStepDeterminate) {
             delay(1.0, closure: { () -> Void in
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
                     self.waitStepViewController = stepViewController
@@ -169,10 +229,13 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, learnMoreButtonPressedWith learnMoreStep: ORKLearnMoreInstructionStep, for stepViewController: ORKStepViewController) {
-        //        FIXME: Temporary fix. This method should not be called if it is only used to present the learnMoreStepViewController, the stepViewController should present the learnMoreStepViewController.
         stepViewController.present(UINavigationController(rootViewController: ORKLearnMoreStepViewController(step: learnMoreStep)), animated: true) {
             
         }
+    }
+
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
     }
     
     func delay(_ delay: Double, closure: @escaping () -> Void ) {
@@ -199,5 +262,26 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             self.waitStepUpdateTimer?.invalidate()
         }
     }
+    
+    /* Once saved in-memory, the user can later bring up the same task and start off where they left off.
+     This works only until the app relaunches since we don't save the restorationData to disk
+     */
+    func saveRestorationData(for taskViewController: ORKTaskViewController) {
+        guard let taskID = taskViewController.task?.identifier else {
+            return
+        }
+        
+        restorationDataByTaskID[taskID] = taskViewController.restorationData
+    }
+
+    func resetRestorationData(for taskViewController: ORKTaskViewController) {
+        guard let taskID = taskViewController.task?.identifier else {
+            return
+        }
+        
+        restorationDataByTaskID[taskID] = nil
+    }
 
 }
+
+

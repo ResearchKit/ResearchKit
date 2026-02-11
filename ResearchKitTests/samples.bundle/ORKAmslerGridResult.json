@@ -1,0 +1,26 @@
+{
+    "_class":"ORKAmslerGridResult",
+    "endDate":"2019-05-27T00:35:06-0700",
+    "startDate":"2019-05-27T00:35:06-0700",
+    "identifier":"",
+    "userInfo":{},
+    "eyeSide":0,
+    "imageFileResult" : {
+        "_class":"ORKFileResult",
+        "endDate":"2019-05-27T00:35:06-0700",
+        "startDate":"2019-05-27T00:35:06-0700",
+        "contentType":"",
+        "identifier":"",
+        "userInfo":{},
+        "fileName":""
+    },
+    "drawingPathFileResult" : {
+        "_class":"ORKFileResult",
+        "endDate":"2019-05-27T00:35:06-0700",
+        "startDate":"2019-05-27T00:35:06-0700",
+        "contentType":"",
+        "identifier":"",
+        "userInfo":{},
+        "fileName":""
+    }
+}

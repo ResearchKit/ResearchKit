@@ -30,7 +30,6 @@
 
 #import "ORKPageStep_Private.h"
 #import "ORKHelpers_Internal.h"
-#import "ORKPageStepViewController.h"
 #import "ORKResult.h"
 
 
@@ -65,12 +64,6 @@
     return self.pageTask.steps;
 }
 
-#pragma mark - view controller instantiation
-
-+ (Class)stepViewControllerClass {
-    return [ORKPageStepViewController class];
-}
-
 #pragma mark - permissions
 
 - (ORKPermissionMask)requestedPermissions {
@@ -80,12 +73,14 @@
     return ORKPermissionNone;
 }
 
+#if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
 - (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     if ([self.pageTask respondsToSelector:@selector(requestedHealthKitTypesForReading)]) {
         return [self.pageTask requestedHealthKitTypesForReading];
     }
     return nil;
 }
+#endif
 
 #pragma mark - NSCopying
 

@@ -351,18 +351,6 @@
 "dBHL_ALERT_TEXT" = "Reconectați‑vă căștile AirPods sau EarPods pentru a face acest test.";
 "dBHL_PROGRESS_COMPLETION_%@" = "Finalizat în proporție de %@";
 
-/* Headphones. */
-"AIRPODS" = "AirPods";
-"EARPODS" = "EarPods";
-"HEADPHONES" = "Căști audio";
-"HEADPHONES_UNKNOWN" = "Necunoscut";
-"HEADPHONES_NONE" = "Nimic";
-"CONNECTED" = "Conectate";
-"NOT_CONNECTED" = "Neconectate";
-"HEADPHONE_CONNECTED_%@" = "Conectate - %@";
-"HEADPHONE_DETECT_TITLE" = "Conectați‑vă căștile audio";
-"HEADPHONE_DETECT_TEXT" = "Acest test necesită Apple AirPods sau Apple EarPods";
-
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memorie spațială";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Această activitate vă măsoară memoria spațială pe termen scurt, solicitându-vă să repetați ordinea în care se aprind simbolurile reprezentând %@.";

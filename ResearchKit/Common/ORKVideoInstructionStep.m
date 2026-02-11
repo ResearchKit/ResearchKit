@@ -30,16 +30,11 @@
 
 
 #import "ORKVideoInstructionStep.h"
-#import "ORKVideoInstructionStepViewController.h"
 #import "ORKHelpers_Internal.h"
 #import <AVFoundation/AVFoundation.h>
 
 
 @implementation ORKVideoInstructionStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKVideoInstructionStepViewController class];
-}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
@@ -54,6 +49,7 @@
     if (self) {
         ORK_DECODE_URL(aDecoder, videoURL);
         ORK_DECODE_INTEGER(aDecoder, thumbnailTime);
+        ORK_DECODE_OBJ_CLASS(aDecoder, bundleAsset, ORKBundleAsset);
     }
     return self;
 }
@@ -62,6 +58,7 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_URL(aCoder, videoURL);
     ORK_ENCODE_INTEGER(aCoder, thumbnailTime);
+    ORK_ENCODE_OBJ(aCoder, bundleAsset);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -72,18 +69,21 @@
     ORKVideoInstructionStep *step = [super copyWithZone:zone];
     step.videoURL = self.videoURL;
     step.thumbnailTime = self.thumbnailTime;
+    step.bundleAsset = self.bundleAsset;
     return step;
 }
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(castObject.videoURL, self.videoURL) &&
+    return isParentSame &&
+        ORKEqualObjects(castObject.videoURL, self.videoURL) &&
+        ORKEqualObjects(castObject.bundleAsset, self.bundleAsset) &&
         castObject.thumbnailTime == self.thumbnailTime;
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.videoURL.hash;
+    return super.hash ^ self.videoURL.hash ^ self.bundleAsset.hash;
 }
 
 - (void)setThumbnailTime:(NSUInteger)thumbnailTime {

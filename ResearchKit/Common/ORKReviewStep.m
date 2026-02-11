@@ -32,13 +32,10 @@
 #import "ORKReviewStep.h"
 #import "ORKReviewStep_Internal.h"
 
-#import "ORKReviewStepViewController.h"
-
 #import "ORKResult.h"
 #import "ORKCollectionResult_Private.h"
 
 #import "ORKHelpers_Internal.h"
-
 
 @implementation ORKReviewStep
 
@@ -49,8 +46,6 @@
     if (self) {
         if (steps) {
             _steps = [steps copy];
-        } else {
-            _steps = @[];
         }
         _resultSource = resultSource;
         _excludeInstructionSteps = NO;
@@ -68,12 +63,12 @@
     return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:nil resultSource:nil];
 }
 
-+ (Class)stepViewControllerClass {
-    return [ORKReviewStepViewController class];
-}
-
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
++ (NSArray *)allowedTaskResultSourceClasses {
+    return @[[ORKTaskResult class], [ORKPageResult class]];
 }
 
 
@@ -81,7 +76,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
-        ORK_DECODE_OBJ(aDecoder, resultSource);
+        ORK_DECODE_OBJ_CLASSES(aDecoder, resultSource, [ORKReviewStep allowedTaskResultSourceClasses]);
         ORK_DECODE_BOOL(aDecoder, excludeInstructionSteps);
     }
     return self;
