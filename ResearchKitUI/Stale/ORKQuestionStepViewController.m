@@ -626,6 +626,12 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 }
 
 - (void)saveAnswer:(id)answer {
+    NSError *validationError = nil;
+    if (![self.answerFormat validateAnswer:answer error:&validationError]) {
+        [self showValidityAlertWithMessage:validationError.localizedDescription];
+        return;
+    }
+    
     self.answer = answer;
     _savedSystemCalendar = [NSCalendar currentCalendar];
     _savedSystemTimeZone = [NSTimeZone systemTimeZone];
@@ -737,6 +743,12 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 #pragma mark - ORKQuestionStepCustomViewDelegate
 
 - (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer {
+    NSError *validationError = nil;
+    if (![self.answerFormat validateAnswer:answer error:&validationError]) {
+        [self showValidityAlertWithMessage:validationError.localizedDescription];
+        return;
+    }
+    
     [self saveAnswer:answer];
     self.hasChangedAnswer = YES;
 }
@@ -909,6 +921,12 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 }
 
 - (void)goForward {
+    NSError *validationError = nil;
+    if (![self.answerFormat validateAnswer:self.answer error:&validationError]) {
+        [self showValidityAlertWithMessage:validationError.localizedDescription];
+        return;
+    }
+    
     if (![self shouldContinue]) {
         return;
     }
@@ -927,6 +945,12 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 
 - (void)continueAction:(id)sender {
     if (self.continueActionButton.enabled) {
+        NSError *validationError = nil;
+        if (![self.answerFormat validateAnswer:self.answer error:&validationError]) {
+            [self showValidityAlertWithMessage:validationError.localizedDescription];
+            return;
+        }
+        
         if (![self shouldContinue]) {
             return;
         }
