@@ -36,6 +36,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString *const kSpeechRecognitionPrefersKeyboard = @"prefersKeyboard";
+
 ORK_CLASS_AVAILABLE
 @interface ORKSpeechRecognitionStep : ORKActiveStep
 

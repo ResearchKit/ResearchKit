@@ -281,7 +281,7 @@ static const CGFloat PickerMinimumHeight = 34.0;
         for (NSInteger i = 0; i <= 299; i++) {
             [mutableCentimeterValues addObject:[NSNumber numberWithInteger:i]];
         }
-        centimeterValues = [mutableCentimeterValues copy];
+        centimeterValues = [NSArray arrayWithArray:mutableCentimeterValues];
     });
     return centimeterValues;
 }
@@ -294,7 +294,7 @@ static const CGFloat PickerMinimumHeight = 34.0;
         for (NSInteger i = 0; i <= 9; i++) {
             [mutableFeetValues addObject:[NSNumber numberWithInteger:i]];
         }
-        feetValues = [mutableFeetValues copy];
+        feetValues = [NSArray arrayWithArray:mutableFeetValues];
     });
     return feetValues;
 }
@@ -307,7 +307,7 @@ static const CGFloat PickerMinimumHeight = 34.0;
         for (NSInteger i = 0; i <= 11; i++) {
             [mutableInchesValues addObject:[NSNumber numberWithInteger:i]];
         }
-        inchesValues = [mutableInchesValues copy];
+        inchesValues = [NSArray arrayWithArray:mutableInchesValues];
     });
     return inchesValues;
 }

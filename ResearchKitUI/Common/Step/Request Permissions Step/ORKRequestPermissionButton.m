@@ -54,6 +54,10 @@ NSString * const ORKRequestPermissionButtonAccessibilityIdentifier = @"ORKReques
         [self setupTitleLabel];
         [self setState:ORKRequestPermissionsStateDefault];
         [self updateFonts];
+
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKRequestPermissionButton *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView updateFonts];
+        }];
     }
     self.accessibilityIdentifier = ORKRequestPermissionButtonAccessibilityIdentifier;
     return self;
@@ -131,13 +135,6 @@ NSString * const ORKRequestPermissionButtonAccessibilityIdentifier = @"ORKReques
             [self setBackgroundColor:UIColor.tertiarySystemFillColor];
             [self setEnabled:NO];
             break;
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    if (previousTraitCollection.preferredContentSizeCategory != self.traitCollection.preferredContentSizeCategory) {
-        [self updateFonts];
     }
 }
 

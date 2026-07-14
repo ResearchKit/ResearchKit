@@ -496,7 +496,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         self.logName = logName;
         self.logFormatter = formatter;
         self.delegate = delegate;
-        self.fileProtectionMode = ORKFileProtectionNone;
+        self.fileProtectionMode = ORKFileProtectionComplete;
         _oldLogsPrefix = [_logName stringByAppendingString:@"-"];
         _fileExtension = fileExtension;
         _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"maximumCurrentLogFileLifetime", @"maximumCurrentLogFileSize"] selector:@selector(fileSizeLimitsDidChange)];
@@ -1138,7 +1138,14 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
 
 - (void)queue_synchronizeConfiguration {
     NSDictionary *configuration = [self queue_configuration];
-    [configuration writeToURL:[_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename] atomically:YES];
+    NSURL *configURL = [_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename];
+    [configuration writeToURL:configURL atomically:YES];
+    NSError *error = nil;
+    if (![[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey: NSFileProtectionComplete}
+                                          ofItemAtPath:[configURL path]
+                                                 error:&error]) {
+        ORK_Log_Error("Error setting file protection on %@: %@", configURL, error);
+    }
 }
 
 - (void)configurationDidChange {

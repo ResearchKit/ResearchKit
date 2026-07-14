@@ -87,7 +87,7 @@
     if (!recognizer) {
         handler([NSError errorWithDomain:ORKErrorDomain
                                     code:ORKSpeechRecognitionErrorLanguageNotAvailable
-                                userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"Speech recognizer could not be initialized", nil)}]);
+                                userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"SPEECH_RECOGNITION_COULD_NOT_INITIALIZE", nil)}]);
         return;
     }
     [recognizer setDelegate:self];
@@ -96,7 +96,7 @@
     if (status != SFSpeechRecognizerAuthorizationStatusAuthorized) {
         handler([NSError errorWithDomain:ORKErrorDomain
                                     code:ORKSpeechRecognitionErrorLanguageNotAvailable
-                                userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"Speech recognizer not authorized", nil)}]);
+                                userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"SPEECH_RECOGNITION_NOT_AUTHORIZED", nil)}]);
         return;
     }
     [recognizer isAvailable];
@@ -107,7 +107,7 @@
     if (!request) {
         handler([NSError errorWithDomain:ORKErrorDomain
                                     code:ORKSpeechRecognitionErrorLanguageNotAvailable
-                                userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"Speech recognizer could not be initialized", nil)}]);
+                                userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"SPEECH_RECOGNITION_COULD_NOT_INITIALIZE", nil)}]);
         return;
     }
     
@@ -147,12 +147,8 @@
 - (void)speechRecognitionTask:(SFSpeechRecognitionTask *)task didFinishRecognition:(SFSpeechRecognitionResult *)recognitionResult {
     dispatch_async(_responseQueue, ^{
         ORK_Log_Debug("did produce final result %@", [[recognitionResult bestTranscription] formattedString]);
-        if (@available(iOS 14.5, *)) {
-            if (self->_responseDelegate && [self->_responseDelegate respondsToSelector:@selector(didFinishRecognition:)]) {
-                [self->_responseDelegate didFinishRecognition:recognitionResult];
-            } else if (self->_responseDelegate && [self->_responseDelegate respondsToSelector:@selector(didHypothesizeTranscription:)]) {
-                [self->_responseDelegate didHypothesizeTranscription:recognitionResult.bestTranscription];
-            }
+        if (self->_responseDelegate && [self->_responseDelegate respondsToSelector:@selector(didFinishRecognition:)]) {
+            [self->_responseDelegate didFinishRecognition:recognitionResult];
         } else if (self->_responseDelegate && [self->_responseDelegate respondsToSelector:@selector(didHypothesizeTranscription:)]) {
             [self->_responseDelegate didHypothesizeTranscription:recognitionResult.bestTranscription];
         }

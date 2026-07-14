@@ -103,13 +103,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.psatContentView = [[ORKPSATContentView alloc] initWithPresentationMode:[self psatStep].presentationMode];
     self.psatContentView.keyboardView.delegate = self;
     [self.psatContentView setEnabled:NO];
+
     self.activeStepView.activeCustomView = self.psatContentView;
     self.activeStepView.customContentFillsAvailableSpace = YES;
-    
+    [self.activeStepView setNavigationFooterViewHidden:YES];
+
+    ORKPSATStep *step = [self psatStep];
+    NSString *text = step.text ?: ORKLocalizedString(@"PSAT_INITIAL_INSTRUCTION", nil);
+    [self.activeStepView updateTitle:step.title text:text];
+
     self.timerUpdateInterval = [self psatStep].interStimulusInterval;
 }
 

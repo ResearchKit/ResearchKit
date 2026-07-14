@@ -97,6 +97,9 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) BOOL captureRaw;
 
+/// Uses the front-facing camera instead of the rear camera when set to YES. Defaults to NO.
+@property (nonatomic, assign) BOOL useFrontCamera;
+
 @end
 
 NS_ASSUME_NONNULL_END

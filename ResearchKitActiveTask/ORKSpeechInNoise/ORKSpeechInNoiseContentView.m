@@ -74,6 +74,10 @@ static CGFloat const ORKSpeechInNoiseContentViewVerticalMargin = 44;
         [self updateGraphSamples];
         [self applyAlertColor];
         [self setUpConstraints];
+
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKSpeechInNoiseContentView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView setUpConstraints];
+        }];
     }
     return self;
 }
@@ -106,6 +110,21 @@ static CGFloat const ORKSpeechInNoiseContentViewVerticalMargin = 44;
     self.playButton.enabled = YES;
     self.playButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitStartsMediaSession;
     [self addSubview:_playButton];
+}
+
+- (ORKPlaybackButton *)stopButton {
+    if (_stopButton == nil) {
+        _stopButton = [[ORKPlaybackButton alloc] initWithText:ORKLocalizedString(@"SPEECH_IN_NOISE_STOP_AUDIO_LABEL", nil) image:[UIImage systemImageNamed:@"stop.circle"]];
+        _stopButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _stopButton.enabled = YES;
+        _stopButton.highlightTintColor = [UIColor systemRedColor];
+        _stopButton.normalTintColor = [UIColor systemRedColor];
+        [_stopButton setHidden:YES];
+        _stopButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitStartsMediaSession;
+        [self addSubview:_stopButton];
+    }
+    
+    return _stopButton;
 }
 
 - (void)tintColorDidChange {
@@ -148,17 +167,13 @@ static CGFloat const ORKSpeechInNoiseContentViewVerticalMargin = 44;
         [_graphView.heightAnchor constraintEqualToConstant:ORKSpeechInNoiseContentFlamesViewHeightConstant],
         [_playButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
         [_playButton.topAnchor constraintGreaterThanOrEqualToAnchor:_graphView.bottomAnchor constant:ORKSpeechInNoiseContentFlamesViewVerticalSpacing],
-        [_playButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor constant:-ORKSpeechInNoiseContentViewVerticalMargin]
+        [_playButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor constant:-ORKSpeechInNoiseContentViewVerticalMargin],
+        [self.stopButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+        [self.stopButton.topAnchor constraintGreaterThanOrEqualToAnchor:_graphView.bottomAnchor constant:ORKSpeechInNoiseContentFlamesViewVerticalSpacing],
+        [self.stopButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor constant:-ORKSpeechInNoiseContentViewVerticalMargin]
     ];
     
     [NSLayoutConstraint activateConstraints:self.constraints];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self setUpConstraints];
 }
 
 - (void)updateGraphSamples

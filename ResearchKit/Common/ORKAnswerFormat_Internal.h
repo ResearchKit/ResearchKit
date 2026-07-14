@@ -193,6 +193,21 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoice)
 
 NSArray<Class> *ORKAllowableValueClasses(void);
 
+@protocol ORKWarningStateSupport <NSObject>
+
+@property (nonatomic, nullable) NSString *warningStateMessage;
+@property (nonatomic, nullable) NSArray<NSObject<NSCopying, NSSecureCoding> *> *warningStateTriggerValues;
+
+@end
+
+@interface ORKBooleanAnswerFormat () <ORKWarningStateSupport>
+
+@end
+
+@interface ORKTextChoiceAnswerFormat () <ORKWarningStateSupport>
+
+@end
+
 @interface ORKTextChoice () <ORKAnswerOption>
 
 @end
@@ -277,6 +292,8 @@ NSArray<Class> *ORKAllowableValueClasses(void);
 @interface ORKTextChoiceOther()
 
 @property (nonatomic, nullable) NSString *textViewText;
+
+@property (nonatomic, nonnull, readonly) NSString *answer;
 
 @end
 #endif

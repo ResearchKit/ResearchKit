@@ -47,7 +47,6 @@
 #import <ResearchKitUI/ORKCustomStepViewController.h>
 #import <ResearchKitUI/ORKDateTimePicker.h>
 #import <ResearchKitUI/ORKDefaultFont.h>
-#import <ResearchKitUI/ORKDontKnowButton.h>
 #import <ResearchKitUI/ORKFamilyHistoryRelatedPersonCell.h>
 #import <ResearchKitUI/ORKFamilyHistoryStepViewController.h>
 #import <ResearchKitUI/ORKFamilyHistoryTableFooterView.h>
@@ -64,6 +63,7 @@
 #import <ResearchKitUI/ORKInstructionStepViewController.h>
 #import <ResearchKitUI/ORKLabel.h>
 #import <ResearchKitUI/ORKLearnMoreStepViewController.h>
+#import <ResearchKitUI/ORKLiquidGlassSupport.h>
 #import <ResearchKitUI/ORKLoginStepViewController.h>
 #import <ResearchKitUI/ORKMultipleValuePicker.h>
 #import <ResearchKitUI/ORKObserver.h>

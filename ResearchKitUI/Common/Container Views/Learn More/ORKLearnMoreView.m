@@ -33,6 +33,9 @@
 #import "ORKLearnMoreItem.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKBodyItem.h"
+#import "ORKSkin.h"
+
+static const CGFloat LearnMoreButtonContentTopInset = 3.0;
 
 ORK_CLASS_AVAILABLE
 @interface ORKLearnMoreButton : UIButton
@@ -55,13 +58,24 @@ ORK_CLASS_AVAILABLE
 
 + (instancetype)learnMoreCustomButtonWithText:(NSString *)text {
     ORKLearnMoreButton *button = [super buttonWithType:UIButtonTypeCustom];
-    [button setTitle:text forState:UIControlStateNormal];
-    [button setTitleColor:button.tintColor forState:UIControlStateNormal];
-    button.titleLabel.numberOfLines = 0;
-    button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    button.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [button setContentEdgeInsets:UIEdgeInsetsMake(CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN)];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    UIButtonConfiguration *config = [UIButtonConfiguration plainButtonConfiguration];
+    config.contentInsets = NSDirectionalEdgeInsetsMake(LearnMoreButtonContentTopInset, 0, 0, 0);
+    config.titleLineBreakMode = NSLineBreakByWordWrapping;
+    config.background = [UIBackgroundConfiguration clearConfiguration];
+    config.attributedTitle = [ORKLearnMoreButton attributedTitle:text font:ORKBulletDetailTextFont()];
+    button.configuration = config;
     return button;
+}
+
++ (NSAttributedString *)attributedTitle:(NSString *)title font:(UIFont *)font {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    NSDictionary *attributes = @{
+        NSFontAttributeName: font,
+        NSParagraphStyleAttributeName: paragraphStyle
+    };
+    return [[NSAttributedString alloc] initWithString:title attributes:attributes];
 }
 
 + (instancetype)learnMoreDetailDisclosureButton {
@@ -139,8 +153,11 @@ ORK_CLASS_AVAILABLE
 }
 
 - (void)setLearnMoreButtonFont: (UIFont *)font {
-    if (_learnMoreButton) {
-        [_learnMoreButton.titleLabel setFont:font];
+    if (_learnMoreButton && _learnMoreButton.configuration) {
+        UIButtonConfiguration *config = _learnMoreButton.configuration;
+        NSString *title = config.attributedTitle.string ?: [_learnMoreButton titleForState:UIControlStateNormal] ?: @"";
+        config.attributedTitle = [ORKLearnMoreButton attributedTitle:title font:font];
+        _learnMoreButton.configuration = config;
     }
 }
 

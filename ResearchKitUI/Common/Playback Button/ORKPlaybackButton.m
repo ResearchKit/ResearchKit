@@ -47,18 +47,17 @@ static const CGFloat ImageToLabelPadding = 2.0;
     [self setColors];
     [self setupImageView];
     [self setupTextLabel];
+
+    [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKPlaybackButton *traitChangeView, UITraitCollection *previousTraitCollection) {
+        traitChangeView->_textLabel.font = [traitChangeView bodyTextFont];
+    }];
+
     return self;
 }
 
 - (void)setColors {
     _highlightTintColor = self.tintColor;
     _normalTintColor = [self.tintColor colorWithAlphaComponent:0.4];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    _textLabel.font = [self bodyTextFont];
 }
 
 - (void)setupImageView {

@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  and add the new `ORKRecorderConfiguration` subclass to an `ORKActiveStep` object.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKRecorderConfiguration : NSObject <NSSecureCoding>
+@interface ORKRecorderConfiguration : NSObject <NSSecureCoding, NSCopying>
 
 /*
  The `init` and `new` methods are unavailable outside the framework on `ORKRecorderConfiguration`,
@@ -223,6 +223,8 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKAudioRecorderConfiguration : ORKRecorderConfiguration
+
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
 
 /**
  The audio format settings for the recorder.
@@ -669,6 +671,15 @@ ORK_CLASS_AVAILABLE
  Subclasses should call `finishRecordingWithError:` rather than calling super.
  */
 - (void)stop NS_REQUIRES_SUPER;
+
+/**
+ Stops data recording and discards any files produced during the recording session.
+
+ Use this instead of `stop` when the recorder is being torn down without the intent to
+ report results - for example, when recorders are recreated due to a configuration change.
+ Unlike `stop`, results are not delivered to the delegate and any output files are deleted.
+ */
+- (void)invalidate NS_REQUIRES_SUPER;
 
 /**
  A Boolean value indicating whether the recorder is currently recording.

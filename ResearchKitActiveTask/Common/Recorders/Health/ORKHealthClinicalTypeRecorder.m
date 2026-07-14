@@ -30,8 +30,6 @@
 
 #import <Availability.h>
 
-#if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
-
 #import <ResearchKit/HKSample+ORKJSONDictionary.h>
 #import "ORKHealthClinicalTypeRecorder.h"
 #import "ORKHelpers_Internal.h"
@@ -238,12 +236,21 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, healthClinicalType);
     ORK_ENCODE_OBJ(aCoder, healthFHIRResourceType);
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKHealthClinicalTypeRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                               healthClinicalType:[_healthClinicalType copy]
+                                                           healthFHIRResourceType:[_healthFHIRResourceType copy]
+                                                                  outputDirectory:[self.outputDirectory copy]
+                                                         rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 - (BOOL)isEqual:(id)object {
@@ -260,5 +267,4 @@
 }
 
 @end
-#endif
 #endif 

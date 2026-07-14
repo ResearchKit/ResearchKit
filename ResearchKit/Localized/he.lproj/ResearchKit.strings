@@ -30,6 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "הסכמה";
+"CONSENT_NAME_SECTION_TITLE" = "שם";
+
 "CONSENT_NAME_GIVEN" = "שם פרטי";
 "CONSENT_NAME_FAMILY" = "שם משפחה";
 "CONSENT_NAME_PLACEHOLDER" = "חובה";
@@ -96,8 +98,6 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "הקש/י כתובת";
 "LOCATION_ERROR_TITLE" = "לא ניתן למצוא את הכתובת שצוינה";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "לא ניתן לזהות את מיקומך הנוכחי. הקלד/י כתובת או עבור/י אל מיקום שבו קליטת ה-GPS טובה יותר, אם אפשר.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "הגישה אל שירותי המיקום נדחתה. הענק/י ליישום זה הרשאה להשתמש בשירותי המיקום דרך ״הגדרות״.";
 "LOCATION_ERROR_GEOCODE" = "לא ניתן למצוא תוצאה עבור הכתובת שהוקשה. ודא/י שהכתובת תקינה.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "יתכן שאינך מחובר/ת לאינטרנט, או שחרגת מהמספר המרבי המותר של בקשות בדיקת כתובת. אם אינך מחובר/ת לאינטרנט, הפעל/י את הרשת האלחוטית בכדי לענות על שאלה זו, דלג/י על השאלה אם כפתור הדילוג זמין, או חזור/י ובצע/י שוב את הסקר כשתהיה/י מחובר/ת לאינטרנט. אחרת, נסה/י שוב בעוד כמה דקות.";
 
@@ -147,6 +147,9 @@
 "PASSCODE_INVALID_ALERT_MESSAGE" = "קודי הגישה לא היו זהים. נסה/י שוב.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "בצע/י אימות באמצעות Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "שגיאת Touch ID";
+"PASSCODE_FACE_ID_MESSAGE" = "אמת/י את זהותך באמצעות Face ID";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "שגיאת Face ID";
+
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "ניתן להשתמש בתווי ספרות בלבד.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "מד התקדמות של הקשת קוד גישה";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "הוקשו %@ מתוך %@ ספרות";
@@ -175,6 +178,12 @@
 "FITZPATRICK_SKIN_TYPE_IV" = "סוג עור 4";
 "FITZPATRICK_SKIN_TYPE_V" = "סוג עור 5";
 "FITZPATRICK_SKIN_TYPE_VI" = "סוג עור 6";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "סוג 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "סוג 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "סוג 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "סוג 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "סוג 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "סוג 6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "נקבה";
@@ -226,6 +235,9 @@
 "BUTTON_READ_ONLY_MODE" = "לא ניתן לשנות את התשובה הזאת.";
 "BUTTON_COPYRIGHT" = "זכויות יוצרים";
 "BUTTON_CLOSE" = "סגור";
+"BUTTON_START_TEST" = "התחלת הבדיקה";
+"BUTTON_PRACTICE_TEST" = "מבחן תרגול";
+"BUTTON_PRACTICE_AGAIN" = "תרגול נוסף";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "מתחיל פעילות בעוד";
@@ -246,6 +258,12 @@
 "CAPTURE_BUTTON_CAPTURE_VIDEO" = "התחל הקלטה";
 "CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "הפסק הקלטה";
 "CAPTURE_BUTTON_RECAPTURE_VIDEO" = "צלם/י את הסרט מחדש";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE" = "נדרשת גישה למצלמה";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_MIC" = "נדרשת גישה למיקרופון";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_CAMERA_AND_MIC" = "נדרשת גישה למצלמה ולמיקרופון";
+"VIDEO_CAPTURE_ACCESS_DENIED_MIC_TEXT" = "כדי להשלים את השלב, אפשר/י ליישום גישה למיקרופון ב\"הגדרות\".";
+"VIDEO_CAPTURE_ACCESS_DENIED_CAMERA_AND_MIC_TEXT" = "כדי להשלים את השלב, אפשר/י ליישום גישה למצלמה ולמיקרופון ב\"הגדרות\".";
+"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT" = "פתח/י את \"הגדרות\"";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "כושר";
@@ -350,6 +368,8 @@
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "בטל את הבדיקה";
 "dBHL_ALERT_TEXT" = "יש לחבר מחדש את ה-AirPods או ה-EarPods כדי להתחיל בבדיקה.";
 "dBHL_PROGRESS_COMPLETION_%@" = "‏%@ הושלם";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "הבדיקה מתבצעת";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "הבדיקה מתבצעת • %@";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "זכרון מרחבי";
@@ -382,6 +402,8 @@
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "הקש/י על ״התחלה״ כדי להתחיל.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "נסיון %@ מתוך %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "נער/י את המכשיר במהירות כשמופיע העיגול הכחול";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "הקש/י על הכפתור \"החזק\" ולאחר מכן על העיגול הכחול";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "החזק";
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "מבחן סטרופ";
@@ -392,6 +414,12 @@
 "STROOP_COLOR_GREEN" = "ירוק";
 "STROOP_COLOR_BLUE" = "כחול";
 "STROOP_COLOR_YELLOW" = "צהוב";
+"STROOP_COLOR_ORANGE" = "כתום";
+"STROOP_COLOR_BROWN" = "חום";
+"STROOP_COLOR_PINK" = "ורוד";
+"STROOP_COLOR_PURPLE" = "סגול";
+"STROOP_COLOR_GRAY" = "אפור";
+
 "STROOP_COLOR_RED_INITIAL" = "א";
 "STROOP_COLOR_GREEN_INITIAL" = "י";
 "STROOP_COLOR_BLUE_INITIAL" = "כ";
@@ -425,6 +453,42 @@
 "KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "הנח/י את המכשיר על ברך ימין. הקש/י על המסך והרחק/י את ברך ימין ככל האפשר.";
 "KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "לסיום, החזר/י את ברך שמאל לנקודת ההתחלה. לאחר מכן, הקש/י בכל מקום.";
 "KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "לסיום, החזר/י את ברך ימין לנקודת ההתחלה. לאחר מכן, הקש/י בכל מקום.";
+
+/* Family History */
+"FAMILY_HISTORY_I_DONT_KNOW" = "לא יודע/ת";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "האם אובחנת עם אחד או יותר מהמחלות או מהמצבים הרפואיים הבאים?";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "מצבים רפואיים";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "ענה/י על השאלות הללו כמיטב יכולתך";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "המשימה הושלמה";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "אף אחד מאלה";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "מעדיפ/ה לא לענות";
+"FAMILY_HISTORY_CONDITIONS" = "מצבים רפואיים";
+"FAMILY_HISTORY_NONE_SELECTED" = "לא נבחרה אף אפשרות";
+"FAMILY_HISTORY_EDIT_ENTRY" = "ערוך/י רשומה";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "האם למחוק את הרשומה מההיסטוריה הרפואית המשפחתית?";
+"FAMILY_HISTORY_DELETE_ENTRY" = "מחק/י רשומה";
+"FAMILY_HISTORY_CANCEL" = "ביטול";
+"FAMILY_HISTORY_ADD" = "הוספת %@";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "אשר/י כל מחלה או מצב רפואי שאובחנו.";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "הכפתור \"עריכה\"";
+
+/* Permission denied completion step titles and descriptions. */
+"PERMISSION_DENIED_AUDIO_TITLE" = "הגישה למיקרופון נדחתה";
+"PERMISSION_DENIED_AUDIO_TEXT" = "עליך לאפשר גישה למיקרופון כדי להמשיך במשימה.";
+"PERMISSION_DENIED_MOTION_TITLE" = "הגישה ל\"תנועה וכושר\" נדחתה";
+"PERMISSION_DENIED_MOTION_TEXT" = "עליך לאפשר גישה לפעילות התנועה והכושר שלך כדי להמשיך במשימה.";
+"PERMISSION_DENIED_LOCATION_TITLE" = "הגישה למיקום נדחתה";
+"PERMISSION_DENIED_LOCATION_TEXT" = "עליך לאפשר גישה למיקום כדי להמשיך במשימה.";
+"PERMISSION_DENIED_CAMERA_TITLE" = "הגישה למצלמה נדחתה";
+"PERMISSION_DENIED_CAMERA_TEXT" = "עליך לאפשר גישה למצלמה כדי להמשיך במשימה.";
+
+/* Permission required alert title and messages. */
+"PERMISSION_REQUIRED_ALERT_TITLE" = "נדרשת הרשאה";
+"PERMISSION_REQUIRED_ALERT_AUDIO_MESSAGE" = "נדרשת גישה למיקרופון כדי ששלב זה יפעל כראוי. יש לאפשר גישה ב\"הגדרות\".";
+"PERMISSION_REQUIRED_ALERT_MOTION_MESSAGE" = "נדרשת גישה ל\"תנועה וכושר\" כדי ששלב זה יפעל כראוי. יש לאפשר גישה ב\"הגדרות\".";
+"PERMISSION_REQUIRED_ALERT_LOCATION_MESSAGE" = "נדרשת גישה למיקום כדי ששלב זה יפעל כראוי. יש לאפשר גישה ב\"הגדרות\".";
+"PERMISSION_REQUIRED_ALERT_CAMERA_MESSAGE" = "נדרשת גישה למצלמה כדי ששלב זה יפעל כראוי. יש לאפשר גישה ב\"הגדרות\".";
+"PERMISSION_REQUIRED_ALERT_DEFAULT_MESSAGE" = "לא ניתנה הרשאה נדרשת. יש לאפשר גישה ב\"הגדרות\" כדי להבטיח ששלב זה יפעל כראוי.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "טווח התנועה של כתף שמאל";
@@ -480,7 +544,7 @@
 "HOLE_PEG_TEST_TITLE_%@" = "מבחן דיסקית של %@ חורים";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "פעילות זו מודדת את תפקוד פלג הגוף העליון בכך שהיא מבקשת ממך להניח דיסקית עגולה בתוך חור. את הפעולה הזו תתבקש/י לבצע %@ פעמים.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד הימנית והשמאלית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "כעת תתבצע בדיקה של היד הימנית והשמאלית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "הקש/י על ״התחלה״ כדי להתחיל.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך השמאלית.";
@@ -557,7 +621,13 @@
 "SPEECH_RECOGNITION_QUESTION_TEXT" = "ערוך/י את התמלול כדי לתקן טעויות בפירוש הטקסטואלי של הדיבור.";
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "התמלול יופיע כאן.";
 "SPEECH_RECOGNITION_FAILED" = "זיהוי הדיבור נכשל.";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "לא ניתן להקליט. יש להקיש כדי לנסות שוב.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "לא זוהה דיבור בהקלטה שלך. יש להקיש כדי לנסות שוב.";
+
 "SPEECH_RECOGNITION_INIT_FAILURE" = "לא ניתן היה להתחיל את זיהוי הדיבור.";
+"SPEECH_RECOGNITION_NOT_AVAILABLE" = "זיהוי הדיבור אינו זמין";
+"SPEECH_RECOGNITION_COULD_NOT_INITIALIZE" = "לא ניתן היה לאתחל את זיהוי הדיבור";
+"SPEECH_RECOGNITION_NOT_AUTHORIZED" = "זיהוי הדיבור אינו מורשה";
 
 /* Speech In Noise active task. */
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "הפעל שמע";
@@ -571,6 +641,21 @@
 "SPEECH_IN_NOISE_STEP_TEXT" = "משפט המשולב עם רעש רקע בעל יחס אות לרעש (SNR) אקראי יושמע פעם אחת בלבד.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "דבר/י";
 "SPEECH_IN_NOISE_SPEAK_TEXT" = "חזור/י על מה ששמעת.";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "השתמש/י במקלדת במקום זאת";
+
+/* ORKRecordButton */
+"PLAY" = "הפעלה";
+"RECORD" = "הקלטה";
+"STOP" = "עצור";
+
+/* ORKFrontFacingCameraStepContentView */
+"FRONT_FACING_CAMERA_START_TITLE" = "התחלת הקלטה";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "הפסקת הקלטה";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "אפשרויות וידאו";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "סקירת סרטון";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "מחק/י ונסה/י שוב";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "שליחת סרטון";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "לא ניתן ליצור את הקובץ";
@@ -600,7 +685,10 @@
 
 /* Slider */
 "SLIDER_MOVE_SLIDER_FOR_VALUE" = "הזז/י את המחוון להזנת ערך";
-"SLIDER_I_DONT_KNOW" = "לא ממש ברור לי";
+"SLIDER_I_DONT_KNOW" = "אני לא יודע/ת";
+
+/* Word Count Error */
+"MAX_WORD_COUNT_ERROR" = "הגעת למספר התווים המרבי";
 
 /* Review Step */
 "REVIEW_STEP_PAGE" = "עמוד";
@@ -614,7 +702,6 @@
 "AX_BUTTON_HIDE_SEARCH" = "הסתר את שורת החיפוש";
 "AX_BUTTON_SHARE" = "שתף";
 
-
 "AX_COMPLETION_ILLUSTRATION" = "איור של סימן בחירה בתוך עיגול כחול המציין הצלחה";
 
 "AX_SIGNVIEW_LABEL" = "שדה חתימה ייעודי";
@@ -625,6 +712,8 @@
 "AX_SELECTED" = "נבחרו";
 "AX_UNSELECTED" = "לא נבחר";
 "AX_SELECT_ALL_THAT_APPLY" = "נא לבחור את כל האפשרויות הרלוונטיות";
+"AX_BUTTON" = "כפתור";
+"AX_PAGE_NUMBER_FORMAT" = "עמוד %1$ld מתוך %2$ld";
 
 "AX_SLIDER_LABEL" = "מחוון תגובה. טווח שנע בין %@ ל-%@";
 "AX_UNLABELED_IMAGE" = "תמונה ללא תיוג";
@@ -684,6 +773,86 @@
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
 "AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ באמצעות VoiceOver, ניתן יהיה להקיש ישירות על הכפתורים בבדיקה.";
+"AX_SES_TOP" = "למעלה";
+"AX_SES_BOTTOM" = "למטה";
+"AX_SES_PERCENT" = "אחוזים";
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "לא ניתן לפענח את הקוד של restoreData לצורך אתחול";
+
+/* Request Permission Step */
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "סקירה";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "נסקר";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "לא נתמך";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "שגיאה";
+
+/* Request Health Data Step */
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "נתוני בריאות";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "המחקר מבקש גישה לנתוני בריאות.";
+
+/* Request Notification Permission Step */
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "התראות";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "המחקר מבקש לשלוח לך התראות.";
+
+/* Request Sensor Permission Step */
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "נתוני חיישנים";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "המחקר מבקש גישה לנתוני חיישנים מהמכשירים שלך.";
+
+/* Request Device Motion Permission Step */
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "תנועת המכשיר";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "המחקר מבקש גישה לנתוני תנועה מהמכשירים שלך.";
+
+/* Request Location Permission Step */
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "נתוני מיקום";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "המחקר מבקש גישה לנתוני מיקום מהמכשירים שלך.";
+
+/* 6 minute walk test task. */
+"6MWT_TASK_TITLE" = "מבחן הליכה של 6 דקות";
+"6MWT_INTRO" = "מטרת הבדיקה היא ללכת רחוק ככל האפשר בקצב נוח למשך 6 דקות.";
+"6MWT_INTRO_DETAILS" = "פרטים";
+"6MWT_INTRO_DETAIL_TIME" = "להשלמת הבדיקה נדרשות כ-6 דקות.";
+"6MWT_INTRO_DETAIL_WATCH" = "יש להשתמש ב-Apple Watch כדי לבצע את הבדיקה.";
+"6MWT_INTRO_DETAIL_CLOTHING" = "יש ללבוש בגדים נוחים ולנעול נעליים במידה מתאימה. אם את/ה משתמש/ת באביזר הליכה בדרך כלל, ניתן להשתמש בו בעת ביצוע הבדיקה.";
+"6MWT_INTRO_DETAIL_LOCATION" = "אם אינך מסוגל/ת ללכת בחוץ, כדאי לשקול להשלים את הבדיקה בקניון מקומי.";
+"6MWT_INSTRUCTIONS_TITLE" = "מתחילים";
+"6MWT_INSTRUCTIONS_1" = "מצא/י מסלול הליכה ישר באורך של 30 מטר לפחות.";
+"6MWT_INSTRUCTIONS_2" = "חשוב לוודא שלאורך המסלול יש מקום לעצור ולשבת במקרה הצורך.";
+"6MWT_INSTRUCTIONS_3" = "יש להגביר את עוצמת הקול של הטלפון ל-50% לפחות";
+"6MWT_INSTRUCTIONS_4" = "התחל/י אימון \"הליכה בחוץ\" (או \"הליכה בתוך מבנה\") ב‑Apple Watch על‑ידי בקשה מ‑Siri, או על‑ידי פתיחת היישום \"אימונים\" והקשה על \"הליכה בחוץ\" (או \"הליכה בתוך מבנה\").";
+"6MWT_TEST_IN_PROGRESS" = "הבדיקה מתבצעת";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "לך/י רחוק ככל האפשר לאורך מסלול ההליכה הישר במשך 6 דקות. אם עליך להסדיר את הנשימה, יש לעצור ולשבת.";
+"6MWT_QUESTIONS_TITLE" = "יפה מאוד";
+"6MWT_QUESTIONS_DETAIL" = "כל הכבוד, סיימת את מבחן ההליכה של 6 דקות! דרג/י את הרגשתך בתחומים הבאים.";
+"6MWT_QUESTIONS_BREATH" = "קוצר נשימה";
+"6MWT_QUESTIONS_FATIGUE" = "עייפות";
+"6MWT_LOW_SCORE" = "1: כלל לא";
+"6MWT_HIGH_SCORE" = "10: הרבה";
+
+/* Fitness test. */
+"FITNESS_STOP_TEST_CONFIRMATION" = "האם לסיים את הפעילות מוקדם מהצפוי?";
+"FITNESS_STOP_TEST_DETAIL" = "ההתקדמות תישמר והבדיקה תסומן כבדיקה שהושלמה.";
+"FITNESS_RESUME_TEST" = "המשך פעילות";
+
+/* Tecumseh cube active task. */
+"TC_TASK_TITLE" = "מבחן הקובייה של Tecumseh";
+"TC_INTRO" = "מטרת הבדיקה היא להעלות את קצב הלב שלך בזמן עלייה וירידה במדרגות במשך 3 דקות לפי קצב.";
+"TC_INTRO_DETAILS" = "פרטים";
+"TC_INTRO_DETAIL_TIME" = "להשלמת הבדיקה נדרשות כ-6 דקות.";
+"TC_INTRO_DETAIL_WATCH" = "יש להשתמש ב-Apple Watch כדי לבצע את הבדיקה.";
+"TC_INTRO_DETAIL_DANGER" = "אם מתפתחים כאב או אי נוחות בחזה, יש לעצור את הבדיקה באופן מיידי.";
+"TC_INSTRUCTIONS_TITLE" = "מתחילים";
+"TC_INSTRUCTIONS_1" = "מצא/י מדרגה בגובה של כ-20 ס\"מ (8 אינץ') מהקרקע.";
+"TC_INSTRUCTIONS_2" = "הגבר/י את עוצמת הקול של ה-iPhone ל-50 לפחות";
+"TC_INSTRUCTIONS_3" = "התחל/י אימון \"מדרגות\" ב-Apple Watch על-ידי בקשה מ-Siri, או על-ידי הפעלת היישום ״אימון״, הקשה על ״הוספת אימון״ ואז בחירה ב\"מדרגות\".";
+"TC_TEST_IN_PROGRESS" = "הבדיקה מתבצעת";
+"TC_TEST_IN_PROGRESS_DETAIL" = "השתמש/י במדרגה כדי לעלות ולרדת במקום לפי הקצב";
+"TC_REST_IN_PROGRESS" = "הפסקה למנוחה";
+"TC_REST_IN_PROGRESS_DETAIL" = "שב/י והירגע/י במשך 3 דקות בזמן שה-Apple Watch מתעד את קצב הלב שלך במנוחה.";
+"TC_COMPLETION_TITLE" = "יפה מאוד";
+"TC_COMPLETION_DETAIL" = "ברכות על השלמת מבחן הקובייה של Tecumseh!";
+
+/* Strings localized directly from source. */
+"X" = "X";
+"You have completed this task." = "המשימה הושלמה.";
+"Done" = "בוצע";
+"Share Task Snapshot" = "שתף/י תמונת מצב של המשימה";

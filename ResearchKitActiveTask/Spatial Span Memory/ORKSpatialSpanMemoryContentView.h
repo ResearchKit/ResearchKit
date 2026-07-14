@@ -31,7 +31,6 @@
 
 #import "ORKActiveStepCustomView.h"
 #import "ORKSpatialSpanTargetView.h"
-#import "ORKBorderedButton.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -81,7 +80,7 @@ typedef struct {
 // Things that can be shown in the footer.
 @property (nonatomic, assign) NSInteger numberOfItems;
 @property (nonatomic, assign) NSInteger score;
-@property (nonatomic, strong, nullable) ORKBorderedButton *buttonItem;
+@property (nonatomic, strong, nullable) UIButton *buttonItem;
 
 @end
 

@@ -124,9 +124,11 @@
 
 @interface ORKRangeOfMotionStepViewController () <ORKDeviceMotionRecorderDelegate> {
     ORKRangeOfMotionContentView *_contentView;
+    NSMutableArray *_results;
     UITapGestureRecognizer *_gestureRecognizer;
     CMAttitude *_referenceAttitude;
     UIInterfaceOrientation _orientation;
+    NSMutableArray<ORKFileResult *> *_fileResults;
 }
 
 @end
@@ -138,6 +140,8 @@
     [super viewDidLoad];
     _contentView = [ORKRangeOfMotionContentView new];
     _contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    _results = [NSMutableArray new];
+    _fileResults = [NSMutableArray new];
     self.activeStepView.activeCustomView = _contentView;
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
@@ -161,6 +165,21 @@
 }
 
 #pragma mark - ORKDeviceMotionRecorderDelegate
+
+- (void)recorder:(ORKRecorder *)recorder didCompleteWithResults:(NSArray<ORKFileResult *> *)results {
+    [_fileResults addObjectsFromArray:results];
+    
+    ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
+    result.start = 90.0 - _startAngle;
+    result.finish = result.start - _newAngle;
+    //Because the task uses pitch in the direction opposite to the original CoreMotion device axes (i.e. right hand rule), maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks
+    result.minimum = result.start - _maxAngle;
+    result.maximum = result.start - _minAngle;
+    result.range = fabs(result.maximum - result.minimum);
+    result.fileResults = [_fileResults copy];
+    [_fileResults removeAllObjects];
+    [_results addObject:result];
+}
 
 - (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion {
     if (!_referenceAttitude) {
@@ -213,20 +232,9 @@
 
 #pragma mark - ORKActiveTaskViewController
 
-- (ORKResult *)result {
+- (ORKStepResult *)result {
     ORKStepResult *stepResult = [super result];
-    
-    ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    
-    result.start = 90.0 - _startAngle;
-    result.finish = result.start - _newAngle;
-    //Because the task uses pitch in the direction opposite to the original CoreMotion device axes (i.e. right hand rule), maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks
-    result.minimum = result.start - _maxAngle;
-    result.maximum = result.start - _minAngle;
-    result.range = fabs(result.maximum - result.minimum);
-    
-    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
-    
+    stepResult.results = [self.addedResults arrayByAddingObjectsFromArray:_results] ? : _results;
     return stepResult;
 }
 

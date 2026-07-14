@@ -243,6 +243,20 @@
     return [super initWithCoder:aDecoder];
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                     outputDirectory:[self.outputDirectory copy]
+                                            rollingFileSizeThreshold:self.rollingFileSizeThreshold];
+}
+
+- (BOOL)isEqual:(id)object {
+    return [super isEqual:object];
+}
+
 + (BOOL)supportsSecureCoding {
     return YES;
 }

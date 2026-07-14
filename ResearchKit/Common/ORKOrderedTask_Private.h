@@ -68,6 +68,12 @@ FOUNDATION_EXPORT NSString *const ORKHeartRateRecorderIdentifier;
 
 FOUNDATION_EXPORT void ORKStepArrayAddStep(NSMutableArray<ORKStep *> *array, ORKStep *step);
 
+@interface ORKOrderedTask ()
+
+- (BOOL)_shouldSkipStep:(ORKStep *)step;
+
+@end
+
 @interface ORKOrderedTask (ORKMakeTaskUtilities)
 
 + (ORKCompletionStep *)makeCompletionStep;

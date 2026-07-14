@@ -86,11 +86,11 @@ NSString * const PATHS_ARRAY_STORAGE_ERROR = @"Failed to store paths array to fi
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     self.view.backgroundColor = [UIColor blackColor];
     _amslerGridView = [ORKAmslerGridContentView new];
     _amslerGridView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _amslerGridView;
-    [self.activeStepView removeCustomContentPadding];
     
     _freehandDrawingView = [ORKFreehandDrawingView new];
 
@@ -99,10 +99,9 @@ NSString * const PATHS_ARRAY_STORAGE_ERROR = @"Failed to store paths array to fi
     _freehandDrawingView.opaque = NO;
 
     [_amslerGridView addSubview:_freehandDrawingView];
-   
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [self.activeStepView addGestureRecognizer:panGestureRecognizer];
-    
+
+    _navigationFooterView.continueEnabled = YES;
+
     self.activeStepView.isAccessibilityElement = YES;
     self.activeStepView.accessibilityLabel = ORKLocalizedString(@"AX_AMSLER_GRID_LABEL", nil);
     self.activeStepView.accessibilityHint = ORKLocalizedString(@"AX_AMSLER_GRID_HINT", nil);
@@ -110,10 +109,19 @@ NSString * const PATHS_ARRAY_STORAGE_ERROR = @"Failed to store paths array to fi
     [self setupContraints];
 }
 
-- (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
-        [self finish];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    /// The ActiveSteViewController calls [self start] if shouldStartTimerAutomatically is true.
+    /// If shouldStartTimerAutomatically is false, we call it ourselves to make sure any provided recorders begin collection.
+    if (!((ORKAmslerGridStep *)self.step).shouldStartTimerAutomatically && !self.started) {
+        [self start];
     }
+}
+
+- (void)goForward {
+    [self finish];
+    [super goForward];
 }
 
 - (void)setupContraints {
@@ -197,7 +205,7 @@ NSString * const PATHS_ARRAY_STORAGE_ERROR = @"Failed to store paths array to fi
         amslerGridResult.imageFileResult = imageFileResult;
         amslerGridResult.drawingPathFileResult = drawingPathFileResult;
         
-        parentResult.results = @[amslerGridResult];
+        parentResult.results = [parentResult.results arrayByAddingObject:amslerGridResult] ? : @[amslerGridResult];
     }
 
     return parentResult;
@@ -232,7 +240,7 @@ NSString * const PATHS_ARRAY_STORAGE_ERROR = @"Failed to store paths array to fi
     
     // If set properly, the outputDirectory is already created, so write the file into it
     NSError *writeError = nil;
-    if (![data writeToURL:URL options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
+    if (![data writeToURL:URL options:NSDataWritingAtomic|ORKDataWritingFileProtectionFromMode(self.fileProtectionMode) error:&writeError]) {
         if (writeError) {
             ORK_Log_Error("%@", writeError);
         }
@@ -257,7 +265,8 @@ NSString * const PATHS_ARRAY_STORAGE_ERROR = @"Failed to store paths array to fi
     }
     
     NSURL *URL = [[self.outputDirectory URLByAppendingPathComponent:fileName] URLByAppendingPathExtension:PATHS_EXTENSION];
-    BOOL success = [data writeToURL:URL atomically:YES];
+    NSError *writeError = nil;
+    BOOL success = [data writeToURL:URL options:NSDataWritingAtomic|ORKDataWritingFileProtectionFromMode(self.fileProtectionMode) error:&writeError];
     
     if (!success) {
         [self _throwPathStorageError];

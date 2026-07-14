@@ -38,7 +38,6 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 #import "UIImageView+ResearchKit.h"
-#import "UIImage+ResearchKit.h"
 
 @interface ORKChoiceButtonView : UIView
 
@@ -76,42 +75,27 @@
             self.button.accessibilityLabel = self.labelText;
         }
         [self updateViewColors];
+
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKChoiceButtonView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView updateViewColors];
+        }];
     }
     return self;
 }
 
 - (void)setupButtonImagesFromImageChoice:(ORKImageChoice *)choice {
-    if ([UITraitCollection currentTraitCollection].userInterfaceStyle == UIUserInterfaceStyleDark) {
-        [_button setImage:[_button.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    } else {
-        [_button setImage:[_button.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-    }
-    
     if (choice.selectedStateImage) {
-        UIImage *selectedStateImage = choice.selectedStateImage;
-        if (@available(iOS 12.0, *)) {
-            selectedStateImage = [choice.selectedStateImage ork_imageWithRenderingModeForUserInterfaceStyle:self.traitCollection.userInterfaceStyle];
-        }
-        [_button setImage:selectedStateImage forState:UIControlStateSelected];
+        [_button setImage:choice.selectedStateImage forState:UIControlStateSelected];
     }
-    
-    UIImage *normalStateImage = choice.normalStateImage;
-    if (@available(iOS 12.0, *)) {
-        normalStateImage = [choice.normalStateImage ork_imageWithRenderingModeForUserInterfaceStyle:self.traitCollection.userInterfaceStyle];
-    }
-    
-    [_button setImage:normalStateImage forState:UIControlStateNormal];
+
+    [_button setImage:choice.normalStateImage forState:UIControlStateNormal];
 }
 
 - (void)updateViewColors {
-    if (@available(iOS 12.0, *)) {
-        _button.imageView.tintColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : nil;
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [self setupButtonImagesFromImageChoice:_choice];
+    UIImage *image = _button.imageView.image;
+    BOOL imageIsTemplate = image.isSymbolImage || image.renderingMode == UIImageRenderingModeAlwaysTemplate;
+    BOOL isDarkMode = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark;
+    _button.imageView.tintColor = (imageIsTemplate && isDarkMode) ? [UIColor whiteColor] : nil;
 }
 
 - (void)setUpConstraints {
@@ -164,6 +148,9 @@
 
 static const CGFloat SpacerWidth = 10.0;
 static const CGFloat SpacerHeight = 5.0;
+static const CGFloat MaxImageChoiceButtonHeight = 150.0;
+static const CGFloat SelectionBorderWidth = 2.0;
+static const CGFloat ChoiceLabelTopSpacing = 30.0;
 
 @implementation ORKImageSelectionView {
     ORKChoiceAnswerFormatHelper *_helper;
@@ -216,6 +203,7 @@ static const CGFloat SpacerHeight = 5.0;
             ORKChoiceButtonView *buttonView = [[ORKChoiceButtonView alloc] initWithImageChoice:imageChoice];
             [buttonView.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
             buttonView.button.imageView.layer.cornerRadius = ORKImageChoiceButtonCornerRadii;
+            buttonView.button.imageView.clipsToBounds = YES;
             [buttonViews addObject:buttonView];
             [self addSubview:buttonView];
         }
@@ -257,14 +245,35 @@ static const CGFloat SpacerHeight = 5.0;
 
     ORKChoiceButtonView *previousView = nil;
     for (ORKChoiceButtonView *buttonView in _buttonViews) {
-        NSDictionary *views = NSDictionaryOfVariableBindings(buttonView, _choiceLabel);
-        
+
         if (!_isVertical) {
-            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[buttonView]-30-[_choiceLabel]-|"
+            NSDictionary *views = NSDictionaryOfVariableBindings(buttonView, _choiceLabel);
+            NSDictionary *metrics = @{@"topPadding": @(ORKSurveyItemMargin), @"choiceLabelTopSpacing": @(ChoiceLabelTopSpacing)};
+            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topPadding-[buttonView]-choiceLabelTopSpacing-[_choiceLabel]"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                     metrics:nil
+                                                     metrics:metrics
                                                        views:views]];
-            
+
+            NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_choiceLabel
+                                                                               attribute:NSLayoutAttributeBottom
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self
+                                                                               attribute:NSLayoutAttributeBottom
+                                                                              multiplier:1.0
+                                                                                constant:-ORKSurveyItemMargin];
+            bottomConstraint.priority = UILayoutPriorityRequired - 1;
+            [constraints addObject:bottomConstraint];
+
+            NSLayoutConstraint *maxHeight = [NSLayoutConstraint constraintWithItem:buttonView
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                        multiplier:1.0
+                                                                          constant:MaxImageChoiceButtonHeight];
+            maxHeight.priority = UILayoutPriorityDefaultHigh;
+            [constraints addObject:maxHeight];
+
             if (previousView) {
                 // ButtonView left trailing
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
@@ -274,7 +283,7 @@ static const CGFloat SpacerHeight = 5.0;
                                                                     attribute:NSLayoutAttributeRight
                                                                    multiplier:1.0
                                                                      constant:SpacerWidth]];
-                
+
                 // All ButtonViews has equal width
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
                                                                     attribute:NSLayoutAttributeWidth
@@ -283,7 +292,7 @@ static const CGFloat SpacerHeight = 5.0;
                                                                     attribute:NSLayoutAttributeWidth
                                                                    multiplier:1.0
                                                                      constant:0.0]];
-                
+
             } else {
                 // ButtonView left trailing
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
@@ -295,6 +304,17 @@ static const CGFloat SpacerHeight = 5.0;
                                                                      constant:SpacerWidth]];
             }
         } else {
+            // Max height cap for vertical images
+            NSLayoutConstraint *maxHeight = [NSLayoutConstraint constraintWithItem:buttonView
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                        multiplier:1.0
+                                                                          constant:MaxImageChoiceButtonHeight];
+            maxHeight.priority = UILayoutPriorityDefaultHigh;
+            [constraints addObject:maxHeight];
+
             if (previousView) {
                 // ButtonView top spacing
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
@@ -304,7 +324,7 @@ static const CGFloat SpacerHeight = 5.0;
                                                                     attribute:NSLayoutAttributeBottom
                                                                    multiplier:1.0
                                                                      constant:SpacerHeight]];
-                
+
                 // All ButtonViews has equal height
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
                                                                     attribute:NSLayoutAttributeHeight
@@ -322,7 +342,7 @@ static const CGFloat SpacerHeight = 5.0;
                                                                     attribute:NSLayoutAttributeWidth
                                                                    multiplier:1.0
                                                                      constant:0.0]];
-                
+
             } else {
                 // ButtonView top spacing
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
@@ -331,28 +351,28 @@ static const CGFloat SpacerHeight = 5.0;
                                                                        toItem:self
                                                                     attribute:NSLayoutAttributeTop
                                                                    multiplier:1.0
-                                                                     constant:SpacerHeight]];
+                                                                     constant:ORKSurveyItemMargin]];
             }
-            // ButtonView left trailing
+            // Center horizontally instead of pinning left+right
             [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
-                                                                attribute:NSLayoutAttributeLeft
+                                                                attribute:NSLayoutAttributeCenterX
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:self
-                                                                attribute:NSLayoutAttributeLeft
+                                                                attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:SpacerWidth]];
-            // ButtonView right trailing
+                                                                 constant:0.0]];
+            // Don't exceed container width
             [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
-                                                                attribute:NSLayoutAttributeRight
-                                                                relatedBy:NSLayoutRelationEqual
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationLessThanOrEqual
                                                                    toItem:self
-                                                                attribute:NSLayoutAttributeRight
+                                                                attribute:NSLayoutAttributeWidth
                                                                multiplier:1.0
-                                                                 constant:-SpacerWidth]];
+                                                                 constant:-(2 * SpacerWidth)]];
         }
         previousView = buttonView;
     }
-    
+
     if (!_isVertical) {
         if (previousView) {
             // ButtonView right trailing
@@ -373,15 +393,17 @@ static const CGFloat SpacerHeight = 5.0;
                                                                    toItem:_choiceLabel
                                                                 attribute:NSLayoutAttributeTop
                                                                multiplier:1.0
-                                                                 constant:-30.0]];
+                                                                 constant:-ChoiceLabelTopSpacing]];
 
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_choiceLabel
+            NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_choiceLabel
                                                                 attribute:NSLayoutAttributeBottom
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:self
                                                                 attribute:NSLayoutAttributeBottom
                                                                multiplier:1.0
-                                                                 constant:0.0]];
+                                                                 constant:-ORKSurveyItemMargin];
+            bottomConstraint.priority = UILayoutPriorityRequired - 1;
+            [constraints addObject:bottomConstraint];
         }
     }
     [NSLayoutConstraint activateConstraints:constraints];
@@ -389,9 +411,16 @@ static const CGFloat SpacerHeight = 5.0;
 
 - (void)setAnswer:(id)answer {
     _answer = answer;
-    
+
+    // Deselect all buttons before applying the new selection state
+    [_buttonViews enumerateObjectsUsingBlock:^(ORKChoiceButtonView *buttonView, NSUInteger idx, BOOL *stop) {
+        buttonView.button.selected = NO;
+        buttonView.button.imageView.layer.borderWidth = 0.0;
+    }];
+    [self resetLabelText];
+
     NSArray *selectedIndexes = [_helper selectedIndexesForAnswer:answer];
-    
+
     [self setSelectedIndexes:selectedIndexes];
 }
 
@@ -403,9 +432,9 @@ static const CGFloat SpacerHeight = 5.0;
 - (void)resetButtonSelection:(UIButton *)button {
     [_buttonViews enumerateObjectsUsingBlock:^(ORKChoiceButtonView *buttonView, NSUInteger idx, BOOL *stop) {
         if (_singleChoice) {
-            buttonView.button.imageView.backgroundColor = nil;
+            buttonView.button.imageView.layer.borderWidth = 0.0;
         } else if ([buttonView.button isEqual: button]) {
-            buttonView.button.imageView.backgroundColor = nil;
+            buttonView.button.imageView.layer.borderWidth = 0.0;
         }
     }];
 }
@@ -430,7 +459,7 @@ static const CGFloat SpacerHeight = 5.0;
              if (buttonView.button != button) {
                  if (_singleChoice) {
                      buttonView.button.selected = NO;
-                     buttonView.button.imageView.backgroundColor = nil;
+                     buttonView.button.imageView.layer.borderWidth = 0.0;
                  }
              } else {
                  if (_singleChoice) {
@@ -438,7 +467,8 @@ static const CGFloat SpacerHeight = 5.0;
                  } else {
                      [self setLabelText:[_helper labelForChoiceAnswer:[_helper answerForSelectedIndexes:[self selectedIndexes]]]];
                  }
-                 buttonView.button.imageView.backgroundColor = [UIColor lightGrayColor];
+                 buttonView.button.imageView.layer.borderWidth = SelectionBorderWidth;
+                 buttonView.button.imageView.layer.borderColor = self.tintColor.CGColor;
              }
              
          }];
@@ -482,7 +512,8 @@ static const CGFloat SpacerHeight = 5.0;
         if (number.unsignedIntegerValue < _buttonViews.count) {
             ORKChoiceButtonView *buttonView = _buttonViews[number.unsignedIntegerValue];
             [buttonView button].selected = YES;
-            buttonView.button.imageView.backgroundColor = [UIColor lightGrayColor];
+            buttonView.button.imageView.layer.borderWidth = SelectionBorderWidth;
+            buttonView.button.imageView.layer.borderColor = self.tintColor.CGColor;
             if (_singleChoice) {
                 [self setLabelText:buttonView.labelText];
             }
@@ -496,6 +527,15 @@ static const CGFloat SpacerHeight = 5.0;
 
 - (BOOL)isAccessibilityElement {
     return NO;
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    for (ORKChoiceButtonView *buttonView in _buttonViews) {
+        if (buttonView.button.selected) {
+            buttonView.button.imageView.layer.borderColor = self.tintColor.CGColor;
+        }
+    }
 }
 
 @end

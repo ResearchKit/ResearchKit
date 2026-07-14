@@ -32,6 +32,7 @@ capabilities of frameworks such as HealthKit and CoreMotion.
 - <doc:Setting-up-Your-Project-to-Use-ResearchKit>
 - <doc:Obtaining-Consent>
 - <doc:Steps-Tasks-Results>
+- <doc:Serializing-ResearchKit-Objects>
 - <doc:Configurations>
 
 ### Research components

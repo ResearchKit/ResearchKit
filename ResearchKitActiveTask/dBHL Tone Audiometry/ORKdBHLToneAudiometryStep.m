@@ -30,11 +30,11 @@
 
 
 #import "ORKdBHLToneAudiometryStep.h"
+
 #import "ORKAudiometry.h"
-
 #import "ORKHelpers_Internal.h"
+#import "ORKRecorder.h"
 
-#define ORKdBHLToneAudiometryTaskToneMinimumDuration 1.0
 #define ORKdBHLToneAudiometryTaskDefaultMaxRandomPreStimulusDelay 2.0
 #define ORKdBHLToneAudiometryTaskDefaultMaxPostStimulusDelay 1.0
 #define ORKdBHLToneAudiometryTaskDefaultTransitionsPerFrequency 20
@@ -48,6 +48,18 @@
 
 @implementation ORKdBHLToneAudiometryStep {
     id<ORKAudiometryProtocol> _audiometry;
+}
+
++ (NSTimeInterval)minimumToneDuration {
+    return 1.0;
+}
+
++ (NSTimeInterval)minimumMaxRandomPreStimulusDelay {
+    return 1.0;
+}
+
++ (NSTimeInterval)maximumMaxRandomPreStimulusDelay {
+    return (double)UINT32_MAX + 1.0;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -64,7 +76,7 @@
 }
 
 - (void)commonInit {
-    self.toneDuration = ORKdBHLToneAudiometryTaskToneMinimumDuration;
+    self.toneDuration = ORKdBHLToneAudiometryStep.minimumToneDuration;
     self.maxRandomPreStimulusDelay = ORKdBHLToneAudiometryTaskDefaultMaxRandomPreStimulusDelay;
     self.postStimulusDelay = ORKdBHLToneAudiometryTaskDefaultMaxPostStimulusDelay;
     self.maxNumberOfTransitionsPerFrequency = ORKdBHLToneAudiometryTaskDefaultTransitionsPerFrequency;
@@ -83,15 +95,11 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    if (self.toneDuration < ORKdBHLToneAudiometryTaskToneMinimumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"pulse duration cannot be shorter than %@ seconds.", @(ORKdBHLToneAudiometryTaskToneMinimumDuration)]  userInfo:nil];
-    }
-    if (self.maxNumberOfTransitionsPerFrequency <= 0) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of transitions per frequency cannot be less than or equal to 0"]  userInfo:nil];
-    }
-    if ((self.dBHLStepDownSize <= 0) || self.dBHLStepUpSize <=0) {
-       @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"step size cannot be less than or equal to 0"]  userInfo:nil];
-    }
+    ORKValidateBoundedValue(self.toneDuration, ORKdBHLToneAudiometryStep.minimumToneDuration, @"toneDuration", YES);
+    ORKValidateBoundedValue(self.maxRandomPreStimulusDelay, ORKdBHLToneAudiometryStep.minimumMaxRandomPreStimulusDelay, ORKdBHLToneAudiometryStep.maximumMaxRandomPreStimulusDelay, @"maxRandomPreStimulusDelay", YES);
+    ORKValidateBoundedValue(self.maxNumberOfTransitionsPerFrequency, 1, @"maxNumberOfTransitionsPerFrequency", YES);
+    ORKValidateBoundedValue(self.dBHLStepDownSize, 0, @"dBHLStepDownSize", NO);
+    ORKValidateBoundedValue(self.dBHLStepUpSize, 0, @"dBHLStepUpSize", NO);
     if (self.frequencyList.count == 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"frequency list cannot be empty"]  userInfo:nil];
     }
@@ -197,6 +205,24 @@
 
 - (void)resetAudiometryEngine {
     _audiometry = nil;
+}
+
+- (void)prepareRecorders {
+    NSArray *filteredConfigs = [self.recorderConfigurations filteredArrayUsingPredicate:
+                                [NSPredicate predicateWithBlock:^BOOL(id config, NSDictionary *bindings) {
+        BOOL isAudioRecorderConfig = [config isKindOfClass:[ORKAudioRecorderConfiguration class]];
+        BOOL isStreamingAudioConfig = [config isKindOfClass:[ORKStreamingAudioRecorderConfiguration class]];
+        
+        BOOL isValidConfiguration = !isAudioRecorderConfig && !isStreamingAudioConfig;
+        
+        if (!isValidConfiguration) {
+            ORK_Log_Info("The %@ class has been filtered out of the recorderConfigurations array of the ORKdBHLToneAudiometryStep class.", NSStringFromClass([config class]));
+        }
+        
+        return isValidConfiguration;
+    }]];
+    
+    self.recorderConfigurations = filteredConfigs;
 }
 
 @end

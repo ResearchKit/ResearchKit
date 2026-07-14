@@ -54,6 +54,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityHint, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityInstructions, NSString);
         ORK_DECODE_BOOL(aDecoder, captureRaw);
+        ORK_DECODE_BOOL(aDecoder, useFrontCamera);
     }
     return self;
 }
@@ -65,6 +66,7 @@
     ORK_ENCODE_OBJ(aCoder, accessibilityHint);
     ORK_ENCODE_OBJ(aCoder, accessibilityInstructions);
     ORK_ENCODE_BOOL(aCoder, captureRaw);
+    ORK_ENCODE_BOOL(aCoder, useFrontCamera);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -78,6 +80,7 @@
     step.accessibilityHint = self.accessibilityHint;
     step.accessibilityInstructions = self.accessibilityInstructions;
     step.captureRaw = self.captureRaw;
+    step.useFrontCamera = self.useFrontCamera;
     return step;
 }
 
@@ -89,7 +92,8 @@
                         && UIEdgeInsetsEqualToEdgeInsets(self.templateImageInsets, castObject.templateImageInsets)
                         && ORKEqualObjects(self.accessibilityHint, castObject.accessibilityHint)
                         && ORKEqualObjects(self.accessibilityInstructions, castObject.accessibilityInstructions)
-                        && self.captureRaw == castObject.captureRaw;
+                        && self.captureRaw == castObject.captureRaw
+                        && self.useFrontCamera == castObject.useFrontCamera;
 }
 
 @end

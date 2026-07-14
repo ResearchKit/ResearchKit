@@ -38,9 +38,13 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.userInfo = [[NSDictionary alloc] init];
-        self.shouldShowDefaultTimer = NO;
     }
     return self;
+}
+
+- (void)setShouldShowDefaultTimer:(BOOL)shouldShowDefaultTimer {
+    NSAssert(shouldShowDefaultTimer, @"ORKFitnessStep requires shouldShowDefaultTimer to be YES.");
+    [super setShouldShowDefaultTimer:YES];
 }
 
 - (void)validateParameters {

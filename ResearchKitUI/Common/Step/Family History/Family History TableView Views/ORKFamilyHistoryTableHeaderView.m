@@ -29,9 +29,12 @@
  */
 
 #import "ORKFamilyHistoryTableHeaderView.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+#import <ResearchKit/ResearchKit-Swift.h>
 
 static const CGFloat HeaderViewLabelTopBottomPadding = 6.0;
-static const CGFloat HeaderViewLeftRightLabelPadding = 11.0;
 static const CGFloat HeaderViewCollapsedBottomPadding = 0.0;
 static const CGFloat HeaderViewExpandedBottomPadding = 10.0;
 static const CGFloat CellLeftRightPadding = 8.0;
@@ -52,19 +55,26 @@ static const CGFloat MaxDetailLabelFont = 40.0;
     if (self) {
         _title = [title copy];
         _detailText = [detailText copy];
-        
+
+        self.directionalLayoutMargins = ORKSmallContentLayoutMargins;
         self.backgroundColor = [UIColor clearColor];
         
         [self setupSubviews];
         [self setupConstraints];
+
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKFamilyHistoryTableHeaderView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView updateViewColors];
+        }];
     }
     return self;
 }
 
 - (void)setFrame:(CGRect)frame {
-    frame.origin.x += CellLeftRightPadding;
-    frame.size.width -= 2 * CellLeftRightPadding;
-    
+    if (!ORKLiquidGlassSupportEnabled()) {
+        frame.origin.x += CellLeftRightPadding;
+        frame.size.width -= 2 * CellLeftRightPadding;
+    }
+
     [super setFrame:frame];
 }
 
@@ -103,19 +113,8 @@ static const CGFloat MaxDetailLabelFont = 40.0;
 }
 
 - (void)updateViewColors {
-    if (@available(iOS 12.0, *)) {
-        _detailTextLabel.textColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : [UIColor blackColor];
-        _titleLabel.textColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : [UIColor blackColor];
-
-    } else {
-        _detailTextLabel.textColor = [UIColor blackColor];
-        _titleLabel.textColor = [UIColor blackColor];
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [self updateViewColors];
+    _detailTextLabel.textColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : [UIColor blackColor];
+    _titleLabel.textColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : [UIColor blackColor];
 }
 
 - (void)setupConstraints {
@@ -124,19 +123,23 @@ static const CGFloat MaxDetailLabelFont = 40.0;
     }
     
     _viewConstraints = [NSMutableArray new];
-    
+
     // titleLabel constraints
-    [_viewConstraints addObject:[_titleLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:HeaderViewLabelTopBottomPadding]];
-    [_viewConstraints addObject:[_titleLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:HeaderViewLeftRightLabelPadding]];
-    [_viewConstraints addObject:[_titleLabel.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-HeaderViewLeftRightLabelPadding]];
-    
+    [_viewConstraints addObjectsFromArray:@[
+        [_titleLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:HeaderViewLabelTopBottomPadding],
+        [_titleLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+        [_titleLabel.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]
+    ]];
+
     UIView *bottomElementToConstraintViewTo;
 
     // detailLabel constraints if detailText was provided
     if (_detailText != nil) {
-        [_viewConstraints addObject:[_detailTextLabel.topAnchor constraintEqualToAnchor:_titleLabel.bottomAnchor constant:HeaderViewLabelTopBottomPadding]];
-        [_viewConstraints addObject:[_detailTextLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:HeaderViewLeftRightLabelPadding]];
-        [_viewConstraints addObject:[_detailTextLabel.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-HeaderViewLeftRightLabelPadding]];
+        [_viewConstraints addObjectsFromArray:@[
+            [_detailTextLabel.topAnchor constraintEqualToAnchor:_titleLabel.bottomAnchor constant:HeaderViewLabelTopBottomPadding],
+            [_detailTextLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+            [_detailTextLabel.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]
+        ]];
         bottomElementToConstraintViewTo = _detailTextLabel;
     } else {
         bottomElementToConstraintViewTo = _titleLabel;

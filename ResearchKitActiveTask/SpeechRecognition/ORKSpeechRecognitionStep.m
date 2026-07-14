@@ -34,6 +34,7 @@
 #import "ORKStep_Private.h"
 
 #import "ORKHelpers_Internal.h"
+#import "ORKStreamingAudioRecorder.h"
 
 
 @implementation ORKSpeechRecognitionStep {
@@ -42,10 +43,21 @@
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier image:(nullable UIImage *)image text:(nullable NSString *)text {
-    self = [super initWithIdentifier:identifier];
+    self = [self initWithIdentifier:identifier];
     _speechRecognitionImage = image;
     _text = text;
     _speechRecognizerLocale = ORKSpeechRecognizerLocaleEnglishUS;
+    return self;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+
+    if (self) {
+        self.allowsBackNavigation = NO;
+        self.shouldShowDefaultTimer = NO;
+    }
+
     return self;
 }
 
@@ -84,10 +96,6 @@
             [self.speechRecognizerLocale isEqual:castObject.speechRecognizerLocale]);
 }
 
-- (BOOL)allowsBackNavigation {
-    return NO;
-}
-
 - (BOOL)startsFinished {
     return NO;
 }
@@ -102,6 +110,29 @@
 
 - (nullable NSString *)speechRecognitionText {
     return _text;
+}
+
+- (ORKPermissionMask)requiredPermissions {
+    return ORKPermissionAudioRecording;
+}
+
+- (void)prepareRecorders {
+    BOOL hasStreamingAudioRecorder = NO;
+    for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
+        if ([config isKindOfClass:[ORKStreamingAudioRecorderConfiguration class]]) {
+            hasStreamingAudioRecorder = YES;
+            break;
+        }
+    }
+
+    if (!hasStreamingAudioRecorder) {
+        ORKStreamingAudioRecorderConfiguration *defaultConfig = [[ORKStreamingAudioRecorderConfiguration alloc]
+                                                                  initWithIdentifier:@"ORKStreamingAudioRecorderConfiguration"
+                                                                  outputDirectory:nil];
+        NSMutableArray *configs = [NSMutableArray arrayWithArray:self.recorderConfigurations ?: @[]];
+        [configs addObject:defaultConfig];
+        self.recorderConfigurations = configs;
+    }
 }
 
 @end

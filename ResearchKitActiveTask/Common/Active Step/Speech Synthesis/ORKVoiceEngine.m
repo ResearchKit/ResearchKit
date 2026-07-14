@@ -60,6 +60,18 @@
     self.speechSynthesizer.delegate = nil;
 }
 
+- (void)prepare {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        return;
+    }
+    // volume=0.01 rather than 0.0: iOS may skip audio session initialization for
+    // completely silent utterances, which would defeat the purpose of this warm-up.
+    AVSpeechUtterance *warmup = [[AVSpeechUtterance alloc] initWithString:@"a"];
+    warmup.volume = 0.01;
+    warmup.rate = AVSpeechUtteranceMaximumSpeechRate;
+    [self.speechSynthesizer speakUtterance:warmup];
+}
+
 - (void)speakText:(NSString *)text {
     if (self.speechSynthesizer.isSpeaking) {
         [self stopTalking];
@@ -77,6 +89,17 @@
     }
     utterance.rate = speechRate;
     
+    [self.speechSynthesizer speakUtterance:utterance];
+}
+
+- (void)speakTimeSensitiveText:(NSString *)text {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, text);
+        return;
+    }
+    [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
+    utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
     [self.speechSynthesizer speakUtterance:utterance];
 }
 

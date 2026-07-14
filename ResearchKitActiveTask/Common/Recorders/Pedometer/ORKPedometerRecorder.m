@@ -145,19 +145,30 @@
 }
 
 - (void)stop {
-    [self doStopRecording];
-    [_logger finishCurrentLog];
-    
-    NSError *error = nil;
-    __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
-    [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
-        [fileUrls addObject:logFileUrl];
+    if (_isRecording) {
+        [self doStopRecording];
+        [_logger finishCurrentLog];
+        
+        NSError *error = nil;
+        __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
+        [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
+            [fileUrls addObject:logFileUrl];
+        }
+                         error:&error];
+        
+        /// If no fileUrls are found, write a file with an empty items array to indicate
+        /// that recording ran but no pedometer data was generated.
+        if (fileUrls.count == 0 && !error) {
+            NSURL *emptyFileURL = [_logger currentLogFileURL];
+            NSData *emptyJSON = [@"{\"items\": []}" dataUsingEncoding:NSUTF8StringEncoding];
+            [[NSFileManager defaultManager] createFileAtPath:emptyFileURL.path contents:emptyJSON attributes:nil];
+            [fileUrls addObject:emptyFileURL];
+        }
+
+        [self reportFileResultsWithFiles:fileUrls error:error];
+        
+        [super stop];
     }
-                     error:&error];
-    
-    [self reportFileResultsWithFiles:fileUrls error:error];
-    
-    [super stop];
 }
 
 - (void)doStopRecording {
@@ -220,8 +231,18 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+}
+
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                         outputDirectory:[self.outputDirectory copy]
+                                                rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 - (BOOL)isEqual:(id)object {

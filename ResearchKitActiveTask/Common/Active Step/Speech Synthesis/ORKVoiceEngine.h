@@ -39,7 +39,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (ORKVoiceEngine *)sharedVoiceEngine;
 
+/// Warms up the underlying audio engine by speaking a silent utterance.
+///
+/// Call this before speech is expected so the first real utterance plays without delay.
+/// Has no effect when VoiceOver is running.
+- (void)prepare;
+
 - (void)speakText:(NSString *)text;
+
+/// Speaks @c text, immediately cancelling any in-progress or queued speech.
+///
+/// Use this for countdown values, where stale audio should be dropped rather than queued.
+/// Handles VoiceOver by posting @c UIAccessibilityAnnouncementNotification, so it is
+/// safe to call regardless of accessibility state.
+/// Contrast with speakText:, which only cancels when speech is already in progress.
+- (void)speakTimeSensitiveText:(NSString *)text;
 
 - (void)speakInt:(NSInteger)number;
 

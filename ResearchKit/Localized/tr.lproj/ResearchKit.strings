@@ -49,25 +49,25 @@
 "CONSENT_SECTION_STUDY_SURVEY" = "Çalışma Anketi";
 "CONSENT_SECTION_STUDY_TASKS" = "Çalışma Görevleri";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Zaman Ayırma";
-"CONSENT_SECTION_WITHDRAWING" = "Ayrılma";
+"CONSENT_SECTION_WITHDRAWING" = "Çalışmadan Çıkma";
 "CONSENT_LEARN_MORE_TITLE" = "Daha Fazla Bilgi";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Verilerin toplanması hakkında daha fazla bilgi";
-"LEARN_MORE_DATA_USE" = "Verilerin kullanılması hakkında daha fazla bilgi";
-"LEARN_MORE_PRIVACY" = "Gizliliğinizin ve kimliğinizin korunması hakkında daha fazla bilgi";
-"LEARN_MORE_WELCOME" = "Çalışma hakkında daha fazla bilgi";
-"LEARN_MORE_STUDY_SURVEY" = "Çalışma anketi hakkında daha fazla bilgi";
-"LEARN_MORE_TIME_COMMITMENT" = "Çalışmanın zamanınıza etkisi hakkında daha fazla bilgi";
-"LEARN_MORE_TASKS" = "İlişkili görevler hakkında daha fazla bilgi";
-"LEARN_MORE_WITHDRAWING" = "Ayrılma hakkında daha fazla bilgi";
+"LEARN_MORE_DATA_GATHERING" = "Verilerin toplanması hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_DATA_USE" = "Verilerin kullanılması hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_PRIVACY" = "Gizliliğinizin ve kimliğinizin korunması hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_WELCOME" = "Çalışma hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_STUDY_SURVEY" = "Çalışma anketi hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_TIME_COMMITMENT" = "Çalışmanın zamanınıza etkisi hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_TASKS" = "İlişkili görevler hakkında daha fazla bilgi edinin.";
+"LEARN_MORE_WITHDRAWING" = "Çalışmadan çıkma hakkında daha fazla bilgi edinin.";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Paylaşma Seçenekleri";
 "CONSENT_SHARE_WIDELY_%@" = "Verilerimi %@ ve dünya çapında nitelikli araştırmacılarla paylaş";
 "CONSENT_SHARE_ONLY_%@" = "Verilerimi yalnızca %@ ile paylaş";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@, bu çalışmaya katılımınızdan elde ettiğiniz çalışma verilerinizi alacak.\n\nKodlanmış çalışma verilerinizi daha geniş bir biçimde (adınız gibi bilgiler olmadan) paylaşmanız, bu araştırma ve gelecekteki araştırmalar için yararlı olabilir.";
-"LEARN_MORE_CONSENT_SHARING" = "Veri paylaşımı hakkında daha fazla bilgi";
+"LEARN_MORE_CONSENT_SHARING" = "Veri paylaşımı hakkında daha fazla bilgi edinin.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Yazılı Ad";
@@ -82,10 +82,10 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Atlandı";
-"REVIEW_EDIT_ANSWER" = "Düzenle";
+"REVIEW_EDIT_ANSWER" = "DÜZENLE";
 
 /* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Geçersiz değer";
+"RANGE_ALERT_TITLE" = "Geçersiz Değer";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@, izin verilen maksimum değeri (%2$@) aşıyor.";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@, izin verilen minimum değerden (%2$@) küçük.";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ geçerli bir değer değil.";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Adres girin";
 "LOCATION_ERROR_TITLE" = "Belirtilen Adres Bulunamadı";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Şu anki konumunuz çözülemedi. Lütfen bir adres girin veya uygunsa daha iyi GPS sinyalı olan bir konuma gidin.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Konum servislerine erişim reddedildi. Lütfen konum servislerini kullanmak için Ayarlar'da bu uygulamaya izin verin.";
 "LOCATION_ERROR_GEOCODE" = "Girilen adres için bir sonuç bulunmadı. Lütfen adresin geçerli olduğundan emin olun.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "İnternete bağlı değilsiniz veya en fazla adres arama isteği miktarını aştınız. İnternete bağlı değilseniz lütfen bu soruya yanıt vermek için Wi-Fi'yi açın, atlama düğmesi varsa bu soruyu atlayın ya da internete bağlı olduğunuzda anket için yeniden sayfayı ziyaret edin. Aksi takdirde, birkaç dakika sonra yeniden deneyin.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "İnternet’e bağlı değilsiniz veya en fazla adres arama isteği miktarını aştınız. İnternet’e bağlı değilseniz lütfen bu soruya yanıt vermek için Wi-Fi’yi açın, atlama düğmesi varsa bu soruyu atlayın ya da İnternet’e bağlı olduğunuzda anket için yeniden sayfayı ziyaret edin. Aksi takdirde, birkaç dakika sonra yeniden deneyin.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Metin içeriği maksimum uzunluğu aşıyor: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Metin sınırı %@ karakter";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Bölünmüş ekranda Kamera kullanılamıyor.";
@@ -111,11 +109,11 @@
 "EMAIL_FORM_ITEM_TITLE" = "E-posta";
 "EMAIL_FORM_ITEM_PLACEHOLDER" = "ad@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Parola";
-"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parola girin";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parolayı girin";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Doğrula";
 "CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parolayı yeniden girin";
 "CONFIRM_PASSWORD_ERROR_MESSAGE" = "Parolalar eşleşmiyor.";
-"ADDITIONAL_INFO_SECTION_TITLE" = "Ek Bilgi";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Ek Bilgiler";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "Ali";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "Utku";
 "GENDER_FORM_ITEM_TITLE" = "Cinsiyet";
@@ -129,14 +127,14 @@
 "VERIFICATION_NAV_TITLE" = "Doğrulama";
 "VERIFICATION_STEP_TITLE" = "E-postanızı doğrulayın";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Doğrulama e-postası almadıysanız ve yeniden gönderilmesini istiyorsanız, lütfen aşağıdaki bağlantıya dokunun.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Doğrulamayı Yeniden E-postala";
+"RESEND_EMAIL_BUTTON_TITLE" = "Doğrulama E-postasını Yeniden Gönder";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Oturum Aç";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Parolayı mı unuttunuz?";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Parolayı Unuttunuz mu?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Parola girin";
+"PASSCODE_PROMPT_MESSAGE" = "Parolayı girin";
 "PASSCODE_CONFIRM_MESSAGE" = "Parolayı doğrulayın";
 "PASSCODE_SAVED_MESSAGE" = "Parola kaydedildi";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Parola doğrulandı";
@@ -176,6 +174,13 @@
 "FITZPATRICK_SKIN_TYPE_V" = "Tip V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Tip VI";
 
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Tip 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Tip 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Tip 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Tip 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Tip 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Tip 6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Kadın";
 "GENDER_MALE" = "Erkek";
@@ -213,23 +218,23 @@
 "BUTTON_DISAGREE" = "Kabul Etmiyorum";
 "BUTTON_DONE" = "Bitti";
 "BUTTON_GET_STARTED" = "Başla";
-"BUTTON_LEARN_MORE" = "Daha fazla bilgi";
+"BUTTON_LEARN_MORE" = "Daha Fazla Bilgi";
 "BUTTON_NEXT" = "İleri";
 "BUTTON_SKIP" = "Atla";
-"BUTTON_SKIP_QUESTION" = "Bu soruyu atla";
+"BUTTON_SKIP_QUESTION" = "Bu Soruyu Atla";
 "BUTTON_START_TIMER" = "Sayacı Başlat";
 "BUTTON_OPTION_SAVE" = "Sonrası İçin Kaydet";
 "BUTTON_OPTION_DISCARD" = "Sonuçları Sil";
 "BUTTON_OPTION_STOP_TASK" = "Görevi Bitir";
 "BUTTON_SAVE" = "Kaydet";
-"BUTTON_CLEAR_ANSWER" = "Yanıtı sil";
-"BUTTON_READ_ONLY_MODE" = "Bu yanıt değiştirilemiyor.";
+"BUTTON_CLEAR_ANSWER" = "Yanıtı Sil";
+"BUTTON_READ_ONLY_MODE" = "Bu Yanıt Değiştirilemiyor.";
 "BUTTON_COPYRIGHT" = "Telif Hakkı";
 "BUTTON_CLOSE" = "Kapat";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivite başlatılıyor";
-"TASK_COMPLETE_TITLE" = "Tamamlandı";
+"TASK_COMPLETE_TITLE" = "Aktivite Tamamlandı";
 "TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunda size haber verilecektir.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ kaldı.";
 "TOUCH_ANYWHERE_LABEL" = "Sürdürmek için herhangi bir yere dokunun";
@@ -238,7 +243,7 @@
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Görüntü Yakala";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Görüntüyü Yeniden Yakala";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera bulunamadı. Bu adım tamamlanamıyor.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "Bu adımı tamamlamak için Ayarlar'da bu uygulamanın kameraya erişimine izin verin.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Bu adımı tamamlamak için Ayarlar’da bu uygulamanın kameraya erişimine izin verin.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Yakalanan görüntülerin kaydedileceği bir dizin belirtilmemiş.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Yakalanan görüntü kaydedilemedi.";
 
@@ -298,7 +303,7 @@
 "AMSLER_GRID_TITLE" = "Amsler Izgarası";
 "AMSLER_GRID_INTRO_TEXT" = "Bu aktivite, kullanıcının görüşündeki sorunları algılamaya yardımcı olur.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Aygıtı test boyunca yüzünüzden 30 cm uzakta ve göz seviyenizde tutun.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@ünüzü kapatın ve kare ızgaranın ortasındaki noktaya bakın.\n\nParmağınızı veya ekran kalemini kullanarak gördüğünüz bozulmaları işaretleyin (örneğin bulanık veya dalgalı çizgiler).\n\nİşiniz bittiğinde, ızgaranın dışında herhangi bir yere doğru sola kaydırın.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@ünüzü kapatın ve kare ızgaranın ortasındaki noktaya bakın.\n\nParmağınızı veya ekran kalemini kullanarak gördüğünüz bozulmaları işaretleyin (örneğin bulanık veya dalgalı çizgiler).\n\nİşiniz bittiğinde İleri düğmesine dokunun.";
 "AMSLER_GRID_LEFT_EYE" = "Sol Göz";
 "AMSLER_GRID_RIGHT_EYE" = "Sağ Göz";
 
@@ -328,13 +333,13 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Bir ses tonu duyduğunuzda dokunun.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Bir ses tonu duyduğunuzda düğmeye dokunun.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ses Tonu ve Ses Yüksekliği";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Bir dizi ses tonu duyacaksınız.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Bir ses tonu duyduğunuzda düğmeye dokunun.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Bu test için ses düzeyi yüzde 50 olarak ayarlanır.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Bu test yaklaşık 10 dakika sürer.";
-"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Kesintilerden kaçınmak için Rahatsız Etme'yi açın.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Kesintilerden kaçınmak için Rhatsız Etme’yi açın.";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Tonlar ilk önce sağ kulağınızda çalacak.";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Tonlar şimdi sol kulağınızda çalacak.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Bu aktivite, bir bireyin duyma eşiği düzeylerini dB HL ölçeğinde belirler.";
@@ -352,13 +357,13 @@
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ Tamamlandı";
 
 /* Spatial span memory active task. */
-"SPATIAL_SPAN_MEMORY_TITLE" = "Konumsal Bellek";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Bu aktivite, %@ görüntülerinin sırasını yinelemenizi isteyerek kısa süreli konumsal belleğinizi ölçer.";
+"SPATIAL_SPAN_MEMORY_TITLE" = "Uzamsal Bellek";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Bu aktivite, %@ görüntülerinin sırasını yinelemenizi isteyerek kısa süreli uzamsal belleğinizi ölçer.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "çiçek";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "çiçek";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Bu %@ görüntülerinin bazıları teker teker yanacaktır. Bu %@ görüntülerine yandıkları sırada dokunun.";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Bu %@ görüntülerinin bazıları teker teker yanacaktır. Bu %@ görüntülerine yandıkları sıranın tersinde dokunun.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Başlamak için Başla'ya dokunun, sonra dikkatlice izleyin.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun, sonra dikkatlice izleyin.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Puan";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Bu %@ görüntülerinin yanmasını izleyin";
@@ -421,10 +426,10 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aygıtınızı, resimde gösterildiği gibi ekran dışa bakacak şekilde sağ dizinize yerleştirin.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Hazır olduğunuzda başlamak için ekrana dokunun ve sol dizinizi uzatabildiğiniz kadar uzatın. Başlangıç noktasına dönün ve bitirdiğinizde yeniden dokunun.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Hazır olduğunuzda başlamak için ekrana dokunun ve sağ dizinizi uzatabildiğiniz kadar uzatın. Başlangıç noktasına dönün ve bitirdiğinizde yeniden dokunun.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aygıtınızı sol dizinize yerleştirin. Ekrana dokunun ve sol dizinizi uzatabildiğiniz kadar uzatın.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aygıtınızı sağ dizinize yerleştirin. Ekrana dokunun ve sağ dizinizi uzatabildiğiniz kadar uzatın.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Bitirdiğinizde sol dizinizi başlangıç noktasına getirin. Sonra herhangi bir yere dokunun.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Bitirdiğinizde sağ dizinizi başlangıç noktasına getirin. Sonra herhangi bir yere dokunun.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aygıtınızı sol dizinize yerleştirin.\n\nEkrana dokunun ve sol dizinizi uzatabildiğiniz kadar uzatın.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aygıtınızı sağ dizinize yerleştirin.\n\nEkrana dokunun ve sağ dizinizi uzatabildiğiniz kadar uzatın.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Bitirdiğinizde sol dizinizi başlangıç noktasına getirin.\n\nSonra herhangi bir yere dokunun.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Bitirdiğinizde sağ dizinizi başlangıç noktasına getirin.\n\nSonra herhangi bir yere dokunun.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Sol Omuz Hareket Alanı";
@@ -447,7 +452,7 @@
 "TIMED_WALK_INTRO_DETAIL" = "Bu aktivite, alt ekstremite fonksiyonlarınızı ölçer.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Düz bir çizgide mümkün olduğunca hızlı ama güvenli bir şekilde %@ yürüyebileceğiniz bir yer (tercihen dışarıda) bulun. Bitirme çizgisini geçene dek yavaşlamayın.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Başlamak için İleri’ye dokunun.";
-"TIMED_WALK_FORM_TITLE" = "Yardımcı aygıt";
+"TIMED_WALK_FORM_TITLE" = "Yardımcı Aygıt";
 "TIMED_WALK_FORM_TEXT" = "Her test için aynı yardımcı aygıtı kullanın.";
 "TIMED_WALK_QUESTION_TEXT" = "Ayak bileği ortezi takıyor musunuz?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Yardımcı aygıt kullanıyor musunuz?";
@@ -567,7 +572,7 @@
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Bu testin bir parçası olarak şunları yapacaksınız:\n\nBir cümle dinleyin.\n\nDuyduğunuzu açıkça tekrar edin ya da bu kısmı atlayıp klavyeyi kullanarak duyduğunuzu yazın. \n\nDuyduğunuzu tekrar ederseniz, konuşma tanıma motoru tarafından oluşturulan dökümü değiştirme seçeneğiniz olacaktır.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Ses Düzeyi Ayarlama";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "“Sesi Çal”a dokunun, ses yüksekliğini sizi rahatsız etmeyecek bir düzeye ayarlayın ve ardından “Sesi Durdur”a dokunarak ilerleyin.";
-"SPEECH_IN_NOISE_STEP_TITLE" = "Dinle";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Dinleyin";
 "SPEECH_IN_NOISE_STEP_TEXT" = "Rasgele Sinyal - Gürültü Oranı’nda (SNR) arka plan gürültüsü ile karışık bir cümle yalnızca bir sefer oynatılacaktır.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Seslendir";
 "SPEECH_IN_NOISE_SPEAK_TEXT" = "Duyduğunuzu tekrar edin.";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "SPL Metre";
 "ENVIRONMENTSPL_INTRO_TEXT" = "Bu aktivite, ortam ses baskısı düzeyini ölçer. Gürültü düzeyleri çok yüksekse, ilerleyemezsiniz. Lütfen bu görevi tamamlamak için daha sessiz bir konuma geçin ya da bu aktiviteyi daha sonra tekrar yapın.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Hesaplanıyor";
+"ENVIRONMENTSPL_CALCULATING" = "Ölçülüyor…";
 "ENVIRONMENTSPL_THRESHOLD" = "Eşik: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Arka Plan Gürültüsü İyi";
-"ENVIRONMENTSPL_NOISE" = "Arka Plan Gürültüsü Çok Fazla";
-"ENVIRONMENTSPL_TITLE_2" = "Sessiz bir yer bulun";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "Doğruluğu sağlamak için bu test sessiz bir ortamda yapılmalıdır.";
+"ENVIRONMENTSPL_OK" = "İyi";
+"ENVIRONMENTSPL_NOISE" = "Çok Yüksek";
+"ENVIRONMENTSPL_TITLE_2" = "Sessiz Bir Yer Bulun";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Doğru sonuç almak için bu görevin sessiz bir yerde tamamlanması gerekir. Arka plan gürültüsü ölçümü alındıktan sonra sürdürebilirsiniz.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Görevi Başlat";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Ses Çubuğu Grafiği";
 
 "AX_AMSLER_GRID_LABEL" = "Amsler Izgarası";
-"AX_AMSLER_GRID_HINT" = "Doğrudan ızgarayı işaretlemek için parmağınızı veya ekran kalemini kullanın ya da bitirmek için ızgaranın dışına doğru sola kaydırın.";
+"AX_AMSLER_GRID_HINT" = "Doğrudan ızgarayı işaretlemek için parmağınızı veya ekran kalemini kullanın ya da bitirmek için İleri düğmesine dokunun.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Dokunulabilir Düğmeler";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Sol Kulak İçin Dokun";
@@ -672,18 +677,118 @@
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Sağ Kulak İçin Dokun";
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Teste başlamak için etkinleştirin. Test başladıktan sonra sağ kulağınızda bir ses duyduğunuzda doğrudan bu düğmeye basın.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Düğmelerin nerede olduğunu öğrenmek için ekranı dokunarak VoiceOver ile keşfedin. Test başladığında düğmeler doğrudan dokunulabilir olur. %@";
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ VoiceOver kullanıyor, ekrana dokunup keşfederek her bir kulak için düğmelerin nerede olduğunu öğrenin. Test başladığında düğmeler doğrudan dokunulabilir olur. %@";
 "AX_TAP_BUTTON_1_LABEL" = "Bir Parmak İçin Dokun";
 "AX_TAP_BUTTON_2_LABEL" = "Diğer Parmak İçin Dokun";
 "AX_TAP_BUTTON_HINT" = "Düğmeleri doğrudan dokunulabilir yapmak için etkinleştirin.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Düğmelerin nerede olduğunu öğrenmek için ekranı dokunarak VoiceOver ile keşfedin. Düğmeleri doğrudan dokunulabilir yapmak için düğmelerden birini etkinleştirin.";
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ VoiceOver kullanıyor, ekrana dokunup keşfederek düğmelerin nerede olduğunu öğrenin. Düğmeleri doğrudan dokunulabilir yapmak için düğmelerden birini etkinleştirin.";
 "AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Düğmeler artık doğrudan dokunulabilir.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ VoiceOver ile düğme doğrudan dokunulabilir olur ve ekranın merkezine yakın bir noktada konumlanır.";
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ VoiceOver kullanıyor, düğme doğrudan dokunulabilir olur ve ekranın merkezine yakın bir noktada konumlanır.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
-"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ VoiceOver ile test edilen düğmeler doğrudan dokunulabilir olur.";
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ VoiceOver kullanıyor, testin içerdiği düğmeler doğrudan dokunulabilir olur.";
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "restoreData kodu başlangıç için çözülemiyor";
+"6MWT_HIGH_SCORE" = "10: Çok Fazla";
+"6MWT_INSTRUCTIONS_1" = "En az 30 metre uzunluğunda düz bir yürüme yolu bulun.";
+"6MWT_INSTRUCTIONS_2" = "Yürüme yolu boyunca gerektiğinde durup oturabileceğinizden emin olun.";
+"6MWT_INSTRUCTIONS_3" = "Telefonunuzun ses yüksekliğini en az %50’ye kadar artırın.";
+"6MWT_INSTRUCTIONS_4" = "Apple Watch’unuzda Siri’ye sorarak veya Antrenman uygulamasını başlatarak ve ardından Yürüyüş (Dış) veya Yürüyüş (İç) seçeneğine dokunarak Yürüyüş (Dış) veya Yürüyüş (İç) antrenmanı başlatın.";
+"6MWT_INSTRUCTIONS_TITLE" = "Başlangıç";
+"6MWT_INTRO" = "Bu testin amacı, 6 dakika boyunca rahat bir tempoda olabildiğince uzağa yürümektir.";
+"6MWT_INTRO_DETAILS" = "Ayrıntılar";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Rahat giysiler ve uygun ayakkabılar giyin. Normalde bir yürüyüş yardımcısı kullanıyorsanız bu testi tamamlarken de kullanabilirsiniz.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Dışarıda yürüyemiyorsanız bu testi bölgenizdeki bir alışveriş merkezinde tamamlamayı değerlendirin.";
+"6MWT_INTRO_DETAIL_TIME" = "Bu testin tamamlanması yaklaşık 6 dakika sürer.";
+"6MWT_INTRO_DETAIL_WATCH" = "Bu testi tamamlamak için Apple Watch’unuza ihtiyacınız olacak.";
+"6MWT_LOW_SCORE" = "1: Pek Değil";
+"6MWT_QUESTIONS_BREATH" = "Nefes Darlığı";
+"6MWT_QUESTIONS_DETAIL" = "Tebrikler, 6 Dakika Yürüme Testi’ni tamamladınız! Lütfen aşağıdaki boyutlarda nasıl hissettiğinizi puanlayın.";
+"6MWT_QUESTIONS_FATIGUE" = "Yorgunluk";
+"6MWT_QUESTIONS_TITLE" = "Aferin";
+"6MWT_TASK_TITLE" = "6 Dakika Yürüme Testi";
+"6MWT_TEST_IN_PROGRESS" = "Test Sürüyor";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "6 dakika boyunca düz yürüyüş yolunda olabildiğince uzağa yürüyün. Nefesinizi toparlamanız gerekirse durup oturun.";
+"AX_BUTTON" = "Düğme";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Düzenle düğmesi";
+"AX_PAGE_NUMBER_FORMAT" = "Sayfa %1$ld / %2$ld";
+"AX_SES_BOTTOM" = "Alt";
+"AX_SES_PERCENT" = "Yüzde";
+"AX_SES_TOP" = "Üst";
+"BUTTON_PRACTICE_AGAIN" = "Yeniden Uygulayın";
+"BUTTON_PRACTICE_TEST" = "Uygulama Testi";
+"BUTTON_START_TEST" = "Testi Başlat";
+"CONSENT_NAME_SECTION_TITLE" = "Ad";
+"FAMILY_HISTORY_ADD" = "Ekle: %@";
+"FAMILY_HISTORY_CANCEL" = "Vazgeç";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Görev Tamamlandı";
+"FAMILY_HISTORY_CONDITIONS" = "Rahatsızlıklar";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Aşağıdaki hastalıklardan veya rahatsızlıklardan tanısı koyulmuş olan var mı?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Bu soruları elinizden geldiğince yanıtlamaya çalışın";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Tanısı koyulmuş hastalıkları veya rahatsızlıkları doğrulayın.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Rahatsızlıklar";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Girişi Sil";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Bu girişi Aile Sağlığı Geçmişi’nizden silmek istediğinizden emin misiniz?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Girişi Düzenle";
+"FAMILY_HISTORY_I_DONT_KNOW" = "Bilmiyorum";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Yukarıdakilerin hiçbiri";
+"FAMILY_HISTORY_NONE_SELECTED" = "Hiçbiri seçilmedi";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "Yanıtlamamayı tercih ederim";
+"FITNESS_RESUME_TEST" = "Aktiviteyi Sürdür";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Bu aktiviteyi erken bitirmek istediğinizden emin misiniz?";
+"FITNESS_STOP_TEST_DETAIL" = "İlerlemeniz kaydedilir ve bu test tamamlandı olarak işaretlenir.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Sil ve Yeniden Dene";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Video Seçenekleri";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Videoyu Gözden Geçir";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Kaydı Başlat";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Kaydı Durdur";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Videoyu Gönder";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Hem sağ hem de sol eliniz test edilecektir.\nDaireyi mümkün olduğu kadar hızlı bir şekilde almalı, onu deliğe koymalı ve bunu %@ kez yaptıktan sonra yeniden %@ kez kaldırmalısınız.";
+"MAX_WORD_COUNT_ERROR" = "Maksimum karakter sayısına ulaştınız";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID Hatası";
+"PASSCODE_FACE_ID_MESSAGE" = "Lütfen Face ID ile kimlik doğrulayın";
+"PLAY" = "Çal";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tutma düğmesine, sonra da mavi daireye dokunun";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "tut";
+"RECORD" = "Kayıt Yap";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Çalışma sağlık verilerine erişim istiyor.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Sağlık Verileri";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "Çalışma, aygıtlarınızdaki konum verilerine erişim istiyor.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Konum Verisi";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Çalışma, aygıtlarınızdaki hareket verilerine erişim istiyor.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Aygıt Hareketi";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Çalışma size bildirim göndermek istiyor.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Bildirimler";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Gözden Geçirildi";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Gözden Geçir";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Hata";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Desteklenmiyor";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "Çalışma, aygıtlarınızdaki sensör verilerine erişim istiyor.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensör Verisi";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Onun Yerine Klavye Kullanın";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Kaydedilemedi. Yeniden denemek için dokunun.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Kaydınızda konuşma algılanmadı. Yeniden denemek için dokunun.";
+"STOP" = "Durdur";
+"STROOP_COLOR_ORANGE" = "TURUNCU";
+"TC_COMPLETION_DETAIL" = "Tebrikler, Tecumseh Küp Testi’ni tamamladınız!";
+"TC_COMPLETION_TITLE" = "Aferin";
+"TC_INSTRUCTIONS_1" = "Yerden yaklaşık 20 cm yükseklikte bir basamak bulun.";
+"TC_INSTRUCTIONS_2" = "iPhone’unuzun ses yüksekliğini en az %50’ye kadar artırın.";
+"TC_INSTRUCTIONS_3" = "Apple Watch’unuzda Siri’ye sorarak veya Antrenman uygulamasını başlatarak, Antrenman Ekle’ye dokunup ardından Merdiven’i seçerek bir Merdiven antrenmanı başlatın.";
+"TC_INSTRUCTIONS_TITLE" = "Başlangıç";
+"TC_INTRO" = "Bu testin amacı bir ritimle 3 dakika boyunca yukarı ve aşağı adım atarken kalp atış hızınızı yükseltmektir.";
+"TC_INTRO_DETAILS" = "Ayrıntılar";
+"TC_INTRO_DETAIL_DANGER" = "Göğüs ağrınız veya rahatsızlığınız olursa bu testi hemen durdurun.";
+"TC_INTRO_DETAIL_TIME" = "Bu testin tamamlanması yaklaşık 6 dakika sürer.";
+"TC_INTRO_DETAIL_WATCH" = "Bu testi tamamlamak için Apple Watch’unuza ihtiyacınız olacak.";
+"TC_REST_IN_PROGRESS" = "Dinlenin";
+"TC_REST_IN_PROGRESS_DETAIL" = "Apple Watch’unuz dinlenme sırasındaki kalp atış hızınızı kaydederken 3 dakikalığına oturup dinlenin.";
+"TC_TASK_TITLE" = "Tecumseh Küp Testi";
+"TC_TEST_IN_PROGRESS" = "Test Sürüyor";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Merdiveni kullanarak ritimle yerinizde yukarı ve aşağı adım atın";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST SÜRÜYOR";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST SÜRÜYOR \U2022 %@";

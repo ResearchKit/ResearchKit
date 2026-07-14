@@ -49,6 +49,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.indicatorType = ORKProgressIndicatorTypeIndeterminate;
+        self.allowsBackNavigation = NO;
     }
     return self;
 }
@@ -68,10 +69,6 @@
 
 + (BOOL)supportsSecureCoding {
     return YES;
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

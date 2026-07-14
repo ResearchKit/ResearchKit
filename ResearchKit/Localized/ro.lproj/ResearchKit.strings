@@ -33,8 +33,8 @@
 "CONSENT_NAME_GIVEN" = "Prenume";
 "CONSENT_NAME_FAMILY" = "Nume de familie";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatoriu";
-"CONSENT_REVIEW_TITLE" = "Revizuire";
-"CONSENT_REVIEW_INSTRUCTION" = "Revizuiți formularul de mai jos și apăsați pe “De acord” dacă sunteți gata să continuați.";
+"CONSENT_REVIEW_TITLE" = "Revizuiți";
+"CONSENT_REVIEW_INSTRUCTION" = "Revizuiți formularul de mai jos și apăsați pe „De acord” dacă sunteți gata să continuați.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Revizuiți";
 "CONSENT_SIGNATURE_TITLE" = "Semnătura";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Semnați folosind degetul în caseta de mai jos.";
@@ -53,21 +53,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "Aflați mai multe";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Aflați mai multe despre colectarea datelor";
-"LEARN_MORE_DATA_USE" = "Aflați mai multe despre utilizarea datelor";
+"LEARN_MORE_DATA_GATHERING" = "Aflați mai multe despre colectarea datelor.";
+"LEARN_MORE_DATA_USE" = "Aflați mai multe despre utilizarea datelor.";
 "LEARN_MORE_PRIVACY" = "Aflați mai multe despre protejarea intimității și identității dvs.";
-"LEARN_MORE_WELCOME" = "Mai întâi, aflați mai multe despre studiu";
-"LEARN_MORE_STUDY_SURVEY" = "Aflați mai multe despre chestionarul studiului";
+"LEARN_MORE_WELCOME" = "Mai întâi, aflați mai multe despre studiu.";
+"LEARN_MORE_STUDY_SURVEY" = "Aflați mai multe despre chestionarul studiului.";
 "LEARN_MORE_TIME_COMMITMENT" = "Aflați mai multe despre impactul studiului asupra timpului dvs.";
-"LEARN_MORE_TASKS" = "Aflați mai multe despre sarcinile implicate";
-"LEARN_MORE_WITHDRAWING" = "Aflați mai multe despre retragere";
+"LEARN_MORE_TASKS" = "Aflați mai multe despre sarcinile implicate.";
+"LEARN_MORE_WITHDRAWING" = "Aflați mai multe despre retragere.";
 
 /* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Opțiuni de partajare";
+"CONSENT_SHARING_TITLE" = "Opțiuni partajare";
 "CONSENT_SHARE_WIDELY_%@" = "Partajați datele dvs. cu %@ și cercetători calificați din întreaga lume";
 "CONSENT_SHARE_ONLY_%@" = "Partajați datele dvs. doar cu %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ va primi datele referitoare la participarea dvs. la acest studiu.\n\nPartajarea mai extinsă a datelor codificate privind studiul (fără informații precum numele dvs.) poate contribui la această cercetare și la cele viitoare.";
-"LEARN_MORE_CONSENT_SHARING" = "Mai multe despre partajarea datelor";
+"LEARN_MORE_CONSENT_SHARING" = "Aflați mai multe despre partajarea datelor.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Nume tipărit";
@@ -82,12 +82,12 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Omis";
-"REVIEW_EDIT_ANSWER" = "Editați";
+"REVIEW_EDIT_ANSWER" = "EDITAȚI";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valoare nevalidă";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea “%1$@” depășește maximul permis (%2$@).";
-"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Valoarea “%1$@” este mai mică decât minimul permis (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea „%1$@” depășește maximul permis (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Valoarea „%1$@” este mai mică decât minimul permis (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ nu este o valoare validă.";
 
 /* Alert for invalid email address value */
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Introduceți o adresă";
 "LOCATION_ERROR_TITLE" = "Adresa specificată nu a putut fi găsită";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Imposibil de rezolvat localizarea dvs. actuală. Introduceți o adresă sau mergeți într-un loc cu semnal GPS mai bun dacă este cazul.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Accesul la serviciile de localizare a fost refuzat. Acordați acestei aplicații permisiunea de a utiliza serviciile de localizare din Configurări.";
 "LOCATION_ERROR_GEOCODE" = "Imposibil de găsit un rezultat pentru adresa introdusă. Asigurați-vă că adresa este validă.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Nu dispuneți de o conexiune la internet sau ați depășit numărul maxim al solicitărilor de identificare a adreselor. Dacă nu dispuneți de conexiune la internet, activați Wi-Fi pentru a răspunde la această întrebare, omiteți întrebarea dacă butonul de omitere este disponibil sau reveniți la chestionar după ce vă conectați la internet. În caz contrar, reîncercați peste câteva minute.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nu dispuneți de o conexiune la Internet sau ați depășit numărul maxim al solicitărilor de identificare a adreselor. Dacă nu dispuneți de conexiune la Internet, activați Wi-Fi pentru a răspunde la această întrebare, omiteți întrebarea dacă butonul de omitere este disponibil sau reveniți la chestionar după ce vă conectați la Internet. În caz contrar, reîncercați peste câteva minute.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conținutul de text depășește lungimea maximă: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textul este limitat la %@ caractere";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera nu este disponibilă în ecranul divizat.";
@@ -122,7 +120,7 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Alegeți o opțiune";
 "DOB_FORM_ITEM_TITLE" = "Data nașterii";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Alegeți o dată";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefon";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Număr de telefon";
 "PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
@@ -132,7 +130,7 @@
 "RESEND_EMAIL_BUTTON_TITLE" = "Retrimiteți e‑mailul de verificare";
 
 /* Login step */
-"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Efectuați login";
 "FORGOT_PASSWORD_BUTTON_TITLE" = "Ați uitat parola?";
 
 /* Passcode step */
@@ -175,6 +173,13 @@
 "FITZPATRICK_SKIN_TYPE_IV" = "Tip IV";
 "FITZPATRICK_SKIN_TYPE_V" = "Tip V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Tip VI";
+
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Tipul 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Tipul 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Tipul 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Tipul 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Tipul 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Tipul 6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "Feminin";
@@ -254,7 +259,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Așezați-vă confortabil timp de %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Mergeți cât de repede puteți timp de %@.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Această activitate vă monitorizează ritmul cardiac și măsoară cât de mult puteți merge în %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Mergeți în aer liber, în cel mai rapid ritm posibil, timp de %1$@. Când sunteți gata, așezați‑vă și stați confortabil timp de %2$@. Pentru a începe, apăsați pe “Start”.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Mergeți în aer liber, în cel mai rapid ritm posibil, timp de %1$@. După ce ați terminat, așezați‑vă și stați confortabil timp de %2$@. Pentru a începe, apăsați pe „Start”.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Mers și echilibru";
@@ -263,12 +268,12 @@
 "WALK_INTRO_2_DETAIL" = "Puneți dispozitivul într-un buzunar sau într-o geantă și urmați instrucțiunile audio.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Acum nu vă mișcați timp de %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Nu vă mișcați timp de %@.";
-"WALK_RETURN_INSTRUCTION_FORMAT" = "Întorceți-vă și mergeți înapoi la locul de pornire.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Întoarceți‑vă și mergeți înapoi la locul de pornire.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Mergeți până la %ld pași în linie dreaptă.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Găsiți un loc unde puteți să mergeți în siguranță înainte și înapoi în linie dreaptă. Încercați să mergeți continuu întorcându-vă la capătul traseului ca și cum ați merge în jurul unui con.\n\nÎn continuare, vi se va solicita să vă întoarceți descriind un cerc complet, apoi să stați cu brațele pe lângă corp și cu picioarele depărtate la lățimea umerilor, fără să vă mișcați.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Apăsați “Start” când sunteți gata să începeți.\nApoi puneți dispozitivul într-un buzunar sau într-o geantă și urmați instrucțiunile audio.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Găsiți un loc unde puteți să mergeți în siguranță înainte și înapoi în linie dreaptă. Încercați să mergeți continuu întorcându-vă la capătul traseului ca și cum ați merge în jurul unui con.\n\nÎn continuare veți fi instruit să vă întoarceți descriind un cerc complet, apoi să stați nemișcat cu brațele pe lângă corp și cu picioarele depărtate la lățimea umerilor.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Apăsați pe „Start” când sunteți gata să începeți.\nApoi puneți dispozitivul într-un buzunar sau într-o geantă și urmați instrucțiunile audio.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Mergeți înainte și înapoi în linie dreaptă timp de %@. Mergeți așa cum o ați face‑o în mod normal.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Întoarceți‑vă descriind un cerc complet, apoi stați în repaus timp de %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ați finalizat activitatea.";
@@ -285,8 +290,8 @@
 "TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Acum, repetați același test folosind mâna dreaptă.";
 "TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Acum, repetați același test folosind mâna stângă.";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "Apăsați cu un deget, apoi cu celălalt. Încercați ca apăsările să se succeadă cât de regulat cu putință. Continuați să apăsați timp de %@.";
-"TAPPING_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
-"TAPPING_CALL_TO_ACTION_NEXT" = "Apăsați “Înainte” pentru a începe.";
+"TAPPING_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Apăsați pe „Înainte” pentru a începe.";
 "TAP_BUTTON_TITLE" = "Apăsați";
 "TOTAL_TAPS_LABEL" = "Total apăsări";
 "TAPPING_INSTRUCTION" = "Apăsați butoanele cât de consecvent puteți folosind două degete.";
@@ -297,28 +302,28 @@
 /* Amsler Grid Task.*/
 "AMSLER_GRID_TITLE" = "Grilă Amsler";
 "AMSLER_GRID_INTRO_TEXT" = "Această activitate contribuie la detectarea problemelor de vedere ale utilizatorului.";
-"AMSLER_GRID_INSTRUCTION_TEXT" = "Țineți dispozitivul la o distanță de 30 cm de față și la nivelul ochilor pe toată durata testului.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Închideți %@ și uitați-vă la punctul din centrul grilei de pătrate.\n\nFolosind degetul sau un stilou, marcați orice distorsiune vedeți, cum ar fi linii estompate sau ondulate.\n\nCând ați terminat, glisați spre stânga oriunde în exteriorul grilei.";
-"AMSLER_GRID_LEFT_EYE" = "ochiul stâng";
-"AMSLER_GRID_RIGHT_EYE" = "ochiul drept";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Țineți dispozitivul la o distanță de 12 inch (aproximativ 30 de cm) de față și la nivelul ochilor pe toată durata testului.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Închideți %@ și fixați cu privirea punctul din centrul grilei de pătrate.\n\nFolosind degetul sau un stilou, marcați orice distorsiune vedeți, cum ar fi linii estompate sau ondulate.\n\nCând ați terminat, apăsați pe butonul „Înainte”.";
+"AMSLER_GRID_LEFT_EYE" = "Ochi stâng";
+"AMSLER_GRID_RIGHT_EYE" = "Ochi drept";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voce";
-"AUDIO_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
-"AUDIO_INSTRUCTION" = "Spuneți “Aaaaah” în microfon cât de mult timp puteți.";
-"AUDIO_INTRO_TEXT" = "Inspirați adânc și spuneți “Aaaaah” în microfon cât de mult timp puteți. Mențineți un volum vocal constant, astfel încât barele audio să rămână albastre.";
+"AUDIO_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
+"AUDIO_INSTRUCTION" = "Spuneți „Aaaaah” în microfon cât de mult timp puteți.";
+"AUDIO_INTRO_TEXT" = "Inspirați adânc și spuneți „Aaaaah” în microfon cât de mult timp puteți. Mențineți un volum vocal constant, astfel încât barele audio să rămână albastre.";
 "AUDIO_INTENDED_USE" = "Această activitate vă evaluează vocea prin înregistrarea acesteia cu microfonul din partea de jos a dispozitivului.";
 "AUDIO_TOO_LOUD_LABEL" = "Prea tare";
 "AUDIO_GENERIC_ERROR_LABEL" = "Imposibil de înregistrat audio";
 "AUDIO_LEVEL_CHECK_LABEL" = "Așteptați să se verifice nivelul zgomotului de fundal.";
 "AUDIO_TOO_LOUD_MESSAGE" = "Nivelul zgomotului ambiental este prea puternic pentru a vă înregistra vocea. Mutați‑vă într‑un loc mai liniștit și reîncercați.";
-"AUDIO_TOO_LOUD_ACTION_NEXT" = "Apăsați “Înainte” când sunteți gata.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Apăsați pe „Înainte” când sunteți gata.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometrie tonală";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Această activitate vă măsoară capacitatea de a auzi diferite sunete.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Înainte de a începe, conectați căștile și puneți-le la urechi.\n\nSunetul va fi foarte subtil și diferit de un ton de alertă obișnuit.  La început, sunetul va fi slab, apoi va crește lent în volum.  Fiți atent și apăsați butonul din stânga sau din dreapta pentru a indica urechea în care auziți sunetul.";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Ar trebui să auziți acum un ton. Ajustați volumul folosind comenzile de pe lateralul dispozitivului.\n\nApăsați orice buton când sunteți gata de a începe.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "De fiecare dată când auziți un sunet, apăsați butonul din stânga sau din dreapta pentru a indica urechea în care auziți sunetul.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Urechea stângă";
@@ -328,15 +333,15 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometrie tonală";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Apăsați când auziți un ton.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Apăsați pe buton atunci când auziți un ton.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ton și volum";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Veți auzi o serie de tonuri.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Când auziți un ton, apăsați pe buton.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Pentru acest test, volumul va fi fixat la 50 la sută.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Acest test durează aproximatv 10 minute.";
-"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Activați opțiunea “Nu deranjați” pentru a evita întreruperile.";
-"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Vor fi redate mai întâi tonuri în urechea dvs. dreaptă.";
-"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Acum vor fi redate tonuri în urechea dvs. stângă.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Activați opțiunea „Nu deranjați” pentru a evita întreruperile.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Vor fi redate tonuri în urechea dvs. dreaptă.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Vor fi redate tonuri în urechea dvs. stângă.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Această activitate identifică nivelul pragului auditiv al unei persoane în scala HL dB.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Asigurați-vă că volumul dispozitivului este la nivel maxim.\n\nPe durata sarcinii va fi redat un ton subtil în urechea stângă sau dreaptă.\n\nAscultați cu atenție și apăsați butonul de fiecare dată când auziți un ton.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Acest test determină cât de puternic trebuie să fie un sunet pentru a‑l putea auzi.";
@@ -358,28 +363,28 @@
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flori";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea în care s‑au aprins.";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea inversă aprinderii lor.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Pentru a începe, apăsați “Start”, apoi priviți cu atenție.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Pentru a începe, apăsați pe „Start”, apoi priviți cu atenție.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Scor";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Priviți cum se aprind simbolurile de %@";
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Apăsați pe %@ în ordinea în care s‑au aprins";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Apăsați pe %@ în ordine inversă";
 "MEMORY_GAME_COMPLETE_TITLE" = "Secvență finalizată";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "Pentru a continua, apăsați “Înainte”";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Pentru a continua, apăsați pe „Înainte”";
 "MEMORY_GAME_FAILED_TITLE" = "Reîncercați";
-"MEMORY_GAME_FAILED_MESSAGE" = "Nu ați reușit să vă încadrați în timpul alocat. Apăsați “Înainte” pentru a continua.";
+"MEMORY_GAME_FAILED_MESSAGE" = "Nu ați reușit să vă încadrați în timpul alocat. Apăsați pe „Înainte” pentru a continua.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Timpul a expirat";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "Ați epuizat timpul.\nApăsați “Înainte” pentru a continua.";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Ați epuizat timpul.\nApăsați pe „Înainte” pentru a continua.";
 "MEMORY_GAME_COMPLETE" = "Joc finalizat";
 "MEMORY_GAME_PAUSED_TITLE" = "Suspendat";
-"MEMORY_GAME_PAUSED_MESSAGE" = "Pentru a continua, apăsați “Înainte”";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Pentru a continua, apăsați pe „Înainte”";
 "MEMORY_GAME_COPYRIGHT_TEXT" = "Activitatea pentru memorie a fost dezvoltată cu ajutorul dr. Katherine Possin și al dr. Joel Kramer de la Universitatea din California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Timp de reacție";
 "REACTION_TIME_TASK_INTENDED_USE" = "Această activitate evaluează timpul de care aveți nevoie pentru a răspunde la un stimul vizual.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agitați dispozitivul în orice direcție imediat ce apare cercul albastru pe ecran. Va trebui să repetați acțiunea de %D ori.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Încercarea %@ din %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agitați rapid dispozitivul atunci când apare cercul albastru";
 
@@ -399,9 +404,9 @@
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Turnul din Hanoi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Această activitate evaluează aptitudinile dvs. de rezolvare a puzzle‑urilor";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Această activitate evaluează aptitudinile dvs. de rezolvare a puzzle‑urilor.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mutați toată stiva pe platforma evidențiată din cât mai puține mișcări posibil.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Rezolvați puzzle‑ul";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Număr de mișcări: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nu pot rezolva acest puzzle";
@@ -419,12 +424,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Așezați-vă pe marginea unui scaun. Când începeți, puneți-vă dispozitivul pe genunchiul drept pentru măsurătoare. Activați sunetul pe dispozitivul dvs. pentru a auzi instrucțiunile.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Așezați dispozitivul pe genunchiul stâng cu ecranul în sus, ca în imagine.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Așezați dispozitivul pe genunchiul drept cu ecranul în sus, ca în imagine.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Când sunteți gata, apăsați ecranul pentru a începe și întindeți genunchiul stâng cât de mult puteți. Reveniți la poziția inițială și apăsați din nou când ați terminat.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Când sunteți gata, apăsați ecranul pentru a începe și întindeți genunchiul drept cât de mult puteți. Reveniți la poziția inițială și apăsați din nou când ați terminat.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Așezați dispozitivul pe genunchiul stâng. Apăsați ecranul și întindeți genunchiul stâng cât de mult puteți.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Așezați dispozitivul pe genunchiul drept. Apăsați ecranul și întindeți genunchiul drept cât de mult puteți.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Când sunteți gata, readuceți genunchiul stâng în poziția inițială, apoi apăsați oriunde.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Când sunteți gata, readuceți genunchiul drept în poziția inițială, apoi apăsați oriunde.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Când sunteți gata să începeți, apăsați ecranul pentru a începe și întindeți genunchiul stâng cât de mult puteți. Reveniți la poziția inițială și apăsați din nou când ați terminat.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Când sunteți gata să începeți, apăsați ecranul pentru a începe și întindeți genunchiul drept cât de mult puteți. Reveniți la poziția inițială și apăsați din nou când ați terminat.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Așezați dispozitivul pe genunchiul stâng.\n\nApăsați ecranul și întindeți genunchiul stâng cât de mult puteți.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Așezați dispozitivul pe genunchiul drept.\n\nApăsați ecranul și întindeți genunchiul drept cât de mult puteți.\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "După ce ați terminat, readuceți genunchiul stâng în poziția inițială.\n\nApăsați apoi oriunde.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "După ce ați terminat, readuceți genunchiul drept în poziția inițială.\n\nApăsați apoi oriunde.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Amplitudinea mișcării umărului stâng";
@@ -439,14 +444,14 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Când sunteți gata, apăsați ecranul pentru a începe și ridicați brațul drept cât de mult puteți. Reveniți la poziția inițială și apăsați din nou când ați terminat.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Așezați dispozitivul pe umărul stâng. Apăsați ecranul și ridicați brațul stâng în față cât de mult puteți.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Așezați dispozitivul pe umărul drept. Apăsați ecranul și ridicați brațul drept în față cât de mult puteți.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Când sunteți gata, readuceți brațul stâng în poziția inițială, apoi apăsați oriunde.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Când sunteți gata, readuceți brațul drept în poziția inițială, apoi apăsați oriunde.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "După ce ați terminat, readuceți brațul stâng în poziția inițială, apoi apăsați oriunde.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "După ce ați terminat, readuceți brațul drept în poziția inițială, apoi apăsați oriunde.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Mers cronometrat";
 "TIMED_WALK_INTRO_DETAIL" = "Această activitate măsoară funcționarea extremităților dvs. inferioare.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Găsiți un loc, preferabil afară, unde să puteți merge aproximativ %@ în linie dreaptă cât de repede posibil, dar în siguranță. Nu încetiniți decât după ce treceți linia de sosire.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Apăsați “Înainte” pentru a începe.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Apăsați pe „Înainte” pentru a începe.";
 "TIMED_WALK_FORM_TITLE" = "Dispozitiv asistiv";
 "TIMED_WALK_FORM_TEXT" = "Utilizați același dispozitiv asistiv pentru fiecare test.";
 "TIMED_WALK_QUESTION_TEXT" = "Purtați o orteză de gleznă?";
@@ -461,7 +466,7 @@
 "TIMED_WALK_INSTRUCTION_%@" = "Mergeți până la %@ în linie dreaptă.";
 "TIMED_WALK_INSTRUCTION_TURN" = "Întoarceți-vă.";
 "TIMED_WALK_INSTRUCTION_2" = "Mergeți înapoi la locul de pornire.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Apăsați “Înainte” când terminați.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Apăsați pe „Înainte” când terminați.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -471,7 +476,7 @@
 "PVSAT_INTRO_TEXT" = "Testul PAVSAT (testul vizual pe etape de adunare în serie) măsoară aptitudinile dvs. de calcul și viteza de procesare a informațiilor vizuale.";
 "PAVSAT_INTRO_TEXT" = "Testul PAVSAT (testul auditiv și vizual pe etape de adunare în serie) măsoară aptitudinile dvs. de calcul și viteza de procesare a informațiilor auditive și vizuale.";
 "PSAT_INTRO_TEXT_2_%@" = "Cifrele apar la fiecare %@.\nTrebuie să adunați fiecare cifră nouă cu cea imediat precedentă.\nAtenție, nu trebuie să calculați suma totală, ci doar suma ultimelor două cifre.";
-"PSAT_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"PSAT_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "PSAT_INITIAL_INSTRUCTION" = "Rețineți această primă cifră.";
 "PSAT_INSTRUCTION" = "Adăugați această nouă cifră la cea anterioară.";
 "PSAT_NO_DIGIT" = "-";
@@ -482,7 +487,7 @@
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Va fi testată atât mâna stângă, cât și mâna dreaptă.\nTrebuie să ridicați cercul cât mai rapid posibil, să-l plasați în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți din nou de %@ ori.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Va fi testată atât mâna dreaptă, cât și mâna stângă.\nTrebuie să ridicați cercul cât mai rapid posibil, să-l plasați în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți din nou de %@ ori.";
 
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Puneți cercul în orificiu folosind mâna stângă.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Puneți cercul în orificiu folosind mâna dreaptă.";
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Puneți cercul după linie folosind mâna stângă.";
@@ -493,16 +498,16 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Activitate referitoare la tremor";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Această activitate vă măsoară tremorul mâinilor în diverse poziții. Găsiți un loc unde să puteți sta confortabil pe durata activității.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Țineți telefonul în mâna mai afectată, ca în imaginea de mai jos.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Țineți telefonul în mâna DREAPTĂ, ca în imaginea de mai jos.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Țineți telefonul în mâna STÂNGĂ, ca în imaginea de mai jos.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Țineți telefonul în mâna mai afectată, ca în imaginea de mai sus.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Țineți telefonul în mâna DREAPTĂ, ca în imaginea de mai sus.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Țineți telefonul în mâna STÂNGĂ, ca în imaginea de mai sus.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Vi se va solicita să efectuați %@ stând cu telefonul în mână.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "o sarcină";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "două sarcini";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "trei sarcini";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "patru sarcini";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "cinci sarcini";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Apăsați “Înainte” pentru a continua.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Apăsați pe „Înainte” pentru a continua.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Pregătiți‑vă să țineți telefonul pe genunchi.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Pregătiți‑vă să țineți telefonul pe genunchi cu mâna STÂNGĂ.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Pregătiți‑vă să țineți telefonul pe genunchi cu mâna DREAPTĂ.";
@@ -535,10 +540,10 @@
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "Test de trasare a liniilor";
 "TRAILMAKING_INTENDED_USE" = "Această activitate vă evaluează atenția vizuală și comutarea între sarcini prin înregistrarea timpului necesar pentru a apăsa o serie de puncte în ordine.";
-"TRAILMAKING_INTENDED_USE2_A" = "După numărătoarea inversă, apăsați punctele în ordine alternativă între numere și litere. Începeți prin apăsarea primului număr, ‘1’, apoi continuați cu numerele '2' – '3' – '4'… până când ajungeți la numărul ’7’.";
-"TRAILMAKING_INTENDED_USE2_B" = "După numărătoarea inversă, apăsați punctele în ordine alternativă între numere și litere. Începeți prin apăsarea primului număr, ‘1’, apoi apăsați prima literă, 'A' și continuați cu '2' – 'B' – '3' – 'C'… până când ajungeți la numărul ’7’.";
-"TRAILMAKING_INTRO_TEXT" = "Faceți acest lucru cât de rapid puteți fără să faceți greșeli. \n ";
-"TRAILMAKING_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TRAILMAKING_INTENDED_USE2_A" = "După numărătoarea inversă, apăsați punctele în ordine alternativă între numere și litere. Începeți prin apăsarea primului număr, „1”, apoi continuați cu numerele „2” – „3” – „4”… până când ajungeți la numărul „7”.";
+"TRAILMAKING_INTENDED_USE2_B" = "După numărătoarea inversă, apăsați punctele în ordine alternativă între numere și litere. Începeți prin apăsarea primului număr, „1”, apoi apăsați prima literă, „A” și continuați cu „2” – „B” – „3” – „C”… până când ajungeți la numărul „7”.";
+"TRAILMAKING_INTRO_TEXT" = "Faceți acest lucru cât mai rapid puteți fără să faceți greșeli. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -549,7 +554,7 @@
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "Recunoaștere vocală";
 "SPEECH_RECOGNITION_INTRO_TEXT" = "Această activitate vă înregistrează vocea folosind microfonul din partea de jos a dispozitivului și o transformă în text.";
-"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Apăsați pe „Start” pentru a începe.";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "Apăsați butonul pentru a începe înregistrarea înainte de a vorbi.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Porniți înregistrarea";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Opriți înregistrarea";
@@ -560,13 +565,13 @@
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Recunoașterea vocală nu a putut fi inițializată.";
 
 /* Speech In Noise active task. */
-"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Redare audio";
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Redați audio";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Oprire audio";
 "SPEECH_IN_NOISE_TITLE" = "Enunțare în zgomot";
 "SPEECH_IN_NOISE_INTRO_TEXT" = "Această activitate măsoară inteligibilitatea vorbirii atunci când are loc în medii cu zgomot.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "În cadrul acestui test, veți:\n\nAsculta o propoziție.\n\nRepeta în mod clar ce ați auzit sau veți face un salt înainte pentru a tasta ce ați auzit folosind tastatura.\n\nDacă repetați ce ați auzit, veți avea opțiunea de a modifica transcrierea generată de motorul de recunoaștere vocală.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Calibrare volum";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Apăsați “Redare audio”, ajustați volumul la un nivel confortabil și apoi apăsați “Oprire audio” pentru a continua.";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Apăsați pe „Redare audio”, ajustați volumul la un nivel confortabil și apoi apăsați pe „Oprire audio” pentru a continua.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Ascultați";
 "SPEECH_IN_NOISE_STEP_TEXT" = "Va fi redată o singură dată o propoziție combinată cu zgomot de fundal la un raport semnal/zgomot (SNR) randomizat.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Vorbiți";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "Contor nivel de presiune sonoră";
 "ENVIRONMENTSPL_INTRO_TEXT" = "Această activitate măsoară nivelul presiunii sonore din mediu. Dacă nivelul zgomotului este prea mare, nu veți putea continua. Mergeți într-un loc mai liniștit pentru a termina această sarcină sau reluați ulterior această activitate.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Calculare";
+"ENVIRONMENTSPL_CALCULATING" = "Măsurare…";
 "ENVIRONMENTSPL_THRESHOLD" = "Prag: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Zgomot de fundal OK";
-"ENVIRONMENTSPL_NOISE" = "Zgomot de fundal excesiv";
+"ENVIRONMENTSPL_OK" = "Bună";
+"ENVIRONMENTSPL_NOISE" = "Prea tare";
 "ENVIRONMENTSPL_TITLE_2" = "Găsiți un loc liniștit";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "Pentru asigurarea preciziei, acest test trebuie efectuat într‑un loc liniștit.";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Pentru rezultate precise, această sarcină ar trebui să fie realizată într‑un loc liniștit. După ce măsurătoarea zgomotului de fundal este finalizată, puteți continua.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Începeți sarcina";
@@ -603,7 +608,7 @@
 "SLIDER_I_DONT_KNOW" = "Nu știu";
 
 /* Review Step */
-"REVIEW_STEP_PAGE" = "Pagina";
+"REVIEW_STEP_PAGE" = "Pagină";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Înapoi";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Grafic bară audio";
 
 "AX_AMSLER_GRID_LABEL" = "Grilă Amsler";
-"AX_AMSLER_GRID_HINT" = "Utilizați degetul sau un stilou pentru a marca grila direct sau glisați spre stânga în exteriorul grilei pentru a termina.";
+"AX_AMSLER_GRID_HINT" = "Utilizați degetul sau un stylus pentru a marca grila direct sau apăsați pe butonul „Înainte” pentru a termina.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Butoane pe care puteți apăsa";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Apăsați pentru urechea stângă";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "Datele restoreData nu pot fi decodate pentru inițializare";
+"6MWT_HIGH_SCORE" = "10: Foarte mult";
+"6MWT_INSTRUCTIONS_1" = "Găsiți o rută de mers dreaptă, cu o lungime de cel puțin 30 de metri.";
+"6MWT_INSTRUCTIONS_2" = "Asigurați-vă că pe ruta de mers vă puteți opri și așeza dacă este necesar.";
+"6MWT_INSTRUCTIONS_3" = "Măriți volumul telefonului la cel puțin 50%.";
+"6MWT_INSTRUCTIONS_4" = "Începeți un exercițiu Mers afară (sau Mers în sală) pe Apple Watch solicitând acest lucru către Siri sau lansând aplicația Exerciții, apoi apăsând pe Mers afară (sau Mers în sală).";
+"6MWT_INSTRUCTIONS_TITLE" = "Primii pași";
+"6MWT_INTRO" = "Scopul acestui test este să mergeți cât mai departe într-un ritm confortabil timp de 6 minute.";
+"6MWT_INTRO_DETAILS" = "Detalii";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Purtați îmbrăcăminte confortabilă și încălțăminte care vi se potrivește bine. Dacă utilizați de obicei un dispozitiv pentru asistență la mers, îl puteți utiliza și pentru efectuarea acestui test.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Dacă nu aveți posibilitatea să mergeți afară, puteți realiza acest test într-un centru comercial local.";
+"6MWT_INTRO_DETAIL_TIME" = "Finalizarea acestui test va dura aproximativ 6 minute.";
+"6MWT_INTRO_DETAIL_WATCH" = "Pentru a finaliza acest test, aveți nevoie de Apple Watch.";
+"6MWT_LOW_SCORE" = "1: Deloc";
+"6MWT_QUESTIONS_BREATH" = "Dificultăți de respirație";
+"6MWT_QUESTIONS_DETAIL" = "Felicitări pentru finalizarea testului de mers de 6 minute! Evaluați cum vă simțiți din următoarele puncte de vedere.";
+"6MWT_QUESTIONS_FATIGUE" = "Oboseală";
+"6MWT_QUESTIONS_TITLE" = "Bună treabă!";
+"6MWT_TASK_TITLE" = "Test de mers de 6 minute";
+"6MWT_TEST_IN_PROGRESS" = "Test în desfășurare";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Mergeți cât mai departe pe ruta de mers timp de 6 minute. Dacă trebuie să vă trageți sufletul, opriți-vă și luați loc.";
+"AX_BUTTON" = "Buton";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Buton de editare";
+"AX_PAGE_NUMBER_FORMAT" = "Pagina %1$ld din %2$ld";
+"AX_SES_BOTTOM" = "Jos";
+"AX_SES_PERCENT" = "Procent";
+"AX_SES_TOP" = "Sus";
+"BUTTON_PRACTICE_AGAIN" = "Exersați din nou";
+"BUTTON_PRACTICE_TEST" = "Test de exersare";
+"BUTTON_START_TEST" = "Începeți testul";
+"CONSENT_NAME_SECTION_TITLE" = "Nume";
+"FAMILY_HISTORY_ADD" = "Adăugați %@";
+"FAMILY_HISTORY_CANCEL" = "Anulați";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Sarcină finalizată";
+"FAMILY_HISTORY_CONDITIONS" = "Afecțiuni";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Ați avut membri ai familiei diagnosticați cu oricare dintre următoarele boli sau afecțiuni medicale?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Răspundeți la aceste întrebări cât de bine puteți";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Confirmați orice boli sau afecțiuni medicale diagnosticate.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Afecțiuni de sănătate";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Ștergeți intrarea";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Sigur doriți să ștergeți această intrare din istoricul medical al familiei dvs.?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Editați intrarea";
+"FAMILY_HISTORY_I_DONT_KNOW" = "Nu știu";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Niciuna dintre cele de mai sus";
+"FAMILY_HISTORY_NONE_SELECTED" = "Nicio selecție";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "Prefer să nu răspund";
+"FITNESS_RESUME_TEST" = "Reluați activitatea";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Sigur doriți să încheiați această activitate mai devreme?";
+"FITNESS_STOP_TEST_DETAIL" = "Progresul dvs. va fi salvat și testul va fi marcat drept finalizat.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Ștergeți și reîncercați";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Opțiuni video";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Revedeți clipul";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Porniți înregistrarea";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Opriți înregistrarea";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Trimiteți clipul";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Va fi testată atât mâna dreaptă, cât și mâna stângă.\nTrebuie să ridicați cercul cât mai rapid posibil, să-l plasați în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți din nou de %@ ori.";
+"MAX_WORD_COUNT_ERROR" = "Ați atins numărul maxim de caractere";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Eroare Face ID";
+"PASSCODE_FACE_ID_MESSAGE" = "Autentificați‑vă cu Face ID";
+"PLAY" = "Redați";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Apăsați pe butonul de menținere, iar apoi pe cercul albastru";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "menținere";
+"RECORD" = "Înregistrați";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Studiul solicită acces la datele dvs. din aplicația Sănătate.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Date Sănătate";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "Studiul solicită acces la datele de localizare de pe dispozitivele dvs.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Datele de localizare";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Studiul solicită acces la datele de mișcare de pe dispozitivele dvs.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Mișcare dispozitiv";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Studiul solicită permisiunea de a vă trimite notificări.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notificări";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Revizuită";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Revizuiți";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Eroare";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Nu este acceptat";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "Studiul solicită acces la datele senzorilor de pe dispozitivele dvs.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Date senzor";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Utilizați în schimb tastatura";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Înregistrarea nu a reușit. Apăsați pentru a reîncerca.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Vocea nu a fost detectată în înregistrare. Apăsați pentru a reîncerca.";
+"STOP" = "Opriți";
+"STROOP_COLOR_ORANGE" = "PORTOCALIU";
+"TC_COMPLETION_DETAIL" = "Felicitări pentru finalizarea testului Tecumseh Cube!";
+"TC_COMPLETION_TITLE" = "Bună treabă!";
+"TC_INSTRUCTIONS_1" = "Găsiți o scară cu o elevație de aproximativ 20 cm față de pământ.";
+"TC_INSTRUCTIONS_2" = "Măriți volumul iPhone‑ului la cel puțin 50%.";
+"TC_INSTRUCTIONS_3" = "Începeți un exercițiu Scări pe Apple Watch solicitând acest lucru către Siri sau lansând aplicația Exerciții, apăsând pe Adăugați un exercițiu, apoi selectând Scări.";
+"TC_INSTRUCTIONS_TITLE" = "Primii pași";
+"TC_INTRO" = "Scopul acestui test este să creșteți ritmul cardiac în timp ce urcați și coborâți timp de 3 minute urmând ritmul.";
+"TC_INTRO_DETAILS" = "Detalii";
+"TC_INTRO_DETAIL_DANGER" = "Dacă resimțiți durere în piept sau disconfort, opriți imediat acest test.";
+"TC_INTRO_DETAIL_TIME" = "Finalizarea acestui test va dura aproximativ 6 minute.";
+"TC_INTRO_DETAIL_WATCH" = "Pentru a finaliza acest test, aveți nevoie de Apple Watch.";
+"TC_REST_IN_PROGRESS" = "Odihniți-vă";
+"TC_REST_IN_PROGRESS_DETAIL" = "Stați jos și relaxați‑vă timp de 3 minute cât timp Apple Watch‑ul vă înregistrează ritmul cardiac de repaus.";
+"TC_TASK_TITLE" = "Testul Tecumseh Cube";
+"TC_TEST_IN_PROGRESS" = "Test în desfășurare";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Utilizând scările, urcați și coborâți urmărind ritmul";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST ÎN DESFĂȘURARE";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST ÎN DESFĂȘURARE \U2022 %@";

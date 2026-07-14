@@ -191,7 +191,9 @@ static NSString *const FilledBulletString = @"\u25CF";
     _suffixLabel.font = self.font;
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
     _suffixLabel.userInteractionEnabled = NO;
-    _suffixLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    _suffixLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    _suffixLabel.adjustsFontSizeToFitWidth = YES;
+    _suffixLabel.minimumScaleFactor = 0.5;
     _suffixLabel.frame = previousSuffixFrame;
 
     // re-layout to position the suffix
@@ -315,48 +317,40 @@ static NSString *const FilledBulletString = @"\u25CF";
             ((!isEditing && self.text.length == 0) || (isEditing && self.text.length == 0 && _unit.length == 0));
 }
 
+- (NSString *)textToMeasure {
+    return [self isPlaceholderVisible] ? self.placeholder : self.text;
+}
+
+- (CGSize)sizeOfText:(NSString *)textToMeasure {
+    return [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
+}
+
+- (BOOL)isClearButtonVisible {
+    return (self.clearButtonMode != UITextFieldViewModeNever && self.text.length > 0);
+}
+
+- (CGFloat)clearButtonWidthForBounds:(CGRect)bounds {
+    CGRect clearButtonRect = [self clearButtonRectForBounds:bounds];
+    return CGRectGetWidth(clearButtonRect);
+}
+
+- (CGFloat)availableWidthForSuffixInBounds:(CGRect)bounds {
+    CGSize textSize = [self sizeOfText:self.textToMeasure];
+    CGFloat clearButtonWidth = [self isClearButtonVisible] ? [self clearButtonWidthForBounds:bounds] : 0;
+    return (bounds.size.width - paddingGuess.left - paddingGuess.right - clearButtonWidth) - textSize.width;
+}
+
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {
     CGFloat suffixWidth = [_suffixLabel.text sizeWithAttributes:@{NSFontAttributeName: _suffixLabel.font}].width;
-    suffixWidth = MIN(suffixWidth, bounds.size.width / 2);
-    return suffixWidth;
+    CGFloat availableWidth = [self availableWidthForSuffixInBounds:bounds];
+    return MIN(suffixWidth, MAX(availableWidth, bounds.size.width * 0.3)); // Use at least 30% of bounds width;
 }
 
 static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 
-- (CGRect)textRectForBounds:(CGRect)bounds {
-    CGRect textRect = [super textRectForBounds:bounds];
-    
-    // Leave room for the suffix label
-    if (_suffixLabel.text.length) {
-        CGFloat suffixWidth = [self suffixWidthForBounds:bounds];
-        if (suffixWidth > 0) {
-            suffixWidth += paddingGuess.right;
-        }
-        textRect.size.width = MAX(0, textRect.size.width - suffixWidth);
-    }
-    return textRect;
-}
-
-
-- (CGRect)editingRectForBounds:(CGRect)bounds {
-    CGRect rect = [super editingRectForBounds:bounds];
-    
-    // Leave room for the suffix label
-    if (_suffixLabel.text.length) {
-        CGFloat suffixWidth = [self suffixWidthForBounds:bounds];
-        if (suffixWidth > 0) {
-            suffixWidth += paddingGuess.right;
-        }
-        rect.size.width = MAX(0, rect.size.width - suffixWidth);
-    }
-    
-    return rect;
-}
-
 - (CGRect)ork_suffixFrame {
     // Get the text currently 'in' the edit field
-    NSString *textToMeasure = [self isPlaceholderVisible] ? self.placeholder : self.text;
-    CGSize sizeOfText = [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
+    CGSize textSize = [self sizeOfText:self.textToMeasure];
     
     // Get the maximum size of the actual editable area (taking into account prefix/suffix/views/clear button
     CGRect textFrame = [self textRectForBounds:self.bounds];
@@ -367,18 +361,18 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
     
     // Take padding into account
     CGFloat xMaximum = CGRectGetMaxX(textFrame);
-    if (sizeOfText.width < (textFrame.size.width - (paddingGuess.left + paddingGuess.right))) {
+    if (textSize.width < (textFrame.size.width - (paddingGuess.left + paddingGuess.right))) {
         // Adjust the rectangle to include the padding
         textFrame.origin.x += paddingGuess.left;
         textFrame.size.width -= paddingGuess.left + paddingGuess.right;
     } else {
         // Cover the fringe case where the padding is not applied, but the field editor has not scrolled, so the prefix/suffix could
         // overlap the text slightly.
-        sizeOfText.width += paddingGuess.left + paddingGuess.right;
+        textSize.width += paddingGuess.left + paddingGuess.right;
     }
     
     // Calculate position for alignment
-    CGFloat xOffset = CGRectGetMinX(textFrame) + sizeOfText.width;
+    CGFloat xOffset = CGRectGetMinX(textFrame) + textSize.width;
     
     // Make sure it can't escape out the right of the view
     suffixFrame.origin.x = MIN(xOffset, xMaximum);
@@ -408,13 +402,8 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 - (NSString *)accessibilityValue {
     if (self.text.length > 0) {
         return ORKAccessibilityStringForVariables([super accessibilityValue], _unitWithNumber);
-    
     }
-    else if ( _managedPlaceholder ) {
-        return ORKAccessibilityStringForVariables(_managedPlaceholder, _unitWithNumber);
-    }
-
-    return [super accessibilityValue];
+    return nil;
 }
 
 - (BOOL)accessibilityActivate
@@ -507,6 +496,12 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 
 - (BOOL)hideUnitWhenAnswerEmpty {
     return _textField.hideUnitWhenAnswerEmpty;
+}
+
+#pragma mark - Accessibility
+
+- (NSString *)accessibilityValue {
+    return _textField.accessibilityValue;
 }
 
 @end

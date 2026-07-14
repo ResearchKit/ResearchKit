@@ -62,7 +62,12 @@ typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
     /**
      tag label
      */
-    ORKBodyItemStyleTag
+    ORKBodyItemStyleTag,
+
+    /**
+     header style body item — bold text with primary label color, suitable for section headers
+     */
+    ORKBodyItemStyleHeader
 } ORK_ENUM_AVAILABLE;
 
 @class ORKLearnMoreItem;
@@ -75,12 +80,65 @@ typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
 ORK_CLASS_AVAILABLE
 @interface ORKBodyItem : NSObject <NSSecureCoding, NSCopying>
 
-- (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle;
+/// Returns an initialized body item with the specified content.
+///
+/// - Parameters:
+///   - text: Primary text to display.
+///   - detailText: Secondary text to display below the primary text.
+///   - image: An image to display alongside the text.
+///   - learnMoreItem: A learn more item to attach additional information.
+///   - bodyItemStyle: The visual style of the body item.
+///
+/// - Returns: An initialized ``ORKBodyItem``.
+- (instancetype)initWithText:(nullable NSString *)text
+                  detailText:(nullable NSString *)detailText
+                       image:(nullable UIImage *)image
+               learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem
+               bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle;
 
-- (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle;
+/// Returns an initialized body item with the specified content and card style option.
+///
+/// - Parameters:
+///   - text: Primary text to display.
+///   - detailText: Secondary text to display below the primary text.
+///   - image: An image to display alongside the text.
+///   - learnMoreItem: A learn more item to attach additional information.
+///   - bodyItemStyle: The visual style of the body item.
+///   - useCardStyle: Whether this item is rendered inside a card-styled container.
+///
+/// - Returns: An initialized ``ORKBodyItem``.
+- (instancetype)initWithText:(nullable NSString *)text
+                  detailText:(nullable NSString *)detailText
+                       image:(nullable UIImage *)image
+               learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem
+               bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle
+                useCardStyle:(BOOL)useCardStyle;
 
-- (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle alignImageToTop:(BOOL)alignImageToTop;
+/// Returns an initialized body item with the specified content, card style option, and image alignment.
+///
+/// - Parameters:
+///   - text: Primary text to display.
+///   - detailText: Secondary text to display below the primary text.
+///   - image: An image to display alongside the text.
+///   - learnMoreItem: A learn more item to attach additional information.
+///   - bodyItemStyle: The visual style of the body item.
+///   - useCardStyle: Whether this item is rendered inside a card-styled container.
+///   - alignImageToTop: Whether the image aligns to the top of the row instead of centering.
+///
+/// - Returns: An initialized ``ORKBodyItem``.
+- (instancetype)initWithText:(nullable NSString *)text
+                  detailText:(nullable NSString *)detailText
+                       image:(nullable UIImage *)image
+               learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem
+               bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle
+                useCardStyle:(BOOL)useCardStyle
+             alignImageToTop:(BOOL)alignImageToTop;
 
+/// Returns a body item that renders as a full-width horizontal rule.
+///
+/// Use this initializer to insert visual dividers between groups of body items.
+///
+/// - Returns: An initialized ``ORKBodyItem`` with ``ORKBodyItemStyleHorizontalRule`` style.
 - (instancetype)initWithHorizontalRule;
 
 @property (nonatomic, nullable) NSString *text;
@@ -90,6 +148,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, nullable) UIImage *image;
 
 @property (nonatomic, nullable) ORKLearnMoreItem *learnMoreItem;
+
+@property (nonatomic, nullable) NSString *accessibilityIdentifier;
 
 @property (nonatomic) ORKBodyItemStyle bodyItemStyle;
 

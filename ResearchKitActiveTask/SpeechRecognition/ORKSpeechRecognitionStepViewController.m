@@ -99,11 +99,14 @@
 
 - (void)setupContentView {
     ORKSpeechRecognitionStep *step = (ORKSpeechRecognitionStep *) self.step;
-    
-    _speechRecognitionContentView = [ORKSpeechRecognitionContentView new];
+
+    BOOL hideUseKeyboardButton = ![self isNextStepForTextEntry];
+    _speechRecognitionContentView = [[ORKSpeechRecognitionContentView alloc] initWithFrame:CGRectZero
+                                                                     hideUseKeyboardButton:hideUseKeyboardButton];
     _speechRecognitionContentView.shouldHideTranscript = step.shouldHideTranscript;
-    self.activeStepView.customContentFillsAvailableSpace = YES;
+    self.activeStepView.customContentFillsAvailableSpace = NO;
     self.activeStepView.activeCustomView = _speechRecognitionContentView;
+    [self.activeStepView setNavigationFooterViewHidden:YES];
     _speechRecognitionContentView.speechRecognitionImage = step.speechRecognitionImage;
     _speechRecognitionContentView.speechRecognitionText = step.speechRecognitionText;
     _speechRecognitionContentView.delegate = self;
@@ -133,9 +136,12 @@
             [ORKSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus authorizationStatus)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self handleSpeechRecognizerAuthorizationStatus:authorizationStatus == SFSpeechRecognizerAuthorizationStatusAuthorized ?
-                    SFSpeechRecognizerAuthorizationStatusAuthorized:
-                     SFSpeechRecognizerAuthorizationStatusDenied];
+                    if (authorizationStatus == SFSpeechRecognizerAuthorizationStatusAuthorized) {
+                        [self handleSpeechRecognizerAuthorizationStatus:authorizationStatus];
+                    } else {
+                        [self setAllowUserToRecordInsteadOnNextStep:NO];
+                        [self goForward];
+                    }
                 });
             }];
             break;
@@ -313,12 +319,16 @@
 
 - (void)setupNextStepForAllowingUserToRecordInstead:(BOOL)allowUserToRecordInsteadOnNextStep
 {
-    if ([[self nextStep] isKindOfClass:[ORKQuestionStep class]] && [[[self nextStep] answerFormat] isKindOfClass:[ORKTextAnswerFormat class]]) {
+    if ([self isNextStepForTextEntry]) {
         
         NSString *substitutedTextAnswer = [self substitutedStringWithString:[_localResult.transcription formattedString]];
         
         [((ORKTextAnswerFormat *)self.nextStep.answerFormat) setDefaultTextAnswer:substitutedTextAnswer];
     }
+}
+
+- (BOOL)isNextStepForTextEntry {
+    return [[self nextStep] isKindOfClass:[ORKQuestionStep class]] && [[[self nextStep] answerFormat] isKindOfClass:[ORKTextAnswerFormat class]];
 }
 
 - (nullable NSString *)substitutedStringWithString:(nullable NSString *)string
@@ -391,7 +401,9 @@
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     [super recorder:recorder didFailWithError:error];
-    [self stopWithError:error];
+    if (recorder == _audioRecorder) {
+        [self stopWithError:error];
+    }
 }
 
 // Methods running on a different thread
@@ -452,11 +464,7 @@
     
     dispatch_sync(_speechRecognitionQueue, ^{
         _localResult.transcription = recognitionResult.bestTranscription;
-#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
-        if (@available(iOS 14.5, *)) {
-            _localResult.recognitionMetadata = recognitionResult.speechRecognitionMetadata;
-        }
-#endif
+        _localResult.recognitionMetadata = recognitionResult.speechRecognitionMetadata;
     });
 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -482,7 +490,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
         [self stopWithError:[NSError errorWithDomain:ORKErrorDomain
                                                 code:ORKSpeechRecognitionErrorLanguageNotAvailable
-                                            userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"Speech recognizer not available", nil)}]];
+                                            userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"SPEECH_RECOGNITION_NOT_AVAILABLE", nil)}]];
         });
     }
 }

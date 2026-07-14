@@ -55,10 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)hasContinueOrSkip;
 - (BOOL)wasContinueOrSkipButtonJustPressed;
-- (void)removeStyling;
-
-- (CGFloat)effectViewOpacity;
-- (void)setStylingOpactity:(CGFloat)opacity animated:(BOOL)animated;
 
 - (void)showActivityIndicator:(BOOL)showActivityIndicator;
 - (void)flattenIfNeeded;

@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ORKHelpers_Internal.h>
+
 #import "ORKCustomStepViewController.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKCustomStep.h"
@@ -64,18 +66,69 @@ NSString * const ORKCustomStepViewAccessibilityIdentifier = @"ORKCustomStepView"
 - (void)stepDidChange {
     [_containerView removeFromSuperview];
     _containerView = nil;
-    
+
     if (self.step && [self isViewLoaded]) {
         _containerView = [[ORKStepContainerView alloc] init];
         _containerView.accessibilityIdentifier = ORKCustomStepViewAccessibilityIdentifier;
         [self configureContainerView];
+
+        _containerView.scrollContentLayoutMargins = NSDirectionalEdgeInsetsZero;
         [_containerView setPinNavigationContainer:self.customStep.pinNavigationContainer];
-        [_containerView setCustomContentView:[self customStep].contentView withTopPadding:0.0 sidePadding:0.0];
+        [_containerView setCustomContentView:[self customStep].contentView withPadding:[self contentPadding] shouldAddFooterPadding:[self shouldAddFooterPadding]];
         [_containerView setUseExtendedPadding:self.step.useExtendedPadding];
-        _containerView.navigationFooterView.hidden = self.customStep.hideNavigationContainer;
+        [_containerView setNavigationFooterViewHidden:self.customStep.hideNavigationContainer];
+        [_containerView.navigationFooterView.footnoteLabel setText:self.step.footnote];
         [self.view addSubview:_containerView];
         [self setupConstraints];
     }
+}
+
+- (NSDirectionalEdgeInsets)contentPadding {
+    NSDirectionalEdgeInsets padding;
+    if (ORKLiquidGlassSupportEnabled()) {
+        if (NSDirectionalEdgeInsetsEqualToDirectionalEdgeInsets(self.contentViewPadding, NSDirectionalEdgeInsetsZero)) {
+            padding = NSDirectionalEdgeInsetsMake(self.contentViewTopPadding, 0, 0, 0);
+        } else {
+            padding = self.contentViewPadding;
+        }
+    } else {
+        if (NSDirectionalEdgeInsetsEqualToDirectionalEdgeInsets(self.contentViewPadding, NSDirectionalEdgeInsetsZero)) {
+            padding = NSDirectionalEdgeInsetsMake(
+                                                  self.contentViewTopPadding,
+                                                  ORKStepContainerLeftRightPaddingForWindow(self.view.window),
+                                                  0,
+                                                  ORKStepContainerLeftRightPaddingForWindow(self.view.window));
+        } else {
+            if (self.contentViewPadding.leading > 0 || self.contentViewPadding.trailing > 0) {
+                padding = self.contentViewPadding;
+            } else {
+                padding = NSDirectionalEdgeInsetsMake(
+                                                      self.contentViewPadding.top,
+                                                      ORKStepContainerLeftRightPaddingForWindow(self.view.window),
+                                                      0,
+                                                      ORKStepContainerLeftRightPaddingForWindow(self.view.window));
+            }
+        }
+    }
+    return padding;
+}
+
+- (BOOL)shouldAddFooterPadding {
+    BOOL shouldAddFooterPadding;
+    if (NSDirectionalEdgeInsetsEqualToDirectionalEdgeInsets(self.contentViewPadding, NSDirectionalEdgeInsetsZero)) {
+        if (ORKLiquidGlassSupportEnabled()) {
+            shouldAddFooterPadding = YES;
+        } else {
+            shouldAddFooterPadding = NO;
+        }
+    } else {
+        if (self.contentViewPadding.leading > 0 || self.contentViewPadding.trailing > 0) {
+            shouldAddFooterPadding = NO;
+        } else {
+            shouldAddFooterPadding = YES;
+        }
+    }
+    return shouldAddFooterPadding;
 }
 
 - (void)setupConstraints {
@@ -89,36 +142,15 @@ NSString * const ORKCustomStepViewAccessibilityIdentifier = @"ORKCustomStepView"
     _constraints = nil;
     [self customStep].contentView.translatesAutoresizingMaskIntoConstraints = NO;
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    UILayoutGuide *targetView = viewForiPad.safeAreaLayoutGuide ? : self.view.safeAreaLayoutGuide;
+    NSLayoutYAxisAnchor *topAnchor = viewForiPad.topAnchor ?: self.view.topAnchor;
     
     _constraints = [[NSMutableArray alloc] initWithArray:@[
-        [NSLayoutConstraint constraintWithItem:_containerView
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
-                                     attribute:NSLayoutAttributeTop
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_containerView
-                                     attribute:NSLayoutAttributeLeading
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
-                                     attribute:NSLayoutAttributeLeading
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_containerView
-                                     attribute:NSLayoutAttributeTrailing
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
-                                     attribute:NSLayoutAttributeTrailing
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_containerView
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
-                                     attribute:NSLayoutAttributeBottom
-                                    multiplier:1.0
-                                      constant:0.0]
+        [_containerView.topAnchor constraintEqualToAnchor:topAnchor],
+        [_containerView.leadingAnchor constraintEqualToAnchor:targetView.leadingAnchor],
+        [_containerView.trailingAnchor constraintEqualToAnchor:targetView.trailingAnchor],
+        [_containerView.bottomAnchor constraintEqualToAnchor:targetView.bottomAnchor]
     ]];
     
     [NSLayoutConstraint activateConstraints:_constraints];
@@ -154,6 +186,14 @@ NSString * const ORKCustomStepViewAccessibilityIdentifier = @"ORKCustomStepView"
         [_containerView setTitleIconImage:self.step.iconImage];
     }
 
+}
+
+- (CGFloat)contentViewTopPadding {
+    return 0.0;
+}
+
+- (NSDirectionalEdgeInsets)contentViewPadding {
+    return NSDirectionalEdgeInsetsZero;
 }
 
 - (void)setStepHeaderTextAlignment:(NSTextAlignment)stepHeaderTextAlignment {

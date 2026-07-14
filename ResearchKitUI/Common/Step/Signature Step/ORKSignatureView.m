@@ -133,6 +133,8 @@ static const CGFloat LineWidthStepValue = 0.25f;
     CGFloat maxPressure;
     // Time used only to calculate speed when force isn't available on the device.
     NSTimeInterval previousTouchTime;
+    // Tracks whether the touch moved beyond the minimum distance threshold during a stroke.
+    BOOL _hasMovedBeyondThreshold;
 }
 
 @property (nonatomic, strong) UIBezierPath *currentPath;
@@ -333,7 +335,9 @@ static const CGFloat LineWidthStepValue = 0.25f;
 
 - (void)gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
-    
+
+    _hasMovedBeyondThreshold = NO;
+
     self.currentPath = [self pathWithRoundedStyle];
     
     // Trigger full redraw - whether there's a path has changed
@@ -379,7 +383,9 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     if (distanceSquared < PointMinDistanceSquared) {
         return;
     }
-    
+
+    _hasMovedBeyondThreshold = YES;
+
     // Will be assigned a real value on all devices.
     CGFloat pressure;
     if ([self isForceTouchAvailable] || [self isTouchTypeStylus:touch]) {
@@ -454,7 +460,9 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self commitCurrentPath];
+    if (_hasMovedBeyondThreshold) {
+        [self commitCurrentPath];
+    }
 }
 
 - (void)gestureTouchesHaveEndedWithTimeInterval {

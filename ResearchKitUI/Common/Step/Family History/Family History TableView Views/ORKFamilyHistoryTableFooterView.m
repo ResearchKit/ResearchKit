@@ -29,6 +29,10 @@
  */
 
 #import "ORKFamilyHistoryTableFooterView.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+#import <ResearchKit/ResearchKit-Swift.h>
 
 static const CGFloat CellLeftRightPadding = 12.0;
 static const CGFloat CellTopCollapsedPadding = 10.0;
@@ -37,9 +41,7 @@ static const CGFloat CellBottomCollapsedPadding = 30.0;
 static const CGFloat CellTopExpandedPadding = 0.0;
 static const CGFloat CellBottomExpandedPadding = 20.0;
 
-static const CGFloat ViewButtonLeadingPadding = 5.0;
-static const CGFloat ViewButtonTopBottomPadding = 12.0;
-static const CGFloat ViewLeftRightPadding = 16.0;
+static const CGFloat ViewButtonTopBottomPadding = 16.0;
 
 @implementation ORKFamilyHistoryTableFooterView {
     NSString *_relativeGroupIdentifier;
@@ -65,18 +67,17 @@ static const CGFloat ViewLeftRightPadding = 16.0;
         _delegate = delegate;
         
         self.backgroundColor = [UIColor clearColor];
-        
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
+
         [self setupSubviews];
         [self setupConstraints];
         [self enableAccessibilitySupport];
+
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKFamilyHistoryTableFooterView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView updateViewColors];
+        }];
     }
     return self;
-}
-
-- (void)setFrame:(CGRect)frame {
-    frame.origin.x += ViewLeftRightPadding;
-    frame.size.width -= 2 * ViewLeftRightPadding;
-    [super setFrame:frame];
 }
 
 - (void)setExpanded:(BOOL)isExpanded {
@@ -85,11 +86,53 @@ static const CGFloat ViewLeftRightPadding = 16.0;
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setupPrimaryButton {
+    if (@available(iOS 26.0, *)) {
+        UIButtonConfiguration *buttonConfiguration = [UIButtonConfiguration glassButtonConfiguration];
+        buttonConfiguration.baseForegroundColor = [UIColor systemBlueColor];
+        buttonConfiguration.buttonSize = UIButtonConfigurationSizeLarge;
+        buttonConfiguration.titleAlignment = UIButtonConfigurationTitleAlignmentLeading;
+        buttonConfiguration.imagePlacement = NSDirectionalRectEdgeTrailing;
+        buttonConfiguration.cornerStyle = UIButtonConfigurationCornerStyleDynamic;
+        NSDirectionalEdgeInsets contentInsets = buttonConfiguration.contentInsets;
+        contentInsets.leading = ORKSmallContentLayoutMargins.leading;
+        contentInsets.trailing = ORKSmallContentLayoutMargins.trailing;
+        buttonConfiguration.contentInsets = contentInsets;
+
+        _viewButton = [UIButton buttonWithConfiguration:buttonConfiguration primaryAction:nil];
+        [_viewButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentFill];
+        _viewButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _viewButton.clipsToBounds = YES;
+        [_viewButton addTarget:self action:@selector(buttonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_viewButton];
+
+        UIImage *image = [UIImage systemImageNamed:@"plus.circle.fill"];
+
+        UIImageSymbolConfiguration *symbolConfiguration = [UIImageSymbolConfiguration configurationWithPaletteColors:@[
+            [UIColor systemBackgroundColor],
+            [UIColor systemBlueColor]]
+        ];
+
+        image = [image imageByApplyingSymbolConfiguration:symbolConfiguration];
+
+        [_viewButton setTitle:_title forState:UIControlStateNormal];
+        [_viewButton setImage:image forState:UIControlStateNormal];
+    }
+}
+
 - (void)setupSubviews {
+    if (ORKLiquidGlassSupportEnabled()) {
+        [self setupPrimaryButton];
+    } else {
+        [self legacySetupSubviews];
+    }
+}
+
+- (void)legacySetupSubviews {
     _viewButton = [UIButton new];
     _viewButton.translatesAutoresizingMaskIntoConstraints = NO;
     _viewButton.clipsToBounds = YES;
-    _viewButton.layer.cornerRadius = 12.0;
+    _viewButton.layer.cornerRadius = 10.0;
     [_viewButton addTarget:self action:@selector(buttonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_viewButton];
     
@@ -114,8 +157,12 @@ static const CGFloat ViewLeftRightPadding = 16.0;
 }
 
 - (void)updateViewColors {
-    _titleLabel.textColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : [UIColor systemBlueColor];
     _viewButton.backgroundColor = [UIColor secondarySystemGroupedBackgroundColor];
+    if (ORKLiquidGlassSupportEnabled()) {
+    [_viewButton setTintColor:self.tintColor];
+    } else {
+        _titleLabel.textColor = self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor whiteColor] : self.tintColor;
+    }
 }
 
 - (void)enableAccessibilitySupport {
@@ -125,36 +172,34 @@ static const CGFloat ViewLeftRightPadding = 16.0;
     self.accessibilityHint = [_title copy];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [self updateViewColors];
-}
-
 - (void)setupConstraints {
     if (_viewConstraints.count > 0) {
         [NSLayoutConstraint deactivateConstraints:_viewConstraints];
     }
-    
-    _viewConstraints = [NSMutableArray new];
-    
-    [_viewConstraints addObject:[_viewButton.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
-    [_viewConstraints addObject:[_viewButton.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
-    
+
     topConstraint = [self.topAnchor constraintEqualToAnchor:_viewButton.topAnchor constant:-CellTopCollapsedPadding];
-    [_viewConstraints addObject:topConstraint];
-    
     bottomConstraint = [self.bottomAnchor constraintEqualToAnchor:_viewButton.bottomAnchor constant:CellBottomCollapsedPadding];
-    [_viewConstraints addObject: bottomConstraint];
-    
-    [_viewConstraints addObject:[_titleLabel.centerYAnchor constraintEqualToAnchor:_viewButton.centerYAnchor]];
-    [_viewConstraints addObject:[_titleLabel.leadingAnchor constraintEqualToAnchor:_viewButton.leadingAnchor constant:CellLeftRightPadding]];
-    [_viewConstraints addObject:[_titleLabel.topAnchor constraintEqualToAnchor:_viewButton.topAnchor constant:ViewButtonTopBottomPadding]];
-    [_viewConstraints addObject:[_titleLabel.bottomAnchor constraintEqualToAnchor:_viewButton.bottomAnchor constant:-ViewButtonTopBottomPadding]];
-    
-    [_viewConstraints addObject:[_titleLabel.trailingAnchor constraintEqualToAnchor:_iconImageview.leadingAnchor constant:ViewButtonLeadingPadding]];
-    [_viewConstraints addObject:[_iconImageview.centerYAnchor constraintEqualToAnchor:_viewButton.centerYAnchor]];
-    [_viewConstraints addObject:[_iconImageview.trailingAnchor constraintEqualToAnchor:_viewButton.trailingAnchor constant:-CellLeftRightPadding]];
-    
+
+    _viewConstraints = [NSMutableArray arrayWithArray: @[
+        [_viewButton.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+        [_viewButton.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor],
+        topConstraint,
+        bottomConstraint
+    ]];
+
+    if (!ORKLiquidGlassSupportEnabled()) {
+        [_viewConstraints addObjectsFromArray:@[
+            [_titleLabel.centerYAnchor constraintEqualToAnchor:_viewButton.centerYAnchor],
+            [_titleLabel.leadingAnchor constraintEqualToAnchor:_viewButton.leadingAnchor constant:CellLeftRightPadding],
+            [_titleLabel.topAnchor constraintEqualToAnchor:_viewButton.topAnchor constant:ViewButtonTopBottomPadding],
+            [_titleLabel.bottomAnchor constraintEqualToAnchor:_viewButton.bottomAnchor constant:-ViewButtonTopBottomPadding],
+            [_titleLabel.trailingAnchor constraintEqualToAnchor:_iconImageview.leadingAnchor],
+            [_iconImageview.centerYAnchor constraintEqualToAnchor:_viewButton.centerYAnchor],
+            [_iconImageview.trailingAnchor constraintEqualToAnchor:_viewButton.trailingAnchor constant:-CellLeftRightPadding],
+            [_iconImageview.widthAnchor constraintEqualToAnchor:_iconImageview.heightAnchor]
+        ]];
+    }
+
     [NSLayoutConstraint activateConstraints:_viewConstraints];
 }
 

@@ -154,7 +154,7 @@
 @implementation ORKShoulderRangeOfMotionStep (ViewControllerProviding)
 
 - (ORKStepViewController *)makeViewControllerWithResult:(ORKResult *)result {
-    return [[ORKShoulderRangeOfMotionStepViewController alloc] initWithStep:self result:result];
+    return [[ORKRangeOfMotionStepViewController alloc] initWithStep:self result:result];
 }
 
 @end

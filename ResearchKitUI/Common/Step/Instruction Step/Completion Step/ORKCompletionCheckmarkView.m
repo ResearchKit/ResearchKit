@@ -78,7 +78,7 @@
 }
 
 - (instancetype)initWithDefaultDimension {
-    return [self initWithDimension:ORKStepContentIconImageViewDimension];
+    return [self initWithDimension:ORKStepContentIconImageViewDimension()];
 }
 
 - (void)layoutSubviews {

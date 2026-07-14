@@ -48,6 +48,13 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return self;
 }
 
+- (void)setStartDate:(NSDate *)startDate {
+    _startDate = startDate;
+    if (startDate != nil) {
+        _timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[[NSTimeZone localTimeZone] secondsFromGMTForDate:startDate]];
+    }
+}
+
 - (BOOL)isSaveable {
     return NO;
 }
@@ -60,6 +67,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, startDate);
     ORK_ENCODE_OBJ(aCoder, endDate);
+    ORK_ENCODE_OBJ(aCoder, timeZone);
     ORK_ENCODE_OBJ(aCoder, userInfo);
 }
 
@@ -69,6 +77,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, endDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, timeZone, NSTimeZone);
         ORK_DECODE_OBJ_PLIST(aDecoder, userInfo);
     }
     return self;
@@ -83,17 +92,19 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.startDate, castObject.startDate)
             && ORKEqualObjects(self.endDate, castObject.endDate)
+            && (self.timeZone.secondsFromGMT == castObject.timeZone.secondsFromGMT)
             && ORKEqualObjects(self.userInfo, castObject.userInfo));
 }
 
 - (NSUInteger)hash {
-    return _identifier.hash ^ _startDate.hash ^ _endDate.hash ^ _userInfo.hash;
+    return _identifier.hash ^ _startDate.hash ^ _endDate.hash ^ _timeZone.hash ^ _userInfo.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKResult *result = [[[self class] allocWithZone:zone] init];
     result.startDate = [self.startDate copy];
     result.endDate = [self.endDate copy];
+    result.timeZone = [self.timeZone copy];
     result.userInfo = [self.userInfo copy];
     result.identifier = [self.identifier copy];
     return result;

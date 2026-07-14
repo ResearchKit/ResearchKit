@@ -118,6 +118,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy) NSDate *endDate;
 
 /**
+ Metadata that describes the user's time zone.
+ */
+@property (nonatomic, copy, nullable) NSTimeZone *timeZone;
+
+/**
  Metadata that describes the conditions under which the result was acquired.
  
  The `userInfo` dictionary can be set by the view controller or recorder

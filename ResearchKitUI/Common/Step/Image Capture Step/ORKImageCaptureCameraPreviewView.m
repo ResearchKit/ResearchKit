@@ -52,12 +52,13 @@
     self = [super init];
     if (self) {
         _previewLayer = [[AVCaptureVideoPreviewLayer alloc] init];
-        _previewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         _previewLayer.needsDisplayOnBoundsChange = YES;
         [self.layer addSublayer:_previewLayer];
         
         _capturedImageView = [[UIImageView alloc] init];
-        _capturedImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _capturedImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _capturedImageView.clipsToBounds = YES;
         [self addSubview:_capturedImageView];
     
         _templateImageView = [[ORKTintedImageView alloc] init];
@@ -126,11 +127,11 @@
     
     // Make the captured image view use the available space (taking into account the layout margins)
     NSDictionary *views = @{ @"capturedImageView": _capturedImageView };
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[capturedImageView]-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[capturedImageView]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[capturedImageView]-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[capturedImageView]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
@@ -183,7 +184,7 @@
     [super layoutSubviews];
     
     // Ensure that the preview layer takes up all the space
-    _previewLayer.frame = self.frame;
+    _previewLayer.frame = self.bounds;
     
     // Update the insets for the template and catpured image views
     [self updateInsets];
@@ -225,8 +226,8 @@
         return UIEdgeInsetsZero;
     AVCaptureDeviceInput *input = (AVCaptureDeviceInput*)inputs[0];
     CMVideoDimensions videoDimensions = CMVideoFormatDescriptionGetDimensions(input.device.activeFormat.formatDescription);
-    AVCaptureVideoOrientation orientation = _previewLayer.connection.videoOrientation;
-    BOOL landscape = (orientation == AVCaptureVideoOrientationLandscapeLeft || orientation == AVCaptureVideoOrientationLandscapeRight);
+    CGFloat rotationAngle = _previewLayer.connection.videoRotationAngle;
+    BOOL landscape = (rotationAngle == ORKVideoRotationAngleLandscapeRight || rotationAngle == ORKVideoRotationAngleLandscapeLeft);
     
     CGRect contentFrame = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(landscape ? videoDimensions.width : videoDimensions.height, landscape ? videoDimensions.height : videoDimensions.width), _previewLayer.frame);
     CGRect overallFrame = _previewLayer.frame;
@@ -234,14 +235,6 @@
                             contentFrame.origin.x - overallFrame.origin.x,
                             (overallFrame.origin.y + overallFrame.size.height) - (contentFrame.origin.y + contentFrame.size.height),
                             (overallFrame.origin.x + overallFrame.size.width) - (contentFrame.origin.x + contentFrame.size.width));
-}
-
-- (AVCaptureVideoOrientation)videoOrientation {
-    return _previewLayer.connection.videoOrientation;
-}
-
-- (void)setVideoOrientation:(AVCaptureVideoOrientation)videoOrientation {
-    _previewLayer.connection.videoOrientation = videoOrientation;
 }
 
 #pragma mark - Accessibility

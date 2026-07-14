@@ -33,11 +33,29 @@
 #import "ORKRecorder_Private.h"
 #import "ORKHelpers_Internal.h"
 
+#import <ResearchKit/ORKActiveStep_Internal.h>
+
 #define ORKEnvironmentSPLMeterTaskDefaultThresholdValue 35.0
 #define ORKEnvironmentSPLMeterTaskMinimumSamplingInterval 1.0
 #define ORKEnvironmentSPLMeterTaskDefaultRequiredContiguousSamples 5
 
 @implementation ORKEnvironmentSPLMeterStep
+
++ (double)maximumThresholdValue {
+    return 120.0;
+}
+
++ (NSTimeInterval)maximumSamplingInterval {
+    return 3600.0;
+}
+
++ (NSTimeInterval)minimumSamplingInterval {
+    return ORKEnvironmentSPLMeterTaskMinimumSamplingInterval;
+}
+
++ (NSInteger)maximumRequiredContiguousSamples {
+    return 1000;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     return [self initWithIdentifier:identifier outputDirectory:nil];
@@ -57,23 +75,17 @@
     self.requiredContiguousSamples = ORKEnvironmentSPLMeterTaskDefaultRequiredContiguousSamples;
     self.stepDuration = CGFLOAT_MAX;
     self.shouldShowDefaultTimer = NO;
-    // This is inserted here because it is required for any task that requires the SPL Meter step
-    ORKAudioStreamerConfiguration *config = [[ORKAudioStreamerConfiguration alloc] initWithIdentifier:[NSString stringWithFormat:@"%@_streamerConfiguration",self.identifier] outputDirectory:outputDirectory];
-    config.bypassAudioEngineStart = YES;
-    self.recorderConfigurations = @[config];
 }
 
 - (void)validateParameters {
     [super validateParameters];
     
-    if (self.thresholdValue < 0) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"threshold cannot be lesser than 0"]  userInfo:nil];
+    if (!isfinite(self.thresholdValue) || self.thresholdValue <= 0 || self.thresholdValue > ORKEnvironmentSPLMeterStep.maximumThresholdValue) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"thresholdValue must be a finite number greater than 0 and no more than %g dBSPL-A", ORKEnvironmentSPLMeterStep.maximumThresholdValue] userInfo:nil];
     }
-    if (self.samplingInterval < ORKEnvironmentSPLMeterTaskMinimumSamplingInterval) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"sampling interval cannot be lesser than %@", @(ORKEnvironmentSPLMeterTaskMinimumSamplingInterval)]  userInfo:nil];
-    }
-    if (self.requiredContiguousSamples <= 0) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"required contiguous samples cannot be less than or equal to 0"]  userInfo:nil];
+    ORKValidateBoundedValue(self.samplingInterval, ORKEnvironmentSPLMeterStep.minimumSamplingInterval, ORKEnvironmentSPLMeterStep.maximumSamplingInterval, @"samplingInterval", YES);
+    if (self.requiredContiguousSamples <= 0 || self.requiredContiguousSamples > ORKEnvironmentSPLMeterStep.maximumRequiredContiguousSamples) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"requiredContiguousSamples must be greater than 0 and no more than %ld", (long)ORKEnvironmentSPLMeterStep.maximumRequiredContiguousSamples] userInfo:nil];
     }
 }
 
@@ -118,6 +130,14 @@
             && (self.thresholdValue == castObject.thresholdValue)
             && (self.samplingInterval == castObject.samplingInterval)
             && (self.requiredContiguousSamples == castObject.requiredContiguousSamples));
+}
+
+- (BOOL)hasAudioRecording {
+    return YES;
+}
+
+- (ORKPermissionMask)requiredPermissions {
+    return ORKPermissionAudioRecording;
 }
 
 @end

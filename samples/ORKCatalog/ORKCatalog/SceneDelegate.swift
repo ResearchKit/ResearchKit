@@ -43,29 +43,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return navigationController.visibleViewController as! TaskListViewController
     }
 
-    var resultViewController: ResultViewController? {
+    var resultHostingController: ResultHostingController? {
         let navigationController = tabBarController.viewControllers![1] as! UINavigationController
-
-        // Find the `ResultViewController` (if any) that's a view controller in the navigation controller.
-        return navigationController.viewControllers.first(where: { (someVC) -> Bool in
-            someVC is ResultViewController
-        }) as? ResultViewController
+        return navigationController.viewControllers.first(where: { $0 is ResultHostingController }) as? ResultHostingController
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        // When a task result has been finished, update the result view controller's task result.
+        // When a task result has been finished, update the result hosting controller's task result.
         taskListViewController.taskResultFinishedCompletionHandler = { [unowned self] taskResult in
-            /*
-                If we're displaying a new result, make sure the result view controller's
-                navigation controller is at the root.
-            */
-            if let navigationController = self.resultViewController?.navigationController {
-                navigationController.popToRootViewController(animated: false)
-            }
-
-            // Set the result so we can display it.
-            self.resultViewController?.result = taskResult
+            self.resultHostingController?.result = taskResult
         }
     }
 }

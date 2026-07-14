@@ -37,9 +37,10 @@
 @implementation ORKTapCountLabel
 
 + (UIFont *)defaultFont {
-    // Thin, 56
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    return ORKThinFontWithSize([[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]+ 39.0);
+    // 39pt larger than the system headline size for the large tap count display.
+    CGFloat baseSize = ORKDefaultFontSizeForTextStyle(UIFontTextStyleHeadline) + 39.0;
+    UIFont *baseFont = [UIFont systemFontOfSize:baseSize weight:UIFontWeightThin];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleHeadline] scaledFontForFont:baseFont];
 }
 
 @end

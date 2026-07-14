@@ -1,21 +1,21 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2020, Apple Inc. All rights reserved.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1.  Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
- 
+
  2.  Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3.  Neither the name of the copyright holder(s) nor the names of any contributors
  may be used to endorse or promote products derived from this software without
  specific prior written permission. No license is granted to the trademarks of
  the copyright holders even if such marks are included in this software.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -30,9 +30,10 @@
 
 
 #import "ORKFitnessStepViewController.h"
-#import "ORKFitnessContentView.h"
 #import "ORKFitnessStep.h"
 #import "ORKActiveStepView.h"
+#import "ORKActiveStepTimerView.h"
+#import "ORKActiveStepView_Private.h"
 #import "ORKActiveStepTimer.h"
 
 #import "ORKStepViewController_Internal.h"
@@ -42,16 +43,15 @@
 
 #import "ORKStepContainerView_Private.h"
 
+
 @interface ORKFitnessStepViewController () {
-    ORKFitnessContentView *_contentView;
+    NSLayoutConstraint *_timerAspectRatioConstraint;
 }
-
 @end
-
 
 @implementation ORKFitnessStepViewController
 
-- (instancetype)initWithStep:(ORKStep *)step {    
+- (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
     if (self) {
         self.suspendIfInactive = NO;
@@ -63,38 +63,39 @@
     return (ORKFitnessStep *)self.step;
 }
 
+- (void)prepareStep {
+    [super prepareStep];
+    self.activeStepView.timerView.style = ORKActiveStepTimerViewStyleRing;
+    if (!_timerAspectRatioConstraint) {
+        _timerAspectRatioConstraint = [self.activeStepView.timerView.heightAnchor constraintGreaterThanOrEqualToAnchor:self.activeStepView.timerView.widthAnchor
+                                                                                                           multiplier:1.25];
+        _timerAspectRatioConstraint.active = YES;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _contentView = [[ORKFitnessContentView alloc] initWithDuration:self.fitnessStep.stepDuration];
-    _contentView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    self.activeStepView.activeCustomView = _contentView;
-    self.activeStepView.customContentFillsAvailableSpace = YES;
-    self.continueButtonTitle = ORKLocalizedString(@"BUTTON_SKIP_STEP", nil);
+    if (self.step.isOptional) {
+        self.activeStepView.pinNavigationContainer = YES;
+    }
 }
 
 - (void)finish {
     [super finish];
-    _contentView.labelHidden = YES;
-    self.continueButtonTitle = ORKLocalizedString(@"BUTTON_NEXT", nil);
-}
-
-- (void)stepDidChange {
-    [super stepDidChange];
-    _contentView.duration = self.fitnessStep.stepDuration;
-    _contentView.timeLeft = self.fitnessStep.stepDuration;
-}
-
-- (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-    _contentView.timeLeft = finished ? 0 : (timer.duration - timer.runtime);
-    _contentView.duration = self.fitnessStep.stepDuration;
-    [super countDownTimerFired:timer finished:finished];
+    if (self.fitnessStep.stepDuration > 0 && self.fitnessStep.shouldStartTimerAutomatically) {
+        self.activeStepView.timerView.labelHidden = YES;
+    }
 }
 
 - (void)goForward {
 
     if (self.finished) {
+        [super goForward];
+        return;
+    }
+
+    if (!self.step.isOptional) {
         [super goForward];
         return;
     }
@@ -109,7 +110,7 @@
         [alert dismissViewControllerAnimated:YES completion:nil];
     }]];
 
-    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_SKIP_STEP", nil)
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_SKIP", nil)
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
         [alert dismissViewControllerAnimated:YES completion:^{

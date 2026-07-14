@@ -139,6 +139,9 @@
     // 4) The showsProgress property is set to false
     
     for (ORKStep *stepObject in _steps) {
+        if ([self _shouldSkipStep:stepObject]) {
+            continue;
+        }
         NSUInteger indexOfStep = [self indexOfStep:stepObject];
         BOOL isFirstOrLastStep = indexOfStep == 0 || indexOfStep == _steps.count - 1;
         BOOL isInstructionOrCompletionStep = [stepObject isKindOfClass:[ORKInstructionStep class]] || [stepObject isKindOfClass:[ORKCompletionStep class]];
@@ -180,49 +183,70 @@
     return index;
 }
 
+- (BOOL)_requiredStepUnavailableForStep:(ORKStep *)step {
+    NSArray<NSString *> *requiredIdentifiers = step.requiredStepIdentifiers;
+    for (NSString *requiredIdentifier in requiredIdentifiers) {
+        ORKStep *requiredStep = [self stepWithIdentifier:requiredIdentifier];
+        if (requiredStep && [self _shouldSkipStep:requiredStep]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)_shouldSkipStep:(ORKStep *)step {
+    if (!step.isStepAvailable) {
+        return YES;
+    }
+    return [self _requiredStepUnavailableForStep:step];
+}
+
+- (nullable ORKStep *)_firstAvailableStepFromIndex:(NSInteger)index delta:(NSInteger)delta {
+    NSArray *steps = _steps;
+    while (index >= 0 && index < (NSInteger)steps.count) {
+        ORKStep *step = steps[index];
+        if (![self _shouldSkipStep:step]) {
+            return step;
+        }
+        index += delta;
+    }
+    return nil;
+}
+
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     NSArray *steps = _steps;
     
     if (steps.count <= 0) {
         return nil;
     }
-    
-    ORKStep *currentStep = step;
-    ORKStep *nextStep = nil;
-    
-    if (currentStep == nil) {
-        nextStep = steps[0];
+
+    NSInteger startIndex;
+    if (step == nil) {
+        startIndex = 0;
     } else {
         NSUInteger index = [self indexOfStep:step];
-        
-        if (NSNotFound != index && index != (steps.count - 1)) {
-            nextStep = steps[index + 1];
+        if (NSNotFound == index || index == (steps.count - 1)) {
+            return nil;
         }
+        startIndex = (NSInteger)index + 1;
     }
-    return nextStep;
+
+    return [self _firstAvailableStepFromIndex:startIndex delta:1];
 }
 
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     NSArray *steps = _steps;
-    
-    if (steps.count <= 0) {
+
+    if (steps.count <= 0 || step == nil) {
         return nil;
     }
-    
-    ORKStep *currentStep = step;
-    ORKStep *previousStep = nil;
-    
-    if (currentStep == nil) {
-        previousStep = nil;
-        
-    } else {
-        NSUInteger index = [self indexOfStep:step];
-        
-        if (NSNotFound != index && index != 0) {
-            previousStep = steps[index - 1];
-        }
+
+    NSUInteger index = [self indexOfStep:step];
+    if (NSNotFound == index || index == 0) {
+        return nil;
     }
-    return previousStep;
+
+    return [self _firstAvailableStepFromIndex:(NSInteger)index - 1 delta:-1];
 }
 
 - (ORKStep *)stepWithIdentifier:(NSString *)identifier {

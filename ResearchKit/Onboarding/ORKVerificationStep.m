@@ -50,6 +50,7 @@
         self.title = ORKLocalizedString(@"VERIFICATION_STEP_TITLE", nil);
         self.text = text;
         self.showsProgress = NO;
+        self.allowsBackNavigation = NO;
         _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
         
         [self validateParameters];
@@ -69,10 +70,6 @@
                                        reason:@"Unable to find ORKVerificationStepViewController subclass."
                                      userInfo:nil];
     }
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
 }
 
 + (BOOL)supportsSecureCoding {

@@ -28,11 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit-Swift.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 #import "ORKSurveyAnswerCellForNumber.h"
 
 #import "ORKTextFieldView.h"
-#import "ORKDontKnowButton.h"
 
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
@@ -45,7 +46,7 @@ static const CGFloat DefaultPadding = 8.0;
 static const CGFloat HorizontalPadding = 16.0;
 static const CGFloat MinTextFieldViewHeight = 40.0;
 static const CGFloat ErrorLabelBottomPadding = 10.0;
-static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
+static const CGFloat DontKnowButtonTopBottomPadding = 3.0;
 
 
 @interface ORKSurveyAnswerCellForNumber ()
@@ -174,19 +175,19 @@ static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
     _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     [[_textFieldView.topAnchor constraintEqualToAnchor:self.topAnchor constant:DefaultPadding] setActive:YES];
-    [[_textFieldView.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:HorizontalPadding] setActive:YES];
-    [[_textFieldView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-HorizontalPadding] setActive:YES];
+    [[_textFieldView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:HorizontalPadding] setActive:YES];
+    [[_textFieldView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-HorizontalPadding] setActive:YES];
     [[_textFieldView.heightAnchor constraintGreaterThanOrEqualToConstant:MinTextFieldViewHeight] setActive:YES];
     
     [[_errorLabel.topAnchor constraintEqualToAnchor:_textFieldView.bottomAnchor constant:ErrorLabelTopPadding] setActive:YES];
-    [[_errorLabel.leftAnchor constraintEqualToAnchor:_textFieldView.leftAnchor] setActive:YES];
-    [[_errorLabel.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
+    [[_errorLabel.leadingAnchor constraintEqualToAnchor:_textFieldView.leadingAnchor] setActive:YES];
+    [[_errorLabel.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
     
     if (_dontKnowButton) {
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
         [[_dividerView.topAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
-        [[_dividerView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
-        [[_dividerView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
+        [[_dividerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+        [[_dividerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
         [[_dividerView.heightAnchor constraintEqualToConstant:separatorHeight] setActive:YES];
 
         [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];

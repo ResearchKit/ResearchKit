@@ -88,7 +88,8 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.stepDuration = 180;
-        self.shouldShowDefaultTimer = NO;
+        self.shouldShowDefaultTimer = YES;
+        self.shouldStartTimerAutomatically = YES;
         self.audioAsset = audioAsset;
         self.vocalCues = vocalCues == nil ? [NSArray new] : vocalCues;
     }

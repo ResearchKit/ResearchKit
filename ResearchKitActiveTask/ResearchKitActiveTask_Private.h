@@ -30,7 +30,9 @@
 
 #import <ResearchKitActiveTask/ORKAccelerometerRecorder.h>
 #import <ResearchKitActiveTask/ORKActiveStepTimer.h>
+#import <ResearchKitActiveTask/ORKActiveStepTimerView.h>
 #import <ResearchKitActiveTask/ORKActiveStepView.h>
+#import <ResearchKitActiveTask/ORKActiveStepView_Private.h>
 #import <ResearchKitActiveTask/ORKActiveStepViewController_Internal.h>
 #import <ResearchKitActiveTask/ORKAmslerGridStep.h>
 #import <ResearchKitActiveTask/ORKAudioFitnessStep.h>
@@ -63,7 +65,6 @@
 #import <ResearchKitActiveTask/ORKSpeechRecognitionContentView.h>
 #import <ResearchKitActiveTask/ORKSpeechRecognitionStepViewController_Private.h>
 #import <ResearchKitActiveTask/ORKStreamingAudioRecorder.h>
-#import <ResearchKitActiveTask/ORKStroopStep.h>
 #import <ResearchKitActiveTask/ORKTappingIntervalStep.h>
 #import <ResearchKitActiveTask/ORKTimedWalkStep.h>
 #import <ResearchKitActiveTask/ORKToneAudiometryStep.h>

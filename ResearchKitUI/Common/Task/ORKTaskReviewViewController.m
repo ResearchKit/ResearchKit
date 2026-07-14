@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit-Swift.h>
+
 #import "ORKTaskReviewViewController.h"
 #import "ORKStepView_Private.h"
 #import "ORKTableContainerView.h"
@@ -68,6 +70,7 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     
     UIView *_containerView;
     CAShapeLayer *_contentMaskLayer;
+    UIView *_separator;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -113,21 +116,12 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     CAShapeLayer *foreLayer = [CAShapeLayer layer];
     [foreLayer setFillColor:[fillColor CGColor]];
     foreLayer.zPosition = 0.0f;
-    
-    CAShapeLayer *lineLayer = [CAShapeLayer layer];
-    
+        
     CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, _containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, _containerView.bounds.size.height);
     foreLayer.path = [UIBezierPath bezierPathWithRect:foreLayerBounds].CGPath;
     _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:_containerView.bounds].CGPath;
-    CGFloat leftRightMargin = ORKCardLeftRightMarginForWindow(self.window);
-    CGRect lineBounds = CGRectMake(leftRightMargin, _containerView.bounds.size.height - 1.0, _containerView.bounds.size.width - leftRightMargin, 0.5);
-    lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
-    lineLayer.zPosition = 0.0f;
-        
-    lineLayer.fillColor = _isLastCell ? UIColor.clearColor.CGColor : borderColor.CGColor;
     _contentMaskLayer.fillColor = borderColor.CGColor;
     [_contentMaskLayer addSublayer:foreLayer];
-    [_contentMaskLayer addSublayer:lineLayer];
     [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
 }
 
@@ -135,9 +129,17 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     if (!_containerView) {
         _containerView = [UIView new];
     }
-    
+
+    self.contentView.directionalLayoutMargins = ORKLargeContentLayoutMargins;
+    _containerView.directionalLayoutMargins = ORKSmallContentLayoutMargins;
     _containerView.backgroundColor = UIColor.systemBackgroundColor;
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _separator = [UIView new];
+    _separator.backgroundColor = UIColor.separatorColor;
+    _separator.translatesAutoresizingMaskIntoConstraints = NO;
+    [_containerView addSubview:_separator];
+    
     [self.contentView addSubview:_containerView];
 }
 
@@ -166,18 +168,23 @@ static const float ReviewQuestionAnswerPadding = 2.0;
 }
 
 - (void)setupConstraints {
-    [[_containerView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:1.0 / [UIScreen mainScreen].scale] setActive:YES];
-    [[_containerView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:ORKCardLeftRightMarginForWindow(self.window)] setActive:YES];
-    [[_containerView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-ORKCardLeftRightMarginForWindow(self.window)] setActive:YES];
-    
+    [[_containerView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor] setActive:YES];
+    [[_containerView.leadingAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leadingAnchor] setActive:YES];
+    [[_containerView.trailingAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.trailingAnchor] setActive:YES];
+
     [[_questionLabel.topAnchor constraintEqualToAnchor:_containerView.topAnchor constant:ReviewCellTopBottomPadding] setActive:YES];
-    [[_questionLabel.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor constant:ORKSurveyItemMargin] setActive:YES];
-    [[_questionLabel.trailingAnchor constraintEqualToAnchor:_containerView.trailingAnchor constant:-ORKSurveyItemMargin] setActive:YES];
+    [[_questionLabel.leadingAnchor constraintEqualToAnchor:_containerView.layoutMarginsGuide.leadingAnchor] setActive:YES];
+    [[_questionLabel.trailingAnchor constraintEqualToAnchor:_containerView.layoutMarginsGuide.trailingAnchor] setActive:YES];
 
     [[_answerLabel.topAnchor constraintEqualToAnchor:_questionLabel.bottomAnchor constant:ReviewQuestionAnswerPadding] setActive:YES];
-    [[_answerLabel.trailingAnchor constraintEqualToAnchor:_containerView.trailingAnchor constant:-ORKSurveyItemMargin] setActive:YES];
-    [[_answerLabel.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor constant:ORKSurveyItemMargin] setActive:YES];
+    [[_answerLabel.trailingAnchor constraintEqualToAnchor:_containerView.layoutMarginsGuide.trailingAnchor] setActive:YES];
+    [[_answerLabel.leadingAnchor constraintEqualToAnchor:_containerView.layoutMarginsGuide.leadingAnchor] setActive:YES];
     [[_answerLabel.bottomAnchor constraintEqualToAnchor:_containerView.bottomAnchor constant:-ReviewCellTopBottomPadding] setActive:YES];
+    
+    [_separator.heightAnchor constraintEqualToConstant: (ORKLiquidGlassSupportEnabled() ? 1.0 : 1.0 / self.safeDisplayScale)].active = YES;
+    [_separator.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor].active = YES;
+    [_separator.trailingAnchor constraintEqualToAnchor:_containerView.trailingAnchor].active = YES;
+    [_separator.topAnchor constraintEqualToAnchor:_containerView.topAnchor].active = YES;
     
     [[self.contentView.bottomAnchor constraintEqualToAnchor:_containerView.bottomAnchor] setActive:YES];
 }
@@ -194,6 +201,7 @@ static const float ReviewQuestionAnswerPadding = 2.0;
 {
     self = [super init];
     if (self) {
+        self.directionalLayoutMargins = ORKLargeContentLayoutMargins;
         [self setupContainerView];
         [self setupButton];
         [self setupConstraints];
@@ -214,19 +222,20 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     
     [_contentLayer removeFromSuperlayer];
     CGRect contentBounds = _containerView.bounds;
-    
+
+    CGFloat cornerRadius = ORKCardDefaultCornerRadii();
     _contentLayer.path = [UIBezierPath bezierPathWithRoundedRect: contentBounds
                                                byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight
-                                                     cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
-    
+                                                     cornerRadii: (CGSize){cornerRadius, cornerRadius}].CGPath;
+
     CAShapeLayer *foreLayer = [CAShapeLayer layer];
     UIColor *fillColor = [UIColor secondarySystemGroupedBackgroundColor];
     UIColor *borderColor = UIColor.separatorColor;
 
     [foreLayer setFillColor:[fillColor CGColor]];
     
-    CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
-    
+    CGFloat foreLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
+
     CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, ORKCardDefaultBorderWidth, contentBounds.size.width - 2 * ORKCardDefaultBorderWidth, contentBounds.size.height - 2 * ORKCardDefaultBorderWidth);
     
     foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds
@@ -264,7 +273,9 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     [_button setTitle:ORKLocalizedString(@"REVIEW_EDIT_ANSWER", nil) forState:UIControlStateNormal];
     [_button setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
     [_button setBackgroundColor:[UIColor tertiarySystemFillColor]];
-    [_button setContentEdgeInsets:UIEdgeInsetsMake(EditAnswerButtonTopBottomInsetSpacing, EditAnswerButtomLeftRightInsetSpacing, EditAnswerButtonTopBottomInsetSpacing, EditAnswerButtomLeftRightInsetSpacing)];
+    UIButtonConfiguration *buttonConfig = [UIButtonConfiguration plainButtonConfiguration];
+    buttonConfig.contentInsets = NSDirectionalEdgeInsetsMake(EditAnswerButtonTopBottomInsetSpacing, EditAnswerButtomLeftRightInsetSpacing, EditAnswerButtonTopBottomInsetSpacing, EditAnswerButtomLeftRightInsetSpacing);
+    _button.configuration = buttonConfig;
     _button.clipsToBounds = YES;
 
     UIFontDescriptor *buttonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
@@ -276,18 +287,14 @@ static const float ReviewQuestionAnswerPadding = 2.0;
 }
 
 - (void)setupConstraints {
-    //    TODO: replace padding constants
-    
-    CGFloat leftRightPadding = ORKCardLeftRightMarginForWindow(self.window);
-    
     [[_containerView.topAnchor constraintEqualToAnchor:self.topAnchor constant:0.0] setActive:YES];
-    [[_containerView.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:leftRightPadding] setActive:YES];
-    [[_containerView.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-leftRightPadding] setActive:YES];
+    [[_containerView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor] setActive:YES];
+    [[_containerView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor] setActive:YES];
     [[_button.topAnchor constraintEqualToAnchor:_containerView.topAnchor constant:EditAnswerButtonTopBottomPadding] setActive:YES];
     [[_button.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor constant:EditAnswerButtonLeftPadding] setActive:YES];
     [[_containerView.bottomAnchor constraintEqualToAnchor:_button.bottomAnchor constant:EditAnswerButtonTopBottomPadding] setActive:YES];
     
-    [_separator.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale].active = YES;
+    [_separator.heightAnchor constraintEqualToConstant: (ORKLiquidGlassSupportEnabled() ? 1.0 : 1.0 / self.safeDisplayScale)].active = YES;
     [_separator.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor].active = YES;
     [_separator.trailingAnchor constraintEqualToAnchor:_containerView.trailingAnchor].active = YES;
     [_separator.topAnchor constraintEqualToAnchor:_containerView.topAnchor].active = YES;
@@ -303,6 +310,7 @@ static const float ReviewQuestionAnswerPadding = 2.0;
 @property (nonatomic) NSMutableArray<ORKReviewSection *> *reviewSections;
 @property (nonatomic) id<ORKTaskResultSource> resultSource;
 @property (nonatomic, nonnull) NSArray<ORKStep *> *steps;
+@property (nonatomic, strong) NSMutableDictionary<NSIndexPath *, NSNumber *> *tableCellHeightMapping;
 
 @end
 
@@ -337,11 +345,6 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     [_tableContainerView setNeedsLayout];
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    [_tableContainerView sizeHeaderToFit];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_tableContainerView layoutIfNeeded];
@@ -349,7 +352,6 @@ static const float ReviewQuestionAnswerPadding = 2.0;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_tableContainerView sizeHeaderToFit];
     [_tableContainerView.tableView reloadData];
     [self.view layoutSubviews];
 }
@@ -373,13 +375,12 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     _tableContainerView.translatesAutoresizingMaskIntoConstraints = NO;
     [[_tableContainerView.topAnchor constraintEqualToAnchor:self.view.topAnchor] setActive:YES];
     [[_tableContainerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-    [[_tableContainerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[_tableContainerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
+    [[_tableContainerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor] setActive:YES];
+    [[_tableContainerView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor] setActive:YES];
 }
 
 - (void)setupNavigationFooterView {
     _navigationFooterView = _tableContainerView.navigationFooterView;
-    [_navigationFooterView removeStyling];
     _navigationFooterView.skipButtonItem = nil;
     _navigationFooterView.continueEnabled = YES;
     _navigationFooterView.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonTapped)];
@@ -499,12 +500,31 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat cachedCellHeight = [self.tableCellHeightMapping[indexPath] floatValue];
+
+    return automaticMinimumHeightForTableViewRow(cachedCellHeight);
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableCellHeightMapping == nil) {
+        [self setTableCellHeightMapping:[NSMutableDictionary new]];
+    }
+    [self.tableCellHeightMapping setObject:[NSNumber numberWithFloat:cell.bounds.size.height] forKey:indexPath];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ORKSurveyCardHeaderView *cardHeaderView = (ORKSurveyCardHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
     
     if (cardHeaderView == nil) {
         ORKReviewSection *reviewSection = _reviewSections[section];
-        cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:reviewSection.title detailText:reviewSection.text learnMoreView:nil progressText:[NSString stringWithFormat:@"%@ %@", ORKLocalizedString(@"REVIEW_STEP_PAGE", nil), ORKLocalizedStringFromNumber(@(section + 1))] tagText:nil showBorder:YES hasMultipleChoiceItem:NO shouldIgnoreDarkMode:NO];
+        cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:reviewSection.title
+                                                             detailText:reviewSection.text
+                                                          learnMoreView:nil
+                                                           progressText:[NSString stringWithFormat:@"%@ %@", ORKLocalizedString(@"REVIEW_STEP_PAGE", nil), ORKLocalizedStringFromNumber(@(section + 1))]
+                                                                tagText:nil
+                                                             showBorder:YES
+                                                  hasMultipleChoiceItem:NO];
     }
     
     return cardHeaderView;

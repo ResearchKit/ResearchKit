@@ -30,10 +30,11 @@
 
 #import "ORKReviewIncompleteCell.h"
 #import "ORKSkin.h"
+#import "ORKFormItem_Internal.h"
 
 static const CGFloat topPadding = 8.0;
 static const CGFloat horizontalPadding = 16.0;
-static const CGFloat verticalPadding = 10.0;
+static const CGFloat verticalPadding = 14.0;
 
 @implementation ORKReviewIncompleteCell {
     UIView *cardView;
@@ -55,7 +56,7 @@ static const CGFloat verticalPadding = 10.0;
     cardView = [[UIView alloc] init];
     cardView.translatesAutoresizingMaskIntoConstraints = NO;
     cardView.backgroundColor = [UIColor secondarySystemGroupedBackgroundColor];
-    cardView.layer.cornerRadius = ORKCardDefaultCornerRadii;
+    cardView.layer.cornerRadius = ORKCardDefaultCornerRadii();
     [self.contentView addSubview:cardView];
     
     label = [[UILabel alloc] init];
@@ -67,17 +68,18 @@ static const CGFloat verticalPadding = 10.0;
 }
 
 - (void)setupConstraints {
-    CGFloat leftRightPadding = ORKStepContainerLeftRightPaddingForWindow(self.window);
-    
-    [cardView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:topPadding].active = YES;
-    [cardView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:leftRightPadding].active = YES;
-    [cardView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-leftRightPadding].active = YES;
-    [cardView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor].active = YES;
-    
-    [label.topAnchor constraintEqualToAnchor:cardView.topAnchor constant:verticalPadding].active = YES;
-    [label.leadingAnchor constraintEqualToAnchor:cardView.leadingAnchor constant:horizontalPadding].active = YES;
-    [label.trailingAnchor constraintEqualToAnchor:cardView.trailingAnchor constant:-horizontalPadding].active = YES;
-    [label.bottomAnchor constraintEqualToAnchor:cardView.bottomAnchor constant:-verticalPadding].active = YES;
+    NSArray<NSLayoutConstraint *> *constraints = @[
+        [cardView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:topPadding],
+        [cardView.leadingAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leadingAnchor],
+        [cardView.trailingAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.trailingAnchor],
+        [cardView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
+
+        [label.topAnchor constraintEqualToAnchor:cardView.topAnchor constant:verticalPadding],
+        [label.leadingAnchor constraintEqualToAnchor:cardView.leadingAnchor constant:horizontalPadding],
+        [label.trailingAnchor constraintEqualToAnchor:cardView.trailingAnchor constant:-horizontalPadding],
+        [label.bottomAnchor constraintEqualToAnchor:cardView.bottomAnchor constant:-verticalPadding]
+    ];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setText:(NSString *)text {

@@ -57,7 +57,6 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-
 @interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
@@ -65,11 +64,10 @@
 @end
 
 
-
 @implementation ORKReviewStepViewController {
     NSArray<NSLayoutConstraint *> *_constraints;
 }
- 
+
 - (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(NSArray<ORKStep *>*)steps resultSource:(id<ORKTaskResultSource>)resultSource {
     self = [self initWithStep:reviewStep];
     if (self && [self reviewStep]) {
@@ -281,8 +279,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewAutomaticDimension;
+    CGFloat cachedCellHeight = [self.tableCellHeightMapping[indexPath] floatValue];
+
+    return automaticMinimumHeightForTableViewRow(cachedCellHeight);
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableCellHeightMapping == nil) {
+        [self setTableCellHeightMapping:[NSMutableDictionary new]];
+    }
+    [self.tableCellHeightMapping setObject:[NSNumber numberWithFloat:cell.bounds.size.height] forKey:indexPath];
 }
 
 @end
-

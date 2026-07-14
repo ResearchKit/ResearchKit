@@ -100,13 +100,13 @@ class ORKStepViewControllerTests: XCTestCase {
         }
         
         XCTAssertEqual(testController.continueButtonItem, testController.internalContinueButtonItem)
-        XCTAssertEqual(testController.backButtonItem, nil)
+        XCTAssertTrue(testController.navigationItem.leftBarButtonItem?.action == #selector(testController.popFromNavigationStack))
         
         testController.delegate = nil
         testController.viewWillAppear(false)
 
         XCTAssertEqual(testController.continueButtonItem, testController.internalDoneButtonItem)
-        XCTAssertEqual(testController.backButtonItem, nil)
+        XCTAssertTrue(testController.navigationItem.leftBarButtonItem?.action == #selector(testController.popFromNavigationStack))
         XCTAssertEqual(testController.hasBeenPresented, true)
         XCTAssert(testController.presentedDate != nil)
         XCTAssertNil(testController.dismissedDate)

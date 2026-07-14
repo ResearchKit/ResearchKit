@@ -57,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
                 maxLabelWidth:(CGFloat)maxLabelWidth
                      delegate:(id<ORKFormItemCellDelegate>)delegate;
 
+@property (nonatomic, copy, readonly) UIView *containerView;
 @property (nonatomic, weak, readonly) id<ORKFormItemCellDelegate> delegate;
 @property (nonatomic, copy, nullable) id answer;
 @property (nonatomic, strong) ORKFormItem *formItem;

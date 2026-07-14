@@ -30,8 +30,10 @@
 
 
 #import "ORKActiveStepView.h"
+#import "ORKActiveStepView_Private.h"
 
 #import "ORKActiveStepCustomView.h"
+#import "ORKActiveStepTimerView.h"
 #import "ORKTintedImageView.h"
 #import "ORKStepContainerView_Private.h"
 
@@ -41,6 +43,7 @@
 
 @implementation  ORKActiveStepView {
     ORKTintedImageView *_imageView;
+    ORKActiveStepTimerView *_timerView;
 }
 
 - (void)setActiveStep:(ORKActiveStep *)step {
@@ -60,8 +63,45 @@
 - (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView {
     _activeCustomView = activeCustomView;
     if (_activeCustomView) {
-        self.customContentView = activeCustomView;
+        [self setCustomContentView:activeCustomView withPadding:NSDirectionalEdgeInsetsMake(20, 0, 0, 0)];
     }
+}
+
+- (NSArray<UIView *> *)canonicalContentViewOrder {
+    NSMutableArray<UIView *> *order = [[super canonicalContentViewOrder] mutableCopy];
+    if (_timerView) {
+        // Insert timerView immediately before customContentView (after stepContentViewLayoutContainer).
+        // If customContentView is absent, insert immediately after stepContentView so the timer
+        // stays in the content area above flexible spacer and navigation views.
+        NSUInteger idx = [order indexOfObject:self.customContentView];
+        if (idx == NSNotFound) {
+            NSUInteger scvIdx = [order indexOfObject:self.stepContentView];
+            idx = (scvIdx != NSNotFound) ? scvIdx + 1 : 0;
+        }
+        [order insertObject:_timerView atIndex:MIN(idx, order.count)];
+    }
+    return order;
+}
+
+- (ORKActiveStepTimerView *)timerView {
+    return _timerView;
+}
+
+- (void)setTimerView:(ORKActiveStepTimerView *)timerView {
+    if (_timerView) {
+        [self.scrollContentView removeArrangedSubview:_timerView];
+        [_timerView removeFromSuperview];
+    }
+    _timerView = timerView;
+    if (_timerView) {
+        [self.scrollContentView addArrangedSubview:_timerView];
+        [self arrangeContentViews];
+        [self.scrollContentView setCustomSpacing:20 afterView:self.stepContentView];
+    }
+}
+
+- (void)hideStartTimerButton {
+    [_timerView hideStartTimerButton];
 }
 
 @end

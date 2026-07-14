@@ -90,35 +90,28 @@
 }
 
 - (void)updateCheckView {
-    UIColor *existingTintColor = self.tintColor;
-    if (_checked) {
-        self.image = _checkedImage;
-        if (existingTintColor != ORKViewTintColor(self)) {
-            self.tintColor = ORKViewTintColor(self);
-        }
-    }
-    else {
-        self.image = _uncheckedImage;
-        if (existingTintColor != ORKViewTintColor(self)) {
-            self.tintColor = _shouldIgnoreDarkMode ? [UIColor lightGrayColor] : [UIColor systemGray3Color];
-        }
-    }
+    self.image = _checked ? _checkedImage : _uncheckedImage;
+    self.tintColor = _checked ? self.checkedTint : self.uncheckedTint;
+}
+
+- (UIColor *)checkedTint {
+    return ORKWindowTintcolor(self.window) ? : [UIColor systemBlueColor];
+}
+
+- (UIColor *)uncheckedTint {
+    return [UIColor systemGray3Color];
 }
 
 - (void)setupView {
-    [[self.widthAnchor constraintEqualToConstant:_dimension] setActive:YES];
-    [[self.heightAnchor constraintEqualToConstant:_dimension] setActive:YES];
-    
+    [[self.widthAnchor constraintGreaterThanOrEqualToConstant:_dimension] setActive:YES];
+    [[self.heightAnchor constraintGreaterThanOrEqualToConstant:_dimension] setActive:YES];
+
+    [self setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     self.contentMode = UIViewContentModeCenter;
 }
 
 - (void)setChecked:(BOOL)checked {
     _checked = checked;
-    [self updateCheckView];
-}
-
-- (void)setShouldIgnoreDarkMode:(BOOL)shouldIgnoreDarkMode {
-    _shouldIgnoreDarkMode = shouldIgnoreDarkMode;
     [self updateCheckView];
 }
 

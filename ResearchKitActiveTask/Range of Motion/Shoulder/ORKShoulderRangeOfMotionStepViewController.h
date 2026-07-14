@@ -32,11 +32,7 @@
 #import <ResearchKitActiveTask/ORKRangeOfMotionStepViewController.h>
 
 
-/**
- This class override its parent's result because here 
- a flex result of 0 degrees would mean the device is at a 90 degree angle.
- */
-ORK_CLASS_AVAILABLE
+ORK_TO_BE_DEPRECATED("Please use ORKRangeOfMotionStepViewController instead.")
 @interface ORKShoulderRangeOfMotionStepViewController : ORKRangeOfMotionStepViewController
 
 @end

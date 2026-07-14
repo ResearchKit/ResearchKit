@@ -31,12 +31,18 @@
 
 #import "ORKTappingIntervalStep.h"
 
+#import "ORKHelpers_Internal.h"
+
 @implementation ORKTappingIntervalStep
+
++ (NSTimeInterval)twoFingerTappingMinimumDuration {
+    return 5.0;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.shouldShowDefaultTimer = NO;
+        self.shouldShowDefaultTimer = YES;
         self.optional = NO; // default to *not* optional
     }
     return self;
@@ -44,12 +50,8 @@
 
 - (void)validateParameters {
     [super validateParameters];
-    
-    NSTimeInterval const ORKTwoFingerTappingMinimumDuration = 5.0;
-    
-    if ( self.stepDuration < ORKTwoFingerTappingMinimumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKTwoFingerTappingMinimumDuration)]  userInfo:nil];
-    }
+
+    ORKValidateBoundedValue(self.stepDuration, ORKTappingIntervalStep.twoFingerTappingMinimumDuration, @"stepDuration", YES);
 }
 
 @end

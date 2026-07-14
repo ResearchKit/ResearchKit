@@ -31,6 +31,7 @@
 
 #import "ORKTitleLabel.h"
 #import "ORKSkin.h"
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKTitleLabel
 
@@ -40,10 +41,15 @@
 }
 
 + (UIFont *)defaultFont {
-    UIFontTextStyle style = ORKTitleLabelFontTextStyleForWindow([UIView new].window);
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:style];
-    UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:style == UIFontTextStyleTitle1 ? (UIFontDescriptorTraitBold | UIFontDescriptorTraitTightLeading) : (UIFontDescriptorTraitBold)];
-    return [UIFont fontWithDescriptor:fontDescriptor size:0];
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleHeadline]
+                scaledFontForFont:[UIFont systemFontOfSize:22.0 weight:UIFontWeightBold]];
+    } else {
+        UIFontTextStyle style = ORKTitleLabelFontTextStyleForWindow([UIView new].window);
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:style];
+        UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:style == UIFontTextStyleTitle1 ? (UIFontDescriptorTraitBold | UIFontDescriptorTraitTightLeading) : (UIFontDescriptorTraitBold)];
+        return [UIFont fontWithDescriptor:fontDescriptor size:0];
+    }
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

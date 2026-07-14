@@ -39,7 +39,6 @@
 #import "ORKSkin.h"
 
 
-static const CGFloat PegViewDiameter = 88.0f;
 static const CGFloat PegViewSeparatorWidth = 2.0f;
 
 
@@ -88,7 +87,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
         [self.progressView setAlpha:0];
         [self addSubview:self.progressView];
         
-        self.pegView = [[ORKHolePegTestRemovePegView alloc] initWithFrame:CGRectMake(0, 0, PegViewDiameter, PegViewDiameter)];
+        self.pegView = [[ORKHolePegTestRemovePegView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegTestViewDiameter, ORKHolePegTestViewDiameter)];
         [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.container addSubview:self.pegView];
         
@@ -98,6 +97,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
         
         self.directionView = [[ORKDirectionView alloc] initWithOrientation:(self.movingDirection == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft];
         [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.directionView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self addSubview:self.directionView];
         
         [self addSubview:self.container];
@@ -141,59 +141,57 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
     }
 
     NSMutableArray *constraintsArray = [NSMutableArray array];
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _container, _pegView, _separatorView, _directionView);
-    NSDictionary *metrics = @{@"diameter": @(PegViewDiameter), @"separator": @(PegViewSeparatorWidth), @"margin": @((1 + self.threshold) * PegViewDiameter)};
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKBodySagittalLeft) ? @"H:|-[_pegView(diameter)]->=0-[_separatorView(separator)]-(margin)-|" : @"H:|-(margin)-[_separatorView(separator)]->=0-[_pegView(diameter)]-|"
-                                             options:NSLayoutFormatAlignAllCenterY
-                                             metrics:metrics views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_container]|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_pegView(diameter)]-(>=0)-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:metrics views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_separatorView]-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView][_container]|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:metrics views:views]];
-    
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.directionView
-                                                             attribute:NSLayoutAttributeCenterX
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1
-                                                              constant:0]];
-    
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.directionView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1
-                                                              constant:0]];
-    
+
+    // Progress view - pinned to top, leading and trailing edges
+    [constraintsArray addObject:[self.progressView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:8]];
+    [constraintsArray addObject:[self.progressView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-8]];
+    [constraintsArray addObject:[self.progressView.topAnchor constraintEqualToAnchor:self.topAnchor]];
+
+    // Container view - fills width, below progress view to bottom
+    [constraintsArray addObject:[self.container.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
+    [constraintsArray addObject:[self.container.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
+    [constraintsArray addObject:[self.container.topAnchor constraintEqualToAnchor:self.progressView.bottomAnchor]];
+    [constraintsArray addObject:[self.container.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]];
+
+    // Position pegView on one side based on moving direction
+    if (self.movingDirection == ORKBodySagittalLeft) {
+        // Peg on left
+        [constraintsArray addObject:[self.pegView.leadingAnchor constraintEqualToAnchor:self.container.leadingAnchor]];
+    } else {
+        // Peg on right
+        [constraintsArray addObject:[self.pegView.trailingAnchor constraintEqualToAnchor:self.container.trailingAnchor]];
+    }
+
+    // Peg view size and vertical centering
+    [constraintsArray addObject:[self.pegView.widthAnchor constraintEqualToConstant:ORKHolePegTestViewDiameter]];
+    [constraintsArray addObject:[self.pegView.heightAnchor constraintEqualToConstant:ORKHolePegTestViewDiameter]];
+    [constraintsArray addObject:[self.pegView.centerYAnchor constraintEqualToAnchor:self.container.centerYAnchor]];
+
+    // Separator view - offset from the edge opposite to the peg by (1 + threshold) * ORKHolePegTestViewDiameter
+    // This intentionally requires the user to drag the peg farther across the screen
+    CGFloat separatorMargin = (1 + self.threshold) * ORKHolePegTestViewDiameter;
+    if (self.movingDirection == ORKBodySagittalLeft) {
+        // Peg on left, separator offset from right edge
+        [constraintsArray addObject:[self.separatorView.trailingAnchor constraintEqualToAnchor:self.container.trailingAnchor constant:-separatorMargin]];
+    } else {
+        // Peg on right, separator offset from left edge
+        [constraintsArray addObject:[self.separatorView.leadingAnchor constraintEqualToAnchor:self.container.leadingAnchor constant:separatorMargin]];
+    }
+    [constraintsArray addObject:[self.separatorView.widthAnchor constraintEqualToConstant:PegViewSeparatorWidth]];
+    [constraintsArray addObject:[self.separatorView.topAnchor constraintEqualToAnchor:self.container.topAnchor constant:8]];
+    [constraintsArray addObject:[self.separatorView.bottomAnchor constraintEqualToAnchor:self.container.bottomAnchor constant:-8]];
+
+    // Direction view - positioned adjacent to the peg, vertically centered
+    if (self.movingDirection == ORKBodySagittalLeft) {
+        // Peg on left, arrows to the right of peg
+        [constraintsArray addObject:[self.directionView.leadingAnchor constraintEqualToAnchor:self.pegView.trailingAnchor constant:8]];
+    } else {
+        // Peg on right, arrows to the left of peg
+        [constraintsArray addObject:[self.directionView.trailingAnchor constraintEqualToAnchor:self.pegView.leadingAnchor constant:-8]];
+    }
+    [constraintsArray addObject:[self.directionView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]];
+
     self.constraints = constraintsArray;
-    [self addConstraints:self.constraints];
-    
     [NSLayoutConstraint activateConstraints:self.constraints];
     [super updateConstraints];
 }
@@ -276,7 +274,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+    return [otherGestureRecognizer.view isDescendantOfView:self];
 }
 
 #pragma mark - peg view delegate

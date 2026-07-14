@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "Achternaam";
 "CONSENT_NAME_PLACEHOLDER" = "Vereist";
 "CONSENT_REVIEW_TITLE" = "Bekijk";
-"CONSENT_REVIEW_INSTRUCTION" = "Lees het formulier hieronder door en tik op 'Akkoord' als je klaar bent om verder te gaan.";
+"CONSENT_REVIEW_INSTRUCTION" = "Lees het formulier hieronder door en tik op ’Akkoord’ als je klaar bent om verder te gaan.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Bekijk";
 "CONSENT_SIGNATURE_TITLE" = "Handtekening";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Onderteken met je vinger in het onderstaande vak.";
@@ -53,24 +53,24 @@
 "CONSENT_LEARN_MORE_TITLE" = "Meer informatie";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Meer informatie over het verzamelen van gegevens";
-"LEARN_MORE_DATA_USE" = "Meer informatie over het gebruik van gegevens";
-"LEARN_MORE_PRIVACY" = "Meer informatie over de bescherming van je privacy en identiteit";
-"LEARN_MORE_WELCOME" = "Meer informatie over het onderzoek";
-"LEARN_MORE_STUDY_SURVEY" = "Meer informatie over de onderzoeksenquête";
-"LEARN_MORE_TIME_COMMITMENT" = "Meer informatie over hoelang het onderzoek duurt";
-"LEARN_MORE_TASKS" = "Meer informatie over wat je moet doen";
-"LEARN_MORE_WITHDRAWING" = "Meer informatie over afzien van deelname";
+"LEARN_MORE_DATA_GATHERING" = "Meer informatie over het verzamelen van gegevens.";
+"LEARN_MORE_DATA_USE" = "Meer informatie over het gebruik van gegevens.";
+"LEARN_MORE_PRIVACY" = "Meer informatie over de bescherming van je privacy en identiteit.";
+"LEARN_MORE_WELCOME" = "Meer informatie over het onderzoek.";
+"LEARN_MORE_STUDY_SURVEY" = "Meer informatie over de onderzoeksenquête.";
+"LEARN_MORE_TIME_COMMITMENT" = "Meer informatie over hoelang het onderzoek duurt.";
+"LEARN_MORE_TASKS" = "Meer informatie over wat je moet doen.";
+"LEARN_MORE_WITHDRAWING" = "Meer informatie over afzien van deelname.";
 
 /* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Opties voor delen";
+"CONSENT_SHARING_TITLE" = "Delingsopties";
 "CONSENT_SHARE_WIDELY_%@" = "Deel mijn gegevens met %@ en gekwalificeerde onderzoekers wereldwijd";
 "CONSENT_SHARE_ONLY_%@" = "Deel mijn gegevens alleen met %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "De resultaten van je deelname aan dit onderzoek worden naar %@ gestuurd.\n\nDoor de gecodeerde onderzoeksgegevens met anderen te delen (zonder persoonlijke gegevens zoals je naam) kun je helpen om dit en toekomstig onderzoek te verbeteren.";
-"LEARN_MORE_CONSENT_SHARING" = "Meer informatie over het delen van gegevens";
+"LEARN_MORE_CONSENT_SHARING" = "Meer informatie over het delen van gegevens.";
 
 /* Lines beneath typewritten signatures on documents.*/
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Naam in hoofdletters";
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Naam in drukletters";
 "CONSENT_DOC_LINE_SIGNATURE" = "Handtekening";
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
@@ -82,7 +82,7 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Overgeslagen";
-"REVIEW_EDIT_ANSWER" = "Wijzig";
+"REVIEW_EDIT_ANSWER" = "WIJZIG";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ongeldige waarde";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Voer een adres in";
 "LOCATION_ERROR_TITLE" = "Opgegeven adres niet gevonden";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "De huidige locatie kan niet worden bepaald. Typ een adres of ga indien nodig naar een plek met een beter gps-signaal.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Toegang tot 'Locatievoorzieningen' is geweigerd. Ga naar Instellingen en geef deze app toestemming om 'Locatievoorzieningen' te gebruiken.";
 "LOCATION_ERROR_GEOCODE" = "Het ingevoerde adres is niet gevonden. Zorg dat je een geldig adres invoert.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Je bent niet verbonden met het internet of je hebt te vaak naar een adres gezocht. Zet om deze vraag te beantwoorden wifi aan als je niet verbonden bent met het internet. Je kunt deze vraag ook overslaan als er een knop 'Sla over' is of verdergaan met deze vragenlijst als de internetverbinding actief is. Of je kunt het over een paar minuten opnieuw proberen.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Je bent niet verbonden met het internet of je hebt te vaak naar een adres gezocht. Zet om deze vraag te beantwoorden wifi aan als je niet verbonden bent met het internet. Je kunt deze vraag ook overslaan als er een knop ’Sla over’ is of verdergaan met deze vragenlijst als de internetverbinding actief is. Of je kunt het over een paar minuten opnieuw proberen.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekst overschrijdt maximale lengte: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekst is beperkt tot %@ tekens";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera niet beschikbaar in gedeeld scherm.";
@@ -129,23 +127,23 @@
 "VERIFICATION_NAV_TITLE" = "Verificatie";
 "VERIFICATION_STEP_TITLE" = "Verifieer je e-mailadres";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Tik op de koppeling hieronder als je geen verificatiemail hebt ontvangen en je deze opnieuw wilt laten versturen.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Stuur controlemail opnieuw";
+"RESEND_EMAIL_BUTTON_TITLE" = "Stuur verificatiemail opnieuw";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggen";
 "FORGOT_PASSWORD_BUTTON_TITLE" = "Wachtwoord vergeten?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Voer toegangscode in";
+"PASSCODE_PROMPT_MESSAGE" = "Voer code in";
 "PASSCODE_CONFIRM_MESSAGE" = "Herhaal toegangscode";
 "PASSCODE_SAVED_MESSAGE" = "Toegangscode bewaard";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Toegangscode geverifieerd";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Voer je oude toegangscode in";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Voer je nieuwe toegangscode in";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Voer oude toegangscode in";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Voer nieuwe toegangscode in";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Herhaal je nieuwe wachtwoord";
 "PASSCODE_INVALID_ALERT_TITLE" = "Toegangscode onjuist";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "De codes komen niet overeen. Probeer het opnieuw.";
-"PASSCODE_TOUCH_ID_MESSAGE" = "Log in met Touch ID";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Authenticeer met Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fout";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Alleen cijfertekens toegestaan.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Voortgangsindicator toegangscode-invoer";
@@ -176,6 +174,13 @@
 "FITZPATRICK_SKIN_TYPE_V" = "Type V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
 
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Type 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Type 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Type 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Type 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Type 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Type 6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Vrouw";
 "GENDER_MALE" = "Man";
@@ -187,7 +192,7 @@
 
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";
-"MEASURING_UNIT_FT" = "vt";
+"MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "inch";
 "MEASURING_UNIT_KG" = "kg";
 "MEASURING_UNIT_LB" = "lb";
@@ -212,7 +217,7 @@
 "BUTTON_APPLY" = "Pas toe";
 "BUTTON_DISAGREE" = "Niet akkoord";
 "BUTTON_DONE" = "Gereed";
-"BUTTON_GET_STARTED" = "Start";
+"BUTTON_GET_STARTED" = "Aan de slag";
 "BUTTON_LEARN_MORE" = "Meer informatie";
 "BUTTON_NEXT" = "Volgende";
 "BUTTON_SKIP" = "Sla over";
@@ -254,7 +259,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Ga %@ gemakkelijk zitten.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Loop %@ zo snel als je kunt.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Tijdens deze activiteit wordt je hartslag gemeten en wordt gekeken hoe ver je in %1$@ kunt lopen.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Loop buiten %1$@ zo snel als je kunt. Ga daarna gemakkelijk zitten en rust %2$@ uit. Tik op 'Start' om te beginnen.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Loop buiten %1$@ zo snel als je kunt. Ga daarna gemakkelijk zitten en rust %2$@ uit. Tik op ’Start’ om te beginnen.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Tred en balans";
@@ -268,7 +273,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Zoek een plek waar je veilig in een rechte lijn heen en weer kunt lopen. Maak aan de einden van de looproute een bocht (alsof je om een pylon heenloopt) zodat je niet hoeft te stoppen.\n\nDaarna wordt je gevraagd om één keer om je as te draaien en vervolgens om stil te staan met je armen langs je lichaam en je voeten uit elkaar op schouderbreedte.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tik op 'Start' als je klaar bent om te beginnen.\nStop het apparaat vervolgens in je zak of tas en volg de audio-instructies.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tik op ’Start’ als je klaar bent om te beginnen.\nStop het apparaat vervolgens in je zak of tas en volg de audio-instructies.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Loop %@ in een rechte lijn heen en weer. Loop zoals je altijd loopt.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Draai één keer om je as en sta vervolgens %@ stil.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Je hebt de activiteit voltooid.";
@@ -285,8 +290,8 @@
 "TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Voer nu dezelfde test uit met je rechterhand.";
 "TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Voer nu dezelfde test uit met je linkerhand.";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "Tik eerst met de ene vinger en dan met de andere. Probeer zo gelijkmatig mogelijk te tikken. Ga %@ door met tikken.";
-"TAPPING_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
-"TAPPING_CALL_TO_ACTION_NEXT" = "Tik op 'Volgende' om te beginnen.";
+"TAPPING_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Tik op ’Volgende’ om te beginnen.";
 "TAP_BUTTON_TITLE" = "Tik";
 "TOTAL_TAPS_LABEL" = "Totaal aantal tikken";
 "TAPPING_INSTRUCTION" = "Tik met twee vingers zo gelijkmatig mogelijk op de knoppen.";
@@ -298,27 +303,27 @@
 "AMSLER_GRID_TITLE" = "Amslerrooster";
 "AMSLER_GRID_INTRO_TEXT" = "Met deze activiteit kun je problemen met het gezichtsvermogen van de gebruiker beter detecteren.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Houd het apparaat gedurende de test 30 centimeter van je gezicht en op ooghoogte.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Sluit je %@ en staar naar de stip in het midden van het vierkante rooster.\n\nGebruik je vinger of stylus en markeer eventuele vervormingen die je ziet, zoals vervaagde of golvende lijnen.\n\nVeeg wanneer je klaar bent naar links buiten het rooster.";
-"AMSLER_GRID_LEFT_EYE" = "linkeroog";
-"AMSLER_GRID_RIGHT_EYE" = "rechteroog";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Sluit je %@ en staar naar de stip in het midden van het vierkante rooster.\n\nGebruik je vinger of stylus en markeer eventuele vervormingen die je ziet, zoals vervaagde of golvende lijnen.\n\nTik wanneer je klaar bent op de knop ’Volgende’.";
+"AMSLER_GRID_LEFT_EYE" = "Linkeroog";
+"AMSLER_GRID_RIGHT_EYE" = "Rechteroog";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stem";
-"AUDIO_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
-"AUDIO_INSTRUCTION" = "Zeg zo lang mogelijk 'aaaaah' in de microfoon.";
-"AUDIO_INTRO_TEXT" = "Haal diep adem en zeg zo lang mogelijk 'aaaaah' in de microfoon. Houd daarbij dezelfde geluidssterkte aan zodat de audiobalken blauw blijven.";
+"AUDIO_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
+"AUDIO_INSTRUCTION" = "Zeg zo lang mogelijk ’aaaaah’ in de microfoon.";
+"AUDIO_INTRO_TEXT" = "Haal diep adem en zeg zo lang mogelijk ’aaaaah’ in de microfoon. Houd daarbij dezelfde geluidssterkte aan zodat de audiobalken blauw blijven.";
 "AUDIO_INTENDED_USE" = "Tijdens deze activiteit wordt je stemgeluid gemeten door dit op te nemen met de microfoon aan de onderkant van je apparaat.";
 "AUDIO_TOO_LOUD_LABEL" = "Te hard";
 "AUDIO_GENERIC_ERROR_LABEL" = "Geluid opnemen niet mogelijk";
 "AUDIO_LEVEL_CHECK_LABEL" = "Even geduld. Het achtergrondgeluid wordt gecontroleerd.";
 "AUDIO_TOO_LOUD_MESSAGE" = "Er is te veel omgevingsgeluid om je stem op te nemen. Ga naar een stillere plek en probeer het opnieuw.";
-"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tik op 'Volgende' als je klaar bent.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tik op ’Volgende’ als je klaar bent.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Toonaudiometrie";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Met deze activiteit wordt gemeten of je verschillende geluiden kunt horen.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Voordat je begint, sluit je je koptelefoon aan en zet je deze op.\n\nHet geluid is erg subtiel en lijkt niet op een normaal waarschuwingssignaal. Het geluid begint zacht en wordt langzaam steeds luider. Luister aandachtig en tik op de linker- of rechterknop om aan te geven in welk oor je het geluid hoorde.";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Je moet nu een toon horen. Pas het volume aan met de knoppen aan de zijkant van je apparaat.\n\nTik op een willekeurige knop wanneer je klaar bent om te beginnen.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Telkens wanneer je een geluid hoort, tik je op de linker- of rechterknop om aan te geven in welk oor je het geluid hoorde.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Linkeroor";
@@ -328,20 +333,20 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toonaudiometrie";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tik wanneer je een toon hoort.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tik op de knop wanneer je een toon hoort.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Toon en volume";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Je hoort een reeks tonen.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Wanneer je een toon hoort, tik je op de knop.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Voor deze test wordt het volume ingesteld op 50 procent.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Deze test duurt ongeveer 10 minuten.";
-"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Schakel 'Niet storen' in om onderbrekingen te voorkomen.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Schakel ’Niet storen’ in om onderbrekingen te voorkomen.";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Er worden eerst tonen in je rechteroor afgespeeld.";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Er worden nu tonen in je linkeroor afgespeeld.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Met deze activiteit bepaal je de gehoordrempelwaarden van een individu op de dB HL-schaal.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Zorg ervoor dat het volume van het apparaat op het hoogste niveau is ingesteld.\n\nTijdens deze taak wordt er een subtiele toon afgespeeld in het linker- of rechteroor.\n\nLuister aandachtig en tik telkens wanneer je een toon hoort op de knop.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Deze test stelt vast hoe hard een geluid moet zijn, zodat jij het kunt horen.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Intakevragenlijst.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \"beter oor\", indien van toepassing";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor “beter oor”, indien van toepassing";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "links";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "rechts";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "geen voorkeur";
@@ -358,36 +363,36 @@
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bloemen";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in dezelfde volgorde als waarin ze oplichtten.";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in de omgekeerde volgorde als waarin ze oplichtten.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen en kijk goed.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen en kijk goed.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Score";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Kijk hoe de %@ oplichten";
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tik op de %@ in de volgorde waarin ze oplichtten";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tik in omgekeerde volgorde op de %@";
 "MEMORY_GAME_COMPLETE_TITLE" = "Volgorde voltooid";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "Tik op 'Ga door' om verder te gaan";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Tik op ’Ga door’ om verder te gaan";
 "MEMORY_GAME_FAILED_TITLE" = "Probeer het opnieuw";
-"MEMORY_GAME_FAILED_MESSAGE" = "Het is niet helemaal gelukt dit keer. Tik op 'Volgende' om verder te gaan.";
+"MEMORY_GAME_FAILED_MESSAGE" = "Het is niet helemaal gelukt dit keer. Tik op ’Volgende’ om verder te gaan.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Tijd is om";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "Je hebt het niet binnen de tijd gehaald.\nTik op 'Volgende' om verder te gaan.";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Je hebt het niet binnen de tijd gehaald.\nTik op ’Volgende’ om verder te gaan.";
 "MEMORY_GAME_COMPLETE" = "Spel voltooid";
 "MEMORY_GAME_PAUSED_TITLE" = "Pauze";
-"MEMORY_GAME_PAUSED_MESSAGE" = "Tik op 'Ga door' om verder te gaan";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Tik op ’Ga door’ om verder te gaan";
 "MEMORY_GAME_COPYRIGHT_TEXT" = "De geheugenactiviteit is ontwikkeld met hulp van Katherine Possin, PhD en Joel Kramer, PhD van de University of California in San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reactietijd";
 "REACTION_TIME_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe snel je op een visuele aanwijzing reageert.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schud het apparaat in een willekeurige richting zodra de blauwe stip op het scherm verschijnt. Je wordt gevraagd om dit %D keer te doen.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Poging %@ van %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Schud het apparaat snel heen en weer als de blauwe cirkel verschijnt";
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Stroop-taak";
-"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Telkens wanneer er een woord verschijnt, selecteer je de eerste letter(s) van de naam van de KLEUR die wordt weergegeven.";
-"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Tik op 'Start' wanneer je klaar bent om de Stroop-taak te starten.";
-"STROOP_TASK_STEP_TEXT" = "Selecteer de eerste letter(s) van de naam van de KLEUR die wordt weergegeven.";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Telkens wanneer er een woord verschijnt, selecteer je de eerste letter van de naam van de KLEUR die wordt weergegeven.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Tik op ’Start’ wanneer je klaar bent om de Stroop-taak te starten.";
+"STROOP_TASK_STEP_TEXT" = "Selecteer de eerste letters van de naam van de KLEUR die wordt weergegeven.";
 "STROOP_COLOR_RED" = "ROOD";
 "STROOP_COLOR_GREEN" = "GROEN";
 "STROOP_COLOR_BLUE" = "BLAUW";
@@ -401,7 +406,7 @@
 "TOWER_OF_HANOI_TASK_TITLE" = "Torens van Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe goed je puzzels kunt oplossen.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Verplaats de hele stapel in zo min mogelijk stappen naar het gemarkeerde platform.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Los de puzzel op";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Aantal stappen: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ik kan deze puzzel niet oplossen";
@@ -421,10 +426,10 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Plaats je apparaat op je rechterknie met het scherm naar boven en de leesrichting van je af, zoals in de afbeelding.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wanneer je klaar bent, tik je op het scherm om te beginnen en strek je je linkerknie zo ver mogelijk uit. Breng je knie terug naar het beginpunt en tik opnieuw wanneer je klaar bent.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wanneer je klaar bent, tik je op het scherm om te beginnen en strek je je rechterknie zo ver mogelijk. Breng je knie terug naar het beginpunt en tik opnieuw wanneer je klaar bent.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Plaats je apparaat op je linkerknie. Tik op het scherm en strek je linkerknie zo ver mogelijk.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Plaats je apparaat op je rechterknie. Tik op het scherm en strek je rechterknie zo ver mogelijk.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Wanneer je klaar bent, breng je je linkerknie terug naar het beginpunt. Tik vervolgens op een willekeurige plaats.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Wanneer je klaar bent, breng je je rechterknie terug naar het beginpunt. Tik vervolgens op een willekeurige plaats.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Plaats je apparaat op je linkerknie.\n\nTik op het scherm en strek je linkerknie zo ver mogelijk.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Plaats je apparaat op je rechterknie.\n\nTik op het scherm en strek je rechterknie zo ver mogelijk.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Wanneer je klaar bent, breng je je linkerknie terug naar het beginpunt.\n\nTik vervolgens op een willekeurige plaats.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Wanneer je klaar bent, breng je je rechterknie terug naar het beginpunt.\n\nTik vervolgens op een willekeurige plaats.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Beweeglijkheid linkerschouder";
@@ -443,10 +448,10 @@
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Wanneer je klaar bent, breng je je rechterarm terug naar het beginpunt. Tik vervolgens op een willekeurige plaats.";
 
 /* Timed walk active task. */
-"TIMED_WALK_TITLE" = "Looptest";
+"TIMED_WALK_TITLE" = "Lopen met tijdmeting";
 "TIMED_WALK_INTRO_DETAIL" = "Met deze activiteit wordt het functioneren van je onderlichaam gemeten.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Zoek een plek, bij voorkeur buiten, waar je veilig zo snel mogelijk ongeveer %@ in een rechte lijn kunt lopen. Vertraag je tempo niet totdat je voorbij de eindstreep bent.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Tik op 'Volgende' om te beginnen.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tik op ’Volgende’ om te beginnen.";
 "TIMED_WALK_FORM_TITLE" = "Loophulpmiddel";
 "TIMED_WALK_FORM_TEXT" = "Gebruik hetzelfde hulpmiddel voor elke test.";
 "TIMED_WALK_QUESTION_TEXT" = "Draag je een enkel-voetorthese?";
@@ -461,7 +466,7 @@
 "TIMED_WALK_INSTRUCTION_%@" = "Loop max. %@ in een rechte lijn.";
 "TIMED_WALK_INSTRUCTION_TURN" = "Keer om.";
 "TIMED_WALK_INSTRUCTION_2" = "Loop terug naar het beginpunt.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tik op 'Volgende' als je klaar bent.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tik op ’Volgende’ als je klaar bent.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -471,7 +476,7 @@
 "PVSAT_INTRO_TEXT" = "Met de PVSAT (een stapsgewijze visuele seriële opteltest) wordt gemeten hoe snel je zichtbare informatie verwerkt en hoe goed je kunt rekenen.";
 "PAVSAT_INTRO_TEXT" = "Met de PAVSAT (een stapsgewijze auditieve en visuele seriële opteltest) wordt gemeten hoe snel je hoorbare en zichtbare informatie verwerkt en hoe goed je kunt rekenen.";
 "PSAT_INTRO_TEXT_2_%@" = "Elke %@ zie en/of hoor je een cijfer.\nJe moet elk nieuw cijfer optellen bij het vorige cijfer.\nLet op: je moet niet het totaal van alle cijfers berekenen, maar alleen de som van de laatste twee cijfers.";
-"PSAT_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"PSAT_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "PSAT_INITIAL_INSTRUCTION" = "Onthoud dit eerste cijfer.";
 "PSAT_INSTRUCTION" = "Tel dit nieuwe cijfer op bij het vorige.";
 "PSAT_NO_DIGIT" = "-";
@@ -482,7 +487,7 @@
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Zowel je linker- als rechterhand wordt getest.\nJe moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat je dit %@ keer hebt gedaan, moet je het schijfje %@ keer weer weghalen.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Zowel je rechter- als linkerhand wordt getest.\nJe moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat je dit %@ keer hebt gedaan, moet je het schijfje %@ keer weer weghalen.";
 
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plaats met je linkerhand het schijfje in de cirkel.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Plaats met je rechterhand het schijfje in de cirkel.";
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Plaats met je linkerhand het schijfje achter de lijn.";
@@ -493,16 +498,16 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Trillingsactiviteit";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Met deze activiteit wordt gemeten hoe sterk je handen trillen in verschillende posities. Ga naar een plek waar je comfortabel kunt zitten gedurende deze activiteit.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Houd de telefoon in de hand waarvan je de meeste last hebt, zoals hieronder afgebeeld.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Houd de telefoon in je RECHTERHAND, zoals hieronder afgebeeld.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Houd de telefoon in je LINKERHAND, zoals hieronder afgebeeld.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Houd de telefoon in de hand waarvan je de meeste last hebt, zoals hierboven afgebeeld.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Houd de telefoon in je RECHTERHAND, zoals hierboven afgebeeld.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Houd de telefoon in je LINKERHAND, zoals hierboven afgebeeld.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Je wordt gevraagd om %@ zittend uit te voeren met de telefoon in je hand.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "een taak";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "twee taken";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "drie taken";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "vier taken";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "vijf taken";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tik op 'Volgende' om door te gaan.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tik op ’Volgende’ om door te gaan.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Bereid je voor om de telefoon in je schoot te houden.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Bereid je voor om de telefoon in je schoot te houden met je LINKERHAND.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Bereid je voor om de telefoon in je schoot te houden met je RECHTERHAND.";
@@ -533,12 +538,12 @@
 "TREMOR_SKIP_NEITHER" = "Ik kan deze activiteit met beide handen uitvoeren.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Test 'Spoor maken'";
+"TRAILMAKING_TASK_TITLE" = "Test ’Spoor maken’";
 "TRAILMAKING_INTENDED_USE" = "Met deze activiteit wordt je visuele aandacht en je vermogen om tussen taken te schakelen gemeten door de tijd vast te leggen die je nodig hebt om in de juiste volgorde op een reeks stippen te tikken.";
-"TRAILMAKING_INTENDED_USE2_A" = "Tik na het aftellen op stippen, waarbij je afwisselend op cijfers en letters tikt. Begin door op het eerste cijfer '1' te tikken, gevolgd door de cijfers '2' – '3' – '4'… totdat je het cijfer '7' bereikt.";
-"TRAILMAKING_INTENDED_USE2_B" = "Tik na het aftellen op stippen, waarbij je afwisselend op cijfers en letters tikt. Begin door op het eerste cijfer '1' te tikken, gevolgd door een tik op de eerste letter 'A', en dan '2' – 'B' – '3' – 'C'… totdat je het cijfer '7' bereikt.";
+"TRAILMAKING_INTENDED_USE2_A" = "Tik na het aftellen op stippen, waarbij je afwisselend op cijfers en letters tikt. Begin door op het eerste cijfer ’1’ te tikken, gevolgd door de cijfers ’2’ – ’3’ – ’4’… totdat je het cijfer ’7’ bereikt.";
+"TRAILMAKING_INTENDED_USE2_B" = "Tik na het aftellen op stippen, waarbij je afwisselend op cijfers en letters tikt. Begin door op het eerste cijfer ’1’ te tikken, gevolgd door een tik op de eerste letter ’A’, en dan ’2’ – ’B’ – ’3’ – ’C’… totdat je het cijfer ’7’ bereikt.";
 "TRAILMAKING_INTRO_TEXT" = "Doe dit zo snel als je kunt zonder fouten te maken. \n ";
-"TRAILMAKING_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"TRAILMAKING_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -549,7 +554,7 @@
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "Spraakherkenning";
 "SPEECH_RECOGNITION_INTRO_TEXT" = "Met deze activiteit neem je spraak op met de microfoon aan de onderzijde van het apparaat, waarna dit naar tekst wordt omgezet.";
-"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tik op ’Start’ om te beginnen.";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "Druk op de knop om de opname te starten voordat je begint met praten.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start opname";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stop opname";
@@ -566,7 +571,7 @@
 "SPEECH_IN_NOISE_INTRO_TEXT" = "Met deze activiteit meet je de verstaanbaarheid van spraak in omgevingen met veel geluid.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Als onderdeel van deze test ga je het volgende doen:\n\nLuister naar een zin.\n\nHerhaal duidelijk wat je hebt gehoord of ga door naar de volgende stap en typ wat je hebt gehoord met het toetsenbord. \n\nAls je herhaalt wat je hebt gehoord, heb je de mogelijkheid om de transcriptie die door de spraakherkenning is gegenereerd, te wijzigen.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volumekalibratie";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tik op 'Speel audio af', zet het volume op een prettig niveau en tik vervolgens op 'Stop audio' om verder te gaan.";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tik op ’Speel audio af’, zet het volume op een prettig niveau en tik vervolgens op ’Stop audio’ om verder te gaan.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Luister";
 "SPEECH_IN_NOISE_STEP_TEXT" = "Er wordt slechts eenmaal een zin afgespeeld, waarbij achtergrondgeluid met een willekeurige signaal-ruisverhouding hoorbaar is.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Spreek";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "SPL-meter";
 "ENVIRONMENTSPL_INTRO_TEXT" = "Met deze activiteit meet je het niveau van de druk van het omgevingsgeluid. Als het ruisniveau te hoog is, kun je niet verdergaan. Ga naar een stillere locatie om deze taak uit te voeren of voer deze taak op een later tijdstip uit.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Berekenen";
+"ENVIRONMENTSPL_CALCULATING" = "Meten…";
 "ENVIRONMENTSPL_THRESHOLD" = "Drempelwaarde: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Achtergrondgeluid OK";
-"ENVIRONMENTSPL_NOISE" = "Te veel geluid op de achtergrond";
+"ENVIRONMENTSPL_OK" = "Goed";
+"ENVIRONMENTSPL_NOISE" = "Te hard";
 "ENVIRONMENTSPL_TITLE_2" = "Zoek een rustige plek op";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "Voor een grotere nauwkeurigheid moet deze test in een rustige omgeving worden uitgevoerd.";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Voor nauwkeurige resultaten moet deze taak worden uitgevoerd op een stille locatie. Wanneer de meting van het achtergrondgeluid is voltooid, mag je doorgaan.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Start taak";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Audiostaafdiagram";
 
 "AX_AMSLER_GRID_LABEL" = "Amslerrooster";
-"AX_AMSLER_GRID_HINT" = "Gebruik je vinger of stylus om rechtstreeks markeringen aan te brengen op het rooster of veeg naar links buiten het rooster om te stoppen.";
+"AX_AMSLER_GRID_HINT" = "Gebruik je vinger of stylus om rechtstreeks markeringen aan te brengen op het rooster of tik op de knop ’Volgende’ om te stoppen.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tikbare knoppen";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tik voor linkeroor";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "Decoderen van restoreData voor initialisatie niet mogelijk";
+"6MWT_HIGH_SCORE" = "10: Veel";
+"6MWT_INSTRUCTIONS_1" = "Zoek een recht wandelpad van minimaal 30 meter lang.";
+"6MWT_INSTRUCTIONS_2" = "Zorg dat er langs het wandelpad voldoende ruimte is om te stoppen en te gaan zitten als dat nodig is.";
+"6MWT_INSTRUCTIONS_3" = "Verhoog het volume van je telefoon tot minimaal 50%.";
+"6MWT_INSTRUCTIONS_4" = "Vraag Siri om de work-out ’Buiten wandelen’ (of ’Binnen wandelen’) op je Apple Watch te starten of start de app Work-out op je Apple Watch en tik op ’Buiten wandelen’ (of ’Binnen wandelen’).";
+"6MWT_INSTRUCTIONS_TITLE" = "Aan de slag";
+"6MWT_INTRO" = "Het doel van deze test is om 6 minuten lang zo ver mogelijk te wandelen in een comfortabel tempo.";
+"6MWT_INTRO_DETAILS" = "Details";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Draag comfortabele kleding en goed passende schoenen. Als je een hulpmiddel gebruikt bij het lopen, kun je dit tijdens de test gebruiken.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Als je niet buiten kunt wandelen, kun je overwegen om de test in een lokaal winkelcentrum te doen.";
+"6MWT_INTRO_DETAIL_TIME" = "Deze test duurt ongeveer 6 minuten.";
+"6MWT_INTRO_DETAIL_WATCH" = "Je hebt je Apple Watch nodig om deze test te doen.";
+"6MWT_LOW_SCORE" = "1: Geen";
+"6MWT_QUESTIONS_BREATH" = "Kortademigheid";
+"6MWT_QUESTIONS_DETAIL" = "Gefeliciteerd met het voltooien van de 6-minutenwandeltest! Beoordeel hoe je je voelt aan de hand van de volgende aspecten.";
+"6MWT_QUESTIONS_FATIGUE" = "Vermoeidheid";
+"6MWT_QUESTIONS_TITLE" = "Goed gedaan";
+"6MWT_TASK_TITLE" = "6-minutenwandeltest";
+"6MWT_TEST_IN_PROGRESS" = "Test wordt uitgevoerd";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Loop zo ver mogelijk over het rechte wandelpad als je kunt in 6 minuten. Als je op adem moet komen, stop je en ga je zitten.";
+"AX_BUTTON" = "Knop";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Wijzig-knop";
+"AX_PAGE_NUMBER_FORMAT" = "Pagina %1$ld van %2$ld";
+"AX_SES_BOTTOM" = "Onder";
+"AX_SES_PERCENT" = "Procent";
+"AX_SES_TOP" = "Boven";
+"BUTTON_PRACTICE_AGAIN" = "Oefen opnieuw";
+"BUTTON_PRACTICE_TEST" = "Oefen test";
+"BUTTON_START_TEST" = "Start test";
+"CONSENT_NAME_SECTION_TITLE" = "Naam";
+"FAMILY_HISTORY_ADD" = "Voeg %@ toe";
+"FAMILY_HISTORY_CANCEL" = "Annuleer";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Taak voltooid";
+"FAMILY_HISTORY_CONDITIONS" = "Aandoeningen";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Zijn een of meer van de volgende ziekten of aandoeningen bij hen vastgesteld door een arts?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Beantwoord deze vragen zo goed mogelijk";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Bevestig gediagnosticeerde ziekten of gezondheidsproblemen.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Aandoeningen";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Wis notitie";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Weet je zeker dat je dit onderdeel uit de gezondheidsgeschiedenis van je familie wilt verwijderen?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Wijzig onderdeel";
+"FAMILY_HISTORY_I_DONT_KNOW" = "Weet ik niet";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Geen van bovenstaande";
+"FAMILY_HISTORY_NONE_SELECTED" = "Niets geselecteerd";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "Ik geef liever geen antwoord";
+"FITNESS_RESUME_TEST" = "Hervat activiteit";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Weet je zeker dat je deze activiteit vroegtijdig wilt beëindigen?";
+"FITNESS_STOP_TEST_DETAIL" = "Je voortgang wordt bewaard en deze test wordt aangemerkt als voltooid.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Verwijder en probeer het opnieuw";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Video-opties";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Bekijk video";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Start opname";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Stop opname";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Verstuur video";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Zowel je rechter- als linkerhand wordt getest.\nJe moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat je dit %@ keer hebt gedaan, moet je het schijfje %@ keer weer weghalen.";
+"MAX_WORD_COUNT_ERROR" = "Je hebt het maximale aantal tekens bereikt";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID-fout";
+"PASSCODE_FACE_ID_MESSAGE" = "Authenticeer met Face ID";
+"PLAY" = "Speel af";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tik op de wachtknop en vervolgens op de blauwe cirkel";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "wacht";
+"RECORD" = "Neem op";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "De studie vraagt om toegang tot gezondheidsgegevens.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Gezondheidsgegevens";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "De studie vraagt om toegang tot de locatiegegevens van je apparaten.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Locatiegegevens";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "De studie vraagt om toegang tot de bewegingsgegevens van je apparaten.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Apparaatbeweging";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "De studie wil je meldingen sturen.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Meldingen";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Gecontroleerd";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Bekijk";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Fout";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Niet ondersteund";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "De studie vraagt om toegang tot de sensorgegevens van je apparaten.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensorgegevens";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Gebruik het toetsenbord";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Opnemen mislukt. Tik om het opnieuw te proberen.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Er is geen spraak gedetecteerd in je opname. Tik om het opnieuw te proberen.";
+"STOP" = "Stop";
+"STROOP_COLOR_ORANGE" = "ORANJE";
+"TC_COMPLETION_DETAIL" = "Gefeliciteerd met het voltooien van de Tecumseh Cube-test!";
+"TC_COMPLETION_TITLE" = "Goed gedaan";
+"TC_INSTRUCTIONS_1" = "Zoek een trede of stoep die ongeveer 20 cm boven de grond uitsteekt.";
+"TC_INSTRUCTIONS_2" = "Verhoog het volume van je iPhone tot minimaal 50%.";
+"TC_INSTRUCTIONS_3" = "Vraag Siri om de work-out ’Trap’ op je Apple Watch te starten of start de app Work-out op je Apple Watch en tik op ’Trap’.";
+"TC_INSTRUCTIONS_TITLE" = "Aan de slag";
+"TC_INTRO" = "Het doel van deze test is om je hartslag te verhogen door 3 minuten op en af een trede of stoep te stappen in het ritme van een beat.";
+"TC_INTRO_DETAILS" = "Details";
+"TC_INTRO_DETAIL_DANGER" = "Als je pijn op de borst of een onaangenaam gevoel krijgt, stop dan direct met deze test.";
+"TC_INTRO_DETAIL_TIME" = "Deze test duurt ongeveer 6 minuten.";
+"TC_INTRO_DETAIL_WATCH" = "Je hebt je Apple Watch nodig om deze test te doen.";
+"TC_REST_IN_PROGRESS" = "Rust uit";
+"TC_REST_IN_PROGRESS_DETAIL" = "Ga zitten en ontspan jezelf 3 minuten zodat je Apple Watch je hartslag in rust kan vastleggen.";
+"TC_TASK_TITLE" = "Tecumseh Cube-test";
+"TC_TEST_IN_PROGRESS" = "Test wordt uitgevoerd";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Stap op en af de trede of stoep in het ritme van de beat";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST WORDT UITGEVOERD";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST WORDT UITGEVOERD \U2022 %@";

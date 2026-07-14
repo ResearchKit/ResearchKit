@@ -30,9 +30,7 @@
 
 #import <Speech/SFTranscription.h>
 #import <Speech/SFTranscriptionSegment.h>
-#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
 #import <Speech/SFSpeechRecognitionMetadata.h>
-#endif
 
 #import <ResearchKit/ORKResult.h>
 
@@ -53,9 +51,7 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) SFTranscription *transcription;
 
-#if defined(__IPHONE_14_5) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_5
-@property (nonatomic, copy, nullable) SFSpeechRecognitionMetadata *recognitionMetadata API_AVAILABLE(ios(14.5));
-#endif
+@property (nonatomic, copy, nullable) SFSpeechRecognitionMetadata *recognitionMetadata;
 
 @end
 

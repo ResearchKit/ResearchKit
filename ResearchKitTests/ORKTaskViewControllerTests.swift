@@ -1,4 +1,3 @@
-//
 /*
  Copyright (c) 2024, Apple Inc. All rights reserved.
  
@@ -29,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import ResearchKitActiveTask_Private
 import ResearchKit
 import ResearchKitUI
 import XCTest
@@ -194,6 +194,8 @@ final class ORKTaskViewControllerTests: XCTestCase {
 
         XCTAssertEqual(initialTaskViewController.task?.identifier, restoredTaskViewController.task?.identifier)
         XCTAssertEqual(initialResult.results?.count, restoredResult.results?.count)
+        XCTAssertEqual(restoredTaskViewController.fileProtectionMode, initialTaskViewController.fileProtectionMode)
+        XCTAssertEqual(restoredTaskViewController.excludesFilesFromBackup, initialTaskViewController.excludesFilesFromBackup)
 
         initialResult.results?.enumerated().forEach({ index, stepResult in
             guard
@@ -257,6 +259,112 @@ final class ORKTaskViewControllerTests: XCTestCase {
         })
     }
 
+    func testFileProtectionModeDefaultIsComplete() {
+        let task = createTask()
+        let taskVC = ORKTaskViewController(task: task, taskRun: nil)
+        XCTAssertEqual(taskVC.fileProtectionMode, .complete)
+    }
+
+    func testFileProtectionModeSerializationRoundTrip() {
+        let task = createTask()
+        let taskVC = ORKTaskViewController(task: task, taskRun: nil)
+        taskVC.fileProtectionMode = .completeUnlessOpen
+        let delegate = FauxTaskViewController()
+        delegate.expectation = taskCompletionExpectation
+        taskVC.delegate = delegate
+
+        mockPresentTaskViewController(taskViewController: taskVC)
+        wait(for: [taskCompletionExpectation!], timeout: 2.0)
+
+        guard let restoredData = taskVC.restorationData else {
+            XCTFail("Unable to get restoration data")
+            return
+        }
+
+        let restoredVC = ORKTaskViewController(
+            task: task,
+            restorationData: restoredData,
+            delegate: FauxTaskViewController(),
+            error: nil
+        )
+
+        XCTAssertEqual(restoredVC.fileProtectionMode, .completeUnlessOpen)
+    }
+
+    func testExcludesFilesFromBackupDefaultIsFalse() {
+        let task = createTask()
+        let taskVC = ORKTaskViewController(task: task, taskRun: nil)
+        XCTAssertFalse(taskVC.excludesFilesFromBackup)
+    }
+
+    func testExcludesFilesFromBackupSerializationRoundTrip() {
+        let task = createTask()
+        let taskVC = ORKTaskViewController(task: task, taskRun: nil)
+        taskVC.excludesFilesFromBackup = true
+        let delegate = FauxTaskViewController()
+        delegate.expectation = taskCompletionExpectation
+        taskVC.delegate = delegate
+
+        mockPresentTaskViewController(taskViewController: taskVC)
+        wait(for: [taskCompletionExpectation!], timeout: 2.0)
+
+        guard let restoredData = taskVC.restorationData else {
+            XCTFail("Unable to get restoration data")
+            return
+        }
+
+        let restoredVC = ORKTaskViewController(
+            task: task,
+            restorationData: restoredData,
+            delegate: FauxTaskViewController(),
+            error: nil
+        )
+
+        XCTAssertTrue(restoredVC.excludesFilesFromBackup)
+    }
+
+    func testPSATStepViewControllerUsesStepTextWhenSet() throws {
+        // Given
+        let stepText = "Custom Instruction Text"
+
+        // When
+        let viewController = psatStepViewController(stepText: stepText)
+        viewController.loadViewIfNeeded()
+
+        // Then
+        let activeStepView = try XCTUnwrap(viewController.activeStepView)
+        XCTAssertEqual(activeStepView.stepText, stepText)
+    }
+
+    func testPSATStepViewControllerUsesDefaultTextWhenStepTextIsNil() throws {
+        // Given
+        let stepText: String? = nil
+
+        // When
+        let viewController = psatStepViewController(stepText: stepText)
+        viewController.loadViewIfNeeded()
+
+        // Then
+        let activeStepView = try XCTUnwrap(viewController.activeStepView)
+        XCTAssertEqual(
+            activeStepView.stepText,
+            ORKLocalizedHiddenString("PSAT_INITIAL_INSTRUCTION")
+        )
+    }
+
+    private func psatStepViewController(stepText: String?) -> ORKPSATStepViewController {
+        let step = ORKPSATStep(identifier: "psatStep")
+        step.presentationMode = .visual
+        step.interStimulusInterval = 3.0
+        step.stimulusDuration = 2.0
+        step.seriesLength = 3
+        step.stepDuration = 12.0
+        step.title = "Custom Title"
+        step.text = stepText
+
+        return ORKPSATStepViewController(step: step)
+    }
+    
     func mockPresentTaskViewController(taskViewController: ORKTaskViewController) {
         guard
             let orderedTask = taskViewController.task as? ORKOrderedTask,

@@ -30,7 +30,7 @@
 
 
 #import "ORKBodyLabel.h"
-
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKBodyLabel
 
@@ -40,7 +40,12 @@
 }
 
 + (UIFont *)defaultFont {
-    return [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2]
+                scaledFontForFont:[UIFont systemFontOfSize:22.0 weight:UIFontWeightRegular]];
+    } else {
+        return [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    }
 }
 
 @end

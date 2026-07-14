@@ -38,6 +38,7 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
+#import "ORKNavigationContainerView_Internal.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKTowerOfHanoiResult.h"
 #import "ORKTowerOfHanoiStep.h"
@@ -53,7 +54,8 @@ static const NSUInteger NumberOfTowers = 3;
 
 @property (nonatomic, strong) NSDateComponentsFormatter *dateComponentsFormatter;
 @property (nonatomic, strong) NSMutableArray *moves;
-
+@property (nonatomic, strong) NSLayoutConstraint *verticalCenter;
+@property (nonatomic, strong) NSLayoutConstraint *gameContentViewHeight;
 @end
 
 
@@ -75,18 +77,47 @@ static const NSUInteger NumberOfTowers = 3;
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     _towerOfHanoiCustomView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
-    
+
     [self setUpTowers];
     [self setUpTowerViews];
     [self reloadData];
     NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT", nil);
     NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT", nil);
     [self.activeStepView updateTitle:title text:text];
+    if ([self.activeStepView.stepDetailText length] == 0) {
+        self.activeStepView.stepDetailText = @" "; //Allows bottom space to expand when top text collapses and game area stays fixed.
+    }
+
+    [self.activeStepView.navigationFooterView setUseNextForSkip:NO];
+    [self setNavigationFooterViewHidden:![self.step isOptional]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_timer invalidate];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    /// The ActiveSteViewController calls [self start] if shouldStartTimerAutomatically is true.
+    /// If shouldStartTimerAutomatically is false, we call it ourselves to make sure any provided recorders begin collection.
+    if (!((ORKTowerOfHanoiStep *)self.step).shouldStartTimerAutomatically && !self.started) {
+        [self start];
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (self.verticalCenter == nil) {
+        self.verticalCenter = [_towerOfHanoiCustomView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor];
+        [self.verticalCenter setActive:YES];
+    }
+    if (self.gameContentViewHeight == nil) {
+        CGFloat gameContentViewHeight = [_towerOfHanoiCustomView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        self.gameContentViewHeight = [_towerOfHanoiCustomView.heightAnchor constraintEqualToConstant:gameContentViewHeight];
+        [self.gameContentViewHeight setActive:YES];
+    }
 }
 
 - (void)updateViewConstraints {
@@ -122,7 +153,7 @@ static const NSUInteger NumberOfTowers = 3;
     if (_firstMoveDate != nil) {
         result.startDate = _firstMoveDate;
     }
-    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
+    stepResult.results = [stepResult.results arrayByAddingObject:result] ? : @[result];
     return stepResult;
 }
 
@@ -273,7 +304,7 @@ static const NSUInteger NumberOfTowers = 3;
 }
 
 - (NSArray *)compactConstraints {
-    CGFloat compactWidth = ([[UIScreen mainScreen]bounds].size.height - (3 * 8)) / 3;
+    CGFloat compactWidth = (self.view.bounds.size.height - (3 * 8)) / 3;
     NSDictionary *views = @{ @"A": _towerViews[0], @"B": _towerViews[1], @"C": _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
 

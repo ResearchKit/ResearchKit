@@ -42,15 +42,15 @@
 
 @interface ORKFrontFacingCameraStepOptionsView : UIVisualEffectView
 
-@property (nonatomic, strong) ORKIconButton *reviewVideoButton;
-@property (nonatomic, strong) ORKIconButton *deleteAndRetryVideoButton;
+@property (nonatomic, strong) UIButton *reviewVideoButton;
+@property (nonatomic, strong) UIButton *deleteAndRetryVideoButton;
 @property (nonatomic, strong) UIButton *submitVideoButton;
+@property (nonatomic, strong) ORKTitleLabel *titleLabel;
 
 @end
 
 @implementation ORKFrontFacingCameraStepOptionsView {
     NSMutableArray *_constraints;
-    ORKTitleLabel *_titleLabel;
 }
 
 - (instancetype)initWithEffect:(UIVisualEffect *)effect {
@@ -58,7 +58,6 @@
     
     if (self) {
         [self setupSubviews];
-        [self setUpConstraints];
     }
     return self;
 }
@@ -69,71 +68,128 @@
     self.clipsToBounds = YES;
 }
 
-- (void)setupSubviews {
-    _titleLabel = [ORKTitleLabel new];
-    _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [_titleLabel setTextColor:[UIColor whiteColor]];
-    _titleLabel.text = ORKLocalizedString(@"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE", nil);
-    [self.contentView addSubview:_titleLabel];
-
-    UIImage *reviewButtonIcon = [UIImage systemImageNamed:@"video.fill"];
-    _reviewVideoButton = [[ORKIconButton alloc] initWithButtonText:ORKLocalizedString(@"FRONT_FACING_CAMERA_REVIEW_VIDEO", nil) buttonIcon: reviewButtonIcon];
-    _reviewVideoButton.tag = 0;
-    _reviewVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.contentView addSubview:_reviewVideoButton];
-    
-    UIImage *deleteAndRetryButtonIcon = [UIImage systemImageNamed:@"trash.fill"];
-    _deleteAndRetryVideoButton = [[ORKIconButton alloc] initWithButtonText:ORKLocalizedString(@"FRONT_FACING_CAMERA_RETRY_VIDEO", nil) buttonIcon: deleteAndRetryButtonIcon];
-    _deleteAndRetryVideoButton.tag = 1;
-    _deleteAndRetryVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_deleteAndRetryVideoButton updateTextAndImageColor:[UIColor redColor]];
-    [self.contentView addSubview:_deleteAndRetryVideoButton];
-    
-    _submitVideoButton = [UIButton new];
-    _submitVideoButton.tag = 2;
-    _submitVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
-    _submitVideoButton.layer.cornerRadius = 10.0;
-    _submitVideoButton.clipsToBounds = YES;
-    _submitVideoButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
-    [_submitVideoButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    [_submitVideoButton setBackgroundColor:[UIColor systemBlueColor]];
-    [_submitVideoButton setTitleEdgeInsets:UIEdgeInsetsMake(5.0, 8.0, 5.0, 8.0)];
-    [_submitVideoButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_SUBMIT_VIDEO", nil) forState:UIControlStateNormal];
-    [self.contentView addSubview:_submitVideoButton];
+- (void)applyDefaultConfiguration:(UIButtonConfiguration *)configuration API_AVAILABLE(ios(15.0)) {
+    configuration.buttonSize = UIButtonConfigurationSizeLarge;
+    configuration.titleAlignment = UIButtonConfigurationTitleAlignmentLeading;
+    configuration.imagePlacement = NSDirectionalRectEdgeTrailing;
+    configuration.cornerStyle = UIButtonConfigurationCornerStyleDynamic;
+    NSDirectionalEdgeInsets contentInsets = configuration.contentInsets;
+    contentInsets.leading = ORKSmallContentLayoutMargins.leading;
+    contentInsets.trailing = ORKSmallContentLayoutMargins.trailing;
+    configuration.contentInsets = contentInsets;
 }
 
-- (void)setUpConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
+- (UIButtonConfiguration *)buttonConfigurationWithForegroundColor:(UIColor *)foregroundColor API_AVAILABLE(ios(15.0)) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        if (@available(iOS 26.0, *)) {
+            UIButtonConfiguration *configuration = [UIButtonConfiguration glassButtonConfiguration];
+            configuration.baseForegroundColor = foregroundColor;
+            [self applyDefaultConfiguration:configuration];
+            return configuration;
+        }
     }
-    
-    _constraints = [NSMutableArray array];
-    
-    [_constraints addObject: [_titleLabel.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:25.0]];
-    [_constraints addObject: [_titleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:20.0]];
-    [_constraints addObject: [_titleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-20.0]];
-    
-    //reviewVideoButton constraints
-    [_constraints addObject:[_reviewVideoButton.topAnchor constraintEqualToAnchor:_titleLabel.bottomAnchor constant:40.0]];
-    [_constraints addObject:[_reviewVideoButton.leadingAnchor constraintEqualToAnchor:_titleLabel.leadingAnchor]];
-    [_constraints addObject:[_reviewVideoButton.trailingAnchor constraintEqualToAnchor:_titleLabel.trailingAnchor]];
-    [_constraints addObject:[_reviewVideoButton.heightAnchor constraintEqualToConstant:50.0]];
-    
-    //deleteAndRetryButton constraints
-    [_constraints addObject:[_deleteAndRetryVideoButton.topAnchor constraintEqualToAnchor:_reviewVideoButton.bottomAnchor constant:15.0]];
-    [_constraints addObject:[_deleteAndRetryVideoButton.leadingAnchor constraintEqualToAnchor:_titleLabel.leadingAnchor]];
-    [_constraints addObject:[_deleteAndRetryVideoButton.trailingAnchor constraintEqualToAnchor:_titleLabel.trailingAnchor]];
-    [_constraints addObject:[_deleteAndRetryVideoButton.heightAnchor constraintEqualToConstant:50.0]];
-    
-    //submitVideoButton constraints
-    [_constraints addObject:[_submitVideoButton.leadingAnchor constraintEqualToAnchor:_titleLabel.leadingAnchor]];
-    [_constraints addObject:[_submitVideoButton.trailingAnchor constraintEqualToAnchor:_titleLabel.trailingAnchor]];
-    [_constraints addObject:[_submitVideoButton.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-20.0]];
-    [_constraints addObject:[_submitVideoButton.heightAnchor constraintEqualToConstant:50.0]];
-    
-    [NSLayoutConstraint activateConstraints:_constraints];
+    return [UIButtonConfiguration plainButtonConfiguration];
+}
+
+- (UIButtonConfiguration *)prominentButtonConfigurationWithForegroundColor:(UIColor *)foregroundColor API_AVAILABLE(ios(15.0)) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        if (@available(iOS 26.0, *)) {
+            UIButtonConfiguration *configuration = [UIButtonConfiguration prominentGlassButtonConfiguration];
+            configuration.baseForegroundColor = foregroundColor;
+            [self applyDefaultConfiguration:configuration];
+            return configuration;
+        }
+    }
+    return [UIButtonConfiguration borderedProminentButtonConfiguration];
+}
+
+- (UIButton *)deleteAndRetryVideoButton {
+    if (_deleteAndRetryVideoButton == nil) {
+        UIImageSymbolConfiguration *imageConfig = [UIImageSymbolConfiguration configurationPreferringMulticolor];
+        UIImage *deleteAndRetryButtonIcon = [[UIImage systemImageNamed:@"trash.fill"] imageByApplyingSymbolConfiguration:imageConfig];
+        _deleteAndRetryVideoButton = [UIButton buttonWithConfiguration:[self buttonConfigurationWithForegroundColor:[UIColor systemRedColor]] primaryAction:nil];
+        [_deleteAndRetryVideoButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentFill];
+        [_deleteAndRetryVideoButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_RETRY_VIDEO", nil) forState:UIControlStateNormal];
+        [_deleteAndRetryVideoButton setImage:deleteAndRetryButtonIcon forState:UIControlStateNormal];
+        _deleteAndRetryVideoButton.tag = 1;
+        _deleteAndRetryVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _deleteAndRetryVideoButton;
+}
+
+- (UIButton *)reviewVideoButton  {
+    if (_reviewVideoButton == nil) {
+        UIImage *reviewButtonIcon = [UIImage systemImageNamed:@"video.fill"];
+        UIImageSymbolConfiguration *imageConfig = [UIImageSymbolConfiguration configurationPreferringMulticolor];
+        reviewButtonIcon = [reviewButtonIcon imageByApplyingSymbolConfiguration:imageConfig];
+        _reviewVideoButton = [UIButton buttonWithConfiguration:[self buttonConfigurationWithForegroundColor:[UIColor labelColor]] primaryAction:nil];
+        [_reviewVideoButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentFill];
+        [_reviewVideoButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_REVIEW_VIDEO", nil) forState:UIControlStateNormal];
+        [_reviewVideoButton setImage:reviewButtonIcon forState:UIControlStateNormal];
+        _reviewVideoButton.tag = 0;
+        _reviewVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _reviewVideoButton;
+}
+
+- (UIButton *)submitVideoButton {
+    if (_submitVideoButton == nil) {
+        _submitVideoButton = [UIButton buttonWithConfiguration:[self prominentButtonConfigurationWithForegroundColor:[UIColor labelColor]] primaryAction:nil];
+        _submitVideoButton.tag = 2;
+        _submitVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _submitVideoButton.layer.cornerRadius = 10.0;
+        _submitVideoButton.clipsToBounds = YES;
+        _submitVideoButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
+        [_submitVideoButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        [_submitVideoButton setBackgroundColor:[UIColor systemBlueColor]];
+        [_submitVideoButton setTitle:ORKLocalizedString(@"FRONT_FACING_CAMERA_SUBMIT_VIDEO", nil) forState:UIControlStateNormal];
+    }
+    return _submitVideoButton;
+}
+
+- (ORKTitleLabel *)titleLabel {
+    if (_titleLabel == nil) {
+        _titleLabel = [ORKTitleLabel new];
+        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [_titleLabel setTextColor:[UIColor whiteColor]];
+        _titleLabel.text = ORKLocalizedString(@"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE", nil);
+    }
+    return _titleLabel;
+}
+
+- (void)setupSubviews {
+    const CGFloat verticalSpaceBetweenTitleLabelAndContent = 40.0;
+    const CGFloat verticalContentOffset = 40.0; // Prior to this minor refactor to UIStackView,
+                                                // this value was to move the titleLabel vertically
+                                                // appear to simulate it's location in the hidden Navigation Bar.
+
+    UIStackView *contentStack = [[UIStackView alloc] initWithArrangedSubviews:@[
+        self.titleLabel,
+        self.reviewVideoButton,
+        self.deleteAndRetryVideoButton,
+        [UIView new],
+        self.submitVideoButton
+    ]];
+    contentStack.spacing = 15;
+    contentStack.axis = UILayoutConstraintAxisVertical;
+    contentStack.distribution = UIStackViewDistributionFill;
+    contentStack.alignment = UIStackViewAlignmentFill;
+    contentStack.layoutMarginsRelativeArrangement = YES;
+    contentStack.translatesAutoresizingMaskIntoConstraints = NO;
+    [contentStack setCustomSpacing:verticalSpaceBetweenTitleLabelAndContent afterView:self.titleLabel];
+    contentStack.directionalLayoutMargins = ORKBottomSafeAreaDirectionalEdgeInsetsFrom(ORKLargeContentLayoutMargins);
+
+    [self.contentView addSubview:contentStack];
+    self.contentView.preservesSuperviewLayoutMargins = NO;
+
+    [NSLayoutConstraint activateConstraints:@[
+        [self.contentView.topAnchor constraintEqualToAnchor:contentStack.topAnchor constant:verticalContentOffset],
+        [self.contentView.layoutMarginsGuide.bottomAnchor constraintEqualToAnchor:contentStack.bottomAnchor],
+        [self.contentView.layoutMarginsGuide.leadingAnchor constraintEqualToAnchor:contentStack.leadingAnchor],
+        [self.contentView.layoutMarginsGuide.trailingAnchor constraintEqualToAnchor:contentStack.trailingAnchor],
+    ]];
 }
 
 @end
@@ -182,16 +238,32 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     return self;
 }
 
-- (void)setupSubviews {
-    _startStopButton = [UIButton new];
-    _startStopButton.layer.cornerRadius = 14.0;
-    _startStopButton.clipsToBounds = YES;
-    _startStopButton.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
-    UIFontDescriptor *descriptorOne = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    _startStopButton.titleLabel.font = [UIFont boldSystemFontOfSize:[[descriptorOne objectForKey: UIFontDescriptorSizeAttribute] doubleValue] + 1.0];
+- (UIButton *)startStopButton {
+    if (_startStopButton == nil) {
+        UIButtonConfiguration *configuration;
+        if (ORKLiquidGlassSupportEnabled()) {
+            if (@available(iOS 26.0, *)) {
+                configuration = [UIButtonConfiguration prominentGlassButtonConfiguration];
+            } else {
+                configuration = [UIButtonConfiguration plainButtonConfiguration];
+            }
+        } else {
+            configuration = [UIButtonConfiguration plainButtonConfiguration];
+        }
+        configuration.contentInsets = NSDirectionalEdgeInsetsMake(0, 6, 0, 6);
+        _startStopButton = [UIButton buttonWithConfiguration:configuration primaryAction:nil];
+        _startStopButton.layer.cornerRadius = 14.0;
+        _startStopButton.clipsToBounds = YES;
+        UIFontDescriptor *descriptorOne = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
+        _startStopButton.titleLabel.font = [UIFont boldSystemFontOfSize:[[descriptorOne objectForKey: UIFontDescriptorSizeAttribute] doubleValue] + 1.0];
 
-    [self.contentView addSubview:_startStopButton];
-    
+    }
+    return _startStopButton;
+}
+
+- (void)setupSubviews {
+    [self.contentView addSubview:self.startStopButton];
+
     _timerLabel = [UILabel new];
     _timerLabel.font = [UIFont systemFontOfSize:15.0];
     _timerLabel.adjustsFontSizeToFitWidth = YES;
@@ -234,13 +306,13 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     _timerLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _detailTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [[_startStopButton.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:20.0] setActive:YES];
+
+    [[_startStopButton.leadingAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leadingAnchor constant:20.0] setActive:YES];
     [[_startStopButton.trailingAnchor constraintEqualToAnchor:_timerLabel.leadingAnchor constant:-15.0] setActive:YES];
-    [[_startStopButton.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-20.0] setActive:YES];
-    [[_startStopButton.heightAnchor constraintEqualToConstant:50.0] setActive:YES];
+    [[_startStopButton.bottomAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor constant:-20.0] setActive:YES];
+    [[_startStopButton.heightAnchor constraintGreaterThanOrEqualToConstant:50.0] setActive:YES];
     
-    [[_timerLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-20.0] setActive:YES];
+    [[_timerLabel.trailingAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.trailingAnchor constant:-20.0] setActive:YES];
     [[_timerLabel.centerYAnchor constraintEqualToAnchor:_startStopButton.centerYAnchor] setActive:YES];
     [[_timerLabel.widthAnchor constraintEqualToConstant:40.0] setActive:YES];
     
@@ -428,7 +500,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     _previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
     _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     _previewLayer.needsDisplayOnBoundsChange = YES;
-    _previewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
     
     [_cameraView.layer addSublayer:_previewLayer];
 }
@@ -457,8 +528,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKStartStopButtonState) {
     [self addSubview:_headerView];
     [NSLayoutConstraint activateConstraints:@[
         [_headerView.topAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.topAnchor],
-        [_headerView.leftAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leftAnchor],
-        [_headerView.rightAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.rightAnchor],
+        [_headerView.leadingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leadingAnchor],
+        [_headerView.trailingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.trailingAnchor],
     ]];
     
     [self invokeViewEventHandlerWithEvent:ORKFrontFacingCameraStepContentViewEventError];

@@ -75,6 +75,7 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
     LAContext *_touchContext;
     ORKPasscodeType _authenticationPasscodeType;
     BOOL _useTouchId;
+    ORKPasscodeFlow _effectivePasscodeFlow;
 }
 
 - (ORKPasscodeStep *)passcodeStep {
@@ -91,6 +92,15 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
     _passcodeStepView = nil;
     
     if (self.step && [self isViewLoaded]) {
+        // Set the starting passcode state and textfield based on flow.
+        ORKPasscodeStep *passcodeStep = [self passcodeStep];
+        
+        if (passcodeStep.passcodeFlow == ORKPasscodeFlowCreate && [ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+            ORK_Log_Debug("[ResearchKit] ORKPasscodeStep: passcodeFlow is ORKPasscodeFlowCreate but a passcode is already stored in the keychain. Call +[ORKPasscodeViewController removePasscodeFromKeychain] before presenting this step if you intend to replace the existing passcode. Falling back to ORKPasscodeFlowAuthenticate.");
+            _effectivePasscodeFlow = ORKPasscodeFlowAuthenticate;
+        } else {
+            _effectivePasscodeFlow = passcodeStep.passcodeFlow;
+        }
         
         [self.taskViewController setNavigationBarColor:ORKColor(ORKBackgroundColorKey)];
         [self.view setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
@@ -125,7 +135,7 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
         _useTouchId = [self passcodeStep].useBiometrics;
         
         // If this has text, we should add the forgot passcode button with this title
-        if ([self hasForgotPasscode]) {
+        if ([self hasForgotPasscode:_effectivePasscodeFlow]) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         
@@ -134,7 +144,9 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
             CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
 
             UIButton *forgotPasscodeButton = [ORKTextButton new];
-            forgotPasscodeButton.contentEdgeInsets = (UIEdgeInsets){12, 10, 8, 10};
+            UIButtonConfiguration *config = [UIButtonConfiguration plainButtonConfiguration];
+            config.contentInsets = NSDirectionalEdgeInsetsMake(12, 10, 8, 10);
+            forgotPasscodeButton.configuration = config;
             forgotPasscodeButton.frame = CGRectMake(x, _originalForgotPasscodeY, width, kForgotPasscodeHeight);
             
             NSString *buttonTitle = [self forgotPasscodeButtonText];
@@ -146,10 +158,8 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
             [self.view addSubview:forgotPasscodeButton];            
             _forgotPasscodeButton = forgotPasscodeButton;
         }
-        
-        // Set the starting passcode state and textfield based on flow.
-        ORKPasscodeStep *passcodeStep = [self passcodeStep];
-        switch (passcodeStep.passcodeFlow) {
+
+        switch (_effectivePasscodeFlow) {
             case ORKPasscodeFlowCreate:
                 _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:passcodeStep.passcodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
@@ -170,7 +180,7 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
         
         // If Touch ID was enabled then present it for authentication flow.
         if (_useTouchId &&
-            passcodeStep.passcodeFlow == ORKPasscodeFlowAuthenticate) {
+            _effectivePasscodeFlow == ORKPasscodeFlowAuthenticate) {
             [self promptTouchId];
         }
         
@@ -238,11 +248,6 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    // Destructive: Only clear the passcode when the step starts in creation mode
-    if ([self passcodeStep].passcodeFlow == ORKPasscodeFlowCreate) {
-        [self removePasscodeFromKeychain];
-    }
     
     if (!_shouldResignFirstResponder) {
         [self.view layoutIfNeeded]; // layout pass might be required before showing the keyboard
@@ -404,11 +409,11 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
 }
 
 - (BOOL)canIgnoreError:(NSError *)error {
-    return ([self passcodeStep].passcodeFlow == ORKPasscodeFlowCreate || [self passcodeStep].passcodeFlow == ORKPasscodeFlowEdit) && error.code == LAErrorBiometryNotAvailable;
+    return (_effectivePasscodeFlow == ORKPasscodeFlowCreate || _effectivePasscodeFlow == ORKPasscodeFlowEdit) && error.code == LAErrorBiometryNotAvailable;
 }
 
 - (void)moveForwardOrShowTextEntry {
-    if ([self passcodeStep].passcodeFlow == ORKPasscodeFlowCreate || [self passcodeStep].passcodeFlow == ORKPasscodeFlowEdit) {
+    if (_effectivePasscodeFlow == ORKPasscodeFlowCreate || _effectivePasscodeFlow == ORKPasscodeFlowEdit) {
         [self finishTouchId];
     } else {
         [self makePasscodeViewBecomeFirstResponder];
@@ -445,7 +450,7 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
                     _isTouchIdAuthenticated = YES;
                     
                     // Send a delegate callback for authentication flow.
-                    if ([strongSelf passcodeStep].passcodeFlow == ORKPasscodeFlowAuthenticate) {
+                    if (_effectivePasscodeFlow == ORKPasscodeFlowAuthenticate) {
                         [strongSelf.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:strongSelf];
                     }
                     
@@ -495,18 +500,17 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
 
 - (void)finishTouchId {
     // Only save to keychain if it is not in authenticate flow.
-    ORKPasscodeFlow passcodeFlow = [self passcodeStep].passcodeFlow;
-    if (passcodeFlow != ORKPasscodeFlowAuthenticate) {
+    if (_effectivePasscodeFlow != ORKPasscodeFlowAuthenticate) {
         [self savePasscodeToKeychain];
     }
     
-    if (passcodeFlow == ORKPasscodeFlowCreate) {
+    if (_effectivePasscodeFlow == ORKPasscodeFlowCreate) {
         // If it is in creation flow (consent step), go to the next step.
         [self goForward];
-    } else if (passcodeFlow == ORKPasscodeFlowAuthenticate) {
+    } else if (_effectivePasscodeFlow == ORKPasscodeFlowAuthenticate) {
         // If it is in authentication flow (any task), go to the next step.
         [self goForward];
-    } else if (passcodeFlow == ORKPasscodeFlowEdit) {
+    } else if (_effectivePasscodeFlow == ORKPasscodeFlowEdit) {
         // If it is in editing flow, send a delegate callback.
         [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
     }
@@ -564,7 +568,7 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
     _authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
     
-    if ([self passcodeStep].passcodeFlow == ORKPasscodeFlowAuthenticate) {
+    if (_effectivePasscodeFlow == ORKPasscodeFlowAuthenticate) {
         _useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
     }
 }
@@ -776,7 +780,7 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             ORKStrongTypeOf(self) strongSelf = weakSelf;
             
-            switch ([strongSelf passcodeStep].passcodeFlow) {
+            switch (_effectivePasscodeFlow) {
                 case ORKPasscodeFlowCreate:
                     [strongSelf passcodeFlowCreate];
                     break;
@@ -805,8 +809,8 @@ NSString * const ORKPasscodeStepViewAccessibilityIdentifier = @"ORKPasscodeStepV
     }
 }
 
-- (BOOL)hasForgotPasscode {
-    if (([self passcodeStep].passcodeFlow == ORKPasscodeFlowAuthenticate) &&
+- (BOOL)hasForgotPasscode:(ORKPasscodeFlow)passcodeFlow {
+    if ((passcodeFlow == ORKPasscodeFlowAuthenticate) &&
         [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerForgotPasscodeTapped:)]) {
         return YES;
     }

@@ -46,11 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKNavigationContainerView ()
 
-@property (nonatomic, strong, readonly) ORKContinueButton *continueButton;
-@property (nonatomic, strong, readonly) ORKBorderedButton *skipButton;
+@property (nonatomic, strong, readonly) UIStackView *contentView;
+@property (nonatomic, strong, readonly) UIButton *continueButton;
+@property (nonatomic, strong, readonly) UIButton *skipButton;
 @property (nonatomic, strong, readonly) ORKFootnoteLabel *footnoteLabel;
-@property (nonatomic, strong, readonly) ORKBorderedButton *cancelButton;
 @property (nonatomic, strong, readonly) ORKLabel *detailTextLabel;
+
+@property (nonatomic, assign) BOOL shouldAddFooterPadding;
 
 @property (nonatomic) BOOL useNextForSkip;
 @property (nonatomic, getter=isOptional) BOOL optional;

@@ -63,11 +63,17 @@
     
     _stepContentView = [ORK3DModelStepContentView new];
     _stepContentView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     self.activeStepView.activeCustomView = _stepContentView;
-    self.activeStepView.customContentFillsAvailableSpace = NO;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     self.activeStepView.navigationFooterView.neverHasContinueButton = NO;
     
-    [[_stepContentView.bottomAnchor constraintEqualToAnchor:self.activeStepView.navigationFooterView.topAnchor] setActive:YES];
+    self.view.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
+    [self.view setNeedsLayout];
+    self.activeStepView.contentLayoutMargins = NSDirectionalEdgeInsetsZero;
+    self.activeStepView.scrollContentLayoutMargins = NSDirectionalEdgeInsetsZero;
+    
+    [_stepContentView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(disableContinueButton:)

@@ -53,10 +53,10 @@
 }
 
 - (void)init_ORKLabel {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateAppearance)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
+    self.adjustsFontForContentSizeCategory = YES;
+    [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKLabel *traitChangeView, UITraitCollection *previousTraitCollection) {
+        [traitChangeView updateAppearance];
+    }];
     self.font = [[self class] defaultFont];
     [self updateAppearance];
 }
@@ -71,13 +71,11 @@
     [self invalidateIntrinsicContentSize];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 + (UIFont *)defaultFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
-    return ORKMediumFontWithSize(((NSNumber *)[descriptor objectForKey: UIFontDescriptorSizeAttribute]).doubleValue + 3.0);
+    // 3pt larger than the system subheadline size, matching the original ORKLabel design.
+    CGFloat baseSize = ORKDefaultFontSizeForTextStyle(UIFontTextStyleSubheadline) + 3.0;
+    UIFont *baseFont = [UIFont systemFontOfSize:baseSize weight:UIFontWeightMedium];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleSubheadline] scaledFontForFont:baseFont];
 }
 
 @end

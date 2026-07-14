@@ -39,7 +39,7 @@
 "CONSENT_SIGNATURE_TITLE" = "Подпись";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Распишитесь пальцем в поле ниже.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Место для подписи";
-"CONSENT_PAGE_NUMBER_FORMAT" = "Стр. %1$ld из %2$ld";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Страница %1$ld из %2$ld";
 
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "Добро пожаловать!";
@@ -47,27 +47,27 @@
 "CONSENT_SECTION_PRIVACY" = "Личные данные";
 "CONSENT_SECTION_DATA_USE" = "Использование данных";
 "CONSENT_SECTION_STUDY_SURVEY" = "Опрос";
-"CONSENT_SECTION_STUDY_TASKS" = "Задачи";
+"CONSENT_SECTION_STUDY_TASKS" = "Задания";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Соглашение о времени";
 "CONSENT_SECTION_WITHDRAWING" = "Отказ от участия";
 "CONSENT_LEARN_MORE_TITLE" = "Подробнее";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Подробнее о сборе данных";
-"LEARN_MORE_DATA_USE" = "Подробнее об использовании данных";
-"LEARN_MORE_PRIVACY" = "Подробнее о конфиденциальности и защите личной информации";
-"LEARN_MORE_WELCOME" = "Подробнее об исследовании";
-"LEARN_MORE_STUDY_SURVEY" = "Подробнее об опросе";
-"LEARN_MORE_TIME_COMMITMENT" = "Подробнее о том, сколько времени занимает исследование";
-"LEARN_MORE_TASKS" = "Подробнее о задачах, включенных в исследование";
-"LEARN_MORE_WITHDRAWING" = "Подробнее об отказе от участия";
+"LEARN_MORE_DATA_GATHERING" = "Узнайте больше о сборе данных.";
+"LEARN_MORE_DATA_USE" = "Узнайте больше об использовании данных.";
+"LEARN_MORE_PRIVACY" = "Узнайте больше о защите Вашей конфиденциальности и личной информации.";
+"LEARN_MORE_WELCOME" = "Узнайте больше об исследовании.";
+"LEARN_MORE_STUDY_SURVEY" = "Узнайте больше об опросе.";
+"LEARN_MORE_TIME_COMMITMENT" = "Узнайте больше о том, сколько времени занимает исследование.";
+"LEARN_MORE_TASKS" = "Узнайте больше о заданиях в составе исследования.";
+"LEARN_MORE_WITHDRAWING" = "Узнайте больше об отказе от участия.";
 
 /* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Параметры предоставления данных";
+"CONSENT_SHARING_TITLE" = "Параметры экспорта";
 "CONSENT_SHARE_WIDELY_%@" = "Предоставлять мои данные %@ и мировому научному сообществу.";
 "CONSENT_SHARE_ONLY_%@" = "Предоставлять мои данные только %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ получат данные о Вашем участии в этом исследовании.\n\nПредоставление этих данных (без Вашей личной информации) научному сообществу может помочь этому и будущим исследованиям.";
-"LEARN_MORE_CONSENT_SHARING" = "Подробнее о предоставлении данных";
+"LEARN_MORE_CONSENT_SHARING" = "Узнайте больше о предоставлении доступа к данным.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Имя и фамилия печатными буквами";
@@ -82,10 +82,10 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Пропущено";
-"REVIEW_EDIT_ANSWER" = "Изменить";
+"REVIEW_EDIT_ANSWER" = "ИЗМЕНИТЬ";
 
 /* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Недопустимое значение";
+"RANGE_ALERT_TITLE" = "Недействительное значение";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ превышает максимально допустимое значение (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ меньше минимально допустимого значения (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "Недопустимое значение: %@.";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Введите адрес";
 "LOCATION_ERROR_TITLE" = "Указанный адрес не найден";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Не удается устранить проблему с текущей геопозицией. Введите адрес или переместитесь в геопозицию с лучшим GPS‑сигналом, если возможно.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "В доступе к службам геолокации отказано. Разрешите этой программе использовать службы геолокации в Настройках.";
 "LOCATION_ERROR_GEOCODE" = "Не удается найти результат по введенному адресу. Убедитесь, что адрес действителен.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Вы не подключены к Интернету или превысили максимальное количество запросов на поиск адресов. Если Вы не подключены к Интернету, включите Wi‑Fi, чтобы ответить на это вопрос; пропустите этот вопрос, если кнопка «Пропустить» доступна; или вернитесь к опросу после подключения к Интернету. В противном случае, повторите попытку через несколько минут.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Превышены максимальная длина текста: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Максимальное число символов — %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Камера недоступна в разделенном экране.";
@@ -128,8 +126,8 @@
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Проверка";
 "VERIFICATION_STEP_TITLE" = "Проверка e‑mail";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Нажмите ссылку ниже, если Вы не получили e‑mail с подтверждением и хотите, чтобы он был отправлен повторно.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Повторно отправить e‑mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Коснитесь ссылки ниже, если Вы не получили e‑mail с подтверждением и хотите, чтобы он был отправлен повторно.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Повторно отправить проверочный e‑mail";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Вход";
@@ -169,12 +167,19 @@
 "BLOOD_TYPE_O-" = "0(I)Rh‑";
 
 /* Fitzpatrick Skin types */
-"FITZPATRICK_SKIN_TYPE_I" = "Тип I";
-"FITZPATRICK_SKIN_TYPE_II" = "Тип II";
-"FITZPATRICK_SKIN_TYPE_III" = "Тип III";
-"FITZPATRICK_SKIN_TYPE_IV" = "Тип IV";
-"FITZPATRICK_SKIN_TYPE_V" = "Тип V";
-"FITZPATRICK_SKIN_TYPE_VI" = "Тип VI";
+"FITZPATRICK_SKIN_TYPE_I" = "Фототип I";
+"FITZPATRICK_SKIN_TYPE_II" = "Фототип II";
+"FITZPATRICK_SKIN_TYPE_III" = "Фототип III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Фототип IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Фототип V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Фототип VI";
+
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Фототип 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Фототип 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Фототип 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Фототип 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Фототип 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Фототип 6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "Женский";
@@ -218,7 +223,7 @@
 "BUTTON_SKIP" = "Пропустить";
 "BUTTON_SKIP_QUESTION" = "Пропустить этот вопрос";
 "BUTTON_START_TIMER" = "Запустить таймер";
-"BUTTON_OPTION_SAVE" = "Сохранить на потом";
+"BUTTON_OPTION_SAVE" = "Сохранить";
 "BUTTON_OPTION_DISCARD" = "Сбросить результаты";
 "BUTTON_OPTION_STOP_TASK" = "Завершить";
 "BUTTON_SAVE" = "Сохранить";
@@ -240,7 +245,7 @@
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Камера не найдена. Невозможно завершить этот шаг.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Для выполнения этого шага необходимо в Настройках разрешить этой программе доступ к камере.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Не указана папка для сохранения полученных изображений.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Не удается сохранить полученное изображение.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Не удалось сохранить полученное изображение.";
 
 /* Video capture step. */
 "CAPTURE_BUTTON_CAPTURE_VIDEO" = "Начать запись";
@@ -254,7 +259,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Сядьте поудобнее и сидите %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Идите %@ с максимальной скоростью.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Во время выполнения этого задания программа следит за частотой Вашего пульса и измеряет расстояние, которое Вы пройдете за %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Пройдите %1$@ по улице с максимальной скоростью. После этого удобно сядьте и отдыхайте %2$@. Коснитесь «Начать», чтобы приступить.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Пройдите %1$@ по улице с максимальной скоростью. После этого удобно сядьте и отдыхайте в течение %2$@. Коснитесь «Начать», чтобы приступить.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Координация";
@@ -298,16 +303,16 @@
 "AMSLER_GRID_TITLE" = "Сетка Амслера";
 "AMSLER_GRID_INTRO_TEXT" = "Это задание позволяет установить наличие проблем со зрением.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Во время теста держите устройство на уровне глаз и в 30 сантиметрах от лица.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Закройте %@ и смотрите на точку в центре сетки.\n\nИспользуя стилус или палец, отметьте любые дефекты сетки, которые заметите, например, волны или искривления линий сетки.\n\nКогда будете готовы, смахните влево в любом месте, где нет сетки.";
-"AMSLER_GRID_LEFT_EYE" = "левый глаз";
-"AMSLER_GRID_RIGHT_EYE" = "правый глаз";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Закройте %@ и смотрите на точку в центре сетки.\n\nОтметьте пальцем или стилусом любые дефекты сетки, которые заметите, например волны или искривления линий.\n\nКогда закончите, коснитесь кнопки «Далее».";
+"AMSLER_GRID_LEFT_EYE" = "Левый глаз";
+"AMSLER_GRID_RIGHT_EYE" = "Правый глаз";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Голос";
 "AUDIO_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
 "AUDIO_INSTRUCTION" = "Произносите «Ааааа» в микрофон как можно дольше.";
 "AUDIO_INTRO_TEXT" = "Сделайте глубокий вдох и произнесите «Ааааа» в микрофон как можно дольше. Сохраняйте такую громкость голоса, чтобы полоски звука на диаграмме оставались синими.";
-"AUDIO_INTENDED_USE" = "Во время выполнения этого задания оцениваются характеристики Вашего голоса, который записывается микрофоном, расположенным в нижней части устройства.";
+"AUDIO_INTENDED_USE" = "Во время выполнения этого задания оцениваются характеристики Вашего голоса, который записывается с помощью микрофона, расположенного в нижней части устройства.";
 "AUDIO_TOO_LOUD_LABEL" = "Слишком громко";
 "AUDIO_GENERIC_ERROR_LABEL" = "Не удается записать аудио.";
 "AUDIO_LEVEL_CHECK_LABEL" = "Подождите, пока устройство измерит уровень фонового шума.";
@@ -317,9 +322,9 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Аудиометрия";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Во время выполнения этого задания оценивается способность слышать различные звуки.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Сначала подключите наушники к устройству, а затем наденьте их.\n\nЗвук будет очень слабым, не похожим на обычный сигнал предупреждения.  Сначала звук будет тихим, а затем громкость будет постепенно нарастать.  Сосредоточьтесь и касайтесь левой или правой кнопки в зависимости от того, каким ухом Вы слышите сигнал.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Сначала подключите наушники к устройству, а затем наденьте их.\n\nЗвук будет очень слабым, не похожим на обычный звук предупреждения.  Сначала звук будет тихим, а затем громкость будет постепенно нарастать.  Сосредоточьтесь и касайтесь левой или правой кнопки в зависимости от того, каким ухом Вы слышите звук.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Сейчас Вы должны слышать сигнал. Отрегулируйте громкость при помощи боковых кнопок устройства.\n\nКоснитесь любой кнопки, когда будете готовы начать.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Сейчас Вы должны слышать звук. Отрегулируйте громкость при помощи боковых кнопок устройства.\n\nКоснитесь любой кнопки, когда будете готовы начать.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Каждый раз, когда слышите звук, определяйте, каким ухом Вы слышите его, и с учетом этого касайтесь левой или правой кнопки.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Левое ухо";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Правое ухо";
@@ -328,10 +333,10 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Аудиометрия";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Касайтесь, когда услышите звук.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Касайтесь кнопки, когда услышите звук.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Звук и громкость";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Вы услышите последовательность звуков.";
-"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Нажимайте кнопку, когда услышите звук.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Касайтесь кнопки, когда услышите звук.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Для этого теста громкость будет установлена на 50 процентов.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Этот тест займет около 10 минут.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Включите режим «Не беспокоить», чтобы не прерываться.";
@@ -349,7 +354,7 @@
 "dBHL_ALERT_TITLE_START_OVER" = "Начать снова";
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "Отменить тест";
 "dBHL_ALERT_TEXT" = "Чтобы пройти тест, переподключите свои наушники AirPods или EarPods.";
-"dBHL_PROGRESS_COMPLETION_%@" = "Выполнено %@";
+"dBHL_PROGRESS_COMPLETION_%@" = "Завершено на %@";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Пространственная память";
@@ -365,14 +370,14 @@
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Коснитесь изображений (%@) в том порядке, в котором они подсвечивались";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Коснитесь изображений (%@) в обратном порядке";
 "MEMORY_GAME_COMPLETE_TITLE" = "Задание выполнено";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "Нажмите «Далее», чтобы продолжить";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Коснитесь «Далее», чтобы продолжить";
 "MEMORY_GAME_FAILED_TITLE" = "Повторить";
 "MEMORY_GAME_FAILED_MESSAGE" = "В этот раз Вы не совсем справились с заданием. Коснитесь «Далее», чтобы продолжить.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Время истекло";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "Время истекло.\nНажмите «Далее», чтобы продолжить.";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Время истекло.\nКоснитесь «Далее», чтобы продолжить.";
 "MEMORY_GAME_COMPLETE" = "Игра завершена";
 "MEMORY_GAME_PAUSED_TITLE" = "Пауза";
-"MEMORY_GAME_PAUSED_MESSAGE" = "Нажмите «Далее», чтобы продолжить";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Коснитесь «Далее», чтобы продолжить";
 "MEMORY_GAME_COPYRIGHT_TEXT" = "Задание для оценки памяти было подготовлено при участии доктора философских наук Кэтрин Поссин и доктора философских наук Джоэла Крамера из Калифорнийского университета в Сан-Франциско.";
 
 /* Reaction time active task. */
@@ -399,7 +404,7 @@
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Ханойская башня";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Во время выполнения этого задания проверяется способность решать головоломки.";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Во время выполнения этого задания проверяется способность решать сложные вопросы.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Переместите всю стопку на отмеченное цветом место за наименьшее число ходов.";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Решить задачу";
@@ -417,30 +422,30 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Во время выполнения этого задания оценивается подвижность правого коленного сустава.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Сядьте на край стула. Сперва положите устройство на левую ногу, ближе к колену: это необходимо для оценивания. Включите звук на устройстве для прослушивания инструкций.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Сядьте на край стула. Сперва положите устройство на правую ногу, ближе к колену: это необходимо для оценивания. Включите звук на устройстве для прослушивания инструкций.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Положите устройство экраном вверх на левую ногу, ближе к колену, как показано на картинке.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Положите устройство экраном вверх на правую ногу, ближе к колену, как показано на картинке.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и максимально разогните левое колено. Вернитесь в начальное положение и коснитесь экрана снова, когда будете готовы.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и максимально разогните правое колено. Вернитесь в начальное положение и коснитесь экрана снова, когда будете готовы.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Положите устройство на левое колено. Коснитесь экрана и максимально разогните левое колено.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Положите устройство на правое колено. Коснитесь экрана и максимально разогните правое колено.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Когда будете готовы, верните левое колено в начальное положение. Затем коснитесь экрана.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Когда будете готовы, верните правое колено в начальное положение. Затем коснитесь экрана.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Положите устройство экраном вниз на левую ногу, ближе к колену, как показано на картинке.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Положите устройство экраном вниз на правую ногу, ближе к колену, как показано на картинке.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и отведите левое колено как можно дальше. Вернитесь в начальное положение и коснитесь снова, когда будете готовы.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и отведите правое колено как можно дальше. Вернитесь в начальное положение и коснитесь снова, когда будете готовы.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Положите устройство на левое колено.\n\nКоснитесь экрана и отведите левое колено как можно дальше.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Положите устройство на правое колено.\n\nКоснитесь экрана и отведите правое колено как можно дальше.\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Когда будете готовы, верните левое колено в начальное положение.\n\nЗатем коснитесь в любом месте экрана.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Когда будете готовы, верните правое колено в начальное положение.\n\nЗатем коснитесь в любом месте экрана.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Амплитуда движений левого плечевого сустава";
 "SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Амплитуда движений правого плечевого сустава";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Во время выполнения этого задания оценивается подвижность левого плечевого сустава.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Во время выполнения этого задания оценивается подвижность правого плечевого сустава.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Сперва положите устройство на левое надплечье, ближе к плечу: это необходимо для оценивания. Включите звук на устройстве для прослушивания инструкций.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Сперва положите устройство на правое надплечье, ближе к плечу: это необходимо для оценивания. Включите звук на устройстве для прослушивания инструкций.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Положите устройство экраном вверх на левое плечо, как показано на картинке.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Положите устройство экраном вверх на правое плечо, как показано на картинке.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и поднимите левую руку как можно выше. Вернитесь в начальное положение и коснитесь экрана снова, когда будете готовы.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и поднимите правую руку как можно выше. Вернитесь в начальное положение и коснитесь экрана снова, когда будете готовы.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Положите устройство на левое плечо. Коснитесь экрана и поднимите левую руку как можно выше.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Положите устройство на правое плечо. Коснитесь экрана и поднимите правую руку как можно выше.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Когда будете готовы, верните левую руку в начальное положение. Затем коснитесь экрана.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Когда будете готовы, верните правую руку в начальное положение. Затем коснитесь экрана.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Сперва положите устройство на левое плечо: это необходимо для оценки. Включите звук на устройстве для прослушивания инструкций.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Сперва положите устройство на правое плечо: это необходимо для оценки. Включите звук на устройстве для прослушивания инструкций.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Положите устройство экраном вниз на левое надплечье, ближе к плечу, как показано на картинке.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Положите устройство экраном вниз на правое надплечье, ближе к плечу, как показано на картинке.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и поднимите левую руку как можно выше. Вернитесь в начальное положение и коснитесь снова, когда будете готовы.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Когда будете готовы, коснитесь экрана, чтобы начать, и поднимите правую руку как можно выше. Вернитесь в начальное положение и коснитесь снова, когда будете готовы.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Положите устройство на левое плечо. Коснитесь экрана и отведите левую руку вперед как можно дальше.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Положите устройство на правое плечо. Коснитесь экрана и отведите правую руку вперед как можно дальше.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Когда будете готовы, верните левую руку в начальное положение. Затем коснитесь в любом месте.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Когда будете готовы, верните правую руку в начальное положение. Затем коснитесь в любом месте.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Ходьба на время";
@@ -450,7 +455,7 @@
 "TIMED_WALK_FORM_TITLE" = "Вспомогательные приспособления";
 "TIMED_WALK_FORM_TEXT" = "Используйте одно и тоже вспомогательное приспособление для всех упражнений.";
 "TIMED_WALK_QUESTION_TEXT" = "Вы носите голеностопный ортез?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Вы пользуетесь вспомогательными приспособлениями?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Вы пользуетесь каким-либо вспомогательным приспособлением?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Коснитесь, чтобы выбрать ответ.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Нет";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Одна трость";
@@ -470,7 +475,7 @@
 "PASAT_INTRO_TEXT" = "В слуховом тесте на сложение с заданным темпом измеряются способность обрабатывать аудиальную информацию, а также способность к вычислениям.";
 "PVSAT_INTRO_TEXT" = "В визуальном тесте на сложение с заданным темпом измеряются способность обрабатывать визуальную информацию, а также способность к вычислениям.";
 "PAVSAT_INTRO_TEXT" = "В слуховом и визуальном тестах на сложение с заданным темпом измеряются способности обрабатывать аудиальную и визуальную информацию, а также способность к вычислениям.";
-"PSAT_INTRO_TEXT_2_%@" = "С частотой в %@ будет появляться однозначное число.\nПрибавляйте каждое новое число к предыдущему.\nВнимание! Вычислять общую сумму не нужно — просто складывайте два последних числа.";
+"PSAT_INTRO_TEXT_2_%@" = "С частотой в %@ с будет появляться однозначное число.\nПрибавляйте каждое новое число к предыдущему.\nВнимание! Вычислять общую сумму не нужно — просто складывайте два последних числа.";
 "PSAT_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
 "PSAT_INITIAL_INSTRUCTION" = "Запомните эту первую цифру.";
 "PSAT_INSTRUCTION" = "Прибавьте это новое число к предыдущему.";
@@ -479,7 +484,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Тест «Вставляем %@ колышков»";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Во время выполнения этого задания оценивается работоспособность верхних конечностей. Вам предложат поместить колышек в лунку %@ раз(а).";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Проверены будут обе руки: левая и правая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Будут проверены обе руки: левая и правая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), убрать его снова %@ раз(а).";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Проверены будут обе руки: правая и левая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
@@ -493,9 +498,9 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Измерение дрожания рук";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Во время выполнения этого задания оценивается дрожание рук в различных положениях. Найдите удобное место, где бы Вы могли сидеть во время выполнения задания.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Держите телефон, как показано на изображении ниже, той рукой, дрожь которой сильнее.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Держите телефон ПРАВОЙ рукой, как показано на изображении ниже.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Держите телефон ЛЕВОЙ рукой, как показано на изображении ниже.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Держите телефон, как показано на изображении выше, той рукой, дрожь которой сильнее.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Держите телефон ПРАВОЙ рукой, как показано на изображении выше.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Держите телефон ЛЕВОЙ рукой, как показано на изображении выше.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Вам нужно будет выполнить %@ в сидячем положении, держа телефон в руке.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "одно задание";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "два задания";
@@ -548,7 +553,7 @@
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "Распознавание речи";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "Во время выполнения этого задания Ваша речь записывается микрофоном, расположенным в нижней части устройства, и переводится в текст.";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Во время выполнения этого задания Ваша речь записывается с помощью микрофона, расположенного в нижней части устройства, и переводится в текст.";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "Нажмите кнопку, чтобы начать запись до проговаривания.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Начать запись";
@@ -563,7 +568,7 @@
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Воспроизвести аудио";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Остановить аудио";
 "SPEECH_IN_NOISE_TITLE" = "Проговаривание на фоне шума";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "Во время выполнения этого задания оценивается четкость и ясность речи в шумном окружении.";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Во время выполнения этого задания оценивается четкость и ясность речи в шумной обстановке.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Во время этого теста от Вас потребуется:\n\nПрослушать предложение.\n\nЧетко и ясно повторить то, что услышали, или пропустить эту часть и ввести услышанный текст с помощью клавиатуры. \n\nЕсли Вы произнесете то, что услышали, Вы сможете внести изменения в расшифровку, созданную системой распознавания речи.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Калибровка громкости";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Коснитесь «Воспроизвести аудио», отрегулируйте громкость до нужного уровня, а затем коснитесь «Остановить аудио», чтобы продолжить.";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "Шумомер";
 "ENVIRONMENTSPL_INTRO_TEXT" = "Это задание направлено на измерение звукового давления окружающей среды. Если уровень шума слишком высокий, выполнить задание не удастся. Потребуется пройти в тихое место или выполнить это задание в другое время.";
 "ENVIRONMENTSPL_UNIT" = "дБА";
-"ENVIRONMENTSPL_CALCULATING" = "Вычисление";
+"ENVIRONMENTSPL_CALCULATING" = "Измерение…";
 "ENVIRONMENTSPL_THRESHOLD" = "Порог: %@ дБА";
-"ENVIRONMENTSPL_OK" = "Приемлемый уровень фонового шума";
-"ENVIRONMENTSPL_NOISE" = "Вокруг слишком шумно";
+"ENVIRONMENTSPL_OK" = "Нормально";
+"ENVIRONMENTSPL_NOISE" = "Слишком громко";
 "ENVIRONMENTSPL_TITLE_2" = "Найдите тихое место";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "Для получения достоверного результата этот тест необходимо проводить в тихом месте.";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Для получения достоверных результатов следует выполнить это задание в тихом месте. После измерения фонового шума можно будет приступить к заданию.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Начать задание";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Столбчатый график звука";
 
 "AX_AMSLER_GRID_LABEL" = "Сетка Амслера";
-"AX_AMSLER_GRID_HINT" = "Отметьте участки сетки стилусом или пальцем или смахните влево в любом месте, где нет сетки, чтобы закончить тест.";
+"AX_AMSLER_GRID_HINT" = "Отмечайте участки сетки пальцем или стилусом. Либо коснитесь кнопки «Далее», чтобы закончить тест.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Поддержка касания для кнопок";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Коснитесь для левого уха";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "Не удалось декодировать данные restoreData для инициализации";
+"6MWT_HIGH_SCORE" = "10: сильная";
+"6MWT_INSTRUCTIONS_1" = "Найдите место, где Вы можете пройти как минимум 30 метров по прямой.";
+"6MWT_INSTRUCTIONS_2" = "Убедитесь, что на этом пути Вы сможете остановиться и сесть при необходимости.";
+"6MWT_INSTRUCTIONS_3" = "Установите на телефоне уровень громкости не менее 50 %.";
+"6MWT_INSTRUCTIONS_4" = "На Apple Watch запустите тренировку по ходьбе на улице (или на дорожке): попросите об этом Siri либо запустите приложение «Тренировка», а затем коснитесь «Ходьба на улице» (или «Ходьба на дорожке»).";
+"6MWT_INSTRUCTIONS_TITLE" = "Приступим!";
+"6MWT_INTRO" = "Ваша задача — пройти как можно большее расстояние в комфортном для Вас темпе за 6 минут.";
+"6MWT_INTRO_DETAILS" = "Подробнее";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Наденьте удобную одежду и обувь. Если обычно Вы пользуетесь поддержкой при ходьбе, используйте ее и во время теста.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Если у Вас нет возможности ходить на открытом воздухе, попробуйте выполнить этот тест в местном торговом центре.";
+"6MWT_INTRO_DETAIL_TIME" = "Этот тест займет около 6 минут.";
+"6MWT_INTRO_DETAIL_WATCH" = "Для этого теста Вам понадобятся часы Apple Watch.";
+"6MWT_LOW_SCORE" = "1: совсем нет";
+"6MWT_QUESTIONS_BREATH" = "Одышка";
+"6MWT_QUESTIONS_DETAIL" = "Поздравляем с завершением 6‑минутного теста ходьбы! Оцените, как Вы себя чувствуете по следующей шкале.";
+"6MWT_QUESTIONS_FATIGUE" = "Усталость";
+"6MWT_QUESTIONS_TITLE" = "Отлично!";
+"6MWT_TASK_TITLE" = "6‑минутный тест ходьбы";
+"6MWT_TEST_IN_PROGRESS" = "Выполняется тестирование";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Пройдите по прямой так далеко, как сможете, за 6 минут. Если Вам нужно перевести дыхание, остановитесь и присядьте.";
+"AX_BUTTON" = "Кнопка";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Кнопка редактирования";
+"AX_PAGE_NUMBER_FORMAT" = "Страница %1$ld из %2$ld";
+"AX_SES_BOTTOM" = "Внизу";
+"AX_SES_PERCENT" = "Процент";
+"AX_SES_TOP" = "Вверху";
+"BUTTON_PRACTICE_AGAIN" = "Пройти еще раз";
+"BUTTON_PRACTICE_TEST" = "Пройти тест";
+"BUTTON_START_TEST" = "Начать тестирование";
+"CONSENT_NAME_SECTION_TITLE" = "Название";
+"FAMILY_HISTORY_ADD" = "Добавить: %@";
+"FAMILY_HISTORY_CANCEL" = "Отменить";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Задача выполнена";
+"FAMILY_HISTORY_CONDITIONS" = "Состояния";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "У кого-нибудь из Вашей семьи были диагностированы любые из следующих заболеваний или состояний здоровья?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Постарайтесь максимально точно ответить на эти вопросы.";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Подтвердите данные о поставленных диагнозах или состояниях здоровья.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Состояния здоровья";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Удалить запись";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Вы действительно хотите удалить эту запись из истории здоровья Вашей семьи?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Редактировать запись";
+"FAMILY_HISTORY_I_DONT_KNOW" = "Не знаю";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Ничего из перечисленного";
+"FAMILY_HISTORY_NONE_SELECTED" = "Ничего не выбрано";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "Предпочитаю не отвечать";
+"FITNESS_RESUME_TEST" = "Возобновить упражнение";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Вы действительно хотите завершить это упражнение досрочно?";
+"FITNESS_STOP_TEST_DETAIL" = "Ваш прогресс будет сохранен, и этот тест будет отмечен как выполненный.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Удалить и повторить попытку";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Параметры видео";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Просмотреть видео";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Начать запись";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Остановить запись";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Отправить видео";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Будут проверены обе руки: правая и левая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), убрать его снова %@ раз(а).";
+"MAX_WORD_COUNT_ERROR" = "Достигнуто максимальное количество символов";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Ошибка Face ID";
+"PASSCODE_FACE_ID_MESSAGE" = "Выполните аутентификацию с Face ID";
+"PLAY" = "Воспроизвести";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Коснитесь кнопки задержки, а затем — синего круга";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "задержка";
+"RECORD" = "Записать";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Это исследование запрашивает доступ к медданным.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Медданные";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "Это исследование запрашивает доступ к данным о геопозиции, хранящимся на Ваших устройствах.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Геоданные";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Это исследование запрашивает доступ к данным о движении, хранящимся на Ваших устройствах.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Перемещение устройства";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Это исследование хочет отправлять Вам уведомления.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Уведомления";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Проверено";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Проверка";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Ошибка";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Не поддерживается";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "Это исследование запрашивает доступ к данным с датчиков, хранящимся на Ваших устройствах.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Данные с датчиков";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Использовать вместо этого клавиатуру";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Не удалось записать. Коснитесь, чтобы повторить попытку.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "В записи не обнаружена речь. Коснитесь, чтобы повторить попытку.";
+"STOP" = "Остановить";
+"STROOP_COLOR_ORANGE" = "ОРАНЖЕВЫЙ";
+"TC_COMPLETION_DETAIL" = "Поздравляем с выполнением шагового теста Текумсе!";
+"TC_COMPLETION_TITLE" = "Отлично!";
+"TC_INSTRUCTIONS_1" = "Найдите ступеньку высотой около 20 см (8 дюймов) от земли.";
+"TC_INSTRUCTIONS_2" = "Установите на iPhone уровень громкости не менее 50 %.";
+"TC_INSTRUCTIONS_3" = "На Apple Watch запустите тренировку по ходьбе по лестнице: попросите об этом Siri либо запустите приложение «Тренировка», коснитесь «Добавить тренировку» и выберите «Лестница».";
+"TC_INSTRUCTIONS_TITLE" = "Приступим!";
+"TC_INTRO" = "Ваша задача — поднять частоту своего пульса, поднимаясь и спускаясь на одну ступеньку в течение 3 минут и при этом следуя ритму.";
+"TC_INTRO_DETAILS" = "Подробнее";
+"TC_INTRO_DETAIL_DANGER" = "Если Вы ощутите дискомфорт или боль в груди, немедленно прекратите этот тест.";
+"TC_INTRO_DETAIL_TIME" = "Этот тест займет около 6 минут.";
+"TC_INTRO_DETAIL_WATCH" = "Для этого теста Вам понадобятся часы Apple Watch.";
+"TC_REST_IN_PROGRESS" = "Отдохните";
+"TC_REST_IN_PROGRESS_DETAIL" = "Присядьте и отдохните в течение 3 минут, пока часы Apple Watch записывают Ваш пульс в покое.";
+"TC_TASK_TITLE" = "Шаговый тест Текумсе";
+"TC_TEST_IN_PROGRESS" = "Выполняется тест";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Ступайте вверх и вниз по ступеньке, следуя ритму";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "ВЫПОЛНЯЕТСЯ ТЕСТИРОВАНИЕ";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "ВЫПОЛНЯЕТСЯ ТЕСТИРОВАНИЕ \U2022 %@";

@@ -29,6 +29,7 @@
  */
 
 #import "ORKTagLabel.h"
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKTagLabel
 
@@ -42,17 +43,22 @@ static const CGFloat verticalInset = 4;
         self.clipsToBounds = YES;
         self.layer.cornerRadius = 2.0;
         self.font = [ORKTagLabel font];
-        self.textColor = [UIColor systemGrayColor];
-        self.backgroundColor = [UIColor tertiarySystemGroupedBackgroundColor];
+        self.textColor = ORKLiquidGlassSupportEnabled() ? UIColor.secondaryLabelColor : UIColor.systemGrayColor;
+        self.backgroundColor = [UIColor tertiarySystemFillColor];
     }
     return self;
 }
 
 + (UIFont*)font {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleCaption1];
-    UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
-    
-    return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleCaption2]
+                scaledFontForFont:[UIFont systemFontOfSize:11.0 weight:UIFontWeightSemibold]];
+    } else {
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleCaption1];
+        UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+        
+        return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+    }
 }
 
 - (void)drawTextInRect:(CGRect)rect {

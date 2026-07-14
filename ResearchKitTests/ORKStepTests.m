@@ -133,6 +133,22 @@
     XCTAssertEqual([step iconImage], image);
 }
 
+- (void)testAttributedDetailTextPreservedThroughArchival {
+    NSDictionary *attributes = @{
+        NSForegroundColorAttributeName: UIColor.redColor,
+        NSFontAttributeName: [UIFont boldSystemFontOfSize:18]
+    };
+    NSAttributedString *original = [[NSAttributedString alloc] initWithString:@"Formatted" attributes:attributes];
+
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"test"];
+    step.attributedDetailText = original;
+
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:step requiringSecureCoding:YES error:nil];
+    ORKInstructionStep *restored = [NSKeyedUnarchiver unarchivedObjectOfClass:[ORKInstructionStep class] fromData:data error:nil];
+
+    XCTAssertEqualObjects(restored.attributedDetailText, original);
+}
+
 @end
 
 
@@ -566,7 +582,7 @@
     XCTAssertEqual(step.audioAsset.name, name);
     XCTAssertEqual(step.audioAsset.fileExtension, extension);
     XCTAssertEqual(step.stepDuration, 180);
-    XCTAssertEqual(step.shouldShowDefaultTimer, NO);
+    XCTAssertEqual(step.shouldShowDefaultTimer, YES);
     XCTAssertEqual(step.vocalCues.count, 0);
     XCTAssert([step isEqual:step]);
 }

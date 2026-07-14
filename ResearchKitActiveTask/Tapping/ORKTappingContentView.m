@@ -32,6 +32,7 @@
 #import "ORKTappingContentView.h"
 
 #import "ORKActiveStepTimer.h"
+#import "ORKModalDismissalBlockingGesture.h"
 #import "ORKRoundTappingButton.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKTapCountLabel.h"
@@ -47,6 +48,7 @@
 static const CGFloat ProgressViewTopPadding = 10.0;
 static const CGFloat TapCaptionLabelTopPadding = 20.0;
 static const CGFloat TapCountLabelTopPadding = 10.0;
+static const CGFloat TapButtonsMinimumVerticalPadding = 44.0;
 
 @interface ORKTappingContentView ()
 
@@ -63,12 +65,13 @@ static const CGFloat TapCountLabelTopPadding = 10.0;
     NSLayoutConstraint *_topToProgressViewConstraint;
     NSLayoutConstraint *_topToCaptionLabelConstraint;
     NSLayoutConstraint *_captionLabelToTapCountLabelConstraint;
-    NSLayoutConstraint *_tapButtonToBottomConstraint;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
+        [self addGestureRecognizer:[[ORKModalDismissalBlockingGesture alloc] initWithTarget:nil action:nil]];
+
         _tapCaptionLabel = [ORKSubheadlineLabel new];
         _tapCaptionLabel.textAlignment = NSTextAlignmentCenter;
         _tapCaptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -105,7 +108,8 @@ static const CGFloat TapCountLabelTopPadding = 10.0;
         
         [_buttonContainer addSubview:_tapButton1];
         [_buttonContainer addSubview:_tapButton2];
-        
+
+        self.directionalLayoutMargins = ORKLargeContentLayoutMargins;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         _tapCaptionLabel.text = ORKLocalizedString(@"TOTAL_TAPS_LABEL", nil);
@@ -196,20 +200,20 @@ static const CGFloat TapCountLabelTopPadding = 10.0;
                                                                            constant:TapCountLabelTopPadding];
     [constraints addObject:_captionLabelToTapCountLabelConstraint];
     
-    _tapButtonToBottomConstraint = [NSLayoutConstraint constraintWithItem:_buttonContainer
-                                                                attribute:NSLayoutAttributeBottom
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:self
-                                                                attribute:NSLayoutAttributeBottom
-                                                               multiplier:1.0
-                                                                 constant:0.0];
-    [constraints addObject:_tapButtonToBottomConstraint];
-    
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tapCountLabel]-(>=10)-[_buttonContainer]"
-                                             options:NSLayoutFormatAlignAllCenterX
-                                             metrics:nil
-                                               views:views]];
+    UILayoutGuide *topSpacer = [[UILayoutGuide alloc] init];
+    UILayoutGuide *bottomSpacer = [[UILayoutGuide alloc] init];
+    [self addLayoutGuide:topSpacer];
+    [self addLayoutGuide:bottomSpacer];
+
+    [constraints addObjectsFromArray:@[
+        [topSpacer.topAnchor constraintEqualToAnchor:_tapCountLabel.bottomAnchor],
+        [topSpacer.bottomAnchor constraintEqualToAnchor:_buttonContainer.topAnchor],
+        [bottomSpacer.topAnchor constraintEqualToAnchor:_buttonContainer.bottomAnchor],
+        [bottomSpacer.bottomAnchor constraintEqualToAnchor:self.layoutMarginsGuide.bottomAnchor],
+        [topSpacer.heightAnchor constraintEqualToAnchor:bottomSpacer.heightAnchor],
+        [bottomSpacer.heightAnchor constraintGreaterThanOrEqualToConstant:TapButtonsMinimumVerticalPadding],
+        [_buttonContainer.centerXAnchor constraintEqualToAnchor:_tapCountLabel.centerXAnchor]
+    ]];
     
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"

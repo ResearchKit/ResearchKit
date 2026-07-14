@@ -30,12 +30,19 @@
 
 
 #import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
 #import "ORKVideoCaptureStepViewController.h"
 #import "ORKVideoCaptureView.h"
 #import "ORKVideoCaptureStep.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKStep_Private.h"
+#import "ORKNavigableOrderedTask.h"
+#import "ORKCompletionStep.h"
+#import "ORKCompletionStepViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "ORKCaptureAccessDeniedContext.h"
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 
 @interface ORKVideoCaptureStepViewController () <ORKVideoCaptureViewDelegate, AVCaptureFileOutputRecordingDelegate>
@@ -73,6 +80,13 @@
     self = [super initWithStep:step];
     if (self) {
         self.fileURL = nil;
+        self.step.authDeniedContext = [[ORKCaptureAccessDeniedContext alloc]
+                                       initWithTitle:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_TITLE", nil)
+                                       text:ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil)
+                                       settingsLinkText:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT", nil)
+                                       completionStepIdentifier:@"ORKVideoCaptureStepIdentifierVideoAccessDeniedCompletion"
+                                       learnMoreStepIdentifier:@"ORKVideoCaptureStepIdentifierInstructionStepPlaceHolderVideoAccessDenied"
+                                       iconImage:[UIImage systemImageNamed:@"video.slash"]];
     }
     return self;
 }
@@ -136,15 +150,22 @@
     [super stepDidChange];
     
     if (self.step && [self isViewLoaded]) {
+        [_videoCaptureView.playerViewController willMoveToParentViewController:nil];
+        [_videoCaptureView.playerViewController removeFromParentViewController];
         [_videoCaptureView removeFromSuperview];
         _videoCaptureView = nil;
         _movieFileOutput = nil;
-        
+        _captureSession = nil;
+
         _videoCaptureView = [[ORKVideoCaptureView alloc] initWithFrame:CGRectZero];
         _videoCaptureView.videoCaptureStep = (ORKVideoCaptureStep *)self.step;
         _videoCaptureView.delegate = self;
         _videoCaptureView.cancelButtonItem = self.cancelButtonItem;
+        _videoCaptureView.hidden = YES;
         [self.view addSubview:_videoCaptureView];
+
+        [self addChildViewController:_videoCaptureView.playerViewController];
+        [_videoCaptureView.playerViewController didMoveToParentViewController:self];
         
         
         _videoCaptureStep = (ORKVideoCaptureStep *)self.step;
@@ -155,11 +176,6 @@
         
         // Capture actions should be performed off the main queue to keep the UI responsive
         _sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
-        
-        // Setup the capture session
-        dispatch_async(_sessionQueue, ^{
-            [self queue_SetupCaptureSession];
-        });
     }
 }
 
@@ -170,14 +186,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    // If we don't already have a captured image, then start running the capture session.
-    if (!_fileURL) {
+
+    if (_fileURL) {
+        _videoCaptureView.hidden = NO;
+        [self setFileURL:_fileURL];
+    } else if (_captureSession) {
+        _videoCaptureView.hidden = NO;
         dispatch_async(_sessionQueue, ^{
-            [_captureSession startRunning];
+            [self->_captureSession startRunning];
         });
     } else {
-        [self setFileURL:_fileURL];
+        [self _checkCameraAuthorizationAndSetupSession];
     }
 }
 
@@ -192,6 +211,153 @@
     [_videoCaptureView.playerViewController.player pause];
     
     [super viewWillDisappear:animated];
+}
+
+- (void)_checkCameraAuthorizationAndSetupSession {
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+
+    switch (authStatus) {
+        case AVAuthorizationStatusNotDetermined: {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self _checkMicrophoneAuthorizationAndStart];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self _handleDeniedCameraAccess];
+                    });
+                }
+            }];
+            break;
+        }
+        case AVAuthorizationStatusAuthorized: {
+            [self _checkMicrophoneAuthorizationAndStart];
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+        default: {
+            [self _handleDeniedCameraAccess];
+            break;
+        }
+    }
+}
+
+- (void)_checkMicrophoneAuthorizationAndStart {
+    if (_videoCaptureStep.isAudioMute) {
+        [self _startCaptureSession];
+        return;
+    }
+
+    AVAuthorizationStatus audioStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    switch (audioStatus) {
+        case AVAuthorizationStatusNotDetermined: {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (granted) {
+                        [self _startCaptureSession];
+                    } else {
+                        [self _handleDeniedMicrophoneAccess];
+                    }
+                });
+            }];
+            break;
+        }
+        case AVAuthorizationStatusAuthorized: {
+            [self _startCaptureSession];
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+        default: {
+            [self _handleDeniedMicrophoneAccess];
+            break;
+        }
+    }
+}
+
+- (void)_startCaptureSession {
+    _videoCaptureView.hidden = NO;
+    dispatch_async(_sessionQueue, ^{
+        [self queue_SetupCaptureSession];
+        [self->_captureSession startRunning];
+    });
+}
+
+- (void)_handleDeniedCameraAccess {
+    BOOL microphoneDenied = NO;
+    if (!_videoCaptureStep.isAudioMute) {
+        AVAuthorizationStatus audioStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+        microphoneDenied = (audioStatus == AVAuthorizationStatusDenied || audioStatus == AVAuthorizationStatusRestricted);
+    }
+
+    if (microphoneDenied) {
+        self.step.authDeniedContext = [[ORKCaptureAccessDeniedContext alloc]
+                                       initWithTitle:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_CAMERA_AND_MIC", nil)
+                                       text:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_CAMERA_AND_MIC_TEXT", nil)
+                                       settingsLinkText:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT", nil)
+                                       completionStepIdentifier:@"ORKVideoCaptureStepIdentifierVideoAccessDeniedCompletion"
+                                       learnMoreStepIdentifier:@"ORKVideoCaptureStepIdentifierInstructionStepPlaceHolderVideoAccessDenied"
+                                       iconImage:[UIImage systemImageNamed:@"video.slash"]];
+    }
+
+    ORKTaskViewController *taskVC = self.taskViewController;
+    if (taskVC != nil &&
+        [taskVC.task isKindOfClass:[ORKNavigableOrderedTask class]] &&
+        self.step.authDeniedContext != nil) {
+        [self _tearDownVideoCaptureView];
+        [taskVC handleDeniedAuthForStep:self.step];
+    } else {
+        [self _showAccessDeniedCompletionStep];
+    }
+}
+
+- (void)_handleDeniedMicrophoneAccess {
+    self.step.authDeniedContext = [[ORKCaptureAccessDeniedContext alloc]
+                                   initWithTitle:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_MIC", nil)
+                                   text:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_MIC_TEXT", nil)
+                                   settingsLinkText:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT", nil)
+                                   completionStepIdentifier:@"ORKVideoCaptureStepIdentifierVideoAccessDeniedCompletion"
+                                   learnMoreStepIdentifier:@"ORKVideoCaptureStepIdentifierInstructionStepPlaceHolderVideoAccessDenied"
+                                   iconImage:[UIImage systemImageNamed:@"mic.slash"]];
+
+    ORKTaskViewController *taskVC = self.taskViewController;
+    if (taskVC != nil &&
+        [taskVC.task isKindOfClass:[ORKNavigableOrderedTask class]]) {
+        [self _tearDownVideoCaptureView];
+        [taskVC handleDeniedAuthForStep:self.step];
+    } else {
+        [self _showAccessDeniedCompletionStep];
+    }
+}
+
+- (void)_tearDownVideoCaptureView {
+    [_videoCaptureView.playerViewController willMoveToParentViewController:nil];
+    [_videoCaptureView.playerViewController removeFromParentViewController];
+    [_videoCaptureView removeFromSuperview];
+    _videoCaptureView = nil;
+}
+
+- (void)_showAccessDeniedCompletionStep {
+    [self _tearDownVideoCaptureView];
+    ORKCompletionStep *completionStep;
+    if (self.step.authDeniedContext != nil) {
+        completionStep = [self.step.authDeniedContext authDeniedCompletionStep];
+    } else {
+        completionStep = [[ORKCompletionStep alloc] initWithIdentifier:@"ORKVideoCaptureAccessDeniedFallback"];
+        completionStep.title = ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_TITLE", nil);
+        completionStep.text = ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil);
+        completionStep.reasonForCompletion = ORKTaskFinishReasonFailed;
+        completionStep.iconImage = [UIImage systemImageNamed:@"video.slash"];
+    }
+
+    ORKCompletionStepViewController *completionVC = [[ORKCompletionStepViewController alloc] initWithStep:completionStep];
+    [self addChildViewController:completionVC];
+    completionVC.view.frame = self.view.bounds;
+    completionVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:completionVC.view];
+    [completionVC didMoveToParentViewController:self];
 }
 
 - (void)queue_SetupCaptureSession {
@@ -228,8 +394,8 @@
             
             if (!_videoCaptureStep.audioMute) {
                 AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-                AVCaptureDeviceInput * audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
-                if ([_captureSession canAddInput:audioInput]) {
+                AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+                if (audioInput && [_captureSession canAddInput:audioInput]) {
                     [_captureSession addInput:audioInput];
                 }
             }
@@ -268,9 +434,8 @@
     _videoCaptureView.session = nil;
     _videoCaptureView.videoFileURL = nil;
     _fileURL = nil;
-    
-    // Show the error in the image capture view
-    _videoCaptureView.error = error;
+
+    [self _showAccessDeniedCompletionStep];
 }
 
 - (void)setFileURL:(NSURL *)fileURL {
@@ -372,14 +537,6 @@
     }
 }
 
-- (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation {
-    // Keep the output orientation in sync with the input orientation
-    NSArray<AVCaptureConnection *> *connections = _movieFileOutput.connections;
-    if (connections.count > 0) {
-         connections[0].videoOrientation = videoOrientation;
-    }
-}
-
 
 #pragma mark - AVCaptureFileOutputRecordingDelegate
 
@@ -389,10 +546,19 @@
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
     if (error && !error.userInfo[AVErrorRecordingSuccessfullyFinishedKey]) {
-        _videoCaptureView.error = error;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self handleError:error];
+        });
         return;
     }
-    
+
+    NSError *protectionError = nil;
+    if (![[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(self.fileProtectionMode)}
+                                          ofItemAtPath:[outputFileURL path]
+                                                 error:&protectionError]) {
+        ORK_Log_Error("Error setting file protection on %@: %@", outputFileURL, protectionError);
+    }
+
     self.recording = NO;
     self.fileURL = outputFileURL;
     

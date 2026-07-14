@@ -53,21 +53,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "Learn More";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered";
-"LEARN_MORE_DATA_USE" = "Learn more about how data is used";
-"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected";
-"LEARN_MORE_WELCOME" = "Learn more about the study first";
-"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey";
-"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study’s impact on your time";
-"LEARN_MORE_TASKS" = "Learn more about the tasks involved";
-"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing";
+"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered.";
+"LEARN_MORE_DATA_USE" = "Learn more about how data is used.";
+"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected.";
+"LEARN_MORE_WELCOME" = "Learn more about the study first.";
+"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey.";
+"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study’s impact on your time.";
+"LEARN_MORE_TASKS" = "Learn more about the tasks involved.";
+"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing.";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Sharing Options";
 "CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
 "CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name), may benefit this and future research.";
-"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
+"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Printed Name";
@@ -82,10 +82,10 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Skipped";
-"REVIEW_EDIT_ANSWER" = "Edit";
+"REVIEW_EDIT_ANSWER" = "EDIT";
 
 /* Alert for out of range values. */
-"RANGE_ALERT_TITLE" = "Invalid value";
+"RANGE_ALERT_TITLE" = "Invalid Value";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
 "LOCATION_ERROR_TITLE" = "Could not Find Specified Address";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
 "LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the Internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the Internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the Internet. Otherwise, please try again in a few minutes.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text is limited to %@ characters";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
@@ -133,7 +131,7 @@
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot Password?";
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
@@ -176,6 +174,13 @@
 "FITZPATRICK_SKIN_TYPE_V" = "Type V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
 
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Type 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Type 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Type 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Type 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Type 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Type 6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Female";
 "GENDER_MALE" = "Male";
@@ -213,17 +218,17 @@
 "BUTTON_DISAGREE" = "Disagree";
 "BUTTON_DONE" = "Done";
 "BUTTON_GET_STARTED" = "Get Started";
-"BUTTON_LEARN_MORE" = "Learn more";
+"BUTTON_LEARN_MORE" = "Learn More";
 "BUTTON_NEXT" = "Next";
 "BUTTON_SKIP" = "Skip";
-"BUTTON_SKIP_QUESTION" = "Skip this question";
+"BUTTON_SKIP_QUESTION" = "Skip This Question";
 "BUTTON_START_TIMER" = "Start Timer";
 "BUTTON_OPTION_SAVE" = "Save for Later";
 "BUTTON_OPTION_DISCARD" = "Discard Results";
 "BUTTON_OPTION_STOP_TASK" = "End Task";
 "BUTTON_SAVE" = "Save";
-"BUTTON_CLEAR_ANSWER" = "Clear answer";
-"BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
+"BUTTON_CLEAR_ANSWER" = "Clear Answer";
+"BUTTON_READ_ONLY_MODE" = "This Answer Cannot Be Modified.";
 "BUTTON_COPYRIGHT" = "Copyright";
 "BUTTON_CLOSE" = "Close";
 
@@ -298,7 +303,7 @@
 "AMSLER_GRID_TITLE" = "Amsler Grid";
 "AMSLER_GRID_INTRO_TEXT" = "This activity helps in detecting problems in user’s vision.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Hold the device 30 centimetres from your face and at eye level throughout the test.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the centre of the square grid.\n\nUsing your finger or stylus, mark any distortions you see, such as blurred or wavy lines.\n\nWhen you are done, swipe left anywhere outside the grid.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the centre of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you have finished, tap the Next button.";
 "AMSLER_GRID_LEFT_EYE" = "Left Eye";
 "AMSLER_GRID_RIGHT_EYE" = "Right Eye";
 
@@ -328,7 +333,7 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tap when you hear a tone.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tap the button when you hear a tone.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Tone & Volume";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "You will hear a series of tones.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "When you hear a tone, tap on the button.";
@@ -341,7 +346,7 @@
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Make sure the device volume is set to the maximum level.\n\nDuring this task, a subtle tone will play in either the left or right ear.\n\nListen carefully and tap the button every time you hear a tone.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "This test identifies how loud a sound needs to be in order for you to hear it.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding questionnaire.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Select your preference for 'better ear', if any";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Select your preference for ’better ear’, if any";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "left";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "right";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "no preference";
@@ -421,10 +426,10 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Return to the start position and tap again when you are done.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Return to the start position and tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee. Tap the screen and extend your left knee as far as you can.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee. Tap the screen and extend your right knee as far as you can.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left knee to the start position. Then tap anywhere.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position. Then tap anywhere.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee.\n\nTap the screen and extend your left knee as far as you can.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee.\n\nTap the screen and extend your right knee as far as you can.\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left knee to the start position.\n\nThen tap anywhere.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position.\n\nThen tap anywhere.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
@@ -447,10 +452,10 @@
 "TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you’ve passed the finish line.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
-"TIMED_WALK_FORM_TITLE" = "Assistive device";
+"TIMED_WALK_FORM_TITLE" = "Assistive Device";
 "TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
 "TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Do you use an assistive device?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "None";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
@@ -470,7 +475,7 @@
 "PASAT_INTRO_TEXT" = "The Paced Auditory Serial Addition Test measures your auditory information processing speed and calculation ability.";
 "PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
 "PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test measures your auditory and visual information processing speed and calculation ability.";
-"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ \nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn’t calculate a running total, but only the sum of the last two numbers.";
+"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@.\nYou must add each new digit to the one immediately prior to it.\nDon’t calculate a running total, just the sum of the last two numbers.";
 "PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
 "PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
@@ -493,16 +498,16 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Tremor Activity";
 "TREMOR_TEST_INTRO_1_DETAIL" = "This activity measures the tremor of your hands in various positions. Find a place where you can sit comfortably for the duration of this activity.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold the phone in your more affected hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold the phone in your RIGHT hand as shown in the image below.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold the phone in your LEFT hand as shown in the image below.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold the phone in your more affected hand as shown in the image above.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold the phone in your RIGHT hand as shown in the image above.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold the phone in your LEFT hand as shown in the image above.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "You will be asked to perform %@ while sitting with the phone in your hand.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "a task";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "two tasks";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "three tasks";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "four tasks";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "five tasks";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap Next to proceed.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepare to hold your phone in your lap.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Prepare to hold your phone in your lap with your LEFT hand.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Prepare to hold your phone in your lap with your RIGHT hand.";
@@ -535,8 +540,8 @@
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "Trail Making Test";
 "TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
-"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by the numbers '2' – '3' – '4'… until you reach the number '7'.";
-"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A' and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
+"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number ’1’ followed by the numbers ’2’ – ’3’ – ’4’… until you reach the number ’7’.";
+"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number ’1’ followed by tapping the first letter ’A’ and then ’2’ – ’B’ – ’3’ – ’C’… until you reach the number ’7’.";
 "TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "TRAILMAKING_LETTER_A" = "A";
@@ -566,7 +571,7 @@
 "SPEECH_IN_NOISE_INTRO_TEXT" = "This activity measures intelligibility of speech when presented in noisy environments.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "As part of this test, you will:\n\nListen to a sentence.\n\nRepeat clearly what you heard or skip ahead to type what you heard using the keyboard. \n\nIf you repeat what you heard, you will have the option to modify the transcript generated by the speech recognition engine.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volume Calibration";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tap 'Play Audio', adjust your volume to a comfortable level and then tap 'Stop Audio' to proceed.";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tap ’Play Audio’, adjust your volume to a comfortable level and then tap ’Stop Audio’ to proceed.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Listen";
 "SPEECH_IN_NOISE_STEP_TEXT" = "A sentence mixed with background noise at a randomised Signal to Noise Ratio (SNR) will be played only once.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "SPL Meter";
 "ENVIRONMENTSPL_INTRO_TEXT" = "This activity measures the environment sound pressure level. If the noise levels are too high, you will be unable to proceed. Please move to a quieter location to complete this task or retake this activity at a later time.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Calculating";
+"ENVIRONMENTSPL_CALCULATING" = "Measuring…";
 "ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Background Noise OK";
-"ENVIRONMENTSPL_NOISE" = "Too Much Background Noise";
-"ENVIRONMENTSPL_TITLE_2" = "Find a quiet place";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "To ensure accuracy, this test should be taken in a quiet environment.";
+"ENVIRONMENTSPL_OK" = "Good";
+"ENVIRONMENTSPL_NOISE" = "Too Loud";
+"ENVIRONMENTSPL_TITLE_2" = "Find a Quiet Place";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "For accurate results, this task should be completed in a quiet location. Once the background noise measurement reading is completed, you may continue.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Start Task";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
 
 "AX_AMSLER_GRID_LABEL" = "Amsler Grid";
-"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or tap the Next button to finish.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "Cannot decode restoreData for initialisation";
+"6MWT_HIGH_SCORE" = "10: A Lot";
+"6MWT_INSTRUCTIONS_1" = "Find a straight walking path at least 30 metres in length.";
+"6MWT_INSTRUCTIONS_2" = "Make sure you can stop and sit, if necessary, along the walking path.";
+"6MWT_INSTRUCTIONS_3" = "Turn your phone volume up to at least 50%.";
+"6MWT_INSTRUCTIONS_4" = "Start an Outdoor Walk (or Indoor Walk) workout on your Apple Watch by asking Siri, or by launching the Workouts app, then tapping Outdoor Walk (or Indoor Walk).";
+"6MWT_INSTRUCTIONS_TITLE" = "Getting Started";
+"6MWT_INTRO" = "The goal of this test is to walk as far as possible at a comfortable pace for 6 minutes.";
+"6MWT_INTRO_DETAILS" = "Details";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Wear comfortable clothes and properly fitting shoes. If you normally use a walking aid, you can use it while completing this test.";
+"6MWT_INTRO_DETAIL_LOCATION" = "If you are unable to walk outdoors, consider completing this test at a local shopping centre.";
+"6MWT_INTRO_DETAIL_TIME" = "This test will take about 6 minutes to complete.";
+"6MWT_INTRO_DETAIL_WATCH" = "You’ll need your Apple Watch to complete this test.";
+"6MWT_LOW_SCORE" = "1: Not Any";
+"6MWT_QUESTIONS_BREATH" = "Shortness of Breath";
+"6MWT_QUESTIONS_DETAIL" = "Congratulations on completing the 6-Minute Walk Test! Please rate how you’re feeling on the following dimensions.";
+"6MWT_QUESTIONS_FATIGUE" = "Fatigue";
+"6MWT_QUESTIONS_TITLE" = "Nicely Done";
+"6MWT_TASK_TITLE" = "6-Minute Walk Test";
+"6MWT_TEST_IN_PROGRESS" = "Test in Progress";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Walk as far along the straight walking path as you can for 6 minutes. If you need to catch your breath, stop and sit down.";
+"AX_BUTTON" = "Button";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Edit button";
+"AX_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
+"AX_SES_BOTTOM" = "Bottom";
+"AX_SES_PERCENT" = "Per cent";
+"AX_SES_TOP" = "Top";
+"BUTTON_PRACTICE_AGAIN" = "Practice Again";
+"BUTTON_PRACTICE_TEST" = "Practice Test";
+"BUTTON_START_TEST" = "Start Test";
+"CONSENT_NAME_SECTION_TITLE" = "Name";
+"FAMILY_HISTORY_ADD" = "Add %@";
+"FAMILY_HISTORY_CANCEL" = "Cancel";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Task Complete";
+"FAMILY_HISTORY_CONDITIONS" = "Conditions";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Have they been diagnosed with any of the following diseases or health conditions?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Answer these questions to the best of your ability";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Confirm any diagnosed diseases or health conditions.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Health Conditions";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Delete Entry";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Are you sure you want to delete this entry from your Family Health History?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Edit Entry";
+"FAMILY_HISTORY_I_DONT_KNOW" = "I don’t know";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "None of the above";
+"FAMILY_HISTORY_NONE_SELECTED" = "None selected";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "I prefer not to answer";
+"FITNESS_RESUME_TEST" = "Resume Activity";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Are you sure you want to end this activity early?";
+"FITNESS_STOP_TEST_DETAIL" = "Your progress will be saved and this test will be marked as completed.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Delete and Retry";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Video Options";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Review Video";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Start Recording";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Stop Recording";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Submit Video";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole and, once done %@ times, remove it again %@ times.";
+"MAX_WORD_COUNT_ERROR" = "You’ve reached the maximum character count";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID Error";
+"PASSCODE_FACE_ID_MESSAGE" = "Please authenticate with Face ID";
+"PLAY" = "Play";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tap the hold button and then the blue circle";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "hold";
+"RECORD" = "Record";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to health data.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health Data";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting access to location data from your devices.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Location Data";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "The study is requesting access to motion data from your devices.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Device Motion";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "The study is requesting to send you notifications.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notifications";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Reviewed";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Review";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Error";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Not Supported";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "The study is requesting access to sensor data from your devices.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensor Data";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Use Keyboard Instead";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Could not record. Tap to try again.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Speech was not detected in your recording. Tap to try again.";
+"STOP" = "Stop";
+"STROOP_COLOR_ORANGE" = "ORANGE";
+"TC_COMPLETION_DETAIL" = "Congratulation on completing the Tecumseh Cube Test!";
+"TC_COMPLETION_TITLE" = "Nicely Done";
+"TC_INSTRUCTIONS_1" = "Find a step with about 20 cm of elevation from the ground.";
+"TC_INSTRUCTIONS_2" = "Turn your iPhone volume up to at least 50%.";
+"TC_INSTRUCTIONS_3" = "Start a Stairs workout on your Apple Watch by asking Siri, or by launching the Workouts app, tapping Add Workout, then choosing Stairs.";
+"TC_INSTRUCTIONS_TITLE" = "Getting Started";
+"TC_INTRO" = "The goal of this test is to raise your heart rate while you are stepping up and down for 3 minutes following a beat.";
+"TC_INTRO_DETAILS" = "Details";
+"TC_INTRO_DETAIL_DANGER" = "If you develop chest pain or discomfort, stop this test immediately.";
+"TC_INTRO_DETAIL_TIME" = "This test will take about 6 minutes to complete.";
+"TC_INTRO_DETAIL_WATCH" = "You’ll need your Apple Watch to complete this test.";
+"TC_REST_IN_PROGRESS" = "Have a Rest";
+"TC_REST_IN_PROGRESS_DETAIL" = "Sit down and relax for 3 minutes while your Apple Watch records your resting heart rate.";
+"TC_TASK_TITLE" = "Tecumseh Cube Test";
+"TC_TEST_IN_PROGRESS" = "Test in Progress";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Using the stair, step up and down in place with the beat";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST IN PROGRESS";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST IN PROGRESS \U2022 %@";

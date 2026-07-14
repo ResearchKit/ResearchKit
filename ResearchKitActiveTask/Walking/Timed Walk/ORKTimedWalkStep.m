@@ -42,6 +42,7 @@
         self.shouldPlaySoundOnFinish = YES;
         self.shouldVibrateOnStart = YES;
         self.shouldVibrateOnFinish = YES;
+        self.allowsBackNavigation = NO;
     }
     return self;
 }
@@ -62,10 +63,6 @@
     if (self.stepDuration < ORKTimedWalkMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKTimedWalkMinimumDuration)] userInfo:nil];
     }
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
 }
 
 @end

@@ -72,7 +72,7 @@
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(castObject.pdfURL, self.pdfURL);
+    return isParentSame && ORKEqualFileURLs(castObject.pdfURL, self.pdfURL);
 }
 
 #pragma mark - NSSecureCoding

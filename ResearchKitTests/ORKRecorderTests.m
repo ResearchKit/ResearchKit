@@ -166,6 +166,29 @@
 @end
 
 
+// Simulates ORKSpeechRecognitionStepViewController's delegate behavior:
+// calls stop on the recorder when it fails, which is what triggers the recursion.
+@interface ORKReentrantStopDelegate : NSObject <ORKRecorderDelegate>
+@property (nonatomic, weak) ORKRecorder *recorder;
+@property (nonatomic) NSInteger failCallCount;
+@property (nonatomic) NSInteger completeCallCount;
+@end
+
+@implementation ORKReentrantStopDelegate
+
+- (void)recorder:(ORKRecorder *)recorder didCompleteWithResults:(NSArray<ORKFileResult *> *)results {
+    _completeCallCount++;
+    [_recorder stop];
+}
+
+- (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
+    _failCallCount++;
+    [_recorder stop];
+}
+
+@end
+
+
 @interface ORKMockAccelerometerRecorder : ORKAccelerometerRecorder
 
 @property (nonatomic, strong) ORKMockMotionManager* mockManager;
@@ -674,8 +697,102 @@ static const NSInteger kNumberOfSamples = 5;
     }
 }
 
+// Verifies that calling stop on a recorder whose delegate re-calls stop (as
+// ORKSpeechRecognitionStepViewController does) does not cause infinite recursion.
+// With no pedometer data collected, stop produces a file result containing {"items": []} and calls
+// didCompleteWithResults: rather than didFailWithError:.
+- (void)testPedometerRecorderStopIsReentrantSafe {
+    ORKMockPedometerRecorder *recorder = [[ORKMockPedometerRecorder alloc] initWithIdentifier:@"pedometer"
+                                                                                         step:[[ORKStep alloc] initWithIdentifier:@"step"]
+                                                                              outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                     rollingFileSizeThreshold:_rollingFileSizeThreshold];
+    ORKMockPedometer *pedometer = [ORKMockPedometer new];
+    recorder.mockPedometer = pedometer;
+
+    ORKReentrantStopDelegate *delegate = [ORKReentrantStopDelegate new];
+    delegate.recorder = recorder;
+    recorder.delegate = delegate;
+
+    [recorder start];
+    // No data injected - simulates no activity. The recorder produces an empty file result.
+    [recorder stop];
+
+    XCTAssertEqual(delegate.completeCallCount, 1, @"didCompleteWithResults: should be called exactly once, not recursively");
+}
+
+- (void)testDeviceMotionRecorderStopIsReentrantSafe {
+    ORKMockDeviceMotionRecorder *recorder = [[ORKMockDeviceMotionRecorder alloc] initWithIdentifier:@"deviceMotion"
+                                                                                          frequency:60.0
+                                                                                               step:[[ORKStep alloc] initWithIdentifier:@"step"]
+                                                                                    outputDirectory:[NSURL fileURLWithPath:_outputPath]
+                                                                           rollingFileSizeThreshold:_rollingFileSizeThreshold];
+    ORKMockMotionManager *manager = [ORKMockMotionManager new];
+    recorder.mockManager = manager;
+
+    ORKReentrantStopDelegate *delegate = [ORKReentrantStopDelegate new];
+    delegate.recorder = recorder;
+    recorder.delegate = delegate;
+
+    [recorder start];
+    // No motion data injected - simulates unavailable hardware or a very brief task.
+    [recorder stop];
+
+    XCTAssertEqual(delegate.failCallCount, 1, @"didFailWithError: should be called exactly once, not recursively");
+}
+
+// Verifies that invalidate stops recording without calling the delegate and
+// deletes any output files that were written during the session.
+- (void)testInvalidateDoesNotCallDelegate {
+    NSURL *outputDirectory = [NSURL fileURLWithPath:[_outputPath stringByAppendingPathComponent:@"testInvalidate"]];
+    [[NSFileManager defaultManager] createDirectoryAtPath:outputDirectory.path withIntermediateDirectories:YES attributes:nil error:nil];
+
+    ORKMockPedometerRecorder *recorder = [[ORKMockPedometerRecorder alloc] initWithIdentifier:@"pedometer"
+                                                                                         step:[[ORKStep alloc] initWithIdentifier:@"step"]
+                                                                              outputDirectory:outputDirectory
+                                                                     rollingFileSizeThreshold:_rollingFileSizeThreshold];
+    ORKMockPedometer *pedometer = [ORKMockPedometer new];
+    recorder.mockPedometer = pedometer;
+
+    ORKReentrantStopDelegate *delegate = [ORKReentrantStopDelegate new];
+    delegate.recorder = recorder;
+    recorder.delegate = delegate;
+
+    [recorder start];
+
+    ORKMockPedometerData *data = [ORKMockPedometerData new];
+    for (NSInteger i = 0; i < kNumberOfSamples; i++) {
+        [pedometer injectData:data];
+    }
+
+    // Collect files written during recording. The logger uses dispatch_sync internally,
+    // so all appended data is on disk before injectData: returns.
+    NSMutableArray<NSURL *> *createdFiles = [NSMutableArray array];
+    NSDirectoryEnumerator<NSURL *> *enumerator = [[NSFileManager defaultManager]
+        enumeratorAtURL:outputDirectory
+        includingPropertiesForKeys:@[NSURLIsRegularFileKey]
+        options:0
+        errorHandler:nil];
+    for (NSURL *url in enumerator) {
+        NSNumber *isRegularFile;
+        [url getResourceValue:&isRegularFile forKey:NSURLIsRegularFileKey error:nil];
+        if (isRegularFile.boolValue) {
+            [createdFiles addObject:url];
+        }
+    }
+    XCTAssertGreaterThan(createdFiles.count, 0, @"files should be written during recording");
+
+    [recorder invalidate];
+
+    XCTAssertEqual(delegate.completeCallCount, 0, @"invalidate should not call didCompleteWithResults:");
+    XCTAssertEqual(delegate.failCallCount, 0, @"invalidate should not call didFailWithError:");
+
+    for (NSURL *fileURL in createdFiles) {
+        XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path],
+                       @"invalidate should delete output files");
+    }
+}
+
 - (void)testAudioRecorder {
-    
     ORKAudioRecorderConfiguration *recorderConfiguration = [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"audio" recorderSettings:@{}];
     Class recorderClass = [ORKAudioRecorder class];
     ORKAudioRecorder *recorder = (ORKAudioRecorder *)[self createRecorder:recorderConfiguration];

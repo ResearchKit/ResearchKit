@@ -39,8 +39,8 @@
     self = [super init];
     
     if (self) {
-        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
     }
     
     return self;

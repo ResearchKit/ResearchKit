@@ -47,13 +47,14 @@
 #import "ORKResult_Private.h"
 #import "ORKReviewStep_Internal.h"
 #import "ORKStep_Private.h"
-#import "ORKViewControllerProviding.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKObserver.h"
 #import "ORKSkin.h"
 #import "ORKBorderedButton.h"
 #import "ORKTaskReviewViewController.h"
+#import "ResearchKit/ResearchKit-Swift.h"
+#import "ResearchKitUI/ResearchKitUI-Swift.h"
 
 @import AVFoundation;
 @import CoreMotion;
@@ -62,7 +63,7 @@
 #if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 #import <CoreLocation/CLLocationManagerDelegate.h>
 #import <ResearchKit/CLLocationManager+ResearchKit.h>
-
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 
 
@@ -80,7 +81,7 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 
 #if ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION
 @implementation ORKLocationAuthorizationRequester {
-    CLLocationManager *_manager;
+    CLLocationManager *_locationManager;
     _ORKLocationAuthorizationRequestHandler _handler;
     BOOL _started;
 }
@@ -89,14 +90,14 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     self = [super init];
     if (self) {
         _handler = handler;
-        _manager = [CLLocationManager new];
-        _manager.delegate = self;
+        _locationManager = [CLLocationManager new];
+        _locationManager.delegate = self;
     }
     return self;
 }
 
 - (void)dealloc {
-    _manager.delegate = nil;
+    _locationManager.delegate = nil;
 }
 
 - (void)resume {
@@ -108,13 +109,13 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     NSString *whenInUseKey = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"];
     NSString *alwaysKey = (NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysAndWhenInUseUsageDescription"];
     
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    CLAuthorizationStatus status = _locationManager.authorizationStatus;
     if ((status == kCLAuthorizationStatusNotDetermined) && (whenInUseKey || alwaysKey)) {
         BOOL requestWasDelivered = YES;
         if (alwaysKey) {
-            requestWasDelivered = [_manager ork_requestAlwaysAuthorization];
+            requestWasDelivered = [_locationManager ork_requestAlwaysAuthorization];
         } else {
-            requestWasDelivered = [_manager ork_requestWhenInUseAuthorization];
+            requestWasDelivered = [_locationManager ork_requestWhenInUseAuthorization];
         }
         if (requestWasDelivered == NO) {
             [self finishWithResult:NO];
@@ -151,11 +152,12 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     NSSet<HKObjectType *> *_requestedHealthTypesForRead;
     NSSet<HKObjectType *> *_requestedHealthTypesForWrite;
     NSURL *_outputDirectory;
+    ORKFileProtectionMode _fileProtectionMode;
+    BOOL _excludesFilesFromBackup;
     
     NSDate *_presentedDate;
     NSDate *_dismissedDate;
     
-    NSString *_lastBeginningInstructionStepIdentifier;
     NSString *_lastRestorableStepIdentifier;
     
     BOOL _hasAudioSession; // does not need state restoration - temporary
@@ -167,6 +169,8 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     UIViewController *_previousToTopControllerInNavigationStack;
     
     NSString *_forcedNextStepIdentifier;
+
+    BOOL _hasCalledFinish;
 }
 
 @property (nonatomic, strong) ORKStepViewController *currentStepViewController;
@@ -186,19 +190,30 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     UIViewController *emptyViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     _childNavigationController = [[UINavigationController alloc] initWithRootViewController:emptyViewController];
     _childNavigationController.delegate = self;
-    
-    [_childNavigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [_childNavigationController.navigationBar setShadowImage:[UIImage new]];
-    [_childNavigationController.navigationBar setTranslucent:NO];
-    [_childNavigationController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
-    [_childNavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor secondaryLabelColor]}];
-    _childNavigationController.navigationBar.prefersLargeTitles = NO;
+
+    if (!ORKLiquidGlassSupportEnabled()) {
+        [_childNavigationController.navigationBar setPrefersLargeTitles:NO];
+        [_childNavigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [_childNavigationController.navigationBar setShadowImage:[UIImage new]];
+        [_childNavigationController.navigationBar setTranslucent:YES];
+        [_childNavigationController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+        [_childNavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor secondaryLabelColor]}];
+        _childNavigationController.navigationBar.prefersLargeTitles = NO;
+    }
     [_childNavigationController.view setBackgroundColor:UIColor.clearColor];
-    
+
     [self addChildViewController:_childNavigationController];
-    _childNavigationController.view.frame = self.view.frame;
-    _childNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+
+    _childNavigationController.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_childNavigationController.view];
+    NSArray *constraints = @[
+        [_childNavigationController.view.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [_childNavigationController.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [_childNavigationController.view.safeAreaLayoutGuide.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [_childNavigationController.view.safeAreaLayoutGuide.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+    ];
+    [NSLayoutConstraint activateConstraints:constraints];
+
     [_childNavigationController didMoveToParentViewController:self];
     _childNavigationController.restorationClass = [self class];
     _childNavigationController.restorationIdentifier = _ChildNavigationControllerRestorationKey;
@@ -211,6 +226,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     self.discardable = NO;
     self.skipSaveResultsConfirmation = NO;
     self.progressMode = ORKTaskViewControllerProgressModeQuestionsPerStep;
+    _fileProtectionMode = ORKFileProtectionComplete;
     
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
@@ -297,6 +313,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (self) {
         if (restoreAtFirstStep && ongoingResult != nil) {
             _restoredStepIdentifier = ongoingResult.results.firstObject.identifier;
+            [_managedStepIdentifiers removeAllObjects];
         }
     }
     return self;
@@ -333,7 +350,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (UIBarButtonItem *)defaultCancelButtonItem {
-    return [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction:)];
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                         target:self
+                                                         action:@selector(cancelAction:)];
 }
 
 - (UIBarButtonItem *)defaultLearnMoreButtonItem {
@@ -412,7 +431,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)requestAudioRecordingAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
-    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+    [AVAudioApplication requestRecordPermissionWithCompletionHandler:^(BOOL granted) {
         dispatch_async(dispatch_get_main_queue(), ^{
             handler(granted);
         });
@@ -480,17 +499,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
 #if ORK_FEATURE_HEALTHKIT_AUTHORIZATION
+        dispatch_async(dispatch_get_main_queue(), ^{
+
             ORK_Log_Debug("Requesting health access");
             [self requestHealthStoreAccessWithReadTypes:readTypes
                                              writeTypes:writeTypes
                                                 handler:^{
                                                     dispatch_semaphore_signal(semaphore);
                                                 }];
-#endif
         });
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+#endif
         if (permissions & ORKPermissionCoreMotionAccelerometer) {
             _grantedPermissions |= ORKPermissionCoreMotionAccelerometer;
         }
@@ -554,7 +574,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
         
-        _hasRequestedHealthData = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             _hasRequestedHealthData = YES;
             if (completion) completion();
@@ -659,17 +678,26 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     if (!_hasBeenPresented) {
         // Add first step viewController
+        [self prepareRecorders];
         ORKStep *step = [self nextStep];
         if ([self shouldPresentStep:step]) {
             
-            if (![step isKindOfClass:[ORKInstructionStep class]]) {
-                [self startAudioPromptSessionIfNeeded];
-                [self requestHealthAuthorizationWithCompletion:nil];
-            }
+            [self startAudioPromptSessionIfNeeded];
+            [self requestHealthAuthorizationWithCompletion:^{
+                [self checkRequiredPermissionsForCurrentStep];
+            }];
             
             ORKStepViewController *firstViewController = [self viewControllerForStep:step];
             [self showStepViewController:firstViewController goForward:YES animated:NO];
-            
+
+        } else if (step == nil) {
+            // No available steps — finish the task immediately
+            _hasBeenPresented = YES;
+            NSError *error = [NSError errorWithDomain:ORKErrorDomain
+                                                 code:ORKErrorInvalidObject
+                                             userInfo:@{NSLocalizedDescriptionKey: @"No available steps in the task. All steps may have been skipped due to hardware or device requirements."}];
+            [self.delegate taskViewController:self didFinishWithReason:ORKTaskFinishReasonDiscarded error:error];
+            return;
         }
         _hasBeenPresented = YES;
     }
@@ -709,13 +737,17 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
 }
 
+- (void)dealloc {
+    [self cleanupOutputDirectory];
+}
+
 - (NSArray *)managedResultsArray {
     NSMutableArray *results = [NSMutableArray new];
-    
+        
     [_managedStepIdentifiers enumerateObjectsUsingBlock:^(NSString *identifier, NSUInteger idx, BOOL *stop) {
         id <NSCopying> key = identifier;
         ORKResult *result = _managedResults[key];
-        NSAssert2(result, @"Result should not be nil for identifier %@ with key %@", identifier, key);
+        NSAssert(result, @"Result should not be nil for identifier %@ with key %@", identifier, key);
         [results addObject:result];
     }];
     
@@ -809,6 +841,64 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
 }
 
+- (void)cleanupOutputDirectory {
+    if (self.outputDirectory != nil) {
+        [self deleteEmptySubdirectoriesAtURL:self.outputDirectory];
+        [self deleteDirectoryIfEmptyAtURL:self.outputDirectory];
+    }
+}
+
+- (void)deleteEmptySubdirectoriesAtURL:(NSURL *)url {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray<NSURL *> *contents = [fileManager contentsOfDirectoryAtURL:url
+                                            includingPropertiesForKeys:@[NSURLIsDirectoryKey]
+                                                               options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                                 error:nil];
+    for (NSURL *itemURL in contents) {
+        NSNumber *isDirectory = nil;
+        [itemURL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil];
+        if (isDirectory.boolValue) {
+            [self deleteDirectoryIfEmptyAtURL:itemURL];
+        }
+    }
+}
+
+- (void)deleteDirectoryIfEmptyAtURL:(NSURL *)url {
+    if ([self isDirectoryEmptyAtURL:url]) {
+        NSError *error = nil;
+        BOOL success = [[NSFileManager defaultManager] removeItemAtURL:url error:&error];
+        if (!success) {
+            ORK_Log_Debug("Failed to delete directory: %@", error.localizedDescription);
+        }
+    }
+}
+
+- (BOOL)isDirectoryEmptyAtURL:(NSURL *)url {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSNumber *isDirectory = nil;
+    [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil];
+    
+    if (!isDirectory.boolValue) {
+        return NO;
+    }
+    
+    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:url
+                                          includingPropertiesForKeys:@[NSURLIsRegularFileKey]
+                                                             options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                        errorHandler:nil];
+    
+    for (NSURL *itemURL in enumerator) {
+        NSNumber *isRegularFile = nil;
+        [itemURL getResourceValue:&isRegularFile forKey:NSURLIsRegularFileKey error:nil];
+        if (isRegularFile.boolValue) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 + (NSURL *)ORKDefaultTemporaryOutputDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
@@ -822,8 +912,32 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [self ensureDirectoryExists:outputDirectory];
     
     _outputDirectory = [outputDirectory copy];
-    
+    [self _applyBackupExclusionToOutputDirectoryIfNeeded];
+
     [[self currentStepViewController] setOutputDirectory:_outputDirectory];
+}
+
+- (void)setFileProtectionMode:(ORKFileProtectionMode)fileProtectionMode {
+    if (_hasBeenPresented) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change fileProtectionMode after presenting task controller" userInfo:nil];
+    }
+    _fileProtectionMode = fileProtectionMode;
+    [[self currentStepViewController] setFileProtectionMode:_fileProtectionMode];
+}
+
+- (void)setExcludesFilesFromBackup:(BOOL)excludesFilesFromBackup {
+    if (_hasBeenPresented) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change excludesFilesFromBackup after presenting task controller" userInfo:nil];
+    }
+    _excludesFilesFromBackup = excludesFilesFromBackup;
+    [self _applyBackupExclusionToOutputDirectoryIfNeeded];
+    [[self currentStepViewController] setExcludesFilesFromBackup:_excludesFilesFromBackup];
+}
+
+- (void)_applyBackupExclusionToOutputDirectoryIfNeeded {
+    if (_excludesFilesFromBackup && _outputDirectory) {
+        ORKApplyBackupExclusionToFileURL(_outputDirectory);
+    }
 }
 
 - (void)setRegisteredScrollView:(UIScrollView *)registeredScrollView {
@@ -868,42 +982,25 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (self.currentStepViewController) {
         supportedOrientations = self.currentStepViewController.supportedInterfaceOrientations;
     } else {
-        supportedOrientations = [self.nextStep makeViewControllerWithResult:nil].supportedInterfaceOrientations;
+        supportedOrientations = [self makeStepViewControllerForStep:self.nextStep result:nil].supportedInterfaceOrientations;
     }
     return supportedOrientations;
 }
 
 #pragma mark - internal helpers
 
-- (void)updateLastBeginningInstructionStepIdentifierForStep:(ORKStep *)step
-                                                  goForward:(BOOL)goForward {
-    if (NO == goForward) {
-        // Going backward, check current step to nil saved state
-        if (_lastBeginningInstructionStepIdentifier != nil &&
-            [_currentStepViewController.step.identifier isEqualToString:_lastBeginningInstructionStepIdentifier]) {
-            
-            _lastBeginningInstructionStepIdentifier = nil;
+- (void)prepareRecorders {
+    if (![self.task isKindOfClass:[ORKOrderedTask class]]) {
+        return;
+    }
+    
+    ORKOrderedTask *orderedTask = (ORKOrderedTask *)self.task;
+    for (ORKStep *step in orderedTask.steps) {
+        ORKActiveStep *activeStep = (ORKActiveStep *)step;
+        if ([activeStep isKindOfClass:[ORKActiveStep class]]) {
+            [activeStep prepareRecorders];
         }
-        // Don't return here, because the *next* step might NOT be an instruction step
-        // the next time we look.
     }
-    
-    ORKStep *nextStep = [self.task stepAfterStep:step withResult:[self result]];
-    BOOL isNextStepInstructionStep = [nextStep isKindOfClass:[ORKInstructionStep class]];
-    
-    if (_lastBeginningInstructionStepIdentifier == nil &&
-        nextStep && NO == isNextStepInstructionStep) {
-        _lastBeginningInstructionStepIdentifier = step.identifier;
-    }
-}
-
-- (BOOL)isStepLastBeginningInstructionStep:(ORKStep *)step {
-    if (!step) {
-        return NO;
-    }
-    return (_lastBeginningInstructionStepIdentifier != nil &&
-            [step isKindOfClass:[ORKInstructionStep class]]&&
-            [step.identifier isEqualToString:_lastBeginningInstructionStepIdentifier]);
 }
 
 - (BOOL)grantedAtLeastOnePermission {
@@ -921,51 +1018,65 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return NO;
 }
 
+- (ORKPermissionMask)deniedRequiredPermissionForActiveStep:(ORKActiveStep *)activeStep {
+    ORKPermissionMask required = [activeStep requiredPermissions];
+
+    if (required == ORKPermissionNone) {
+        return ORKPermissionNone;
+    }
+
+    if (required & ORKPermissionAudioRecording) {
+        if ([AVAudioApplication sharedInstance].recordPermission != AVAudioApplicationRecordPermissionGranted) {
+            return ORKPermissionAudioRecording;
+        }
+    }
+
+    if (required & ORKPermissionCoreMotionActivity) {
+        if ([CMMotionActivityManager authorizationStatus] == CMAuthorizationStatusDenied) {
+            return ORKPermissionCoreMotionActivity;
+        }
+    }
+
+    if (required & ORKPermissionCoreLocation) {
+        CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+        CLAuthorizationStatus status = locationManager.authorizationStatus;
+        if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted) {
+            return ORKPermissionCoreLocation;
+        }
+    }
+
+    if (required & ORKPermissionCamera) {
+        if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusDenied) {
+            return ORKPermissionCamera;
+        }
+    }
+
+    return ORKPermissionNone;
+}
+
+- (nullable ORKCompletionStep *)requiredPermissionDeniedCompletionStepForActiveStep:(ORKActiveStep *)activeStep {
+    ORKPermissionMask denied = [self deniedRequiredPermissionForActiveStep:activeStep];
+
+    switch (denied) {
+        case ORKPermissionAudioRecording:
+            return [ORKCompletionStep audioPermissionDeniedCompletionStepWithSettingsLink];
+        case ORKPermissionCoreMotionActivity:
+            return [ORKCompletionStep motionPermissionDeniedCompletionStepWithSettingsLink];
+        case ORKPermissionCoreLocation:
+            return [ORKCompletionStep locationPermissionDeniedCompletionStep];
+        case ORKPermissionCamera:
+            return [ORKCompletionStep cameraPermissionDeniedCompletionStep];
+        default:
+            return nil;
+    }
+}
+
 - (void)showStepViewController:(ORKStepViewController *)stepViewController goForward:(BOOL)goForward animated:(BOOL)animated {
     if (nil == stepViewController) {
         return;
     }
-    
+
     ORKStep *step = stepViewController.step;
-    
-    [self updateLastBeginningInstructionStepIdentifierForStep:step goForward:goForward];
-    
-    ORKStepViewController *fromController = self.currentStepViewController;
-    if (fromController && animated && [self isStepLastBeginningInstructionStep:fromController.step]) {
-
-        [self startAudioPromptSessionIfNeeded];
-        if ( [self grantedAtLeastOnePermission] == NO) {
-            // Do the health request and THEN proceed.
-            [self requestHealthAuthorizationWithCompletion:^{
-                
-                // If we are able to collect any data, proceed.
-                // An alternative rule would be to never proceed if any permission fails.
-                // However, since iOS does not re-present requests for access, we
-                // can easily fail even if the user does not see a dialog, which would
-                // be highly unexpected.
-
-                BOOL canRetryShowStepViewController = YES;
-                
-                // if we were granted at least one permission, it's worth trying again to show the step
-                canRetryShowStepViewController = canRetryShowStepViewController && [self grantedAtLeastOnePermission];
-
-                // even if we weren't granted permission, maybe step doesn't require it or the task can handle it some other way?
-                NSError *handlerErrorOrNil = nil;
-                if (canRetryShowStepViewController == NO) {
-                    BOOL handledRequestsDenied = [self handlePermissionRequestsDeniedForStep:fromController.step error:&handlerErrorOrNil];
-                    canRetryShowStepViewController = canRetryShowStepViewController && handledRequestsDenied;
-                }
-
-                if (canRetryShowStepViewController == YES) {
-                    [self showStepViewController:stepViewController goForward:goForward animated:animated];
-                } else {
-                    [self reportError:handlerErrorOrNil onStep:fromController.step];
-                }
-            }];
-            
-            return;
-        }
-    }
     
     if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
@@ -1021,6 +1132,141 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
     if ([newViewControllers isEqual:_childNavigationController.viewControllers] == NO) {
         [_childNavigationController setViewControllers:newViewControllers animated:animated];
+    }
+}
+
+- (BOOL)didHandlePermissionDenial {
+    // Defaults to no, but can be overridden by subclasses that wish to handle permission denial separately
+    return NO;
+}
+
+- (void)handleDeniedAuthForStep:(ORKStep *)step {
+    ORKNavigableOrderedTask* navigableTask = (ORKNavigableOrderedTask *)_task;
+    if (navigableTask == nil || ![navigableTask isKindOfClass:[ORKNavigableOrderedTask class]]) {
+        return;
+    }
+    
+    if (step.authDeniedContext != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Add a completion step to the current navigable ordered task
+            ORKCompletionStep *accessDeniedCompletionStep = [[step.authDeniedContext authDeniedCompletionStep] copy];
+            [navigableTask addStep:accessDeniedCompletionStep];
+
+            // Set a navigation rule for the new completion step
+            ORKDirectStepNavigationRule *endNavigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+            [navigableTask setNavigationRule:endNavigationRule forTriggerStepIdentifier:accessDeniedCompletionStep.identifier];
+            
+            [self flipToPageWithIdentifier:[step.authDeniedContext authDeniedCompletionStep].identifier
+                                   forward:YES
+                                  animated:YES];
+        });
+    }
+}
+
+- (void)checkRequiredPermissionsForCurrentStep {
+    if (!_hasRequestedHealthData) {
+        return;
+    }
+    
+    ORKActiveStep *activeStep = (ORKActiveStep *)_currentStepViewController.step;
+    if (![activeStep isKindOfClass:[ORKActiveStep class]]) {
+        return;
+    }
+
+    ORKPermissionMask denied = [self deniedRequiredPermissionForActiveStep:activeStep];
+    if (denied == ORKPermissionNone) {
+        return;
+    }
+
+    if ([_task isKindOfClass:[ORKNavigableOrderedTask class]]) {
+        ORKCompletionStep *deniedStep = [self requiredPermissionDeniedCompletionStepForActiveStep:activeStep];
+        if (deniedStep != nil) {
+            [self handleRequiredPermissionDenialWithCompletionStep:deniedStep];
+        }
+    } else {
+        [self showRequiredPermissionDeniedAlertForDeniedPermission:denied];
+    }
+}
+
+- (BOOL)isStepLastBeginningInstructionStep:(ORKStep *)step {
+    // The instruction step navigation system this relied on has been removed.
+    // This stub exists to preserve binary compatibility while the method is deprecated.
+    return NO;
+}
+
+- (void)showRequiredPermissionDeniedAlertForDeniedPermission:(ORKPermissionMask)denied {
+    NSString *message = nil;
+
+    switch (denied) {
+        case ORKPermissionAudioRecording:
+            message = ORKLocalizedString(@"PERMISSION_REQUIRED_ALERT_AUDIO_MESSAGE", nil);
+            break;
+        case ORKPermissionCoreMotionActivity:
+            message = ORKLocalizedString(@"PERMISSION_REQUIRED_ALERT_MOTION_MESSAGE", nil);
+            break;
+        case ORKPermissionCoreLocation:
+            message = ORKLocalizedString(@"PERMISSION_REQUIRED_ALERT_LOCATION_MESSAGE", nil);
+            break;
+        case ORKPermissionCamera:
+            message = ORKLocalizedString(@"PERMISSION_REQUIRED_ALERT_CAMERA_MESSAGE", nil);
+            break;
+        default:
+            message = ORKLocalizedString(@"PERMISSION_REQUIRED_ALERT_DEFAULT_MESSAGE", nil);
+            break;
+    }
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PERMISSION_REQUIRED_ALERT_TITLE", nil)
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self finishWithReason:ORKTaskFinishReasonFailed error:nil];
+        });
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)handleRequiredPermissionDenialWithCompletionStep:(ORKCompletionStep *)completionStep {
+    ORKNavigableOrderedTask* navigableTask = (ORKNavigableOrderedTask *)_task;
+    if (navigableTask == nil || ![navigableTask isKindOfClass:[ORKNavigableOrderedTask class]]) {
+        return;
+    }
+
+    [navigableTask addStep:completionStep];
+
+    ORKDirectStepNavigationRule *endNavigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [navigableTask setNavigationRule:endNavigationRule forTriggerStepIdentifier:completionStep.identifier];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self flipToPageWithIdentifier:completionStep.identifier
+                               forward:YES
+                              animated:YES];
+    });
+}
+
+- (void)handleUnsupportedDeviceForStep:(ORKStep *)step {
+    ORKNavigableOrderedTask* navigableTask = (ORKNavigableOrderedTask *)_task;
+    if (navigableTask == nil || ![navigableTask isKindOfClass:[ORKNavigableOrderedTask class]]) {
+        return;
+    }
+    
+    if (step.unsupportedDeviceContext != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Add a completion step to the current navigable ordered task
+            ORKCompletionStep *unsupportedDeviceCompletionStep = [[step.unsupportedDeviceContext unsupportedDeviceCompletionStep] copy];
+            [navigableTask addStep:unsupportedDeviceCompletionStep];
+
+            // Set a navigation rule for the new completion step
+            ORKDirectStepNavigationRule *endNavigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+            [navigableTask setNavigationRule:endNavigationRule forTriggerStepIdentifier:unsupportedDeviceCompletionStep.identifier];
+            
+            [self flipToPageWithIdentifier:unsupportedDeviceCompletionStep.identifier
+                                   forward:YES
+                                  animated:YES];
+        });
     }
 }
 
@@ -1143,7 +1389,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 result = previousResult ? : [[ORKStepResult alloc] initWithIdentifier:step.identifier];
             }
             
-            stepViewController = [step makeViewControllerWithResult:result];
+            stepViewController = [self makeStepViewControllerForStep:step result:result];
         }
     }
     
@@ -1167,6 +1413,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     stepViewController.outputDirectory = self.outputDirectory;
+    stepViewController.fileProtectionMode = self.fileProtectionMode;
+    stepViewController.excludesFilesFromBackup = self.excludesFilesFromBackup;
     stepViewController.delegate = self;
     
     if (!isPreviousViewController) {
@@ -1231,11 +1479,45 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 #pragma mark - internal action Handlers
 
 - (void)finishWithReason:(ORKTaskFinishReason)reason error:(nullable NSError *)error {
+    if (_hasCalledFinish) {
+        return;
+    }
+    _hasCalledFinish = YES;
+
+    if (self.currentStepViewController != nil && [self isEarlyTerminationReason:reason]) {
+        [self.currentStepViewController taskDidTerminateEarly];
+    }
+
+    [self cleanupOutputDirectory];
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
         [strongDelegate taskViewController:self didFinishWithReason:reason error:error];
     }
     [self didFinishWithReason:reason error:error];
+
+    // Re-arm for the next user-initiated call. Using dispatch_async ensures that
+    // any same-tick duplicate calls (e.g. recorder completion racing with goForward)
+    // remain blocked, while a deliberate retry after the delegate chose not to dismiss
+    // can go through on a subsequent run loop pass.
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf->_hasCalledFinish = NO;
+        }
+    });
+}
+
+- (BOOL)isEarlyTerminationReason:(ORKTaskFinishReason)reason {
+    switch (reason) {
+        case ORKTaskFinishReasonSaved:
+        case ORKTaskFinishReasonDiscarded:
+        case ORKTaskFinishReasonFailed:
+        case ORKTaskFinishReasonEarlyTermination:
+            return YES;
+        case ORKTaskFinishReasonCompleted:
+            return NO;
+    }
 }
 
 // For subclasses
@@ -1249,7 +1531,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    
+
+    if (@available(iOS 16.0, *)) {
+        if (ORKLiquidGlassSupportEnabled()) {
+            alert.popoverPresentationController.sourceItem = self.currentStepViewController.cancelButtonItem;
+        }
+    }
     if ([sender isKindOfClass:[ORKBorderedButton class]]) {
         UIView *cancelButtonView = (UIView *)sender;
         alert.popoverPresentationController.sourceView = cancelButtonView;
@@ -1628,6 +1915,8 @@ static NSString *const _ORKHasRequestedHealthDataRestoreKey = @"hasRequestedHeal
 static NSString *const _ORKRequestedHealthTypesForReadRestoreKey = @"requestedHealthTypesForRead";
 static NSString *const _ORKRequestedHealthTypesForWriteRestoreKey = @"requestedHealthTypesForWrite";
 static NSString *const _ORKOutputDirectoryRestoreKey = @"outputDirectory";
+static NSString *const _ORKFileProtectionModeRestoreKey = @"fileProtectionMode";
+static NSString *const _ORKExcludesFilesFromBackupRestoreKey = @"excludesFilesFromBackup";
 static NSString *const _ORKLastBeginningInstructionStepIdentifierKey = @"lastBeginningInstructionStepIdentifier";
 static NSString *const _ORKTaskIdentifierRestoreKey = @"taskIdentifier";
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
@@ -1647,7 +1936,8 @@ static NSString *const _ORKProgressMode = @"progressMode";
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDate];
     [coder encodeInteger:_progressMode forKey:_ORKProgressMode];
     [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryRestoreKey];
-    [coder encodeObject:_lastBeginningInstructionStepIdentifier forKey:_ORKLastBeginningInstructionStepIdentifierKey];
+    [coder encodeInteger:_fileProtectionMode forKey:_ORKFileProtectionModeRestoreKey];
+    [coder encodeBool:_excludesFilesFromBackup forKey:_ORKExcludesFilesFromBackupRestoreKey];
     
     [coder encodeObject:_task.identifier forKey:_ORKTaskIdentifierRestoreKey];
     
@@ -1676,6 +1966,9 @@ static NSString *const _ORKProgressMode = @"progressMode";
     
     _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
     [self ensureDirectoryExists:_outputDirectory];
+    _fileProtectionMode = [coder decodeIntegerForKey:_ORKFileProtectionModeRestoreKey];
+    _excludesFilesFromBackup = [coder decodeBoolForKey:_ORKExcludesFilesFromBackupRestoreKey];
+    [self _applyBackupExclusionToOutputDirectoryIfNeeded];
     
     // Must have a task object already provided by this point in the restoration, in order to restore any other state.
     if (_task) {
@@ -1700,7 +1993,6 @@ static NSString *const _ORKProgressMode = @"progressMode";
             _requestedHealthTypesForWrite = nil;
 #endif
             _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
-            _lastBeginningInstructionStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKLastBeginningInstructionStepIdentifierKey];
             _restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
         } else {
             ORK_Log_Info("Not restoring current step of task %@ because it does not implement -stepWithIdentifier:", _task.identifier);
@@ -1882,6 +2174,8 @@ static NSString *const _ORKProgressMode = @"progressMode";
 #pragma mark - UINavigationBarAppearance
 
 - (void)setNavigationBarColor:(UIColor *)color {
+    if (ORKLiquidGlassSupportEnabled()) { return; }
+
     UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
     [appearance configureWithOpaqueBackground];
     appearance.shadowColor = nil;

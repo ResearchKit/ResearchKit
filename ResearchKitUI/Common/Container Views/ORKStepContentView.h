@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable) NSString *stepDetailText;
 
+@property (nonatomic, nullable) NSAttributedString *stepAttributedDetailText;
+
 @property (nonatomic) NSTextAlignment stepHeaderTextAlignment;
 
 @property (nonatomic) NSTextAlignment bodyTextAlignment;
@@ -70,8 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL shouldAutomaticallyAdjustImageTintColor;
 
 @property (nonatomic, weak) id<ORKStepContentLearnMoreItemDelegate> delegate;
-
-- (instancetype)initWithStandardPadding;
 
 @end
 

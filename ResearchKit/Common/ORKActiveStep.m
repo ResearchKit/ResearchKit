@@ -179,10 +179,19 @@
 
 - (ORKPermissionMask)requestedPermissions {
     ORKPermissionMask mask = [super requestedPermissions];
+    mask |= [self requiredPermissions];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
         mask |= [config requestedPermissionMask];
     }
     return mask;
+}
+
+- (ORKPermissionMask)requiredPermissions {
+    return ORKPermissionNone;
+}
+
+- (void)prepareRecorders {
+    // no-op - subclasses override
 }
 
 @end

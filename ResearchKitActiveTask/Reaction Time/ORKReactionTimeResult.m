@@ -39,9 +39,19 @@
 
 @implementation ORKReactionTimeResult
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        // ORKESerializer creates instances via [[class alloc] init] + KVC; legacy JSON without isSuccessful must default to YES.
+        _isSuccessful = YES;
+    }
+    return self;
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_BOOL(aCoder, isSuccessful);
     ORK_ENCODE_OBJ(aCoder, fileResults);
 }
 
@@ -49,7 +59,12 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
-        ORK_DECODE_OBJ_CLASS(aDecoder, fileResults, NSArray<ORKFileResult *>);
+        if ([aDecoder containsValueForKey:@"isSuccessful"]) {
+            ORK_DECODE_BOOL(aDecoder, isSuccessful);
+        } else {
+            _isSuccessful = YES;
+        }
+        ORK_DECODE_OBJ_ARRAY(aDecoder, fileResults, ORKFileResult);
     }
     return self;
 }
@@ -60,26 +75,28 @@
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
-    
+
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.timestamp == castObject.timestamp) &&
+            (self.isSuccessful == castObject.isSuccessful) &&
             ORKEqualObjects(self.fileResults, castObject.fileResults)) ;
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ self.fileResults.hash;
+    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ @(self.isSuccessful).hash ^ self.fileResults.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKReactionTimeResult *result = [super copyWithZone:zone];
     result.fileResults = [self.fileResults copy];
     result.timestamp = self.timestamp;
+    result.isSuccessful = self.isSuccessful;
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; timestamp: %f; fileResult: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.timestamp, self.fileResults.description, self.descriptionSuffix];
+    return [NSString stringWithFormat:@"%@; timestamp: %f; isSuccessful: %d; fileResult: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.timestamp, self.isSuccessful, self.fileResults.description, self.descriptionSuffix];
 }
 
 @end

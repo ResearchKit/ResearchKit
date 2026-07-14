@@ -33,7 +33,9 @@
 
 #import "ORKStep_Private.h"
 
+#import "ORKAudioRecorder.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKRecorder.h"
 
 
 @implementation ORKAudioStep
@@ -50,20 +52,16 @@
 
 - (void)setUseRecordButton:(BOOL)useRecordButton {
     _useRecordButton = useRecordButton;
-    
     [self setShouldStartTimerAutomatically:!_useRecordButton];
-    
-    if (_useRecordButton) {
-        self.stepDuration = 0;
-    }
 }
 
 - (void)validateParameters {
     [super validateParameters];
-    
+    ORKValidateBoundedValue(self.stepDuration, 0, @"stepDuration", YES);
+
     NSTimeInterval const ORKAudioTaskMinimumDuration = 5.0;
     
-    if ( self.stepDuration < ORKAudioTaskMinimumDuration && !self.useRecordButton) {
+    if ( (self.stepDuration < ORKAudioTaskMinimumDuration && self.useRecordButton == NO) || (self.stepDuration < ORKAudioTaskMinimumDuration && self.stepDuration != 0 && self.useRecordButton == YES)) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKAudioTaskMinimumDuration)]  userInfo:nil];
     }
 }
@@ -100,6 +98,43 @@
     
     __typeof(self) castObject = object;
     return (isParentSame && self.useRecordButton == castObject.useRecordButton);
+}
+
+- (ORKPermissionMask)requiredPermissions {
+    return ORKPermissionAudioRecording;
+}
+
+- (void)prepareRecorders {
+    BOOL hasAudioRecorder = NO;
+    for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
+        if ([config isKindOfClass:[ORKAudioRecorderConfiguration class]]) {
+            hasAudioRecorder = YES;
+            break;
+        }
+    }
+    
+    if (!hasAudioRecorder) {
+        ORKAudioRecorderConfiguration *defaultConfig = [[ORKAudioRecorderConfiguration alloc]
+                                                        initWithIdentifier:@"ORKAudioRecorderConfiguration"
+                                                        recorderSettings:[ORKAudioRecorder defaultRecorderSettings]
+                                                        outputDirectory:nil];
+        NSMutableArray *configs = [NSMutableArray arrayWithArray:self.recorderConfigurations ?: @[]];
+        [configs addObject:defaultConfig];
+        self.recorderConfigurations = configs;
+    }
+    
+    // Filter out any configurations that are not of type ORKAudioRecorderConfiguration
+    NSArray *filteredConfigs = [self.recorderConfigurations filteredArrayUsingPredicate:
+                                [NSPredicate predicateWithBlock:^BOOL(id config, NSDictionary *bindings) {
+        BOOL isAudioRecorderConfig = [config isKindOfClass:[ORKAudioRecorderConfiguration class]];
+        if (!isAudioRecorderConfig) {
+            ORK_Log_Info("The %@ class has been filtered out of the recorderConfigurations array of the ORKAudioStep class.", NSStringFromClass([config class]));
+        }
+        
+        return isAudioRecorderConfig;
+    }]];
+
+    self.recorderConfigurations = filteredConfigs;
 }
 
 @end

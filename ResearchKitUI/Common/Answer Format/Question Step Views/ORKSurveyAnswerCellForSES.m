@@ -56,8 +56,8 @@
     [self addSubview:_selectionView];
     
     [[_selectionView.topAnchor constraintEqualToAnchor:self.topAnchor] setActive:YES];
-    [[_selectionView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
-    [[_selectionView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
+    [[_selectionView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+    [[_selectionView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
     [[self.bottomAnchor constraintEqualToAnchor:_selectionView.bottomAnchor] setActive:YES];
     
 }

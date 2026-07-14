@@ -43,6 +43,15 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithIdentifier:(NSString *)identifier audiometryEngine:(nullable id<ORKAudiometryProtocol>)audiometry;
 
+/// Minimum allowed value for `toneDuration`, in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval minimumToneDuration;
+
+/// Minimum allowed value for `maxRandomPreStimulusDelay`, in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval minimumMaxRandomPreStimulusDelay;
+
+/// Maximum allowed value for `maxRandomPreStimulusDelay`, in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval maximumMaxRandomPreStimulusDelay;
+
 @property (nonatomic, assign) NSTimeInterval toneDuration;
 
 @property (nonatomic, assign) NSTimeInterval maxRandomPreStimulusDelay;

@@ -61,13 +61,15 @@ static CGFloat const ORKSpeechRecognitionContentBottomLayoutMargin = 44.0;
     UIImageView *_imageView;
     UILabel *_textLabel;
     UIButton *_useKeyboardButton;
+    BOOL _hideUseKeyboardButton;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (nonnull instancetype)initWithFrame:(CGRect)frame hideUseKeyboardButton:(BOOL)hideUseKeyboardButton {
     self = [super initWithFrame:frame];
     if (self) {
         self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        _hideUseKeyboardButton = hideUseKeyboardButton;
         [self setupTranscriptLabel];
         [self setupGraphView];
         [self setupRecordButton];
@@ -77,26 +79,23 @@ static CGFloat const ORKSpeechRecognitionContentBottomLayoutMargin = 44.0;
         [self updateGraphSamples];
         [self applyKeyColor];
         [self setUpConstraints];
+
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKSpeechRecognitionContentView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView setUpConstraints];
+
+            NSAttributedString *attributedTitle = [[NSAttributedString alloc]
+                                                   initWithString:ORKLocalizedString(@"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD", nil)
+                                                   attributes:@{NSFontAttributeName:[traitChangeView buttonTextFont],
+                                                                NSForegroundColorAttributeName:traitChangeView.tintColor}];
+            [traitChangeView->_useKeyboardButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        }];
     }
+    
     return self;
 }
 
 - (void)drawRect:(CGRect)rect {
     [self setUpConstraints];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self setUpConstraints];
-    
-    
-    
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc]
-                                           initWithString:ORKLocalizedString(@"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD", nil)
-                                           attributes:@{NSFontAttributeName:[self buttonTextFont],
-                                                        NSForegroundColorAttributeName:self.tintColor}];
-    [_useKeyboardButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
 }
 
 - (void)setupImageView {
@@ -187,12 +186,19 @@ static CGFloat const ORKSpeechRecognitionContentBottomLayoutMargin = 44.0;
 }
 
 - (void)setupUseKeyboardButton {
+    CGFloat spacing = 8;
+    
+    UIButtonConfiguration *useKeyboardButtonConfiguration = UIButtonConfiguration.plainButtonConfiguration;
+    useKeyboardButtonConfiguration.imagePadding = spacing;
+    useKeyboardButtonConfiguration.contentInsets = NSDirectionalEdgeInsetsMake(0, -spacing, 0, -spacing);
+    useKeyboardButtonConfiguration.preferredSymbolConfigurationForImage = [UIImageSymbolConfiguration configurationWithScale:UIImageSymbolScaleDefault];
+    
     _useKeyboardButton = [[UIButton alloc] init];
-    [_useKeyboardButton setImage:[UIImage systemImageNamed:@"keyboard" 
+    _useKeyboardButton.configuration = useKeyboardButtonConfiguration;
+    [_useKeyboardButton setImage:[UIImage systemImageNamed:@"keyboard"
                              compatibleWithTraitCollection:self.traitCollection]
                         forState:UIControlStateNormal];
     
-    _useKeyboardButton.adjustsImageWhenHighlighted = NO;
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:ORKLocalizedString(@"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD", nil)
                                                                           attributes:@{NSFontAttributeName:[self buttonTextFont],
                                                                                        NSForegroundColorAttributeName:self.tintColor}];
@@ -200,10 +206,7 @@ static CGFloat const ORKSpeechRecognitionContentBottomLayoutMargin = 44.0;
     [_useKeyboardButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     _useKeyboardButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _useKeyboardButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    CGFloat spacing = 8;
-    _useKeyboardButton.imageEdgeInsets = UIEdgeInsetsMake(0, -(spacing/2), 0, (spacing/2));
-    _useKeyboardButton.titleEdgeInsets = UIEdgeInsetsMake(0, (spacing/2), 0, -(spacing/2));
-    _useKeyboardButton.contentEdgeInsets = UIEdgeInsetsMake(0, -spacing, 0, -spacing);
+    _useKeyboardButton.hidden = _hideUseKeyboardButton;
     [self addSubview:_useKeyboardButton];
     
     [_useKeyboardButton addTarget:self action:@selector(useKeyboardButtonPressed) forControlEvents:UIControlEventTouchUpInside];

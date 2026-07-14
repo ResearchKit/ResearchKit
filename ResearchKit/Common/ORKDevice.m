@@ -127,6 +127,8 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
 - (void)_init {
     self->_product = [self _product];
     self->_osBuild = [self _osBuild];
+    self->_researchKitVersion = [self currentResearchKitVersion];
+    self->_researchKitBundleVersion = [self currentResearchKitBundleVersion];
     NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
 #if TARGET_OS_IOS
     self->_platform = [[UIDevice currentDevice] systemName];
@@ -139,16 +141,20 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
                       osVersion:(NSString *)osVersion
                         osBuild:(NSString *)osBuild
                        platform:(NSString *)platform
-{
+             researchKitVersion:(nullable NSString *)researchKitVersion
+       researchKitBundleVersion:(nullable NSString *)researchKitBundleVersion {
     self = [super init];
     if (self) {
         self->_product = [product copy];
         self->_osVersion = [osVersion copy];
         self->_osBuild = [osBuild copy];
         self->_platform = [platform copy];
+        self->_researchKitVersion = [researchKitVersion copy];
+        self->_researchKitBundleVersion = [researchKitBundleVersion copy];
     }
     return self;
 }
+
 
 - (nullable NSString *)_product {
 #if !TARGET_OS_SIMULATOR
@@ -166,6 +172,14 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
 #endif
 }
 
+- (nullable NSString *)currentResearchKitVersion {
+    return [[ORKBundle() infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
+- (nullable NSString *)currentResearchKitBundleVersion {
+    return [[ORKBundle() infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
 #pragma mark - NSObjectProtocol
 
 - (BOOL)isEqual:(id)object {
@@ -173,11 +187,13 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
     return (ORKEqualObjects(self.product, castObject.product) &&
             ORKEqualObjects(self.platform, castObject.platform) &&
             ORKEqualObjects(self.osBuild, castObject.osBuild) &&
-            ORKEqualObjects(self.osVersion, castObject.osVersion));
+            ORKEqualObjects(self.osVersion, castObject.osVersion) &&
+            ORKEqualObjects(self.researchKitVersion, castObject.researchKitVersion) &&
+            ORKEqualObjects(self.researchKitBundleVersion, castObject.researchKitBundleVersion));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.product.hash ^ self.platform.hash ^ self.osBuild.hash ^ self.osVersion.hash;
+    return super.hash ^ self.product.hash ^ self.platform.hash ^ self.osBuild.hash ^ self.osVersion.hash ^ self.researchKitVersion.hash ^ self.researchKitBundleVersion.hash;
 }
 
 #pragma mark - NSSecureCoding
@@ -187,10 +203,25 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    ORK_ENCODE_OBJ(coder, product);
-    ORK_ENCODE_OBJ(coder, platform);
-    ORK_ENCODE_OBJ(coder, osBuild);
-    ORK_ENCODE_OBJ(coder, osVersion);
+    // Only encode non-nil properties for consistent serialization across simulators and devices
+    if (_product) {
+        ORK_ENCODE_OBJ(coder, product);
+    }
+    if (_platform) {
+        ORK_ENCODE_OBJ(coder, platform);
+    }
+    if (_osBuild) {
+        ORK_ENCODE_OBJ(coder, osBuild);
+    }
+    if (_osVersion) {
+        ORK_ENCODE_OBJ(coder, osVersion);
+    }
+    if (_researchKitVersion) {
+        ORK_ENCODE_OBJ(coder, researchKitVersion);
+    }
+    if (_researchKitBundleVersion) {
+        ORK_ENCODE_OBJ(coder, researchKitBundleVersion);
+    }
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
@@ -200,6 +231,8 @@ static NSString * ORK_SYSCTL_DEBUG_STRING(int tl, int sl) {
         ORK_DECODE_OBJ_CLASS(coder, platform, NSString);
         ORK_DECODE_OBJ_CLASS(coder, osBuild, NSString);
         ORK_DECODE_OBJ_CLASS(coder, osVersion, NSString);
+        ORK_DECODE_OBJ_CLASS(coder, researchKitVersion, NSString);
+        ORK_DECODE_OBJ_CLASS(coder, researchKitBundleVersion, NSString);
     }
     return self;
 }

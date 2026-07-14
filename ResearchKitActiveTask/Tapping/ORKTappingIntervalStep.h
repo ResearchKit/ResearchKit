@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTappingIntervalStep : ORKActiveStep
 
+/// The minimum valid step duration for a tapping interval step, in seconds.
+@property (class, readonly) NSTimeInterval twoFingerTappingMinimumDuration;
+
 @end
 
 NS_ASSUME_NONNULL_END

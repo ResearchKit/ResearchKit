@@ -49,25 +49,25 @@
 "CONSENT_SECTION_STUDY_SURVEY" = "Tutkimuskysely";
 "CONSENT_SECTION_STUDY_TASKS" = "Tutkimustehtävät";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Ajankäyttö";
-"CONSENT_SECTION_WITHDRAWING" = "Peruuttaminen";
+"CONSENT_SECTION_WITHDRAWING" = "Keskeyttäminen";
 "CONSENT_LEARN_MORE_TITLE" = "Lisätietoja";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Lisätietoja tietojen keräämisestä";
-"LEARN_MORE_DATA_USE" = "Lisätietoja tietojen käytöstä";
+"LEARN_MORE_DATA_GATHERING" = "Lisätietoja tietojen keräämisestä.";
+"LEARN_MORE_DATA_USE" = "Lisätietoja tietojen käytöstä.";
 "LEARN_MORE_PRIVACY" = "Lisätietoja siitä, kuinka yksityisyyttäsi ja identiteettiäsi suojataan.";
-"LEARN_MORE_WELCOME" = "Lisätietoja tutkimuksesta";
-"LEARN_MORE_STUDY_SURVEY" = "Lisätietoja tutkimuskyselystä";
-"LEARN_MORE_TIME_COMMITMENT" = "Lisätietoja tutkimuksen vaatimasta ajasta";
-"LEARN_MORE_TASKS" = "Lisätietoja tutkimukseen liittyvistä tehtävistä";
-"LEARN_MORE_WITHDRAWING" = "Lisätietoja peruuttamisesta";
+"LEARN_MORE_WELCOME" = "Lisätietoja tutkimuksesta.";
+"LEARN_MORE_STUDY_SURVEY" = "Lisätietoja tutkimuskyselystä.";
+"LEARN_MORE_TIME_COMMITMENT" = "Lisätietoja tutkimuksen vaatimasta ajasta.";
+"LEARN_MORE_TASKS" = "Lisätietoja tutkimukseen liittyvistä tehtävistä.";
+"LEARN_MORE_WITHDRAWING" = "Lisätietoja keskeyttämisestä.";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Jakovalinnat";
 "CONSENT_SHARE_WIDELY_%@" = "Jaa datani kohteen %@ ja hyväksyttyjen tutkijoiden kanssa maailmanlaajuisesti";
 "CONSENT_SHARE_ONLY_%@" = "Jaa datani vain kohteen %@ kanssa";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ vastaanottaa tutkimusdatasi tästä tutkimuksesta.\n\nKoodatun tutkimusdatan jakaminen laajemmalle käyttäjäkunnalle (ilman nimeä ym. tietoja) voi edesauttaa tätä ja tulevia tutkimuksia.";
-"LEARN_MORE_CONSENT_SHARING" = "Lisätietoja datajaosta";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ vastaanottaa tutkimusdatasi tästä tutkimuksesta.\n\nKoodatun tutkimusdatan jakaminen laajemmalle käyttäjäkunnalle (ilman nimi ym. tietoja) voi edesauttaa tätä ja tulevia tutkimuksia.";
+"LEARN_MORE_CONSENT_SHARING" = "Lisätietoja datajaosta.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Nimi painokirjaimin";
@@ -82,7 +82,7 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Ohitettu";
-"REVIEW_EDIT_ANSWER" = "Muokkaa";
+"REVIEW_EDIT_ANSWER" = "MUOKKAA";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Virheellinen arvo";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Syötä osoite";
 "LOCATION_ERROR_TITLE" = "Määritettyä osoitetta ei löydy";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nykyistä sijaintiasi ei voida määrittää. Kirjoita osoite tai, jos mahdollista, siirry paikkaan, jossa GPS-signaali on parempi.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Sijaintipalveluiden käyttö on kielletty. Anna Asetuksissa tälle ohjelmalle oikeus käyttää Sijaintipalveluita.";
 "LOCATION_ERROR_GEOCODE" = "Syötetyllä osoitteella ei löydy tuloksia. Varmista, että osoite on oikein.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Joko et ole yhteydessä internetiin tai olet ylittänyt osoitehakupyyntöjen enimmäismäärän. Jos et ole yhteydessä internetiin, laita Wi-Fi päälle vastataksesi tähän kysymykseen, ohita tämä kysymys (jos ohituspainike on käytettävissä), tai palaa kyselyyn, kun olet internet-yhteydessä. Muussa tapauksessa yritä muutaman minuutin päästä uudelleen.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstisisältö ylittää maksimipituuden: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstin pituus on rajoitettu %@ merkkiin";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera ei ole käytettävissä jaetulla näytöllä.";
@@ -122,7 +120,7 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Valitse sukupuoli";
 "DOB_FORM_ITEM_TITLE" = "Syntymäaika";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Valitse päiväys";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Puhelinnumero";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Puhelin­numero";
 "PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
@@ -133,7 +131,7 @@
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Kirjaudu sisään";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Unohditko salasanan?";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Unohtuiko salasana?";
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Syötä pääsykoodi";
@@ -175,6 +173,13 @@
 "FITZPATRICK_SKIN_TYPE_IV" = "Tyyppi IV";
 "FITZPATRICK_SKIN_TYPE_V" = "Tyyppi V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Tyyppi VI";
+
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Tyyppi 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Tyyppi 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Tyyppi 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Tyyppi 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Tyyppi 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Tyyppi 6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "Nainen";
@@ -218,7 +223,7 @@
 "BUTTON_SKIP" = "Ohita";
 "BUTTON_SKIP_QUESTION" = "Ohita tämä kysymys";
 "BUTTON_START_TIMER" = "Käynnistä ajastin";
-"BUTTON_OPTION_SAVE" = "Jatka tästä myöhemmin";
+"BUTTON_OPTION_SAVE" = "Lue myöhemmin";
 "BUTTON_OPTION_DISCARD" = "Hylkää tulokset";
 "BUTTON_OPTION_STOP_TASK" = "Lopeta tehtävä";
 "BUTTON_SAVE" = "Tallenna";
@@ -298,15 +303,15 @@
 "AMSLER_GRID_TITLE" = "Amslerin ruudukko";
 "AMSLER_GRID_INTRO_TEXT" = "Tämä aktiviteetti auttaa havaitsemaan ongelmia käyttäjän näössä.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Pidä laitetta noin 30 cm päässä kasvoistasi ja silmän korkeudella koko testin ajan.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Sulje %@ ja tuijota neliöruudukon keskellä olevaa pistettä.\n\nMerkitse sormella tai kynällä kaikki näkemäsi vääristymät, esim. epäselvät tai aaltoilevat viivat.\n\nKun olet valmis, pyyhkäise vasemmalle ruudukon ulkopuolelta.";
-"AMSLER_GRID_LEFT_EYE" = "vasen silmä";
-"AMSLER_GRID_RIGHT_EYE" = "oikea silmä";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Sulje %@ ja tuijota neliöruudukon keskellä olevaa pistettä.\n\nMerkitse sormella tai kynällä kaikki näkemäsi vääristymät, esim. epäselvät tai aaltoilevat viivat.\n\nKun olet valmis, napauta Seuraava.";
+"AMSLER_GRID_LEFT_EYE" = "Vasen silmä";
+"AMSLER_GRID_RIGHT_EYE" = "Oikea silmä";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Ääni";
 "AUDIO_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
 "AUDIO_INSTRUCTION" = "Sano ”aaa” mikrofoniin niin kauan kuin voit.";
-"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano ”Aaaaa\" mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
+"AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano ”Aaaaa” mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
 "AUDIO_INTENDED_USE" = "Tämä aktiviteetti arvioi ääntäsi tallentamalla sitä laitteen alareunassa olevalla mikrofonilla.";
 "AUDIO_TOO_LOUD_LABEL" = "Liian kovaa";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ei voida äänittää";
@@ -328,7 +333,7 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Napauta, kun kuulet äänen.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Napauta painiketta, kun kuulet äänen.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ääni ja äänenvoimakkuus";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Kuulet sarjan ääniä.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Kun kuulet äänen, napauta painiketta.";
@@ -337,7 +342,7 @@
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Laita Älä häiritse -toiminto päälle keskeytysten välttämiseksi.";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Äänet toistetaan ensin oikeaan korvaan.";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Äänet toistetaan nyt vasempaan korvaan.";
-"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Tämä aktiviteetti mittaa henkilön kuulon kynnystasoja dB HL -asteikolla.";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Tämä aktiviteetti osoittaa henkilön kuulon kynnystasoja dB HL -asteikolla.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Varmista, että laitteen äänenvoimakkuus on asetettu suurimpaan arvoonsa.\n\nTämän tehtävän aikana hiljainen ääni toistetaan joko vasempaan tai oikeaan korvaan.\n\nKuuntele tarkasti ja napauta painiketta aina, kun kuulet äänen.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Tämä testi määrittää, kuinka kova äänen täytyy olla, jotta kuulet sen.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Aloituskysely.";
@@ -421,10 +426,10 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aseta laite oikealle polvelle näyttö ulospäin, kuten kuvassa.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta vasen polvi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta oikea polvi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle polvelle. Napauta näyttöä ja suorista vasenta polvea niin pitkälle kuin mahdollista.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle polvelle. Napauta näyttöä ja suorista oikeaa polvea niin pitkälle kuin mahdollista.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kun olet valmis, palauta vasen polvi lähtöasentoon. Napauta sitten missä tahansa.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Kun olet valmis, palauta oikea polvi aloitusasentoon. Napauta sitten missä tahansa.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle polvelle.\n\nNapauta näyttöä ja suorista vasenta polvea niin pitkälle kuin mahdollista.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle polvelle.\n\nNapauta näyttöä ja suorista oikeaa polvea niin pitkälle kuin mahdollista.\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kun olet valmis, palauta vasen polvi lähtöasentoon.\n\nNapauta sitten missä tahansa.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Kun olet valmis, palauta oikea polvi aloitusasentoon.\n\nNapauta sitten missä tahansa.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Vasemman olkapään liikealue";
@@ -435,8 +440,8 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Aloitettaessa laite asetetaan mittausta varten oikealle olkapäälle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aseta laite vasemmalle olkapäälle näyttö ulospäin, kuten kuvassa.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aseta laite oikealle olkapäälle näyttö ulospäin, kuten kuvassa.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta vasen käsi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta oikea käsi niin ylös kuin mahdollista. Palaa aloitusasentoon ja napauta uudelleen, kun olet valmis.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta vasenta kättä niin ylös kuin mahdollista. Palaa aloitusasentoon ja lopeta napauttamalla uudelleen.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, aloita napauttamalla näyttöä ja nosta oikeaa kättä niin ylös kuin mahdollista. Palaa aloitusasentoon ja lopeta napauttamalla uudelleen.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle olkapäälle. Napauta näyttöä ja nosta vasen käsi eteen niin kauas kuin mahdollista.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle olkapäälle. Napauta näyttöä ja nosta oikea käsi eteen niin kauas kuin mahdollista.";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Kun olet valmis, palauta vasen käsi lähtöasentoon. Napauta sitten missä tahansa.";
@@ -493,9 +498,9 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Vapina-aktiviteetti";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Tämä aktiviteetti mittaa käsiesi vapinaa eri asennoissa. Etsi paikka, jossa voit istua mukavasti tämän aktiviteetin keston ajan.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Pidä puhelinta alla olevan kuvan mukaisesti kädessä, jossa vaikutus on voimakkaampi.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Pidä puhelinta alla olevan kuvan mukaisesti OIKEASSA kädessä.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Pidä puhelinta alla olevan kuvan mukaisesti VASEMMASSA kädessä.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Pidä puhelinta yllä olevan kuvan mukaisesti kädessä, jossa vaikutus on voimakkaampi.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Pidä puhelinta yllä olevan kuvan mukaisesti OIKEASSA kädessä.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Pidä puhelinta yllä olevan kuvan mukaisesti VASEMMASSA kädessä.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Sinua pyydetään suorittamaan %@ puhelin kädessä istuen.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "tehtävä";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "kaksi tehtävää";
@@ -535,8 +540,8 @@
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "Polkutesti";
 "TRAILMAKING_INTENDED_USE" = "Tämä aktiviteetti arvioi visuaalista tarkkaavaisuutta ja tehtävänvaihtoa mittaamalla aikaa, joka kuluu pisteiden napautteluun järjestyksessä.";
-"TRAILMAKING_INTENDED_USE2_A" = "Lähtölaskennan jälkeen napauttele pisteitä numeroiden ja kirjainten vuorottelevassa järjestyksessä. Aloita napauttamalla numeroa 1, napauta sitten 2, 3, 4 jne., kunnes vastaan tulee numero 7.";
-"TRAILMAKING_INTENDED_USE2_B" = "Lähtölaskennan jälkeen napauttele pisteitä numeroiden ja kirjainten vuorottelevassa järjestyksessä. Aloita napauttamalla numeroa 1, napauta sitten kirjainta A. Jatka tätä järjestyksessä 2 ja B, 3 ja C jne., kunnes vastaan tulee numero 7.";
+"TRAILMAKING_INTENDED_USE2_A" = "Lähtölaskennan jälkeen napauttele pisteitä järjestyksessä numeroiden ja kirjainten välillä vuorotellen. Aloita napauttamalla numeroa 1, napauta sitten 2, 3, 4 jne., kunnes vastaan tulee numero 7.";
+"TRAILMAKING_INTENDED_USE2_B" = "Lähtölaskennan jälkeen napauttele pisteitä järjestyksessä numeroiden ja kirjainten välillä vuorotellen. Aloita napauttamalla numeroa 1, napauta sitten kirjainta A. Jatka tätä järjestyksessä 2 ja B, 3 ja C jne., kunnes vastaan tulee numero 7.";
 "TRAILMAKING_INTRO_TEXT" = "Tee tämä niin nopeasti kuin kykenet tekemättä virheitä. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
 "TRAILMAKING_LETTER_A" = "A";
@@ -550,11 +555,11 @@
 "SPEECH_TASK_TITLE" = "Puheentunnistus";
 "SPEECH_RECOGNITION_INTRO_TEXT" = "Tämä aktiviteetti tallentaa puhettasi laitteen alareunassa olevalla mikrofonilla ja muuntaa sen tekstiksi.";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
-"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Aloita äänitys painamalla painiketta ennen puhumista.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Aloita äänitys ennen puhumista painamalla painiketta.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Aloita tallentaminen";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Lopeta tallentaminen";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "Muokkaa tekstiä";
-"SPEECH_RECOGNITION_QUESTION_TEXT" = "Korjaa mahdolliset väärintunnistetut kohdat muokkaamalla saneltua tekstiä.";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Korjaa mahdolliset väärintunnistetut kohdat muokkaamalla muunnettua tekstiä.";
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Muunnettu teksti näkyy tässä.";
 "SPEECH_RECOGNITION_FAILED" = "Puheentunnistus epäonnistui.";
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Puheentunnistuksen alustaminen epäonnistui.";
@@ -562,13 +567,13 @@
 /* Speech In Noise active task. */
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Toista ääni";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Pysäytä ääni";
-"SPEECH_IN_NOISE_TITLE" = "Puhe kohinan seassa";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "Tämä aktiviteetti mittaa puheen ymmärrettävyyttä meluisassa ympäristössä.";
-"SPEECH_IN_NOISE_DETAIL_TEXT" = "Tämän testin osana:\n\nKuuntele virke.\n\nToista kuulemasi selkeästi tai jatka eteenpäin ja kirjoita kuulemasi näppäimistöllä. \n\nJos toistit kuulemasi, voit tarvittaessa muokata puheen­tunnistus­järjestelmän tuottamaa tekstiä.";
+"SPEECH_IN_NOISE_TITLE" = "Puhe kohinan\\nseassa";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Tämä aktiviteetti mittaa puheen havaitsemista meluisassa ympäristössä.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Tämän testin osana:\n\nKuuntele virke.\n\nToista selkeästi kuulemasi tai jatka eteenpäin ja kirjoita kuulemasi näppäimistöllä. \n\nJos toistit kuulemasi, voit vielä muokata puheentunnistusjärjestelmän tuottamaa tekstiä.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Äänenvoimakkuuden kalibrointi";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Napauta Toista ääni, säädä äänenvoimakkuus sopivalle tasolle ja jatka napauttamalla Pysäytä ääni.";
 "SPEECH_IN_NOISE_STEP_TITLE" = "Kuuntele";
-"SPEECH_IN_NOISE_STEP_TEXT" = "Virke, johon on sekoitettu taustakohinaa satunnaisessa signaali-kohinasuhteessa (SNR), toistetaan vain kerran.";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Virke, johon on sekoitettu taustamelua satunnaisessa signaali-kohinasuhteessa (SNR), toistetaan vain kerran.";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Puhu";
 "SPEECH_IN_NOISE_SPEAK_TEXT" = "Toista kuulemasi.";
 
@@ -583,14 +588,14 @@
 
 /* Environment SPL*/
 "ENVIRONMENTSPL_TITLE" = "SPL-mittari";
-"ENVIRONMENTSPL_INTRO_TEXT" = "Tämä aktiviteetti mittaa ympäristön äänenpaineen. Jos melutaso on liian korkea, et voi jatkaa. Siirry hiljaisempaan ympäristöön nyt tai suorita tämä tehtävä myöhemmin.";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Tämä aktiviteetti mittaa ympäristön äänenpaineen. Jos melutaso on liian korkea, et voi jatkaa. Suorita tämä tehtävä siirtymällä hiljaisempaan ympäristöön tai myöhemmin.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Lasketaan";
+"ENVIRONMENTSPL_CALCULATING" = "Mitataan…";
 "ENVIRONMENTSPL_THRESHOLD" = "Kynnys: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Taustamelu OK";
-"ENVIRONMENTSPL_NOISE" = "Liikaa taustahälyä";
+"ENVIRONMENTSPL_OK" = "Hyvä";
+"ENVIRONMENTSPL_NOISE" = "Liikaa melua";
 "ENVIRONMENTSPL_TITLE_2" = "Etsi hiljainen paikka";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "Tarkkuuden varmistamiseksi tämä testi on suoritettava hiljaisessa paikassa.";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Jotta tulokset olisivat tarkkoja, tehtävä on suoritettava hiljaisessa paikassa. Kun taustamelun mittaus on valmis, voit jatkaa.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Aloita tehtävä";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Äänipalkin graafi";
 
 "AX_AMSLER_GRID_LABEL" = "Amslerin ruudukko";
-"AX_AMSLER_GRID_HINT" = "Merkitse suoraan ruudukkoon sormellasi tai kynällä, tai lopeta pyyhkäisemällä ruudukon ulkopuolella.";
+"AX_AMSLER_GRID_HINT" = "Merkitse suoraan ruudukkoon sormellasi tai kynällä, tai lopeta napauttamalla Seuraava.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Napautettavissa olevat painikkeet";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Napauta vasemmalle korvalle";
@@ -672,7 +677,7 @@
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Napauta oikealle korvalle";
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aloita testi napauttamalla. Kun testi alkaa, napauta tätä painiketta suoraan, kun kuulet äänen oikeassa korvassasi.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
-"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Käytettäessä VoiceOveria paikanna kunkin korvan painikkeet koskettelemalla näyttöä. Painikkeet ovat suoraan painettavissa testin alettua.%@";
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Käytettäessä VoiceOveria paikanna kunkin korvan painikkeet koskettelemalla näyttöä. Painikkeet ovat suoraan napautettavissa testin alettua. %@";
 "AX_TAP_BUTTON_1_LABEL" = "Napauta yhdelle sormelle";
 "AX_TAP_BUTTON_2_LABEL" = "Napauta toiselle sormelle";
 "AX_TAP_BUTTON_HINT" = "Laita päälle, jotta painikkeita voidaan napauttaa suoraan.";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "restoreDataa ei voida dekoodata alustusta varten";
+"6MWT_HIGH_SCORE" = "10: Paljon";
+"6MWT_INSTRUCTIONS_1" = "Etsi paikka, jossa voit kävellä suoraan vähintään 30 metriä.";
+"6MWT_INSTRUCTIONS_2" = "Varmista, että voit tarvittaessa pysähtyä ja istua kävelymatkan varrella.";
+"6MWT_INSTRUCTIONS_3" = "Säädä puhelimen äänenvoimakkuudeksi ainakin 50 %.";
+"6MWT_INSTRUCTIONS_4" = "Aloita ulkokävely- (tai sisäkävely-) treeni Apple Watchissa pyytämällä Siriltä tai käynnistämällä Treeni-appi ja napauttamalla Ulkokävely (tai Sisäkävely).";
+"6MWT_INSTRUCTIONS_TITLE" = "Aloittaminen";
+"6MWT_INTRO" = "Tämän testin tavoite on kävellä mukavalla nopeudella mahdollisimman kauas 6 minuutin aikana.";
+"6MWT_INTRO_DETAILS" = "Tiedot";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Käytä mukavia vaatteita ja hyvin sopivia kenkiä. Jos käytät tavallisesti kävellessäsi apuvälinettä, voit käyttää sitä testin aikana.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Jos et voi kävellä ulkona, harkitse testin suorittamista ostoskeskuksessa.";
+"6MWT_INTRO_DETAIL_TIME" = "Testi kestää noin 6 minuuttia.";
+"6MWT_INTRO_DETAIL_WATCH" = "Tämän testin suorittamiseen tarvitaan Apple Watch.";
+"6MWT_LOW_SCORE" = "1: Ei lainkaan";
+"6MWT_QUESTIONS_BREATH" = "Hengenahdistus";
+"6MWT_QUESTIONS_DETAIL" = "Onnittelut 6 minuutin kävelytestin suorittamisesta. Arvioi, miltä sinusta tuntuu seuraavissa asioissa.";
+"6MWT_QUESTIONS_FATIGUE" = "Väsymys";
+"6MWT_QUESTIONS_TITLE" = "Hyvin tehty";
+"6MWT_TASK_TITLE" = "6 minuutin kävelytesti";
+"6MWT_TEST_IN_PROGRESS" = "Testi käynnissä";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Kävele suoraa reittiä niin pitkään kuin jaksat 6 minuutin aikana. Jos sinun täytyy levätä, pysähdy ja istu.";
+"AX_BUTTON" = "Painike";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Muokkaa-painike";
+"AX_PAGE_NUMBER_FORMAT" = "Sivu %1$ld / %2$ld";
+"AX_SES_BOTTOM" = "Alhaalla";
+"AX_SES_PERCENT" = "Prosentti";
+"AX_SES_TOP" = "Ylhäällä";
+"BUTTON_PRACTICE_AGAIN" = "Harjoittele uudelleen";
+"BUTTON_PRACTICE_TEST" = "Harjoittelutesti";
+"BUTTON_START_TEST" = "Aloita testi";
+"CONSENT_NAME_SECTION_TITLE" = "Nimi";
+"FAMILY_HISTORY_ADD" = "Lisää %@";
+"FAMILY_HISTORY_CANCEL" = "Kumoa";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Tehtävä suoritettu";
+"FAMILY_HISTORY_CONDITIONS" = "Sairaudet";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Onko heillä diagnosoitu jokin seuraavista sairauksista tai terveydentiloista?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Vastaa näihin kysymyksiin parhaan kykysi mukaan";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Vahvista diagnosoidut sairaudet tai terveyteen vaikuttavat seikat.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Terveydentila";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Poista merkintä";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Poistetaanko tämä tietue perheen terveyshistoriasta?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Muokkaa tietuetta";
+"FAMILY_HISTORY_I_DONT_KNOW" = "En tiedä";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Ei mikään yllä olevista";
+"FAMILY_HISTORY_NONE_SELECTED" = "Ei valintaa";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "En halua vastata";
+"FITNESS_RESUME_TEST" = "Jatka toimintaa";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Lopetetaanko tämä toiminta kesken?";
+"FITNESS_STOP_TEST_DETAIL" = "Etenemisesi tallennetaan ja tämä testi merkitään suoritetuksi.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Poista ja yritä uudelleen";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Videovalinnat";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Tarkista video";
+"FRONT_FACING_CAMERA_START_TIME" = "0.00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Aloita tallentaminen";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Lopeta tallentaminen";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Lähetä video";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Sekä oikea että vasen käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+"MAX_WORD_COUNT_ERROR" = "Merkkien enimmäismäärä on saavutettu";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID -virhe";
+"PASSCODE_FACE_ID_MESSAGE" = "Tunnistaudu Face ID:llä";
+"PLAY" = "Toista";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Napauta pitopainiketta ja sitten sinistä ympyrää";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "pito";
+"RECORD" = "Äänitä";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Tämä tutkimus pyytää pääsyä terveysdataan.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Terveysdata";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "Tutkimus pyytää pääsyä sijaintitietoihin laitteissasi.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Sijaintitiedot";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Tutkimus pyytää pääsyä liiketietoihin laitteissasi.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Laitteen liike";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Tutkimus pyytää lupaa lähettää sinulle ilmoituksia.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Ilmoitukset";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Tarkastettu";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Tarkasta";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Virhe";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Ei tuettu";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "Tutkimus pyytää pääsyä tunnistintietoihin laitteissasi.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Anturidata";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Käytä näppäimistöä";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Ei voitu äänittää. Yritä uudelleen napauttamalla.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Äänitteestä ei havaittu puhetta. Yritä uudelleen napauttamalla.";
+"STOP" = "Lopeta";
+"STROOP_COLOR_ORANGE" = "ORANSSI";
+"TC_COMPLETION_DETAIL" = "Onnittelut Tecumseh Cube -testin suorittamisesta!";
+"TC_COMPLETION_TITLE" = "Hyvin tehty";
+"TC_INSTRUCTIONS_1" = "Etsi noin 20 cm:n korkuinen porras.";
+"TC_INSTRUCTIONS_2" = "Säädä iPhonen äänenvoimakkuudeksi ainakin 50 %.";
+"TC_INSTRUCTIONS_3" = "Aloita porrastreeni Apple Watchissa pyytämällä Siriltä tai käynnistämällä Treeni-appi ja napauttamalla Lisää treeni ja valitsemalla Portaat.";
+"TC_INSTRUCTIONS_TITLE" = "Aloittaminen";
+"TC_INTRO" = "Tämän testin tavoite on nostaa sykettä nousemalla portaalle ja laskeutumalla siltä 3 minuutin ajan tahdissa.";
+"TC_INTRO_DETAILS" = "Tiedot";
+"TC_INTRO_DETAIL_DANGER" = "Jos havaitset rintakipua tai olosi on epämukava, keskeytä testi välittömästi.";
+"TC_INTRO_DETAIL_TIME" = "Testi kestää noin 6 minuuttia.";
+"TC_INTRO_DETAIL_WATCH" = "Tämän testin suorittamiseen tarvitaan Apple Watch.";
+"TC_REST_IN_PROGRESS" = "Lepää";
+"TC_REST_IN_PROGRESS_DETAIL" = "Istu ja lepää 3 minuuttia, kun Apple Watch tallentaa leposykkeesi.";
+"TC_TASK_TITLE" = "Tecumseh Cube -testi";
+"TC_TEST_IN_PROGRESS" = "Testi käynnissä";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Käyttäen porrasta, nouse sille ja laskeudu paikallasi tahdissa";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TESTI KÄYNNISSÄ";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TESTI KÄYNNISSÄ \U2022 %@";

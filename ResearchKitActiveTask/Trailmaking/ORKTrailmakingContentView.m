@@ -33,6 +33,7 @@
 
 #import "ORKHeadlineLabel.h"
 #import "ORKLabel.h"
+#import "ORKModalDismissalBlockingGesture.h"
 
 #import "ORKAccessibility.h"
 #import "ORKHelpers_Internal.h"
@@ -53,6 +54,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
         self.contentMode = UIViewContentModeRedraw;
         [self setBackgroundColor:[UIColor clearColor]];
     }
@@ -126,11 +128,13 @@
 - (instancetype)initWithType:(NSString*)trailType {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.isAccessibilityElement = YES;
         self.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_DIRECT_TOUCH_AREA", nil);
         self.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
+
+        [self addGestureRecognizer:[[ORKModalDismissalBlockingGesture alloc] initWithTarget:nil action:nil]];
 
         self.testView = [[ORKTrailmakingTestView alloc] init];
         _testView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -186,7 +190,7 @@
                                                                              metrics:nil
                                                                                views:views]];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-32-[_testView(>=100)]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_testView(>=100)]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];

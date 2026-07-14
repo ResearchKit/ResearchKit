@@ -321,6 +321,26 @@
 #endif
 }
 
+- (void)testBackupExclusionHelper {
+    NSURL *tempDir = [NSFileManager.defaultManager.temporaryDirectory URLByAppendingPathComponent:[NSUUID UUID].UUIDString];
+    [NSFileManager.defaultManager createDirectoryAtURL:tempDir withIntermediateDirectories:YES attributes:nil error:nil];
+
+    NSURL *fileURL = [tempDir URLByAppendingPathComponent:@"test.json"];
+    [@"{}" writeToURL:fileURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
+
+    XCTAssertTrue(ORKApplyBackupExclusionToFileURL(fileURL));
+
+    NSNumber *isExcluded = nil;
+    NSError *error = nil;
+    XCTAssertTrue([fileURL getResourceValue:&isExcluded forKey:NSURLIsExcludedFromBackupKey error:&error]);
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(isExcluded, @YES);
+
+    XCTAssertFalse(ORKApplyBackupExclusionToFileURL(nil));
+
+    [NSFileManager.defaultManager removeItemAtURL:tempDir error:nil];
+}
+
 - (void)testFileSizeLimitTriggersRollover {
     _dataLogger.maximumCurrentLogFileSize = 50;
     NSFileManager *fileManager = [NSFileManager defaultManager];

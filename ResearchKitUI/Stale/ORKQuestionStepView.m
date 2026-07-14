@@ -57,6 +57,7 @@
     self.stepText = step.text;
     self.stepHeaderTextAlignment = step.headerTextAlignment;
     self.bodyItems = step.bodyItems;
+    [self setNavigationFooterViewHidden:NO];
 }
 
 - (void)setCustomHeaderTitle:(nullable NSString *)text {

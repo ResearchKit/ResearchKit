@@ -30,14 +30,15 @@
 
 
 #import "ORKSelectionSubTitleLabel.h"
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKSelectionSubTitleLabel
 
 + (UIFont *)defaultFont {
-    // regular, 14. Increased by 1 due review feedback.
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
-    return [UIFont systemFontOfSize:([[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue])];
+    CGFloat baseSize = ORKDefaultFontSizeForTextStyle(UIFontTextStyleSubheadline);
+    UIFont *baseFont = [UIFont systemFontOfSize:baseSize];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleSubheadline] scaledFontForFont:baseFont];
 }
 
 @end

@@ -46,11 +46,17 @@ ORK_CLASS_AVAILABLE
 
 /**
  The number of disks in the puzzle.
- 
- It is not recommended that you use a large number of disks. As this provides a poor user experience.
- The default value of this property is 3.
+
+ Valid range is 1 to 8, inclusive. Values outside this range cause `validateParameters` to throw
+ `NSInvalidArgumentException`. The default value is 3.
  */
 @property (nonatomic, assign) NSUInteger numberOfDisks;
+
+/// The minimum valid value for `numberOfDisks`.
+@property (class, readonly) NSUInteger minimumNumberOfDisks;
+
+/// The maximum valid value for `numberOfDisks`.
+@property (class, readonly) NSUInteger maximumNumberOfDisks;
 
 @end
 

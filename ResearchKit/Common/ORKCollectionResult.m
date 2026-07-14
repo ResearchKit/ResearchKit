@@ -318,28 +318,38 @@
 #if TARGET_OS_IOS
 @implementation ORKPageResult
 
-- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result {
-    self = [super initWithTaskIdentifier:step.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
-    if (self) {
-        NSArray <NSString *> *stepIdentifiers = [step.steps valueForKey:@"identifier"];
-        NSMutableArray *results = [NSMutableArray new];
-        for (NSString *identifier in stepIdentifiers) {
-            NSString *prefix = [NSString stringWithFormat:@"%@.", identifier];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier BEGINSWITH %@", prefix];
-            NSArray *filteredResults = [result.results filteredArrayUsingPredicate:predicate];
-            if (filteredResults.count > 0) {
-                NSMutableArray *subresults = [NSMutableArray new];
-                for (ORKResult *subresult in filteredResults) {
-                    ORKResult *copy = [subresult copy];
-                    copy.identifier = [subresult.identifier substringFromIndex:prefix.length];
-                    [subresults addObject:copy];
-                }
-                [results addObject:[[ORKStepResult alloc] initWithStepIdentifier:identifier results:subresults]];
-            }
-        }
-        self.results = results;
-    }
+- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)stepResult {
+    self = [self initWithTaskIdentifier:step.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
+    NSArray <ORKResult *> *results = [ORKPageResult makeResults:step stepResult:stepResult];
+    self.results = results;
     return self;
+}
+
+- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult *)result device:(ORKDevice *)device uuid:(NSUUID *)uuid {
+    self = [super initWithTaskIdentifier:step.identifier taskRunUUID:uuid outputDirectory:nil device:device];
+    NSArray <ORKResult *> *results = [ORKPageResult makeResults:step stepResult:result];
+    self.results = results;
+    return self;
+}
+
++ (NSArray<ORKResult *> *)makeResults:(ORKPageStep *)step stepResult:(ORKStepResult *)result {
+    NSArray <NSString *> *stepIdentifiers = [step.steps valueForKey:@"identifier"];
+    NSMutableArray *results = [NSMutableArray new];
+    for (NSString *identifier in stepIdentifiers) {
+        NSString *prefix = [NSString stringWithFormat:@"%@.", identifier];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier BEGINSWITH %@", prefix];
+        NSArray *filteredResults = [result.results filteredArrayUsingPredicate:predicate];
+        if (filteredResults.count > 0) {
+            NSMutableArray *subresults = [NSMutableArray new];
+            for (ORKResult *subresult in filteredResults) {
+                ORKResult *copy = [subresult copy];
+                copy.identifier = [subresult.identifier substringFromIndex:prefix.length];
+                [subresults addObject:copy];
+            }
+            [results addObject:[[ORKStepResult alloc] initWithStepIdentifier:identifier results:subresults]];
+        }
+    }
+    return results;
 }
 
 - (void)addStepResult:(ORKStepResult *)stepResult {

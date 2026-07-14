@@ -80,4 +80,6 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+CGFloat ORKBorderedButtonCornerRadius(void);
+
 NS_ASSUME_NONNULL_END

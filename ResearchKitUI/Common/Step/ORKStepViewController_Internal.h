@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stepDidChange;
 
 @property (nonatomic, copy, nullable) NSURL *outputDirectory;
+@property (nonatomic, assign) ORKFileProtectionMode fileProtectionMode;
+@property (nonatomic, assign) BOOL excludesFilesFromBackup;
 @property (nonatomic, copy, readonly, nullable) NSArray <ORKResult *> *addedResults;
 
 @property (nonatomic, strong, nullable) UIBarButtonItem *internalContinueButtonItem;
@@ -99,6 +101,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 // internal method for enabling back navigation.
 - (void)enableBackNavigation;
+
+// internal method to notify the step view controller of early task cancellation.
+- (void)taskDidTerminateEarly;
+
+/// Pops the current view controller when the custom back button is pressed.
+- (void)popFromNavigationStack;
 
 @end
 #endif

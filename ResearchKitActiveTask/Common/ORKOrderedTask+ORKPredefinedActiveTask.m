@@ -825,7 +825,7 @@ NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
             fitnessStep.recorderConfigurations = [self makeRecorderConfigurationsWithOptions:options
                                                                              outputDirectory:outputDirectory];
             fitnessStep.shouldContinueOnFinish = YES;
-            fitnessStep.optional = NO;
+            fitnessStep.optional = YES;
             fitnessStep.shouldStartTimerAutomatically = YES;
             fitnessStep.shouldTintImages = YES;
             fitnessStep.image = [UIImage imageNamed:@"walkingman" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -845,7 +845,7 @@ NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
             stillStep.recorderConfigurations = [self makeRecorderConfigurationsWithOptions:options
                                                                            outputDirectory:outputDirectory];
             stillStep.shouldContinueOnFinish = YES;
-            stillStep.optional = NO;
+            stillStep.optional = YES;
             stillStep.shouldStartTimerAutomatically = YES;
             stillStep.shouldTintImages = YES;
             stillStep.image = [UIImage imageNamed:@"sittingman" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1989,6 +1989,7 @@ NSString *const ORKSpeechInNoiseStep2Identifier = @"speech.in.noise2";
         step.gainAppliedToNoise = [gainValues[0] doubleValue];
         step.title = ORKLocalizedString(@"SPEECH_IN_NOISE_STEP_TITLE", nil);
         step.text = ORKLocalizedString(@"SPEECH_IN_NOISE_STEP_TEXT", nil);
+        
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -2386,6 +2387,7 @@ NSString *const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
     ORKTowerOfHanoiStep *towerOfHanoiStep = [[ORKTowerOfHanoiStep alloc]initWithIdentifier:ORKTowerOfHanoiStepIdentifier];
     towerOfHanoiStep.title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_TITLE", nil);
     towerOfHanoiStep.numberOfDisks = numberOfDisks;
+    towerOfHanoiStep.optional = YES;
     ORKStepArrayAddStep(steps, towerOfHanoiStep);
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {

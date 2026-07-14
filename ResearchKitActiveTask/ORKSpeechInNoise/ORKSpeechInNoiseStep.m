@@ -43,6 +43,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         [self commonInit];
+        self.shouldShowDefaultTimer = NO;
     }
     return self;
 }

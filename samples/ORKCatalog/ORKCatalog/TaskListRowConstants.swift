@@ -48,6 +48,7 @@ enum Identifier {
     case groupedFormTask
     case formStep
     case formStep02
+    case formStep03
     case groupedFormStep
     case formStepWithMultipleSelection
     case formStepWithSingleSelection
@@ -247,13 +248,17 @@ enum Identifier {
 
     // Passcode task specific identifiers.
     case passcodeTask
+    case passcodeInstructionStep
     case passcodeStep
     case biometricPasscodeTask
     case biometricPasscodeStep
 
     // Active tasks.
     case audioTask
+    case audioRecordButtonStep
+    case audioRecordButtonStepNoDuration
     case amslerGridTask
+    case amslerGridPredefinedTask
     case tecumsehCubeTestTask
     case sixMinuteWalkTask
     case fitnessTask
@@ -271,6 +276,7 @@ enum Identifier {
     case toneAudiometryTask
     case dBHLToneAudiometryTask
     case splMeterTask
+    case splMeterInstructionStep
     case splMeterStep
     case towerOfHanoi
     case tremorTestTask
@@ -295,13 +301,13 @@ enum Identifier {
     // ORKColorChoice tasks.
     case colorChoiceQuestionTask
     case colorChoiceQuestionStep
+    case colorChoiceQuestionStepTwo
     case colorChoiceQuestionStepSwatchOnly
     case colorChoiceQuestionFormItem
     
     // Family History tasks.
     case familyHistoryStep
     case familyHistoryTask
-    
 }
 
 
@@ -367,6 +373,4 @@ enum TaskListRowStrings {
     static var loremIpsumLongText: String {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
     }
-    
-
 }

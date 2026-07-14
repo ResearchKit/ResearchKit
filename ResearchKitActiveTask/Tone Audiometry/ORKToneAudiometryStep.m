@@ -32,9 +32,18 @@
 #import "ORKToneAudiometryStep.h"
 
 #import "ORKHelpers_Internal.h"
+#import "ORKRecorder.h"
 
 
 @implementation ORKToneAudiometryStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+    }
+    return self;
+}
 
 - (void)validateParameters {
     [super validateParameters];
@@ -83,6 +92,24 @@
     return (isParentSame
             && (self.toneDuration == castObject.toneDuration)
             && (self.practiceStep == castObject.practiceStep));
+}
+
+- (void)prepareRecorders {
+    NSArray *filteredConfigs = [self.recorderConfigurations filteredArrayUsingPredicate:
+                                [NSPredicate predicateWithBlock:^BOOL(id config, NSDictionary *bindings) {
+        BOOL isAudioRecorderConfig = [config isKindOfClass:[ORKAudioRecorderConfiguration class]];
+        BOOL isStreamingAudioConfig = [config isKindOfClass:[ORKStreamingAudioRecorderConfiguration class]];
+        
+        BOOL isValidConfiguration = !isAudioRecorderConfig && !isStreamingAudioConfig;
+        
+        if (!isValidConfiguration) {
+            ORK_Log_Info("The %@ class has been filtered out of the recorderConfigurations array of the ORKToneAudiometryStep class.", NSStringFromClass([config class]));
+        }
+        
+        return isValidConfiguration;
+    }]];
+    
+    self.recorderConfigurations = filteredConfigs;
 }
 
 @end

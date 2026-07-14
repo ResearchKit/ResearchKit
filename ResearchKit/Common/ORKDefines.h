@@ -42,3 +42,61 @@
 
 #define ORK_TO_BE_DEPRECATED(message) \
 __deprecated_msg(message)
+
+// For Serializer
+
+#define ESTRINGIFY2(x) #x
+#define ESTRINGIFY(x) ESTRINGIFY2(x)
+
+#define NUMTOSTRINGBLOCK(table) ^id(id num, __unused ORKESerializationContext *context) { return table[((NSNumber *)num).unsignedIntegerValue]; }
+
+#define STRINGTONUMBLOCK(table) ^id(id string, __unused ORKESerializationContext *context) { NSUInteger index = [table indexOfObject:string]; \
+NSCAssert(index != NSNotFound, @"Expected valid entry from table %@", table); \
+return @(index); \
+}
+
+#define ENTRY(entryName, mInitBlock, mProperties) \
+    @ESTRINGIFY(entryName) : [[ORKESerializableTableEntry alloc] initWithClass: [entryName class] \
+                                                                     initBlock: mInitBlock \
+                                                                    properties: mProperties]
+
+#define PROPERTY(propertyName, mValueClass, mContainerClass, mWriteAfterInit, mObjectToJSONBlock, mJsonToObjectBlock) \
+    @ESTRINGIFY(propertyName) : ([[ORKESerializableProperty alloc] initWithPropertyName: @ESTRINGIFY(propertyName) \
+                                                                             valueClass: [mValueClass class] \
+                                                                         containerClass: [mContainerClass class] \
+                                                                         writeAfterInit: mWriteAfterInit \
+                                                                      objectToJSONBlock: mObjectToJSONBlock \
+                                                                      jsonToObjectBlock: mJsonToObjectBlock \
+                                                                      skipSerialization: NO])
+
+#define PROPERTY_TIED_TO_OTHER_PROPERTY(propertyName, mValueClass, mContainerClass, mSecondPropertyName, mSecondValueClass, mSecondContainerClass, mWriteAfterInit, mObjectsToJSONBlock, mJsonToObjectsBlock) \
+    @ESTRINGIFY(propertyName) : ([[ORKESerializableProperty alloc] initWithPropertyName: @ESTRINGIFY(propertyName) \
+                                                                             valueClass: [mValueClass class] \
+                                                                         containerClass: [mContainerClass class] \
+                                                                     secondPropertyName: @ESTRINGIFY(mSecondPropertyName) \
+                                                                       secondValueClass: [mSecondValueClass class] \
+                                                                   secondContainerClass: [mSecondContainerClass class] \
+                                                                         writeAfterInit: mWriteAfterInit \
+                                                                      objectsToJSONBlock: mObjectsToJSONBlock \
+                                                                      jsonToObjectsBlock: mJsonToObjectsBlock \
+                                                                      skipSerialization: NO])
+
+#define SKIP_PROPERTY(propertyName, mValueClass, mContainerClass, mWriteAfterInit, mObjectToJSONBlock, mJsonToObjectBlock) \
+@ESTRINGIFY(propertyName) : ([[ORKESerializableProperty alloc] initWithPropertyName: @ESTRINGIFY(propertyName) \
+                                                                         valueClass: [mValueClass class] \
+                                                                     containerClass: [mContainerClass class] \
+                                                                     writeAfterInit: mWriteAfterInit \
+                                                                  objectToJSONBlock: mObjectToJSONBlock \
+                                                                  jsonToObjectBlock: mJsonToObjectBlock \
+                                                                  skipSerialization: YES])
+
+
+#define IMAGEPROPERTY(propertyName, mContainerClass, mWriteAfterInit) \
+    @ESTRINGIFY(propertyName) : [[ORKESerializableProperty alloc] imagePropertyObjectWithPropertyName: @ESTRINGIFY(propertyName) \
+                                                                                       containerClass: [mContainerClass class] \
+                                                                                       writeAfterInit: mWriteAfterInit \
+                                                                                    skipSerialization: YES]
+
+#define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
+
+#define DYNAMICCAST(x, c) ((c *) ([x isKindOfClass:[c class]] ? x : nil))

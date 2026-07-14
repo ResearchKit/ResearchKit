@@ -328,7 +328,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 - (void)reset {
     [super reset];
-    
+
     _logger = nil;
 }
 
@@ -393,7 +393,16 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     return self;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                               healthQuantityType:_quantityType
+                                                                             unit:_unit
+                                                                  outputDirectory:[self.outputDirectory copy]
+                                                         rollingFileSizeThreshold:self.rollingFileSizeThreshold];
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, quantityType);
     ORK_ENCODE_OBJ(aCoder, unit);
 }

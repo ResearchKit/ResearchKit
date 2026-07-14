@@ -30,7 +30,7 @@
 
 
 #import "ORKRangeOfMotionResult.h"
-
+#import "ORKFileResult.h"
 #import "ORKResult_Private.h"
 #import "ORKHelpers_Internal.h"
 
@@ -44,6 +44,7 @@
     ORK_ENCODE_DOUBLE(aCoder, minimum);
     ORK_ENCODE_DOUBLE(aCoder, maximum);
     ORK_ENCODE_DOUBLE(aCoder, range);
+    ORK_ENCODE_OBJ(aCoder, fileResults);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -54,6 +55,7 @@
         ORK_DECODE_DOUBLE(aDecoder, minimum);
         ORK_DECODE_DOUBLE(aDecoder, maximum);
         ORK_DECODE_DOUBLE(aDecoder, range);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, fileResults, ORKFileResult);
     }
     return self;
 }
@@ -70,7 +72,8 @@
     self.finish == castObject.finish &&
     self.minimum == castObject.minimum &&
     self.maximum == castObject.maximum &&
-    self.range == castObject.range;
+    self.range == castObject.range &&
+    ORKEqualObjects(self.fileResults, castObject.fileResults);
 }
 
 - (NSUInteger)hash {
@@ -84,11 +87,13 @@
     result.minimum = self.minimum;
     result.maximum = self.maximum;
     result.range = self.range;
+    result.fileResults = [self.fileResults copy];
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"<%@: start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, self.start, self.finish, self.minimum, self.maximum, self.range];
+    return [NSString stringWithFormat:@"<%@: start: %f; finish: %f; minimum: %f; maximum: %f; range: %f; fileResults: %@>",
+            self.class.description, self.start, self.finish, self.minimum, self.maximum, self.range, self.fileResults];
 }
 
 @end

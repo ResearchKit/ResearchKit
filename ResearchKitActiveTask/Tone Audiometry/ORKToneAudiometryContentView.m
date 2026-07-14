@@ -41,10 +41,10 @@
 static const CGFloat TopToProgressViewMinPadding = 10.0;
 static const CGFloat ProgressViewToCaptionMaxPadding = 20.0;
 static const CGFloat ButtonToLabelPaddingStandard = 5.0;
-static const CGFloat CaptionLabelToButtonMinPadding = 5.0;
 
 @interface ORKToneAudiometryContentView ()
 
+@property (nonatomic, strong, readwrite) UIStackView *contentView;
 @property (nonatomic, strong) ORKUnitLabel *captionLabel;
 @property (nonatomic, strong) UIProgressView *progressView;
 
@@ -60,63 +60,110 @@ static const CGFloat CaptionLabelToButtonMinPadding = 5.0;
     UILabel *_rightLabel;
 }
 
+@synthesize rightButton = _rightButton;
+@synthesize leftButton = _leftButton;
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(TopToProgressViewMinPadding, 0, 0, 0);
+        [self addSubview:self.contentView];
+        [NSLayoutConstraint activateConstraints:@[
+            [self.layoutMarginsGuide.topAnchor constraintEqualToAnchor:self.contentView.topAnchor],
+            [self.layoutMarginsGuide.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
+            [self.layoutMarginsGuide.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor],
+            [self.layoutMarginsGuide.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor],
+        ]];
+
+        [self.contentView setCustomSpacing:ProgressViewToCaptionMaxPadding afterView:self.progressView];
+    }
+    return self;
+}
+
+- (UIStackView *)contentView {
+    if (_contentView == nil) {
+        _contentView = [[UIStackView alloc] initWithArrangedSubviews:[self arrangedContentViews]];
+        _contentView.axis = UILayoutConstraintAxisVertical;
+        _contentView.alignment = UIStackViewAlignmentFill;
+        _contentView.distribution = UIStackViewDistributionFill;
+        _contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return  _contentView;
+}
+
+- (UIView *)captionLabel {
+    if (_captionLabel == nil) {
         _captionLabel = [ORKUnitLabel new];
         _captionLabel.textAlignment = NSTextAlignmentCenter;
         _captionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        
+        _captionLabel.text = nil;
+        [_captionLabel setHidden:YES];
+
+    }
+    return _captionLabel;
+}
+
+- (UIProgressView *)progressView {
+    if (_progressView == nil) {
         _progressView = [UIProgressView new];
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
         _progressView.progressTintColor = [self tintColor];
         [_progressView setAlpha:0];
-        
+    }
+    return _progressView;
+}
+
+- (ORKRoundTappingButton *)leftButton {
+    if (_leftButton == nil) {
+
         _leftButton = [[ORKRoundTappingButton alloc] init];
         _leftButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_leftButton setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
-        
+        _leftButton.accessibilityLabel = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL", nil);
+        _leftButton.accessibilityHint = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT", nil);
+
+    }
+    return _leftButton;
+}
+
+- (ORKRoundTappingButton *)rightButton {
+    if (_rightButton == nil) {
+
         _rightButton = [[ORKRoundTappingButton alloc] init];
         _rightButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_rightButton setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState: UIControlStateNormal];
-        
-        _leftLabel = [ORKUnitLabel new];
-        _rightLabel = [ORKUnitLabel new];
-        
-        _leftLabel.text = ORKLocalizedString(@"TONE_AUDIOMETRY_LABEL_LEFT_EAR", nil);
-        _rightLabel.text = ORKLocalizedString(@"TONE_AUDIOMETRY_LABEL_RIGHT_EAR", nil);
-        
-        _leftLabel.textColor = [UIColor lightGrayColor];
-        _rightLabel.textColor = [UIColor lightGrayColor];
-        
-        _leftLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _rightLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        _leftButton.accessibilityLabel = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL", nil);
-        _leftButton.accessibilityHint = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT", nil);
         _rightButton.accessibilityLabel = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL", nil);
         _rightButton.accessibilityHint = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT", nil);
-        // The labels will be included in the button accessibility label, so we should not expose them additionally here.
-        _leftLabel.isAccessibilityElement = NO;
-        _rightLabel.isAccessibilityElement = NO;
-        
-        [self addSubview:_captionLabel];
-        [self addSubview:_progressView];
-        [self addSubview:_leftButton];
-        [self addSubview:_rightButton];
-        [self addSubview:_leftLabel];
-        [self addSubview:_rightLabel];
-        
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        _captionLabel.text = nil;
-        [_captionLabel setHidden:YES];
-        
-        [self setUpConstraints];
     }
-    
-    return self;
+    return _rightButton;
+}
+
+- (UILabel *)rightLabel {
+    if (_rightLabel == nil) {
+        _rightLabel = [ORKUnitLabel new];
+        _rightLabel.text = ORKLocalizedString(@"TONE_AUDIOMETRY_LABEL_RIGHT_EAR", nil);
+        _rightLabel.textColor = [UIColor lightGrayColor];
+        _rightLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _rightLabel.isAccessibilityElement = NO;
+        _rightLabel.numberOfLines = 0;
+        _rightLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    return _rightLabel;
+}
+
+- (UILabel *)leftLabel {
+    if (_leftLabel == nil) {
+        _leftLabel = [ORKUnitLabel new];
+        _leftLabel.text = ORKLocalizedString(@"TONE_AUDIOMETRY_LABEL_LEFT_EAR", nil);
+        _leftLabel.textColor = [UIColor lightGrayColor];
+        _leftLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _leftLabel.isAccessibilityElement = NO;
+        _leftLabel.numberOfLines = 0;
+        _leftLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    return _leftLabel;
 }
 
 - (void)tintColorDidChange {
@@ -141,121 +188,31 @@ static const CGFloat CaptionLabelToButtonMinPadding = 5.0;
     self.rightButton.enabled = NO;
 }
 
-- (void)setUpConstraints {
-    NSArray<NSLayoutConstraint *> *constraints = @[
-                                                 [NSLayoutConstraint constraintWithItem:_progressView
-                                                                              attribute:NSLayoutAttributeTop
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeTop
-                                                                             multiplier:1.0
-                                                                               constant:TopToProgressViewMinPadding],
-                                                 [NSLayoutConstraint constraintWithItem:_progressView
-                                                                              attribute:NSLayoutAttributeLeft
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeLeft
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 [NSLayoutConstraint constraintWithItem:_progressView
-                                                                              attribute:NSLayoutAttributeRight
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeRight
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 [NSLayoutConstraint constraintWithItem:_captionLabel
-                                                                              attribute:NSLayoutAttributeTop
-                                                                              relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                                 toItem:_progressView
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                             multiplier:1.0
-                                                                               constant:ProgressViewToCaptionMaxPadding],
-                                                 [NSLayoutConstraint constraintWithItem:_captionLabel
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 
-                                                 [NSLayoutConstraint constraintWithItem:_leftButton
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                             multiplier:0.5
-                                                                               constant:0.0],
-                                                 [NSLayoutConstraint constraintWithItem:_rightButton
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                             multiplier:1.5
-                                                                               constant:0.0],
-                                                 
-                                                 [NSLayoutConstraint constraintWithItem:_leftLabel
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 [NSLayoutConstraint constraintWithItem:_rightLabel
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 
-                                                 [NSLayoutConstraint constraintWithItem:_leftLabel
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:_leftButton
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 [NSLayoutConstraint constraintWithItem:_rightLabel
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:_rightButton
-                                                                              attribute:NSLayoutAttributeCenterX
-                                                                             multiplier:1.0
-                                                                               constant:0.0],
-                                                 
-                                                 [NSLayoutConstraint constraintWithItem:_leftButton
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:_leftLabel
-                                                                              attribute:NSLayoutAttributeTop
-                                                                             multiplier:1.0
-                                                                               constant:-ButtonToLabelPaddingStandard],
-                                                 [NSLayoutConstraint constraintWithItem:_rightButton
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:_rightLabel
-                                                                              attribute:NSLayoutAttributeTop
-                                                                             multiplier:1.0
-                                                                               constant:-ButtonToLabelPaddingStandard],
-                                                 
-                                                 [NSLayoutConstraint constraintWithItem:_leftButton
-                                                                              attribute:NSLayoutAttributeTop
-                                                                              relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                                 toItem:_captionLabel
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                             multiplier:1.0
-                                                                               constant:CaptionLabelToButtonMinPadding],
-                                                 [NSLayoutConstraint constraintWithItem:_rightButton
-                                                                              attribute:NSLayoutAttributeTop
-                                                                              relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                                 toItem:_captionLabel
-                                                                              attribute:NSLayoutAttributeBottom
-                                                                             multiplier:1.0
-                                                                               constant:CaptionLabelToButtonMinPadding],
-                                                 ];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
+- (NSArray *)arrangedContentViews {
+    UIStackView *leftButtonContainer = [[UIStackView alloc] initWithArrangedSubviews:@[self.leftButton, self.leftLabel]];
+    leftButtonContainer.spacing = ButtonToLabelPaddingStandard;
+    leftButtonContainer.axis = UILayoutConstraintAxisVertical;
+    leftButtonContainer.alignment = UIStackViewAlignmentCenter;
+
+    UIStackView *rightButtonContainer = [[UIStackView alloc] initWithArrangedSubviews:@[self.rightButton, self.rightLabel]];
+    rightButtonContainer.spacing = ButtonToLabelPaddingStandard;
+    rightButtonContainer.axis = UILayoutConstraintAxisVertical;
+    rightButtonContainer.alignment = UIStackViewAlignmentCenter;
+
+    UIStackView *buttonContainer = [[UIStackView alloc] initWithArrangedSubviews:@[
+        [UIView new],
+        leftButtonContainer,
+        [UIView new],
+        rightButtonContainer,
+        [UIView new],
+    ]];
+    buttonContainer.axis = UILayoutConstraintAxisHorizontal;
+    buttonContainer.alignment = UIStackViewAlignmentTop;
+    buttonContainer.distribution = UIStackViewDistributionFillProportionally;
+
+    [[leftButtonContainer.widthAnchor constraintEqualToAnchor:rightButtonContainer.widthAnchor] setActive:YES];
+
+    return @[self.progressView, self.captionLabel, buttonContainer];
 }
 
 @end

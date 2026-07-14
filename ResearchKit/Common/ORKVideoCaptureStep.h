@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  take your instructions literally. So be cautious. Make sure your template image
  is high contrast and very visible against a variety of backgrounds.
  
- The recording length can be a max of 20 minutes. It defaults to 2 minutes.
+ The recording length must be between `minimumDuration` and `maximumDuration`. It defaults to 2 minutes.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKVideoCaptureStep : ORKStep
@@ -70,13 +70,17 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
+/// The minimum valid recording duration in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval minimumDuration;
+
+/// The maximum valid recording duration in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval maximumDuration;
+
 /**
  The duration, in seconds, for the recording.
- 
- The maximum that this can be set to is 20.0 minutes (60*20 seconds).
- The minimum that this can be set to is 0.01 minutes (1 second).
- 
- The default value is 2.0 minutes (60*2 seconds).
+
+ Valid values are in the range `ORKVideoCaptureStep.minimumDuration` to `ORKVideoCaptureStep.maximumDuration`.
+ The default value is 120 seconds (2 minutes). Validated when `validateParameters` is called.
  */
 @property (nonatomic) NSNumber *duration;
 

@@ -182,16 +182,16 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 typedef NS_OPTIONS(NSInteger, ORKPermissionMask) {
     /// No permissions.
     ORKPermissionNone                     = 0,
-    
+
     /// Access to CoreMotion activity is required.
     ORKPermissionCoreMotionActivity       = (1 << 1),
-    
+
     /// Access to CoreMotion accelerometer data.
     ORKPermissionCoreMotionAccelerometer  = (1 << 2),
-    
+
     /// Access for audio recording.
     ORKPermissionAudioRecording           = (1 << 3),
-    
+
     /// Access to location.
     ORKPermissionCoreLocation             = (1 << 4),
     
@@ -259,9 +259,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
     
     /// Task should test the right limb
     ORKPredefinedTaskLimbOptionRight = 1 << 2,
-    
-    /// Task should test the both limbs (random order)
-    ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
+
 } ORK_ENUM_AVAILABLE;
 
 
@@ -392,14 +390,33 @@ ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen
 /// AirPods generation 3
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen3;
 
+/// AirPods generation 4
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen4E;
+
+/// AirPods generation 4 (CH)
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen4CHE;
+
+/// AirPods generation 4 ANC
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen4M;
+
+/// AirPods generation 4 ANC (CH)
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsGen4CHM;
+
 /// AirPods Pro
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro;
 
 /// AirPods Pro generation 2
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsProGen2;
 
+/// AirPods Pro generation 3
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsProGen3;
+
 /// AirPods Max
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMax;
+
+/// AirPods Max USBC
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsMaxUSBC;
+
 /// Lightning and Audio Jack Earpods
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods;
 
@@ -538,11 +555,12 @@ typedef NS_ENUM(NSInteger, ORKNavigationContainerButtonStyle) {
 
 /**
  An enumeration of the types of button styles for the "don't know" button.
+ @deprecated ORKDontKnowButtonStyle is deprecated. All "don't know" buttons now use the CircleChoice style.
  */
 typedef NS_ENUM(NSInteger, ORKDontKnowButtonStyle) {
-    ORKDontKnowButtonStyleStandard = 0,
-    ORKDontKnowButtonStyleCircleChoice,
-} ORK_ENUM_AVAILABLE;
+    ORKDontKnowButtonStyleStandard __attribute__((deprecated("ORKDontKnowButtonStyleStandard is deprecated. Use ORKDontKnowButtonStyleCircleChoice."))) = 0,
+    ORKDontKnowButtonStyleCircleChoice __attribute__((deprecated("ORKDontKnowButtonStyleCircleChoice is deprecated. The CircleChoice style is now used unconditionally."))),
+} ORK_ENUM_AVAILABLE __attribute__((deprecated("ORKDontKnowButtonStyle is deprecated and will be removed in a future release.")));
 
 extern const double ORKDoubleDefaultValue ORK_AVAILABLE_DECL;
 

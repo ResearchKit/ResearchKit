@@ -206,6 +206,18 @@ The default value of this property is `NO`.
  */
 @property (nonatomic, copy, nullable) NSArray<ORKRecorderConfiguration *> *recorderConfigurations;
 
+/// The set of permissions required for this step's core functionality.
+///
+/// Override to return a bitmask of ``ORKPermissionMask`` values. If any of these
+/// permissions are denied when the step is about to be presented, the task redirects
+/// to an explanatory completion step. Defaults to ``ORKPermissionNone``.
+- (ORKPermissionMask)requiredPermissions;
+
+/// Called before the permission check fires, giving the step a chance to update,
+/// add, or remove recorder configurations. Override to ensure recorders reflect
+/// the step's final state before permissions are evaluated.
+- (void)prepareRecorders;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -49,6 +49,7 @@ static const NSTimeInterval MAX_RECORDING_DURATION = 300.0;
         _maximumRecordingLimit = 60.0;
         _allowsRetry = NO;
         _allowsReview = NO;
+        self.allowsBackNavigation = NO;
     }
     return self;
 }
@@ -70,11 +71,6 @@ static const NSTimeInterval MAX_RECORDING_DURATION = 300.0;
 }
 
 - (BOOL)startsFinished
-{
-    return NO;
-}
-
-- (BOOL)allowsBackNavigation
 {
     return NO;
 }

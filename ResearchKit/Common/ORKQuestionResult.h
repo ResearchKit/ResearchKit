@@ -145,11 +145,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSCalendar *calendar;
 
-/**
- The time zone that was current when selecting the date and time.
- */
-@property (nonatomic, copy, nullable) NSTimeZone *timeZone;
-
 @end
 
 

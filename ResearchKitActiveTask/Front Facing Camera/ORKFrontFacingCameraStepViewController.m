@@ -36,6 +36,7 @@
 #import "ORKActiveStepView.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKCollectionResult_Private.h"
+#import "ORKCompletionStep.h"
 #import "ORKFrontFacingCameraStep.h"
 #import "ORKFrontFacingCameraStepContentView.h"
 #import "ORKFrontFacingCameraStepResult.h"
@@ -46,6 +47,10 @@
 #import "ORKStepContainerView_Private.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
+
+#import <ResearchKitUI/ORKCompletionStepViewController.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
+#import <ResearchKitUI/ResearchKitUI_Private.h>
 
 @interface ORKFrontFacingCameraStepViewController () <AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -59,7 +64,7 @@
     ORKFrontFacingCameraStep *_frontFacingCameraStep;
     
     AVCaptureMovieFileOutput *_movieFileOutput;
-    
+    AVCaptureVideoDataOutput *_videoDataOutput;
     NSURL *_tempOutputURL;
     NSURL *_savedFileURL;
     
@@ -88,8 +93,18 @@
     
     [self setupContentView];
     [self setupConstraints];
-    [self startSession];
-    
+
+    AVAuthorizationStatus videoStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    AVAuthorizationStatus audioStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    BOOL cameraDenied = (videoStatus == AVAuthorizationStatusDenied || videoStatus == AVAuthorizationStatusRestricted);
+    BOOL micDenied = (audioStatus == AVAuthorizationStatusDenied || audioStatus == AVAuthorizationStatusRestricted);
+
+    if (cameraDenied || micDenied) {
+        [self _showAccessDeniedCompletionStepForCameraDenied:cameraDenied microphoneDenied:micDenied];
+    } else {
+        [self startSession];
+    }
+
     [self.taskViewController setNavigationBarColor:[self.view backgroundColor]];
 }
 
@@ -185,6 +200,43 @@
     [[_contentView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
 }
 
+- (void)_showAccessDeniedCompletionStepForCameraDenied:(BOOL)cameraDenied microphoneDenied:(BOOL)microphoneDenied {
+    [_contentView removeFromSuperview];
+    _contentView = nil;
+
+    NSString *titleKey;
+    NSString *textKey;
+    NSString *iconName;
+    if (cameraDenied && microphoneDenied) {
+        titleKey = @"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_CAMERA_AND_MIC";
+        textKey = @"VIDEO_CAPTURE_ACCESS_DENIED_CAMERA_AND_MIC_TEXT";
+        iconName = @"video.slash";
+    } else if (cameraDenied) {
+        titleKey = @"VIDEO_CAPTURE_ACCESS_DENIED_TITLE";
+        textKey = @"CAPTURE_ERROR_NO_PERMISSIONS";
+        iconName = @"video.slash";
+    } else {
+        titleKey = @"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_MIC";
+        textKey = @"VIDEO_CAPTURE_ACCESS_DENIED_MIC_TEXT";
+        iconName = @"mic.slash";
+    }
+
+    ORKCaptureAccessDeniedContext *context = [[ORKCaptureAccessDeniedContext alloc]
+                                              initWithTitle:ORKLocalizedString(titleKey, nil)
+                                              text:ORKLocalizedString(textKey, nil)
+                                              settingsLinkText:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT", nil)
+                                              completionStepIdentifier:@"ORKFrontFacingCameraStepIdentifierAccessDeniedCompletion"
+                                              learnMoreStepIdentifier:@"ORKFrontFacingCameraStepIdentifierInstructionStepPlaceHolderAccessDenied"
+                                              iconImage:[UIImage systemImageNamed:iconName]];
+
+    ORKCompletionStepViewController *completionVC = [[ORKCompletionStepViewController alloc] initWithStep:[context authDeniedCompletionStep]];
+    [self addChildViewController:completionVC];
+    completionVC.view.frame = self.view.bounds;
+    completionVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:completionVC.view];
+    [completionVC didMoveToParentViewController:self];
+}
+
 - (void)startSession
 {
     _captureSession = [AVCaptureSession new];
@@ -193,18 +245,18 @@
     
     if (_frontCameraCaptureDevice)
     {
-        NSError *error = nil;
-        
-        AVCaptureDevice *captureAudioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:_frontCameraCaptureDevice error:&error];
-        AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:captureAudioDevice error:&error];
-        [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeVideoRecording options:0 error:&error];
-        
-        if (error) {
+        NSError *videoInputError = nil;
+        AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:_frontCameraCaptureDevice error:&videoInputError];
+
+        if (!deviceInput || videoInputError) {
             [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CAMERA_NOT_FOUND", nil)}]];
             return;
         }
-        
+        NSError *audioInputError = nil;
+        AVCaptureDevice *captureAudioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:captureAudioDevice error:&audioInputError];
+        [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeVideoRecording options:0 error:nil];
+
         [_captureSession beginConfiguration];
         
         if ([_captureSession canAddInput:deviceInput]) {
@@ -214,8 +266,8 @@
         if ([_captureSession canSetSessionPreset:AVCaptureSessionPreset640x480]) {
             [_captureSession setSessionPreset:AVCaptureSessionPreset640x480];
         }
-        
-        if ([_captureSession canAddInput:audioInput]) {
+
+        if (audioInput && [_captureSession canAddInput:audioInput]) {
             [_captureSession addInput:audioInput];
         }
         
@@ -229,23 +281,19 @@
             }
         }
         
-        AVCaptureVideoDataOutput *output = [AVCaptureVideoDataOutput new];
-        
+        _videoDataOutput = [AVCaptureVideoDataOutput new];
+
         NSString* key = (NSString*)kCVPixelBufferPixelFormatTypeKey;
         NSNumber* value = [NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA];
         NSDictionary* videoSettings = [NSDictionary dictionaryWithObject:value forKey:key];
-        [output setVideoSettings:videoSettings];
-        output.alwaysDiscardsLateVideoFrames = YES;
-        
-        if ([_captureSession canAddOutput:output]) {
-            [_captureSession addOutput:output];
+        [_videoDataOutput setVideoSettings:videoSettings];
+        _videoDataOutput.alwaysDiscardsLateVideoFrames = YES;
+
+        if ([_captureSession canAddOutput:_videoDataOutput]) {
+            [_captureSession addOutput:_videoDataOutput];
         }
-        
-        AVCaptureConnection *connection = [output connectionWithMediaType:AVMediaTypeVideo];
-        if ([connection isVideoOrientationSupported]) {
-            connection.videoOrientation = AVCaptureVideoOrientationPortrait;
-        }
-        
+
+        AVCaptureConnection *connection = [_videoDataOutput connectionWithMediaType:AVMediaTypeVideo];
         if ([connection isVideoMirroringSupported]) {
             [connection setVideoMirrored:NO];
         }
@@ -255,7 +303,7 @@
         dispatch_queue_attr_t qos = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
         dispatch_queue_t recordingQueue = dispatch_queue_create("output.queue", qos);
         
-        [output setSampleBufferDelegate:self queue:recordingQueue];
+        [_videoDataOutput setSampleBufferDelegate:self queue:recordingQueue];
         
         [_contentView setPreviewLayerWithSession:_captureSession];
         
@@ -269,8 +317,6 @@
     if (![_movieFileOutput isRecording]) {
          
         AVCaptureConnection *movieFileOutputConnection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-        [movieFileOutputConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-        
         NSArray<AVVideoCodecType> *availableVideoCodecTypes = _movieFileOutput.availableVideoCodecTypes;
         
         if (availableVideoCodecTypes && [availableVideoCodecTypes containsObject:AVVideoCodecTypeHEVC]) {
@@ -305,10 +351,14 @@
         docURL = [docURL URLByAppendingPathComponent:_savedFileName];
         
         NSData *data = [NSData dataWithContentsOfURL:_tempOutputURL];
-        BOOL wasDataSavedToURL = [data writeToURL:docURL atomically:YES];
+        NSError *writeError = nil;
+        BOOL wasDataSavedToURL = [data writeToURL:docURL options:NSDataWritingAtomic|ORKDataWritingFileProtectionFromMode(self.fileProtectionMode) error:&writeError];
         
         if (wasDataSavedToURL)
         {
+            if (self.excludesFilesFromBackup) {
+                ORKApplyBackupExclusionToFileURL(docURL);
+            }
             //remove video saved to temp directory if it was saved successfully in the document directory
             _savedFileURL = docURL;
             [self deleteTempVideoFile];

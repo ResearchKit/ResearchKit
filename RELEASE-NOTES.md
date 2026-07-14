@@ -1,5 +1,39 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.4.0 Release Notes
+
+In addition to general stability and performance improvements, ResearchKit 3.4.0 includes the following updates:
+
+- **Liquid Glass Support**
+    - ResearchKit has been updated to support Liquid Glass, bringing the modernized iOS visual style to steps, form elements, and task navigation throughout the framework.
+
+- **ORKESerializer**
+    - A new, fully public serialization API replaces the previous internal approach. The `ORKESerializer` class encodes and decodes ResearchKit tasks, steps, and results to and from JSON. It uses an entry provider pattern to register serializable classes.
+    - See the new DocC article [Serializing ResearchKit Objects](https://researchkit.github.io/main/documentation/researchkit/serializing-researchkit-objects) for working examples of ResearchKit classes encoded and decoded with the `ORKESerializer`.
+
+- **ORKRecorder Improvements**
+    - ResearchKit now configures the required `ORKRecorder`s for `ORKActiveStep`s automatically. Updated `ORKTaskViewController` to request all required sensor permissions before the active step is reached.
+
+- **File Protection Updates**
+    - `fileProtectionMode` - Controls the `NSFileProtection` level for images, video, audio, serialization data, and other files that ResearchKit writes to the `outputDirectory`. Defaults to `ORKFileProtectionComplete` (Class A encryption).
+    - `excludeFilesFromBackup` - When `true`, ResearchKit applies `NSURLIsExcludedFromBackupKey` to the `outputDirectory`, excluding all task output files from iCloud backups. Defaults to `false`.
+
+- **Expanded AirPods Support for dBHL Tone Audiometry**
+    - Added updated audiometry calibration data for 4th generation AirPods support.
+
+- **New Stroop Task**
+    - Rebuilt the Stroop task in SwiftUI.
+
+- **ORKImageCaptureStep - Front Camera Support**
+    - New `useFrontCamera` property on `ORKImageCaptureStep`. When `true`, the step uses the front-facing camera instead of the default rear camera.
+
+- **ORKDontKnowButtonStyle Deprecated**
+    - The `ORKDontKnowButtonStyle` enum and `dontKnowButtonStyle` property on `ORKAnswerFormat` are now formally deprecated. All "don't know" buttons unconditionally use the `CircleChoice` style going forward.
+
+- **`stable` Branch Retired**
+    - The `stable` branch is retired as of this release. Releases are now cut as version tags directly off `main`. Consume releases via the version tags. If you previously tracked the `stable` branch, pin to a version tag instead.
+
+
 ## ResearchKit 3.2.0 Release Notes
 ### API Changes
 - **`ORKRecorderConfiguration`**
@@ -7,36 +41,36 @@ Deprecated `recorder(for:outputDirectory:)` method in favor of setting the `outp
 
 ### General bug fixes
 - **`ORKRecorder`**
-	- Fixed issue where results for active tasks using `ORKRecorder` did not account for all recorded files.
-	- Added file rolling as an API-level setting for `ORKRecorder` configuration.
-	- Added `timestampSince1970` for logged `CMLogItems` for better usability.
+    - Fixed issue where results for active tasks using `ORKRecorder` did not account for all recorded files.
+    - Added file rolling as an API-level setting for `ORKRecorder` configuration.
+    - Added `timestampSince1970` for logged `CMLogItems` for better usability.
 
 - **Active Tasks**
-	- **Amsler Grid**
-		- Fixed issue where the names of the dat files created for the recorded data contained two periods.
-		- Fixed serialization issue preventing `ORKAmslerGridResult` from being properly serialized.
+    - **Amsler Grid**
+        - Fixed issue where the names of the dat files created for the recorded data contained two periods.
+        - Fixed serialization issue preventing `ORKAmslerGridResult` from being properly serialized.
 
-	- **dBHL Tone Audiometry**
-		- Updated the current retSPL dBSPL tables for improved accuracy in audio-based active tasks.
+    - **dBHL Tone Audiometry**
+        - Updated the current retSPL dBSPL tables for improved accuracy in audio-based active tasks.
 
-	- **Reaction Time**
-		- Fixed issue where all device motion files were not taken into account when reporting results.
+    - **Reaction Time**
+        - Fixed issue where all device motion files were not taken into account when reporting results.
 
-	- **Shoulder Range of Motion**
-		- Fixed issue where some instructions were not vocalized  during the task.
+    - **Shoulder Range of Motion**
+        - Fixed issue where some instructions were not vocalized during the task.
 
-	- **Spatial Span Memory**
-		- Fixed crash when serializing `ORKSpatialSpanMemoryGameTouchSample` objects.
+    - **Spatial Span Memory**
+        - Fixed crash when serializing `ORKSpatialSpanMemoryGameTouchSample` objects.
 
-	- **Tremor Test**
-		- Fixed serialization issue preventing tremor test results from being properly serialized.
+    - **Tremor Test**
+        - Fixed serialization issue preventing tremor test results from being properly serialized.
 
 - **`ORKFormStepViewController`**
-	- Fixed crash in `ORKFormStepViewController` that could occur during form step 
-navigation.
+    - Fixed crash in `ORKFormStepViewController` that could occur during form step navigation.
 
 - **`ORKCheckMarkView`**
-	- Fixed recursive crash that occurred when setting tint color on `ORKCheckMarkView` components.
+    - Fixed recursive crash that occurred when setting tint color on `ORKCheckMarkView` components.
+
 
 ## ResearchKit 3.1.1 Release Notes
 General bug fixes for the following:
@@ -110,6 +144,7 @@ Our `ORKConsent` APIs will be deprecated in favor of using existing functionalit
 
 - **Question Step**
 The `ORKQuestionStep` will be deprecated in favor of using the `ORKFormStep`. Certain answer formats will present slightly different UI when used with a `ORKFormStep`. Updates will be made to ensure backwards compatibility before the question step is removed.
+
 
 ## ResearchKit 2.0 Release Notes
 

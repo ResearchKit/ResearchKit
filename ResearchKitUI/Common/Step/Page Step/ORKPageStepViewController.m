@@ -37,7 +37,7 @@
 #import "ORKTaskViewController_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"
-#import "ORKViewControllerProviding.h"
+#import "ResearchKitUI/ResearchKitUI-Swift.h"
 
 typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     ORKPageNavigationDirectionNone = 0,
@@ -251,7 +251,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
         // If the pageResult does not carry a step result, then check the initial result
         stepResult = [self.initialResult stepResultForStepIdentifier:step.identifier];
     }
-    ORKStepViewController *viewController = [step makeViewControllerWithResult:stepResult];
+    ORKStepViewController *viewController = [self makeStepViewControllerFor:step result:stepResult];
     return viewController;
 }
 

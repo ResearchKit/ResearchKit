@@ -117,6 +117,14 @@
     if (self.outputDirectory == nil) {
         @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"StreamingAudioRecorder requires an output directory" userInfo:nil];
     }
+    
+    if ([AVAudioApplication sharedInstance].recordPermission != AVAudioApplicationRecordPermissionGranted) {
+        [self finishRecordingWithError:[NSError errorWithDomain:ORKErrorDomain
+                                                           code:ORKErrorException
+                                                       userInfo:@{NSLocalizedDescriptionKey: @"Microphone access denied."}]];
+        return;
+    }
+    
     if (!_audioEngine)
     {
         NSError *error = nil;
@@ -153,12 +161,7 @@
         
         // Update the file type to be written to the file
         NSMutableDictionary *modifiedSettings = [NSMutableDictionary dictionaryWithDictionary:[recordingFormat settings]];
-        if (@available(iOS 11.0, *)) {
-            modifiedSettings[AVAudioFileTypeKey] = [NSNumber numberWithInt:kAudioFileWAVEType];
-        } else {
-            // Fallback on earlier versions
-            ORK_Log_Info("ORKStreamingAudioRecorder can only be used with iOS 11.0 or above.");
-        }
+        modifiedSettings[AVAudioFileTypeKey] = [NSNumber numberWithInt:kAudioFileWAVEType];
         
         AVAudioFile *mixerOutputFile = [[AVAudioFile alloc] initForWriting:audiourl settings:modifiedSettings error:&error];
         if (error) {
@@ -224,7 +227,7 @@
         }
         _audioEngine = nil;
 #if !TARGET_IPHONE_SIMULATOR
-        [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
+        [self applyFileProtection:self.configuration.fileProtectionMode toFileAtURL:[self recordingFileURL]];
 #endif
         [self restoreSavedAudioSessionCategory];
     }
@@ -283,6 +286,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKStreamingAudioRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                              outputDirectory:[self.outputDirectory copy]
+                                                     rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 + (BOOL)supportsSecureCoding {

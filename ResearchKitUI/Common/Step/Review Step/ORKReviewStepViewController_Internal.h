@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable, readonly) ORKReviewStep *reviewStep;
 
+@property (nonnull, strong) NSMutableDictionary<NSIndexPath *, NSNumber *> *tableCellHeightMapping;
+
 @end
 
 NS_ASSUME_NONNULL_END

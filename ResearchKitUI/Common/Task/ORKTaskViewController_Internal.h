@@ -60,10 +60,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)flipToPageWithIdentifier:(NSString *)identifier forward:(BOOL)forward animated:(BOOL)animated;
 
+- (void)showStepViewController:(ORKStepViewController *)stepViewController goForward:(BOOL)goForward animated:(BOOL)animated;
+
 - (void)restartTask;
 
 - (void)flipToFirstPage;
 - (void)flipToLastPage;
+
+- (BOOL)didHandlePermissionDenial;
+
+- (void)handleDeniedAuthForStep:(ORKStep *)step;
+
+- (void)handleUnsupportedDeviceForStep:(ORKStep *)step;
+
+- (void)checkRequiredPermissionsForCurrentStep;
 
 @end
 

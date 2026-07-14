@@ -29,7 +29,7 @@
  */
 
 /* Informed consent process. */
-"CONSENT_NAME_TITLE" = "Godkännande";
+"CONSENT_NAME_TITLE" = "Samtycke";
 "CONSENT_NAME_GIVEN" = "Förnamn";
 "CONSENT_NAME_FAMILY" = "Efternamn";
 "CONSENT_NAME_PLACEHOLDER" = "Krävs";
@@ -53,21 +53,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "Läs mer";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Läs mer om hur data samlas in";
-"LEARN_MORE_DATA_USE" = "Läs mer om hur data används";
-"LEARN_MORE_PRIVACY" = "Läs mer om hur din integritet och identitet skyddas";
-"LEARN_MORE_WELCOME" = "Läs mer om studien först";
-"LEARN_MORE_STUDY_SURVEY" = "Läs mer om studieenkäten";
-"LEARN_MORE_TIME_COMMITMENT" = "Läs mer om studiens påverkan på din tid";
-"LEARN_MORE_TASKS" = "Läs mer om de berörda åtgärderna";
-"LEARN_MORE_WITHDRAWING" = "Läs mer om tillbakadragning";
+"LEARN_MORE_DATA_GATHERING" = "Läs mer om hur data samlas in.";
+"LEARN_MORE_DATA_USE" = "Läs mer om hur data används.";
+"LEARN_MORE_PRIVACY" = "Läs mer om hur din integritet och identitet skyddas.";
+"LEARN_MORE_WELCOME" = "Läs mer om studien först.";
+"LEARN_MORE_STUDY_SURVEY" = "Läs mer om studieenkäten.";
+"LEARN_MORE_TIME_COMMITMENT" = "Läs mer om studiens påverkan på din tid.";
+"LEARN_MORE_TASKS" = "Läs mer om de berörda uppgifterna.";
+"LEARN_MORE_WITHDRAWING" = "Läs mer om tillbakadragning.";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Delningsalternativ";
 "CONSENT_SHARE_WIDELY_%@" = "Dela mina data med %@ och kvalificerade forskare över hela världen";
 "CONSENT_SHARE_ONLY_%@" = "Dela mina data endast med %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ kommer att få dina studiedata från din medverkan i denna studie.\n\nVidare delning av dina kodade studiedata (utan ditt namn eller liknande information) kan vara till nytta för denna och framtida forskning.";
-"LEARN_MORE_CONSENT_SHARING" = "Läs mer om datadelning";
+"LEARN_MORE_CONSENT_SHARING" = "Läs mer om datadelning.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Namnförtydligande";
@@ -81,8 +81,8 @@
 "FORM_ITEM_PROGRESS" = "Fråga %1$@ av %2$@";
 
 /* ORKTaskReviewViewController */
-"REVIEW_SKIPPED_ANSWER" = "Överhoppad";
-"REVIEW_EDIT_ANSWER" = "Ändra";
+"REVIEW_SKIPPED_ANSWER" = "Överhoppat";
+"REVIEW_EDIT_ANSWER" = "ÄNDRA";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ogiltigt värde";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Ange en adress";
 "LOCATION_ERROR_TITLE" = "Kunde inte hitta den angivna adressen";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Kunde inte bestämma din aktuella plats. Ange en adress eller flytta dig till en plats med bättre GPS-signal om det är tillämpligt.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Åtkomst till platstjänster har nekats. Tillåt att den här appen använder platstjänster via Inställningar.";
 "LOCATION_ERROR_GEOCODE" = "Det gick inte att hitta något resultat för den angivna adressen. Kontrollera att adressen är giltig.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Antingen är du inte ansluten till internet eller så har du överskridit det maximala antalet addressökbegäranden. Om du inte är ansluten till internet aktiverar du Wi-Fi så att du kan svara på frågan, hoppa över frågan om en sådan knapp är tillgänglig eller gå tillbaka till enkäten när du är ansluten till internet. I annat fall försöker du igen om några minuter.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textinnehållet överskrider maximal längd: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text är begränsad till %@ tecken";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera inte tillgänglig i delad skärm.";
@@ -114,26 +112,26 @@
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ange lösenord";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekräfta";
 "CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ange lösenordet igen";
-"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Lösenorden stämmer inte överens.";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Lösenorden matchar inte.";
 "ADDITIONAL_INFO_SECTION_TITLE" = "Ytterligare information";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
 "GENDER_FORM_ITEM_TITLE" = "Kön";
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Välj ett kön";
-"DOB_FORM_ITEM_TITLE" = "Födelsedatum";
+"DOB_FORM_ITEM_TITLE" = "Födelse­datum";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Välj ett datum";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefon­nummer";
 "PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verifiering";
 "VERIFICATION_STEP_TITLE" = "Bekräfta din e-postadress";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Tryck på länken nedan om du inte fick något bekräftelsebrev och vill att det skickas på nytt.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Skicka bekräftelsebrev igen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tryck på länken nedan om du inte fick något bekräftelsemejl och vill att det skickas på nytt.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Skicka verifieringsmejl igen";
 
 /* Login step */
-"LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggning";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "Har du glömt lösenordet?";
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Logga in";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Glömt lösenordet?";
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Ange lösenkod";
@@ -175,6 +173,13 @@
 "FITZPATRICK_SKIN_TYPE_IV" = "Typ IV";
 "FITZPATRICK_SKIN_TYPE_V" = "Typ V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Typ VI";
+
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Typ 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Typ 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Typ 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Typ 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Typ 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Typ 6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "Kvinna";
@@ -219,7 +224,7 @@
 "BUTTON_SKIP_QUESTION" = "Hoppa över denna fråga";
 "BUTTON_START_TIMER" = "Starta timern";
 "BUTTON_OPTION_SAVE" = "Spara till senare";
-"BUTTON_OPTION_DISCARD" = "Bortse från träffar";
+"BUTTON_OPTION_DISCARD" = "Bortse från resultat";
 "BUTTON_OPTION_STOP_TASK" = "Avsluta åtgärd";
 "BUTTON_SAVE" = "Spara";
 "BUTTON_CLEAR_ANSWER" = "Rensa svar";
@@ -298,9 +303,9 @@
 "AMSLER_GRID_TITLE" = "Amsler-nät";
 "AMSLER_GRID_INTRO_TEXT" = "Den här aktiviteten kan upptäcka synproblem hos användaren.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Håll enheten 30 cm från ansiktet och i ögonhöjd under hela testet.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Blunda med %@ och fokusera på punkten i mitten av det kvadratiska rutnätet.\n\nOm du ser förvrängningar, exempelvis suddiga eller vågiga linjer, märker du ut dem med fingret eller en ritpenna.\n\nSvep åt vänster utanför rutnätet när du är klar.";
-"AMSLER_GRID_LEFT_EYE" = "vänster öga";
-"AMSLER_GRID_RIGHT_EYE" = "höger öga";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Blunda med %@ och fokusera på punkten i mitten av det kvadratiska rutnätet.\n\nOm du ser förvrängningar, exempelvis suddiga eller vågiga linjer, märker du ut dem med fingret eller en ritpenna.\n\nTryck på knappen Nästa när du är klar.";
+"AMSLER_GRID_LEFT_EYE" = "Vänster öga";
+"AMSLER_GRID_RIGHT_EYE" = "Höger öga";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Röst";
@@ -317,7 +322,7 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometri";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Den här aktiviteten mäter din förmåga att höra olika ljud.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Anslut och ta på dig hörlurarna innan du börjar.\n\nLjudet kommer att vara väldigt subtilt och liknar inte ett vanligt varningsljud. Ljudet är svagt i början och ökar sakta i ljudstyrka. Koncentrera dig på ljudet och tryck på höger- eller vänsterknappen för att registrera i vilket öra du hör ljudet.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Anslut och ta på dig hörlurarna innan du börjar.\n\nLjudet kommer att vara väldigt subtilt och liknar inte ett vanligt varningsljud. Ljudet är svagt i början och ökar sakta i ljudstyrka. Koncentrera dig på ljudet och tryck på höger- eller vänsterknappen för att registrera i vilket öra du hör ljudet.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Nu bör du höra en ton. Justera volymen med reglagen på sidan av enheten.\n\nTryck på någon av knapparna när du vill börja.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Varje gång du börjar höra ett ljud ska du trycka på vänster eller höger knapp för att visa vilket öra du hör ljudet i.";
@@ -328,7 +333,7 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometri";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tryck när du hör en ton.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tryck på knappen när du hör en ton.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ton och volym";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "En serie toner kommer att spelas upp.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Tryck på knappen när du hör en ton.";
@@ -339,7 +344,7 @@
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Nu kommer toner att spelas upp i ditt vänstra öra.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Den här aktiviteten identifierar en persons hörseltröskvärden i dB HL-skala.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Se till att ljudet på enheten är inställt på högsta volym.\n\nUnder den här uppgiften kommer en subtil ton att spelas i antingen det högra eller vänstra örat.\n\nLyssna noga och tryck på knappen varje gång du hör en ton.";
-"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Det här testet mäter hur hög volymen måste vara för att du ska kunna höra ett ljud.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Det här testet identifierar hur hög volymen måste vara för att du ska kunna höra ett ljud.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Förberedande frågeformulär.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Markera din inställning för ”bättre öra” (om du har ett)";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "vänster";
@@ -417,14 +422,14 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Den här aktiviteten mäter hur långt du kan sträcka ditt högra knä.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sätt dig längst ut på en stol. Du börjar med att lägga enheten på ditt vänstra knä så att det kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sätt dig längst ut på en stol. Du börjar med att lägga enheten på ditt högra knä så att det kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Placera enheten på ditt vänstra knä med skärmen utåt (se bild).";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Placera enheten på ditt högra knä med skärmen utåt (se bild).";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lägg enheten på ditt vänstra knä med skärmen utåt (se bild).";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lägg enheten på ditt högra knä med skärmen utåt (se bild).";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "När du är klar trycker du på skärmen för att börja och rätar ut ditt vänstra knä så långt du kan. Återgå till startpositionen och tryck igen när du är klar.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "När du är klar trycker du på skärmen för att börja och rätar ut ditt högra knä så långt du kan. Återgå till startpositionen och tryck igen när du är klar.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Placera enheten på ditt vänstra knä. Tryck på skärmen och räta ut ditt vänstra knä så mycket du kan.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Placera enheten på ditt högra knä. Tryck på skärmen och räta ut ditt högra knä så mycket du kan.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "När du är klar återgår du till startpositionen för ditt vänstra knä. Tryck sedan var som helst på skärmen.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "När du är klar återgår du till startpositionen för ditt högra knä. Tryck sedan var som helst på skärmen.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Placera enheten på ditt vänstra knä.\n\nTryck på skärmen och räta ut ditt vänstra knä så mycket du kan.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Placera enheten på ditt högra knä.\n\nTryck på skärmen och räta ut ditt högra knä så mycket du kan.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "När du är klar återgår du till startpositionen för ditt vänstra knä.\n\nTryck sedan var som helst på skärmen.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "När du är klar återgår du till startpositionen för ditt högra knä.\n\nTryck sedan var som helst på skärmen.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Rörlighet, vänster axel";
@@ -433,8 +438,8 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Den här aktiviteten mäter hur långt du kan sträcka din högra axel.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Du börjar med att lägga enheten på din vänstra axel så att den kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Du börjar med att lägga enheten på din högra axel så att den kan mätas. Slå på ljudet på enheten så att du kan höra anvisningarna.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Placera enheten på din vänstra axel med skärmen utåt (se bild).";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Placera enheten på din högra axel med skärmen utåt (se bild).";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lägg enheten på din vänstra axel med skärmen utåt (se bild).";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lägg enheten på din högra axel med skärmen utåt (se bild).";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "När du är klar trycker du på skärmen för att börja och höjer din vänstra arm så högt du kan. Återgå till startpositionen och tryck igen när du är klar.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "När du är klar trycker du på skärmen för att börja och höjer din högra arm så högt du kan. Återgå till startpositionen och tryck igen när du är klar.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Placera enheten på din vänstra axel. Tryck på skärmen och lyft din vänstra arm framåt så långt du kan.";
@@ -493,16 +498,16 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Tremoraktivitet";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Den här aktiviteten mäter darrningarna i dina händer i olika positioner. Hitta en plats där du kan sitta bekvämt under hela den här aktiviteten.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Håll telefonen i den mer påverkade handen enligt bilden nedan.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Håll telefonen i den HÖGRA handen enligt bilden nedan.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Håll telefonen i den VÄNSTRA handen enligt bilden nedan.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Håll telefonen i den mer påverkade handen enligt bilden ovan.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Håll telefonen i den HÖGRA handen enligt bilden ovan.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Håll telefonen i den VÄNSTRA handen enligt bilden ovan.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Du blir ombedd att utföra %@ medan du sitter med telefonen i handen.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "en åtgärd";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "två åtgärder";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tre åtgärder";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "fyra åtgärder";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "fem åtgärder";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tryck på nästa för att fortsätta.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tryck på Nästa för att fortsätta.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Förbered dig på att hålla telefonen i knät.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Förbered dig på att hålla telefonen i knät med den VÄNSTRA handen.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Förbered dig på att hålla telefonen i knät med den HÖGRA handen.";
@@ -563,7 +568,7 @@
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Spela upp ljud";
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stoppa ljud";
 "SPEECH_IN_NOISE_TITLE" = "Tal i brus";
-"SPEECH_IN_NOISE_INTRO_TEXT" = "Den här aktiviteten mäter hörförståelsen i bullriga miljöer.";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Den här aktiviteten mäter hörförståelsen i bullriga nivåer.";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "Som en del av det här testet ska du:\n\nLyssna på en mening.\n\nTydligt upprepa det du hörde eller gå vidare för att skriva in det du hörde med tangentbordet. \n\nOm du upprepar det du hörde har du möjlighet att ändra utskriften som görs av röstigenkänningsmotorn.";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volymkalibrering";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tryck på Spela upp ljud, justera volymen till en behaglig nivå och fortsätt sedan genom att trycka på Stoppa ljud.";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "Ljudtrycksmätare";
 "ENVIRONMENTSPL_INTRO_TEXT" = "Den här aktiviteten mäter miljöns ljudtrycksnivå. Om bullernivåerna är för höga kan du inte fortsätta. Flytta till en tystare plats där du kan slutföra uppgiften eller gör om den här aktiviteten senare.";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "Beräknar";
+"ENVIRONMENTSPL_CALCULATING" = "Mäter…";
 "ENVIRONMENTSPL_THRESHOLD" = "Tröskel: %@ dBA";
-"ENVIRONMENTSPL_OK" = "Bakgrundsbrus OK";
-"ENVIRONMENTSPL_NOISE" = "För mycket bakgrundsljud";
+"ENVIRONMENTSPL_OK" = "Bra";
+"ENVIRONMENTSPL_NOISE" = "För högt";
 "ENVIRONMENTSPL_TITLE_2" = "Hitta en tyst plats";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "För att det här testet ska bli så exakt som möjligt bör det utföras i en tyst miljö.";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "För bästa resultat bör du utföra den här uppgiften i en tyst miljö. När mätningen av bakgrundsbuller är klar kan du fortsätta.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Starta uppgiften";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Ljudstapeldiagram";
 
 "AX_AMSLER_GRID_LABEL" = "Amsler-nät";
-"AX_AMSLER_GRID_HINT" = "Använd fingret eller en ritpenna till att märka rutnätet, eller svep åt vänster utanför rutnätet för att avsluta.";
+"AX_AMSLER_GRID_HINT" = "Markera rutnätet direkt med fingret eller en ritpenna eller tryck på knappen Nästa för att avsluta.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Knappar som kan tryckas";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tryck för vänster öra";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "Det går inte att avkoda restoreData för initiering";
+"6MWT_HIGH_SCORE" = "10: En hel del";
+"6MWT_INSTRUCTIONS_1" = "Hitta en rak gångväg som är minst 30 meter lång.";
+"6MWT_INSTRUCTIONS_2" = "Se till att du kan stanna och sitta längs gångvägen om du behöver det.";
+"6MWT_INSTRUCTIONS_3" = "Höj telefonens volym till minst 50 %.";
+"6MWT_INSTRUCTIONS_4" = "Starta en utomhusgång (eller inomhusgång) på Apple Watch genom att fråga Siri eller genom att öppna appen Träning och sedan trycka på Utomhusgång (eller Inomhusgång).";
+"6MWT_INSTRUCTIONS_TITLE" = "Komma igång";
+"6MWT_INTRO" = "Målet med det här testet är att gå så långt som möjligt i en bekväm takt under 6 minuter.";
+"6MWT_INTRO_DETAILS" = "Detaljer";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Ha på dig bekväma kläder och välsittande skor. Om du vanligtvis använder ett gång­hjälp­medel kan du använda det under testet.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Om du har svårt att gå utomhus bör du överväga att göra testet i ett lokalt köpcentrum.";
+"6MWT_INTRO_DETAIL_TIME" = "Det här testet tar ungefär 6 minuter att utföra.";
+"6MWT_INTRO_DETAIL_WATCH" = "Du måste ha en Apple Watch när du gör det här testet.";
+"6MWT_LOW_SCORE" = "1: Ingen";
+"6MWT_QUESTIONS_BREATH" = "Andnöd";
+"6MWT_QUESTIONS_DETAIL" = "Du har genomfört gångtestet på 6 minuter! Betygsätt hur du känner dig när det gäller följande.";
+"6MWT_QUESTIONS_FATIGUE" = "Trötthet";
+"6MWT_QUESTIONS_TITLE" = "Bra gjort";
+"6MWT_TASK_TITLE" = "6 minuters gångtest";
+"6MWT_TEST_IN_PROGRESS" = "Test pågår";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Gå så långt du kan längs den raka gångvägen under 6 minuter. Stanna och sätt dig ned om du blir andfådd.";
+"AX_BUTTON" = "Knapp";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Redigeringsknapp";
+"AX_PAGE_NUMBER_FORMAT" = "Sidan %1$ld av %2$ld";
+"AX_SES_BOTTOM" = "Nedtill";
+"AX_SES_PERCENT" = "Procent";
+"AX_SES_TOP" = "Upptill";
+"BUTTON_PRACTICE_AGAIN" = "Öva igen";
+"BUTTON_PRACTICE_TEST" = "Öva på testet";
+"BUTTON_START_TEST" = "Starta testet";
+"CONSENT_NAME_SECTION_TITLE" = "Namn";
+"FAMILY_HISTORY_ADD" = "Lägg till %@";
+"FAMILY_HISTORY_CANCEL" = "Avbryt";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Uppgift klar";
+"FAMILY_HISTORY_CONDITIONS" = "Hälsotillstånd";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Har personen diagnosticerats med någon av följande sjukdomar eller hälsotillstånd?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Besvara de här frågorna så gott du kan";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Bekräfta eventuella sjukdomar eller hälsotillstånd.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Hälsotillstånd";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Radera inlägg";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Är du säker på att du vill radera den här posten från familjens hälsohistorik?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Redigera post";
+"FAMILY_HISTORY_I_DONT_KNOW" = "Jag vet inte";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Inget ovanstånde";
+"FAMILY_HISTORY_NONE_SELECTED" = "Inget valt";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "Jag föredrar att inte svara";
+"FITNESS_RESUME_TEST" = "Återuppta aktivitet";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Är du säker på att du vill avsluta den här aktiviteten tidigt?";
+"FITNESS_STOP_TEST_DETAIL" = "Dina framsteg sparas och detta test markeras som slutfört.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Radera och försök igen";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Videoalternativ";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Granska video";
+"FRONT_FACING_CAMERA_START_TIME" = "00:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Starta inspelning";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Stoppa inspelning";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Skicka video";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Både den högra och vänstra handen kommer att testas.\nDu måste plocka upp pinnen så fort som möjligt och placera den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
+"MAX_WORD_COUNT_ERROR" = "Du har uppnått högsta antal tecken";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID-fel";
+"PASSCODE_FACE_ID_MESSAGE" = "Autentisera med Face ID";
+"PLAY" = "Spela";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tryck på hållknappen och sedan på den blå cirkeln";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "håll";
+"RECORD" = "Spela in";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Studien begär tillgång till hälsodata.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Hälsodata";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "Studien begär tillgång till platsdata från dina enheter.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Platsinformation";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Studien begär tillgång till rörelsedata från dina enheter.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Enhetsrörelse";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Studien begär att få skicka notiser till dig.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notiser";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Granskade";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Granska";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Fel";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Stöds inte";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "Studien begär tillgång till sensordata från dina enheter.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensordata";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Använd tangentbord istället";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Kunde inte spela in. Tryck för att försöka igen.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Tal upptäcktes inte i inspelningen. Tryck för att försöka igen.";
+"STOP" = "Stopp";
+"STROOP_COLOR_ORANGE" = "ORANGE";
+"TC_COMPLETION_DETAIL" = "Du har genomfört Tecumseh-stegtestet!";
+"TC_COMPLETION_TITLE" = "Bra gjort";
+"TC_INSTRUCTIONS_1" = "Hitta ett trappsteg på ungefär 20 cm höjd från marken.";
+"TC_INSTRUCTIONS_2" = "Höj iPhones volym till minst 50 %.";
+"TC_INSTRUCTIONS_3" = "Starta en trappträning på Apple Watch genom att fråga Siri eller genom att öppna appen Träning, trycka på Lägg till träning och sedan välja Trappträning.";
+"TC_INSTRUCTIONS_TITLE" = "Komma igång";
+"TC_INTRO" = "Målet med det här testet är att höja pulsen medan du kliver upp och ned i 3 minuter medan du följer en takt.";
+"TC_INTRO_DETAILS" = "Detaljer";
+"TC_INTRO_DETAIL_DANGER" = "Avbryt testet omedelbart om du får bröstsmärtor eller upplever obehag.";
+"TC_INTRO_DETAIL_TIME" = "Det här testet tar ungefär 6 minuter att utföra.";
+"TC_INTRO_DETAIL_WATCH" = "Du måste ha en Apple Watch när du gör det här testet.";
+"TC_REST_IN_PROGRESS" = "Vila";
+"TC_REST_IN_PROGRESS_DETAIL" = "Sätt dig ned och slappna av i 3 minuter medan Apple Watch registrerar din vilopuls.";
+"TC_TASK_TITLE" = "Tecumseh-stegtest";
+"TC_TEST_IN_PROGRESS" = "Test pågår";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Kliv upp och ned på trappsteget i takt med rytmen";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST PÅGÅR";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST PÅGÅR \U2022 %@";

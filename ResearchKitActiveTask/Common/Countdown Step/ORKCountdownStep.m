@@ -30,8 +30,18 @@
 
 
 #import "ORKCountdownStep.h"
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKCountdownStep
+
++ (NSTimeInterval)minimumStepDuration {
+    return 3.0;
+}
+
++ (NSTimeInterval)maximumStepDuration {
+    // 4-digit values (1000+) overflow the countdown circle label.
+    return 999.0;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
@@ -45,15 +55,9 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
-    
-    NSTimeInterval const ORKCountdownStepMinimumDuration = 3.0;
-    
-    if ( self.stepDuration < ORKCountdownStepMinimumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKCountdownStepMinimumDuration)]  userInfo:nil];
-    }
-    
+
+    ORKValidateBoundedValue(self.stepDuration, ORKCountdownStep.minimumStepDuration, ORKCountdownStep.maximumStepDuration, @"stepDuration", YES);
 }
 
 @end

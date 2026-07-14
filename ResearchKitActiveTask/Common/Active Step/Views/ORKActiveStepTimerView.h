@@ -29,24 +29,40 @@
  */
 
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
-#import "ORKActiveStepCustomView.h"
+#import <ResearchKitActiveTask/ORKActiveStepCustomView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKActiveStep;
-@class ORKCountdownLabel;
 @class ORKTextButton;
+
+/// Controls the visual presentation of `ORKActiveStepTimerView`.
+typedef NS_ENUM(NSInteger, ORKActiveStepTimerViewStyle) {
+    /// Displays a large countdown number. This is the default.
+    ORKActiveStepTimerViewStyleDefault = 0,
+    /// Displays a circular progress ring with a countdown label inside.
+    ORKActiveStepTimerViewStyleRing,
+};
 
 @interface ORKActiveStepTimerView : ORKActiveStepCustomView
 
-@property (nonatomic, strong, nullable) ORKCountdownLabel *countDownLabel;
+/// The visual style of the timer view. Defaults to `ORKActiveStepTimerViewStyleDefault`.
+@property (nonatomic) ORKActiveStepTimerViewStyle style;
 
 @property (nonatomic, strong, nullable) ORKTextButton *startTimerButton;
 
 @property (nonatomic, strong, nullable) ORKActiveStep *step;
+
+/// An optional icon displayed inside the ring. Only visible when `style` is `ring`.
+@property (nonatomic, nullable) UIImage *image;
+
+/// Whether the time label inside the ring is hidden. Only applies when `style` is `ring`.
+@property (nonatomic) BOOL labelHidden;
+
+- (void)hideStartTimerButton;
 
 @end
 

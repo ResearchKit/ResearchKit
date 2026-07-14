@@ -195,8 +195,8 @@
         return UIEdgeInsetsZero;
     AVCaptureDeviceInput* input = (AVCaptureDeviceInput*)inputs[0];
     CMVideoDimensions cmd = CMVideoFormatDescriptionGetDimensions(input.device.activeFormat.formatDescription);
-    AVCaptureVideoOrientation avcvo = _previewLayer.connection.videoOrientation;
-    BOOL landscape = avcvo == AVCaptureVideoOrientationLandscapeLeft || avcvo == AVCaptureVideoOrientationLandscapeRight;
+    CGFloat rotationAngle = _previewLayer.connection.videoRotationAngle;
+    BOOL landscape = (rotationAngle == ORKVideoRotationAngleLandscapeRight || rotationAngle == ORKVideoRotationAngleLandscapeLeft);
     
     CGRect contentFrame = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(landscape ? cmd.width : cmd.height, landscape ? cmd.height : cmd.width), _previewLayer.frame);
     CGRect overallFrame = _previewLayer.frame;
@@ -204,14 +204,6 @@
                             contentFrame.origin.x - overallFrame.origin.x,
                             (overallFrame.origin.y + overallFrame.size.height) - (contentFrame.origin.y + contentFrame.size.height),
                             (overallFrame.origin.x + overallFrame.size.width) - (contentFrame.origin.x + contentFrame.size.width));
-}
-
-- (AVCaptureVideoOrientation)videoOrientation {
-    return _previewLayer.connection.videoOrientation;
-}
-
-- (void)setVideoOrientation:(AVCaptureVideoOrientation)videoOrientation {
-    _previewLayer.connection.videoOrientation = videoOrientation;
 }
 
 #pragma mark - Accessibility

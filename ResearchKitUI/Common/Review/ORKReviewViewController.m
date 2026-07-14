@@ -105,8 +105,8 @@ static const float FirstSectionHeaderPadding = 24.0;
     _tableContainerView.stepDetailText = _detailText;
     _tableContainerView.stepTopContentImage = _image;
     _tableContainerView.bodyItems = _bodyItems;
-    
-    [_tableContainerView.navigationFooterView setHidden:YES];
+
+    [_tableContainerView removeFooterView];
     [_tableContainerView setNeedsLayout];
 }
 
@@ -118,7 +118,6 @@ static const float FirstSectionHeaderPadding = 24.0;
 - (void)setText:(NSString *)text {
     _text = text;
     _tableContainerView.stepText = text;
-    [_tableContainerView sizeHeaderToFit];
 }
 
 - (void)setDetailText:(NSString *)detailText {
@@ -136,14 +135,8 @@ static const float FirstSectionHeaderPadding = 24.0;
     _tableContainerView.bodyItems = bodyItems;
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    [_tableContainerView sizeHeaderToFit];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_tableContainerView sizeHeaderToFit];
     [_tableContainerView.tableView reloadData];
     [self.view layoutSubviews];
 }
@@ -168,8 +161,8 @@ static const float FirstSectionHeaderPadding = 24.0;
     _tableContainerView.translatesAutoresizingMaskIntoConstraints = NO;
     [[_tableContainerView.topAnchor constraintEqualToAnchor:self.view.topAnchor] setActive:YES];
     [[_tableContainerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-    [[_tableContainerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[_tableContainerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
+    [[_tableContainerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor] setActive:YES];
+    [[_tableContainerView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor] setActive:YES];
 }
 
 - (void)createReviewSectionsWithDefaultResultSource:(id<ORKTaskResultSource>)defaultResultSource {
@@ -342,7 +335,13 @@ static const float FirstSectionHeaderPadding = 24.0;
     
     if (cardHeaderView == nil) {
         ORKReviewSection *reviewSection = _reviewSections[section];
-        cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:reviewSection.title detailText:reviewSection.text learnMoreView:nil progressText:[NSString stringWithFormat:@"%@ %@", ORKLocalizedString(@"REVIEW_STEP_PAGE", nil), ORKLocalizedStringFromNumber(@(section + 1))] tagText:nil showBorder:YES hasMultipleChoiceItem:NO shouldIgnoreDarkMode:NO];
+        cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:reviewSection.title
+                                                             detailText:reviewSection.text
+                                                          learnMoreView:nil
+                                                           progressText:[NSString stringWithFormat:@"%@ %@", ORKLocalizedString(@"REVIEW_STEP_PAGE", nil), ORKLocalizedStringFromNumber(@(section + 1))]
+                                                                tagText:nil
+                                                             showBorder:YES
+                                                  hasMultipleChoiceItem:NO];
     }
     
     // The first section needs extra padding at the top to account for space between the content in

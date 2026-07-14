@@ -16,7 +16,6 @@ Constants utilized throughout ResearchKit.
 - ``ORKCaptionTextColorKey``
 - ``ORKCardDefaultBorderWidth``
 - ``ORKCardDefaultCornerRadii``
-- ``ORKCardDefaultFontSize``
 - ``ORKConsentBackgroundColorKey``
 - ``ORKDarkTintColorKey``
 - ``ORKDoneButtonPressedKey``

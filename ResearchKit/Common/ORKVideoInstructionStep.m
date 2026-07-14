@@ -77,7 +77,7 @@
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
     return isParentSame &&
-        ORKEqualObjects(castObject.videoURL, self.videoURL) &&
+        ORKEqualFileURLs(castObject.videoURL, self.videoURL) &&
         ORKEqualObjects(castObject.bundleAsset, self.bundleAsset) &&
         castObject.thumbnailTime == self.thumbnailTime;
 }

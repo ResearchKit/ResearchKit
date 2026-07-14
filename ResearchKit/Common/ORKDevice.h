@@ -36,18 +36,37 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// A snapshot of the current device and framework version information.
+///
+/// Use ``ORKDevice`` to capture device metadata at a point in time. This information
+/// is useful for debugging and for correlating results with the device and OS version
+/// on which they were collected.
 ORK_CLASS_AVAILABLE
 @interface ORKDevice : NSObject<NSSecureCoding, NSCopying>
 
+/// Returns a snapshot of the current device's information.
+///
+/// - Returns: An ``ORKDevice`` instance populated with the current device, OS, and
+///   ResearchKit version information.
 + (instancetype)currentDevice;
 
+/// The marketing name of the device.
 @property (nonatomic, copy, readonly, nullable) NSString *product;
 
+/// The operating system version string.
 @property (nonatomic, copy, readonly, nullable) NSString *osVersion;
 
+/// The operating system build identifier.
 @property (nonatomic, copy, readonly, nullable) NSString *osBuild;
 
+/// The hardware platform identifier.
 @property (nonatomic, copy, readonly, nullable) NSString *platform;
+
+/// The ResearchKit framework version string.
+@property (nonatomic, copy, readonly, nullable) NSString *researchKitVersion;
+
+/// The ResearchKit framework bundle version string.
+@property (nonatomic, copy, readonly, nullable) NSString *researchKitBundleVersion;
 
 @end
 

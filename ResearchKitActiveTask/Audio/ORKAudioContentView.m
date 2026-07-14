@@ -48,8 +48,6 @@ static const CGFloat GraphViewBlueZoneHeight = 170;
 // The two bands at top and bottom which are "loud" each have this height.
 static const CGFloat GraphViewRedZoneHeight = 25;
 
-static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
-
 @interface ORKAudioTimerLabel : ORKLabel
 
 @end
@@ -67,18 +65,22 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
 
 @interface ORKAudioContentView () <ORKRecordButtonDelegate>
 
+@property (nonatomic, strong) UIView *alertLabelContainerView;
 @property (nonatomic, strong) ORKHeadlineLabel *alertLabel;
 @property (nonatomic, strong) UILabel *timerLabel;
 @property (nonatomic, strong) ORKAudioMeteringView *graphView;
+@property (nonatomic, strong) ORKRecordButton *recordButton;
 @property (nonatomic, copy, nullable) ORKAudioStepContentViewEventHandler viewEventhandler;
+@property (nonatomic, strong) UIStackView *graphStackView;
+@property (nonatomic, strong) UIStackView *contentStackView;
 
 @end
 
 
 @implementation ORKAudioContentView {
+    NSMutableArray *_constraints;
     NSMutableArray *_samples;
     UIColor *_keyColor;
-    ORKRecordButton *_recordButton;
     BOOL _checkAudioLevel;
 }
 
@@ -89,24 +91,9 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
         _checkAudioLevel = YES;
         _useRecordButton = NO;
         
-        self.alertLabel = [ORKHeadlineLabel new];
-        _alertLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.timerLabel = [ORKAudioTimerLabel new];
-        _timerLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _timerLabel.textAlignment = NSTextAlignmentRight;
-        self.graphView = [[ORKAudioMeteringView alloc] init];
-        _graphView.translatesAutoresizingMaskIntoConstraints = NO;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         self.alertColor = [UIColor ork_redColor];
-        
-        [self addSubview:_alertLabel];
-        [self addSubview:_timerLabel];
-        [self addSubview:_graphView];
-        
-        _alertLabel.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
-        // _timerLabel.text set in -updateTimerLabel:
-        
         self.alertThreshold = GraphViewBlueZoneHeight / ((GraphViewRedZoneHeight * 2) + GraphViewBlueZoneHeight);
         
         [self updateGraphSamples];
@@ -122,7 +109,7 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
 
 - (void)setFailed:(BOOL)failed {
     _failed = failed;
-    _alertLabel.text = failed ? ORKLocalizedString(@"AUDIO_GENERIC_ERROR_LABEL", nil) : ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
+    self.alertLabel.text = failed ? ORKLocalizedString(@"AUDIO_GENERIC_ERROR_LABEL", nil) : ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
     [self updateAlertLabelHidden];
 }
 
@@ -133,20 +120,13 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
 
 - (void)setUseRecordButton:(BOOL)useRecordButton {
     _useRecordButton = useRecordButton;
-    
-    if (_useRecordButton) {
-        _checkAudioLevel = NO;
-        [_timerLabel setHidden: YES];
-        
-        [self setupRecordButton];
-        [self setUpConstraints];
-    }
+    [self.recordButton setHidden:!_useRecordButton];
 }
 
 - (void)applyKeyColor {
     UIColor *keyColor = [self keyColor];
-    _timerLabel.textColor = keyColor;
-    _graphView.meterColor = keyColor;
+    self.timerLabel.textColor = keyColor;
+    self.graphView.meterColor = keyColor;
 }
 
 - (UIColor *)keyColor {
@@ -160,8 +140,35 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
 
 - (void)setAlertColor:(UIColor *)alertColor {
     _alertColor = alertColor;
-    _alertLabel.textColor = alertColor;
-    _graphView.alertColor = alertColor;
+    self.alertLabel.textColor = alertColor;
+    self.graphView.alertColor = alertColor;
+}
+
+- (UIStackView *)graphStackView {
+    if (_graphStackView == nil) {
+        _graphStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.graphView, self.timerLabel]];
+        [_graphStackView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_graphStackView setAxis:UILayoutConstraintAxisHorizontal];
+        [_graphStackView setDistribution:UIStackViewDistributionFill];
+        const CGFloat innerMargin = 2;
+        [_graphStackView setSpacing:innerMargin];
+    }
+    
+    return _graphStackView;
+}
+
+- (UIStackView *)contentStackView {
+    if (_contentStackView == nil) {
+        _contentStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.graphStackView, self.alertLabelContainerView, self.recordButton]];
+        [_contentStackView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_contentStackView setAxis:UILayoutConstraintAxisVertical];
+        [_contentStackView setDistribution:UIStackViewDistributionFill];
+        [_contentStackView setSpacing:20.0];
+        
+        [self addSubview:_contentStackView];
+    }
+    
+    return _contentStackView;
 }
 
 - (void)setViewEventHandler:(ORKAudioStepContentViewEventHandler)handler {
@@ -177,86 +184,127 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
     }
 }
 
+- (ORKAudioMeteringView *)graphView {
+    if (_graphView == nil) {
+        _graphView = [[ORKAudioMeteringView alloc] init];
+        _graphView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    
+    return _graphView;
+}
+
+- (UILabel *)timerLabel {
+    if (_timerLabel == nil) {
+        _timerLabel = [ORKAudioTimerLabel new];
+        _timerLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _timerLabel.textAlignment = NSTextAlignmentRight;
+    }
+    
+    return _timerLabel;
+}
+
+- (UIView *)alertLabelContainerView {
+    if (_alertLabelContainerView == nil) {
+        _alertLabelContainerView = [UIView new];
+        [_alertLabelContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_alertLabelContainerView setBackgroundColor:[UIColor clearColor]];
+        
+        [_alertLabelContainerView addSubview:self.alertLabel];
+    }
+    
+    return _alertLabelContainerView;
+}
+
+- (ORKHeadlineLabel *)alertLabel {
+    if (_alertLabel == nil) {
+        _alertLabel = [ORKHeadlineLabel new];
+        _alertLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _alertLabel.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
+    }
+    
+    return _alertLabel;
+}
+
+- (ORKRecordButton *)recordButton {
+    if (_recordButton == nil) {
+        _recordButton = [[ORKRecordButton alloc] init];
+        _recordButton.delegate = self;
+        _recordButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_recordButton setHidden:YES];
+        [_recordButton setButtonType:ORKRecordButtonTypeRecord];
+    }
+    
+    return _recordButton;
+}
+
+- (void)setUpConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    
+    _constraints = [NSMutableArray array];
+    
+    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKStandardLeftMarginForTableViewCell(self));
+    
+    // content stack view constraints
+    [_constraints addObject:[self.contentStackView.topAnchor constraintEqualToAnchor:self.topAnchor]];
+    [_constraints addObject:[self.contentStackView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-sideMargin]];
+    [_constraints addObject:[self.contentStackView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:sideMargin]];
+    [_constraints addObject:[self.bottomAnchor constraintEqualToAnchor:_contentStackView.bottomAnchor]];
+    
+    // alert label + alert label container view constraints
+    [_constraints addObject:[self.alertLabel.centerXAnchor constraintEqualToAnchor:self.alertLabelContainerView.centerXAnchor]];
+    [_constraints addObject:[self.alertLabel.centerYAnchor constraintEqualToAnchor:self.alertLabelContainerView.centerYAnchor]];
+    [_constraints addObject:[self.alertLabel.topAnchor constraintEqualToAnchor:self.alertLabelContainerView.topAnchor]];
+    [_constraints addObject:[self.alertLabel.bottomAnchor constraintEqualToAnchor:self.alertLabelContainerView.bottomAnchor]];
+    
+    // graph view constraints
+    [_constraints addObject:[NSLayoutConstraint constraintWithItem:self.graphView
+                                                         attribute:NSLayoutAttributeHeight
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:nil
+                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                        multiplier:1.0
+                                                          constant:(GraphViewBlueZoneHeight + GraphViewRedZoneHeight * 2)]];
+    
+    [NSLayoutConstraint activateConstraints:_constraints];
+}
+
 - (void)buttonPressed:(ORKRecordButton *)recordButton {
     switch (recordButton.buttonType) {
         case ORKRecordButtonTypeRecord:
             [self invokeViewEventHandlerWithEvent:ORKAudioContentViewEventStartRecording];
-            [_recordButton setButtonType:ORKRecordButtonTypeStop];
+            
+            if (_timeLeft > 0) {
+                // if step duration is set, hide the button and allow the timer to end the recording.
+                [self.recordButton setHidden:YES];
+            } else {
+                [self.recordButton setButtonType:ORKRecordButtonTypeStop];
+            }
+           
             break;
         default:
             [self invokeViewEventHandlerWithEvent:ORKAudioContentViewEventStopRecording];
-            [_recordButton setButtonState:ORKRecordButtonStateDisabled];
+            [self.recordButton setButtonState:ORKRecordButtonStateDisabled];
             break;
     }
-}
-
-- (void)setupRecordButton {
-    if (!_recordButton) {
-        _recordButton = [[ORKRecordButton alloc] init];
-        _recordButton.delegate = self;
-        _recordButton.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [_recordButton setButtonType:ORKRecordButtonTypeRecord];
-        
-        [self addSubview:_recordButton];
-    }
-}
-
-- (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray array];
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_timerLabel, _alertLabel, _graphView);
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_graphView]-[_alertLabel]|"
-                                                                             options:(NSLayoutFormatOptions)0
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_alertLabel
-                                                        attribute:NSLayoutAttributeCenterX
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
-    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKStandardLeftMarginForTableViewCell(self));
-    const CGFloat innerMargin = 2;
-    
-    if (_useRecordButton) {
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-sideMargin-[_graphView]-sideMargin-|"
-                                                 options:NSLayoutFormatAlignAllCenterY
-                                                 metrics:@{@"sideMargin": @(sideMargin)}
-                                                   views:views]];
-        
-        [constraints addObject:[_recordButton.topAnchor constraintEqualToAnchor:_graphView.bottomAnchor constant:ORKAudioStepContentRecordButtonVerticalSpacing]];
-        [constraints addObject:[_recordButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
-    } else {
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-sideMargin-[_graphView]-innerMargin-[_timerLabel]-sideMargin-|"
-                                                 options:NSLayoutFormatAlignAllCenterY
-                                                 metrics:@{@"sideMargin": @(sideMargin), @"innerMargin": @(innerMargin)}
-                                                   views:views]];
-    }
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_graphView
-                                                        attribute:NSLayoutAttributeHeight
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil
-                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1.0
-                                                         constant:(GraphViewBlueZoneHeight + GraphViewRedZoneHeight * 2)]];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setAlertThreshold:(CGFloat)alertThreshold {
     _alertThreshold = alertThreshold;
-    _graphView.alertThreshold = alertThreshold;
+    self.graphView.alertThreshold = alertThreshold;
     [self updateGraphSamples];
 }
 
 - (void)setTimeLeft:(NSTimeInterval)timeLeft {
     _timeLeft = timeLeft;
+    
+    // if timeLeft is 0 and timerLabel's text hasn't been set, the timerLabel isn't intended to be used.
+    if (_timeLeft == 0 && self.timerLabel.text == nil) {
+        [self.timerLabel setHidden:YES];
+        return;
+    }
+    
     [self updateTimerLabel];
 }
 
@@ -271,12 +319,12 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
     });
     
     NSString *string = [formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
-    _timerLabel.text = string;
-    _timerLabel.hidden = (string == nil);    
+    self.timerLabel.text = string;
+    self.timerLabel.hidden = (string == nil);
 }
 
 - (void)updateGraphSamples {
-    _graphView.samples = _samples;
+    self.graphView.samples = _samples;
     [self updateAlertLabelHidden];
 }
 
@@ -286,10 +334,10 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
     if (_checkAudioLevel) {
         BOOL show = (!_finished && (sample.doubleValue > _alertThreshold)) || _failed;
         
-        if (_alertLabel.hidden && show) {
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, _alertLabel.text);
+        if (self.alertLabel.hidden && show) {
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self.alertLabel.text);
         }
-        _alertLabel.hidden = !show;
+        self.alertLabel.hidden = !show;
     }
 }
 
@@ -319,12 +367,13 @@ static const CGFloat ORKAudioStepContentRecordButtonVerticalSpacing = 20.0;
 #pragma mark Accessibility
 
 - (BOOL)isAccessibilityElement {
-    return YES;
+    // Set this to NO in order to prevent voiceover from ignoring it's subviews
+    return NO;
 }
 
 - (NSString *)accessibilityLabel {
-    NSString *timerAxString = _timerLabel.isHidden ? nil : _timerLabel.accessibilityLabel;
-    NSString *alertAxString = _alertLabel.isHidden ? nil : _alertLabel.accessibilityLabel;
+    NSString *timerAxString = self.timerLabel.isHidden ? nil : self.timerLabel.accessibilityLabel;
+    NSString *alertAxString = self.alertLabel.isHidden ? nil : self.alertLabel.accessibilityLabel;
     return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", nil), timerAxString, alertAxString);
 }
 

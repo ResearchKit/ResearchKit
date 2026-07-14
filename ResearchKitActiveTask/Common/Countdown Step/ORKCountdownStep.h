@@ -48,6 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKCountdownStep : ORKActiveStep
 
+/// The minimum allowed value for `stepDuration`, in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval minimumStepDuration;
+
+/// The maximum allowed value for `stepDuration`, in seconds.
+@property (class, nonatomic, readonly) NSTimeInterval maximumStepDuration;
+
 @end
 
 NS_ASSUME_NONNULL_END

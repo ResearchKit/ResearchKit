@@ -44,6 +44,8 @@
 #import "ORKStepContentView.h"
 #import "ORKEarlyTerminationConfiguration.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
+#import <ResearchKit/ResearchKit-Swift.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 static const CGFloat iPadStepTitleLabelPadding = 15.0;
 static const CGFloat iPadStepTitleLabelFontSize = 50.0;
@@ -65,6 +67,7 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     UIView *_iPadContentView;
     UILabel *_iPadStepTitleLabel;
     NSArray<NSLayoutConstraint *> *_iPadConstraints;
+    
 }
 
 - (void)initializeInternalButtonItems {
@@ -266,6 +269,14 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     }
     
     self.skipButtonItem = _internalSkipButtonItem;
+    
+    if (self.skipButtonAccessibilityIdentifier) {
+        self.skipButtonItem.accessibilityIdentifier = self.skipButtonAccessibilityIdentifier;
+    }
+
+    if (self.continueButtonAccessibilityIdentifier) {
+        self.continueButtonItem.accessibilityIdentifier = self.continueButtonAccessibilityIdentifier;
+    }
 }
 
 - (void)setStep:(ORKStep *)step {
@@ -318,6 +329,18 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     if (self.step.earlyTerminationConfiguration != nil) {
         self.skipButtonTitle = self.step.earlyTerminationConfiguration.buttonText;
     }
+    
+    if (!self.step.allowsBackNavigation) {
+        [self setBackButtonItem:nil];
+        [self.navigationItem setHidesBackButton:YES];
+    } else if ([self hasPreviousStep]) {
+        [self enableBackNavigation];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -394,7 +417,7 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 }
 
 - (UIBarButtonItem *)goToPreviousPageButtonItem {
-    UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goBackward)];
+    UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(popFromNavigationStack)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
 }
@@ -503,6 +526,10 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
+- (void)popFromNavigationStack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)skip:(UIView *)sender {
     if (self.isBeingReviewed && !self.readOnlyMode) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
@@ -577,6 +604,10 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     }];
     
     return YES;
+}
+
+- (void)taskDidTerminateEarly {
+    // For subclasses. Overrides must be safe to call more than once.
 }
 
 

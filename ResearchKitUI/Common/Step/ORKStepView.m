@@ -66,10 +66,6 @@
     if (!self.navigationFooterView) {
         self.navigationFooterView = [ORKNavigationContainerView new];
     }
-    
-    if (_isNavigationContainerScrollable == NO) {
-        [self.navigationFooterView removeStyling];
-    }
 }
 
 - (void)setStepTopContentImage:(UIImage *)stepTopContentImage {
@@ -111,6 +107,11 @@
 - (void)setStepDetailText:(NSString *)stepDetailText {
     _stepDetailText = stepDetailText;
     [_stepContentView setStepDetailText:_stepDetailText];
+}
+
+- (void)setStepAttributedDetailText:(NSAttributedString *)stepAttributedDetailText {
+    _stepAttributedDetailText = stepAttributedDetailText;
+    [_stepContentView setStepAttributedDetailText:_stepAttributedDetailText];
 }
 
 - (void)setStepHeaderTextAlignment:(NSTextAlignment)stepHeaderTextAlignment {

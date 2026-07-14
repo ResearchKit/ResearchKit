@@ -56,10 +56,20 @@ NSString *const ORKResetDoneButtonKey = @"ORKResetDoneButton";
 CGFloat ORKFormStepLargeTextMinimumHeaderHeight = 80.0;
 CGFloat ORKFormStepMinimumHeaderHeight = 50.0;
 CGFloat ORKQuestionStepMinimumHeaderHeight = 29.75;
-CGFloat ORKCardDefaultCornerRadii = 10.0;
+
+CGFloat ORKCardDefaultCornerRadii(void) {
+#if ORK_FEATURE_LIQUID_GLASS_SUPPORT
+    if (ORKLiquidGlassSupportEnabled()) {
+        return 26.0;
+    } else {
+        return 10.0;
+    }
+#else
+    return 10.0;
+#endif
+}
 CGFloat ORKImageChoiceButtonCornerRadii = 5.0;
 CGFloat ORKCardDefaultBorderWidth = 0.0;
-CGFloat ORKCardDefaultFontSize = 25.0;
 CGFloat ORKSurveyItemMargin = 16.0;
 CGFloat ORKSurveyTableContainerLeftRightPadding = 20.0;
 CGFloat ORKiPadBackgroundViewCornerRadius = 20.0;
@@ -87,8 +97,16 @@ CGFloat ORKStepContainerTopMarginFor7 = 20.0;
 CGFloat ORKStepContainerTopMarginForSE = 20.0;
 CGFloat ORKStepContainerTopMarginForDefault = 20.0;
 
-CGFloat ORKStepContainerTitleToBodyTopPaddingStandard = 15.0;
-CGFloat ORKStepContainerTitleToBodyTopPaddingShort = 11.0;
+CGFloat ORKStepContainerTitleToBodyTopPaddingStandard(void) {
+    return ORKLiquidGlassSupportEnabled() ? 0.0 : 15.0;
+}
+
+#if TARGET_OS_IOS
+static CGFloat ORKStepContainerTitleToBodyTopPaddingShort(void) {
+    return ORKLiquidGlassSupportEnabled() ? 0.0 : 11.0;
+}
+#endif
+
 CGFloat ORKBodyToBodyPaddingStandard = 12.0;
 CGFloat ORKBodyToBodyParagraphPaddingStandard = 22.0;
 
@@ -97,12 +115,31 @@ CGFloat ORKStepContainerTitleToBulletTopPaddingShort = 37.0;
 CGFloat ORKStepContainerTopContentHeightPercentage = 36.0;
 CGFloat ORKStepContainerFirstItemTopPaddingPercentage = 9.0;
 
-CGFloat ORKStepContentIconImageViewDimension = 80.0;
-
 CGFloat ORKEffectViewOpacityHidden = 0.0;
 CGFloat ORKEffectViewOpacityVisible = 1.0;
 
 CGFloat CheckmarkViewDimension = 25.0;
+NSDirectionalEdgeInsets ORKLargeContentLayoutMargins = {0, 22, 0, 22};
+NSDirectionalEdgeInsets ORKSmallContentLayoutMargins = {0, 16, 0, 16};
+
+NSDirectionalEdgeInsets ORKBottomSafeAreaDirectionalEdgeInsetsFrom(NSDirectionalEdgeInsets margins) {
+    CGFloat bottomMargin = MAX(margins.bottom, margins.leading);
+    return (NSDirectionalEdgeInsets){
+        margins.top,
+        margins.leading,
+        bottomMargin,
+        margins.trailing
+    };
+}
+
+CGFloat ORKStepContentIconImageViewDimension(void) {
+#if ORK_FEATURE_LIQUID_GLASS_SUPPORT
+    if (ORKLiquidGlassSupportEnabled()) {
+        return 100.0;
+    }
+#endif
+    return 80.0;
+}
 
 @implementation UIColor (ORKColor)
 
@@ -153,7 +190,7 @@ static NSMutableDictionary *colors(void) {
         colors = [@{
                     ORKSignatureColorKey: ORKRGB(0x000000),
 #if TARGET_OS_IOS
-                    ORKBackgroundColorKey: [UIColor secondarySystemBackgroundColor],
+                    ORKBackgroundColorKey: [UIColor systemBackgroundColor],
 #endif
                     ORKConsentBackgroundColorKey: ORKRGB(0xffffff),
                     ORKToolBarTintColorKey: ORKRGB(0xffffff),
@@ -167,7 +204,7 @@ static NSMutableDictionary *colors(void) {
                     ORKProgressLabelColorKey: [UIColor colorWithRed:142.0/255.0 green:142.0/255.0 blue:142.0/255.0 alpha:1.0],
                     ORKiPadBackgroundViewColorKey: [UIColor colorWithRed:249.0 / 255.0 green:249.0 / 255.0 blue:251.0 / 255.0 alpha:1.0],
 #if TARGET_OS_IOS
-                    ORKTopContentImageViewBackgroundColorKey: UIColor.quaternarySystemFillColor,
+                    ORKTopContentImageViewBackgroundColorKey: UIColor.clearColor,
 #endif
                     ORKBulletItemTextColorKey: [UIColor colorWithRed:0.56 green:0.56 blue:0.58 alpha:1.0]
                     } mutableCopy];
@@ -252,7 +289,15 @@ static UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
         // Use this method instead of UIApplication's keyWindow or UIApplication's delegate's window
         // because we may need the window before the keyWindow is set (e.g., if a view controller
         // loads programmatically on the app delegate to be assigned as the root view controller)
-        window = [UIApplication sharedApplication].windows.firstObject;
+        for (UIScene *scene in [UIApplication sharedApplication].connectedScenes) {
+            if ([scene isKindOfClass:[UIWindowScene class]]) {
+                UIWindowScene *windowScene = (UIWindowScene *)scene;
+                window = windowScene.windows.firstObject;
+                if (window) {
+                    break;
+                }
+            }
+        }
     }
     return window;
 }
@@ -268,6 +313,7 @@ static ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
 }
 
 const CGFloat ORKScreenMetricMaxDimension = 10000.0;
+const CGFloat ORKHolePegTestViewDiameter = 88.0;
 
 static CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
@@ -553,14 +599,14 @@ CGFloat ORKStepContainerTitleToBodyTopPaddingForWindow(UIWindow *window) {
     CGFloat padding = 0;
     switch (ORKGetVerticalScreenTypeForWindow(window)) {
         case ORKScreenTypeiPhone5:
-            padding = ORKStepContainerTitleToBodyTopPaddingShort;
+            padding = ORKStepContainerTitleToBodyTopPaddingShort();
             break;
         case ORKScreenTypeiPhoneXSMax:
         case ORKScreenTypeiPhoneX:
         case ORKScreenTypeiPhone6Plus:
         case ORKScreenTypeiPhone6:
         default:
-            padding = ORKStepContainerTitleToBodyTopPaddingStandard;
+            padding = ORKStepContainerTitleToBodyTopPaddingStandard();
             break;
     }
     return padding;
@@ -604,6 +650,78 @@ UIFont *ORKDefaultFontForStyle(UIFontTextStyle style, CGFloat sizeAdjustment) {
 
 CGFloat ORKDefaultFontSizeForStyle(UIFontTextStyle style, CGFloat sizeAdjustment) {
     return ORKDefaultFontForStyle(style, sizeAdjustment).pointSize;
+}
+
+UIFont *ORKBodyTitleFontBold(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2]
+                scaledFontForFont:[UIFont systemFontOfSize:22.0 weight:UIFontWeightBold]];
+    } else {
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+        UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+        return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+    }
+}
+
+UIFont *ORKBodyTitleFont(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2]
+                scaledFontForFont:[UIFont systemFontOfSize:22.0 weight:UIFontWeightRegular]];
+    } else {
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+        return [UIFont fontWithDescriptor:descriptor size:[[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+    }
+}
+
+UIFont *ORKBodyTextFont(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleBody]
+                scaledFontForFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightRegular]];
+    } else {
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+        return [UIFont fontWithDescriptor:descriptor size:[[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+    }
+}
+
+UIFont *ORKBodyTextFontBold(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleBody]
+                scaledFontForFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightBold]];
+    } else {
+        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+        UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+        return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+    }
+}
+
+UIFont *ORKBulletIconFont(void) {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+    descriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitTightLeading | UIFontDescriptorTraitBold)];
+    return [UIFont fontWithDescriptor:descriptor size:0];
+}
+
+UIFont *ORKBulletTextFontBold(void) {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold | UIFontDescriptorTraitLooseLeading)];
+    return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+}
+
+UIFont *ORKBulletBodyTextFontBold(void) {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold | UIFontDescriptorTraitLooseLeading)];
+    return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+}
+
+UIFont *ORKBulletTextFont(void) {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitLooseLeading)];
+    return [UIFont fontWithDescriptor:fontDescriptor size:[[fontDescriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
+}
+
+UIFont *ORKBulletDetailTextFont(void) {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor *fontDescriptor = [descriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitLooseLeading)];
+    return [UIFont fontWithDescriptor:fontDescriptor size:[[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue]];
 }
 
 #endif

@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKVideoCaptureCameraPreviewView : UIView
 
 @property (nonatomic, weak, nullable) AVCaptureSession *session;
-@property (nonatomic) AVCaptureVideoOrientation videoOrientation;
 @property (nonatomic, weak, nullable) UIImage *templateImage;
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 @property (nonatomic, getter=isTemplateImageHidden) BOOL templateImageHidden;

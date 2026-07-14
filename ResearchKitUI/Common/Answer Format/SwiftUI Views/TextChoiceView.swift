@@ -28,8 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
 struct TextChoiceView: View {
     @ObservedObject var textChoiceHelper: SwiftUITextChoiceHelper
@@ -126,7 +126,6 @@ struct TextChoiceView: View {
                     buttonTapped(index)
                 }) {
                     HStack {
-                        
                         Text(text)
                             .foregroundColor(Color(.label))
                             .font(.system(.subheadline))
@@ -145,6 +144,7 @@ struct TextChoiceView: View {
                     .padding([.trailing], 20)
                     .padding([.top, .bottom], 12)
                 }
+                .buttonStyle(.plain)
             }
         }
         
@@ -325,13 +325,9 @@ private struct CompatibleNavigationBarItems<
 
     @ViewBuilder
     func body(content: Content) -> some View {
-        if #available(iOS 14, *) {
-            content.toolbar {
-                ToolbarItem(placement: .navigationBarLeading) { leadingContent }
-                ToolbarItem(placement: .navigationBarTrailing) { trailingContent }
-            }
-        } else {
-            content.navigationBarItems(leading: leadingContent, trailing: trailingContent)
+        content.toolbar {
+            ToolbarItem(placement: .navigationBarLeading) { leadingContent }
+            ToolbarItem(placement: .navigationBarTrailing) { trailingContent }
         }
     }
 }
@@ -353,5 +349,73 @@ extension CompatibleNavigationBarItems where TrailingContent == EmptyView {
             leadingContent: leadingContent,
             trailingContent: { EmptyView() }
         )
+    }
+}
+
+// MARK: - Preview
+
+#Preview("Text Choice View - Single Choice") {
+    let textChoices = [
+        ORKTextChoice(text: "Option 1", value: "option1" as NSString),
+        ORKTextChoice(text: "Option 2", value: "option2" as NSString),
+        ORKTextChoice(
+            text: "Option 3 with longer text that might wrap to multiple lines",
+            value: "option3" as NSString
+        )
+    ]
+    
+    let answerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: textChoices)
+    let helper = SwiftUITextChoiceHelper(answer: [], answerFormat: answerFormat)
+    
+    return TextChoiceView(textChoiceHelper: helper) { answer in
+        print("Selected answer: \(answer)")
+    }
+}
+
+#Preview("Text Choice View - Multiple Choice") {
+    let textChoices = [
+        ORKTextChoice(text: "First Option", value: "first" as NSString),
+        ORKTextChoice(text: "Second Option", value: "second" as NSString),
+        ORKTextChoice(text: "Third Option", value: "third" as NSString),
+        ORKTextChoice(text: "Fourth Option", value: "fourth" as NSString)
+    ]
+    
+    let answerFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: textChoices)
+    let helper = SwiftUITextChoiceHelper(answer: ["first"], answerFormat: answerFormat)
+    
+    TextChoiceView(textChoiceHelper: helper) { answer in
+        print("Selected answers: \(answer)")
+    }
+}
+
+#Preview("Text Choice View - With Images") {
+    let image1 = UIImage(named: "heartbeat", in: Bundle(identifier: "org.researchkit.ResearchKit"), compatibleWith: .none)!
+    let image2 = UIImage(named: "amslerGrid", in: Bundle(identifier: "org.researchkit.ResearchKit"), compatibleWith: .none)!
+    let image3 = UIImage(named: "Face", in: Bundle(identifier: "org.researchkit.ResearchKit"), compatibleWith: .none)!
+
+    
+    let textChoices = [
+        ORKTextChoice(
+            text: "Starred Item",
+            image: image1,
+            value: "star" as NSString
+        ),
+        ORKTextChoice(
+            text: "Favorite Item",
+            image: image2,
+            value: "heart" as NSString,
+        ),
+        ORKTextChoice(
+            text: "Completed Item",
+            image: image3,
+            value: "check" as NSString,
+        )
+    ]
+    
+    let answerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: textChoices)
+    let helper = SwiftUITextChoiceHelper(answer: [], answerFormat: answerFormat)
+    
+    TextChoiceView(textChoiceHelper: helper) { answer in
+        print("Selected answer: \(answer)")
     }
 }

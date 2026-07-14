@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
+
 #import "ORKStepView_Private.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKTitleLabel.h"
@@ -39,6 +41,8 @@
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKTypes.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKTableContainerView.h"
+#import "UIView+Additions.h"
 
 /*
  +-----------------------------------------+
@@ -101,17 +105,37 @@
       vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
  */
 
-static NSString *scrollContentChangedNotification = @"scrollContentChanged";
-
-@interface ScrollView : UIScrollView
-
+@interface ScrollView : UIScrollView {
+@private
+    CGSize _previousContentSize;
+    CGSize _previousMinusOneContentSize;
+}
 @end
 
 @implementation ScrollView
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _previousContentSize = CGSizeZero;
+        _previousMinusOneContentSize = CGSizeZero;
+    }
+    return self;
+}
+
 - (void)setContentSize:(CGSize)contentSize {
+    // Detect oscillation: if the new size matches what we saw two calls ago,
+    // Auto Layout is switching between two values. Break the cycle by
+    // picking the larger height to avoid clipping content.
+    if (!CGSizeEqualToSize(_previousContentSize, CGSizeZero) &&
+        fabs(contentSize.height - _previousContentSize.height) < 1.0) {
+        CGFloat maxHeight = MAX(contentSize.height, _previousMinusOneContentSize.height);
+        contentSize = CGSizeMake(contentSize.width, maxHeight);
+    }
+
+    _previousContentSize = _previousMinusOneContentSize;
+    _previousMinusOneContentSize = contentSize;
     [super setContentSize:contentSize];
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:scrollContentChangedNotification object:nil]];
 }
 
 - (BOOL)accessibilityScroll:(UIAccessibilityScrollDirection)direction {
@@ -141,56 +165,154 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
 
 @end
 
+@interface ORKStepContainerView ()
+@property (nonatomic, readonly) NSArray<NSLayoutConstraint *> *navigationFooterViewConstraints;
+@property (nonatomic, readonly) UIScrollEdgeElementContainerInteraction *bottomScrollEdgeInteraction API_AVAILABLE(ios(26.0));
+@property (nonatomic, readonly) UIStackView *containerView;
+@property (nonatomic, readwrite) UIView *flexibleContentSpacer;
+@property (nonatomic, readwrite) UIImageView *topContentImageView;
+@property (nonatomic, readwrite) UIView *footerLayoutContainer;
+@end
+
 @implementation ORKStepContainerView {
-    CGFloat _leftRightPadding;
-    CGFloat _customContentLeftRightPadding;
+    UIImageView *_topContentImageView;
+    UIStackView *_containerView;
+    UIStackView *_scrollContentView;
     ScrollView *_scrollView;
-    UIView *_scrollContainerView;
+    
+    BOOL _shouldAddFooterPadding;
+
     BOOL _topContentImageShouldScroll;
     CGFloat _customContentTopPadding;
-    CGFloat _highestContentPosition;
     BOOL _showScrollIndicator;
     CGFloat _scrollViewCustomContentInset;
-    
-    UIImageView *_topContentImageView;
+    NSLayoutConstraint *_contentViewHeightConstraint;
 
-//    variable constraints:
-    NSLayoutConstraint *_scrollViewTopConstraint;
-    NSLayoutConstraint *_scrollViewBottomConstraint;
-    NSLayoutConstraint *_stepContentViewTopConstraint;
-    NSLayoutConstraint *_customContentViewTopConstraint;
-    
-    NSArray<NSLayoutConstraint *> *_topContentImageViewConstraints;
-    
-    NSLayoutConstraint *_navigationContainerViewTopConstraint;
-    NSArray<NSLayoutConstraint *> *_navigationContainerViewConstraints;
-    NSLayoutConstraint *_customContentWidthConstraint;
-    NSLayoutConstraint *_customContentHeightConstraint;
-    NSMutableArray<NSLayoutConstraint *> *_updatedConstraints;
-    NSLayoutConstraint *_scrollContentBottomConstraint;
+    NSLayoutConstraint *_spacerHeightConstraint;
+    NSArray<NSLayoutConstraint *> *_navigationFooterViewConstraints;
+    NSLayoutConstraint *_footerHeightConstraint;
+    UIScrollEdgeElementContainerInteraction *_bottomScrollEdgeInteraction API_AVAILABLE(ios(26.0));
+}
+
+- (NSArray<NSLayoutConstraint *> *)navigationFooterViewConstraints {
+    if (!_navigationFooterViewConstraints) {
+        _navigationFooterViewConstraints = @[
+            [self.navigationFooterView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+            [self.navigationFooterView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor],
+            [self.navigationFooterView.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor]
+        ];
+    }
+    return _navigationFooterViewConstraints;
+}
+
+- (UIScrollEdgeElementContainerInteraction *)bottomScrollEdgeInteraction API_AVAILABLE(ios(26.0)) {
+    if (!_bottomScrollEdgeInteraction) {
+        _bottomScrollEdgeInteraction = [self magicPocketFor:_scrollView edge:UIRectEdgeBottom];
+    }
+    return _bottomScrollEdgeInteraction;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _customContentLeftRightPadding = ORKStepContainerLeftRightPaddingForWindow(self.window);
-        _leftRightPadding = ORKStepContainerExtendedLeftRightPaddingForWindow(self.window);
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.directionalLayoutMargins = ORKLargeContentLayoutMargins;
+        self.contentLayoutMargins = NSDirectionalEdgeInsetsZero;
         self.isNavigationContainerScrollable = NO;
-        _highestContentPosition = 0.0;
-        _scrollViewCustomContentInset = ORKCGFloatDefaultValue;
-        [self setupScrollView];
-        [self setupScrollContainerView];
-        [self addStepContentView];
-        [self setupConstraints];
-        [self setupUpdatedConstraints];
-        [self placeNavigationContainerView];
+        _pinNavigationContainer = YES;
         _topContentImageShouldScroll = YES;
         _customContentTopPadding = ORKStepContainerTopCustomContentPaddingStandard;
-        [self setPinNavigationContainer:YES]; // Default behavior is to pin the navigation footer
-
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollContentChanged) name:scrollContentChangedNotification object:nil];
     }
     return self;
+}
+
+- (NSArray<UIView *> *)canonicalContentViewOrder {
+    // Build the list conditionally: properties like customContentView and
+    // footerLayoutContainer are nil until externally set, and NSArray literals
+    // crash on nil elements.
+    NSMutableArray<UIView *> *order = [NSMutableArray array];
+    addViewIfNotNil(order, self.stepContentView);
+    addViewIfNotNil(order, self.stepContentViewLayoutContainer);
+    addViewIfNotNil(order, self.customContentView);
+    addViewIfNotNil(order, self.flexibleContentSpacer);
+    addViewIfNotNil(order, self.footerLayoutContainer);
+    addViewIfNotNil(order, self.navigationFooterView);
+    return order;
+}
+
+
+static void addViewIfNotNil(NSMutableArray<UIView *> *viewArray, UIView *view) {
+    if (viewArray && view) {
+        [viewArray addObject:view];
+    }
+}
+
+- (void)arrangeContentViews {
+    UIStackView *stackView = self.scrollContentView;
+    NSArray<UIView *> *canonical = [self canonicalContentViewOrder];
+    NSArray *sorted = [stackView.arrangedSubviews sortedArrayUsingComparator:^NSComparisonResult(UIView *a, UIView *b) {
+        NSUInteger aIdx = [canonical indexOfObject:a];
+        NSUInteger bIdx = [canonical indexOfObject:b];
+        if (aIdx == NSNotFound) { aIdx = NSUIntegerMax; }
+        if (bIdx == NSNotFound) { bIdx = NSUIntegerMax; }
+        if (aIdx < bIdx) { return NSOrderedAscending; }
+        if (aIdx > bIdx) { return NSOrderedDescending; }
+        return NSOrderedSame;
+    }];
+    for (UIView *subview in sorted) {
+        [stackView removeArrangedSubview:subview];
+        [stackView addArrangedSubview:subview];
+    }
+}
+
+- (void)updateConstraints {
+    [super updateConstraints];
+    [[self.scrollContentView.widthAnchor constraintEqualToAnchor:self.scrollView.frameLayoutGuide.widthAnchor] setActive:YES];
+
+    self.stepContentView.hidden = [[self.stepContentView subviews] count] == 0;
+    self.stepContentViewLayoutContainer.hidden = self.stepContentView.hidden;
+
+    [self.stepContentViewLayoutContainer setContentHuggingPriority:UILayoutPriorityDefaultHigh + 1 forAxis:UILayoutConstraintAxisVertical];
+
+    [self.scrollContentView setCustomSpacing:_customContentTopPadding afterView:self.stepContentView];
+
+    // Set a minimum height for the scroll content view to prevent ambiguity
+    [self.scrollContentView removeConstraint:_contentViewHeightConstraint];
+    _contentViewHeightConstraint = [self.scrollContentView.heightAnchor constraintGreaterThanOrEqualToAnchor:self.scrollView.frameLayoutGuide.heightAnchor];
+    _contentViewHeightConstraint.priority = UILayoutPriorityDefaultHigh;
+    [_contentViewHeightConstraint setActive:YES];
+
+    if (_pinNavigationContainer || [self isScrollViewContentScrollable]) {
+        CGSize navigationFooterSize = [self.navigationFooterView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+
+        [_spacerHeightConstraint setActive:NO];
+        _spacerHeightConstraint = [self.flexibleContentSpacer.heightAnchor constraintGreaterThanOrEqualToConstant:navigationFooterSize.height];
+        _spacerHeightConstraint.priority = UILayoutPriorityDefaultLow;
+        [_spacerHeightConstraint setActive:YES];
+    }
+}
+
+- (void)setupContainerView {
+    [self addSubview:self.containerView];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.containerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+        [self.containerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
+        [self.containerView.topAnchor constraintEqualToAnchor:self.topAnchor],
+        [self.containerView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]
+    ]];
+}
+
+- (void)setupScrollContentView {
+    [self.scrollView addSubview:self.scrollContentView];
+
+    UILayoutGuide *contentGuide = self.scrollView.contentLayoutGuide;
+    NSLayoutYAxisAnchor *topAnchor = self.scrollView.contentLayoutGuide.topAnchor;
+    [NSLayoutConstraint activateConstraints:@[
+        [self.scrollContentView.topAnchor constraintEqualToAnchor:topAnchor],
+        [self.scrollContentView.leadingAnchor constraintEqualToAnchor:contentGuide.leadingAnchor],
+        [self.scrollContentView.trailingAnchor constraintEqualToAnchor:contentGuide.trailingAnchor],
+        [self.scrollContentView.bottomAnchor constraintEqualToAnchor:contentGuide.bottomAnchor],
+    ]];
 }
 
 - (void)setPinNavigationContainer:(BOOL)pinNavigationContainer {
@@ -198,49 +320,88 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
     [self placeNavigationContainerView];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:scrollContentChangedNotification object:nil];
-}
-
 - (void)setStepTopContentImage:(UIImage *)stepTopContentImage {
     
     [super setStepTopContentImage:stepTopContentImage];
     if (_topContentImageShouldScroll) {
+        self.topContentImageView.hidden = YES;
         [self.stepContentView setStepTopContentImage:stepTopContentImage];
     }
     else {
-        //    1.) nil Image; updateConstraints
-        if (!stepTopContentImage && _topContentImageView) {
-            [_topContentImageView removeFromSuperview];
-            _topContentImageView = nil;
-            [self deactivateTopContentImageViewConstraints];
-            [self updateScrollViewTopConstraint];
-            [self setNeedsUpdateConstraints];
+        //    1.) nil Image
+        if (!stepTopContentImage) {
+            self.topContentImageView.hidden = YES;
         }
         
-        //    2.) First Image; updateConstraints
-        if (stepTopContentImage && !_topContentImageView) {
-            [self setupTopContentImageView];
-            _topContentImageView.image = [self topContentAndAuxiliaryImage];
-            [self updateScrollViewTopConstraint];
-            [self setNeedsUpdateConstraints];
-        }
-        
-        //    3.) >= second Image;
-        if (stepTopContentImage && _topContentImageView) {
-            _topContentImageView.image = [self topContentAndAuxiliaryImage];
+        //    2.) First Image
+        if (stepTopContentImage) {
+            self.topContentImageView.image = [self topContentAndAuxiliaryImage];
+            self.topContentImageView.hidden = NO;
         }
     }
 }
 
-- (void)setupScrollView {
+- (UIStackView *)containerView {
+    if (!_containerView) {
+        _containerView = [[UIStackView alloc] initWithArrangedSubviews:@[
+            self.topContentImageView,
+            self.scrollView
+        ]];
+        _containerView.axis = UILayoutConstraintAxisVertical;
+        _containerView.distribution = UIStackViewDistributionFill;
+        _containerView.alignment = UIStackViewAlignmentFill;
+        _containerView.spacing = 0;
+        _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _containerView;
+}
+
+- (ScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[ScrollView alloc] init];
+        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+        _scrollView.showsVerticalScrollIndicator = self.showScrollIndicator;
+        _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+        _scrollView.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
+        [_scrollView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh + 1 forAxis:UILayoutConstraintAxisVertical];
     }
-    _scrollView.showsVerticalScrollIndicator = self.showScrollIndicator;
-    _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    _scrollView.delegate = self;
-    [self addSubview:_scrollView];
+    return _scrollView;
+}
+
+- (UIView *)scrollContentView {
+    if (!_scrollContentView) {
+        _scrollContentView = [[UIStackView alloc] init];
+        _scrollContentView.axis = UILayoutConstraintAxisVertical;
+        _scrollContentView.distribution = UIStackViewDistributionFill;
+        _scrollContentView.alignment = UIStackViewAlignmentFill;
+        _scrollContentView.translatesAutoresizingMaskIntoConstraints = NO;
+        _scrollContentView.layoutMarginsRelativeArrangement = YES;
+        _scrollContentView.directionalLayoutMargins = ORKSmallContentLayoutMargins;
+    }
+    return _scrollContentView;
+}
+
+- (NSDirectionalEdgeInsets) scrollContentLayoutMargins {
+    return self.scrollContentView.directionalLayoutMargins;
+}
+
+- (void)setScrollContentLayoutMargins:(NSDirectionalEdgeInsets)contentLayoutMargins {
+    self.scrollContentView.directionalLayoutMargins = contentLayoutMargins;
+}
+
+- (void)setContentLayoutMargins:(NSDirectionalEdgeInsets)contentLayoutMargins {
+    _contentLayoutMargins = contentLayoutMargins;
+    self.stepContentView.directionalLayoutMargins = contentLayoutMargins;
+}
+
+- (UIImageView *)topContentImageView {
+    if (!_topContentImageView) {
+        _topContentImageView = [UIImageView new];
+        _topContentImageView.hidden = YES;
+        _topContentImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_topContentImageView setBackgroundColor:ORKColor(ORKTopContentImageViewBackgroundColorKey)];
+    }
+    return _topContentImageView;
 }
 
 - (void)setShowScrollIndicator:(BOOL)showScrollIndicator {
@@ -250,27 +411,6 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
 
 - (BOOL)showScrollIndicator {
     return _showScrollIndicator;
-}
-
-- (void)setupScrollContainerView {
-    if (!_scrollContainerView) {
-        _scrollContainerView = [UIView new];
-    }
-    [_scrollView addSubview:_scrollContainerView];
-}
-
-- (void)setupUpdatedConstraints {
-    _updatedConstraints = [[NSMutableArray alloc] init];
-}
-
-- (void)setupTopContentImageView {
-    if (!_topContentImageView) {
-        _topContentImageView = [UIImageView new];
-    }
-    _topContentImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [_topContentImageView setBackgroundColor:ORKColor(ORKTopContentImageViewBackgroundColorKey)];
-    [self addSubview:_topContentImageView];
-    [self setTopContentImageViewConstraints];
 }
 
 - (void)setStepTopContentImageContentMode:(UIViewContentMode)stepTopContentImageContentMode {
@@ -283,63 +423,8 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
 - (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
     [super setAuxiliaryImage:auxiliaryImage];
     if (self.stepTopContentImage) {
-        _topContentImageView.image = [self topContentAndAuxiliaryImage];
-    }
-}
-
-- (void)addStepContentView {
-    [_scrollContainerView addSubview:self.stepContentView];
-}
-
-- (void)stepContentViewImageChanged:(NSNotification *)notification {
-    [super stepContentViewImageChanged:notification];
-    [self updateStepContentViewTopConstraint];
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)setStepContentViewConstraints {
-    self.stepContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self setStepContentViewTopConstraint];
-    
-    [NSLayoutConstraint activateConstraints:@[
-                                              _stepContentViewTopConstraint,
-                                              [NSLayoutConstraint constraintWithItem:self.stepContentView
-                                                                                   attribute:NSLayoutAttributeLeft
-                                                                                   relatedBy:NSLayoutRelationEqual
-                                                                                      toItem:_scrollContainerView
-                                                                                   attribute:NSLayoutAttributeLeft
-                                                                                  multiplier:1.0
-                                                                                    constant:0.0],
-                                                      [NSLayoutConstraint constraintWithItem:self.stepContentView
-                                                                                   attribute:NSLayoutAttributeRight
-                                                                                   relatedBy:NSLayoutRelationEqual
-                                                                                      toItem:_scrollContainerView
-                                                                                   attribute:NSLayoutAttributeRight
-                                                                                  multiplier:1.0
-                                                                                    constant:0.0]
-                                              ]];
-}
-
-- (void)setStepContentViewTopConstraint {
-    _stepContentViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.stepContentView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.stepContentView.topContentImageView.image ? _scrollContainerView : _scrollContainerView.safeAreaLayoutGuide
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0
-                                                                  constant:0.0];
-}
-
-- (void)updateStepContentViewTopConstraint {
-    if (_stepContentViewTopConstraint && _stepContentViewTopConstraint.isActive) {
-        [NSLayoutConstraint deactivateConstraints:@[_stepContentViewTopConstraint]];
-    }
-    if ([_updatedConstraints containsObject:_stepContentViewTopConstraint]) {
-        [_updatedConstraints removeObject:_stepContentViewTopConstraint];
-    }
-    [self setStepContentViewTopConstraint];
-    if (_stepContentViewTopConstraint) {
-        [_updatedConstraints addObject:_stepContentViewTopConstraint];
+        self.topContentImageView.image = [self topContentAndAuxiliaryImage];
+        self.topContentImageView.hidden = NO;
     }
 }
 
@@ -359,463 +444,196 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
 }
 
 - (void)setCustomContentView:(UIView *)customContentView {
+    if (_customContentView) {
+        [_customContentView removeFromSuperview];
+    }
     _customContentView = customContentView;
-    [_scrollContainerView addSubview:_customContentView];
-    [self setupCustomContentViewConstraints];
-    [self updateNavigationContainerViewTopConstraint];
-    [self setNeedsUpdateConstraints];
+    [self.scrollContentView addArrangedSubview:_customContentView];
+    [self arrangeContentViews];
+
+//  Since a new view was added, make sure it gets rendered on the next render pass
+    [self setNeedsLayout];
 }
 
 - (void)removeNavigationFooterView {
-    [self.navigationFooterView removeFromSuperview];
-    if (_navigationContainerViewConstraints) {
-        [NSLayoutConstraint deactivateConstraints:_navigationContainerViewConstraints];
-        for (NSLayoutConstraint *constraint in _navigationContainerViewConstraints) {
-            if ([_updatedConstraints containsObject:constraint]) {
-                [_updatedConstraints removeObject:constraint];
-            }
-        }
-        _navigationContainerViewConstraints = nil;
+    if (_navigationFooterViewConstraints) {
+        [NSLayoutConstraint deactivateConstraints:_navigationFooterViewConstraints];
     }
+    
+    [self.footerLayoutContainer removeFromSuperview];
+    [self.navigationFooterView removeFromSuperview];
+}
+
+- (UIView *)flexibleContentSpacer {
+    if (!_flexibleContentSpacer) {
+        _flexibleContentSpacer = [[UIView alloc] initWithFrame:CGRectZero];
+        [_flexibleContentSpacer setContentHuggingPriority:UILayoutPriorityDefaultLow - 1
+                                                              forAxis:UILayoutConstraintAxisVertical];
+    }
+    return _flexibleContentSpacer;
+}
+
+- (void)setNavigationFooterViewHidden:(BOOL)hidden {
+    [self.footerLayoutContainer setHidden:hidden];
+    [self.navigationFooterView setHidden:hidden];
+
+    /* The flexible spacer is useful when there is a view above and below in it the stackview.
+     This allows the stackview to adjust the size of the space from 0 to whatever height is needed
+     to let the top content be top aligned with variable empty space down to the footer view. However,
+     when the footer is completely hidden. the spacer is then not allowing the top view to take all
+     the visible space in the stack view, which is generally the main reason the footer is hidden.
+     */
+    if (!self.customContentView.hidden && hidden) {
+        [self.scrollContentView removeArrangedSubview:self.flexibleContentSpacer];
+    } else if (![self.scrollContentView.arrangedSubviews containsObject:self.flexibleContentSpacer]) {
+        // Only add if not already present to avoid moving it during layout
+        [self.scrollContentView addArrangedSubview:self.flexibleContentSpacer];
+        [self arrangeContentViews];
+    }
+    
+    [self.footerLayoutContainer removeFromSuperview];
+    [self.navigationFooterView removeFromSuperview];
 }
 
 - (void)placeNavigationContainerView {
-    [self removeNavigationFooterView];
-    
-    if (!_pinNavigationContainer) {
-        [_scrollView addSubview:self.navigationFooterView];
-    } else if (self.isNavigationContainerScrollable) {
-        [_scrollContainerView addSubview:self.navigationFooterView];
+    if (ORKLiquidGlassSupportEnabled()) {
+        if (_pinNavigationContainer || [self isScrollViewContentScrollable]) {
+            [self removeNavigationFooterView];
+            
+            if (@available(iOS 26.0, *)) {
+                [self.navigationFooterView addInteraction:self.bottomScrollEdgeInteraction];
+            }
+
+            self.navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+
+            [self addSubview:self.navigationFooterView];
+            [NSLayoutConstraint activateConstraints:self.navigationFooterViewConstraints];
+        } else if (![self isScrollViewContentScrollable]) {
+            [self removeNavigationFooterView];
+            
+            if (_bottomScrollEdgeInteraction) {
+                [self.navigationFooterView removeInteraction:_bottomScrollEdgeInteraction];
+            }
+            
+            [self placeNavigationViewInContainer:self.scrollContentView embedInLayoutContainer:YES shouldAddFooterPadding:_shouldAddFooterPadding];
+        }
     } else {
-        [self addSubview:self.navigationFooterView];
+        // Non-Liquid Glass: Only place footer once - check if it's already in the right container
+        BOOL footerAlreadyPlaced = (self.footerLayoutContainer.superview == _containerView) ||
+                                    (self.footerLayoutContainer.superview == _scrollContentView);
+
+        if (!footerAlreadyPlaced) {
+            [self removeNavigationFooterView];
+
+            if (_pinNavigationContainer) {
+                [self placeNavigationViewInContainer:self.containerView embedInLayoutContainer:YES];
+            } else {
+                [self placeNavigationViewInContainer:self.scrollContentView
+                              embedInLayoutContainer:NSDirectionalEdgeInsetsEqualToDirectionalEdgeInsets(NSDirectionalEdgeInsetsZero, self.contentLayoutMargins)];
+            }
+        }
     }
-    [self setupNavigationContainerViewConstraints];
+}
+
+- (void)placeNavigationViewInContainer:(UIStackView *)container embedInLayoutContainer:(BOOL)embedFooterInLayoutContainer {
+    [self placeNavigationViewInContainer:container embedInLayoutContainer:embedFooterInLayoutContainer shouldAddFooterPadding:YES];
+}
+
+- (void)placeNavigationViewInContainer:(UIStackView *)container embedInLayoutContainer:(BOOL)embedFooterInLayoutContainer shouldAddFooterPadding:(BOOL)shouldAddFooterPadding {
+    // Remove old footer height constraint if it exists
+    if (_footerHeightConstraint) {
+        [_footerHeightConstraint setActive:NO];
+        _footerHeightConstraint = nil;
+    }
+
+    // Only add spacer when placing footer in scrollContentView, not in containerView
+    BOOL isAddingToContainerView = (container == _containerView);
+    
+    if (embedFooterInLayoutContainer) {
+        self.footerLayoutContainer = [UIView layoutContainerFor:self.navigationFooterView shouldAddFooterPadding:shouldAddFooterPadding];
+
+        if (isAddingToContainerView) {
+            // iOS 18 pinned footer: Use explicit height constraint to prevent stretching in stack
+            CGSize footerSize = [self.navigationFooterView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+            _footerHeightConstraint = [self.footerLayoutContainer.heightAnchor constraintEqualToConstant:footerSize.height];
+            _footerHeightConstraint.priority = UILayoutPriorityRequired - 1;
+            [_footerHeightConstraint setActive:YES];
+        } else {
+            // iOS 26 or iOS 18 non-pinned: Use content hugging priority
+            [self.footerLayoutContainer setContentHuggingPriority:UILayoutPriorityDefaultHigh + 1 forAxis:UILayoutConstraintAxisVertical];
+        }
+        [container addArrangedSubview:self.footerLayoutContainer];
+    } else {
+        [container addArrangedSubview:self.navigationFooterView];
+    }
 }
 
 - (void)placeNavigationContainerInsideScrollView {
     self.isNavigationContainerScrollable = YES;
-    [self setupConstraints];
     [self placeNavigationContainerView];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (!newSuperview) { return; }
+
+	[self setupContainerView];
+	[self setupScrollContentView];
+
+    [self.scrollContentView addArrangedSubview:self.stepContentView];
+    [self.scrollContentView addArrangedSubview:self.flexibleContentSpacer];
+
+    [self arrangeContentViews];
+}
+
+- (BOOL)isScrollViewContentScrollable {
+    return self.scrollContentView.bounds.size.height > self.scrollView.bounds.size.height;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self updateScrollContentConstraints];
-    // dispatching on main thread to prevent the blur view from popping-up after transition is complete
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateEffectViewStylingAndAnimate:NO checkCurrentValue:NO];
-        if (_scrollViewCustomContentInset != ORKCGFloatDefaultValue) {
-            [self updateScrollViewCustomContentInset];
-        }
-    });
-}
 
-- (void)updateScrollContentConstraints {
-    if (_scrollContentBottomConstraint != nil) {
-        [NSLayoutConstraint deactivateConstraints:@[_scrollContentBottomConstraint]];
-    }
-    _scrollContentBottomConstraint = [NSLayoutConstraint constraintWithItem:self.stepContentView
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                  relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                     toItem:_scrollContainerView
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                 multiplier:1.0
-                                                                   constant:0.0];
-    [NSLayoutConstraint activateConstraints:@[_scrollContentBottomConstraint]];
-}
-
-- (void)setupNavigationContainerViewConstraints {
-    self.navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
-    BOOL useScrollableItem = (self.isNavigationContainerScrollable || !_pinNavigationContainer);
-    id boundaryView = useScrollableItem ? _scrollContainerView : self;
-    _navigationContainerViewConstraints = @[
-                                              [NSLayoutConstraint constraintWithItem:self.navigationFooterView
-                                                                           attribute:NSLayoutAttributeBottom
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:boundaryView
-                                                                           attribute:NSLayoutAttributeBottom
-                                                                          multiplier:1.0
-                                                                            constant:0.0],
-                                              [NSLayoutConstraint constraintWithItem:self.navigationFooterView
-                                                                           attribute:NSLayoutAttributeLeft
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:boundaryView
-                                                                           attribute:NSLayoutAttributeLeft
-                                                                          multiplier:1.0
-                                                                            constant:0.0],
-                                              [NSLayoutConstraint constraintWithItem:self.navigationFooterView
-                                                                           attribute:NSLayoutAttributeRight
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:boundaryView
-                                                                           attribute:NSLayoutAttributeRight
-                                                                          multiplier:1.0
-                                                                            constant:0.0]];
-    
-    [_updatedConstraints addObjectsFromArray:_navigationContainerViewConstraints];
-    [self updateNavigationContainerViewTopConstraint];
-
-    if (!self.isNavigationContainerScrollable) {
-        [NSLayoutConstraint deactivateConstraints:@[_scrollViewBottomConstraint]];
-        if ([_updatedConstraints containsObject:_scrollViewBottomConstraint]) {
-            [_updatedConstraints removeObject:_scrollViewBottomConstraint];
-        }
-        
-        _scrollViewBottomConstraint = [NSLayoutConstraint constraintWithItem:_scrollView
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                  multiplier:1.0
-                                                                    constant:0.0];
-        [_updatedConstraints addObject:_scrollViewBottomConstraint];
-    }
-    
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)setupNavigationContainerViewTopConstraint {
-    BOOL shouldScrollNavigationContainer = (self.isNavigationContainerScrollable || !_pinNavigationContainer);
-    if (self.navigationFooterView && shouldScrollNavigationContainer) {
-        
-        id topItem;
-        NSLayoutAttribute topItemAttribute;
-        if (_customContentView) {
-            topItem = _customContentView;
-            topItemAttribute = NSLayoutAttributeBottom;
-        }
-        else if(self.stepContentView) {
-            topItem = self.stepContentView;
-            topItemAttribute = NSLayoutAttributeBottom;
-        }
-        else {
-            topItem = _scrollContainerView;
-            topItemAttribute = NSLayoutAttributeTop;
-        }
-        
-        _navigationContainerViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.navigationFooterView
-                                                                             attribute:NSLayoutAttributeTop
-                                                                             relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                                toItem:topItem
-                                                                             attribute:topItemAttribute
-                                                                            multiplier:1.0
-                                                                              constant:ORKStepContainerNavigationFooterTopPaddingStandard];
-    }
-}
-
-- (void)updateNavigationContainerViewTopConstraint {
-    BOOL shouldScrollNavigationContainer = (self.isNavigationContainerScrollable || !_pinNavigationContainer);
-    if (self.navigationFooterView && shouldScrollNavigationContainer) {
-        [self removeNavigationContainerViewTopConstraint];
-        [self setupNavigationContainerViewTopConstraint];
-        [_updatedConstraints addObject:_navigationContainerViewTopConstraint];
-    } else  {
-        [self removeNavigationContainerViewTopConstraint];
-    }
-}
-
-- (void)removeNavigationContainerViewTopConstraint {
-    if (_navigationContainerViewTopConstraint) {
-        [NSLayoutConstraint deactivateConstraints:@[_navigationContainerViewTopConstraint]];
-        if ([_updatedConstraints containsObject:_navigationContainerViewTopConstraint]) {
-            [_updatedConstraints removeObject:_navigationContainerViewTopConstraint];
-        }
-    }
-}
-
-- (void)setupCustomContentViewConstraints {
-    _customContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self setCustomContentViewTopConstraint];
-    [self setCustomContentWidthConstraint];
-    [_updatedConstraints addObjectsFromArray:@[
-                                               _customContentViewTopConstraint,
-                                               [NSLayoutConstraint constraintWithItem:_customContentView
-                                                                            attribute:NSLayoutAttributeCenterX
-                                                                            relatedBy:NSLayoutRelationEqual
-                                                                               toItem:_scrollContainerView
-                                                                            attribute:NSLayoutAttributeCenterX
-                                                                           multiplier:1.0
-                                                                             constant:0.0],
-                                               _customContentWidthConstraint
-                                               ]];
-    [self updateCustomContentHeightConstraint];
-    [self setNeedsUpdateConstraints];
-    
-   
+    [self placeNavigationContainerView];
 }
 
 - (void)setCustomContentFillsAvailableSpace:(BOOL)customContentFillsAvailableSpace {
     _customContentFillsAvailableSpace = customContentFillsAvailableSpace;
-    [self updateCustomContentHeightConstraint];
-}
 
-- (void)setCustomContentHeightConstraint {
-    if (_customContentView) {
-        if ([_customContentView isKindOfClass:[UIImageView class]]) {
-            _customContentHeightConstraint = [_customContentView.heightAnchor constraintLessThanOrEqualToConstant:ImageViewMaxHeightAndWidth];
-        } else {
-            _customContentHeightConstraint = [NSLayoutConstraint constraintWithItem:_customContentView
-                                                                          attribute:NSLayoutAttributeBottom
-                                                                          relatedBy:_customContentFillsAvailableSpace ? NSLayoutRelationEqual : NSLayoutRelationLessThanOrEqual
-                                                                             toItem:self.isNavigationContainerScrollable ? self.navigationFooterView : _scrollContainerView
-                                                                          attribute:self.isNavigationContainerScrollable ? NSLayoutAttributeTop : NSLayoutAttributeBottom
-                                                                         multiplier:1.0
-                                                                           constant:self.isNavigationContainerScrollable ? -ORKStepContainerNavigationFooterTopPaddingStandard : 0.0];
-        }
+    // When content fills available space, remove the spacer so it doesn't compete for space
+    if (customContentFillsAvailableSpace) {
+        [self.scrollContentView removeArrangedSubview:self.flexibleContentSpacer];
     }
 }
 
-- (void)updateCustomContentHeightConstraint {
-    if (_customContentView) {
-        if (_customContentHeightConstraint && _customContentHeightConstraint.isActive) {
-            [NSLayoutConstraint deactivateConstraints:@[_customContentHeightConstraint]];
-        }
-        if ([_updatedConstraints containsObject:_customContentHeightConstraint]) {
-            [_updatedConstraints removeObject:_customContentHeightConstraint];
-        }
-        [self setCustomContentHeightConstraint];
-        if (_customContentHeightConstraint) {
-            [_updatedConstraints addObject:_customContentHeightConstraint];
-        }
-    }
+- (void)setCustomContentView:(UIView *)customContentView withPadding:(NSDirectionalEdgeInsets)padding {
+    [self setCustomContentView:customContentView withPadding:padding shouldAddFooterPadding:YES];
 }
 
-- (void)setCustomContentWidthConstraint {
-    if (_customContentView) {
-        if ([_customContentView isKindOfClass:[UIImageView class]]) {
-            _customContentWidthConstraint = [_customContentView.widthAnchor constraintLessThanOrEqualToConstant:ImageViewMaxHeightAndWidth];
-        } else {
-            _customContentWidthConstraint = [NSLayoutConstraint constraintWithItem:_customContentView
-                                                                         attribute:NSLayoutAttributeWidth
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:_scrollContainerView
-                                                                         attribute:NSLayoutAttributeWidth
-                                                                        multiplier:1.0
-                                                                          constant:-2*_customContentLeftRightPadding];
-        }
-    }
-}
-
-- (void)removeCustomContentPadding {
-    _customContentLeftRightPadding = 0.0;
-    if (_customContentWidthConstraint) {
-        _customContentWidthConstraint.constant = _customContentLeftRightPadding;
-    }
-}
-
-- (void)setCustomContentViewTopConstraint {
-    id topItem;
-    NSLayoutAttribute attribute;
+- (void)setCustomContentView:(UIView *)customContentView withPadding:(NSDirectionalEdgeInsets)padding shouldAddFooterPadding:(BOOL)shouldAddFooterPadding {
+    _shouldAddFooterPadding = shouldAddFooterPadding;
     
-    if (self.stepContentView) {
-        topItem = self.stepContentView;
-        attribute = NSLayoutAttributeBottom;
-    }
-    else {
-        topItem = _scrollContainerView;
-        attribute = NSLayoutAttributeTop;
-    }
+    self.navigationFooterView.shouldAddFooterPadding = shouldAddFooterPadding;
     
-    _customContentViewTopConstraint = [NSLayoutConstraint constraintWithItem:_customContentView
-                                                                   attribute:NSLayoutAttributeTop
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:topItem
-                                                                   attribute:attribute
-                                                                  multiplier:1.0
-                                                                    constant:_customContentTopPadding];
-}
+    _customContentTopPadding = padding.top;
+    [self.stepContentView setCustomTopPadding:[NSNumber numberWithFloat:padding.top]];
 
-- (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding {
-    [self setCustomContentView:customContentView withTopPadding:topPadding sidePadding:_customContentLeftRightPadding];
-}
+    NSDirectionalEdgeInsets currentMargins = self.scrollContentView.directionalLayoutMargins;
 
-- (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding sidePadding:(CGFloat)sidePadding {
-    _customContentTopPadding = topPadding;
-    _customContentLeftRightPadding = sidePadding;
-    [self.stepContentView setCustomTopPadding:[NSNumber numberWithFloat:topPadding]];
-    [self setCustomContentView:customContentView];
-}
+    self.scrollContentView.directionalLayoutMargins =
+        NSDirectionalEdgeInsetsMake(
+            currentMargins.top,
+            padding.leading > 0 ? padding.leading : currentMargins.leading,
+            0,
+            padding.trailing > 0 ? padding.trailing : currentMargins.trailing
+        );
 
-- (void)updateCustomContentViewTopConstraint {
-    if (_customContentView) {
-        if (_customContentViewTopConstraint && _customContentViewTopConstraint.isActive) {
-            [NSLayoutConstraint deactivateConstraints:@[_customContentViewTopConstraint]];
-        }
-        if ([_updatedConstraints containsObject:_customContentViewTopConstraint]) {
-            [_updatedConstraints removeObject:_customContentViewTopConstraint];
-        }
-        [self setCustomContentViewTopConstraint];
-        if (_customContentViewTopConstraint) {
-            [_updatedConstraints addObject:_customContentViewTopConstraint];
-        }
+    NSDirectionalEdgeInsets superViewLayoutMargins = [self.superview directionalLayoutMargins];
+    if (NSDirectionalEdgeInsetsEqualToDirectionalEdgeInsets(superViewLayoutMargins, ORKLargeContentLayoutMargins)) {
+        [self setCustomContentView:customContentView];
+    } else {
+        UIView *contentViewLayoutContainer = [UIView layoutContainerFor:customContentView margins:currentMargins];
+        [self setCustomContentView:contentViewLayoutContainer];
     }
-}
-
-- (NSArray<NSLayoutConstraint *> *)scrollViewStaticConstraints {
-    _scrollViewBottomConstraint = [NSLayoutConstraint constraintWithItem:_scrollView
-                                                               attribute:NSLayoutAttributeBottom
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeBottom
-                                                              multiplier:1.0
-                                                                constant:0.0];
-    return @[
-             [NSLayoutConstraint constraintWithItem:_scrollView
-                                          attribute:NSLayoutAttributeLeft
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self
-                                          attribute:NSLayoutAttributeLeft
-                                         multiplier:1.0
-                                           constant:0.0],
-             [NSLayoutConstraint constraintWithItem:_scrollView
-                                          attribute:NSLayoutAttributeRight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:self
-                                          attribute:NSLayoutAttributeRight
-                                         multiplier:1.0
-                                           constant:0.0],
-             _scrollViewBottomConstraint
-             ];
-}
-
-- (NSArray<NSLayoutConstraint *> *)scrollContainerStaticConstraints {
-
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_scrollContainerView
-                                                              attribute:NSLayoutAttributeHeight
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:_scrollView
-                                                              attribute:NSLayoutAttributeHeight
-                                                             multiplier:1.0
-                                                               constant:0.0];
-    heightConstraint.priority = UILayoutPriorityDefaultLow;
-
-    return @[
-             [NSLayoutConstraint constraintWithItem:_scrollContainerView
-                                          attribute:NSLayoutAttributeTop
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:_scrollView
-                                          attribute:NSLayoutAttributeTop
-                                         multiplier:1.0
-                                           constant:0.0],
-             [NSLayoutConstraint constraintWithItem:_scrollContainerView
-                                          attribute:NSLayoutAttributeLeft
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:_scrollView
-                                          attribute:NSLayoutAttributeLeft
-                                         multiplier:1.0
-                                           constant:0.0],
-             [NSLayoutConstraint constraintWithItem:_scrollContainerView
-                                          attribute:NSLayoutAttributeRight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:_scrollView
-                                          attribute:NSLayoutAttributeRight
-                                         multiplier:1.0
-                                           constant:0.0],
-             [NSLayoutConstraint constraintWithItem:_scrollContainerView
-                                          attribute:NSLayoutAttributeBottom
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:_scrollView
-                                          attribute:NSLayoutAttributeBottom
-                                         multiplier:1.0
-                                           constant:0.0],
-             [NSLayoutConstraint constraintWithItem:_scrollContainerView
-                                          attribute:NSLayoutAttributeWidth
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:_scrollView
-                                          attribute:NSLayoutAttributeWidth
-                                         multiplier:1.0
-                                           constant:0.0],
-             heightConstraint
-             ];
-}
-
-- (void)setScrollViewTopConstraint {
-    _scrollViewTopConstraint = [NSLayoutConstraint constraintWithItem:_scrollView
-                                                                     attribute:NSLayoutAttributeTop
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:_topContentImageView ? : self
-                                                                     attribute:_topContentImageView ? NSLayoutAttributeBottom : NSLayoutAttributeTop
-                                                                    multiplier:1.0
-                                                                      constant:0.0];
-    [_updatedConstraints addObject:_scrollViewTopConstraint];
-}
-
-- (void)updateScrollViewTopConstraint {
-    if (_scrollViewTopConstraint) {
-        [NSLayoutConstraint deactivateConstraints:@[_scrollViewTopConstraint]];
-    }
-    if ([_updatedConstraints containsObject:_scrollViewTopConstraint]) {
-        [_updatedConstraints removeObject:_scrollViewTopConstraint];
-    }
-    [self setScrollViewTopConstraint];
-}
-
-- (void)setTopContentImageViewConstraints {
-    _topContentImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    _topContentImageViewConstraints = @[
-                                        [NSLayoutConstraint constraintWithItem:_topContentImageView
-                                                                     attribute:NSLayoutAttributeTop
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self
-                                                                     attribute:NSLayoutAttributeTop
-                                                                    multiplier:1.0
-                                                                      constant:0.0],
-                                        [NSLayoutConstraint constraintWithItem:_topContentImageView
-                                                                     attribute:NSLayoutAttributeLeft
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self
-                                                                     attribute:NSLayoutAttributeLeft
-                                                                    multiplier:1.0
-                                                                      constant:0.0],
-                                        [NSLayoutConstraint constraintWithItem:_topContentImageView
-                                                                     attribute:NSLayoutAttributeRight
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self
-                                                                     attribute:NSLayoutAttributeRight
-                                                                    multiplier:1.0
-                                                                      constant:0.0],
-                                        [NSLayoutConstraint constraintWithItem:_topContentImageView
-                                                                     attribute:NSLayoutAttributeHeight
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:nil
-                                                                     attribute:NSLayoutAttributeNotAnAttribute
-                                                                    multiplier:1.0
-                                                                      constant:ORKStepContainerTopContentHeightForWindow(self.window)]
-                                        ];
-    [_updatedConstraints addObjectsFromArray:_topContentImageViewConstraints];
-}
-
-- (void)deactivateTopContentImageViewConstraints {
-    if (_topContentImageViewConstraints) {
-        [NSLayoutConstraint deactivateConstraints:_topContentImageViewConstraints];
-        for (NSLayoutConstraint *constraint in _topContentImageViewConstraints) {
-            if ([_updatedConstraints containsObject:constraint]) {
-                [_updatedConstraints removeObject:constraint];
-            }
-        }
-    }
-    _topContentImageViewConstraints = nil;
-}
-
-- (void)setupConstraints {
-    _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    _scrollContainerView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self setScrollViewTopConstraint];
-    NSMutableArray<NSLayoutConstraint *> *staticConstraints = [[NSMutableArray alloc] initWithArray:[self scrollViewStaticConstraints]];
-    [staticConstraints addObject:_scrollViewTopConstraint];
-    [staticConstraints addObjectsFromArray:[self scrollContainerStaticConstraints]];
-    [NSLayoutConstraint activateConstraints:staticConstraints];
-    [self setStepContentViewConstraints];
-}
-
-- (void)updateContainerConstraints {
-    [NSLayoutConstraint activateConstraints:_updatedConstraints];
-    [_updatedConstraints removeAllObjects];
-}
-
-- (void)updateConstraints {
-    [self updateContainerConstraints];
-    [super updateConstraints];
+    [self setNeedsLayout];
 }
 
 - (void)topContentImageShouldStickToTop {
@@ -839,70 +657,17 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
 }
 
 - (void)scrollToBodyItem:(UIView *)bodyItem {
-    CGPoint pointInScrollView = [bodyItem.superview convertPoint:bodyItem.frame.origin toView:_scrollView];
+    CGPoint pointInScrollView = [bodyItem.superview convertPoint:bodyItem.frame.origin toView:self.scrollView];
     CGFloat bottomOfView = pointInScrollView.y + bodyItem.frame.size.height;
-    CGFloat bottomOfScrollView = _scrollView.frame.size.height - [self navigationFooterView].frame.size.height;
+    CGFloat bottomOfScrollView = self.scrollView.frame.size.height - [self navigationFooterView].frame.size.height;
 
     if (bottomOfView > bottomOfScrollView) {
-        [_scrollView setContentOffset:CGPointMake(0, (bottomOfView - bottomOfScrollView) + ORKBodyItemScrollPadding) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(0, (bottomOfView - bottomOfScrollView) + ORKBodyItemScrollPadding) animated:YES];
     }
 }
 
 - (CGFloat)contentHeight {
-    CGFloat height = 0.0;
-    for (UIView *view in _scrollContainerView.subviews) {
-        height += view.frame.size.height;
-    }
-    
-    return height;
-}
-
-- (void)updateEffectViewStylingAndAnimate:(BOOL)animated checkCurrentValue:(BOOL)checkCurrentValue {
-    CGFloat startOfFooter = self.navigationFooterView.frame.origin.y;
-    CGFloat endOfFooter = self.navigationFooterView.frame.origin.y + self.navigationFooterView.frame.size.height;
-    
-    // calculating height of all subviews in _scrollContainerView
-    CGFloat height = [self contentHeight];
-    if (!self.isNavigationContainerScrollable) {
-        CGFloat contentPosition = (height - _scrollView.contentOffset.y);
-        CGFloat newOpacity = (contentPosition < startOfFooter) ? ORKEffectViewOpacityHidden : ORKEffectViewOpacityVisible;
-        [self updateEffectStyleWithNewOpacity:newOpacity animated:animated checkCurrentValue:checkCurrentValue];
-
-        // This check is to guard against scenarios when the view can be dragged down even if the content size doesn't allow for scrolling behavior
-        if (contentPosition > _highestContentPosition && (_scrollView.contentOffset.y >= _scrollView.contentInset.top)) {
-            _highestContentPosition = contentPosition;
-            // add contentInset if the contentPosition extends beyond the footerView
-            if ((contentPosition > startOfFooter) && (!self.navigationFooterView.isHidden)) {
-                // Only need to calculate the offset based on content position if the end of the content sits between
-                // the top and the bottom of the navigation footer view
-                if (contentPosition < endOfFooter) {
-                    CGFloat offset = contentPosition - startOfFooter;
-                    self.scrollViewInset = UIEdgeInsetsMake(0, 0, offset + ORKContentBottomPadding, 0);
-                } else {
-                    self.scrollViewInset = UIEdgeInsetsMake(0, 0, self.navigationFooterView.frame.size.height + ORKContentBottomPadding, 0);
-                }
-            }
-        }
-    } else if ([self.navigationFooterView effectViewOpacity] != ORKEffectViewOpacityHidden) {
-        [self updateEffectStyleWithNewOpacity:ORKEffectViewOpacityHidden animated:NO checkCurrentValue:NO];
-    }
-}
-
-- (void)updateEffectViewStylingAndAnimate:(BOOL)animated checkCurrentValue:(BOOL)checkCurrentValue customView:(UIView *)customView {
-    CGFloat startOfFooter = self.navigationFooterView.frame.origin.y;
-    CGPoint newPoint = [customView convertPoint:customView.frame.origin toView:_scrollView];
-    CGFloat endOfContent = newPoint.y + customView.frame.size.height;
-    CGFloat newOpacity = (endOfContent < startOfFooter) ? ORKEffectViewOpacityHidden : ORKEffectViewOpacityVisible;
-    [self updateEffectStyleWithNewOpacity:newOpacity animated:animated checkCurrentValue:checkCurrentValue];
-}
-
-- (void)updateEffectStyleWithNewOpacity:(CGFloat)newOpacity animated:(BOOL)animated checkCurrentValue:(BOOL)checkCurrentValue {
-    CGFloat currentOpacity = [self.navigationFooterView effectViewOpacity];
-    if (!checkCurrentValue || (newOpacity != currentOpacity)) {
-        // Don't animate transition from hidden to visible as text appears behind during animation
-        if (currentOpacity == ORKEffectViewOpacityHidden) { animated = NO; }
-        [self.navigationFooterView setStylingOpactity:newOpacity animated:animated];
-    }
+    return self.scrollView.contentSize.height;
 }
 
 - (void)setScrollEnabled:(BOOL)scrollEnabled {
@@ -932,16 +697,6 @@ static NSString *scrollContentChangedNotification = @"scrollContentChanged";
 
 - (void)scrollToPoint:(CGPoint)point {
     [_scrollView setContentOffset:point animated:YES];
-}
-
-// MARK: ScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self updateEffectViewStylingAndAnimate:YES checkCurrentValue:YES];
-}
-
-- (void)scrollContentChanged {
-    [self updateEffectViewStylingAndAnimate:NO checkCurrentValue:NO];
 }
 
 @end

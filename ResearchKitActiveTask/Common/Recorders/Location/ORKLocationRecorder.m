@@ -109,7 +109,7 @@
     self.locationManager.delegate = self;
 
     BOOL locationManagerAuthRequestsAllowed = YES;
-    if ([CLLocationManager authorizationStatus] <= kCLAuthorizationStatusDenied) {
+    if (self.locationManager.authorizationStatus <= kCLAuthorizationStatusDenied) {
         locationManagerAuthRequestsAllowed = [self.locationManager ork_requestWhenInUseAuthorization];
     }
 
@@ -171,11 +171,11 @@
 
 - (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
-    [super finishRecordingWithError:nil];
+    [super finishRecordingWithError:error];
 }
 
 - (BOOL)isRecording {
-    return [CLLocationManager locationServicesEnabled] && (self.locationManager != nil) && ([CLLocationManager authorizationStatus] > kCLAuthorizationStatusDenied);
+    return [CLLocationManager locationServicesEnabled] && (self.locationManager != nil) && (self.locationManager.authorizationStatus > kCLAuthorizationStatusDenied);
 }
 
 - (void)reset {
@@ -219,6 +219,16 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKLocationRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                        outputDirectory:[self.outputDirectory copy]
+                                               rollingFileSizeThreshold:self.rollingFileSizeThreshold];
 }
 
 + (BOOL)supportsSecureCoding {

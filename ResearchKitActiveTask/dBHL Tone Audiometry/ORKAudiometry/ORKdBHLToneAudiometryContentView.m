@@ -268,43 +268,33 @@ static const CGFloat TestingInProgressIndicatorRadius = 6.0;
 
 - (void)setUpConstraints {
     NSArray<NSLayoutConstraint *> *constraints = @[
-                                                   [NSLayoutConstraint constraintWithItem:_progressView
-                                                                                attribute:NSLayoutAttributeTop
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:self
-                                                                                attribute:NSLayoutAttributeTop
-                                                                               multiplier:1.0
-                                                                                 constant:TopToProgressViewMinPadding],
-                                                   [NSLayoutConstraint constraintWithItem:_progressView
-                                                                                attribute:NSLayoutAttributeLeft
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:self
-                                                                                attribute:NSLayoutAttributeLeft
-                                                                               multiplier:1.0
-                                                                                 constant:0.0],
-                                                   [NSLayoutConstraint constraintWithItem:_progressView
-                                                                                attribute:NSLayoutAttributeRight
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:self
-                                                                                attribute:NSLayoutAttributeRight
-                                                                               multiplier:1.0
-                                                                                 constant:0.0],
-                                                   [NSLayoutConstraint constraintWithItem:_tapButton
-                                                                                attribute:NSLayoutAttributeCenterX
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:self
-                                                                                attribute:NSLayoutAttributeCenterX
-                                                                               multiplier:1.0
-                                                                                 constant:0.0],
-                                                   [NSLayoutConstraint constraintWithItem:_tapButton
-                                                                                attribute:NSLayoutAttributeCenterY
-                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                   toItem:self
-                                                                                attribute:NSLayoutAttributeCenterY
-                                                                               multiplier:1.0
-                                                                                 constant:0.0]
-                                                   ];
-    
+        [NSLayoutConstraint constraintWithItem:_progressView
+                                     attribute:NSLayoutAttributeTop
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeTop
+                                    multiplier:1.0
+                                      constant:TopToProgressViewMinPadding],
+        [NSLayoutConstraint constraintWithItem:_progressView
+                                     attribute:NSLayoutAttributeLeft
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeLeftMargin
+                                    multiplier:1.0
+                                      constant:0.0],
+        [NSLayoutConstraint constraintWithItem:_progressView
+                                     attribute:NSLayoutAttributeRight
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeRightMargin
+                                    multiplier:1.0
+                                      constant:0.0],
+        [_tapButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+        [_tapButton.centerYAnchor constraintEqualToAnchor:self.centerYAnchor],
+        [_tapButton.topAnchor constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:_progressView.bottomAnchor multiplier:1],
+        [_tapButton.bottomAnchor constraintLessThanOrEqualToSystemSpacingBelowAnchor:self.bottomAnchor multiplier:1]
+    ];
+
     [NSLayoutConstraint activateConstraints:constraints];
 }
 

@@ -39,7 +39,7 @@
 "CONSENT_SIGNATURE_TITLE" = "署名";
 "CONSENT_SIGNATURE_INSTRUCTION" = "下の枠内に指で署名してください。";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "ここに署名";
-"CONSENT_PAGE_NUMBER_FORMAT" = "ページ%1$ld/%2$ld";
+"CONSENT_PAGE_NUMBER_FORMAT" = "%1$ld / %2$ldページ ";
 
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "ようこそ";
@@ -53,21 +53,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "詳しい情報";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "データの収集方法についての詳しい情報を表示します";
-"LEARN_MORE_DATA_USE" = "データの使用方法についての詳しい情報を表示します";
-"LEARN_MORE_PRIVACY" = "プライバシーおよび個人を特定する情報の保護方法についての詳しい情報を表示します";
-"LEARN_MORE_WELCOME" = "まず調査についての詳しい情報を表示します";
-"LEARN_MORE_STUDY_SURVEY" = "調査アンケートについての詳しい情報を表示します";
-"LEARN_MORE_TIME_COMMITMENT" = "調査にかかる時間についての詳しい情報を表示します";
-"LEARN_MORE_TASKS" = "必要なタスクについての詳しい情報を表示します";
-"LEARN_MORE_WITHDRAWING" = "同意の撤回についての詳しい情報を表示します";
+"LEARN_MORE_DATA_GATHERING" = "データの収集方法についての詳しい情報を表示します。";
+"LEARN_MORE_DATA_USE" = "データの使用方法についての詳しい情報を表示します。";
+"LEARN_MORE_PRIVACY" = "プライバシーおよび個人を特定する情報の保護方法についての詳しい情報を表示します。";
+"LEARN_MORE_WELCOME" = "まず調査についての詳しい情報を表示します。";
+"LEARN_MORE_STUDY_SURVEY" = "調査アンケートについての詳しい情報を表示します。";
+"LEARN_MORE_TIME_COMMITMENT" = "調査にかかる時間についての詳しい情報を表示します。";
+"LEARN_MORE_TASKS" = "必要なタスクについての詳しい情報を表示します。";
+"LEARN_MORE_WITHDRAWING" = "同意の撤回についての詳しい情報を表示します。";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "共有オプション";
 "CONSENT_SHARE_WIDELY_%@" = "自分のデータを%@および資格を持つ世界中の研究者と共有します";
 "CONSENT_SHARE_ONLY_%@" = "自分のデータを%@とのみ共有します";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@は、この調査に参加したあなたの調査データを受信します。\n\n名前などの情報を含まない、大まかにコード化された調査データを共有すると、今回と将来の調査に役立てることができます。";
-"LEARN_MORE_CONSENT_SHARING" = "データ共有についての詳しい情報を表示します";
+"LEARN_MORE_CONSENT_SHARING" = "データ共有についての詳しい情報を表示します。";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "氏名（活字体）";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "住所を入力";
 "LOCATION_ERROR_TITLE" = "指定した住所が見つかりませんでした";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "現在地を確認できません。住所を入力するか、GPS信号の受信状況が良好な場所に移動してください。";
-"LOCATION_ERROR_MESSAGE_DENIED" = "位置情報サービスへのアクセスが拒否されました。“設定”でこのAppに位置情報サービスの使用を許可してください。";
 "LOCATION_ERROR_GEOCODE" = "入力した住所の結果が見つかりません。住所が正しいことを確認してください。";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "インターネットに接続されていないか、住所検索要求の最大数に達しました。インターネットに接続されていない場合は、Wi-Fiをオンにしてこの質問に回答するか、この質問をスキップするか（スキップボタンが表示されている場合）、またはインターネットに接続されているときにアンケートをやり直してください。インターネットに接続されている場合は、数分待ってからやり直してください。";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字数が最大許容数を超えています: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "テキストは%@文字に制限されています";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "分割画面ではカメラを使用できません。";
@@ -136,12 +134,12 @@
 "FORGOT_PASSWORD_BUTTON_TITLE" = "パスワードをお忘れですか?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "パスコードを入力してください";
+"PASSCODE_PROMPT_MESSAGE" = "パスコードを入力";
 "PASSCODE_CONFIRM_MESSAGE" = "パスコードを確認してください";
 "PASSCODE_SAVED_MESSAGE" = "パスコードが保存されました";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "パスコードが認証されました";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "古いパスコードを入力してください";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "新しいパスコードを入力してください";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "古いパスコードを入力";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "新しいパスコードを入力";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "新しいパスコードを確認してください";
 "PASSCODE_INVALID_ALERT_TITLE" = "パスコードが正しくありません";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "パスコードが一致しません。もう一度入力してください。";
@@ -175,6 +173,13 @@
 "FITZPATRICK_SKIN_TYPE_IV" = "タイプIV";
 "FITZPATRICK_SKIN_TYPE_V" = "タイプV";
 "FITZPATRICK_SKIN_TYPE_VI" = "タイプVI";
+
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "タイプ1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "タイプ2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "タイプ3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "タイプ4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "タイプ5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "タイプ6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "女性";
@@ -218,11 +223,11 @@
 "BUTTON_SKIP" = "スキップ";
 "BUTTON_SKIP_QUESTION" = "この質問をスキップ";
 "BUTTON_START_TIMER" = "タイマーを開始";
-"BUTTON_OPTION_SAVE" = "後で使用するために保存";
+"BUTTON_OPTION_SAVE" = "保存してあとで読む";
 "BUTTON_OPTION_DISCARD" = "結果を破棄";
 "BUTTON_OPTION_STOP_TASK" = "タスクを終了";
 "BUTTON_SAVE" = "保存";
-"BUTTON_CLEAR_ANSWER" = "答えを消去";
+"BUTTON_CLEAR_ANSWER" = "解答を消去";
 "BUTTON_READ_ONLY_MODE" = "この答えは変更できません。";
 "BUTTON_COPYRIGHT" = "著作権";
 "BUTTON_CLOSE" = "閉じる";
@@ -230,7 +235,7 @@
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "アクティビティ開始まで";
 "TASK_COMPLETE_TITLE" = "アクティビティ完了";
-"TASK_COMPLETE_TEXT" = "データは分析され、結果が準備できたら通知されます。";
+"TASK_COMPLETE_TEXT" = "データは分析され、結果の準備ができると通知されます。";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "残り%@です。";
 "TOUCH_ANYWHERE_LABEL" = "続けるにはどこかをタッチしてください";
 
@@ -238,14 +243,20 @@
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "イメージを取り込む";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "再度イメージを取り込む";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "カメラが見つからないため、この手順を完了できません。";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "この手順を完了するには、“設定”でこのAppがカメラにアクセスすることを許可してください。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "この手順を完了するには、“設定”でこのアプリがカメラにアクセスすることを許可してください。";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "取り込んだイメージの出力ディレクトリが指定されていません。";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "取り込んだイメージを保存できませんでした。";
 
 /* Video capture step. */
-"CAPTURE_BUTTON_CAPTURE_VIDEO" = "収録を開始";
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "録画を開始";
 "CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "収録を停止";
 "CAPTURE_BUTTON_RECAPTURE_VIDEO" = "再度ビデオを取り込む";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE" = "カメラへのアクセスが必要です";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_MIC" = "マイクへのアクセスが必要です";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_CAMERA_AND_MIC" = "カメラとマイクへのアクセスが必要です";
+"VIDEO_CAPTURE_ACCESS_DENIED_MIC_TEXT" = "このステップを完了するには、[設定]でこのアプリがマイクにアクセスできるようにしてください。";
+"VIDEO_CAPTURE_ACCESS_DENIED_CAMERA_AND_MIC_TEXT" = "このステップを完了するには、[設定]でこのアプリがカメラとマイクにアクセスできるようにしてください。";
+"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT" = "設定を開く";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "体力";
@@ -298,7 +309,7 @@
 "AMSLER_GRID_TITLE" = "アムスラーグリッド";
 "AMSLER_GRID_INTRO_TEXT" = "このアクティビティは、ユーザの視力の問題を検出するときに役立てることができます。";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "テストの間、デバイスを目の高さで、顔から30センチメートルほど離して持ってください。";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@を閉じて、四角形のグリッドの中央にあるドットを見つめます。\n\n指かスタイラスペンで、不鮮明な線や破線などの歪みをマークします。\n\n終わったら、グリッドの外を左へスワイプします。";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@を閉じて、四角形のグリッドの中央にあるドットを見つめます。\n\n指かスタイラスペンで、ぼやけた線や波打った線などの歪みをマークします。\n\n終わったら、“次へ”ボタンをタップします。";
 "AMSLER_GRID_LEFT_EYE" = "左目";
 "AMSLER_GRID_RIGHT_EYE" = "右目";
 
@@ -328,7 +339,7 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "トーン音が聞こえたらタップしてください。";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "トーン音が聞こえたらボタンをタップしてください。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "トーンおよび音量";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "一連のトーン音が聞こえます。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "トーン音が聞こえたら、ボタンをタップしてください。";
@@ -421,10 +432,10 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "写真のように、画面を外側に向けてデバイスを右膝の上に置きます。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左膝をできるだけ伸ばしてください。終わったら、最初の位置に戻りもう一度タップしてください。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右膝をできるだけ伸ばしてください。終わったら、最初の位置に戻りもう一度タップしてください。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左膝の上に置きます。画面をタップして、左膝をできるだけ伸ばしてください。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右膝の上に置きます。画面をタップして、右膝をできるだけ伸ばしてください。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "終わったら、左膝を最初の位置に戻してください。次にどこかをタップしてください。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "終わったら、右膝を最初の位置に戻してください。次にどこかをタップしてください。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左膝の上に置きます。\n\n画面をタップして、左膝をできるだけ伸ばしてください。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右膝の上に置きます。\n\n画面をタップして、右膝をできるだけ伸ばしてください。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "終わったら、左膝を最初の位置に戻してください。\n\n次にどこかをタップしてください。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "終わったら、右膝を最初の位置に戻してください。\n\n次にどこかをタップしてください。";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩の可動域";
@@ -493,9 +504,9 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "震え測定アクティビティ";
 "TREMOR_TEST_INTRO_1_DETAIL" = "このアクティビティでは、さまざまな位置で手の震えを測定します。このアクティビティが終わるまで楽な姿勢で座っていられる場所を見つけてください。";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "下の図のように、震えの大きい方の手で電話を持ってください。";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "下の図のように、右手で電話を持ってください。";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "下の図のように、左手で電話を持ってください。";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "上の図のように、震えの大きい方の手で電話を持ってください。";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "上の図のように、右手で電話を持ってください。";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "上の図のように、左手で電話を持ってください。";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "電話を手に持って座ったまま、%@を行うように求められます。";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "1つのタスク";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "2つのタスク";
@@ -548,10 +559,10 @@
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "音声認識";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "このアクティビティは、あなたが話す音声をデバイスの下部にあるマイクで記録して、テキストに書き起こします。";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "このアクティビティは、デバイスの下部にあるマイクで発声した内容を記録して、テキストに書き起こします。";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "ボタンを押して、収録を開始してから、話します。";
-"SPEECH_RECOGNITION_START_RECORD_LABEL" = "収録を開始";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "録画を開始";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "収録を停止";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "発音表記を編集";
 "SPEECH_RECOGNITION_QUESTION_TEXT" = "発音表記のテキストを修正して、発声内容の聞き間違いを訂正します。";
@@ -578,19 +589,19 @@
 "ERROR_DATALOGGER_SET_ATTRIBUTE" = "属性の設定中にエラーが起きました";
 "ERROR_DATALOGGER_COULD_NOT_MAORK" = "ファイルが削除済みとマークされていません（アップロード済みとマークされていません）";
 "ERROR_DATALOGGER_MULTIPLE" = "ログ削除時に複数のエラー";
-"ERROR_RECORDER_NO_DATA" = "収集したデータが見つかりませんでした。";
+"ERROR_RECORDER_NO_DATA" = "収集されたデータが見つかりませんでした。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "出力ディレクトリが指定されていません";
 
 /* Environment SPL*/
 "ENVIRONMENTSPL_TITLE" = "騒音計";
 "ENVIRONMENTSPL_INTRO_TEXT" = "このアクティビティでは、環境の音圧レベルを測定します。ノイズレベルが高すぎる場合、アクティビティを続けることはできません。静かな場所に移動してこのタスクを完了するか、後でこのアクティビティを行ってください。";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "計算中";
+"ENVIRONMENTSPL_CALCULATING" = "計測中…";
 "ENVIRONMENTSPL_THRESHOLD" = "閾値: %@ dBA";
-"ENVIRONMENTSPL_OK" = "背景ノイズOK";
-"ENVIRONMENTSPL_NOISE" = "背景の雑音が多すぎます";
+"ENVIRONMENTSPL_OK" = "良好";
+"ENVIRONMENTSPL_NOISE" = "大きすぎます";
 "ENVIRONMENTSPL_TITLE_2" = "静かな環境を見つけてください";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "正確性を確保するため、このテストは静かな環境で実施する必要があります。";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "正確な結果を得るために、このタスクは静かな場所で実施する必要があります。背景ノイズ測定値の読み取りが完了したら、続行できます。";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "タスクを開始";
@@ -613,7 +624,6 @@
 "AX_BUTTON_SHOW_SEARCH" = "検索バーを表示";
 "AX_BUTTON_HIDE_SEARCH" = "検索バーを非表示";
 "AX_BUTTON_SHARE" = "共有";
-
 
 "AX_COMPLETION_ILLUSTRATION" = "成功を示すために青い丸の中にチェックマークがある図";
 
@@ -664,7 +674,7 @@
 "AX_AUDIO_BAR_GRAPH" = "オーディオバーグラフ";
 
 "AX_AMSLER_GRID_LABEL" = "アムスラーグリッド";
-"AX_AMSLER_GRID_HINT" = "指かスタイラスペンでグリッドに直接マークするか、グリッドの外を左にスワイプして終了します。";
+"AX_AMSLER_GRID_HINT" = "指かスタイラスペンでグリッドに直接マークするか、“次へ”ボタンをタップして終了します。";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "直接タップ可能ボタン";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "左耳用タップ";
@@ -687,3 +697,132 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "初期化のためのrestoreDataのデコードができません";
+"6MWT_HIGH_SCORE" = "10: かなり多い";
+"6MWT_INSTRUCTIONS_1" = "少なくとも30メートルの長さがあるまっすぐな歩道を見つけます。";
+"6MWT_INSTRUCTIONS_2" = "必要に応じて、歩道沿いで立ち止まって座れることを確認します。";
+"6MWT_INSTRUCTIONS_3" = "電話の音量を少なくとも50%まで上げてください。";
+"6MWT_INSTRUCTIONS_4" = "Siriに頼むか、ワークアウトアプリを起動し、「屋外ウォーキング」（または「室内ウォーキング」）をタップして、Apple Watchで屋外ウォーキング（または室内ウォーキング）ワークアウトを開始します。";
+"6MWT_INSTRUCTIONS_TITLE" = "始めよう";
+"6MWT_INTRO" = "このテストの目的は、6分間、快適なペースでできるだけ遠くまで歩くことです。";
+"6MWT_INTRO_DETAILS" = "詳細";
+"6MWT_INTRO_DETAIL_CLOTHING" = "動きやすい服装と適切にフィットする靴を着用してください。普段から歩行補助具を使用している方は、このテスト中も使用できます。";
+"6MWT_INTRO_DETAIL_LOCATION" = "屋外を歩くことができない場合は、地元のショッピングモールでこのテストを実施することを検討してください。";
+"6MWT_INTRO_DETAIL_TIME" = "このテストは完了まで約6分かかります。";
+"6MWT_INTRO_DETAIL_WATCH" = "このテストを実施するにはApple Watchが必要です。";
+"6MWT_LOW_SCORE" = "1: まったくない";
+"6MWT_QUESTIONS_BREATH" = "息切れ";
+"6MWT_QUESTIONS_DETAIL" = "おめでとうございます! 6分間ウォーキングテストを完了しました。以下の項目について、どのように思うか評価してください。";
+"6MWT_QUESTIONS_FATIGUE" = "疲労";
+"6MWT_QUESTIONS_TITLE" = "お疲れさまでした";
+"6MWT_TASK_TITLE" = "6分間ウォーキングテスト";
+"6MWT_TEST_IN_PROGRESS" = "テストを実行中";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "まっすぐな歩道に沿って、6分間、できるだけ遠くまで歩きます。息を整える必要がある場合は、立ち止まって座ります。";
+"AX_BUTTON" = "ボタン";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "“編集”ボタン";
+
+/* Permission denied completion step titles and descriptions. */
+"PERMISSION_DENIED_AUDIO_TITLE" = "マイクへのアクセスが拒否されました";
+"PERMISSION_DENIED_AUDIO_TEXT" = "このタスクを続行するには、マイクへのアクセスを許可する必要があります。";
+"PERMISSION_DENIED_MOTION_TITLE" = "モーション&フィットネスへのアクセスが拒否されました";
+"PERMISSION_DENIED_MOTION_TEXT" = "このタスクを続行するには、モーション&フィットネスアクティビティへのアクセスを許可する必要があります。";
+"PERMISSION_DENIED_LOCATION_TITLE" = "位置情報へのアクセスが拒否されました";
+"PERMISSION_DENIED_LOCATION_TEXT" = "このタスクを続行するには、位置情報へのアクセスを許可する必要があります。";
+"PERMISSION_DENIED_CAMERA_TITLE" = "カメラへのアクセスが拒否されました";
+"PERMISSION_DENIED_CAMERA_TEXT" = "このタスクを続行するには、カメラへのアクセスを許可する必要があります。";
+
+/* Permission required alert title and messages. */
+"PERMISSION_REQUIRED_ALERT_TITLE" = "権限が必要です";
+"PERMISSION_REQUIRED_ALERT_AUDIO_MESSAGE" = "このステップを適切に機能させるには、マイクへのアクセスが必要です。[設定]でアクセスを許可してください。";
+"PERMISSION_REQUIRED_ALERT_MOTION_MESSAGE" = "このステップを適切に機能させるには、モーション&フィットネスへのアクセスが必要です。[設定]でアクセスを許可してください。";
+"PERMISSION_REQUIRED_ALERT_LOCATION_MESSAGE" = "このステップを適切に機能させるには、位置情報へのアクセスが必要です。[設定]でアクセスを許可してください。";
+"PERMISSION_REQUIRED_ALERT_CAMERA_MESSAGE" = "このステップを適切に機能させるには、カメラへのアクセスが必要です。[設定]でアクセスを許可してください。";
+"PERMISSION_REQUIRED_ALERT_DEFAULT_MESSAGE" = "必要な権限が付与されていません。[設定]でアクセスを許可して、このステップが正しく機能するようにしてください。";
+
+"AX_PAGE_NUMBER_FORMAT" = "%1$ld / %2$ldページ ";
+"AX_SES_BOTTOM" = "下";
+"AX_SES_PERCENT" = "パーセント";
+"AX_SES_TOP" = "上";
+"BUTTON_PRACTICE_AGAIN" = "もう一度練習";
+"BUTTON_PRACTICE_TEST" = "テストを練習";
+"BUTTON_START_TEST" = "テストを開始";
+"CONSENT_NAME_SECTION_TITLE" = "名前";
+"FAMILY_HISTORY_ADD" = "%@を追加";
+"FAMILY_HISTORY_CANCEL" = "キャンセル";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "タスク完了";
+"FAMILY_HISTORY_CONDITIONS" = "病状";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "この家族は次のいずれかの疾患または健康状態と診断されたことがありますか?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "これらの質問にできる限り回答してください";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "診断された疾患または健康状態を確認してください。";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "健康状態";
+"FAMILY_HISTORY_DELETE_ENTRY" = "エントリーを削除";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "このエントリーを家族の既往歴から削除してもよろしいですか?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "エントリーを編集";
+"FAMILY_HISTORY_I_DONT_KNOW" = "分からない";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "上記のいずれでもない";
+"FAMILY_HISTORY_NONE_SELECTED" = "何も選択されていません";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "回答しない";
+"FITNESS_RESUME_TEST" = "アクティビティを再開";
+"FITNESS_STOP_TEST_CONFIRMATION" = "このアクティビティを早めに終了してもよろしいですか?";
+"FITNESS_STOP_TEST_DETAIL" = "進行状況が保存され、このテストは完了としてマークされます。";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "削除してやり直す";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "ビデオ・オプション";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "ビデオを確認";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "録画を開始";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "収録を停止";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "ビデオを送信";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "右手と左手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+"MAX_WORD_COUNT_ERROR" = "文字数が上限に達しました";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face IDエラー";
+"PASSCODE_FACE_ID_MESSAGE" = "Face IDで認証してください";
+"PLAY" = "再生";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "保留ボタンをタップしてから、青い円をタップします";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "保留";
+"RECORD" = "録音";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "この調査では、ヘルスケアデータへのアクセスが要求されています。";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "ヘルスケアデータ";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "この調査では、デバイスの位置情報データへのアクセスが要求されています。";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "位置情報データ";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "この調査では、デバイスのモーションデータへのアクセスが要求されています。";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "デバイスの動き";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "この調査では、あなたへの通知の送信が要求されています。";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "通知";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "確認済み";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "確認";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "エラー";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "対応していません";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "この調査では、デバイスのセンサーデータへのアクセスが要求されています。";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "センサーデータ";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "代わりにキーボードを使用";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "録音できませんでした。タップしてもう一度お試しください。";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "録音の中に音声が検出されませんでした。タップしてやり直してみてください。";
+"STOP" = "停止";
+"STROOP_COLOR_ORANGE" = "オレンジ";
+"STROOP_COLOR_BROWN" = "ちゃいろ";
+"STROOP_COLOR_PINK" = "ピンク";
+"STROOP_COLOR_PURPLE" = "むらさき";
+"STROOP_COLOR_GRAY" = "はいいろ";
+"TC_COMPLETION_DETAIL" = "おめでとうございます! Tecumsehキューブテストを完了しました。";
+"TC_COMPLETION_TITLE" = "お疲れさまでした";
+"TC_INSTRUCTIONS_1" = "地面から約20 cm（8インチ）の高さの段差を見つけます。";
+"TC_INSTRUCTIONS_2" = "iPhoneの音量を少なくとも50%まで上げてください。";
+"TC_INSTRUCTIONS_3" = "Apple WatchでSiriに頼むか、ワークアウトアプリを起動し、“ワークアウトを追加”をタップして“階段昇降”を選択し、“階段昇降”ワークアウトを開始します。";
+"TC_INSTRUCTIONS_TITLE" = "始めよう";
+"TC_INTRO" = "このテストの目的は、ビートに合わせて3分間階段を昇り降りし、心拍数を上げることです。";
+"TC_INTRO_DETAILS" = "詳細";
+"TC_INTRO_DETAIL_DANGER" = "胸の痛みや不快感が生じた場合は、直ちにこのテストを中止してください。";
+"TC_INTRO_DETAIL_TIME" = "このテストは完了まで約6分かかります。";
+"TC_INTRO_DETAIL_WATCH" = "このテストを実施するにはApple Watchが必要です。";
+"TC_REST_IN_PROGRESS" = "休憩してください";
+"TC_REST_IN_PROGRESS_DETAIL" = "Apple Watchが安静時の心拍数を記録する間、3分間座ってリラックスしてください。";
+"TC_TASK_TITLE" = "Tecumsehキューブテスト";
+"TC_TEST_IN_PROGRESS" = "テストを実行中";
+"TC_TEST_IN_PROGRESS_DETAIL" = "階段を使って、ビートに合わせてその場で段差を昇り降りします";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "テストを実行中";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "テストを実行中 \U2022 %@";
+
+/* Strings localized directly from source. */
+"X" = "X";
+"You have completed this task." = "このタスクを完了しました。";
+"Done" = "完了";
+"Share Task Snapshot" = "タスクスナップショットを共有";

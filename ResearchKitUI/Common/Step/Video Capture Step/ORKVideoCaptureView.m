@@ -49,7 +49,10 @@
     NSTimer *_timer;
     CGFloat _recordTime;
     NSDateComponentsFormatter *_dateComponentsFormatter;
-    
+    UIView *_recordingIndicatorView;
+    UIView *_redDotView;
+    UILabel *_timerLabel;
+
     BOOL _capturePressesIgnored;
     BOOL _stopCapturePressesIgnored;
     BOOL _retakePressesIgnored;
@@ -65,6 +68,7 @@
         _playerViewController = [AVPlayerViewController new];
         _playerViewController.videoGravity = AVLayerVideoGravityResizeAspectFill;
         _playerViewController.allowsPictureInPicturePlayback = NO;
+        _playerViewController.showsPlaybackControls = YES;
         [self addSubview:_playerViewController.view];
         
         _headerView = [ORKStepHeaderView new];
@@ -94,11 +98,42 @@
         _navigationFooterView = [ORKNavigationContainerView new];
         _navigationFooterView.continueEnabled = YES;
         _navigationFooterView.optional = YES;
-        _navigationFooterView.footnoteLabel.textAlignment = NSTextAlignmentCenter;
-        _navigationFooterView.footnoteLabel.text = @" ";
-        _navigationFooterView.backgroundColor = ORKColor(ORKNavigationContainerColorKey);
-        [_navigationFooterView setAlpha:0.8];
+        _navigationFooterView.backgroundColor = [[UIColor systemBackgroundColor] colorWithAlphaComponent:0.9];
+        [_navigationFooterView.skipButton setContentHuggingPriority:UILayoutPriorityRequired - 1 forAxis:UILayoutConstraintAxisVertical];
         [self addSubview:_navigationFooterView];
+
+        _recordingIndicatorView = [UIView new];
+        _recordingIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+        _recordingIndicatorView.hidden = YES;
+        _recordingIndicatorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        _recordingIndicatorView.layer.cornerRadius = 16.0;
+        _recordingIndicatorView.clipsToBounds = YES;
+
+        _redDotView = [UIView new];
+        _redDotView.translatesAutoresizingMaskIntoConstraints = NO;
+        _redDotView.backgroundColor = [UIColor systemRedColor];
+        _redDotView.layer.cornerRadius = 5.0;
+        [_recordingIndicatorView addSubview:_redDotView];
+
+        _timerLabel = [UILabel new];
+        _timerLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _timerLabel.font = [UIFont monospacedDigitSystemFontOfSize:17.0 weight:UIFontWeightSemibold];
+        _timerLabel.textColor = [UIColor whiteColor];
+        _timerLabel.textAlignment = NSTextAlignmentCenter;
+        [_recordingIndicatorView addSubview:_timerLabel];
+
+        [NSLayoutConstraint activateConstraints:@[
+            [_redDotView.widthAnchor constraintEqualToConstant:10.0],
+            [_redDotView.heightAnchor constraintEqualToConstant:10.0],
+            [_redDotView.centerYAnchor constraintEqualToAnchor:_recordingIndicatorView.centerYAnchor],
+            [_redDotView.leadingAnchor constraintEqualToAnchor:_recordingIndicatorView.leadingAnchor constant:12.0],
+            [_timerLabel.leadingAnchor constraintEqualToAnchor:_redDotView.trailingAnchor constant:6.0],
+            [_timerLabel.trailingAnchor constraintEqualToAnchor:_recordingIndicatorView.trailingAnchor constant:-12.0],
+            [_timerLabel.topAnchor constraintEqualToAnchor:_recordingIndicatorView.topAnchor constant:6.0],
+            [_timerLabel.bottomAnchor constraintEqualToAnchor:_recordingIndicatorView.bottomAnchor constant:-6.0],
+        ]];
+
+        [self addSubview:_recordingIndicatorView];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
@@ -116,33 +151,6 @@
 - (void)queue_sessionRunning {
     dispatch_async(dispatch_get_main_queue(), ^{
         _previewView.templateImageHidden = NO;
-    });
-}
-
-- (void)orientationDidChange {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
-        switch (self.window.windowScene.interfaceOrientation) {
-            case UIInterfaceOrientationLandscapeRight:
-                orientation = AVCaptureVideoOrientationLandscapeRight;
-                break;
-            case UIInterfaceOrientationLandscapeLeft:
-                orientation = AVCaptureVideoOrientationLandscapeLeft;
-                break;
-            case UIInterfaceOrientationPortraitUpsideDown:
-                orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-                break;
-            case UIInterfaceOrientationPortrait:
-                orientation = AVCaptureVideoOrientationPortrait;
-                break;
-            case UIInterfaceOrientationUnknown:
-                // Do nothing in these cases, since we don't need to change display orientation.
-                return;
-        }
-        
-        [_previewView setVideoOrientation:orientation];
-        [self.delegate videoOrientationDidChange:orientation];
-        [self setNeedsUpdateConstraints];
     });
 }
 
@@ -165,14 +173,19 @@
     _previewView.alpha = (self.error) ? 0 : 1;
     
     if (self.error) {
-        // Display the error instruction.
+        // Display the error title and description.
+        NSString *errorTitle = [self.error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey];
+        if (errorTitle) {
+            _headerView.captionLabel.text = errorTitle;
+        }
         _headerView.instructionLabel.text = [self.error.userInfo valueForKey:NSLocalizedDescriptionKey];
         
         // Hide the template image if there is an error
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
         _playerViewController.view.hidden = YES;
-        
+        _recordingIndicatorView.hidden = YES;
+
         // Show skip, if available, and hide the template and continue/capture button
         _navigationFooterView.continueButtonItem = nil;
         _navigationFooterView.skipButtonItem = _skipButtonItem;
@@ -181,24 +194,28 @@
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
+        _previewView.userInteractionEnabled = NO;
         _playerViewController.view.hidden = NO;
-        
+        _recordingIndicatorView.hidden = YES;
+
         // Set the continue button to the one we've saved and configure the skip button as a recapture button
         _navigationFooterView.continueButtonItem = _continueButtonItem;
         _navigationFooterView.skipButtonItem = _recaptureButtonItem;
         _navigationFooterView.skipEnabled = YES;
     } else if (self.recording) {
-        // Show the template image during capturing
-        _previewView.templateImageHidden = NO;
+        _previewView.templateImageHidden = (_videoCaptureStep.templateImage == nil);
+        _previewView.userInteractionEnabled = YES;
         _previewView.accessibilityHint = _videoCaptureStep.accessibilityInstructions;
         _playerViewController.view.hidden = YES;
-        
-        // Change the continue button back to capture.
+
         _navigationFooterView.continueButtonItem = _stopButtonItem;
-    
-        // Start a timer to show recording progress.
-        _navigationFooterView.footnoteLabel.text = [self formattedTimeFromSeconds:_videoCaptureStep.duration.floatValue];
+        _navigationFooterView.skipButtonItem = nil;
         _navigationFooterView.skipEnabled = NO;
+
+        _recordingIndicatorView.hidden = NO;
+        _timerLabel.text = [self formattedTimeFromSeconds:_videoCaptureStep.duration.floatValue];
+        [self _startRedDotAnimation];
+
         _recordTime = 0.0;
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
@@ -210,7 +227,8 @@
         _previewView.templateImageHidden = NO;
         _previewView.accessibilityHint = _videoCaptureStep.accessibilityInstructions;
         _playerViewController.view.hidden = YES;
-        
+        _recordingIndicatorView.hidden = YES;
+
         // Change the continue button back to capture, and change the recapture button back to skip (if available)
         _navigationFooterView.continueButtonItem = _captureButtonItem;
         _navigationFooterView.skipButtonItem = _skipButtonItem;
@@ -225,6 +243,7 @@
     if (_videoFileURL != nil) {
         AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:_videoFileURL];
         _playerViewController.player = [[AVPlayer alloc] initWithPlayerItem:item];
+        [_playerViewController.player play];
     }
     
     [self updateAppearance];
@@ -262,7 +281,7 @@
                                                 [NSLayoutConstraint constraintWithItem:_headerView
                                                                              attribute:NSLayoutAttributeTop
                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self
+                                                                                toItem:self.safeAreaLayoutGuide
                                                                              attribute:NSLayoutAttributeTop
                                                                             multiplier:1.0
                                                                               constant:0.0],
@@ -304,8 +323,8 @@
                                                 [NSLayoutConstraint constraintWithItem:playerView
                                                                              attribute:NSLayoutAttributeBottom
                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self
-                                                                             attribute:NSLayoutAttributeBottom
+                                                                                toItem:_navigationFooterView
+                                                                             attribute:NSLayoutAttributeTop
                                                                             multiplier:1.0
                                                                               constant:0.0],
                                                 [NSLayoutConstraint constraintWithItem:_navigationFooterView
@@ -361,9 +380,26 @@
                                                 
                                                 
                                                 ]];
-    
+
+    [_variableConstraints addObjectsFromArray:@[
+                                                [_recordingIndicatorView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+                                                [_recordingIndicatorView.bottomAnchor constraintEqualToAnchor:_navigationFooterView.topAnchor constant:-12.0],
+                                                ]];
+
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
+}
+
+- (void)_startRedDotAnimation {
+    [_redDotView.layer removeAnimationForKey:@"redDotPulse"];
+    CABasicAnimation *pulse = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    pulse.fromValue = @(1.0);
+    pulse.toValue = @(0.0);
+    pulse.duration = 0.8;
+    pulse.autoreverses = YES;
+    pulse.repeatCount = HUGE_VALF;
+    pulse.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [_redDotView.layer addAnimation:pulse forKey:@"redDotPulse"];
 }
 
 - (AVCaptureSession *)session {
@@ -372,8 +408,6 @@
 
 - (void)setSession:(AVCaptureSession *)session {
     _previewView.session = session;
-    // Set up the proper videoOrientation from the start
-    [self orientationDidChange];
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
@@ -418,6 +452,7 @@
     
     // Invalidate timer.
     [_timer invalidate];
+    [_redDotView.layer removeAnimationForKey:@"redDotPulse"];
     
     // Stop the video capture via the delegate
     [self.delegate stopCapturePressed:^ {
@@ -447,10 +482,11 @@
 
     if (_recordTime >= _videoCaptureStep.duration.floatValue || !self.recording) {
         [_timer invalidate];
+        [_redDotView.layer removeAnimationForKey:@"redDotPulse"];
         [self updateAppearance];
     } else {
         CGFloat remainingTime = _videoCaptureStep.duration.floatValue - _recordTime;
-        _navigationFooterView.footnoteLabel.text = [self formattedTimeFromSeconds:remainingTime];
+        _timerLabel.text = [self formattedTimeFromSeconds:remainingTime];
     }
 }
 

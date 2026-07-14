@@ -32,24 +32,35 @@
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#import <ResearchKit/ResearchKit-Swift.h>
 
-static const CGFloat standardSpacing = 5.0;
-static const CGFloat skipButtonHeight = 50.0;
-static const CGFloat topSpacing = 24.0;
-static const CGFloat bottomSpacing = 34.0;
-static const CGFloat activityIndicatorPadding = 24.0;
-static const CGFloat detailTextBottomSpacing = 16.0;
+
+CGFloat navigationButtonHeight(void);
+
+CGFloat navigationButtonHeight(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return 48;
+    } else {
+        return 50;
+    }
+}
+
+static const CGFloat activityIndicatorPadding = 24;
+static const CGFloat navigationContainerContentViewSpacing = 8;
 
 @implementation ORKNavigationContainerView {
     UIActivityIndicatorView *_activityIndicatorView;
-    
-    NSArray *_leftRightPaddingConstraints;
-    UIVisualEffectView *effectView;
     UIColor *_appTintColor;
-    
+    UIStackView *_contentView;
+    UIButton *_continueButton;
+    UIButton *_skipButton;
+    ORKFootnoteLabel *_footnoteLabel;
+    ORKLabel *_detailTextLabel;
+
     BOOL _continueOrSkipButtonJustTapped;
     BOOL _removeVisualEffect;
     NSMutableArray *_regularConstraints;
+    id<NSObject> _accessibilityObservationToken;
 }
 
 - (instancetype)init {
@@ -60,126 +71,190 @@ static const CGFloat detailTextBottomSpacing = 16.0;
     return self;
 }
 
-- (void)removeStyling {
-    _removeVisualEffect = YES;
-    if (effectView) {
-        [effectView removeFromSuperview];
-        effectView = nil;
-    }
-}
-
 - (void)commonInit {
     [self setBackgroundColor:ORKColor(ORKNavigationContainerColorKey)];
-    [self setupVisualEffectView];
+    
+    self.shouldAddFooterPadding = YES;
+    
     [self setupViews];
-    [self setupFootnoteLabel];
-    [self setupNavigationDetailTextLabel];
+
     self.preservesSuperviewLayoutMargins = NO;
     _appTintColor = nil;
-    self.skipButtonStyle = ORKNavigationContainerButtonStyleTextBold;
     [self updateContinueAndSkipEnabled];
 }
 
 - (void)flattenIfNeeded {
-    if (![self hasContinueOrSkip] || (self.continueButtonItem == nil && [self neverHasSkipButton] && [self neverHasFootnote])) {
-        [[self.heightAnchor constraintEqualToConstant:0] setActive:YES];
+    if (![self hasContinueOrSkip] || (self.continueButtonItem == nil && [self hasSkipButton] && [self neverHasFootnote])) {
+        for (UIView *subview in self.contentView.arrangedSubviews) {
+            subview.hidden = YES;
+        }
+        [self setNeedsLayout];
     }
 }
 
-- (void)setupVisualEffectView {
-    if (!effectView && !_removeVisualEffect) {
-        self.backgroundColor = [UIColor clearColor];
-        UIVisualEffect *blurEffect;
-        blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemChromeMaterial];
-        effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+- (UIStackView *)contentView {
+    if (_contentView == nil) {
+        _contentView = [[UIStackView alloc] initWithArrangedSubviews:[self getContentViewArrangedViews]];
+        _contentView.spacing = navigationContainerContentViewSpacing;
+        _contentView.axis = UILayoutConstraintAxisVertical;
+        _contentView.alignment = UIStackViewAlignmentFill;
+        _contentView.distribution = UIStackViewDistributionFillProportionally;
+        _contentView.translatesAutoresizingMaskIntoConstraints = NO;
     }
-    effectView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:effectView];
+    return _contentView;
 }
 
-- (CGFloat)effectViewOpacity {
-    return effectView.alpha;
-}
-
-- (void)setStylingOpactity:(CGFloat)opacity animated:(BOOL)animated {
-    if (animated == YES) {
-        [UIView animateWithDuration:0.2 animations:^(void) {
-            effectView.alpha = opacity;
-        }];
+- (NSArray *)getContentViewArrangedViews {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return @[
+            self.detailTextLabel,
+            self.footnoteLabel,
+            self.continueButton,
+            self.skipButton
+        ];
     } else {
-        effectView.alpha = opacity;
+        return @[
+            self.detailTextLabel,
+            self.continueButton,
+            self.skipButton,
+            self.footnoteLabel
+        ];
     }
 }
 
-- (void)setupContinueButton {
+- (UIButton *)continueButton {
     if (!_continueButton) {
         _continueButton = [[ORKContinueButton alloc] initWithTitle:@"" isDoneButton:NO];
+        if (@available(iOS 26.0, *)) {
+            if (ORKLiquidGlassSupportEnabled()) {
+                UIButtonConfiguration *configuration = [UIButtonConfiguration prominentGlassButtonConfiguration];
+                configuration.buttonSize = UIButtonConfigurationSizeLarge;
+                configuration.cornerStyle = UIButtonConfigurationCornerStyleDynamic;
+                _continueButton = [UIButton buttonWithConfiguration:configuration primaryAction:nil];
+            }
+        }
+
+        _continueButton.accessibilityIdentifier = @"ORKContinueButton.Next";
+        _continueButton.exclusiveTouch = YES;
+        _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
-    _continueButton.alpha = 0;
-    _continueButton.exclusiveTouch = YES;
-    _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_continueButton];
+    return _continueButton;
 }
 
-- (void)setupSkipButton {
+- (UIButton *)skipButton {
     if (!_skipButton) {
         _skipButton = [ORKBorderedButton new];
+        if (@available(iOS 26.0, *)) {
+            if (ORKLiquidGlassSupportEnabled()) {
+                UIButtonConfiguration *configuration = [UIButtonConfiguration clearGlassButtonConfiguration];
+                configuration.buttonSize = UIButtonConfigurationSizeLarge;
+                configuration.cornerStyle = UIButtonConfigurationCornerStyleDynamic;
+                configuration.titleLineBreakMode = NSLineBreakByClipping;
+                _skipButton = [UIButton buttonWithConfiguration:configuration primaryAction:nil];
+            }
+        }
+
+        _skipButton.exclusiveTouch = YES;
+        [_skipButton setTitle:nil forState:UIControlStateNormal];
+        [_skipButton addTarget:self action:@selector(skipButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _skipButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+
+        // Use UIButtonConfiguration for content insets on iOS 16+
+        if (_skipButton.configuration == nil) {
+            // Legacy path - create configuration with content insets
+            UIButtonConfiguration *config = [UIButtonConfiguration plainButtonConfiguration];
+            config.contentInsets = NSDirectionalEdgeInsetsMake(6, 0, 6, 0);
+            _skipButton.configuration = config;
+        }
+
+        _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _skipButton.accessibilityIdentifier = @"ORKNavigationContainerView_skipButton";
+        [self setSkipButtonStyle:[self __skipButtonStyle]];
     }
-    _skipButton.exclusiveTouch = YES;
-    [_skipButton setTitle:nil forState:UIControlStateNormal];
-    [_skipButton addTarget:self action:@selector(skipButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
-    _skipButton.accessibilityIdentifier = @"ORKNavigationContainerView_skipButton";
-    [self addSubview:_skipButton];
+    return _skipButton;
 }
 
-- (void)setupFootnoteLabel {
-    _footnoteLabel = [ORKFootnoteLabel new];
-    _footnoteLabel.numberOfLines = 0;
-    _footnoteLabel.textAlignment = NSTextAlignmentCenter;
-    _footnoteLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _footnoteLabel.textColor = UIColor.secondaryLabelColor;
-    [self addSubview:_footnoteLabel];
+- (ORKFootnoteLabel *)footnoteLabel {
+    if (_footnoteLabel == nil) {
+        _footnoteLabel = [ORKFootnoteLabel new];
+        _footnoteLabel.numberOfLines = 0;
+        _footnoteLabel.textAlignment = NSTextAlignmentCenter;
+        _footnoteLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _footnoteLabel.textColor = UIColor.secondaryLabelColor;
+    }
+    return _footnoteLabel;
 }
 
-- (void)setupNavigationDetailTextLabel {
-    _detailTextLabel = [[ORKLabel alloc] init];
-    _detailTextLabel.numberOfLines = 0;
-    _detailTextLabel.textAlignment = NSTextAlignmentCenter;
-    _detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-    _detailTextLabel.textColor = [UIColor secondaryLabelColor];
-    _detailTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:_detailTextLabel];
+- (ORKLabel *)detailTextLabel {
+    if (_detailTextLabel == nil) {
+        _detailTextLabel = [[ORKLabel alloc] init];
+        _detailTextLabel.numberOfLines = 0;
+        _detailTextLabel.textAlignment = NSTextAlignmentCenter;
+        _detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+        _detailTextLabel.textColor = [UIColor secondaryLabelColor];
+        _detailTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _detailTextLabel;
 }
 
 - (void)setupViews {
-    [self setupContinueButton];
-    [self setupSkipButton];
-    [self setUpConstraints];
+    [self addSubview:self.contentView];
+}
+
+- (ORKNavigationContainerButtonStyle)__skipButtonStyle {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return ORKNavigationContainerButtonStyleRoundedRect;
+    } else {
+        return ORKNavigationContainerButtonStyleTextBold;
+    }
 }
 
 - (void)didMoveToWindow {
     _appTintColor = ORKViewTintColor(self);
-    
-    _continueButton.normalTintColor = _appTintColor;
-    _skipButton.normalTintColor = _appTintColor;
+
+    if ([_continueButton isKindOfClass:[ORKContinueButton class]]) {
+        ORKContinueButton *continueButton = (ORKContinueButton *)_continueButton;
+        continueButton.normalTintColor = _appTintColor;
+    } else {
+        [_continueButton setTintColor:_appTintColor];
+    }
+
+    if ([_skipButton isKindOfClass:[ORKBorderedButton class]]) {
+        ORKBorderedButton *skipButton = (ORKBorderedButton *)_skipButton;
+        skipButton.normalTintColor = _appTintColor;
+    } else {
+        [_skipButton setTintColor:_appTintColor];
+    }
+
+    CGFloat bottomMargin = ORKLargeContentLayoutMargins.leading + ORKSmallContentLayoutMargins.leading;
+    if (self.shouldAddFooterPadding) {
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(0,
+                                                                    ORKSmallContentLayoutMargins.leading,
+                                                                    bottomMargin,
+                                                                    ORKSmallContentLayoutMargins.trailing);
+    } else {
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(0,
+                                                                    0,
+                                                                    bottomMargin,
+                                                                    0);
+    }
 }
 
 - (void)setSkipButtonStyle:(ORKNavigationContainerButtonStyle)skipButtonStyle {
     _skipButtonStyle = skipButtonStyle;
     switch (skipButtonStyle) {
         case ORKNavigationContainerButtonStyleTextStandard:
-            [_skipButton setAppearanceAsTextButton];
+            [_skipButton performIfRespondsToSelector:@selector(setAppearanceAsTextButton)];
             break;
         case ORKNavigationContainerButtonStyleTextBold:
-            [_skipButton setAppearanceAsBoldTextButton];
+            [_skipButton performIfRespondsToSelector:@selector(setAppearanceAsBoldTextButton)];
             break;
         case ORKNavigationContainerButtonStyleRoundedRect:
-            [_skipButton resetAppearanceAsBorderedButton];
+            [_skipButton performIfRespondsToSelector:@selector(resetAppearanceAsBorderedButton)];
             break;
         default:
-            [_skipButton setAppearanceAsTextButton];
+            [_skipButton performIfRespondsToSelector:@selector(setAppearanceAsTextButton)];
             break;
     }
 }
@@ -196,16 +271,14 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 
 - (void)setNavigationDetailText:(NSString *)navigationDetailText {
     _navigationDetailText = navigationDetailText;
-    _detailTextLabel.text = _navigationDetailText;
+    self.detailTextLabel.text = _navigationDetailText;
+    self.detailTextLabel.hidden = [self isDetailTextEmpty];
 }
 
 - (void)setContinueButtonDisabledStyle:(ORKBorderedButtonDisabledStyle)continueButtonDisabledStyle {
     _continueButtonDisabledStyle = continueButtonDisabledStyle;
-    _continueButton.disabledButtonStyle = continueButtonDisabledStyle;
-}
-
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [super willMoveToWindow:newWindow];
+    [_continueButton performIfRespondsToSelector:@selector(setDisabledButtonStyle:)
+                                      withObject:[NSNumber numberWithBool: continueButtonDisabledStyle]];
 }
 
 - (void)skipButtonAction:(id)sender {
@@ -213,13 +286,14 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 
     // Disable button for 0.5s
     ((UIView *)sender).userInteractionEnabled = NO;
-    ((ORKTextButton *)sender).isInTransition = YES;
+    [sender performIfRespondsToSelector:@selector(setIsInTransition:) withObject:[NSNumber numberWithBool:YES]];
+
     _continueOrSkipButtonJustTapped = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _continueOrSkipButtonJustTapped = NO;
         // Re-enable skip button
         ((UIView *)sender).userInteractionEnabled = YES;
-        ((ORKTextButton *)sender).isInTransition = NO;
+        [sender performIfRespondsToSelector:@selector(setIsInTransition:) withObject:[NSNumber numberWithBool:NO]];
     });
 }
 
@@ -232,11 +306,12 @@ static const CGFloat detailTextBottomSpacing = 16.0;
     
     // Disable button for 0.5s
     ((UIView *)sender).userInteractionEnabled = NO;
-    ((ORKTextButton *)sender).isInTransition = YES;
+    [sender performIfRespondsToSelector:@selector(setIsInTransition:) withObject:[NSNumber numberWithBool:YES]];
     _continueOrSkipButtonJustTapped = YES;
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _continueOrSkipButtonJustTapped = NO;
-        ((ORKTextButton *)sender).isInTransition = NO;
+        [sender performIfRespondsToSelector:@selector(setIsInTransition:) withObject:[NSNumber numberWithBool:NO]];
         [self updateContinueAndSkipEnabled];
     });
 }
@@ -258,8 +333,12 @@ static const CGFloat detailTextBottomSpacing = 16.0;
     [self setNeedsUpdateConstraints];
 }
 
-- (BOOL)neverHasSkipButton {
+- (BOOL)hasSkipButton {
     return !self.optional;
+}
+
+- (BOOL)isDetailTextEmpty {
+    return _detailTextLabel.text.length == 0;
 }
 
 - (BOOL)neverHasFootnote {
@@ -270,12 +349,8 @@ static const CGFloat detailTextBottomSpacing = 16.0;
     return (!_skipButtonItem) || _useNextForSkip || !self.optional || _skipButtonItem.title == nil;
 }
 
-- (CGFloat)skipButtonAlpha {
-    return ([self skipButtonHidden] ? 0.0 : 1.0);
-}
-
 - (BOOL)hasContinueOrSkip {
-    return !([self neverHasContinueButton] && [self neverHasSkipButton] && [self neverHasFootnote]);
+    return !([self neverHasContinueButton] && [self hasSkipButton] && [self neverHasFootnote]);
 }
 
 - (BOOL)wasContinueOrSkipButtonJustPressed {
@@ -284,67 +359,104 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 
 - (void)updateContinueAndSkipEnabled {
     [_skipButton setTitle:_skipButtonItem.title ? : ORKLocalizedString(@"BUTTON_SKIP", nil) forState:UIControlStateNormal];
+    
+    if (_skipButtonItem.accessibilityIdentifier) {
+        _skipButton.accessibilityIdentifier = _skipButtonItem.accessibilityIdentifier;
+    }
 
     if ([self neverHasContinueButton]) {
         _continueButton.hidden = YES;
     }
 
     if (_useNextForSkip && _skipButtonItem) {
-        _continueButton.alpha = (_continueButtonItem == nil && _skipButtonItem == nil) ? 0 : 1;
+        if (![self neverHasContinueButton]) {
+            _continueButton.hidden = (_continueButtonItem == nil && _skipButtonItem == nil);
+        }
         [_continueButton setTitle: _continueButtonItem.title ? : _skipButtonItem.title forState:UIControlStateNormal];
         _continueButton.accessibilityHint = _continueButtonItem.accessibilityHint ? : _skipButtonItem.accessibilityHint;
+        
+        NSString *accessibilityId = _continueButtonItem.accessibilityIdentifier ? : _skipButtonItem.accessibilityIdentifier;
+        if (accessibilityId) {
+            _continueButton.accessibilityIdentifier = accessibilityId;
+        }
     } else {
-        _continueButton.alpha = (_continueButtonItem == nil) ? 0 : 1;
+        if (![self neverHasContinueButton]) {
+            _continueButton.hidden = (_continueButtonItem == nil);
+        }
         [_continueButton setTitle: _continueButtonItem.title forState:UIControlStateNormal];
         _continueButton.accessibilityHint = _continueButtonItem.accessibilityHint;
+        
+        if (_continueButtonItem.accessibilityIdentifier) {
+            _continueButton.accessibilityIdentifier = _continueButtonItem.accessibilityIdentifier;
+        }
     }
     
     _continueButton.enabled = (_continueEnabled || (_useNextForSkip && _skipButtonItem));
-    _continueButton.disableTintColor = [[self tintColor] colorWithAlphaComponent:0.5];
-    _continueButton.disabledButtonStyle = self.continueButtonDisabledStyle;
-    
+    if ([_continueButton isKindOfClass:[ORKContinueButton class]]) {
+        ORKContinueButton *continueButton = (ORKContinueButton *)_continueButton;
+        continueButton.disableTintColor = [[self tintColor] colorWithAlphaComponent:0.5];
+        continueButton.disabledButtonStyle = self.continueButtonDisabledStyle;
+    }
+    else if (@available(iOS 26.0, *)) {
+        if (ORKLiquidGlassSupportEnabled()) {
+            UIButtonConfiguration *configuration = [_continueButton configuration];
+            UIColor *tintColor = [UIColor tintColor];
+            if (!_continueButton.enabled) {
+                configuration.baseBackgroundColor = [tintColor colorWithAlphaComponent:0.5];
+            } else {
+                configuration.baseBackgroundColor = tintColor;
+            }
+            [_continueButton setConfiguration:configuration];
+        }
+    }
+
     // Do not modify _continueButton.userInteractionEnabled during continueButton disable period
     // or when the activity indicator is present
     if (_continueOrSkipButtonJustTapped == NO && _activityIndicatorView == nil) {
         _continueButton.userInteractionEnabled = (_continueEnabled || (_useNextForSkip && _skipButtonItem));
     }
-    
-    _skipButton.alpha = [self skipButtonAlpha];
+
+    self.detailTextLabel.hidden = [self isDetailTextEmpty];
+    self.footnoteLabel.hidden = [self neverHasFootnote];
+    _skipButton.hidden = [self skipButtonHidden];
     [self setNeedsUpdateConstraints];
     [self setUpConstraints];
 }
 
 - (void)showActivityIndicator:(BOOL)showActivityIndicator {
-    
     [_continueButton setUserInteractionEnabled:!showActivityIndicator];
+    [self updateContinueAndSkipEnabled];
 
     if (showActivityIndicator == YES) {
         if (_activityIndicatorView == nil) {
             _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
-            
+            [self updateActivityIndicator:_activityIndicatorView for:[[UIApplication sharedApplication] preferredContentSizeCategory]];
+
             [_continueButton addSubview:_activityIndicatorView];
             _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
             [NSLayoutConstraint activateConstraints:@[
-                [NSLayoutConstraint constraintWithItem:_activityIndicatorView
-                                             attribute:NSLayoutAttributeCenterX
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:_continueButton.titleLabel
-                                             attribute:NSLayoutAttributeLeft
-                                            multiplier:1.0
-                                              constant:-activityIndicatorPadding],
-                [NSLayoutConstraint constraintWithItem:_activityIndicatorView
-                                             attribute:NSLayoutAttributeCenterY
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:_continueButton.titleLabel
-                                             attribute:NSLayoutAttributeCenterY
-                                            multiplier:1.0
-                                              constant:0]
+                [_activityIndicatorView.centerXAnchor constraintEqualToAnchor:_continueButton.readableContentGuide.leadingAnchor constant:activityIndicatorPadding],
+                [_activityIndicatorView.centerYAnchor constraintEqualToAnchor:_continueButton.centerYAnchor]
             ]];
 
         }
         [_activityIndicatorView startAnimating];
+        _accessibilityObservationToken = [[NSNotificationCenter defaultCenter] addObserverForName:UIContentSizeCategoryDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull notification) {
+            NSString *sizeCategory = [[notification userInfo] valueForKey:UIContentSizeCategoryNewValueKey];
+            [self updateActivityIndicator:_activityIndicatorView for:sizeCategory];
+        }];
     } else {
         [_activityIndicatorView stopAnimating];
+        _accessibilityObservationToken = nil;
+    }
+}
+
+- (void) updateActivityIndicator:(UIActivityIndicatorView *)activityIndicatorView for:(NSString *)sizeCategory {
+    NSArray *largeSizesSupported = @[UIContentSizeCategoryExtraLarge, UIContentSizeCategoryExtraExtraLarge, UIContentSizeCategoryExtraExtraExtraLarge, UIContentSizeCategoryAccessibilityExtraLarge, UIContentSizeCategoryAccessibilityExtraExtraLarge, UIContentSizeCategoryAccessibilityExtraExtraExtraLarge];
+    if ([largeSizesSupported containsObject:sizeCategory]) {
+        _activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleLarge;
+    } else {
+        _activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleMedium;
     }
 }
 
@@ -369,205 +481,20 @@ static const CGFloat detailTextBottomSpacing = 16.0;
 }
 
 - (void)setUpConstraints {
-    
-    CGFloat leftRightPadding = _useExtendedPadding ? ORKStepContainerExtendedLeftRightPaddingForWindow(self.window) : ORKStepContainerLeftRightPaddingForWindow(self.window);
-    
     if (_regularConstraints) {
         [NSLayoutConstraint deactivateConstraints:_regularConstraints];
     }
-    [_regularConstraints removeAllObjects];
     _regularConstraints = [NSMutableArray new];
 
-    if (_detailTextLabel) {
-        [_regularConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_detailTextLabel
-                                         attribute:NSLayoutAttributeTop
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeTop
-                                        multiplier:1.0
-                                          constant:topSpacing],
-            [NSLayoutConstraint constraintWithItem:_detailTextLabel
-                                         attribute:NSLayoutAttributeLeft
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeLeft
-                                        multiplier:1.0
-                                          constant:leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_detailTextLabel
-                                         attribute:NSLayoutAttributeRight
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeRight
-                                        multiplier:1.0
-                                          constant:-leftRightPadding]
-        ]];
-    }
-    
-    if (_continueButton) {
-        if (_detailTextLabel) {
-            [_regularConstraints addObjectsFromArray:@[
-                [NSLayoutConstraint constraintWithItem:_continueButton
-                                             attribute:NSLayoutAttributeTop
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:_detailTextLabel
-                                             attribute:NSLayoutAttributeBottom
-                                            multiplier:1.0
-                                              constant:detailTextBottomSpacing]
-            ]];
-        } else {
-            [_regularConstraints addObjectsFromArray:@[
-                [NSLayoutConstraint constraintWithItem:_continueButton
-                                             attribute:NSLayoutAttributeTop
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:self
-                                             attribute:NSLayoutAttributeTop
-                                            multiplier:1.0
-                                              constant:topSpacing]
-            ]];
-        }
-        
-        [_regularConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_continueButton
-                                         attribute:NSLayoutAttributeLeft
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeLeft
-                                        multiplier:1.0
-                                          constant:leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_continueButton
-                                         attribute:NSLayoutAttributeRight
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeRight
-                                        multiplier:1.0
-                                          constant:-leftRightPadding],
-        ]];
-    }
-    
-    if (_skipButton) {
-        [_regularConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_skipButton
-                                         attribute:NSLayoutAttributeTop
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:_continueButton ? : self.safeAreaLayoutGuide
-                                         attribute:_continueButton ? NSLayoutAttributeBottom : NSLayoutAttributeTop
-                                        multiplier:1.0
-                                          constant:_continueButton ? standardSpacing : topSpacing],
-            [NSLayoutConstraint constraintWithItem:_skipButton
-                                         attribute:NSLayoutAttributeHeight
-                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                            toItem:nil
-                                         attribute:NSLayoutAttributeNotAnAttribute
-                                        multiplier:1.0
-                                          constant:skipButtonHeight],
-            [NSLayoutConstraint constraintWithItem:_skipButton
-                                         attribute:NSLayoutAttributeLeft
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeLeft
-                                        multiplier:1.0
-                                          constant:leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_skipButton
-                                         attribute:NSLayoutAttributeRight
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeRight
-                                        multiplier:1.0
-                                          constant:-leftRightPadding],
-        ]];
-    }
-    
-    UIView *lastView = _skipButton ? : _continueButton;
-
-    if (![self neverHasFootnote]) {
-        UIView *lastButton = [self neverHasSkipButton] ? _continueButton : _skipButton;
-        [_regularConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_footnoteLabel
-                                         attribute:NSLayoutAttributeTop
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:lastButton ? : self.safeAreaLayoutGuide
-                                         attribute:lastButton ? NSLayoutAttributeBottom : NSLayoutAttributeTop
-                                        multiplier:1.0
-                                          constant:lastButton ? standardSpacing : topSpacing],
-            [NSLayoutConstraint constraintWithItem:_footnoteLabel
-                                         attribute:NSLayoutAttributeLeft
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeLeft
-                                        multiplier:1.0
-                                          constant:leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_footnoteLabel
-                                         attribute:NSLayoutAttributeRight
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.safeAreaLayoutGuide
-                                         attribute:NSLayoutAttributeRight
-                                        multiplier:1.0
-                                          constant:-leftRightPadding],
-        ]];
-        lastView = _footnoteLabel;
-    }
-    
-    if (lastView) {
-        [_regularConstraints addObject:[NSLayoutConstraint constraintWithItem:self
-                                                                    attribute:NSLayoutAttributeBottom
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:lastView
-                                                                    attribute:NSLayoutAttributeBottom
-                                                                   multiplier:1.0
-                                                                     constant:bottomSpacing]
-         ];
-    }
-    else {
-        [_regularConstraints addObject:[NSLayoutConstraint constraintWithItem:self
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:0.0]
-        ];
-    }
-    if (effectView) {
-        [_regularConstraints addObjectsFromArray:@[
-                                           [NSLayoutConstraint constraintWithItem:effectView
-                                                                        attribute:NSLayoutAttributeTop
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self
-                                                                        attribute:NSLayoutAttributeTop
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:effectView
-                                                                        attribute:NSLayoutAttributeLeft
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self
-                                                                        attribute:NSLayoutAttributeLeft
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:effectView
-                                                                        attribute:NSLayoutAttributeRight
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self
-                                                                        attribute:NSLayoutAttributeRight
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:effectView
-                                                                        attribute:NSLayoutAttributeBottom
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self
-                                                                        attribute:NSLayoutAttributeBottom
-                                                                       multiplier:1.0
-                                                                         constant:0.0]
-                                           ]];
-
-    }
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints: @[
+        [self.contentView.topAnchor constraintEqualToSystemSpacingBelowAnchor:self.safeAreaLayoutGuide.topAnchor multiplier:3],
+        [self.layoutMarginsGuide.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
+        [self.layoutMarginsGuide.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor],
+        [self.layoutMarginsGuide.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor],
+    ]];
     
     [NSLayoutConstraint activateConstraints:_regularConstraints];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self setUpConstraints];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {

@@ -45,9 +45,13 @@ NSString * const ORKLearnMoreViewDoneButtonAccessibilityIdentifier = @"ORKLearnM
 
 - (void)stepDidChange {
     [super stepDidChange];
-    [self.stepView.navigationFooterView setHidden:YES];
-    
     self.stepView.accessibilityIdentifier = ORKLearnMoreStepViewAccessibilityIdentifier;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    // Hide the footer after layout is complete
+    [self.stepView.navigationFooterView setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,13 +61,16 @@ NSString * const ORKLearnMoreViewDoneButtonAccessibilityIdentifier = @"ORKLearnM
     }
     
     self.view.backgroundColor = [UIColor systemBackgroundColor];
-    self.navigationController.navigationBar.backgroundColor = UIColor.systemBackgroundColor;
-    self.navigationController.navigationBar.tintColor = self.view.tintColor;
+    
+    if (!ORKLiquidGlassSupportEnabled()) {
+        self.navigationController.navigationBar.backgroundColor = UIColor.systemBackgroundColor;
+        self.navigationController.navigationBar.tintColor = self.view.tintColor;
 
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+    }
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemClose target:self action:@selector(doneButtonPressed:)];
     self.navigationItem.rightBarButtonItem.accessibilityIdentifier = ORKLearnMoreViewDoneButtonAccessibilityIdentifier;
     
     if (self.stepView.navigationFooterView.isHidden) {

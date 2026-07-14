@@ -38,6 +38,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXPORT NSString * const ORKStreamingAudioRecorderIdentifier;
+
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
 /// Returns a predefined Amsler Grid task that helps in detecting problems in a user's vision.

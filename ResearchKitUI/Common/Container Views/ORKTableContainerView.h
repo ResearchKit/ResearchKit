@@ -62,12 +62,12 @@ NS_ASSUME_NONNULL_BEGIN
     
 - (instancetype)initWithStyle:(UITableViewStyle)style pinNavigationContainer:(BOOL)pinNavigationContainer;
 
-- (void)sizeHeaderToFit;
-
-- (void)resizeFooterToFitUsingMinHeight:(BOOL)useMinHeight;
+- (void)resizeFooterToFit;
 
 - (void)removeFooterView;
 
 @end
+
+CGFloat automaticMinimumHeightForTableViewRow(CGFloat existingHeight);
 
 NS_ASSUME_NONNULL_END

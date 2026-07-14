@@ -52,6 +52,7 @@
 
 #define BOUND(lo, hi, v) (((v) < (lo)) ? (lo) : (((v) > (hi)) ? (hi) : (v)))
 
+
 @implementation ORKTrailmakingStepViewController {
     ORKTrailmakingContentView *_trailmakingContentView;
     NSArray *_testPoints;
@@ -96,13 +97,25 @@
     for (ORKRoundTappingButton* b in _trailmakingContentView.tapButtons) {
         [b addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     }
-    
-    _timerLabel = [[UILabel alloc] init];
-    _timerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    _timerLabel.adjustsFontForContentSizeCategory = YES;
-    _timerLabel.textAlignment = NSTextAlignmentCenter;
-    
-    [self.view addSubview:_timerLabel];
+
+    [self setNavigationFooterViewHidden:YES];
+    [self.view addSubview:self.timerLabel];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.timerLabel.topAnchor constraintEqualToAnchor:self.activeStepView.topAnchor],
+        [self.timerLabel.leadingAnchor constraintEqualToAnchor:self.activeStepView.leadingAnchor],
+        [self.timerLabel.trailingAnchor constraintEqualToAnchor:self.activeStepView.trailingAnchor]
+    ]];
+}
+
+- (UILabel *)timerLabel {
+    if (_timerLabel == nil) {
+        _timerLabel = [[UILabel alloc] init];
+        _timerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        _timerLabel.adjustsFontForContentSizeCategory = YES;
+        _timerLabel.textAlignment = NSTextAlignmentCenter;
+        _timerLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _timerLabel;
 }
 
 - (void)timerUpdated:(NSTimer*)timer {
@@ -120,7 +133,7 @@
         text = [NSString stringWithFormat:@"%@ %@", text, localizedErrors];
     }
     
-    _timerLabel.text = text;
+    self.timerLabel.text = text;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -150,7 +163,7 @@
 }
 
 - (void)layoutButtons {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGRect screenRect = self.view.bounds;
     int screenSize = MAX(screenRect.size.width, screenRect.size.height);
     
     int cx;
@@ -162,11 +175,6 @@
     } else {
         cx = 40;  // iPhone 5/SE
     }
-    
-    CGRect labelRect = _trailmakingContentView.testArea;
-    labelRect.size.height = 20;
-    labelRect.origin = self.activeStepView.frame.origin;
-    [_timerLabel setFrame:labelRect];
     
     CGRect r = _trailmakingContentView.testArea;
     int idx = 0;

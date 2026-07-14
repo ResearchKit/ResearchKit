@@ -128,7 +128,12 @@
     if ([answer isKindOfClass:[NSNumber class]]) {
         answer = @[answer];
     }
-    
+
+    // Don't Know is not a choice selection; treat it as no selection.
+    if ([answer isKindOfClass:[ORKDontKnowAnswer class]]) {
+        answer = nil;
+    }
+
     NSMutableArray *indexArray = [NSMutableArray new];
     
     if (answer != nil && answer != ORKNullAnswerValue() ) {
@@ -141,8 +146,9 @@
         
         for (id answerValue in (NSArray *)answer) {
             id<ORKAnswerOption> matchedChoice = nil;
+#if TARGET_OS_IOS
             BOOL isTextChoiceOtherResult = [self _isTextChoiceOtherResult:answerValue choices:_choices];
-            
+#endif
             for ( id<ORKAnswerOption> choice in _choices) {
 #if TARGET_OS_IOS
                 if ([choice isKindOfClass:[ORKTextChoiceOther class]]) {

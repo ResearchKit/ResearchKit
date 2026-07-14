@@ -39,6 +39,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.shouldStartTimerAutomatically = YES;
+        self.shouldShowDefaultTimer = NO;
         self.text = [instructionText stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"TOUCH_ANYWHERE_LABEL", nil)]];
     }
     return self;

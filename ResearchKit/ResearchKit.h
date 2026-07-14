@@ -122,3 +122,10 @@
 #import <ResearchKit/ORKHealthCondition.h>
 #import <ResearchKit/ORKRelatedPerson.h>
 #import <ResearchKit/ORKRelativeGroup.h>
+
+// Serialization
+#import <ResearchKit/ORKCoreSerializationEntryProvider.h>
+#import <ResearchKit/ORKESerialization+Helpers.h>
+#import <ResearchKit/ORKESerializer+CoreSerializationEntryProvider.h>
+#import <ResearchKit/ORKESerializer.h>
+#import <ResearchKit/ORKSerializationEntryProvider.h>

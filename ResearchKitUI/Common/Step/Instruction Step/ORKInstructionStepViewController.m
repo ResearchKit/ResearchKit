@@ -82,7 +82,9 @@
     if (_stepView) {
         _navigationFooterView = _stepView.navigationFooterView;
         _navigationFooterView.continueButtonItem = self.continueButtonItem;
+        _navigationFooterView.skipButtonItem = self.skipButtonItem;
         _navigationFooterView.continueEnabled = YES;
+        _navigationFooterView.skipEnabled = self.skipButtonItem ? YES : NO;
         _navigationFooterView.hidden = self.isBeingReviewed;
         _navigationFooterView.optional = [self instructionStep].isOptional || [self instructionStep].earlyTerminationConfiguration != nil;
         _navigationFooterView.footnoteLabel.text = [self instructionStep].footnote;
@@ -95,66 +97,32 @@
         [NSLayoutConstraint deactivateConstraints:_constraints];
     }
     self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutYAxisAnchor *topAnchor = ORKLiquidGlassSupportEnabled() ? self.view.topAnchor : self.view.safeAreaLayoutGuide.topAnchor;
+
     _constraints = nil;
     _constraints = @[
-                     [NSLayoutConstraint constraintWithItem:self.stepView
-                                                  attribute:NSLayoutAttributeTop
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeTop
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:self.stepView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:self.stepView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:self.stepView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0]
-                     ];
+        [self.stepView.topAnchor constraintEqualToAnchor:topAnchor],
+        [self.stepView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+        [self.stepView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor],
+        [self.stepView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor],
+    ];
     [NSLayoutConstraint activateConstraints:_constraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    if ([self.taskViewController isStepLastBeginningInstructionStep:self.step]) {
-        [self useAppropriateButtonTitleAsLastBeginningInstructionStep];
-    }
-    
     [super viewWillAppear:animated];
     [self.taskViewController setNavigationBarColor:self.view.backgroundColor];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self stepDidChange];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [_stepView setNeedsUpdateConstraints];
-    
-    if (self.step.buildInBodyItems == YES) {
-        UIView *lastVisibleBodyItem = [_stepView.stepContentView.bodyContainerView lastVisibleBodyItem];
-        [_stepView updateEffectViewStylingAndAnimate:NO checkCurrentValue:NO customView:lastVisibleBodyItem];
-    } else {
-        [_stepView updateEffectViewStylingAndAnimate:NO checkCurrentValue:NO];
-    }
 }
 
 - (void)useAppropriateButtonTitleAsLastBeginningInstructionStep {
@@ -180,7 +148,6 @@
     
     UIView *lastView = [_stepView.stepContentView.bodyContainerView lastVisibleBodyItem];
     [_stepView scrollToBodyItem:lastView];
-    [_stepView updateEffectViewStylingAndAnimate:NO checkCurrentValue:NO customView:lastView];
 }
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -223,13 +190,6 @@
         [self buildInNextBodyItem];
     } else {
         [super goForward];
-    }
-}
-
-- (void)bodyContainerViewDidLoadBodyItems {
-    if ([self.stepView buildInBodyItems] == YES) {
-        UIView *lastVisibleBodyItem = [_stepView.stepContentView.bodyContainerView lastVisibleBodyItem];
-        [_stepView updateEffectViewStylingAndAnimate:NO checkCurrentValue:NO customView:lastVisibleBodyItem];
     }
 }
 

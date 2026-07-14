@@ -28,18 +28,19 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit-Swift.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 #import "ORKSurveyAnswerCellForPicker.h"
 
 #import "ORKPicker.h"
-#import "ORKDontKnowButton.h"
 
 #import "ORKQuestionStep_Internal.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHelpers_Internal.h"
 
 static const CGFloat DividerViewTopPadding = 10.0;
-static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
+static const CGFloat DontKnowButtonTopBottomPadding = 3.0;
 static const CGFloat DontKnowButtonBottomPaddingOffset = 10.0;
 
 
@@ -122,10 +123,10 @@ static const CGFloat DontKnowButtonBottomPaddingOffset = 10.0;
         [[view.topAnchor constraintEqualToAnchor:self.topAnchor] setActive:YES];
         
         if (_dontKnowButton) {
-            CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+            CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
             [[_dividerView.topAnchor constraintEqualToAnchor:view.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
-            [[_dividerView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
-            [[_dividerView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
+            [[_dividerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+            [[_dividerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
             [[_dividerView.heightAnchor constraintGreaterThanOrEqualToConstant:separatorHeight] setActive:YES];
             
             [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];

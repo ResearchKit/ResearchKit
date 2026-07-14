@@ -39,9 +39,10 @@
     if (self) {
         self.shouldVibrateOnStart = YES;
         self.shouldShowDefaultTimer = NO;
-        self.shouldContinueOnFinish = YES;
+        self.shouldContinueOnFinish = NO;
         self.stepDuration = NSIntegerMax;
         self.eyeSide = ORKAmslerGridEyeSideNotSpecified;
+        self.allowsBackNavigation = NO;
     }
     return self;
 }
@@ -70,10 +71,6 @@
 }
 
 - (BOOL)startsFinished {
-    return NO;
-}
-
-- (BOOL)allowsBackNavigation {
     return NO;
 }
 

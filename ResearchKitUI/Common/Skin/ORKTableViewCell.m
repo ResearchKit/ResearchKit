@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit-Swift.h>
 
 #import "ORKTableViewCell.h"
 
@@ -76,7 +77,7 @@
         [self addSubview:_bottomSeparator];
         _bottomSeparator.translatesAutoresizingMaskIntoConstraints = NO;
         
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
         
         NSMutableArray *constraints = [NSMutableArray array];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_bottomSeparator
@@ -128,7 +129,7 @@
         [self addSubview:_topSeparator];
         _topSeparator.translatesAutoresizingMaskIntoConstraints = NO;
         
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
         
         NSMutableArray *constraints = [NSMutableArray array];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_topSeparator

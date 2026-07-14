@@ -33,9 +33,18 @@
 
 #import "ORKSkin.h"
 #import "ORKAccessibilityFunctions.h"
+#import <ResearchKit/ResearchKit-Swift.h>
+
+CGFloat continueButtonHeight(void);
 
 static const CGFloat ContinueButtonTouchMargin = 10;
-static const CGFloat ContinueButtonHeight = 50.0;
+CGFloat continueButtonHeight(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return 52;
+    } else {
+        return 48;
+    }
+}
 
 static NSString *accessibilityIdentifierDone = @"ORKContinueButton.Done";
 static NSString *accessibilityIdentifierNext = @"ORKContinueButton.Next";
@@ -47,14 +56,16 @@ static NSString *accessibilityIdentifierNext = @"ORKContinueButton.Next";
 - (instancetype)initWithTitle:(NSString *)title isDoneButton:(BOOL)isDoneButton {
     self = [super init];
     if (self) {
-        [self setTitle:title forState:UIControlStateNormal];
         if (isDoneButton) {
             self.accessibilityIdentifier = accessibilityIdentifierDone;
         } else {
             self.accessibilityIdentifier = accessibilityIdentifierNext;
         }
         self.isDoneButton = isDoneButton;
-        self.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
+        UIButtonConfiguration *config = [UIButtonConfiguration plainButtonConfiguration];
+        config.contentInsets = NSDirectionalEdgeInsetsMake(0, 6, 0, 6);
+        config.title = title;
+        self.configuration = config;
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -70,7 +81,7 @@ static NSString *accessibilityIdentifierNext = @"ORKContinueButton.Next";
                                                         toItem:nil
                                                      attribute:NSLayoutAttributeNotAnAttribute
                                                     multiplier:1.0
-                                                      constant:ContinueButtonHeight];
+                                                      constant:continueButtonHeight()];
     _heightConstraint.active = YES;
 }
 

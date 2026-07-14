@@ -81,19 +81,43 @@
 }
 
 - (void)viewDidLoad {
+    if (!self.step.text) {
+        self.step.text = [[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]];
+    }
+
     [super viewDidLoad];
-    
+
+    // Parse the task's results to find the ORKHolePegTestResult totalTime
+    // value and subtract that from this step's stepDuration.
+    NSString *identifier = [[self holePegTestRemoveStep].identifier stringByReplacingOccurrencesOfString:@"remove" withString:@"place"];
+    NSTimeInterval placeStepDuration = ((ORKHolePegTestResult *)[[self.taskViewController.result stepResultForStepIdentifier:identifier].results firstObject]).totalTime;
+    [self holePegTestRemoveStep].stepDuration -= placeStepDuration;
+
+    // Construct the active task custom view
     self.holePegTestRemoveContentView = [[ORKHolePegTestRemoveContentView alloc] initWithMovingDirection:[self holePegTestRemoveStep].movingDirection];
     self.holePegTestRemoveContentView.threshold = [self holePegTestRemoveStep].threshold;
     self.holePegTestRemoveContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestRemoveContentView;
     self.activeStepView.customContentFillsAvailableSpace = YES;
-    
-    NSString *identifier = [[self holePegTestRemoveStep].identifier stringByReplacingOccurrencesOfString:@"remove" withString:@"place"];
-    NSTimeInterval placeStepDuration = ((ORKHolePegTestResult *)[[self.taskViewController.result stepResultForStepIdentifier:identifier].results firstObject]).totalTime;
-    [self holePegTestRemoveStep].stepDuration -= placeStepDuration;
-    
+
+    [self pinContentView];
+
+    [super stepDidChange];
     [self start];
+}
+
+- (void)pinContentView {
+    self.holePegTestRemoveContentView.translatesAutoresizingMaskIntoConstraints = NO;
+    UIView *superview = self.holePegTestRemoveContentView.superview;
+    if (!superview) {
+        return;
+    }
+    [NSLayoutConstraint activateConstraints:@[
+        [self.holePegTestRemoveContentView.leadingAnchor constraintEqualToAnchor:superview.leadingAnchor],
+        [self.holePegTestRemoveContentView.trailingAnchor constraintEqualToAnchor:superview.trailingAnchor],
+        [self.holePegTestRemoveContentView.bottomAnchor constraintEqualToAnchor:superview.bottomAnchor],
+        [self.holePegTestRemoveContentView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:self.view.bounds.size.height * 0.25]
+    ]];
 }
 
 #pragma mark - step life cycle methods
@@ -106,6 +130,12 @@
     [self.holePegTestRemoveContentView setProgress:0.001f animated:NO];
     
     [super start];
+}
+
+- (void)stepDidChange {
+    // This override prevents the super call that constructs the timer view
+    // before we have access to the ORKTaskViewController to fetch the correct
+    // start time.
 }
 
 #pragma mark - result methods

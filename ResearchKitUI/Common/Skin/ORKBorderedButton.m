@@ -31,8 +31,9 @@
 
 #import "ORKBorderedButton.h"
 #import "ORKBorderedButton_Internal.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKTextButton_Internal.h"
-
+#import <ResearchKit/ResearchKit-Swift.h>
 
 @implementation CALayer (ORKCornerCurveContinuousCategory)
 
@@ -46,12 +47,19 @@
 
 @end
 
-static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
+CGFloat ORKBorderedButtonCornerRadius(void) {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return 26.0;
+    } else {
+        return 14.0;
+    }
+}
 
 @implementation ORKBorderedButton {
 
     BOOL _appearsAsTextButton;
     BOOL _useBoldFont;
+    NSLayoutConstraint *_heightConstraint;
 }
 
 - (instancetype)init {
@@ -71,8 +79,20 @@ static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
 }
 
 - (void)setupLayer {
-    self.layer.cornerRadius = ORKBorderedButtonCornerRadii;
+    self.layer.cornerRadius = ORKBorderedButtonCornerRadius();
     [self.layer setCornerCurveContinuous];
+}
+
+- (void)updateConstraints {
+    [super updateConstraints];
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:ORKBorderedButtonCornerRadius() * 2];
+    _heightConstraint.active = YES;
 }
 
 - (void)setFadeDelay {

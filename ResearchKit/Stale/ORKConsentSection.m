@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit-Swift.h>
 
 #import "ORKConsentSection.h"
 
@@ -43,7 +44,7 @@ static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
 }
 
 NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
-    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat scale = UITraitCollection.currentSafeDisplayScale;
     
     // For iPad, use the movie for the next scale up
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && scale < 3) {

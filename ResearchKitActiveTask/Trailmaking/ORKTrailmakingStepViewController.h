@@ -37,8 +37,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKTrailmakingStepViewController : ORKActiveStepViewController {
-}
+@interface ORKTrailmakingStepViewController : ORKActiveStepViewController
 
 @end
 

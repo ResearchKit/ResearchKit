@@ -30,6 +30,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ResearchKitActiveTask/ORKAudioFitnessStepViewController.h>
+#import <ResearchKitActiveTask/ORKAudioFitnessStep.h>
 
 @import XCTest;
 
@@ -89,7 +90,12 @@
 @implementation ORKAudioFitnessStepViewControllerTests
 
 - (void)setUp {
-    audioFitnessStepViewController = [[ORKMockAudioFitnessStepViewController alloc] init];
+    ORKBundleAsset *audio = [[ORKBundleAsset alloc] initWithName:@"testAudio"
+                                                bundleIdentifier:@"com.test.bundle"
+                                                   fileExtension:@".mp3"];
+    ORKAudioFitnessStep *step = [[ORKAudioFitnessStep alloc] initWithIdentifier:@"testStep" audioAsset:audio vocalCues:nil];
+    step.stepDuration = 10.0;
+    audioFitnessStepViewController = [[ORKMockAudioFitnessStepViewController alloc] initWithStep:step];
 }
 
 - (void)tearDown {

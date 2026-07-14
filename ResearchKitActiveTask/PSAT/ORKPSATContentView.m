@@ -83,7 +83,8 @@
         _keyboardView = [ORKPSATKeyboardView new];
         _keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_keyboardView];
-        
+
+        self.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
         self.translatesAutoresizingMaskIntoConstraints = NO;
 
         [self setNeedsUpdateConstraints];
@@ -125,8 +126,7 @@
 
 - (void)updateConstraints {
     [NSLayoutConstraint deactivateConstraints:self.constraints];
-    
-    const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewWidth, self.window);
+
     const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewHeight, self.window);
     
     NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray array];
@@ -138,14 +138,14 @@
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
-    
+
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_keyboardView
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil
-                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeWidth
                                                        multiplier:1.0
-                                                         constant:ORKPSATKeyboardWidth]];
+                                                         constant:0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_keyboardView
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual

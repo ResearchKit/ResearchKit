@@ -88,6 +88,7 @@
     self.activeStepView.customContentFillsAvailableSpace = NO;
     _speechInNoiseContentView.alertColor = [UIColor blueColor];
     [self.speechInNoiseContentView.playButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
+    [self.speechInNoiseContentView.stopButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
     [_speechInNoiseContentView setGraphViewHidden:[self speechInNoiseStep].hideGraphView];
 }
 
@@ -225,9 +226,11 @@
         
         [_playerNode play];
         if ([self speechInNoiseStep].willAudioLoop) {
-            [_speechInNoiseContentView.playButton setTitle:ORKLocalizedString(@"SPEECH_IN_NOISE_STOP_AUDIO_LABEL", nil)
-                                                  forState:UIControlStateNormal];
-            [_speechInNoiseContentView.playButton setTintColor:[UIColor ork_redColor]];
+            // hide the play button and show the stop button if the audio is looped
+            [_speechInNoiseContentView.playButton setEnabled:NO];
+            [_speechInNoiseContentView.playButton setHidden:YES];
+            
+            [_speechInNoiseContentView.stopButton setHidden:NO];
         } else {
             ORKWeakTypeOf(self) weakSelf = self;
             [_speechInNoiseContentView.playButton setEnabled:NO];

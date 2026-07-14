@@ -32,8 +32,7 @@
 import UIKit
 import ResearchKit_Private
 import ResearchKitUI
-
-
+import ResearchKitActiveTask
 
 /**
     This example displays a catalog of tasks, each consisting of one or two steps,
@@ -50,6 +49,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     var waitStepUpdateTimer: Timer?
     var waitStepProgress: CGFloat = 0.0
 
+    private var searchFilter: String?
 
     // In-memory store for taskViewController restoration data
     var restorationDataByTaskID: [String:Data] = [:]
@@ -74,40 +74,136 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         super.viewDidLoad()
         
         self.tableView.backgroundColor = UIColor.systemGroupedBackground
+        self.tableView.keyboardDismissMode = .onDrag
+        
+        // Configure table view for dynamic type support
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 44
+        
+        // Configure section headers for dynamic type support
+        self.tableView.sectionHeaderHeight = UITableView.automaticDimension
+        self.tableView.estimatedSectionHeaderHeight = 28
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Check if the content size category has changed
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            self.tableView.invalidateIntrinsicContentSize()
+            self.tableView.setNeedsLayout()
+            self.tableView.layoutIfNeeded()
+        }
     }
     
     // MARK: UITableViewDataSource
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return TaskListRow.sections.count
+    var sections: [TaskListRow.TaskListRowSection] {
+        if searchFilter != nil {
+            let sections = TaskListRow.sections
+                .filter {
+                    $0.rows
+                        .contains(where: includeRowFilter(_:))
+                }
+            return sections
+        } else {
+            return TaskListRow.sections
+        }
     }
-    
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
+
+    private func rowsForSection(_ section: Int) -> [TaskListRow] {
+        let rows = sections[section].rows
+        return rows.filter(includeRowFilter(_:))
+    }
+
+    private func rowForIndexPath(_ indexPath: IndexPath) -> TaskListRow? {
+        let filteredSections = self.sections
+        guard filteredSections.indices.contains(indexPath.section) else { return nil }
+        let section = filteredSections[indexPath.section]
+        let rows = section.rows.filter(includeRowFilter(_:))
+
+        if rows.indices.contains(indexPath.row) {
+            return rows[indexPath.row]
+        } else {
+            return nil
+        }
+    }
+
+    private func includeRowFilter(_ row: TaskListRow) -> Bool {
+        return if let searchFilter {
+            row.description.localizedCaseInsensitiveContains(searchFilter)
+        } else {
+            true //no filter, always include result
+        }
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TaskListRow.sections[section].rows.count
+        return rowsForSection(section).count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return TaskListRow.sections[section].title
+        return sections[section].title
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.systemGroupedBackground
+        
+        let titleLabel = UILabel()
+        titleLabel.text = sections[section].title
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.textColor = UIColor.secondaryLabel
+        titleLabel.numberOfLines = 0
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        headerView.addSubview(titleLabel)
+        
+        let margin = 8.0
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: margin*2),
+            titleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -margin*2),
+            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: margin),
+            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -margin)
+        ])
+        
+        return headerView
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifier.default.rawValue, for: indexPath)
+
+        let taskListRow = rowsForSection(indexPath.section)[indexPath.row]
         
-        let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
-        
-        cell.textLabel!.text = "\(taskListRow)"
+        cell.textLabel?.text = "\(taskListRow)"
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.textLabel?.adjustsFontForContentSizeCategory = true
         cell.textLabel?.textColor = UIColor.label
+        cell.textLabel?.numberOfLines = 0
         
         return cell
     }
     
     // MARK: UITableViewDelegate
     
+    let settings: UserDefaults = .standard
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         // Present the task view controller that the user asked for.
-        let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
+        guard let taskListRow = rowForIndexPath(indexPath) else { return }
+
+        guard taskListRow != .emptyTask else { return }
         
         displayTaskViewController(taskListRow: taskListRow)
     }
@@ -131,19 +227,23 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         } else {
             // making a brand new taskViewController
             taskViewController = ORKTaskViewController(task: task, ongoingResult: nil, defaultResultSource: nil, delegate: self)
+            
+            // Assign a directory to store the `taskViewController` output. Here, we're using the default temporary
+            // output directory provided by `ORKTaskViewController`, but any URL can be specified.
+            taskViewController.outputDirectory = ORKTaskViewController.orkDefaultTemporaryOutputDirectory();
         }
-        // Assign a directory to store the `taskViewController` output. Here, we're using the default temporary
-        // output directory provided by `ORKTaskViewController`, but any URL can be specified.
-        taskViewController.outputDirectory = ORKTaskViewController.orkDefaultTemporaryOutputDirectory();
+        
 
         /*
          We present the task directly, but it is also possible to use segues.
          The task property of the task view controller can be set any time before
          the task view controller is presented.
          */
+
+        // Fallback on earlier versions
         present(taskViewController, animated: true)
+ 
     }
-    
     
     func storePDFIfConsentTaskDetectedIn(taskViewController: ORKTaskViewController) {
         guard taskViewController.task?.identifier == String(describing: Identifier.consentTask) else {
@@ -203,7 +303,29 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             break;
         }
         
-        taskViewController.dismiss(animated: true, completion: nil)
+        tableView.reloadData()
+        
+        taskViewController.dismiss(
+            animated: true,
+            completion: taskViewControllerOnDismissCompletion(
+                for: taskViewController,
+                given: reason
+            )
+        )
+    }
+    
+    private func taskViewControllerOnDismissCompletion(
+        for taskViewController: ORKTaskViewController,
+        given taskFinishReason: ORKTaskFinishReason
+    ) -> (() -> Void)? {
+        let onDismissCompletionWhenDataMightHaveBeenGiven: (() -> Void)?
+        onDismissCompletionWhenDataMightHaveBeenGiven = nil
+        
+        return switch (taskFinishReason) {
+        case .discarded: nil
+        case .earlyTermination, .completed, .failed, .saved: onDismissCompletionWhenDataMightHaveBeenGiven
+        @unknown default: onDismissCompletionWhenDataMightHaveBeenGiven
+        }
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
@@ -236,6 +358,13 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
 
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, serializerFor task: ORKOrderedTask) -> ORKESerializer {
+    return ORKESerializer(entryProviders: [
+        ORKCoreSerializationEntryProvider(),
+        ORKActiveTaskSerializationEntryProvider()
+    ])
     }
     
     func delay(_ delay: Double, closure: @escaping () -> Void ) {
@@ -283,5 +412,3 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     }
 
 }
-
-

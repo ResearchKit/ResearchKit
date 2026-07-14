@@ -244,6 +244,12 @@ static const CGFloat ArrowLineWidth = 4;
     [NSLayoutConstraint activateConstraints:self.constraints];
 }
 
+- (CGSize)intrinsicContentSize {
+    // Return the combined size of all three arrows
+    CGSize arrowSize = self.leftArrow.intrinsicContentSize;
+    return CGSizeMake(arrowSize.width * 3, arrowSize.height);
+}
+
 - (void)dealloc {
     [self stopAnimating];
 }

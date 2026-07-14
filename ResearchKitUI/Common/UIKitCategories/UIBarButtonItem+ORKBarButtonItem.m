@@ -43,9 +43,10 @@
     }
     
     UIImage *image = [UIImage systemImageNamed:imageName];
+    UIBarButtonItemStyle style = ORKLiquidGlassSupportEnabled() ? UIBarButtonItemStylePlain : UIBarButtonItemStyleDone;
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:image
                                                landscapeImagePhone:image
-                                                             style:UIBarButtonItemStyleDone
+                                                             style:style
                                                             target:target
                                                             action:selector];
     item.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);

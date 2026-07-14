@@ -45,6 +45,9 @@
     self.isLastItem = isLastItem;
     self.immediateNavigation = NO;
     [self setPrimaryText:textChoice.text];
+    if (textChoice.voiceOverReadableText) {
+        [self setPrimaryTextVoiceOverReadableText:textChoice.voiceOverReadableText];
+    }
     [self setDetailText:textChoice.detailText];
     [self setTextChoiceImage:textChoice.image];
 }

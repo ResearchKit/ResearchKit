@@ -50,6 +50,7 @@ NSString * const ORKInstructionStepViewAccessibilityIdentifier = @"ORKInstructio
     self.stepTitle = _instructionStep.title;
     self.stepText = _instructionStep.text;
     self.stepDetailText = _instructionStep.detailText;
+    self.stepAttributedDetailText = _instructionStep.attributedDetailText;
     self.stepHeaderTextAlignment = _instructionStep.headerTextAlignment;
     self.bodyTextAlignment = _instructionStep.bodyItemTextAlignment;
     self.bodyItems = _instructionStep.bodyItems;
@@ -57,8 +58,15 @@ NSString * const ORKInstructionStepViewAccessibilityIdentifier = @"ORKInstructio
     self.useExtendedPadding = _instructionStep.useExtendedPadding;
 
     self.auxiliaryImage = _instructionStep.auxiliaryImage;
-    self.titleIconImage = _instructionStep.iconImage;
-    
+
+    // Apply tint color to icon image if specified
+    UIImage *iconImage = _instructionStep.iconImage;
+    if (iconImage && _instructionStep.iconImageTintColor) {
+        iconImage = [iconImage imageWithTintColor:_instructionStep.iconImageTintColor renderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    self.titleIconImage = iconImage;
+
+    self.contentLayoutMargins = ORKLargeContentLayoutMargins;
     self.accessibilityIdentifier = ORKInstructionStepViewAccessibilityIdentifier;
     
     [super updatePaddingConstraints];

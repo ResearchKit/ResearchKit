@@ -30,9 +30,8 @@
  */
 
 
-#import "ORKFormItemCell.h"
+#import "ORKFormItemCell_Private.h"
 
-#import "ORKCaption1Label.h"
 #import "ORKFormTextView.h"
 #import "ORKImageSelectionView.h"
 #import "ORKLocationSelectionView.h"
@@ -41,7 +40,6 @@
 #import "ORKScaleSliderView.h"
 #import "ORKTableContainerView.h"
 #import "ORKTextFieldView.h"
-#import "ORKDontKnowButton.h"
 
 #import <ResearchKit/ORKAnswerFormat_Private.h>
 #import "ORKFormItem_Internal.h"
@@ -50,6 +48,8 @@
 #import "ORKAccessibility.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#import <ResearchKit/ResearchKit-Swift.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 @import MapKit;
 
@@ -57,38 +57,14 @@
 static const CGFloat VerticalMargin = 10.0;
 static const CGFloat TextViewVerticalMargin = 10.0;
 static const CGFloat TextViewMinHeight = 140.0;
-static const CGFloat StandardSpacing = 8.0;
+static const CGFloat StandardSpacing = 16.0;
 static const CGFloat ErrorLabelTopPadding = 4.0;
 static const CGFloat ErrorLabelBottomPadding = 10.0;
 static const CGFloat WordCountViewElementsLeftRightPadding = 16.0;
-static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
+static const CGFloat DontKnowButtonTopBottomPadding = 3.0;
 static const CGFloat DividerViewTopPadding = 10.0;
-static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
 
 NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextViewButton";
-
-@interface ORKFormItemCell ()
-
-- (void)cellInit NS_REQUIRES_SUPER;
-- (void)inputValueDidChange NS_REQUIRES_SUPER;
-- (void)inputValueDidClear NS_REQUIRES_SUPER;
-- (void)defaultAnswerDidChange NS_REQUIRES_SUPER;
-- (void)answerDidChange;
-- (void)cellNeedsToResize;
-- (void)updateErrorLabelWithMessage:(NSString *)message;
-
-// For use when setting the answer in response to user action
-- (void)ork_setAnswer:(id)answer;
-
-@property (nonatomic, strong) ORKCaption1Label *labelLabel;
-@property (nonatomic, strong) UILabel *errorLabel;
-@property (nonatomic, weak) UITableView *_parentTableView;
-
-// If hasChangedAnswer, then a new defaultAnswer should not change the answer
-@property (nonatomic, assign) BOOL hasChangedAnswer;
-
-@end
-
 
 @interface ORKSegmentedControl : UISegmentedControl
 
@@ -112,14 +88,12 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 @interface ORKFormItemCell ()
 
-@property (nonatomic, copy) UIView *containerView;
 - (void)showValidityAlertWithMessage:(NSString *)text;
 
 @end
 
 
 @implementation ORKFormItemCell {
-    CGFloat _leftRightMargin;
     CAShapeLayer *_contentMaskLayer;
     NSLayoutConstraint *contentViewBottomConstraint;
     NSArray<NSLayoutConstraint *> *_containerConstraints;
@@ -181,16 +155,23 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     if (_containerConstraints) {
         [NSLayoutConstraint deactivateConstraints:_containerConstraints];
     }
+
+    self.contentView.directionalLayoutMargins = ORKLargeContentLayoutMargins;
+    self.containerView.directionalLayoutMargins = ORKSmallContentLayoutMargins;
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
-    
+
+    if ([_containerView superview] == nil) {
+        return;
+    }
+
     _containerConstraints = @[
         [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:_leftRightMargin],
-        [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-_leftRightMargin]
+        [self.contentView.layoutMarginsGuide.leadingAnchor constraintEqualToAnchor:_containerView.leadingAnchor],
+        [self.contentView.layoutMarginsGuide.trailingAnchor constraintEqualToAnchor:_containerView.trailingAnchor]
     ];
     
     contentViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_containerView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-    
+
     _containerConstraints = [_containerConstraints arrayByAddingObject:contentViewBottomConstraint];
     
     [NSLayoutConstraint activateConstraints:_containerConstraints];
@@ -244,12 +225,12 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
                 rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight;
             }
             
-            
+            CGFloat cornerRadius = ORKCardDefaultCornerRadii();
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.containerView.bounds
                                                            byRoundingCorners: rectCorners
-                                                                 cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
-            
-            CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
+                                                                 cornerRadii: (CGSize){cornerRadius, cornerRadius}].CGPath;
+
+            CGFloat foreLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
             
             foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds
                                                    byRoundingCorners: rectCorners
@@ -261,6 +242,9 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:self.containerView.bounds].CGPath;
             
             CGRect lineBounds = CGRectMake(0.0, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width, 0.5);
+            if (ORKLiquidGlassSupportEnabled()) {
+                lineBounds = CGRectInset(lineBounds, self.layoutMargins.left, 0);
+            }
             lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
             lineLayer.zPosition = 0.0f;
         }
@@ -278,7 +262,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 - (void)setUseCardView:(bool)useCardView {
     _useCardView = useCardView;
-    _leftRightMargin = ORKCardLeftRightMarginForWindow(self.window);
     [self setupConstraints];
 }
 
@@ -414,7 +397,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     
     self.errorLabel.attributedText = fullString;
     
-    [self updateConstraints];
+    [self setNeedsUpdateConstraints];
     [self cellNeedsToResize];
 }
 
@@ -443,15 +426,18 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 @implementation ORKFormItemTextFieldBasedCell {
     BOOL _shouldShowDontKnow;
-    ORKDontKnowButtonStyle _dontKnowButtonStyle;
     NSString *_customDontKnowString;
     UIView *_dividerView;
     UIView *_dontKnowBackgroundView;
+    
+    NSMutableArray<NSLayoutConstraint *> *_constraints;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self != nil) {
+        _constraints = [NSMutableArray new];
+        
         UILabel *label = self.labelLabel;
         label.isAccessibilityElement = NO;
         self.textFieldView.isAccessibilityElement = YES;
@@ -478,7 +464,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     if ([formItem.answerFormat shouldShowDontKnowButton]) {
         _shouldShowDontKnow = YES;
         _customDontKnowString = formItem.answerFormat.customDontKnowButtonText;
-        _dontKnowButtonStyle = formItem.answerFormat.dontKnowButtonStyle; // reset in prepareForResuse
         
         [self setupDontKnowButtonWithAnswer:answer];
         self.accessibilityElements = @[_textFieldView, _dontKnowButton, self.errorLabel];
@@ -486,7 +471,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         self.accessibilityElements = @[_textFieldView, self.errorLabel];
     }
     
-    [self setUpContentConstraint];
     [self setNeedsUpdateConstraints];
 
     [super configureWithFormItem:formItem answer:answer maxLabelWidth:maxLabelWidth delegate:delegate];
@@ -518,13 +502,16 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     textField.delegate = self; // init
     
     [self.containerView addSubview:_textFieldView]; // init
-    
+
     self.errorLabel = [UILabel new]; // init
     [self.errorLabel setTextColor: [UIColor redColor]]; // init
     [self.errorLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]]; // init
     self.errorLabel.numberOfLines = 0; // init
     self.errorLabel.isAccessibilityElement = YES;
-    
+
+    if (ORKLiquidGlassSupportEnabled()) {
+        self.containerView.directionalLayoutMargins = ORKSmallContentLayoutMargins;
+    }
     [self.containerView addSubview:self.errorLabel]; // init
     
     self.labelLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -542,7 +529,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     _doneButtonWasPressed = NO;
     _shouldShowDontKnow = NO;
     _customDontKnowString = nil;
-    _dontKnowButtonStyle = ORKDontKnowButtonStyleStandard;
 
     [_dontKnowBackgroundView removeFromSuperview];
     _dontKnowBackgroundView = nil;
@@ -574,7 +560,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     if (!_dontKnowButton) {
         _dontKnowButton = [ORKDontKnowButton new];
         _dontKnowButton.customDontKnowButtonText = _customDontKnowString;
-        _dontKnowButton.dontKnowButtonStyle = _dontKnowButtonStyle;
         _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -611,7 +596,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         
         if (self.errorLabel.attributedText) {
             self.errorLabel.attributedText = nil;
-            [self updateConstraints];
+            [self setNeedsUpdateConstraints];
             [self cellNeedsToResize];
         }
     }
@@ -621,19 +606,10 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     //this tap gesture is here to avoid the cell being selected if the user missed the dont know button
 }
 
-- (void)setUpContentConstraint {
-    NSLayoutConstraint *contentConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
-                                                                         attribute:NSLayoutAttributeWidth
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:self
-                                                                         attribute:NSLayoutAttributeWidth
-                                                                        multiplier:1.0
-                                                                          constant:0.0];
-    contentConstraint.priority = UILayoutPriorityDefaultHigh;
-    contentConstraint.active = YES;
-}
-
 - (void)updateConstraints {
+    [NSLayoutConstraint deactivateConstraints:_constraints];
+    _constraints = [NSMutableArray new];
+    
     CGFloat labelWidth = self.maxLabelWidth;
     
     NSString *contentSize = [[UIApplication sharedApplication] preferredContentSizeCategory];
@@ -646,49 +622,73 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         UIContentSizeCategoryAccessibilityExtraExtraExtraLarge];
 
     if (self.labelLabel.text) {
-        [[self.labelLabel.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:StandardSpacing] setActive:YES];
-        [[self.labelLabel.leftAnchor constraintEqualToAnchor:self.containerView.leftAnchor constant:ORKSurveyItemMargin] setActive:YES];
+        [_constraints addObjectsFromArray:@[
+            [self.labelLabel.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:StandardSpacing],
+            [self.labelLabel.leadingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.leadingAnchor]
+        ]];
     }
 
     if ([largeSizes containsObject:contentSize]) {
         //stack label and textfieldview when the content size is large
         if (self.labelLabel.text) {
-            [[self.labelLabel.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor constant:-ORKSurveyItemMargin] setActive:YES];
+            [_constraints addObject:[self.labelLabel.trailingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.trailingAnchor]];
         }
-        [[self.textFieldView.topAnchor constraintEqualToAnchor:self.labelLabel.text ? self.labelLabel.bottomAnchor : self.containerView.topAnchor
-                                                      constant:self.labelLabel.text ? StandardSpacing : ORKSurveyItemMargin] setActive:YES];
-        [[self.textFieldView.leftAnchor constraintEqualToAnchor:self.containerView.leftAnchor constant:ORKSurveyItemMargin] setActive:YES];
+        
+        [_constraints addObjectsFromArray:@[
+            [self.textFieldView.topAnchor constraintEqualToAnchor:self.labelLabel.text ? self.labelLabel.bottomAnchor : self.containerView.topAnchor
+                                                         constant:self.labelLabel.text ? StandardSpacing : ORKSurveyItemMargin],
+            [self.textFieldView.leadingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.leadingAnchor],
+            [self.errorLabel.topAnchor constraintEqualToAnchor:self.textFieldView.bottomAnchor constant:ErrorLabelTopPadding]
+        ]];
 
-        [[self.errorLabel.topAnchor constraintEqualToAnchor:self.textFieldView.bottomAnchor constant:ErrorLabelTopPadding] setActive:YES];
     } else {
+        
         if (self.labelLabel.text) {
-            [[self.labelLabel.widthAnchor constraintLessThanOrEqualToConstant:labelWidth] setActive:YES];
-            [[self.textFieldView.centerYAnchor constraintEqualToAnchor:self.labelLabel.centerYAnchor constant:0.0] setActive:YES];
-            [[self.textFieldView.leftAnchor constraintEqualToAnchor:self.labelLabel.rightAnchor constant:InlineFormItemLabelToTextFieldPadding] setActive:YES];
-            [[self.errorLabel.topAnchor constraintEqualToAnchor:self.labelLabel.bottomAnchor constant:ErrorLabelTopPadding] setActive:YES];
+            [_constraints addObjectsFromArray:@[
+                [self.labelLabel.widthAnchor constraintLessThanOrEqualToConstant:labelWidth],
+                [self.textFieldView.centerYAnchor constraintEqualToAnchor:self.labelLabel.centerYAnchor constant:0.0],
+                [self.textFieldView.leadingAnchor constraintEqualToAnchor:self.labelLabel.layoutMarginsGuide.trailingAnchor constant:ORKSurveyItemMargin],
+                [self.errorLabel.topAnchor constraintEqualToAnchor:self.labelLabel.bottomAnchor constant:ErrorLabelTopPadding]
+            ]];
         } else {
-            [[self.textFieldView.topAnchor constraintEqualToAnchor:self.containerView.topAnchor
-            constant:ORKSurveyItemMargin] setActive:YES];
-            [[self.textFieldView.leftAnchor constraintEqualToAnchor:self.containerView.leftAnchor constant:ORKSurveyItemMargin] setActive:YES];
-            [[self.errorLabel.topAnchor constraintEqualToAnchor:self.textFieldView.bottomAnchor constant:ErrorLabelTopPadding] setActive:YES];
+            [_constraints addObjectsFromArray:@[
+                [self.textFieldView.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:ORKSurveyItemMargin],
+                [self.textFieldView.leadingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.leadingAnchor],
+                [self.errorLabel.topAnchor constraintEqualToAnchor:self.textFieldView.bottomAnchor constant:ErrorLabelTopPadding]
+            ]];
         }
     }
 
-    [[self.textFieldView.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor constant:0.0] setActive:YES];
-
-    [[self.errorLabel.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor] setActive:YES];
-    [[self.errorLabel.leftAnchor constraintEqualToAnchor:self.containerView.leftAnchor constant:ORKSurveyItemMargin] setActive:YES];
-
+    [_constraints addObjectsFromArray:@[
+        [self.textFieldView.trailingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.trailingAnchor],
+        [self.errorLabel.trailingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.trailingAnchor],
+        [self.errorLabel.leadingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.leadingAnchor]
+    ]];
+    
     if (_shouldShowDontKnow) {
         [[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor] setActive:YES];
         [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.containerView.bottomAnchor] setActive:YES];
         
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
-        [[_dividerView.topAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
-        [[_dividerView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor] setActive:YES];
-        [[_dividerView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
+        UIView *additionalBottomView = [self additionalBottomConstraintView];
+        if (additionalBottomView) {
+            [[additionalBottomView.topAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor] setActive:YES];
+            [[additionalBottomView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor] setActive:YES];
+            [[additionalBottomView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
+            [[_dividerView.topAnchor constraintEqualToAnchor:additionalBottomView.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
+        } else {
+            [[_dividerView.topAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
+        }
+        NSLayoutXAxisAnchor *leadingAnchor = self.containerView.leadingAnchor;
+        NSLayoutXAxisAnchor *trailingAnchor = self.containerView.trailingAnchor;
+        if (ORKLiquidGlassSupportEnabled()) {
+            leadingAnchor = self.containerView.layoutMarginsGuide.leadingAnchor;
+            trailingAnchor = self.containerView.layoutMarginsGuide.trailingAnchor;
+        }
+        [[_dividerView.leadingAnchor constraintEqualToAnchor:leadingAnchor] setActive:YES];
+        [[_dividerView.trailingAnchor constraintEqualToAnchor:trailingAnchor] setActive:YES];
         NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_dividerView
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
@@ -700,14 +700,8 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         constraint1.active = YES;
         [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
         
-        if (_dontKnowButton.dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
-            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.containerView.centerXAnchor] setActive:YES];
-            [[_dontKnowButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.containerView.leadingAnchor constant:StandardSpacing] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.containerView.trailingAnchor constant:-StandardSpacing] setActive:YES];
-        } else {
-            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:StandardSpacing] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor constant:-StandardSpacing] setActive:YES];
-        }
+        [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:StandardSpacing] setActive:YES];
+        [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor constant:-StandardSpacing] setActive:YES];
         
         NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:self.containerView
                                                                       attribute:NSLayoutAttributeBottom
@@ -719,10 +713,27 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         constraint2.priority = UILayoutPriorityRequired - 1;
         constraint2.active = YES;
     } else {
-        [[self.containerView.bottomAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
+        UIView *additionalBottomView = [self additionalBottomConstraintView];
+        if (additionalBottomView) {
+            [_constraints addObjectsFromArray:@[
+                [additionalBottomView.topAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor],
+                [additionalBottomView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor],
+                [additionalBottomView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor],
+                [self.containerView.bottomAnchor constraintEqualToAnchor:additionalBottomView.bottomAnchor constant:ErrorLabelBottomPadding]
+            ]];
+        } else {
+            [_constraints addObjectsFromArray:@[
+                [self.containerView.bottomAnchor constraintEqualToAnchor:self.errorLabel.bottomAnchor constant:ErrorLabelBottomPadding]
+            ]];
+        }
     }
 
+    [NSLayoutConstraint activateConstraints:_constraints];
     [super updateConstraints];
+}
+
+- (UIView *)additionalBottomConstraintView {
+    return nil;
 }
 
 - (void)setEditingHighlight:(BOOL)editingHighlight {
@@ -803,7 +814,8 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     
     if (self.errorLabel.attributedText != nil) {
         self.errorLabel.attributedText = nil;
-        [self setupConstraints];
+        [self setNeedsUpdateConstraints];
+        [self cellNeedsToResize];
     }
 }
 
@@ -842,7 +854,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         return YES;
     } else {
         self.errorLabel.attributedText = nil;
-        [self updateConstraints];
+        [self setNeedsUpdateConstraints];
         [self cellNeedsToResize];
     }
 
@@ -870,14 +882,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self updateErrorLabelWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:@""]];
-    } else {
-        self.errorLabel.attributedText = nil;
-        [self updateConstraints];
-        [self cellNeedsToResize];
-    }
-    
     [textField resignFirstResponder];
     UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
     return YES;
@@ -976,6 +980,9 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 @implementation ORKFormItemTextFieldCell {
     NSString *_defaultTextAnswer;
+    NSInteger _maxLength;
+    UIView *_maxLengthView;
+    UILabel *_textCountLabel;
 }
 
 - (void)configureWithFormItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth delegate:(id<ORKFormItemCellDelegate>)delegate {
@@ -983,6 +990,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     self.textField.allowsSelection = YES;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[formItem impliedAnswerFormat];
     _defaultTextAnswer = answerFormat.defaultTextAnswer;
+    _maxLength = answerFormat.maximumLength;
     self.textField.autocorrectionType = answerFormat.autocorrectionType;
     self.textField.autocapitalizationType = answerFormat.autocapitalizationType;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
@@ -990,18 +998,64 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
     self.textField.textContentType = answerFormat.textContentType;
 
-    if (@available(iOS 12.0, *)) {
-        self.textField.passwordRules = answerFormat.passwordRules;
-    }
-    
+    self.textField.passwordRules = answerFormat.passwordRules;
+
     [super configureWithFormItem:formItem answer:answer maxLabelWidth:maxLabelWidth delegate:delegate];
+
+    if (_maxLength > 0 && !answerFormat.hideCharacterCountLabel) {
+        [self setupMaxLengthView];
+        [self.textField addTarget:self action:@selector(updateTextCountLabel) forControlEvents:UIControlEventEditingChanged];
+    }
+}
+
+- (void)updateTextCountLabel {
+    if (_textCountLabel && _maxLength > 0) {
+        _textCountLabel.text = [NSString stringWithFormat:@"%lu/%li",
+            (unsigned long)self.textField.text.length, (long)_maxLength];
+    }
+}
+
+- (void)setupMaxLengthView {
+    _maxLengthView = [UIView new];
+    _maxLengthView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    _textCountLabel = [UILabel new];
+    [_textCountLabel setTextColor:[UIColor labelColor]];
+    [_textCountLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]];
+    _textCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self updateTextCountLabel];
+    [_maxLengthView addSubview:_textCountLabel];
+
+    [self.containerView addSubview:_maxLengthView];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [_textCountLabel.topAnchor constraintEqualToAnchor:_maxLengthView.topAnchor constant:StandardSpacing],
+        [_textCountLabel.leadingAnchor constraintEqualToAnchor:_maxLengthView.leadingAnchor constant:WordCountViewElementsLeftRightPadding],
+        [_maxLengthView.bottomAnchor constraintEqualToAnchor:_textCountLabel.bottomAnchor constant:StandardSpacing],
+    ]];
+
+    [self setNeedsUpdateConstraints];
+}
+
+- (UIView *)additionalBottomConstraintView {
+    return _maxLengthView;
 }
 
 - (void)inputValueDidChange {
     NSString *text = self.textField.text;
+    [self updateTextCountLabel];
     [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
-    
     [super inputValueDidChange];
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    _maxLength = 0;
+    [self.textField removeTarget:self action:@selector(updateTextCountLabel) forControlEvents:UIControlEventEditingChanged];
+    [_textCountLabel removeFromSuperview];
+    _textCountLabel = nil;
+    [_maxLengthView removeFromSuperview];
+    _maxLengthView = nil;
 }
 
 - (void)assignDefaultAnswer {
@@ -1015,7 +1069,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 - (void)answerDidChange {
     id answer = self.answer;
-    
+
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     if (answer == [ORKDontKnowAnswer answer]) {
         [self.dontKnowButton setActive:YES];
@@ -1038,6 +1092,30 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     } else {
         self.textField.text = nil;
     }
+    [self updateTextCountLabel];
+}
+
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+- (NSArray *)accessibilityElements {
+    NSMutableArray<UIView *> *elements = [NSMutableArray new];
+    if (self.textFieldView) {
+        [elements addObject:self.textFieldView];
+    }
+    if (_textCountLabel) {
+        [elements addObject:_textCountLabel];
+    }
+    if (self.dontKnowButton) {
+        [elements addObject:self.dontKnowButton];
+    }
+    if (self.errorLabel) {
+        [elements addObject:self.errorLabel];
+    }
+    return elements;
 }
 
 #pragma mark UITextFieldDelegate
@@ -1053,6 +1131,9 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
         
+        //// This is to accomodate when the keyboard adds trailing whitespace during auto-complete.
+        text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
         NSInteger maxLength = answerFormat.maximumLength;
         
         if (maxLength > 0 && text.length > maxLength) {
@@ -1063,7 +1144,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     
     [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
-    
+
     return YES;
 }
 
@@ -1262,9 +1343,11 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 }
 
 - (void)setUpConstraints {
+    self.directionalLayoutMargins = ORKSmallContentLayoutMargins;
+
     NSDictionary *views = @{ @"textView": _textView };
     ORKEnableAutoLayoutForViews(views.allValues);
-    NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.separatorInset.left) };
+    NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.layoutMargins.left) };
     
     NSMutableArray *constraints = [NSMutableArray new];
     
@@ -1308,10 +1391,20 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.containerView.bottomAnchor] setActive:YES];
         
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
         [[_dividerView.topAnchor constraintEqualToAnchor:topViewToConstrainTo.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
-        [[_dividerView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor] setActive:YES];
-        [[_dividerView.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor] setActive:YES];
+
+        NSLayoutXAxisAnchor *leadingAnchor = ORKLiquidGlassSupportEnabled() ?
+        self.containerView.layoutMarginsGuide.leadingAnchor :
+        self.containerView.leadingAnchor;
+
+        [[_dividerView.leadingAnchor constraintEqualToAnchor:leadingAnchor] setActive:YES];
+
+        NSLayoutXAxisAnchor *trailingAnchor = ORKLiquidGlassSupportEnabled() ?
+        self.containerView.layoutMarginsGuide.trailingAnchor :
+        self.containerView.trailingAnchor;
+
+        [[_dividerView.trailingAnchor constraintEqualToAnchor:trailingAnchor] setActive:YES];
         NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_dividerView
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
@@ -1322,15 +1415,8 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         constraint1.priority = UILayoutPriorityRequired - 1;
         constraint1.active = YES;
         [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
-        
-        if (_dontKnowButton.dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
-            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.containerView.centerXAnchor] setActive:YES];
-            [[_dontKnowButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.containerView.leadingAnchor constant:StandardSpacing] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.containerView.trailingAnchor constant:-StandardSpacing] setActive:YES];
-        } else {
-            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:StandardSpacing] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor constant:-StandardSpacing] setActive:YES];
-        }
+        [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:StandardSpacing] setActive:YES];
+        [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor constant:-StandardSpacing] setActive:YES];
         
         bottomViewToConstrainTo = _dontKnowButton;
     }
@@ -1415,7 +1501,6 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     if (!_dontKnowButton) {
         _dontKnowButton = [ORKDontKnowButton new];
         _dontKnowButton.customDontKnowButtonText = self.formItem.answerFormat.customDontKnowButtonText;
-        _dontKnowButton.dontKnowButtonStyle = self.formItem.answerFormat.dontKnowButtonStyle;
         _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -1467,7 +1552,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 }
 
 - (void)dontKnowBackgroundViewPressed {
-    if (_dontKnowButton && self.formItem.answerFormat.dontKnowButtonStyle == ORKDontKnowButtonStyleCircleChoice) {
+    if (_dontKnowButton) {
         [self dontKnowButtonWasPressed];
     }
 }
@@ -1484,9 +1569,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
         _textView.secureTextEntry = textAnswerFormat.secureTextEntry;
         _textView.textContentType = textAnswerFormat.textContentType;
         
-        if (@available(iOS 12.0, *)) {
-            _textView.passwordRules = textAnswerFormat.passwordRules;
-        }
+        _textView.passwordRules = textAnswerFormat.passwordRules;
     } else {
         _maxLength = 0;
     }
@@ -1557,6 +1640,29 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     }
     
     return textAnswerFormat;
+}
+
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+- (NSArray *)accessibilityElements {
+    NSMutableArray<UIView *> *accessibilityElements = [[NSMutableArray alloc] init];
+    if (_textView) {
+        [accessibilityElements addObject:_textView];
+    }
+    if (_textCountLabel) {
+        [accessibilityElements addObject:_textCountLabel];
+    }
+    if (_clearTextViewButton) {
+        [accessibilityElements addObject:_clearTextViewButton];
+    }
+    if (_dontKnowButton) {
+        [accessibilityElements addObject:_dontKnowButton];
+    }
+    return accessibilityElements;
 }
 
 #pragma mark UITextViewDelegate
@@ -1645,8 +1751,11 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
                                                                              answer:answer];
     _selectionView.delegate = self;
     
-    self.contentView.layoutMargins = UIEdgeInsetsMake(VerticalMargin, ORKSurveyItemMargin, VerticalMargin, ORKSurveyItemMargin);
-    
+    self.containerView.directionalLayoutMargins = NSDirectionalEdgeInsetsMake(VerticalMargin,
+                                                                              ORKSmallContentLayoutMargins.leading,
+                                                                              VerticalMargin,
+                                                                              ORKSmallContentLayoutMargins.trailing);
+
     [self.containerView addSubview:_selectionView];
     [self setUpConstraints];
     
@@ -2002,7 +2111,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     
     NSDictionary *dictionary = @{@"_selectionView":_selectionView};
     ORKEnableAutoLayoutForViews([dictionary allValues]);
-    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(ORKSurveyItemMargin), @"verticalMarginBottom":@(VerticalMargin - (1.0 / [UIScreen mainScreen].scale))};
+    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(ORKSurveyItemMargin), @"verticalMarginBottom":@(VerticalMargin - (1.0 / self.safeDisplayScale))};
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
@@ -2053,7 +2162,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 - (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
     _heightConstraint.constant = _selectionView.intrinsicContentSize.height;
-    _bottomConstraint.constant = -(VerticalMargin - (1.0 / [UIScreen mainScreen].scale));
+    _bottomConstraint.constant = -(VerticalMargin - (1.0 / self.safeDisplayScale));
     
     [self cellNeedsToResize];
 }
@@ -2126,6 +2235,30 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
     [self.contentView addConstraints:constraints];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.useCardView) {
+        CACornerMask maskedCorners = 0;
+        if (self.isLastItem) {
+            maskedCorners |= kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner;
+        }
+        if (self.isFirstItemInSectionWithoutTitle) {
+            maskedCorners |= kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+        }
+        if (maskedCorners != 0) {
+            self.containerView.layer.cornerRadius = ORKCardDefaultCornerRadii();
+            self.containerView.layer.maskedCorners = maskedCorners;
+            self.containerView.clipsToBounds = YES;
+        } else {
+            self.containerView.layer.cornerRadius = 0;
+            self.containerView.clipsToBounds = NO;
+        }
+    } else {
+        self.containerView.layer.cornerRadius = 0;
+        self.containerView.clipsToBounds = NO;
+    }
+}
+
 - (void)buttonPressedAtIndex:(NSInteger)index {
     _selectionView.answer = [NSNumber numberWithInteger:index];
     [self inputValueDidChange];
@@ -2139,6 +2272,12 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 - (void)inputValueDidChange {
     [self ork_setAnswer:_selectionView.answer];
     [super inputValueDidChange];
+}
+
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
 }
 
 @end

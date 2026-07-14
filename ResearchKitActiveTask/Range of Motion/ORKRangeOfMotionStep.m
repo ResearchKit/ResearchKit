@@ -31,6 +31,7 @@
 
 #import "ORKRangeOfMotionStep.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKDeviceMotionRecorder.h"
 
 
 @implementation ORKRangeOfMotionStep
@@ -44,6 +45,7 @@
         self.shouldPlaySoundOnFinish = YES;
         self.shouldContinueOnFinish = YES;
         self.shouldStartTimerAutomatically = YES;
+        self.shouldShowDefaultTimer = NO;
         self.limbOption = limbOption;
     }
     return self;
@@ -91,6 +93,26 @@
     
     __typeof(self) castObject = object;
     return (isParentSame && (self.limbOption == castObject.limbOption));
+}
+
+- (void)prepareRecorders {
+    BOOL hasDeviceMotionRecorder = NO;
+    for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
+        if ([config isKindOfClass:[ORKDeviceMotionRecorderConfiguration class]]) {
+            hasDeviceMotionRecorder = YES;
+            break;
+        }
+    }
+
+    if (!hasDeviceMotionRecorder) {
+        ORKDeviceMotionRecorderConfiguration *defaultConfig = [[ORKDeviceMotionRecorderConfiguration alloc]
+                                                               initWithIdentifier:@"ORKDeviceMotionRecorderConfiguration"
+                                                               frequency:100
+                                                               outputDirectory:nil];
+        NSMutableArray *configs = [NSMutableArray arrayWithArray:self.recorderConfigurations ?: @[]];
+        [configs addObject:defaultConfig];
+        self.recorderConfigurations = configs;
+    }
 }
 
 @end

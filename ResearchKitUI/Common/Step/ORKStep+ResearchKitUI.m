@@ -31,8 +31,7 @@
 #import <ResearchKit/ResearchKit.h>
 #import "ResearchKitUI.h"
 #import "ResearchKitUI_Private.h"
-
-#import "ORKViewControllerProviding.h"
+#import "ResearchKitUI/ResearchKitUI-Swift.h"
 
 @implementation ORKCompletionStep (ViewControllerProviding)
 

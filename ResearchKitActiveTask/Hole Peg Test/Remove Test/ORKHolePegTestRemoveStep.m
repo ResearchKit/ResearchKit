@@ -41,6 +41,7 @@
     if (self) {
         self.shouldShowDefaultTimer = NO;
         self.shouldContinueOnFinish = YES;
+        self.allowsBackNavigation = NO;
     }
     return self;
 }
@@ -72,10 +73,6 @@
     if (self.stepDuration < ORKHolePegTestMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKHolePegTestMinimumDuration)] userInfo:nil];
     }
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
 }
 
 + (BOOL)supportsSecureCoding {

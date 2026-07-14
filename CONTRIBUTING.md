@@ -121,7 +121,7 @@ to main. You are still responsible for your change after it is
 accepted. Stay in contact, in case bugs are detected that may require
 your attention.
 
-When the project is next branched for release, your changes will be
+At the next release, your changes will be
 incorporated. Queries may come back to you regarding localization,
 documentation, or other issues during this process.
 
@@ -138,19 +138,14 @@ The `main` branch is used for work in progress. On `main`:
 * Everything should be continuously in working order in English (the
   base language).
 
-  The project will make periodic releases. When preparing a stable release, we
-  will branch from `main` to a convergence branch. During this process,
-  changes will be made first to the convergence branch, and then merged into
-  `main`. On the convergence branch, changes will be made only to:
+  The project makes periodic releases directly from `main`. When preparing a
+  release, we bring documentation, localization, and device coverage up to date
+  on `main`, then cut the release as a version tag off `main`. The most recent
+  release is highlighted in the [README](../..).
 
-  * Fix high priority issues.
-  * Update documentation.
-  * Bring localization up to date.
-  * Ensure good behavior across all supported devices.
-
-  After the converging process is completed, we will merge everything to the
-  `stable` branch and tag with a new release number. The most recent release
-  will be highlighted in the [README](../..). 
+  Note: the `stable` branch is retired as of the 3.4.0 release. Releases are no
+  longer merged to a `stable` branch; consume releases via the version tags
+  instead.
 
 
   ResearchKit Contribution Terms and License Policy<a name="contribution"></a>

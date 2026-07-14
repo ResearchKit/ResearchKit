@@ -31,9 +31,9 @@
 
 #import "ORKWalkingTaskStep.h"
 
-#import "ORKStep_Private.h"
-
 #import "ORKHelpers_Internal.h"
+#import "ORKRecorder.h"
+#import "ORKStep_Private.h"
 
 
 @implementation ORKWalkingTaskStep
@@ -91,6 +91,31 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.numberOfStepsPerLeg == castObject.numberOfStepsPerLeg));
+}
+
+- (ORKPermissionMask)requiredPermissions {
+    return ORKPermissionCoreMotionActivity;
+}
+
+- (void)prepareRecorders {
+    BOOL hasPedometerRecorder = NO;
+    for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
+        
+        /// The ORKPedometerRecorderConfiguration is a required recorder configuration for the
+        /// ORKWalkingTaskStep.
+        if ([config isKindOfClass:[ORKPedometerRecorderConfiguration class]]) {
+            hasPedometerRecorder = YES;
+            break;
+        }
+    }
+    
+    if (!hasPedometerRecorder) {
+        ORK_Log_Info("An ORKPedometerRecorderConfiguration has been added to the ORKWalkingTaskStep by the framework");
+        ORKPedometerRecorderConfiguration *defaultConfig = [[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:@"com.apple.researchkit.pedometerRecorderConfigurationIdentifier"];
+        NSMutableArray *configs = [NSMutableArray arrayWithArray:self.recorderConfigurations ?: @[]];
+        [configs addObject:defaultConfig];
+        self.recorderConfigurations = configs;
+    }
 }
 
 @end

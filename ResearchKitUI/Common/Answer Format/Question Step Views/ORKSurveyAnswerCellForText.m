@@ -28,12 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit-Swift.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 #import "ORKSurveyAnswerCellForText.h"
 
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
-#import "ORKDontKnowButton.h"
 
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
@@ -50,7 +51,7 @@ static const CGFloat ErrorLabelTopPadding = 4.0;
 static const CGFloat ErrorLabelBottomPadding = 10.0;
 static const CGFloat StandardSpacing = 8.0;
 static const CGFloat CellBottomPadding = 5.0;
-static const CGFloat DontKnowButtonTopBottomPadding = 12.0;
+static const CGFloat DontKnowButtonTopBottomPadding = 3.0;
 static const CGFloat DividerViewTopPadding = 10.0;
 
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
@@ -92,9 +93,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         self.textView.secureTextEntry = textAnswerFormat.secureTextEntry;
         self.textView.textContentType = textAnswerFormat.textContentType;
         
-        if (@available(iOS 12.0, *)) {
-            self.textView.passwordRules = textAnswerFormat.passwordRules;
-        }
+        self.textView.passwordRules = textAnswerFormat.passwordRules;
     } else {
         _maxLength = 0;
     }
@@ -263,7 +262,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         [_constraints addObject:[_bottomSeperatorView.topAnchor constraintEqualToAnchor:_textView.bottomAnchor constant:TextViewTopPadding]];
         [_constraints addObject:[_bottomSeperatorView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
         [_constraints addObject:[_bottomSeperatorView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
-        [_constraints addObject:[_bottomSeperatorView.heightAnchor constraintEqualToConstant:1.0 / [UIScreen mainScreen].scale]];
+        [_constraints addObject:[_bottomSeperatorView.heightAnchor constraintEqualToConstant:1.0 / self.safeDisplayScale]];
     }
     
     if (bottomMostElement && !createEmptySpaceForPossibleErrorMessage) {
@@ -304,7 +303,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
         
         if (createEmptySpaceForPossibleErrorMessage) {
             [[_dividerView.topAnchor constraintEqualToAnchor:bottomMostElement.bottomAnchor constant:CellBottomPadding + TextViewBottomPadding + ClearTextButtonMinimumHeight] setActive:YES];
@@ -325,16 +324,9 @@ static const CGFloat DividerViewTopPadding = 10.0;
         constraint1.active = YES;
         [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
         
-        if (_dontKnowButton.dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
-            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor] setActive:YES];
-            [[_dontKnowButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.leadingAnchor constant:StandardSpacing] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.trailingAnchor constant:-StandardSpacing] setActive:YES];
-        } else {
-            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:_textView.leadingAnchor] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:_textView.trailingAnchor] setActive:YES];
-            
-            [_dontKnowButton setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
-        }
+        [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:_textView.leadingAnchor] setActive:YES];
+        [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:_textView.trailingAnchor] setActive:YES];
+        [_dontKnowButton setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
         
         [_constraints addObject:[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding - StandardSpacing]];
         
@@ -363,7 +355,6 @@ static const CGFloat DividerViewTopPadding = 10.0;
     if (!_dontKnowButton) {
         _dontKnowButton = [ORKDontKnowButton new];
         _dontKnowButton.customDontKnowButtonText = self.step.answerFormat.customDontKnowButtonText;
-        _dontKnowButton.dontKnowButtonStyle = self.step.answerFormat.dontKnowButtonStyle;
         _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -428,7 +419,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
 }
 
 - (void)dontKnowBackgroundViewPressed {
-    if (_dontKnowButton && self.step.answerFormat.dontKnowButtonStyle == ORKDontKnowButtonStyleCircleChoice) {
+    if (_dontKnowButton) {
         [self dontKnowButtonWasPressed];
     }
 }
@@ -639,7 +630,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
         [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
-        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
         
         [[_dividerView.topAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:DividerViewTopPadding] setActive:YES];
         [[_dividerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
@@ -655,16 +646,10 @@ static const CGFloat DividerViewTopPadding = 10.0;
         constraint1.active = YES;
         [[_dontKnowButton.topAnchor constraintEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
         
-        if (_dontKnowButton.dontKnowButtonStyle == ORKDontKnowButtonStyleStandard) {
-            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor] setActive:YES];
-            [[_dontKnowButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.leadingAnchor constant:StandardSpacing] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.trailingAnchor constant:-StandardSpacing] setActive:YES];
-        } else {
-            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:_textField.leadingAnchor] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:_textField.trailingAnchor] setActive:YES];
+        [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:_textField.leadingAnchor] setActive:YES];
+        [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:_textField.trailingAnchor] setActive:YES];
             
-            [_dontKnowButton setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
-        }
+        [_dontKnowButton setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
         
         [[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding - StandardSpacing] setActive:YES];
     } else {
@@ -689,7 +674,6 @@ static const CGFloat DividerViewTopPadding = 10.0;
     if (!_dontKnowButton) {
         _dontKnowButton = [ORKDontKnowButton new];
         _dontKnowButton.customDontKnowButtonText = self.step.answerFormat.customDontKnowButtonText;
-        _dontKnowButton.dontKnowButtonStyle = self.step.answerFormat.dontKnowButtonStyle;
         _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -748,7 +732,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
 }
 
 - (void)dontKnowBackgroundViewPressed {
-    if (_dontKnowButton && self.step.answerFormat.dontKnowButtonStyle == ORKDontKnowButtonStyleCircleChoice) {
+    if (_dontKnowButton) {
         [self dontKnowButtonWasPressed];
     }
 }
@@ -765,9 +749,7 @@ static const CGFloat DividerViewTopPadding = 10.0;
         self.textField.secureTextEntry = textFormat.secureTextEntry;
         self.textField.textContentType = textFormat.textContentType;
         
-        if (@available(iOS 12.0, *)) {
-            self.textField.passwordRules = textFormat.passwordRules;
-        }
+        self.textField.passwordRules = textFormat.passwordRules;
     }
     
     if (answer == [ORKDontKnowAnswer answer] && ![_dontKnowButton active]) {

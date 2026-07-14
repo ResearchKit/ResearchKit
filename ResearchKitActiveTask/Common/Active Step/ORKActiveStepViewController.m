@@ -34,6 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepTimerView.h"
 #import "ORKActiveStepView.h"
+#import "Views/ORKActiveStepView_Private.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
@@ -59,6 +60,15 @@
 
 NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView";
 
+static const NSInteger ORKCountdownSpeechUpperBound = 3;
+
+NSArray<NSNumber *> *ORKCountdownValuesToSpeak(NSInteger current) {
+    if (current < 1 || current > ORKCountdownSpeechUpperBound) {
+        return @[];
+    }
+    return @[@(current)];
+}
+
 @interface ORKActiveStepViewController () {
     ORKActiveStepView *_activeStepView;
     ORKActiveStepTimer *_activeStepTimer;
@@ -68,6 +78,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     SystemSoundID _alertSound;
     NSURL *_alertSoundURL;
     BOOL _hasSpokenHalfwayCountdown;
+    NSInteger _lastHandledCountdownValue;
     NSArray<NSLayoutConstraint *> *_constraints;
 }
 
@@ -75,13 +86,13 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
 
 @end
 
-
 @implementation ORKActiveStepViewController
 
 - (instancetype)initWithStep:(ORKStep *)step {
     
     self = [super initWithStep:step];
     if (self) {
+        [[self activeStep] prepareRecorders];
         _recorderResults = [NSArray new];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -113,7 +124,9 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
 }
 
 - (void)viewDidLoad {
+    self.view.directionalLayoutMargins = ORKLargeContentLayoutMargins;
     [super viewDidLoad];
+
     [self setActiveStepView];
     [self setNavigationFooterView];
     [self updateContinueButtonItem];
@@ -125,6 +138,8 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     if (!_activeStepView) {
         _activeStepView = [ORKActiveStepView new];
         [_activeStepView placeNavigationContainerInsideScrollView];
+        // Remove internal margins since view controller handles inset
+        _activeStepView.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
     }
     if (_customView) {
         _activeStepView.customContentView = _customView;
@@ -134,7 +149,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
 }
 
 - (void)setNavigationFooterViewHidden:(BOOL)hidden {
-    [_navigationFooterView setHidden:hidden];
+    [self.activeStepView setNavigationFooterViewHidden:hidden];
 }
 
 - (void)setNavigationFooterView {
@@ -155,45 +170,20 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
 }
 
 - (void)setupConstraints {
+
     if (_constraints) {
         [NSLayoutConstraint deactivateConstraints:_constraints];
     }
     _constraints = nil;
     
-    
     _activeStepView.translatesAutoresizingMaskIntoConstraints = NO;
-    
+
     _constraints = @[
-                     [NSLayoutConstraint constraintWithItem:_activeStepView
-                                                  attribute:NSLayoutAttributeTop
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeTop
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_activeStepView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_activeStepView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_activeStepView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0]
-                     
-                     ];
+        [_activeStepView.topAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.topAnchor],
+        [_activeStepView.leadingAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.leadingAnchor],
+        [_activeStepView.trailingAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.trailingAnchor],
+        [_activeStepView.bottomAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.bottomAnchor]
+    ];
     [NSLayoutConstraint activateConstraints:_constraints];
 }
 
@@ -226,6 +216,11 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
+        ORKTaskViewController *taskVC = (ORKTaskViewController *)self.taskViewController;
+        if ([taskVC isKindOfClass:[ORKTaskViewController class]]) {
+            [taskVC checkRequiredPermissionsForCurrentStep];
+        }
+        
         if(self.started){
             // Should call resume instead of start when the task has been started.
             [self resume];
@@ -292,8 +287,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     // Stop any existing recorders
     [self recordersWillStop];
     for (ORKRecorder *recorder in self.recorders) {
-        recorder.delegate = nil;
-        [recorder stop];
+        [recorder invalidate];
     }
     NSMutableArray *recorders = [NSMutableArray array];
     
@@ -301,6 +295,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
         if (self.outputDirectory != nil) { // Deprecation strategy
             provider.outputDirectory = [self.outputDirectory copy]; // Needed while the output directory can be set from ORKTaskViewController.
         }
+        provider.fileProtectionMode = self.fileProtectionMode;
         ORKRecorder *recorder = [provider recorderForStep:self.step];
         recorder.delegate = self;
         if (recorder) {
@@ -329,12 +324,12 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     
     if ([self.activeStep hasCountDown]) {
         ORKActiveStepTimerView *timerView = [ORKActiveStepTimerView new];
-        _activeStepView.activeCustomView = timerView;
+        _activeStepView.timerView = timerView;
     } else {
-        _activeStepView.activeCustomView = nil;
+        _activeStepView.timerView = nil;
     }
-    _activeStepView.activeCustomView.activeStepViewController = self;
-    [_activeStepView.activeCustomView resetStep:self];
+    _activeStepView.timerView.activeStepViewController = self;
+    [_activeStepView.timerView resetStep:self];
     [self resetTimer];
     
     [self prepareRecorders];
@@ -370,6 +365,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     self.started = YES;
     [self startTimer];
     [_activeStepView.activeCustomView startStep:self];
+    [_activeStepView.timerView startStep:self];
     
     [self startRecorders];
     
@@ -382,6 +378,9 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     }
     
     // Start speech
+    if (self.activeStep.shouldSpeakCountDown) {
+        [[ORKVoiceEngine sharedVoiceEngine] prepare];
+    }
     if (self.activeStep.hasVoice && self.activeStep.spokenInstruction) {
         // Let VO speak "Step x of y" before the instruction.
         // If VO is not running, the text is spoken immediately.
@@ -399,6 +398,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     
     [_activeStepTimer pause];
     [_activeStepView.activeCustomView suspendStep:self];
+    [_activeStepView.timerView suspendStep:self];
     
     [self stopRecorders];
 }
@@ -413,6 +413,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     [self prepareRecorders];
     [self startRecorders];
     [_activeStepView.activeCustomView resumeStep:self];
+    [_activeStepView.timerView resumeStep:self];
 }
 
 - (void)finish {
@@ -424,6 +425,7 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     self.finished = YES;
     [_activeStepTimer pause];
     [_activeStepView.activeCustomView finishStep:self];
+    [_activeStepView.timerView finishStep:self];
     [self stopRecorders];
     if (self.activeStep.shouldPlaySoundOnFinish) {
         [self playSound];
@@ -449,11 +451,16 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     [nfc removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
+- (void)taskDidTerminateEarly {
+    [self suspend];
+}
+
 #pragma mark - timers
 
 - (void)resetTimer {
     [_activeStepTimer reset];
     _activeStepTimer = nil;
+    _lastHandledCountdownValue = 0;
 }
 
 - (void)startTimer {
@@ -481,19 +488,22 @@ NSString * const ORKActiveStepViewAccessibilityIdentifier = @"ORKActiveStepView"
     NSInteger countDownValue = (NSInteger)round(timer.duration - timer.runtime);
     ORKActiveStepCustomView *customView = _activeStepView.activeCustomView;
     [customView updateDisplay:self];
+    [_activeStepView.timerView updateDisplay:self];
     
     
     ORKVoiceEngine *voice = [ORKVoiceEngine sharedVoiceEngine];
     
-    if (!finished && self.activeStep.shouldSpeakCountDown) {
-        // Speak entire countdown if VO is running.
+    if (!finished && self.activeStep.shouldSpeakCountDown && countDownValue != _lastHandledCountdownValue) {
+        _lastHandledCountdownValue = countDownValue;
         if (UIAccessibilityIsVoiceOverRunning()) {
+            // VoiceOver speaks every tick intentionally: UIAccessibilityPostNotification does not queue
+            // announcements, so gap-filling (ORKCountdownValuesToSpeak) is unnecessary. Hearing every
+            // value also gives VoiceOver users a more accurate sense of elapsed time.
             [voice speakInt:countDownValue];
             return;
         }
-        
-        if (0 < countDownValue && countDownValue <= 3) {
-            [voice speakInt:countDownValue];
+        for (NSNumber *v in ORKCountdownValuesToSpeak(countDownValue)) {
+            [voice speakTimeSensitiveText:[NSString stringWithFormat:@"%ld", (long)v.integerValue]];
         }
     }
     

@@ -40,9 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  The `ORKHealthClinicalTypeRecorder` class represents a recorder for collecting health records data from HealthKit during
  an active task.
  */
-#if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
 ORK_CLASS_AVAILABLE
-API_AVAILABLE(ios(12.0))
 @interface ORKHealthClinicalTypeRecorder : ORKRecorder
 
 @property (nonatomic, copy, readonly) HKClinicalType *healthClinicalType;
@@ -82,12 +80,11 @@ API_AVAILABLE(ios(12.0))
             healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory
-          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 @end
 
 ORK_CLASS_AVAILABLE
-API_AVAILABLE(ios(12.0))
 @interface ORKHealthClinicalTypeRecorderConfiguration : ORKRecorderConfiguration
 
 /**
@@ -102,7 +99,7 @@ API_AVAILABLE(ios(12.0))
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthClinicalType:(HKClinicalType *)healthClinicalType
-            healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType API_AVAILABLE(ios(12.0));
+            healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType;
 
 /**
  Returns an initialized health clinical type recorder configuration using the specified clinical type.
@@ -123,7 +120,7 @@ API_AVAILABLE(ios(12.0))
                 healthClinicalType:(HKClinicalType *)healthClinicalType
             healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType
                    outputDirectory:(nullable NSURL *)outputDirectory
-          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
+          rollingFileSizeThreshold:(size_t)rollingFileSizeThreshold NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a new health clinical type recorder configuration initialized from data in the given unarchiver.
@@ -145,8 +142,6 @@ API_AVAILABLE(ios(12.0))
 @property (nonatomic, readonly, copy) HKFHIRResourceType healthFHIRResourceType;
 
 @end
-
-#endif
 
 NS_ASSUME_NONNULL_END
 #endif 

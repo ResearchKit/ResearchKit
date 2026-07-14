@@ -34,7 +34,16 @@
 #import "ORKStep_Private.h"
 
 
+
 @implementation ORKVideoCaptureStep
+
++ (NSTimeInterval)minimumDuration {
+    return 1.0;
+}
+
++ (NSTimeInterval)maximumDuration {
+    return 1200.0;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
@@ -46,6 +55,12 @@
         self.devicePosition = AVCaptureDevicePositionBack;
     }
     return self;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    ORKThrowInvalidArgumentExceptionIfNil(self.duration);
+    ORKValidateBoundedValue(self.duration.doubleValue, ORKVideoCaptureStep.minimumDuration, ORKVideoCaptureStep.maximumDuration, @"duration", YES);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

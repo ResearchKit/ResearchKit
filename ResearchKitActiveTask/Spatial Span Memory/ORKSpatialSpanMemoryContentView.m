@@ -32,6 +32,7 @@
 #import "ORKSpatialSpanMemoryContentView.h"
 
 #import "ORKActiveStepQuantityView.h"
+#import "ORKModalDismissalBlockingGesture.h"
 #import "ORKNavigationContainerView.h"
 #import "ORKSpatialSpanTargetView.h"
 #import "ORKVerticalContainerView.h"
@@ -169,33 +170,25 @@
 
 
 @implementation ORKSpatialSpanMemoryContentView {
+    ORKSpatialSpanMemoryGameView *_gameView;
     ORKQuantityPairView *_quantityPairView;
     UIView *_continueView;
+    UIStackView *_contentView;
 }
 
 - (ORKActiveStepQuantityView *)countView {
-    return [_quantityPairView leftView];
+    return [self.quantityPairView leftView];
 }
 
 - (ORKActiveStepQuantityView *)scoreView {
-    return [_quantityPairView rightView];
+    return [self.quantityPairView rightView];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _gameView = [ORKSpatialSpanMemoryGameView new];
-        _gameView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_gameView];
-        
-        _quantityPairView = [ORKQuantityPairView new];
-        _quantityPairView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_quantityPairView];
-        
-        _continueView = [UIView new];
-        _continueView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_continueView];
-        
+        [self addGestureRecognizer:[[ORKModalDismissalBlockingGesture alloc] initWithTarget:nil action:nil]];
+
         ORKActiveStepQuantityView *countView = [self countView];
         ORKActiveStepQuantityView *scoreView = [self scoreView];
         
@@ -208,9 +201,7 @@
         
         self.numberOfItems = 0;
         self.score = 0;
-        
-        [self updateMargins];
-        
+
 #if LAYOUT_DEBUG
         self.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
         _gameView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.2];
@@ -219,10 +210,55 @@
         [self scoreView].backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
         [self countView].backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
-        
-        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)didMoveToSuperview {
+    [self addSubview:self.contentView];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.topAnchor constraintEqualToAnchor:self.contentView.topAnchor],
+        [self.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
+        [self.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor],
+        [self.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor],
+    ]];
+}
+
+- (UIStackView *)contentView {
+    if (_contentView == nil) {
+        _contentView = [[UIStackView alloc] initWithArrangedSubviews:@[self.gameView, self.quantityPairView, self.continueView]];
+        _contentView.axis = UILayoutConstraintAxisVertical;
+        _contentView.alignment = UIStackViewAlignmentFill;
+        _contentView.distribution = UIStackViewDistributionFill;
+        _contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _contentView;
+}
+
+- (UIView *)gameView {
+    if (_gameView == nil) {
+        _gameView = [ORKSpatialSpanMemoryGameView new];
+        _gameView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_gameView setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+
+    }
+    return _gameView;
+}
+
+- (ORKQuantityPairView *)quantityPairView {
+    if (_quantityPairView == nil) {
+        _quantityPairView = [ORKQuantityPairView new];
+        _quantityPairView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _quantityPairView;
+}
+
+- (UIView *)continueView {
+    if (_continueView == nil) {
+        _continueView = [UIView new];
+        _continueView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return _continueView;
 }
 
 - (void)setCapitalizedPluralItemDescription:(NSString *)capitalizedPluralItemDescription {
@@ -249,7 +285,7 @@
 }
 
 - (void)updateFooterHidden {
-    _quantityPairView.hidden = (_footerHidden || (_buttonItem != nil));
+    self.quantityPairView.hidden = (_footerHidden || (_buttonItem != nil));
 }
 
 - (void)setFooterHidden:(BOOL)footerHidden {
@@ -257,110 +293,40 @@
     [self updateFooterHidden];
 }
 
-- (void)setButtonItem:(ORKBorderedButton *)buttonItem {
+- (void)setButtonItem:(UIButton *)buttonItem {
+    UIButton *oldButton = _buttonItem;
     _buttonItem = buttonItem;
     if (buttonItem) {
-        buttonItem.contentEdgeInsets = (UIEdgeInsets){.top = 2, .bottom = 2, .left = 8, .right = 8};
+        if (buttonItem.configuration == nil) {
+            UIButtonConfiguration *config = [UIButtonConfiguration plainButtonConfiguration];
+            config.contentInsets = NSDirectionalEdgeInsetsMake(2, 8, 2, 8);
+            buttonItem.configuration = config;
+        }
         buttonItem.translatesAutoresizingMaskIntoConstraints = NO;
-        [_continueView addSubview:buttonItem];
-        [[NSLayoutConstraint constraintWithItem:_buttonItem
-                                      attribute:NSLayoutAttributeCenterX
-                                      relatedBy:NSLayoutRelationEqual
-                                         toItem:_continueView
-                                      attribute:NSLayoutAttributeCenterX
-                                     multiplier:1.0
-                                       constant:0.0] setActive:YES];
-        [[NSLayoutConstraint constraintWithItem:_buttonItem
-                                      attribute:NSLayoutAttributeCenterY
-                                      relatedBy:NSLayoutRelationEqual
-                                         toItem:_continueView
-                                      attribute:NSLayoutAttributeCenterY
-                                     multiplier:1.0
-                                       constant:0.0] setActive:YES];
+        [oldButton removeFromSuperview];
+        CGRect containingFrame = [[self.continueView superview] frame];
+        CGRect windowFrame = [self.continueView convertRect:containingFrame toView:nil];
+        self.continueView.directionalLayoutMargins = (NSDirectionalEdgeInsets){
+            0,
+            0,
+            windowFrame.origin.x,
+            0
+        };
+
+        [self.continueView addSubview:buttonItem];
+        [NSLayoutConstraint activateConstraints:@[
+            [_buttonItem.bottomAnchor constraintEqualToAnchor:self.continueView.layoutMarginsGuide.bottomAnchor],
+            [_buttonItem.leadingAnchor constraintEqualToAnchor:self.continueView.layoutMarginsGuide.leadingAnchor],
+            [_buttonItem.trailingAnchor constraintEqualToAnchor:self.continueView.layoutMarginsGuide.trailingAnchor],
+            [_buttonItem.heightAnchor constraintGreaterThanOrEqualToConstant:52]
+        ]];
     }
     else {
-        [_buttonItem removeFromSuperview];
+        [oldButton removeFromSuperview];
     }
     
-    _continueView.hidden = (buttonItem == nil);
+    self.continueView.hidden = (buttonItem == nil);
     [self updateFooterHidden];
-}
-
-- (void)updateMargins {
-    CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
-    _quantityPairView.layoutMargins = self.layoutMargins;
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self updateMargins];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    [self updateMargins];
-}
-
-- (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_gameView, _quantityPairView, _continueView);
-    
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_gameView(>=ORKScreenMetricMinimumGameViewHeightForMemoryGame)][_quantityPairView]|"
-                                             options:NSLayoutFormatAlignAllCenterX
-                                             metrics:@{@"ORKScreenMetricMinimumGameViewHeightForMemoryGame": @(ORKGetMetricForWindow(ORKScreenMetricMinimumGameViewHeightForMemoryGame, self.window))}
-                                               views:views]];
-    NSLayoutConstraint *gameViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_gameView
-                                                                      attribute:NSLayoutAttributeHeight
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:1.0
-                                                                       constant:CGFLOAT_MIN];
-    gameViewHeightConstraint.priority = UILayoutPriorityDefaultLow - 1;
-    [constraints addObject:gameViewHeightConstraint];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|"
-                                                                             options:(NSLayoutFormatOptions)0
-                                                                             metrics:nil
-                                                                               views:views]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_quantityPairView]|"
-                                                                             options:(NSLayoutFormatOptions)0
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueView]|"
-                                                                             options:(NSLayoutFormatOptions)0
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
-                                                        attribute:NSLayoutAttributeBottom
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_quantityPairView
-                                                        attribute:NSLayoutAttributeBottom
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
-                                                        attribute:NSLayoutAttributeTop
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_quantityPairView
-                                                        attribute:NSLayoutAttributeTop
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
-    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:nil
-                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1.0
-                                                                           constant:ORKScreenMetricMaxDimension];
-    maxWidthConstraint.priority = UILayoutPriorityRequired - 1;
-    [constraints addObject:maxWidthConstraint];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 @end

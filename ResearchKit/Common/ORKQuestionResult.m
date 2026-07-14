@@ -261,14 +261,12 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, calendar);
-    ORK_ENCODE_OBJ(aCoder, timeZone);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, calendar, NSCalendar);
-        ORK_DECODE_OBJ_CLASS(aDecoder, timeZone, NSTimeZone);
         if (_typedAnswerOrNoAnswer == nil) {
             // Backwards compatibility, do not change the key
             ORK_DECODE_OBJ_CLASSES_FOR_KEY(aDecoder, typedAnswerOrNoAnswer, [[self class] answerClassesIncludingNoAnswer], dateAnswer);
@@ -290,7 +288,6 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.timeZone, castObject.timeZone) &&
             ORKEqualObjects(self.calendar, castObject.calendar));
 }
 
@@ -300,7 +297,6 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKDateQuestionResult *result = [super copyWithZone:zone];
-    result->_timeZone = [self.timeZone copyWithZone:zone];
     result->_calendar = [self.calendar copyWithZone:zone];
     return result;
 }

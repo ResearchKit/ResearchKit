@@ -31,10 +31,13 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKAudioFitnessStep.h"
 #import "ORKAudioFitnessStepViewController.h"
+#import "ORKActiveStepTimerView.h"
 #import "ORKVoiceEngine.h"
 
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKActiveStepView_Private.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKStepContainerView_Private.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -47,6 +50,7 @@
 @interface ORKAudioFitnessStepViewController ()
 @property (nonatomic) BOOL appHasAudioBackgroundMode;
 @property (nonatomic) NSMutableSet<ORKVocalCue *> *playedCues;
+@property (nonatomic, strong) NSLayoutConstraint *timerAspectRatioConstraint;
 @end
 
 @implementation ORKAudioFitnessStepViewController
@@ -65,6 +69,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.audioPlayer prepareToPlay];
+}
+
+- (void)prepareStep {
+    [super prepareStep];
+    self.activeStepView.timerView.style = ORKActiveStepTimerViewStyleRing;
+    if (!_timerAspectRatioConstraint) {
+        _timerAspectRatioConstraint = [self.activeStepView.timerView.heightAnchor constraintGreaterThanOrEqualToAnchor:self.activeStepView.timerView.widthAnchor
+                                                                                                           multiplier:1.25];
+        _timerAspectRatioConstraint.active = YES;
+    }
 }
 
 - (void)start {

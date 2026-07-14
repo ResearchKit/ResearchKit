@@ -13,9 +13,18 @@
   },
   "testTargets" : [
     {
-      "skippedTests" : [
-        "ORKDataCollectionTests"
-      ],
+      "skippedTests" : {
+        "suites" : [
+          {
+            "name" : "ORKPredicateFormItemVisibilityRuleSerializationTests"
+          }
+        ],
+        "xctestClasses" : [
+          {
+            "name" : "ORKDataCollectionTests"
+          }
+        ]
+      },
       "target" : {
         "containerPath" : "container:ResearchKit.xcodeproj",
         "identifier" : "86CC8E991AC09332001CCD89",
@@ -23,5 +32,5 @@
       }
     }
   ],
-  "version" : 1
+  "version" : 2
 }

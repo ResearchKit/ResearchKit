@@ -43,6 +43,7 @@
 
 @interface ORKDeviceMotionRecorder () {
     ORKDataLogger *_logger;
+    BOOL _isRecording;
 }
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
@@ -114,7 +115,8 @@
     self.uptime = [NSProcessInfo processInfo].systemUptime;
     
     [self.motionManager stopDeviceMotionUpdates];
-    
+
+    _isRecording = YES;
     [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *data, NSError *error) {
          BOOL success = NO;
          if (data) {
@@ -137,25 +139,28 @@
 }
 
 - (void)stop {
-    [self doStopRecording];
-    [_logger finishCurrentLog];
-    
-    NSError *error = nil;
-    __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
-    [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
-        [fileUrls addObject:logFileUrl];
+    if (_isRecording) {
+        [self doStopRecording];
+        [_logger finishCurrentLog];
+        
+        NSError *error = nil;
+        __block NSMutableArray<NSURL *> *fileUrls = [[NSMutableArray alloc] init];
+        [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
+            [fileUrls addObject:logFileUrl];
+        }
+                         error:&error];
+        
+        [self reportFileResultsWithFiles:fileUrls error:error];
+        
+        [super stop];
     }
-                     error:&error];
-    
-    [self reportFileResultsWithFiles:fileUrls error:error];
-    
-    [super stop];
 }
 
 - (void)doStopRecording {
-    if (self.isRecording) {
+    if (_isRecording) {
         [self.motionManager stopDeviceMotionUpdates];
         self.motionManager = nil;
+        _isRecording = NO;
     }
 }
 
@@ -165,7 +170,7 @@
 }
 
 - (BOOL)isRecording {
-    return self.motionManager.deviceMotionActive;
+    return _isRecording;
 }
 
 - (NSString *)mimeType {
@@ -185,6 +190,12 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException
+                                   reason:@"Use subclass designated initializer"
+                                 userInfo:nil];
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)freq {
     return [self initWithIdentifier:identifier frequency:freq outputDirectory:nil rollingFileSizeThreshold:0];
 }
@@ -232,16 +243,19 @@
     return YES;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                                  frequency:_frequency
+                                                            outputDirectory:[self.outputDirectory copy]
+                                                   rollingFileSizeThreshold:self.rollingFileSizeThreshold];
+}
+
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.frequency == castObject.frequency));
-}
-
-- (ORKPermissionMask)requestedPermissionMask {
-    return ORKPermissionCoreMotionAccelerometer;
 }
 
 @end

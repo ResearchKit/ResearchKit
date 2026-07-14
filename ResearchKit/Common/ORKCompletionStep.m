@@ -75,7 +75,7 @@
 }
 
 - (BOOL)allowsBackNavigation {
-    return !(_reasonForCompletion == ORKTaskFinishReasonDiscarded);
+    return !(_reasonForCompletion == ORKTaskFinishReasonDiscarded) && [super allowsBackNavigation];
 }
 #endif
 @end

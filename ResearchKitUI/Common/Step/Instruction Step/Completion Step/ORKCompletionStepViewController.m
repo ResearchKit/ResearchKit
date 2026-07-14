@@ -59,19 +59,21 @@
     _reasonForCompletion = completionStep.reasonForCompletion;
     
     self.cancelButtonItem = nil;
-    
-    if (_reasonForCompletion == ORKTaskFinishReasonCompleted) {
+
+    // If an iconImage is explicitly set on the step, use it instead of the checkmark
+    BOOL hasCustomIcon = (self.step.iconImage != nil);
+
+    if (_reasonForCompletion == ORKTaskFinishReasonCompleted && !hasCustomIcon) {
         _completionCheckmarkView = [self.stepView.stepContentView completionCheckmarkView];
+        _completionCheckmarkView.accessibilityIdentifier = @"ORKCompletionCheckmarkView";
         [_completionCheckmarkView setNeedsLayout];
         if (self.checkmarkColor) {
             _completionCheckmarkView.tintColor = self.checkmarkColor;
         }
-    } else {
+    } else if (_reasonForCompletion != ORKTaskFinishReasonCompleted) {
         self.continueButtonItem.target = self;
         self.continueButtonItem.action = @selector(continueWasPressed);
     }
-    
-    self.stepView.customContentFillsAvailableSpace = YES;
 }
 
 - (void)continueWasPressed {

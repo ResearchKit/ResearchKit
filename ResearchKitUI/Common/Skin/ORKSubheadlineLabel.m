@@ -36,17 +36,19 @@
 
 @implementation ORKSubheadlineLabel
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    self.font = [ORKSubheadlineLabel defaultFont];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKSubheadlineLabel *traitChangeView, UITraitCollection *previousTraitCollection) {
+            traitChangeView.font = [ORKSubheadlineLabel defaultFont];
+        }];
+    }
+    return self;
 }
 
 + (UIFont *)defaultFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
-    const CGFloat defaultSize = 15;
-    return [UIFont systemFontOfSize:[[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue] - defaultSize + ORKGetMetricForWindow(ORKScreenMetricFontSizeSubheadline, nil)];
+    UIFont *baseFont = [UIFont systemFontOfSize:ORKGetMetricForWindow(ORKScreenMetricFontSizeSubheadline, nil)];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleSubheadline] scaledFontForFont:baseFont];
 }
 
 @end

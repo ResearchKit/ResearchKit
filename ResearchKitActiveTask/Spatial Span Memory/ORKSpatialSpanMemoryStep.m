@@ -43,6 +43,8 @@
     if (self) {
         self.shouldStartTimerAutomatically = YES;
         self.shouldContinueOnFinish = YES;
+        self.allowsBackNavigation = NO;
+        self.shouldShowDefaultTimer = NO;
     }
     return self;
 }
@@ -166,10 +168,6 @@
             (self.maximumConsecutiveFailures == castObject.maximumConsecutiveFailures) &&
             (ORKEqualObjects(self.customTargetPluralName, castObject.customTargetPluralName)) &&
             (self.requireReversal == castObject.requireReversal));
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
 }
 
 @end

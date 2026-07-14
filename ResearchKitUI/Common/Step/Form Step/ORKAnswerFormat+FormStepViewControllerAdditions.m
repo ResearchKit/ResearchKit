@@ -33,6 +33,7 @@
 #import "ORKFormItemCell.h"
 
 #import <ResearchKit/ORKAnswerFormat_Private.h>
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,7 +43,15 @@ NS_ASSUME_NONNULL_BEGIN
     Class result = nil;
     
     ORKQuestionType type = self.questionType;
-    
+
+    if (@available(iOS 16.0, *)) {
+        if (result == nil && ORKLiquidGlassSupportEnabled()) {
+            BOOL matchesType = NO;
+            matchesType = matchesType || (type == ORKQuestionTypeAge);
+            matchesType = matchesType || (type == ORKQuestionTypeYear);
+            result = matchesType ? [ORKAgePickerFormItemCell class] : result;
+        }
+    }
     if (result == nil) {
         BOOL matchesType = NO;
         matchesType = matchesType || (type == ORKQuestionTypeDateAndTime);

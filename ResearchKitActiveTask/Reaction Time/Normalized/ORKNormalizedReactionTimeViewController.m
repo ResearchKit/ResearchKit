@@ -40,6 +40,7 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKVerticalContainerView_Internal.h"
+#import "ORKStepContainerView_Private.h"
 
 #import "ORKCollectionResult_Private.h"
 #import "ORKNormalizedReactionTimeResult.h"
@@ -54,6 +55,7 @@
 @implementation ORKNormalizedReactionTimeViewController {
     ORKNormalizedReactionTimeContentView *_reactionTimeContentView;
     NSMutableArray *_results;
+    NSMutableArray<ORKFileResult *> *_fileResults;
     NSTimer *_stimulusTimer;
     NSTimer *_timeoutTimer;
     NSTimeInterval _stimulusTimestamp;
@@ -78,12 +80,14 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     // Do any additional setup after loading the view.
     [self configureTitle];
     _results = [NSMutableArray new];
+    _fileResults = [NSMutableArray new];
     _reactionTimeContentView = [ORKNormalizedReactionTimeContentView new];
     [_reactionTimeContentView.button addTarget:self action:@selector(startStimulusTimer) forControlEvents:UIControlEventTouchDown];
     [_reactionTimeContentView.button addTarget:self action:@selector(startReactionTimer) forControlEvents:UIControlEventTouchUpInside];
     
     self.activeStepView.activeCustomView = _reactionTimeContentView;
 
+    [self.activeStepView setNavigationFooterViewHidden:YES];
     _backgroundView = [_reactionTimeContentView getBackgroundView];
     _stimulusView = [_reactionTimeContentView getStimulusView];
 
@@ -98,10 +102,10 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     if (_stimulusView.hidden) {
             _validResult = NO;
             _timedOut = YES;
-            [self addReactionTimeResult];
+        [self stopRecorders];
         #if TARGET_IPHONE_SIMULATOR
             // Device motion recorder won't work, so manually trigger didfinish
-            [self attemptDidFinish];
+            [self addReactionTimeResult];
         #endif
     } else {
         _timerStartDate = [NSDate date];
@@ -111,7 +115,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)tapDetected {
     if ([_stimulusTimer isValid] || [_timeoutTimer isValid]) {
         _reactionDate = [NSDate date];
-        [self addReactionTimeResult];
+        [self stopRecorders];
+#if TARGET_IPHONE_SIMULATOR
+    // Device motion recorder won't work, so manually trigger didfinish
+    [self addReactionTimeResult];
+#endif
     }
 }
 
@@ -153,6 +161,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 #pragma mark - ORKRecorderDelegate
 
+- (void)recorder:(ORKRecorder *)recorder didCompleteWithResults:(NSArray<ORKFileResult *> *)results {
+    [_fileResults addObjectsFromArray:results];
+    [self addReactionTimeResult];
+}
+
 - (void)addReactionTimeResult {
     ORKNormalizedReactionTimeResult *reactionTimeResult = [[ORKNormalizedReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
     reactionTimeResult.timerStartDate = _timerStartDate;
@@ -160,11 +173,14 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     reactionTimeResult.reactionDate = _reactionDate;
     reactionTimeResult.stimulusStartDate = _stimulusStartDate;
     reactionTimeResult.currentInterval = [self reactionTimeStep].currentInterval;
+    reactionTimeResult.fileResults = [_fileResults copy];
+    
     [_results addObject:reactionTimeResult];
     _timerStartDate = nil;
     _reactionDate = nil;
     _stimulusStartDate = nil;
-    
+    [_fileResults removeAllObjects];
+
     [self attemptDidFinish];
 }
 
@@ -244,10 +260,10 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)timeoutTimerDidFire {
     _validResult = NO;
     _timedOut = YES;
-    [self addReactionTimeResult];
+    [self stopRecorders];
 #if TARGET_IPHONE_SIMULATOR
     // Device motion recorder won't work, so manually trigger didfinish
-    [self attemptDidFinish];
+    [self addReactionTimeResult];
 #endif
 }
 

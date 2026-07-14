@@ -84,8 +84,14 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    self.checkLayer.strokeColor = self.tintColor.CGColor;
     [self setNeedsDisplay];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)setSuccess:(BOOL)success
@@ -113,22 +119,29 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
     [path stroke];
 
     if (self.isSuccess) {
-        [self.layer addSublayer:self.checkLayer];
-        
-        CAMediaTimingFunction *timing = [[CAMediaTimingFunction alloc] initWithControlPoints:0.180739998817444
-                                                                                            :0
-                                                                                            :0.577960014343262
-                                                                                            :0.918200016021729];
-        
-        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-        [animation setTimingFunction:timing];
-        [animation setFillMode:kCAFillModeBoth];
-        animation.fromValue = @(0);
-        animation.toValue = @(1);
-        animation.duration = 0.3f;
-        animation.delegate = self;
-        [self.checkLayer addAnimation:animation forKey:@"strokeEnd"];
+        [self.tintColor setFill];
+        [path fill];
+        self.checkLayer.strokeColor = [UIColor systemBackgroundColor].CGColor;
+        if (self.checkLayer.superlayer == nil) {
+            [self.layer addSublayer:self.checkLayer];
+
+            CAMediaTimingFunction *timing = [[CAMediaTimingFunction alloc] initWithControlPoints:0.180739998817444
+                                                                                                :0
+                                                                                                :0.577960014343262
+                                                                                                :0.918200016021729];
+
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+            [animation setTimingFunction:timing];
+            [animation setFillMode:kCAFillModeBoth];
+            animation.fromValue = @(0);
+            animation.toValue = @(1);
+            animation.duration = 0.3f;
+            animation.delegate = self;
+            [self.checkLayer addAnimation:animation forKey:@"strokeEnd"];
+        }
     } else if (self.isRotated) {
+        [self.crossLayer removeFromSuperlayer];
+
         UIBezierPath *crossPath = [[UIBezierPath alloc] init];
         [crossPath moveToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 1/4)];
         [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 7/16)];

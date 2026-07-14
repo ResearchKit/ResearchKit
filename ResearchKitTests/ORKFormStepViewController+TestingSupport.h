@@ -63,7 +63,8 @@ returns a list of all the answerable formItems
  */
 - (nonnull ORKTaskResult *)_ongoingTaskResult;
 
-- (void)buildDataSource:(UITableViewDiffableDataSource<NSString *, ORKTableCellItemIdentifier *> *)dataSource withCompletion:(void (^ _Nullable)(void))completion;
+- (void)_createDiffableSnapshot:(UITableViewDiffableDataSource<NSString *, ORKTableCellItemIdentifier *> *)dataSource
+                 withCompletion:(void (^ _Nullable)(void))completion;
 
 /**
  fetches the associated ORKFormItem from an indexPath which calls  _formItemForFormItemIdentifier (potential performance hit)

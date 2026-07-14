@@ -55,6 +55,7 @@
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
         _identifier = [identifier copy];
         _earlyTerminationConfiguration = nil;
+        _allowsBackNavigation = YES;
         self.showsProgress = YES;
     }
     return self;
@@ -71,11 +72,11 @@
     return [NSString stringWithFormat:@"<%@ %@ %@>", super.description, self.identifier, self.title];
 }
 
-- (BOOL)allowsBackNavigation {
+- (BOOL)isRestorable {
     return YES;
 }
 
-- (BOOL)isRestorable {
+- (BOOL)isStepAvailable {
     return YES;
 }
 
@@ -97,14 +98,17 @@
     ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
     step.title = _title;
     step.optional = _optional;
+    step.allowsBackNavigation = _allowsBackNavigation;
     step.text = _text;
     step.detailText = self.detailText;
     step.headerTextAlignment = _headerTextAlignment;
     step.footnote = self.footnote;
+    step.accessibilityIdentifier = self.accessibilityIdentifier;
     step.showsProgress = _showsProgress;
     step.shouldTintImages = _shouldTintImages;
     step.useSurveyMode = _useSurveyMode;
     step.useExtendedPadding = _useExtendedPadding;
+    step.requiredStepIdentifiers = _requiredStepIdentifiers;
 #if TARGET_OS_IOS
     step.bodyItemTextAlignment = _bodyItemTextAlignment;
     step.buildInBodyItems = _buildInBodyItems;
@@ -112,6 +116,7 @@
     step.imageContentMode = self.imageContentMode;
     step.auxiliaryImage = self.auxiliaryImage;
     step.iconImage = self.iconImage;
+    step.iconImageTintColor = self.iconImageTintColor;
     step.bodyItems = [_bodyItems copy];
     step.earlyTerminationConfiguration = self.earlyTerminationConfiguration;
     step.shouldAutomaticallyAdjustImageTintColor = _shouldAutomaticallyAdjustImageTintColor;
@@ -134,11 +139,14 @@
             && ORKEqualObjects(self.detailText, castObject.detailText)
             && (self.headerTextAlignment == castObject.headerTextAlignment)
             && ORKEqualObjects(self.footnote, castObject.footnote)
+            && ORKEqualObjects(self.accessibilityIdentifier, castObject.accessibilityIdentifier)
             && (self.showsProgress == castObject.showsProgress)
             && (self.optional == castObject.optional)
+            && (self.allowsBackNavigation == castObject.allowsBackNavigation)
             && (self.shouldTintImages == castObject.shouldTintImages)
             && (self.useSurveyMode == castObject.useSurveyMode)
             && (self.useExtendedPadding == castObject.useExtendedPadding)
+            && ORKEqualObjects(self.requiredStepIdentifiers, castObject.requiredStepIdentifiers)
 #if TARGET_OS_IOS
             && (self.bodyItemTextAlignment == castObject.bodyItemTextAlignment)
             && (self.buildInBodyItems == castObject.buildInBodyItems)
@@ -146,6 +154,7 @@
             && ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage)
             && (self.imageContentMode == castObject.imageContentMode)
             && ORKEqualObjects(self.iconImage, castObject.iconImage)
+            && ORKEqualObjects(self.iconImageTintColor, castObject.iconImageTintColor)
             && ORKEqualObjects(self.bodyItems, castObject.bodyItems)
             && ORKEqualObjects(self.earlyTerminationConfiguration, castObject.earlyTerminationConfiguration)
             && _shouldAutomaticallyAdjustImageTintColor == castObject->_shouldAutomaticallyAdjustImageTintColor
@@ -155,7 +164,7 @@
 
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step.
-    return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment  ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0)
+    return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment  ^ self.footnote.hash ^ self.accessibilityIdentifier.hash ^ (_optional ? 0xf : 0x0) ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0) ^ _requiredStepIdentifiers.hash
 #if TARGET_OS_IOS
     ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ _bodyItems.hash ^_earlyTerminationConfiguration.hash ^ (_shouldAutomaticallyAdjustImageTintColor ? 0xf : 0x0)
 #endif
@@ -178,12 +187,17 @@
         ORK_DECODE_ENUM(aDecoder, headerTextAlignment);
         ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
         ORK_DECODE_IMAGE(aDecoder, iconImage);
+        ORK_DECODE_OBJ_CLASS(aDecoder, iconImageTintColor, UIColor);
+        ORK_DECODE_OBJ_CLASS(aDecoder, accessibilityIdentifier, NSString);
         ORK_DECODE_BOOL(aDecoder, showsProgress);
         ORK_DECODE_BOOL(aDecoder, optional);
-        ORK_DECODE_OBJ_CLASS(aDecoder, task, ORKOrderedTask);
+        ORK_DECODE_BOOL(aDecoder, allowsBackNavigation);
+        // Do not decode task here - it creates retain cycle during decoding
+        // Task relationship will be re-established by the task itself at runtime
         ORK_DECODE_BOOL(aDecoder, shouldTintImages);
         ORK_DECODE_BOOL(aDecoder, useSurveyMode);
         ORK_DECODE_BOOL(aDecoder, useExtendedPadding);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, requiredStepIdentifiers, NSString);
 #if TARGET_OS_IOS
         ORK_DECODE_ENUM(aDecoder, bodyItemTextAlignment);
         ORK_DECODE_IMAGE(aDecoder, image);
@@ -205,25 +219,28 @@
     ORK_ENCODE_OBJ(aCoder, detailText);
     ORK_ENCODE_ENUM(aCoder, headerTextAlignment);
     ORK_ENCODE_OBJ(aCoder, footnote);
+    ORK_ENCODE_OBJ(aCoder, accessibilityIdentifier);
     ORK_ENCODE_BOOL(aCoder, showsProgress);
     ORK_ENCODE_BOOL(aCoder, optional);
+    ORK_ENCODE_BOOL(aCoder, allowsBackNavigation);
     ORK_ENCODE_BOOL(aCoder, shouldTintImages);
     ORK_ENCODE_BOOL(aCoder, useSurveyMode);
     ORK_ENCODE_BOOL(aCoder, useExtendedPadding);
+    ORK_ENCODE_OBJ(aCoder, requiredStepIdentifiers);
 #if TARGET_OS_IOS
     ORK_ENCODE_ENUM(aCoder, bodyItemTextAlignment);
     ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_ENUM(aCoder, imageContentMode);
     ORK_ENCODE_IMAGE(aCoder, auxiliaryImage);
     ORK_ENCODE_IMAGE(aCoder, iconImage);
+    ORK_ENCODE_OBJ(aCoder, iconImageTintColor);
     ORK_ENCODE_OBJ(aCoder, bodyItems);
     ORK_ENCODE_BOOL(aCoder, buildInBodyItems);
     ORK_ENCODE_OBJ(aCoder, earlyTerminationConfiguration);
     ORK_ENCODE_BOOL(aCoder, shouldAutomaticallyAdjustImageTintColor);
 #endif
-    if ([_task isKindOfClass:[ORKOrderedTask class]]) {
-        ORK_ENCODE_OBJ(aCoder, task);
-    }
+    // Do not encode task here - it creates retain cycle during decoding
+    // Task relationship will be re-established by the task itself at runtime
 }
 
 #if TARGET_OS_IOS

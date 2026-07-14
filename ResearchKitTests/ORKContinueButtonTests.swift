@@ -41,7 +41,7 @@ class ORKContinueButtonTests: XCTestCase {
     }
 
     func testAttributes() {
-        XCTAssertEqual(button.titleLabel?.text, "BUTTON")
+        XCTAssertEqual(button.configuration?.title, "BUTTON")
         XCTAssertEqual(button.isDoneButton, true)
     }
 }

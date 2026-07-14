@@ -32,6 +32,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class AVCaptureDevice;
 @class AVCaptureSession;
 
 typedef NS_ENUM(NSUInteger, ORKFrontFacingCameraStepContentViewEvent) {

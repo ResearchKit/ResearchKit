@@ -86,22 +86,20 @@
 }
 
 - (ORKChoiceViewCell *)cellAtIndex:(NSUInteger)index withReuseIdentifier:(NSString *)identifier {
-    ORKChoiceViewCell *cell = _cells[@(index)];
+    ORKColorChoiceCell *cell = _cells[@(index)];
     
     if (cell == nil) {
         ORKColorChoice *colorChoice = [_helper colorChoiceAtIndex:index];
         
         if ([self.presentationStyle isEqualToString:ORKQuestionStepPresentationStyleDefault]) {
-            cell = [[ORKChoiceViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        } else if ([self.presentationStyle isEqualToString:ORKQuestionStepPresentationStylePlatter]) {
-            cell = [[ORKChoiceViewPlatterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell = [[ORKColorChoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
         
         cell.isExclusive = colorChoice.exclusive;
         cell.immediateNavigation = _immediateNavigation;
-        cell.shouldIgnoreDarkMode = YES;
         [cell setSwatchColor:colorChoice.color];
         [cell setPrimaryText:colorChoice.text];
+        [cell setPrimaryTextVoiceOverReadableText:colorChoice.voiceOverReadableText];
         [cell setDetailText:colorChoice.detailText];
      
         _cells[@(index)] = cell;

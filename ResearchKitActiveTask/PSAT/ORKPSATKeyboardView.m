@@ -51,7 +51,7 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
     self = [super init];
     if (self) {
         NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:(ORKPSATMaximumAnswer - ORKPSATMinimumAnswer) + 1];
-        ORKBorderedButton *answerButton = nil;
+        UIButton *answerButton = nil;
         for (int i = ORKPSATMinimumAnswer; i <= ORKPSATMaximumAnswer; i++) {
             answerButton = [self answerButtonWithTitle:[NSNumberFormatter localizedStringFromNumber:@(i)
                                                                                         numberStyle:NSNumberFormatterNoStyle]];
@@ -68,8 +68,13 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
     return self;
 }
 
-- (ORKBorderedButton *)answerButtonWithTitle:(NSString *)title {
-    ORKBorderedButton *answerButton = [ORKBorderedButton new];
+- (UIButton *)answerButtonWithTitle:(NSString *)title {
+    UIButton *answerButton = [ORKBorderedButton new];
+    if (ORKLiquidGlassSupportEnabled()) {
+        if (@available(iOS 26.0, *)) {
+            answerButton = [UIButton buttonWithConfiguration:[UIButtonConfiguration prominentGlassButtonConfiguration] primaryAction:nil];
+        }
+    }
     answerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [answerButton setTitle:title forState:UIControlStateNormal];
     [answerButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
@@ -78,7 +83,7 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
 }
 
 - (void)setEnabled:(BOOL)enabled {
-    for (ORKBorderedButton *answerButton in self.answerButtons) {
+    for (UIButton *answerButton in self.answerButtons) {
         [answerButton setEnabled:enabled];
         [answerButton setBackgroundColor:ORKWindowTintcolor(self.window) ? : [UIColor systemBlueColor]];
     }
@@ -110,25 +115,26 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
     
     // First line of answer buttons
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer3Button]-[answer4Button(==answer3Button)]-[answer5Button(==answer3Button)]-[answer6Button(==answer3Button)]-[answer7Button(==answer3Button)]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[answer3Button]-[answer4Button(==answer3Button)]-[answer5Button(==answer3Button)]-[answer6Button(==answer3Button)]-[answer7Button(==answer3Button)]|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Second line of answer buttons
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer8Button]-[answer9Button(==answer8Button)]-[answer10Button(==answer8Button)]-[answer11Button(==answer8Button)]-[answer12Button(==answer8Button)]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[answer8Button]-[answer9Button(==answer8Button)]-[answer10Button(==answer8Button)]-[answer11Button(==answer8Button)]-[answer12Button(==answer8Button)]|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Third line of answer buttons
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer13Button]-[answer14Button(==answer13Button)]-[answer15Button(==answer13Button)]-[answer16Button(==answer13Button)]-[answer17Button(==answer13Button)]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[answer13Button]-[answer14Button(==answer13Button)]-[answer15Button(==answer13Button)]-[answer16Button(==answer13Button)]-[answer17Button(==answer13Button)]|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Align vertically
+    NSString *bottomSpacing = ORKLiquidGlassSupportEnabled() ? @"-26-" : @"-";
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[answer3Button]-[answer8Button(==answer3Button)]-[answer13Button(==answer3Button)]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-[answer3Button]-[answer8Button(==answer3Button)]-[answer13Button(==answer3Button)]%@|", bottomSpacing]
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     

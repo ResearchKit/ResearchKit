@@ -40,7 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithProduct:(NSString *)product
                       osVersion:(NSString *)osVersion
                         osBuild:(NSString *)osBuild
-                       platform:(NSString *)platform;
+                       platform:(NSString *)platform
+             researchKitVersion:(nullable NSString *)researchKitVersion
+       researchKitBundleVersion:(nullable NSString *)researchKitBundleVersion;
 
 @end
 

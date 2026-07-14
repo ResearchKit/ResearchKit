@@ -199,12 +199,24 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
                                                                                       calendar:calendar];
             _impliedAnswerFormat = format;
         } else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierFitzpatrickSkinType]) {
-            NSArray *options = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_I", nil) value:@(HKFitzpatrickSkinTypeI)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_II", nil) value:@(HKFitzpatrickSkinTypeII)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_III", nil) value:@(HKFitzpatrickSkinTypeIII)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_IV", nil) value:@(HKFitzpatrickSkinTypeIV)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_V", nil) value:@(HKFitzpatrickSkinTypeV)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_VI", nil) value:@(HKFitzpatrickSkinTypeVI)],
+            NSArray *options = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_I", nil)
+                                         voiceOverReadableText:ORKLocalizedString(@"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I", nil)
+                                                         value:@(HKFitzpatrickSkinTypeI)],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_II", nil)
+                                         voiceOverReadableText:ORKLocalizedString(@"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II", nil)
+                                                         value:@(HKFitzpatrickSkinTypeII)],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_III", nil)
+                                         voiceOverReadableText:ORKLocalizedString(@"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III", nil)
+                                                         value:@(HKFitzpatrickSkinTypeIII)],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_IV", nil)
+                                         voiceOverReadableText:ORKLocalizedString(@"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV", nil)
+                                                         value:@(HKFitzpatrickSkinTypeIV)],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_V", nil)
+                                         voiceOverReadableText:ORKLocalizedString(@"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V", nil)
+                                                         value:@(HKFitzpatrickSkinTypeV)],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"FITZPATRICK_SKIN_TYPE_VI", nil)
+                                         voiceOverReadableText:ORKLocalizedString(@"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI", nil)
+                                                         value:@(HKFitzpatrickSkinTypeVI)],
                                  ];
             ORKValuePickerAnswerFormat *format = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:options];
             _impliedAnswerFormat = format;
@@ -223,9 +235,9 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, characteristicType, HKCharacteristicType);
-        ORK_DECODE_OBJ_CLASS(aDecoder, defaultDate, NSDate);
-        ORK_DECODE_OBJ_CLASS(aDecoder, minimumDate, NSDate);
-        ORK_DECODE_OBJ_CLASS(aDecoder, maximumDate, NSDate);
+        ORK_DECODE_DATE_ISO8601(aDecoder, defaultDate);
+        ORK_DECODE_DATE_ISO8601(aDecoder, minimumDate);
+        ORK_DECODE_DATE_ISO8601(aDecoder, maximumDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, calendar, NSCalendar);
         ORK_DECODE_BOOL(aDecoder, shouldRequestAuthorization);
     }
@@ -235,9 +247,9 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, characteristicType);
-    ORK_ENCODE_OBJ(aCoder, defaultDate);
-    ORK_ENCODE_OBJ(aCoder, minimumDate);
-    ORK_ENCODE_OBJ(aCoder, maximumDate);
+    ORK_ENCODE_DATE_ISO8601(aCoder, defaultDate);
+    ORK_ENCODE_DATE_ISO8601(aCoder, minimumDate);
+    ORK_ENCODE_DATE_ISO8601(aCoder, maximumDate);
     ORK_ENCODE_OBJ(aCoder, calendar);
     ORK_ENCODE_BOOL(aCoder, shouldRequestAuthorization);
 }

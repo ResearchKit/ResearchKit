@@ -42,6 +42,7 @@
         self.shouldStartTimerAutomatically = YES;
         self.shouldShowDefaultTimer = NO;
         self.shouldContinueOnFinish = YES;
+        self.allowsBackNavigation = NO;
     }
     return self;
 }
@@ -81,10 +82,6 @@
         self.seriesLength > ORKPSATSeriesMaximumLength) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"series length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPSATSeriesMinimumLength), @(ORKPSATSeriesMaximumLength)] userInfo:nil];
     }
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
 }
 
 + (BOOL)supportsSecureCoding {

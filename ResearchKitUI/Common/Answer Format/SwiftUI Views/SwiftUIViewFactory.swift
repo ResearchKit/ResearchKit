@@ -29,8 +29,8 @@
  */
 
 import Foundation
-import SwiftUI
 import ResearchKit
+import SwiftUI
 
 @objc
 public class SwiftUIViewFactory: NSObject {
@@ -79,11 +79,7 @@ struct FullScreenModifier<V: View>: ViewModifier {
 
     @ViewBuilder
     func body(content: Content) -> some View {
-        if #available(iOS 14.0, *) {
-            content.fullScreenCover(isPresented: isPresented, content: builder)
-        } else {
-            content.sheet(isPresented: isPresented, content: builder)
-        }
+        content.fullScreenCover(isPresented: isPresented, content: builder)
     }
 }
 

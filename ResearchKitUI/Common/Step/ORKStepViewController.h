@@ -264,6 +264,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *continueButtonTitle;
 
 /**
+ A localized string that represents the axid of the "Continue" button.
+
+ This will be applied to the continue button who's title is adjusted in `continueButtonTitle`
+ */
+@property (nonatomic, copy, nullable) NSString *continueButtonAccessibilityIdentifier;
+
+/**
  The enabled state of the continue button.
  
  The default state is enabled. Setting the continue button to disabled will add a visual treatment
@@ -298,6 +305,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *skipButtonTitle;
 
 /**
+ A localized string that represents the axid of the "Skip" button.
+
+ Setting this property does not guarantee that Skip button is visible, but will allow the button 
+ to be accessible for XCUITests.
+ */
+@property (nonatomic, copy, nullable) NSString *skipButtonAccessibilityIdentifier;
+
+/**
  Detail text to be displayed in the navigation container.
  
  The text will appear above the continue button as part of the navigation container. The primary use case
@@ -317,9 +332,10 @@ ORK_CLASS_AVAILABLE
  the step view controller is current.
  This property lets you control the appearance and target of the
  Back button at runtime.
- 
- When the value of the property is `nil`, the default Back button is displayed; otherwise passed Back button item is used . If you want to hide the back button, set it to a newly allocated `UIBarButtonItem` instance.
- 
+
+ When the value of the property is `nil`, the default Back button is displayed; otherwise the passed back button item is used.
+ If you want to hide the back button, set `allowsBackNavigation` to `NO` on the corresponding `ORKStep`.
+
  The back button item is updated during view loading and when the value of the `step` property
  is changed, but they are safe to set in the `taskViewController:stepViewControllerWillAppear:` delegate callback.
  

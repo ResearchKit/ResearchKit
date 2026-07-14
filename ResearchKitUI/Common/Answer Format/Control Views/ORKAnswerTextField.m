@@ -35,6 +35,29 @@
 #import "ORKAccessibility.h"
 
 
+/// The container view used as an `inputAccessoryView`. Forwards taps
+/// back to the view hierarchy below (without this override it swallows taps
+/// on content above the keyboard, such as the "Done" button). 
+@interface ORKAnswerTextFieldAccessoryView : UIView
+@end
+
+@implementation ORKAnswerTextFieldAccessoryView
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *hit = [super hitTest:point withEvent:event];
+    if (hit == nil || hit == self) {
+        return nil;
+    }
+    for (UIView *view = hit; view != nil && view != self; view = view.superview) {
+        if ([view isKindOfClass:[UIControl class]]) {
+            return hit;
+        }
+    }
+    return nil;
+}
+
+@end
+
 @implementation ORKAnswerTextField
 
 - (instancetype)init {
@@ -63,17 +86,28 @@
 }
 
 - (void)addAccessoryViewWithDoneButton {
-    UIToolbar* accessoryViewWithDoneButton = [[UIToolbar alloc] init];
-    [accessoryViewWithDoneButton sizeToFit];
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    [toolbar sizeToFit];
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]
                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                       target:nil action:nil];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                   target:self action:@selector(keyboardAccessoryViewDoneButtonPressed)];
-    accessoryViewWithDoneButton.items = @[flexibleSpace, doneButton];
-    [accessoryViewWithDoneButton setBarTintColor:ORKColor(ORKBackgroundColorKey)];
-    self.inputAccessoryView = accessoryViewWithDoneButton;
+                                   target:self
+                                   action:@selector(keyboardAccessoryViewDoneButtonPressed)];
+    toolbar.items = @[flexibleSpace, doneButton];
+    [toolbar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+
+    static const CGFloat bottomPadding = 8.0;
+    CGSize toolbarSize = toolbar.bounds.size;
+    ORKAnswerTextFieldAccessoryView *container = [[ORKAnswerTextFieldAccessoryView alloc]
+                                                  initWithFrame:CGRectMake(0, 0, toolbarSize.width, toolbarSize.height + bottomPadding)];
+    container.backgroundColor = [UIColor clearColor];
+    toolbar.frame = CGRectMake(0, 0, toolbarSize.width, toolbarSize.height);
+    toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [container addSubview:toolbar];
+
+    self.inputAccessoryView = container;
 }
 
 - (void)keyboardAccessoryViewDoneButtonPressed {

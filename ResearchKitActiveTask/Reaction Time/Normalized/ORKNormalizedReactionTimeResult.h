@@ -57,7 +57,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSDate * stimulusStartDate;
 @property (nonatomic, copy, nullable) NSDate * reactionDate;
 @property (nonatomic) double currentInterval;
-
+@property (nonatomic, strong, nullable) NSArray<ORKFileResult *> *fileResults;
 
 
 @end

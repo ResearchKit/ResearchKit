@@ -125,8 +125,15 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
     _savedSessionCategoryOptions = audioSession.categoryOptions;
 }
 
-- (void)setNavigationFooterView {
+- (void)resetView {
+    _counter = 0;
+    self.environmentSPLMeterContentView.ringView.animationDuration = 0.5;
+    [self.environmentSPLMeterContentView setProgressCircle:0.0];
+    [self.environmentSPLMeterContentView setProgress:0.0];
+    [self.environmentSPLMeterContentView setProgressBar:0.5];
+}
 
+- (void)setNavigationFooterView {
     self.activeStepView.navigationFooterView.continueButtonItem = self.continueButtonItem;
     self.activeStepView.navigationFooterView.continueEnabled = NO;
     [self.activeStepView.navigationFooterView updateContinueAndSkipEnabled];
@@ -140,12 +147,13 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self resetView];
     [self setNavigationFooterView];
     if (!_audioEngine.isRunning) {
         [self saveAudioSession];
         _sensitivityOffset = [self sensitivityOffsetForDevice];
         [self requestRecordPermissionIfNeeded];
-        [self configureAudioSession];
+        [self turnOnAudioSession];
         [self setupFeedbackGenerator];
     }
 }
@@ -158,7 +166,6 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
     _samplingInterval = [self environmentSPLMeterStep].samplingInterval;
     _requiredContiguousSamples = [self environmentSPLMeterStep].requiredContiguousSamples;
     _thresholdValue = [self environmentSPLMeterStep].thresholdValue;
-    [self configureInputNode];
     [self splWorkBlock];
     
     if (UIAccessibilityIsVoiceOverRunning()) {
@@ -170,8 +177,7 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self stopAudioEngine];
-    [self resetAudioSession];
+    [self turnOffAndResetAudioSession];
 }
 
 - (NSString *)deviceType {
@@ -206,31 +212,34 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
     return sResult;
 }
 
-- (void)requestRecordPermissionIfNeeded
-{
-    [self handleRecordPermission:[[AVAudioSession sharedInstance] recordPermission]];
+- (void)requestRecordPermissionIfNeeded {
+    [self handleRecordPermission:[[AVAudioApplication sharedInstance] recordPermission]];
 }
 
-- (void)handleRecordPermission:(AVAudioSessionRecordPermission)recordPermission
-{
-    switch (recordPermission)
-    {
-        case AVAudioSessionRecordPermissionGranted:
+- (void)handleRecordPermission:(AVAudioApplicationRecordPermission)recordPermission {
+    switch (recordPermission) {
+        case AVAudioApplicationRecordPermissionGranted:
             break;
-            
-        case AVAudioSessionRecordPermissionDenied:
+
+        case AVAudioApplicationRecordPermissionDenied:
         {
             ORK_Log_Error("User has denied record permission for a step which requires microphone access.");
             break;
         }
-        case AVAudioSessionRecordPermissionUndetermined:
+        case AVAudioApplicationRecordPermissionUndetermined:
         {
-            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-                [self handleRecordPermission:granted ? AVAudioSessionRecordPermissionGranted : AVAudioSessionRecordPermissionDenied];
+            [AVAudioApplication requestRecordPermissionWithCompletionHandler:^(BOOL granted) {
+                [self handleRecordPermission:granted ? AVAudioApplicationRecordPermissionGranted : AVAudioApplicationRecordPermissionDenied];
             }];
             break;
         }
     }
+}
+
+- (void)turnOnAudioSession {
+    [self configureAudioSession];
+    [self configureInputNode];
+    [self splWorkBlock];
 }
 
 - (void)configureAudioSession {
@@ -339,7 +348,7 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
                       bufferSize:_bufferSize
                           format:_inputNodeOutputFormat
                            block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
-                               if ([AVAudioSession sharedInstance].recordPermission == AVAudioSessionRecordPermissionGranted) {
+                               if ([AVAudioApplication sharedInstance].recordPermission == AVAudioApplicationRecordPermissionGranted) {
                                    if (buffer.frameLength != self->_bufferSize) {
                                        self->_bufferSize = buffer.frameLength;
                                    }
@@ -386,7 +395,7 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
                                        dispatch_semaphore_signal(self->_semaphoreRms);
                                    });
                                    dispatch_semaphore_wait(self->_semaphoreRms, DISPATCH_TIME_FOREVER);
-                               } else if ([AVAudioSession sharedInstance].recordPermission == AVAudioSessionRecordPermissionDenied) {
+                               } else if ([AVAudioApplication sharedInstance].recordPermission == AVAudioApplicationRecordPermissionDenied) {
                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                        [self->_eqUnit removeTapOnBus:0];
                                        [self->_audioEngine stop];
@@ -403,16 +412,12 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
     }
 }
 
-- (void)evaluateThreshold:(float)spl
-{
-    if (spl < _thresholdValue)
-    {
+- (void)evaluateThreshold:(float)spl {
+    if (spl < _thresholdValue) {
         _counter += 1;
         
         [self.environmentSPLMeterContentView.ringView fillRingWithDuration:(double)_requiredContiguousSamples*_samplingInterval];
-    }
-    else
-    {
+    } else {
         _counter = 0;
         self.environmentSPLMeterContentView.ringView.animationDuration = 0.5;
         [self.environmentSPLMeterContentView setProgress:0.0];
@@ -421,7 +426,8 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
     }
 }
 
-- (void)resetAudioSession {
+- (void)turnOffAndResetAudioSession {
+    [self stopAudioEngine];
     NSError *error = nil;
     [[AVAudioSession sharedInstance] setCategory:_savedSessionCategory mode:_savedSessionMode options:_savedSessionCategoryOptions error:&error];
     [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:&error];
@@ -446,9 +452,8 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
 }
 
 - (void)reachedOptimumNoiseLevel {
-    [self stopAudioEngine];
     [self sendHapticEvent:UINotificationFeedbackTypeSuccess];
-    [self resetAudioSession];
+    [self turnOffAndResetAudioSession];
 }
 
 - (void)stepDidFinish {
@@ -471,6 +476,7 @@ NSString * const ORKEnvironmentSPLMeterStepViewAccessibilityIdentifier = @"ORKEn
     [self reachedOptimumNoiseLevel];
     [self.environmentSPLMeterContentView reachedOptimumNoiseLevel];
     self.activeStepView.navigationFooterView.continueEnabled = YES;
+    [self stopRecorders];
 }
 
 #pragma mark - UINotificationFeedbackGenerator

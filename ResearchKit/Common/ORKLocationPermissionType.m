@@ -76,7 +76,7 @@ static const uint32_t IconDarkTintColor = 0x00A36C;
 }
 
 - (ORKRequestPermissionsState)permissionState {
-    switch (CLLocationManager.authorizationStatus) {
+    switch ([self locationManager].authorizationStatus) {
         case kCLAuthorizationStatusNotDetermined:
             return ORKRequestPermissionsStateDefault;
 
@@ -102,11 +102,13 @@ static const uint32_t IconDarkTintColor = 0x00A36C;
 - (void)requestPermission {
     [self.locationManager requestAlwaysAuthorization];
     
+#if DEBUG
     BOOL requestWasDelivered = [self.locationManager ork_requestAlwaysAuthorization];
     
     // if the auth request was not delivered, that means ResearchKit was built with CoreLocation requests disabled
     // Presenting the location permission step in this case is probably programmer error
     NSAssert(requestWasDelivered, @"Tried to invoke -[CLLocationManager requestAlwaysAuthorization] but ResearchKit was compiled with CoreLocation authorization requests disabled. This is a programmer error. Check build settings for ORK_FEATURE_CLLOCATIONMANAGER_AUTHORIZATION");
+#endif
 }
 
 - (BOOL)isEqual:(id)object {

@@ -97,9 +97,11 @@
     self.toneAudiometryContentView = [[ORKToneAudiometryContentView alloc] init];
     self.activeStepView.activeCustomView = self.toneAudiometryContentView;
     self.activeStepView.customContentFillsAvailableSpace = YES;
-    
     [self.toneAudiometryContentView.leftButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     [self.toneAudiometryContentView.rightButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
+
+    [self.activeStepView setNavigationFooterViewHidden:NO];
+
     self.currentTestIndex = 0;
     self.audioGenerator = [ORKAudioGenerator new];
     

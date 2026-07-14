@@ -29,15 +29,15 @@
  */
 
 /* Informed consent process. */
-"CONSENT_NAME_TITLE" = "Tilladelse";
+"CONSENT_NAME_TITLE" = "Samtykke";
 "CONSENT_NAME_GIVEN" = "Fornavn";
 "CONSENT_NAME_FAMILY" = "Efternavn";
-"CONSENT_NAME_PLACEHOLDER" = "Nødvendig";
+"CONSENT_NAME_PLACEHOLDER" = "Påkrævet";
 "CONSENT_REVIEW_TITLE" = "Gennemse";
 "CONSENT_REVIEW_INSTRUCTION" = "Gennemse nedenstående formular, og tryk på Enig, hvis du er klar til at fortsætte.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Gennemse";
 "CONSENT_SIGNATURE_TITLE" = "Underskrift";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Brug din finger til at underskrive i feltet nedenfor.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Underskriv i feltet nedenfor vha. din finger.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Skriv under her";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Side %1$ld af %2$ld";
 
@@ -53,21 +53,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "Læs mere";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Læs mere om, hvordan data indsamles";
-"LEARN_MORE_DATA_USE" = "Læs mere om, hvordan data bruges";
-"LEARN_MORE_PRIVACY" = "Læs mere om, hvordan din anonymitet og identitet er beskyttet";
-"LEARN_MORE_WELCOME" = "Læs mere om undersøgelsen først";
-"LEARN_MORE_STUDY_SURVEY" = "Læs mere om undersøgelsen";
-"LEARN_MORE_TIME_COMMITMENT" = "Læs mere om undersøgelsens indflydelse på din tid";
-"LEARN_MORE_TASKS" = "Læs mere om de involverede opgaver";
-"LEARN_MORE_WITHDRAWING" = "Læs mere om tilbagetrækning";
+"LEARN_MORE_DATA_GATHERING" = "Læs mere om, hvordan data indsamles.";
+"LEARN_MORE_DATA_USE" = "Læs mere om, hvordan data bruges.";
+"LEARN_MORE_PRIVACY" = "Læs mere om, hvordan din anonymitet og identitet er beskyttet.";
+"LEARN_MORE_WELCOME" = "Læs mere om undersøgelsen først.";
+"LEARN_MORE_STUDY_SURVEY" = "Læs mere om undersøgelsen.";
+"LEARN_MORE_TIME_COMMITMENT" = "Læs mere om undersøgelsens indflydelse på din tid.";
+"LEARN_MORE_TASKS" = "Læs mere om de involverede opgaver.";
+"LEARN_MORE_WITHDRAWING" = "Læs mere om tilbagetrækning.";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Valg til deling";
 "CONSENT_SHARE_WIDELY_%@" = "Del mine data med %@ og kvalificerede forskere i hele verden";
 "CONSENT_SHARE_ONLY_%@" = "Del kun mine data med %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ modtager dine data fra din deltagelse i dette studie.\n\nHvis du deler dine kodede data fra studiet (uden oplysninger som f.eks. dit navn), kan det være til gavn for dette studie og fremtidig forskning.";
-"LEARN_MORE_CONSENT_SHARING" = "Læs mere om deling af data";
+"LEARN_MORE_CONSENT_SHARING" = "Læs mere om deling af data.";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Navn med blokbogstaver";
@@ -82,7 +82,7 @@
 
 /* ORKTaskReviewViewController */
 "REVIEW_SKIPPED_ANSWER" = "Sprunget over";
-"REVIEW_EDIT_ANSWER" = "Rediger";
+"REVIEW_EDIT_ANSWER" = "REDIGER";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig værdi";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Indtast en adresse";
 "LOCATION_ERROR_TITLE" = "Den angivne adresse blev ikke fundet";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Din aktuelle lokalitet blev ikke fundet. Skriv en adresse, eller flyt til en lokalitet med bedre GPS-signal, hvis relevant.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Der er nægtet adgang til lokalitetstjenester. Giv denne app tilladelse til at bruge lokalitetstjenester vha. Indstillinger.";
 "LOCATION_ERROR_GEOCODE" = "Den indtastede adresse blev ikke fundet. Kontroller, at adressen er gyldig.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Enten har du ikke oprettet forbindelse til internettet, eller også har du overskredet det maksimale antal anmodninger om adresseopslag. Hvis du ikke har oprettet forbindelse til internettet, skal du slå Wi-Fi til for at besvare dette spørgsmål, springe dette spørgsmål over, hvis knappen spring over er tilgængelig, eller vende tilbage til denne undersøgelse, når du har oprettet forbindelse til internettet. Ellers prøv igen om nogle minutter.";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstindhold overskrider maks. længde: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksten må kun være på %@ tegn";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera ikke tilgængeligt på delt skærm.";
@@ -122,8 +120,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Vælg køn";
 "DOB_FORM_ITEM_TITLE" = "Fødselsdato";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Vælg en dato";
-"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
-"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefon­nummer";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "(+45) 12 34 56 78";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Bekræftelse";
@@ -150,7 +148,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tilladt.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusindikator for indtastning af adgangskode";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ af %@ cifre indtastet";
-"PASSCODE_FORGOT_BUTTON_TITLE" = "Glemt adgangskoden?";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Glemt koden?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nøgleringsemne kunne ikke tilføjes.";
@@ -165,8 +163,8 @@
 "BLOOD_TYPE_AB-" = "AB-";
 "BLOOD_TYPE_B+" = "B+";
 "BLOOD_TYPE_B-" = "B-";
-"BLOOD_TYPE_O+" = "O+";
-"BLOOD_TYPE_O-" = "O-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
 
 /* Fitzpatrick Skin types */
 "FITZPATRICK_SKIN_TYPE_I" = "Type I";
@@ -175,6 +173,13 @@
 "FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
 "FITZPATRICK_SKIN_TYPE_V" = "Type V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
+
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Type 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Type 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Type 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Type 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Type 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Type 6";
 
 /* Gender values. */
 "GENDER_FEMALE" = "Kvinde";
@@ -188,7 +193,7 @@
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fod";
-"MEASURING_UNIT_IN" = "\\\"";
+"MEASURING_UNIT_IN" = "\\“";
 "MEASURING_UNIT_KG" = "kg";
 "MEASURING_UNIT_LB" = "lb";
 "MEASURING_UNIT_OZ" = "oz";
@@ -217,7 +222,7 @@
 "BUTTON_NEXT" = "Næste";
 "BUTTON_SKIP" = "Spring over";
 "BUTTON_SKIP_QUESTION" = "Spring dette spørgsmål over";
-"BUTTON_START_TIMER" = "Start stopur";
+"BUTTON_START_TIMER" = "Start tidtagning";
 "BUTTON_OPTION_SAVE" = "Arkiver til senere";
 "BUTTON_OPTION_DISCARD" = "Slet resultater";
 "BUTTON_OPTION_STOP_TASK" = "Slut opgave";
@@ -297,8 +302,8 @@
 /* Amsler Grid Task.*/
 "AMSLER_GRID_TITLE" = "Amsler-gitter";
 "AMSLER_GRID_INTRO_TEXT" = "Denne aktivitet hjælper med at registrere problemer med brugerens syn.";
-"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold enheden 30 cm fra ansigtet og i øjenhøjde under hele testen.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Luk %@, og fokuser på prikken i midten af det firkantede gitter.\n\nBrug en finger eller pen til at markere alle forvrængninger, du ser, f.eks. slørede eller bølgede streger.\n\nSkub til venstre uden for gitteret, når du er færdig.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold enheden i mellem 25-50 cm fra ansigtet og i øjenhøjde under hele testen.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Luk %@, og fokuser på prikken i midten af det kvadratiske net.\n\nBrug en finger eller pen til at markere alle forvrængninger, du ser, f.eks. slørede eller bølgede streger.\n\nTryk på knappen Næste, når du er færdig.";
 "AMSLER_GRID_LEFT_EYE" = "Venstre øje";
 "AMSLER_GRID_RIGHT_EYE" = "Højre øje";
 
@@ -310,7 +315,7 @@
 "AUDIO_INTENDED_USE" = "Denne aktivitet vurderer din stemme ved at optage den med mikrofonen nederst i enheden.";
 "AUDIO_TOO_LOUD_LABEL" = "For højt";
 "AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke optage lyd";
-"AUDIO_LEVEL_CHECK_LABEL" = "Vent, mens støjniveauet i baggrunden kontrolles.";
+"AUDIO_LEVEL_CHECK_LABEL" = "Vent, mens støjniveauet i baggrunden kontrolleres.";
 "AUDIO_TOO_LOUD_MESSAGE" = "Det omgivende støjniveau er for højt til at optage din stemme. Gå et sted hen, hvor der er mere stille, og prøv igen.";
 "AUDIO_TOO_LOUD_ACTION_NEXT" = "Tryk på Næste, når du er klar.";
 
@@ -328,7 +333,7 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tryk, når du hører en tone.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tryk på knappen, når du hører en tone.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Tone og lydstyrke";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Du vil høre en række toner.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Tryk på knappen, når du hører en tone.";
@@ -419,12 +424,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sæt dig på kanten af en stol. Når du starter, anbringer du din enhed på dit højre knæ for at tage et mål. Slå lyden til på din enhed, så du kan høre instruktioner.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Anbring din enhed på dit venstre knæ med skærmen udad som vist på billedet.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Anbring din enhed på dit højre knæ med skærmen udad som vist på billedet.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, skal du trykke på skærmen for at begynde og strække dit venstre ben så meget, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, skal du trykke på skærmen for at begynde og strække dit højre ben så meget, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Anbring enheden på dit venstre knæ. Tryk på skærmen, og stræk dit venstre ben så meget, som du kan.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Anbring enheden på dit højre knæ. Tryk på skærmen, og stræk dit højre ben så meget, som du kan.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Når du er færdig, skal du føre dit venstre knæ tilbage til startpositionen. Tryk derefter et vilkårligt sted.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Når du er færdig, skal du føre dit højre knæ tilbage til startpositionen. Tryk derefter et vilkårligt sted.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, skal du trykke på skærmen for at begynde og føre dit venstre knæ så langt fremad, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, skal du trykke på skærmen for at begynde og føre dit højre knæ så langt fremad, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Anbring enheden på dit venstre knæ.\n\nTryk på skærmen, og før dit venstre knæ så langt fremad, som du kan.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Anbring enheden på dit højre knæ.\n\nTryk på skærmen, og før dit højre knæ så langt fremad, som du kan.\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Når du er færdig, skal du føre dit venstre knæ tilbage til startpositionen.\n\nTryk derefter et vilkårligt sted.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Når du er færdig, skal du føre dit højre knæ tilbage til startpositionen.\n\nTryk derefter et vilkårligt sted.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bevægelighed af venstre skulder";
@@ -435,22 +440,22 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Når du starter, anbringer du din enhed på din højre skulder for at tage et mål. Slå lyden til på din enhed, så du kan høre instruktioner.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Anbring din enhed på din venstre skulder med skærmen udad som vist på billedet.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Anbring din enhed på din højre skulder med skærmen udad som vist på billedet.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, skal du trykke på skærmen for at begynde og løfte din venstre arm så højt, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, skal du trykke på skærmen for at begynde og løfte din højre arm så højt, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Anbring enheden på din venstre skulder. Tryk på skærmen, og løft din venstre arm fremad så højt, som du kan.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Anbring enheden på din højre skulder. Tryk på skærmen, og løft din højre arm fremad så højt, som du kan.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, skal du trykke på skærmen for at begynde og løfte din venstre arm så langt, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, skal du trykke på skærmen for at begynde og løfte din højre arm så langt, som du kan. Vend tilbage til startpositionen, og tryk igen, når du er færdig.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Anbring enheden på din venstre skulder. Tryk på skærmen, og løft din venstre arm så langt fremad, som du kan.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Anbring enheden på din højre skulder. Tryk på skærmen, og løft din højre arm så langt fremad, som du kan.";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Når du er færdig, skal du føre din venstre arm tilbage til startpositionen. Tryk derefter et vilkårligt sted.";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Når du er færdig, skal du føre din højre arm tilbage til startpositionen. Tryk derefter et vilkårligt sted.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gå på tid";
-"TIMED_WALK_INTRO_DETAIL" = "Denne aktivitet måler funktionen i dine ben.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Find et sted, helst udenfor, hvor du trygt kan gå omkring %@ i en lige linje så hurtigt som muligt. Sænk ikke farten, før du har passeret mållinjen.";
+"TIMED_WALK_INTRO_DETAIL" = "Denne aktivitet måler funktionen i dine nedre ekstremiteter.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Find et sted, helst udenfor, hvor du trygt kan gå omkring i %@ i en lige linje så hurtigt som muligt. Sænk ikke farten, før du har passeret mållinjen.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Tryk på Næste for at starte.";
 "TIMED_WALK_FORM_TITLE" = "Hjælpemiddelenhed";
 "TIMED_WALK_FORM_TEXT" = "Brug den samme hjælpemiddelenhed til hver test.";
 "TIMED_WALK_QUESTION_TEXT" = "Bruger du en ankel-fodortose?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Bruger du hjælpemiddelenheder?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Bruger du en hjælpemiddelenhed?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Tryk her for at vælge et svar.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Enkeltsidig stok";
@@ -470,15 +475,15 @@
 "PASAT_INTRO_TEXT" = "PASAT-testen måler, hvor hurtigt du behandler lydoplysninger og din evne til at foretage udregninger.";
 "PVSAT_INTRO_TEXT" = "PVSAT-testen måler, hvor hurtigt du behandler synsoplysninger og din evne til at foretage udregninger.";
 "PAVSAT_INTRO_TEXT" = "PAVSAT-testen (Paced Auditory and Visual Serial Addition Test) måler, hvor hurtigt du behandler lyd- og synsoplysninger og din evne til at foretage udregninger.";
-"PSAT_INTRO_TEXT_2_%@" = "Der vises enkelte tal med %@s interval.\nDu skal lægge hvert nye tal sammen med det forrige tal.\nBemærk: Du skal ikke lægge alle tallene sammen, men kun de to sidste tal.";
+"PSAT_INTRO_TEXT_2_%@" = "Der vises enkelte tal hver %@.\nDu skal lægge hvert nye tal sammen med det forrige tal.\nBemærk: Du skal ikke lægge alle tallene sammen, men kun de to sidste tal.";
 "PSAT_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
 "PSAT_INITIAL_INSTRUCTION" = "Husk dette første tal.";
 "PSAT_INSTRUCTION" = "Læg dette nye tal sammen med det forrige.";
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-huls pindetest";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler funktionen i dine hænder ved at bede dig om at anbringe en pind i et hul. Du bliver bedt om at gøre dette %@ gange.";
+"HOLE_PEG_TEST_TITLE_%@" = "%@-huls Pegtest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler funktionen i dine øvre ekstremiteter ved at bede dig om at anbringe en pind i et hul. Du bliver bedt om at gøre dette %@ gange.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Både din venstre og højre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din højre og venstre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 
@@ -493,16 +498,16 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Aktivitet med rysten";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Denne aktivitet måler dine hænders rysten i forskellige positioner. Find et sted, hvor du kan sidde behageligt under hele aktiviteten.";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold telefonen i den hånd, der er mest påvirket, som vist på billedet nedenfor.";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold telefonen i din HØJRE hånd som vist på billedet nedenfor.";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold telefonen i din VENSTRE hånd som vist på billedet nedenfor.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold telefonen i den hånd, der er mest påvirket, som vist på billedet ovenfor.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold telefonen i din HØJRE hånd som vist på billedet ovenfor.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold telefonen i din VENSTRE hånd som vist på billedet ovenfor.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Du vil blive bedt om at udføre %@, mens du sidder med telefonen i hånden.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "en opgave";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "to opgaver";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tre opgaver";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "fire opgaver";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "fem opgaver";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tryk på næste for at fortsætte.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tryk på Næste for at fortsætte.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Gør dig klar til at holde telefonen i skødet.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Gør dig klar til at holde telefonen i skødet med din VENSTRE hånd.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Gør dig klar til at holde telefonen i skødet med din HØJRE hånd.";
@@ -548,7 +553,7 @@
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "Talegenkendelse";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "Denne aktivitet optager din tale med mikrofonen i bunden af enheden og oversætter den til tekst.";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Denne aktivitet optager din tale med mikrofonen i bunden af enheden, og oversætter den til tekst.";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "Tryk på knappen for at starte optagelsen, før du taler.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start optagelse";
@@ -585,12 +590,12 @@
 "ENVIRONMENTSPL_TITLE" = "Støjniveaumåler";
 "ENVIRONMENTSPL_INTRO_TEXT" = "Denne aktivitet måler omgivelsernes støjniveau. Hvis støjniveauet er for højt, kan du ikke fortsætte. Gå et sted hen, der er mere stille, for at gennemføre opgaven, eller udfør aktiviteten igen senere.";
 "ENVIRONMENTSPL_UNIT" = "dB(A)";
-"ENVIRONMENTSPL_CALCULATING" = "Beregner";
+"ENVIRONMENTSPL_CALCULATING" = "Måler…";
 "ENVIRONMENTSPL_THRESHOLD" = "Grænse: %@ dB(A)";
-"ENVIRONMENTSPL_OK" = "Baggrundsstøj er OK";
-"ENVIRONMENTSPL_NOISE" = "For meget baggrundsstøj";
+"ENVIRONMENTSPL_OK" = "God";
+"ENVIRONMENTSPL_NOISE" = "For højt";
 "ENVIRONMENTSPL_TITLE_2" = "Find et stille område";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "Denne test bør udføres på et stille sted for at opnå størst nøjagtighed.";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Denne opgave bør udføres i stille omgivelser for at sikre, at resultaterne bliver nøjagtige. Når målingen af baggrundsstøj er færdig, kan du fortsætte.";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "Start opgave";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Lydsøjlegraf";
 
 "AX_AMSLER_GRID_LABEL" = "Amsler-gitter";
-"AX_AMSLER_GRID_HINT" = "Brug din finger eller pen til at markere gitteret, eller skub til venstre uden for gitteret for at fortsætte.";
+"AX_AMSLER_GRID_HINT" = "Brug en finger eller pen til at markere nettet direkte, eller tryk på knappen Næste for at afslutte.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Knapper, der kan trykkes på";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tryk for venstre øre";
@@ -686,4 +691,104 @@
 "AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Med VoiceOver kan du trykke direkte på knapperne i testen.";
 
 /* Restore error */
-"RESTORE_ERROR_CANNOT_DECODE" = "Kan ikke afkode restoreData til initialisering";
+"RESTORE_ERROR_CANNOT_DECODE" = "Kan ikke afkode gendannelsesdata til initialisering";
+"6MWT_HIGH_SCORE" = "10: Meget";
+"6MWT_INSTRUCTIONS_1" = "Find en lige gangsti, der er mindst 30 m lang.";
+"6MWT_INSTRUCTIONS_2" = "Sørg for, at du kan stoppe og sætte dig langs stien, hvis det bliver nødvendigt.";
+"6MWT_INSTRUCTIONS_3" = "Skru telefonens lydstyrke op til mindst 50 %.";
+"6MWT_INSTRUCTIONS_4" = "Start en udendørs (eller indendørs) gangtræning på dit Apple Watch ved at bede Siri om det eller ved at starte appen Træninger og derefter trykke på Gang udendørs (eller Gang indendørs).";
+"6MWT_INSTRUCTIONS_TITLE" = "Kom i gang";
+"6MWT_INTRO" = "Målet med denne test er at gå så langt som muligt i et behageligt tempo i 6 minutter.";
+"6MWT_INTRO_DETAILS" = "Oplysninger";
+"6MWT_INTRO_DETAIL_CLOTHING" = "Du skal have behageligt tøj på, og skoene skal passe rigtigt. Hvis du normalt bruger et hjælpemiddel, når du går, kan du bruge det, når du gennemfører testen.";
+"6MWT_INTRO_DETAIL_LOCATION" = "Hvis du ikke kan gå udendørs, kan du gennemføre testen i et butikscenter.";
+"6MWT_INTRO_DETAIL_TIME" = "Det tager omkring 6 minutter at gennemføre testen.";
+"6MWT_INTRO_DETAIL_WATCH" = "Du skal bruge dit Apple Watch for at gennemføre testen.";
+"6MWT_LOW_SCORE" = "1: Ingen";
+"6MWT_QUESTIONS_BREATH" = "Åndenød";
+"6MWT_QUESTIONS_DETAIL" = "Tillykke med, at du har gennemført gangtesten på 6 minutter! Vurder, hvordan det føles på følgende områder.";
+"6MWT_QUESTIONS_FATIGUE" = "Træthed";
+"6MWT_QUESTIONS_TITLE" = "Godt klaret";
+"6MWT_TASK_TITLE" = "Gangtest på 6 minutter";
+"6MWT_TEST_IN_PROGRESS" = "Test i gang";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "Gå, så langt du kan på 6 minutter ad den lige gangsti. Stop op, og sæt dig ned, hvis har svært ved at trække vejret.";
+"AX_BUTTON" = "Knap";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "Knappen Rediger";
+"AX_PAGE_NUMBER_FORMAT" = "Side %1$ld af %2$ld";
+"AX_SES_BOTTOM" = "Nederst";
+"AX_SES_PERCENT" = "Procent";
+"AX_SES_TOP" = "Øverst";
+"BUTTON_PRACTICE_AGAIN" = "Prøv testen igen";
+"BUTTON_PRACTICE_TEST" = "Prøv test";
+"BUTTON_START_TEST" = "Start test";
+"CONSENT_NAME_SECTION_TITLE" = "Navn";
+"FAMILY_HISTORY_ADD" = "Tilføj %@";
+"FAMILY_HISTORY_CANCEL" = "Annuller";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "Opgave udført";
+"FAMILY_HISTORY_CONDITIONS" = "Sygdomme";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "Har de fået diagnosticeret nogen af følgende sygdomme eller sundhedsproblemer?";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "Besvar disse spørgsmål så godt, du kan";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Bekræft diagnosticerede sygdomme eller sundhedsproblemer.";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "Sygdomme";
+"FAMILY_HISTORY_DELETE_ENTRY" = "Slet optegnelse";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "Er du sikker på, at du vil slette denne optegnelse fra Familiens sundhedshistorik?";
+"FAMILY_HISTORY_EDIT_ENTRY" = "Rediger optegnelse";
+"FAMILY_HISTORY_I_DONT_KNOW" = "Jeg ved det ikke";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "Ingen af ovenstående";
+"FAMILY_HISTORY_NONE_SELECTED" = "Intet valgt";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "Jeg foretrækker ikke at svare";
+"FITNESS_RESUME_TEST" = "Genoptag aktivitet";
+"FITNESS_STOP_TEST_CONFIRMATION" = "Er du sikker på, at du vil afslutte denne aktivitet før tid?";
+"FITNESS_STOP_TEST_DETAIL" = "Dit fremskridt gemmes, og denne test markeres som gennemført.";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Slet og prøv igen";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Videoindstillinger";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Gennemse video";
+"FRONT_FACING_CAMERA_START_TIME" = "0.00";
+"FRONT_FACING_CAMERA_START_TITLE" = "Start optagelse";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Stop optagelse";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Send video";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Både din højre og venstre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
+"MAX_WORD_COUNT_ERROR" = "Det maksimale antal tegn er nået";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID-fejl";
+"PASSCODE_FACE_ID_MESSAGE" = "Godkend med Face ID";
+"PLAY" = "Afspil";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "Tryk på knappen Udsæt og derefter på den blå cirkel";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "udsæt";
+"RECORD" = "Optag";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "Undersøgelsen anmoder om adgang til sundhedsdata.";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Sundhedsdata";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "Undersøgelsen anmoder om adgang til lokalitetsdata fra dine enheder.";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "Lokalitetsdata";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "Undersøgelsen anmoder om adgang til bevægelsesdata fra dine enheder.";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "Enhedsbevægelse";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "Undersøgelsen anmoder om tilladelse til at sende dig notifikationer.";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "Notifikationer";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "Gennemset";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "Gennemse";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "Fejl";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "Ikke understøttet";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "Undersøgelsen anmoder om adgang til sensordata fra dine enheder.";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "Sensordata";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "Brug tastaturet i stedet";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Kunne ikke optage. Tryk for at prøve igen.";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Der blev ikke registreret tale i optagelsen. Tryk for at prøve igen.";
+"STOP" = "Stop";
+"STROOP_COLOR_ORANGE" = "ORANGE";
+"TC_COMPLETION_DETAIL" = "Tillykke med, at du har gennemført testen Tecumseh Cube!";
+"TC_COMPLETION_TITLE" = "Godt klaret";
+"TC_INSTRUCTIONS_1" = "Find et trin, der er ca. 20 cm højt.";
+"TC_INSTRUCTIONS_2" = "Skru lydstyrken op til mindst 50 % på din iPhone.";
+"TC_INSTRUCTIONS_3" = "Start en trappetræning på dit Apple Watch ved at bede Siri om det eller ved at starte appen Træninger, trykke på Tilføj træning og derefter vælge Trapper.";
+"TC_INSTRUCTIONS_TITLE" = "Kom i gang";
+"TC_INTRO" = "Målet med denne test er at hæve din puls, mens du går op og ned i 3 minutter i takt med en rytme.";
+"TC_INTRO_DETAILS" = "Oplysninger";
+"TC_INTRO_DETAIL_DANGER" = "Hvis du oplever brystsmerter eller ubehag, skal du stoppe testen øjeblikkeligt.";
+"TC_INTRO_DETAIL_TIME" = "Det tager omkring 6 minutter at gennemføre testen.";
+"TC_INTRO_DETAIL_WATCH" = "Du skal bruge dit Apple Watch for at gennemføre testen.";
+"TC_REST_IN_PROGRESS" = "Hvil et øjeblik";
+"TC_REST_IN_PROGRESS_DETAIL" = "Sæt dig ned, og slap af i 3 minutter, mens dit Apple Watch registrerer din hvilepuls.";
+"TC_TASK_TITLE" = "Tecumseh Cube-test";
+"TC_TEST_IN_PROGRESS" = "Test i gang";
+"TC_TEST_IN_PROGRESS_DETAIL" = "Brug trappetrinnet til at gå op og ned på stedet i takt med rytmen";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST I GANG";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST I GANG \U2022 %@";

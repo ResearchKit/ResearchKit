@@ -97,8 +97,6 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
 "LOCATION_ERROR_TITLE" = "Could not Find Specified Address";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
 "LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
 
@@ -179,6 +177,13 @@
 "FITZPATRICK_SKIN_TYPE_V" = "Type V";
 "FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
 
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "Type 1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "Type 2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "Type 3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "Type 4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "Type 5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "Type 6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Female";
 "GENDER_MALE" = "Male";
@@ -252,6 +257,12 @@
 "CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start Recording";
 "CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stop Recording";
 "CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Recapture Video";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE" = "Camera Access Required";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_MIC" = "Microphone Access Required";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_CAMERA_AND_MIC" = "Camera and Microphone Access Required";
+"VIDEO_CAPTURE_ACCESS_DENIED_MIC_TEXT" = "In order to complete this step, allow this app access to the microphone in Settings.";
+"VIDEO_CAPTURE_ACCESS_DENIED_CAMERA_AND_MIC_TEXT" = "In order to complete this step, allow this app access to the camera and microphone in Settings.";
+"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT" = "Open Settings";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
@@ -304,7 +315,7 @@
 "AMSLER_GRID_TITLE" = "Amsler Grid";
 "AMSLER_GRID_INTRO_TEXT" = "This activity helps in detecting problems in user’s vision.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "Hold the device 12 inches from your face and at eye level throughout the test.";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the center of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you are done, swipe left anywhere outside the grid.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the center of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you are done, tap the Next button.";
 "AMSLER_GRID_LEFT_EYE" = "Left Eye";
 "AMSLER_GRID_RIGHT_EYE" = "Right Eye";
 
@@ -401,6 +412,10 @@
 "STROOP_COLOR_BLUE" = "BLUE";
 "STROOP_COLOR_YELLOW" = "YELLOW";
 "STROOP_COLOR_ORANGE" = "ORANGE";
+"STROOP_COLOR_BROWN" = "BROWN";
+"STROOP_COLOR_PINK" = "PINK";
+"STROOP_COLOR_PURPLE" = "PURPLE";
+"STROOP_COLOR_GRAY" = "GRAY";
 "STROOP_COLOR_RED_INITIAL" = "R";
 "STROOP_COLOR_GREEN_INITIAL" = "G";
 "STROOP_COLOR_BLUE_INITIAL" = "B";
@@ -565,6 +580,9 @@
 "SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Could not record. Tap to try again.";
 "SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "Speech was not detected in your recording. Tap to try again.";
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
+"SPEECH_RECOGNITION_NOT_AVAILABLE" = "Speech recognizer not available";
+"SPEECH_RECOGNITION_COULD_NOT_INITIALIZE" = "Speech recognizer could not be initialized";
+"SPEECH_RECOGNITION_NOT_AUTHORIZED" = "Speech recognizer not authorized";
 
 /* Speech In Noise active task. */
 "SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Play Audio";
@@ -691,7 +709,7 @@
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
 
 "AX_AMSLER_GRID_LABEL" = "Amsler Grid";
-"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or tap the Next button to finish.";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
@@ -812,3 +830,22 @@
 "FAMILY_HISTORY_ADD" = "Add %@";
 "FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "Confirm any diagnosed diseases or health conditions.";
 "AX_FAMILY_HISTORY_EDIT_BUTTON" = "Edit button";
+
+/* Permission denied completion step titles and descriptions. */
+"PERMISSION_DENIED_AUDIO_TITLE" = "Microphone Access Denied";
+"PERMISSION_DENIED_AUDIO_TEXT" = "You must allow access to your microphone in order to continue this task.";
+"PERMISSION_DENIED_MOTION_TITLE" = "Motion & Fitness Access Denied";
+"PERMISSION_DENIED_MOTION_TEXT" = "You must allow access to your motion & fitness activity in order to continue this task.";
+"PERMISSION_DENIED_OPEN_SETTINGS" = "Open Settings";
+"PERMISSION_DENIED_LOCATION_TITLE" = "Location Access Denied";
+"PERMISSION_DENIED_LOCATION_TEXT" = "You must allow location access in order to continue this task.";
+"PERMISSION_DENIED_CAMERA_TITLE" = "Camera Access Denied";
+"PERMISSION_DENIED_CAMERA_TEXT" = "You must allow access to your camera in order to continue this task.";
+
+/* Permission required alert title and messages. */
+"PERMISSION_REQUIRED_ALERT_TITLE" = "Permission Required";
+"PERMISSION_REQUIRED_ALERT_AUDIO_MESSAGE" = "Microphone access is required for this step to function properly. Allow access in Settings.";
+"PERMISSION_REQUIRED_ALERT_MOTION_MESSAGE" = "Motion & Fitness access is required for this step to function properly. Allow access in Settings.";
+"PERMISSION_REQUIRED_ALERT_LOCATION_MESSAGE" = "Location access is required for this step to function properly. Allow access in Settings.";
+"PERMISSION_REQUIRED_ALERT_CAMERA_MESSAGE" = "Camera access is required for this step to function properly. Allow access in Settings.";
+"PERMISSION_REQUIRED_ALERT_DEFAULT_MESSAGE" = "A required permission has not been granted. Allow access in Settings to ensure this step can function properly.";

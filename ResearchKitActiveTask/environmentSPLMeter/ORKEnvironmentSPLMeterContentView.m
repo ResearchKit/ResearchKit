@@ -74,14 +74,13 @@ NSString * const ORKEnvironmentSPLMeterOptimumNoiseLevelLabelAccessibilityIdenti
         [self setupBarView];
         [self setupXmarkView];
         [self setProgressCircle:0.0];
+
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKEnvironmentSPLMeterContentView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            traitChangeView->_DBInstructionLabel.font = [traitChangeView title3TextFont];
+        }];
     }
 
     return self;
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    _DBInstructionLabel.font = [self title3TextFont];
 }
 
 - (UIFont *)title3TextFont {
@@ -99,8 +98,8 @@ NSString * const ORKEnvironmentSPLMeterOptimumNoiseLevelLabelAccessibilityIdenti
     
     [[_containerView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor constant:-RingViewPadding] setActive:YES];
     [[_containerView.topAnchor constraintGreaterThanOrEqualToAnchor:self.topAnchor] setActive:YES];
-    [[_containerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
-    [[_containerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
+    [[_containerView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor] setActive:YES];
+    [[_containerView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor] setActive:YES];
     [[_containerView.topAnchor constraintLessThanOrEqualToAnchor:self.bottomAnchor] setActive:YES];
 }
 
@@ -195,6 +194,8 @@ NSString * const ORKEnvironmentSPLMeterOptimumNoiseLevelLabelAccessibilityIdenti
         BOOL isNoise = (progress >= ORKRingViewMaximumValue);
         NSString *newInstruction = isNoise ? ORKLocalizedString(@"ENVIRONMENTSPL_NOISE", nil) : ORKLocalizedString(@"ENVIRONMENTSPL_CALCULATING", nil);
         self->_xmarkView.hidden = !isNoise;
+        self->_xmarkView.image = isNoise ? _xmarkImage : _checkmarkImage;
+        self->_xmarkView.tintColor = isNoise ? UIColor.systemOrangeColor : UIColor.systemGreenColor;
 
         if (![newInstruction isEqualToString:currentInstruction]) {
             self->_DBInstructionLabel.text = newInstruction;

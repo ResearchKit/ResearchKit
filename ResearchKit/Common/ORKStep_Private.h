@@ -35,12 +35,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKCompletionStep;
+
+@protocol ORKAuthenticationDeniedContext <NSObject>
+
+- (ORKCompletionStep *)authDeniedCompletionStep;
+
+@end
+
+@protocol ORKUnsupportedDeviceContext <NSObject>
+
+- (ORKCompletionStep *)unsupportedDeviceCompletionStep;
+
+@end
+
+
 @interface ORKStep ()
 
-@property (nonatomic, assign) BOOL shouldTintImages;
+@property (nonatomic, strong, nullable) id<ORKAuthenticationDeniedContext> authDeniedContext;
 
-// Whether to allow navigation back from this step.
-@property (nonatomic, assign, readonly) BOOL allowsBackNavigation;
+@property (nonatomic, strong, nullable) id<ORKUnsupportedDeviceContext> unsupportedDeviceContext;
+
+@property (nonatomic, assign) BOOL shouldTintImages;
 
 @property (nonatomic, assign) BOOL useSurveyMode;
 

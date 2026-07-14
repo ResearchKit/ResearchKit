@@ -39,6 +39,7 @@
 #import "ORKStepViewController_Internal.h"
 
 #import "ORKActiveStepView.h"
+#import "ORKActiveStepView_Private.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKTappingIntervalResult.h"
 #import "ORKStep.h"
@@ -95,11 +96,13 @@
     self.timerUpdateInterval = 0.1;
     
     _expired = NO;
-    
+
+    [self.activeStepView hideStartTimerButton];
+
     _tappingContentView = [[ORKTappingContentView alloc] init];
     self.activeStepView.activeCustomView = _tappingContentView;
     self.activeStepView.customContentFillsAvailableSpace = YES;
-    
+
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     [_tappingContentView.tapButton2 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonReleased:forEvent:) forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];

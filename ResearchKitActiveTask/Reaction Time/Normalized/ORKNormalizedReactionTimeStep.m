@@ -35,6 +35,7 @@
 #import "ORKNormalizedReactionTimeViewController.h"
 
 #import "ORKHelpers_Internal.h"
+#import "ORKDeviceMotionRecorder.h"
 
 
 @implementation ORKNormalizedReactionTimeStep
@@ -46,6 +47,8 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     self.shouldContinueOnFinish = YES;
+    self.allowsBackNavigation = NO;
+    self.shouldShowDefaultTimer = NO;
     return self;
 }
 
@@ -142,12 +145,43 @@
             (self.currentInterval == castObject.currentInterval)
             );}
 
-- (BOOL)allowsBackNavigation {
+- (BOOL)startsFinished {
     return NO;
 }
 
-- (BOOL)startsFinished {
-    return NO;
+- (void)prepareRecorders {
+    BOOL hasDeviceMotionRecorder = NO;
+    for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
+        if ([config isKindOfClass:[ORKDeviceMotionRecorderConfiguration class]]) {
+            hasDeviceMotionRecorder = YES;
+            break;
+        }
+    }
+    
+    // Add a instance of ORKDeviceMotionRecorderConfiguration if it is not present
+    if (!hasDeviceMotionRecorder) {
+        ORK_Log_Info("A ORKDeviceMotionRecorderConfiguration has been added to the ORKNormalizedReactionTimeStep by the framework");
+        ORKDeviceMotionRecorderConfiguration *defaultConfig = [[ORKDeviceMotionRecorderConfiguration alloc]
+                                                               initWithIdentifier:@"ORKDeviceMotionRecorderConfiguration"
+                                                               frequency:100
+                                                               outputDirectory:nil];
+        NSMutableArray *configs = [NSMutableArray arrayWithArray:self.recorderConfigurations ?: @[]];
+        [configs addObject:defaultConfig];
+        self.recorderConfigurations = configs;
+    }
+    
+    // Filter out any configurations that are not of type ORKDeviceMotionRecorderConfiguration
+    NSArray *filteredConfigs = [self.recorderConfigurations filteredArrayUsingPredicate:
+                                [NSPredicate predicateWithBlock:^BOOL(id config, NSDictionary *bindings) {
+        BOOL isDeviceMotionRecorderConfig = [config isKindOfClass:[ORKDeviceMotionRecorderConfiguration class]];
+        if (!isDeviceMotionRecorderConfig) {
+            ORK_Log_Info("The %@ class has been filtered out of the recorderConfigurations array of the ORKNormalizedReactionTimeStep class.", NSStringFromClass([config class]));
+        }
+        
+        return isDeviceMotionRecorderConfig;
+    }]];
+    
+    self.recorderConfigurations = filteredConfigs;
 }
 
 @end

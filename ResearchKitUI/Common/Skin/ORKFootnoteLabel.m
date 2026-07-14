@@ -36,9 +36,8 @@
 @implementation ORKFootnoteLabel
 
 + (UIFont *)defaultFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
-    const CGFloat defaultSize = 12;
-    return [UIFont systemFontOfSize:[[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue] - defaultSize + ORKGetMetricForWindow(ORKScreenMetricFontSizeFootnote, nil)];
+    UIFont *baseFont = [UIFont systemFontOfSize:ORKGetMetricForWindow(ORKScreenMetricFontSizeFootnote, nil)];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleFootnote] scaledFontForFont:baseFont];
 }
 
 @end

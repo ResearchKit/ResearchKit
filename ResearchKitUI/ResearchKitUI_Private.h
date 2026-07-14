@@ -29,6 +29,7 @@
  */
 
 #import <ResearchKitUI/ORKBodyContainerView.h>
+#import <ResearchKitUI/ORKCaptureAccessDeniedContext.h>
 #import <ResearchKitUI/ORKCheckmarkView.h>
 #import <ResearchKitUI/ORKDirectionView.h>
 #import <ResearchKitUI/ORKFamilyHistoryStepViewController_Private.h>
@@ -53,6 +54,6 @@
 #import <ResearchKitUI/ORKTableContainerView.h>
 #import <ResearchKitUI/ORKTaskViewController_Private.h>
 #import <ResearchKitUI/ORKTaskViewController_Internal.h>
+#import <ResearchKitUI/ORKTimerRingView.h>
 #import <ResearchKitUI/ORKTintedImageView.h>
 #import <ResearchKitUI/ORKVerticalContainerView.h>
-#import <ResearchKitUI/ORKViewControllerProviding.h>

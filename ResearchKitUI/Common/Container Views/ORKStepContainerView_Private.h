@@ -44,18 +44,25 @@ static const CGFloat ImageViewMaxHeightAndWidth = 175.0;
 @class ORKStepContentView;
 @interface ORKStepContainerView ()
 
+@property (nonatomic, readonly) UIStackView *scrollContentView;
 @property (nonatomic) UIView *customContentView;
+@property (nonatomic, readwrite) UIView *stepContentViewLayoutContainer;
 @property (nonatomic, assign) BOOL customContentFillsAvailableSpace;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pinNavigationContainer;
 @property (nonatomic) UIEdgeInsets scrollViewInset;
+@property (nonatomic) NSDirectionalEdgeInsets contentLayoutMargins;
+@property (nonatomic, readwrite) NSDirectionalEdgeInsets scrollContentLayoutMargins;
 
-- (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding;
-- (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding sidePadding:(CGFloat)sidePadding;
+- (void)setCustomContentView:(UIView *)customContentView withPadding:(NSDirectionalEdgeInsets)padding;
+- (void)setCustomContentView:(UIView *)customContentView withPadding:(NSDirectionalEdgeInsets)padding shouldAddFooterPadding:(BOOL)shouldAddFooterPadding;
 - (void)setScrollViewCustomContentInset:(CGFloat)scrollViewCustomContentInset;
 - (void)scrollToPoint:(CGPoint)point;
 - (void)resetScrollViewInset;
 - (CGFloat)contentHeight;
+- (void)setNavigationFooterViewHidden:(BOOL)hidden;
+- (void)arrangeContentViews;
+- (NSArray<UIView *> *)canonicalContentViewOrder;
 
 @end
 

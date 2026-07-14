@@ -37,7 +37,7 @@
 #import "ORKStepViewController.h"
 
 #import "ORKSkin.h"
-
+#import <ResearchKit/ResearchKit-Swift.h>
 
 @implementation ORKQuestionStepCustomView
 
@@ -45,7 +45,6 @@
 
 
 @implementation ORKQuestionStepCellHolderView {
-    CGFloat _leftRightMargin;
     CAShapeLayer *_contentMaskLayer;
     
     ORKSurveyCardHeaderView * _cardHeaderView;
@@ -61,7 +60,6 @@
         self.translatesAutoresizingMaskIntoConstraints = NO;
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
         [self addGestureRecognizer:recognizer];
-        _leftRightMargin = 0.0;
         [self setupContainerView];
         [self setBackgroundColor:[UIColor clearColor]];
         [self setupConstraints];
@@ -79,7 +77,13 @@
 
 - (void)setupHeaderViewWithTitle:(NSString *)title detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
     if (!_cardHeaderView) {
-        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText tagText:nil showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem shouldIgnoreDarkMode:NO];
+        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithTitle:title
+                                                             detailText:detailText
+                                                          learnMoreView:learnMoreView
+                                                           progressText:progressText
+                                                                tagText:nil
+                                                             showBorder:NO
+                                                  hasMultipleChoiceItem:hasMultipleChoiceFormItem];
     }
     _cardHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_cardHeaderView];
@@ -112,7 +116,6 @@
 - (void)useCardViewWithTitle:(NSString *)title detailText:(NSString *)detailText learnMoreView:(ORKLearnMoreView *)learnMoreView progressText:(NSString *)progressText tagText:(NSString *)tagText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
     _title = title;
     _useCardView = YES;
-    _leftRightMargin = 0.0;
     [self setBackgroundColor:[UIColor clearColor]];
     [self setupHeaderViewWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
     [self setupConstraints];
@@ -134,27 +137,28 @@
                                                                attribute:NSLayoutAttributeTop
                                                               multiplier:1.0
                                                                 constant:0.0],
-                                  [NSLayoutConstraint constraintWithItem:_cardHeaderView
-                                                               attribute:NSLayoutAttributeLeft
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeLeft
-                                                              multiplier:1.0
-                                                                constant:0.0],
-                                  [NSLayoutConstraint constraintWithItem:_cardHeaderView
-                                                               attribute:NSLayoutAttributeRight
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeRight
-                                                              multiplier:1.0
-                                                                constant:0.0],
                                   [NSLayoutConstraint constraintWithItem:_containerView
                                                                attribute:NSLayoutAttributeTop
                                                                relatedBy:NSLayoutRelationEqual
                                                                   toItem:_cardHeaderView
                                                                attribute:NSLayoutAttributeBottom
                                                               multiplier:1.0
-                                                                constant:0.0]
+                                                                constant:0.0],
+                                  [NSLayoutConstraint constraintWithItem:_cardHeaderView
+                                                               attribute:NSLayoutAttributeLeading
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self
+                                                               attribute:NSLayoutAttributeLeading
+                                                              multiplier:1.0
+                                                                constant:0.0],
+                                  [NSLayoutConstraint constraintWithItem:_cardHeaderView
+                                                               attribute:NSLayoutAttributeTrailing
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self
+                                                               attribute:NSLayoutAttributeTrailing
+                                                              multiplier:1.0
+                                                                constant:0.0],
+
                                   ];
     }
     else {
@@ -271,15 +275,16 @@
         CAShapeLayer *lineLayer = [CAShapeLayer layer];
         
         NSUInteger rectCorners = _title ? UIRectCornerBottomLeft | UIRectCornerBottomRight : UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerTopRight | UIRectCornerTopLeft;
-            
+
+        CGFloat cornerRadius = ORKCardDefaultCornerRadii();
         _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: _containerView.bounds
                                                        byRoundingCorners: rectCorners
-                                                             cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
-        
+                                                             cornerRadii: (CGSize){cornerRadius, cornerRadius}].CGPath;
+
         CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, _containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, _containerView.bounds.size.height - ORKCardDefaultBorderWidth);
         
-        CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
-        
+        CGFloat foreLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
+
         foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds byRoundingCorners: rectCorners cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
             
         
@@ -317,6 +322,7 @@
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         _leftRightMargin = 0.0;
+        self.directionalLayoutMargins = ORKLargeContentLayoutMargins;
         [self setupContainerView];
         [self setBackgroundColor:[UIColor clearColor]];
         [self setupConstraints];
@@ -328,14 +334,22 @@
     if (!_containerView) {
         _containerView = [UIView new];
     }
+    _containerView.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_containerView];
 }
 
 - (void)setupHeaderViewWithTitle:(NSString *)title detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
     if (!_cardHeaderView) {
-        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText tagText:nil showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem shouldIgnoreDarkMode:NO];
+        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithTitle:title
+                                                             detailText:detailText
+                                                          learnMoreView:learnMoreView
+                                                           progressText:progressText
+                                                                tagText:nil
+                                                             showBorder:NO
+                                                  hasMultipleChoiceItem:hasMultipleChoiceFormItem];
     }
+    _cardHeaderView.directionalLayoutMargins = NSDirectionalEdgeInsetsZero;
     _cardHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_cardHeaderView];
     if (!title) {
@@ -381,14 +395,14 @@
                                          attribute:NSLayoutAttributeLeft
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:self
-                                         attribute:NSLayoutAttributeLeft
+                                         attribute:NSLayoutAttributeLeftMargin
                                         multiplier:1.0
                                           constant:0.0],
             [NSLayoutConstraint constraintWithItem:_cardHeaderView
                                          attribute:NSLayoutAttributeRight
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:self
-                                         attribute:NSLayoutAttributeRight
+                                         attribute:NSLayoutAttributeRightMargin
                                         multiplier:1.0
                                           constant:0.0],
             [NSLayoutConstraint constraintWithItem:_containerView
@@ -411,22 +425,22 @@
                                           constant:0.0]
         ];
     }
-    
+
     _containerConstraints = [topViewConstraints arrayByAddingObjectsFromArray:@[
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeLeft
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self
-                                     attribute:NSLayoutAttributeLeft
+                                     attribute:NSLayoutAttributeLeftMargin
                                     multiplier:1.0
-                                      constant:ORKCardLeftRightMarginForWindow(self.window)],   //Adding Padding to match surveyCardHeader in Question Step.
+                                      constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeRight
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self
-                                     attribute:NSLayoutAttributeRight
+                                     attribute:NSLayoutAttributeRightMargin
                                     multiplier:1.0
-                                      constant:-ORKCardLeftRightMarginForWindow(self.window)]   //Adding Padding to match surveyCardHeader in Question Step.
+                                      constant:0]
     ]];
     
     [NSLayoutConstraint activateConstraints:_containerConstraints];
@@ -453,14 +467,14 @@
                                                         attribute:NSLayoutAttributeLeft
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_containerView
-                                                        attribute:NSLayoutAttributeLeft
+                                                        attribute:NSLayoutAttributeLeftMargin
                                                        multiplier:1.0
                                                          constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_swiftUIView
                                                         attribute:NSLayoutAttributeRight
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_containerView
-                                                        attribute:NSLayoutAttributeRight
+                                                        attribute:NSLayoutAttributeRightMargin
                                                        multiplier:1.0
                                                          constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_containerView
@@ -471,16 +485,6 @@
                                                        multiplier:1.0
                                                          constant:0.0]];
     [NSLayoutConstraint activateConstraints:constraints];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
 }
 
 -(void) drawRect:(CGRect)rect {
@@ -514,15 +518,16 @@
         CAShapeLayer *lineLayer = [CAShapeLayer layer];
         
         NSUInteger rectCorners = _title ? UIRectCornerBottomLeft | UIRectCornerBottomRight : UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerTopRight | UIRectCornerTopLeft;
-        
+
+        CGFloat cornerRadius = ORKCardDefaultCornerRadii();
         _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: _containerView.bounds
                                                        byRoundingCorners: rectCorners
-                                                             cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
-        
+                                                             cornerRadii: (CGSize){cornerRadius, cornerRadius}].CGPath;
+
         CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, _containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, _containerView.bounds.size.height - ORKCardDefaultBorderWidth);
         
-        CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
-        
+        CGFloat foreLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
+
         foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds byRoundingCorners: rectCorners cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
         
         

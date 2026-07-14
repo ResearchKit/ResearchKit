@@ -30,7 +30,6 @@
 
 import ResearchKitActiveTask
 
-
 enum TaskListRowSteps {
     
     // MARK: - ORKFormStep Examples
@@ -207,9 +206,33 @@ enum TaskListRowSteps {
         
         //Start of first section
         let learnMoreInstructionStep01 = ORKLearnMoreInstructionStep(identifier: "LearnMoreInstructionStep01")
+        learnMoreInstructionStep01.iconImage = UIImage(
+            named: "Face",
+            in: Bundle(identifier: "org.researchkit.ResearchKit"),
+            compatibleWith: .none
+        )!
         learnMoreInstructionStep01.title = NSLocalizedString("Learn more title", comment: "")
         learnMoreInstructionStep01.text = NSLocalizedString("Learn more text", comment: "")
+        learnMoreInstructionStep01.bodyItems = [
+            ORKBodyItem(
+                text: nil,
+                detailText: nil,
+                image: nil,
+                learnMoreItem: .init(
+                    text: "Learn More",
+                    learnMoreInstructionStep: {
+                        let learnMoreStep = ORKLearnMoreInstructionStep(
+                            identifier: "ID"
+                        )
+                        learnMoreStep.title = "Learn more step"
+                        return learnMoreStep
+                    }()
+                ),
+                bodyItemStyle: .text
+            )
+        ]
         let learnMoreItem01 = ORKLearnMoreItem(text: nil, learnMoreInstructionStep: learnMoreInstructionStep01)
+        
         let section01 = ORKFormItem(sectionTitle: NSLocalizedString("Section title", comment: ""), detailText: NSLocalizedString("Section detail text", comment: ""), learnMoreItem: learnMoreItem01, showsProgress: true)
         
         // A first field, for entering an integer.
@@ -231,7 +254,7 @@ enum TaskListRowSteps {
         
         //Start of section for scale question
         let formItem03Text = TaskListRowStrings.exampleQuestionText
-        let scaleAnswerFormat = ORKContinuousScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0.0, maximumFractionDigits: 1)
+        let scaleAnswerFormat = ORKContinuousScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: ORKDoubleDefaultValue, maximumFractionDigits: 1)
         let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, detailText: nil, learnMoreItem: nil, showsProgress: true, answerFormat: scaleAnswerFormat, tagText: nil, optional: true)
         
         step.formItems = [
@@ -259,7 +282,7 @@ enum TaskListRowSteps {
         let heartRateFormItem = ORKFormItem(identifier: String(describing: Identifier.healthQuantityFormItem),
                                             text: nil,
                                             answerFormat:heartRateAnswerFormat)
-        
+    
         let heartRateFormStep = ORKFormStep(identifier: String(describing: Identifier.healthQuantityFormStep1),
                                             title: NSLocalizedString("Heart Rate", comment: ""),
                                             text: TaskListRowStrings.exampleDetailText)
@@ -670,10 +693,11 @@ enum TaskListRowSteps {
         let sharingHealthDataBodyItem = ORKBodyItem(text: "The study will ask you to share some of your Health data.",
                                                     detailText: nil,
                                                     image: UIImage(systemName: "heart.fill"),
-                                                    learnMoreItem: nil,
-                                                    bodyItemStyle: .image,
-                                                    useCardStyle: false,
-                                                    alignImageToTop: true)
+                                                    learnMoreItem: ORKLearnMoreItem(
+                                                        text: String(localizedWithFallbackToBaseLanguage: "LEARN_MORE_ITEM_TEXT"),
+                                                        learnMoreInstructionStep: ORKLearnMoreInstructionStep(identifier: "LearnMoreItemIdentifier")
+                                                    ),
+                                                    bodyItemStyle: .image)
         
         let completingTasksBodyItem = ORKBodyItem(text: "You will be asked to complete various tasks over the duration of the study.",
                                                   detailText: nil,
@@ -988,7 +1012,6 @@ enum TaskListRowSteps {
         
         return familyHistoryStep
     }
-    
     
     // MARK: - Helpers
     

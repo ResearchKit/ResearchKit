@@ -95,7 +95,10 @@
     if ([self class] != [object class]) {
         return NO;
     }
-    return YES;
+    ORKRecorderConfiguration *other = object;
+    return ORKEqualObjects(self.identifier, other.identifier)
+        && ORKEqualObjects(self.outputDirectory.path, other.outputDirectory.path)
+        && self.rollingFileSizeThreshold == other.rollingFileSizeThreshold;
 }
 
 - (NSUInteger)hash {
@@ -127,11 +130,19 @@
     return ORKPermissionNone;
 }
 
+- (nonnull id)copyWithZone:(nullable NSZone *)zone {
+    ORKRecorderConfiguration *config = [[[self class] allocWithZone:zone] initWithIdentifier:[self.identifier copy]
+                                                                             outputDirectory:[self.outputDirectory copy]
+                                                                    rollingFileSizeThreshold:self.rollingFileSizeThreshold];
+    return config;
+}
+
 @end
 
 @implementation ORKRecorder {
     UIBackgroundTaskIdentifier _backgroundTask;
     NSUUID *_recorderUUID;
+    BOOL _isInvalid;
 }
 
 + (instancetype)new {
@@ -162,6 +173,7 @@
         self.step = step;
         _backgroundTask = NSNotFound;
         _recorderUUID = [NSUUID UUID];
+        _isInvalid = NO;
     }
     return self;
 }
@@ -187,6 +199,11 @@
 - (void)stop {
     [self finishRecordingWithError:nil];
     [self reset];
+}
+
+- (void)invalidate {
+    _isInvalid = YES;
+    [self stop];
 }
 
 - (void)finishRecordingWithError:(NSError *)error {
@@ -245,10 +262,10 @@
     NSString *identifier = [self logName];
     NSString *logName = [identifier stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
     
-    // Class B data protection for temporary file during active task logging.
+    // Use the propagated file protection mode from the task view controller.
     ORKDataLogger *logger = [ORKDataLogger JSONDataLoggerWithDirectory:workingDir logName:logName delegate:nil];
-    
-    logger.fileProtectionMode = ORKFileProtectionCompleteUnlessOpen;
+
+    logger.fileProtectionMode = self.configuration.fileProtectionMode;
     
     if (self.rollingFileSizeThreshold > 0) {
         logger.maximumCurrentLogFileSize = self.rollingFileSizeThreshold;
@@ -279,7 +296,21 @@
 
 - (void)reportFileResultsWithFiles:(NSArray<NSURL *> *)fileUrls error:(NSError *)error {
     id<ORKRecorderDelegate> localDelegate = self.delegate;
-    if (fileUrls.count != 0 && !error) {
+    
+    if (_isInvalid) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        for (NSURL *fileURL in fileUrls) {
+            if ([fileManager removeItemAtURL:fileURL error:nil]) {
+                ORK_Log_Info("File removed from invalidated recorder at path: %@", fileURL.path);
+            } else {
+                ORK_Log_Info("Failed to remove file from invalidated recorder at path: %@", fileURL.path);
+            }
+        }
+        
+        // No further delegate callbacks are needed after this conditional block
+        // has been reached.
+        _delegate = nil;
+    } else if (fileUrls.count != 0 && !error) {
         if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didCompleteWithResults:)]) {
             NSMutableArray<ORKFileResult *> *fileResults = [[NSMutableArray alloc] init];
             for (NSURL *fileURL in fileUrls) {

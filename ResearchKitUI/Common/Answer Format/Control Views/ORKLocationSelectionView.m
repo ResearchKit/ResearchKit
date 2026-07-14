@@ -49,6 +49,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+#import <ResearchKit/ResearchKit-Swift.h>
 #import <ResearchKit/CLLocationManager+ResearchKit.h>
 
 @import MapKit;
@@ -99,19 +100,14 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 + (CGFloat)textFieldBottomMargin {
-    static CGFloat textFieldBottomMargin = 0;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        textFieldBottomMargin = 1.0 / [UIScreen mainScreen].scale;
-    });
-    return textFieldBottomMargin;
+    return 1.0 / UITraitCollection.currentSafeDisplayScale;
 }
 
 - (instancetype)initWithFormMode:(BOOL)formMode
               useCurrentLocation:(BOOL)useCurrentLocation
                    leadingMargin:(CGFloat)leadingMargin {
     if (NO == formMode) {
-        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + [self.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
     } else {
         self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight])];
     }
@@ -191,8 +187,8 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     if (_seperator1) {
         _seperator1.translatesAutoresizingMaskIntoConstraints = NO;
         NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator1);
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_seperator1 attribute:NSLayoutAttributeTop multiplier:1.0 constant:-1.0/[UIScreen mainScreen].scale]];
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator1 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_seperator1 attribute:NSLayoutAttributeTop multiplier:1.0 constant:-1.0/self.safeDisplayScale]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator1 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / self.safeDisplayScale]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_seperator1]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:seperators]];
     }
     
@@ -200,7 +196,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
         _seperator2.translatesAutoresizingMaskIntoConstraints = NO;
         NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator2);
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_seperator2 attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / self.safeDisplayScale]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_seperator2]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:seperators]];
     }
     
@@ -240,7 +236,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (CGSize)intrinsicContentSize {
-    CGFloat height = [self.class textFieldHeight] + (_mapView.superview == nil ? 0.0 : [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
+    CGFloat height = [self.class textFieldHeight] + (_mapView.superview == nil ? 0.0 : [self.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
     return CGSizeMake(40, height);
 }
 
@@ -257,7 +253,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     
     NSDictionary *metrics = @{@"horizontalMargin": @(_mapHorizontalMargin)};
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:NSDictionaryOfVariableBindings(_mapView)]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeBottom multiplier:1.0 constant:[ORKLocationSelectionView.class textFieldBottomMargin]]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeBottom multiplier:1.0 constant:[self.class textFieldBottomMargin]]];
     
     _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window)];
     [constraints addObject:_mapViewHeightConstraint];
@@ -267,7 +263,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
         _seperator3.translatesAutoresizingMaskIntoConstraints = NO;
         NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator3);
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_seperator3 attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / self.safeDisplayScale]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_seperator3]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:seperators]];
     }
     
@@ -280,7 +276,8 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 - (void)loadCurrentLocationIfNecessary {
     if (_useCurrentLocation) {
-        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        CLAuthorizationStatus status = _locationManager.authorizationStatus;
+        
         
         if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
             _userLocationNeedsUpdate = YES;
@@ -293,49 +290,102 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     }
 }
 
+- (void)handleGeocodingError:(NSError *)error {
+    [self notifyDelegateOfError:error];
+    [self setAnswer:ORKNullAnswerValue()];
+}
+
+- (void)handleForwardGeocodingSuccess:(NSArray *)results userInput:(NSString *)userInput {
+    if (@available(iOS 26.0, *)) {
+        MKMapItem *mapItem = [(NSArray<MKMapItem *> *)results lastObject];
+        [self setAnswer:[[ORKLocation alloc] initWithPlacemark:mapItem.placemark userInput:userInput]];
+    } else {
+        CLPlacemark *placemark = [(NSArray<CLPlacemark *> *)results lastObject];
+        [self setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark userInput:userInput]];
+    }
+}
+
+- (void)handleReverseGeocodingSuccess:(NSArray *)results userInput:(NSString *)userInput {
+    if (@available(iOS 26.0, *)) {
+        MKPlacemark *placemark = [[(NSArray<MKMapItem *> *)results lastObject] placemark];
+        [self setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark
+                                                     userInput:userInput ?: placemark.ork_addressLine]
+                updateMap:YES];
+    } else {
+        CLPlacemark *placemark = [(NSArray<CLPlacemark *> *)results lastObject];
+        [self setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark
+                                                     userInput:userInput ?: placemark.ork_addressLine]
+                updateMap:YES];
+    }
+}
+
 - (void)geocodeAndDisplay:(NSString *)string {
-    
+
     if (string == nil || string.length == 0) {
         [self setAnswer:ORKNullAnswerValue()];
         return;
     }
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+
     ORKWeakTypeOf(self) weakSelf = self;
-    [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
-        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
-        if (error) {
-            [self notifyDelegateOfError:error];
-            [strongSelf setAnswer:ORKNullAnswerValue()];
-        } else {
-            CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark userInput:string]];
-        }
-    }];
+    if (@available(iOS 26.0, *)) {
+        MKGeocodingRequest *request = [[MKGeocodingRequest alloc] initWithAddressString:string];
+        [request getMapItemsWithCompletionHandler:^(NSArray<MKMapItem *> *mapItems, NSError *error) {
+            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
+            if (error) {
+                [strongSelf handleGeocodingError:error];
+            } else {
+                [strongSelf handleForwardGeocodingSuccess:mapItems userInput:string];
+            }
+        }];
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
+            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
+            if (error) {
+                [strongSelf handleGeocodingError:error];
+            } else {
+                [strongSelf handleForwardGeocodingSuccess:placemarks userInput:string];
+            }
+        }];
+#pragma clang diagnostic pop
+    }
 }
 
 - (void)reverseGeocodeAndDisplay:(ORKLocation *)location {
-    
+
     if (location == nil) {
         [self setAnswer:ORKNullAnswerValue()];
         return;
     }
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+
     ORKWeakTypeOf(self) weakSelf = self;
     CLLocation *cllocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-    [geocoder reverseGeocodeLocation:cllocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
-        if (error) {
-            [self notifyDelegateOfError:error];
-            [strongSelf setAnswer:ORKNullAnswerValue()];
-        } else {
-            CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark
-                                                               userInput:location.userInput ? : placemark.ork_addressLine]
-                        updateMap:YES];
-        }
-    }];
+    if (@available(iOS 26.0, *)) {
+        MKReverseGeocodingRequest *request = [[MKReverseGeocodingRequest alloc] initWithLocation:cllocation];
+        [request getMapItemsWithCompletionHandler:^(NSArray<MKMapItem *> *mapItems, NSError *error) {
+            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
+            if (error) {
+                [strongSelf handleGeocodingError:error];
+            } else {
+                [strongSelf handleReverseGeocodingSuccess:mapItems userInput:location.userInput];
+            }
+        }];
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation:cllocation completionHandler:^(NSArray *placemarks, NSError *error) {
+            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
+            if (error) {
+                [strongSelf handleGeocodingError:error];
+            } else {
+                [strongSelf handleReverseGeocodingSuccess:placemarks userInput:location.userInput];
+            }
+        }];
+#pragma clang diagnostic pop
+    }
 }
 
 - (void)setAnswer:(ORKLocation *)answer {
@@ -343,7 +393,18 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (void)setAnswer:(ORKLocation *)answer updateMap:(BOOL)updateMap {
-    
+    // When Don't Know is selected, clear the display without notifying the delegate
+    // (notifying would trigger inputValueDidChange → ork_setAnswer, overwriting the saved ORKDontKnowAnswer)
+    if ([answer isKindOfClass:[ORKDontKnowAnswer class]]) {
+        _answer = ORKNullAnswerValue();
+        _userLocationNeedsUpdate = NO;
+        _textField.text = nil;
+        if (updateMap) {
+            [self updateMapWithLocation:nil];
+        }
+        return;
+    }
+
     BOOL isAnswerClassORKLocation = [[answer class] isSubclassOfClass:[ORKLocation class]];
     _answer = (isAnswerClassORKLocation || answer == ORKNullAnswerValue()) ? answer : nil;
     
@@ -403,32 +464,40 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     [_mapView setRegion:region animated:YES];
 }
 
-- (void)notifyDelegateOfError:(NSError *)error {
-    NSString *title = ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"");
-    NSString *message = nil;
-    
+- (NSString *)messageForMKError:(NSError *)error {
     switch (error.code) {
-        case kCLErrorLocationUnknown:
-        case kCLErrorHeadingFailure:
-            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN", @"");
-            break;
-        case kCLErrorDenied:
-        case kCLErrorRegionMonitoringDenied:
-            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_DENIED", @"");
-            break;
+        case MKErrorServerFailure:
+        case MKErrorLoadingThrottled:
+            return ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
+        case MKErrorPlacemarkNotFound:
+        default:
+            return ORKLocalizedString(@"LOCATION_ERROR_GEOCODE", @"");
+    }
+}
+
+- (NSString *)messageForCLError:(NSError *)error {
+    switch (error.code) {
         case kCLErrorNetwork:
-            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
-            break;
+            return ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
         case kCLErrorGeocodeFoundNoResult:
         case kCLErrorGeocodeFoundPartialResult:
         case kCLErrorGeocodeCanceled:
-            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE", @"");
-            break;
         default:
-            break;
+            return ORKLocalizedString(@"LOCATION_ERROR_GEOCODE", @"");
     }
-    
-    if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithErrorTitle:message:)] && message != nil) {
+}
+
+- (NSString *)messageForError:(NSError *)error {
+    return [error.domain isEqualToString:MKErrorDomain]
+        ? [self messageForMKError:error]
+        : [self messageForCLError:error];
+}
+
+- (void)notifyDelegateOfError:(NSError *)error {
+    NSString *title = ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"");
+    NSString *message = [self messageForError:error];
+
+    if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithErrorTitle:message:)]) {
         [_delegate locationSelectionView:self didFailWithErrorTitle:title message:message];
     }
 }

@@ -33,16 +33,23 @@
 
 #import "ORKHelpers_Internal.h"
 
-
-static const NSUInteger MaximumNumberOfDisks = 8;
-
 @implementation ORKTowerOfHanoiStep
+
++ (NSUInteger)minimumNumberOfDisks {
+    return 1;
+}
+
++ (NSUInteger)maximumNumberOfDisks {
+    return 8;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.optional = YES;
         self.numberOfDisks = 3;
+        self.allowsBackNavigation = NO;
+        self.shouldShowDefaultTimer = NO;
     }
     return self;
 }
@@ -54,7 +61,11 @@ static const NSUInteger MaximumNumberOfDisks = 8;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_INTEGER(aDecoder, numberOfDisks);
+        if ([aDecoder containsValueForKey:@"numberOfDisks"]) {
+            ORK_DECODE_INTEGER(aDecoder, numberOfDisks);
+        } else {
+            self.numberOfDisks = 3;
+        }
     }
     return self;
 }
@@ -80,13 +91,7 @@ static const NSUInteger MaximumNumberOfDisks = 8;
 
 - (void)validateParameters {
     [super validateParameters];
-    if (self.numberOfDisks > MaximumNumberOfDisks) {
-        ORK_Log_Info("Having a large number of disks provides a poor user experience, consider reducing the number below %@.", @(MaximumNumberOfDisks));
-    }
-}
-
-- (BOOL)allowsBackNavigation {
-    return NO;
+    ORKValidateBoundedValue(self.numberOfDisks, ORKTowerOfHanoiStep.minimumNumberOfDisks, ORKTowerOfHanoiStep.maximumNumberOfDisks, @"numberOfDisks", YES);
 }
 
 - (BOOL)startsFinished {

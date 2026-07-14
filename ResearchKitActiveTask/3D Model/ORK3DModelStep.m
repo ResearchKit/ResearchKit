@@ -34,7 +34,7 @@
 @implementation ORK3DModelStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier modelManager:(nonnull ORK3DModelManager *)modelManager {
-    self = [super initWithIdentifier:identifier];
+    self = [self initWithIdentifier:identifier];
     
     if (self) {
         _modelManager = modelManager;
@@ -43,15 +43,22 @@
     return self;
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+
+    if (self) {
+        self.allowsBackNavigation = NO;
+        self.shouldShowDefaultTimer = NO;
+    }
+
+    return self;
+}
+
 - (void)validateParameters {
     [super validateParameters];
 }
 
 - (BOOL)startsFinished {
-    return NO;
-}
-
-- (BOOL)allowsBackNavigation {
     return NO;
 }
 

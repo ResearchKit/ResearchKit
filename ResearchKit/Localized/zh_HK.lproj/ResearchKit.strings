@@ -39,13 +39,13 @@
 "CONSENT_SIGNATURE_TITLE" = "簽名";
 "CONSENT_SIGNATURE_INSTRUCTION" = "請用手指在以下方格內簽名。";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "在此簽名";
-"CONSENT_PAGE_NUMBER_FORMAT" = "第%1$ld頁（共%2$ld頁）";
+"CONSENT_PAGE_NUMBER_FORMAT" = "頁面%1$ld/%2$ld";
 
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "歡迎";
-"CONSENT_SECTION_DATA_GATHERING" = "數據收集";
+"CONSENT_SECTION_DATA_GATHERING" = "資料收集";
 "CONSENT_SECTION_PRIVACY" = "私隱";
-"CONSENT_SECTION_DATA_USE" = "數據使用";
+"CONSENT_SECTION_DATA_USE" = "資料使用";
 "CONSENT_SECTION_STUDY_SURVEY" = "研究問卷";
 "CONSENT_SECTION_STUDY_TASKS" = "研究任務";
 "CONSENT_SECTION_TIME_COMMITMENT" = "所需時間";
@@ -53,24 +53,24 @@
 "CONSENT_LEARN_MORE_TITLE" = "了解更多";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "進一步了解數據的收集方法";
-"LEARN_MORE_DATA_USE" = "進一步了解數據的使用方法";
-"LEARN_MORE_PRIVACY" = "進一步了解你的私隱及個人身份如何得到保護";
-"LEARN_MORE_WELCOME" = "開始前先了解此研究";
-"LEARN_MORE_STUDY_SURVEY" = "進一步了解研究的問卷";
-"LEARN_MORE_TIME_COMMITMENT" = "進一步了解研究所花費的時間";
-"LEARN_MORE_TASKS" = "進一步了解相關的任務";
-"LEARN_MORE_WITHDRAWING" = "進一步了解退出研究";
+"LEARN_MORE_DATA_GATHERING" = "進一步了解資料的收集方法。";
+"LEARN_MORE_DATA_USE" = "進一步了解資料的使用方法。";
+"LEARN_MORE_PRIVACY" = "進一步了解你的私隱及個人身份如何得到保護。";
+"LEARN_MORE_WELCOME" = "開始前先了解此研究。";
+"LEARN_MORE_STUDY_SURVEY" = "進一步了解研究的問卷。";
+"LEARN_MORE_TIME_COMMITMENT" = "進一步了解研究所花費的時間。";
+"LEARN_MORE_TASKS" = "進一步了解相關的任務。";
+"LEARN_MORE_WITHDRAWING" = "進一步了解退出研究。";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "分享選項";
-"CONSENT_SHARE_WIDELY_%@" = "與「%@」及全世界合資格的研究者分享我的數據";
-"CONSENT_SHARE_ONLY_%@" = "只與「%@」分享我的數據";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@會收到你參與這個研究的研究數據。\n\n更廣泛地分享你的已編碼研究數據（不含你的姓名等資料）可能對此研究和未來的調查有益處。";
-"LEARN_MORE_CONSENT_SHARING" = "進一步了解數據共享";
+"CONSENT_SHARE_WIDELY_%@" = "與「%@」及全世界合資格的研究者分享我的資料";
+"CONSENT_SHARE_ONLY_%@" = "只與「%@」分享我的資料";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ 會收到你參與這個研究的研究資料。\n\n更廣泛地分享你的已編碼研究資料（不含你的姓名等資料）可能對此研究和未來的調查有益處。";
+"LEARN_MORE_CONSENT_SHARING" = "進一步了解資料分享。";
 
 /* Lines beneath typewritten signatures on documents.*/
-"CONSENT_DOC_LINE_PRINTED_NAME" = "正楷名稱";
+"CONSENT_DOC_LINE_PRINTED_NAME" = "正楷姓名";
 "CONSENT_DOC_LINE_SIGNATURE" = "簽名";
 "CONSENT_DOC_LINE_DATE" = "日期";
 
@@ -87,7 +87,7 @@
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "無效值";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@超過了上限（%2$@）。";
-"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@低於下限（%2$@）。";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ 低於下限（%2$@）。";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@不是有效的數值。";
 
 /* Alert for invalid email address value */
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "輸入地址";
 "LOCATION_ERROR_TITLE" = "找不到指定的地址";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "無法找出現時位置，請輸入地址或移動至GPS訊號較佳的位置（如適用）。";
-"LOCATION_ERROR_MESSAGE_DENIED" = "定位服務存取遭拒，請前往「設定」以授權此App使用定位服務。";
 "LOCATION_ERROR_GEOCODE" = "找不到輸入的地址，請確定地址是否正確。";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "你可能未連接互聯網，或地址查詢請求的次數已超出上限。如果你未連接互聯網，請開啟Wi-Fi以回答此問題（如果顯示「略過」按鈕，則可略過此問題），或在連接互聯網後返回此問卷。否則，請在幾分鐘後再試一次。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "你可能未連接互聯網，或地址查詢請求的次數已超出上限。如果你未連接互聯網，請開啟 Wi-Fi 以回答此問題（如果顯示「略過」按鈕，則可略過此問題），或在連接互聯網後返回此問卷。否則，請在幾分鐘後再試一次。";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字內容超出長度上限：%@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字上限為%@個字元";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "分割螢幕無法使用相機。";
@@ -114,8 +112,8 @@
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "輸入密碼";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "確認";
 "CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "請再次輸入密碼";
-"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密碼不符。";
-"ADDITIONAL_INFO_SECTION_TITLE" = "其他資料";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密碼不相符。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "詳細資料";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "大明";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "王";
 "GENDER_FORM_ITEM_TITLE" = "性別";
@@ -123,7 +121,7 @@
 "DOB_FORM_ITEM_TITLE" = "出生日期";
 "DOB_FORM_ITEM_PLACEHOLDER" = "選擇日期";
 "PHONE_NUMBER_FORM_ITEM_TITLE" = "電話號碼";
-"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+852 1111 1111";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "驗證";
@@ -146,7 +144,7 @@
 "PASSCODE_INVALID_ALERT_TITLE" = "密碼不正確";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "密碼不符，請再試一次。";
 "PASSCODE_TOUCH_ID_MESSAGE" = "請使用Touch ID認證";
-"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID錯誤";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 錯誤";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "只允許輸入數字。";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼輸入進度指示器";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已輸入%@個數字（共%@個）";
@@ -176,6 +174,13 @@
 "FITZPATRICK_SKIN_TYPE_V" = "類型V";
 "FITZPATRICK_SKIN_TYPE_VI" = "類型VI";
 
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "類型1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "類型2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "類型3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "類型4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "類型5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "類型6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "女性";
 "GENDER_MALE" = "男性";
@@ -198,7 +203,7 @@
 "LIMB_RIGHT" = "右";
 
 /* Default placeholders to request answers in a questionnaire. */
-"PLACEHOLDER_TEXT_OR_NUMBER" = "點一下回答";
+"PLACEHOLDER_TEXT_OR_NUMBER" = "點一下以回答";
 "NULL_ANSWER" = "選擇答案";
 "PLACEHOLDER_IMAGE_CHOICES" = "點一下選擇";
 "PLACEHOLDER_LONG_TEXT" = "點一下編寫";
@@ -213,12 +218,12 @@
 "BUTTON_DISAGREE" = "不同意";
 "BUTTON_DONE" = "完成";
 "BUTTON_GET_STARTED" = "開始";
-"BUTTON_LEARN_MORE" = "了解更多";
+"BUTTON_LEARN_MORE" = "進一步了解";
 "BUTTON_NEXT" = "下一步";
 "BUTTON_SKIP" = "略過";
 "BUTTON_SKIP_QUESTION" = "略過此問題";
-"BUTTON_START_TIMER" = "開始計時器";
-"BUTTON_OPTION_SAVE" = "儲存作日後之用";
+"BUTTON_START_TIMER" = "啟動計時器";
+"BUTTON_OPTION_SAVE" = "儲存作稍後閲讀";
 "BUTTON_OPTION_DISCARD" = "放棄測試結果";
 "BUTTON_OPTION_STOP_TASK" = "結束測試任務";
 "BUTTON_SAVE" = "儲存";
@@ -244,7 +249,7 @@
 
 /* Video capture step. */
 "CAPTURE_BUTTON_CAPTURE_VIDEO" = "開始錄製";
-"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "停止錄影";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "停止錄製";
 "CAPTURE_BUTTON_RECAPTURE_VIDEO" = "重新截取影片";
 
 /* Fitness active task. */
@@ -262,9 +267,9 @@
 "WALK_INTRO_2_TEXT_%ld" = "找一個安全的地方，讓你可以不靠輔助地直線步行大約%ld步。";
 "WALK_INTRO_2_DETAIL" = "將你的裝置放入口袋或手袋中，並跟隨音訊指示。";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "現在站立%@。";
-"WALK_STAND_INSTRUCTION_FORMAT" = "站立%@。";
+"WALK_STAND_INSTRUCTION_FORMAT" = "站立 %@。";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "掉頭，然後步行回到起點。";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "直線步行最多%ld步。";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "直線步行最多 %ld 步。";
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找一個你可以安全地來回走直線的地方。請在路徑的盡頭調頭以持續行走，就像繞過錐形路標走路。\n然後你會收到指示360度自轉一次，並以雙手放在身側，雙腳稍微分開至肩膀距離的姿勢站立不動。";
@@ -284,7 +289,7 @@
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "請用左手的兩指梅花間竹地點按螢幕上的按鈕。";
 "TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "現在用右手進行相同的測試。";
 "TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "現在用左手進行相同的測試。";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "先用一指點按，然後用另一指點按。請嘗試以最平穩的速度，持續點按%@。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "先用一指點按，然後用另一指點按。請嘗試以最平穩的速度，持續點按 %@。";
 "TAPPING_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "TAPPING_CALL_TO_ACTION_NEXT" = "點一下「下一步」開始。";
 "TAP_BUTTON_TITLE" = "點按";
@@ -298,7 +303,7 @@
 "AMSLER_GRID_TITLE" = "阿姆斯勒⽅格";
 "AMSLER_GRID_INTRO_TEXT" = "此活動有助偵測用户的視力問題。";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "在整個測試期間，將裝置放在面孔前方與視線成水平，距離約30厘米。";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "閉上你的%@並注視方格中央的點。\n\n使用手指或觸控筆，標記你看到的任何變形地方，例如模糊或波浪線條。\n\n完成後，在方格外任何位置向左掃。";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "閉上你的%@並注視方格中央的點。\n\n使用手指或觸控筆，標記你看到的任何變形地方，例如模糊或扭曲的線條。\n\n完成後，點一下「下一步」按鈕。";
 "AMSLER_GRID_LEFT_EYE" = "左眼";
 "AMSLER_GRID_RIGHT_EYE" = "右眼";
 
@@ -328,20 +333,20 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "當你聽到聲音時，請點一下。";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "當你聽到聲音時，請點一下按鈕。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "聲音與音量";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "你將會聽到一連串聲音。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "當你聽到聲音時，請點一下按鈕。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "就是次測試，音量將會設定為50%。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "此測試需時大約10分鐘。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "開啟「請勿打擾」以避免打擾。";
-"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "會先在你的右耳播放聲音。";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "會先在你的左耳播放聲音。";
 "dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "現在會在你的左耳播放聲音。";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "此測試活動以分貝聽力級別為單位辨識個別人士的聽力臨界值。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "請確定裝置音量已設定為最大聲。\n\n在此測試活動中，會在左耳或右耳播放一個微細的音調。\n\n細心聆聽並在每次聽到音調時點一下按鈕。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "此測試識別聲音需要多大你才能聽得到。";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "測試前問卷調查。";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "選擇「聽力較好」偏好設定（如有）";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "為「聽力較好的耳朵」選擇你的偏好（如有）";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "左";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "右";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "沒有偏好";
@@ -408,7 +413,7 @@
 
 /* Range of Motion active task */
 "RANGE_OF_MOTION_TITLE" = "動作範圍";
-"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption 必須為左或右";
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption必須為左或右";
 
 /* Knee Range of Motion active task */
 "KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "左膝動作範圍";
@@ -421,10 +426,10 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "請將裝置放在右膝上，螢幕向外（如圖）。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備好時，點一下螢幕即可開始，將你的左膝盡量伸展到最遠的距離。完成後，將你的左膝還原至開始時的位置，並且再點一下。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備好時，點一下螢幕即可開始，將你的右膝盡量伸展到最遠的距離。完成後，將你的右膝還原至開始時的位置，並且再點一下。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "將裝置放在你的左膝上。點一下螢幕並將左膝盡量伸展到最遠的距離。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "將裝置放在你的右膝上。點一下螢幕並將右膝盡量伸展到最遠的距離。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "完成後，請將你的左膝還原至開始時的位置。然後點一下任何位置。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "完成後，請將你的右膝還原至開始時的位置。然後點一下任何位置。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "將裝置放在你的左膝上。\n\n點一下螢幕並將左膝盡量伸展到最遠的距離。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "將裝置放在你的右膝上。\n\n點一下螢幕並將右膝盡量伸展到最遠的距離。\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "完成後，請將你的左膝還原至開始時的位置。\n\n然後點一下任何位置。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "完成後，請將你的右膝還原至開始時的位置。\n\n然後點一下任何位置。";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩動作範圍";
@@ -438,7 +443,7 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "當準備好，點一下螢幕即可開始，舉起你的左臂，盡量向上方伸展。完成後，將左臂還原至開始時的位置，並且再點一下。";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "當準備好，點一下螢幕即可開始，舉起你的右臂，盡量向上方伸展。完成後，將右臂還原至開始時的位置，並且再點一下。";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "將裝置放在你的左肩上。點一下螢幕，舉起你的左臂，盡量向前方伸展。";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "將裝置放在你的右肩上。點一下螢幕，舉起你的右臂，盡量向前方伸展。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "將裝置放在你的左肩上。點一下螢幕，舉起你的右臂，盡量向前方伸展。";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "完成後，請將你的左臂還原至開始時的位置。然後點一下任何位置。";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "完成後，請將你的右臂還原至開始時的位置。然後點一下任何位置。";
 
@@ -493,9 +498,9 @@
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "顫抖測試活動";
 "TREMOR_TEST_INTRO_1_DETAIL" = "此測試活動可測量你雙手不同位置的顫抖情況。請找一個地方，讓你可以在此測試活動期間舒適坐下。";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "請用較受影響的手拿着電話，如下圖所示。";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "請用右手拿着電話，如下圖所示。";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "請用左手拿着電話，如下圖所示。";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "請用較受影響的手拿着電話，如上圖所示。";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "請用右手拿着電話，如上圖所示。";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "請用左手拿着電話，如上圖所示。";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "你將需要坐着，並拿着電話進行%@。";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "一個任務";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "兩個任務";
@@ -551,8 +556,8 @@
 "SPEECH_RECOGNITION_INTRO_TEXT" = "此測試活動會以裝置底部的咪高風錄下你的語音，並將語音翻譯為文字。";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "開始說話前，請按下按鈕來開始錄音。";
-"SPEECH_RECOGNITION_START_RECORD_LABEL" = "開始錄音";
-"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "停止錄音";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "開始錄製";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "停止錄製";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "編輯文字記錄";
 "SPEECH_RECOGNITION_QUESTION_TEXT" = "編輯文字記錄以改正任何對語音的誤譯。";
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "你的文字記錄會在此顯示。";
@@ -566,7 +571,7 @@
 "SPEECH_IN_NOISE_INTRO_TEXT" = "此測試活動能評估在噪音環境中的語音清晰度。";
 "SPEECH_IN_NOISE_DETAIL_TEXT" = "作為此測試的一部份，你會：\n\n聆聽一句句子。\n\n清晰地重複你聽到的內容，或跳過此程序，以鍵盤輸入你聽到的內容。\n\n如你重複你聽到的內容，你可以選擇修改由語音辨識引擎產生的文字記錄。";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "音量校正";
-"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "按一下「播放音訊」，將音量調整至一個舒適的水平，然後按一下「停止音訊」以繼續。";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "按一下「播放音訊」，將音量調整至一個舒適的水平，然後按一下「停止音訊」來繼續。";
 "SPEECH_IN_NOISE_STEP_TITLE" = "聆聽";
 "SPEECH_IN_NOISE_STEP_TEXT" = "只會播放一次以隨機訊噪比（SNR）混合背景噪音的句子。";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "朗讀";
@@ -578,25 +583,25 @@
 "ERROR_DATALOGGER_SET_ATTRIBUTE" = "設定屬性錯誤";
 "ERROR_DATALOGGER_COULD_NOT_MAORK" = "檔案未標示為已刪除（未標示為已上載）";
 "ERROR_DATALOGGER_MULTIPLE" = "移除記錄檔時發生多個錯誤";
-"ERROR_RECORDER_NO_DATA" = "找不到已收集的數據。";
+"ERROR_RECORDER_NO_DATA" = "找不到已收集的資料。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定輸出目錄";
 
 /* Environment SPL*/
 "ENVIRONMENTSPL_TITLE" = "聲壓計";
 "ENVIRONMENTSPL_INTRO_TEXT" = "此測試活動可測量環境聲壓水平。如果噪音水平太高，你將無法進行。請移至一個比較安靜的位置來完成此測試活動，或在稍後重新進行。";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "正在計算";
-"ENVIRONMENTSPL_THRESHOLD" = "臨界值：%@dBA";
-"ENVIRONMENTSPL_OK" = "背景噪音正常";
-"ENVIRONMENTSPL_NOISE" = "太多背景噪音";
+"ENVIRONMENTSPL_CALCULATING" = "測量中⋯";
+"ENVIRONMENTSPL_THRESHOLD" = "臨界值：%@ dBA";
+"ENVIRONMENTSPL_OK" = "良好";
+"ENVIRONMENTSPL_NOISE" = "太大聲";
 "ENVIRONMENTSPL_TITLE_2" = "找一個安靜的地方";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "為確保準確性，此測試應該在一個安靜的環境中進行。";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "為了確保結果準確，此任務應該在安靜的地方完成。當背景噪音測量讀取完成時，你便可以繼續。";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "開始任務";
 
 /* Charts */
-"CHART_NO_DATA_TEXT" = "沒有數據";
+"CHART_NO_DATA_TEXT" = "沒有資料";
 
 /* Slider */
 "SLIDER_MOVE_SLIDER_FOR_VALUE" = "移動滑桿以輸入數值";
@@ -653,7 +658,7 @@
 
 "AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "關閉鍵盤";
 
-"AX_GRAPH_RANGE_FORMAT_%@_%@" = "範圍介乎%@至%@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "範圍介乎 %@ 至 %@";
 "AX_GRAPH_STACK_PREFIX" = "圓盤柱的組成方式：";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
 "AX_GRAPH_POINT_%@" = "點數：%@";
@@ -664,7 +669,7 @@
 "AX_AUDIO_BAR_GRAPH" = "音量棒圖表";
 
 "AX_AMSLER_GRID_LABEL" = "阿姆斯勒⽅格";
-"AX_AMSLER_GRID_HINT" = "用你的手指或觸控筆直接標記該方格，或在方格外向左掃來完成。";
+"AX_AMSLER_GRID_HINT" = "用你的手指或觸控筆直接標記該方格，或點一下「下一步」按鈕來完成。";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "可輕點的按鈕";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "點一下表示左耳";
@@ -687,3 +692,103 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "無法解碼restoreData以進行初始化";
+"6MWT_HIGH_SCORE" = "10：非常疲勞";
+"6MWT_INSTRUCTIONS_1" = "找一條至少30米長的直路。";
+"6MWT_INSTRUCTIONS_2" = "請確定在需要時你可以在步行徑上停止和坐下。";
+"6MWT_INSTRUCTIONS_3" = "將電話音量調高至少50%。";
+"6MWT_INSTRUCTIONS_4" = "透過詢問Siri，或透過啟動「體能訓練」App，然後點一下「户外步行」（或「室內步行」）來在Apple Watch上開始「户外步行」（或「室內步行」）體能訓練。";
+"6MWT_INSTRUCTIONS_TITLE" = "入門小貼士";
+"6MWT_INTRO" = "此測試的目標是在6分鐘內以舒服的配速盡可能步行最遠的距離。";
+"6MWT_INTRO_DETAILS" = "詳細資料";
+"6MWT_INTRO_DETAIL_CLOTHING" = "穿上舒適的衣服和合腳的鞋子。如你平常使用助行工具，你可以在完成此測試的過程中使用。";
+"6MWT_INTRO_DETAIL_LOCATION" = "如你無法在户外步行，請考慮在本地購物中心完成此測試。";
+"6MWT_INTRO_DETAIL_TIME" = "此測試需要約6分鐘時間完成。";
+"6MWT_INTRO_DETAIL_WATCH" = "你需要Apple Watch才能完成此測試。";
+"6MWT_LOW_SCORE" = "1：完全不疲勞";
+"6MWT_QUESTIONS_BREATH" = "氣促";
+"6MWT_QUESTIONS_DETAIL" = "恭喜你完成6分鐘步行測試！請就以下各方面評價你的感受。";
+"6MWT_QUESTIONS_FATIGUE" = "疲勞";
+"6MWT_QUESTIONS_TITLE" = "完成得很好";
+"6MWT_TASK_TITLE" = "6分鐘步行測試";
+"6MWT_TEST_IN_PROGRESS" = "正在進行測試";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "6分鐘內，在直路上盡可能步行最遠的距離。如你需要休息，請停止並坐下。";
+"AX_BUTTON" = "按鈕";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "編輯按鈕";
+"AX_PAGE_NUMBER_FORMAT" = "頁面%1$ld/%2$ld";
+"AX_SES_BOTTOM" = "底部";
+"AX_SES_PERCENT" = "百分比";
+"AX_SES_TOP" = "頂部";
+"BUTTON_PRACTICE_AGAIN" = "重新練習";
+"BUTTON_PRACTICE_TEST" = "練習測試";
+"BUTTON_START_TEST" = "開始測試";
+"CONSENT_NAME_SECTION_TITLE" = "姓名";
+"FAMILY_HISTORY_ADD" = "加入%@";
+"FAMILY_HISTORY_CANCEL" = "取消";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "任務完成";
+"FAMILY_HISTORY_CONDITIONS" = "健康狀況";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "他們是否曾經被診斷患有以下任何疾病或健康狀況？";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "盡你所能回答這些問題";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "確認任何已被診斷的疾病或健康狀況。";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "健康狀況";
+"FAMILY_HISTORY_DELETE_ENTRY" = "刪除項目";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "確定要從你的「家庭健康史」刪除此項目嗎？";
+"FAMILY_HISTORY_EDIT_ENTRY" = "編輯項目";
+"FAMILY_HISTORY_I_DONT_KNOW" = "我不知道";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "以上皆非";
+"FAMILY_HISTORY_NONE_SELECTED" = "沒有選取任何項目";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "我選擇不回答";
+"FITNESS_RESUME_TEST" = "繼續健身記錄";
+"FITNESS_STOP_TEST_CONFIRMATION" = "你確定要提早結束此健身記錄嗎？";
+"FITNESS_STOP_TEST_DETAIL" = "系統會儲存你的進度且此測試會標示為已完成。";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "刪除並再試";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "影片選項";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "檢視影片";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "開始錄製";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "停止錄製";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "提交影片";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "你的左右手都會被測試。\n你必須盡快拿起釘子放入洞中，並在完成%@次後，再拿出來%@次。";
+"MAX_WORD_COUNT_ERROR" = "你已達到字元上限";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "Face ID錯誤";
+"PASSCODE_FACE_ID_MESSAGE" = "請使用Face ID認證";
+"PLAY" = "播放";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "點一下並按住按鈕，然後是藍色圓圈";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "保留";
+"RECORD" = "錄音";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "研究正要求取用健康資料。";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "「健康」資料";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "研究正要求取用你裝置的位置資料。";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "位置資料";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "研究正要求取用你裝置的動作資料。";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "裝置動作";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "此研究正要求向你發送通知。";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "通知";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "已檢視";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "檢視";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "錯誤";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "不支援";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "研究正要求取用你裝置的感應器資料。";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "感應器資料";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "改用鍵盤";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "無法錄音。請點一下再試。";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "你的錄音中未偵測到語音。請點一下再試。";
+"STOP" = "停止";
+"STROOP_COLOR_ORANGE" = "橙色";
+"TC_COMPLETION_DETAIL" = "恭喜你完成Tecumseh Cube測試！";
+"TC_COMPLETION_TITLE" = "完成得很好";
+"TC_INSTRUCTIONS_1" = "找一處距離地面約20厘米（8吋）的梯級。";
+"TC_INSTRUCTIONS_2" = "將iPhone音量調高至少50%。";
+"TC_INSTRUCTIONS_3" = "透過詢問Siri，或透過啟動「體能訓練」App，點一下「加入體能訓練」，然後選擇「樓梯」來在Apple Watch上開始「樓梯」體能訓練。";
+"TC_INSTRUCTIONS_TITLE" = "入門小貼士";
+"TC_INTRO" = "此測試的目標是在3分鐘內跟隨節奏上落梯級時提高你的心率。";
+"TC_INTRO_DETAILS" = "詳細資料";
+"TC_INTRO_DETAIL_DANGER" = "如你有胸痛或不適，請立即停止此測試。";
+"TC_INTRO_DETAIL_TIME" = "此測試需要約6分鐘時間完成。";
+"TC_INTRO_DETAIL_WATCH" = "你需要Apple Watch才能完成此測試。";
+"TC_REST_IN_PROGRESS" = "休息";
+"TC_REST_IN_PROGRESS_DETAIL" = "坐下並休息3分鐘，同時Apple Watch記錄你的靜止心率。";
+"TC_TASK_TITLE" = "Tecumseh Cube測試";
+"TC_TEST_IN_PROGRESS" = "正在進行測試";
+"TC_TEST_IN_PROGRESS_DETAIL" = "使用樓梯，跟隨節拍上落梯級";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "正在進行測試";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "正在進行測試 \U2022 %@";

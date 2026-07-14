@@ -188,6 +188,12 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException
+                                   reason:@"Use subclass designated initializer"
+                                 userInfo:nil];
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency {
     return [self initWithIdentifier:identifier
                           frequency:frequency
@@ -241,16 +247,19 @@
     return YES;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:[self.identifier copy]
+                                                                   frequency:_frequency
+                                                             outputDirectory:[self.outputDirectory copy]
+                                                    rollingFileSizeThreshold:self.rollingFileSizeThreshold];
+}
+
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.frequency == castObject.frequency));
-}
-
-- (ORKPermissionMask)requestedPermissionMask {
-    return ORKPermissionCoreMotionAccelerometer;
 }
 
 @end

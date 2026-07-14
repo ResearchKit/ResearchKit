@@ -34,6 +34,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKAnswerTextView;
+@class ORKColorChoice;
 @class ORKTextChoiceOther;
 
 @interface ORKChoiceViewCell : UITableViewCell
@@ -50,18 +51,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL isExclusive;
 
-@property (nonatomic) BOOL shouldIgnoreDarkMode;
+@property (nonatomic) BOOL shouldIgnoreCornerRadius;
 
 @property (nonatomic) ORKCardViewStyle cardViewStyle;
 
 
 - (void)setTextChoiceImage:(UIImage *)image;
-- (void)setSwatchColor:(UIColor *)swatchColor;
 - (void)setPrimaryText:(NSString *)primaryText;
+- (void)setPrimaryTextVoiceOverReadableText:(nonnull NSString *)voiceOverReadableText;
 - (void)setPrimaryAttributedText: (NSAttributedString *)primaryAttributedText;
 - (void)setDetailText:(NSString *)detailText;
 - (void)setDetailAttributedText:(NSAttributedString *)detailAttributedText;
 - (void)setCellSelected:(BOOL)cellSelected highlight:(BOOL)highlight;
+- (void)updateHeightIfNeeded;
 
 @end
 
@@ -76,6 +78,15 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface ORKChoiceViewPlatterCell : ORKChoiceViewCell
+
+@end
+
+@interface ORKColorChoiceCell: ORKChoiceViewCell
+
+- (void)configureWithColorChoice:(ORKColorChoice *)colorChoice
+                      isLastItem:(BOOL)isLastItem;
+
+- (void)setSwatchColor:(UIColor *)swatchColor;
 
 @end
 

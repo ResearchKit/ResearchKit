@@ -39,6 +39,8 @@
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#import "ORKTitleLabel.h"
+#import "ORKBodyLabel.h"
 
 
 @implementation ORKImageCaptureView {
@@ -47,11 +49,16 @@
     ORKNavigationContainerView *_navigationFooterView;
     UIBarButtonItem *_captureButtonItem;
     UIBarButtonItem *_recaptureButtonItem;
+    UIVisualEffectView *_instructionBlurView;
+    UIVisualEffectView *_footerBlurView;
+    ORKTitleLabel *_titleLabel;
+    ORKBodyLabel *_detailTextLabel;
     NSMutableArray *_variableConstraints;
     
     BOOL _capturePressesIgnored;
     BOOL _retakePressesIgnored;
     BOOL _showSkipButtonItem;
+    BOOL _hasInstructionContent;
 }
 
 - (instancetype)initWithFrame:(CGRect)aRect {
@@ -72,9 +79,53 @@
         _navigationFooterView.topMargin = 5;
         _navigationFooterView.bottomMargin = 15;
         _navigationFooterView.optional = YES;
-        _navigationFooterView.backgroundColor = ORKColor(ORKNavigationContainerColorKey);
+
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
+        _footerBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _footerBlurView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_navigationFooterView insertSubview:_footerBlurView atIndex:0];
+        [NSLayoutConstraint activateConstraints:@[
+            [_footerBlurView.topAnchor constraintEqualToAnchor:_navigationFooterView.topAnchor],
+            [_footerBlurView.bottomAnchor constraintEqualToAnchor:_navigationFooterView.bottomAnchor],
+            [_footerBlurView.leadingAnchor constraintEqualToAnchor:_navigationFooterView.leadingAnchor],
+            [_footerBlurView.trailingAnchor constraintEqualToAnchor:_navigationFooterView.trailingAnchor],
+        ]];
+        _navigationFooterView.backgroundColor = [UIColor clearColor];
         [self addSubview:_navigationFooterView];
-        
+
+        // Instruction panel - extends to bottom of screen behind footer for seamless blur
+        _instructionBlurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial]];
+        _instructionBlurView.translatesAutoresizingMaskIntoConstraints = NO;
+        _instructionBlurView.hidden = YES;
+        [self insertSubview:_instructionBlurView belowSubview:_navigationFooterView];
+
+        CGFloat margin = 20.0;
+
+        _titleLabel = [ORKTitleLabel new];
+        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _titleLabel.numberOfLines = 0;
+        [_titleLabel setTextColor:[UIColor labelColor]];
+        [self addSubview:_titleLabel];
+
+        _detailTextLabel = [ORKBodyLabel new];
+        _detailTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _detailTextLabel.textAlignment = NSTextAlignmentLeft;
+        _detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _detailTextLabel.numberOfLines = 0;
+        [_detailTextLabel setTextColor:[UIColor secondaryLabelColor]];
+        [self addSubview:_detailTextLabel];
+
+        [NSLayoutConstraint activateConstraints:@[
+            [_detailTextLabel.bottomAnchor constraintEqualToAnchor:_navigationFooterView.topAnchor constant:-12.0],
+            [_detailTextLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:margin],
+            [_detailTextLabel.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-margin],
+            [_titleLabel.bottomAnchor constraintEqualToAnchor:_detailTextLabel.topAnchor constant:-8.0],
+            [_titleLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:margin],
+            [_titleLabel.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-margin],
+        ]];
+
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _navigationFooterView, _headerView);
         ORKEnableAutoLayoutForViews(dictionary.allValues);
         
@@ -97,33 +148,6 @@
     });
 }
 
-- (void)orientationDidChange {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
-        switch (self.window.windowScene.interfaceOrientation) {
-            case UIInterfaceOrientationLandscapeRight:
-                orientation = AVCaptureVideoOrientationLandscapeRight;
-                break;
-            case UIInterfaceOrientationLandscapeLeft:
-                orientation = AVCaptureVideoOrientationLandscapeLeft;
-                break;
-            case UIInterfaceOrientationPortraitUpsideDown:
-                orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-                break;
-            case UIInterfaceOrientationPortrait:
-                orientation = AVCaptureVideoOrientationPortrait;
-                break;
-            case UIInterfaceOrientationUnknown:
-                // Do nothing in these cases, since we don't need to change display orientation.
-                return;
-        }
-        
-        [_previewView setVideoOrientation:orientation];
-        [self.delegate videoOrientationDidChange:orientation];
-        [self setNeedsUpdateConstraints];
-    });
-}
-
 - (void)setImageCaptureStep:(ORKImageCaptureStep *)imageCaptureStep {
     _imageCaptureStep = imageCaptureStep;
     
@@ -133,7 +157,11 @@
     _captureButtonItem.accessibilityHint = imageCaptureStep.accessibilityHint;
     
     _showSkipButtonItem = imageCaptureStep.optional;
-    
+
+    _hasInstructionContent = (imageCaptureStep.title.length > 0 || imageCaptureStep.text.length > 0);
+    _titleLabel.text = imageCaptureStep.title;
+    _detailTextLabel.text = imageCaptureStep.text;
+
     [self updateAppearance];
 }
 
@@ -143,6 +171,11 @@
     _previewView.alpha = (self.error) ? 0 : 1;
     
     if (self.error) {
+        _instructionBlurView.hidden = YES;
+        _titleLabel.hidden = YES;
+        _detailTextLabel.hidden = YES;
+        _footerBlurView.hidden = NO;
+
         // Display the error instruction.
         _headerView.instructionLabel.text = [self.error.userInfo valueForKey:NSLocalizedDescriptionKey];
         
@@ -154,6 +187,11 @@
         _navigationFooterView.continueButtonItem = nil;
         _navigationFooterView.skipButtonItem = _skipButtonItem;
     } else if (self.capturedImage) {
+        _instructionBlurView.hidden = YES;
+        _titleLabel.hidden = YES;
+        _detailTextLabel.hidden = YES;
+        _footerBlurView.hidden = NO;
+
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
@@ -162,6 +200,11 @@
         _navigationFooterView.continueButtonItem = _continueButtonItem;
         _navigationFooterView.skipButtonItem = _recaptureButtonItem;
     } else {
+        _instructionBlurView.hidden = !_hasInstructionContent;
+        _titleLabel.hidden = !_hasInstructionContent;
+        _detailTextLabel.hidden = !_hasInstructionContent;
+        _footerBlurView.hidden = _hasInstructionContent;
+
         // Show the template image during capturing
         _previewView.templateImageHidden = NO;
         _previewView.accessibilityHint = _imageCaptureStep.accessibilityInstructions;
@@ -187,9 +230,6 @@
 }
 
 - (void)updateConstraints {
-    const CGFloat NavigationFooterViewTranslucentAlpha = 0.5;
-    const CGFloat NavigationFooterViewOpaqueAlpha = 0.0;
-
     if (_variableConstraints) {
         [NSLayoutConstraint deactivateConstraints:_variableConstraints];
         [_variableConstraints removeAllObjects];
@@ -207,12 +247,13 @@
                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                              metrics:nil
                                                views:views]];
-    
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
-                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                      metrics:nil
-                                                                                        views:views]];
-    
+
+    [_variableConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+
     [_variableConstraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-(>=0)-|"
                                              options:NSLayoutFormatDirectionLeadingToTrailing
@@ -223,30 +264,26 @@
                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                              metrics:nil
                                                views:views]];
-    
-    // Float the continue view over the previewView if in landscape to give more room for the preview
-    if (UIInterfaceOrientationIsLandscape(self.window.windowScene.interfaceOrientation)) {
-        [_variableConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
-                                                   views:views]];
-        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                                     attribute:NSLayoutAttributeBottom
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self
-                                                                     attribute:NSLayoutAttributeBottom
-                                                                    multiplier:1.0
-                                                                      constant:0.0]];
-        _navigationFooterView.backgroundColor = [_navigationFooterView.backgroundColor colorWithAlphaComponent:NavigationFooterViewTranslucentAlpha];
-    } else {
-        [_variableConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_navigationFooterView]|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:nil
-                                                   views:views]];
-        _navigationFooterView.backgroundColor = [_navigationFooterView.backgroundColor colorWithAlphaComponent:NavigationFooterViewOpaqueAlpha];
-    }
-    
+
+    [_variableConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [_variableConstraints addObject:
+     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                  attribute:NSLayoutAttributeBottom
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self
+                                  attribute:NSLayoutAttributeBottom
+                                 multiplier:1.0
+                                   constant:0.0]];
+
+    [_variableConstraints addObject:[_instructionBlurView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
+    [_variableConstraints addObject:[_instructionBlurView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
+    [_variableConstraints addObject:[_instructionBlurView.topAnchor constraintEqualToAnchor:_titleLabel.topAnchor constant:-20.0]];
+    [_variableConstraints addObject:[_instructionBlurView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]];
+
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
@@ -257,8 +294,6 @@
 
 - (void)setSession:(AVCaptureSession *)session {
     _previewView.session = session;
-    // Set up the proper videoOrientation from the start
-    [self orientationDidChange];
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {

@@ -68,6 +68,27 @@
     }];
 }
 
+- (void)testMaxRandomPreStimulusDelayBelowOneIsInvalid {
+    ORKdBHLToneAudiometryStep *step = [[ORKdBHLToneAudiometryStep alloc] initWithIdentifier:@"test"];
+    step.frequencyList = @[@1000];
+    step.maxRandomPreStimulusDelay = ORKdBHLToneAudiometryStep.minimumMaxRandomPreStimulusDelay - 1.0;
+
+    // Values < 1.0 make the expression arc4random_uniform(maxRandomPreStimulusDelay - 1) receive
+    // a negative double; the implicit cast to uint32_t wraps to UINT32_MAX (~4.3e9), hanging the
+    // step indefinitely before the first stimulus.
+    XCTAssertThrows([step validateParameters]);
+}
+
+- (void)testMaxRandomPreStimulusDelayAboveUINT32MAXPlusOneIsInvalid {
+    ORKdBHLToneAudiometryStep *step = [[ORKdBHLToneAudiometryStep alloc] initWithIdentifier:@"test"];
+    step.frequencyList = @[@1000];
+    step.maxRandomPreStimulusDelay = ORKdBHLToneAudiometryStep.maximumMaxRandomPreStimulusDelay + 1.0;
+
+    // Values > UINT32_MAX + 1 cause maxRandomPreStimulusDelay - 1 to exceed UINT32_MAX, wrapping
+    // the uint32_t cast in arc4random_uniform to an unpredictable value.
+    XCTAssertThrows([step validateParameters]);
+}
+
 - (ORKdBHLToneAudiometryStep *)stepForCurrentKeys {
     ORKdBHLToneAudiometryStep *step = [[ORKdBHLToneAudiometryStep alloc] initWithIdentifier:@"ORKAudiometryTests"];
     step.frequencyList = [self.keys allKeys];

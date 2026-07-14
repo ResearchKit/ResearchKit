@@ -70,6 +70,10 @@ static const CGFloat CircleLineWidth = 3.0;
             [self.safeAreaLayoutGuide.widthAnchor constraintEqualToConstant:VIEW_DIMENSION],
             [self.safeAreaLayoutGuide.heightAnchor constraintEqualToConstant:VIEW_DIMENSION]
         ]];
+
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKRingView *traitChangeView, UITraitCollection *previousTraitCollection) {
+            [traitChangeView resetLayerColors];
+        }];
     }
     
     return self;
@@ -192,12 +196,6 @@ static const CGFloat CircleLineWidth = 3.0;
     }
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self resetLayerColors];
-}
-
 - (UIColor *)fetchSystemGrayColor {
     return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traits) {
         return traits.userInterfaceStyle == UIUserInterfaceStyleDark ? UIColor.systemGray5Color : UIColor.systemGray6Color;
@@ -213,22 +211,6 @@ static const CGFloat CircleLineWidth = 3.0;
 - (void)fillRingWithDuration:(NSTimeInterval)duration {
     _animationDuration = duration;
     [self setValue:1.0];
-}
-
-- (void)ringAnimation {
-    [self.layer insertSublayer:_filledCircleLayer above:_backgroundLayer];
-    _backgroundLayer.fillColor = _color.CGColor;
-
-    UIBezierPath *endShape = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(55, 55, 0, 0)
-                                                        cornerRadius:VIEW_DIMENSION / 2.0];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"path"];
-    animation.toValue = (__bridge id _Nullable)(endShape.CGPath);
-    animation.duration = 0.5;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    animation.fillMode = kCAFillModeBoth;
-    animation.removedOnCompletion = NO;
-
-    [_filledCircleLayer addAnimation:animation forKey:animation.keyPath];
 }
 
 @end

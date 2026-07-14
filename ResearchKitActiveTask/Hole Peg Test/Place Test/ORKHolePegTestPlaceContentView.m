@@ -40,7 +40,6 @@
 
 
 static const CGFloat ORKOrientationThreshold = 12.0f;
-static const CGFloat ORKHolePegViewDiameter = 88.0f;
 #define degreesToRadians(degrees) ((degrees) / 180.0 * M_PI)
 
 
@@ -88,18 +87,19 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
         [self.progressView setAlpha:0];
         [self addSubview:self.progressView];
         
-        self.holeView = [[ORKHolePegTestPlaceHoleView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegViewDiameter, ORKHolePegViewDiameter)];
+        self.holeView = [[ORKHolePegTestPlaceHoleView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegTestViewDiameter, ORKHolePegTestViewDiameter)];
         self.holeView.rotated = self.isRotated;
         [self.holeView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.holeView];
         
-        self.pegView = [[ORKHolePegTestPlacePegView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegViewDiameter, ORKHolePegViewDiameter)];
+        self.pegView = [[ORKHolePegTestPlacePegView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegTestViewDiameter, ORKHolePegTestViewDiameter)];
         self.pegView.rotated = self.isRotated;
         [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.pegView];
-        
+
         self.directionView = [[ORKDirectionView alloc] initWithOrientation:(self.movingDirection == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft];
         [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.directionView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self addSubview:self.directionView];
         
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -148,51 +148,44 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     }
 
     NSMutableArray *constraintsArray = [NSMutableArray array];
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _pegView, _holeView, _directionView);
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKBodySagittalLeft) ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
-                                             options:NSLayoutFormatAlignAllCenterY
-                                             metrics:nil views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView]"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
 
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.pegView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1
-                                                              constant:0]];
-    
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.directionView
-                                                             attribute:NSLayoutAttributeCenterX
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1
-                                                              constant:0]];
-    
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.directionView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1
-                                                              constant:0]];
-    
+    // Progress view - pinned to top, leading and trailing edges
+    [constraintsArray addObject:[self.progressView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:8]];
+    [constraintsArray addObject:[self.progressView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-8]];
+    [constraintsArray addObject:[self.progressView.topAnchor constraintEqualToAnchor:self.topAnchor]];
+
+    // Position pegView and holeView on opposite sides based on moving direction
+    if (self.movingDirection == ORKBodySagittalLeft) {
+        // Peg on left, hole on right
+        [constraintsArray addObject:[self.pegView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
+        [constraintsArray addObject:[self.holeView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
+    } else {
+        // Hole on left, peg on right
+        [constraintsArray addObject:[self.holeView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
+        [constraintsArray addObject:[self.pegView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
+    }
+
+    // Peg view size and vertical centering
+    [constraintsArray addObject:[self.pegView.widthAnchor constraintEqualToConstant:ORKHolePegTestViewDiameter]];
+    [constraintsArray addObject:[self.pegView.heightAnchor constraintEqualToConstant:ORKHolePegTestViewDiameter]];
+    [constraintsArray addObject:[self.pegView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]];
+
+    // Hole view size and vertical centering
+    [constraintsArray addObject:[self.holeView.widthAnchor constraintEqualToConstant:ORKHolePegTestViewDiameter]];
+    [constraintsArray addObject:[self.holeView.heightAnchor constraintEqualToConstant:ORKHolePegTestViewDiameter]];
+    [constraintsArray addObject:[self.holeView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]];
+
+    // Direction view - positioned adjacent to the peg, vertically centered
+    if (self.movingDirection == ORKBodySagittalLeft) {
+        // Peg on left, arrows to the right of peg
+        [constraintsArray addObject:[self.directionView.leadingAnchor constraintEqualToAnchor:self.pegView.trailingAnchor constant:8]];
+    } else {
+        // Peg on right, arrows to the left of peg
+        [constraintsArray addObject:[self.directionView.trailingAnchor constraintEqualToAnchor:self.pegView.leadingAnchor constant:-8]];
+    }
+    [constraintsArray addObject:[self.directionView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]];
+
     self.constraints = constraintsArray;
-    [self addConstraints:self.constraints];
-    
     [NSLayoutConstraint activateConstraints:self.constraints];
     [super updateConstraints];
 }
@@ -297,7 +290,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+    return [otherGestureRecognizer.view isDescendantOfView:self];
 }
 
 #pragma mark - peg view delegate

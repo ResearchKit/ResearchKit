@@ -29,7 +29,7 @@
  */
 
 /* Informed consent process. */
-"CONSENT_NAME_TITLE" = "同意书";
+"CONSENT_NAME_TITLE" = "同意";
 "CONSENT_NAME_GIVEN" = "名";
 "CONSENT_NAME_FAMILY" = "姓";
 "CONSENT_NAME_PLACEHOLDER" = "必填";
@@ -39,7 +39,7 @@
 "CONSENT_SIGNATURE_TITLE" = "签名";
 "CONSENT_SIGNATURE_INSTRUCTION" = "请用手指在下方的方框中签名。";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "在此签名";
-"CONSENT_PAGE_NUMBER_FORMAT" = "第%1$ld/%2$ld页";
+"CONSENT_PAGE_NUMBER_FORMAT" = "第%1$ld页（共%2$ld页）";
 
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "欢迎使用";
@@ -50,24 +50,24 @@
 "CONSENT_SECTION_STUDY_TASKS" = "研究任务";
 "CONSENT_SECTION_TIME_COMMITMENT" = "时间保证";
 "CONSENT_SECTION_WITHDRAWING" = "退出研究";
-"CONSENT_LEARN_MORE_TITLE" = "了解更多";
+"CONSENT_LEARN_MORE_TITLE" = "进一步了解";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "了解有关数据收集方式的更多信息";
-"LEARN_MORE_DATA_USE" = "了解有关数据使用方式的更多信息";
-"LEARN_MORE_PRIVACY" = "了解有关隐私和身份保护方式的更多信息";
-"LEARN_MORE_WELCOME" = "首先了解有关研究的更多信息";
-"LEARN_MORE_STUDY_SURVEY" = "了解有关研究调查的更多信息";
-"LEARN_MORE_TIME_COMMITMENT" = "了解有关研究所占用时间的更多信息";
-"LEARN_MORE_TASKS" = "了解有关所涉及任务的更多信息";
-"LEARN_MORE_WITHDRAWING" = "了解有关退出研究的更多信息";
+"LEARN_MORE_DATA_GATHERING" = "进一步了解数据收集方式。";
+"LEARN_MORE_DATA_USE" = "进一步了解数据使用方式。";
+"LEARN_MORE_PRIVACY" = "进一步了解隐私和身份保护方式。";
+"LEARN_MORE_WELCOME" = "先进一步了解研究。";
+"LEARN_MORE_STUDY_SURVEY" = "进一步了解研究调查。";
+"LEARN_MORE_TIME_COMMITMENT" = "进一步了解研究所占用的时间。";
+"LEARN_MORE_TASKS" = "进一步了解所涉及的任务。";
+"LEARN_MORE_WITHDRAWING" = "进一步了解退出研究。";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "共享选项";
-"CONSENT_SHARE_WIDELY_%@" = "与%@及全世界符合资格的研究者共享我的数据";
-"CONSENT_SHARE_ONLY_%@" = "仅与%@共享我的数据";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@将从您参与的此研究中接收研究数据。\n\n更广泛地共享经加密的研究数据（不包含诸如姓名的信息）可能有助于本次以及未来的研究。";
-"LEARN_MORE_CONSENT_SHARING" = "了解有关数据共享的更多信息";
+"CONSENT_SHARE_WIDELY_%@" = "与“%@”及全世界符合资格的研究者共享我的数据";
+"CONSENT_SHARE_ONLY_%@" = "仅与“%@”共享我的数据";
+"CONSENT_SHARING_DESCRIPTION_%@" = "“%@”将从你参与的此研究中接收研究数据。\n\n更广泛地共享经加密的研究数据（不包含诸如姓名的信息）可能有助于本次以及未来的研究。";
+"LEARN_MORE_CONSENT_SHARING" = "进一步了解数据共享。";
 
 /* Lines beneath typewritten signatures on documents.*/
 "CONSENT_DOC_LINE_PRINTED_NAME" = "正楷签名";
@@ -96,13 +96,11 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "输入地址";
 "LOCATION_ERROR_TITLE" = "无法找到指定地址";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "未能解析您的当前位置。请键入地址或转移到GPS信号较好的位置（若条件允许）。";
-"LOCATION_ERROR_MESSAGE_DENIED" = "访问位置服务已被拒绝。请通过“设置”来授权此App使用位置服务。";
 "LOCATION_ERROR_GEOCODE" = "未能找到所输入地址的相关结果。请确定该地址是否有效。";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "您未连接到互联网，或已超出地址查询请求的次数上限。如果未连接到互联网，请打开您的Wi-Fi以回答此问题，跳过按钮可用时可跳过此问题，或在连接到互联网后继续参与该调查。如果超出请求次数上限，请等待几分钟后再次尝试。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "你未接入互联网，或已超出地址查询请求的次数上限。如果未接入互联网，请打开Wi-Fi回答此问题，跳过按钮可用时可跳过此问题，或在接入互联网后继续参与该调查。如果超出请求次数上限，请等待几分钟后重试。";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文本内容超过最大长度：%@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文本上限为%@个字符";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "相机在拆分屏幕中不可用。";
@@ -114,8 +112,8 @@
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "输入密码";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "确认";
 "CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "再次输入密码";
-"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密码不匹配。";
-"ADDITIONAL_INFO_SECTION_TITLE" = "其他信息";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密码不相符。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "附加信息";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
 "GENDER_FORM_ITEM_TITLE" = "性别";
@@ -127,30 +125,30 @@
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "验证";
-"VERIFICATION_STEP_TITLE" = "验证您的电子邮件";
-"RESEND_EMAIL_LABEL_MESSAGE" = "如果您未收到验证电子邮件并希望再收一次，请轻点下方的链接。";
+"VERIFICATION_STEP_TITLE" = "验证你的电子邮件";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果你未收到验证电子邮件并希望再收一次，请轻点下方的链接。";
 "RESEND_EMAIL_BUTTON_TITLE" = "重新发送验证电子邮件";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "登录";
-"FORGOT_PASSWORD_BUTTON_TITLE" = "忘记了密码？";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "忘记密码？";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "输入口令";
-"PASSCODE_CONFIRM_MESSAGE" = "确认口令";
-"PASSCODE_SAVED_MESSAGE" = "口令已存储";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "口令已认证";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "输入旧口令";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "输入新口令";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "确认新口令";
-"PASSCODE_INVALID_ALERT_TITLE" = "口令不正确";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "口令不匹配。请再试一次。";
-"PASSCODE_TOUCH_ID_MESSAGE" = "请使用触控ID进行认证";
-"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "触控ID错误";
+"PASSCODE_PROMPT_MESSAGE" = "输入密码";
+"PASSCODE_CONFIRM_MESSAGE" = "确认密码";
+"PASSCODE_SAVED_MESSAGE" = "密码已保存";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "密码已认证";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "输入旧密码";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "输入新密码";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "确认新密码";
+"PASSCODE_INVALID_ALERT_TITLE" = "密码不正确";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "密码不匹配。请重试。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "请使用触控 ID进行鉴定";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "触控 ID错误";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "仅允许数字字符。";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "口令输入进度指示器";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密码输入进度指示器";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已输入%@/%@位";
-"PASSCODE_FORGOT_BUTTON_TITLE" = "忘记了密码？";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "忘记密码？";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "无法添加钥匙串项。";
@@ -176,6 +174,13 @@
 "FITZPATRICK_SKIN_TYPE_V" = "类型V";
 "FITZPATRICK_SKIN_TYPE_VI" = "类型VI";
 
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_I" = "类型1";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_II" = "类型2";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_III" = "类型3";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_IV" = "类型4";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_V" = "类型5";
+"VOICE_OVER_FITZPATRICK_SKIN_TYPE_VI" = "类型6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "女";
 "GENDER_MALE" = "男";
@@ -199,7 +204,7 @@
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "轻点来回答";
-"NULL_ANSWER" = "选择一个答案";
+"NULL_ANSWER" = "选择回答";
 "PLACEHOLDER_IMAGE_CHOICES" = "轻点来选择";
 "PLACEHOLDER_LONG_TEXT" = "轻点来书写";
 
@@ -212,25 +217,25 @@
 "BUTTON_APPLY" = "应用";
 "BUTTON_DISAGREE" = "不同意";
 "BUTTON_DONE" = "完成";
-"BUTTON_GET_STARTED" = "开始";
-"BUTTON_LEARN_MORE" = "了解更多";
+"BUTTON_GET_STARTED" = "开始使用";
+"BUTTON_LEARN_MORE" = "进一步了解";
 "BUTTON_NEXT" = "下一步";
 "BUTTON_SKIP" = "跳过";
 "BUTTON_SKIP_QUESTION" = "跳过此问题";
-"BUTTON_START_TIMER" = "启动定时器";
-"BUTTON_OPTION_SAVE" = "存储以稍后查看";
+"BUTTON_START_TIMER" = "开始计时";
+"BUTTON_OPTION_SAVE" = "保存以稍后阅读";
 "BUTTON_OPTION_DISCARD" = "放弃结果";
 "BUTTON_OPTION_STOP_TASK" = "结束任务";
-"BUTTON_SAVE" = "存储";
-"BUTTON_CLEAR_ANSWER" = "清除答案";
-"BUTTON_READ_ONLY_MODE" = "此答案无法修改。";
+"BUTTON_SAVE" = "保存";
+"BUTTON_CLEAR_ANSWER" = "清除回答";
+"BUTTON_READ_ONLY_MODE" = "此回答无法修改。";
 "BUTTON_COPYRIGHT" = "版权";
 "BUTTON_CLOSE" = "关闭";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "即将开始活动";
 "TASK_COMPLETE_TITLE" = "活动完成";
-"TASK_COMPLETE_TEXT" = "将对您的数据进行分析并在结果可用时通知您。";
+"TASK_COMPLETE_TEXT" = "将对你的数据进行分析并在结果可用时通知你。";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "还剩%@。";
 "TOUCH_ANYWHERE_LABEL" = "触碰任意位置以继续";
 
@@ -238,14 +243,20 @@
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "捕捉图像";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新捕捉图像";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "未找到相机。此步骤无法完成。";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "为了完成此步骤，请在“设置”中允许此App访问相机。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "为了完成此步骤，请在“设置”中允许本应用程序访问相机。";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "未指定捕捉图像的输出目录。";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "无法存储捕捉的图像。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "无法保存捕捉的图像。";
 
 /* Video capture step. */
 "CAPTURE_BUTTON_CAPTURE_VIDEO" = "开始录制";
 "CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "停止录制";
 "CAPTURE_BUTTON_RECAPTURE_VIDEO" = "重新采集视频";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE" = "需要摄像头权限";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_MIC" = "需要麦克风权限";
+"VIDEO_CAPTURE_ACCESS_DENIED_TITLE_CAMERA_AND_MIC" = "需要摄像头和麦克风权限";
+"VIDEO_CAPTURE_ACCESS_DENIED_MIC_TEXT" = "要完成此步骤，请在设置中允许此应用访问麦克风。";
+"VIDEO_CAPTURE_ACCESS_DENIED_CAMERA_AND_MIC_TEXT" = "要完成此步骤，请在设置中允许此应用访问摄像头和麦克风。";
+"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT" = "打开设置";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "健身";
@@ -253,12 +264,12 @@
 "FITNESS_HEARTRATE_TITLE" = "心率（次/分）";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "请静坐%@。";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "以最快速度步行%@。";
-"FITNESS_INTRO_TEXT_FORMAT" = "本活动监控您的心率并测量%1$@内的步行距离。";
+"FITNESS_INTRO_TEXT_FORMAT" = "本活动监控你的心率并测量%1$@内的步行距离。";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "请在室外以最快的速度步行%1$@。步行完成后，请静坐%2$@。若要开始，请轻点“开始”。";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "步态和平衡";
-"WALK_INTRO_TEXT" = "本活动测量您在步行和站立时的步态和平衡。请仅在步行安全区域（无外力辅助条件下）进行。";
+"WALK_INTRO_TEXT" = "本活动测量你在步行和站立时的步态和平衡。请仅在步行安全区域（无外力辅助条件下）进行。";
 "WALK_INTRO_2_TEXT_%ld" = "请在步行安全区域（无外力辅助条件下）直线行走大约%ld步。";
 "WALK_INTRO_2_DETAIL" = "请将设备放入口袋或背包中，然后跟随音频指示操作。";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "现在请站立%@。";
@@ -267,29 +278,29 @@
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "请直线步行最多%ld步。";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找到一处您可以沿直线安全往返的地方。在路尽头转弯，不要停下来，就好像绕着圆锥体转圈一样。\n\n接下来会要求您转一圈，然后站立不动，双手放在两侧，双脚张开，与肩同宽。";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找到一处你可以沿直线安全往返的地方。在路尽头转弯，不要停下来，就好像绕着圆锥体转圈一样。\n\n接下来会要求你转一圈，然后站立不动，双手放在两侧，双脚张开，与肩同宽。";
 "WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "准备就绪后，轻点“开始”。\n将设备放入口袋或背包中，然后跟随音频指示操作。";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "沿直线往返%@。尽可能跟平时一样走动。";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "走完一圈后站立不动，坚持%@。";
-"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "您已经完成了本活动。";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "你已经完成了本活动。";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "轻点速度";
 "TAPPING_TASK_TITLE_RIGHT" = "右手";
 "TAPPING_TASK_TITLE_LEFT" = "左手";
-"TAPPING_INTRO_TEXT" = "本活动测量您的轻点速度。";
+"TAPPING_INTRO_TEXT" = "本活动测量你的轻点速度。";
 "TAPPING_INTRO_TEXT_2_REST_PHONE" = "把设备放在平面上。";
-"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "用同一只手上的两根手指来轮流轻点屏幕上的按钮。";
-"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "用右手上的两根手指来轮流轻点屏幕上的按钮。";
-"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "用左手上的两根手指来轮流轻点屏幕上的按钮。";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "用同一只手上的两个手指来轮流轻点屏幕上的按钮。";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "用右手上的两个手指来轮流轻点屏幕上的按钮。";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "用左手上的两个手指来轮流轻点屏幕上的按钮。";
 "TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "现在用右手重复相同的测试。";
 "TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "现在用左手重复相同的测试。";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "用一根手指轻点，然后用另一根手指轻点。尽量保持均匀的轻点间隔。持续轻点%@。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "用一个手指轻点，然后用另一个手指轻点。尽量保持均匀的轻点间隔。持续轻点%@。";
 "TAPPING_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "TAPPING_CALL_TO_ACTION_NEXT" = "轻点“下一步”来开始。";
 "TAP_BUTTON_TITLE" = "轻点";
 "TOTAL_TAPS_LABEL" = "轻点总次数";
-"TAPPING_INSTRUCTION" = "用两根手指尽可能以均匀的速度轻点按钮。";
+"TAPPING_INSTRUCTION" = "用两个手指尽可能以均匀的速度轻点按钮。";
 "TAPPING_INSTRUCTION_RIGHT" = "使用右手轻点按钮。";
 "TAPPING_INSTRUCTION_LEFT" = "使用左手轻点按钮。";
 "TAPPING_SKIP_TITLE" = "跳过这只手";
@@ -297,8 +308,8 @@
 /* Amsler Grid Task.*/
 "AMSLER_GRID_TITLE" = "阿姆斯勒方格表";
 "AMSLER_GRID_INTRO_TEXT" = "本活动帮助检测用户视力方面的问题。";
-"AMSLER_GRID_INSTRUCTION_TEXT" = "在整个测试中，将设备置于靠近距您脸部12英寸（约30厘米）的位置，与眼睛同高。";
-"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "闭上您的%@并盯着正方形网格中间的圆点。\n\n用您的手指或触控笔标记出您所看到的任何变形，如模糊的线或波浪线。\n\n完成后，在网格外的任意位置向左轻扫。";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "在整个测试中，将设备置于靠近距你脸部12英寸（约30厘米）的位置，与眼睛同高。";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "闭上%@并盯着正方形网格中间的圆点。\n\n用手指或触控笔标记出你所看到的任何变形，如模糊的线或波浪线。\n\n完成后，轻点“下一步”按钮。";
 "AMSLER_GRID_LEFT_EYE" = "左眼";
 "AMSLER_GRID_RIGHT_EYE" = "右眼";
 
@@ -311,15 +322,15 @@
 "AUDIO_TOO_LOUD_LABEL" = "太大声";
 "AUDIO_GENERIC_ERROR_LABEL" = "无法录音";
 "AUDIO_LEVEL_CHECK_LABEL" = "请耐心等待，我们正在检查背景噪声级。";
-"AUDIO_TOO_LOUD_MESSAGE" = "环境噪声级太高，无法录制您的声音。请移至较为安静的地方，然后再试一次。";
+"AUDIO_TOO_LOUD_MESSAGE" = "环境噪声级太高，无法录制你的声音。请移至较为安静的地方，然后重试。";
 "AUDIO_TOO_LOUD_ACTION_NEXT" = "就绪后，轻点“下一步”。";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "纯音测听";
-"TONE_AUDIOMETRY_INTENDED_USE" = "本活动测量您是否可听见不同的声音。";
+"TONE_AUDIOMETRY_INTENDED_USE" = "本活动测量你是否可听见不同的声音。";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "开始之前，请先插入并戴上耳机。\n\n这种声音十分微弱，与普通的提醒铃声有所不同。起初声音十分柔和，之后音量会慢慢增大。请注意听，然后轻点左边或右边的按钮来表示哪只耳朵听到了声音。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
-"TONE_AUDIOMETRY_PREP_TEXT" = "现在您应该听到一个音调。使用设备一侧的控制来调整音量。\n\n请在准备好后，轻点任意按钮来开始测试。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "现在你应该听到一个音调。使用设备一侧的控制来调整音量。\n\n请在准备好后，轻点任意按钮来开始测试。";
 "TONE_AUDIOMETRY_INSTRUCTION" = "每次一听到声音，就轻点左边或右边的按钮来表示哪只耳朵听到了声音。";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "左耳";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
@@ -328,20 +339,20 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "纯音测听";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "听到音调时轻点。";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "听到音调时轻点按钮。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "音调与音量";
-"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "您将听到一连串的音调。";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "你将听到一连串的音调。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "听到一声音调后，轻点按钮。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "此测试的音量将设为50%。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "此测试需要大约10分钟。";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "打开“勿扰模式”以防止打断。";
-"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "音调将先在您的右耳播放。";
-"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "现在音调将在您的左耳播放。";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "音调将先在你的右耳播放。";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "现在音调将在你的左耳播放。";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "本活动识别个人的听力阈值水平，以dB HL为度量。";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "确保设备的音量已设为最高。\n\n在本任务过程中，将在左耳或右耳播放柔和的音调。\n\n请仔细听并在每次听到音调时轻点按钮。";
-"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "此测试确定声音需要多大才能被您听见。";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "此测试确定声音需要多大才能被你听见。";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "参与问卷调查。";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "针对“听力较好的耳朵”选择您的偏好（如果有）";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "针对“听力较好的耳朵”选择你的偏好（如果有）";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "左";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "右";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "无偏好";
@@ -353,7 +364,7 @@
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空间记忆";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "本活动通过重现%@亮起的顺序来测量您的短期空间记忆能力。";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "本活动通过重现%@亮起的顺序来测量你的短期空间记忆能力。";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花朵";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花朵";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "部分%@一次只亮起一个。请以亮起的顺序轻点这些%@。";
@@ -366,8 +377,8 @@
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "请以相反的顺序轻点%@";
 "MEMORY_GAME_COMPLETE_TITLE" = "顺序完成";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "轻点“下一步”来继续";
-"MEMORY_GAME_FAILED_TITLE" = "再试一次";
-"MEMORY_GAME_FAILED_MESSAGE" = "您好像记错了顺序。轻点“下一步”来继续。";
+"MEMORY_GAME_FAILED_TITLE" = "请重试";
+"MEMORY_GAME_FAILED_MESSAGE" = "你好像记错了顺序。轻点“下一步”来继续。";
 "MEMORY_GAME_TIMEOUT_TITLE" = "计时结束";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "时间已到。\n轻点“下一步”来继续。";
 "MEMORY_GAME_COMPLETE" = "游戏完成";
@@ -377,8 +388,8 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "反应时间";
-"REACTION_TIME_TASK_INTENDED_USE" = "本活动评估您对视觉提示的反应时间。";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "屏幕出现蓝色圆点时立刻朝任意方向摇动设备。您将需要完成此操作%D次。";
+"REACTION_TIME_TASK_INTENDED_USE" = "本活动评估你对视觉提示的反应时间。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "屏幕出现蓝色圆点时立刻朝任意方向摇动设备。你将需要完成此操作%D次。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第%@/%@次尝试";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "蓝色圆圈出现时快速摇动设备";
@@ -399,7 +410,7 @@
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "汉诺塔";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "本活动评估您的解谜能力。";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "本活动评估你的解谜能力。";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "将整个圆盘堆以尽可能少的步数移到高亮显示的平台。";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解谜";
@@ -413,45 +424,45 @@
 /* Knee Range of Motion active task */
 "KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "左膝运动范围";
 "KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "右膝运动范围";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "本活动测试您左膝伸展的距离。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "本活动测试您右膝伸展的距离。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "坐在椅子的边缘上。开始前，将设备放在左膝上进行测试。请打开设备的声音，方便您听到指示。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "坐在椅子的边缘上。开始前，将设备放在右膝上进行测试。请打开设备的声音，方便您听到指示。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在您的左膝上，屏幕朝外，如图所示。";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在您的右膝上，屏幕朝外，如图所示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "本活动测试你左膝伸展的距离。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "本活动测试你右膝伸展的距离。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "坐在椅子的边缘上。开始前，将设备放在左膝上进行测试。请打开设备的声音，方便你听到指示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "坐在椅子的边缘上。开始前，将设备放在右膝上进行测试。请打开设备的声音，方便你听到指示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在你的左膝上，屏幕朝外，如图所示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在你的右膝上，屏幕朝外，如图所示。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "就绪后，轻点屏幕以开始，并将左膝尽可能地伸展。完成后，将左膝归位并再次轻点。";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "就绪后，轻点屏幕以开始，并将右膝尽可能地伸展。完成后，将右膝归位并再次轻点。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在您的左膝上。轻点屏幕并将左膝尽可能地伸展。";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在您的右膝上。轻点屏幕并将右膝尽可能地伸展。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "完成后，将左膝归位。然后轻点任意位置。";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "完成后，将右膝归位。然后轻点任意位置。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在你的左膝上。\n\n轻点屏幕并将左膝尽可能地伸展。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在你的右膝上。\n\n轻点屏幕并将右膝尽可能地伸展。\n";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "完成后，将左膝归位。\n\n然后轻点任意位置。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "完成后，将右膝归位。\n\n然后轻点任意位置。";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩运动范围";
 "SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "右肩运动范围";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "本活动测试您左肩伸展的距离。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "本活动测试您右肩伸展的距离。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "开始前，将设备放在左肩上进行测试。请打开设备的声音，方便您听到指示。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "开始前，将设备放在右肩上进行测试。请打开设备的声音，方便您听到指示。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在您的左肩上，屏幕朝外，如图所示。";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在您的右肩上，屏幕朝外，如图所示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "本活动测试你左肩伸展的距离。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "本活动测试你右肩伸展的距离。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "开始前，将设备放在左肩上进行测试。请打开设备的声音，方便你听到指示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "开始前，将设备放在右肩上进行测试。请打开设备的声音，方便你听到指示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在你的左肩上，屏幕朝外，如图所示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在你的右肩上，屏幕朝外，如图所示。";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "就绪后，轻点屏幕以开始，并将左手手臂尽可能地向前伸。完成后，将手臂归位并再次轻点。";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "就绪后，轻点屏幕以开始，并将右手手臂尽可能地向前伸。完成后，将手臂归位并再次轻点。";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在您的左肩上。轻点屏幕并将左手手臂尽可能地向前伸。";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在您的右肩上。轻点屏幕并将右手手臂尽可能地向前伸。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在你的左肩上。轻点屏幕并将左手手臂尽可能地向前伸。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在你的右肩上。轻点屏幕并将右手手臂尽可能地向前伸。";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "完成后，将左手手臂归位。然后轻点任意位置。";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "完成后，将右手手臂归位。然后轻点任意位置。";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "计时步行";
-"TIMED_WALK_INTRO_DETAIL" = "本活动测量您的下肢功能。";
+"TIMED_WALK_INTRO_DETAIL" = "本活动测量你的下肢功能。";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "找到一处地点，最好是户外，能够安全地以最快速度直线步行约%@。请不要放慢脚步，直到跨过终点线。";
 "TIMED_WALK_INTRO_2_DETAIL" = "轻点“下一步”来开始。";
 "TIMED_WALK_FORM_TITLE" = "辅助设备";
 "TIMED_WALK_FORM_TEXT" = "在每次测试中使用相同的辅助设备。";
-"TIMED_WALK_QUESTION_TEXT" = "您是否穿戴了踝足矫形器？";
-"TIMED_WALK_QUESTION_2_TITLE" = "您是否使用了辅助设备？";
-"TIMED_WALK_QUESTION_2_TEXT" = "轻点此处来选择答案。";
+"TIMED_WALK_QUESTION_TEXT" = "你是否穿戴了踝足矫形器？";
+"TIMED_WALK_QUESTION_2_TITLE" = "你是否使用了辅助设备？";
+"TIMED_WALK_QUESTION_2_TEXT" = "轻点此处选择回答。";
 "TIMED_WALK_QUESTION_2_CHOICE" = "无";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "单杖";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "单拐";
@@ -467,10 +478,10 @@
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "“步进式听觉累加实验”测量您的听觉信息处理速度和计算能力。";
-"PVSAT_INTRO_TEXT" = "“步进式视觉累加实验”测量您的视觉信息处理速度和计算能力。";
-"PAVSAT_INTRO_TEXT" = "“步进式听觉和视觉累加实验”测量您的听觉和视觉信息处理速度和计算能力。";
-"PSAT_INTRO_TEXT_2_%@" = "每隔%@会显示一个一位数。\n您必须将每个新数字与前一个数字相加。\n注意，您不用计算累加值，只需计算最后两个数字之和。";
+"PASAT_INTRO_TEXT" = "“步进式听觉累加实验”测量你的听觉信息处理速度和计算能力。";
+"PVSAT_INTRO_TEXT" = "“步进式视觉累加实验”测量你的视觉信息处理速度和计算能力。";
+"PAVSAT_INTRO_TEXT" = "“步进式听觉和视觉累加实验”测量你的听觉和视觉信息处理速度和计算能力。";
+"PSAT_INTRO_TEXT_2_%@" = "每隔%@会显示一个一位数。\n你必须将每个新数字与前一个数字相加。\n注意，你不用计算累加值，只需计算最后两个数字之和。";
 "PSAT_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "PSAT_INITIAL_INSTRUCTION" = "记住这第一个数字。";
 "PSAT_INSTRUCTION" = "将这个新数字与前一个数字相加。";
@@ -478,31 +489,31 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@孔插棒测试";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "本活动通过将圆饼放入圆孔来测量您的上肢功能。您将需要完成此操作%@次。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "您的左手和右手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成%@次后，再将其移除%@次。";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "本活动通过将圆饼放入圆孔来测量你的上肢功能。你将需要完成此操作%@次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "你的左手和右手都需要进行测试。\n你必须以最快速度拿起圆饼，将其放入圆孔中，完成%@次后，再将其移除%@次。";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "您的右手和左手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成%@次后，再将其移除%@次。";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "用您的左手将圆饼放入圆孔中。";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "用您的右手将圆饼放入圆孔中。";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "用您的左手将圆饼放在线条后方。";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "用您的右手将圆饼放在线条后方。";
-"HOLE_PEG_TEST_TEXT" = "用两根手指拿起圆饼。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "用你的左手将圆饼放入圆孔中。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "用你的右手将圆饼放入圆孔中。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "用你的左手将圆饼放在线条后方。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "用你的右手将圆饼放在线条后方。";
+"HOLE_PEG_TEST_TEXT" = "用两个手指拿起圆饼。";
 "HOLE_PEG_TEST_TEXT_2" = "抬起手指以放下圆饼。";
 
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "颤抖活动";
-"TREMOR_TEST_INTRO_1_DETAIL" = "本活动测试在不同姿势下，您双手的颤抖情况。请找到一处舒适的地方坐下并完成此活动。";
-"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "如下图所示，用更易受到影响的手握住手机。";
-"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "如下图所示，用右手握住手机。";
-"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "如下图所示，用左手握住手机。";
+"TREMOR_TEST_INTRO_1_DETAIL" = "本活动测试在不同姿势下，你双手的颤抖情况。请找到一处舒适的地方坐下并完成此活动。";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "如上图所示，用更易受到影响的手握住手机。";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "如上图所示，用右手握住手机。";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "如上图所示，用左手握住手机。";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "请坐下并用手握住手机，然后完成%@。";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "一个任务";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "两个任务";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "三个任务";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "四个任务";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "五个任务";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "轻点下一步来继续。";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "轻点“下一步”来继续。";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "准备握住手机并放在膝盖上。";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "准备用左手握住手机并放在膝盖上。";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "准备用右手握住手机并放在膝盖上。";
@@ -515,9 +526,9 @@
 "TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "现在用左手握住手机，举至肩高并弯曲手肘。";
 "TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "现在用右手握住手机，举至肩高并弯曲手肘。";
 "TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "握住手机并弯曲手肘，坚持%ld秒钟";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "现在弯曲手肘，重复用手机接触您的鼻子。";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "现在弯曲手肘并用左手握住手机，重复用手机接触您的鼻子。";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "现在弯曲手肘并用右手握住手机，重复用手机接触您的鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "现在弯曲手肘，重复用手机接触你的鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "现在弯曲手肘并用左手握住手机，重复用手机接触你的鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "现在弯曲手肘并用右手握住手机，重复用手机接触你的鼻子。";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "用手机接触鼻子，坚持%ld秒钟";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "准备挥手（通过转动手腕来挥手）。";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "用左手握住手机并准备挥手（通过转动手腕来挥手）。";
@@ -526,7 +537,7 @@
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "现在换左手握住手机并继续下一个任务。";
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "现在换右手握住手机并继续下一个任务。";
 "TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "继续下一个任务。";
-"TREMOR_TEST_COMPLETED_INSTRUCTION" = "活动已完成。";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "活动完成。";
 "TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "请坐下并用一只手握住手机，然后完成%@，接着换另一只手再完成一次。";
 "TREMOR_SKIP_LEFT_HAND" = "我不能用左手完成本活动。";
 "TREMOR_SKIP_RIGHT_HAND" = "我不能用右手完成本活动。";
@@ -534,7 +545,7 @@
 
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "连线测试";
-"TRAILMAKING_INTENDED_USE" = "本活动通过记录按顺序轻点一系列圆点所需的时间，来评估您的视觉注意力和任务切换能力。";
+"TRAILMAKING_INTENDED_USE" = "本活动通过记录按顺序轻点一系列圆点所需的时间，来评估你的视觉注意力和任务切换能力。";
 "TRAILMAKING_INTENDED_USE2_A" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点数字“2”–“3”–“4”…直到数字“7”。";
 "TRAILMAKING_INTENDED_USE2_B" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点第一个字母“A”，以此类推，依次轻点“2”–“B”–“3”–“C”…直到数字“7”。";
 "TRAILMAKING_INTRO_TEXT" = "以最快的速度完成而不出错。\n ";
@@ -548,14 +559,14 @@
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "语音识别";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "本活动使用设备底部的麦克风录制您的语音，并将它翻译成文本。";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "本活动使用设备底部的麦克风录制你的语音，并将它翻译成文本。";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "按下按钮以在说话前开始录音。";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "开始录制";
 "SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "停止录制";
 "SPEECH_RECOGNITION_QUESTION_TITLE" = "编辑文本记录";
 "SPEECH_RECOGNITION_QUESTION_TEXT" = "编辑文本记录以改正任何错误的语音解析。";
-"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "您的文本记录将显示在此处。";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "你的文本记录将显示在此处。";
 "SPEECH_RECOGNITION_FAILED" = "语音识别失败。";
 "SPEECH_RECOGNITION_INIT_FAILURE" = "初始化语音识别失败。";
 
@@ -564,13 +575,13 @@
 "SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "停止播放音频";
 "SPEECH_IN_NOISE_TITLE" = "在噪声中说话";
 "SPEECH_IN_NOISE_INTRO_TEXT" = "本活动测量噪声环境中语音的清晰度。";
-"SPEECH_IN_NOISE_DETAIL_TEXT" = "作为本测试的一部分，您将：\n\n听一个句子。\n\n清楚地复述您所听到的内容，或跳过以使用键盘键入您听到的内容。\n\n如果复述听到的内容，您可以选择修改由语音识别引擎生成的文本记录。";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "作为本测试的一部分，你将：\n\n听一个句子。\n\n清楚地重复你所听到的内容，或跳过以使用键盘键入你听到的内容。\n\n如果重复听到的内容，你可以选择修改由语音识别引擎生成的文本记录。";
 "SPEECH_IN_NOISE_CALIBRATION_TITLE" = "音量校准";
 "SPEECH_IN_NOISE_CALIBRATION_TEXT" = "轻点“播放音频”，将音量调整至舒适的程度，然后轻点“停止播放音频”以进行下一步。";
 "SPEECH_IN_NOISE_STEP_TITLE" = "听";
 "SPEECH_IN_NOISE_STEP_TEXT" = "混有背景噪声的句子会以随机信噪比(SNR)只播放一次。";
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "说话";
-"SPEECH_IN_NOISE_SPEAK_TEXT" = "复述您所听到的内容。";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "重复你所听到的内容。";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
@@ -583,14 +594,14 @@
 
 /* Environment SPL*/
 "ENVIRONMENTSPL_TITLE" = "SPL指示器";
-"ENVIRONMENTSPL_INTRO_TEXT" = "本活动测量环境声压级。如果噪声级过高，您将无法进行下一步。请转移到更安静的地方以完成本任务或稍后再重新进行本活动。";
+"ENVIRONMENTSPL_INTRO_TEXT" = "本活动测量环境声压级。如果噪声级过高，你将无法进行下一步。请转移到更安静的地方以完成本任务或稍后再重新进行本活动。";
 "ENVIRONMENTSPL_UNIT" = "dBA";
-"ENVIRONMENTSPL_CALCULATING" = "正在计算";
+"ENVIRONMENTSPL_CALCULATING" = "正在测量…";
 "ENVIRONMENTSPL_THRESHOLD" = "阈值：%@ dBA";
-"ENVIRONMENTSPL_OK" = "背景噪声通过";
-"ENVIRONMENTSPL_NOISE" = "背景噪声过杂";
+"ENVIRONMENTSPL_OK" = "良好";
+"ENVIRONMENTSPL_NOISE" = "太大声";
 "ENVIRONMENTSPL_TITLE_2" = "找一处安静的地方";
-"ENVIRONMENTSPL_INTRO_TEXT_2" = "为确保准确性，此测试应当在安静的环境中进行。";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "为获得准确的结果，此任务应在安静的位置完成。背景噪声测量读取完成后，你便可继续。";
 
 /* Secondary Task Step*/
 "SECONDARY_TASK_START_BUTTON" = "开始任务";
@@ -607,13 +618,12 @@
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "上一步";
-"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "显示PDF缩略图";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "显示 PDF 缩略图";
 "AX_BUTTON_HIDE_PDF_THUMBNAIL" = "隐藏PDF缩略图";
 "AX_BUTTON_ANNOTATE" = "注解";
 "AX_BUTTON_SHOW_SEARCH" = "显示搜索栏";
 "AX_BUTTON_HIDE_SEARCH" = "隐藏搜索栏";
 "AX_BUTTON_SHARE" = "共享";
-
 
 "AX_COMPLETION_ILLUSTRATION" = "蓝色圆圈中带有勾号的图示，表示成功";
 
@@ -664,17 +674,17 @@
 "AX_AUDIO_BAR_GRAPH" = "音频条图形";
 
 "AX_AMSLER_GRID_LABEL" = "阿姆斯勒方格表";
-"AX_AMSLER_GRID_HINT" = "用手指或触控笔直接标记网格，或在网格外向左轻扫以结束。";
+"AX_AMSLER_GRID_HINT" = "用手指或触控笔直接标记网格，或轻点“下一步”按钮以结束。";
 
 "AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "可轻点的按钮";
 "AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "轻点表示左耳";
-"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "激活以开始测试。测试开始后，当您左耳听到声音时直接轻点此按钮。";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "激活以开始测试。测试开始后，当你左耳听到声音时直接轻点此按钮。";
 "AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "轻点表示右耳";
-"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "激活以开始测试。测试开始后，当您右耳听到声音时直接轻点此按钮。";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "激活以开始测试。测试开始后，当你右耳听到声音时直接轻点此按钮。";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
 "AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@使用旁白时，通过触碰学习表示每只耳朵的按钮位置来探索屏幕。测试开始时，按钮将变为可直接轻点。%@";
-"AX_TAP_BUTTON_1_LABEL" = "用一根手指轻点";
-"AX_TAP_BUTTON_2_LABEL" = "用另一根手指轻点";
+"AX_TAP_BUTTON_1_LABEL" = "用一个手指轻点";
+"AX_TAP_BUTTON_2_LABEL" = "用另一个手指轻点";
 "AX_TAP_BUTTON_HINT" = "激活以使按钮变为可直接轻点。";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
 "AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@使用旁白时，通过触碰学习按钮位置来探索屏幕。激活任一按钮，使按钮变为可直接轻点。";
@@ -687,3 +697,132 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "无法解码restoreData以进行初始化";
+"6MWT_HIGH_SCORE" = "10：非常疲劳";
+"6MWT_INSTRUCTIONS_1" = "寻找至少30米长的步行直路。";
+"6MWT_INSTRUCTIONS_2" = "确保必要时可沿步行路线停下来并坐下。";
+"6MWT_INSTRUCTIONS_3" = "将手机音量调高到至少50%。";
+"6MWT_INSTRUCTIONS_4" = "通过询问Siri或开启“体能训练”App后轻点“户外步行”（或“室内步行”），在Apple Watch上开始“户外步行”（或“室内步行”）训练。";
+"6MWT_INSTRUCTIONS_TITLE" = "现在开始";
+"6MWT_INTRO" = "此测试的目标是在6分钟内以舒适的配速步行尽可能远。";
+"6MWT_INTRO_DETAILS" = "详细信息";
+"6MWT_INTRO_DETAIL_CLOTHING" = "穿上舒适的衣服和合脚的鞋子。如果你平常使用助行器，可以在完成此测试的过程中使用。";
+"6MWT_INTRO_DETAIL_LOCATION" = "如果无法在户外步行，请考虑在当地购物中心完成此测试。";
+"6MWT_INTRO_DETAIL_TIME" = "此测试需要大约6分钟来完成。";
+"6MWT_INTRO_DETAIL_WATCH" = "你需要Apple Watch来完成此测试。";
+"6MWT_LOW_SCORE" = "1：完全不疲劳";
+"6MWT_QUESTIONS_BREATH" = "气短";
+"6MWT_QUESTIONS_DETAIL" = "恭喜你完成6分钟步行测试！请从以下几个方面评价你的感受。";
+"6MWT_QUESTIONS_FATIGUE" = "疲劳程度";
+"6MWT_QUESTIONS_TITLE" = "完成得不错";
+"6MWT_TASK_TITLE" = "6分钟步行测试";
+"6MWT_TEST_IN_PROGRESS" = "正在测试";
+"6MWT_TEST_IN_PROGRESS_DETAIL" = "在6分钟内沿步行直路步行尽可能远。如果需要休息，你可以停下来并坐下。";
+"AX_BUTTON" = "按钮";
+"AX_FAMILY_HISTORY_EDIT_BUTTON" = "“编辑”按钮";
+
+/* Permission denied completion step titles and descriptions. */
+"PERMISSION_DENIED_AUDIO_TITLE" = "麦克风权限被拒绝";
+"PERMISSION_DENIED_AUDIO_TEXT" = "您必须允许麦克风权限才能继续此任务。";
+"PERMISSION_DENIED_MOTION_TITLE" = "运动与健身权限被拒绝";
+"PERMISSION_DENIED_MOTION_TEXT" = "您必须允许运动与健身活动权限才能继续此任务。";
+"PERMISSION_DENIED_LOCATION_TITLE" = "定位权限被拒绝";
+"PERMISSION_DENIED_LOCATION_TEXT" = "您必须允许定位权限才能继续此任务。";
+"PERMISSION_DENIED_CAMERA_TITLE" = "摄像头权限被拒绝";
+"PERMISSION_DENIED_CAMERA_TEXT" = "您必须允许摄像头权限才能继续此任务。";
+
+/* Permission required alert title and messages. */
+"PERMISSION_REQUIRED_ALERT_TITLE" = "需要授予权限";
+"PERMISSION_REQUIRED_ALERT_AUDIO_MESSAGE" = "此步骤需要麦克风权限才能正常运行。请在设置中允许权限。";
+"PERMISSION_REQUIRED_ALERT_MOTION_MESSAGE" = "此步骤需要运动与健身权限才能正常运行。请在设置中允许权限。";
+"PERMISSION_REQUIRED_ALERT_LOCATION_MESSAGE" = "此步骤需要定位权限才能正常运行。请在设置中允许权限。";
+"PERMISSION_REQUIRED_ALERT_CAMERA_MESSAGE" = "此步骤需要摄像头权限才能正常运行。请在设置中允许权限。";
+"PERMISSION_REQUIRED_ALERT_DEFAULT_MESSAGE" = "尚未授予必需的权限。请在设置中允许权限，以确保此步骤可以正常运行。";
+
+"AX_PAGE_NUMBER_FORMAT" = "第%1$ld页（共%2$ld页）";
+"AX_SES_BOTTOM" = "底部";
+"AX_SES_PERCENT" = "百分比";
+"AX_SES_TOP" = "顶部";
+"BUTTON_PRACTICE_AGAIN" = "再次练习";
+"BUTTON_PRACTICE_TEST" = "练习测试";
+"BUTTON_START_TEST" = "开始测试";
+"CONSENT_NAME_SECTION_TITLE" = "姓名";
+"FAMILY_HISTORY_ADD" = "添加“%@”";
+"FAMILY_HISTORY_CANCEL" = "取消";
+"FAMILY_HISTORY_COMPLETION_STEP_TITLE" = "任务完成";
+"FAMILY_HISTORY_CONDITIONS" = "健康状况";
+"FAMILY_HISTORY_CONDITIONS_FORM_ITEM_TEXT" = "他们是否曾被诊断出下列任何疾病或健康状况？";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION" = "尽可能回答这些问题";
+"FAMILY_HISTORY_CONDITIONS_STEP_DESCRIPTION_TEMP" = "确认诊断出的任何疾病或健康状况。";
+"FAMILY_HISTORY_CONDITIONS_STEP_TITLE" = "健康状况";
+"FAMILY_HISTORY_DELETE_ENTRY" = "删除条目";
+"FAMILY_HISTORY_DELETE_ENTRY_TITLE" = "你确定要从“家庭健康史”中删除此条目吗？";
+"FAMILY_HISTORY_EDIT_ENTRY" = "编辑条目";
+"FAMILY_HISTORY_I_DONT_KNOW" = "不知道";
+"FAMILY_HISTORY_NONE_OF_THE_ABOVE" = "以上皆不是";
+"FAMILY_HISTORY_NONE_SELECTED" = "未选择任何项";
+"FAMILY_HISTORY_PREFER_NOT_TO_ANSWER" = "我选择不回答";
+"FITNESS_RESUME_TEST" = "继续健身记录";
+"FITNESS_STOP_TEST_CONFIRMATION" = "确定要提早结束此健身记录吗？";
+"FITNESS_STOP_TEST_DETAIL" = "你的进度将保存且此测试将标记为已完成。";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "删除并重试";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "视频选项";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "检查视频";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_START_TITLE" = "开始录制";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "停止录制";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "提交视频";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "你的右手和左手都需要进行测试。\n你必须以最快速度拿起圆饼，将其放入圆孔中，完成%@次后，再将其移除%@次。";
+"MAX_WORD_COUNT_ERROR" = "字符计数已达上限";
+"PASSCODE_FACE_ID_ERROR_ALERT_TITLE" = "面容ID错误";
+"PASSCODE_FACE_ID_MESSAGE" = "请使用面容ID进行认证";
+"PLAY" = "播放";
+"REACTION_TIME_NORMALIZED_TASK_ACTIVE_STEP_TITLE" = "轻点按住按钮，然后轻点蓝色圆圈";
+"REACTION_TIME_TASK_NORM_BUTTON_TITLE" = "按住";
+"RECORD" = "录音";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "该研究正在请求访问健康数据。";
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "健康数据";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "该研究正在请求访问来自你设备的位置数据。";
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "位置数据";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "该研究正在请求访问来自你设备的运动数据。";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "设备动作";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "该研究正在请求向你发送通知。";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "通知";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "已检查";
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "检查";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "错误";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "不支持";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "该研究正在请求访问来自你设备的传感器数据。";
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "传感器数据";
+"SPEECH_IN_NOISE_PREDEFINED_USE_KEYBOARD_INSTEAD" = "改为使用键盘";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "无法录音。轻点以重试。";
+"SPEECH_RECOGNITION_NOT_DETECTED_TRY_AGAIN" = "未在你的录音中检测到语音。轻点以重试。";
+"STOP" = "停止";
+"STROOP_COLOR_ORANGE" = "橙色";
+"STROOP_COLOR_BROWN" = "棕色";
+"STROOP_COLOR_PINK" = "粉色";
+"STROOP_COLOR_PURPLE" = "紫色";
+"STROOP_COLOR_GRAY" = "灰色";
+"TC_COMPLETION_DETAIL" = "恭喜完成Tecumseh Cube测试！";
+"TC_COMPLETION_TITLE" = "完成得不错";
+"TC_INSTRUCTIONS_1" = "寻找一级离地面约20厘米（8英寸）高的台阶。";
+"TC_INSTRUCTIONS_2" = "将iPhone音量调高到至少50%。";
+"TC_INSTRUCTIONS_3" = "通过询问Siri或开启“体能训练”App，轻点“添加体能训练”后选取“楼梯”，在Apple Watch上开始“楼梯”训练。";
+"TC_INSTRUCTIONS_TITLE" = "现在开始";
+"TC_INTRO" = "此测试的目标是在3分钟内跟随节拍上下楼梯时提高你的心率。";
+"TC_INTRO_DETAILS" = "详细信息";
+"TC_INTRO_DETAIL_DANGER" = "如果出现胸痛或不适，请立即停止此测试。";
+"TC_INTRO_DETAIL_TIME" = "此测试需要大约6分钟来完成。";
+"TC_INTRO_DETAIL_WATCH" = "你需要Apple Watch来完成此测试。";
+"TC_REST_IN_PROGRESS" = "休息片刻";
+"TC_REST_IN_PROGRESS_DETAIL" = "Apple Watch记录你的静息心率时，请坐下并休息3分钟。";
+"TC_TASK_TITLE" = "Tecumseh Cube测试";
+"TC_TEST_IN_PROGRESS" = "正在测试";
+"TC_TEST_IN_PROGRESS_DETAIL" = "使用楼梯，跟随节拍上下楼梯";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "正在测试";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "正在测试 \U2022 %@";
+
+/* Strings localized directly from source. */
+"X" = "X";
+"You have completed this task." = "您已完成此任务。";
+"Done" = "完成";
+"Share Task Snapshot" = "共享任务快照";

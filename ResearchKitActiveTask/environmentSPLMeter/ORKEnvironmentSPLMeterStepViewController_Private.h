@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setNavigationFooterView;
 - (void)reachedOptimumNoiseLevel;
-- (void)resetAudioSession;
-- (void)stopAudioEngine;
+- (void)turnOffAndResetAudioSession;
+- (void)turnOnAudioSession;
 - (void)sendHapticEvent:(UINotificationFeedbackType)eventType;
 
 @property (nonatomic, strong)  AVAudioEngine *audioEngine;

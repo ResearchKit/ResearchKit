@@ -4,7 +4,7 @@ Add the ResearchKit framework to your app as a dynamic framework
 
 ## Overview
 
-ResearchKit is an open source framework and is not shipped with native IOS. To use it, you can embed ResearchKit into your app as dynamic framework.
+ResearchKit is an open source framework and is not shipped with native iOS. To use it, you can embed ResearchKit into your app as a dynamic framework.
 
 ### Installation
 

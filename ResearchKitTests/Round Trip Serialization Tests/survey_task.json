@@ -1,0 +1,1323 @@
+{
+    "_class": "ORKNavigableOrderedTask",
+    "identifier": "readOnlyFormStepTask",
+    "steps": [
+        {
+            "_class": "ORKInstructionStep",
+            "bodyItems": [
+                {
+                    "_class": "ORKBodyItem",
+                    "bodyItemStyle": 3
+                },
+                {
+                    "_class": "ORKBodyItem",
+                    "bodyItemStyle": 4,
+                    "text": "STANDARDIZED QUESTION"
+                },
+                {
+                    "_class": "ORKBodyItem",
+                    "bodyItemStyle": 0,
+                    "detailText": "A standardized question is one that’s been asked before in other, independent studies. By using the same question in these studies, researchers can compare the data and gain insights. Standardized questions appear in some surveys, including this one."
+                }
+            ],
+            "detailText": "",
+            "iconImage": {
+                "imageName": "Survey.png",
+                "imageSource": "bundle"
+            },
+            "identifier": "322fe4fb-491d-4583-9c36-aa007a96ea7c",
+            "optional": 0,
+            "text": "Answer a few survey questions.\n\nThese questions help demonstrate the variety of answer formats supported by ResearchKit.",
+            "title": "Survey"
+        },
+        {
+            "_class": "ORKFormStep",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "American Indian or Alaska Native",
+                                "value": "american_indian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Asian",
+                                "value": "asian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Black, African American, or African",
+                                "value": "black"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Hispanic, Latino, or Spanish",
+                                "value": "hispanic"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Middle Eastern or North African",
+                                "value": "middle_eastern"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Native Hawaiian or other Pacific Islander",
+                                "value": "pacific"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "White",
+                                "value": "white"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    },
+                    "detailText": "",
+                    "identifier": "d1e640f8-1a50-4aa7-9d00-78f04b69354e",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "bodyItems": [
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 4,
+                                    "text": "STANDARDIZED QUESTION"
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "A standardized question is one that’s been asked before in other, independent studies. By using the same question in this study, researchers can compare the studies and gain insights."
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 3
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "This is an example of a standardized question commonly used in research surveys."
+                                }
+                            ],
+                            "detailText": "",
+                            "identifier": "6d6b5a2d-60e7-495c-9f5b-394d81f13024",
+                            "text": "",
+                            "title": "About This Question"
+                        }
+                    },
+                    "optional": 0,
+                    "showsProgress": true,
+                    "tagText": "STANDARDIZED QUESTION",
+                    "text": "Which categories describe you?"
+                }
+            ],
+            "identifier": "e5e2af6e-2e5d-4d6b-9e27-4068641001ce",
+            "optional": 0,
+            "text": "",
+            "title": "Survey"
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "step-a0a9f8c0-5c00-11e9-8cf2-af4fadae911f",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "step-a0a9f8c0-5c00-11e9-8cf2-af4fadae911f",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "American Indian",
+                                "value": "American Indian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Alaska Native",
+                                "value": "Alaska Native"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Central or South American Indian",
+                                "value": "Central or South American Indian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "c167dd27-d7cb-47eb-8580-47e21b8d2d3c",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "c167dd27-d7cb-47eb-8580-47e21b8d2d3c",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Asian Indian",
+                                "value": "Asian Indian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Cambodian",
+                                "value": "Cambodian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Chinese",
+                                "value": "Chinese"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Filipino",
+                                "value": "Filipino"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Hmong",
+                                "value": "Hmong"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Japanese",
+                                "value": "Japanese"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Korean",
+                                "value": "Korean"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Pakistani",
+                                "value": "Pakistani"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Vietnamese",
+                                "value": "Vietnamese"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "708a0ff8-802e-4526-9983-7951bce5dcc6",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "708a0ff8-802e-4526-9983-7951bce5dcc6",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "African American",
+                                "value": "African American"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Barbadian",
+                                "value": "Barbadian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Caribbean",
+                                "value": "Caribbean"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Ethiopian",
+                                "value": "Ethiopian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Ghanaian",
+                                "value": "Ghanaian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Haitian",
+                                "value": "Haitian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Jamaican",
+                                "value": "Jamaican"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Liberian",
+                                "value": "Liberian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Nigerian",
+                                "value": "Nigerian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Somali",
+                                "value": "Somali"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "South African",
+                                "value": "South African"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "17514c57-968c-4344-9267-7144588be27d",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "17514c57-968c-4344-9267-7144588be27d",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Colombian",
+                                "value": "Colombian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Cuban",
+                                "value": "Cuban"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Dominican",
+                                "value": "Dominican"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Ecuadorian",
+                                "value": "Ecuadorian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Honduran",
+                                "value": "Honduran"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Mexican or Mexican American",
+                                "value": "Mexican or Mexican American"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Puerto Rican",
+                                "value": "Puerto Rican"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Salvadoran",
+                                "value": "Salvadoran"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Spanish",
+                                "value": "Spanish"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "048e1d43-c109-4b9e-bde8-16642d2c6014",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "048e1d43-c109-4b9e-bde8-16642d2c6014",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Afghan",
+                                "value": "Afghan"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Algerian",
+                                "value": "Algerian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Egyptian",
+                                "value": "Egyptian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Iranian",
+                                "value": "Iranian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Iraqi",
+                                "value": "Iraqi"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Israeli",
+                                "value": "Israeli"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Lebanese",
+                                "value": "Lebanese"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Moroccan",
+                                "value": "Moroccan"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Syrian",
+                                "value": "Syrian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Tunisian",
+                                "value": "Tunisian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "f28102f8-e795-4cd2-8978-413bf406c1f4",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "f28102f8-e795-4cd2-8978-413bf406c1f4",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Chamorro",
+                                "value": "Chamorro"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Chuukese",
+                                "value": "Chuukese"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Fijian",
+                                "value": "Fijian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Marshallese",
+                                "value": "Marshallese"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Native Hawaiian",
+                                "value": "Native Hawaiian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Palauan",
+                                "value": "Palauan"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Samoan",
+                                "value": "Samoan"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Tahitian",
+                                "value": "Tahitian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Tongan",
+                                "value": "Tongan"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "40b89a91-1642-4ee0-844f-a66f1ea15e97",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "40b89a91-1642-4ee0-844f-a66f1ea15e97",
+                    "text": "Which categories describe you?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Dutch",
+                                "value": "Dutch"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "English",
+                                "value": "English"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "European, not listed",
+                                "value": "European, not listed"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "French",
+                                "value": "French"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "German",
+                                "value": "German"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Irish",
+                                "value": "Irish"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Italian",
+                                "value": "Italian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Norwegian",
+                                "value": "Norwegian"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Polish",
+                                "value": "Polish"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Scottish",
+                                "value": "Scottish"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Spanish",
+                                "value": "Spanish"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "None of these fully describe me",
+                                "value": "None of these fully describe me"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "singleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Never attended school or only attended kindergarten",
+                                "value": "never_attended_school_or_only_attended_kindergarten"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Grades 1 through 4 (Primary)",
+                                "value": "grades_1_through_4"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Grades 5 through 9 (Middle school)",
+                                "value": "grades_5_through_9"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Grades 9 through 11 (Some high school)",
+                                "value": "grades_9_through_11"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Grade 12 or GED (High school graduate)",
+                                "value": "grade_12_or_GED"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "1 to 3 years after high school (Technical school)",
+                                "value": "1_to_3_years_after_high_school_tech_school"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "1 to 3 years after high school (Some college, Associate’s Degree)",
+                                "value": "1_to_3_years_after_high_school_college"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "College 4 years or more (College graduate)",
+                                "value": "college_4_years_or_more"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Advanced degree (Master’s Degree)",
+                                "value": "advanced_degree_masters"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Advanced degree (Doctorate Degree)",
+                                "value": "advanced_degree_doc"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    },
+                    "detailText": "",
+                    "identifier": "item-279a5820-5c01-11e9-8cf2-af4fadae911f",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "bodyItems": [
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 4,
+                                    "text": "STANDARDIZED QUESTION"
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "A standardized question is one that’s been asked before in other, independent studies. By using the same question in this study, researchers can compare the studies and gain insights."
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 3
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "This question was adapted from the Behavioral Risk Factor Surveillance System, an annual survey conducted by the US Centers for Disease Control (CDC)."
+                                }
+                            ],
+                            "detailText": "",
+                            "identifier": "833d5e8e-3189-41ba-95e9-6ad0548b630b",
+                            "text": "",
+                            "title": "About This Question"
+                        }
+                    },
+                    "optional": 0,
+                    "showsProgress": true,
+                    "tagText": "STANDARDIZED QUESTION",
+                    "text": "What is the highest grade or year of school you completed?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "singleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Married",
+                                "value": "Married"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Divorced",
+                                "value": "Divorced"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Widowed",
+                                "value": "Widowed"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Separated",
+                                "value": "Separated"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Never married",
+                                "value": "Never married"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "A member of an unmarried couple",
+                                "value": "A member of an unmarried couple"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    },
+                    "identifier": "item-af7fecf0-5c01-11e9-8cf2-af4fadae911f",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "bodyItems": [
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 4,
+                                    "text": "STANDARDIZED QUESTION"
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "A standardized question is one that’s been asked before in other, independent studies. By using the same question in this study, researchers can compare the studies and gain insights."
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 3
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "This question is from the Behavioral Risk Factor Surveillance System, an annual survey conducted by the US Centers for Disease Control (CDC)."
+                                }
+                            ],
+                            "detailText": "",
+                            "identifier": "b6660cb5-a9eb-4edb-b9a9-5e79c56912fa",
+                            "text": "",
+                            "title": "About This Question"
+                        }
+                    },
+                    "optional": 0,
+                    "showsProgress": true,
+                    "tagText": "STANDARDIZED QUESTION",
+                    "text": "Are you..."
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "singleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Employed for pay (part-time, full-time, self-employed)",
+                                "value": "Employed for pay (part-time, full-time, self-employed)"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Unemployed",
+                                "value": "unemployed"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Unable to work (i.e., disability, illness, other circumstances)",
+                                "value": "Unable to work (i.e., disability, illness, other circumstances)"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "In school",
+                                "value": "In school"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Taking care of house or family",
+                                "value": "Taking care of house or family"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "In retirement",
+                                "value": "In retirement"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    },
+                    "identifier": "item-7b484f90-5c01-11e9-8cf2-af4fadae911f",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "bodyItems": [
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 4,
+                                    "text": "STANDARDIZED QUESTION"
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "A standardized question is one that’s been asked before in other, independent studies. By using the same question in this study, researchers can compare the studies and gain insights."
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 3
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "This question was adapted from the U.S. Census Current Population Survey."
+                                }
+                            ],
+                            "detailText": "",
+                            "identifier": "5fd77101-0cbc-4a30-a606-8adcce079197",
+                            "text": "",
+                            "title": "About This Question"
+                        }
+                    },
+                    "optional": 0,
+                    "showsProgress": true,
+                    "tagText": "STANDARDIZED QUESTION",
+                    "text": "Which of the following best describes your current employment situation?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKSESAnswerFormat",
+                        "bottomRungText": "Worst off",
+                        "topRungText": "Best off"
+                    },
+                    "detailText": "Think of this ladder as representing where people stand in the country you live in.\n\nAt the top of the ladder are the people who are the best off – those who have the most money, the most education, and the most respected jobs. At the bottom are the people who are the worst off – those who have the least money, least education, the least respected jobs, or no job. The higher up you are on this ladder, the closer you are to the people at the very top; the lower you are, the closer you are to the people at the very bottom.\n\nPlease select where you think you stand at this time in your life relative to other people around you.",
+                    "identifier": "505e3880-3d5f-4e20-8546-1d76a26d4522",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "bodyItems": [
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 4,
+                                    "text": "STANDARDIZED QUESTION"
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "A standardized question is one that’s been asked before in other, independent studies. By using the same question in this study, researchers can compare the studies and gain insights."
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 3
+                                },
+                                {
+                                    "_class": "ORKBodyItem",
+                                    "bodyItemStyle": 0,
+                                    "detailText": "This is an example of a standardized question commonly used in research surveys."
+                                }
+                            ],
+                            "detailText": "",
+                            "identifier": "4aab5952-757a-4a91-9ab3-cc1aa5bb9ca1",
+                            "text": "",
+                            "title": "About This Question"
+                        }
+                    },
+                    "optional": 1,
+                    "showsProgress": true,
+                    "tagText": "STANDARDIZED QUESTION",
+                    "text": "Where would you place yourself on this ladder?"
+                }
+            ],
+            "identifier": "step-01190390-5c01-11e9-8cf2-af4fadae911f",
+            "optional": 0,
+            "text": "",
+            "title": "Survey"
+        },
+        {
+            "_class": "ORKFormStep",
+            "identifier": "aa0eba9c-a4d3-4410-bc20-33b7f2376e46",
+            "optional": 0,
+            "title": "Survey",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "aa0eba9c-a4d3-4410-bc20-33b7f2376e46",
+                    "text": "What best describes your unemployment situation at this time?",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "singleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Unemployed for less than 1 year",
+                                "value": "Unemployed for less than 1 year"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Unemployed for more than 1 year",
+                                "value": "Unemployed for more than 1 year"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "I prefer not to answer",
+                                "value": "Prefer not to answer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_class": "ORKFormStep",
+            "formItems": [
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "eed4f63a-e7da-488f-9118-f1a3d2a62132-header",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "detailText": "",
+                            "identifier": "9df915af-ffed-49b5-ac3a-80cb312825a9",
+                            "text": "If you live in a ZIP code with few people in it, the study will only receive the first 3 digits of your ZIP code.",
+                            "title": "About This Question"
+                        }
+                    },
+                    "showsProgress": true,
+                    "text": "What is your ZIP code?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextAnswerFormat",
+                        "customDontKnowButtonText": "I prefer not to answer",
+                        "keyboardType": 5,
+                        "multipleLines": false,
+                        "showDontKnowButton": 1,
+                        "textContentType": "postal-code"
+                    },
+                    "identifier": "eed4f63a-e7da-488f-9118-f1a3d2a62132",
+                    "optional": 0,
+                    "placeholder": "Add ZIP code",
+                    "showsProgress": true
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "50f9dbfb-f78b-4615-a7d4-bfededec531b-header",
+                    "showsProgress": true,
+                    "text": "What is your height?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKHeightAnswerFormat",
+                        "customDontKnowButtonText": "I prefer not to answer",
+                        "showDontKnowButton": 1
+                    },
+                    "identifier": "50f9dbfb-f78b-4615-a7d4-bfededec531b",
+                    "optional": 0,
+                    "placeholder": "Add height",
+                    "showsProgress": true
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "identifier": "2b905361-53b4-437c-b1af-a2212da8ac47-header",
+                    "showsProgress": true,
+                    "text": "What is your current weight?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKWeightAnswerFormat",
+                        "customDontKnowButtonText": "I prefer not to answer",
+                        "defaultValue": 185,
+                        "maximumValue": 800,
+                        "measurementSystem": 2,
+                        "minimumValue": 40,
+                        "showDontKnowButton": 1
+                    },
+                    "identifier": "2b905361-53b4-437c-b1af-a2212da8ac47",
+                    "optional": 0,
+                    "placeholder": "Add weight",
+                    "showsProgress": true
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "singleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Female",
+                                "value": "Female"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Male",
+                                "value": "Male"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Intersex",
+                                "value": "Intersex"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    },
+                    "identifier": "e98aa4d0-65c5-42fb-9133-9f00611bc221",
+                    "optional": 0,
+                    "showsProgress": true,
+                    "text": "What was the sex assigned on your original birth certificate?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "singleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Yes",
+                                "value": "yes"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "No",
+                                "value": "no"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    },
+                    "identifier": "231f34b7-bc39-4a0f-88ed-ad9d283352b6",
+                    "optional": 0,
+                    "showsProgress": true,
+                    "text": "Do you identify as intersex?"
+                },
+                {
+                    "_class": "ORKFormItem",
+                    "answerFormat": {
+                        "_class": "ORKTextChoiceAnswerFormat",
+                        "style": "multipleChoice",
+                        "textChoices": [
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Woman",
+                                "value": "Woman"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Man",
+                                "value": "Man"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Trans Woman",
+                                "value": "Trans Woman"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Trans Man",
+                                "value": "Trans Man"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Genderqueer / Non-binary",
+                                "value": "Genderqueer / Non-binary"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 0,
+                                "text": "Another gender identity",
+                                "value": "Another gender identity"
+                            },
+                            {
+                                "_class": "ORKTextChoice",
+                                "exclusive": 1,
+                                "text": "I prefer not to answer",
+                                "value": "skip"
+                            }
+                        ]
+                    },
+                    "detailText": "",
+                    "identifier": "0feb345f-f93a-464f-98fc-381f61e7cea5",
+                    "learnMoreItem": {
+                        "_class": "ORKLearnMoreItem",
+                        "learnMoreInstructionStep": {
+                            "_class": "ORKLearnMoreInstructionStep",
+                            "detailText": "",
+                            "identifier": "c250eb5f-754b-42a6-b0f8-d82cee088acc",
+                            "text": "This information provides context related to your health, behaviors, and risks that could have an impact on your overall health.",
+                            "title": "About This Question"
+                        }
+                    },
+                    "optional": 0,
+                    "showsProgress": true,
+                    "text": "Which of the following best describes your gender identity?"
+                }
+            ],
+            "identifier": "1c27fa16-a3f8-471c-adee-9e1f7fae60f6",
+            "optional": 0,
+            "text": "The following questions collect additional information.",
+            "title": "Survey"
+        }
+    ]
+}

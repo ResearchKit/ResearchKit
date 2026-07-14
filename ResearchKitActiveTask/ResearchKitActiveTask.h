@@ -1,4 +1,3 @@
-//
 /*
  Copyright (c) 2022, Apple Inc. All rights reserved.
  
@@ -82,6 +81,7 @@ FOUNDATION_EXPORT const unsigned char ResearchKitActiveTaskVersionString[];
 #import <ResearchKitActiveTask/ORKSpeechRecognitionResult.h>
 #import <ResearchKitActiveTask/ORKSpeechRecognitionStep.h>
 #import <ResearchKitActiveTask/ORKSpeechRecognitionStepViewController.h>
+#import <ResearchKitActiveTask/ORKStroopStep.h>
 #import <ResearchKitActiveTask/ORKStroopResult.h>
 #import <ResearchKitActiveTask/ORKStroopStepViewController.h>
 #import <ResearchKitActiveTask/ORKTappingIntervalResult.h>
@@ -110,3 +110,7 @@ FOUNDATION_EXPORT const unsigned char ResearchKitActiveTaskVersionString[];
 #import <ResearchKitActiveTask/ORKUSDZModelManager.h>
 #import <ResearchKitActiveTask/ORKUSDZModelManagerResult.h>
 #import <ResearchKitActiveTask/ORKWalkingTaskStepViewController.h>
+
+// Serialization
+#import <ResearchKitActiveTask/ORKActiveTaskSerializationEntryProvider.h>
+#import <ResearchKitActiveTask/ORKESerializer+ActiveTaskSerializationEntryProvider.h>

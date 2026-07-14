@@ -4,7 +4,7 @@
 ResearchKit Framework
 ===========
 
-![VCS](https://img.shields.io/badge/dvcs-Git%20%2B%20LFS-tomato.svg) ![Platform](https://img.shields.io/cocoapods/p/ResearchKit.svg) ![CocoaPods](https://img.shields.io/cocoapods/v/ResearchKit.svg) ![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license) ![](https://travis-ci.com/ResearchKit/ResearchKit.svg?branch=master)
+![VCS](https://img.shields.io/badge/dvcs-Git%20%2B%20LFS-tomato.svg) ![Platform](https://img.shields.io/cocoapods/p/ResearchKit.svg) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license)
 
 The *ResearchKit™ framework* is an open source software framework that makes it easy to create apps
 for medical research or for other research projects.
@@ -24,7 +24,7 @@ for medical research or for other research projects.
 
 # Requirements <a name="requirements"></a>
 
-The *ResearchKit framework* codebase supports iOS and requires Xcode 12.0 or newer. The *ResearchKit framework* has a Base SDK version of 13.0.
+The *ResearchKit framework* codebase supports iOS and requires Xcode 16.0 or newer. The *ResearchKit framework* has a Base SDK version of 17.0.
 
 # Documentation <a name="documentation"></a>
 
@@ -36,15 +36,11 @@ View the *ResearchKit framework* documentation by setting ResearchKit as your ta
 # Getting Started <a name="gettingstarted"></a>
 
 * [Website](https://www.researchandcare.org)
-* [WWDC: ResearchKit and CareKit Reimagined](https://developer.apple.com/videos/play/wwdc2019/217/)
 
 
 ### Install as an embedded framework <a name="installation"></a>
 
-1. Clone or download the project source code to the desired location in your project.
-2. Drag the ResearchKit.xcodeproj file into your Xcode Project. The drop target should be the target Xcode Project icon at the top of the Project Navigator.
-3. In the Import Window, select "Reference files in Place" and click Finish
-4. Embed *ResearchKit* as a dynamic framework within your app by adding it to the "Frameworks, Libraries, and Embedded Content" section for your target, as illustrated in the figure below.
+Download the project source code and drag in ResearchKit.xcodeproj. Then, embed *ResearchKit* framework in your app by adding it to the "Frameworks, Libraries, and Embedded Content" section for your target as shown in the figure below.
 
 <img width="1000" alt="ebedded-framework" src="https://github.com/ResearchKit/ResearchKit/assets/29615893/7479f313-ecc7-4d94-8c64-c58ae7362a4d">
 
@@ -140,7 +136,7 @@ The consent steps are presented in the figure below.
 |---|---|
 | ![consent-welcome-page](https://github.com/ResearchKit/ResearchKit/assets/29615893/e6cbbe07-47ed-4bb4-a84a-f3bf612e9122) | ![consent-before-you-join](https://github.com/ResearchKit/ResearchKit/assets/29615893/687fe345-14d9-4356-9c37-c6a2714875ae) |
 
-Vist the `Obtaining Consent`article in ResearchKit's Documentation for
+Visit the `Obtaining Consent`article in ResearchKit's Documentation for
 more examples that include signature collection and PDF file storage.
 
 # Active Tasks <a name="active-tasks"></a>

@@ -114,8 +114,10 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, nullable) NSString *customDontKnowButtonText;
 
-
-@property (nonatomic) ORKDontKnowButtonStyle dontKnowButtonStyle;
+/**
+ @deprecated dontKnowButtonStyle is deprecated. All "don't know" buttons now use the CircleChoice style unconditionally.
+ */
+@property (nonatomic) ORKDontKnowButtonStyle dontKnowButtonStyle __attribute__((deprecated("dontKnowButtonStyle is deprecated and will be removed in a future release.")));
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
@@ -201,17 +203,32 @@ ORK_CLASS_AVAILABLE
 @end
 
 
+/// An answer format that presents a list of color choices.
+///
+/// Use ``ORKColorChoiceAnswerFormat`` to ask participants to select one or more colors
+/// from a predefined set of ``ORKColorChoice`` objects. This answer format produces an
+/// ``ORKChoiceQuestionResult``.
 ORK_CLASS_AVAILABLE
 @interface ORKColorChoiceAnswerFormat : ORKAnswerFormat
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
+/// Returns an initialized color choice answer format using the specified question style and
+/// array of color choices.
+///
+/// - Parameters:
+///   - style: The style of question, such as single or multiple choice.
+///   - colorChoices: An array of ``ORKColorChoice`` objects.
+///
+/// - Returns: An initialized color choice answer format.
 - (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
                  colorChoices:(NSArray<ORKColorChoice *> *)colorChoices NS_DESIGNATED_INITIALIZER;
 
+/// The style of the question (single or multiple choice).
 @property (readonly) ORKChoiceAnswerStyle style;
 
+/// An array of ``ORKColorChoice`` objects representing the color options presented to participants.
 @property (copy, readonly) NSArray<ORKColorChoice *> *colorChoices;
 
 @end
@@ -308,6 +325,18 @@ ORK_CLASS_AVAILABLE
 + (instancetype)choiceWithText:(NSString *)text value:(NSObject<NSCopying, NSSecureCoding> *)value;
 
 /**
+ Returns a choice object that includes the specified primary text and VoiceOver readable replacemennt text.
+ 
+ @param text                        The primary text that describes the choice in a localized string.
+ @param voiceOverReadableText       The localized text VoiceOver should read in place of the primary text for better comprehension.
+ @param value                       The value to record in a result object when this item is selected.
+                                    Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(NSString *)text voiceOverReadableText:(NSString *)voiceOverReadableText value:(NSObject<NSCopying, NSSecureCoding> *)value;
+
+/**
  Returns a choice object that includes the specified primary text.
  
  @param text        The primary text that describes the choice in a localized string.
@@ -333,6 +362,21 @@ ORK_CLASS_AVAILABLE
                   detailText:(nullable NSString *)detailText
                        value:(NSObject<NSCopying, NSSecureCoding> *)value
                     exclusive:(BOOL)exclusive;
+
+/**
+ Returns an initialized text choice object using the specified primary text, a VoiceOver readable replacement text if necessary, associated value, and exclusivity.
+  
+ @param text                    The primary text that describes the choice in a localized string.
+ @param voiceOverReadableText   The localized text VoiceOver should read in place of the primary text for better comprehension.
+ @param value                   The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ @param exclusive               Whether this choice is to be considered exclusive within the set of choices.
+
+ @return An initialized text choice.
+ */
+- (instancetype)initWithText:(NSString *)text
+       voiceOverReadableText:(NSString *)voiceOverReadableText
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
+                   exclusive:(BOOL)exclusive;
 
 /**
  Returns an initialized text choice object using the specified primary text or text with string attributes, detail text or text with string attributes, and exclusivity.
@@ -361,6 +405,11 @@ ORK_CLASS_AVAILABLE
  In general, it's best when the text can fit on one line.
   */
 @property (copy, readonly) NSString *text;
+
+/**
+ The text VoiceOver should read instead of `text` if necessary.
+  */
+@property (copy, readonly, nullable) NSString *voiceOverReadableText;
 
 /**
  The text that describes the choice in an attributed string.
@@ -427,9 +476,31 @@ ORK_CLASS_AVAILABLE
                         value:(NSObject<NSCopying, NSSecureCoding> *)value
                     exclusive:(BOOL)exclusive;
 
+/**
+ Returns an initialized color choice object using the specified text, a VoiceOver readable replacement text
+ if necessary, associated value and exclusivity.
+ 
+ @param color                       The color associated to the choice .
+ @param text                        The primary text that describes the choice in a localized string.
+ @param voiceOverReadableText       The localized text VoiceOver should read in place of the primary text for better comprehension.
+ @param value                       The value to record in a result object when this item is selected. Only `NSString`, `NSNumber`, and `NSDate` values are supported.
+ @param exclusive                   Whether this choice is to be considered exclusive within the set of choices.
+
+ @return An initialized text choice.
+ */
+- (instancetype)initWithColor:(nullable UIColor *)color
+                         text:(nullable NSString *)text
+       voiceOverReadableText:(NSString *)voiceOverReadableText
+                       value:(NSObject<NSCopying, NSSecureCoding> *)value
+                   exclusive:(BOOL)exclusive;
+
 @property (nonatomic, copy, readonly, nullable) UIColor *color;
 
 @property (nonatomic, copy, readonly, nullable) NSString *text;
+/**
+ The text VoiceOver should read instead of `text` if necessary.
+  */
+@property (copy, readonly, nullable) NSString *voiceOverReadableText;
 
 @property (nonatomic, copy, readonly, nullable) NSString *detailText;
 
@@ -488,8 +559,8 @@ ORK_CLASS_AVAILABLE
                                                  maximumDate:(nullable NSDate *)maximumDate
                                                     calendar:(nullable NSCalendar *)calendar;
 
-+ (ORKDateAnswerFormat *)dateTimeAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
-                                                  daysAfterCurrentDate:(NSInteger)daysAfter
++ (ORKDateAnswerFormat *)dateTimeAnswerFormatWithDaysBeforeCurrentDate:(NSNumber *)daysBefore
+                                                  daysAfterCurrentDate:(NSNumber *)daysAfter
                                                               calendar:(nullable NSCalendar *)calendar;
 
 + (ORKDateAnswerFormat *)dateAnswerFormat;
@@ -498,8 +569,8 @@ ORK_CLASS_AVAILABLE
                                              maximumDate:(nullable NSDate *)maximumDate
                                                 calendar:(nullable NSCalendar *)calendar;
 
-+ (ORKDateAnswerFormat *)dateAnswerFormatWithDaysBeforeCurrentDate:(NSInteger)daysBefore
-                                              daysAfterCurrentDate:(NSInteger)daysAfter
++ (ORKDateAnswerFormat *)dateAnswerFormatWithDaysBeforeCurrentDate:(NSNumber *)daysBefore
+                                              daysAfterCurrentDate:(NSNumber *)daysAfter
                                                           calendar:(nullable NSCalendar *)calendar;
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
@@ -761,7 +832,8 @@ ORK_CLASS_AVAILABLE
  @param maximumValue                The upper bound of the scale.
  @param minimumValue                The lower bound of the scale.
  @param defaultValue                The default value of the scale. If this value is out of range,
-                                        the slider is displayed without a default value.
+                                        the slider is displayed without a default value. Pass
+                                        `ORKDoubleDefaultValue` for no default.
  @param maximumFractionDigits       The maximum number of fractional digits to display.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
                                         scale, pass `NO`.
@@ -786,7 +858,8 @@ ORK_CLASS_AVAILABLE
  @param maximumValue            The upper bound of the scale.
  @param minimumValue            The lower bound of the scale.
  @param defaultValue            The default value of the scale. If this value is out of range, the
-                                    slider is displayed without a default value.
+                                    slider is displayed without a default value. Pass
+                                    `ORKDoubleDefaultValue` for no default.
  @param maximumFractionDigits   The maximum number of fractional digits to display.
  @param vertical                Pass `YES` to use a vertical scale; for the default horizontal scale,
                                     pass `NO`.
@@ -807,7 +880,8 @@ ORK_CLASS_AVAILABLE
  @param maximumValue            The upper bound of the scale.
  @param minimumValue            The lower bound of the scale.
  @param defaultValue            The default value of the scale. If this value is out of range, the
-                                    slider is displayed without a default value.
+                                    slider is displayed without a default value. Pass
+                                    `ORKDoubleDefaultValue` for no default.
  @param maximumFractionDigits   The maximum number of fractional digits to display.
  
  @return An initialized scale answer format.
@@ -831,7 +905,8 @@ ORK_CLASS_AVAILABLE
  The default value for the slider. (read-only)
  
  If the value of this property is less than `minimum` or greater than `maximum`, the slider has no
- default value.
+ default value and displays a "Move slider to enter value" prompt. Use `ORKDoubleDefaultValue` to
+ indicate no default.
  */
 @property (readonly) double defaultValue;
 
@@ -1650,13 +1725,13 @@ When the value of this property is `nil`, there is no minimum.
  This number passed to this property will set the minimum date to the relative amount of days
  before the current date.
  */
-@property (nonatomic) NSInteger daysBeforeCurrentDateToSetMinimumDate;
+@property (copy, nonatomic, nullable) NSNumber *daysBeforeCurrentDateToSetMinimumDate;
 
 /**
  This number passed to this property will set the minimum date to the relative amount of days
  after the current date.
  */
-@property (nonatomic) NSInteger daysAfterCurrentDateToSetMinimumDate;
+@property (copy, nonatomic, nullable) NSNumber *daysAfterCurrentDateToSetMinimumDate;
 
 
 /**
@@ -1719,7 +1794,6 @@ ORK_CLASS_AVAILABLE
  @return An initialized text answer format.
  */
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
-
 
 /**
  The regular expression used to validate user's input.
@@ -2081,19 +2155,24 @@ ORK_CLASS_AVAILABLE
 
 /**
  The `ORKAgeAnswerFormat` class represents the answer format for questions that require users
- to enter a weight.
+ to enter an age.
  
- A weight answer format produces an `ORKNumericQuestionResult` object. The result is always reported
- in the metric system using the `kg` unit.
+ The following are the default bounds for an age answer format - all expressed in completed years:
+ * Minimum age value is 1
+ * Maximum age value is 125
+The bound values can also be customized at initialization, with the following restrictions:
+ * Minimum age value can not be lower than 0
+ * Maximum age value can not be higher than 150
+ 
+ An age answer format produces an `ORKNumericQuestionResult` object.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKAgeAnswerFormat : ORKAnswerFormat
 
 /**
- Returns an initialized weight answer format using the measurement system specified in the current
- locale.
+ Returns an initialized age answer format in complete years.
  
- @return An initialized weight answer format.
+ @return An initialized age answer format.
  */
 - (instancetype)init;
 

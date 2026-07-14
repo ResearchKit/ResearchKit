@@ -179,7 +179,10 @@ NSString * const ORKPDFViewerStepViewAccessibilityIdentifier = @"ORKPDFViewerSte
 - (void)createNewPDFFile {
     NSURL *fileURL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", _newFilename]];
     NSData *pdfData = [[_pdfView getDocument] dataRepresentation];
-    [[NSFileManager defaultManager] createFileAtPath:[fileURL path] contents:pdfData attributes:nil];
+    NSError *error = nil;
+    if (![pdfData writeToURL:fileURL options:NSDataWritingAtomic|ORKDataWritingFileProtectionFromMode(self.fileProtectionMode) error:&error]) {
+        ORK_Log_Error("Error writing PDF file: %@", error);
+    }
 }
 
 

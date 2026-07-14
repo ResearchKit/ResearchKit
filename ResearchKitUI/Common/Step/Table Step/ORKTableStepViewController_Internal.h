@@ -48,4 +48,6 @@
  */
 @property (nonatomic, readonly) UITableViewStyle tableViewStyle;
 
+@property (nonatomic, strong) NSMutableDictionary<NSIndexPath *, NSNumber *> *tableCellHeightMapping;
+
 @end

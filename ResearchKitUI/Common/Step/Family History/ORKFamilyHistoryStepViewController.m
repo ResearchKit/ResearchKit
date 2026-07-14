@@ -45,6 +45,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKTableContainerView.h"
 #import "ORKTaskViewController_Internal.h"
+#import "UIView+Additions.h"
 
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKAnswerFormat_Internal.h>
@@ -64,7 +65,7 @@
 #import <ResearchKit/ORKSkin.h>
 #import <ResearchKit/ORKStep_Private.h>
 #import <ResearchKit/ORKQuestionResult.h>
-
+#import <ResearchKit/ResearchKit-Swift.h>
 
 @class ORKTaskViewController;
 
@@ -81,7 +82,7 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ORKStepContentView *headerView;
-
+@property (nonatomic, strong) NSMutableDictionary<NSIndexPath *, NSNumber *> *tableCellHeightMapping;
 @end
 
 
@@ -102,7 +103,6 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     BOOL _editingPreviousTask;
     ORKRelatedPerson *_relativeForPresentedTask;
 }
-
 
 - (instancetype)ORKFamilyHistoryStepViewController_initWithResult:(ORKResult *)result {
     ORKStepResult *stepResult = (ORKStepResult *)result;
@@ -141,6 +141,11 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     [self configureOrderedTasks];
 
     [_tableView reloadData];
+
+    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKFamilyHistoryStepViewController *traitChangeView, UITraitCollection *previousTraitCollection) {
+        [traitChangeView setupViews];
+        [traitChangeView updateViewColors];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -174,14 +179,11 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     [_tableContainer setNeedsLayout];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self setupViews];
-    [self updateViewColors];
-}
-
 - (void)updateNavBarBackgroundColor:(UIColor *)color {
+    if (ORKLiquidGlassSupportEnabled()) {
+        return;
+    }
+
     UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
     [appearance configureWithOpaqueBackground];
     appearance.backgroundColor = color;
@@ -192,9 +194,7 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     self.navigationController.navigationBar.compactAppearance = appearance;
     self.navigationController.navigationBar.standardAppearance = appearance;
     
-    if (@available(iOS 15.0, *)) {
-        self.navigationController.navigationBar.compactScrollEdgeAppearance = appearance;
-    }
+    self.navigationController.navigationBar.compactScrollEdgeAppearance = appearance;
 }
 
 - (void)setupConstraints {
@@ -204,37 +204,12 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     _tableContainer.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = nil;
 
-    
     _constraints = @[
-                     [NSLayoutConstraint constraintWithItem:_tableContainer
-                                                  attribute:NSLayoutAttributeTop
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeTop
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_tableContainer
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_tableContainer
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_tableContainer
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0]
-                     ];
+        [self.view.topAnchor constraintEqualToAnchor:_tableContainer.topAnchor],
+        [self.view.leadingAnchor constraintEqualToAnchor:_tableContainer.leadingAnchor],
+        [self.view.trailingAnchor constraintEqualToAnchor:_tableContainer.trailingAnchor],
+        [self.view.bottomAnchor constraintEqualToAnchor:_tableContainer.bottomAnchor],
+    ];
     [NSLayoutConstraint activateConstraints:_constraints];
     
 }
@@ -246,7 +221,6 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.clipsToBounds = YES;
-    _tableView.rowHeight = UITableViewAutomaticDimension;
     _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
     _tableView.estimatedSectionHeaderHeight = 30.0;
@@ -631,8 +605,6 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     _navigationFooterView.continueEnabled = YES;
     _navigationFooterView.continueButtonItem = self.continueButtonItem;
     _navigationFooterView.optional = self.step.optional;
-    
-    [_navigationFooterView removeStyling];
 }
 
 - (void)handleRelatedPersonTaskResult:(ORKTaskResult *)taskResult taskIdentifier:(NSString *)identifier {
@@ -674,7 +646,7 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     }
     
     [self resultUpdated];
-    
+    [_tableContainer resizeFooterToFit];
     [_tableContainer setNeedsLayout];
 }
 
@@ -739,7 +711,7 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
                                                               conditionsKeyValues:[_conditionsTextAndValues copy]];
     [cell configureWithDetailValues:detailValues conditionsValues:conditionValues isLastItemBeforeAddRelativeButton:shouldAddExtraSpaceBelowCell];
     cell.delegate = self;
-    
+
     return cell;
 }
 
@@ -765,7 +737,7 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     BOOL isExpanded = _relatedPersons[relativeGroup.identifier].count > 0;
     [headerView setExpanded:isExpanded];
     
-    return headerView;
+    return [UIView layoutContainerFor:headerView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -791,12 +763,21 @@ NSString * const ORKHealthConditionPreferNotToAnswerChoiceValue = @"prefer not t
     BOOL isExpanded = _relatedPersons[relativeGroup.identifier].count > 0;
     [footerView setExpanded:isExpanded];
     
-    return footerView;
+    return [UIView layoutContainerFor:footerView];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableCellHeightMapping == nil) {
+        self.tableCellHeightMapping = [NSMutableDictionary new];
+    }
+
+    [self.tableCellHeightMapping setObject:[NSNumber numberWithFloat:cell.bounds.size.height] forKey:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewAutomaticDimension;
-}
+    CGFloat cachedCellHeight = [self.tableCellHeightMapping[indexPath] floatValue];
 
+    return automaticMinimumHeightForTableViewRow(cachedCellHeight);
+}
 
 @end

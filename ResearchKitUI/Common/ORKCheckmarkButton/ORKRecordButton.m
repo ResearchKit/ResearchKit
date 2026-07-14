@@ -320,6 +320,10 @@ static NSString * ORKRecordButtonLabelForType(ORKRecordButtonType type)
         [self setupStackView];
         [self setupControl];
         [self setupTextLabel];
+
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class] withHandler:^(ORKRecordButton *traitChangeView, UITraitCollection *previousTraitCollection) {
+            traitChangeView->_textLabel.font = [traitChangeView bodyTextFont];
+        }];
     }
     return self;
 }
@@ -339,13 +343,6 @@ static NSString * ORKRecordButtonLabelForType(ORKRecordButtonType type)
     {
         [self.delegate buttonPressed:self];
     }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    _textLabel.font = [self bodyTextFont];
 }
 
 - (void)setupStackView

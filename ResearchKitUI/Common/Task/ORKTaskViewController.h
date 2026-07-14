@@ -35,7 +35,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKOrderedTask;
 @class ORKResult;
+@class ORKESerializer;
 @class ORKStep;
 @class ORKStepViewController;
 @class ORKTaskResult;
@@ -273,6 +275,16 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 /**
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreButtonPressedWithStep:(ORKLearnMoreInstructionStep *)learnMoreStep forStepViewController:(ORKStepViewController *)stepViewController;
+
+/**
+ Ask the delegate for an ORKESerializer instance that can encode
+ the provided task.
+ 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param task              The current task presented by the `ORKTaskViewController`.
+ */
+- (ORKESerializer *)taskViewController:(ORKTaskViewController *)taskViewController
+                     serializerForTask:(ORKOrderedTask *)task;
 @end
 
 
@@ -493,6 +505,28 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSURL *outputDirectory;
 
 /**
+ The file protection mode applied to files written during the task.
+
+ Controls the `NSFileProtection` level for images, video, audio, serialized data,
+ and other files that ResearchKit writes to the `outputDirectory`. Set this property
+ after instantiating the task view controller and before presenting it.
+
+ The default value is `ORKFileProtectionComplete` (Class A encryption).
+ */
+@property (nonatomic, assign) ORKFileProtectionMode fileProtectionMode;
+
+/**
+ A Boolean value that determines whether files written during the task are excluded from iCloud backups.
+
+ When set to `YES`, ResearchKit applies `NSURLIsExcludedFromBackupKey` to the `outputDirectory`,
+ excluding all of its contents from iCloud backups. Set this property after
+ instantiating the task view controller and before presenting it.
+
+ The default value is `NO`.
+ */
+@property (nonatomic, assign) BOOL excludesFilesFromBackup;
+
+/**
  A Boolean value indicating whether progress is shown in the navigation bar.
  
  Setting this property to `YES` does not display progress if you don't also implement the `progress`
@@ -521,7 +555,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  Forces navigation to the next step.
- 
+
  Call this method to force forward navigation. This method is called by the framework
  if the user takes an action that requires navigation, or if the step is timed
  and the timer completes.
@@ -537,9 +571,14 @@ ORK_CLASS_AVAILABLE
 - (void)goBackward;
 
 /**
- Returns true if the step provided is instruction step and is the  first step in the task.
+ Returns whether the given step is the last beginning instruction step in the task.
+
+ @param step   The step to check.
+
+ @return Always returns `NO`. This method is deprecated and will be removed in a future release.
  */
-- (BOOL)isStepLastBeginningInstructionStep:(ORKStep *)step;
+- (BOOL)isStepLastBeginningInstructionStep:(ORKStep *)step
+    __deprecated_msg("This method reflects internal navigation state that no longer exists. Do not use.");
 
 /**
  A Boolean value indicating whether the navigation bar is hidden.

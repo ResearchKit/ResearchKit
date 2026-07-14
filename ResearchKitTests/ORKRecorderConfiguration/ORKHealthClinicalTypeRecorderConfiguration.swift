@@ -32,7 +32,6 @@
 import ResearchKitActiveTask
 import ResearchKitActiveTask_Private
 
-
 import Testing
 
 @testable import ResearchKitActiveTask

@@ -34,6 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKFileResult;
+
 /**
  The `ORKRangeOfMotionResult` class records the results of a range of motion active task.
  
@@ -66,6 +68,8 @@ ORK_CLASS_AVAILABLE
  The angle (degrees) passed through from the start position to the maximum angle (e.g. from when the knee is flexed to when it is extended).
  */
 @property (nonatomic, assign) double range;
+
+@property (nonatomic, strong, nullable) NSArray<ORKFileResult *> *fileResults;
 
 @end
 

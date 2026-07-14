@@ -35,31 +35,39 @@
 #import "ORKSelectionSubTitleLabel.h"
 
 #import "ORKAccessibility.h"
+#import "ORKAnswerFormat.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKAnswerTextView.h"
 #import "ORKSkin.h"
 #import "ORKCheckmarkView.h"
+#import <ResearchKit/ResearchKit-Swift.h>
 
 static const CGFloat CardTopBottomMargin = 2.0;
+static const CGFloat DetailLabelTopPadding = 5.0;
 static const CGFloat LabelTopBottomMargin = 14.0;
+static const CGFloat MinimumRowHeight = 52.0;
 static const CGFloat LabelTopBottomMarginWithColorSwatch = 18.0;
 static const CGFloat TextViewTopMargin = 20.0;
 static const CGFloat TextViewHeight = 100.0;
 static const CGFloat LabelCheckViewPadding = 10.0;
+
+#pragma mark - ORKColorChoiceCell specific constants
+
+static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
+static const CGFloat ColorSwatchViewCollapsedHeight = 50.0;
+static const CGFloat ColorSwatchViewExpandedHeight = 150.0;
 static const CGFloat ColorSwatchViewHeightWidth = 40.0;
 static const CGFloat ColorSwatchViewTopBottomPadding = 12.0;
-static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
+
 
 @interface ORKChoiceViewCell() <CAAnimationDelegate>
 
 @property (nonatomic) UIView *containerView;
 @property (nonatomic) UIImageView *textChoiceImageView;
-@property (nonatomic) UIView *colorSwatchView;
 @property (nonatomic) ORKSelectionTitleLabel *primaryLabel;
 @property (nonatomic) ORKSelectionSubTitleLabel *detailLabel;
 @property (nonatomic) ORKCheckmarkView *checkView;
 @property (nonatomic) NSMutableArray<NSLayoutConstraint *> *containerConstraints;
-@property (nonatomic, readonly) CGFloat leftRightMargin;
 @property (nonatomic, readonly) CGFloat intraCellSpacing;
 
 @end
@@ -81,6 +89,10 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
         _topBottomMargin = 0.0;
         [self setupContainerView];
         [self setupCheckView];
+
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKChoiceViewCell *traitChangeView, UITraitCollection *previousTraitCollection) {
+            traitChangeView->_fillColor = [traitChangeView __fillColor];
+        }];
     }
     return self;
 }
@@ -90,17 +102,8 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
     [self setMaskLayers];
 }
 
-- (CGFloat)leftRightMargin {
-    return self.useCardView ? ORKCardLeftRightMarginForWindow(self.window) : 0.0;
-}
-
 - (CGFloat)intraCellSpacing {
     return 0;
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    _fillColor = [self __fillColor];
 }
 
 - (void)clearLayerIfNeeded:(CALayer *)layer {
@@ -116,10 +119,6 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 }
 
 - (UIColor *)__fillColor {
-    
-    if (_shouldIgnoreDarkMode) {
-        return [UIColor whiteColor];
-    }
     
     UIColor *color = [UIColor secondarySystemGroupedBackgroundColor];;
     
@@ -151,7 +150,7 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 }
 
 - (BOOL)shouldApplyMaskLayers {
-    return _isLastItem || _isFirstItemInSectionWithoutTitle;
+    return (_isLastItem && !_shouldIgnoreCornerRadius) || _isFirstItemInSectionWithoutTitle;
 }
 
 - (void)setMaskLayers {
@@ -175,16 +174,17 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
             UIRectCorner rectCorners = [self roundedCorners];
             
             _foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height - ORKCardDefaultBorderWidth);
-            
-            CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
-            
+
+            CGFloat cornerRadius = ORKCardDefaultCornerRadii();
+            CGFloat foreLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
+
             _foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: _foreLayerBounds
                                                    byRoundingCorners: rectCorners
                                                          cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
             
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.containerView.bounds
                                                            byRoundingCorners:rectCorners
-                                                                 cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
+                                                                 cornerRadii: (CGSize){cornerRadius, cornerRadius}].CGPath;
         } else {
             
             _foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
@@ -207,7 +207,11 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 - (nullable CAShapeLayer *)lineLayer {
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     if (!_isLastItem) {
-        CGRect lineBounds = CGRectMake(ORKSurveyItemMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - ORKSurveyItemMargin, 0.5);
+        CGRect lineBounds = CGRectMake(0, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width, 0.5);
+
+        if (ORKLiquidGlassSupportEnabled()) {
+            lineBounds = CGRectInset(lineBounds, self.layoutMargins.left, 0);
+        }
         lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
         lineLayer.zPosition = 0.0f;
     }
@@ -220,7 +224,11 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
     if (!_containerView) {
         _containerView = [UIView new];
         _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _containerView.directionalLayoutMargins = ORKLargeContentLayoutMargins;
+        // Permanent minimum height — survives prepareForReuse / _containerConstraints resets.
+        [[_containerView.heightAnchor constraintGreaterThanOrEqualToConstant:MinimumRowHeight] setActive:YES];
     }
+    self.contentView.directionalLayoutMargins = ORKLargeContentLayoutMargins;
     [self.contentView addSubview:_containerView];
 }
 
@@ -234,19 +242,19 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
                                     multiplier:1.0
                                       constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
-                                     attribute:NSLayoutAttributeLeft
+                                     attribute:NSLayoutAttributeLeading
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self.contentView
-                                     attribute:NSLayoutAttributeLeft
+                                     attribute:NSLayoutAttributeLeadingMargin
                                     multiplier:1.0
-                                      constant:self.leftRightMargin],
+                                      constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
-                                     attribute:NSLayoutAttributeRight
+                                     attribute:NSLayoutAttributeTrailing
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:self.contentView
-                                     attribute:NSLayoutAttributeRight
+                                     attribute:NSLayoutAttributeTrailingMargin
                                     multiplier:1.0
-                                      constant:-self.leftRightMargin],
+                                      constant:0],
         [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeBottom
                                      relatedBy:NSLayoutRelationEqual
@@ -306,41 +314,13 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
                                                                            constant:LabelTopBottomMargin]];
         }
         
-        if (_colorSwatchView) {
-            [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                          attribute:NSLayoutAttributeCenterY
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_containerView
-                                                                          attribute:NSLayoutAttributeCenterY
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-        } else {
-            [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                          attribute:NSLayoutAttributeTop
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_containerView
-                                                                          attribute:NSLayoutAttributeTop
-                                                                         multiplier:1.0
-                                                                           constant:LabelTopBottomMargin]];
-        }
-        
-        if (_colorSwatchView) {
-            [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                          attribute:NSLayoutAttributeCenterY
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_containerView
-                                                                          attribute:NSLayoutAttributeCenterY
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-        } else {
-            [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                          attribute:NSLayoutAttributeTop
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_containerView
-                                                                          attribute:NSLayoutAttributeTop
-                                                                         multiplier:1.0
-                                                                           constant:LabelTopBottomMargin]];
-        }
+        [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:_primaryLabel
+                                                                      attribute:NSLayoutAttributeTop
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:_containerView
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.0
+                                                                       constant:LabelTopBottomMargin]];
         
         [_containerConstraints addObjectsFromArray:@[
             [NSLayoutConstraint constraintWithItem:_primaryLabel
@@ -411,7 +391,7 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 }
 
 - (void)setupConstraints {
-    if (!_primaryLabel && !_detailLabel && !_colorSwatchView) {
+    if (!_primaryLabel && !_detailLabel) {
         return;
     }
     
@@ -440,19 +420,34 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 - (void)prepareForReuse {
     _primaryLabel.text = nil;
     _detailLabel.text = nil;
-    
+
     if (_textChoiceImageView) {
         [_textChoiceImageView removeFromSuperview];
         _textChoiceImageView = nil;
     }
-    
-    if (_colorSwatchView) {
-        [_colorSwatchView removeFromSuperview];
-        _colorSwatchView = nil;
-    }
+
     [NSLayoutConstraint deactivateConstraints:_containerConstraints];
     [_containerConstraints removeAllObjects];
-    // [choiceViewCell setCellSelected:NO highlight:NO];
+
+    self.isLastItem = NO;
+    self.isFirstItemInSectionWithoutTitle = NO;
+
+    if (_animationLayer) {
+        [_animationLayer removeAllAnimations];
+        [_animationLayer removeFromSuperlayer];
+        _animationLayer = nil;
+    }
+
+    if (_contentMaskLayer) {
+        [_contentMaskLayer removeFromSuperlayer];
+        _contentMaskLayer = nil;
+    }
+    _foreLayer = nil;
+
+    _containerView.layer.cornerRadius = 0;
+    _containerView.layer.maskedCorners = 0;
+    _containerView.clipsToBounds = NO;
+
     [super prepareForReuse];
 }
 
@@ -490,9 +485,9 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
         
         if ([self shouldApplyMaskLayers]) {
             UIRectCorner rectCorners = [self roundedCorners];
+            CGFloat cornerRadius = ORKCardDefaultCornerRadii();
+            CGFloat animationLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
 
-            CGFloat animationLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
-            
             _animationLayer.path = [UIBezierPath bezierPathWithRoundedRect: _foreLayerBounds
                                                          byRoundingCorners: rectCorners
                                                                cornerRadii: (CGSize){animationLayerCornerRadii, animationLayerCornerRadii}].CGPath;
@@ -534,22 +529,9 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
     }
 }
 
-- (void)setupColorSwatchView {
-    if (!_colorSwatchView) {
-        _colorSwatchView = [UIView new];
-        _colorSwatchView.clipsToBounds = YES;
-        _colorSwatchView.layer.cornerRadius = 4.0;
-        _colorSwatchView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [_containerView addSubview:_colorSwatchView];
-    }
-}
-
 - (nullable UIView *)getLeftContentView {
     if (_textChoiceImageView) {
         return _textChoiceImageView;
-    } else if (_colorSwatchView) {
-        return _colorSwatchView;
     }
     
     return nil;
@@ -559,7 +541,7 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
     if (!_primaryLabel) {
         _primaryLabel = [ORKSelectionTitleLabel new];
         _primaryLabel.numberOfLines = 0;
-        _primaryLabel.textColor = _shouldIgnoreDarkMode ? [UIColor blackColor] : [UIColor labelColor];
+        _primaryLabel.textColor = [UIColor labelColor];
         
         [self.containerView addSubview:_primaryLabel];
         [self setPrimaryLabelFont];
@@ -610,26 +592,11 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
     }
 }
 
-- (void)setShouldIgnoreDarkMode:(BOOL)shouldIgnoreDarkMode {
-    _shouldIgnoreDarkMode = shouldIgnoreDarkMode;
-    
-    if (_checkView) {
-        _checkView.shouldIgnoreDarkMode = shouldIgnoreDarkMode;
-    }
-}
-
 - (void)setTextChoiceImage:(UIImage *)image {
-    if (image && !_colorSwatchView) {
+    if (image) {
         [self setupTextChoiceImageView];
         
         [_textChoiceImageView setImage:image];
-    }
-}
-
-- (void)setSwatchColor:(UIColor *)swatchColor {
-    if (swatchColor && !_textChoiceImageView) {
-        [self setupColorSwatchView];
-        _colorSwatchView.backgroundColor = swatchColor;
     }
 }
 
@@ -637,6 +604,12 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
     if (primaryText) {
         [self setupPrimaryLabel];
         _primaryLabel.text = primaryText;
+    }
+}
+
+- (void)setPrimaryTextVoiceOverReadableText:(nonnull NSString *)voiceOverReadableText {
+    if (_primaryLabel.text) {
+        _primaryLabel.accessibilityLabel = voiceOverReadableText;
     }
 }
 
@@ -663,18 +636,19 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 
 - (void)setPrimaryLabelFont {
     if (!_primaryLabel.attributedText) {
-        UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
-        [_primaryLabel setFont:[UIFont fontWithDescriptor:descriptor size:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+        [_primaryLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     }
 }
 
 - (void)updateCheckView {
     if (_checkView) {
-        _checkView.tintColor = self.tintColor;
         [_checkView setChecked:_cellSelected];
     }
 }
 
+- (void)updateHeightIfNeeded {
+    // should be used by subclasses
+}
 
 #pragma mark - Accessibility
 
@@ -840,6 +814,7 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 
 @end
 
+
 #pragma mark - ORKChoiceViewPlatterCell
 
 @implementation ORKChoiceViewPlatterCell
@@ -860,6 +835,238 @@ static const CGFloat ColorSwatchExpandedRightPadding = 16.0;
 
 - (nullable CAShapeLayer *)lineLayer {
     return nil;
+}
+
+@end
+
+
+#pragma mark - ORKColorChoiceCell
+
+@interface ORKColorChoiceCell()
+
+@property (nonatomic) UIView *colorSwatchView;
+
+@end
+
+@implementation ORKColorChoiceCell {
+    NSLayoutConstraint *_colorSwatchHeightConstraint;
+    UIView *_dividerView;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        if (self.containerView) {
+            [self.containerView setBackgroundColor:[self __fillColor]];
+        }
+    }
+    return self;
+}
+
+- (CGFloat)colorSwatchViewCornerRadius {
+    return ORKLiquidGlassSupportEnabled() ? 26.0 : 4.0;
+}
+
+- (CGFloat)colorSwatchViewRightPadding {
+    return ORKLiquidGlassSupportEnabled() ? 16.0 : 15.0;
+}
+
+- (void)configureWithColorChoice:(nonnull ORKColorChoice *)colorChoice isLastItem:(BOOL)isLastItem {
+    [self setSwatchColor:colorChoice.color];
+    
+    self.isExclusive = colorChoice.exclusive;;
+    self.isLastItem = isLastItem;
+    self.immediateNavigation = NO;
+    [self setPrimaryText:colorChoice.text];
+    [self setPrimaryTextVoiceOverReadableText:colorChoice.voiceOverReadableText];
+    [self setDetailText:colorChoice.detailText];
+}
+
+- (void)prepareForReuse {
+    if (_colorSwatchView) {
+        [_colorSwatchView removeFromSuperview];
+        _colorSwatchView = nil;
+    }
+    
+    [super prepareForReuse];
+}
+
+- (void)roundBottomCornersOfContainerView {
+    if (self.containerView && self.isLastItem) {
+        self.containerView.clipsToBounds = YES;
+        self.containerView.layer.maskedCorners = kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner;
+        self.containerView.layer.cornerRadius = ORKCardDefaultCornerRadii();
+    }
+}
+
+- (void)setupColorSwatchView {
+    if (!_colorSwatchView) {
+        _colorSwatchView = [UIView new];
+        _colorSwatchView.clipsToBounds = YES;
+        _colorSwatchView.layer.cornerRadius = [self colorSwatchViewCornerRadius];
+        _colorSwatchView.translatesAutoresizingMaskIntoConstraints = NO;
+        _colorSwatchView.layer.borderWidth = 3.0;
+        _colorSwatchView.layer.borderColor = [UIColor whiteColor].CGColor;
+        
+        [self.containerView addSubview:_colorSwatchView];
+    }
+}
+
+- (void)setupDividerView {
+    if (self.isLastItem) {
+        [_dividerView removeFromSuperview];
+        _dividerView = nil;
+        return;
+    }
+
+    if (!_dividerView) {
+        _dividerView = [UIView new];
+        [_dividerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_dividerView setBackgroundColor:[UIColor separatorColor]];
+
+        if (self.containerView) {
+            [self.containerView addSubview:_dividerView];
+        }
+    }
+}
+
+- (void)updateHeightIfNeeded {
+    if (!_colorSwatchView) {
+        return;
+    }
+    
+    _colorSwatchHeightConstraint.constant = self.cellSelected ? ColorSwatchViewExpandedHeight : ColorSwatchViewCollapsedHeight;
+
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                            [self layoutIfNeeded];
+                     }
+                     completion: nil];
+}
+
+#pragma mark - Setters
+
+- (void)setSwatchColor:(UIColor *)swatchColor {
+    if (swatchColor) {
+        [self setupColorSwatchView];
+        _colorSwatchView.backgroundColor = swatchColor;
+    }
+}
+
+- (void)setCellSelected:(BOOL)cellSelected highlight:(BOOL)highlight {
+    [super setCellSelected:cellSelected highlight:NO];
+}
+
+- (void)setMaskLayers {
+    // Do nothing here. The color choice cell sets the view's background color.
+}
+
+- (void)setIsLastItem:(BOOL)isLastItem {
+    [super setIsLastItem:isLastItem];
+    [self setupDividerView];
+    [self roundBottomCornersOfContainerView];
+    [self setupConstraints];
+}
+
+#pragma mark - Constraints
+
+- (void)setupConstraints {
+    if (!self.primaryLabel && !self.detailLabel && !_colorSwatchView) {
+        return;
+    }
+    
+    if (self.containerConstraints) {
+        [NSLayoutConstraint deactivateConstraints:self.containerConstraints];
+    }
+    
+    self.containerConstraints = [[NSMutableArray alloc] init];
+    [self addContainerViewToSelfConstraints];
+    [self addColorSwatchViewToContainerViewConstraints];
+    [self addPrimaryLabelToContainerViewConstraints];
+    [self addDetailLabelConstraints];
+    [self addCheckViewToContainerViewConstraints];
+    [self addContainerViewBottomConstraint];
+    [self addDividerViewToContainerViewConstraints];
+    
+    [NSLayoutConstraint activateConstraints:self.containerConstraints];
+}
+
+- (void)addColorSwatchViewToContainerViewConstraints {
+    if (!_colorSwatchView) {
+        return;
+    }
+    
+    CGFloat initialHeight = self.isCellSelected ? ColorSwatchViewExpandedHeight : ColorSwatchViewCollapsedHeight;
+    _colorSwatchHeightConstraint = [_colorSwatchView.heightAnchor constraintEqualToConstant:initialHeight];
+    [_colorSwatchHeightConstraint setPriority:UILayoutPriorityDefaultHigh];
+    [self.containerConstraints addObject: _colorSwatchHeightConstraint];
+    
+    [self.containerConstraints addObject:[_colorSwatchView.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:ORKSurveyItemMargin]];
+    [self.containerConstraints addObject:[_colorSwatchView.trailingAnchor constraintEqualToAnchor:self.checkView.leadingAnchor
+                                                                                         constant:-[self colorSwatchViewRightPadding]]];
+    
+    if ((!self.primaryLabel && !self.detailLabel)) {
+        [self.containerConstraints addObject:[_colorSwatchView.topAnchor constraintEqualToAnchor:self.containerView.topAnchor
+                                                                                        constant:LabelTopBottomMargin]];
+    } else {
+        NSLayoutAnchor *topAnchor = self.detailLabel ? self.detailLabel.bottomAnchor : self.primaryLabel.bottomAnchor;
+        [self.containerConstraints addObject:[_colorSwatchView.topAnchor constraintEqualToAnchor:topAnchor constant:LabelTopBottomMargin]];
+    }
+}
+
+- (void)addPrimaryLabelToContainerViewConstraints {
+    if (!self.primaryLabel) {
+        return;
+    }
+
+    [self.containerConstraints addObject:[self.primaryLabel.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:ORKSurveyItemMargin]];
+    [self.containerConstraints addObject:[self.primaryLabel.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:LabelTopBottomMargin]];
+    [self.containerConstraints addObject:[self.primaryLabel.trailingAnchor constraintEqualToAnchor:self.checkView.leadingAnchor constant:-LabelCheckViewPadding]];
+}
+
+- (void)addDetailLabelConstraints {
+    if (!self.detailLabel) {
+        return;
+    }
+    
+    [self.containerConstraints addObject:[self.detailLabel.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:ORKSurveyItemMargin]];
+    [self.containerConstraints addObject:[self.detailLabel.trailingAnchor constraintEqualToAnchor:self.checkView.leadingAnchor constant:-ORKSurveyItemMargin]];
+    
+    if (self.primaryLabel) {
+        [self.containerConstraints addObject:[self.detailLabel.topAnchor constraintEqualToAnchor:self.primaryLabel.bottomAnchor constant:DetailLabelTopPadding]];
+    } else {
+        [self.containerConstraints addObject:[self.detailLabel.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:LabelTopBottomMargin]];
+    }
+}
+
+- (void)addContainerViewBottomConstraint {
+    UIView *bottomMostView = self.detailLabel ?: self.primaryLabel;
+
+    // only use extra margin if the primary or detail label have been initialized
+    CGFloat bottomMargin = (_colorSwatchView && bottomMostView) ? LabelTopBottomMarginWithColorSwatch : LabelTopBottomMargin;
+
+    if (_colorSwatchView) {
+        bottomMostView = _colorSwatchView;
+        bottomMargin = ColorSwatchViewTopBottomPadding;
+    }
+
+    [self.containerConstraints addObject:[self.containerView.bottomAnchor constraintEqualToAnchor:bottomMostView.bottomAnchor constant:bottomMargin]];
+}
+
+- (void)addDividerViewToContainerViewConstraints {
+   if (_dividerView) {
+       CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
+
+       NSLayoutConstraint *heightConstraint = [_dividerView.heightAnchor constraintEqualToConstant:separatorHeight];
+       [heightConstraint setPriority:UILayoutPriorityDefaultHigh];
+
+       [self.containerConstraints addObject:heightConstraint];
+       [self.containerConstraints addObject:[_dividerView.leadingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.leadingAnchor]];
+       [self.containerConstraints addObject:[_dividerView.trailingAnchor constraintEqualToAnchor:self.containerView.layoutMarginsGuide.trailingAnchor]];
+       [self.containerConstraints addObject:[_dividerView.bottomAnchor constraintEqualToAnchor:self.containerView.bottomAnchor]];
+   }
 }
 
 @end

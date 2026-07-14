@@ -38,13 +38,12 @@
 @implementation ORKHeadlineLabel
 
 + (UIFont *)defaultFontInSurveyMode:(BOOL)surveyMode {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    const CGFloat defaultHeadlineSize = 17;
-    
-    CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultHeadlineSize + ORKGetMetricForWindow(surveyMode ? ORKScreenMetricFontSizeSurveyHeadline : ORKScreenMetricFontSizeHeadline, nil);
+    CGFloat fontSize = ORKGetMetricForWindow(surveyMode ? ORKScreenMetricFontSizeSurveyHeadline : ORKScreenMetricFontSizeHeadline, nil);
     CGFloat maxFontSize = ORKGetMetricForWindow(surveyMode ? ORKScreenMetricMaxFontSizeSurveyHeadline : ORKScreenMetricMaxFontSizeHeadline, nil);
-    
-    return ORKLightFontWithSize(MIN(maxFontSize, fontSize));
+
+    UIFont *baseFont = [UIFont systemFontOfSize:MIN(maxFontSize, fontSize) weight:UIFontWeightLight];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleHeadline] scaledFontForFont:baseFont
+                              maximumPointSize:maxFontSize];
 }
 
 + (UIFont *)defaultFont {

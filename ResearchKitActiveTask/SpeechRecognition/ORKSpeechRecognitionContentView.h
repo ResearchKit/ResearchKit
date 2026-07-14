@@ -45,6 +45,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKSpeechRecognitionContentView : ORKActiveStepCustomView
 
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithFrame:(CGRect)frame
+        hideUseKeyboardButton:(BOOL)hideUseKeyboardButton NS_DESIGNATED_INITIALIZER;
+
 @property (nonatomic, weak) id<ORKSpeechRecognitionContentViewDelegate> delegate;
 
 @property (nonatomic, copy, nullable) UIColor *keyColor;

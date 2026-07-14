@@ -36,7 +36,9 @@
 #import "ORKCompletionCheckmarkView.h"
 #import "ORKBodyContainerView.h"
 #import "ORKSkin.h"
+#import "ORKHelpers_Internal.h"
 #import "UIImageView+ResearchKit.h"
+#import <ResearchKit/ResearchKit-Swift.h>
 
 /*
  +_________________________+
@@ -81,11 +83,16 @@
  |_________________________|
  */
 
-static const CGFloat ORKStepContentIconImageViewToTitleLabelPadding = 15.0;
 static const CGFloat ORKStepContentIconToBodyTopPaddingStandard = 20.0;
 static const CGFloat ORKStepContentIconToBulletTopPaddingStandard = 20.0;
 static const CGFloat ORKStepContentTagPaddingTop = 15.0;
-static const CGFloat ORKStepContentBottomPadding = 35.0;
+
+// Padding from title directly to body items when no step.text/step.detailText is set.
+// Separate from ORKStepContainerTitleToBodyTopPaddingStandard to avoid affecting
+// form step headers and other views that share that global constant.
+static CGFloat ORKStepContentTitleDirectToBodyTopPadding(void) {
+    return ORKLiquidGlassSupportEnabled() ? 40.0 : 15.0;
+}
 
 NSString * const ORKStepBodyContainerViewAccessibilityIdentifier = @"ORKStepBodyContainerView";
 
@@ -107,7 +114,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 
 @implementation ORKStepContentView {
     CGFloat _additionalTopPaddingForTopLabel;
-    CGFloat _leftRightPadding;
     NSMutableArray<NSLayoutConstraint *> *_updatedConstraints;
     
     NSArray<NSLayoutConstraint *> *_topContentImageViewConstraints;
@@ -123,7 +129,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     NSLayoutConstraint *_detailTextLabelTopConstraint;
     NSLayoutConstraint *_bodyContainerViewTopConstraint;
     NSLayoutConstraint *_centeredVerticallyImageViewTopConstraint;
-    NSArray<NSLayoutConstraint *> *_bodyContainerLeftRightConstraints;
     NSLayoutConstraint *_stepContentBottomConstraint;
     ORKCompletionCheckmarkView *_completionCheckmarkView;
     BOOL useStandardTextAndFormPadding;
@@ -137,19 +142,14 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     return self;
 }
 
-- (instancetype)initWithStandardPadding {
-    self = [super init];
-    if (self) {
-        useStandardTextAndFormPadding = true;
-        [self setupContentView];
-    }
-    return self;
-}
-
 - (void)setupContentView {
+    self.directionalLayoutMargins = ORKSmallContentLayoutMargins;
     [self setupUpdatedConstraints];
     [self setStepContentViewBottomConstraint];
-    _leftRightPadding = ORKStepContainerLeftRightPaddingForWindow(self.window);
+
+    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class] withHandler:^(ORKStepContentView *traitChangeView, UITraitCollection *previousTraitCollection) {
+        [traitChangeView updateViewColors];
+    }];
 }
 
 // top content image
@@ -200,11 +200,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     _topContentImageView.tintColor = imageViewTintColor;
     _iconImageView.tintColor = imageViewTintColor;
 
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [self updateViewColors];
 }
 
 - (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
@@ -330,15 +325,19 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     [self setIconImageViewConstraints];
 }
 
+- (CGFloat)iconPaddingStandard {
+    return ORKLiquidGlassSupportEnabled() ? 20.0 : 15.0;
+}
+
 - (void)setIconImageViewTopConstraint {
     if (_iconImageView) {
         _iconImageViewTopConstraint = [NSLayoutConstraint constraintWithItem:_iconImageView
                                                                    attribute:NSLayoutAttributeTop
                                                                    relatedBy:NSLayoutRelationEqual
-                                                                      toItem:_topContentImageView ? : self
+                                                                      toItem:_topContentImageView ? : self.safeAreaLayoutGuide
                                                                    attribute:_topContentImageView ? NSLayoutAttributeBottom : NSLayoutAttributeTop
                                                                   multiplier:1.0
-                                                                    constant:ORKStepContentIconImageViewToTitleLabelPadding]; // This needs to match what the text padding is
+                                                                    constant:[self iconPaddingStandard]];
     }
 }
 
@@ -356,6 +355,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     _iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self setIconImageViewTopConstraint];
     
+    CGFloat iconImageViewDimension = ORKStepContentIconImageViewDimension();
+    
     _iconImageViewConstraints = @[
                                 _iconImageViewTopConstraint,
                                 [NSLayoutConstraint constraintWithItem:_iconImageView
@@ -364,14 +365,14 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
                                                                 toItem:nil
                                                              attribute:NSLayoutAttributeNotAnAttribute
                                                             multiplier:1.0
-                                                              constant:ORKStepContentIconImageViewDimension],
+                                                              constant:iconImageViewDimension],
                                 [NSLayoutConstraint constraintWithItem:_iconImageView
                                                              attribute:NSLayoutAttributeHeight
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:nil
                                                              attribute:NSLayoutAttributeNotAnAttribute
                                                             multiplier:1.0
-                                                              constant:ORKStepContentIconImageViewDimension]];
+                                                              constant:iconImageViewDimension]];
     [_updatedConstraints addObjectsFromArray:_iconImageViewConstraints];
     [self setNeedsUpdateConstraints];
 }
@@ -385,33 +386,41 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 
 - (void)setStepTitle:(NSString *)stepTitle {
     _stepTitle = stepTitle;
-    if (!_titleLabel) {
+    if (stepTitle.length > 0 && !_titleLabel) {
         [self setupTitleLabel];
         [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTitleLabel];
         [self setNeedsUpdateConstraints];
     }
-    
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    [paragraphStyle setHyphenationFactor:0.5];
-    [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-
-    if (@available(iOS 14.0, *)) {
-        [paragraphStyle setLineBreakStrategy:NSLineBreakStrategyPushOut];
+    if (stepTitle.length > 0 && _titleLabel) {
+        NSAttributedString *attributedStepTitle = [[NSAttributedString alloc] initWithString:stepTitle attributes:nil];
+        [_titleLabel setAttributedText:attributedStepTitle];
     }
-        
-    NSDictionary *hyphenAttribute = @{NSParagraphStyleAttributeName : paragraphStyle};
-    
-    NSAttributedString *attributedStepTitle = [[NSAttributedString alloc] initWithString:stepTitle ?: @"" attributes:hyphenAttribute];
-    [_titleLabel setAttributedText:attributedStepTitle];
+    else if (_titleLabel) {
+        [_titleLabel removeFromSuperview];
+        _titleLabel = nil;
+        [self deactivateConstraints:@[_titleLabelTopConstraint]];
+        _titleLabelTopConstraint = nil;
+        [self setContainerLeftRightConstraints];
+        [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTitleLabel];
+        [self setNeedsUpdateConstraints];
+    }
 }
 
 - (void)setupTitleLabel {
     if (!_titleLabel) {
         _titleLabel = [ORKTitleLabel new];
     }
+    if (ORKLiquidGlassSupportEnabled()) {
+        _titleLabel.textColor = UIColor.labelColor;
+    }
     _titleLabel.numberOfLines = 0;
     _titleLabel.textAlignment = _stepHeaderTextAlignment;
     _titleLabel.accessibilityIdentifier = @"ORKStepContentView_titleLabel";
+
+    // Prevent the title label from being vertically stretched
+    [_titleLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [_titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+
     [self addSubview:_titleLabel];
     [self setupTitleLabelConstraints];
     [self setContainerLeftRightConstraints];
@@ -435,15 +444,15 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         if (_iconImageView) {
             topItem = _iconImageView;
             attribute = NSLayoutAttributeBottom;
-            constant = ORKStepContentIconImageViewToTitleLabelPadding;
+            constant = [self iconPaddingStandard];
         } else if (_topContentImageView) {
             topItem = _topContentImageView;
             attribute = NSLayoutAttributeBottom;
-            constant = ORKStepContentIconImageViewToTitleLabelPadding;
+            constant = [self iconPaddingStandard];
         } else {
-            topItem = self;
+            topItem = ORKLiquidGlassSupportEnabled() ? [self safeAreaLayoutGuide] : self;
             attribute = NSLayoutAttributeTop;
-            constant = _customTopPadding ? [_customTopPadding floatValue] : ORKStepContentIconImageViewToTitleLabelPadding;
+            constant = _customTopPadding ? [_customTopPadding floatValue] : [self iconPaddingStandard];
         }
         
         _titleLabelTopConstraint = [NSLayoutConstraint constraintWithItem:_titleLabel
@@ -487,10 +496,18 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     if (!_textLabel) {
         _textLabel = [ORKBodyLabel new];
     }
+    if (ORKLiquidGlassSupportEnabled()) {
+        _textLabel.textColor = UIColor.secondaryLabelColor;
+    }
     _textLabel.textAlignment = _stepHeaderTextAlignment;
     _textLabel.numberOfLines = 0;
     _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _textLabel.accessibilityIdentifier = @"ORKStepContentView_textLabel";
+
+    // Prevent the text label from being vertically stretched
+    [_textLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [_textLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+
     [self addSubview:_textLabel];
     [self setupTextLabelConstraints];
     [self setContainerLeftRightConstraints];
@@ -527,9 +544,9 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
             constant = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
         }
         else {
-            topItem = self;
+            topItem = ORKLiquidGlassSupportEnabled() ? [self safeAreaLayoutGuide] : self;
             attribute = NSLayoutAttributeTop;
-            constant = ORKStepContainerFirstItemTopPaddingForWindow(self.window) + _additionalTopPaddingForTopLabel;
+            constant = ORKLiquidGlassSupportEnabled() ? 0 : ORKStepContainerFirstItemTopPaddingForWindow(self.window) + _additionalTopPaddingForTopLabel;
         }
         
         _textLabelTopConstraint = [NSLayoutConstraint constraintWithItem:_textLabel
@@ -562,6 +579,12 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 
 - (void)setStepDetailText:(NSString *)stepDetailText {
     _stepDetailText = stepDetailText;
+    
+    // Only update label if attributed text isn't set (attributed takes priority)
+    if (_stepAttributedDetailText) {
+        return;
+    }
+    
     if (stepDetailText && !_detailTextLabel) {
         [self setupDetailTextLabel];
         [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceDetailTextLabel];
@@ -572,6 +595,30 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         [_detailTextLabel setText:_stepDetailText];
     }
     else if (!stepDetailText) {
+        [_detailTextLabel removeFromSuperview];
+        _detailTextLabel = nil;
+        [self deactivateDetailTextLabelConstraints];
+        [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceDetailTextLabel];
+        [self setNeedsUpdateConstraints];
+    }
+}
+
+- (void)setStepAttributedDetailText:(NSAttributedString *)stepAttributedDetailText {
+    _stepAttributedDetailText = stepAttributedDetailText;
+    
+    if (stepAttributedDetailText || _stepDetailText) {
+        if (!_detailTextLabel) {
+            [self setupDetailTextLabel];
+            [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceDetailTextLabel];
+            [self setNeedsUpdateConstraints];
+        }
+        
+        if (stepAttributedDetailText) {
+            [_detailTextLabel setAttributedText:stepAttributedDetailText];
+        } else {
+            [_detailTextLabel setText:_stepDetailText];
+        }
+    } else {
         [_detailTextLabel removeFromSuperview];
         _detailTextLabel = nil;
         [self deactivateDetailTextLabelConstraints];
@@ -606,7 +653,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 
 - (void)setUseExtendedPadding:(BOOL)useExtendedPadding {
     _useExtendedPadding = useExtendedPadding;
-    _leftRightPadding = useExtendedPadding ? ORKStepContainerExtendedLeftRightPaddingForWindow(self.window) : ORKStepContainerLeftRightPaddingForWindow(self.window);
+
     [NSLayoutConstraint deactivateConstraints:_leftRightPaddingConstraints];
     [_updatedConstraints removeObjectsInArray:_leftRightPaddingConstraints];
     [self setContainerLeftRightConstraints];
@@ -648,9 +695,9 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
             constant = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
         }
         else {
-            topItem = self;
+            topItem = ORKLiquidGlassSupportEnabled() ? [self safeAreaLayoutGuide] : self;
             attribute = NSLayoutAttributeTop;
-            constant = ORKStepContainerFirstItemTopPaddingForWindow(self.window) + _additionalTopPaddingForTopLabel;
+            constant = ORKLiquidGlassSupportEnabled() ? 0 : ORKStepContainerFirstItemTopPaddingForWindow(self.window) + _additionalTopPaddingForTopLabel;
         }
         
         _detailTextLabelTopConstraint = [NSLayoutConstraint constraintWithItem:_detailTextLabel
@@ -727,9 +774,12 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 - (void)setupBodyContainerViewConstraints {
     _bodyContainerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self setBodyContainerViewTopConstraint];
+    
     [_updatedConstraints addObjectsFromArray:@[
                                                _bodyContainerViewTopConstraint,
                                                ]];
+    [_updatedConstraints addObjectsFromArray:self._bodyContainerLeftRightConstraints];
+
     [self setNeedsUpdateConstraints];
 }
 
@@ -825,13 +875,13 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
             attribute = NSLayoutAttributeBottom;
         } else if (_titleLabel) {
             topItem = _titleLabel;
-            
+
             if (_bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleTag) {
                 topPadding = ORKStepContentTagPaddingTop;
             } else {
-                topPadding = _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleText ? ORKStepContainerTitleToBodyTopPaddingForWindow(self.window) : ORKStepContainerTitleToBulletTopPaddingForWindow(self.window);
+                topPadding = _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleText ? ORKStepContentTitleDirectToBodyTopPadding() : ORKStepContainerTitleToBulletTopPaddingForWindow(self.window);
             }
-            
+
             attribute = NSLayoutAttributeBottom;
         } else if (_iconImageView) {
             topItem = _iconImageView;
@@ -842,8 +892,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
             topPadding = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
             attribute = NSLayoutAttributeBottom;
         } else {
-            topItem = self;
-            topPadding = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
+            topItem = ORKLiquidGlassSupportEnabled() ? [self safeAreaLayoutGuide] : self;
+            topPadding = ORKLiquidGlassSupportEnabled() ? 0 : ORKStepContainerFirstItemTopPaddingForWindow(self.window);
             attribute = NSLayoutAttributeTop;
         }
         
@@ -879,112 +929,58 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     _leftRightPaddingConstraints = [[NSMutableArray alloc] init];
     if (_textLabel != nil) {
         [_leftRightPaddingConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_textLabel
-                                         attribute:NSLayoutAttributeLeading
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeLeading
-                                        multiplier:1.0
-                                          constant:_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_textLabel
-                                         attribute:NSLayoutAttributeTrailing
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeTrailing
-                                        multiplier:1.0
-                                          constant:-_leftRightPadding]
+            [_textLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+            [_textLabel.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]
         ]];
     }
     
     if (_titleLabel != nil) {
         [_leftRightPaddingConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_titleLabel
-                                         attribute:NSLayoutAttributeLeading
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeLeading
-                                        multiplier:1.0
-                                          constant:_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_titleLabel
-                                         attribute:NSLayoutAttributeTrailing
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeTrailing
-                                        multiplier:1.0
-                                          constant:-_leftRightPadding]
+            [_titleLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+            [_titleLabel.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]
         ]];
     }
     
     if (_detailTextLabel != nil) {
         [_leftRightPaddingConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_detailTextLabel
-                                         attribute:NSLayoutAttributeLeading
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeLeading
-                                        multiplier:1.0
-                                          constant:_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_detailTextLabel
-                                         attribute:NSLayoutAttributeTrailing
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeTrailing
-                                        multiplier:1.0
-                                          constant:-_leftRightPadding]
+            [_detailTextLabel.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+            [_detailTextLabel.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]
         ]];
     }
     
     if (_bodyContainerView != nil) {
-        [_leftRightPaddingConstraints addObjectsFromArray:@[
-            [NSLayoutConstraint constraintWithItem:_bodyContainerView
-                                         attribute:NSLayoutAttributeLeft
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeLeft
-                                        multiplier:1.0
-                                         constant:_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_bodyContainerView
-                                         attribute:NSLayoutAttributeRight
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self
-                                         attribute:NSLayoutAttributeRight
-                                          multiplier:1.0
-                                          constant:-_leftRightPadding]
-        ]];
+        [_leftRightPaddingConstraints addObjectsFromArray:self._bodyContainerLeftRightConstraints];
     }
     
     if (_centeredVerticallyImageView != nil) {
         [_leftRightPaddingConstraints addObjectsFromArray:@[
-            [_centeredVerticallyImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0.0]
+            [_centeredVerticallyImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]
         ]];
     }
     
     if (_iconImageView != nil) {
-        if (_stepHeaderTextAlignment == NSTextAlignmentLeft) {
-            [_leftRightPaddingConstraints addObjectsFromArray:@[
-                [NSLayoutConstraint constraintWithItem:_iconImageView
-                                             attribute:NSLayoutAttributeLeading
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:self
-                                             attribute:NSLayoutAttributeLeading
-                                            multiplier:1.0
-                                              constant:_leftRightPadding]
-            ]];
-        } else {
-            [_leftRightPaddingConstraints addObjectsFromArray:@[
-                [NSLayoutConstraint constraintWithItem:_iconImageView
-                                             attribute:NSLayoutAttributeCenterX
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:self
-                                             attribute:NSLayoutAttributeCenterX
-                                            multiplier:1.0
-                                              constant:0.0]
-            ]];
-        }
+        [_leftRightPaddingConstraints addObjectsFromArray:@[[self _iconImageViewConstraint]]];
     }
-
+    for (NSLayoutConstraint *constraint in _leftRightPaddingConstraints) {
+        constraint.priority = UILayoutPriorityRequired - 1;
+    }
     [_updatedConstraints addObjectsFromArray:_leftRightPaddingConstraints];
     [self setNeedsUpdateConstraints];
+}
+
+- (NSLayoutConstraint *)_iconImageViewConstraint {
+    if (ORKLiquidGlassSupportEnabled() || _stepHeaderTextAlignment != NSTextAlignmentLeft) {
+       return [_iconImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor];
+    } else {
+        return [_iconImageView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor];
+    }
+}
+
+- (NSArray<NSLayoutConstraint *>*)_bodyContainerLeftRightConstraints {
+    return @[
+        [_bodyContainerView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor],
+        [_bodyContainerView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]
+    ];
 }
 
 - (void)setBodyContainerViewTopConstraint {
@@ -1019,7 +1015,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         if (_bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleTag) {
             topPadding = ORKStepContentTagPaddingTop;
         } else {
-            topPadding = _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleText ? ORKStepContainerTitleToBodyTopPaddingForWindow(self.window) : ORKStepContainerTitleToBulletTopPaddingForWindow(self.window);
+            topPadding = _bodyItems.firstObject.bodyItemStyle == ORKBodyItemStyleText ? ORKStepContentTitleDirectToBodyTopPadding() : ORKStepContainerTitleToBulletTopPaddingForWindow(self.window);
         }
         
         attribute = NSLayoutAttributeBottom;
@@ -1036,8 +1032,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         attribute = NSLayoutAttributeBottom;
     }
     else {
-        topItem = self;
-        topPadding = ORKStepContainerFirstItemTopPaddingForWindow(self.window);
+        topItem = ORKLiquidGlassSupportEnabled() ? [self safeAreaLayoutGuide] : self;
+        topPadding = ORKLiquidGlassSupportEnabled() ? 0 : ORKStepContainerFirstItemTopPaddingForWindow(self.window);
         attribute = NSLayoutAttributeTop;
     }
 
@@ -1085,11 +1081,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     NSLayoutAttribute attribute;
     CGFloat constant = 0.0;
     
-    if (@available(iOS 15, *)) {
-        if (!useStandardTextAndFormPadding) {
-            constant += ORKStepContentBottomPadding;
-        }
-    }
     
     if (_centeredVerticallyImageView) {
         bottomItem = _centeredVerticallyImageView;

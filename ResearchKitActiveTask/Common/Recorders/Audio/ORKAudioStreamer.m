@@ -74,14 +74,24 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-
-    _bypassAudioEngineStart = NO;
-
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, bypassAudioEngineStart);
+    }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, bypassAudioEngineStart);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKAudioStreamerConfiguration *configuration = [[ORKAudioStreamerConfiguration alloc]
+                                                    initWithIdentifier:[self.identifier copy]
+                                                       outputDirectory:[self.outputDirectory copy]
+                                              rollingFileSizeThreshold:self.rollingFileSizeThreshold];
+    configuration.bypassAudioEngineStart = _bypassAudioEngineStart;
+    return configuration;
 }
 
 + (BOOL)supportsSecureCoding {

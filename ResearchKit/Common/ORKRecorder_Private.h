@@ -102,6 +102,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKRecorderConfiguration ()
 
+@property (nonatomic, assign) ORKFileProtectionMode fileProtectionMode;
+
 /**
  Returns an initialized recorder configuration.
   

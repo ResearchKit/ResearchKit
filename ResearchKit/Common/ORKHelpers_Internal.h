@@ -45,6 +45,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Video rotation angles for AVCaptureConnection.videoRotationAngle (iOS 17+)
+/// These replace the deprecated AVCaptureVideoOrientation enum values
+static const CGFloat ORKVideoRotationAngleLandscapeRight = 0.0;
+static const CGFloat ORKVideoRotationAnglePortrait = 90.0;
+static const CGFloat ORKVideoRotationAngleLandscapeLeft = 180.0;
+static const CGFloat ORKVideoRotationAnglePortraitUpsideDown = 270.0;
+
 ORK_EXTERN BOOL ORKLoggingEnabled;
 
 #define ORK_Log(format, ...) __extension__({ \
@@ -105,6 +112,9 @@ ORK_EXTERN BOOL ORKLoggingEnabled;
 
 #define ORK_DECODE_URL(d,x)  _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@ORK_STRINGIFY(x)])
 #define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@ORK_STRINGIFY(x)])
+
+#define ORK_ENCODE_DATE_ISO8601(c,x) [c encodeObject:(_ ## x ? ORKStringFromDateISO8601(_ ## x) : nil) forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_DATE_ISO8601(d,x) _ ## x = ORKDateFromStringISO8601((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@ORK_STRINGIFY(x)])
 
 #define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_BOOL(c,x)  [c encodeBool:_ ## x forKey:@ORK_STRINGIFY(x)]
@@ -177,6 +187,10 @@ NSURL *ORKCreateRandomBaseURL(void);
 
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
+
+ORK_EXTERN NSDataWritingOptions ORKDataWritingFileProtectionFromMode(ORKFileProtectionMode mode);
+
+ORK_EXTERN BOOL ORKApplyBackupExclusionToFileURL(NSURL * _Nullable url);
 
 #if TARGET_OS_IOS
 
@@ -258,6 +272,11 @@ UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
 
+/// Returns the point size of the preferred font for the given text style at the
+/// default (.large) content size category. Use as the design-time base size for
+/// UIFontMetrics scaling to avoid double-scaling.
+CGFloat ORKDefaultFontSizeForTextStyle(UIFontTextStyle textStyle);
+
 NSURL * _Nullable ORKURLFromBookmarkData(NSData *data);
 NSData * _Nullable ORKBookmarkDataFromURL(NSURL *url);
 
@@ -280,6 +299,57 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 #define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" cannot be nil." userInfo:nil]; }
 #define ORKThrowInvalidArgumentExceptionIfNotEqual(argument1, argument2)  if (![argument1 isEqual:argument2]) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"text argument(%@) and value argument(%@) are not equal",argument1, argument2] userInfo:nil]; }
+
+/// Validates that `value` is finite and non-negative.
+///
+/// - Parameters:
+///   - value: The value to validate.
+///   - name: Included in the exception message to identify the parameter.
+/// - Throws: `NSInvalidArgumentException` if `value` is not finite or is negative.
+ORK_INLINE void ORKValidateBoundedValue(double value, NSString *name) __attribute__((overloadable)) {
+    if (!isfinite(value) || value < 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:[NSString stringWithFormat:@"%@ must be a finite non-negative number, got %g", name, value]
+                                     userInfo:nil];
+    }
+}
+
+/// Validates that `value` is finite and bounded by `minimum`.
+///
+/// - Parameters:
+///   - value: The value to validate.
+///   - minimum: The lower bound.
+///   - name: Included in the exception message to identify the parameter.
+///   - shouldBeInclusive: If `YES`, the bound is inclusive (`value >= minimum`); if `NO`, exclusive (`value > minimum`).
+/// - Throws: `NSInvalidArgumentException` if `value` is not finite or fails the bound check.
+ORK_INLINE void ORKValidateBoundedValue(double value, double minimum, NSString *name, BOOL shouldBeInclusive) __attribute__((overloadable)) {
+    if (!isfinite(value) || (shouldBeInclusive ? value < minimum : value <= minimum)) {
+        NSString *reason = [NSString stringWithFormat:shouldBeInclusive
+                            ? @"%@ must be a finite value of at least %g, got %g"
+                            : @"%@ must be a finite value greater than %g, got %g",
+                            name, minimum, value];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil];
+    }
+}
+
+/// Validates that `value` is finite and within the range [`minimum`, `maximum`].
+///
+/// - Parameters:
+///   - value: The value to validate.
+///   - minimum: The lower bound.
+///   - maximum: The upper bound.
+///   - name: Included in the exception message to identify the parameter.
+///   - shouldBeInclusive: If `YES`, both bounds are inclusive; if `NO`, both are exclusive.
+/// - Throws: `NSInvalidArgumentException` if `value` is not finite or outside the specified range.
+ORK_INLINE void ORKValidateBoundedValue(double value, double minimum, double maximum, NSString *name, BOOL shouldBeInclusive) __attribute__((overloadable)) {
+    if (!isfinite(value) || (shouldBeInclusive ? (value < minimum || value > maximum) : (value <= minimum || value >= maximum))) {
+        NSString *reason = [NSString stringWithFormat:shouldBeInclusive
+                            ? @"%@ must be a finite value between %g and %g, got %g"
+                            : @"%@ must be a finite value strictly between %g and %g, got %g",
+                            name, minimum, maximum, value];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil];
+    }
+}
 
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
@@ -439,3 +509,36 @@ NS_ASSUME_NONNULL_END
  */
 NSPredicate* _Nullable ORKPredicateWithFormat(NSString * _Nonnull predicateFormat,
                                               NSString * _Nonnull callerID);
+
+/// Returns `YES` when liquid glass styling is active.
+/// This requires both the `ORK_FEATURE_LIQUID_GLASS_SUPPORT` compilation flag
+/// and iOS 26.0 or later. Liquid glass is enabled by default on iOS 26+
+/// and can be explicitly disabled using `ORKSetLiquidGlassDisabled`.
+BOOL ORKLiquidGlassSupportEnabled(void);
+
+/// Explicitly disables or re-enables liquid glass styling at runtime.
+/// Pass `YES` to disable liquid glass even on iOS 26+, or `NO` to
+/// re-enable it (the default). Call this early in your app lifecycle
+/// (e.g. in `application:didFinishLaunchingWithOptions:`) before any
+/// ResearchKit views are displayed.
+void ORKSetLiquidGlassDisabled(BOOL disabled);
+
+@interface NSObject (Helpers)
+
+- (void) performIfRespondsToSelector:(SEL _Nonnull)selector;
+- (void) performIfRespondsToSelector:(SEL _Nonnull)selector withObject:(id _Nullable)object;
+
+@end
+
+// MARK: - NSAttributedString
+
+ORK_INLINE NSAttributedString * _Nonnull makeHyphenatedAttributedTextFromText(NSString * _Nonnull descriptionText,
+                                                                              NSLineBreakMode lineBreakMode) {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineBreakMode = lineBreakMode;
+    paragraphStyle.hyphenationFactor = 1.0;
+
+    return [[NSAttributedString alloc] initWithString:descriptionText
+                                           attributes:@{ NSParagraphStyleAttributeName: paragraphStyle }];
+}
+

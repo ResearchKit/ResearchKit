@@ -41,6 +41,26 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) NSTextAlignment stepHeaderTextAlignment;
 @property (nonatomic) NSTextAlignment bodyTextAlignment;
 
+/**
+ Returns the top spacing between the step header and custom content view.
+
+ @return The top padding in points. Default is 0.0.
+ @note Ignored if `contentViewPadding` returns non-zero insets.
+ */
+- (CGFloat)contentViewTopPadding;
+
+/**
+ Returns the padding applied to the content container's layout margins.
+
+ Override to customize spacing around content. When non-zero, takes precedence over `contentViewTopPadding`.
+ - top: Spacing between step header and custom content
+ - leading/trailing: Horizontal margins (replaces default 22pt if > 0)
+ - bottom: Not yet implemented
+
+ @return Directional edge insets for padding. Default is `NSDirectionalEdgeInsetsZero`.
+ */
+- (NSDirectionalEdgeInsets)contentViewPadding;
+
 - (BOOL)continueButtonEnabled;
 
 - (void)updateButtonStates;

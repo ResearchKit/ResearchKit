@@ -33,6 +33,9 @@
 #import "ORKLearnMoreView.h"
 #import "ORKTagLabel.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKFormItem_Internal.h"
+#import "UIView+Additions.h"
+#import <ResearchKit/ResearchKit-Swift.h>
 
 static const CGFloat HeaderViewLabelTopBottomPadding = 6.0;
 static const CGFloat HeaderViewLabelTopPadding = 4.0;
@@ -50,6 +53,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
 @implementation ORKSurveyCardHeaderView {
     
     UIView *_headlineView;
+    UIView *_dividerView;
     NSString *_title;
     UILabel *_titleLabel;
     NSString *_detailText;
@@ -61,7 +65,6 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     UILabel *_selectAllThatApplyLabel;
     BOOL _showBorder;
     BOOL _hasMultipleChoiceItem;
-    BOOL _shouldIgnoreDarkMode;
     NSString *_tagText;
     CAShapeLayer *_headlineMaskLayer;
     NSMutableArray<NSLayoutConstraint *> *_headerViewConstraints;
@@ -90,8 +93,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
                   progressText:progressText
                        tagText:tagText
                     showBorder:NO
-         hasMultipleChoiceItem:NO
-          shouldIgnoreDarkMode:NO];
+         hasMultipleChoiceItem:NO];
 }
 
 - (instancetype)initWithTitle:(NSString *)title
@@ -100,8 +102,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
                  progressText:(NSString *)progressText
                       tagText:(nullable NSString *)tagText
                    showBorder:(BOOL)showBorder
-        hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem
-         shouldIgnoreDarkMode:(BOOL)shouldIgnoreDarkMode {
+        hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem {
     
     self = [super init];
     if (self) {
@@ -111,8 +112,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
                     progressText:progressText
                          tagText:tagText
                       showBorder:showBorder
-           hasMultipleChoiceItem:hasMultipleChoiceItem
-            shouldIgnoreDarkMode:shouldIgnoreDarkMode];
+           hasMultipleChoiceItem:hasMultipleChoiceItem];
     }
     return self;
 }
@@ -123,8 +123,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
               progressText:(NSString *)progressText
                    tagText:(NSString *)tagText
                 showBorder:(BOOL)showBorder
-     hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem
-      shouldIgnoreDarkMode:(BOOL)shouldIgnoreDarkMode {
+     hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem {
     _title = [title copy];
     _detailText = [text copy];
     _learnMoreView = learnMoreView;
@@ -132,16 +131,13 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     _showBorder = showBorder;
     _tagText = [tagText copy];
     _hasMultipleChoiceItem = hasMultipleChoiceItem;
-    _shouldIgnoreDarkMode = shouldIgnoreDarkMode;
     [self setupView];
 }
 
 - (void)setupView {
-    if (@available(iOS 14.0, *)) {
-        [self setBackgroundConfiguration:[UIBackgroundConfiguration clearConfiguration]];
-    } else {
-        [self setBackgroundColor:[UIColor clearColor]];
-    }
+    [self setBackgroundConfiguration:[UIBackgroundConfiguration clearConfiguration]];
+    self.preservesSuperviewLayoutMargins = NO;
+    self.directionalLayoutMargins = ORKLargeContentLayoutMargins;
     [self setupHeaderView];
     [self setupConstraints];
 }
@@ -162,7 +158,8 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
    
     [self setupTitleLabel];
     [_headlineView addSubview:_titleLabel];
-    
+    [_headlineView addSubview:self.dividerView];
+
     if (_detailText) {
         [self setUpDetailTextLabel];
         [_headlineView addSubview:_detailTextLabel];
@@ -176,16 +173,22 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
         [self setupSelectAllThatApplyLabel];
         [_headlineView addSubview:_selectAllThatApplyLabel];
     }
-    
-    if (_shouldIgnoreDarkMode) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
 }
 
 - (void)setupHeadlineView {
     if (!_headlineView) {
         _headlineView = [UIView new];
     }
+    _headlineView.directionalLayoutMargins = ORKSmallContentLayoutMargins;
+}
+
+- (UIView *)dividerView {
+    if (_dividerView == nil) {
+        _dividerView = [UIView new];
+        [_dividerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _dividerView.backgroundColor = [UIColor separatorColor];
+    }
+    return  _dividerView;
 }
 
 - (void)setupTitleLabel {
@@ -194,7 +197,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     }
     _titleLabel.text = _title;
     _titleLabel.numberOfLines = 0;
-    _titleLabel.textColor = _shouldIgnoreDarkMode ? [UIColor blackColor] : [UIColor labelColor];
+    _titleLabel.textColor = [UIColor labelColor];
     _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _titleLabel.textAlignment = NSTextAlignmentNatural;
     [_titleLabel setFont:[ORKSurveyCardHeaderView titleLabelFont]];
@@ -218,7 +221,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     }
     _progressLabel.text = _progressText;
     _progressLabel.numberOfLines = 0;
-    _progressLabel.textColor = _shouldIgnoreDarkMode ? [UIColor lightGrayColor] : [UIColor secondaryLabelColor];
+    _progressLabel.textColor = [UIColor secondaryLabelColor];
     _progressLabel.textAlignment = NSTextAlignmentNatural;
     [_progressLabel setFont:[self progressLabelFont]];
 }
@@ -250,6 +253,9 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
 }
 
 - (void)prepareForReuse {
+    [self.dividerView removeFromSuperview];
+    _dividerView = nil;
+
     [_headlineView removeFromSuperview];
     _headlineView = nil;
     
@@ -277,7 +283,6 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     
     _showBorder = NO;
     _hasMultipleChoiceItem = NO;
-    _shouldIgnoreDarkMode = NO;
     
     [super prepareForReuse];
 }
@@ -297,7 +302,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     _selectAllThatApplyLabel.text = ORKLocalizedString(@"AX_SELECT_ALL_THAT_APPLY", nil);
     _selectAllThatApplyLabel.accessibilityIdentifier = ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIdentifier;
     _selectAllThatApplyLabel.numberOfLines = 0;
-    _selectAllThatApplyLabel.textColor = _shouldIgnoreDarkMode ? [UIColor lightGrayColor] : [UIColor secondaryLabelColor];
+    _selectAllThatApplyLabel.textColor = [UIColor secondaryLabelColor];
     _selectAllThatApplyLabel.textAlignment = NSTextAlignmentNatural;
     [_selectAllThatApplyLabel setFont:[self selectAllThatApplyFont]];
 }
@@ -327,7 +332,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     if (_headlineView) {
         if (!_headlineMaskLayer) {
             _headlineMaskLayer = [CAShapeLayer layer];
@@ -336,32 +341,23 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
             [sublayer removeFromSuperlayer];
         }
         [_headlineMaskLayer removeFromSuperlayer];
-        
-        _headlineMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: _headlineView.bounds byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
-        
+
+        CGFloat cornerRadius = ORKCardDefaultCornerRadii();
+        _headlineMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: _headlineView.bounds byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: (CGSize){cornerRadius, cornerRadius}].CGPath;
+
         CAShapeLayer *foreLayer = [CAShapeLayer layer];
-        UIColor *fillColor = _shouldIgnoreDarkMode ? [UIColor whiteColor] : [UIColor secondarySystemGroupedBackgroundColor];
-        UIColor *borderColor = _shouldIgnoreDarkMode ? [UIColor ork_midGrayTintColor] : UIColor.separatorColor;;
+        UIColor *fillColor = [UIColor secondarySystemGroupedBackgroundColor];
+        UIColor *borderColor = UIColor.separatorColor;
         
         [foreLayer setFillColor:[fillColor CGColor]];
         CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, ORKCardDefaultBorderWidth, _headlineView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, _headlineView.bounds.size.height - ORKCardDefaultBorderWidth);
         
-        CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
+        CGFloat foreLayerCornerRadii = cornerRadius >= ORKCardDefaultBorderWidth ? cornerRadius - ORKCardDefaultBorderWidth : cornerRadius;
         
         foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
         foreLayer.zPosition = 0.0f;
         
         [_headlineMaskLayer addSublayer:foreLayer];
-        
-        if (_titleLabel.text) {
-            CAShapeLayer *lineLayer = [CAShapeLayer layer];
-            CGRect lineBounds = CGRectMake(0.0, _headlineView.bounds.size.height - 1.0, _headlineView.bounds.size.width, 0.5);
-            lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
-            lineLayer.zPosition = 0.0f;
-            [lineLayer setFillColor:[borderColor CGColor]];
-            
-            [_headlineMaskLayer addSublayer:lineLayer];
-        }
         
         if (_showBorder) {
             [_headlineMaskLayer setFillColor:[borderColor CGColor]];
@@ -382,7 +378,7 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     if (_headerViewConstraints) {
         [NSLayoutConstraint deactivateConstraints:_headerViewConstraints];
     }
-    
+
     _headerViewConstraints = [NSMutableArray new];
     
     NSLayoutXAxisAnchor *trailingAnchor = [self useLearnMoreLeftAlignmentLayout] ? _learnMoreView.leadingAnchor : _headlineView.trailingAnchor;
@@ -422,9 +418,11 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
     [_headerViewConstraints addObject:[_titleLabel.topAnchor constraintEqualToAnchor:lastYAxisAnchor constant:titlePadding]];
-    [_headerViewConstraints addObject:[_titleLabel.leadingAnchor constraintEqualToAnchor:_headlineView.leadingAnchor constant:ORKSurveyItemMargin]];
-    [_headerViewConstraints addObject:[_titleLabel.trailingAnchor constraintEqualToAnchor:[self useLearnMoreLeftAlignmentLayout] ? _learnMoreView.leadingAnchor : _headlineView.trailingAnchor constant:-ORKSurveyItemMargin]];
-    
+    [_headerViewConstraints addObject:[_titleLabel.leadingAnchor constraintEqualToAnchor:_headlineView.layoutMarginsGuide.leadingAnchor]];
+    [_headerViewConstraints addObject:
+        [_titleLabel.trailingAnchor
+         constraintEqualToAnchor:[self useLearnMoreLeftAlignmentLayout] ? _learnMoreView.leadingAnchor : _headlineView.trailingAnchor constant:-ORKSurveyItemMargin]];
+
     lastYAxisAnchor = _titleLabel.bottomAnchor;
     NSLayoutYAxisAnchor *headlineViewBottomAnchor = _titleLabel.bottomAnchor;
     
@@ -463,17 +461,30 @@ NSString * const ORKSurveyCardHeaderViewSelectAllThatApplyLabelAccessibilityIden
         
         headlineViewBottomAnchor = _selectAllThatApplyLabel.bottomAnchor;
     }
-    
-    [_headerViewConstraints addObject:[_headlineView.topAnchor constraintEqualToAnchor:self.topAnchor constant:0.0]];
-    [_headerViewConstraints addObject:[_headlineView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:ORKCardLeftRightMarginForWindow(self.window)]];
-    [_headerViewConstraints addObject:[_headlineView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-ORKCardLeftRightMarginForWindow(self.window)]];
+
+    [_headerViewConstraints addObject:[_headlineView.topAnchor constraintEqualToAnchor:self.topAnchor]];
+    [_headerViewConstraints addObject:[_headlineView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor]];
+    [_headerViewConstraints addObject:[_headlineView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]];
     [_headerViewConstraints addObject:[_headlineView.bottomAnchor constraintEqualToAnchor: headlineViewBottomAnchor constant: _selectAllThatApplyLabel ? SelectAllThatApplyBottomPadding : HeaderViewBottomPadding]];
     
     
-    [_headerViewConstraints addObject:[self.bottomAnchor constraintEqualToAnchor:_headlineView.bottomAnchor constant:0.0]];
-    
+    [_headerViewConstraints addObject:[self.bottomAnchor constraintEqualToAnchor:_headlineView.bottomAnchor]];
     
     [NSLayoutConstraint activateConstraints:_headerViewConstraints];
+
+    CGFloat dividerHeight = ORKLiquidGlassSupportEnabled() ? 1.0 : 1.0 / UITraitCollection.currentTraitCollection.displayScale;
+    NSLayoutXAxisAnchor *dividerLeadingAnchor = _headlineView.leadingAnchor;
+    NSLayoutXAxisAnchor *dividerTrailingAnchor = _headlineView.trailingAnchor;
+    if (ORKLiquidGlassSupportEnabled()) {
+        dividerLeadingAnchor = _headlineView.layoutMarginsGuide.leadingAnchor;
+        dividerTrailingAnchor = _headlineView.layoutMarginsGuide.trailingAnchor;
+    }
+    [NSLayoutConstraint activateConstraints:@[
+        [self.dividerView.heightAnchor constraintEqualToConstant:dividerHeight],
+        [self.dividerView.bottomAnchor constraintEqualToAnchor:_headlineView.bottomAnchor],
+        [self.dividerView.leadingAnchor constraintEqualToAnchor:dividerLeadingAnchor],
+        [self.dividerView.trailingAnchor constraintEqualToAnchor:dividerTrailingAnchor]
+    ]];
 }
 
 - (void)setupLearnMoreViewConstraints {

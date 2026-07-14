@@ -68,7 +68,6 @@ final class ORKFormStepViewControllerConditionalFormItemsTests: XCTestCase {
         }
     }
     
-
     
     func testConditionalFormItemsAccessors() throws {
         let formStepViewController = ORKFormStepViewController(step: FormStepTestUtilities.conditionalFormStep())
@@ -440,7 +439,7 @@ extension ORKFormStepViewController {
     
     func _buildDataSourceAndApplySnapshot() {
         let dataSource = tableView.dataSource as! UITableViewDiffableDataSourceReference
-        self.build(dataSource)
+        self._createDiffableSnapshot(dataSource)
         dataSource.applySnapshot(dataSource.snapshot(), animatingDifferences: false)
     }
     

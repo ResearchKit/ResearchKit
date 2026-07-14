@@ -101,13 +101,16 @@ ORK_EXTERN CGFloat ORKFormStepMinimumHeaderHeight;
 ORK_EXTERN CGFloat ORKFormStepLargeTextMinimumHeaderHeight;
 
 /// Return step container title to body topPadding standard
-ORK_EXTERN CGFloat ORKStepContainerTitleToBodyTopPaddingStandard;
+ORK_EXTERN CGFloat ORKStepContainerTitleToBodyTopPaddingStandard(void);
+
+/// Step Content Icon Image View Dimension
+ORK_EXTERN CGFloat ORKStepContentIconImageViewDimension(void);
 
 /// Return minimum height for question step header view
 ORK_EXTERN CGFloat ORKQuestionStepMinimumHeaderHeight;
 
 /// Default CGFloat used for rounded corner radii for card view
-ORK_EXTERN CGFloat ORKCardDefaultCornerRadii;
+ORK_EXTERN CGFloat ORKCardDefaultCornerRadii(void);
 
 /// Default CGFloat used for rounded corner radii for image choice button image view
 ORK_EXTERN CGFloat ORKImageChoiceButtonCornerRadii;
@@ -115,8 +118,6 @@ ORK_EXTERN CGFloat ORKImageChoiceButtonCornerRadii;
 /// Default CGFloat used for border width for card view
 ORK_EXTERN CGFloat ORKCardDefaultBorderWidth;
 
-/// Default font size for card view
-ORK_EXTERN CGFloat ORKCardDefaultFontSize;
 
 /// Default Top and Bottom margin for card view
 ORK_EXTERN CGFloat ORKSurveyItemMargin;
@@ -139,9 +140,6 @@ ORK_EXTERN CGFloat ORKBodyToBodyPaddingStandard;
 /// Default body to body item padding;
 ORK_EXTERN CGFloat ORKBodyToBodyParagraphPaddingStandard;
 
-/// Step Content Icon Image View Dimension
-ORK_EXTERN CGFloat ORKStepContentIconImageViewDimension;
-
 /// Navigation Container Effect View Style
 ORK_EXTERN CGFloat ORKEffectViewOpacityHidden;
 
@@ -150,6 +148,15 @@ ORK_EXTERN CGFloat ORKEffectViewOpacityVisible;
 
 /// Checkmark View dimension
 ORK_EXTERN CGFloat CheckmarkViewDimension;
+
+/// System default layout margins
+ORK_EXTERN NSDirectionalEdgeInsets ORKLargeContentLayoutMargins;
+
+/// System default for content margins nested within top level views.
+ORK_EXTERN NSDirectionalEdgeInsets ORKSmallContentLayoutMargins;
+
+/// Provide a safe way for margins to be equal on leading, bottom and trailing edges
+NSDirectionalEdgeInsets ORKBottomSafeAreaDirectionalEdgeInsetsFrom(NSDirectionalEdgeInsets margins);
 
 /// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
@@ -168,6 +175,7 @@ void ORKColorSetColorForKey(NSString *key, UIColor *color);
 @end
 
 extern const CGFloat ORKScreenMetricMaxDimension;
+extern const CGFloat ORKHolePegTestViewDiameter;
 
 typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricTopToCaptionBaseline,
@@ -249,6 +257,16 @@ CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window);
 CGFloat ORKCardLeftRightMarginForWindow(UIWindow *window);
 
 UIFontTextStyle ORKTitleLabelFontTextStyleForWindow(UIWindow *window);
+
+UIFont *ORKBodyTitleFont(void);
+UIFont *ORKBodyTitleFontBold(void);
+UIFont *ORKBodyTextFont(void);
+UIFont *ORKBodyTextFontBold(void);
+UIFont *ORKBulletIconFont(void);
+UIFont *ORKBulletTextFont(void);
+UIFont *ORKBulletTextFontBold(void);
+UIFont *ORKBulletBodyTextFontBold(void);
+UIFont *ORKBulletDetailTextFont(void);
 #endif
 
 NS_ASSUME_NONNULL_END

@@ -39,6 +39,7 @@
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKStepContainerView_Private.h"
 
 #import "ORKActiveStep.h"
 #import "ORKResult.h"
@@ -182,6 +183,12 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
     animation.values = @[ @(1.0), @(0.0), @(0.0) ];
     animation.keyTimes =  @[ @(0.0), @(0.5), @(1.0) ];
     animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    _circleLayer.strokeEnd = 0.0;
+    [CATransaction commit];
+
     [_circleLayer addAnimation:animation forKey:@"drawCircleAnimation"];
 }
 
@@ -234,6 +241,8 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
     _countdownView = [[ORKCountdownView alloc] init];
     _countdownView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _countdownView;
+    [self.activeStepView setNavigationFooterViewHidden:NO];
+    [_countdownView setContentHuggingPriority:UILayoutPriorityRequired-1 forAxis:UILayoutConstraintAxisVertical];
     [self updateCountdownLabel];
 }
 

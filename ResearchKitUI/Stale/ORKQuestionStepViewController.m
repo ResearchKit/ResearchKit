@@ -77,6 +77,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 static const CGFloat TableViewYOffsetStandard = 30.0;
 static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 
+NSString * const ORKQuestionStepViewAccessibilityIdentifier = @"ORKQuestionStepView";
+
 @interface ORKQuestionStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKSurveyAnswerCellDelegate, ORKTextChoiceCellGroupDelegate, ORKChoiceOtherViewCellDelegate, ORKTableContainerViewDelegate, ORKLearnMoreViewDelegate> {
     id _answer;
     
@@ -190,11 +192,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             _headerView = _tableContainer.stepContentView;
             if (self.questionStep.useCardView) {
                 _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-                if (@available(iOS 13.0, *)) {
-                    [_tableView setBackgroundColor:UIColor.systemGroupedBackgroundColor];
-                } else {
-                    [_tableView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
-                }
+                [_tableView setBackgroundColor:UIColor.systemGroupedBackgroundColor];
                 [self.taskViewController setNavigationBarColor:[_tableView backgroundColor]];
                 [self.view setBackgroundColor:[_tableView backgroundColor]];
             }
@@ -219,10 +217,6 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             }
             [self setupConstraints:_tableContainer];
             [_tableContainer setNeedsLayout];
-            
-            // Question steps should always force the navigation controller to be scrollable
-            // therefore we should always remove the styling.
-            [_navigationFooterView removeStyling];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
             ORKQuestionStep *questionStep = (ORKQuestionStep *)self.step;
@@ -268,11 +262,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
                 _swiftUIViewHolder.answer = [self answer];
                 _swiftUIViewHolder.userInteractionEnabled = !self.readOnlyMode;
                 if (self.questionStep.useCardView) {
-                    if (@available(iOS 13.0, *)) {
-                        [_questionView setBackgroundColor:UIColor.systemGroupedBackgroundColor];
-                    } else {
-                        [_questionView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
-                    }
+                    [_questionView setBackgroundColor:UIColor.systemGroupedBackgroundColor];
                     [self.taskViewController setNavigationBarColor:[_questionView backgroundColor]];
                     [self.view setBackgroundColor:[_questionView backgroundColor]];
                     ORKLearnMoreView *learnMoreView;
@@ -310,11 +300,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
                 _cellHolderView.answer = [self answer];
                 _cellHolderView.userInteractionEnabled = !self.readOnlyMode;
                 if (self.questionStep.useCardView) {
-                    if (@available(iOS 13.0, *)) {
-                        [_questionView setBackgroundColor:UIColor.systemGroupedBackgroundColor];
-                    } else {
-                        [_questionView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
-                    }
+                    [_questionView setBackgroundColor:UIColor.systemGroupedBackgroundColor];
                     [self.taskViewController setNavigationBarColor:[_questionView backgroundColor]];
                     [self.view setBackgroundColor:[_questionView backgroundColor]];
                     ORKLearnMoreView *learnMoreView;
@@ -345,7 +331,6 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             }
             
             _questionView.translatesAutoresizingMaskIntoConstraints = NO;
-            [_questionView removeCustomContentPadding];
             
             if (self.readOnlyMode) {
                 _navigationFooterView.optional = YES;
@@ -370,14 +355,6 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
         _navigationFooterView.skipButtonItem = self.skipButtonItem;
         _navigationFooterView.continueEnabled = [self continueButtonEnabled];
         _navigationFooterView.continueButtonItem = self.continueButtonItem;
-    }
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    if (_tableContainer) {
-        [_tableContainer sizeHeaderToFit];
-        [_tableContainer resizeFooterToFitUsingMinHeight:NO];
     }
 }
 
@@ -424,6 +401,8 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.accessibilityIdentifier = ORKQuestionStepViewAccessibilityIdentifier;
     
     [self stepDidChange];
     
@@ -526,6 +505,10 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
     [super viewDidAppear:animated];
     
     _visible = YES;
+    
+    if (_tableContainer) {
+        [_tableContainer resizeFooterToFit];
+    }
     
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
@@ -772,7 +755,13 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             hasMultipleChoiceFormItem = YES;
         }
 
-        return [[ORKSurveyCardHeaderView alloc] initWithTitle:self.questionStep.question detailText:self.questionStep.detailText  learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem shouldIgnoreDarkMode:NO];
+        return [[ORKSurveyCardHeaderView alloc] initWithTitle:self.questionStep.question
+                                                   detailText:self.questionStep.detailText
+                                                learnMoreView:learnMoreView
+                                                 progressText:sectionProgressText
+                                                      tagText:self.questionStep.tagText
+                                                   showBorder:NO
+                                        hasMultipleChoiceItem:hasMultipleChoiceFormItem];
     }
     return nil;
 }
@@ -1001,7 +990,7 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
             break;
     }
     
-    return height;
+    return automaticMinimumHeightForTableViewRow(height);
 }
 
 

@@ -31,7 +31,7 @@
 
 #import "ORKNormalizedReactionTimeResult.h"
 
-
+#import "ORKFileResult.h"
 #import "ORKResult_Private.h"
 #import "ORKHelpers_Internal.h"
 
@@ -45,6 +45,7 @@
     ORK_ENCODE_OBJ(aCoder, stimulusStartDate);
     ORK_ENCODE_OBJ(aCoder, reactionDate);
     ORK_ENCODE_INTEGER(aCoder, currentInterval);
+    ORK_ENCODE_OBJ(aCoder, fileResults);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -55,6 +56,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, stimulusStartDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, reactionDate, NSDate);
         ORK_DECODE_INTEGER(aDecoder, currentInterval);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, fileResults, ORKFileResult);
     }
     return self;
 }
@@ -72,12 +74,12 @@
                 ORKEqualObjects(self.timerEndDate, castObject.timerEndDate) &&
                 ORKEqualObjects(self.stimulusStartDate, castObject.stimulusStartDate) &&
                 ORKEqualObjects(self.reactionDate, castObject.reactionDate) &&
-                (self.currentInterval == castObject.currentInterval));
-    
+                (self.currentInterval == castObject.currentInterval) &&
+                ORKEqualObjects(self.fileResults, castObject.fileResults));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ _timerStartDate.hash ^ _timerEndDate.hash ^ _stimulusStartDate.hash ^ _reactionDate.hash;
+    return super.hash ^ _timerStartDate.hash ^ _timerEndDate.hash ^ _stimulusStartDate.hash ^ _reactionDate.hash ^ _fileResults.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -87,6 +89,7 @@
     result.stimulusStartDate = [self.stimulusStartDate copy];
     result.reactionDate = [self.reactionDate copy];
     result.currentInterval = self.currentInterval;
+    result.fileResults = [self.fileResults copy];
     return result;
 }
 

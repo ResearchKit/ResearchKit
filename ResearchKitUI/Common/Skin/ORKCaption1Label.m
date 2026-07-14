@@ -37,10 +37,10 @@
 @implementation ORKCaption1Label
 
 + (UIFont *)defaultFont {
-    // medium , 17
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleCaption1];
-    const CGFloat defaultSize = 12;
-    return ORKMediumFontWithSize([[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] + 17.0 - defaultSize);
+    // 5pt larger than the system caption1 size, matching the original ORKCaption1Label design.
+    CGFloat baseSize = ORKDefaultFontSizeForTextStyle(UIFontTextStyleCaption1) + 5.0;
+    UIFont *baseFont = [UIFont systemFontOfSize:baseSize weight:UIFontWeightMedium];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleCaption1] scaledFontForFont:baseFont];
 }
 
 @end

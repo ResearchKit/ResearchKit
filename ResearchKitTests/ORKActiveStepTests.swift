@@ -1,21 +1,21 @@
 /*
  Copyright (c) 2019, Apple Inc. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1.  Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
- 
+
  2.  Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3.  Neither the name of the copyright holder(s) nor the names of any contributors
  may be used to endorse or promote products derived from this software without
  specific prior written permission. No license is granted to the trademarks of
  the copyright holders even if such marks are included in this software.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -27,90 +27,256 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import XCTest
-@testable import ResearchKit
+import ResearchKit
+import ResearchKitActiveTask
+import ResearchKitActiveTask_Private
+import Testing
 
-class ORKActiveStepTests: XCTestCase {
-    
-    var activeStepTest: ORKActiveStep!
-    
-    override func setUp() {
-        super.setUp()
-        activeStepTest = ORKActiveStep(identifier: "Test")
+@Suite
+struct ORKActiveStepTests {
+
+    let step: ORKActiveStep
+
+    init() {
+        step = ORKActiveStep(identifier: "Test")
     }
-    
-    func testIdentifier() {
-        XCTAssert(activeStepTest.identifier == "Test")
+
+    @Test
+    func identifier() {
+        #expect(step.identifier == "Test")
     }
-    
-    func testStartsFinished() {
-        activeStepTest.stepDuration = -1
-        XCTAssertFalse(activeStepTest.startsFinished())
-        
-        activeStepTest.stepDuration = 2
-        XCTAssertFalse(activeStepTest.startsFinished())
-        
-        activeStepTest.stepDuration = 0
-        XCTAssert(activeStepTest.startsFinished())
+
+    @Test
+    func startsFinished() {
+        step.stepDuration = -1
+        #expect(!step.startsFinished())
+
+        step.stepDuration = 2
+        #expect(!step.startsFinished())
+
+        step.stepDuration = 0
+        #expect(step.startsFinished())
     }
-    
-    func testHasCountdown() {
+
+    @Test
+    func hasCountdown() {
         // stepDuration > 0 && shouldShowDefaultTimer = true -> true
-        activeStepTest.shouldShowDefaultTimer = true
-        activeStepTest.stepDuration = -1
-        XCTAssertFalse(activeStepTest.hasCountDown())
-        
-        activeStepTest.stepDuration = 0
-        XCTAssertFalse(activeStepTest.hasCountDown())
-        
-        activeStepTest.stepDuration = 1
-        activeStepTest.shouldShowDefaultTimer = false
-        XCTAssertFalse(activeStepTest.hasCountDown())
-        
-        activeStepTest.shouldShowDefaultTimer = true
-        XCTAssert(activeStepTest.hasCountDown())
+        step.shouldShowDefaultTimer = true
+        step.stepDuration = -1
+        #expect(!step.hasCountDown())
+
+        step.stepDuration = 0
+        #expect(!step.hasCountDown())
+
+        step.stepDuration = 1
+        step.shouldShowDefaultTimer = false
+        #expect(!step.hasCountDown())
+
+        step.shouldShowDefaultTimer = true
+        #expect(step.hasCountDown())
     }
-    
-    func testHasTitle() {
-        activeStepTest.title = ""
-        XCTAssertFalse(activeStepTest.hasTitle())
-        
-        activeStepTest.title = nil
-        XCTAssertFalse(activeStepTest.hasTitle())
-        
-        activeStepTest.title = "This should work"
-        XCTAssert(activeStepTest.hasTitle())
+
+    @Test
+    func hasTitle() {
+        step.title = ""
+        #expect(!step.hasTitle())
+
+        step.title = nil
+        #expect(!step.hasTitle())
+
+        step.title = "This should work"
+        #expect(step.hasTitle())
     }
-    
-    func testHasText() {
-        activeStepTest.text = ""
-        XCTAssertFalse(activeStepTest.hasText())
-        
-        activeStepTest.text = nil
-        XCTAssertFalse(activeStepTest.hasText())
-        
-        activeStepTest.text = "THIS SHOULD WORK"
-        XCTAssert(activeStepTest.hasText())
+
+    @Test
+    func hasText() {
+        step.text = ""
+        #expect(!step.hasText())
+
+        step.text = nil
+        #expect(!step.hasText())
+
+        step.text = "THIS SHOULD WORK"
+        #expect(step.hasText())
     }
-    
-    func testHasVoice() {
-        
-        activeStepTest.spokenInstruction = nil
-        XCTAssertFalse(activeStepTest.hasVoice())
-        
-        activeStepTest.spokenInstruction = ""
-        XCTAssertFalse(activeStepTest.hasVoice())
-        
-        activeStepTest.spokenInstruction = "Do jumping jacks"
-        activeStepTest.finishedSpokenInstruction = nil
-        XCTAssert(activeStepTest.hasVoice())
-        
-        activeStepTest.spokenInstruction = nil
-        activeStepTest.finishedSpokenInstruction = ""
-        XCTAssertFalse(activeStepTest.hasVoice())
-        
-        activeStepTest.finishedSpokenInstruction = "Good job"
-        XCTAssert(activeStepTest.hasVoice())
-        
+
+    @Test
+    func hasVoice() {
+        step.spokenInstruction = nil
+        #expect(!step.hasVoice())
+
+        step.spokenInstruction = ""
+        #expect(!step.hasVoice())
+
+        step.spokenInstruction = "Do jumping jacks"
+        step.finishedSpokenInstruction = nil
+        #expect(step.hasVoice())
+
+        step.spokenInstruction = nil
+        step.finishedSpokenInstruction = ""
+        #expect(!step.hasVoice())
+
+        step.finishedSpokenInstruction = "Good job"
+        #expect(step.hasVoice())
+    }
+}
+
+// MARK: - Step subclass shouldShowDefaultTimer defaults
+
+@Suite
+struct ORKActiveStepSubclassDefaultsTests {
+
+    @Test
+    func baseClassDefaultsToShowTimer() {
+        let step = ORKActiveStep(identifier: "base")
+        #expect(step.shouldShowDefaultTimer == true,
+                "ORKActiveStep should default shouldShowDefaultTimer to YES")
+    }
+
+    @Test
+    func toneAudiometryStepDefaultsToNoTimer() {
+        let step = ORKToneAudiometryStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func towerOfHanoiStepDefaultsToNoTimer() {
+        let step = ORKTowerOfHanoiStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func speechRecognitionStepDefaultsToNoTimer() {
+        let step = ORKSpeechRecognitionStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func reactionTimeStepDefaultsToNoTimer() {
+        let step = ORKReactionTimeStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func normalizedReactionTimeStepDefaultsToNoTimer() {
+        let step = ORKNormalizedReactionTimeStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func touchAnywhereStepDefaultsToNoTimer() {
+        let step = ORKTouchAnywhereStep(identifier: "id", instructionText: "tap")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func rangeOfMotionStepDefaultsToNoTimer() {
+        let step = ORKRangeOfMotionStep(identifier: "id", limbOption: .left)
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func shoulderRangeOfMotionStepDefaultsToNoTimer() {
+        let step = ORKShoulderRangeOfMotionStep(identifier: "id", limbOption: .left)
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func spatialSpanMemoryStepDefaultsToNoTimer() {
+        let step = ORKSpatialSpanMemoryStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func speechInNoiseStepDefaultsToNoTimer() {
+        let step = ORKSpeechInNoiseStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func accuracyStroopStepDefaultsToNoTimer() {
+        let step = ORKAccuracyStroopStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+
+    @Test
+    func model3DStepDefaultsToNoTimer() {
+        let step = ORK3DModelStep(identifier: "id")
+        #expect(step.shouldShowDefaultTimer == false)
+    }
+}
+
+// MARK: - ORKActiveStepViewController timerView behavior
+
+@MainActor
+@Suite
+struct ORKActiveStepViewControllerTimerTests {
+
+    /// A step with stepDuration > 0 and shouldShowDefaultTimer = YES should
+    /// produce a non-nil timerView after view load.
+    @Test
+    func timerViewSetWhenHasCountDown() {
+        let step = ORKActiveStep(identifier: "countdown")
+        step.stepDuration = 30
+        step.shouldShowDefaultTimer = true
+
+        let vc = ORKActiveStepViewController(step: step)
+        _ = vc.view
+
+        let timerView = vc.activeStepView?.timerView
+        #expect(timerView != nil,
+                "timerView should be set when hasCountDown is true")
+    }
+
+    /// A step with shouldShowDefaultTimer = NO should leave timerView nil.
+    @Test
+    func timerViewNilWhenShouldShowDefaultTimerFalse() {
+        let step = ORKActiveStep(identifier: "notimer")
+        step.stepDuration = 30
+        step.shouldShowDefaultTimer = false
+
+        let vc = ORKActiveStepViewController(step: step)
+        _ = vc.view
+
+        let timerView = vc.activeStepView?.timerView
+        #expect(timerView == nil,
+                "timerView should be nil when shouldShowDefaultTimer is false")
+    }
+
+    /// A step with stepDuration = 0 should leave timerView nil even if
+    /// shouldShowDefaultTimer is true (hasCountDown requires stepDuration > 0).
+    @Test
+    func timerViewNilWhenStepDurationZero() {
+        let step = ORKActiveStep(identifier: "zeroduration")
+        step.stepDuration = 0
+        step.shouldShowDefaultTimer = true
+
+        let vc = ORKActiveStepViewController(step: step)
+        _ = vc.view
+
+        let timerView = vc.activeStepView?.timerView
+        #expect(timerView == nil,
+                "timerView should be nil when stepDuration is 0")
+    }
+
+    /// Setting activeCustomView after view load should NOT clear the timerView —
+    /// both slots must coexist independently.
+    @Test
+    func timerViewSurvivesSettingActiveCustomView() {
+        let step = ORKActiveStep(identifier: "both")
+        step.stepDuration = 30
+        step.shouldShowDefaultTimer = true
+
+        let vc = ORKActiveStepViewController(step: step)
+        _ = vc.view
+
+        // Simulate a subclass setting its own custom content view.
+        vc.activeStepView?.activeCustomView = ORKActiveStepCustomView()
+
+        let timerView = vc.activeStepView?.timerView
+        #expect(timerView != nil,
+                "timerView should survive a subsequent activeCustomView assignment")
+        #expect(vc.activeStepView?.activeCustomView != nil,
+                "activeCustomView should be set")
     }
 }

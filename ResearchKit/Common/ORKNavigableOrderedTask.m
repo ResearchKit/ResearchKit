@@ -161,6 +161,10 @@
         if ([skipNavigationRule stepShouldSkipWithTaskResult:result]) {
             nextStep = [self stepAfterStep:nextStep withResult:result];
         }
+
+        if (nextStep && [self _shouldSkipStep:nextStep]) {
+            nextStep = [self stepAfterStep:nextStep withResult:result];
+        }
     }
     
     if (nextStep != nil) {

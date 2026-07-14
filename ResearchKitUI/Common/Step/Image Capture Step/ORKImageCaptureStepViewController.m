@@ -30,6 +30,7 @@
 
 
 #import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
 
 #import "ORKImageCaptureView.h"
 #import "ORKImageCaptureStep.h"
@@ -40,10 +41,16 @@
 #import "ORKFileResult.h"
 #import "ORKResult.h"
 #import "ORKStep.h"
+#import "ORKStep_Private.h"
+#import "ORKNavigableOrderedTask.h"
+#import "ORKCompletionStep.h"
+#import "ORKCompletionStepViewController.h"
 
 #import "ORKHelpers_Internal.h"
 
-@import AVFoundation;
+#import <AVFoundation/AVFoundation.h>
+#import "ORKCaptureAccessDeniedContext.h"
+#import <ResearchKitUI/ResearchKitUI-Swift.h>
 
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate, AVCapturePhotoCaptureDelegate>
@@ -92,10 +99,19 @@
         _imageCaptureView.imageCaptureStep = (ORKImageCaptureStep *)step;
         _imageCaptureView.delegate = self;
         _captureRaw = NO;
+        _imageCaptureView.hidden = YES;
         [self.view addSubview:_imageCaptureView];
         
         _imageCaptureView.translatesAutoresizingMaskIntoConstraints = NO;
         [self setUpConstraints];
+
+        self.step.authDeniedContext = [[ORKCaptureAccessDeniedContext alloc]
+                                       initWithTitle:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_TITLE", nil)
+                                       text:ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil)
+                                       settingsLinkText:ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_SETTINGS_LINK_TEXT", nil)
+                                       completionStepIdentifier:@"ORKImageCaptureStepIdentifierAccessDeniedCompletion"
+                                       learnMoreStepIdentifier:@"ORKImageCaptureStepIdentifierInstructionStepPlaceHolderAccessDenied"
+                                       iconImage:[UIImage systemImageNamed:@"camera"]];
     }
     return self;
 }
@@ -178,7 +194,6 @@
         photoSettings = [AVCapturePhotoSettings photoSettingsWithRawPixelFormatType:rawPixelFormatType
                                                                     processedFormat:@{AVVideoCodecKey: AVVideoCodecTypeJPEG}];
     }
-    photoSettings.photoQualityPrioritization = AVCapturePhotoQualityPrioritizationBalanced;
     [photoSettings setFlashMode:(AVCaptureFlashModeAuto)];
     
     return photoSettings;
@@ -252,31 +267,29 @@
     });
 }
 
-- (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation {
-    // Keep the output orientation in sync with the input orientation
-    [[[_photoOutput connections] firstObject] setVideoOrientation:videoOrientation];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Capture actions should be performed off the main queue to keep the UI responsive
     _sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
-    
-    // Setup the capture session
-    dispatch_async(_sessionQueue, ^{
-        [self queue_SetupCaptureSession];
-    });
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    // If we don't already have a captured image, then start the capture session running
-    if (!_capturedImageData) {
+
+    // If we already have a captured image, no need to start the session
+    if (_capturedImageData) {
+        _imageCaptureView.hidden = NO;
+        return;
+    }
+
+    if (_captureSession) {
+        _imageCaptureView.hidden = NO;
         dispatch_async(_sessionQueue, ^{
-            [_captureSession startRunning];
+            [self->_captureSession startRunning];
         });
+    } else {
+        [self _checkCameraAuthorizationAndSetupSession];
     }
 }
 
@@ -291,6 +304,81 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)_checkCameraAuthorizationAndSetupSession {
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+
+    switch (authStatus) {
+        case AVAuthorizationStatusNotDetermined: {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (granted) {
+                        [self _startCaptureSession];
+                    } else {
+                        [self _handleDeniedCameraAccess];
+                    }
+                });
+            }];
+            break;
+        }
+        case AVAuthorizationStatusAuthorized: {
+            [self _startCaptureSession];
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+        default: {
+            [self _handleDeniedCameraAccess];
+            break;
+        }
+    }
+}
+
+- (void)_startCaptureSession {
+    _imageCaptureView.hidden = NO;
+    dispatch_async(_sessionQueue, ^{
+        [self queue_SetupCaptureSession];
+        [self->_captureSession startRunning];
+    });
+}
+
+- (void)_handleDeniedCameraAccess {
+    ORKTaskViewController *taskVC = self.taskViewController;
+    if (taskVC != nil &&
+        [taskVC.task isKindOfClass:[ORKNavigableOrderedTask class]] &&
+        self.step.authDeniedContext != nil) {
+        [self _tearDownImageCaptureView];
+        [taskVC handleDeniedAuthForStep:self.step];
+    } else {
+        [self _showAccessDeniedCompletionStep];
+    }
+}
+
+- (void)_tearDownImageCaptureView {
+    [_imageCaptureView removeFromSuperview];
+    _imageCaptureView = nil;
+}
+
+- (void)_showAccessDeniedCompletionStep {
+    [self _tearDownImageCaptureView];
+    ORKCompletionStep *completionStep;
+    if (self.step.authDeniedContext != nil) {
+        completionStep = [self.step.authDeniedContext authDeniedCompletionStep];
+    } else {
+        completionStep = [[ORKCompletionStep alloc] initWithIdentifier:@"ORKImageCaptureAccessDeniedFallback"];
+        completionStep.title = ORKLocalizedString(@"VIDEO_CAPTURE_ACCESS_DENIED_TITLE", nil);
+        completionStep.text = ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil);
+        completionStep.reasonForCompletion = ORKTaskFinishReasonFailed;
+        completionStep.iconImage = [UIImage systemImageNamed:@"video.slash"];
+    }
+
+    ORKCompletionStepViewController *completionVC = [[ORKCompletionStepViewController alloc] initWithStep:completionStep];
+    [self addChildViewController:completionVC];
+    completionVC.view.frame = self.view.bounds;
+    completionVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:completionVC.view];
+    [completionVC didMoveToParentViewController:self];
+}
+
 - (void)queue_SetupCaptureSession {
     // Create the session
     _captureSession = [[AVCaptureSession alloc] init];
@@ -299,7 +387,12 @@
     _captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
     _captureRaw = [self imageCaptureStep].captureRaw;
     // Get the camera
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *device;
+    if ([self imageCaptureStep].useFrontCamera) {
+        device = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionFront];
+    } else {
+        device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    }
     if (device) {
         // Configure the input and output
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
@@ -308,6 +401,14 @@
             [_captureSession addInput:input];
             [_captureSession addOutput:photoOutput];
             _photoOutput = photoOutput;
+
+            if ([self imageCaptureStep].useFrontCamera) {
+                AVCaptureConnection *photoConnection = [_photoOutput connectionWithMediaType:AVMediaTypeVideo];
+                if ([photoConnection isVideoMirroringSupported]) {
+                    photoConnection.automaticallyAdjustsVideoMirroring = NO;
+                    photoConnection.videoMirrored = YES;
+                }
+            }
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil)}]];
@@ -374,7 +475,7 @@
     
     // If set properly, the outputDirectory is already created, so write the file into it
     NSError *writeError = nil;
-    if (![_capturedImageData writeToURL:URL options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
+    if (![_capturedImageData writeToURL:URL options:NSDataWritingAtomic|ORKDataWritingFileProtectionFromMode(self.fileProtectionMode) error:&writeError]) {
         if (writeError) {
             ORK_Log_Error("%@", writeError);
         }

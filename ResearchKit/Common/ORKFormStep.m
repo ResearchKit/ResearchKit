@@ -148,11 +148,14 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
+        NSArray<ORKFormItem *> *decodedFormItems = [aDecoder decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[ORKFormItem class], nil] forKey:@"formItems"];
         ORK_DECODE_BOOL(aDecoder, useCardView);
         ORK_DECODE_BOOL(aDecoder, autoScrollEnabled);
         ORK_DECODE_OBJ_CLASS(aDecoder, footerText, NSString);
         ORK_DECODE_ENUM(aDecoder, cardViewStyle);
+        
+        // Use setter to properly establish weak reference relationships
+        self.formItems = decodedFormItems;
     }
     return self;
 }
@@ -296,6 +299,8 @@
     item->_showsProgress = _showsProgress;
     item->_tagText = [_tagText copy];
     item->_visibilityRule = [_visibilityRule copy];
+    // Do not copy step reference - it will be set properly via setFormItems: to establish weak reference
+    item->_step = nil;
     return item;
 }
 
@@ -310,7 +315,7 @@
         ORK_DECODE_BOOL(aDecoder, showsProgress);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
-        ORK_DECODE_OBJ_CLASS(aDecoder, step, ORKFormStep);
+        // Do not decode step here - it will be set properly via setFormItems: to establish weak reference
         ORK_DECODE_OBJ_CLASS(aDecoder, tagText, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, visibilityRule, ORKFormItemVisibilityRule);
     }
@@ -326,7 +331,7 @@
     ORK_ENCODE_BOOL(aCoder, showsProgress);
     ORK_ENCODE_OBJ(aCoder, placeholder);
     ORK_ENCODE_OBJ(aCoder, answerFormat);
-    ORK_ENCODE_OBJ(aCoder, step);
+    // Do not encode step here - it creates retain cycle during decoding
     ORK_ENCODE_OBJ(aCoder, tagText);
     ORK_ENCODE_OBJ(aCoder, visibilityRule);
 }

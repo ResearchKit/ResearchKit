@@ -32,13 +32,15 @@
 #import "ORKScaleValueLabel.h"
 
 #import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKScaleValueLabel
 
 + (UIFont *)defaultFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    return ORKLightFontWithSize(((NSNumber *)[descriptor objectForKey: UIFontDescriptorSizeAttribute]).doubleValue + 18.0);
+    CGFloat baseSize = ORKGetMetricForWindow(ORKScreenMetricFontSizeHeadline, nil);
+    UIFont *baseFont = [UIFont systemFontOfSize:baseSize weight:UIFontWeightLight];
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleHeadline] scaledFontForFont:baseFont];
 }
 
 - (CGSize)intrinsicContentSize {
