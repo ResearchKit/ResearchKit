@@ -4,34 +4,95 @@
 
 In addition to general stability and performance improvements, ResearchKit 3.4.0 includes the following updates:
 
-- **Liquid Glass Support**
-    - ResearchKit has been updated to support Liquid Glass, bringing the modernized iOS visual style to steps, form elements, and task navigation throughout the framework.
+## Core API Changes
 
-- **ORKESerializer**
-    - A new, fully public serialization API replaces the previous internal approach. The `ORKESerializer` class encodes and decodes ResearchKit tasks, steps, and results to and from JSON. It uses an entry provider pattern to register serializable classes.
-    - See the new DocC article [Serializing ResearchKit Objects](https://researchkit.github.io/main/documentation/researchkit/serializing-researchkit-objects) for working examples of ResearchKit classes encoded and decoded with the `ORKESerializer`.
+### New `ORKStep` Properties
 
-- **ORKRecorder Improvements**
-    - ResearchKit now configures the required `ORKRecorder`s for `ORKActiveStep`s automatically. Updated `ORKTaskViewController` to request all required sensor permissions before the active step is reached.
+Five new properties have been added to `ORKStep`, covering back navigation control, XCUITest accessibility, icon tint color, device availability gating, and step dependency declarations.
 
-- **File Protection Updates**
-    - `fileProtectionMode` - Controls the `NSFileProtection` level for images, video, audio, serialization data, and other files that ResearchKit writes to the `outputDirectory`. Defaults to `ORKFileProtectionComplete` (Class A encryption).
-    - `excludeFilesFromBackup` - When `true`, ResearchKit applies `NSURLIsExcludedFromBackupKey` to the `outputDirectory`, excluding all task output files from iCloud backups. Defaults to `false`.
+### New `ORKActiveStep` Methods
+
+Two new overridable methods, `requiredPermissions` and `prepareRecorders`, give active steps control over permission requirements and recorder setup before a step is presented.
+
+### New `ORKTaskViewController` Properties and Delegate Method
+
+New `fileProtectionMode` and `excludesFilesFromBackup` properties give apps control over how ResearchKit protects and backs up task output files. A new optional delegate method, `taskViewController:serializerForTask:`, allows providing a custom serializer per task.
+
+## New Features
+
+- **Updated minimum deployment target: iOS 17.0**
+
+- **Liquid Glass Support (iOS 26)**
+
+  ResearchKit adds opt-in Liquid Glass styling for iOS 26, gated behind the `ORK_FEATURE_LIQUID_GLASS_SUPPORT` compilation flag and a runtime iOS 26 check. When enabled, card corners, icon sizing, spacing, and button styles all adapt to the new visual language. Note that three skin constants (`ORKCardDefaultCornerRadii`, `ORKStepContainerTitleToBodyTopPaddingStandard`, `ORKStepContentIconImageViewDimension`) have changed from extern variables to C functions and must be updated at call sites.
+
+- **Serialization: `ORKESerializer`**
+
+  A new public `ORKESerializer` class replaces the previous internal serialization approach, encoding and decoding ResearchKit tasks, steps, and results to and from JSON via a composable entry provider pattern. A new DocC article, [Serializing ResearchKit Objects](https://researchkit.github.io/main/documentation/researchkit/serializing-researchkit-objects), is included with worked examples.
+
+- **SwiftUI Integration Layer**
+
+  A new set of protocols and types, including `ORKSwiftInstructionStep`, `ORKAdapterStep`, and `ORKHostingStepViewController`, makes it possible to build ResearchKit steps backed by SwiftUI views while remaining compatible with the existing `ORKTaskViewController` flow.
+
+- **Stroop Task: Rebuilt in SwiftUI**
+
+  The Stroop task has been rebuilt with a full Swift/SwiftUI implementation via the new `ORKSwiftStroopStep`, offering configurable trial counts, congruent/incongruent ratios, color choices, and inter-trial masking. The legacy Objective-C implementation is preserved under `Stroop-Legacy/` and remains functional.
+
+- **Permission Denied Completion Steps**
+
+  `ORKCompletionStep` gains static factory methods that produce pre-configured, localized completion steps for denied audio, motion, location, and camera permissions, with optional variants that include a deep link to iOS Settings.
 
 - **Expanded AirPods Support for dBHL Tone Audiometry**
-    - Added updated audiometry calibration data for 4th generation AirPods support.
 
-- **New Stroop Task**
-    - Rebuilt the Stroop task in SwiftUI.
+  Full audiometry calibration data and new `ORKHeadphoneTypeIdentifier` constants have been added for AirPods (4th generation, standard and ANC), AirPods Pro (3rd generation), and AirPods Max (USB-C), along with new device artwork for hearing-related active tasks.
 
-- **ORKImageCaptureStep - Front Camera Support**
-    - New `useFrontCamera` property on `ORKImageCaptureStep`. When `true`, the step uses the front-facing camera instead of the default rear camera.
+- **`ORKImageCaptureStep`: Front Camera Support**
 
-- **ORKDontKnowButtonStyle Deprecated**
-    - The `ORKDontKnowButtonStyle` enum and `dontKnowButtonStyle` property on `ORKAnswerFormat` are now formally deprecated. All "don't know" buttons unconditionally use the `CircleChoice` style going forward.
+  A new `useFrontCamera` property on `ORKImageCaptureStep` allows capture steps to use the front-facing camera instead of the default rear camera.
 
-- **`stable` Branch Retired**
-    - The `stable` branch is retired as of this release. Releases are now cut as version tags directly off `main`. Consume releases via the version tags. If you previously tracked the `stable` branch, pin to a version tag instead.
+- **Accessibility: VoiceOver Text for Choice Answer Formats**
+
+  `ORKTextChoice` and `ORKColorChoice` now support a `voiceOverReadableText` property, letting developers specify a separate string for VoiceOver to read in place of the displayed label.
+
+## Deprecations and Removals
+
+### `ORKDontKnowButtonStyle` Deprecated
+
+The `ORKDontKnowButtonStyle` enum and `dontKnowButtonStyle` property are deprecated; all "don't know" buttons now use the CircleChoice style unconditionally.
+
+### `ORKPredefinedTaskLimbOptionBoth` Removed
+
+The `ORKPredefinedTaskLimbOptionBoth` case has been removed from `ORKPredefinedTaskLimbOption`. Apps referencing this value will fail to compile and must be updated.
+
+### `stable` Branch Retired
+
+The `stable` branch is retired as of this release. Releases are now cut as version tags directly off `main`. Consume releases via the version tags. If you previously tracked the `stable` branch, pin to a version tag instead.
+
+## Other Updates
+
+- **`ORKModalDismissalBlockingGesture`**
+
+  A new public `UIPanGestureRecognizer` subclass prevents modal sheets from being accidentally dismissed during pan-gesture-dependent active tasks.
+
+- **`ORKBodyItemStyleHeader`**
+
+  New body item style that renders bold text in the primary label color, suitable for section headers within body item lists.
+
+- **Unified Logging API**
+
+  A new Swift logging interface built on `os.Logger` (`ORKLogDebug`, `ORKLogInfo`, `ORKLogError`, `ORKLogFault`) is now used internally, emitting under the `com.apple.ResearchKit` subsystem.
+
+- **Age Picker Modernized with SwiftUI**
+
+  The `ORKAgeAnswerFormat` picker has been rewritten in SwiftUI and now supports a "Don't Know" option.
+
+- **`ORKOrderedTask` Step Availability Skipping**
+
+  `ORKOrderedTask` now automatically skips hardware-dependent steps at runtime using the new `stepAvailable` and `requiredStepIdentifiers` properties, removing the need for app-side conditional task construction.
+
+- **Localization Updates**
+
+  String additions and corrections across all supported locales, including a full set of permission-denied messages and an "Open Settings" call-to-action string.
 
 
 ## ResearchKit 3.2.0 Release Notes
