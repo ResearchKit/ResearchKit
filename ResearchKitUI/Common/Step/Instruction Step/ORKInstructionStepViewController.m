@@ -166,7 +166,7 @@
      should get handled the same way as other learn more callbacks at the task level. If the app responds to this delegate, it get's
      higher priority and it becomes the responsibility of the developer to handle all cases.
      
-     If not implemented, default to showing the learnMore view controller for the the step.
+     If not implemented, default to showing the learnMore view controller for the step.
      */
     
     [self handleLearnMoreButtonPressed:learnMoreStep];
