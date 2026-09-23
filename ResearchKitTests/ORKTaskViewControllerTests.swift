@@ -291,16 +291,15 @@ final class ORKTaskViewControllerTests: XCTestCase {
         XCTAssertEqual(restoredVC.fileProtectionMode, .completeUnlessOpen)
     }
 
-    func testExcludesFilesFromBackupDefaultIsFalse() {
+    func testExcludesFilesFromBackupDefaultIsTrue() {
         let task = createTask()
         let taskVC = ORKTaskViewController(task: task, taskRun: nil)
-        XCTAssertFalse(taskVC.excludesFilesFromBackup)
+        XCTAssertTrue(taskVC.excludesFilesFromBackup)
     }
 
     func testExcludesFilesFromBackupSerializationRoundTrip() {
         let task = createTask()
         let taskVC = ORKTaskViewController(task: task, taskRun: nil)
-        taskVC.excludesFilesFromBackup = true
         let delegate = FauxTaskViewController()
         delegate.expectation = taskCompletionExpectation
         taskVC.delegate = delegate

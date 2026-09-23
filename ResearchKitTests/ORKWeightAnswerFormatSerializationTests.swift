@@ -29,6 +29,8 @@
  */
 import Testing
 
+private let weightAnswerFormatOmittedBoundsDefaultValue = 70.0
+
 @Suite(.tags(.serialization))
 struct ORKWeightAnswerFormatSerializationTests {
     @Test
@@ -135,6 +137,30 @@ struct ORKWeightAnswerFormatSerializationTests {
         try SerializationTestHelper.assertEquality(instance, expectation)
     }
    
+    @Test
+    func testORKWeightAnswerFormatDecodesDefaultValueWithOmittedBounds() throws {
+        // ResearchKit's own encoder always writes minimumValue/maximumValue, even when they are
+        // still the sentinel, so this simulates externally-authored JSON that omits them entirely.
+        let dictionary: [AnyHashable: Any] = [
+            "_class": "ORKWeightAnswerFormat",
+            "measurementSystem": "metric",
+            "numericPrecision": 0,
+            "defaultValue": weightAnswerFormatOmittedBoundsDefaultValue
+        ]
+
+        let format: ORKWeightAnswerFormat = try SerializationTestHelper.deserializeFromDictionary(dictionary)
+
+        #expect(
+            format.minimumValue == ORKDoubleDefaultValue,
+            "An omitted minimumValue key should decode to the sentinel, not 0"
+        )
+        #expect(
+            format.maximumValue == ORKDoubleDefaultValue,
+            "An omitted maximumValue key should decode to the sentinel, not 0"
+        )
+        #expect(format.defaultValue == weightAnswerFormatOmittedBoundsDefaultValue)
+    }
+
     @Test
     func testInvalidORKWeightAnswerFormat() {
         #expect(

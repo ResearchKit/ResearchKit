@@ -3734,6 +3734,10 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 
 #pragma mark - ORKWeightAnswerFormat
 
+static BOOL ORKDoubleValueIsConfigured(double value) {
+    return value != ORKDoubleDefaultValue;
+}
+
 @implementation ORKWeightAnswerFormat
 
 - (Class)questionResultClass {
@@ -3781,7 +3785,9 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
                              minimumValue:(double)minimumValue
                              maximumValue:(double)maximumValue
                              defaultValue:(double)defaultValue {
-    if ((defaultValue != ORKDoubleDefaultValue) && ((defaultValue < minimumValue) || (defaultValue > maximumValue))) {
+    if (ORKDoubleValueIsConfigured(defaultValue) &&
+        ((ORKDoubleValueIsConfigured(minimumValue) && defaultValue < minimumValue) ||
+         (ORKDoubleValueIsConfigured(maximumValue) && defaultValue > maximumValue))) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"defaultValue must be between minimumValue and maximumValue."
                                      userInfo:nil];

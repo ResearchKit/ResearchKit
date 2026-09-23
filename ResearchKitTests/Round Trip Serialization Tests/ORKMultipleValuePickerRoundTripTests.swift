@@ -107,6 +107,22 @@ struct ORKMultipleValuePickerRoundTripTests {
         )
     }
 
+    @Test
+    func `a date-valued component answer survives the full serialization round trip`() throws {
+        // Arrange - build fixture
+        let optionDate = Date(timeIntervalSinceReferenceDate: 1_000)
+        let (fixture, task) = FormItemTestHelper.makeMultipleValuePickerFixture(text: "Pick a date", componentValue: optionDate as NSDate)
+
+        // Act - feed through pipeline (user does nothing)
+        let (inputJSON, outputJSON) = try FormItemTestHelper.performRoundTrip(fixture: fixture, task: task)
+
+        // Assert - full JSON comparison
+        #expect(
+            inputJSON == outputJSON,
+            "Date-valued component answer should survive the full round-trip through ORKTaskViewController"
+        )
+    }
+
     // MARK: - Active-Answer Tests
 
     @Test

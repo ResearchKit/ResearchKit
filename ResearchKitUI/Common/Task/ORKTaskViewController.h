@@ -522,7 +522,7 @@ ORK_CLASS_AVAILABLE
  excluding all of its contents from iCloud backups. Set this property after
  instantiating the task view controller and before presenting it.
 
- The default value is `NO`.
+ The default value is `YES`. Set this to `NO` if you want task output to sync to iCloud backups.
  */
 @property (nonatomic, assign) BOOL excludesFilesFromBackup;
 

@@ -1,5 +1,64 @@
 # ResearchKit Release Notes
 
+## ResearchKit 3.4.2 Release Notes
+
+In addition to general stability and performance improvements, ResearchKit 3.4.2 includes the following updates:
+
+## Core API Changes
+
+### `excludesFilesFromBackup` Now Defaults to `YES`
+
+The `excludesFilesFromBackup` property on `ORKTaskViewController` now defaults to `YES`, excluding task output from iCloud backups. Apps that rely on task output syncing to iCloud must set this property to `NO` explicitly.
+
+### Passcode Keychain Methods Require Authentication
+
+Breaking change: before executing the keychain write or delete in `+removePasscodeFromKeychain` and `+forcePasscode:withTouchIdEnabled:`, the caller is now required to confirm with Face ID, Touch ID, or the device passcode. Both leave the keychain unchanged if authentication is unavailable or fails, and `removePasscodeFromKeychain` returns `NO` in that case.
+
+### `ORKWebViewStep` Navigation Changes
+
+`ORKWebViewStep` no longer navigates away from the content it loaded. Tapped links are routed to `webViewDelegate` through `handleLinkNavigationWithURL:`, and when no delegate is set, the tap does nothing. Apps presenting consent content with links must keep `webViewDelegate` set while the step is on screen. This release also includes additional input validation across consent and onboarding steps.
+
+## Bug Fixes
+
+- **`ORKWeightAnswerFormat`**
+
+  A default value is no longer rejected when no minimum or maximum is configured. The bounds check now applies only to bounds that were set.
+
+- **Embedded Review Step**
+
+  Fixed an unresponsive back button after selecting an answer to edit from a review step embedded within a task.
+
+- **`ORKESerializer`**
+
+  Fixed a crash when serializing a choice answer whose value is an `NSDate`. A saved date choice is also restored as selected instead of coming back unselected.
+
+- **`ORKValuePicker`**
+
+  Fixed a truncated time selector label at the largest accessibility text sizes.
+
+- **Table Step**
+
+  Fixed content remaining visible behind the done button on iOS 18 and earlier.
+
+- **Scale Question**
+
+  Fixed an unusable scale at larger text sizes. Row heights now recompute when the text size changes while the question is on screen.
+
+- **Height Picker**
+
+  Fixed the picker showing its default height when a saved value landed within half an inch of the next foot, such as 5 feet 11.6 inches. The picker now rounds that value up to the next foot and displays it.
+
+- **Stroop Step**
+
+  Fixed a task containing two Stroop steps recording the same result twice.
+
+## Other Updates
+
+- **Recorders DocC Article**
+
+  A new DocC article, [Understanding Recorders](https://researchkit.github.io/main/documentation/researchkit/understanding-recorders), covers how `ORKRecorderConfiguration` and `ORKRecorder` work together during active steps.
+
+
 ## ResearchKit 3.4.0 Release Notes
 
 In addition to general stability and performance improvements, ResearchKit 3.4.0 includes the following updates:

@@ -106,4 +106,36 @@
     XCTAssert([html isEqualToString:htmlFromCopy]);
 }
 
+- (void)testTitleHTMLIsEscaped {
+    _instructionStep.title = @"<script>alert('x')</script>";
+    NSString *html = [_formatter HTMLForInstructionSteps:@[_instructionStep]];
+
+    XCTAssertFalse([html containsString:@"<script>"], @"Injected markup must not appear unescaped");
+    XCTAssertTrue([html containsString:@"&lt;script&gt;"], @"Injected markup must be escaped");
+}
+
+- (void)testDetailTextHTMLIsEscaped {
+    _instructionStep.detailText = @"<img src=x onerror=alert(1)>";
+    NSString *html = [_formatter HTMLForInstructionSteps:@[_instructionStep]];
+
+    XCTAssertFalse([html containsString:@"<img src=x"], @"Injected markup must not appear unescaped");
+    XCTAssertTrue([html containsString:@"&lt;img src=x"], @"Injected markup must be escaped");
+}
+
+- (void)testBodyItemTextHTMLIsEscaped {
+    ORKBodyItem *bodyItem = [[ORKBodyItem alloc] initWithText:@"<b>bold</b>" detailText:nil image:nil learnMoreItem:nil bodyItemStyle:ORKBodyItemStyleBulletPoint];
+    _instructionStep.bodyItems = @[bodyItem];
+    NSString *html = [_formatter HTMLForInstructionSteps:@[_instructionStep]];
+
+    XCTAssertFalse([html containsString:@"<b>bold</b>"], @"Injected markup must not appear unescaped");
+    XCTAssertTrue([html containsString:@"&lt;b&gt;bold&lt;/b&gt;"], @"Injected markup must be escaped");
+}
+
+- (void)testAmpersandInTitleIsEscaped {
+    _instructionStep.title = @"Diet & Exercise";
+    NSString *html = [_formatter HTMLForInstructionSteps:@[_instructionStep]];
+
+    XCTAssertTrue([html containsString:@"Diet &amp; Exercise"], @"Ampersand must be escaped to a named entity");
+}
+
 @end

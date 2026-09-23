@@ -24,9 +24,9 @@ PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*] =
 SWIFT_VERSION = 5.0
 CLANG_STATIC_ANALYZER_MODE = deep
 
-ORK_FRAMEWORK_VERSION_NUMBER = 3.4.0
+ORK_FRAMEWORK_VERSION_NUMBER = 3.4.2
 
-ORK_FRAMEWORK_BUILD_NUMBER = 28
+ORK_FRAMEWORK_BUILD_NUMBER = 1
 
 // Some CLLocationManager API calls would trigger authorization to use location. The presence of those
 // API calls in ResearchKit **at compile time** mean apps that link ResearchKit also need Info.plist entries

@@ -110,10 +110,18 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
 
 - (void)validateParameters {
     [super validateParameters];
-    
-    if (!_loginViewControllerString || !NSClassFromString(_loginViewControllerString)) {
-        @throw [NSException exceptionWithName:NSGenericException
-                                       reason:@"Unable to find ORKLoginStepViewController subclass."
+
+    // ORKLoginStepViewController lives in ResearchKitUI, which depends on this core
+    // module, so we resolve the base class by name at runtime instead of importing it. The
+    // resolved class must be a subclass of it; anything else (including a class that merely
+    // resolves) is rejected to keep attacker-supplied class names off the instantiation path.
+    Class loginViewControllerClass = NSClassFromString(_loginViewControllerString);
+    Class baseViewControllerClass = NSClassFromString(@"ORKLoginStepViewController");
+    if (!loginViewControllerClass ||
+        !baseViewControllerClass ||
+        ![loginViewControllerClass isSubclassOfClass:baseViewControllerClass]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"loginViewControllerClass must be a subclass of ORKLoginStepViewController."
                                      userInfo:nil];
     }
 }
@@ -131,6 +139,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, loginViewControllerString, NSString);
+        [self validateParameters];
     }
     return self;
 }

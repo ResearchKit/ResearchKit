@@ -618,3 +618,124 @@
     XCTAssertTrue(standAloneReviewStepWithSteps.isStandalone);
 }
 @end
+
+@interface ORKJavaScriptStringLiteralTests : XCTestCase
+
+@end
+
+@implementation ORKJavaScriptStringLiteralTests
+
+- (void)testPlainStringIsWrappedInDoubleQuotes {
+    XCTAssertEqualObjects(ORKJavaScriptStringLiteral(@"abc"), @"\"abc\"");
+}
+
+- (void)testDoubleQuoteIsEscaped {
+    XCTAssertEqualObjects(ORKJavaScriptStringLiteral(@"a\"b"), @"\"a\\\"b\"");
+}
+
+- (void)testBackslashIsEscaped {
+    XCTAssertEqualObjects(ORKJavaScriptStringLiteral(@"a\\b"), @"\"a\\\\b\"");
+}
+
+- (void)testNewlineIsEscaped {
+    XCTAssertEqualObjects(ORKJavaScriptStringLiteral(@"a\nb"), @"\"a\\nb\"");
+}
+
+- (void)testNilBecomesEmptyLiteral {
+    XCTAssertEqualObjects(ORKJavaScriptStringLiteral(nil), @"\"\"");
+}
+
+- (void)testBreakoutPayloadStaysContained {
+    // A payload crafted to close the JS string literal and inject code must remain a
+    // single double-quoted literal with no unescaped closing quote.
+    NSString *payload = @"\"; window.alert(1); var x = \"";
+    NSString *literal = ORKJavaScriptStringLiteral(payload);
+
+    XCTAssertTrue([literal hasPrefix:@"\""]);
+    XCTAssertTrue([literal hasSuffix:@"\""]);
+    // Every double quote from the payload must be backslash-escaped inside the literal.
+    XCTAssertEqualObjects(literal, @"\"\\\"; window.alert(1); var x = \\\"\"");
+}
+
+@end
+
+@interface ORKVerificationStepTests : XCTestCase
+
+@end
+
+@implementation ORKVerificationStepTests
+
+- (void)testValidSubclassDoesNotThrow {
+    XCTAssertNoThrow([[ORKVerificationStep alloc] initWithIdentifier:@"id"
+                                                                text:@"text"
+                                     verificationViewControllerClass:[ORKVerificationStepViewController class]]);
+}
+
+- (void)testNonSubclassThrows {
+    // A class that resolves but is not an ORKVerificationStepViewController subclass must be rejected.
+    XCTAssertThrowsSpecificNamed([[ORKVerificationStep alloc] initWithIdentifier:@"id"
+                                                                            text:@"text"
+                                                 verificationViewControllerClass:[NSString class]],
+                                 NSException, NSInvalidArgumentException);
+}
+
+- (void)testSecureCodingRoundTripValidatesSubclass {
+    ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"id"
+                                                                           text:@"text"
+                                                verificationViewControllerClass:[ORKVerificationStepViewController class]];
+
+    NSError *archiveError = nil;
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:step requiringSecureCoding:YES error:&archiveError];
+    XCTAssertNil(archiveError);
+
+    NSError *unarchiveError = nil;
+    ORKVerificationStep *decoded = [NSKeyedUnarchiver unarchivedObjectOfClass:[ORKVerificationStep class]
+                                                                     fromData:data
+                                                                        error:&unarchiveError];
+    XCTAssertNil(unarchiveError);
+    XCTAssertEqualObjects(step, decoded);
+}
+
+@end
+
+@interface ORKLoginStepTests : XCTestCase
+
+@end
+
+@implementation ORKLoginStepTests
+
+- (void)testValidSubclassDoesNotThrow {
+    XCTAssertNoThrow([[ORKLoginStep alloc] initWithIdentifier:@"id"
+                                                        title:@"title"
+                                                         text:@"text"
+                                     loginViewControllerClass:[ORKLoginStepViewController class]]);
+}
+
+- (void)testNonSubclassThrows {
+    // A class that resolves but is not an ORKLoginStepViewController subclass must be rejected.
+    XCTAssertThrowsSpecificNamed([[ORKLoginStep alloc] initWithIdentifier:@"id"
+                                                                    title:@"title"
+                                                                     text:@"text"
+                                                 loginViewControllerClass:[NSString class]],
+                                 NSException, NSInvalidArgumentException);
+}
+
+- (void)testSecureCodingRoundTripValidatesSubclass {
+    ORKLoginStep *step = [[ORKLoginStep alloc] initWithIdentifier:@"id"
+                                                            title:@"title"
+                                                             text:@"text"
+                                         loginViewControllerClass:[ORKLoginStepViewController class]];
+
+    NSError *archiveError = nil;
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:step requiringSecureCoding:YES error:&archiveError];
+    XCTAssertNil(archiveError);
+
+    NSError *unarchiveError = nil;
+    ORKLoginStep *decoded = [NSKeyedUnarchiver unarchivedObjectOfClass:[ORKLoginStep class]
+                                                              fromData:data
+                                                                 error:&unarchiveError];
+    XCTAssertNil(unarchiveError);
+    XCTAssertEqualObjects(step, decoded);
+}
+
+@end

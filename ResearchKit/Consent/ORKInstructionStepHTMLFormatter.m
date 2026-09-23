@@ -31,6 +31,7 @@
 #import "ORKInstructionStepHTMLFormatter.h"
 #import "ORKInstructionStep.h"
 #import "ORKBodyItem.h"
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKInstructionStepHTMLFormatter
 
@@ -107,7 +108,7 @@ NSString * const ClosingHTMLTag = @"</html>";
 
 - (nullable NSString *)_getHTMLTitleContentFromInstructionStep:(ORKInstructionStep *)instructionStep {
     if (instructionStep.title) {
-        return [NSString stringWithFormat:HeaderForTitleTag, instructionStep.title];
+        return [NSString stringWithFormat:HeaderForTitleTag, ORKHTMLEscapedString(instructionStep.title)];
     }
     
     return nil;
@@ -115,7 +116,7 @@ NSString * const ClosingHTMLTag = @"</html>";
 
 - (nullable NSString *)_getHTMLDetailTextContentFromInstructionStep:(ORKInstructionStep *)instructionStep {
     if (instructionStep.detailText) {
-        return [NSString stringWithFormat:ParagraphForDetailTextTag, instructionStep.detailText];
+        return [NSString stringWithFormat:ParagraphForDetailTextTag, ORKHTMLEscapedString(instructionStep.detailText)];
     }
     
     return nil;
@@ -127,7 +128,7 @@ NSString * const ClosingHTMLTag = @"</html>";
         [content appendString:OpeningUnorderedListTag];
         
         for (ORKBodyItem *bodyItem in instructionStep.bodyItems) {
-            NSString *listItemContent = [NSString stringWithFormat:ListItemElement, bodyItem.text];
+            NSString *listItemContent = [NSString stringWithFormat:ListItemElement, ORKHTMLEscapedString(bodyItem.text)];
             [content appendString: listItemContent];
         }
         

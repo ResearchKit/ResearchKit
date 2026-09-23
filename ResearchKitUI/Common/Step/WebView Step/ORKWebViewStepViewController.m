@@ -158,10 +158,11 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
                textColorString];
     }
 
-    // Apply the CSS to the HTML using JS
-
-    NSString *js = @"var style = document.createElement('style'); style.innerHTML = '%@'; document.head.appendChild(style);";
-    NSString *formattedString = [NSString stringWithFormat:js, css];
+    // Apply the CSS to the HTML using JS.
+    // customCSS can come from a downloaded task definition, so escape it before
+    // dropping it into the script. Otherwise a quote in the CSS could run as code.
+    NSString *cssLiteral = ORKJavaScriptStringLiteral(css);
+    NSString *formattedString = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = %@; document.head.appendChild(style);", cssLiteral];
     WKUserScript *userScript = [[WKUserScript alloc] initWithSource:formattedString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:true];
 
     WKUserContentController *controller = _webView.configuration.userContentController;
@@ -564,6 +565,12 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 {
     if ([message.body isKindOfClass:[NSString class]]){
         _receivedMessageBody = ORKDynamicCast(message.body, NSString);
+
+        // Don't let the page's JavaScript skip the signature. If one is required,
+        // only move forward once it has actually been signed.
+        if ([[self webViewStep] showSignatureAfterContent] && ![_signatureFooterView isComplete]) {
+            return;
+        }
         [self goForward];
     }
 }
@@ -690,6 +697,8 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    // Let the app's delegate handle link taps (usually opening them in Safari).
+    // With no delegate, don't navigate the consent web view itself.
     if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
         if (_webViewDelegate != nil && [_webViewDelegate respondsToSelector:@selector(handleLinkNavigationWithURL:)]) {
             NSURL *documentURL = [navigationAction.request mainDocumentURL];
@@ -700,9 +709,22 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
             }
             return;
         }
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
     }
-    
-    decisionHandler(WKNavigationActionPolicyAllow);
+
+    // Only allow the content we loaded ourselves, not navigation to
+    // another site. This stops the web view from being sent somewhere that could
+    // still use our native bridge to fake a consent result.
+    NSString *scheme = navigationAction.request.URL.scheme.lowercaseString;
+    if (scheme == nil ||
+        [scheme isEqualToString:@"about"] ||
+        [scheme isEqualToString:@"data"]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }
+
+    decisionHandler(WKNavigationActionPolicyCancel);
 }
 
 // MARK: UIScrollViewDelegate

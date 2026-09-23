@@ -1844,13 +1844,17 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 }
 
 - (void)configureWithFormItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth delegate:(id<ORKFormItemCellDelegate>)delegate {
-    
+
     self.labelLabel.text = nil;
+    // Reconfiguring the diffable data source (e.g. reconfigureItemsWithIdentifiers:) calls this
+    // again on an already-configured, still-visible cell without going through prepareForReuse,
+    // so any previous slider view must be torn down here or it's left stacked underneath the new one.
+    [_sliderView removeFromSuperview];
     _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)formItem.answerFormat
                                                             delegate:self];
     [self.containerView addSubview:_sliderView];
     [self setUpConstraints];
-    
+
     [super configureWithFormItem:formItem answer:answer maxLabelWidth:maxLabelWidth delegate:delegate];
 }
 
@@ -1883,7 +1887,7 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 }
 
 - (void)scaleSliderViewCurrentValueDidChange:(ORKScaleSliderView *)sliderView {
-    
+
     [self ork_setAnswer:sliderView.currentAnswerValue];
     [super inputValueDidChange];
 }

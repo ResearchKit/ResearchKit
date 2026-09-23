@@ -227,6 +227,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     self.skipSaveResultsConfirmation = NO;
     self.progressMode = ORKTaskViewControllerProgressModeQuestionsPerStep;
     _fileProtectionMode = ORKFileProtectionComplete;
+    _excludesFilesFromBackup = YES;
     
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
@@ -1105,7 +1106,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Add at most two previous step view controllers to support the back action on the navigation controller stack
     _previousToTopControllerInNavigationStack = nil;
     if (stepViewController.hasPreviousStep) {
-        ORKStep *previousStep = [self.task stepBeforeStep:step withResult:self.result];
+        ORKStep *previousStep = [self stepPrecedingStepViewController:stepViewController];
         if (previousStep) {
             ORKStepViewController *previousStepViewController = [self viewControllerForStep:previousStep isPreviousViewController:YES];
             previousStepViewController.navigationItem.title = nil; // Make sure the back button shows "Back"
@@ -1133,6 +1134,30 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([newViewControllers isEqual:_childNavigationController.viewControllers] == NO) {
         [_childNavigationController setViewControllers:newViewControllers animated:animated];
     }
+}
+
+/// The step that back navigation returns to from the given step view controller, or `nil`
+/// when it cannot go back.
+///
+/// A step view controller reached through the task returns to the task's preceding step.
+/// One presented by another step has no place in the task's step list, so it returns to
+/// the step that presented it; today a review step is the only step that does this.
+- (nullable ORKStep *)stepPrecedingStepViewController:(ORKStepViewController *)stepViewController {
+    ORKStep *thisStep = stepViewController.step;
+    if (!thisStep) {
+        return nil;
+    }
+
+    ORKStep *previousStep = stepViewController.parentReviewStep;
+    if (!previousStep) {
+        previousStep = [self.task stepBeforeStep:thisStep withResult:self.result];
+    }
+
+    if ([previousStep isKindOfClass:[ORKActiveStep class]] || ([thisStep allowsBackNavigation] == NO)) {
+        return nil; // Can't go back to an active step
+    }
+
+    return previousStep;
 }
 
 - (BOOL)didHandlePermissionDenial {
@@ -1834,18 +1859,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController {
-    ORKStep *thisStep = stepViewController.step;
-    if (!thisStep) {
-        return NO;
-    }
-    ORKStep *previousStep = stepViewController.parentReviewStep;
-    if (!previousStep) {
-        previousStep = [self.task stepBeforeStep:thisStep withResult:self.result];
-    }
-    if ([previousStep isKindOfClass:[ORKActiveStep class]] || ([thisStep allowsBackNavigation] == NO)) {
-        previousStep = nil; // Can't go back to an active step
-    }
-    return (previousStep != nil);
+    return [self stepPrecedingStepViewController:stepViewController] != nil;
 }
 
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController {

@@ -36,6 +36,7 @@ import ResearchKit_Private
 import ResearchKitActiveTask
 import ResearchKitActiveTask_Private
 import ResearchKitUI
+import ResearchKitUI_Private
 
 let logger = Logger(subsystem: "com.ORKCatalog.serialization", category: "decoding")
 
@@ -1702,7 +1703,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         The passcode is stored in the keychain.
         */
         
-        ORKPasscodeViewController.removePasscodeFromKeychain() // Clear any previously stored passwords
+        // Bypasses removePasscodeFromKeychain, which gates on LAContext device owner
+        try? ORKKeychainWrapper.removeObject(forKey: PasscodeKey) // Clear any previously stored passwords
         
         let passcodeConsentStep = ORKPasscodeStep(identifier: String(describing: Identifier.biometricPasscodeStep))
         passcodeConsentStep.useBiometrics = true

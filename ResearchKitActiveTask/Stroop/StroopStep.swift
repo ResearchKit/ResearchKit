@@ -147,7 +147,11 @@ public struct StroopStep: Sendable {
 
     /// Valid parameter boundaries.
     private struct ParamBounds {
+        #if DEBUG
+        static let minimumNumberOfTrials: Int = 1
+        #else
         static let minimumNumberOfTrials: Int = 10
+        #endif
         static let minimumNumberOfColorChoices: Int = 2
         static let minimumInterTrialDelay: TimeInterval = 0.25      // Delays in seconds.
         static let maximumInterTrialDelay: TimeInterval = 1.5

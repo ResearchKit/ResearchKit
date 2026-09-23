@@ -104,8 +104,8 @@ class ORKHostingStepViewController<HostedStep, V>: ORKStepViewController where V
                                           message: error.localizedDescription,
                                           preferredStyle: .alert)
             #if DEBUG
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { _ in
-                self.stepCompletion(result)
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+                self?.stepCompletion(result)
             }))
             #endif
             alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -134,8 +134,16 @@ extension View {
 }
 
 struct StepCompletionEnvironmentViewModifier: ViewModifier {
-    @Environment(\.stepCompletion)
-    private var context
+
+    @State private var context = StepCompletionEnvironmentContext()
+
+    // The ambient parent context, read before this modifier overrides it below for its own
+    // subtree. Forwarded to on completion so a nested .onStepCompletion still bubbles up.
+    @Environment(\.stepCompletion) private var parentContext
+
+    // Ensures the completion handler registers only once per modifier instance, even
+    // though `.onAppear` can fire more than once over the view's lifetime.
+    @State private var registered = false
 
     private let completion: StepCompletionFunction
     init(completion: @escaping StepCompletionFunction) {
@@ -144,14 +152,18 @@ struct StepCompletionEnvironmentViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .environment(\.stepCompletion, context)
             .onAppear {
+                guard !registered else { return }
+                registered = true
                 context.append(completion)
+                context.append(parentContext.notify)
             }
     }
 }
 
 struct StepCompletionEnvironmentContextKey: EnvironmentKey {
-    static let defaultValue: StepCompletionEnvironmentContext = .init()
+    @MainActor static var defaultValue: StepCompletionEnvironmentContext { .init() }
 }
 
 extension EnvironmentValues {
@@ -161,18 +173,21 @@ extension EnvironmentValues {
     }
 }
 
+/// A registry of completion handlers for one SwiftUI-hosted step's subtree. Multiple views
+/// in the subtree can register a handler; all of them are notified when the step completes.
+@MainActor
 public class StepCompletionEnvironmentContext {
     private var completions: [StepCompletionFunction] = []
 
-    public func callAsFunction(_ result: Result<any StepResult, Error>) {
+    public func notify(_ result: Result<any StepResult, Error>) {
         completions.forEach { $0(result) }
+    }
+
+    public func callAsFunction(_ result: Result<any StepResult, Error>) {
+        notify(result)
     }
 
     func append(_ function: @escaping StepCompletionFunction) {
         completions.append(function)
-    }
-
-    var function: StepCompletionFunction {
-        callAsFunction(_:)
     }
 }

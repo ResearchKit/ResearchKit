@@ -106,4 +106,104 @@ enum FormItemTestHelper {
         }
         return nil
     }
+
+    // MARK: - Passthrough Round-Trip Helpers
+
+    /// Wraps `questionResult` and `formItem` into a fixed-date `ORKTaskResult`/`ORKOrderedTask`
+    /// pair suitable for round-trip serialization tests.
+    @MainActor
+    static func makeRoundTripFixture(
+        questionResult: ORKQuestionResult,
+        formItem: ORKFormItem
+    ) -> (fixture: ORKTaskResult, task: any ORKTask) {
+        questionResult.startDate = Date(timeIntervalSinceReferenceDate: 0)
+        questionResult.endDate = Date(timeIntervalSinceReferenceDate: 60)
+
+        let stepResult = ORKStepResult(stepIdentifier: "formStep", results: [questionResult])
+        stepResult.startDate = Date(timeIntervalSinceReferenceDate: 0)
+        stepResult.endDate = Date(timeIntervalSinceReferenceDate: 120)
+
+        let fixture = ORKTaskResult(taskIdentifier: "task", taskRun: UUID(), outputDirectory: nil)
+        fixture.results = [stepResult]
+
+        let formStep = ORKFormStep(identifier: "formStep")
+        formStep.formItems = [formItem]
+        let task = ORKNavigableOrderedTask(identifier: "task", steps: [formStep])
+
+        return (fixture, task)
+    }
+
+    /// Wraps `choiceValue` in a single-choice round-trip fixture, so a test can focus on the
+    /// answer value's serialization rather than the surrounding choice/form scaffolding.
+    @MainActor
+    static func makeSingleChoiceFixture(
+        identifier: String = "choiceItem",
+        text: String = "Pick a value",
+        choiceValue: NSObject & NSCopying & NSSecureCoding
+    ) -> (fixture: ORKTaskResult, task: any ORKTask) {
+        let questionResult = ORKChoiceQuestionResult(identifier: identifier)
+        questionResult.choiceAnswers = [choiceValue]
+        questionResult.questionType = .singleChoice
+
+        let formItem = ORKFormItem(
+            identifier: identifier,
+            text: text,
+            answerFormat: ORKTextChoiceAnswerFormat(
+                style: .singleChoice,
+                textChoices: [ORKTextChoice(text: "Option 1", value: choiceValue)]
+            )
+        )
+
+        return makeRoundTripFixture(questionResult: questionResult, formItem: formItem)
+    }
+
+    /// Wraps `componentValue` in a multiple value picker round-trip fixture, so a test can focus
+    /// on the answer value's serialization rather than the surrounding picker/form scaffolding.
+    @MainActor
+    static func makeMultipleValuePickerFixture(
+        identifier: String = "multiPickerItem",
+        text: String = "Pick a value",
+        componentValue: NSObject & NSCopying & NSSecureCoding
+    ) -> (fixture: ORKTaskResult, task: any ORKTask) {
+        let picker = ORKValuePickerAnswerFormat(textChoices: [
+            ORKTextChoice(text: "A", value: componentValue),
+            ORKTextChoice(text: "B", value: "b" as NSString),
+            ORKTextChoice(text: "C", value: "c" as NSString)
+        ])
+
+        let questionResult = ORKMultipleComponentQuestionResult(identifier: identifier)
+        questionResult.componentsAnswer = [componentValue]
+        questionResult.separator = " "
+        questionResult.questionType = .multiplePicker
+
+        let formItem = ORKFormItem(
+            identifier: identifier,
+            text: text,
+            answerFormat: ORKMultipleValuePickerAnswerFormat(valuePickers: [picker])
+        )
+
+        return makeRoundTripFixture(questionResult: questionResult, formItem: formItem)
+    }
+
+    /// Runs `fixture` through the full ORKTaskViewController pipeline unattended and returns
+    /// the fixture's original JSON alongside the re-serialized output JSON for comparison.
+    @MainActor
+    static func performRoundTrip(fixture: ORKTaskResult, task: any ORKTask) throws -> (inputJSON: String, outputJSON: String) {
+        let inputJSON = try SerializationTestHelper.serializeToPrettyPrintedString(fixture)
+        let deserialized: ORKTaskResult = try SerializationTestHelper.deserializedFromPrettyPrintedString(inputJSON)
+
+        let subject = ORKTaskViewController(
+            task: task,
+            ongoingResult: deserialized,
+            defaultResultSource: deserialized,
+            delegate: nil
+        )
+        subject.loadViewIfNeeded()
+
+        let output = subject.result
+        stampVolatileFields(on: output, from: fixture)
+
+        let outputJSON = try SerializationTestHelper.serializeToPrettyPrintedString(output)
+        return (inputJSON, outputJSON)
+    }
 }

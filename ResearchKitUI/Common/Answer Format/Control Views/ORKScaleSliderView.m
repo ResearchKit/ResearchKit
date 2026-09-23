@@ -56,6 +56,12 @@ static const CGFloat RangeDescriptionLabelSpacing = 8.0;
 static const CGFloat DividerSpacing = 8.0;
 static const CGFloat kMargin = 25.0;
 
+// The slider must never lose to anything else in the row, so it sits one below required.
+// Whichever label is arranged inside _topStackView yields next. _moveSliderLabel and
+// _valueLabel are never arranged at the same time, so sharing one tier can't tie them.
+static const UILayoutPriority ORKScaleSliderProtectedPriority = UILayoutPriorityRequired - 1;
+static const UILayoutPriority ORKScaleTopStackViewLabelYieldingPriority = UILayoutPriorityRequired - 2;
+
 // #define LAYOUT_DEBUG 1
 
 @implementation ORKScaleSliderView {
@@ -74,7 +80,6 @@ static const CGFloat kMargin = 25.0;
     NSMutableArray<ORKScaleRangeLabel *> *_textChoiceLabels;
     NSNumber *_currentNumberValue;
     NSMutableArray *constraints;
-    NSLayoutConstraint *_topStackViewHeightConstraint;
 }
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider
@@ -90,6 +95,9 @@ static const CGFloat kMargin = 25.0;
         _slider.minimumTrackTintColor = self.tintColor;
         _slider.userInteractionEnabled = YES;
         _slider.contentMode = UIViewContentModeRedraw;
+        // Protects the slider from collapsing to zero height under space pressure. One shy of
+        // required so a real conflict breaks elsewhere instead of tying two required constraints.
+        [_slider setContentCompressionResistancePriority:ORKScaleSliderProtectedPriority forAxis:UILayoutConstraintAxisVertical];
         [self addSubview:_slider];
         
         _slider.maximumValue = [formatProvider maximumNumber].floatValue;
@@ -192,7 +200,6 @@ static const CGFloat kMargin = 25.0;
         [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class, UITraitPreferredContentSizeCategory.class] withHandler:^(ORKScaleSliderView *traitChangeView, UITraitCollection *previousTraitCollection) {
             [traitChangeView->_moveSliderLabel invalidateIntrinsicContentSize];
             [traitChangeView->_valueLabel invalidateIntrinsicContentSize];
-            [traitChangeView updateTopStackViewHeight];
         }];
     }
     return self;
@@ -232,9 +239,15 @@ static const CGFloat kMargin = 25.0;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    // Update the top stack view height when the frame changes, as this affects multi-line label height calculation
-    [self updateTopStackViewHeight];
+
+    // _moveSliderLabel wraps across multiple lines, so its intrinsic size is ambiguous
+    // without a known width. Keep it in sync with the row's current width so Auto Layout
+    // can derive the wrapped height itself instead of us precomputing it.
+    CGFloat availableWidth = self.frame.size.width - (2 * kMargin);
+    if (availableWidth > 0 && _moveSliderLabel.preferredMaxLayoutWidth != availableWidth) {
+        _moveSliderLabel.preferredMaxLayoutWidth = availableWidth;
+        [_moveSliderLabel invalidateIntrinsicContentSize];
+    }
 }
 
 - (void)setupTopLabels {
@@ -247,7 +260,9 @@ static const CGFloat kMargin = 25.0;
     UIFontDescriptor *moveSliderFontDescriptor = [moveSliderDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
     [_moveSliderLabel setFont: [UIFont fontWithDescriptor:moveSliderFontDescriptor size:[[moveSliderFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
     _moveSliderLabel.textColor = [UIColor secondaryLabelColor];
-    
+    // Stays below the slider's protected priority so the slider wins when space is short.
+    [_moveSliderLabel setContentCompressionResistancePriority:ORKScaleTopStackViewLabelYieldingPriority forAxis:UILayoutConstraintAxisVertical];
+
     _valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
     _valueLabel.text = @"";
     _valueLabel.textAlignment = NSTextAlignmentCenter;
@@ -255,9 +270,9 @@ static const CGFloat kMargin = 25.0;
     UIFontDescriptor *valueLabelFontDescriptor = [valueLabelDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
     [_valueLabel setFont: [UIFont fontWithDescriptor:valueLabelFontDescriptor size:[[valueLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
     [_valueLabel setTextColor:self.tintColor];
-        
-    // Set content compression resistance priority to prevent squishing
-    [_valueLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+
+    // Stays below the slider's protected priority so the slider wins when space is short.
+    [_valueLabel setContentCompressionResistancePriority:ORKScaleTopStackViewLabelYieldingPriority forAxis:UILayoutConstraintAxisVertical];
     [_valueLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
 }
 
@@ -349,28 +364,6 @@ static const CGFloat kMargin = 25.0;
     }
 }
 
-/// The computed maximum height for `_topStackView` using the largest height value between its 2 potential
-/// subviews + some room to breathe.
-- (CGFloat)topStackViewHeight {
-    CGFloat moveSliderLabelHeight = [_moveSliderLabel intrinsicContentSize].height;
-    
-    // For multi-line labels, we need to calculate the actual height based on the available width
-    if (_moveSliderLabel.numberOfLines == 0 && self.frame.size.width > 0) {
-        CGFloat availableWidth = self.frame.size.width - (2 * kMargin); // Account for margins
-        CGSize constraintSize = CGSizeMake(availableWidth, CGFLOAT_MAX);
-        CGSize labelSize = [_moveSliderLabel sizeThatFits:constraintSize];
-        moveSliderLabelHeight = labelSize.height;
-    }
-    
-    return MAX(moveSliderLabelHeight, [_valueLabel intrinsicContentSize].height) + 1.0;
-}
-
-- (void)updateTopStackViewHeight {
-    if (_topStackViewHeightConstraint) {
-        _topStackViewHeightConstraint.constant = self.topStackViewHeight;
-    }
-}
-
 - (void)setUpConstraints {
     BOOL isVertical = [_formatProvider isVertical];
     NSArray<ORKTextChoice *> *textChoices = _slider.textChoices;
@@ -385,10 +378,7 @@ static const CGFloat kMargin = 25.0;
     if (constraints) {
         [NSLayoutConstraint deactivateConstraints:constraints];
     }
-    
-    // Reset the height constraint reference since we're recreating constraints
-    _topStackViewHeightConstraint = nil;
-    
+
     constraints = [NSMutableArray new];
     if (isVertical) {
         [self setRangeDescriptionLabelsTextAlignmentForSliderOrientation:isVertical];
@@ -591,15 +581,15 @@ static const CGFloat kMargin = 25.0;
                                                                  constant:SideLabelMargin]];
             
             // Limit the height of the descriptionLabels
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
                                                              attribute:NSLayoutAttributeHeight
                                                              relatedBy:NSLayoutRelationLessThanOrEqual
                                                                 toItem:_slider
                                                              attribute:NSLayoutAttributeHeight
                                                             multiplier:0.5
                                                               constant:SliderMargin]];
-            
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
+
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
                                                              attribute:NSLayoutAttributeHeight
                                                              relatedBy:NSLayoutRelationLessThanOrEqual
                                                                 toItem:_slider
@@ -627,24 +617,24 @@ static const CGFloat kMargin = 25.0;
         }
     } else {
         
-        [[_topStackView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:kMargin] setActive:YES];
-        [[_topStackView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kMargin] setActive:YES];
+        [constraints addObject:[_topStackView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:kMargin]];
+        [constraints addObject:[_topStackView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kMargin]];
         
         //Vertical Constraints
         [constraints addObject:[_topStackView.topAnchor constraintEqualToAnchor:self.topAnchor constant:TopViewPadding]];
         [constraints addObject:[_slider.topAnchor constraintEqualToAnchor:_topStackView.bottomAnchor constant:TopViewPadding]];
-        /// Give `_topStackView` a fixed height to ensure smooth transitions when swapping the subviews it contains.
-        _topStackViewHeightConstraint = [_topStackView.heightAnchor constraintEqualToConstant:self.topStackViewHeight];
-        _topStackViewHeightConstraint.active = YES;
-        
-        [[_leftRangeDescriptionLabel.topAnchor constraintEqualToAnchor:_slider.bottomAnchor constant:SliderBottomPadding] setActive:YES];
-        [[_rightRangeDescriptionLabel.topAnchor constraintEqualToAnchor:_slider.bottomAnchor constant:SliderBottomPadding] setActive:YES];
-        
+        // _topStackView has no explicit height constraint: it sizes itself from whichever
+        // label is currently arranged inside it (see setupTopLabels), so self-sizing always
+        // reads a live value instead of a separately cached one that can go stale.
+
+        [constraints addObject:[_leftRangeDescriptionLabel.topAnchor constraintEqualToAnchor:_slider.bottomAnchor constant:SliderBottomPadding]];
+        [constraints addObject:[_rightRangeDescriptionLabel.topAnchor constraintEqualToAnchor:_slider.bottomAnchor constant:SliderBottomPadding]];
+
         //Horizontal constraints for center elements
-        [[_leftRangeView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:kMargin] setActive:YES];
-        [[_rightRangeView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kMargin] setActive:YES];
-        [[_leftRangeView.centerYAnchor constraintEqualToAnchor:_slider.centerYAnchor] setActive:YES];
-        [[_rightRangeView.centerYAnchor constraintEqualToAnchor:_slider.centerYAnchor] setActive:YES];
+        [constraints addObject:[_leftRangeView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:kMargin]];
+        [constraints addObject:[_rightRangeView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kMargin]];
+        [constraints addObject:[_leftRangeView.centerYAnchor constraintEqualToAnchor:_slider.centerYAnchor]];
+        [constraints addObject:[_rightRangeView.centerYAnchor constraintEqualToAnchor:_slider.centerYAnchor]];
         
         // Set content hugging and compression resistance priorities for range views
         [_leftRangeView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -652,45 +642,45 @@ static const CGFloat kMargin = 25.0;
         [_leftRangeView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [_rightRangeView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         
-        [[_slider.leadingAnchor constraintEqualToAnchor:_leftRangeView.trailingAnchor constant:RangeViewHorizontalPadding] setActive:YES];
-        [[_slider.trailingAnchor constraintEqualToAnchor:_rightRangeView.leadingAnchor constant:-RangeViewHorizontalPadding] setActive:YES];
-        
+        [constraints addObject:[_slider.leadingAnchor constraintEqualToAnchor:_leftRangeView.trailingAnchor constant:RangeViewHorizontalPadding]];
+        [constraints addObject:[_slider.trailingAnchor constraintEqualToAnchor:_rightRangeView.leadingAnchor constant:-RangeViewHorizontalPadding]];
+
         //Horizontal constraints for bottom elements with fixed spacing
-        [[_leftRangeDescriptionLabel.leadingAnchor constraintEqualToAnchor:_slider.leadingAnchor] setActive:YES];
-        [[_rightRangeDescriptionLabel.trailingAnchor constraintEqualToAnchor:_slider.trailingAnchor] setActive:YES];
-        
+        [constraints addObject:[_leftRangeDescriptionLabel.leadingAnchor constraintEqualToAnchor:_slider.leadingAnchor]];
+        [constraints addObject:[_rightRangeDescriptionLabel.trailingAnchor constraintEqualToAnchor:_slider.trailingAnchor]];
+
         // Fixed spacing between the labels
-        [[_rightRangeDescriptionLabel.leadingAnchor constraintEqualToAnchor:_leftRangeDescriptionLabel.trailingAnchor constant:RangeDescriptionLabelSpacing] setActive:YES];
-        
+        [constraints addObject:[_rightRangeDescriptionLabel.leadingAnchor constraintEqualToAnchor:_leftRangeDescriptionLabel.trailingAnchor constant:RangeDescriptionLabelSpacing]];
+
         // Make both labels equal width for balanced layout
-        [[_leftRangeDescriptionLabel.widthAnchor constraintEqualToAnchor:_rightRangeDescriptionLabel.widthAnchor] setActive:YES];
+        [constraints addObject:[_leftRangeDescriptionLabel.widthAnchor constraintEqualToAnchor:_rightRangeDescriptionLabel.widthAnchor]];
         
         //Constraints for dont know button elements
         if ([_formatProvider shouldShowDontKnowButton]) {
-            [[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor] setActive:YES];
-            [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
-            [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
-            [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
+            [constraints addObject:[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor]];
+            [constraints addObject:[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor]];
+            [constraints addObject:[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]];
+            [constraints addObject:[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]];
 
              CGFloat separatorHeight = 1.0 / self.safeDisplayScale;
 
-            [[_dividerView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor] setActive:YES];
-            [[_dividerView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor] setActive:YES];
-            [[_dividerView.heightAnchor constraintEqualToConstant:separatorHeight] setActive:YES];
-            
-            // Ensure divider view is positioned below both description labels to prevent overlap
-            [[_dividerView.topAnchor constraintGreaterThanOrEqualToAnchor:_leftRangeDescriptionLabel.bottomAnchor constant:DividerSpacing] setActive:YES];
-            [[_dividerView.topAnchor constraintGreaterThanOrEqualToAnchor:_rightRangeDescriptionLabel.bottomAnchor constant:DividerSpacing] setActive:YES];
+            [constraints addObject:[_dividerView.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor]];
+            [constraints addObject:[_dividerView.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]];
+            [constraints addObject:[_dividerView.heightAnchor constraintEqualToConstant:separatorHeight]];
 
-            [[_dontKnowButton.topAnchor constraintGreaterThanOrEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
-            [[_dontKnowButton.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor] setActive:YES];
-            [[_dontKnowButton.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor] setActive:YES];
-            
-            [[self.bottomAnchor constraintEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive: YES];
+            // Ensure divider view is positioned below both description labels to prevent overlap
+            [constraints addObject:[_dividerView.topAnchor constraintGreaterThanOrEqualToAnchor:_leftRangeDescriptionLabel.bottomAnchor constant:DividerSpacing]];
+            [constraints addObject:[_dividerView.topAnchor constraintGreaterThanOrEqualToAnchor:_rightRangeDescriptionLabel.bottomAnchor constant:DividerSpacing]];
+
+            [constraints addObject:[_dontKnowButton.topAnchor constraintGreaterThanOrEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding]];
+            [constraints addObject:[_dontKnowButton.leadingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leadingAnchor]];
+            [constraints addObject:[_dontKnowButton.trailingAnchor constraintEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]];
+
+            [constraints addObject:[self.bottomAnchor constraintEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding]];
         } else {
             // When there's no "Don't Know" button, constrain to the bottom of both description labels
-            [[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_leftRangeDescriptionLabel.bottomAnchor constant:DividerSpacing] setActive: YES];
-            [[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_rightRangeDescriptionLabel.bottomAnchor constant:DividerSpacing] setActive: YES];
+            [constraints addObject:[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_leftRangeDescriptionLabel.bottomAnchor constant:DividerSpacing]];
+            [constraints addObject:[self.bottomAnchor constraintGreaterThanOrEqualToAnchor:_rightRangeDescriptionLabel.bottomAnchor constant:DividerSpacing]];
         }
         
     }
@@ -771,7 +761,7 @@ static const CGFloat kMargin = 25.0;
     [_moveSliderLabel removeFromSuperview];
     [_topStackView addArrangedSubview:_valueLabel];
      _topStackView.alignment = UIStackViewAlignmentCenter;
-    
+
     [self setUpConstraints];
 }
 
@@ -803,7 +793,7 @@ static const CGFloat kMargin = 25.0;
 }
 
 - (void)notifyDelegate {
-    
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(scaleSliderViewCurrentValueDidChange:)]) {
         [self.delegate scaleSliderViewCurrentValueDidChange:self];
     }

@@ -46,6 +46,8 @@
 
 static const CGFloat PickerSpacerHeight = 15.0;
 static const CGFloat PickerMinimumHeight = 34.0;
+/// Keeps row text clear of the wheel's rounded edges.
+static const CGFloat PickerRowHorizontalInset = 16.0;
 
 @implementation ORKValuePicker {
     UIPickerView *_pickerView;
@@ -162,6 +164,7 @@ static const CGFloat PickerMinimumHeight = 34.0;
         valueLabel = [[UILabel alloc] init];
         [valueLabel setFont:[self defaultFont]];
         [valueLabel setTextAlignment:NSTextAlignmentCenter];
+        valueLabel.numberOfLines = 0;
     }
     valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
     NSAttributedString *attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
@@ -178,8 +181,35 @@ static const CGFloat PickerMinimumHeight = 34.0;
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     UIFont *font = [self defaultFont];
-    CGFloat height =  font.pointSize + PickerSpacerHeight;
+    CGFloat rowWidth = [self pickerView:pickerView widthForComponent:component];
+    NSInteger maximumLineCount = [self maximumLineCountForWidth:rowWidth];
+    CGFloat height = font.pointSize + PickerSpacerHeight + (maximumLineCount - 1) * font.lineHeight;
     return (height < PickerMinimumHeight ? PickerMinimumHeight : height);
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    return MAX(pickerView.bounds.size.width - 2 * PickerRowHorizontalInset, 0.0);
+}
+
+- (NSInteger)maximumLineCountForWidth:(CGFloat)width {
+    NSInteger maximumLineCount = 1;
+    for (NSInteger row = 0; row < _helper.choiceCount; row++) {
+        NSString *title = [self pickerView:_pickerView titleForRow:row forComponent:0];
+        maximumLineCount = MAX(maximumLineCount, [self lineCountForText:title width:width]);
+    }
+    return maximumLineCount;
+}
+
+- (NSInteger)lineCountForText:(NSString *)text width:(CGFloat)width {
+    if (width <= 0.0) {
+        return 1;
+    }
+    UIFont *font = [self defaultFont];
+    CGRect textRect = [text boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{NSFontAttributeName: font}
+                                         context:nil];
+    return MAX((NSInteger)round(textRect.size.height / font.lineHeight), 1);
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {

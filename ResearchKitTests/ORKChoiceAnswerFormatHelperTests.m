@@ -32,6 +32,9 @@
 @import XCTest;
 @import ResearchKit_Private;
 
+#import <ResearchKit/ORKCoreSerializationEntryProvider.h>
+#import <ResearchKit/ORKESerializer.h>
+
 #import "ORKChoiceAnswerFormatHelper.h"
 
 
@@ -345,8 +348,100 @@
         ORKChoiceAnswerFormatHelper *formatHelper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
         
         [self verifySelectedIndexesForAnswer:formatHelper choices:imageChoices];
-        
+
     }
+}
+
+/// Round-trips `choiceAnswers` through the serializer, so a test sees the values the way a
+/// form step sees them when a participant returns to a saved result.
+- (NSArray *)choiceAnswersLoadedFromSavedData:(NSArray *)choiceAnswers {
+    ORKChoiceQuestionResult *questionResult =
+        [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"choiceItem"];
+    questionResult.choiceAnswers = choiceAnswers;
+
+    ORKESerializer *serializer = [[ORKESerializer alloc]
+        initWithEntryProviders:@[[[ORKCoreSerializationEntryProvider alloc] init]]];
+    NSData *json = [serializer JSONDataForObject:questionResult error:nil];
+    ORKChoiceQuestionResult *restored = [serializer objectFromJSONData:json error:nil];
+
+    return restored.choiceAnswers;
+}
+
+/// Asserts that a choice carrying `choiceValue` is still the selected one after the answer has
+/// been through a save and a load.
+- (void)verifyChoiceValueSurvivesSavedData:(NSObject<NSCopying, NSSecureCoding> *)choiceValue {
+    ORKAnswerFormat *answerFormat =
+        [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                         textChoices:@[[ORKTextChoice choiceWithText:@"Option 1" value:choiceValue]]];
+    ORKChoiceAnswerFormatHelper *formatHelper =
+        [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
+
+    NSArray *savedAnswers = [self choiceAnswersLoadedFromSavedData:@[choiceValue]];
+
+    NSArray *selectedIndexes = [formatHelper selectedIndexesForAnswer:savedAnswers];
+
+    XCTAssertEqualObjects(selectedIndexes, @[@(0)], @"choice value %@", choiceValue);
+}
+
+- (void)testADateAnswerLoadedFromSavedDataIsStillSelected {
+    [self verifyChoiceValueSurvivesSavedData:[NSDate dateWithTimeIntervalSinceReferenceDate:1000]];
+}
+
+- (void)testATextAnswerLoadedFromSavedDataIsStillSelected {
+    [self verifyChoiceValueSurvivesSavedData:@"option_one"];
+}
+
+- (void)testAWholeNumberAnswerLoadedFromSavedDataIsStillSelected {
+    [self verifyChoiceValueSurvivesSavedData:@(7)];
+}
+
+- (void)testAFractionalNumberAnswerLoadedFromSavedDataIsStillSelected {
+    [self verifyChoiceValueSurvivesSavedData:@(0.25)];
+}
+
+- (void)testATextAnswerShapedLikeADateIsStillSelected {
+    [self verifyChoiceValueSurvivesSavedData:@"2001-01-01T00:16:40+0000"];
+}
+
+/// Builds a single choice format that offers a free-text "Other" ahead of a date choice, the
+/// ordering under which the date used to be mistaken for free text.
+- (ORKChoiceAnswerFormatHelper *)formatHelperWithOtherChoice:(ORKTextChoiceOther *)otherChoice
+                                            aheadOfDateValue:(NSDate *)dateValue {
+    ORKAnswerFormat *answerFormat =
+        [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                         textChoices:@[otherChoice,
+                                                       [ORKTextChoice choiceWithText:@"Option 1" value:dateValue]]];
+    return [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
+}
+
+- (ORKTextChoiceOther *)otherChoice {
+    return [ORKTextChoiceOther choiceWithText:@"Other"
+                                   detailText:nil
+                                        value:@"other"
+                                    exclusive:NO
+                      textViewPlaceholderText:@"Describe"];
+}
+
+- (void)testADateAnswerPicksTheDateChoiceRatherThanAnOtherChoice {
+    NSDate *optionDate = [NSDate dateWithTimeIntervalSinceReferenceDate:1000];
+    ORKChoiceAnswerFormatHelper *formatHelper =
+        [self formatHelperWithOtherChoice:[self otherChoice] aheadOfDateValue:optionDate];
+
+    NSArray *savedAnswers = [self choiceAnswersLoadedFromSavedData:@[optionDate]];
+
+    XCTAssertEqualObjects([formatHelper selectedIndexesForAnswer:savedAnswers], @[@(1)]);
+}
+
+- (void)testADateAnswerIsNotTypedIntoAnOtherChoice {
+    NSDate *optionDate = [NSDate dateWithTimeIntervalSinceReferenceDate:1000];
+    ORKTextChoiceOther *otherChoice = [self otherChoice];
+    ORKChoiceAnswerFormatHelper *formatHelper =
+        [self formatHelperWithOtherChoice:otherChoice aheadOfDateValue:optionDate];
+
+    NSArray *savedAnswers = [self choiceAnswersLoadedFromSavedData:@[optionDate]];
+    [formatHelper selectedIndexesForAnswer:savedAnswers];
+
+    XCTAssertNil(otherChoice.textViewText);
 }
 
 @end

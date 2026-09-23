@@ -885,11 +885,14 @@
             })),
             ENTRY(ORKWeightAnswerFormat,
             ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+                // A missing key means the bound was never configured, not that it is 0. GETPROP
+                // returns nil for a missing key, so fall back to the sentinel rather than let
+                // NSNumber's doubleValue-on-nil silently produce 0.
                 return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:((NSNumber *)GETPROP(dict, measurementSystem)).integerValue
                                                                numericPrecision:((NSNumber *)GETPROP(dict, numericPrecision)).integerValue
-                                                                   minimumValue:((NSNumber *)GETPROP(dict, minimumValue)).doubleValue
-                                                                   maximumValue:((NSNumber *)GETPROP(dict, maximumValue)).doubleValue
-                                                                   defaultValue:((NSNumber *)GETPROP(dict, defaultValue)).doubleValue];
+                                                                   minimumValue:((NSNumber *)GETPROP(dict, minimumValue) ?: @(ORKDoubleDefaultValue)).doubleValue
+                                                                   maximumValue:((NSNumber *)GETPROP(dict, maximumValue) ?: @(ORKDoubleDefaultValue)).doubleValue
+                                                                   defaultValue:((NSNumber *)GETPROP(dict, defaultValue) ?: @(ORKDoubleDefaultValue)).doubleValue];
             },
             (@{
                 PROPERTY(measurementSystem, NSNumber, NSObject, NO,

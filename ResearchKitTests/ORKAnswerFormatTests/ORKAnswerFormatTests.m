@@ -671,6 +671,18 @@
 
 #pragma mark - UIHeightPickerTests
 
+static const double ORKAnswerFormatTestsHeightInchesJustBelowSixFeet = 71.6;
+
+- (void)testHeightPickerRestoresAHeightJustBelowSixFeetAsSixFeet {
+    ORKHeightAnswerFormat *answerFormat = [ORKAnswerFormat heightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC];
+
+    XCTAssertTrue([self revisitingNonOptionalPicker:answerFormat
+                                       defaultValue:ORKInchesToCentimeters(ORKAnswerFormatTestsHeightInchesJustBelowSixFeet)
+                                        expectedRow:6
+                                  expectedSecondRow:0],
+                  @"A height within half an inch of six feet should restore as 6 ft 0 in");
+}
+
 - (void)testNonOptionalHeightPickerAnswerFormat {
     // Setup an answer format
     ORKHeightAnswerFormat *answerFormat = [ORKAnswerFormat heightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC];
@@ -1463,6 +1475,14 @@
     XCTAssertEqual(answerFormat.useCurrentLocation, YES);
 }
 
+// MARK: - Weight Answer Format Tests
+
+static const double ORKAnswerFormatTestsWeightMinimumValue = 50.0;
+static const double ORKAnswerFormatTestsWeightMaximumValue = 100.0;
+static const double ORKAnswerFormatTestsWeightDefaultValue = 70.0;
+static const double ORKAnswerFormatTestsWeightBelowMinimumValue = 20.0;
+static const double ORKAnswerFormatTestsWeightAboveMaximumValue = 120.0;
+
 - (void)testWeightAnswerFormat {
     ORKWeightAnswerFormat *answerFormat = [ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric
                                                                                   numericPrecision:ORKNumericPrecisionHigh
@@ -1485,6 +1505,64 @@
                                  NSInvalidArgumentException,
                                  @"Should throw NSInvalidArgumentException since min > max");
 
+}
+
+- (void)testWeightAnswerFormatAcceptsDefaultValueWithNoConfiguredBounds {
+    XCTAssertNoThrow([self weightAnswerFormatWithMinimumValue:nil
+                                                  maximumValue:nil
+                                                  defaultValue:ORKAnswerFormatTestsWeightDefaultValue],
+                     @"A default value with no configured bounds should be accepted");
+}
+
+- (void)testWeightAnswerFormatAcceptsDefaultValueWithOnlyMinimumConfigured {
+    XCTAssertNoThrow([self weightAnswerFormatWithMinimumValue:@(ORKAnswerFormatTestsWeightMinimumValue)
+                                                  maximumValue:nil
+                                                  defaultValue:ORKAnswerFormatTestsWeightDefaultValue],
+                     @"A default value above a configured minimum with no maximum should be accepted");
+}
+
+- (void)testWeightAnswerFormatAcceptsDefaultValueWithOnlyMaximumConfigured {
+    XCTAssertNoThrow([self weightAnswerFormatWithMinimumValue:nil
+                                                  maximumValue:@(ORKAnswerFormatTestsWeightMaximumValue)
+                                                  defaultValue:ORKAnswerFormatTestsWeightDefaultValue],
+                     @"A default value below a configured maximum with no minimum should be accepted");
+}
+
+- (void)testWeightAnswerFormatRejectsDefaultValueBelowConfiguredMinimum {
+    XCTAssertThrowsSpecificNamed([self weightAnswerFormatWithMinimumValue:@(ORKAnswerFormatTestsWeightMinimumValue)
+                                                               maximumValue:@(ORKAnswerFormatTestsWeightMaximumValue)
+                                                               defaultValue:ORKAnswerFormatTestsWeightBelowMinimumValue],
+                                 NSException,
+                                 NSInvalidArgumentException,
+                                 @"A default value below the configured minimum should throw");
+}
+
+- (void)testWeightAnswerFormatRejectsDefaultValueAboveConfiguredMaximum {
+    XCTAssertThrowsSpecificNamed([self weightAnswerFormatWithMinimumValue:@(ORKAnswerFormatTestsWeightMinimumValue)
+                                                               maximumValue:@(ORKAnswerFormatTestsWeightMaximumValue)
+                                                               defaultValue:ORKAnswerFormatTestsWeightAboveMaximumValue],
+                                 NSException,
+                                 NSInvalidArgumentException,
+                                 @"A default value above the configured maximum should throw");
+}
+
+- (void)testWeightAnswerFormatRejectsDefaultValueBelowConfiguredMinimumWithNoMaximumSet {
+    XCTAssertThrowsSpecificNamed([self weightAnswerFormatWithMinimumValue:@(ORKAnswerFormatTestsWeightMinimumValue)
+                                                               maximumValue:nil
+                                                               defaultValue:ORKAnswerFormatTestsWeightBelowMinimumValue],
+                                 NSException,
+                                 NSInvalidArgumentException,
+                                 @"A default value below a configured minimum should throw even with no maximum set");
+}
+
+- (ORKWeightAnswerFormat *)weightAnswerFormatWithMinimumValue:(NSNumber *)minimumValue
+                                                  maximumValue:(NSNumber *)maximumValue
+                                                  defaultValue:(double)defaultValue {
+    return [ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric
+                                                    numericPrecision:ORKNumericPrecisionDefault
+                                                        minimumValue:(minimumValue ?: @(ORKDoubleDefaultValue)).doubleValue
+                                                        maximumValue:(maximumValue ?: @(ORKDoubleDefaultValue)).doubleValue
+                                                        defaultValue:defaultValue];
 }
 
 - (void)testMultipleValuePickerAnswerFormat {

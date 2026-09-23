@@ -143,16 +143,24 @@ ORK_CLASS_AVAILABLE
 + (BOOL)isPasscodeStoredInKeychain;
 
 /**
- Returns 'YES' if passcode was successfully removed from the keychain, otherwise 'NO'.
+ Removes the passcode from the keychain, after the device owner authenticates via `LAContext`
+ (Face ID, Touch ID, or device passcode fallback).
+
+ @return 'YES' if passcode was successfully removed from the keychain, otherwise 'NO'. Also returns
+         `NO` if device owner authentication is unavailable or fails.
  */
 + (BOOL)removePasscodeFromKeychain;
 
 /**
  This method allows to force the passcode to be a certain value. You only want to use this capability when you're moving your existing users
  from a custom passcode entry mechanism to the one provided by ResearchKit.
- 
+
+ The device owner must authenticate via `LAContext` (Face ID, Touch ID, or device passcode fallback)
+ before the passcode is stored. If authentication is unavailable or fails, this method returns
+ without storing `passcode`.
+
  This method will raise an exception if `passcode` is nil.
- 
+
  @param passcode          The passcode to store
  @param touchIdEnabled    Whether TouchId will be available during passcode entry
  */

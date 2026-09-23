@@ -133,6 +133,32 @@ NSString *ORKSignatureStringFromDate(NSDate *date) {
     return [formatter stringFromDate:date];
 }
 
+NSString *ORKHTMLEscapedString(NSString *string) {
+    if (string == nil) {
+        return @"";
+    }
+    NSMutableString *escaped = [string mutableCopy];
+    // Escape the ampersand first so the entities inserted below are not re-escaped.
+    [escaped replaceOccurrencesOfString:@"&" withString:@"&amp;" options:NSLiteralSearch range:NSMakeRange(0, escaped.length)];
+    [escaped replaceOccurrencesOfString:@"<" withString:@"&lt;" options:NSLiteralSearch range:NSMakeRange(0, escaped.length)];
+    [escaped replaceOccurrencesOfString:@">" withString:@"&gt;" options:NSLiteralSearch range:NSMakeRange(0, escaped.length)];
+    [escaped replaceOccurrencesOfString:@"\"" withString:@"&quot;" options:NSLiteralSearch range:NSMakeRange(0, escaped.length)];
+    [escaped replaceOccurrencesOfString:@"'" withString:@"&#39;" options:NSLiteralSearch range:NSMakeRange(0, escaped.length)];
+    return escaped;
+}
+
+NSString *ORKJavaScriptStringLiteral(NSString *string) {
+    // Turn the string into a safe, quoted JavaScript string by JSON-encoding it. This
+    // escapes quotes, backslashes, and newlines so the value can't break out and run as code.
+    NSData *data = [NSJSONSerialization dataWithJSONObject:(string ?: @"")
+                                                  options:NSJSONWritingFragmentsAllowed
+                                                    error:nil];
+    if (data == nil) {
+        return @"\"\"";
+    }
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha) {
     CGFloat b = (x & 0xff) / 255.0f; x >>= 8;
     CGFloat g = (x & 0xff) / 255.0f; x >>= 8;

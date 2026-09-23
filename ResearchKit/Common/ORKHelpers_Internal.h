@@ -185,6 +185,14 @@ NSString *ORKSignatureStringFromDate(NSDate *date);
 
 NSURL *ORKCreateRandomBaseURL(void);
 
+// Replaces the HTML characters & < > " ' with their entities, Marked extern so it is
+// accessible to unit tests.
+ORK_EXTERN NSString *ORKHTMLEscapedString(NSString * _Nullable string);
+
+// Returns a fully-escaped, double-quoted JavaScript string literal for the given string,
+// safe to interpolate into a script source. Marked extern so it is accessible to unit tests.
+ORK_EXTERN NSString *ORKJavaScriptStringLiteral(NSString * _Nullable string);
+
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
 
@@ -377,6 +385,10 @@ ORK_INLINE void ORKInchesToFeetAndInches(double inches, double *outFeet, double 
     }
     *outFeet = floor(inches / 12);
     *outInches = round(fmod(inches, 12));
+    if (*outInches == 12) {
+        *outFeet += 1;
+        *outInches = 0;
+    }
 }
 
 ORK_INLINE double ORKInchesToCentimeters(double inches) {

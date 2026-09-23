@@ -54,6 +54,7 @@ const CGFloat tableHeaderBottomPadding = 32.0;
 @property (nonnull, readwrite, nonatomic) UIStackView *contentView;
 @property (assign) UITableViewStyle tableViewStyle;
 @property (nonatomic, readwrite) UIScrollEdgeElementContainerInteraction *navigationFooterMagicPocketInteraction API_AVAILABLE(ios(26.0));
+@property (nonatomic, readwrite) ORKScrollEdgeFadeView *navigationFooterScrollEdgeFadeView;
 @property (nonatomic, assign) BOOL isFooterHidden;
 
 @end
@@ -189,6 +190,13 @@ CGFloat automaticMinimumHeightForTableViewRow(CGFloat existingHeight) {
     return _navigationFooterMagicPocketInteraction;
 }
 
+- (ORKScrollEdgeFadeView *)navigationFooterScrollEdgeFadeView {
+    if (_navigationFooterScrollEdgeFadeView == nil) {
+        _navigationFooterScrollEdgeFadeView = [[ORKScrollEdgeFadeView alloc] init];
+    }
+    return _navigationFooterScrollEdgeFadeView;
+}
+
 - (UIView *)layoutContainerFor:(UIView *)contentView {
     UIView *layoutContainer = [[UIView alloc] initWithFrame:contentView.bounds];
     layoutContainer.directionalLayoutMargins = ORKLargeContentLayoutMargins;
@@ -248,8 +256,17 @@ CGFloat automaticMinimumHeightForTableViewRow(CGFloat existingHeight) {
         if (@available(iOS 26.0, *)) {
             self.navigationFooterView.backgroundColor = [UIColor clearColor];
             [self.navigationFooterView addInteraction:self.navigationFooterMagicPocketInteraction];
+        } else if (self.navigationFooterScrollEdgeFadeView.superview != _footerView) {
+            ORKScrollEdgeFadeView *fadeView = self.navigationFooterScrollEdgeFadeView;
+            [_footerView insertSubview:fadeView atIndex:0];
+            [NSLayoutConstraint activateConstraints:@[
+                [fadeView.topAnchor constraintEqualToAnchor:_footerView.topAnchor],
+                [fadeView.bottomAnchor constraintEqualToAnchor:_footerView.bottomAnchor],
+                [fadeView.leadingAnchor constraintEqualToAnchor:_footerView.leadingAnchor],
+                [fadeView.trailingAnchor constraintEqualToAnchor:_footerView.trailingAnchor]
+            ]];
         }
-        
+
         // Add bottom inset so content isn't hidden behind the footer
         CGSize footerSize = [self minimumNavigationFooterSize];
         if (footerSize.height > 0) {
@@ -272,6 +289,8 @@ CGFloat automaticMinimumHeightForTableViewRow(CGFloat existingHeight) {
 
         if (@available(iOS 26.0, *)) {
             [self.navigationFooterView removeInteraction:self.navigationFooterMagicPocketInteraction];
+        } else {
+            [_navigationFooterScrollEdgeFadeView removeFromSuperview];
         }
         
         _footerView.translatesAutoresizingMaskIntoConstraints = YES;

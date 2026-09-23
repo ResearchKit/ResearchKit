@@ -49,6 +49,7 @@ capabilities of frameworks such as HealthKit and CoreMotion.
 - <doc:Obtaining-Consent>
 - <doc:Setting-up-Your-Project-to-Use-ResearchKit>
 - <doc:Understanding-Active-Tasks>
+- <doc:Understanding-Recorders>
 
 ### Other 
 

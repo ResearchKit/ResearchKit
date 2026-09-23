@@ -156,7 +156,7 @@
                     if ([textChoiceOther.textViewText isEqual:answerValue]) {
                         matchedChoice = choice;
                         break;
-                    } else if (textChoiceOther.textViewInputOptional && textChoiceOther.textViewText.length <= 0 && [textChoiceOther.value isEqual:answerValue]) {
+                    } else if (textChoiceOther.textViewInputOptional && textChoiceOther.textViewText.length <= 0 && [self choice:choice matchesAnswerValue:answerValue]) {
                         matchedChoice = choice;
                         break;
                     } else if (isTextChoiceOtherResult) {
@@ -165,12 +165,12 @@
                         break;
                     }
                     
-                } else if ([choice.value isEqual:answerValue]) {
+                } else if ([self choice:choice matchesAnswerValue:answerValue]) {
                     matchedChoice = choice;
                     break;
                 }
 #else
-                if ([choice.value isEqual:answerValue]) {
+                if ([self choice:choice matchesAnswerValue:answerValue]) {
                     matchedChoice = choice;
                     break;
                 }
@@ -213,12 +213,28 @@
     }
     
     for (id<ORKAnswerOption> choice in _choices) {
-        if ([choice.value isEqual:answerValue]){
+        if ([self choice:choice matchesAnswerValue:answerValue]) {
             return NO;
         }
     }
     
     return YES;
+}
+
+- (BOOL)choice:(id<ORKAnswerOption>)choice matchesAnswerValue:(id)answerValue {
+    if ([choice.value isEqual:answerValue]) {
+        return YES;
+    }
+
+    // A date choice value has no type information once it is written to JSON, so an answer read
+    // back from a saved result arrives as the ISO8601 string the serializer produced. Parse it
+    // back the same way every other decoded date is, then compare instants.
+    if (![choice.value isKindOfClass:[NSDate class]] || ![answerValue isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+
+    NSDate *savedDate = ORKDateFromStringISO8601(answerValue);
+    return savedDate != nil && [savedDate isEqualToDate:(NSDate *)choice.value];
 }
 
 - (NSString *)stringForChoiceAnswer:(id)answer {

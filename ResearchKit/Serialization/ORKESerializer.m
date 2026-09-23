@@ -347,6 +347,11 @@ static NSString *_ClassKey = @"_class";
             encodedDictionary[key] = [self jsonObjectForObject:inputDict[key] context:context];
         }
         jsonOutput = encodedDictionary;
+    } else if ([c isSubclassOfClass:[NSDate class]]) {
+        // Bare NSDate here (e.g. in the untyped ORKChoiceQuestionResult.choiceAnswers array) has no
+        // registered converter and no associated timeZone property to tie the encoded offset to, so
+        // encode against a fixed UTC offset rather than the device's current zone.
+        jsonOutput = [ORKESerializerHelper ORKEStringFromDateISO8601:object timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     } else if (![c isSubclassOfClass:[NSPredicate class]]) {  // Ignore NSPredicate which cannot be easily serialized for now
         NSCAssert(isValid(object), @"Expected valid JSON object");
         // Leaf: native JSON object

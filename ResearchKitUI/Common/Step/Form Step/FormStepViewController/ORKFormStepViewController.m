@@ -207,11 +207,22 @@ NSString * const ORKDontKnowChoiceViewCellReuseIdentifier = @"ORKDontKnowChoiceV
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self stepDidChange];
-    
+
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+
     self.view.accessibilityIdentifier = ORKFormStepViewAccessibilityIdentifier;
+
+    // Self-sized row heights are cached per index path and don't auto-recompute when
+    // text size changes while the step is already visible. Reconfiguring through the
+    // diffable data source (rather than -beginUpdates/-endUpdates) keeps this safe to
+    // call while a snapshot is still applying.
+    [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class]
+                       withHandler:^(ORKFormStepViewController *viewController, UITraitCollection *previousTraitCollection) {
+        NSDiffableDataSourceSnapshot<NSString *, ORKTableCellItemIdentifier *> *snapshot = [viewController->_diffableDataSource snapshot];
+        [snapshot reconfigureItemsWithIdentifiers:snapshot.itemIdentifiers];
+        [viewController->_diffableDataSource applySnapshot:snapshot animatingDifferences:NO];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -39,6 +39,8 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKKeychainWrapper.h"
 
+#import <LocalAuthentication/LocalAuthentication.h>
+
 
 @implementation ORKPasscodeViewController
 
@@ -105,12 +107,49 @@
 }
 
 + (BOOL)removePasscodeFromKeychain {
+    if (![self authenticateDeviceOwnerForPasscodeKeychainMutation]) {
+        return NO;
+    }
     return [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:nil];
 }
 
 + (void)forcePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
     ORKThrowInvalidArgumentExceptionIfNil(passcode)
+    if (![self authenticateDeviceOwnerForPasscodeKeychainMutation]) {
+        return;
+    }
     [ORKPasscodeStepViewController savePasscode:passcode withTouchIdEnabled:touchIdEnabled];
+}
+
+// Blocks synchronously on LAContext's async evaluation so removePasscodeFromKeychain/forcePasscode:
+// can keep their existing synchronous signatures. Face ID/Touch ID/passcode evaluation runs out of
+// process, so this does not deadlock the calling thread, including the main thread.
++ (BOOL)authenticateDeviceOwnerForPasscodeKeychainMutation {
+    LAContext *context = [LAContext new];
+    NSError *canEvaluateError = nil;
+    if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&canEvaluateError]) {
+        ORK_Log_Error("Blocked passcode keychain mutation: device owner authentication unavailable: %@", canEvaluateError);
+        return NO;
+    }
+
+    NSString *localizedReason = (context.biometryType == LABiometryTypeFaceID) ?
+        ORKLocalizedString(@"PASSCODE_FACE_ID_MESSAGE", nil) :
+        ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
+
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    __block BOOL isAuthenticated = NO;
+    [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
+             localizedReason:localizedReason
+                       reply:^(BOOL success, NSError *evaluationError) {
+        isAuthenticated = success;
+        if (!success) {
+            ORK_Log_Error("Blocked passcode keychain mutation: device owner authentication failed: %@", evaluationError);
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+    return isAuthenticated;
 }
 
 @end
