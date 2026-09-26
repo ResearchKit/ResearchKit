@@ -136,7 +136,7 @@ Float32 const VolumeClamp = 60.0;
     
     // Check the volume
     if ((audioLevelResult.fileURL != nil) && [self checkAudioLevelFromSoundFile:audioLevelResult.fileURL]) {
-        // Returning nil will drop through to the next step (which should be the the step that has the instructions
+        // Returning nil will drop through to the next step (which should be the step that has the instructions
         // for moving to a quieter room).
         return nil;
     }

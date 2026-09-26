@@ -195,7 +195,7 @@ ORK_CLASS_AVAILABLE
  For matching a form item result, you need to build a result selector with a `stepIdentifier` (the
  form step identifier) and a `resultIdentifier` (the form item result identifier).
  
- For matching results in the ongoing task, leave the `taskIdentifier` in the the form step identifier
+ For matching results in the ongoing task, leave the `taskIdentifier` in the form step identifier
  as `nil`. For matching results in different tasks, set the `taskIdentifier` appropriately.
 
  */

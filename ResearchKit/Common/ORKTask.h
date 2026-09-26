@@ -83,7 +83,7 @@ typedef struct {
     /// The total number of steps in the task.
     NSUInteger total;
     
-    /// Indicates if the the step should present a progress label
+    /// Indicates if the step should present a progress label
     BOOL shouldBePresented;
 } ORKTaskProgress ORK_AVAILABLE_DECL;
 
