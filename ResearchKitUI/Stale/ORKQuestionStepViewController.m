@@ -609,6 +609,12 @@ NSString * const ORKQuestionStepViewAccessibilityIdentifier = @"ORKQuestionStepV
 }
 
 - (void)saveAnswer:(id)answer {
+    NSError *validationError = nil;
+    if (![self.answerFormat validateAnswer:answer error:&validationError]) {
+        [self showValidityAlertWithMessage:validationError.localizedDescription];
+        return;
+    }
+    
     self.answer = answer;
     _savedSystemCalendar = [NSCalendar currentCalendar];
     _savedSystemTimeZone = [NSTimeZone systemTimeZone];
@@ -720,6 +726,12 @@ NSString * const ORKQuestionStepViewAccessibilityIdentifier = @"ORKQuestionStepV
 #pragma mark - ORKQuestionStepCustomViewDelegate
 
 - (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer {
+    NSError *validationError = nil;
+    if (![self.answerFormat validateAnswer:answer error:&validationError]) {
+        [self showValidityAlertWithMessage:validationError.localizedDescription];
+        return;
+    }
+    
     [self saveAnswer:answer];
     self.hasChangedAnswer = YES;
 }
@@ -898,6 +910,12 @@ NSString * const ORKQuestionStepViewAccessibilityIdentifier = @"ORKQuestionStepV
 }
 
 - (void)goForward {
+    NSError *validationError = nil;
+    if (![self.answerFormat validateAnswer:self.answer error:&validationError]) {
+        [self showValidityAlertWithMessage:validationError.localizedDescription];
+        return;
+    }
+    
     if (![self shouldContinue]) {
         return;
     }
@@ -916,6 +934,12 @@ NSString * const ORKQuestionStepViewAccessibilityIdentifier = @"ORKQuestionStepV
 
 - (void)continueAction:(id)sender {
     if (self.continueActionButton.enabled) {
+        NSError *validationError = nil;
+        if (![self.answerFormat validateAnswer:self.answer error:&validationError]) {
+            [self showValidityAlertWithMessage:validationError.localizedDescription];
+            return;
+        }
+        
         if (![self shouldContinue]) {
             return;
         }
