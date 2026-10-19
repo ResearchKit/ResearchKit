@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -36,6 +37,8 @@
 #import "ORKAudioContentView.h"
 #import "ORKActiveStepCustomView.h"
 #import "ORKVerticalContainerView.h"
+#import "ORKNavigationContainerView.h"
+#import "ORKStepViewController_Internal.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKAudioRecorder.h"
@@ -60,6 +63,8 @@
     ORKAudioRecorder *_audioRecorder;
     ORKActiveStepTimer *_timer;
     NSError *_audioRecorderError;
+    UIBarButtonItem *_earlyFinishButtonItem;
+    BOOL _recordingActive;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
@@ -95,6 +100,43 @@
     }
 
     self.activeStepView.activeCustomView = _audioContentView;
+    if (self.audioStep.allowsEarlyFinish) {
+        _earlyFinishButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil)
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(finishEarly:)];
+        _earlyFinishButtonItem.accessibilityIdentifier = @"ORKAudioEarlyFinish";
+        [self updateEarlyFinishButton];
+    }
+}
+
+// Use the recording timer, which starts with recording and pauses on suspension.
+// Recheck on tap as well as in the UI, including queued taps after completion.
+- (BOOL)canFinishEarly {
+    return self.audioStep.allowsEarlyFinish && _recordingActive && !self.finished
+        && !_audioRecorderError && _timer != nil && _timer.runtime >= self.audioStep.minDuration;
+}
+
+- (void)updateEarlyFinishButton {
+    if (!_earlyFinishButtonItem) {
+        return;
+    }
+    ORKNavigationContainerView *footer = self.activeStepView.navigationFooterView;
+    if (!self.finished) {
+        footer.neverHasContinueButton = NO;
+        footer.continueButtonItem = _earlyFinishButtonItem;
+        footer.continueEnabled = [self canFinishEarly];
+    } else {
+        footer.continueButtonItem = self.continueButtonItem;
+        footer.neverHasContinueButton = self.audioStep.shouldContinueOnFinish;
+        footer.continueEnabled = YES;
+    }
+}
+
+- (void)finishEarly:(id)sender {
+    if ([self canFinishEarly]) {
+        [self finish];
+    }
 }
 
 - (void)handleContentViewEvent:(ORKAudioContentViewEvent)event {
@@ -143,6 +185,7 @@
     [_audioContentView addSample:@(clampedValue)];
     
     _audioContentView.timeLeft = [self shouldRunTimerIndefinitely] ? 0 : [_timer duration] - [_timer runtime];
+    [self updateEarlyFinishButton];
 }
 
 - (void)startNewTimerIfNeeded {
@@ -157,6 +200,9 @@
                                                           runtime:0
                                                           handler:^(ORKActiveStepTimer *timer, BOOL finished) {
                 ORKStrongTypeOf(self) strongSelf = weakSelf;
+                if (!strongSelf || strongSelf->_timer != timer) {
+                    return; // Ignore callbacks queued before a reset or completion.
+                }
                 [strongSelf doSample];
             }];
         } else {
@@ -167,6 +213,9 @@
                                                           runtime:0
                                                           handler:^(ORKActiveStepTimer *timer, BOOL finished) {
                 ORKStrongTypeOf(self) strongSelf = weakSelf;
+                if (!strongSelf || strongSelf->_timer != timer) {
+                    return; // Ignore callbacks queued before a reset or completion.
+                }
                 [strongSelf doSample];
                 if (finished) {
                     [strongSelf finish];
@@ -178,6 +227,16 @@
     }
     
     _audioContentView.finished = NO;
+}
+
+- (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
+    // For early-finish recordings, only the audio timer may complete the step.
+    // The superclass timer starts before the recorder and may have queued a
+    // completion callback before a recording was restarted.
+    if (self.audioStep.allowsEarlyFinish && finished) {
+        return;
+    }
+    [super countDownTimerFired:timer finished:finished];
 }
 
 - (BOOL)shouldRunTimerIndefinitely {
@@ -194,7 +253,14 @@
 }
 
 - (void)startRecording {
+    if (self.finished || _recordingActive) {
+        return;
+    }
     [super start];
+    if (_audioRecorderError) {
+        return;
+    }
+    _recordingActive = YES;
     
     [self audioRecorderDidChange];
     
@@ -202,12 +268,14 @@
     _timer = nil;
     
     [self startNewTimerIfNeeded];
+    [self updateEarlyFinishButton];
 }
 
 - (void)suspend {
-    [super suspend];
-    
+    _recordingActive = NO;
     [_timer pause];
+    [self updateEarlyFinishButton];
+    [super suspend];
     
     if (_avAudioRecorder) {
         [_audioContentView addSample:@(0)];
@@ -215,22 +283,32 @@
 }
 
 - (void)resume {
+    if (self.finished || !self.started || _audioRecorderError || _recordingActive) {
+        return;
+    }
     [super resume];
+    if (_audioRecorderError) {
+        return;
+    }
+    _recordingActive = YES;
     [self audioRecorderDidChange];
     
     [self startNewTimerIfNeeded];
     
     [_timer resume];
+    [self updateEarlyFinishButton];
 }
 
 - (void)finish {
-    if (_audioRecorderError) {
+    if (_audioRecorderError || self.finished) {
         return;
     }
+    _recordingActive = NO;
     [super finish];
     
     [_timer reset];
     _timer = nil;
+    [self updateEarlyFinishButton];
 }
 
 - (void)stepDidFinish {
@@ -245,6 +323,9 @@
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     [super recorder:recorder didFailWithError:error];
     _audioRecorderError = error;
+    _recordingActive = NO;
+    [_timer pause];
+    [self updateEarlyFinishButton];
     _audioContentView.failed = YES;
 }
 

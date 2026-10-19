@@ -55,3 +55,20 @@ The `TaskListRow` enum uses a consistent ordering throughout the project. Within
 section, enum cases are ordered alphabetically, and the task list displays them in the
 same order. This makes it straightforward to navigate between the enum definition and
 the corresponding task setup code.
+
+## Audio with early finish
+
+Select **Active Tasks → Audio With Early Finish** to try a timed audio recording
+that can be completed after five seconds. The Done button is initially disabled;
+after five seconds of recording it becomes enabled. Leaving the recording running
+completes it automatically after twenty seconds. The countdown and background-noise
+check do not contribute to the five-second minimum.
+
+The example uses the `audioTask` overload with `minDuration`. For a custom
+`ORKAudioStep`, set `allowsEarlyFinish` to `true` and set `minDuration` to a finite
+value between zero and `stepDuration`. Existing audio task overloads retain their
+fixed-duration behavior. Early finish is not supported with `useRecordButton`.
+
+Check the Done button with large Dynamic Type, VoiceOver, and different screen
+sizes. Run on a physical device to verify the recorded audio and its duration;
+ResearchKit does not run the actual audio recorder in the simulator.

@@ -150,6 +150,8 @@
                          },
                          (@{
                             PROPERTY(useRecordButton, NSNumber, NSObject, YES, nil, nil),
+                            PROPERTY(allowsEarlyFinish, NSNumber, NSObject, YES, nil, nil),
+                            PROPERTY(minDuration, NSNumber, NSObject, YES, nil, nil),
                             })),
                    ENTRY(ORKToneAudiometryStep,
                          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

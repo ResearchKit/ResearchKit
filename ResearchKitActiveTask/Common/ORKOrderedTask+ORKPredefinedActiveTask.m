@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -627,6 +628,53 @@ NSString *const ORKTappingStepIdentifier = @"tapping";
 
 NSString *const ORKAudioStepIdentifier = @"audio";
 NSString *const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
+
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(NSString *)intendedUseDescription
+                                   speechInstruction:(NSString *)speechInstruction
+                              shortSpeechInstruction:(NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                         minDuration:(NSTimeInterval)minDuration
+                                   recordingSettings:(NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options {
+    return [self audioTaskWithIdentifier:identifier
+                  intendedUseDescription:intendedUseDescription
+                       speechInstruction:speechInstruction
+                  shortSpeechInstruction:shortSpeechInstruction
+                                duration:duration
+                             minDuration:minDuration
+                       recordingSettings:recordingSettings
+                         checkAudioLevel:checkAudioLevel
+                                 options:options
+                         outputDirectory:nil];
+}
+
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(NSString *)intendedUseDescription
+                                   speechInstruction:(NSString *)speechInstruction
+                              shortSpeechInstruction:(NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                         minDuration:(NSTimeInterval)minDuration
+                                   recordingSettings:(NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options
+                                     outputDirectory:(NSURL *)outputDirectory {
+    ORKNavigableOrderedTask *task = [self audioTaskWithIdentifier:identifier
+                                           intendedUseDescription:intendedUseDescription
+                                                speechInstruction:speechInstruction
+                                           shortSpeechInstruction:shortSpeechInstruction
+                                                         duration:duration
+                                                recordingSettings:recordingSettings
+                                                  checkAudioLevel:checkAudioLevel
+                                                          options:options
+                                                  outputDirectory:outputDirectory];
+    ORKAudioStep *step = (ORKAudioStep *)[task stepWithIdentifier:ORKAudioStepIdentifier];
+    step.allowsEarlyFinish = YES;
+    step.minDuration = minDuration;
+    [step validateParameters];
+    return task;
+}
 
 + (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                               intendedUseDescription:(nullable NSString *)intendedUseDescription

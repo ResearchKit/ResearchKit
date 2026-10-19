@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Macro Yau.
 
@@ -103,6 +104,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case passcode
     case biometricPasscode
     case audio
+    case audioEarlyFinish
     case audioRecordButton
     case amslerGrid
     case amslerGridPredefinedTask
@@ -221,6 +223,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .amslerGrid,
                     .amslerGridPredefinedTask,
                     .audio,
+                    .audioEarlyFinish,
                     .audioRecordButton,
                     .dBHLToneAudiometry,
                     .splMeter,
@@ -389,6 +392,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .audio:
             return NSLocalizedString("Audio", comment: "")
         
+        case .audioEarlyFinish:
+            return NSLocalizedString("Audio With Early Finish", comment: "")
+
         case .audioRecordButton:
             return NSLocalizedString("Audio With Record Button", comment: "")
             
@@ -625,6 +631,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .audio:
             return audioTask
             
+        case .audioEarlyFinish:
+            return audioEarlyFinishTask
+
         case .audioRecordButton:
             return audioWithRecordButtonTask
             
@@ -1722,6 +1731,19 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.audioTask(withIdentifier: String(describing: Identifier.audioTask), intendedUseDescription: TaskListRowStrings.exampleDescription, speechInstruction: TaskListRowStrings.exampleSpeechInstruction, shortSpeechInstruction: TaskListRowStrings.exampleSpeechInstruction, duration: 20, recordingSettings: nil, checkAudioLevel: true, options: [])
     }
     
+    /// This task permits finishing after five seconds and stops automatically after twenty seconds.
+    private var audioEarlyFinishTask: ORKTask {
+        return ORKOrderedTask.audioTask(withIdentifier: "audioEarlyFinishTask",
+                                       intendedUseDescription: TaskListRowStrings.exampleDescription,
+                                       speechInstruction: TaskListRowStrings.exampleSpeechInstruction,
+                                       shortSpeechInstruction: TaskListRowStrings.exampleSpeechInstruction,
+                                       duration: 20,
+                                       minDuration: 5,
+                                       recordingSettings: nil,
+                                       checkAudioLevel: true,
+                                       options: [])
+    }
+
     /// This task presents the Audio step with useRecordButton set to true.
     private var audioWithRecordButtonTask: ORKTask {
         let recordingSettings: [String : Any] = [
