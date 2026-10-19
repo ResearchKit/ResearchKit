@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -677,6 +678,105 @@ FOUNDATION_EXPORT NSString * const ORKStreamingAudioRecorderIdentifier;
                                      checkAudioLevel:(BOOL)checkAudioLevel
                                              options:(ORKPredefinedTaskOption)options
                                      outputDirectory:(nullable NSURL*)outputDirectory;
+
+/// Returns a predefined audio task that permits early completion after a minimum recording duration.
+///
+/// In an audio recording task, the participant is asked to make some kind of sound
+/// with their voice, and the audio data is collected.
+///
+/// An audio task can be used to measure properties of the user's voice, such as
+/// frequency range, or the ability to pronounce certain sounds.
+///
+/// If `checkAudioLevel == YES` then a navigation rule is added to do a simple check of the background
+/// noise level. If the background noise is too loud, then the participant is instructed to move to a
+/// quieter location before trying again.
+///
+/// The Done button is disabled until `minDuration` seconds of active recording have elapsed.
+/// The recording finishes automatically at `duration` if the participant does not finish early.
+/// Countdown and background-noise checks do not count toward the minimum.
+///
+/// Data collected in this task consists of audio information.
+///
+/// - Parameters:
+///     - identifier:               The task identifier to use for this task, appropriate to the study.
+///     - intendedUseDescription:   A localized string describing the intended use of the data collected.
+///                                     If the value of this parameter is `nil`, default localized text is used.
+///     - speechInstruction:        Instructional content describing what the user needs to do when recording
+///                                     begins. If the value of this parameter is `nil`, default localized
+///                                     text is used.
+///     - shortSpeechInstruction:   Instructional content shown during audio recording. If the value of this
+///                                     parameter is `nil`, default localized text is used.
+///     - duration:                 The maximum recording duration, in seconds; must be finite and at least five.
+///     - minDuration:              The minimum recording duration, in seconds; must be finite, nonnegative,
+///                                     and no greater than `duration`. Zero permits finishing immediately after start.
+///     - recordingSettings:        See "AV Foundation Audio Settings Constants" for possible values.
+///     - checkAudioLevel:          If `YES` then add navigational rules to check the background noise level.
+///     - options:                  Options that affect the features of the predefined task.
+///
+/// - Returns: An active audio task that must be presented using an `ORKTaskViewController` object.
+///
+/// - Important: This active task must be presented using an `ORKTaskViewController` object. Make sure to
+/// set the `ORKTaskViewController`'s `outputDirectory` property to indicate the directory in which to
+/// temporarily store the result files the task may generate. Otherwise, no data will be logged.
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                         minDuration:(NSTimeInterval)minDuration
+                                   recordingSettings:(nullable NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options;
+
+/// Returns a predefined audio task that permits early completion after a minimum recording duration.
+///
+/// In an audio recording task, the participant is asked to make some kind of sound
+/// with their voice, and the audio data is collected.
+///
+/// An audio task can be used to measure properties of the user's voice, such as
+/// frequency range, or the ability to pronounce certain sounds.
+///
+/// If `checkAudioLevel == YES` then a navigation rule is added to do a simple check of the background
+/// noise level. If the background noise is too loud, then the participant is instructed to move to a
+/// quieter location before trying again.
+///
+/// The Done button is disabled until `minDuration` seconds of active recording have elapsed.
+/// The recording finishes automatically at `duration` if the participant does not finish early.
+/// Countdown and background-noise checks do not count toward the minimum.
+///
+/// Data collected in this task consists of audio information.
+///
+/// - Parameters:
+///     - identifier:               The task identifier to use for this task, appropriate to the study.
+///     - intendedUseDescription:   A localized string describing the intended use of the data collected.
+///                                     If the value of this parameter is `nil`, default localized text is used.
+///     - speechInstruction:        Instructional content describing what the user needs to do when recording
+///                                     begins. If the value of this parameter is `nil`, default localized
+///                                     text is used.
+///     - shortSpeechInstruction:   Instructional content shown during audio recording. If the value of this
+///                                     parameter is `nil`, default localized text is used.
+///     - duration:                 The maximum recording duration, in seconds; must be finite and at least five.
+///     - minDuration:              The minimum recording duration, in seconds; must be finite, nonnegative,
+///                                     and no greater than `duration`. Zero permits finishing immediately after start.
+///     - recordingSettings:        See "AV Foundation Audio Settings Constants" for possible values.
+///     - checkAudioLevel:          If `YES` then add navigational rules to check the background noise level.
+///     - options:                  Options that affect the features of the predefined task.
+///     - outputDirectory:          The URL of the directory in which to write output files.
+///
+/// - Returns: An active audio task that can be presented.
+///
+/// - Important: When presented using an `ORKTaskViewController`, its `outputDirectory`, if set,
+/// overrides the directory passed here.
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                         minDuration:(NSTimeInterval)minDuration
+                                   recordingSettings:(nullable NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options
+                                     outputDirectory:(nullable NSURL *)outputDirectory;
 
 /// Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)
 ///

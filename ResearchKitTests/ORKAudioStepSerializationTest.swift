@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2024, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -63,10 +64,31 @@ struct ORKAudioStepSerializationTests {
           "stepDuration" : 0,
           "useExtendedPadding" : false,
           "useRecordButton" : false,
+          "allowsEarlyFinish" : false,
+          "minDuration" : 0,
           "useSurveyMode" : false
         }
         """
 
         try SerializationTestHelper.assertEquality(instance, expectation)
     }
+
+    @Test
+    func earlyFinishJSONRoundTripAndLegacyDefaults() throws {
+        let step = ORKAudioStep(identifier: "audio")
+        step.stepDuration = 180
+        step.allowsEarlyFinish = true
+        step.minDuration = 60
+        var json = try SerializationTestHelper.serializeToDictionary(step)
+        let restored: ORKAudioStep = try SerializationTestHelper.deserializeFromDictionary(json)
+        #expect(restored == step)
+        #expect(restored.allowsEarlyFinish)
+        #expect(restored.minDuration == 60)
+        json.removeValue(forKey: "allowsEarlyFinish")
+        json.removeValue(forKey: "minDuration")
+        let legacy: ORKAudioStep = try SerializationTestHelper.deserializeFromDictionary(json)
+        #expect(!legacy.allowsEarlyFinish)
+        #expect(legacy.minDuration == 0)
+    }
+
 }

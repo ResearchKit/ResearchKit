@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -48,6 +49,29 @@ ORK_CLASS_AVAILABLE
  The default value of this property is `NO`.
  */
 @property (nonatomic) BOOL useRecordButton;
+
+/**
+ A Boolean value indicating whether the participant can finish a timed recording early.
+
+ When enabled, a Done button is shown during recording and becomes enabled after
+ `minDuration` seconds of active recording. Finishing uses the normal step completion
+ behavior, including `shouldContinueOnFinish`. The recording still finishes automatically
+ at `stepDuration`. The default value is `NO`.
+
+ This option requires `useRecordButton` to be `NO`.
+ */
+@property (nonatomic) BOOL allowsEarlyFinish;
+
+/**
+ The minimum active recording time, in seconds, before the Done button is enabled.
+
+ The value must be finite and nonnegative. When `allowsEarlyFinish` is `YES`, it must
+ also be no greater than `stepDuration`. The default value is zero, which permits
+ finishing immediately after recording starts. Time spent in preceding steps or
+ while the recording is suspended does not count. This property has no effect on
+ completion when `allowsEarlyFinish` is `NO`.
+ */
+@property (nonatomic) NSTimeInterval minDuration;
 
 @end
 

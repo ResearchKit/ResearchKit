@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Daniel Emden. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -59,6 +60,13 @@
     [super validateParameters];
     ORKValidateBoundedValue(self.stepDuration, 0, @"stepDuration", YES);
 
+    ORKValidateBoundedValue(self.minDuration, 0, @"minDuration", YES);
+    if (self.allowsEarlyFinish && (self.useRecordButton || self.minDuration > self.stepDuration)) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"Early finish requires an automatic timed recording and minDuration <= stepDuration."
+                                     userInfo:nil];
+    }
+
     NSTimeInterval const ORKAudioTaskMinimumDuration = 5.0;
     
     if ( (self.stepDuration < ORKAudioTaskMinimumDuration && self.useRecordButton == NO) || (self.stepDuration < ORKAudioTaskMinimumDuration && self.stepDuration != 0 && self.useRecordButton == YES)) {
@@ -73,6 +81,8 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKAudioStep *step = [super copyWithZone:zone];
     step.useRecordButton = self.useRecordButton;
+    step.allowsEarlyFinish = self.allowsEarlyFinish;
+    step.minDuration = self.minDuration;
     return step;
 }
 
@@ -80,6 +90,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_BOOL(aDecoder, useRecordButton);
+        ORK_DECODE_BOOL(aDecoder, allowsEarlyFinish);
+        _minDuration = [aDecoder decodeDoubleForKey:@"minDuration"];
     }
     return self;
 }
@@ -87,6 +99,8 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_BOOL(aCoder, useRecordButton);
+    ORK_ENCODE_BOOL(aCoder, allowsEarlyFinish);
+    [aCoder encodeDouble:self.minDuration forKey:@"minDuration"];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -97,7 +111,9 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && self.useRecordButton == castObject.useRecordButton);
+    return (isParentSame && self.useRecordButton == castObject.useRecordButton
+            && self.allowsEarlyFinish == castObject.allowsEarlyFinish
+            && self.minDuration == castObject.minDuration);
 }
 
 - (ORKPermissionMask)requiredPermissions {
