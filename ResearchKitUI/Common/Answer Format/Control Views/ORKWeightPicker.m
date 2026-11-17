@@ -67,7 +67,6 @@ static const CGFloat PickerMinimumHeight = 34.0;
         
         _answerFormat = answerFormat;
         _pickerDelegate = delegate;
-        self.answer = answer;
         
         _canonicalMaximumValue = ORKDoubleDefaultValue;
         _canonicalMinimumValue = ORKDoubleDefaultValue;
@@ -81,6 +80,11 @@ static const CGFloat PickerMinimumHeight = 34.0;
         if (_answerFormat.numericPrecision == ORKNumericPrecisionHigh) {
             _minorValues = [self _minorValues];
         }
+        
+        // Set the answer only after the picker rows exist: setAnswer: looks the
+        // value up in _majorValues/_minorValues, and with nil rows every
+        // non-empty answer used to fall back to the 60 kg default.
+        self.answer = answer;
     }
     return self;
 }
@@ -99,6 +103,29 @@ static const CGFloat PickerMinimumHeight = 34.0;
     _answer = [self defaultAnswerValue];
 }
 
+- (NSNumber *)nearestValueInValues:(NSArray<NSNumber *> *)values toValue:(double)value {
+    if (values.count == 0) {
+        return nil;
+    }
+    // Values are sorted ascending. Clamp out-of-range values to the ends,
+    // otherwise take the nearest row (ties go to the lower row).
+    if (value <= values.firstObject.doubleValue) {
+        return values.firstObject;
+    }
+    if (value >= values.lastObject.doubleValue) {
+        return values.lastObject;
+    }
+    NSNumber *nearest = values.firstObject;
+    for (NSNumber *candidate in values) {
+        if (fabs(candidate.doubleValue - value) < fabs(nearest.doubleValue - value)) {
+            nearest = candidate;
+        } else if (candidate.doubleValue > value) {
+            break;
+        }
+    }
+    return nearest;
+}
+
 - (void)setAnswer:(id)answer {
     _answer = answer;
     if (ORKIsAnswerEmpty(answer)) {
@@ -109,14 +136,22 @@ static const CGFloat PickerMinimumHeight = 34.0;
         answer = [self defaultAnswerValue];
     }
     
+    // A value that is not an exact picker row (e.g. a HealthKit default such
+    // as 66.68 kg, when rows are 0.5 kg steps) used to fall back to the
+    // 60 kg default via resetAnswerToDefault. Snap to the nearest row
+    // instead, so the picker shows the closest value to the requested one.
+    // _answer is set to the snapped value so the picker's answer matches
+    // the row it displays.
     if (_answerFormat.useMetricSystem) {
         if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
-            NSUInteger index = [_majorValues indexOfObject:@((double)((NSNumber *)answer).doubleValue)];
-            if (index == NSNotFound) {
+            NSNumber *snappedValue = [self nearestValueInValues:_majorValues toValue:((NSNumber *)answer).doubleValue];
+            if (snappedValue == nil) {
                 // Not calling setAnswer:defaultAnswerValue to avoid infinite recursion
                 [self resetAnswerToDefault];
                 return;
             }
+            _answer = snappedValue;
+            NSUInteger index = [_majorValues indexOfObject:snappedValue];
             if (![_pickerDelegate isOptional]) {
                 index = index + 1;
             }
@@ -124,13 +159,16 @@ static const CGFloat PickerMinimumHeight = 34.0;
         } else {
             double whole, fraction;
             ORKKilogramsToWholeAndFraction(((NSNumber *)answer).doubleValue, &whole, &fraction);
-            NSUInteger wholeIndex = [_majorValues indexOfObject:@((NSInteger)whole)];
-            NSUInteger fractionIndex = [_minorValues indexOfObject:@((NSInteger)fraction)];
-            if (wholeIndex == NSNotFound || fractionIndex == NSNotFound) {
+            NSNumber *snappedWhole = [self nearestValueInValues:_majorValues toValue:whole];
+            NSNumber *snappedFraction = [self nearestValueInValues:_minorValues toValue:fraction];
+            if (snappedWhole == nil || snappedFraction == nil) {
                 // Not calling setAnswer:defaultAnswerValue to avoid infinite recursion
                 [self resetAnswerToDefault];
                 return;
             }
+            _answer = @(ORKWholeAndFractionToKilograms(snappedWhole.doubleValue, snappedFraction.doubleValue));
+            NSUInteger wholeIndex = [_majorValues indexOfObject:snappedWhole];
+            NSUInteger fractionIndex = [_minorValues indexOfObject:snappedFraction];
             if (![_pickerDelegate isOptional]) {
                 wholeIndex = wholeIndex + 1;
                 fractionIndex = fractionIndex + 1;
@@ -141,13 +179,21 @@ static const CGFloat PickerMinimumHeight = 34.0;
         }
     } else {
         if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
-            double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
-            NSUInteger poundsIndex = [_majorValues indexOfObject:@((NSInteger)pounds)];
-            if (poundsIndex == NSNotFound) {
+            double pounds, ounces;
+            ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
+            // Round to the nearest pound: ounces >= 8 means the fractional
+            // part is at least half a pound.
+            if (ounces >= 8) {
+                pounds += 1;
+            }
+            NSNumber *snappedPounds = [self nearestValueInValues:_majorValues toValue:pounds];
+            if (snappedPounds == nil) {
                 // Not calling setAnswer:defaultAnswerValue to avoid infinite recursion
                 [self resetAnswerToDefault];
                 return;
             }
+            _answer = @(ORKPoundsToKilograms(snappedPounds.doubleValue));
+            NSUInteger poundsIndex = [_majorValues indexOfObject:snappedPounds];
             // need to add one if not optional
             if (![_pickerDelegate isOptional]) {
                 poundsIndex = poundsIndex + 1;
@@ -156,13 +202,16 @@ static const CGFloat PickerMinimumHeight = 34.0;
         } else {
             double pounds, ounces;
             ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
-            NSUInteger poundsIndex = [_majorValues indexOfObject:@((NSInteger)pounds)];
-            NSUInteger ouncesIndex = [_minorValues indexOfObject:@((NSInteger)ounces)];
-            if (poundsIndex == NSNotFound || ouncesIndex == NSNotFound) {
+            NSNumber *snappedPounds = [self nearestValueInValues:_majorValues toValue:pounds];
+            NSNumber *snappedOunces = [self nearestValueInValues:_minorValues toValue:ounces];
+            if (snappedPounds == nil || snappedOunces == nil) {
                 // Not calling setAnswer:defaultAnswerValue to avoid infinite recursion
                 [self resetAnswerToDefault];
                 return;
             }
+            _answer = @(ORKPoundsAndOuncesToKilograms(snappedPounds.doubleValue, snappedOunces.doubleValue));
+            NSUInteger poundsIndex = [_majorValues indexOfObject:snappedPounds];
+            NSUInteger ouncesIndex = [_minorValues indexOfObject:snappedOunces];
             if (![_pickerDelegate isOptional]) {
                 poundsIndex = poundsIndex + 1;
                 ouncesIndex = ouncesIndex + 1;
