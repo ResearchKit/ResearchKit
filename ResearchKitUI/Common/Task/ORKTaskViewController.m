@@ -267,12 +267,20 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         if (data != nil) {
             self.restorationClass = [self class];
             NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:errorOut];
-            [self decodeRestorableStateWithCoder:unarchiver];
-            [unarchiver finishDecoding];
-            [self applicationFinishedRestoringState];
-            
-            if (unarchiver == nil && errorOut != nil) {
-                *errorOut = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"RESTORE_ERROR_CANNOT_DECODE", nil)}];
+            if (unarchiver == nil) {
+                if (errorOut != nil && *errorOut == nil) {
+                    *errorOut = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"RESTORE_ERROR_CANNOT_DECODE", nil)}];
+                }
+            } else {
+                // Restoration data is decoded with secure coding so that an
+                // archive cannot instantiate arbitrary classes. This also
+                // fixes form-item visibility rules silently losing their
+                // predicate: ORKPredicateFormItemVisibilityRule only decodes
+                // its predicate when requiresSecureCoding is YES.
+                unarchiver.requiresSecureCoding = YES;
+                [self decodeRestorableStateWithCoder:unarchiver];
+                [unarchiver finishDecoding];
+                [self applicationFinishedRestoringState];
             }
         }
     }

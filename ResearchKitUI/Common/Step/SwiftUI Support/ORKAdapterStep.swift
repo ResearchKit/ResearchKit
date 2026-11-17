@@ -54,8 +54,22 @@ public final class ORKAdapterStep<S>: ORKStep, ORKRawStepRepresentable {
         super.init(identifier: identifiable.identifier)
     }
 
+    /// Archives `rawStep` only when it is `NSSecureCoding`. Swift value
+    /// types and other non-`NSSecureCoding` raw steps cannot survive
+    /// archiving; previously `rawStep` was never encoded at all, so any
+    /// unarchive crashed on the force-cast in `init(coder:)`.
+    public override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        if let codableStep = rawStep as? NSSecureCoding {
+            aCoder.encode(codableStep, forKey: "rawStep")
+        }
+    }
+
     public required init(coder aDecoder: NSCoder) {
-        self.rawStep = aDecoder.decodeObject(forKey: "rawStep") as! S
+        guard let rawStep = aDecoder.decodeObject(of: [NSObject.self], forKey: "rawStep") as? S else {
+            fatalError("ORKAdapterStep cannot be decoded: rawStep was not archived. Only NSSecureCoding (NSObject) raw steps round-trip through archiving.")
+        }
+        self.rawStep = rawStep
         super.init(coder: aDecoder)
     }
 

@@ -508,8 +508,8 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 - (instancetype)initWithDirectory:(NSURL *)url configuration:(NSDictionary *)configuration delegate:(id<ORKDataLoggerDelegate>)delegate {
     Class formatterClass = NSClassFromString(configuration[@"formatterClass"]);
-    if (!formatterClass) {
-        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"%@ is not a class", configuration[@"formatterClass"]] userInfo:nil];
+    if (!formatterClass || ![formatterClass isSubclassOfClass:[ORKLogFormatter class]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"%@ is not a subclass of ORKLogFormatter", configuration[@"formatterClass"]] userInfo:nil];
     }
     
     self = [self initWithDirectory:url logName:configuration[@"logName"] fileExtension:configuration[@"fileExtension"] formatter:[[formatterClass alloc] init] delegate:delegate];
