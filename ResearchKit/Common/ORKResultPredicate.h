@@ -444,7 +444,8 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
- the specified hour and minute values.
+ the specified time-of-day range. Both bounds are inclusive, and the answer's hour and minute are
+ compared together as a single time of day (for example, 6:06 matches a 6:00 to 7:00 range).
  
  Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
  If you are interested in additional components, you must build the predicate manually.
