@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2019, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Snehal Mehta.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -233,6 +234,29 @@ class ORKRangeOfMotionResultTests: XCTestCase {
         newResult.endDate = date
         
         XCTAssert(result.isEqual(newResult))
+    }
+}
+
+// Regression test for GitHub issue #1359: the range of motion result was created when the
+// recording ended, so its start and end dates were always the same.
+class ORKRangeOfMotionStepViewControllerResultTests: XCTestCase {
+
+    func testResultStartsWhenDeviceMotionRecordingStarted() throws {
+        let step = ORKRangeOfMotionStep(identifier: "knee", limbOption: .left)
+        let viewController = ORKRangeOfMotionStepViewController(step: step)
+        viewController.loadViewIfNeeded()
+
+        let recorder = ORKDeviceMotionRecorder(identifier: "motion", frequency: 100, step: step)
+        let recordingStart = Date(timeIntervalSinceNow: -5)
+        // `startDate` is set by `-[ORKRecorder start]`, which needs motion hardware.
+        recorder.setValue(recordingStart, forKey: "startDate")
+
+        viewController.recorder(recorder, didCompleteWith: [])
+
+        let results = try XCTUnwrap(viewController.result?.results)
+        let result = try XCTUnwrap(results.compactMap { $0 as? ORKRangeOfMotionResult }.first)
+        XCTAssertEqual(result.startDate, recordingStart)
+        XCTAssertGreaterThan(result.endDate, result.startDate)
     }
 }
 
