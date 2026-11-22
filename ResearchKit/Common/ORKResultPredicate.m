@@ -404,15 +404,21 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                  minimumExpectedMinute:(NSInteger)minimumExpectedMinute
                                                    maximumExpectedHour:(NSInteger)maximumExpectedHour
                                                  maximumExpectedMinute:(NSInteger)maximumExpectedMinute {
+    // Compare the answer as a single time of day (minutes since midnight) instead of checking
+    // the hour and minute components independently. Checking them separately wrongly rejected
+    // answers such as 6:06 for a 6:00-7:00 range (https://github.com/ResearchKit/ResearchKit/issues/1391).
+    //
+    // `predicateMatchingResultSelector:` only prefixes the start of each sub-predicate with `$z.`,
+    // so the second key path in each expression spells out its own `$z.`. The `answer != nil`
+    // check comes first so that a skipped question never reaches the arithmetic.
+    NSInteger minimumExpectedMinutes = minimumExpectedHour * 60 + minimumExpectedMinute;
+    NSInteger maximumExpectedMinutes = maximumExpectedHour * 60 + maximumExpectedMinute;
     return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:@[ @"answer.hour >= %@",
-                                                    @"answer.minute >= %@",
-                                                    @"answer.hour <= %@",
-                                                    @"answer.minute <= %@" ]
-                 subPredicateFormatArgumentArray:@[ @(minimumExpectedHour),
-                                                    @(minimumExpectedMinute),
-                                                    @(maximumExpectedHour),
-                                                    @(maximumExpectedMinute) ]];
+                         subPredicateFormatArray:@[ @"answer != nil",
+                                                    @"answer.hour * 60 + $z.answer.minute >= %@",
+                                                    @"answer.hour * 60 + $z.answer.minute <= %@" ]
+                 subPredicateFormatArgumentArray:@[ @(minimumExpectedMinutes),
+                                                    @(maximumExpectedMinutes) ]];
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
