@@ -494,6 +494,7 @@
 		62FDB4AD2E2AD66900E92AEA /* volume_curve_AIRPODSV2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62FDB4AC2E2AD66900E92AEA /* volume_curve_AIRPODSV2.plist */; };
 		62FDB4AF2E2AD68100E92AEA /* frequency_dBSPL_AIRPODSV2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62FDB4AE2E2AD68100E92AEA /* frequency_dBSPL_AIRPODSV2.plist */; };
 		63B1CA30C98142BCA1BD9F37 /* ORKFormItemTextFieldCellCharacterCountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DA9176A46418DA5609665 /* ORKFormItemTextFieldCellCharacterCountTests.swift */; };
+		FEB4002F38F211068B750E75 /* ORKNumericAnswerKeyboardTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458ADB02724A368C40F8785F /* ORKNumericAnswerKeyboardTypeTests.swift */; };
 		714080DB235FD14700281E04 /* ResearchKit.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 714080D9235FD14700281E04 /* ResearchKit.stringsdict */; };
 		714151D0225C4A23002CA33B /* ORKPasscodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A92C6922444F93007547F2 /* ORKPasscodeViewControllerTests.swift */; };
 		7141EA2222EFBC0C00650145 /* ORKLoggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7141EA2122EFBC0C00650145 /* ORKLoggingTests.m */; };
@@ -1638,6 +1639,7 @@
 		2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVoiceEngineTests.m; sourceTree = "<group>"; };
 		493966232DBC233600FF066D /* URL+exampleURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+exampleURL.swift"; sourceTree = "<group>"; };
 		493DA9176A46418DA5609665 /* ORKFormItemTextFieldCellCharacterCountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKFormItemTextFieldCellCharacterCountTests.swift; sourceTree = "<group>"; };
+		458ADB02724A368C40F8785F /* ORKNumericAnswerKeyboardTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKNumericAnswerKeyboardTypeTests.swift; sourceTree = "<group>"; };
 		49D08F512C94977200DEA951 /* ISO8601DateFormatter+default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+default.swift"; sourceTree = "<group>"; };
 		49D08F532C9497F100DEA951 /* Calendar+default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+default.swift"; sourceTree = "<group>"; };
 		510498A12E14842600D5B8C5 /* ORKActiveTaskSerializationEntryProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKActiveTaskSerializationEntryProvider.h; sourceTree = "<group>"; };
@@ -3696,6 +3698,7 @@
 				1490DD03224D6A61003FEEDA /* ORKTestResultPredicateType.swift */,
 				14F7AC8A2269035200D52F41 /* ORKStepViewControllerTests.swift */,
 				493DA9176A46418DA5609665 /* ORKFormItemTextFieldCellCharacterCountTests.swift */,
+				458ADB02724A368C40F8785F /* ORKNumericAnswerKeyboardTypeTests.swift */,
 				CA0AC56828BD4FAB00E80040 /* ORKStepViewControllerHelpers.swift */,
 				BC4D521E27B326EA0099DC18 /* ORKSecureCodingTests.swift */,
 				5FADC45B2E83449F00CDEC43 /* AgePickerViewModelTests.swift */,
@@ -6269,6 +6272,7 @@
 				1490DD04224D6A61003FEEDA /* ORKTestResultPredicateType.swift in Sources */,
 				14F7AC8B2269035200D52F41 /* ORKStepViewControllerTests.swift in Sources */,
 				63B1CA30C98142BCA1BD9F37 /* ORKFormItemTextFieldCellCharacterCountTests.swift in Sources */,
+				FEB4002F38F211068B750E75 /* ORKNumericAnswerKeyboardTypeTests.swift in Sources */,
 				0BE416DC2C559D8A002E66E3 /* ORKNumericQuestionResultSerializationTest.swift in Sources */,
 				BAB96755226E5D67006AAC56 /* ORKStepContainerViewTests.m in Sources */,
 				0BC40C052C1BA4D200F0646B /* ORKAnswerFormatSerializationTests.swift in Sources */,
