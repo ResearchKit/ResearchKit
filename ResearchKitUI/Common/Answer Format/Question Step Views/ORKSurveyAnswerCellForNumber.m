@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Snehal Mehta.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -57,6 +58,16 @@ static const CGFloat DontKnowButtonTopBottomPadding = 3.0;
 @end
 
 
+// The decimal and number pads have no minus key on iPhone, so a negative answer can't be
+// typed. When the answer format allows negative values, use a keyboard that includes it.
+static UIKeyboardType ORKKeyboardTypeForNumericQuestion(ORKQuestionType questionType, NSNumber *minimum) {
+    if (minimum != nil && minimum.doubleValue < 0) {
+        return UIKeyboardTypeNumbersAndPunctuation;
+    }
+    return (questionType == ORKQuestionTypeInteger) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDecimalPad;
+}
+
+
 @implementation ORKSurveyAnswerCellForNumber {
     NSNumberFormatter *_numberFormatter;
     NSNumber *_defaultNumericAnswer;
@@ -90,10 +101,9 @@ static const CGFloat DontKnowButtonTopBottomPadding = 3.0;
     textField.delegate = self;
     textField.allowsSelection = YES;
     
-    if (questionType == ORKQuestionTypeDecimal) {
-        textField.keyboardType = UIKeyboardTypeDecimalPad;
-    } else if (questionType == ORKQuestionTypeInteger) {
-        textField.keyboardType = UIKeyboardTypeNumberPad;
+    if (questionType == ORKQuestionTypeDecimal || questionType == ORKQuestionTypeInteger) {
+        ORKNumericAnswerFormat *numericFormat = ORKDynamicCast([self.step impliedAnswerFormat], ORKNumericAnswerFormat);
+        textField.keyboardType = ORKKeyboardTypeForNumericQuestion(questionType, numericFormat.minimum);
     }
     
     [textField addTarget:self action:@selector(valueFieldDidChange:) forControlEvents:UIControlEventEditingChanged];

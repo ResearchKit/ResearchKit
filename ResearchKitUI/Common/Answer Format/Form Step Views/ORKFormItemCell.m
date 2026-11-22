@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2026, Snehal Mehta.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -1153,6 +1154,15 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 
 #pragma mark - ORKFormItemNumericCell
 
+// The decimal and number pads have no minus key on iPhone, so a negative answer can't be
+// typed. When the answer format allows negative values, use a keyboard that includes it.
+static UIKeyboardType ORKKeyboardTypeForNumericFormItem(ORKQuestionType questionType, NSNumber *minimum) {
+    if (minimum != nil && minimum.doubleValue < 0) {
+        return UIKeyboardTypeNumbersAndPunctuation;
+    }
+    return (questionType == ORKQuestionTypeInteger) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDecimalPad;
+}
+
 @implementation ORKFormItemNumericCell {
     NSNumberFormatter *_numberFormatter;
     NSNumber *_defaultNumericAnswer;
@@ -1161,11 +1171,11 @@ NSString * const ORKClearTextViewButtonAccessibilityIdentifier = @"ORKClearTextV
 - (void)configureWithFormItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth delegate:(id<ORKFormItemCellDelegate>)delegate {
     
     ORKQuestionType questionType = [formItem questionType];
-    self.textField.keyboardType = (questionType == ORKQuestionTypeInteger) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDecimalPad;
+    ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[formItem impliedAnswerFormat];
+    self.textField.keyboardType = ORKKeyboardTypeForNumericFormItem(questionType, answerFormat.minimum);
     [self.textField addTarget:self action:@selector(valueFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.textField.allowsSelection = YES;
     
-    ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[formItem impliedAnswerFormat];
     _defaultNumericAnswer = answerFormat.defaultNumericAnswer;
     
     self.textField.manageUnitAndPlaceholder = YES;
