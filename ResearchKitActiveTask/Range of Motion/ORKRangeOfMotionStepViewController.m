@@ -37,6 +37,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKDeviceMotionRecorder.h"
+#import "ORKRecorder_Internal.h"
 #import "ORKActiveStepView.h"
 #import "ORKProgressView.h"
 #import "ORKRangeOfMotionResult.h"
@@ -170,6 +171,11 @@
     [_fileResults addObjectsFromArray:results];
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
+    // The result is created when recording ends, so both of its dates start out as now.
+    // Start it when the device motion recording started, so the result covers the recording.
+    if (recorder.startDate != nil) {
+        result.startDate = recorder.startDate;
+    }
     result.start = 90.0 - _startAngle;
     result.finish = result.start - _newAngle;
     //Because the task uses pitch in the direction opposite to the original CoreMotion device axes (i.e. right hand rule), maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks
