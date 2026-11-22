@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2026, Snehal Mehta.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -148,5 +149,74 @@ class ORKResultPredicateTests: XCTestCase {
         let predicateString = TestPredicateFormat.timeOfDay
         let expectedPredicate = NSPredicate(format: predicateString.rawValue, identifier, identifier)
         XCTAssert(predicate.isEqual(expectedPredicate))
+    }
+
+    func testPredicateForTimeOfDayQuestionComparesHourAndMinuteTogether() {
+        // Regression test for https://github.com/ResearchKit/ResearchKit/issues/1391:
+        // 6:06 must fall within 6:00-7:00 even though its minute (6) is
+        // greater than the maximum minute (0).
+        let predicate = ORKResultPredicate.predicateForTimeOfDayQuestionResult(
+            with: selector,
+            minimumExpectedHour: 6,
+            minimumExpectedMinute: 0,
+            maximumExpectedHour: 7,
+            maximumExpectedMinute: 0
+        )
+
+        XCTAssertTrue(evaluate(predicate, hour: 6, minute: 0), "The minimum bound should be inclusive")
+        XCTAssertTrue(evaluate(predicate, hour: 6, minute: 6))
+        XCTAssertTrue(evaluate(predicate, hour: 6, minute: 59))
+        XCTAssertTrue(evaluate(predicate, hour: 7, minute: 0), "The maximum bound should be inclusive")
+
+        XCTAssertFalse(evaluate(predicate, hour: 5, minute: 59))
+        XCTAssertFalse(evaluate(predicate, hour: 7, minute: 1))
+        XCTAssertFalse(evaluate(predicate, hour: 18, minute: 30))
+    }
+
+    func testPredicateForTimeOfDayQuestionWithMinutesInBothBounds() {
+        let predicate = ORKResultPredicate.predicateForTimeOfDayQuestionResult(
+            with: selector,
+            minimumExpectedHour: 2,
+            minimumExpectedMinute: 30,
+            maximumExpectedHour: 10,
+            maximumExpectedMinute: 10
+        )
+
+        XCTAssertTrue(evaluate(predicate, hour: 2, minute: 30))
+        XCTAssertTrue(evaluate(predicate, hour: 3, minute: 15), "Minute below the minimum minute, hour past it")
+        XCTAssertTrue(evaluate(predicate, hour: 9, minute: 45), "Minute above the maximum minute, hour before it")
+        XCTAssertTrue(evaluate(predicate, hour: 10, minute: 10))
+
+        XCTAssertFalse(evaluate(predicate, hour: 2, minute: 29))
+        XCTAssertFalse(evaluate(predicate, hour: 10, minute: 11))
+        XCTAssertFalse(evaluate(predicate, hour: 1, minute: 45))
+    }
+
+    func testPredicateForTimeOfDayQuestionDoesNotMatchSkippedQuestion() {
+        let predicate = ORKResultPredicate.predicateForTimeOfDayQuestionResult(
+            with: selector,
+            minimumExpectedHour: 0,
+            minimumExpectedMinute: 0,
+            maximumExpectedHour: 23,
+            maximumExpectedMinute: 59
+        )
+
+        XCTAssertFalse(evaluate(predicate, timeOfDay: nil))
+    }
+
+    private func evaluate(_ predicate: NSPredicate, hour: Int, minute: Int) -> Bool {
+        return evaluate(predicate, timeOfDay: DateComponents(hour: hour, minute: minute))
+    }
+
+    /// Evaluates `predicate` against a task result that holds a single time-of-day answer for `identifier`.
+    private func evaluate(_ predicate: NSPredicate, timeOfDay: DateComponents?) -> Bool {
+        let questionResult = ORKTimeOfDayQuestionResult(identifier: identifier)
+        questionResult.dateComponentsAnswer = timeOfDay
+        let stepResult = ORKStepResult(stepIdentifier: identifier, results: [questionResult])
+        let taskResult = ORKTaskResult(taskIdentifier: "TaskIdentifier", taskRun: UUID(), outputDirectory: nil)
+        taskResult.results = [stepResult]
+        return predicate.evaluate(with: [taskResult], substitutionVariables: [
+            ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier
+        ])
     }
 }
